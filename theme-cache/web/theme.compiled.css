@@ -46336,11 +46336,6 @@ $callout-info-color: $brand-info;
 // Background Color
 $callout-info-bg: $color-info-lighter;
 */
-.popup-full-screen {
-  height: 95vh;
-  width: 95vw;
-}
-
 /*
 //
 // ██████╗  █████╗ ███████╗██╗ ██████╗
