@@ -23,13 +23,13 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
  * 
  * The Connection entity passed must be of type SynthiaConnection and must contain the KnowledgeBaseName string attribute filled and a Configuration of type Knowledge Base.
  */
-public class KnowledgeBase_Delete_ByMxObject extends CustomJavaAction<java.lang.Boolean>
+public class KnowledgeBaseChunkList_Delete_ByMxObject extends CustomJavaAction<java.lang.Boolean>
 {
 	private IMendixObject __Connection;
 	private genaicommons.proxies.Connection Connection;
 	private IMendixObject MxObject;
 
-	public KnowledgeBase_Delete_ByMxObject(IContext context, IMendixObject Connection, IMendixObject MxObject)
+	public KnowledgeBaseChunkList_Delete_ByMxObject(IContext context, IMendixObject Connection, IMendixObject MxObject)
 	{
 		super(context);
 		this.__Connection = Connection;
@@ -66,10 +66,10 @@ public class KnowledgeBase_Delete_ByMxObject extends CustomJavaAction<java.lang.
 	@java.lang.Override
 	public java.lang.String toString()
 	{
-		return "KnowledgeBase_Delete_ByMxObject";
+		return "KnowledgeBaseChunkList_Delete_ByMxObject";
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new MxLogger(KnowledgeBase_Delete_ByMxObject.class);
+	private static final MxLogger LOGGER = new MxLogger(KnowledgeBaseChunkList_Delete_ByMxObject.class);
 	// END EXTRA CODE
 }
