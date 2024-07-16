@@ -21,13 +21,12 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 /**
  * Use this operation to retrieve chunks from the knowledge base. This operation returns a list of KnowledgeBaseChunks
  * Additional selection and filtering can be done by specifying the optional input parameters:
- * -Offset: number of records to skip (for batching purposes)
+ * -Offset: this is for skipping a number of records in the retrieve (e.g. for batching purposes)
  * -MaxNumberOfResults: limit of the amount of records returned
  * -MetadataCollection: when provided, this operation only returns chunks that are conform with all of the metadata key/value pairs in the list.
  * -MxObject: This is the (original) Mendix object that the chunks in the knowledge base represent. Only chunks related to this Mendix object are retrieved. If no filtering on Mendix object is needed, you can pass "empty".
  * 
- * The Connection must be of type KnowledgeBaseConnection. This determines the knowledge base name and configuration.
- * If for the provided knowledge base name there is already data present from an earlier iteration, this data will be removed first before insertin g the KnowledgeBaseChunks of the ChunkCollection.
+ * The Connection entity passed must be of type SynthiaConnection and must contain the KnowledgeBaseName string attribute filled and a Knowledgebase Configuration associatied with the connection details to the knowledge base service. By providing the KnowledgeBaseName on the Connection, you determine the knowledge base. 
  */
 public class KnowledgeBaseChunkList_Retrieve extends CustomJavaAction<java.util.List<IMendixObject>>
 {
