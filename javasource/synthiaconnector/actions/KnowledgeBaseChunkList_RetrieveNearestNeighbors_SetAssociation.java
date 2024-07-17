@@ -20,13 +20,13 @@ import synthiaconnector.impl.ChunkUtils;
 import synthiaconnector.impl.MxLogger;
 
 /**
- * Use this operation to retrieve chunks from the knowledge base and set associations to the related mendix objects (if applicable). The retrieval is based on similarity with respect to the input string (Content) provided.  This operation returns a list of the same type of the TargetChunk input variable. The returned list is sorted on similarity.
+ * Use this operation to retrieve chunks from the knowledge base and set associations to the related mendix objects (if applicable). The retrieval is based on similarity with respect to the input string (Content) provided.  This operation returns a list of the same type of the TargetChunk input variable.  The returned list is sorted on vector similarity which is handled internally.
  * Additional filtering can be done by specifying the optional input parameters:
  * -MinimumSimilarity (in the range 0-1.0): acts as a cut-off: chunks are not retrieved if they have a similarity below this value.
  * -MaxNumberOfResults: determines the max number of similar chunks that are returned.
  * -MetadataCollection: when provided, this operation only returns chunks that are conform with all of the metadata key/value pairs in the collection.
  * 
- * The Connection entity passed must be of type SynthiaConnection and must contain the KnowledgeBaseName string attribute filled and a KnowledgebaseConfiguration associatied with the connection details to the knowledge base service. By providing the KnowledgeBaseName on the Connection, you determine the knowledge base. 
+ * The Connection entity passed must be of type SynthiaConnection and must contain the KnowledgeBaseName string attribute filled and a KnowledgebaseConfiguration associated with the connection details to the knowledge base service. By providing the KnowledgeBaseName on the Connection, you determine the knowledge base. 
  * The TargetChunk entity (entity parameter) must be a specialization of the KnowledgeBaseChunk entity from the GenAICommons. If it contains associations to (specializations of) the related mendix object for which the chunk was created originally, this will be set by this operation for easy processing afterwards.
  */
 public class KnowledgeBaseChunkList_RetrieveNearestNeighbors_SetAssociation extends CustomJavaAction<java.util.List<IMendixObject>>
