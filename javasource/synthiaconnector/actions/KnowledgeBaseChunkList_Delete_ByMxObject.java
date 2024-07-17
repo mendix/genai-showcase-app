@@ -52,7 +52,7 @@ public class KnowledgeBaseChunkList_Delete_ByMxObject extends CustomJavaAction<j
 			}
 			return synthiaconnector.proxies.microflows.Microflows.knowledgeBaseChunkList_Delete_FromKnowledgeBase(getContext(), chunkList, Connection);
 		} catch (Error e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error(e, "Delete was not successful.");
 			return false;
 		}
 		

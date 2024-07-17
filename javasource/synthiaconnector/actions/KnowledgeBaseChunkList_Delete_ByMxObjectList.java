@@ -50,7 +50,7 @@ public class KnowledgeBaseChunkList_Delete_ByMxObjectList extends CustomJavaActi
 			MxObjectList.forEach(o -> ChunkUtils.addChunkWithMxObjectID(getContext(), o, chunkList));
 			return synthiaconnector.proxies.microflows.Microflows.knowledgeBaseChunkList_Delete_FromKnowledgeBase(getContext(), chunkList, Connection);
 		} catch (Error e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error(e, "Delete list was not successful.");
 			return false;
 		}
 		

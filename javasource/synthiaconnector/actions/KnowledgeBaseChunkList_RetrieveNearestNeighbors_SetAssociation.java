@@ -71,8 +71,8 @@ public class KnowledgeBaseChunkList_RetrieveNearestNeighbors_SetAssociation exte
 			return ChunkUtils.getTargetChunkList(getContext(), chunkList, targetChunk);
 			
 		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-			throw e;
+			LOGGER.error(e, "Retrieve nearest neighbor and set association was not successful.");
+			return null;
 		}
 		// END USER CODE
 	}

@@ -69,7 +69,7 @@ public class KnowledgeBaseChunkList_Retrieve extends CustomJavaAction<java.util.
 			java.util.List<IMendixObject> returnList = knowledgeBaseChunkList.stream().map(o -> o.getMendixObject()).collect(Collectors.toList());
 			return returnList;
 		} catch (Error e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error(e, "Retrieve was not successful.");
 			return null;
 		}
 		// END USER CODE

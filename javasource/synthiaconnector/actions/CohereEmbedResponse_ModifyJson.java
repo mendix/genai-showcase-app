@@ -88,7 +88,7 @@ public class CohereEmbedResponse_ModifyJson extends CustomJavaAction<java.lang.S
 				// Convert outputNode to String and return
 
 			} catch (Exception e) {
-				LOGGER.error("Error occurred while modifying Cohere Embed response body: " + e.getMessage());
+				LOGGER.error(e, "Error occurred while modifying Cohere Embed response body.");
 				throw e;
 			}
 

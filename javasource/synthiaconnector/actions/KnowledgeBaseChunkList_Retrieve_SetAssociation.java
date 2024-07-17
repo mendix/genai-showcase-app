@@ -69,8 +69,8 @@ public class KnowledgeBaseChunkList_Retrieve_SetAssociation extends CustomJavaAc
 			return ChunkUtils.getTargetChunkList(getContext(), chunkList, targetChunk);
 			
 		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-			throw e;
+			LOGGER.error(e, "Retrieve and set association was not successful.");
+			return null;
 		}
 		// END USER CODE
 	}
