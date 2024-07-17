@@ -14,7 +14,6 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.meta.IMetaObject;
 import com.mendix.webui.CustomJavaAction;
-import genaicommons.proxies.EmbeddingsResponse;
 import genaicommons.proxies.KnowledgeBaseChunk;
 import synthiaconnector.impl.ChunkUtils;
 import synthiaconnector.impl.MxLogger;

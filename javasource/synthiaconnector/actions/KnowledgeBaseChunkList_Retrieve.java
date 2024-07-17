@@ -19,7 +19,8 @@ import synthiaconnector.impl.MxLogger;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
- * Use this operation to retrieve chunks from the knowledge base. This operation returns a list of KnowledgeBaseChunks
+ * Use this operation to retrieve chunks from the knowledge base. This operation returns a list of KnowledgeBaseChunks.
+ * 
  * Additional selection and filtering can be done by specifying the optional input parameters:
  * -Offset: this is for skipping a number of records in the retrieve (e.g. for batching purposes)
  * -MaxNumberOfResults: limit of the amount of records returned
