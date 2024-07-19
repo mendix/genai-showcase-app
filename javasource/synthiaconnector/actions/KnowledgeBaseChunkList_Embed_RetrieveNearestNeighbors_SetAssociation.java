@@ -28,7 +28,7 @@ import synthiaconnector.impl.MxLogger;
  * The Connection entity passed must be of type SynthiaConnection and must contain the KnowledgeBaseName string attribute filled and a KnowledgebaseConfiguration associated with the connection details to the knowledge base service. By providing the KnowledgeBaseName on the Connection, you determine the knowledge base. 
  * The TargetChunk entity (entity parameter) must be a specialization of the KnowledgeBaseChunk entity from the GenAICommons. If it contains associations to (specializations of) the related mendix object for which the chunk was created originally, this will be set by this operation for easy processing afterwards.
  */
-public class KnowledgeBaseChunkList_RetrieveNearestNeighbors_SetAssociation extends CustomJavaAction<java.util.List<IMendixObject>>
+public class KnowledgeBaseChunkList_Embed_RetrieveNearestNeighbors_SetAssociation extends CustomJavaAction<java.util.List<IMendixObject>>
 {
 	private IMendixObject __Connection;
 	private genaicommons.proxies.Connection Connection;
@@ -39,7 +39,7 @@ public class KnowledgeBaseChunkList_RetrieveNearestNeighbors_SetAssociation exte
 	private java.lang.Long MaxNumberOfResults;
 	private java.math.BigDecimal MinimumSimilarity;
 
-	public KnowledgeBaseChunkList_RetrieveNearestNeighbors_SetAssociation(IContext context, IMendixObject Connection, java.lang.String TargetChunk, java.lang.String Content, IMendixObject MetadataCollection, java.lang.Long MaxNumberOfResults, java.math.BigDecimal MinimumSimilarity)
+	public KnowledgeBaseChunkList_Embed_RetrieveNearestNeighbors_SetAssociation(IContext context, IMendixObject Connection, java.lang.String TargetChunk, java.lang.String Content, IMendixObject MetadataCollection, java.lang.Long MaxNumberOfResults, java.math.BigDecimal MinimumSimilarity)
 	{
 		super(context);
 		this.__Connection = Connection;
@@ -64,7 +64,7 @@ public class KnowledgeBaseChunkList_RetrieveNearestNeighbors_SetAssociation exte
 			ChunkUtils.validateTargetChunk(targetChunk);
 			
 			// call a microflow to retrieve chunks
-			java.util.List<KnowledgeBaseChunk> chunkList = synthiaconnector.proxies.microflows.Microflows.knowledgeBaseChunkList_RetrieveNearestNeighbors(
+			java.util.List<KnowledgeBaseChunk> chunkList = synthiaconnector.proxies.microflows.Microflows.knowledgeBaseChunkList_Embed_RetrieveNearestNeighbors(
 					getContext(), Content, MinimumSimilarity, MaxNumberOfResults, Connection, MetadataCollection);
 			
 			//map to target chunks to return
@@ -84,10 +84,10 @@ public class KnowledgeBaseChunkList_RetrieveNearestNeighbors_SetAssociation exte
 	@java.lang.Override
 	public java.lang.String toString()
 	{
-		return "KnowledgeBaseChunkList_RetrieveNearestNeighbors_SetAssociation";
+		return "KnowledgeBaseChunkList_Embed_RetrieveNearestNeighbors_SetAssociation";
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new MxLogger(KnowledgeBaseChunkList_RetrieveNearestNeighbors_SetAssociation.class);
+	private static final MxLogger LOGGER = new MxLogger(KnowledgeBaseChunkList_Embed_RetrieveNearestNeighbors_SetAssociation.class);
 	// END EXTRA CODE
 }
