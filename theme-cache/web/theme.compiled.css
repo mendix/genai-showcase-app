@@ -33937,6 +33937,10 @@ $callout-info-bg: $color-info-lighter;
   background-color: #EC7211 !important;
 }
 
+.bg-synthia {
+  background-color: #C6D92F !important;
+}
+
 .bg-info {
   background-color: #0086d9 !important;
 }
