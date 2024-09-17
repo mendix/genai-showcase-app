@@ -10,9 +10,15 @@
 package synthiaconnector.actions;
 
 import static java.util.Objects.requireNonNull;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.apache.commons.io.IOUtils;
 import org.jblas.util.Logger;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
@@ -25,9 +31,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.base.Optional;
+import genaicommons.proxies.ENUM_ContentType;
 import genaicommons.proxies.ENUM_FileType;
 import genaicommons.proxies.ENUM_ToolChoice;
+import genaicommons.proxies.FileContent;
 import genaicommons.proxies.Request;
+import software.amazon.awssdk.services.bedrockruntime.model.ContentBlock;
 import synthiaconnector.impl.MxLogger;
 
 public class Request_ModifyForConverse extends CustomJavaAction<java.lang.String>
@@ -81,7 +90,7 @@ public class Request_ModifyForConverse extends CustomJavaAction<java.lang.String
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 	
 	
-	private void updateMessages(JsonNode rootNode) {
+	private void updateMessages(JsonNode rootNode)throws Exception {
 		//Get messages node
 		JsonNode messagesNode = rootNode.path("messages");
 		
@@ -96,7 +105,7 @@ public class Request_ModifyForConverse extends CustomJavaAction<java.lang.String
 	}
 	
 	//If there is a FileCollection and FileContent attached to a message, the ContentBlock is added
-	private void updateFileContentMessages(JsonNode messageNode) {
+	private void updateFileContentMessages(JsonNode messageNode)throws URISyntaxException, MalformedURLException, IOException {
 		JsonNode fileCollectionNode = messageNode.path("filecollection");
 		if(fileCollectionNode == null || fileCollectionNode .size() == 0) {
 			return;
@@ -108,9 +117,9 @@ public class Request_ModifyForConverse extends CustomJavaAction<java.lang.String
 			
 			if (fileContent.path("filetype") != null && fileContent.path("filetype").asText().equals(ENUM_FileType.image.toString()))	{
 				ObjectNode imageNode = MAPPER.createObjectNode();
-				imageNode.put("format", fileContent.path("fileextension").asText());
+				setImageFormat(imageNode,fileContent);
 				ObjectNode sourceNode = MAPPER.createObjectNode();
-				sourceNode.put("bytes", fileContent.path("filecontent").asText());
+				setImageBytes(sourceNode, fileContent);
 				imageNode.set("source", sourceNode);
 				
 				ObjectNode imageWrapper = MAPPER.createObjectNode();
@@ -130,6 +139,47 @@ public class Request_ModifyForConverse extends CustomJavaAction<java.lang.String
             if (systemNode != null && (systemNode).size() == 0) {
                 ((ObjectNode) rootNode).remove("system");
             }
+		}
+	}
+	
+	
+	// Sets the Image Format for URI and Base64 images.
+	private void setImageFormat(ObjectNode imageNode, JsonNode fileContent) {
+		String extension = fileContent.path("fileextension").asText();
+		//Get the file extension from the URL
+		if (extension.isBlank() && fileContent.path("filecontent") != null) {
+			String url = fileContent.path("filecontent").asText();
+			int lastDotIndex = url.lastIndexOf('.');
+	        if (lastDotIndex != -1) {
+	            extension = url.substring(lastDotIndex + 1);
+	        }
+		}
+		// Bedrock accepts "jpeg", not "jpg"
+		if (extension.equals("jpg")) {
+			extension = "jpeg";
+		}
+		if(extension.isBlank()) {
+			LOGGER.warn("The attached FileContent or URI does not contain a file extension, so it can not be used for Chat Completions with Vision.");
+		}
+		imageNode.put("format",extension);
+	}
+	
+	private void setImageBytes(ObjectNode sourceNode, JsonNode fileContent) throws URISyntaxException, MalformedURLException, IOException{
+		String bytes = "";
+		if (fileContent.path("contenttype") != null && fileContent.path("contenttype").asText().equals(ENUM_ContentType.Base64.toString())) {
+			bytes = fileContent.path("filecontent").asText();
+		}
+		else if (fileContent.path("contenttype") != null && fileContent.path("contenttype").asText().equals(ENUM_ContentType.Url.toString())){
+			bytes = getImageBytesFromURI(fileContent.path("filecontent").asText());
+		}
+		sourceNode.put("bytes", bytes);
+	}
+	
+	private String getImageBytesFromURI(String uriInput) throws URISyntaxException, MalformedURLException, IOException {
+		URL url = new URL(uriInput); 
+		try (InputStream is = url.openStream ()) {
+		  
+		  return Base64.getEncoder().encodeToString(IOUtils.toByteArray(is));
 		}
 	}
 	
