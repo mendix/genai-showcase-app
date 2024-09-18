@@ -106,7 +106,7 @@ public class Request_ModifyForConverse extends CustomJavaAction<java.lang.String
 	
 	//If there is a FileCollection and FileContent attached to a message, the ContentBlock is added
 	private void updateFileContentMessages(JsonNode messageNode)throws URISyntaxException, MalformedURLException, IOException {
-		JsonNode fileCollectionNode = messageNode.path("filecollection");
+		JsonNode fileCollectionNode = messageNode.path("fileCollection");
 		if(fileCollectionNode == null || fileCollectionNode .size() == 0) {
 			return;
 		}
@@ -115,7 +115,7 @@ public class Request_ModifyForConverse extends CustomJavaAction<java.lang.String
 		for (JsonNode fileContent : fileCollectionNode) {
 			JsonNode contentNode = messageNode .path("content");
 			
-			if (fileContent.path("filetype") != null && fileContent.path("filetype").asText().equals(ENUM_FileType.image.toString()))	{
+			if (fileContent.path("filetype") != null && fileContent.path("fileType").asText().equals(ENUM_FileType.image.toString()))	{
 				ObjectNode imageNode = MAPPER.createObjectNode();
 				setImageFormat(imageNode,fileContent);
 				ObjectNode sourceNode = MAPPER.createObjectNode();
@@ -129,7 +129,7 @@ public class Request_ModifyForConverse extends CustomJavaAction<java.lang.String
 			}
 		}	
 		//FileCollection node no longer needed
-		((ObjectNode)messageNode).remove("filecollection");
+		((ObjectNode)messageNode).remove("fileCollection");
 	}
 	
 	//Removes system prompt node if empty (system prompt is not required)
@@ -145,10 +145,10 @@ public class Request_ModifyForConverse extends CustomJavaAction<java.lang.String
 	
 	// Sets the Image Format for URI and Base64 images.
 	private void setImageFormat(ObjectNode imageNode, JsonNode fileContent) {
-		String extension = fileContent.path("fileextension").asText();
+		String extension = fileContent.path("fileExtension").asText();
 		//Get the file extension from the URL
-		if (extension.isBlank() && fileContent.path("filecontent") != null) {
-			String url = fileContent.path("filecontent").asText();
+		if (extension.isBlank() && fileContent.path("fileContent") != null) {
+			String url = fileContent.path("fileContent").asText();
 			int lastDotIndex = url.lastIndexOf('.');
 	        if (lastDotIndex != -1) {
 	            extension = url.substring(lastDotIndex + 1);
@@ -164,21 +164,22 @@ public class Request_ModifyForConverse extends CustomJavaAction<java.lang.String
 		imageNode.put("format",extension);
 	}
 	
+	//Set bytes of SourceNode based on ContentType
 	private void setImageBytes(ObjectNode sourceNode, JsonNode fileContent) throws URISyntaxException, MalformedURLException, IOException{
 		String bytes = "";
-		if (fileContent.path("contenttype") != null && fileContent.path("contenttype").asText().equals(ENUM_ContentType.Base64.toString())) {
-			bytes = fileContent.path("filecontent").asText();
+		if (fileContent.path("contentType") != null && fileContent.path("contentType").asText().equals(ENUM_ContentType.Base64.toString())) {
+			bytes = fileContent.path("fileContent").asText();
 		}
-		else if (fileContent.path("contenttype") != null && fileContent.path("contenttype").asText().equals(ENUM_ContentType.Url.toString())){
-			bytes = getImageBytesFromURI(fileContent.path("filecontent").asText());
+		else if (fileContent.path("contenttype") != null && fileContent.path("contentType").asText().equals(ENUM_ContentType.Url.toString())){
+			bytes = getImageBytesFromURI(fileContent.path("fileContent").asText());
 		}
 		sourceNode.put("bytes", bytes);
 	}
 	
+	//Convert URI to base64 bytes
 	private String getImageBytesFromURI(String uriInput) throws URISyntaxException, MalformedURLException, IOException {
 		URL url = new URL(uriInput); 
 		try (InputStream is = url.openStream ()) {
-		  
 		  return Base64.getEncoder().encodeToString(IOUtils.toByteArray(is));
 		}
 	}
