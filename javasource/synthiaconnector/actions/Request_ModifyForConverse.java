@@ -16,28 +16,18 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Base64;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.apache.commons.io.IOUtils;
-import org.jblas.util.Logger;
-import com.mendix.core.Core;
-import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.webui.CustomJavaAction;
-import communitycommons.Misc;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.google.common.base.Optional;
 import genaicommons.proxies.ENUM_ContentType;
 import genaicommons.proxies.ENUM_FileType;
-import genaicommons.proxies.ENUM_ToolChoice;
-import genaicommons.proxies.FileContent;
-import genaicommons.proxies.Request;
-import software.amazon.awssdk.services.bedrockruntime.model.ContentBlock;
 import synthiaconnector.impl.MxLogger;
+import synthiaconnector.genaicommons_impl.FunctionMappingImpl;
 
 public class Request_ModifyForConverse extends CustomJavaAction<java.lang.String>
 {
@@ -65,6 +55,7 @@ public class Request_ModifyForConverse extends CustomJavaAction<java.lang.String
 			
 			removeSystemPromptIfEmpty(rootNode);
 			updateMessages(rootNode);
+			addToolConfig(rootNode);
 			
 			return MAPPER.writeValueAsString(rootNode);
 
@@ -182,6 +173,60 @@ public class Request_ModifyForConverse extends CustomJavaAction<java.lang.String
 		try (InputStream is = url.openStream ()) {
 		  return Base64.getEncoder().encodeToString(IOUtils.toByteArray(is));
 		}
+	}
+	
+	//Creates toolConfig node
+	private void addToolConfig(ObjectNode rootNode) {
+		if(rootNode == null || rootNode.path("toolConfig").asText().isBlank()) {
+			//If there is no ToolCollection (toolConfig), this needs to be removed
+			((ObjectNode) rootNode).remove("toolConfig");
+			return;
+		}
+		
+		ArrayNode toolsNode = (ArrayNode) rootNode.path("toolConfig").path("tools");
+		for (int i = 0; i < toolsNode.size(); i++) {
+			JsonNode toolNode = toolsNode.get(i);
+			String inputParamName = FunctionMappingImpl.getFirstInputParamName(toolNode.path("functionMicroflow").asText());
+			if (inputParamName.isBlank() == false) {
+				ObjectNode toolNodeObject = (ObjectNode) toolNode;
+				setInputSchemaForToolNode(inputParamName,toolNodeObject);
+				
+				//Add toolSpec node around tool
+				ObjectNode toolSpecNode = MAPPER.createObjectNode();
+				toolSpecNode.set("toolSpec",toolNode);
+				//Existing node is replaced by new toolSpec node.
+				toolsNode.set(i,toolSpecNode);
+				
+				//Remove functionMicrofow node which is not part of the Converse request
+				((ObjectNode) toolNode).remove("functionMicroflow");
+			}
+		}
+	}
+	
+	//This will create the input schema JSON needed for specifying the input of a tool
+	private void setInputSchemaForToolNode(String parameterName, ObjectNode toolNode) {
+            // Create the root object node
+            ObjectNode inputSchemaNode = MAPPER.createObjectNode();
+            inputSchemaNode.put("type", "object");
+
+            // Create the properties node
+            ObjectNode propertiesNode = MAPPER.createObjectNode();
+            ObjectNode fieldNode = MAPPER.createObjectNode();
+            fieldNode.put("type", "string");
+            propertiesNode.set(parameterName, fieldNode);
+
+            // Add properties node to root
+            inputSchemaNode.set("properties", propertiesNode);
+
+            // Create the required array
+            inputSchemaNode.putArray("required").add(parameterName);
+            
+            //Add a "json" wrapper around the inputSchema
+            ObjectNode jsonNode = MAPPER.createObjectNode();
+            jsonNode.set("json", inputSchemaNode);
+            
+            //Set the whole InputSchema as new node to toolNode
+            toolNode.set("inputSchema",jsonNode);
 	}
 	
 	// END EXTRA CODE
