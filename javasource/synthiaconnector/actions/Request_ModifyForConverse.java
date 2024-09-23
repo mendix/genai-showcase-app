@@ -177,12 +177,12 @@ public class Request_ModifyForConverse extends CustomJavaAction<java.lang.String
 	
 	//Creates toolConfig node
 	private void addToolConfig(ObjectNode rootNode) {
-		if(rootNode == null || rootNode.path("toolConfig").asText().isBlank()) {
+		if(rootNode == null || (rootNode.path("toolConfig").asText().isBlank() && rootNode.path("toolConfig").path("tools").size() == 0)) {
 			//If there is no ToolCollection (toolConfig), this needs to be removed
 			((ObjectNode) rootNode).remove("toolConfig");
 			return;
 		}
-		
+		LOGGER.info(rootNode.path("toolConfig").path("tools").asText());
 		ArrayNode toolsNode = (ArrayNode) rootNode.path("toolConfig").path("tools");
 		for (int i = 0; i < toolsNode.size(); i++) {
 			JsonNode toolNode = toolsNode.get(i);
