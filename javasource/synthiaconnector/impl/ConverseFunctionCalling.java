@@ -64,23 +64,55 @@ public class ConverseFunctionCalling{
 	}
 	
 	//Message of type Tool need to be mapped to ToolResult ContentBlock
-	public static void setToolResult(JsonNode messageNode, JsonNode messageListNode, int i) {
-		if(!messageNode.path("role").isNull() && messageNode.path("role").asText().equals(ENUM_MessageRole.tool.toString())) {
+	public static void setToolResult(JsonNode messageNode, ArrayNode messageList, int i) {
+		if(isToolMessage(messageNode)) {
 			//Add new User Message
 			ObjectNode newUserMessage = MAPPER.createObjectNode();
-			//Add Content of toolResult to message for all tool messages
-			for (int j = i; j < messageListNode.size(); j++) {
-				
+			ArrayNode newContent = MAPPER.createArrayNode();
+			//Add Content of toolResult to Content for all tool messages
+			for (int j = i; j < messageList.size(); j++) {
+				JsonNode toolMessage = messageList.get(j);
+				if(isToolMessage(toolMessage)) {
+					ObjectNode toolMessageObject = (ObjectNode) toolMessage;
+					newContent.add(getToolResultBlock(toolMessage));
+					toolMessageObject.put("role","assistant");
+					toolMessageObject.remove("toolCallId");
+					LOGGER.info(messageList.size());
+					//messageList.remove(j);
+				}
 			}
-			
-			//Add new User Message to list
+			//Add content to newUserMessage and message to messageList
+			//TBD: Content needs to be array, messageRole needs to be added
+			newUserMessage.set("content", newContent);
+			newUserMessage.put("role", ENUM_MessageRole.user.toString());
+			messageList.add(newUserMessage);			
 		}
 	}
 	
-	private static JsonNode addToolResultBlock() {
+	private static ObjectNode getToolResultBlock(JsonNode toolMessage) {
+		ObjectNode result = MAPPER.createObjectNode();
+		result.set("result", toolMessage.path("content"));
+		LOGGER.info("result: "+toolMessage.path("content"));
+		LOGGER.info("result text: "+toolMessage.path("content").path("text"));
+		ObjectNode contentItem = MAPPER.createObjectNode();
+        contentItem.set("json", result);
+        
+        ArrayNode contentArray = MAPPER.createArrayNode();
+        contentArray.add(contentItem);
+        
+        ObjectNode toolResult = MAPPER.createObjectNode();
+        toolResult.put("toolUseId", toolMessage.path("toolCallId").asText());
+        toolResult.set("content", contentArray);
+        
+        ObjectNode toolResultWrapper = MAPPER.createObjectNode();
+        toolResultWrapper.set("toolResult", toolResult);
 		
-		
-		return null;
+		return toolResultWrapper;
+	}
+	
+	//The "tool" role is only applicable for tool results that haven't been mapped yet to Converse nodes
+	private static boolean isToolMessage(JsonNode messageNode) {
+		return !messageNode.path("role").isNull() && messageNode.path("role").asText().equals(ENUM_MessageRole.tool.toString());
 	}
 	
 	

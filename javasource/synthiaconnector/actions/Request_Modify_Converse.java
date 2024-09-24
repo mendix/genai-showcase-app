@@ -80,7 +80,7 @@ public class Request_Modify_Converse extends CustomJavaAction<java.lang.String>
 	
 	private void updateMessages(JsonNode rootNode)throws Exception {
 		//Get messages node
-		JsonNode messagesNode = rootNode.path("messages");
+		ArrayNode messagesNode = (ArrayNode) rootNode.path("messages");
 		
 		//Loop over all messages
 		for (int i = 0; i < messagesNode.size(); i++) {
