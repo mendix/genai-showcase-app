@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import genaicommons.proxies.ENUM_FileType;
+import genaicommons.proxies.ENUM_MessageRole;
 import synthiaconnector.impl.MxLogger;
 import synthiaconnector.impl.ConverseVision;
 import synthiaconnector.impl.ConverseFunctionCalling;
@@ -82,8 +83,11 @@ public class Request_Modify_Converse extends CustomJavaAction<java.lang.String>
 		JsonNode messagesNode = rootNode.path("messages");
 		
 		//Loop over all messages
-		for (JsonNode messageNode : messagesNode) {
-            
+		for (int i = 0; i < messagesNode.size(); i++) {
+            JsonNode messageNode = messagesNode.get(i);
+			//Function Calling mapping tool messages
+			ConverseFunctionCalling.setToolResult(messageNode,messagesNode,i);
+			
             //If a fileCollection has been added add new ContentBlock
             updateFileContentMessages(messageNode);
         }

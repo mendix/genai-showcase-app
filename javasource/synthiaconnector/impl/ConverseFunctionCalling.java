@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import synthiaconnector.genaicommons_impl.FunctionMappingImpl;
+import genaicommons.proxies.ENUM_MessageRole;
 
 public class ConverseFunctionCalling{
 	
@@ -51,11 +52,7 @@ public class ConverseFunctionCalling{
             ObjectNode fieldNode = MAPPER.createObjectNode();
             fieldNode.put("type", "string");
             propertiesNode.set(parameterName, fieldNode);
-
-            // Add properties node to root
             inputSchemaNode.set("properties", propertiesNode);
-
-            // Create the required array
             inputSchemaNode.putArray("required").add(parameterName);
             
             //Add a "json" wrapper around the inputSchema
@@ -65,4 +62,59 @@ public class ConverseFunctionCalling{
             //Set the whole InputSchema as new node to toolNode
             toolNode.set("inputSchema",jsonNode);
 	}
+	
+	//Message of type Tool need to be mapped to ToolResult ContentBlock
+	public static void setToolResult(JsonNode messageNode, JsonNode messageListNode, int i) {
+		if(!messageNode.path("role").isNull() && messageNode.path("role").asText().equals(ENUM_MessageRole.tool.toString())) {
+			//Add new User Message
+			ObjectNode newUserMessage = MAPPER.createObjectNode();
+			//Add Content of toolResult to message for all tool messages
+			for (int j = i; j < messageListNode.size(); j++) {
+				
+			}
+			
+			//Add new User Message to list
+		}
+	}
+	
+	private static JsonNode addToolResultBlock() {
+		
+		
+		return null;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
