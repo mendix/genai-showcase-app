@@ -91,9 +91,7 @@ public class ConverseFunctionCalling{
 	
 	private static ObjectNode getToolResultBlock(JsonNode toolMessage) {
 		ObjectNode result = MAPPER.createObjectNode();
-		result.set("result", toolMessage.path("content"));
-		LOGGER.info("result: "+toolMessage.path("content"));
-		LOGGER.info("result text: "+toolMessage.path("content").path("text"));
+		result.put("result", toolMessage.path("content").get(0).path("text").asText());
 		ObjectNode contentItem = MAPPER.createObjectNode();
         contentItem.set("json", result);
         
