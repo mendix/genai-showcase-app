@@ -10,7 +10,10 @@
 package synthiaconnector.actions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mendix.core.Core;
+import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
+import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.webui.CustomJavaAction;
 import static java.util.Objects.requireNonNull;
 import com.fasterxml.jackson.core.JsonProcessingException;
