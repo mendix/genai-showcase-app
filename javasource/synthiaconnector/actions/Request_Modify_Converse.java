@@ -92,7 +92,7 @@ public class Request_Modify_Converse extends CustomJavaAction<java.lang.String>
 		for (int i = 0; i < messagesNode.size(); i++) {
             JsonNode messageNode = messagesNode.get(i);
 			//Function Calling mapping tool messages
-			ConverseFunctionCalling.setToolResult(messageNode,messagesNode,i,getRequestExtension(getContext(),Request));
+			ConverseFunctionCalling.setToolResult(messagesNode,i,getContext(),Request);
 			
             //If a fileCollection has been added add new ContentBlock
             updateFileContentMessages(messageNode);
@@ -139,19 +139,6 @@ public class Request_Modify_Converse extends CustomJavaAction<java.lang.String>
 		}
 	}
 	
-	private RequestExtension getRequestExtension(IContext context, Request request) throws CoreException {
-		/*JsonNode contentArray = rootNode.path("output").path("message").path("content");
-		if (contentArray.isArray()) {
-			
-		}*/
-		List<IMendixObject> requestExtensionList = Core.retrieveByPath(context, request.getMendixObject(), 
-				RequestExtension.MemberNames.RequestExtension_Request.toString());
-		if (requestExtensionList.size() > 0) {
-			return RequestExtension.initialize(getContext(), requestExtensionList.get(requestExtensionList.size() - 1));
-		}
-		else return null;
-		
-	}
 	
 
 
