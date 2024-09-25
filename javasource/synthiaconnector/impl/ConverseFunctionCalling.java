@@ -22,7 +22,6 @@ import genaicommons.proxies.Request;
 
 public class ConverseFunctionCalling{
 	
-	private static final MxLogger LOGGER = new MxLogger(ConverseFunctionCalling.class);
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 	
 	//........Add ToolConfig to Request
@@ -80,10 +79,9 @@ public class ConverseFunctionCalling{
 	
 	//........After a Response was created
 	
-	//All Message of type Tool needs to be mapped to ToolResult ContentBlock (role: user)
+	//All Messages of type Tool need to be mapped to a ToolResult ContentBlock as role "user"
 	public static void setToolResult(ArrayNode messageList, int i,IContext context, Request request) throws JsonMappingException, JsonProcessingException, CoreException {
-		JsonNode messageNode = messageList.get(i);
-		if(isToolMessage(messageNode)) {
+		if(isToolMessage(messageList.get(i))) {
 			//Add new User Message
 			ObjectNode newUserMessage = MAPPER.createObjectNode();
 			ArrayNode newContent = MAPPER.createArrayNode();
@@ -92,37 +90,35 @@ public class ConverseFunctionCalling{
 			//Get the assistant message right before the tool messages
 			JsonNode assistantTextMessage = messageList.get(i-1);
 			if(assistantTextMessage != null) {
-				LOGGER.info("assistant:" + assistantTextMessage);
 				setAssistantToolUse(assistantTextMessage,requestExtension);
-				LOGGER.info("assistant afterwards: " + assistantTextMessage);
 			}
 			
 			//Add Content of toolResult to Content for all subsequent tool messages
 			for (int j = i; j < messageList.size(); j++) {
 				JsonNode toolMessage = messageList.get(j);
-				LOGGER.info(j + " " +toolMessage);
 				if(!isToolMessage(toolMessage)) {
 					//Only map the directly subsequent tools
+					countOfToolCalls++;
 					break;
 				}
-				//ObjectNode toolMessageObject = (ObjectNode) toolMessage;
 				newContent.add(getToolResultBlock(toolMessage));
 				messageList.remove(j);
-				LOGGER.info("MessageList afterwards: " + messageList.size() + " "+ messageList);
 				//decrease j because we removed the previous message
-				j = j - 1;
-				//toolMessageObject.put("role","assistant");
-				
-				//toolMessageObject.remove("toolCallId");
+				j--;
 			}
-			//Add content to newUserMessage and message to messageList
 			newUserMessage.set("content", newContent);
 			newUserMessage.put("role", ENUM_MessageRole.user.toString());
-			messageList.add(newUserMessage);			
+			
+			if(i > messageList.size()) {
+				messageList.add(newUserMessage);
+			}
+			else {
+				messageList.insert(i, newUserMessage);
+			}
 		}
-		LOGGER.info("MessageList: "+ messageList);
 	}
-	
+
+	//Transform a GenAICommons "tool" message to a Converse ToolResultBlock
 	private static ObjectNode getToolResultBlock(JsonNode toolMessage) {
 		ObjectNode result = MAPPER.createObjectNode();
 		result.put("result", toolMessage.path("content").get(0).path("text").asText());
@@ -142,13 +138,12 @@ public class ConverseFunctionCalling{
 		return toolResultWrapper;
 	}
 	
-	//The "tool" role is only applicable for tool results that haven't been mapped yet to Converse nodes
+	//The "tool" role is only applicable for tool results that haven't been mapped yet to Converse nodes. Afterwards, the tool node gets deleted.
 	private static boolean isToolMessage(JsonNode messageNode) {
-		LOGGER.info("message role: " +messageNode.path("role").asText() + " equals: " + messageNode.path("role").asText().equals(ENUM_MessageRole.tool.toString()));
-		return !(messageNode.path("role").isNull()) && messageNode.path("role").asText().equals(ENUM_MessageRole.tool.toString());
+		return (!(messageNode.path("role").isNull()) && messageNode.path("role").asText().equals(ENUM_MessageRole.tool.toString()));
 	}
 	
-	//We need to add the exact Response from Converse as assistant message. This is stored in the requestExtension right after a call.
+	//The exact Response from Converse needs to be added as assistant message. This is stored in the requestExtension right after a call.
 	private static void setAssistantToolUse(JsonNode messageNode,RequestExtension requestExtension) throws JsonMappingException, JsonProcessingException {
 		ObjectNode toolUseMessageRoot = (ObjectNode) MAPPER.readTree(requestExtension.getToolUseContent());
 		JsonNode contentNode = toolUseMessageRoot.path("output").path("message").path("content");
@@ -156,57 +151,19 @@ public class ConverseFunctionCalling{
 		((ObjectNode) messageNode).set("content", contentNode);
 	}
 	
-	//Map Assistant Message
-	private static void mapAssistantMessage(JsonNode assistantMessage) {
-		
-		
-	}
+	//This keep tracks of how many tool calls were done separately. Used to get the RequestExtension of the previous call.
+	private static int countOfToolCalls = 0;
 	
+	//Contains information from previous responses that are added to the Request
 	private static RequestExtension getRequestExtension(IContext context, Request request) throws CoreException {
-		/*JsonNode contentArray = rootNode.path("output").path("message").path("content");
-		if (contentArray.isArray()) {
-			
-		}*/
 		List<IMendixObject> requestExtensionList = Core.retrieveByPath(context, request.getMendixObject(), 
 				RequestExtension.MemberNames.RequestExtension_Request.toString());
 		if (requestExtensionList.size() > 0) {
-			return RequestExtension.initialize(context, requestExtensionList.get(requestExtensionList.size() - 1));
+			return RequestExtension.initialize(context, requestExtensionList.get(countOfToolCalls));
 		}
 		else return null;
 		
 	}
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }

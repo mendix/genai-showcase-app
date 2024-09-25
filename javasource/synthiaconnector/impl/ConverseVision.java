@@ -6,13 +6,13 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Base64;
-
 import org.apache.commons.io.IOUtils;
-
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import genaicommons.proxies.ENUM_ContentType;
+import genaicommons.proxies.ENUM_FileType;
 
 
 
@@ -21,9 +21,32 @@ import genaicommons.proxies.ENUM_ContentType;
 public class ConverseVision{
 	
 	private static final MxLogger LOGGER = new MxLogger(ConverseVision.class);
+	private static final ObjectMapper MAPPER = new ObjectMapper();
+	
+	//Loop over FileCollection and map to Converse format
+	public static void mapToConverseVision(JsonNode fileCollectionNode, JsonNode messageNode) throws MalformedURLException, URISyntaxException, IOException {
+		for (JsonNode fileContent : fileCollectionNode) {
+			JsonNode contentNode = messageNode.path("content");
+			
+			if (fileContent.path("filetype") != null && fileContent.path("fileType").asText().equals(ENUM_FileType.image.toString()))	{
+				ObjectNode imageNode = MAPPER.createObjectNode();
+				ConverseVision.setImageFormat(imageNode,fileContent);
+				ObjectNode sourceNode = MAPPER.createObjectNode();
+				ConverseVision.setImageBytes(sourceNode, fileContent);
+				imageNode.set("source", sourceNode);
+				
+				ObjectNode imageWrapper = MAPPER.createObjectNode();
+				imageWrapper.set("image", imageNode);
+				
+				((ArrayNode) contentNode).add(imageWrapper);
+			}
+		}	
+		//FileCollection node is no longer needed after mapping
+		((ObjectNode)messageNode).remove("fileCollection");
+	}
 	
 	//Sets the Image Format for URI and Base64 images.
-	public static void setImageFormat(ObjectNode imageNode, JsonNode fileContent) {
+	private static void setImageFormat(ObjectNode imageNode, JsonNode fileContent) {
 		String extension = fileContent.path("fileExtension").asText();
 		//Get the file extension from the URL
 		if (extension.isBlank() && fileContent.path("fileContent") != null) {

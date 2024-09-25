@@ -10,15 +10,11 @@
 package synthiaconnector.actions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mendix.core.Core;
-import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.webui.CustomJavaAction;
 import static java.util.Objects.requireNonNull;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import synthiaconnector.impl.MxLogger;
 
@@ -48,7 +44,7 @@ public class Response_ModifyForMapping_Converse extends CustomJavaAction<java.la
 			return MAPPER.writeValueAsString(rootNode);
 
 			} catch (Exception e) {
-				LOGGER.error(e, "An error occurred while modifying Converse response body.");
+				LOGGER.error(e, "An error occurred while modifying the Converse response body.");
 				throw e;
 			}
 		// END USER CODE

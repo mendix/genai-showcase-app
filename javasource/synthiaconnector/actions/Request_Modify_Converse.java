@@ -13,10 +13,6 @@ import static java.util.Objects.requireNonNull;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
-import java.util.List;
-import javax.naming.Context;
-import com.mendix.core.Core;
-import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.webui.CustomJavaAction;
@@ -24,12 +20,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import genaicommons.proxies.ENUM_FileType;
-import genaicommons.proxies.ENUM_MessageRole;
-import genaicommons.proxies.Request;
 import synthiaconnector.impl.MxLogger;
 import synthiaconnector.impl.ConverseVision;
-import synthiaconnector.proxies.RequestExtension;
 import synthiaconnector.impl.ConverseFunctionCalling;
 
 public class Request_Modify_Converse extends CustomJavaAction<java.lang.String>
@@ -53,11 +45,13 @@ public class Request_Modify_Converse extends CustomJavaAction<java.lang.String>
 		// BEGIN USER CODE
 		try {
 			requireNonNull(this.RequestBodyJSON, "RequestBody JSON is required");
-        // Initialize ObjectMapper with full request body as exported from Request
 			ObjectNode rootNode = (ObjectNode) MAPPER.readTree(RequestBodyJSON);
 			
+			//System prompt node needs to be removed if empty
 			removeSystemPromptIfEmpty(rootNode);
+			//Add image for vision or ToolResults/ToolUse for function calling
 			updateMessages(rootNode);
+			//ToolConfig describes the available functions/tools to the model
 			ConverseFunctionCalling.addToolConfig(rootNode);
 			
 			return MAPPER.writeValueAsString(rootNode);
@@ -84,21 +78,19 @@ public class Request_Modify_Converse extends CustomJavaAction<java.lang.String>
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 	
 	
-	private void updateMessages(JsonNode rootNode)throws Exception {
-		//Get messages node
+	private void updateMessages(ObjectNode rootNode)throws Exception {
 		ArrayNode messagesNode = (ArrayNode) rootNode.path("messages");
 		
-		//Loop over all messages
 		for (int i = 0; i < messagesNode.size(); i++) {
             JsonNode messageNode = messagesNode.get(i);
-			//Function Calling mapping tool messages
+			//Map "tool" messages to Converse ToolResult
 			ConverseFunctionCalling.setToolResult(messagesNode,i,getContext(),Request);
 			
-            //If a fileCollection has been added add new ContentBlock
+            //If a fileCollection has been added, add a new Converse ContentBlock
             updateFileContentMessages(messageNode);
         }
-		//Update messages within rootNode
-		((ObjectNode) rootNode).set("messages", messagesNode);
+		//Update messages of rootNode
+		rootNode.set("messages", messagesNode);
 	}
 	
 	//If there is a FileCollection and FileContent attached to a message, the ContentBlock is added
@@ -107,29 +99,10 @@ public class Request_Modify_Converse extends CustomJavaAction<java.lang.String>
 		if(fileCollectionNode == null || fileCollectionNode .size() == 0) {
 			return;
 		}
-		
-		//Loop over FileCollection using FileContent
-		for (JsonNode fileContent : fileCollectionNode) {
-			JsonNode contentNode = messageNode .path("content");
-			
-			if (fileContent.path("filetype") != null && fileContent.path("fileType").asText().equals(ENUM_FileType.image.toString()))	{
-				ObjectNode imageNode = MAPPER.createObjectNode();
-				ConverseVision.setImageFormat(imageNode,fileContent);
-				ObjectNode sourceNode = MAPPER.createObjectNode();
-				ConverseVision.setImageBytes(sourceNode, fileContent);
-				imageNode.set("source", sourceNode);
-				
-				ObjectNode imageWrapper = MAPPER.createObjectNode();
-				imageWrapper.set("image", imageNode);
-				
-				((ArrayNode) contentNode).add(imageWrapper);
-			}
-		}	
-		//FileCollection node no longer needed
-		((ObjectNode)messageNode).remove("fileCollection");
+		ConverseVision.mapToConverseVision(fileCollectionNode,messageNode);
 	}
 	
-	//Removes system prompt node if empty (system prompt is not required)
+	//Removes system prompt node if empty (system prompt is not required, but can't be null)
 	private void removeSystemPromptIfEmpty(JsonNode rootNode) {
 		if (rootNode.has("system")) {
             JsonNode systemNode = rootNode.get("system").get(0);
@@ -138,10 +111,5 @@ public class Request_Modify_Converse extends CustomJavaAction<java.lang.String>
             }
 		}
 	}
-	
-	
-
-
-	
 	// END EXTRA CODE
 }
