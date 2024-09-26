@@ -2,6 +2,8 @@ package synthiaconnector.impl;
 
 import java.util.List;
 
+import org.jblas.util.Logger;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -24,7 +26,7 @@ public class ConverseFunctionCalling{
 	
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 	
-	//........Add ToolConfig to Request
+	//........Add ToolConfig to Request........
 	
 	//Creates toolConfig node
 	public static void addToolConfig(ObjectNode rootNode) {
@@ -77,15 +79,17 @@ public class ConverseFunctionCalling{
 	}
 	
 	
-	//........After a Response was created
+	//........Handle ToolCall and ToolResult........
 	
 	//All Messages of type Tool need to be mapped to a ToolResult ContentBlock as role "user"
 	public static void setToolResult(ArrayNode messageList, int i,IContext context, Request request) throws JsonMappingException, JsonProcessingException, CoreException {
-		if(isToolMessage(messageList.get(i))) {
-			//Add new User Message
+		JsonNode toolMessageRoot = messageList.get(i);
+		
+		if(isToolMessage(toolMessageRoot)) {
+			//Add new User Message that will contain the ToolResult
 			ObjectNode newUserMessage = MAPPER.createObjectNode();
 			ArrayNode newContent = MAPPER.createArrayNode();
-			RequestExtension requestExtension = getRequestExtension(context,request);
+			RequestExtension requestExtension = getRequestExtension(context,request,toolMessageRoot);
 			
 			//Get the assistant message right before the tool messages
 			JsonNode assistantTextMessage = messageList.get(i-1);
@@ -98,12 +102,11 @@ public class ConverseFunctionCalling{
 				JsonNode toolMessage = messageList.get(j);
 				if(!isToolMessage(toolMessage)) {
 					//Only map the directly subsequent tools
-					countOfToolCalls++;
 					break;
 				}
 				newContent.add(getToolResultBlock(toolMessage));
+				//"tool" message no longer needed; decrease j because we removed the previous message
 				messageList.remove(j);
-				//decrease j because we removed the previous message
 				j--;
 			}
 			newUserMessage.set("content", newContent);
@@ -118,7 +121,7 @@ public class ConverseFunctionCalling{
 		}
 	}
 
-	//Transform a GenAICommons "tool" message to a Converse ToolResultBlock
+	//Transform a GenAICommons "tool" message to a Converse "ToolResultBlock"
 	private static ObjectNode getToolResultBlock(JsonNode toolMessage) {
 		ObjectNode result = MAPPER.createObjectNode();
 		result.put("result", toolMessage.path("content").get(0).path("text").asText());
@@ -138,12 +141,12 @@ public class ConverseFunctionCalling{
 		return toolResultWrapper;
 	}
 	
-	//The "tool" role is only applicable for tool results that haven't been mapped yet to Converse nodes. Afterwards, the tool node gets deleted.
+	//The "tool" role is only applicable for tool results that haven't been mapped yet to Converse nodes. 
 	private static boolean isToolMessage(JsonNode messageNode) {
 		return (!(messageNode.path("role").isNull()) && messageNode.path("role").asText().equals(ENUM_MessageRole.tool.toString()));
 	}
 	
-	//The exact Response from Converse needs to be added as assistant message. This is stored in the requestExtension right after a call.
+	//The exact Response from Converse needs to be added as an assistant message. This is stored in the requestExtension right after a call.
 	private static void setAssistantToolUse(JsonNode messageNode,RequestExtension requestExtension) throws JsonMappingException, JsonProcessingException {
 		ObjectNode toolUseMessageRoot = (ObjectNode) MAPPER.readTree(requestExtension.getToolUseContent());
 		JsonNode contentNode = toolUseMessageRoot.path("output").path("message").path("content");
@@ -151,18 +154,26 @@ public class ConverseFunctionCalling{
 		((ObjectNode) messageNode).set("content", contentNode);
 	}
 	
-	//This keep tracks of how many tool calls were done separately. Used to get the RequestExtension of the previous call.
-	private static int countOfToolCalls = 0;
 	
 	//Contains information from previous responses that are added to the Request
-	private static RequestExtension getRequestExtension(IContext context, Request request) throws CoreException {
+	private static RequestExtension getRequestExtension(IContext context, Request request, JsonNode toolMessage) throws CoreException, JsonMappingException, JsonProcessingException {
 		List<IMendixObject> requestExtensionList = Core.retrieveByPath(context, request.getMendixObject(), 
 				RequestExtension.MemberNames.RequestExtension_Request.toString());
-		if (requestExtensionList.size() > 0) {
-			return RequestExtension.initialize(context, requestExtensionList.get(countOfToolCalls));
-		}
-		else return null;
 		
+		String toolCallId = toolMessage.path("toolCallId").toString();
+		//Iterate over all RequestExtension objects and return the object that contains the toolUseId from the current toolMessage
+		for (IMendixObject requestExtensionMxObject : requestExtensionList) {
+			RequestExtension requestExtension = RequestExtension.initialize(context,requestExtensionMxObject);
+			JsonNode rootNode = MAPPER.readTree(requestExtension.getToolUseContent());
+			ArrayNode contentList = (ArrayNode) rootNode.path("output").path("message").path("content");
+			//There can be multiple "toolUseBlocks" inside of the content array.
+			for(JsonNode content : contentList) {
+				if(toolCallId.equals(content.path("toolUse").path("toolUseId").toString())) {
+					return requestExtension;
+				}
+			}
+		}
+		return null;
 	}
 	
 	
