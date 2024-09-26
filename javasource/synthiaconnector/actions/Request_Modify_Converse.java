@@ -45,6 +45,7 @@ public class Request_Modify_Converse extends CustomJavaAction<java.lang.String>
 		// BEGIN USER CODE
 		try {
 			requireNonNull(this.RequestBodyJSON, "RequestBody JSON is required");
+			requireNonNull(this.Request, "Request object is required");
 			ObjectNode rootNode = (ObjectNode) MAPPER.readTree(RequestBodyJSON);
 			
 			//System prompt node needs to be removed if empty
