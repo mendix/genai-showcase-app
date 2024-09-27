@@ -2,8 +2,6 @@ package synthiaconnector.impl;
 
 import java.util.List;
 
-import org.jblas.util.Logger;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;

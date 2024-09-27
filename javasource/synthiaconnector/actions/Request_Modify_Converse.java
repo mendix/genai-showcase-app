@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import synthiaconnector.impl.MxLogger;
-import synthiaconnector.impl.ConverseVision;
+import synthiaconnector.impl.ConverseVisionDocument;
 import synthiaconnector.impl.ConverseFunctionCalling;
 
 public class Request_Modify_Converse extends CustomJavaAction<java.lang.String>
@@ -88,19 +88,19 @@ public class Request_Modify_Converse extends CustomJavaAction<java.lang.String>
 			ConverseFunctionCalling.setToolResult(messagesNode,i,getContext(),Request);
 			
             //If a fileCollection has been added, add a new Converse ContentBlock
-            updateFileContentMessages(messageNode);
+            updateFileContentMessages(messageNode,i);
         }
 		//Update messages of rootNode
 		rootNode.set("messages", messagesNode);
 	}
 	
 	//If there is a FileCollection and FileContent attached to a message, the ContentBlock is added
-	private void updateFileContentMessages(JsonNode messageNode)throws URISyntaxException, MalformedURLException, IOException {
+	private void updateFileContentMessages(JsonNode messageNode, int i)throws URISyntaxException, MalformedURLException, IOException {
 		JsonNode fileCollectionNode = messageNode.path("fileCollection");
 		if(fileCollectionNode == null || fileCollectionNode .size() == 0) {
 			return;
 		}
-		ConverseVision.mapToConverseVision(fileCollectionNode,messageNode);
+		ConverseVisionDocument.mapToConverseVision(fileCollectionNode,messageNode,i);
 	}
 	
 	//Removes system prompt node if empty (system prompt is not required, but can't be null)
