@@ -84,25 +84,17 @@ public class Request_Modify_Converse extends CustomJavaAction<java.lang.String>
 		
 		for (int i = 0; i < messagesNode.size(); i++) {
 			//Map "tool" messages to Converse ToolResult
-			ConverseFunctionCalling.setToolResult(messagesNode,i,getContext(),Request);
+			ConverseFunctionCalling.mapToolResult(messagesNode, i, getContext(), Request);
 			
             //If a fileCollection has been added, add a new Converse ContentBlock
-            JsonNode messageNode = messagesNode.get(i);
-            updateFileContentMessages(messageNode,i);
+            ConverseVisionDocument.mapFileCollection(messagesNode, i);
         }
 		//Update messages of rootNode
 		rootNode.set("messages", messagesNode);
 	}
 	
-	//If there is a FileCollection and FileContent attached to a message, the ContentBlock is added
-	private void updateFileContentMessages(JsonNode messageNode, int i)throws URISyntaxException, MalformedURLException, IOException {
-		JsonNode fileCollectionNode = messageNode.path("fileCollection");
-		if(fileCollectionNode == null || fileCollectionNode .size() == 0) {
-			return;
-		}
-		ConverseVisionDocument.mapToConverseVision(fileCollectionNode,messageNode,i);
-	}
 	
+
 	//Removes system prompt node if empty (system prompt is not required, but can't be null)
 	private void removeSystemPromptIfEmpty(ObjectNode rootNode) {
 		if (rootNode.has("system")) {

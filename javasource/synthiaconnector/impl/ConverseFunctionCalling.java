@@ -80,22 +80,22 @@ public class ConverseFunctionCalling{
 	//........Handle ToolCall and ToolResult........
 	
 	//All Messages of type Tool need to be mapped to a ToolResult ContentBlock as role "user"
-	public static void setToolResult(ArrayNode messageList, int i,IContext context, Request request) throws JsonMappingException, JsonProcessingException, CoreException {
+	public static void mapToolResult(ArrayNode messageList, int i,IContext context, Request request) throws JsonMappingException, JsonProcessingException, CoreException {
 		JsonNode toolMessageRoot = messageList.get(i);
 		
 		if(isToolMessage(toolMessageRoot)) {
 			//Add new User Message that will contain the ToolResult
-			ObjectNode newUserMessage = MAPPER.createObjectNode();
-			ArrayNode newContent = MAPPER.createArrayNode();
-			RequestExtension requestExtension = getRequestExtension(context,request,toolMessageRoot);
 			
-			//Get the assistant message right before the tool messages
+			//Get the assistant message right before the tool messages and populate it with the original json from the response
 			ObjectNode assistantTextMessage = (ObjectNode) messageList.get(i-1);
 			if(assistantTextMessage != null) {
-				setAssistantToolUse(assistantTextMessage,requestExtension);
+				setAssistantToolUse(assistantTextMessage, getRequestExtension(context,request,toolMessageRoot));
 			}
-			
+					
 			//Add Content of toolResult to Content for all subsequent tool messages
+			ObjectNode newUserMessage = MAPPER.createObjectNode();
+			ArrayNode newContent = MAPPER.createArrayNode();
+			
 			for (int j = i; j < messageList.size(); j++) {
 				JsonNode toolMessage = messageList.get(j);
 				if(!isToolMessage(toolMessage)) {
@@ -107,6 +107,7 @@ public class ConverseFunctionCalling{
 				messageList.remove(j);
 				j--;
 			}
+			
 			newUserMessage.set("content", newContent);
 			newUserMessage.put("role", ENUM_MessageRole.user.toString());
 			

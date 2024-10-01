@@ -70,14 +70,14 @@ public class Response_ModifyForMapping_Converse extends CustomJavaAction<java.la
 		if (contentArray.isArray()) {
             for (JsonNode contentNode : contentArray) {
                 JsonNode toolUseNode = contentNode.path("toolUse");
-                if (toolUseNode.isObject()) {
+                if (toolUseNode != null && toolUseNode.isObject()) {
                 	//Replace old "input" field by new "arguments" field to store the input as JSON string
                     ObjectNode toolUseObjectNode = (ObjectNode) toolUseNode;
                     JsonNode inputNode = toolUseObjectNode.remove("input");
                     String inputJsonString = MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(inputNode);
                     toolUseObjectNode.put("arguments", inputJsonString);
                 }
-                else {
+                else if (toolUseNode != null){
                 	//Remove ToolUse if it is not an object
                 	((ObjectNode) contentNode).remove("toolUse");
                 }

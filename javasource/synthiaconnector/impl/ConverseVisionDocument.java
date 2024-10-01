@@ -23,43 +23,48 @@ public class ConverseVisionDocument{
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 	
 	//Loop over FileCollection and map to Converse format
-	public static void mapToConverseVision(JsonNode fileCollectionNode, JsonNode messageNode, int iteratorMessage) throws MalformedURLException, URISyntaxException, IOException {
-		for (int iteratorFile = 0; iteratorFile < fileCollectionNode.size(); iteratorFile++){
-			JsonNode fileContent = fileCollectionNode.get(iteratorFile);
-			
-			if (fileContent.path("filetype").isNull()) {
-				LOGGER.warn("FileContent was passed without a file type specified.");
-				continue;
-			}
-			//Mapping of values that apply to both Image and Document chat
-			ArrayNode contentArrayNode = ((ArrayNode) messageNode.path("content"));
-			ObjectNode contentNode = MAPPER.createObjectNode();
-			setFormat(contentNode,fileContent);
-			ObjectNode sourceNode = MAPPER.createObjectNode();
-			setSourceBytes(sourceNode, fileContent);
-			contentNode.set("source", sourceNode);
-			ObjectNode contentWrapper = MAPPER.createObjectNode();
-			
-			//Specific mapping for each and setting the wrapper node
-			if (fileContent.path("fileType").asText().equals(ENUM_FileType.image.toString()))	{
-				contentWrapper.set("image", contentNode);
-			}
-			else if(fileContent.path("fileType").asText().equals(ENUM_FileType.document.toString())){
-				setDocumentName(fileContent,contentNode,iteratorMessage,iteratorFile);	
-				contentWrapper.set("document", contentNode);
-			}
-			contentArrayNode.add(contentWrapper);
-		}	
-		
+	public static void mapFileCollection(JsonNode messagesNode, int iteratorMessage) throws MalformedURLException, URISyntaxException, IOException {
+		JsonNode messageNode = messagesNode.get(iteratorMessage);
+		JsonNode fileCollectionNode = messageNode.path("fileCollection");
+		if(fileCollectionNode != null && fileCollectionNode.size() != 0) {
+			for (int iteratorFile = 0; iteratorFile < fileCollectionNode.size(); iteratorFile++){
+				JsonNode fileContent = fileCollectionNode.get(iteratorFile);
+				
+				if (fileContent.path("filetype").isNull()) {
+					LOGGER.warn("FileContent was passed without a file type specified.");
+					continue;
+				}
+				//Mapping of values that apply to both Image and Document chat
+				ArrayNode contentArrayNode = ((ArrayNode) messageNode.path("content"));
+				ObjectNode contentNode = MAPPER.createObjectNode();
+				setFormat(contentNode,fileContent);
+				ObjectNode sourceNode = MAPPER.createObjectNode();
+				setSourceBytes(sourceNode, fileContent);
+				contentNode.set("source", sourceNode);
+				ObjectNode contentWrapper = MAPPER.createObjectNode();
+				
+				//Specific mapping for each and setting the wrapper node
+				if (fileContent.path("fileType").asText().equals(ENUM_FileType.image.toString()))	{
+					contentWrapper.set("image", contentNode);
+				}
+				else if(fileContent.path("fileType").asText().equals(ENUM_FileType.document.toString())){
+					setDocumentName(fileContent, contentNode, iteratorMessage, iteratorFile);	
+					contentWrapper.set("document", contentNode);
+				}
+				contentArrayNode.add(contentWrapper);
+			}		
+		}
 		//FileCollection node is no longer needed after mapping
-		((ObjectNode)messageNode).remove("fileCollection");
+		if(fileCollectionNode != null) {
+			((ObjectNode)messageNode).remove("fileCollection");
+		}
 	}
 	
 	//Only applicable for DocumentChat. Either use the TextContent attribute or a static value
-	private static void setDocumentName(JsonNode fileContent, ObjectNode documentNode,int iteratorMessage,int iteratorFile) {
-		String documentName = null;
+	private static void setDocumentName(JsonNode fileContent, ObjectNode documentNode, int iteratorMessage, int iteratorFile) {
+		String documentName;
 		if(fileContent.path("textContent").asText().isBlank()) {
-			documentName = String.format("%s-%s-%s", "Document", iteratorMessage, iteratorFile);
+			documentName = String.format("%s-%s-%s", "Document_", iteratorMessage, "_", iteratorFile);
 		}
 		else {
 			documentName = fileContent.path("textContent").asText();	
