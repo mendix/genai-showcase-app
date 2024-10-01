@@ -83,11 +83,11 @@ public class Request_Modify_Converse extends CustomJavaAction<java.lang.String>
 		ArrayNode messagesNode = (ArrayNode) rootNode.path("messages");
 		
 		for (int i = 0; i < messagesNode.size(); i++) {
-            JsonNode messageNode = messagesNode.get(i);
 			//Map "tool" messages to Converse ToolResult
 			ConverseFunctionCalling.setToolResult(messagesNode,i,getContext(),Request);
 			
             //If a fileCollection has been added, add a new Converse ContentBlock
+            JsonNode messageNode = messagesNode.get(i);
             updateFileContentMessages(messageNode,i);
         }
 		//Update messages of rootNode
@@ -104,11 +104,11 @@ public class Request_Modify_Converse extends CustomJavaAction<java.lang.String>
 	}
 	
 	//Removes system prompt node if empty (system prompt is not required, but can't be null)
-	private void removeSystemPromptIfEmpty(JsonNode rootNode) {
+	private void removeSystemPromptIfEmpty(ObjectNode rootNode) {
 		if (rootNode.has("system")) {
             JsonNode systemNode = rootNode.get("system").get(0);
-            if (systemNode != null && (systemNode).size() == 0) {
-                ((ObjectNode) rootNode).remove("system");
+            if (systemNode != null && systemNode.size() == 0) {
+                rootNode.remove("system");
             }
 		}
 	}

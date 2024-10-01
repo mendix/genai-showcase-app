@@ -90,7 +90,7 @@ public class ConverseFunctionCalling{
 			RequestExtension requestExtension = getRequestExtension(context,request,toolMessageRoot);
 			
 			//Get the assistant message right before the tool messages
-			JsonNode assistantTextMessage = messageList.get(i-1);
+			ObjectNode assistantTextMessage = (ObjectNode) messageList.get(i-1);
 			if(assistantTextMessage != null) {
 				setAssistantToolUse(assistantTextMessage,requestExtension);
 			}
@@ -145,11 +145,10 @@ public class ConverseFunctionCalling{
 	}
 	
 	//The exact Response from Converse needs to be added as an assistant message. This is stored in the requestExtension right after a call.
-	private static void setAssistantToolUse(JsonNode messageNode,RequestExtension requestExtension) throws JsonMappingException, JsonProcessingException {
+	private static void setAssistantToolUse(ObjectNode messageNode,RequestExtension requestExtension) throws JsonMappingException, JsonProcessingException {
 		ObjectNode toolUseMessageRoot = (ObjectNode) MAPPER.readTree(requestExtension.getToolUseContent());
 		JsonNode contentNode = toolUseMessageRoot.path("output").path("message").path("content");
-		
-		((ObjectNode) messageNode).set("content", contentNode);
+		messageNode.set("content", contentNode);
 	}
 	
 	
