@@ -94,7 +94,7 @@ public class ConverseVisionDocument{
 		if (fileContent.path("contentType") != null && fileContent.path("contentType").asText().equals(ENUM_ContentType.Base64.toString())) {
 			bytes = fileContent.path("fileContent").asText();
 		}
-		else if (fileContent.path("contenttype") != null && fileContent.path("contentType").asText().equals(ENUM_ContentType.Url.toString())){
+		else if (fileContent.path("contentType") != null && fileContent.path("contentType").asText().equals(ENUM_ContentType.Url.toString())){
 			bytes = getImageBytesFromURI(fileContent.path("fileContent").asText());
 		}
 		sourceNode.put("bytes", bytes);
@@ -108,12 +108,4 @@ public class ConverseVisionDocument{
 		}
 	}
 	
-	private static final Pattern pattern = Pattern.compile("^[a-zA-Z0-9\\-\\(\\)\\[\\]]+(?: [a-zA-Z0-9\\-\\(\\)\\[\\]]+)*$");
-
-    public static boolean isValidDocumentName(String name) {
-        if (name == null) {
-            return false;
-        }
-        return pattern.matcher(name).matches();
-    }
 }
