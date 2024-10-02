@@ -36284,6 +36284,10 @@ $callout-info-bg: $color-info-lighter;
   min-width: 280px;
 }
 
+.display--inline {
+  display: inline;
+}
+
 .product-tag {
   border-radius: 24px;
 }
