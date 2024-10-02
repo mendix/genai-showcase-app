@@ -35448,7 +35448,7 @@ $callout-info-bg: $color-info-lighter;
   cursor: auto;
 }
 .layout-chat-popup.mx-window .mx-window-header {
-  background: #185a9d;
+  background: linear-gradient(64deg, #185a9d, #43bbce);
   cursor: auto;
 }
 .layout-chat-popup.mx-window .mx-window-header h4 {
@@ -35496,7 +35496,7 @@ $callout-info-bg: $color-info-lighter;
   border: none;
 }
 .layout-chat-sidebar .mx-window-content .mx-window-header {
-  background: #185a9d;
+  background: linear-gradient(64deg, #185a9d, #43bbce) !important;
   cursor: auto;
   border: none;
 }
