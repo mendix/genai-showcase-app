@@ -65,9 +65,14 @@
         }
     }
 
-    .has-error .alert {
-        display: none !important;
-    }
+    .has-error {
+        &:before{
+            display:none;
+        }
+        .alert {
+            display: none !important;
+        }
+    }  
 
     .send-btn {
         position: absolute;
@@ -80,11 +85,13 @@
         border-radius: 50%;
         width: $send-btn-size;
         height: $send-btn-size;
+        padding: 0px;
 
         .glyphicon {
             top: 0;
             font-size: $send-btn-size / 2;
             left: -2px;
+            margin: 0px;
         }
     }
 }

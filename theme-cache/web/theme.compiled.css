@@ -34508,6 +34508,9 @@ $callout-info-bg: $color-info-lighter;
   max-height: 400px;
   overflow: auto;
 }
+.chat-input-wrapper .has-error:before {
+  display: none;
+}
 .chat-input-wrapper .has-error .alert {
   display: none !important;
 }
@@ -34522,11 +34525,13 @@ $callout-info-bg: $color-info-lighter;
   border-radius: 50%;
   width: 28px;
   height: 28px;
+  padding: 0px;
 }
 .chat-input-wrapper .send-btn .glyphicon {
   top: 0;
   font-size: 14px;
   left: -2px;
+  margin: 0px;
 }
 
 .chat-bubble-wrapper {
@@ -35462,6 +35467,7 @@ $callout-info-bg: $color-info-lighter;
   width: 60px;
   height: 60px;
   border-radius: 50%;
+  padding: 0px;
 }
 .btn-chat-popup .glyphicon {
   font-size: 24px;
