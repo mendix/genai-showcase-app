@@ -34539,6 +34539,18 @@ $callout-info-bg: $color-info-lighter;
   text-align: left;
   padding: 8px;
 }
+.chat-bubble-wrapper--assistant {
+  display: flex !important;
+  align-items: flex-start !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+.chat-bubble-wrapper--user {
+  display: flex !important;
+  align-items: flex-end !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
 .chat-bubble-wrapper--user .chat-message-card {
   background: #e9edfc;
   border-radius: 8px 8px 0 8px;
@@ -34552,6 +34564,32 @@ $callout-info-bg: $color-info-lighter;
 .chat-history-active {
   border-left: 3px solid #185a9d;
   font-weight: bold;
+}
+
+.chat-messages-listview.mx-listview > ul > li {
+  padding: 8px;
+  cursor: default;
+  border: none;
+  background-color: transparent;
+  border-bottom: none;
+}
+.chat-messages-listview.mx-listview > ul > li:hover, .chat-messages-listview.mx-listview > ul > li:focus, .chat-messages-listview.mx-listview > ul > li:active {
+  background-color: transparent;
+}
+.chat-messages-listview.mx-listview > ul > li.selected {
+  background-color: transparent !important;
+}
+.chat-messages-listview.mx-listview > ul > li.selected:hover, .chat-messages-listview.mx-listview > ul > li.selected:focus, .chat-messages-listview.mx-listview > ul > li.selected:active {
+  background-color: transparent !important;
+}
+.chat-messages-listview.mx-listview > ul > li:first-child {
+  border-top: none;
+}
+.chat-messages-listview.mx-listview > ul > li:last-child {
+  border-bottom: none;
+}
+.chat-messages-listview.mx-listview > ul > li:nth-child(2n+1) {
+  background-color: transparent;
 }
 
 .chart-input.widget-chart .fills .js-fill,
