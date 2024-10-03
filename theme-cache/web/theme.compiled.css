@@ -34597,6 +34597,10 @@ $callout-info-bg: $color-info-lighter;
   background-color: transparent;
 }
 
+.user-input-instructions {
+  font-style: italic;
+}
+
 .chart-input.widget-chart .fills .js-fill,
 .chart-input.widget-chart .legendfill .js-fill {
   fill: #82a6ca !important;
@@ -35557,10 +35561,6 @@ $callout-info-bg: $color-info-lighter;
 }
 .layout-chat-sidebar .mx-window-content .mx-window-body .mx-placeholder {
   height: 100%;
-}
-
-.text-italic {
-  font-style: italic;
 }
 
 /*
