@@ -98,26 +98,21 @@
 
 .chat-bubble-wrapper {
     margin-top: $spacing-small;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+
     .chat-message-card {
         background: $chat-bubble-assistant-background;
         border-radius: 8px 8px 8px 0;
         margin: 0 10% 0 0;
-        text-align: left;
         padding: $spacing-small;
     }
 
-    &--assistant { //same as col-left
-        display: flex !important;
-        align-items: flex-start !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-    }
+    &--user {
+        align-items: flex-end;
 
-    &--user { //same as col-right
-        display: flex !important;
-        align-items: flex-end !important;
-        flex-direction: column !important;
-        justify-content: center !important;
         .chat-message-card {
             background: $chat-bubble-user-background;
             border-radius: 8px 8px 0 8px;

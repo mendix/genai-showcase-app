@@ -34536,25 +34536,19 @@ $callout-info-bg: $color-info-lighter;
 
 .chat-bubble-wrapper {
   margin-top: 8px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
 }
 .chat-bubble-wrapper .chat-message-card {
   background: #ecf7ec;
   border-radius: 8px 8px 8px 0;
   margin: 0 10% 0 0;
-  text-align: left;
   padding: 8px;
 }
-.chat-bubble-wrapper--assistant {
-  display: flex !important;
-  align-items: flex-start !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-}
 .chat-bubble-wrapper--user {
-  display: flex !important;
-  align-items: flex-end !important;
-  flex-direction: column !important;
-  justify-content: center !important;
+  align-items: flex-end;
 }
 .chat-bubble-wrapper--user .chat-message-card {
   background: #e9edfc;
