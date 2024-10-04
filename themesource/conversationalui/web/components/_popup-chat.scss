@@ -1,4 +1,3 @@
-@import "../../../atlas_core/web/_variables.scss";
 //this file contains styling for a pop-up chatbox
 
 .btn-chat-popup {
@@ -9,6 +8,7 @@
     width: 60px;
     height: 60px;
     border-radius: 50%;
+    padding: 0px;
     .glyphicon {
         font-size: 24px;
     }
@@ -33,7 +33,7 @@
         cursor: auto;
     }
     .mx-window-header {
-        background: $brand-primary;
+        background: $chat-header-color;
         cursor: auto;
         h4 {
             color: $header-text-color;
