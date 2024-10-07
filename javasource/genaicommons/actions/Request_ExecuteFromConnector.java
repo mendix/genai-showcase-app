@@ -90,6 +90,9 @@ public class Request_ExecuteFromConnector extends CustomJavaAction<IMendixObject
 	//Recursive response processing until there is no ToolCall available
 	private Response processRequest() throws CoreException {
 		IMendixObject responseMendixObject = Core.microflowCall(CallModelMicroflow).withParam("Connection", Connection.getMendixObject()).withParam("Request", Request.getMendixObject()).execute(this.getContext());
+		if(responseMendixObject == null) {
+			throw new NullPointerException("Microflow " + CallModelMicroflow + " returned null.");
+		}
 		Response response = genaicommons.proxies.Response.load(getContext(), responseMendixObject.getId());
 		
 		responseUpdateTokenCount(response);
