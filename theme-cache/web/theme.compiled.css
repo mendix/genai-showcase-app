@@ -34498,6 +34498,10 @@ $callout-info-bg: $color-info-lighter;
 
 .chat-input-wrapper {
   position: relative;
+  display: flex !important;
+  align-items: center !important;
+  flex-flow: row !important;
+  justify-content: center !important;
 }
 .chat-input-wrapper .form-group {
   width: 100%;
@@ -34515,7 +34519,13 @@ $callout-info-bg: $color-info-lighter;
 .chat-input-wrapper .has-error .alert {
   display: none !important;
 }
-.chat-input-wrapper .send-btn {
+.chat-input-wrapper .send-btn-container {
+  display: flex !important;
+  align-items: center !important;
+  flex-flow: row !important;
+  justify-content: flex-end !important;
+}
+.chat-input-wrapper .send-btn-container .send-btn {
   position: absolute;
   right: 15px;
   bottom: 15px;
@@ -34528,7 +34538,7 @@ $callout-info-bg: $color-info-lighter;
   height: 28px;
   padding: 0px;
 }
-.chat-input-wrapper .send-btn .glyphicon {
+.chat-input-wrapper .send-btn-container .send-btn .glyphicon {
   top: 0;
   font-size: 14px;
   left: -2px;
@@ -35430,8 +35440,6 @@ $callout-info-bg: $color-info-lighter;
 }
 .chat-listview-horizontal.mx-listview > ul > li .mx-dataview-content > button {
   display: -webkit-box;
-  margin-bottom: 0px !important;
-  margin-right: 0px !important;
   word-break: break-word;
   overflow: hidden;
   -webkit-line-clamp: 1;

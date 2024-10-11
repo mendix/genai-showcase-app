@@ -52,6 +52,11 @@
 
 .chat-input-wrapper {
     position: relative;
+    //row-center
+    display: flex !important;
+    align-items: center !important;
+    flex-flow: row !important;
+    justify-content: center !important;
 
     .form-group {
         width: 100%;
@@ -73,25 +78,33 @@
             display: none !important;
         }
     }  
+    
+    .send-btn-container {
+        //row-right
+        display: flex !important;
+        align-items: center !important;
+        flex-flow: row !important;
+        justify-content: flex-end !important;
 
-    .send-btn {
-        position: absolute;
-        right: 58px / 2 - $send-btn-size / 2;
-        bottom: 58px / 2 - $send-btn-size / 2;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration-line: none;
-        border-radius: 50%;
-        width: $send-btn-size;
-        height: $send-btn-size;
-        padding: 0px;
+        .send-btn {
+            position: absolute;
+            right: 58px / 2 - $send-btn-size / 2;
+            bottom: 58px / 2 - $send-btn-size / 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration-line: none;
+            border-radius: 50%;
+            width: $send-btn-size;
+            height: $send-btn-size;
+            padding: 0px;
 
-        .glyphicon {
-            top: 0;
-            font-size: $send-btn-size / 2;
-            left: -2px;
-            margin: 0px;
+            .glyphicon {
+                top: 0;
+                font-size: $send-btn-size / 2;
+                left: -2px;
+                margin: 0px;
+            }
         }
     }
 }
