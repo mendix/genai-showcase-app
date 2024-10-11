@@ -60,7 +60,7 @@ public class KnowledgeBaseChunkList_Retrieve extends CustomJavaAction<java.util.
 		try {
 			java.util.List<KnowledgeBaseChunk> chunkList = new ArrayList<>();
 			if (MxObject == null) {
-				LOGGER.info("No MxObject was passed, retrieve will be executed without MendixIDs specified");
+				LOGGER.trace("No MxObject was passed, retrieve will be executed without MendixIDs specified");
 			}
 			else {
 				ChunkUtils.addChunkWithMxObjectID(getContext(), MxObject, chunkList);
