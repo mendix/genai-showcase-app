@@ -34393,6 +34393,7 @@ $callout-info-bg: $color-info-lighter;
 
 .accordion-chat-sources .widget-accordion-group {
   background: transparent;
+  border-bottom: none;
 }
 .accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button {
   display: inline-flex;
@@ -34563,32 +34564,6 @@ $callout-info-bg: $color-info-lighter;
 .chat-history-active {
   border-left: 3px solid #185a9d;
   font-weight: bold;
-}
-
-.chat-messages-listview.mx-listview > ul > li {
-  padding: 8px;
-  cursor: default;
-  border: none;
-  background-color: transparent;
-  border-bottom: none;
-}
-.chat-messages-listview.mx-listview > ul > li:hover, .chat-messages-listview.mx-listview > ul > li:focus, .chat-messages-listview.mx-listview > ul > li:active {
-  background-color: transparent;
-}
-.chat-messages-listview.mx-listview > ul > li.selected {
-  background-color: transparent !important;
-}
-.chat-messages-listview.mx-listview > ul > li.selected:hover, .chat-messages-listview.mx-listview > ul > li.selected:focus, .chat-messages-listview.mx-listview > ul > li.selected:active {
-  background-color: transparent !important;
-}
-.chat-messages-listview.mx-listview > ul > li:first-child {
-  border-top: none;
-}
-.chat-messages-listview.mx-listview > ul > li:last-child {
-  border-bottom: none;
-}
-.chat-messages-listview.mx-listview > ul > li:nth-child(2n+1) {
-  background-color: transparent;
 }
 
 .user-input-instructions {
@@ -35448,13 +35423,60 @@ $callout-info-bg: $color-info-lighter;
 }
 .chat-listview-horizontal.mx-listview > ul > li {
   display: inline-block;
+  padding: 8px;
 }
 .chat-listview-horizontal.mx-listview > ul > li:hover {
   background-color: transparent;
 }
+.chat-listview-horizontal.mx-listview > ul > li .mx-dataview-content > button {
+  display: -webkit-box;
+  margin-bottom: 0px !important;
+  margin-right: 0px !important;
+  word-break: break-word;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+  text-wrap: wrap;
+  padding: 5px 10px;
+  line-height: 2;
+}
 
 .listview-hide-on-empty.mx-listview > ul > li.mx-listview-empty {
   display: none;
+}
+
+.convUI-listview-stylingless.mx-listview ul > li, .convUI-listview-stylingless.mx-listview ol > li {
+  cursor: default;
+  border: none;
+  background-color: transparent;
+  border-bottom: none;
+}
+.convUI-listview-stylingless.mx-listview ul > li:hover, .convUI-listview-stylingless.mx-listview ul > li:focus, .convUI-listview-stylingless.mx-listview ul > li:active, .convUI-listview-stylingless.mx-listview ol > li:hover, .convUI-listview-stylingless.mx-listview ol > li:focus, .convUI-listview-stylingless.mx-listview ol > li:active {
+  background-color: transparent;
+}
+.convUI-listview-stylingless.mx-listview ul > li.selected, .convUI-listview-stylingless.mx-listview ol > li.selected {
+  background-color: transparent !important;
+}
+.convUI-listview-stylingless.mx-listview ul > li.selected:hover, .convUI-listview-stylingless.mx-listview ul > li.selected:focus, .convUI-listview-stylingless.mx-listview ul > li.selected:active, .convUI-listview-stylingless.mx-listview ol > li.selected:hover, .convUI-listview-stylingless.mx-listview ol > li.selected:focus, .convUI-listview-stylingless.mx-listview ol > li.selected:active {
+  background-color: transparent !important;
+}
+.convUI-listview-stylingless.mx-listview ul > li:first-child, .convUI-listview-stylingless.mx-listview ol > li:first-child {
+  border-top: none;
+}
+.convUI-listview-stylingless.mx-listview ul > li:last-child, .convUI-listview-stylingless.mx-listview ol > li:last-child {
+  border-bottom: none;
+}
+.convUI-listview-stylingless.mx-listview ul > li:nth-child(2n+1), .convUI-listview-stylingless.mx-listview ol > li:nth-child(2n+1) {
+  background-color: transparent;
+}
+.convUI-listview-stylingless.mx-listview ol > li {
+  padding: 0px;
+}
+.convUI-listview-stylingless.mx-listview ul > li {
+  padding: 8px;
 }
 
 .btn-chat-popup {

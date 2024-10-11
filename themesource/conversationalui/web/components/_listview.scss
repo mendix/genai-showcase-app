@@ -4,8 +4,26 @@
         margin-bottom: none;
         > li {
             display: inline-block;
+            padding: 8px; //default listview-sm
+
             &:hover {
-                background-color: transparent;}
+                background-color: transparent;
+            }
+            .mx-dataview-content > button {
+                display: -webkit-box;
+                margin-bottom: 0px !important;
+                margin-right: 0px !important;
+                word-break: break-word;
+                overflow: hidden;
+                -webkit-line-clamp: 1;
+                line-clamp: 1;
+                -webkit-box-orient: vertical;
+                text-overflow: ellipsis;
+                box-sizing: border-box;
+                text-wrap: wrap;
+                padding: 5px 10px; //Default btn
+                line-height: 2;
+            }
         }
     }
 }
@@ -13,5 +31,46 @@
 .listview-hide-on-empty.mx-listview {
     > ul > li.mx-listview-empty {
         display: none;
+    }
+}
+
+.convUI-listview-stylingless.mx-listview { //same as listview-stylingless and listview-sm
+    ul > li, ol > li {
+        cursor: default;
+        border: none; // remove borders from listview-bordered
+        background-color: transparent;
+        border-bottom: none;
+
+        &:hover,
+        &:focus,
+        &:active {
+            background-color: transparent;
+        }
+
+        &.selected {
+            background-color: transparent !important;
+
+            &:hover,
+            &:focus,
+            &:active {
+                background-color: transparent !important;
+            }
+        }
+
+        &:first-child { // remove border from listview-lined
+            border-top: none;
+        }
+
+        &:last-child { // remove border from listview-lined
+            border-bottom: none;
+        }
+
+        &:nth-child(2n+1) { // remove background from listview-striped
+            background-color: transparent;
+        }
+    } ol > li{
+        padding: 0px; 
+    } ul > li {
+        padding: 8px; //from listview-sm
     }
 }
