@@ -34400,7 +34400,7 @@ $callout-info-bg: $color-info-lighter;
   background: transparent;
   padding: 0;
 }
-.accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button.widget-accordion-group-header-button-clickable:hover, .accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button.widget-accordion-group-header-button-clickable:focus {
+.accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button.widget-accordion-group-header-button-clickable:hover, .accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button.widget-accordion-group-header-button-clickable:focus, .accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button.widget-accordion-group-header-button-clickable:active {
   color: #1f2431;
   background: transparent;
 }
@@ -35435,9 +35435,6 @@ $callout-info-bg: $color-info-lighter;
   display: inline-block;
   padding: 8px;
 }
-.chat-listview-horizontal.mx-listview > ul > li:hover {
-  background-color: transparent;
-}
 .chat-listview-horizontal.mx-listview > ul > li .mx-dataview-content > button {
   display: -webkit-box;
   word-break: break-word;
@@ -35450,6 +35447,12 @@ $callout-info-bg: $color-info-lighter;
   text-wrap: wrap;
   padding: 5px 10px;
   line-height: 2;
+}
+.chat-listview-horizontal.mx-listview > ul > li:hover {
+  background-color: transparent;
+}
+.chat-listview-horizontal.mx-listview > ul > li:first-child {
+  padding-left: 0px;
 }
 
 .listview-hide-on-empty.mx-listview > ul > li.mx-listview-empty {

@@ -6,9 +6,6 @@
             display: inline-block;
             padding: 8px; //default listview-sm
 
-            &:hover {
-                background-color: transparent;
-            }
             .mx-dataview-content > button {
                 display: -webkit-box;
                 word-break: break-word;
@@ -21,6 +18,14 @@
                 text-wrap: wrap;
                 padding: 5px 10px; //Default btn
                 line-height: 2;
+            }
+
+            &:hover {
+                background-color: transparent;
+            }
+
+            &:first-child {
+                padding-left: 0px;
             }
         }
     }
@@ -66,8 +71,9 @@
         &:nth-child(2n+1) { // remove background from listview-striped
             background-color: transparent;
         }
-    } ol > li{
-        padding: 0px; 
+
+    } ol > li {
+        padding: 0px; //used for ordered lists in markdown viewer
     } ul > li {
         padding: 8px; //from listview-sm
     }
