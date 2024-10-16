@@ -1,11 +1,70 @@
+.chat-listview-stylingless.mx-listview { //same as listview-stylingless and listview-sm
+    ul > li, ol > li {
+        cursor: default;
+        border: none; // remove borders from listview-bordered
+        background-color: transparent;
+        border-bottom: none;
+
+        &:hover,
+        &:focus,
+        &:active {
+            background-color: transparent;
+        }
+
+        &.selected {
+            background-color: transparent !important;
+
+            &:hover,
+            &:focus,
+            &:active {
+                background-color: transparent !important;
+            }
+        }
+
+        &:first-child { // remove border from listview-lined
+            border-top: none;
+        }
+
+        &:last-child { // remove border from listview-lined
+            border-bottom: none;
+        }
+
+        &:nth-child(2n+1) { // remove background from listview-striped
+            background-color: transparent;
+        }
+
+    } ol > li {
+        padding: 0px; //used for ordered lists in markdown viewer
+    } ul > li {
+        padding: 8px; //from listview-sm
+    }
+}
+
 .chat-listview-horizontal.mx-listview {
     > ul {
         display: contents;
         margin-bottom: none;
         > li {
             display: inline-block;
+            padding: 4px; //default listview-sm
+
+            .mx-dataview-content > button {
+                display: -webkit-box;
+                word-break: break-word;
+                overflow: hidden;
+                -webkit-line-clamp: 1;
+                line-clamp: 1;
+                -webkit-box-orient: vertical;
+                text-overflow: ellipsis;
+                box-sizing: border-box;
+                text-wrap: wrap;
+                padding: 5px 10px; //Default btn
+                line-height: 2;
+            }
+
             &:hover {
-                background-color: transparent;}
+                background-color: transparent;
+            }
         }
     }
 }
@@ -15,3 +74,4 @@
         display: none;
     }
 }
+
