@@ -34411,6 +34411,7 @@ $callout-info-bg: $color-info-lighter;
 }
 .accordion-chat-sources .widget-accordion-group .widget-accordion-group-content-wrapper .widget-accordion-group-content {
   padding-left: 0;
+  padding-right: 0;
   padding-bottom: 0;
 }
 
@@ -35427,13 +35428,44 @@ $callout-info-bg: $color-info-lighter;
   height: 100%;
 }
 
+.chat-listview-stylingless.mx-listview ul > li, .chat-listview-stylingless.mx-listview ol > li {
+  cursor: default;
+  border: none;
+  background-color: transparent;
+  border-bottom: none;
+}
+.chat-listview-stylingless.mx-listview ul > li:hover, .chat-listview-stylingless.mx-listview ul > li:focus, .chat-listview-stylingless.mx-listview ul > li:active, .chat-listview-stylingless.mx-listview ol > li:hover, .chat-listview-stylingless.mx-listview ol > li:focus, .chat-listview-stylingless.mx-listview ol > li:active {
+  background-color: transparent;
+}
+.chat-listview-stylingless.mx-listview ul > li.selected, .chat-listview-stylingless.mx-listview ol > li.selected {
+  background-color: transparent !important;
+}
+.chat-listview-stylingless.mx-listview ul > li.selected:hover, .chat-listview-stylingless.mx-listview ul > li.selected:focus, .chat-listview-stylingless.mx-listview ul > li.selected:active, .chat-listview-stylingless.mx-listview ol > li.selected:hover, .chat-listview-stylingless.mx-listview ol > li.selected:focus, .chat-listview-stylingless.mx-listview ol > li.selected:active {
+  background-color: transparent !important;
+}
+.chat-listview-stylingless.mx-listview ul > li:first-child, .chat-listview-stylingless.mx-listview ol > li:first-child {
+  border-top: none;
+}
+.chat-listview-stylingless.mx-listview ul > li:last-child, .chat-listview-stylingless.mx-listview ol > li:last-child {
+  border-bottom: none;
+}
+.chat-listview-stylingless.mx-listview ul > li:nth-child(2n+1), .chat-listview-stylingless.mx-listview ol > li:nth-child(2n+1) {
+  background-color: transparent;
+}
+.chat-listview-stylingless.mx-listview ol > li {
+  padding: 0px;
+}
+.chat-listview-stylingless.mx-listview ul > li {
+  padding: 8px;
+}
+
 .chat-listview-horizontal.mx-listview > ul {
   display: contents;
   margin-bottom: none;
 }
 .chat-listview-horizontal.mx-listview > ul > li {
   display: inline-block;
-  padding: 8px;
+  padding: 4px;
 }
 .chat-listview-horizontal.mx-listview > ul > li .mx-dataview-content > button {
   display: -webkit-box;
@@ -35451,43 +35483,9 @@ $callout-info-bg: $color-info-lighter;
 .chat-listview-horizontal.mx-listview > ul > li:hover {
   background-color: transparent;
 }
-.chat-listview-horizontal.mx-listview > ul > li:first-child {
-  padding-left: 0px;
-}
 
 .listview-hide-on-empty.mx-listview > ul > li.mx-listview-empty {
   display: none;
-}
-
-.convUI-listview-stylingless.mx-listview ul > li, .convUI-listview-stylingless.mx-listview ol > li {
-  cursor: default;
-  border: none;
-  background-color: transparent;
-  border-bottom: none;
-}
-.convUI-listview-stylingless.mx-listview ul > li:hover, .convUI-listview-stylingless.mx-listview ul > li:focus, .convUI-listview-stylingless.mx-listview ul > li:active, .convUI-listview-stylingless.mx-listview ol > li:hover, .convUI-listview-stylingless.mx-listview ol > li:focus, .convUI-listview-stylingless.mx-listview ol > li:active {
-  background-color: transparent;
-}
-.convUI-listview-stylingless.mx-listview ul > li.selected, .convUI-listview-stylingless.mx-listview ol > li.selected {
-  background-color: transparent !important;
-}
-.convUI-listview-stylingless.mx-listview ul > li.selected:hover, .convUI-listview-stylingless.mx-listview ul > li.selected:focus, .convUI-listview-stylingless.mx-listview ul > li.selected:active, .convUI-listview-stylingless.mx-listview ol > li.selected:hover, .convUI-listview-stylingless.mx-listview ol > li.selected:focus, .convUI-listview-stylingless.mx-listview ol > li.selected:active {
-  background-color: transparent !important;
-}
-.convUI-listview-stylingless.mx-listview ul > li:first-child, .convUI-listview-stylingless.mx-listview ol > li:first-child {
-  border-top: none;
-}
-.convUI-listview-stylingless.mx-listview ul > li:last-child, .convUI-listview-stylingless.mx-listview ol > li:last-child {
-  border-bottom: none;
-}
-.convUI-listview-stylingless.mx-listview ul > li:nth-child(2n+1), .convUI-listview-stylingless.mx-listview ol > li:nth-child(2n+1) {
-  background-color: transparent;
-}
-.convUI-listview-stylingless.mx-listview ol > li {
-  padding: 0px;
-}
-.convUI-listview-stylingless.mx-listview ul > li {
-  padding: 8px;
 }
 
 .btn-chat-popup {
