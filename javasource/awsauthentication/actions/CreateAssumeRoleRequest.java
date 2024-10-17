@@ -87,7 +87,7 @@ public class CreateAssumeRoleRequest extends CustomJavaAction<IMendixObject>
 			// Get Client Certificate from Environment variables
 			JSONObject cert = Utils.getClientCertificateDetails(ClientCertificateID);
 			if(nonNull(cert)) {
-				LOGGER.debug("Certificate found from Enviroment variables using ClientCertificate Id :: "+ClientCertificateID);
+				LOGGER.debug("Certificate found from Environment variables using ClientCertificate Id :: "+ClientCertificateID);
 				String pfxCert = cert.getString(PFX_KEY);
 				passPhrase = cert.getString(PASSWORD_KEY);
 				// Load certificate into stream
@@ -98,15 +98,15 @@ public class CreateAssumeRoleRequest extends CustomJavaAction<IMendixObject>
 				}				
 			}else {
 				// Running locally form studio-pro, certificate from configuration.
-				LOGGER.debug("Certificate not found from Enviroment variables, searching in runtime configuration");
+				LOGGER.debug("Certificate not found from Environment variables, searching in runtime configuration");
 				
 				int certIndex = getCertificateID();
 				// validates if the certificateID is not less than 0. As the input is 1 based but the retrieve is 0 based, the certIndex is check but the ClientCertificateID is logged
 				// Also, this check cannot be performed within the validation function, as the client certificate id can be any string in cloud environments
 				// TODO check if this can be moved to getCertificateID
 				if (certIndex < 0) {
-					LOGGER.error("The client certifcate id must be a number of 1 or greater. Instead value was set to: " + ClientCertificateID);
-					throw new IllegalArgumentException("The client certifcate id must be a number of 1 or greater. Instead value was set to: " + ClientCertificateID);
+					LOGGER.error("The client certificate id must be a number of 1 or greater. Instead value was set to: " + ClientCertificateID);
+					throw new IllegalArgumentException("The client certificate id must be a number of 1 or greater. Instead value was set to: " + ClientCertificateID);
 				}
 				LOGGER.debug("Searching certificate at index :: "+ClientCertificateID);
 				try(InputStream stream = Core.getConfiguration().getClientCertificates().get(certIndex)){
@@ -168,7 +168,7 @@ public class CreateAssumeRoleRequest extends CustomJavaAction<IMendixObject>
 	                awsRegionString,
 	                SERVICE);
 	        
-	        // create the autherization header based on the steps found here: http://docs.aws.amazon.com/general/latest/gr/sigv4-create-canonical-request.html
+	        // create the authorization header based on the steps found here: http://docs.aws.amazon.com/general/latest/gr/sigv4-create-canonical-request.html
 	        String authorization_header = createAutherizationHeader(privateKey, algorithmName, algorithmHeader, amz_x509,
 					serial_number_dec, amzDate, requestParameters, signedHeaders, host, credentialScope);
 	
@@ -294,7 +294,7 @@ public class CreateAssumeRoleRequest extends CustomJavaAction<IMendixObject>
 			int certIndex = Integer.valueOf(ClientCertificateID) - ONE_TO_ZERO_INDEX_CORRECTION;
 			return certIndex;
 		} catch (NumberFormatException e) {
-			LOGGER.error("The client certifcate id must be a number of 1 or greater. Instead value was set to: " + ClientCertificateID);
+			LOGGER.error("The client certificate id must be a number of 1 or greater. Instead value was set to: " + ClientCertificateID);
 			throw e;
 		}
 	}

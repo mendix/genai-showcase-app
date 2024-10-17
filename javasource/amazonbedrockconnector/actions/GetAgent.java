@@ -15,12 +15,14 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
 import amazonbedrockconnector.impl.AmazonBedrockClient;
 import amazonbedrockconnector.impl.MxLogger;
+import amazonbedrockconnector.genaicommons_impl.ReferenceImpl;
 import amazonbedrockconnector.proxies.GetAgentResponse;
 import amazonbedrockconnector.proxies.RecommendedAction;
 import amazonbedrockconnector.proxies.Agent;
 import amazonbedrockconnector.proxies.AgentFailureReason;
 import amazonbedrockconnector.proxies.ENUM_AgentStatus;
 import software.amazon.awssdk.services.bedrockagent.BedrockAgentClient;
+import software.amazon.awssdk.services.bedrockagent.model.AgentStatus;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 public class GetAgent extends CustomJavaAction<IMendixObject>
@@ -101,6 +103,7 @@ public class GetAgent extends CustomJavaAction<IMendixObject>
 		return awsRequest;
 	}
 	
+
 	private GetAgentResponse getMxResponse(software.amazon.awssdk.services.bedrockagent.model.GetAgentResponse awsResponse) {
 		
 		GetAgentResponse mxResponse = new GetAgentResponse(getContext());
@@ -109,8 +112,8 @@ public class GetAgent extends CustomJavaAction<IMendixObject>
 		mxAgent.setAgentARN(awsResponse.agent().agentArn());
 		mxAgent.setAgentID(awsResponse.agent().agentId());
 		mxAgent.setAgentName(awsResponse.agent().agentName());
-		mxAgent.setAgentResourceRoleARN(awsResponse.agent().agentResourceRoleArn());
-		mxAgent.setAgentStatus(ENUM_AgentStatus.valueOf(awsResponse.agent().agentStatusAsString()));
+		mxAgent.setAgentResourceRoleARN(awsResponse.agent().agentResourceRoleArn());		
+		mxAgent.setAgentStatus(ReferenceImpl.getAgentStatus(awsResponse.agent().agentStatus()));
 		mxAgent.setAgentVersion(awsResponse.agent().agentVersion());
 		mxAgent.setCreatedAt(Date.from(awsResponse.agent().createdAt()));
 		mxAgent.setIdleSessionTTLInSeconds(awsResponse.agent().idleSessionTTLInSeconds());

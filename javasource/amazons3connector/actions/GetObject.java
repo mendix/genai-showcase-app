@@ -24,6 +24,7 @@ import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.core.ResponseInputStream;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest.Builder;
+import software.amazon.awssdk.services.s3.model.StorageClass;
 
 public class GetObject extends CustomJavaAction<IMendixObject>
 {
@@ -139,7 +140,7 @@ public class GetObject extends CustomJavaAction<IMendixObject>
 		java.util.Date LastModified = Date.from(awsResponse.lastModified());
 
 		if (!(awsResponse.storageClass() == null)) {
-			ENUM_StorageClass StorageClass = getStorageClassEnumValue(awsResponse.storageClass().name());
+			ENUM_StorageClass StorageClass = getStorageClassEnumValue(awsResponse.storageClass());
 			mxGetS3ObjectUsage.setStorageClass(StorageClass);
 		}
 		mxGetS3ObjectUsage.setETag(awsResponse.eTag());
@@ -151,33 +152,31 @@ public class GetObject extends CustomJavaAction<IMendixObject>
 		return mxResponse;
 	}
 
-	private ENUM_StorageClass getStorageClassEnumValue(String storageClass) {
+	private ENUM_StorageClass getStorageClassEnumValue(StorageClass storageClass) {
 		switch (storageClass) {
-		case "DEEP_ARCHIVE":
+		case DEEP_ARCHIVE:
 			return ENUM_StorageClass.DEEP_ARCHIVE;
-		case "GLACIER":
+		case GLACIER:
 			return ENUM_StorageClass.GLACIER;
-		case "GLACIER_IR":
+		case GLACIER_IR:
 			return ENUM_StorageClass.GLACIER_IR;
-		case "INTELLIGENT_TIERING":
+		case INTELLIGENT_TIERING:
 			return ENUM_StorageClass.INTELLIGENT_TIERING;
-		case "ONEZONE_IA":
+		case ONEZONE_IA:
 			return ENUM_StorageClass.ONEZONE_IA;
-		case "OUTPOSTS":
+		case OUTPOSTS:
 			return ENUM_StorageClass.OUTPOSTS;
-		case "REDUCED_REDUNDANCY":
+		case REDUCED_REDUNDANCY:
 			return ENUM_StorageClass.REDUCED_REDUNDANCY;
-		case "SNOW":
+		case SNOW:
 			return ENUM_StorageClass.SNOW;
-		case "STANDARD":
+		case STANDARD:
 			return ENUM_StorageClass.STANDARD;
-		case "STANDARD_IA":
+		case STANDARD_IA:
 			return ENUM_StorageClass.STANDARD_IA;
-		case "UNKNOWN_TO_SDK_VERSION":
-			LOGGER.debug("A storage class unknown to the SDK has been returned.");
-			return null;
 		default:
-			return null;
+			LOGGER.debug("A storage class unknown to the SDK has been returned.");
+			return ENUM_StorageClass.UNKNOWN_TO_SDK_VERSION;
 		}
 	}
 	// END EXTRA CODE
