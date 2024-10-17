@@ -20,7 +20,7 @@ import conversationalui.proxies.ProviderConfig;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
- * Adds a new provider config (or a specialization of such depending on the input) to a chat context The provider config is added to the chat context and set to active if IsActive is set to true. Additionally the action microflow of the new provider config is set.
+ * Adds a new provider config (or a specialization of such depending on the input) to a chat context. The provider config is added to the chat context and set to active if IsActive is set to true. Additionally the action microflow of the new provider config is set.
  */
 public class ChatContext_CreateProviderConfig extends CustomJavaAction<IMendixObject>
 {
