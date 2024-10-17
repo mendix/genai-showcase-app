@@ -10,5 +10,5 @@ delete bcutil-jdk18on-1.78.1.jar
 delete bcutil-jdk18on-1.78.1.jar.Encryption.RequiredLib
 delete bcprov-jdk18on-1.78.1.jar
 delete bcprov-jdk18on-1.78.1.jar.Encryption.RequiredLib
-delete commons-io-2.11.0.jar
-delete commons-io-2.11.0.jar.Encryption.RequiredLib
+delete commons-io-2.17.0.jar
+delete commons-io-2.17.0.jar.Encryption.RequiredLib
