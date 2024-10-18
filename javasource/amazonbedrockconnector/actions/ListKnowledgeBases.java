@@ -19,6 +19,7 @@ import amazonbedrockconnector.proxies.KnowledgeBaseSummary;
 import amazonbedrockconnector.proxies.ListKnowledgeBasesResponse;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import amazonbedrockconnector.impl.AmazonBedrockClient;
+import software.amazon.awssdk.services.bedrockagent.model.KnowledgeBaseStatus;
 
 public class ListKnowledgeBases extends CustomJavaAction<IMendixObject>
 {
@@ -104,13 +105,28 @@ public class ListKnowledgeBases extends CustomJavaAction<IMendixObject>
 		
 		return mxResponse;
 	}
+
+	private static ENUM_KnowledgeBaseStatus getKnowledgeBaseStatus(KnowledgeBaseStatus knowledgeBaseStatus) throws java.lang.IllegalStateException {
+			switch(knowledgeBaseStatus){
+				case CREATING:
+				case ACTIVE:
+				case DELETING:
+				case UPDATING:
+				case FAILED:
+				case DELETE_UNSUCCESSFUL:
+					return ENUM_KnowledgeBaseStatus.valueOf(knowledgeBaseStatus.toString());				
+				default:
+					LOGGER.debug("Unknown KnowledgeBaseStatus returned: ", knowledgeBaseStatus.toString());
+					return ENUM_KnowledgeBaseStatus.UNKNOWN_TO_SDK_VERSION;
+			}
+		}	
 	
 	void createMxSummary(software.amazon.awssdk.services.bedrockagent.model.KnowledgeBaseSummary awsSummary, ListKnowledgeBasesResponse mxResponse) {
 		
 		KnowledgeBaseSummary mxSummary = new KnowledgeBaseSummary(getContext());
 		mxSummary.setKnowledgeBaseID(awsSummary.knowledgeBaseId());
-		mxSummary.setName(awsSummary.name());;
-		mxSummary.setStatus(ENUM_KnowledgeBaseStatus.valueOf(awsSummary.statusAsString()));
+		mxSummary.setName(awsSummary.name());
+		mxSummary.setStatus(getKnowledgeBaseStatus(awsSummary.status()));
 		mxSummary.setUpdatedAt(Date.from(awsSummary.updatedAt()));
 		mxSummary.setDescription(awsSummary.description());
 		mxSummary.setKnowledgeBaseSummary_ListKnowledgeBasesResponse(getContext(), mxResponse);

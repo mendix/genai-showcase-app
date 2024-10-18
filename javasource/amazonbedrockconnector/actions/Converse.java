@@ -57,6 +57,7 @@ import genaicommons.proxies.ToolCollection;
 import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.core.document.Document;
 import software.amazon.awssdk.services.bedrockruntime.model.ContentBlock;
+import software.amazon.awssdk.services.bedrockruntime.model.ConversationRole;
 import software.amazon.awssdk.services.bedrockruntime.model.ConverseOutput;
 import software.amazon.awssdk.services.bedrockruntime.model.ConverseResponse;
 import software.amazon.awssdk.services.bedrockruntime.model.DocumentBlock;
@@ -825,6 +826,18 @@ public class Converse extends CustomJavaAction<IMendixObject>
 		return mxResponse;
 	}
 	
+	// Extract the role enumeration value from the awsMessage object
+	private ENUM_MessageRole getMessageRole(ConversationRole role) throws java.lang.IllegalStateException {
+		switch (role) {
+			case USER: 
+			case ASSISTANT: 
+				return ENUM_MessageRole.valueOf(role.toString());
+			default:
+				LOGGER.error("A role unknown to the SDK version has been retrieved.");
+				return null;
+		}
+	}
+
 	// Creating the Mendix response message
 	private genaicommons.proxies.Message getMxResponseMessage(ConverseOutput converseOutput) throws JsonProcessingException {
 		if (converseOutput.type() != ConverseOutput.Type.MESSAGE) {
@@ -834,8 +847,9 @@ public class Converse extends CustomJavaAction<IMendixObject>
 		
 		genaicommons.proxies.Message mxMessage = new genaicommons.proxies.Message(getContext());
 		Message awsMessage = converseOutput.message();
-		mxMessage.setRole(ENUM_MessageRole.valueOf(awsMessage.roleAsString()));
 		
+		mxMessage.setRole(getMessageRole(awsMessage.role()));
+			
 		// Setting message contents and checking for returned tool uses
 		
 		List<ContentBlock> awsMsgContents = awsMessage.content();

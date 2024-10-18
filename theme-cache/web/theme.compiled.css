@@ -34393,13 +34393,14 @@ $callout-info-bg: $color-info-lighter;
 
 .accordion-chat-sources .widget-accordion-group {
   background: transparent;
+  border-bottom: none;
 }
 .accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button {
   display: inline-flex;
   background: transparent;
   padding: 0;
 }
-.accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button.widget-accordion-group-header-button-clickable:hover, .accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button.widget-accordion-group-header-button-clickable:focus {
+.accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button.widget-accordion-group-header-button-clickable:hover, .accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button.widget-accordion-group-header-button-clickable:focus, .accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button.widget-accordion-group-header-button-clickable:active {
   color: #1f2431;
   background: transparent;
 }
@@ -34410,6 +34411,7 @@ $callout-info-bg: $color-info-lighter;
 }
 .accordion-chat-sources .widget-accordion-group .widget-accordion-group-content-wrapper .widget-accordion-group-content {
   padding-left: 0;
+  padding-right: 0;
   padding-bottom: 0;
 }
 
@@ -34497,6 +34499,10 @@ $callout-info-bg: $color-info-lighter;
 
 .chat-input-wrapper {
   position: relative;
+  display: flex !important;
+  align-items: center !important;
+  flex-flow: row !important;
+  justify-content: center !important;
 }
 .chat-input-wrapper .form-group {
   width: 100%;
@@ -34514,7 +34520,13 @@ $callout-info-bg: $color-info-lighter;
 .chat-input-wrapper .has-error .alert {
   display: none !important;
 }
-.chat-input-wrapper .send-btn {
+.chat-input-wrapper .send-btn-container {
+  display: flex !important;
+  align-items: center !important;
+  flex-flow: row !important;
+  justify-content: flex-end !important;
+}
+.chat-input-wrapper .send-btn-container .send-btn {
   position: absolute;
   right: 15px;
   bottom: 15px;
@@ -34527,7 +34539,7 @@ $callout-info-bg: $color-info-lighter;
   height: 28px;
   padding: 0px;
 }
-.chat-input-wrapper .send-btn .glyphicon {
+.chat-input-wrapper .send-btn-container .send-btn .glyphicon {
   top: 0;
   font-size: 14px;
   left: -2px;
@@ -34563,32 +34575,6 @@ $callout-info-bg: $color-info-lighter;
 .chat-history-active {
   border-left: 3px solid #185a9d;
   font-weight: bold;
-}
-
-.chat-messages-listview.mx-listview > ul > li {
-  padding: 8px;
-  cursor: default;
-  border: none;
-  background-color: transparent;
-  border-bottom: none;
-}
-.chat-messages-listview.mx-listview > ul > li:hover, .chat-messages-listview.mx-listview > ul > li:focus, .chat-messages-listview.mx-listview > ul > li:active {
-  background-color: transparent;
-}
-.chat-messages-listview.mx-listview > ul > li.selected {
-  background-color: transparent !important;
-}
-.chat-messages-listview.mx-listview > ul > li.selected:hover, .chat-messages-listview.mx-listview > ul > li.selected:focus, .chat-messages-listview.mx-listview > ul > li.selected:active {
-  background-color: transparent !important;
-}
-.chat-messages-listview.mx-listview > ul > li:first-child {
-  border-top: none;
-}
-.chat-messages-listview.mx-listview > ul > li:last-child {
-  border-bottom: none;
-}
-.chat-messages-listview.mx-listview > ul > li:nth-child(2n+1) {
-  background-color: transparent;
 }
 
 .user-input-instructions {
@@ -35442,12 +35428,57 @@ $callout-info-bg: $color-info-lighter;
   height: 100%;
 }
 
+.chat-listview-stylingless.mx-listview ul > li, .chat-listview-stylingless.mx-listview ol > li {
+  cursor: default;
+  border: none;
+  background-color: transparent;
+  border-bottom: none;
+}
+.chat-listview-stylingless.mx-listview ul > li:hover, .chat-listview-stylingless.mx-listview ul > li:focus, .chat-listview-stylingless.mx-listview ul > li:active, .chat-listview-stylingless.mx-listview ol > li:hover, .chat-listview-stylingless.mx-listview ol > li:focus, .chat-listview-stylingless.mx-listview ol > li:active {
+  background-color: transparent;
+}
+.chat-listview-stylingless.mx-listview ul > li.selected, .chat-listview-stylingless.mx-listview ol > li.selected {
+  background-color: transparent !important;
+}
+.chat-listview-stylingless.mx-listview ul > li.selected:hover, .chat-listview-stylingless.mx-listview ul > li.selected:focus, .chat-listview-stylingless.mx-listview ul > li.selected:active, .chat-listview-stylingless.mx-listview ol > li.selected:hover, .chat-listview-stylingless.mx-listview ol > li.selected:focus, .chat-listview-stylingless.mx-listview ol > li.selected:active {
+  background-color: transparent !important;
+}
+.chat-listview-stylingless.mx-listview ul > li:first-child, .chat-listview-stylingless.mx-listview ol > li:first-child {
+  border-top: none;
+}
+.chat-listview-stylingless.mx-listview ul > li:last-child, .chat-listview-stylingless.mx-listview ol > li:last-child {
+  border-bottom: none;
+}
+.chat-listview-stylingless.mx-listview ul > li:nth-child(2n+1), .chat-listview-stylingless.mx-listview ol > li:nth-child(2n+1) {
+  background-color: transparent;
+}
+.chat-listview-stylingless.mx-listview ol > li {
+  padding: 0px;
+}
+.chat-listview-stylingless.mx-listview ul > li {
+  padding: 8px;
+}
+
 .chat-listview-horizontal.mx-listview > ul {
   display: contents;
   margin-bottom: none;
 }
 .chat-listview-horizontal.mx-listview > ul > li {
   display: inline-block;
+  padding: 4px;
+}
+.chat-listview-horizontal.mx-listview > ul > li .mx-dataview-content > button {
+  display: -webkit-box;
+  word-break: break-word;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+  text-wrap: wrap;
+  padding: 5px 10px;
+  line-height: 2;
 }
 .chat-listview-horizontal.mx-listview > ul > li:hover {
   background-color: transparent;

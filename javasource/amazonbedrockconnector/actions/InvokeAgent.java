@@ -56,17 +56,21 @@ import amazonbedrockconnector.proxies.RequestBodyContentParameter;
 import amazonbedrockconnector.proxies.SessionAttribute;
 import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.core.async.SdkPublisher;
+import software.amazon.awssdk.services.bedrockagentruntime.model.PromptType;
 import software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeAsyncClient;
 import software.amazon.awssdk.services.bedrockagentruntime.model.Citation;
 import software.amazon.awssdk.services.bedrockagentruntime.model.CreationMode;
 import software.amazon.awssdk.services.bedrockagentruntime.model.FailureTrace;
+import software.amazon.awssdk.services.bedrockagentruntime.model.InvocationType;
 import software.amazon.awssdk.services.bedrockagentruntime.model.InvokeAgentResponseHandler;
 import software.amazon.awssdk.services.bedrockagentruntime.model.ModelInvocationInput;
 import software.amazon.awssdk.services.bedrockagentruntime.model.PayloadPart;
 import software.amazon.awssdk.services.bedrockagentruntime.model.ResponseStream;
 import software.amazon.awssdk.services.bedrockagentruntime.model.SessionState;
+import software.amazon.awssdk.services.bedrockagentruntime.model.Source;
 import software.amazon.awssdk.services.bedrockagentruntime.model.Trace;
 import software.amazon.awssdk.services.bedrockagentruntime.model.TracePart;
+import software.amazon.awssdk.services.bedrockagentruntime.model.Type;
 
 /**
  * The Amazon Bedrock InvokeAgent action allows you to send a prompt for an agent to process and respond to.
@@ -466,7 +470,7 @@ public class InvokeAgent extends CustomJavaAction<java.lang.Void>
 			        amazonbedrockconnector.proxies.TracePart mxTracePart = createMxTracePart(event, context);
 			        mxTracePart.setTracePart_InvokeAgentResponse(response);
 				} catch (Exception e) {
-					LOGGER.error("Excepting ocurred while handling Trace Event: ", e.getMessage());
+					LOGGER.error("Exception ocurred while handling Trace Event: ", e.getMessage());
 					this.handler.exceptionOccurred(e);
 					throw e;
 				}
@@ -529,6 +533,8 @@ public class InvokeAgent extends CustomJavaAction<java.lang.Void>
 						LOGGER.debug("Unknown PreProcessingTrace.Type returned: ", awsTrace.preProcessingTrace().type());
 						return null;
 					}
+
+
 				}
 				return null;
 			}
@@ -576,15 +582,29 @@ public class InvokeAgent extends CustomJavaAction<java.lang.Void>
 			}
 		}
 		
+		private static ENUM_PromptType getPromptType(PromptType promptType) throws java.lang.IllegalStateException {
+			switch(promptType) {
+				case PRE_PROCESSING:
+				case ORCHESTRATION:
+				case KNOWLEDGE_BASE_RESPONSE_GENERATION:
+				case POST_PROCESSING:
+					return ENUM_PromptType.valueOf(promptType.toString());
+				default: 
+					return ENUM_PromptType.UNKNOWN_TO_SDK_VERSION;
+			}
+		}
+			
+
 		// Reused across types for specializations of ModelInvocationInput
 		private static void setMxModelInvocationInput(amazonbedrockconnector.proxies.ModelInvocationInput mxModelInvocationInput, ModelInvocationInput awsModelInvocationInput) {
 			mxModelInvocationInput.setTraceId(awsModelInvocationInput.traceId());
 			mxModelInvocationInput.setOverrideLambda(awsModelInvocationInput.overrideLambda());
 			mxModelInvocationInput.setParserMode(setMxCreationMode(awsModelInvocationInput.parserMode()));
 			mxModelInvocationInput.setPromptCreationMode(setMxCreationMode(awsModelInvocationInput.promptCreationMode()));
+			mxModelInvocationInput.setPromptType(getPromptType(awsModelInvocationInput.type()));
 			mxModelInvocationInput.setText(awsModelInvocationInput.text());
-			mxModelInvocationInput.setPromptType(ENUM_PromptType.valueOf(awsModelInvocationInput.type().toString()));
 		}
+	
 		
 		private static ENUM_CreationMode setMxCreationMode(CreationMode awsCreationMode) {
 			if (awsCreationMode == null) {
@@ -597,12 +617,9 @@ public class InvokeAgent extends CustomJavaAction<java.lang.Void>
 			case OVERRIDDEN: {
 				return ENUM_CreationMode.OVERRIDDEN;
 			}
-			case UNKNOWN_TO_SDK_VERSION: {
-				LOGGER.debug("UnknownToSDKVersion ENUM_CreationMode value returned");
-				return ENUM_CreationMode.UNKNOWN_TO_SDK_VERSION;
-			}
 			default:
-				return null;
+				LOGGER.debug("Unknown CreationMode returned: ", awsCreationMode.toString());
+				return ENUM_CreationMode.UNKNOWN_TO_SDK_VERSION;
 			}
 		}
 		
@@ -656,12 +673,30 @@ public class InvokeAgent extends CustomJavaAction<java.lang.Void>
 			return mxPostProcessingTraceModelInvocationOutput;
 		}
 	
+
+
+		// Return the ENUM_InvocationType
+		private static ENUM_InvocationType getInvocationType(InvocationType invocationType) throws java.lang.IllegalStateException {
+			switch (invocationType){
+				case ACTION_GROUP:
+				case KNOWLEDGE_BASE:
+				case FINISH:
+					return ENUM_InvocationType.valueOf(invocationType.toString());
+				default:
+					LOGGER.debug("Unknown InvocationType returned: ", invocationType.toString());
+					return ENUM_InvocationType.UNKNOWN_TO_SDK_VERSION;
+				}
+		}
+
+
 		// Creating the OrchestrationTrace type objects
 		private static InvocationInput createMxInvocationInput(software.amazon.awssdk.services.bedrockagentruntime.model.InvocationInput awsInvocationInput, IContext context) {
 			InvocationInput mxInvocationInput = new InvocationInput(context);
 			mxInvocationInput.setTraceId(awsInvocationInput.traceId());
 			mxInvocationInput.setTraceType(ENUM_TraceType.ORCHESTRATION_TRACE);
-			mxInvocationInput.setInvocationType(ENUM_InvocationType.valueOf(awsInvocationInput.invocationType().toString()));
+			mxInvocationInput.setInvocationType(getInvocationType(awsInvocationInput.invocationType()));
+
+			
 			
 			//Create KnowledgeBaseLookupInput
 			if (awsInvocationInput.knowledgeBaseLookupInput() != null) {
@@ -736,6 +771,33 @@ public class InvokeAgent extends CustomJavaAction<java.lang.Void>
 			mxRationale.setText(awsRationale.text());
 			return mxRationale;
 		}
+
+		private static ENUM_ObservationType getObservationType(Type observationType) throws java.lang.IllegalStateException {
+			switch (observationType){
+				case ACTION_GROUP:
+				case KNOWLEDGE_BASE:
+				case FINISH:
+				case ASK_USER:
+				case REPROMPT:
+					LOGGER.debug("Unknown ObservationType returned: ", observationType.toString());
+					return ENUM_ObservationType.valueOf(observationType.toString());
+				default:
+					return ENUM_ObservationType.UNKNOWN_TO_SDK_VERSION;
+			}
+		}
+
+		private static ENUM_RepromptSource getRepromptSource(Source repromptSource) throws java.lang.IllegalStateException {
+			switch (repromptSource) {
+				case ACTION_GROUP:
+				case KNOWLEDGE_BASE:
+				case PARSER: 
+					LOGGER.debug("Unknown RepromptSource returned: ", repromptSource.toString());
+					return ENUM_RepromptSource.valueOf(repromptSource.toString());
+				default:
+					return ENUM_RepromptSource.UNKNOWN_TO_SDK_VERSION;
+			}
+		}
+
 		
 		private static Observation createMxObservation(software.amazon.awssdk.services.bedrockagentruntime.model.Observation awsObservation, IContext context) {
 			Observation mxObservation = new Observation(context);
@@ -750,13 +812,14 @@ public class InvokeAgent extends CustomJavaAction<java.lang.Void>
 				mxObservation.setFinalResponse(awsObservation.finalResponse().text());
 			}
 			
-			mxObservation.setObservationType(ENUM_ObservationType.valueOf(awsObservation.type().toString()));
-			
+			mxObservation.setObservationType(getObservationType(awsObservation.type()));
+
 			// Create RepromptResponse
 			if (awsObservation.repromptResponse() != null) {
 				RepromptResponse mxRepromptResponse = new RepromptResponse(context);
 				software.amazon.awssdk.services.bedrockagentruntime.model.RepromptResponse awsRepromptResponse = awsObservation.repromptResponse();
-				mxRepromptResponse.setRepromptSource(ENUM_RepromptSource.valueOf(awsRepromptResponse.source().toString()));
+				
+				mxRepromptResponse.setRepromptSource(getRepromptSource(awsRepromptResponse.source()));
 				mxRepromptResponse.setText(awsRepromptResponse.text());
 				mxObservation.setRepromptResponse_Observation(mxRepromptResponse);
 			}

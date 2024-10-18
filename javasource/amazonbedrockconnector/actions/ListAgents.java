@@ -14,6 +14,7 @@ import java.util.Date;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
 import amazonbedrockconnector.impl.MxLogger;
+import amazonbedrockconnector.genaicommons_impl.ReferenceImpl;
 import amazonbedrockconnector.proxies.AgentSummary;
 import amazonbedrockconnector.proxies.ENUM_AgentStatus;
 import amazonbedrockconnector.proxies.ListAgentsResponse;
@@ -110,8 +111,8 @@ public class ListAgents extends CustomJavaAction<IMendixObject>
 		
 		AgentSummary mxAgentSummary = new AgentSummary(getContext());
 		mxAgentSummary.setAgentID(awsAgentSummary.agentId());
-		mxAgentSummary.setAgentName(awsAgentSummary.agentName());
-		mxAgentSummary.setAgentStatus(ENUM_AgentStatus.valueOf(awsAgentSummary.agentStatusAsString()));
+		mxAgentSummary.setAgentName(awsAgentSummary.agentName());		
+		mxAgentSummary.setAgentStatus(ReferenceImpl.getAgentStatus(awsAgentSummary.agentStatus()));		
 		mxAgentSummary.setDescription(awsAgentSummary.description());
 		mxAgentSummary.setLatestAgentVersion(awsAgentSummary.latestAgentVersion());
 		mxAgentSummary.setUpdatedAt(Date.from(awsAgentSummary.updatedAt()));

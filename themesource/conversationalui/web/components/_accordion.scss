@@ -1,15 +1,18 @@
 .accordion-chat-sources {
     .widget-accordion-group{
         background: transparent;
+        border-bottom: none;
 
-        .widget-accordion-group-header{
+        .widget-accordion-group-header {
             .widget-accordion-group-header-button {
                 display: inline-flex;
                 background: transparent;
                 padding: 0;
 
-                &.widget-accordion-group-header-button-clickable{
-                    &:hover, &:focus {
+                &.widget-accordion-group-header-button-clickable {
+                    &:hover,
+                    &:focus,
+                    &:active {
                         color: $font-color-default;
                         background: transparent;
                     }
@@ -23,9 +26,10 @@
             }      
         }
 
-        .widget-accordion-group-content-wrapper{
+        .widget-accordion-group-content-wrapper {
             .widget-accordion-group-content {
                 padding-left: 0;
+                padding-right: 0;
                 padding-bottom: 0;
             }
         }

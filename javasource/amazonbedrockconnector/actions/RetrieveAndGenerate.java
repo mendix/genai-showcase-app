@@ -11,6 +11,7 @@ package amazonbedrockconnector.actions;
 
 import static java.util.Objects.requireNonNull;
 import java.util.List;
+import java.util.stream.Collectors;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
@@ -22,14 +23,18 @@ import amazonbedrockconnector.proxies.KnowledgeBaseTool;
 import genaicommons.proxies.Message;
 import genaicommons.proxies.Reference;
 import genaicommons.proxies.Request;
+import genaicommons.proxies.StopSequence;
 import genaicommons.proxies.Tool;
 import genaicommons.proxies.ToolCollection;
+import software.amazon.awssdk.services.bedrockagentruntime.model.GenerationConfiguration;
+import software.amazon.awssdk.services.bedrockagentruntime.model.InferenceConfig;
 import software.amazon.awssdk.services.bedrockagentruntime.model.KnowledgeBaseRetrieveAndGenerateConfiguration;
 import software.amazon.awssdk.services.bedrockagentruntime.model.RetrieveAndGenerateConfiguration;
 import software.amazon.awssdk.services.bedrockagentruntime.model.RetrieveAndGenerateInput;
 import software.amazon.awssdk.services.bedrockagentruntime.model.RetrieveAndGenerateResponse;
 import software.amazon.awssdk.services.bedrockagentruntime.model.RetrieveAndGenerateSessionConfiguration;
 import software.amazon.awssdk.services.bedrockagentruntime.model.RetrieveAndGenerateType;
+import software.amazon.awssdk.services.bedrockagentruntime.model.TextInferenceConfig;
 
 public class RetrieveAndGenerate extends CustomJavaAction<IMendixObject>
 {
@@ -212,10 +217,54 @@ public class RetrieveAndGenerate extends CustomJavaAction<IMendixObject>
 		var builder = KnowledgeBaseRetrieveAndGenerateConfiguration.builder();
 		
 		builder.knowledgeBaseId(getKnowledgeBaseId(commonRequest))
-			.modelArn(AmazonBedrockConnection.getModel());
+			.modelArn(AmazonBedrockConnection.getModel())
+			.generationConfiguration(getGenerationConfiguration(commonRequest));
 		
 		return builder.build();
 	}
+	
+	private GenerationConfiguration getGenerationConfiguration(Request commonRequest) throws CoreException {
+		var builder = GenerationConfiguration.builder();
+		
+		builder.inferenceConfig(getInferenceConfig(commonRequest));
+		
+		return  builder.build();
+	}
+	
+	private InferenceConfig getInferenceConfig(Request commonRequest) throws CoreException {
+		var builder = InferenceConfig.builder();
+		
+		builder.textInferenceConfig(getTextInferenceConfig(commonRequest));
+		
+		return builder.build();
+	}
+	
+	private TextInferenceConfig getTextInferenceConfig(Request commonRequest) throws CoreException {
+		var builder = TextInferenceConfig.builder();
+		
+		if (commonRequest.getMaxTokens() != null) {
+			builder.maxTokens(commonRequest.getMaxTokens());
+		}
+		
+		if (commonRequest.getTemperature() != null) {
+			builder.temperature(commonRequest.getTemperature().floatValue());
+		}
+		
+		if (commonRequest.getTopP() != null) {
+			builder.topP(commonRequest.getTopP().floatValue());
+		}
+		
+		List<StopSequence> mxStopSequences = commonRequest.getRequest_StopSequence();
+		if (mxStopSequences.size() > 0) {
+			List<String> stopSequences = mxStopSequences.stream().map(mxSeq -> mxSeq.getSequence())
+					.collect(Collectors.toList());
+			builder.stopSequences(stopSequences);
+		}
+		
+		return builder.build();
+	}
+	
+	
 	
 	private amazonbedrockconnector.proxies.RetrieveAndGenerateResponse getMxResponse(RetrieveAndGenerateResponse awsResponse) {
 		amazonbedrockconnector.proxies.RetrieveAndGenerateResponse mxResponse = new amazonbedrockconnector.proxies.RetrieveAndGenerateResponse(getContext());

@@ -28,6 +28,10 @@ import amazonbedrockconnector.proxies.OutputModality;
 import amazonbedrockconnector.proxies.SupportedCustomization;
 import amazonbedrockconnector.proxies.SupportedInferenceType;
 import software.amazon.awssdk.services.bedrock.BedrockClient;
+import software.amazon.awssdk.services.bedrock.model.ModelCustomization;
+import software.amazon.awssdk.services.bedrock.model.InferenceType;
+import software.amazon.awssdk.services.bedrock.model.ModelModality;
+import software.amazon.awssdk.services.bedrock.model.FoundationModelLifecycleStatus;
 
 public class ListFoundationModels extends CustomJavaAction<IMendixObject>
 {
@@ -137,43 +141,97 @@ public class ListFoundationModels extends CustomJavaAction<IMendixObject>
 		
 		return mxResponse;
 	}
+
+
+	private static ENUM_CustomizationType getCustomizationType(ModelCustomization modelCustomization) throws java.lang.IllegalStateException {
+			switch (modelCustomization){
+			case CONTINUED_PRE_TRAINING:
+			case FINE_TUNING:
+				return ENUM_CustomizationType.valueOf(modelCustomization.name());
+			default:
+				LOGGER.debug("Unknown CustomizationType returned: ", modelCustomization.toString());
+				return ENUM_CustomizationType.UNKNOWN_TO_SDK_VERSION;
+			}
+		}
+
 	
-	void createMxSupportedCustomizations(software.amazon.awssdk.services.bedrock.model.ModelCustomization awsCustomizationsSupported, FoundationModelSummary mxFoundationalModel) {
+	void createMxSupportedCustomizations(ModelCustomization awsCustomizationsSupported, FoundationModelSummary mxFoundationalModel) {
 		
-		SupportedCustomization mxSupportedCustomizations = new SupportedCustomization(getContext());
-		mxSupportedCustomizations.setCustomizationType(ENUM_CustomizationType.valueOf(awsCustomizationsSupported.name()));
-		mxSupportedCustomizations.setSupportedCustomization_FoundationModelSummary(mxFoundationalModel);
-		
+		SupportedCustomization mxSupportedCustomizations = new SupportedCustomization(getContext());		
+
+		mxSupportedCustomizations.setCustomizationType(getCustomizationType(awsCustomizationsSupported));
+		mxSupportedCustomizations.setSupportedCustomization_FoundationModelSummary(mxFoundationalModel);		
 	}
+
+
+	private static ENUM_InferenceType getInferenceType(InferenceType inferenceType) throws java.lang.IllegalStateException {
+		switch(inferenceType){
+			case ON_DEMAND:
+			case PROVISIONED:
+				return ENUM_InferenceType.valueOf(inferenceType.name());
+			default: 
+				LOGGER.debug("Unknown InferenceType returned: ", inferenceType.toString());
+				return ENUM_InferenceType.UNKNOWN_TO_SDK_VERSION;
+		}
+	}
+
 	
-	void createMxSupportedInferenceType(software.amazon.awssdk.services.bedrock.model.InferenceType awsInferenceTypesSupported, FoundationModelSummary mxFoundationalModel) {
+	void createMxSupportedInferenceType(InferenceType awsInferenceTypesSupported, FoundationModelSummary mxFoundationalModel) {
 		
 		SupportedInferenceType mxSupportedInferenceType = new SupportedInferenceType(getContext());
-		mxSupportedInferenceType.setInferenceType(ENUM_InferenceType.valueOf(awsInferenceTypesSupported.name()));
-		mxSupportedInferenceType.setSupportedInferenceType_FoundationModelSummary(mxFoundationalModel);
-		
+
+		mxSupportedInferenceType.setInferenceType(getInferenceType(awsInferenceTypesSupported));
+		mxSupportedInferenceType.setSupportedInferenceType_FoundationModelSummary(mxFoundationalModel);		
 	}
+
+
+	private static ENUM_InputOutputModality getInputOutputModality(ModelModality modelModality) throws java.lang.IllegalStateException {
+		switch(modelModality){
+			case EMBEDDING:
+			case IMAGE:
+			case TEXT:
+				return ENUM_InputOutputModality.valueOf(modelModality.name());
+			default: 
+				LOGGER.debug("Unknown InputOutputModality returned: ", modelModality.toString());
+				return ENUM_InputOutputModality.UNKNOWN_TO_SDK_VERSION;
+		}
+	}
+
 	
-	void createMxInputModality(software.amazon.awssdk.services.bedrock.model.ModelModality awsInputModality, FoundationModelSummary mxFoundationalModel) {
+	void createMxInputModality(ModelModality awsInputModality, FoundationModelSummary mxFoundationalModel) {
 		
 		InputModality mxInputModality = new InputModality(getContext());
-		mxInputModality.setInputModalityType(ENUM_InputOutputModality.valueOf(awsInputModality.name()));
-		mxInputModality.setInputModality_FoundationModelSummary(mxFoundationalModel);
-		
+		mxInputModality.setInputModalityType(getInputOutputModality(awsInputModality));
+		mxInputModality.setInputModality_FoundationModelSummary(mxFoundationalModel);		
 	}
+
 	
-	void createMxOutputModality(software.amazon.awssdk.services.bedrock.model.ModelModality awsOutputModality, FoundationModelSummary mxFoundationalModel) {
+	void createMxOutputModality(ModelModality awsOutputModality, FoundationModelSummary mxFoundationalModel) {
 		
 		OutputModality mxOutputModality = new OutputModality(getContext());
-		mxOutputModality.setOutputModalityType(ENUM_InputOutputModality.valueOf(awsOutputModality.name()));
+
+		mxOutputModality.setOutputModalityType(getInputOutputModality(awsOutputModality));
 		mxOutputModality.setOutputModality_FoundationModelSummary(mxFoundationalModel);
 		
 	}
 	
+
+	private static ENUM_ModelLifecycleStatus getLifecycleStatus(FoundationModelLifecycleStatus lifeCycleStatus) throws java.lang.IllegalStateException {
+		switch(lifeCycleStatus){
+			case ACTIVE:
+			case LEGACY:
+				return ENUM_ModelLifecycleStatus.valueOf(lifeCycleStatus.toString());
+			default:
+				LOGGER.debug("Unknown LifeCycleStatus returned: ", lifeCycleStatus.toString());
+				return ENUM_ModelLifecycleStatus.UNKNOWN_TO_SDK_VERSION;
+		}
+	}
+
 	void createMxModelLifecycle(software.amazon.awssdk.services.bedrock.model.FoundationModelLifecycle awsModelLifecycle, FoundationModelSummary mxFoundationalModel) {
 		
 		FoundationModelLifecycle mxFoundationModelLifecycle = new FoundationModelLifecycle(getContext());
-		mxFoundationModelLifecycle.setStatus(ENUM_ModelLifecycleStatus.valueOf(awsModelLifecycle.statusAsString()));
+		
+		mxFoundationModelLifecycle.setStatus(getLifecycleStatus(awsModelLifecycle.status()));
 		mxFoundationModelLifecycle.setFoundationModelLifecycle_FoundationModelSummary(mxFoundationalModel);
 		
 	}
