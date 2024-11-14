@@ -1,0 +1,14 @@
+@import "../../../atlas_core/web/_variables.scss";
+@import '../../../../theme/web/custom-variables';
+
+.prompting-page-container {
+    min-height: -webkit-fill-available;
+    display: flex;
+    justify-content: center;
+
+    .prompting-container--overview {
+        width: 100%;
+        max-width: 1200px;
+        margin-top: $spacing-large;
+    }
+}

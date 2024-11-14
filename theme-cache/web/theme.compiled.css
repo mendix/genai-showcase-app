@@ -24103,4 +24103,44 @@ input[type=checkbox].three-state-checkbox + .control-label {
   }
 }
 
+.prompting-page-container {
+  min-height: -webkit-fill-available;
+  display: flex;
+  justify-content: center;
+}
+.prompting-page-container .prompting-container--overview {
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 24px;
+}
+
+.popupmenu--display-flex.popupmenu {
+  display: flex;
+}
+
+.popupmenu-custom-item-container {
+  padding: 8px;
+  margin-top: none;
+  margin-bottom: none;
+}
+.popupmenu-custom-item-container .mx-link {
+  display: block;
+  padding: 4px;
+  color: #0a1325;
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+.popupmenu-custom-item-container .mx-link:hover {
+  background-color: transparent;
+}
+
+.popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item {
+  background-color: #fff;
+}
+.popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:hover, .popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:focus, .popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:active {
+  cursor: pointer;
+  border-color: #f8f8f8;
+  background-color: #f8f8f8;
+}
+
 /*# sourceMappingURL=theme.compiled.css.map */
