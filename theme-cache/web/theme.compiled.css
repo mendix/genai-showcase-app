@@ -52392,7 +52392,7 @@ $callout-info-bg: $color-info-lighter;
 }
 .texbox-loading-wrapper .generating-loading-wrapper .loading-dot {
   border-radius: 100%;
-  background-color: #845EFF;
+  background-color: #185a9d;
   width: 4.6666666667px;
   height: 4.6666666667px;
 }

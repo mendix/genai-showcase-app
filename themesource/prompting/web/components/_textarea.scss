@@ -1,6 +1,7 @@
+@import "../../../atlas_core/web/_variables.scss";
 @import '../../../../theme/web/custom-variables';
-//move
-$brand-purple-brighter: #845EFF;
+
+
 .texbox-loading-wrapper {
     position: relative;
 
@@ -15,7 +16,7 @@ $brand-purple-brighter: #845EFF;
 
         .loading-dot {
             border-radius: 100%;
-            background-color: $brand-purple-brighter;
+            background-color: $brand-primary;
             width: $font-size-default / 3;
             height: $font-size-default / 3;
 
