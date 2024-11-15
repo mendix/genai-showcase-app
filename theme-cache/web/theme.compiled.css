@@ -24063,6 +24063,127 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-bottom: 16px;
 }
 
+.datagrid--no-scroll.widget-datagrid .widget-datagrid-content {
+  overflow-y: visible;
+}
+
+.prompting-listview-stylingless.mx-listview ul > li, .prompting-listview-stylingless.mx-listview ol > li {
+  cursor: default;
+  border: none;
+  background-color: transparent;
+  border-bottom: none;
+}
+.prompting-listview-stylingless.mx-listview ul > li:hover, .prompting-listview-stylingless.mx-listview ul > li:focus, .prompting-listview-stylingless.mx-listview ul > li:active, .prompting-listview-stylingless.mx-listview ol > li:hover, .prompting-listview-stylingless.mx-listview ol > li:focus, .prompting-listview-stylingless.mx-listview ol > li:active {
+  background-color: transparent;
+}
+.prompting-listview-stylingless.mx-listview ul > li.selected, .prompting-listview-stylingless.mx-listview ol > li.selected {
+  background-color: transparent !important;
+}
+.prompting-listview-stylingless.mx-listview ul > li.selected:hover, .prompting-listview-stylingless.mx-listview ul > li.selected:focus, .prompting-listview-stylingless.mx-listview ul > li.selected:active, .prompting-listview-stylingless.mx-listview ol > li.selected:hover, .prompting-listview-stylingless.mx-listview ol > li.selected:focus, .prompting-listview-stylingless.mx-listview ol > li.selected:active {
+  background-color: transparent !important;
+}
+.prompting-listview-stylingless.mx-listview ul > li:first-child, .prompting-listview-stylingless.mx-listview ol > li:first-child {
+  border-top: none;
+}
+.prompting-listview-stylingless.mx-listview ul > li:last-child, .prompting-listview-stylingless.mx-listview ol > li:last-child {
+  border-bottom: none;
+}
+.prompting-listview-stylingless.mx-listview ul > li:nth-child(2n+1), .prompting-listview-stylingless.mx-listview ol > li:nth-child(2n+1) {
+  background-color: transparent;
+}
+.prompting-listview-stylingless.mx-listview ol > li {
+  padding: 0px;
+}
+.prompting-listview-stylingless.mx-listview ul > li {
+  padding: 8px;
+}
+
+.prompting-listview-horizontal.mx-listview > ul {
+  display: contents;
+  margin-bottom: none;
+}
+.prompting-listview-horizontal.mx-listview > ul > li {
+  display: inline-block;
+  padding: 4px;
+}
+.prompting-listview-horizontal.mx-listview > ul > li .mx-dataview-content > button {
+  display: -webkit-box;
+  word-break: break-word;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+  text-wrap: wrap;
+  padding: 5px 10px;
+  line-height: 2;
+}
+.prompting-listview-horizontal.mx-listview > ul > li:hover {
+  background-color: transparent;
+}
+
+.listview-hide-on-empty.mx-listview > ul > li.mx-listview-empty {
+  display: none;
+}
+
+.prompting-page-container {
+  min-height: -webkit-fill-available;
+  display: flex;
+  justify-content: center;
+}
+.prompting-page-container .prompting-container--overview {
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 24px;
+}
+.prompting-page-container .prompting-container--overview .td {
+  border-bottom: none;
+}
+
+.popupmenu--display-flex.popupmenu {
+  display: flex;
+}
+
+.popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item {
+  background-color: #fff;
+}
+.popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:hover, .popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:focus, .popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:active {
+  cursor: pointer;
+  border-color: #f8f8f8;
+  background-color: #f8f8f8;
+}
+
+.popupmenu-custom-item-container {
+  padding: 8px;
+  margin-top: none;
+  margin-bottom: none;
+}
+.popupmenu-custom-item-container .mx-link {
+  display: block;
+  padding: 4px;
+  color: #0a1325;
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+.popupmenu-custom-item-container .mx-link:hover {
+  background-color: transparent;
+}
+
+.segmented-control {
+  height: fit-content;
+  border: 1px solid #ced0d3;
+  border-radius: 4px;
+  padding: 4px;
+  width: fit-content;
+  background-color: #f8f8f8;
+}
+.segmented-control .btn.btn-default {
+  border: 1px solid transparent;
+  background: transparent;
+  color: #0a1325;
+}
+
 .texbox-loading-wrapper {
   position: relative;
 }
@@ -24101,6 +24222,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
   100% {
     transform: scale(1);
   }
+}
+
+.hide-tooltip .widget-tooltip-arrow-top {
+  display: none;
+}
+.hide-tooltip .widget-tooltip-content {
+  display: none;
 }
 
 /*# sourceMappingURL=theme.compiled.css.map */

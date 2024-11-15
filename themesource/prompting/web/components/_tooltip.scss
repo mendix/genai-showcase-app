@@ -1,0 +1,10 @@
+@import '../../../../theme/web/custom-variables';
+
+.hide-tooltip {
+    .widget-tooltip-arrow-top {
+        display: none;
+    }
+    .widget-tooltip-content {
+        display: none;
+    }
+}
