@@ -24141,6 +24141,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border-bottom: none;
 }
 
+.pageheader-with-buttons {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center !important;
+  margin-bottom: 24px;
+}
+
 .popupmenu--display-flex.popupmenu {
   display: flex;
 }
