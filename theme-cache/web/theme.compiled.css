@@ -24067,6 +24067,66 @@ input[type=checkbox].three-state-checkbox + .control-label {
   overflow-y: visible;
 }
 
+.prompting-listview-stylingless.mx-listview ul > li, .prompting-listview-stylingless.mx-listview ol > li {
+  cursor: default;
+  border: none;
+  background-color: transparent;
+  border-bottom: none;
+}
+.prompting-listview-stylingless.mx-listview ul > li:hover, .prompting-listview-stylingless.mx-listview ul > li:focus, .prompting-listview-stylingless.mx-listview ul > li:active, .prompting-listview-stylingless.mx-listview ol > li:hover, .prompting-listview-stylingless.mx-listview ol > li:focus, .prompting-listview-stylingless.mx-listview ol > li:active {
+  background-color: transparent;
+}
+.prompting-listview-stylingless.mx-listview ul > li.selected, .prompting-listview-stylingless.mx-listview ol > li.selected {
+  background-color: transparent !important;
+}
+.prompting-listview-stylingless.mx-listview ul > li.selected:hover, .prompting-listview-stylingless.mx-listview ul > li.selected:focus, .prompting-listview-stylingless.mx-listview ul > li.selected:active, .prompting-listview-stylingless.mx-listview ol > li.selected:hover, .prompting-listview-stylingless.mx-listview ol > li.selected:focus, .prompting-listview-stylingless.mx-listview ol > li.selected:active {
+  background-color: transparent !important;
+}
+.prompting-listview-stylingless.mx-listview ul > li:first-child, .prompting-listview-stylingless.mx-listview ol > li:first-child {
+  border-top: none;
+}
+.prompting-listview-stylingless.mx-listview ul > li:last-child, .prompting-listview-stylingless.mx-listview ol > li:last-child {
+  border-bottom: none;
+}
+.prompting-listview-stylingless.mx-listview ul > li:nth-child(2n+1), .prompting-listview-stylingless.mx-listview ol > li:nth-child(2n+1) {
+  background-color: transparent;
+}
+.prompting-listview-stylingless.mx-listview ol > li {
+  padding: 0px;
+}
+.prompting-listview-stylingless.mx-listview ul > li {
+  padding: 8px;
+}
+
+.prompting-listview-horizontal.mx-listview > ul {
+  display: contents;
+  margin-bottom: none;
+}
+.prompting-listview-horizontal.mx-listview > ul > li {
+  display: inline-block;
+  padding: 4px;
+}
+.prompting-listview-horizontal.mx-listview > ul > li .mx-dataview-content > button {
+  display: -webkit-box;
+  word-break: break-word;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+  text-wrap: wrap;
+  padding: 5px 10px;
+  line-height: 2;
+}
+.prompting-listview-horizontal.mx-listview > ul > li:hover {
+  background-color: transparent;
+}
+
+.listview-hide-on-empty.mx-listview > ul > li.mx-listview-empty {
+  display: none;
+}
+
 .prompting-page-container {
   min-height: -webkit-fill-available;
   display: flex;
@@ -24076,6 +24136,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 100%;
   max-width: 1200px;
   margin-top: 24px;
+}
+.prompting-page-container .prompting-container--overview .td {
+  border-bottom: none;
 }
 
 .popupmenu--display-flex.popupmenu {
