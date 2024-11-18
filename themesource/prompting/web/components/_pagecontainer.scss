@@ -14,11 +14,31 @@
             border-bottom: none;
         }
     }
-}
 
-.pageheader-with-buttons {
-    display: flex !important;
-    justify-content: space-between;
-    align-items: center !important;
-    margin-bottom: $spacing-large;
+    .prompting-justify-space-between {
+        display: flex !important;
+        justify-content: space-between;
+        align-items: top !important;
+
+        .prompting-container--column {
+            width: 50%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            margin: $spacing-medium;
+        }
+    }
+
+    .pageheader-with-buttons {
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center !important;
+    }
+
+    .pageheader-navigation {
+        display: flex !important;
+        align-items: center !important;
+        flex-flow: row !important;
+        justify-content: flex-start !important;
+    }
 }

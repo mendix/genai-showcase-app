@@ -24063,6 +24063,12 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-bottom: 16px;
 }
 
+.flexbox-space-between {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: top !important;
+}
+
 .combo-deployment-selection {
   min-width: 360px;
 }
@@ -24153,12 +24159,28 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .prompting-page-container .prompting-container--overview .td {
   border-bottom: none;
 }
-
-.pageheader-with-buttons {
+.prompting-page-container .prompting-justify-space-between {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: top !important;
+}
+.prompting-page-container .prompting-justify-space-between .prompting-container--column {
+  width: 50%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  margin: 16px;
+}
+.prompting-page-container .pageheader-with-buttons {
   display: flex !important;
   justify-content: space-between;
   align-items: center !important;
-  margin-bottom: 24px;
+}
+.prompting-page-container .pageheader-navigation {
+  display: flex !important;
+  align-items: center !important;
+  flex-flow: row !important;
+  justify-content: flex-start !important;
 }
 
 .popupmenu--display-flex.popupmenu {

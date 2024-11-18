@@ -2,3 +2,9 @@
 .spacing-outer-bottom-medium {
   margin-bottom: $spacing-medium;
 }
+
+.flexbox-space-between {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: top !important;
+}
