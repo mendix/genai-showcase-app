@@ -24066,14 +24066,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .flexbox-space-between {
   display: flex !important;
   justify-content: space-between;
-  align-items: top !important;
 }
 
 .combo-deployment-selection {
-  min-width: 360px;
+  display: flex;
+  flex-grow: 1;
+  margin: 0px !important;
 }
 .combo-deployment-selection .deployment-selection {
-  display: flex;
   align-items: center;
   height: max-content;
 }
@@ -24159,22 +24159,26 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .prompting-page-container .prompting-container--overview .td {
   border-bottom: none;
 }
+.prompting-page-container .prompting-container--overview .card {
+  border-radius: 16px;
+}
 .prompting-page-container .prompting-justify-space-between {
   display: flex !important;
-  justify-content: space-between;
-  align-items: top !important;
 }
-.prompting-page-container .prompting-justify-space-between .prompting-container--column {
-  width: 50%;
-  max-width: 600px;
-  display: flex;
-  flex-direction: column;
+.prompting-page-container .prompting-justify-space-between .prompting-container-column {
   margin: 16px;
+  height: 100%;
+}
+.prompting-page-container .prompting-justify-space-between .prompting-container-column.prompting-container-column--small {
+  max-width: 40%;
+}
+.prompting-page-container .prompting-justify-space-between .prompting-container-column.prompting-container-column--big {
+  max-width: 60%;
 }
 .prompting-page-container .pageheader-with-buttons {
   display: flex !important;
   justify-content: space-between;
-  align-items: center !important;
+  align-items: center;
 }
 .prompting-page-container .pageheader-navigation {
   display: flex !important;

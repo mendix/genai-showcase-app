@@ -1,15 +1,17 @@
 @import '../../../../theme/web/custom-variables';
 
 .combo-deployment-selection {
-    min-width: 360px;
-    .deployment-selection{
-        display: flex;
+    display: flex;
+    flex-grow: 1;
+    margin: 0px !important;
+
+    .deployment-selection {
         align-items: center;
         height: max-content;
+
     }
     .mx-image {
         height: $font-size-default;
         margin-right: $spacing-small;
     }
-
 }
