@@ -24162,7 +24162,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex !important;
   justify-content: space-between;
   align-items: center !important;
-  margin-bottom: 24px;
 }
 .prompting-page-container .pageheader-navigation {
   display: flex !important;
