@@ -24080,6 +24080,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .combo-deployment-selection .mx-image {
   height: 14px;
   margin-right: 8px;
+  margin-left: auto;
+  float: right;
 }
 
 .datagrid--no-scroll.widget-datagrid .widget-datagrid-content {
@@ -24224,6 +24226,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border: 1px solid transparent;
   background: transparent;
   color: #0a1325;
+}
+
+.segmented-control-top {
+  height: fit-content;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border-top: 1px solid #ced0d3;
+  width: 100%;
 }
 
 .texbox-loading-wrapper {

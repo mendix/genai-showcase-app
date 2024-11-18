@@ -1,3 +1,4 @@
+@import "../../../atlas_core/web/_variables.scss";
 @import "../../../../theme/web/custom-variables.scss";
 .segmented-control {
     height: fit-content;
@@ -11,4 +12,12 @@
         background: transparent;
         color: $font-color-default;
     }
+}
+
+.segmented-control-top {
+    height: fit-content;
+    margin-top: $spacing-small;
+    margin-bottom: $spacing-small;
+    border-top: 1px solid $border-color-default;
+    width: 100%;
 }
