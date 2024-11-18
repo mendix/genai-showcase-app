@@ -11,7 +11,9 @@
 
     }
     .mx-image {
-        height: $font-size-default;
-        margin-right: $spacing-small;
+            height: $font-size-default;
+            margin-right: $spacing-small;
+            margin-left: auto;
+            float:right;
     }
 }
