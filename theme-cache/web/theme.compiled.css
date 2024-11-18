@@ -24068,6 +24068,19 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: space-between;
 }
 
+.btn-without-border.mx-link {
+  color: #0a1325;
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+.btn-without-border.mx-link.disabled {
+  background-color: transparent !important;
+  cursor: default;
+}
+.btn-without-border.mx-link:hover {
+  background-color: transparent;
+}
+
 .combo-deployment-selection {
   display: flex;
   flex-grow: 1;

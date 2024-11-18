@@ -1,0 +1,16 @@
+@import '../../../../theme/web/custom-variables';
+
+.btn-without-border.mx-link {
+    color: $font-color-default;
+    text-decoration: none;
+    border: 1px solid transparent;
+
+    &.disabled {
+        background-color: transparent !important;
+        cursor: default;
+    }
+
+    &:hover {
+        background-color: transparent;
+    }
+}
