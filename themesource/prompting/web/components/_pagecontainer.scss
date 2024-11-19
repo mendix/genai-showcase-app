@@ -10,29 +10,37 @@
         width: 100%;
         max-width: 1200px;
         margin-top: $spacing-large;
+        
         .td {
             border-bottom: none;
+        }
+        
+        .card {
+            border-radius: $spacing-medium;
         }
     }
 
     .prompting-justify-space-between {
         display: flex !important;
-        justify-content: space-between;
-        align-items: top !important;
 
-        .prompting-container--column {
-            width: 50%;
-            max-width: 600px;
-            display: flex;
-            flex-direction: column;
+        .prompting-container-column {
             margin: $spacing-medium;
+            height: 100%;
+            
+            &.prompting-container-column--small {
+                max-width: 40%;
+            }
+
+            &.prompting-container-column--big {
+                max-width: 60%;
+            } 
         }
     }
 
     .pageheader-with-buttons {
         display: flex !important;
         justify-content: space-between;
-        align-items: center !important;
+        align-items: center;
     }
 
     .pageheader-navigation {

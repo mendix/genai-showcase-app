@@ -24066,20 +24066,35 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .flexbox-space-between {
   display: flex !important;
   justify-content: space-between;
-  align-items: top !important;
+}
+
+.btn-without-border.mx-link {
+  color: #0a1325;
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+.btn-without-border.mx-link.disabled {
+  background-color: transparent !important;
+  cursor: default;
+}
+.btn-without-border.mx-link:hover {
+  background-color: transparent;
 }
 
 .combo-deployment-selection {
-  min-width: 360px;
+  display: flex;
+  flex-grow: 1;
+  margin: 0px !important;
 }
 .combo-deployment-selection .deployment-selection {
-  display: flex;
   align-items: center;
   height: max-content;
 }
 .combo-deployment-selection .mx-image {
   height: 14px;
   margin-right: 8px;
+  margin-left: auto;
+  float: right;
 }
 
 .datagrid--no-scroll.widget-datagrid .widget-datagrid-content {
@@ -24159,22 +24174,26 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .prompting-page-container .prompting-container--overview .td {
   border-bottom: none;
 }
+.prompting-page-container .prompting-container--overview .card {
+  border-radius: 16px;
+}
 .prompting-page-container .prompting-justify-space-between {
   display: flex !important;
-  justify-content: space-between;
-  align-items: top !important;
 }
-.prompting-page-container .prompting-justify-space-between .prompting-container--column {
-  width: 50%;
-  max-width: 600px;
-  display: flex;
-  flex-direction: column;
+.prompting-page-container .prompting-justify-space-between .prompting-container-column {
   margin: 16px;
+  height: 100%;
+}
+.prompting-page-container .prompting-justify-space-between .prompting-container-column.prompting-container-column--small {
+  max-width: 40%;
+}
+.prompting-page-container .prompting-justify-space-between .prompting-container-column.prompting-container-column--big {
+  max-width: 60%;
 }
 .prompting-page-container .pageheader-with-buttons {
   display: flex !important;
   justify-content: space-between;
-  align-items: center !important;
+  align-items: center;
 }
 .prompting-page-container .pageheader-navigation {
   display: flex !important;
