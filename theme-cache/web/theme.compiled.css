@@ -24245,14 +24245,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   color: #0a1325;
 }
 
-.segmented-control-top {
-  height: fit-content;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  border-top: 1px solid #ced0d3;
-  width: 100%;
-}
-
 .texbox-loading-wrapper {
   position: relative;
 }
