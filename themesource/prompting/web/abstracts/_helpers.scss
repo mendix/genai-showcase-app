@@ -1,3 +1,5 @@
+@import "../../../atlas_core/web/_variables.scss";
+@import "../../../../theme/web/custom-variables.scss";
 
 .spacing-outer-bottom-medium {
   margin-bottom: $spacing-medium;
@@ -6,4 +8,20 @@
 .flexbox-space-between {
     display: flex !important;
     justify-content: space-between;
+}
+
+
+//Following might be moved, all related to prompt library
+.border-selected{
+  border-color: $brand-primary;
+  border-width: 2px;
+  border: 1px solid;
+  padding: $spacing-small;
+}
+
+.badge{
+  color: #2F008C;
+  background-color: #E2E0FC;
+  font-size: $font-size-small;
+  font-weight: normal;
 }

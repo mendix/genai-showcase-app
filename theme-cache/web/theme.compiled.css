@@ -24068,6 +24068,20 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: space-between;
 }
 
+.border-selected {
+  border-color: #264ae5;
+  border-width: 2px;
+  border: 1px solid;
+  padding: 8px;
+}
+
+.badge {
+  color: #2F008C;
+  background-color: #E2E0FC;
+  font-size: 12px;
+  font-weight: normal;
+}
+
 .btn-without-border.mx-link {
   color: #0a1325;
   text-decoration: none;
@@ -24164,6 +24178,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .listview-hide-on-empty.mx-listview > ul > li.mx-listview-empty {
   display: none;
+}
+
+.prompt-library-page {
+  width: 95vw;
+  height: 95vh;
 }
 
 .prompting-page-container {
