@@ -24075,7 +24075,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 8px;
 }
 
-.badge {
+.badge--purple {
   color: #2F008C;
   background-color: #E2E0FC;
   font-size: 12px;
