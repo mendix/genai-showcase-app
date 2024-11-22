@@ -24095,16 +24095,16 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background-color: transparent;
 }
 
-.combo-deployment-selection {
+.combo-deployment-selection-prompting {
   display: flex;
   flex-grow: 1;
   margin: 0px !important;
 }
-.combo-deployment-selection .deployment-selection {
+.combo-deployment-selection-prompting .deployment-selection {
   align-items: center;
   height: max-content;
 }
-.combo-deployment-selection .mx-image {
+.combo-deployment-selection-prompting .mx-image {
   height: 14px;
   margin-right: 8px;
   margin-left: auto;
