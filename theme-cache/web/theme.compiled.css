@@ -24226,6 +24226,30 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: flex-start !important;
 }
 
+.output-table {
+  display: flex;
+}
+.output-table .text-test-case {
+  min-width: 10%;
+  margin-bottom: auto;
+}
+.output-table .text-output {
+  min-width: 60%;
+  margin-bottom: auto;
+}
+.output-table .text-token {
+  min-width: 10%;
+  margin-bottom: auto;
+}
+.output-table .text-duration {
+  min-width: 10%;
+  margin-bottom: auto;
+}
+
+output-table.table-header {
+  border-bottom: 1px solid #0a1325;
+}
+
 .popupmenu--display-flex.popupmenu {
   display: flex;
 }

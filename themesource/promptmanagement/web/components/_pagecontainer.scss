@@ -50,3 +50,29 @@
         justify-content: flex-start !important;
     }
 }
+
+
+.output-table{
+    display: flex;
+
+    .text-test-case {
+        min-width: 10%;
+        margin-bottom: auto;
+    }
+    .text-output {
+        min-width: 60%;
+        margin-bottom: auto;
+    }
+    .text-token {
+        min-width: 10%;
+        margin-bottom: auto;
+    }
+    .text-duration {
+        min-width: 10%;
+        margin-bottom: auto;
+    }
+}
+
+output-table.table-header{
+    border-bottom: 1px solid $font-color-default;
+}
