@@ -10,6 +10,29 @@
     justify-content: space-between;
 }
 
+.container-disabled {
+  height: fit-content;
+  border: 1px solid $border-color-default;
+  border-radius: $btn-border-radius;
+  padding: $spacing-small;
+  width: auto;
+  background-color: $gray-lighter;
+  display: flex;
+  align-items: center;
+  flex-flow: row;
+  justify-content: flex-start;
+}
+
+.custom-control-label {
+  display: block;
+  overflow: hidden;
+  margin-bottom: $spacing-smaller;
+  text-align: left;
+  text-overflow: ellipsis;
+  color: $form-label-color;
+  font-size: $form-label-size;
+  font-weight: $form-label-weight;
+}
 
 //Following might be moved, all related to prompt library
 .border-selected {

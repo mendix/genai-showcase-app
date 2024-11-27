@@ -1,5 +1,6 @@
 @import "../../../atlas_core/web/_variables.scss";
 @import "../../../../theme/web/custom-variables.scss";
+
 .segmented-control {
     height: fit-content;
     border: 1px solid $border-color-default;
@@ -7,6 +8,7 @@
     padding: $spacing-smaller;
     width: fit-content;
     background-color: $gray-lighter;
+    
     .btn.btn-default {
         border: 1px solid transparent;
         background: transparent;

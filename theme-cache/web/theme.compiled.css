@@ -24068,6 +24068,30 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: space-between;
 }
 
+.container-disabled {
+  height: fit-content;
+  border: 1px solid #ced0d3;
+  border-radius: 4px;
+  padding: 8px;
+  width: auto;
+  background-color: #f8f8f8;
+  display: flex;
+  align-items: center;
+  flex-flow: row;
+  justify-content: flex-start;
+}
+
+.custom-control-label {
+  display: block;
+  overflow: hidden;
+  margin-bottom: 4px;
+  text-align: left;
+  text-overflow: ellipsis;
+  color: #0a1325;
+  font-size: 14px;
+  font-weight: 600;
+}
+
 .border-selected {
   border-color: #264ae5;
   border-width: 2px;
@@ -24080,6 +24104,30 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background-color: #E2E0FC;
   font-size: 12px;
   font-weight: normal;
+}
+
+.badge-with-circle {
+  display: flex;
+  align-items: center;
+  flex-flow: row;
+  justify-content: flex-start;
+  margin-left: 16px;
+}
+.badge-with-circle .circle {
+  border-radius: 100%;
+  background-color: #264ae5;
+  width: 8px;
+  height: 8px;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+.badge-with-circle .badge-text {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 12px;
+}
+.badge-with-circle.badge-with-circle--success .circle {
+  background-color: #3cb33d;
 }
 
 .btn-without-border.mx-link {

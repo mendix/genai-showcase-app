@@ -1,0 +1,27 @@
+@import '../../../../theme/web/custom-variables';
+
+.badge-with-circle {
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+    justify-content: flex-start;
+    margin-left: $spacing-medium;
+    .circle {
+        border-radius: 100%;
+        background-color: $brand-primary;
+        width: $spacing-small;
+        height: $spacing-small;
+        margin-left: $spacing-smaller;
+        margin-right: $spacing-smaller;
+    }
+    .badge-text {
+        text-transform: uppercase;
+        font-weight: $font-weight-semibold;
+        font-size: $font-size-small;
+    }
+    &.badge-with-circle--success {
+        .circle {
+            background-color: $brand-success;
+        }
+    }
+}
