@@ -7,8 +7,8 @@
     justify-content: center;
 
     .prompting-container--overview {
-        width: 100%;
-        max-width: 1200px;
+        width: 80%;
+        //max-width: 1200px;
         margin-top: $spacing-large;
         
         .td {
@@ -73,6 +73,8 @@
     }
 }
 
-output-table.table-header{
-    border-bottom: 1px solid $font-color-default;
+.output-table.table-header{
+    margin-top: $spacing-medium;
+    padding-bottom: $spacing-medium;
+    border-bottom: 1px solid #E7E7E9;
 }

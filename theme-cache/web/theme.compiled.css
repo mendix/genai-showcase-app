@@ -24239,8 +24239,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: center;
 }
 .prompting-page-container .prompting-container--overview {
-  width: 100%;
-  max-width: 1200px;
+  width: 80%;
   margin-top: 24px;
 }
 .prompting-page-container .prompting-container--overview .td {
@@ -24294,8 +24293,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-bottom: auto;
 }
 
-output-table.table-header {
-  border-bottom: 1px solid #0a1325;
+.output-table.table-header {
+  margin-top: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #E7E7E9;
 }
 
 .popupmenu--display-flex.popupmenu {
