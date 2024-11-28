@@ -26,13 +26,13 @@
         .prompting-container-column {
             margin: $spacing-medium;
             height: 100%;
-            
+
             &.prompting-container-column--small {
-                max-width: 40%;
+                width: 40%;
             }
 
             &.prompting-container-column--big {
-                max-width: 60%;
+                width: 60%;
             } 
         }
     }

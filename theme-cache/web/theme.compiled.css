@@ -24257,10 +24257,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: 100%;
 }
 .prompting-page-container .prompting-justify-space-between .prompting-container-column.prompting-container-column--small {
-  max-width: 40%;
+  width: 40%;
 }
 .prompting-page-container .prompting-justify-space-between .prompting-container-column.prompting-container-column--big {
-  max-width: 60%;
+  width: 60%;
 }
 .prompting-page-container .pageheader-with-buttons {
   display: flex !important;
