@@ -24233,6 +24233,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: 95vh;
 }
 
+.popup-mid-size {
+  width: 75vw;
+  height: 60vh;
+}
+
 .prompting-page-container {
   min-height: -webkit-fill-available;
   display: flex;
@@ -24273,6 +24278,12 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: flex-start !important;
 }
 
+.table-header {
+  margin-top: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #E7E7E9;
+}
+
 .output-table {
   display: flex;
 }
@@ -24293,10 +24304,45 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-bottom: auto;
 }
 
-.output-table.table-header {
-  margin-top: 16px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #E7E7E9;
+.version-table {
+  display: flex;
+}
+.version-table .text-version {
+  min-width: 10%;
+  margin-bottom: auto;
+}
+.version-table .text-title {
+  min-width: 25%;
+  margin-bottom: auto;
+}
+.version-table .text-in-use {
+  min-width: 15%;
+  margin-bottom: auto;
+}
+.version-table .text-owner {
+  min-width: 15%;
+  margin-bottom: auto;
+}
+.version-table .text-last-edited {
+  min-width: 20%;
+  margin-bottom: auto;
+}
+.version-table .delete-icon {
+  min-width: 10%;
+  margin-bottom: auto;
+}
+
+.testcase-table {
+  display: flex;
+}
+.testcase-table .text-testcase {
+  min-width: 95%;
+  margin-bottom: auto;
+  background-color: red;
+}
+.testcase-table .delete-icon {
+  min-width: 5%;
+  margin-bottom: auto;
 }
 
 .popupmenu--display-flex.popupmenu {
