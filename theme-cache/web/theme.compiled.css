@@ -24284,6 +24284,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border-bottom: 1px solid #E7E7E9;
 }
 
+.table-header-background {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  background-color: #E7E7E9;
+}
+
 .output-table {
   display: flex;
 }
@@ -24334,11 +24341,12 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .testcase-table {
   display: flex;
+  padding-left: 8px;
 }
 .testcase-table .text-testcase {
   min-width: 95%;
+  margin-top: auto;
   margin-bottom: auto;
-  background-color: red;
 }
 .testcase-table .delete-icon {
   min-width: 5%;

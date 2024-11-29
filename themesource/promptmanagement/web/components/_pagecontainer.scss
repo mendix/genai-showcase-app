@@ -57,6 +57,13 @@
     border-bottom: 1px solid #E7E7E9;
 }
 
+.table-header-background{
+    padding-top: $spacing-small;
+    padding-bottom: $spacing-small;
+    padding-left: $spacing-small;
+    background-color: #E7E7E9;
+}
+
 .output-table{
     display: flex;
 
@@ -109,11 +116,12 @@
 
 .testcase-table{
     display: flex;
+    padding-left: $spacing-small;
 
     .text-testcase{
         min-width: 95%;
+        margin-top: auto;
         margin-bottom: auto;
-        background-color: red;
     }
     .delete-icon{
         min-width: 5%;
