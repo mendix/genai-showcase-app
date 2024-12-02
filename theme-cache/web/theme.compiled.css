@@ -24130,6 +24130,21 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background-color: #3cb33d;
 }
 
+.badge--in-use {
+  max-width: fit-content;
+  height: auto;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: 4px;
+  border: 1px solid #4FD84F;
+  background-color: #E1FAE1;
+}
+.badge--in-use .badge-text {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
 .btn-without-border.mx-link {
   color: #0a1325;
   text-decoration: none;
@@ -24234,8 +24249,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .popup-mid-size {
-  width: 75vw;
-  height: 60vh;
+  width: 60vw;
 }
 
 .prompting-page-container {
@@ -24315,28 +24329,23 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
 }
 .version-table .text-version {
-  min-width: 10%;
-  margin-bottom: auto;
+  width: 10%;
 }
 .version-table .text-title {
-  min-width: 25%;
-  margin-bottom: auto;
+  width: 35%;
 }
 .version-table .text-in-use {
-  min-width: 15%;
-  margin-bottom: auto;
+  width: 10%;
 }
 .version-table .text-owner {
-  min-width: 15%;
-  margin-bottom: auto;
+  width: 20%;
 }
 .version-table .text-last-edited {
-  min-width: 20%;
-  margin-bottom: auto;
+  width: 20%;
 }
 .version-table .delete-icon {
-  min-width: 10%;
-  margin-bottom: auto;
+  width: fit-content;
+  color: #e33f4e;
 }
 
 .testcase-table {
@@ -24345,12 +24354,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .testcase-table .text-testcase {
   min-width: 95%;
-  margin-top: auto;
-  margin-bottom: auto;
 }
 .testcase-table .delete-icon {
   min-width: 5%;
-  margin-bottom: auto;
+  color: #e33f4e;
 }
 
 .popupmenu--display-flex.popupmenu {

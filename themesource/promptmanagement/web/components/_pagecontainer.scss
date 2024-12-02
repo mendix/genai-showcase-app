@@ -89,28 +89,23 @@
     display: flex;
 
     .text-version {
-        min-width: 10%;
-        margin-bottom: auto;
+        width: 10%;
     }
     .text-title {
-        min-width: 25%;
-        margin-bottom: auto;
+        width: 35%;
     }
     .text-in-use {
-        min-width: 15%;
-        margin-bottom: auto;
+        width: 10%;
     }
     .text-owner {
-        min-width: 15%;
-        margin-bottom: auto;
+        width: 20%;
     }
     .text-last-edited {
-        min-width: 20%;
-        margin-bottom: auto;
+        width: 20%;
     }
     .delete-icon {
-        min-width: 10%;
-        margin-bottom: auto;
+        width: fit-content;
+        color: $brand-danger;
     }
 }
 
@@ -120,11 +115,9 @@
 
     .text-testcase{
         min-width: 95%;
-        margin-top: auto;
-        margin-bottom: auto;
     }
     .delete-icon{
         min-width: 5%;
-        margin-bottom: auto;
+        color: $brand-danger;
     }
 }

@@ -1,3 +1,4 @@
+@import "../../../atlas_core/web/_variables.scss";
 @import '../../../../theme/web/custom-variables';
 
 .badge-with-circle {
@@ -24,4 +25,21 @@
             background-color: $brand-success;
         }
     }
+}
+
+.badge--in-use {
+    max-width: fit-content;
+    height: auto;
+    padding-left: $spacing-smaller;
+    padding-right: $spacing-smaller;
+    
+  //border-color: #4FD84F;
+  .badge-text{
+    font-size: $font-size-small;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+  }
+    border-radius: 4px;
+    border: 1px solid #4FD84F;
+    background-color: #E1FAE1;
 }
