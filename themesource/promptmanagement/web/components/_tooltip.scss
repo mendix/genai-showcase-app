@@ -1,4 +1,4 @@
-@import '../../../../theme/web/custom-variables';
+@import '../abstracts/custom_variables';
 
 .hide-tooltip {
     .widget-tooltip-arrow-top {
@@ -6,5 +6,24 @@
     }
     .widget-tooltip-content {
         display: none;
+    }
+}
+
+.prompt-tooltip {
+    .widget-tooltip-content {
+        position: relative;
+        z-index: 1000;
+        text-align: unset; 
+        white-space: break-spaces;
+        word-break: break-word;
+        background-color: $bg-tooltip;
+        //color: white;
+    }
+}
+
+
+.prompt-tooltip-w306 {
+    .widget-tooltip-content {
+        width: 25.5rem;
     }
 }

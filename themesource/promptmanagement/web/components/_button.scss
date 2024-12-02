@@ -14,3 +14,12 @@
         background-color: transparent;
     }
 }
+
+.btn-run {
+    border-radius: 4px 0 0 4px;
+}
+.btn-run-all {
+    border-radius: 0 4px 4px 0;
+    border-left: 1px solid white;
+    fill: white;
+}
