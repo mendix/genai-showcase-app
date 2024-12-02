@@ -24366,7 +24366,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 20%;
 }
 .version-table .delete-icon {
-  width: fit-content;
+  width: 5%;
   color: #e33f4e;
 }
 

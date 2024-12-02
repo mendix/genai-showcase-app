@@ -54,14 +54,14 @@
 .table-header{
     margin-top: $spacing-medium;
     padding-bottom: $spacing-medium;
-    border-bottom: 1px solid #E7E7E9;
+    border-bottom: 1px solid $table-border-separator-color;
 }
 
 .table-header-background{
     padding-top: $spacing-small;
     padding-bottom: $spacing-small;
     padding-left: $spacing-small;
-    background-color: #E7E7E9;
+    background-color: $table-border-separator-color;
 }
 
 .output-table{
@@ -104,7 +104,7 @@
         width: 20%;
     }
     .delete-icon {
-        width: fit-content;
+        width: 5%;
         color: $brand-danger;
     }
 }
