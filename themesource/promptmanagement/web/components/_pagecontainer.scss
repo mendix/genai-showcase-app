@@ -7,8 +7,8 @@
     justify-content: center;
 
     .prompting-container--overview {
-        width: 100%;
-        max-width: 1200px;
+        width: 80%;
+        //max-width: 1200px;
         margin-top: $spacing-large;
         
         .td {
@@ -51,6 +51,18 @@
     }
 }
 
+.table-header{
+    margin-top: $spacing-medium;
+    padding-bottom: $spacing-medium;
+    border-bottom: 1px solid #E7E7E9;
+}
+
+.table-header-background{
+    padding-top: $spacing-small;
+    padding-bottom: $spacing-small;
+    padding-left: $spacing-small;
+    background-color: #E7E7E9;
+}
 
 .output-table{
     display: flex;
@@ -73,6 +85,46 @@
     }
 }
 
-output-table.table-header{
-    border-bottom: 1px solid $font-color-default;
+.version-table{
+    display: flex;
+
+    .text-version {
+        min-width: 10%;
+        margin-bottom: auto;
+    }
+    .text-title {
+        min-width: 25%;
+        margin-bottom: auto;
+    }
+    .text-in-use {
+        min-width: 15%;
+        margin-bottom: auto;
+    }
+    .text-owner {
+        min-width: 15%;
+        margin-bottom: auto;
+    }
+    .text-last-edited {
+        min-width: 20%;
+        margin-bottom: auto;
+    }
+    .delete-icon {
+        min-width: 10%;
+        margin-bottom: auto;
+    }
+}
+
+.testcase-table{
+    display: flex;
+    padding-left: $spacing-small;
+
+    .text-testcase{
+        min-width: 95%;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    .delete-icon{
+        min-width: 5%;
+        margin-bottom: auto;
+    }
 }
