@@ -24106,6 +24106,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   font-weight: normal;
 }
 
+.icon-action-padding {
+  padding-top: 5px;
+}
+
 .badge-with-circle {
   display: flex;
   align-items: center;
@@ -24156,6 +24160,20 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .btn-without-border.mx-link:hover {
   background-color: transparent;
+}
+
+.btn-run {
+  border-radius: 4px 0 0 4px;
+}
+
+.btn-run-all {
+  border-radius: 0 4px 4px 0;
+  border-left: 1px solid white;
+  fill: white;
+}
+
+.card {
+  overflow: unset;
 }
 
 .combo-deployment-selection-prompting {
@@ -24377,6 +24395,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 8px;
   margin-top: none;
   margin-bottom: none;
+  align-items: right !important;
 }
 .popupmenu-custom-item-container .mx-link {
   display: block;
@@ -24448,6 +24467,19 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .hide-tooltip .widget-tooltip-content {
   display: none;
+}
+
+.prompt-tooltip .widget-tooltip-content {
+  position: relative;
+  z-index: 1000;
+  text-align: unset;
+  white-space: break-spaces;
+  word-break: break-word;
+  background-color: white;
+}
+
+.prompt-tooltip-w306 .widget-tooltip-content {
+  width: 25.5rem;
 }
 
 /*# sourceMappingURL=theme.compiled.css.map */
