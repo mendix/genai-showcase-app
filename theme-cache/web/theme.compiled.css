@@ -24176,6 +24176,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   overflow: unset;
 }
 
+.w306 {
+  width: 25.5rem;
+}
+
 .combo-deployment-selection-prompting {
   display: flex;
   flex-grow: 1;
