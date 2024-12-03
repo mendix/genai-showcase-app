@@ -112,13 +112,16 @@ public class PromptToUse_GetAndReplace extends CustomJavaAction<IMendixObject>
 			Variable variable = promptmanagement.proxies.Variable.load(getContext(), variableIterator.getId());
 			
 			if (!VariablesObject.hasMember(variable.getKey())) {
+				LOGGER.warn("Cannot replace variable {{" + variable.getKey() + "}} because it is not found in the passed object.");
 				continue;
 			}
-			String value = VariablesObject.getValue(getContext(), variable.getKey()).toString();
 			
-			if(!value.isEmpty()) {
+			if(VariablesObject.getValue(getContext(), variable.getKey()) != null) {
 				promptmanagement.proxies.microflows.Microflows.promptToUse_ApplyVariable(getContext(), promptToUse,  
-						variable.getKey(), value);
+						variable.getKey(), VariablesObject.getValue(getContext(), variable.getKey()).toString());
+			}
+			else {
+				LOGGER.warn("Cannot replace variable {{" + variable.getKey() + "}} because it is empty in the passed object.");
 			}
 		}
 
