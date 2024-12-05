@@ -24291,7 +24291,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: center;
 }
 .prompting-page-container .prompting-container--overview {
-  width: 80%;
+  width: 90%;
   margin-top: 24px;
 }
 .prompting-page-container .prompting-container--overview .td {
@@ -24308,29 +24308,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin: 16px;
   height: 100%;
 }
-.prompting-page-container .prompting-justify-space-between .prompting-container-column:first-child {
-  /* First row */
-}
-.prompting-page-container .prompting-justify-space-between .prompting-container-column:first-child .prompting-container-column {
-  margin: 16px;
-  height: 100%;
-  /* Make sure the height of the columns are equal */
-}
-.prompting-page-container .prompting-justify-space-between .prompting-container-column:first-child .prompting-container-column--small {
+.prompting-page-container .prompting-justify-space-between .prompting-container-column .prompting-container-column--small {
   width: 45%;
-  /* 45% width for the first column */
 }
-.prompting-page-container .prompting-justify-space-between .prompting-container-column:first-child .prompting-container-column--big {
+.prompting-page-container .prompting-justify-space-between .prompting-container-column .prompting-container-column--big {
   width: 55%;
-  /* 55% width for the second column */
-}
-.prompting-page-container .prompting-justify-space-between .prompting-container-column:last-child {
-  /* Second row */
-}
-.prompting-page-container .prompting-justify-space-between .prompting-container-column:last-child .prompting-container-column {
-  margin: 16px;
-  width: 100%;
-  /* Full width for the second row */
 }
 .prompting-page-container .pageheader-with-buttons {
   display: flex !important;
