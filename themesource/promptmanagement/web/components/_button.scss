@@ -22,9 +22,15 @@
     border-radius: 0 4px 4px 0;
     border-left: 1px solid white;
     fill: white;
+
+    &:hover {
+        border-left: 1px solid white;
+    }
+
+
 }
 
-.btn-icon{
+.btn-icon {
     display: flex;
     padding: 0.6em;
     img{
