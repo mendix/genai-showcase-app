@@ -23,7 +23,7 @@ import promptmanagement.proxies.Version;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
- * Use this action to get a prompt that was configured in the app by passing the prompt's name. If you pass an object, all variables that match the prompt's variables are replaced with the actual values extracted from the attributes with the exact same name as a variable.
+ * Use this action to get a prompt that was configured in the app by passing the prompt's name. If you pass an object, all variables that match the prompt's variables are replaced with the actual values extracted from the attributes with the exact same name as a variable. This works for string, integer/long, decimal, date time, boolean and enum attribute types. Note that the key of an ENUM will be used to replace a variable. To ensure a fixed format (for other types than string), it is recommended to convert values to string first and only pass string attributes for value replacement.
  * 
  * 
  * Output:
@@ -51,6 +51,9 @@ public class PromptToUse_GetAndReplace extends CustomJavaAction<IMendixObject>
 			// get Version In Use (alternatively Draft) and set values
 			Version versionInUse = promptmanagement.proxies.microflows.Microflows.version_GetForPromptTitle(
 					getContext(), PromptName);
+			requireNonNull(versionInUse,"No version marked as 'In Use' was found, so no PromptInUse can be created.");
+			
+			
 			PromptToUse promptToUse = createPromptToUse(versionInUse);
 	
 			
