@@ -1,7 +1,17 @@
-.card {
-    overflow: unset; 
-}
-
 .w306 {
     width: 25.5rem;;
+}
+
+.overflow-unset {
+    overflow: unset;
+}
+
+.prompt-card {
+    border: 1px solid $gray-primary;
+    //border-radius: 4px;
+    background-color: #ffffff;
+    overflow: hidden;
+    position: relative;
+    padding: 24px;
+    margin-bottom: 24px;
 }

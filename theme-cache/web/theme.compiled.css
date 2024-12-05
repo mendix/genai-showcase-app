@@ -24180,12 +24180,21 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-right: 0;
 }
 
-.card {
+.w306 {
+  width: 25.5rem;
+}
+
+.overflow-unset {
   overflow: unset;
 }
 
-.w306 {
-  width: 25.5rem;
+.prompt-card {
+  border: 1px solid #e7e7e9;
+  background-color: #ffffff;
+  overflow: hidden;
+  position: relative;
+  padding: 24px;
+  margin-bottom: 24px;
 }
 
 .combo-deployment-selection-prompting {
@@ -24296,6 +24305,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .prompting-page-container .prompting-container--overview .card {
   border-radius: 16px;
+  border: 1px solid #e7e7e9;
 }
 .prompting-page-container .prompting-justify-space-between {
   display: flex !important;
