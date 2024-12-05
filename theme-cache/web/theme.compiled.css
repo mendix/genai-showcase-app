@@ -24172,6 +24172,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
   fill: white;
 }
 
+.btn-icon {
+  display: flex;
+  padding: 0.6em;
+}
+.btn-icon img {
+  margin-right: 0;
+}
+
 .card {
   overflow: unset;
 }
