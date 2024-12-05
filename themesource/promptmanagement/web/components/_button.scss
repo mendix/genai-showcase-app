@@ -23,3 +23,11 @@
     border-left: 1px solid white;
     fill: white;
 }
+
+.btn-icon{
+    display: flex;
+    padding: 0.6em;
+    img{
+        margin-right: 0;
+    }
+}
