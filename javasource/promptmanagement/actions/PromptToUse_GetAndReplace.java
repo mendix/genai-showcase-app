@@ -16,8 +16,7 @@ import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
 import promptmanagement.impl.MxLogger;
-import promptmanagement.proxies.ModelEntity;
-import promptmanagement.proxies.Prompt;
+import promptmanagement.proxies.Entity;
 import promptmanagement.proxies.PromptToUse;
 import promptmanagement.proxies.Variable;
 import promptmanagement.proxies.Version;
@@ -49,38 +48,15 @@ public class PromptToUse_GetAndReplace extends CustomJavaAction<IMendixObject>
 		try {
 			requireNonNull(PromptName, "PromptName is required.");
 			
-			PromptToUse promptToUse = new PromptToUse(getContext());
-			
 			// get Version In Use (alternatively Draft) and set values
 			Version versionInUse = promptmanagement.proxies.microflows.Microflows.version_GetForPromptTitle(
 					getContext(), PromptName);
-			promptToUse.setPromptToUse_Version(versionInUse);
-			promptToUse.setSystemPrompt(versionInUse.getSystemPrompt());
-			promptToUse.setUserPrompt(versionInUse.getUserPrompt());
+			PromptToUse promptToUse = createPromptToUse(versionInUse);
+	
 			
 			// if a VariablesObject was passed, replace the placeholders with actual values.
 			if(VariablesObject != null) {
-				IMendixObject prompt =  Core.retrieveByPath(getContext(), versionInUse.getMendixObject(),  "PromptManagement.Version_Prompt").get(0); 
-				
-				//Get associated modelEntity (check if list is not empty)
-				List<IMendixObject> modelEntityList = Core.retrieveByPath(getContext(),prompt,"PromptManagement.Prompt_ModelEntity");
-				if(!modelEntityList.isEmpty()) {
-					ModelEntity modelEntity = promptmanagement.proxies.ModelEntity.load(getContext(), modelEntityList.get(0).getId());
-					
-					//Check if modelEntity matches the passed obhect's entity
-					if (VariablesObject.getMetaObject().getName().equals(modelEntity.getName())) {
-						//Get all variables associated to the Prompt and replace placeholders with values from attributes.
-						List<IMendixObject> variableList =  Core.retrieveByPath(getContext(),prompt, "PromptManagement.Variable_Prompt");
-						replaceVariables(promptToUse, variableList, VariablesObject);
-					}
-					else {
-						throw new IllegalArgumentException("Cannot replace variables for the passed VariablesObject because it does not match the entity that is selected for this prompt."
-								+ " Passed object's entity: " + VariablesObject.getMetaObject().getName() + ", expected: " + modelEntity.getName());
-					}
-				}
-				else {
-					throw new IllegalArgumentException("Cannot replace variables for the passed VariablesObject because no entity is selected for this prompt.");
-				}
+				replaceVariables(promptToUse, versionInUse.getMendixObject(), VariablesObject);	
 			}
 			
 			return promptToUse.getMendixObject();
@@ -106,25 +82,65 @@ public class PromptToUse_GetAndReplace extends CustomJavaAction<IMendixObject>
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new MxLogger(PromptToUse_GetAndReplace.class);
 	
-	private void replaceVariables(PromptToUse promptToUse, List<IMendixObject> variableList, IMendixObject VariablesObject) throws CoreException {
+	private void replaceEmptyVariable(PromptToUse promptToUse, Variable variable) {
+		promptmanagement.proxies.microflows.Microflows.promptToUse_ApplyVariable(getContext(), promptToUse,  
+				variable.getKey(), "");
+	}
+	
+	private void replaceVariables(PromptToUse promptToUse, IMendixObject versionInUse,IMendixObject variablesObject) throws CoreException {
 		
-		for(IMendixObject variableIterator : variableList) {
-			Variable variable = promptmanagement.proxies.Variable.load(getContext(), variableIterator.getId());
+		IMendixObject prompt =  Core.retrieveByPath(getContext(), versionInUse,  "PromptManagement.Version_Prompt").get(0); 
+		
+		//Get associated entity (check if list is not empty)
+		List<IMendixObject> entityList = Core.retrieveByPath(getContext(),prompt,"PromptManagement.Prompt_Entity");
+		if(!entityList.isEmpty()) {
+			Entity entity = promptmanagement.proxies.Entity.load(getContext(), entityList.get(0).getId());
 			
-			if (!VariablesObject.hasMember(variable.getKey())) {
-				LOGGER.warn("Cannot replace variable {{" + variable.getKey() + "}} because it is not found in the passed object.");
-				continue;
-			}
-			
-			if(VariablesObject.getValue(getContext(), variable.getKey()) != null) {
-				promptmanagement.proxies.microflows.Microflows.promptToUse_ApplyVariable(getContext(), promptToUse,  
-						variable.getKey(), VariablesObject.getValue(getContext(), variable.getKey()).toString());
+			//Check if entity matches the passed object's entity
+			if (variablesObject.getMetaObject().getName().equals(entity.getName())) {
+				//Get all variables associated to the Prompt and replace placeholders with values from attributes.
+				List<IMendixObject> variableList =  Core.retrieveByPath(getContext(),prompt, "PromptManagement.Variable_Prompt");
+				
+				//Replacement of variables if they are found in the passed object
+				for(IMendixObject variableIterator : variableList) {
+					Variable variable = promptmanagement.proxies.Variable.load(getContext(), variableIterator.getId());
+					
+					//Variable is attribute of passed object
+					if (!variablesObject.hasMember(variable.getKey())) {
+						LOGGER.warn("Cannot replace variable {{" + variable.getKey() + "}} because it is not found in the passed object.");
+						replaceEmptyVariable(promptToUse, variable);
+						continue;
+					}
+					//Value is not empty, then Apply variable
+					if(variablesObject.getValue(getContext(), variable.getKey()) != null) {
+						promptmanagement.proxies.microflows.Microflows.promptToUse_ApplyVariable(getContext(), promptToUse,  
+								variable.getKey(), variablesObject.getValue(getContext(), variable.getKey()).toString());
+					}
+					else {
+						LOGGER.warn("Cannot replace variable {{" + variable.getKey() + "}} because it is empty in the passed object.");
+						replaceEmptyVariable(promptToUse, variable);
+					}
+				}
+				
 			}
 			else {
-				LOGGER.warn("Cannot replace variable {{" + variable.getKey() + "}} because it is empty in the passed object.");
+				throw new IllegalArgumentException("Cannot replace variables for the passed VariablesObject because it does not match the entity that is selected for this prompt."
+						+ " Passed object's entity: " + VariablesObject.getMetaObject().getName() + ", expected: " + entity.getName());
 			}
 		}
-
+		else {
+			throw new IllegalArgumentException("Cannot replace variables for the passed VariablesObject because no entity is selected for this prompt.");
+		}
+	}
+	
+	private PromptToUse createPromptToUse(Version versionInUse){
+		PromptToUse promptToUse = new PromptToUse(getContext());
+		
+		promptToUse.setPromptToUse_Version(versionInUse);
+		promptToUse.setSystemPrompt(versionInUse.getSystemPrompt());
+		promptToUse.setUserPrompt(versionInUse.getUserPrompt());
+		
+		return promptToUse;
 	}
 	// END EXTRA CODE
 }
