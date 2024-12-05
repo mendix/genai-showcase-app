@@ -24171,6 +24171,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border-left: 1px solid white;
   fill: white;
 }
+.btn-run-all:hover {
+  border-left: 1px solid white;
+}
 
 .btn-icon {
   display: flex;
@@ -24186,15 +24189,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .overflow-unset {
   overflow: unset;
-}
-
-.prompt-card {
-  border: 1px solid #e7e7e9;
-  background-color: #ffffff;
-  overflow: hidden;
-  position: relative;
-  padding: 24px;
-  margin-bottom: 24px;
 }
 
 .combo-deployment-selection-prompting {
