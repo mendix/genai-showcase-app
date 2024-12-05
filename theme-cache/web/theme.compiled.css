@@ -24533,7 +24533,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .prompt-tooltip-w250 .widget-tooltip-content {
   width: 280px;
-  padding: 0 15px 0 15px;
+  padding: 15px;
 }
 
 /*# sourceMappingURL=theme.compiled.css.map */
