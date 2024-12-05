@@ -16,14 +16,14 @@ import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
 import promptmanagement.impl.MxLogger;
-import promptmanagement.proxies.Entity;
+import promptmanagement.proxies.Prompt;
 import promptmanagement.proxies.PromptToUse;
 import promptmanagement.proxies.Variable;
 import promptmanagement.proxies.Version;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
- * Use this action to get a prompt that was configured in the app by passing the prompt's name. If you pass an object, all variables that match the prompt's variables are replaced with the actual values extracted from the attributes with the exact same name as a variable.
+ * Use this action to get a prompt that was configured in the app by passing the prompt's name. If you pass an object, all variables that match the prompt's variables are replaced with the actual values extracted from the attributes with the exact same name as a variable. This works for string, integer/long, decimal, date time, boolean and enum attribute types. Note that the key of an ENUM will be used to replace a variable. To ensure a fixed format (for other types than string), it is recommended to convert values to string first and only pass string attributes for value replacement.
  * 
  * 
  * Output:
@@ -51,6 +51,9 @@ public class PromptToUse_GetAndReplace extends CustomJavaAction<IMendixObject>
 			// get Version In Use (alternatively Draft) and set values
 			Version versionInUse = promptmanagement.proxies.microflows.Microflows.version_GetForPromptTitle(
 					getContext(), PromptName);
+			requireNonNull(versionInUse,"No version marked as 'In Use' was found, so no PromptInUse can be created.");
+			
+			
 			PromptToUse promptToUse = createPromptToUse(versionInUse);
 	
 			
@@ -89,17 +92,18 @@ public class PromptToUse_GetAndReplace extends CustomJavaAction<IMendixObject>
 	
 	private void replaceVariables(PromptToUse promptToUse, IMendixObject versionInUse,IMendixObject variablesObject) throws CoreException {
 		
-		IMendixObject prompt =  Core.retrieveByPath(getContext(), versionInUse,  "PromptManagement.Version_Prompt").get(0); 
+		IMendixObject promptMendix =  Core.retrieveByPath(getContext(), versionInUse,  "PromptManagement.Version_Prompt").get(0); 
 		
-		//Get associated entity (check if list is not empty)
-		List<IMendixObject> entityList = Core.retrieveByPath(getContext(),prompt,"PromptManagement.Prompt_Entity");
-		if(!entityList.isEmpty()) {
-			Entity entity = promptmanagement.proxies.Entity.load(getContext(), entityList.get(0).getId());
+		Prompt prompt = promptmanagement.proxies.Prompt.load(getContext(), promptMendix.getId());
+		
+		
+		//Check if entity is not empty)
+		if(prompt.getEntity() != null && !prompt.getEntity().isEmpty()) {
 			
 			//Check if entity matches the passed object's entity
-			if (variablesObject.getMetaObject().getName().equals(entity.getName())) {
+			if (variablesObject.getMetaObject().getName().equals(prompt.getEntity())) {
 				//Get all variables associated to the Prompt and replace placeholders with values from attributes.
-				List<IMendixObject> variableList =  Core.retrieveByPath(getContext(),prompt, "PromptManagement.Variable_Prompt");
+				List<IMendixObject> variableList =  Core.retrieveByPath(getContext(),promptMendix, "PromptManagement.Variable_Prompt");
 				
 				//Replacement of variables if they are found in the passed object
 				for(IMendixObject variableIterator : variableList) {
@@ -125,7 +129,7 @@ public class PromptToUse_GetAndReplace extends CustomJavaAction<IMendixObject>
 			}
 			else {
 				throw new IllegalArgumentException("Cannot replace variables for the passed VariablesObject because it does not match the entity that is selected for this prompt."
-						+ " Passed object's entity: " + VariablesObject.getMetaObject().getName() + ", expected: " + entity.getName());
+						+ " Passed object's entity: " + VariablesObject.getMetaObject().getName() + ", expected: " + prompt.getEntity());
 			}
 		}
 		else {
