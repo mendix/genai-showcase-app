@@ -17,9 +17,9 @@ import promptmanagement.proxies.EntityImport;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.meta.IMetaObject;
 
-public class ModelEntity_GetList extends CustomJavaAction<java.util.List<IMendixObject>>
+public class Entity_GetList extends CustomJavaAction<java.util.List<IMendixObject>>
 {
-	public ModelEntity_GetList(IContext context)
+	public Entity_GetList(IContext context)
 	{
 		super(context);
 	}
@@ -46,7 +46,7 @@ public class ModelEntity_GetList extends CustomJavaAction<java.util.List<IMendix
 	@java.lang.Override
 	public java.lang.String toString()
 	{
-		return "ModelEntity_GetList";
+		return "Entity_GetList";
 	}
 
 	// BEGIN EXTRA CODE
