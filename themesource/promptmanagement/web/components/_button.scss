@@ -23,10 +23,9 @@
     border-left: 1px solid white;
     fill: white;
 
-    &:hover {
+    &:active, &:focus, &:hover {
         border-left: 1px solid white;
     }
-
 
 }
 

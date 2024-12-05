@@ -24171,7 +24171,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border-left: 1px solid white;
   fill: white;
 }
-.btn-run-all:hover {
+.btn-run-all:active, .btn-run-all:focus, .btn-run-all:hover {
   border-left: 1px solid white;
 }
 
@@ -24292,7 +24292,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .prompting-page-container .prompting-container--overview {
   width: 90%;
-  margin-top: 24px;
+  margin: 24px;
 }
 .prompting-page-container .prompting-container--overview .td {
   border-bottom: none;
@@ -24305,7 +24305,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex !important;
 }
 .prompting-page-container .prompting-justify-space-between .prompting-container-column {
-  margin: 16px;
   height: 100%;
 }
 .prompting-page-container .prompting-justify-space-between .prompting-container-column .prompting-container-column--small {
@@ -24506,7 +24505,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   position: relative;
   z-index: 1000;
   text-align: unset;
-  white-space: break-spaces;
   word-break: break-word;
   background-color: white;
   border-radius: 4px;
