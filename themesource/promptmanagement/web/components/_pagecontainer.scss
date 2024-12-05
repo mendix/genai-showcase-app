@@ -26,14 +26,29 @@
         .prompting-container-column {
             margin: $spacing-medium;
             height: 100%;
-
-            &.prompting-container-column--small {
-                width: 40%;
+            &:first-child {
+                /* First row */
+                .prompting-container-column {
+                    margin: $spacing-medium;
+                    height: 100%; /* Make sure the height of the columns are equal */
+                }
+    
+                .prompting-container-column--small {
+                    width: 45%; /* 45% width for the first column */
+                }
+    
+                .prompting-container-column--big {
+                    width: 55%; /* 55% width for the second column */
+                }
             }
-
-            &.prompting-container-column--big {
-                width: 60%;
-            } 
+    
+            &:last-child {
+                /* Second row */
+                .prompting-container-column {
+                    margin: $spacing-medium;
+                    width: 100%; /* Full width for the second row */
+                }
+            }
         }
     }
 
@@ -41,6 +56,27 @@
         display: flex !important;
         justify-content: space-between;
         align-items: center;
+    }
+
+    .pageheader-navigation {
+        display: flex !important;
+        align-items: center !important;
+        flex-flow: row !important;
+        justify-content: flex-start !important;
+    }
+
+}
+
+
+.pageheader {
+    background-color: white;
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    margin: 0;
+    
+    .pageheader-with-buttons {
+        display: flex !important;
     }
 
     .pageheader-navigation {

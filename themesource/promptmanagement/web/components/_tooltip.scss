@@ -16,14 +16,22 @@
         text-align: unset; 
         white-space: break-spaces;
         word-break: break-word;
-        background-color: $bg-tooltip;
-        //color: white;
+        background-color: white;
+        border-radius: 4px;
     }
 }
 
 
-.prompt-tooltip-w306 {
+.prompt-tooltip-w330 {
     .widget-tooltip-content {
-        width: 25.5rem;
+        width: 330px;
+        padding: 0 15px 0 15px;
+    }
+}
+
+.prompt-tooltip-w250 {
+    .widget-tooltip-content {
+        width: 280px;
+        padding: 0 15px 0 15px;
     }
 }

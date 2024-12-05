@@ -24304,11 +24304,29 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin: 16px;
   height: 100%;
 }
-.prompting-page-container .prompting-justify-space-between .prompting-container-column.prompting-container-column--small {
-  width: 40%;
+.prompting-page-container .prompting-justify-space-between .prompting-container-column:first-child {
+  /* First row */
 }
-.prompting-page-container .prompting-justify-space-between .prompting-container-column.prompting-container-column--big {
-  width: 60%;
+.prompting-page-container .prompting-justify-space-between .prompting-container-column:first-child .prompting-container-column {
+  margin: 16px;
+  height: 100%;
+  /* Make sure the height of the columns are equal */
+}
+.prompting-page-container .prompting-justify-space-between .prompting-container-column:first-child .prompting-container-column--small {
+  width: 45%;
+  /* 45% width for the first column */
+}
+.prompting-page-container .prompting-justify-space-between .prompting-container-column:first-child .prompting-container-column--big {
+  width: 55%;
+  /* 55% width for the second column */
+}
+.prompting-page-container .prompting-justify-space-between .prompting-container-column:last-child {
+  /* Second row */
+}
+.prompting-page-container .prompting-justify-space-between .prompting-container-column:last-child .prompting-container-column {
+  margin: 16px;
+  width: 100%;
+  /* Full width for the second row */
 }
 .prompting-page-container .pageheader-with-buttons {
   display: flex !important;
@@ -24316,6 +24334,23 @@ input[type=checkbox].three-state-checkbox + .control-label {
   align-items: center;
 }
 .prompting-page-container .pageheader-navigation {
+  display: flex !important;
+  align-items: center !important;
+  flex-flow: row !important;
+  justify-content: flex-start !important;
+}
+
+.pageheader {
+  background-color: white;
+  width: 100%;
+  min-height: 100px;
+  display: flex;
+  margin: 0;
+}
+.pageheader .pageheader-with-buttons {
+  display: flex !important;
+}
+.pageheader .pageheader-navigation {
   display: flex !important;
   align-items: center !important;
   flex-flow: row !important;
@@ -24488,10 +24523,17 @@ input[type=checkbox].three-state-checkbox + .control-label {
   white-space: break-spaces;
   word-break: break-word;
   background-color: white;
+  border-radius: 4px;
 }
 
-.prompt-tooltip-w306 .widget-tooltip-content {
-  width: 25.5rem;
+.prompt-tooltip-w330 .widget-tooltip-content {
+  width: 330px;
+  padding: 0 15px 0 15px;
+}
+
+.prompt-tooltip-w250 .widget-tooltip-content {
+  width: 280px;
+  padding: 0 15px 0 15px;
 }
 
 /*# sourceMappingURL=theme.compiled.css.map */
