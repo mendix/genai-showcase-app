@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
-import promptmanagement.proxies.EntityImport;
+import promptmanagement.proxies.Entity;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.meta.IMetaObject;
 
@@ -31,8 +31,8 @@ public class Entity_GetList extends CustomJavaAction<java.util.List<IMendixObjec
 		ArrayList<IMendixObject> modelEntityList = new ArrayList<IMendixObject>();
 		
 		for(IMetaObject metaObject : Core.getMetaObjects()) {
-			IMendixObject entityImport = Core.instantiate(getContext(), EntityImport.getType());
-			entityImport.setValue(getContext(), EntityImport.MemberNames.EntityName.toString(), metaObject.getName());
+			IMendixObject entityImport = Core.instantiate(getContext(), Entity.getType());
+			entityImport.setValue(getContext(), Entity.MemberNames.Name.toString(), metaObject.getName());
 			modelEntityList.add(entityImport);
 		}
 		return modelEntityList; 
