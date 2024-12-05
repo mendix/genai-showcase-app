@@ -24292,6 +24292,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .prompting-page-container .prompting-container--overview {
   width: 90%;
+  max-width: 1200px;
   margin: 24px;
 }
 .prompting-page-container .prompting-container--overview .td {
@@ -24301,11 +24302,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border-radius: 16px;
   border: 1px solid #e7e7e9;
 }
+.prompting-page-container .prompting-container--overview .prompting-container-row {
+  width: 100%;
+}
 .prompting-page-container .prompting-justify-space-between {
   display: flex !important;
 }
 .prompting-page-container .prompting-justify-space-between .prompting-container-column {
   height: 100%;
+  width: 100%;
 }
 .prompting-page-container .prompting-justify-space-between .prompting-container-column .prompting-container-column--small {
   width: 45%;
@@ -24424,7 +24429,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .popupmenu-custom-item-container {
-  padding: 8px;
   margin-top: none;
   margin-bottom: none;
   align-items: right !important;

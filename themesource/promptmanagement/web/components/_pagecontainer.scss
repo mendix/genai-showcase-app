@@ -9,6 +9,7 @@
 
     .prompting-container--overview {
         width: 90%;
+        max-width: 1200px;
         margin: $spacing-large;
         
         .td {
@@ -19,13 +20,19 @@
             border-radius: $spacing-medium;
             border: 1px solid $gray-primary;
         }
+
+        .prompting-container-row {
+            width: 100%;
+        }
     }
+
 
     .prompting-justify-space-between {
         display: flex !important;
 
         .prompting-container-column {
             height: 100%;
+            width: 100%;
 
             .prompting-container-column--small {
                 width: 45%;
