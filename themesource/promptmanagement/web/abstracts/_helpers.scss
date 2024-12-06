@@ -34,6 +34,18 @@
   font-weight: $form-label-weight;
 }
 
+.alert-danger-text{
+  margin-top: $spacing-smaller;
+  margin-bottom: $spacing-large;
+  .alert-circle-filled{
+    width: 14px;
+    margin-right: $spacing-small;
+  }
+  .alert-text{
+    color: $brand-danger;
+  }
+}
+
 //Following might be moved, all related to prompt library
 .border-selected {
   border-color: $brand-primary;

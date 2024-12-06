@@ -19,3 +19,9 @@
     }
 }
 
+.combobox-border-danger{
+  .widget-combobox{
+    border: 1px solid $brand-danger;
+  }
+}
+

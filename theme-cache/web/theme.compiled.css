@@ -24092,6 +24092,18 @@ input[type=checkbox].three-state-checkbox + .control-label {
   font-weight: 600;
 }
 
+.alert-danger-text {
+  margin-top: 4px;
+  margin-bottom: 24px;
+}
+.alert-danger-text .alert-circle-filled {
+  width: 14px;
+  margin-right: 8px;
+}
+.alert-danger-text .alert-text {
+  color: #e33f4e;
+}
+
 .border-selected {
   border-color: #264ae5;
   border-width: 2px;
@@ -24208,6 +24220,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   float: right;
 }
 
+.combobox-border-danger .widget-combobox {
+  border: 1px solid #e33f4e;
+}
+
 .datagrid--no-scroll.widget-datagrid .widget-datagrid-content {
   overflow-y: visible;
 }
@@ -24275,6 +24291,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .listview-hide-on-empty.mx-listview > ul > li.mx-listview-empty {
   display: none;
+}
+
+.listview-bullet-points > ul {
+  list-style-type: disc;
+}
+.listview-bullet-points > ul > li {
+  list-style-position: outside;
 }
 
 .prompt-library-page {
