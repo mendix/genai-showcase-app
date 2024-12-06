@@ -10,18 +10,12 @@
 package genaicommons.actions;
 
 import static java.util.Objects.requireNonNull;
-
-import java.util.Map;
-
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.webui.CustomJavaAction;
+import genaicommons.impl.DeployedModelImpl;
 import genaicommons.impl.MxLogger;
 import genaicommons.proxies.DeployedModel;
-import genaicommons.proxies.Request;
-import genaicommons.proxies.Response;
-
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
@@ -60,7 +54,6 @@ public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 		// END USER CODE
 	}
 
-
 	/**
 	 * Returns a string representation of this action
 	 * @return a string representation of this action
@@ -91,7 +84,7 @@ public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 	
 	private void validate() {
 		validateInputParameters();
-		validateChatCompletionsMicroflow();
+		DeployedModelImpl.validateChatCompletionsMicroflow(ChatCompletionsMicroflow);
 	}
 	
 	private void validateInputParameters() {
@@ -100,37 +93,6 @@ public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 		requireNonNull(Architecture, "Architecture is required.");
 		requireNonNull(ModelType, "ModelType is required.");
 		requireNonNull(DeployedModelSpecialization, "DeployedModelSpecialization is required.");
-	}
-	
-	private void validateChatCompletionsMicroflow() {
-		if (ChatCompletionsMicroflow == null || ChatCompletionsMicroflow.isBlank()) {
-			throw new IllegalArgumentException("ChatCompletionsMicroflow is required.");
-		}
-		
-		Map<String, IDataType> inputParameters = Core.getInputParameters(ChatCompletionsMicroflow);
-		if (inputParameters == null || inputParameters.entrySet().isEmpty() || inputParameters.size() != 2) {
-			throw new IllegalArgumentException("ChatCompletionsMicroflow " + ChatCompletionsMicroflow + " should only have one input parameter of type " + Request.getType() + " and one input parameter of type " + DeployedModel.getType() + ".");
-		}
-		
-		boolean requestFound = false;
-		boolean deployedModelFound = false;
-
-		// Iterate through the values in the inputParameters map
-		for (IDataType value : inputParameters.values()) {
-		    if (Core.getMetaObject(value.getObjectType()).isSubClassOf(Request.getType())) {
-		    	requestFound = true;
-		    } else if (Core.getMetaObject(value.getObjectType()).isSubClassOf(DeployedModel.getType())) {
-		    	deployedModelFound = true;
-		    }
-		}
-		
-		if(!requestFound || !deployedModelFound) {
-			throw new IllegalArgumentException("ChatCompletionsMicroflow " + ChatCompletionsMicroflow + " should only have one input parameter of type " + Request.getType() + " and one input parameter of type " + DeployedModel.getType() + ".");
-		}
-		
-		if(Core.getReturnType(ChatCompletionsMicroflow) == null || !Core.getMetaObject(Core.getReturnType(ChatCompletionsMicroflow).getObjectType()).isSubClassOf(Response.getType())) {
-			throw new IllegalArgumentException("ChatCompletionsMicroflow " + ChatCompletionsMicroflow + " should have a return value of type " + Response.getType() + ".");		
-		}
 	}
 	
 	private void validateDeployedModelSpecialization(IMendixObject deployedModelSpecialization) {
