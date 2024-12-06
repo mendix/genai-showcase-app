@@ -24195,6 +24195,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
   flex-grow: 1;
   margin: 0px !important;
+  height: 30px !important;
 }
 .combo-deployment-selection-prompting .deployment-selection {
   align-items: center;
@@ -24299,8 +24300,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border-bottom: none;
 }
 .prompting-page-container .prompting-container--overview .card {
+  overflow: unset;
   border-radius: 16px;
   border: 1px solid #e7e7e9;
+  padding-top: 16px;
 }
 .prompting-page-container .prompting-container--overview .prompting-container-row {
   width: 100%;
@@ -24453,6 +24456,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .popupmenu-custom-item-container .mx-link:hover {
   background-color: transparent;
+}
+
+.widget-combobox .widget-combobox-input-container {
+  flex-grow: 0;
+  transition: box-shadow 0.15s ease 0s;
 }
 
 .segmented-control {

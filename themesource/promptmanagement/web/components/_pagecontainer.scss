@@ -17,8 +17,10 @@
         }
         
         .card {
+            overflow: unset;
             border-radius: $spacing-medium;
             border: 1px solid $gray-primary;
+            padding-top: $spacing-medium;
         }
 
         .prompting-container-row {

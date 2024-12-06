@@ -38,3 +38,9 @@
         }
     }
 }
+
+
+.widget-combobox .widget-combobox-input-container {
+    flex-grow: 0;
+    transition: box-shadow .15s ease 0s;
+}
