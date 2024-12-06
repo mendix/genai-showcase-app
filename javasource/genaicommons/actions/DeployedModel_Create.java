@@ -9,36 +9,57 @@
 
 package genaicommons.actions;
 
-import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.webui.CustomJavaAction;
+import static java.util.Objects.requireNonNull;
 
-public class DeployedModel_Create extends CustomJavaAction<java.lang.Void>
+import java.util.Map;
+
+import com.mendix.core.Core;
+import com.mendix.systemwideinterfaces.core.IContext;
+import com.mendix.systemwideinterfaces.core.IDataType;
+import com.mendix.webui.CustomJavaAction;
+import genaicommons.impl.MxLogger;
+import genaicommons.proxies.DeployedModel;
+import genaicommons.proxies.Request;
+import genaicommons.proxies.Response;
+
+import com.mendix.systemwideinterfaces.core.IMendixObject;
+
+public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 {
 	private java.lang.String DisplayName;
-	private java.lang.String Model;
 	private java.lang.String Architecture;
-	private java.lang.String ChatCompletionsMicroflow;
+	private java.lang.String Model;
 	private genaicommons.proxies.ENUM_ModelType ModelType;
+	private java.lang.String ChatCompletionsMicroflow;
 	private java.lang.String DeployedModelSpecialization;
 
-	public DeployedModel_Create(IContext context, java.lang.String DisplayName, java.lang.String Model, java.lang.String Architecture, java.lang.String ChatCompletionsMicroflow, java.lang.String ModelType, java.lang.String DeployedModelSpecialization)
+	public DeployedModel_Create(IContext context, java.lang.String DisplayName, java.lang.String Architecture, java.lang.String Model, java.lang.String ModelType, java.lang.String ChatCompletionsMicroflow, java.lang.String DeployedModelSpecialization)
 	{
 		super(context);
 		this.DisplayName = DisplayName;
-		this.Model = Model;
 		this.Architecture = Architecture;
-		this.ChatCompletionsMicroflow = ChatCompletionsMicroflow;
+		this.Model = Model;
 		this.ModelType = ModelType == null ? null : genaicommons.proxies.ENUM_ModelType.valueOf(ModelType);
+		this.ChatCompletionsMicroflow = ChatCompletionsMicroflow;
 		this.DeployedModelSpecialization = DeployedModelSpecialization;
 	}
 
 	@java.lang.Override
-	public java.lang.Void executeAction() throws Exception
+	public IMendixObject executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		throw new com.mendix.systemwideinterfaces.MendixRuntimeException("Java action was not implemented");
+		try {
+			validate();
+			
+			return createAndSetDeployedModel().getMendixObject();
+			
+		} catch (Exception e) {
+			LOGGER.error(e);
+			throw e;
+		}
 		// END USER CODE
 	}
+
 
 	/**
 	 * Returns a string representation of this action
@@ -51,5 +72,71 @@ public class DeployedModel_Create extends CustomJavaAction<java.lang.Void>
 	}
 
 	// BEGIN EXTRA CODE
+	private static final MxLogger LOGGER = new MxLogger(DeployedModel_Create.class);
+	
+	private DeployedModel createAndSetDeployedModel() {
+		// Create an instance of the specialized ProviderConfig object
+		IMendixObject deployedModelSpecialization = Core.instantiate(getContext(), DeployedModelSpecialization);
+		validateDeployedModelSpecialization(deployedModelSpecialization);
+
+		// Use the specialized proxy class to wrap the generic IMendixObject to set attributes
+		DeployedModel deployedModel = DeployedModel.initialize(getContext(), deployedModelSpecialization);
+		deployedModel.setArchitecture(Architecture);
+		deployedModel.setChatCompletionsMicroflow(ChatCompletionsMicroflow);
+		deployedModel.setDisplayName(DisplayName);
+		deployedModel.setModel(Model);
+		deployedModel.setModelType(ModelType);
+		return deployedModel;
+	}
+	
+	private void validate() {
+		validateInputParameters();
+		validateChatCompletionsMicroflow();
+	}
+	
+	private void validateInputParameters() {
+		requireNonNull(DisplayName, "DisplayName is required.");
+		requireNonNull(Model, "Model is required.");
+		requireNonNull(Architecture, "Architecture is required.");
+		requireNonNull(ModelType, "ModelType is required.");
+		requireNonNull(DeployedModelSpecialization, "DeployedModelSpecialization is required.");
+	}
+	
+	private void validateChatCompletionsMicroflow() {
+		if (ChatCompletionsMicroflow == null || ChatCompletionsMicroflow.isBlank()) {
+			throw new IllegalArgumentException("ChatCompletionsMicroflow is required.");
+		}
+		
+		Map<String, IDataType> inputParameters = Core.getInputParameters(ChatCompletionsMicroflow);
+		if (inputParameters == null || inputParameters.entrySet().isEmpty() || inputParameters.size() != 2) {
+			throw new IllegalArgumentException("ChatCompletionsMicroflow " + ChatCompletionsMicroflow + " should only have one input parameter of type " + Request.getType() + " and one input parameter of type " + DeployedModel.getType() + ".");
+		}
+		
+		boolean requestFound = false;
+		boolean deployedModelFound = false;
+
+		// Iterate through the values in the inputParameters map
+		for (IDataType value : inputParameters.values()) {
+		    if (Core.getMetaObject(value.getObjectType()).isSubClassOf(Request.getType())) {
+		    	requestFound = true;
+		    } else if (Core.getMetaObject(value.getObjectType()).isSubClassOf(DeployedModel.getType())) {
+		    	deployedModelFound = true;
+		    }
+		}
+		
+		if(!requestFound || !deployedModelFound) {
+			throw new IllegalArgumentException("ChatCompletionsMicroflow " + ChatCompletionsMicroflow + " should only have one input parameter of type " + Request.getType() + " and one input parameter of type " + DeployedModel.getType() + ".");
+		}
+		
+		if(Core.getReturnType(ChatCompletionsMicroflow) == null || !Core.getMetaObject(Core.getReturnType(ChatCompletionsMicroflow).getObjectType()).isSubClassOf(Response.getType())) {
+			throw new IllegalArgumentException("ChatCompletionsMicroflow " + ChatCompletionsMicroflow + " should have a return value of type " + Response.getType() + ".");		
+		}
+	}
+	
+	private void validateDeployedModelSpecialization(IMendixObject deployedModelSpecialization) {
+		if (!deployedModelSpecialization.isInstanceOf(DeployedModel.entityName)){
+			throw new IllegalArgumentException(DeployedModel.entityName + " or a specialization of such is required.");
+		}
+	}
 	// END EXTRA CODE
 }
