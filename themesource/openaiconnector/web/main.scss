@@ -1,6 +1,4 @@
-@import '../../../theme/web/custom-variables';
-
-$font-color-light: rgba($font-color-default, 0.8);
+@import "../../atlas_core/web/_variables.scss";
 
 //Popup menu customizations and fixes
 .popupmenu--display-flex {
@@ -14,28 +12,15 @@ $font-color-light: rgba($font-color-default, 0.8);
 
     .mx-link {
         display: block;
-        padding: $spacing-smaller;
-    }
-}
-
-.popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item {
-    background-color: $bg-color-secondary;
-
-    &:hover,
-    &:focus,
-    &:active {
-        cursor: pointer;
-        border-color: $bg-color;
-        background-color: $bg-color;
+        padding: $spacing-small;
     }
 }
 
 //Buttons
 .btn-without-border.mx-link {
-    border-radius: $border-radius-large;
-    color: $font-color-light;
     text-decoration: none;
     border: 1px solid transparent;
+    color: $font-color-default;
 
     &.disabled {
         background-color: transparent !important;
@@ -58,6 +43,18 @@ $font-color-light: rgba($font-color-default, 0.8);
         margin-bottom: 0;
         > li {
             display: inline-block;
+        }
+    }
+}
+
+.listview-empty-deployed-models.mx-listview {
+    > ul > li.mx-listview-empty {
+        > label {
+            display: none;
+        }
+        &::before {
+            content: "Please add deployed models on the Edit page to be able to use this configuration.";
+            color: $brand-danger;
         }
     }
 }

@@ -9,7 +9,6 @@
 
 package genaicommons.actions;
 
-import static java.util.Objects.requireNonNull;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
@@ -43,7 +42,7 @@ public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 	{
 		// BEGIN USER CODE
 		try {
-			validate();
+			DeployedModelImpl.validateChatCompletionsMicroflow(ChatCompletionsMicroflow);
 			
 			return createAndSetDeployedModel().getMendixObject();
 			
@@ -69,7 +68,7 @@ public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 	
 	private DeployedModel createAndSetDeployedModel() {
 		// Create an instance of the specialized ProviderConfig object
-		IMendixObject deployedModelSpecialization = Core.instantiate(getContext(), DeployedModelSpecialization);
+		IMendixObject deployedModelSpecialization = createDeployedModel();
 		validateDeployedModelSpecialization(deployedModelSpecialization);
 
 		// Use the specialized proxy class to wrap the generic IMendixObject to set attributes
@@ -81,18 +80,15 @@ public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 		deployedModel.setModelType(ModelType);
 		return deployedModel;
 	}
-	
-	private void validate() {
-		validateInputParameters();
-		DeployedModelImpl.validateChatCompletionsMicroflow(ChatCompletionsMicroflow);
-	}
-	
-	private void validateInputParameters() {
-		requireNonNull(DisplayName, "DisplayName is required.");
-		requireNonNull(Model, "Model is required.");
-		requireNonNull(Architecture, "Architecture is required.");
-		requireNonNull(ModelType, "ModelType is required.");
-		requireNonNull(DeployedModelSpecialization, "DeployedModelSpecialization is required.");
+
+	private IMendixObject createDeployedModel() {
+		if (!DeployedModelSpecialization.isBlank()) {
+			IMendixObject deployedModelSpecialization = Core.instantiate(getContext(), DeployedModelSpecialization);
+			return deployedModelSpecialization;
+		} else { // if no object is passed, then a GenAICOmmons.DeployedModel object is created
+			DeployedModel deployedModel = new DeployedModel(getContext());
+			return (IMendixObject) deployedModel;
+		}
 	}
 	
 	private void validateDeployedModelSpecialization(IMendixObject deployedModelSpecialization) {
