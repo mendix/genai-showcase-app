@@ -15,6 +15,7 @@ import com.mendix.webui.CustomJavaAction;
 import genaicommons.impl.DeployedModelImpl;
 import genaicommons.impl.MxLogger;
 import genaicommons.proxies.DeployedModel;
+import genaicommons.proxies.ENUM_ModelType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
@@ -23,17 +24,17 @@ public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 	private java.lang.String Architecture;
 	private java.lang.String Model;
 	private genaicommons.proxies.ENUM_ModelType ModelType;
-	private java.lang.String ChatCompletionsMicroflow;
+	private java.lang.String Microflow;
 	private java.lang.String DeployedModelSpecialization;
 
-	public DeployedModel_Create(IContext context, java.lang.String DisplayName, java.lang.String Architecture, java.lang.String Model, java.lang.String ModelType, java.lang.String ChatCompletionsMicroflow, java.lang.String DeployedModelSpecialization)
+	public DeployedModel_Create(IContext context, java.lang.String DisplayName, java.lang.String Architecture, java.lang.String Model, java.lang.String ModelType, java.lang.String Microflow, java.lang.String DeployedModelSpecialization)
 	{
 		super(context);
 		this.DisplayName = DisplayName;
 		this.Architecture = Architecture;
 		this.Model = Model;
 		this.ModelType = ModelType == null ? null : genaicommons.proxies.ENUM_ModelType.valueOf(ModelType);
-		this.ChatCompletionsMicroflow = ChatCompletionsMicroflow;
+		this.Microflow = Microflow;
 		this.DeployedModelSpecialization = DeployedModelSpecialization;
 	}
 
@@ -42,7 +43,8 @@ public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 	{
 		// BEGIN USER CODE
 		try {
-			DeployedModelImpl.validateChatCompletionsMicroflow(ChatCompletionsMicroflow);
+			if (ModelType != null && ModelType == ENUM_ModelType.TextGeneration)
+				DeployedModelImpl.validateChatCompletionsMicroflow(Microflow);
 			
 			return createAndSetDeployedModel().getMendixObject();
 			
@@ -74,7 +76,7 @@ public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 		// Use the specialized proxy class to wrap the generic IMendixObject to set attributes
 		DeployedModel deployedModel = DeployedModel.initialize(getContext(), deployedModelSpecialization);
 		deployedModel.setArchitecture(Architecture);
-		deployedModel.setChatCompletionsMicroflow(ChatCompletionsMicroflow);
+		deployedModel.setMicroflow(Microflow);
 		deployedModel.setDisplayName(DisplayName);
 		deployedModel.setModel(Model);
 		deployedModel.setModelType(ModelType);

@@ -11,13 +11,11 @@ package genaicommons.actions;
 
 import static java.util.Objects.requireNonNull;
 import com.mendix.core.Core;
-import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
 import genaicommons.impl.DeployedModelImpl;
 import genaicommons.impl.MxLogger;
-import genaicommons.proxies.Response;
-import genaicommons.proxies.microflows.Microflows;
+import genaicommons.proxies.ENUM_ModelType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 public class Request_ChatCompletionsWithHistory extends CustomJavaAction<IMendixObject>
@@ -43,12 +41,9 @@ public class Request_ChatCompletionsWithHistory extends CustomJavaAction<IMendix
 
 		// BEGIN USER CODE
 		try {
-			requireNonNull(Request, "Request is required.");
-			requireNonNull(DeployedModel, "DeployedModel is required.");
-			String chatCompletionsMicroflow = DeployedModel.getChatCompletionsMicroflow();
-			DeployedModelImpl.validateChatCompletionsMicroflow(chatCompletionsMicroflow);
-			startTime = System.currentTimeMillis();
-			return processRequest(chatCompletionsMicroflow).getMendixObject();
+			validate();
+			return Core.microflowCall(DeployedModel.getMicroflow()).withParam("DeployedModel", DeployedModel.getMendixObject()).withParam("Request", Request.getMendixObject()).execute(this.getContext());
+
 		} catch (Exception e) {
 			LOGGER.error(e);
 			throw e;
@@ -69,47 +64,14 @@ public class Request_ChatCompletionsWithHistory extends CustomJavaAction<IMendix
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new MxLogger(Request_ChatCompletionsWithHistory.class);
 	
-	private int totalTokens = 0;
-	private int requestTokens = 0;
-	private int responseTokens = 0;
-	private long startTime;
+	private void validate() {
+		requireNonNull(Request, "Request is required.");
+		requireNonNull(DeployedModel, "DeployedModel is required.");
+		if (DeployedModel.getModelType() == null || DeployedModel.getModelType() != ENUM_ModelType.TextGeneration) {
+			throw new IllegalArgumentException("The DeployedModel needs to have the Text generation ModelType.");
+		}
+		DeployedModelImpl.validateChatCompletionsMicroflow(DeployedModel.getMicroflow());
+	}
 	
-	//Recursive response processing until there is no ToolCall available
-	private Response processRequest(String chatCompletionsMicroflow) throws CoreException {
-		IMendixObject responseMendixObject = Core.microflowCall(chatCompletionsMicroflow).withParam("DeployedModel", DeployedModel.getMendixObject()).withParam("Request", Request.getMendixObject()).execute(this.getContext());
-		if(responseMendixObject == null) {
-			throw new NullPointerException("Microflow " + chatCompletionsMicroflow + " returned null.");
-		}
-		Response response = genaicommons.proxies.Response.load(getContext(), responseMendixObject.getId());
-		
-		responseUpdateTokenCount(response);
-		
-		boolean toolCallsProcessed = Microflows.response_ProcessToolCalls(getContext(), response, Request);
-		
-		//Recursion if tool calls are available
-		if (toolCallsProcessed) {
-			return processRequest(chatCompletionsMicroflow);
-		}
-		
-		responseStoreDurationAndUsage(response);
-		return response;
-	}
-
-	private void responseStoreDurationAndUsage(Response response) {
-		String deploymentIdentifier = DeployedModel.getArchitecture() + " " + DeployedModel.getModel();
-		response.setDurationMilliseconds((int) Math.ceil(System.currentTimeMillis() - startTime));
-		if (genaicommons.proxies.constants.Constants.getStoreUsageMetrics()) {
-			Microflows.usage_Create_TextAndFiles(getContext(), response, deploymentIdentifier);
-		}
-	}
-		
-	private void responseUpdateTokenCount(Response response) {
-		requestTokens += response.getRequestTokens();
-		responseTokens += response.getResponseTokens();
-		totalTokens += response.getTotalTokens();
-		response.setRequestTokens(requestTokens);
-		response.setResponseTokens(responseTokens);
-		response.setTotalTokens(totalTokens);
-	}
 	// END EXTRA CODE
 }
