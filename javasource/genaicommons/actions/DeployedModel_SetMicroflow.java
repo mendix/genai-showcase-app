@@ -17,6 +17,14 @@ import genaicommons.impl.MxLogger;
 import genaicommons.proxies.ENUM_ModelType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
+/**
+ * Sets the microflow to execute for the specified model and type of the DeployedModel.
+ * Currently this is only required for models of type text generation and optional for other types.
+ * 
+ * For text generation, the following input and response parameters are required:
+ * - Input parameters: GenAICommons.Request and GenAICommons.DeployedModel
+ * - Return type: GenAICommons.Response
+ */
 public class DeployedModel_SetMicroflow extends CustomJavaAction<java.lang.Void>
 {
 	private IMendixObject __DeployedModel;

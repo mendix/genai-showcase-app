@@ -18,6 +18,9 @@ import genaicommons.proxies.DeployedModel;
 import genaicommons.proxies.ENUM_ModelType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
+/**
+ * Creates a DployedModel objects (or a specialization of such if the specialization is passed) and sets all passed attributes. The DeployedModel entity partially replaces the Connection entity and is a required input parameter for all chat completions operations.
+ */
 public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 {
 	private java.lang.String DisplayName;
