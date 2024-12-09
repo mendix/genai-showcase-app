@@ -1,2 +1,63 @@
 @import '../../../theme/web/custom-variables';
 
+$font-color-light: rgba($font-color-default, 0.8);
+
+//Popup menu customizations and fixes
+.popupmenu--display-flex {
+    &.popupmenu {
+        display: flex;
+    }
+}
+
+.popupmenu-custom-item-container {
+    padding: $spacing-small;
+
+    .mx-link {
+        display: block;
+        padding: $spacing-smaller;
+    }
+}
+
+.popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item {
+    background-color: $bg-color-secondary;
+
+    &:hover,
+    &:focus,
+    &:active {
+        cursor: pointer;
+        border-color: $bg-color;
+        background-color: $bg-color;
+    }
+}
+
+//Buttons
+.btn-without-border.mx-link {
+    border-radius: $border-radius-large;
+    color: $font-color-light;
+    text-decoration: none;
+    border: 1px solid transparent;
+
+    &.disabled {
+        background-color: transparent !important;
+        cursor: default;
+    }
+
+    &:hover {
+        background-color: $btn-default-bg-hover;
+    }
+}
+
+.btn-no-hover.mx-link:hover {
+    background-color: transparent !important;
+}
+
+//Listview
+.listview-horizontal.mx-listview {
+    > ul {
+        display: inline-block;
+        margin-bottom: 0;
+        > li {
+            display: inline-block;
+        }
+    }
+}

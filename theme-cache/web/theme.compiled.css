@@ -7210,6 +7210,53 @@ $callout-info-color: $brand-info;
 // Background Color
 $callout-info-bg: $color-info-lighter;
 */
+.popupmenu--display-flex.popupmenu {
+  display: flex;
+}
+
+.popupmenu-custom-item-container {
+  padding: 8px;
+}
+.popupmenu-custom-item-container .mx-link {
+  display: block;
+  padding: 4px;
+}
+
+.popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item {
+  background-color: #fff;
+}
+.popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:hover, .popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:focus, .popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:active {
+  cursor: pointer;
+  border-color: #f8f8f8;
+  background-color: #f8f8f8;
+}
+
+.btn-without-border.mx-link {
+  border-radius: 24px;
+  color: rgba(31, 36, 49, 0.8);
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+.btn-without-border.mx-link.disabled {
+  background-color: transparent !important;
+  cursor: default;
+}
+.btn-without-border.mx-link:hover {
+  background-color: rgba(24, 90, 157, 0.1);
+}
+
+.btn-no-hover.mx-link:hover {
+  background-color: transparent !important;
+}
+
+.listview-horizontal.mx-listview > ul {
+  display: inline-block;
+  margin-bottom: 0;
+}
+.listview-horizontal.mx-listview > ul > li {
+  display: inline-block;
+}
+
 /*
 //
 // ██████╗  █████╗ ███████╗██╗ ██████╗
