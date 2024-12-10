@@ -24173,6 +24173,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background-color: transparent;
 }
 
+.btn-run-single {
+  border-radius: 4px 4px 4px 4px;
+}
+
 .btn-run {
   border-radius: 4px 0 0 4px;
 }
