@@ -35,11 +35,10 @@
 }
 
 .alert-danger-text{
-  margin-top: $spacing-smaller;
   margin-bottom: $spacing-large;
   .alert-circle-filled{
     width: 14px;
-    margin-right: $spacing-small;
+    margin-right: $spacing-smaller;
   }
   .alert-text{
     color: $brand-danger;

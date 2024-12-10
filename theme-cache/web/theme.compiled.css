@@ -24093,12 +24093,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .alert-danger-text {
-  margin-top: 4px;
   margin-bottom: 24px;
 }
 .alert-danger-text .alert-circle-filled {
   width: 14px;
-  margin-right: 8px;
+  margin-right: 4px;
 }
 .alert-danger-text .alert-text {
   color: #e33f4e;
@@ -24220,6 +24219,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   float: right;
 }
 
+.combobox-border-danger {
+  margin-bottom: 4px !important;
+}
 .combobox-border-danger .widget-combobox {
   border: 1px solid #e33f4e;
 }
