@@ -18,7 +18,7 @@ public class DeployedModelImpl {
 		
 		Map<String, IDataType> inputParameters = Core.getInputParameters(chatCompletionsMicroflow);
 		if (inputParameters == null || inputParameters.entrySet().isEmpty() || inputParameters.size() != 2) {
-			throw new IllegalArgumentException("Chat Completions Microflow " + chatCompletionsMicroflow + " should only have one input parameter of type " + Request.getType() + " and one input parameter of type " + DeployedModel.getType() + ".");
+			throw new IllegalArgumentException("Chat Completions Microflow " + chatCompletionsMicroflow + " does not exist or has wrong input parameters. It should only have one input parameter of type " + Request.getType() + " and one input parameter of type " + DeployedModel.getType() + ".");
 		}
 		
 		boolean requestFound = false;
