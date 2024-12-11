@@ -12,6 +12,7 @@ import genaicommons.proxies.DeployedModel;
 import genaicommons.proxies.ENUM_ModelType;
 import genaicommons.proxies.EmbeddingsOptions;
 import genaicommons.proxies.EmbeddingsResponse;
+import genaicommons.proxies.ImageOptions;
 import genaicommons.proxies.Request;
 import genaicommons.proxies.Response;
 
@@ -89,6 +90,36 @@ public class DeployedModelImpl {
 		
 		if(Core.getReturnType(embeddingsMicroflow) == null || !Core.getMetaObject(Core.getReturnType(embeddingsMicroflow).getObjectType()).isSubClassOf(EmbeddingsResponse.getType())) {
 			throw new IllegalArgumentException("Embeddings Microflow " + embeddingsMicroflow + " should have a return value of type " + EmbeddingsResponse.getType() + ".");		
+		}
+	}
+	
+	public static void validateImageGenerationsMicroflow(String imageGenerationsMicroflow) {
+		if (imageGenerationsMicroflow == null || imageGenerationsMicroflow.isBlank()) {
+			throw new IllegalArgumentException("Image Generations Microflow is required.");
+		}
+		
+		Map<String, IDataType> inputParameters = Core.getInputParameters(imageGenerationsMicroflow);
+		if (inputParameters == null || inputParameters.entrySet().isEmpty() || (inputParameters.size() < 2 && inputParameters.size() > 3)) {
+			throw new IllegalArgumentException("Image Generations Microflow " + imageGenerationsMicroflow + " does not exist or has wrong input parameters. It should only have one String input parameter containing the UserPrompt and one input parameter of type " + DeployedModel.getType() + ". Optionally an input parameter of type " + ImageOptions.getType() + " can be passed.");
+		}
+		
+		boolean userPromptFound = false;
+		boolean deployedModelFound = false;
+
+		// Iterate through the values in the inputParameters map
+		for (IDataType value : inputParameters.values()) {
+		    if (value.getType().equals(IDataType.DataTypeEnum.String)) {
+		    	userPromptFound = true;
+		    } else if (Core.getMetaObject(value.getObjectType()).isSubClassOf(DeployedModel.getType())) {
+		    	deployedModelFound = true;
+		    }
+		}
+		
+		if(!userPromptFound || !deployedModelFound) {
+			throw new IllegalArgumentException("Image Generations Microflow " + imageGenerationsMicroflow + " does not exist or has wrong input parameters. It should only have one String input parameter containing the UserPrompt and one input parameter of type " + DeployedModel.getType() + ". Optionally an input parameter of type " + ImageOptions.getType() + " can be passed.");		}
+		
+		if(Core.getReturnType(imageGenerationsMicroflow) == null || !Core.getMetaObject(Core.getReturnType(imageGenerationsMicroflow).getObjectType()).isSubClassOf(Response.getType())) {
+			throw new IllegalArgumentException("Image Generations Microflow " + imageGenerationsMicroflow + " should have a return value of type " + Response.getType() + ".");		
 		}
 	}
 }
