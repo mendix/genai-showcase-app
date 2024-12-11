@@ -1,15 +1,35 @@
 package genaicommons.impl;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Map;
 
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IDataType;
 
+import genaicommons.proxies.ChunkCollection;
 import genaicommons.proxies.DeployedModel;
+import genaicommons.proxies.ENUM_ModelType;
+import genaicommons.proxies.EmbeddingsOptions;
+import genaicommons.proxies.EmbeddingsResponse;
 import genaicommons.proxies.Request;
 import genaicommons.proxies.Response;
 
 public class DeployedModelImpl {
+	
+	public static void validate(DeployedModel deployedModel, ENUM_ModelType modelType) {
+		requireNonNull(deployedModel, "DeployedModel is required.");
+		
+		if (deployedModel.getModelType() == null || deployedModel.getModelType() != modelType) {
+			throw new IllegalArgumentException("The DeployedModel needs to have the " + modelType.getCaption() + " ModelType.");
+		}
+		
+		if (modelType == ENUM_ModelType.TextGeneration) {
+			DeployedModelImpl.validateChatCompletionsMicroflow(deployedModel.getMicroflow());
+		} else if (modelType == ENUM_ModelType.Embeddings) {
+			DeployedModelImpl.validateEmbeddingsMicroflow(deployedModel.getMicroflow());
+		}
+	}
 	
 	public static void validateChatCompletionsMicroflow(String chatCompletionsMicroflow) {
 		if (chatCompletionsMicroflow == null || chatCompletionsMicroflow.isBlank()) {
@@ -42,4 +62,33 @@ public class DeployedModelImpl {
 		}
 	}
 	
+	public static void validateEmbeddingsMicroflow(String embeddingsMicroflow) {
+		if (embeddingsMicroflow == null || embeddingsMicroflow.isBlank()) {
+			throw new IllegalArgumentException("Embeddings Microflow is required.");
+		}
+		
+		Map<String, IDataType> inputParameters = Core.getInputParameters(embeddingsMicroflow);
+		if (inputParameters == null || inputParameters.entrySet().isEmpty() || (inputParameters.size() < 2 && inputParameters.size() > 3)) {
+			throw new IllegalArgumentException("Embeddings Microflow " + embeddingsMicroflow + " does not exist or has wrong input parameters. It should only have one input parameter of type " + ChunkCollection.getType() + " and one input parameter of type " + DeployedModel.getType() + ". Optionally an input parameter of type " + EmbeddingsOptions.getType() + " can be passed.");
+		}
+		
+		boolean chunkCollectionFound = false;
+		boolean deployedModelFound = false;
+
+		// Iterate through the values in the inputParameters map
+		for (IDataType value : inputParameters.values()) {
+		    if (Core.getMetaObject(value.getObjectType()).isSubClassOf(ChunkCollection.getType())) {
+		    	chunkCollectionFound = true;
+		    } else if (Core.getMetaObject(value.getObjectType()).isSubClassOf(DeployedModel.getType())) {
+		    	deployedModelFound = true;
+		    }
+		}
+		
+		if(!chunkCollectionFound || !deployedModelFound) {
+			throw new IllegalArgumentException("Embeddings Microflow " + embeddingsMicroflow + " does not exist or has wrong input parameters. It should only have one input parameter of type " + ChunkCollection.getType() + " and one input parameter of type " + DeployedModel.getType() + ". Optionally an input parameter of type " + EmbeddingsOptions.getType() + " can be passed.");		}
+		
+		if(Core.getReturnType(embeddingsMicroflow) == null || !Core.getMetaObject(Core.getReturnType(embeddingsMicroflow).getObjectType()).isSubClassOf(EmbeddingsResponse.getType())) {
+			throw new IllegalArgumentException("Embeddings Microflow " + embeddingsMicroflow + " should have a return value of type " + EmbeddingsResponse.getType() + ".");		
+		}
+	}
 }
