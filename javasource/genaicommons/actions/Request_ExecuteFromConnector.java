@@ -10,13 +10,12 @@
 package genaicommons.actions;
 
 import static java.util.Objects.requireNonNull;
-import java.util.Map;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.webui.CustomJavaAction;
+import genaicommons.proxies.ENUM_ModelType;
 import genaicommons.proxies.Response;
 import genaicommons.proxies.microflows.Microflows;
 import genaicommons.impl.DeployedModelImpl;
@@ -121,13 +120,12 @@ public class Request_ExecuteFromConnector extends CustomJavaAction<IMendixObject
 	
 	private void validate() {
 		requireNonNull(Request, "Request is required.");
-		requireNonNull(DeployedModel, "DeployedModel is required.");
 		
 		if (CallModelMicroflow == null || CallModelMicroflow.isBlank()) {
 			throw new IllegalArgumentException("CallModelMicroflow is required.");
 		}
 		
-		DeployedModelImpl.validateChatCompletionsMicroflow(CallModelMicroflow);
+		DeployedModelImpl.validate(DeployedModel, ENUM_ModelType.TextGeneration);
 	}
 	// END EXTRA CODE
 }
