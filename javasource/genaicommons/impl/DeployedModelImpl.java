@@ -29,6 +29,8 @@ public class DeployedModelImpl {
 			DeployedModelImpl.validateChatCompletionsMicroflow(deployedModel.getMicroflow());
 		} else if (modelType == ENUM_ModelType.Embeddings) {
 			DeployedModelImpl.validateEmbeddingsMicroflow(deployedModel.getMicroflow());
+		} else if (modelType == ENUM_ModelType.ImageGeneration) {
+			DeployedModelImpl.validateImageGenerationsMicroflow(deployedModel.getMicroflow());
 		}
 	}
 	
