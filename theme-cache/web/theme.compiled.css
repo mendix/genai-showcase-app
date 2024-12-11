@@ -24315,15 +24315,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 60vw;
 }
 
-.popup-microflow-settings {
-  position: fixed;
-  left: unset !important;
-  bottom: unset !important;
-  top: 120px !important;
-  width: 30%;
-  right: 5%;
-}
-
 .prompting-page-container {
   min-height: -webkit-fill-available;
   display: flex;
