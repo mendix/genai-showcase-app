@@ -19,7 +19,7 @@ import genaicommons.proxies.ENUM_ModelType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
- * Creates a DployedModel objects (or a specialization of such if the specialization is passed) and sets all passed attributes. The DeployedModel entity partially replaces the Connection entity and is a required input parameter for all chat completion operations. It contains the name of the microflow to be executed for the specified model and other information relevant to connect to a model.
+ * Creates a DployedModel objects (or a specialization of such if the specialization is passed) and sets all passed attributes. The DeployedModel entity replaces the Connection entity and is a required input parameter for all chat completion operations. It contains the name of the microflow to be executed for the specified model and other information relevant to connect to a model.
  */
 public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 {

@@ -6498,7 +6498,17 @@ $callout-info-bg: $color-info-lighter;
 }
 .popupmenu-custom-item-container .mx-link {
   display: block;
-  padding: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item {
+  background-color: #fff;
+}
+.popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:hover, .popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:focus, .popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:active {
+  cursor: pointer;
+  border-color: #f8f8f8;
+  background-color: #f8f8f8;
 }
 
 .btn-without-border.mx-link {
@@ -6532,6 +6542,17 @@ $callout-info-bg: $color-info-lighter;
 .listview-empty-deployed-models.mx-listview > ul > li.mx-listview-empty::before {
   content: "Please add deployed models on the Edit page to be able to use this configuration.";
   color: #e33f4e;
+}
+
+.label-with-text > label {
+  overflow: hidden;
+  margin-bottom: 4px;
+  text-align: left;
+  text-overflow: ellipsis;
+  color: #24276c;
+  font-size: 14px;
+  font-weight: 600;
+  display: block;
 }
 
 /*
