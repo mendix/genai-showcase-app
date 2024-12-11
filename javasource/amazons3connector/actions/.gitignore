@@ -1,0 +1,10 @@
+/CopyObject.class
+/CreateBucket.class
+/DeleteBucket.class
+/DeleteObject.class
+/GeneratePresignedURL.class
+/GetObject.class
+/HeadBucket.class
+/ListBuckets.class
+/ListObjects.class
+/PutObject.class
