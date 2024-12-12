@@ -58,7 +58,7 @@ public class Request_AddFunction extends CustomJavaAction<IMendixObject>
 			return FunctionImpl.createFunction(getContext(), FunctionMicroflow, ToolName, ToolDescription, toolCollection).getMendixObject();
 
 		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error(e);
 			throw e;
 		}
 		// END USER CODE

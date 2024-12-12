@@ -60,7 +60,7 @@ public class ChatContext_CreateProviderConfig extends CustomJavaAction<IMendixOb
 		    return providerConfig.getMendixObject();
 
 		} catch (Exception e) {
-		    LOGGER.error(e.getMessage());
+		    LOGGER.error(e);
 		    throw e;
 		}
 		

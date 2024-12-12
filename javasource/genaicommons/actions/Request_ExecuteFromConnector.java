@@ -104,8 +104,8 @@ public class Request_ExecuteFromConnector extends CustomJavaAction<IMendixObject
 
 	private void responseStoreDurationAndUsage(Response response) {
 		response.setDurationMilliseconds((int) Math.ceil(System.currentTimeMillis() - startTime));
-		if (genaicommons.proxies.constants.Constants.getStoreUsageMetrics() && DeployedModel.getDisplayName() != null && !DeployedModel.getDisplayName().isBlank()) {
-			Microflows.usage_Create_TextAndFiles(getContext(), response, DeployedModel.getDisplayName());
+		if (genaicommons.proxies.constants.Constants.getStoreUsageMetrics()) {
+			Microflows.usage_Create_TextAndFiles(getContext(), response, DeployedModel);
 		}
 	}
 	

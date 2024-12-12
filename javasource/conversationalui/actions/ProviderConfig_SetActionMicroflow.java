@@ -49,7 +49,7 @@ public class ProviderConfig_SetActionMicroflow extends CustomJavaAction<java.lan
 			return null;
 			
 		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error(e);
 			throw e;
 		}
 		

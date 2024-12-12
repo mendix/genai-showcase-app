@@ -42,7 +42,7 @@ public class ImageResponse_PrepareForImportMapping extends CustomJavaAction<java
 			return MAPPER.writeValueAsString(rootNode);
 			
 		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error(e);
 			throw e;
 		}
 		// END USER CODE

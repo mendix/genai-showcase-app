@@ -52,7 +52,7 @@ public class ChatContext_Create_SetActionMicroflow extends CustomJavaAction<IMen
 		    return createAndSetChatContext(providerConfig).getMendixObject();
 
 		} catch (Exception e) {
-		    LOGGER.error(e.getMessage());
+		    LOGGER.error(e);
 		    throw e;
 		}
 		

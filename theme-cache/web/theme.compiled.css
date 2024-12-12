@@ -34752,6 +34752,7 @@ $callout-info-bg: $color-info-lighter;
 
 .combo-deployment-selection {
   min-width: 360px;
+  z-index: 200;
 }
 .combo-deployment-selection .deployment-selection {
   display: flex;

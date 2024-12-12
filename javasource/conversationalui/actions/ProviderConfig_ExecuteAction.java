@@ -47,7 +47,7 @@ public class ProviderConfig_ExecuteAction extends CustomJavaAction<java.lang.Boo
 			return Core.microflowCall(ProviderConfig.getActionMicroflow()).withParam(chatContextParameterString, ChatContext.getMendixObject()).execute(this.getContext());
 		
 		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error(e);
 			throw e;
 		}
 		// END USER CODE

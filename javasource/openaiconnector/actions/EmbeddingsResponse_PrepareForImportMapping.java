@@ -41,7 +41,7 @@ public class EmbeddingsResponse_PrepareForImportMapping extends CustomJavaAction
 			return MAPPER.writeValueAsString(rootNode);
 			
 		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error(e);
 			throw e;
 		}
 		// END USER CODE

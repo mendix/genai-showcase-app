@@ -30,6 +30,7 @@
  
 .combo-deployment-selection {
     min-width: 360px;
+    z-index: 200;
     .deployment-selection{
         display: flex;
         align-items: center;

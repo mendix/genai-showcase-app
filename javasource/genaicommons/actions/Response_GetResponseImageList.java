@@ -53,7 +53,7 @@ public class Response_GetResponseImageList extends CustomJavaAction<java.util.Li
 			return returnList;
 			
 		} catch (Exception e) {
-			LOGGER.error("An error ocurred while creating the response image list: " + e.getMessage());
+			LOGGER.error(e);
 			throw e;
 		}
 		// END USER CODE
