@@ -15,7 +15,7 @@ import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.webui.CustomJavaAction;
-import genaicommons.proxies.ENUM_ModelType;
+import genaicommons.proxies.ENUM_ModelModality;
 import genaicommons.proxies.Response;
 import genaicommons.proxies.microflows.Microflows;
 import genaicommons.impl.DeployedModelImpl;
@@ -125,7 +125,7 @@ public class Request_ExecuteFromConnector extends CustomJavaAction<IMendixObject
 			throw new IllegalArgumentException("CallModelMicroflow is required.");
 		}
 		
-		DeployedModelImpl.validate(DeployedModel, ENUM_ModelType.TextGeneration);
+		DeployedModelImpl.validate(DeployedModel, ENUM_ModelModality.TextGeneration);
 	}
 	// END EXTRA CODE
 }

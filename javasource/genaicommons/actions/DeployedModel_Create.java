@@ -15,7 +15,7 @@ import com.mendix.webui.CustomJavaAction;
 import genaicommons.impl.DeployedModelImpl;
 import genaicommons.impl.MxLogger;
 import genaicommons.proxies.DeployedModel;
-import genaicommons.proxies.ENUM_ModelType;
+import genaicommons.proxies.ENUM_ModelModality;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
@@ -26,17 +26,17 @@ public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 	private java.lang.String DisplayName;
 	private java.lang.String Architecture;
 	private java.lang.String Model;
-	private genaicommons.proxies.ENUM_ModelType ModelType;
+	private genaicommons.proxies.ENUM_ModelModality OutputModality;
 	private java.lang.String Microflow;
 	private java.lang.String DeployedModelSpecialization;
 
-	public DeployedModel_Create(IContext context, java.lang.String DisplayName, java.lang.String Architecture, java.lang.String Model, java.lang.String ModelType, java.lang.String Microflow, java.lang.String DeployedModelSpecialization)
+	public DeployedModel_Create(IContext context, java.lang.String DisplayName, java.lang.String Architecture, java.lang.String Model, java.lang.String OutputModality, java.lang.String Microflow, java.lang.String DeployedModelSpecialization)
 	{
 		super(context);
 		this.DisplayName = DisplayName;
 		this.Architecture = Architecture;
 		this.Model = Model;
-		this.ModelType = ModelType == null ? null : genaicommons.proxies.ENUM_ModelType.valueOf(ModelType);
+		this.OutputModality = OutputModality == null ? null : genaicommons.proxies.ENUM_ModelModality.valueOf(OutputModality);
 		this.Microflow = Microflow;
 		this.DeployedModelSpecialization = DeployedModelSpecialization;
 	}
@@ -46,7 +46,7 @@ public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 	{
 		// BEGIN USER CODE
 		try {
-			if (ModelType != null && ModelType == ENUM_ModelType.TextGeneration)
+			if (OutputModality != null && OutputModality == ENUM_ModelModality.TextGeneration)
 				DeployedModelImpl.validateChatCompletionsMicroflow(Microflow);
 			
 			return createAndSetDeployedModel().getMendixObject();
@@ -82,7 +82,7 @@ public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 		deployedModel.setMicroflow(Microflow);
 		deployedModel.setDisplayName(DisplayName);
 		deployedModel.setModel(Model);
-		deployedModel.setModelType(ModelType);
+		deployedModel.setOutputModality(OutputModality);
 		return deployedModel;
 	}
 

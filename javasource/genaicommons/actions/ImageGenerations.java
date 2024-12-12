@@ -16,7 +16,7 @@ import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.webui.CustomJavaAction;
 import genaicommons.impl.DeployedModelImpl;
 import genaicommons.impl.MxLogger;
-import genaicommons.proxies.ENUM_ModelType;
+import genaicommons.proxies.ENUM_ModelModality;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
@@ -84,7 +84,7 @@ public class ImageGenerations extends CustomJavaAction<IMendixObject>
 		if (UserPrompt == null || UserPrompt.isBlank()) {
 			throw new IllegalArgumentException("UserPrompt is required.");
 		}
-		DeployedModelImpl.validate(DeployedModel, ENUM_ModelType.ImageGeneration);
+		DeployedModelImpl.validate(DeployedModel, ENUM_ModelModality.ImageGeneration);
 	}
 	
 	private Map<String, Object> mapInputParameters() {

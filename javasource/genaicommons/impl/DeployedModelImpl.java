@@ -9,7 +9,7 @@ import com.mendix.systemwideinterfaces.core.IDataType;
 
 import genaicommons.proxies.ChunkCollection;
 import genaicommons.proxies.DeployedModel;
-import genaicommons.proxies.ENUM_ModelType;
+import genaicommons.proxies.ENUM_ModelModality;
 import genaicommons.proxies.EmbeddingsOptions;
 import genaicommons.proxies.EmbeddingsResponse;
 import genaicommons.proxies.ImageOptions;
@@ -18,18 +18,18 @@ import genaicommons.proxies.Response;
 
 public class DeployedModelImpl {
 	
-	public static void validate(DeployedModel deployedModel, ENUM_ModelType modelType) {
+	public static void validate(DeployedModel deployedModel, ENUM_ModelModality modelType) {
 		requireNonNull(deployedModel, "DeployedModel is required.");
 		
-		if (deployedModel.getModelType() == null || deployedModel.getModelType() != modelType) {
+		if (deployedModel.getOutputModality() == null || deployedModel.getOutputModality() != modelType) {
 			throw new IllegalArgumentException("The DeployedModel needs to have the " + modelType.getCaption() + " ModelType.");
 		}
 		
-		if (modelType == ENUM_ModelType.TextGeneration) {
+		if (modelType == ENUM_ModelModality.TextGeneration) {
 			DeployedModelImpl.validateChatCompletionsMicroflow(deployedModel.getMicroflow());
-		} else if (modelType == ENUM_ModelType.Embeddings) {
+		} else if (modelType == ENUM_ModelModality.Embeddings) {
 			DeployedModelImpl.validateEmbeddingsMicroflow(deployedModel.getMicroflow());
-		} else if (modelType == ENUM_ModelType.ImageGeneration) {
+		} else if (modelType == ENUM_ModelModality.ImageGeneration) {
 			DeployedModelImpl.validateImageGenerationsMicroflow(deployedModel.getMicroflow());
 		}
 	}

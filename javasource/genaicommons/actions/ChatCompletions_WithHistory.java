@@ -17,7 +17,7 @@ import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.webui.CustomJavaAction;
 import genaicommons.impl.DeployedModelImpl;
 import genaicommons.impl.MxLogger;
-import genaicommons.proxies.ENUM_ModelType;
+import genaicommons.proxies.ENUM_ModelModality;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
@@ -75,7 +75,7 @@ public class ChatCompletions_WithHistory extends CustomJavaAction<IMendixObject>
 	
 	private void validate() {
 		requireNonNull(Request, "Request is required.");
-		DeployedModelImpl.validate(DeployedModel, ENUM_ModelType.TextGeneration);
+		DeployedModelImpl.validate(DeployedModel, ENUM_ModelModality.TextGeneration);
 	}
 	
 	private Map<String, Object> mapInputParameters() {

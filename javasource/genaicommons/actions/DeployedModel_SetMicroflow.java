@@ -14,7 +14,7 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
 import genaicommons.impl.DeployedModelImpl;
 import genaicommons.impl.MxLogger;
-import genaicommons.proxies.ENUM_ModelType;
+import genaicommons.proxies.ENUM_ModelModality;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
@@ -47,7 +47,7 @@ public class DeployedModel_SetMicroflow extends CustomJavaAction<java.lang.Void>
 		try {
 			requireNonNull(Microflow, "Microflow is required.");
 			requireNonNull(DeployedModel, "DeployedModel is required.");
-			if (DeployedModel.getModelType() != null && DeployedModel.getModelType() == ENUM_ModelType.TextGeneration)
+			if (DeployedModel.getOutputModality() != null && DeployedModel.getOutputModality() == ENUM_ModelModality.TextGeneration)
 				DeployedModelImpl.validateChatCompletionsMicroflow(Microflow);
 			
 			DeployedModel.setMicroflow(Microflow);
