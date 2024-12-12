@@ -24173,6 +24173,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background-color: transparent;
 }
 
+.btn-no-hover.mx-link:hover {
+  background-color: transparent !important;
+  cursor: default;
+}
+
 .btn-run-single {
   border-radius: 4px 4px 4px 4px;
 }
@@ -24235,17 +24240,17 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border: 1px solid #f8f8f8;
 }
 
-.combo-deployment-selection-prompting {
+.combobox-selection {
   display: flex;
   flex-grow: 1;
   margin: 0px !important;
   height: 30px !important;
 }
-.combo-deployment-selection-prompting .deployment-selection {
+.combobox-selection .item-selection {
   align-items: center;
   height: max-content;
 }
-.combo-deployment-selection-prompting .mx-image {
+.combobox-selection .mx-image {
   height: 14px;
   margin-right: 8px;
   margin-left: auto;
@@ -24399,9 +24404,12 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .prompting-page-content-container .prompting-justify-space-between .prompting-container-column .prompting-container-column--small {
   margin-left: 24px;
   width: 45%;
+  padding-bottom: unset;
+  padding-top: 16px;
 }
 .prompting-page-content-container .prompting-justify-space-between .prompting-container-column .prompting-container-column--big {
   width: 55%;
+  padding-bottom: unset;
 }
 .prompting-page-content-container .pageheader-with-buttons {
   display: flex !important;

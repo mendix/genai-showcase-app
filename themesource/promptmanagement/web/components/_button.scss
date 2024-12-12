@@ -15,6 +15,11 @@
     }
 }
 
+.btn-no-hover.mx-link:hover {
+    background-color: transparent !important;
+    cursor: default;
+}
+
 .btn-run-single {
     border-radius: 4px 4px 4px 4px;
 }

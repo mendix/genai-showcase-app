@@ -1,12 +1,12 @@
 @import '../../../../theme/web/custom-variables';
 
-.combo-deployment-selection-prompting {
+.combobox-selection {
     display: flex;
     flex-grow: 1;
     margin: 0px !important;
     height: 30px !important;
 
-    .deployment-selection {
+    .item-selection {
         align-items: center;
         height: max-content;
 
