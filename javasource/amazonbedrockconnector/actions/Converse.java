@@ -121,7 +121,7 @@ public class Converse extends CustomJavaAction<IMendixObject>
 			return mxResponse.getMendixObject();
 			
 		} catch (Exception e) {
-			LOGGER.error("An error ocurred during Converse operation " + e.getMessage());
+			LOGGER.error("An error ocurred during Converse operation. " + e.getMessage());
 			throw e;
 		}
 		
