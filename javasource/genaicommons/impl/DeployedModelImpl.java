@@ -18,23 +18,27 @@ import genaicommons.proxies.Response;
 
 public class DeployedModelImpl {
 	
-	public static void validate(DeployedModel deployedModel, ENUM_ModelModality modelType) {
+	public static void validate(DeployedModel deployedModel, ENUM_ModelModality outputModality) {
 		requireNonNull(deployedModel, "DeployedModel is required.");
 		
-		if (deployedModel.getOutputModality() == null || deployedModel.getOutputModality() != modelType) {
-			throw new IllegalArgumentException("The DeployedModel needs to have the " + modelType.getCaption() + " ModelType.");
+		if (deployedModel.getOutputModality() == null || deployedModel.getOutputModality() != outputModality) {
+			throw new IllegalArgumentException("The DeployedModel needs to have the " + outputModality.getCaption() + " output modlaity.");
 		}
 		
-		if (modelType == ENUM_ModelModality.TextGeneration) {
-			DeployedModelImpl.validateChatCompletionsMicroflow(deployedModel.getMicroflow());
-		} else if (modelType == ENUM_ModelModality.Embeddings) {
-			DeployedModelImpl.validateEmbeddingsMicroflow(deployedModel.getMicroflow());
-		} else if (modelType == ENUM_ModelModality.ImageGeneration) {
-			DeployedModelImpl.validateImageGenerationsMicroflow(deployedModel.getMicroflow());
+		validateMicroflow(deployedModel.getMicroflow(), outputModality);
+	}
+
+	public static void validateMicroflow(String microflow, ENUM_ModelModality outputModality) {
+		if (outputModality == ENUM_ModelModality.Text) {
+			DeployedModelImpl.validateChatCompletionsMicroflow(microflow);
+		} else if (outputModality == ENUM_ModelModality.Embeddings) {
+			DeployedModelImpl.validateEmbeddingsMicroflow(microflow);
+		} else if (outputModality == ENUM_ModelModality.Image) {
+			DeployedModelImpl.validateImageGenerationsMicroflow(microflow);
 		}
 	}
 	
-	public static void validateChatCompletionsMicroflow(String chatCompletionsMicroflow) {
+	private static void validateChatCompletionsMicroflow(String chatCompletionsMicroflow) {
 		if (chatCompletionsMicroflow == null || chatCompletionsMicroflow.isBlank()) {
 			throw new IllegalArgumentException("Chat Completions Microflow is required.");
 		}
@@ -65,7 +69,7 @@ public class DeployedModelImpl {
 		}
 	}
 	
-	public static void validateEmbeddingsMicroflow(String embeddingsMicroflow) {
+	private static void validateEmbeddingsMicroflow(String embeddingsMicroflow) {
 		if (embeddingsMicroflow == null || embeddingsMicroflow.isBlank()) {
 			throw new IllegalArgumentException("Embeddings Microflow is required.");
 		}
@@ -95,7 +99,7 @@ public class DeployedModelImpl {
 		}
 	}
 	
-	public static void validateImageGenerationsMicroflow(String imageGenerationsMicroflow) {
+	private static void validateImageGenerationsMicroflow(String imageGenerationsMicroflow) {
 		if (imageGenerationsMicroflow == null || imageGenerationsMicroflow.isBlank()) {
 			throw new IllegalArgumentException("Image Generations Microflow is required.");
 		}

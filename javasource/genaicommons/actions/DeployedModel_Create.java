@@ -15,7 +15,6 @@ import com.mendix.webui.CustomJavaAction;
 import genaicommons.impl.DeployedModelImpl;
 import genaicommons.impl.MxLogger;
 import genaicommons.proxies.DeployedModel;
-import genaicommons.proxies.ENUM_ModelModality;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
@@ -46,8 +45,8 @@ public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 	{
 		// BEGIN USER CODE
 		try {
-			if (OutputModality != null && OutputModality == ENUM_ModelModality.TextGeneration)
-				DeployedModelImpl.validateChatCompletionsMicroflow(Microflow);
+			if (OutputModality != null)
+				DeployedModelImpl.validateMicroflow(Microflow, OutputModality);
 			
 			return createAndSetDeployedModel().getMendixObject();
 			
