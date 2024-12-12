@@ -24263,6 +24263,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   overflow-y: visible;
 }
 
+.dataview-without-border .mx-dataview-controls {
+  border-top: none;
+}
+
 .responsive-image.mx-image-viewer {
   max-width: 14px;
   max-height: 14px;
@@ -24342,6 +24346,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .popup-mid-size {
   width: 60vw;
+}
+
+.pop-up-without-border .modal-header {
+  border-bottom: none;
 }
 
 .prompting-page-container {

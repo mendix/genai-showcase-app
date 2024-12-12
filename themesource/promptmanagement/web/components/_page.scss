@@ -1,3 +1,4 @@
+@import "../../../../theme/web/custom-variables.scss";
 .prompt-library-page{
     width: 95vw;
     height: 95vh;
@@ -5,4 +6,10 @@
 
 .popup-mid-size{
     width: 60vw;
+}
+
+.pop-up-without-border{
+    .modal-header{
+        border-bottom: none;
+    }
 }
