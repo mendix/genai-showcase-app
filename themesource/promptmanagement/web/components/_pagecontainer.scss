@@ -1,8 +1,28 @@
 @import "../../../atlas_core/web/_variables.scss";
 @import '../../../../theme/web/custom-variables';
 
-.prompting-page-container {
+.prompting-page-container{
     min-height: -webkit-fill-available;
+    min-height:  -moz-available;
+    //check if needed, used to stretch the chat container
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.promting-page-wrapper{
+    width: 100%;
+    //display: flex;
+    min-height: 100%;
+}
+
+.prompting-page-content-container {
+    min-height: -webkit-fill-available;
+    min-height:  -moz-available;
+
+    
     display: flex;
     justify-content: center;
     
@@ -37,6 +57,7 @@
             width: 100%;
 
             .prompting-container-column--small {
+                margin-left: $spacing-large;
                 width: 45%;
             }
 
@@ -92,6 +113,36 @@
     .pageheader-content {
         max-width: 70%;
     }
+}
+
+@media(max-width: 1900px){
+    .prompting-justify-space-between--screen {
+        flex-direction: column !important;
+    }
+    .prompting-container-column--small--screen {
+        margin-left: 0px;
+        width: 50%;
+        min-width: 400px;
+    }
+
+    .prompting-container-column--big--screen {
+        max-width: 100%;
+    }
+}
+
+.header-conversational-prompt{
+    border-bottom: 1px solid $table-border-separator-color;
+    padding-bottom: $spacing-small;
+    .header-text{
+        margin-left: $spacing-medium;
+        width: 100%;
+    }
+    .close-icon{
+        border-left : 1px solid $table-border-separator-color;
+        padding-left: $spacing-medium;
+        margin-right: $spacing-medium;
+    }
+    
 }
 
 .table-header{

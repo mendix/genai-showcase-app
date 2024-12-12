@@ -1,0 +1,32 @@
+@import "../../../../theme/web/custom-variables.scss";
+.chat-container-prompting {
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    //margin-left: $spacing-medium;
+    padding-right: 0;
+    margin-bottom: 0;    
+    border-left: 1px solid $table-border-separator-color;
+    padding-left: 0px;
+    .chat-container{
+        margin-left: $spacing-medium;
+        padding-right: $spacing-medium;
+    }
+
+    //customizations on conversational UI
+    .chat-bubble-wrapper {
+        .chat-message-card {
+            background: $bg-color-secondary;
+            border-radius: 8px;
+            border: 1px solid $border-color-default;
+            padding: $spacing-medium;
+        }
+
+        &--user .chat-message-card {
+            background: $gray-lighter;
+            border: 1px solid $gray-lighter;
+        }
+    }
+}

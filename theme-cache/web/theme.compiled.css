@@ -24206,6 +24206,32 @@ input[type=checkbox].three-state-checkbox + .control-label {
   overflow: unset;
 }
 
+.chat-container-prompting {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-right: 0;
+  margin-bottom: 0;
+  border-left: 1px solid #E7E7E9;
+  padding-left: 0px;
+}
+.chat-container-prompting .chat-container {
+  margin-left: 16px;
+  padding-right: 16px;
+}
+.chat-container-prompting .chat-bubble-wrapper .chat-message-card {
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #ced0d3;
+  padding: 16px;
+}
+.chat-container-prompting .chat-bubble-wrapper--user .chat-message-card {
+  background: #f8f8f8;
+  border: 1px solid #f8f8f8;
+}
+
 .combo-deployment-selection-prompting {
   display: flex;
   flex-grow: 1;
@@ -24326,45 +24352,61 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .prompting-page-container {
   min-height: -webkit-fill-available;
+  min-height: -moz-available;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.promting-page-wrapper {
+  width: 100%;
+  min-height: 100%;
+}
+
+.prompting-page-content-container {
+  min-height: -webkit-fill-available;
+  min-height: -moz-available;
   display: flex;
   justify-content: center;
 }
-.prompting-page-container .prompting-container--overview {
+.prompting-page-content-container .prompting-container--overview {
   width: 90%;
   max-width: 1200px;
   margin: 24px;
 }
-.prompting-page-container .prompting-container--overview .td {
+.prompting-page-content-container .prompting-container--overview .td {
   border-bottom: none;
 }
-.prompting-page-container .prompting-container--overview .card {
+.prompting-page-content-container .prompting-container--overview .card {
   overflow: unset;
   border-radius: 16px;
   border: 1px solid #e7e7e9;
   padding-top: 16px;
 }
-.prompting-page-container .prompting-container--overview .prompting-container-row {
+.prompting-page-content-container .prompting-container--overview .prompting-container-row {
   width: 100%;
 }
-.prompting-page-container .prompting-justify-space-between {
+.prompting-page-content-container .prompting-justify-space-between {
   display: flex !important;
 }
-.prompting-page-container .prompting-justify-space-between .prompting-container-column {
+.prompting-page-content-container .prompting-justify-space-between .prompting-container-column {
   height: 100%;
   width: 100%;
 }
-.prompting-page-container .prompting-justify-space-between .prompting-container-column .prompting-container-column--small {
+.prompting-page-content-container .prompting-justify-space-between .prompting-container-column .prompting-container-column--small {
+  margin-left: 24px;
   width: 45%;
 }
-.prompting-page-container .prompting-justify-space-between .prompting-container-column .prompting-container-column--big {
+.prompting-page-content-container .prompting-justify-space-between .prompting-container-column .prompting-container-column--big {
   width: 55%;
 }
-.prompting-page-container .pageheader-with-buttons {
+.prompting-page-content-container .pageheader-with-buttons {
   display: flex !important;
   justify-content: space-between;
   align-items: center;
 }
-.prompting-page-container .pageheader-navigation {
+.prompting-page-content-container .pageheader-navigation {
   display: flex !important;
   align-items: center !important;
   flex-flow: row !important;
@@ -24398,6 +24440,35 @@ input[type=checkbox].three-state-checkbox + .control-label {
     max-width: 70%;
   }
 }
+@media (max-width: 1900px) {
+  .prompting-justify-space-between--screen {
+    flex-direction: column !important;
+  }
+
+  .prompting-container-column--small--screen {
+    margin-left: 0px;
+    width: 50%;
+    min-width: 400px;
+  }
+
+  .prompting-container-column--big--screen {
+    max-width: 100%;
+  }
+}
+.header-conversational-prompt {
+  border-bottom: 1px solid #E7E7E9;
+  padding-bottom: 8px;
+}
+.header-conversational-prompt .header-text {
+  margin-left: 16px;
+  width: 100%;
+}
+.header-conversational-prompt .close-icon {
+  border-left: 1px solid #E7E7E9;
+  padding-left: 16px;
+  margin-right: 16px;
+}
+
 .table-header {
   margin-top: 16px;
   padding-bottom: 16px;
