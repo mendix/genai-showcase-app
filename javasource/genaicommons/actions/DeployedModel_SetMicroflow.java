@@ -18,10 +18,9 @@ import genaicommons.proxies.ENUM_ModelModality;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
- * Sets the microflow to execute for the specified model and type of the DeployedModel.
- * Currently this is only required for models of type text generation and optional for other types.
+ * Sets the microflow to execute for the specified model and type of the DeployedModel. The microflow should follow the principles from GenAI commons that are applicable for the model type.
  * 
- * For text generation, the following input and response parameters are required:
+ * E.g. For text generation, the following input and response parameters are required:
  * - Input parameters: GenAICommons.Request and GenAICommons.DeployedModel
  * - Return type: GenAICommons.Response
  */
