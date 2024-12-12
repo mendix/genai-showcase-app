@@ -22,7 +22,7 @@ public class DeployedModelImpl {
 		requireNonNull(deployedModel, "DeployedModel is required.");
 		
 		if (deployedModel.getOutputModality() == null || deployedModel.getOutputModality() != outputModality) {
-			throw new IllegalArgumentException("The DeployedModel needs to have the " + outputModality.getCaption() + " output modlaity.");
+			throw new IllegalArgumentException("The DeployedModel needs to have the " + outputModality.getCaption() + " output modality.");
 		}
 		
 		validateMicroflow(deployedModel.getMicroflow(), outputModality);

@@ -52,7 +52,7 @@ public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 			
 		} catch (Exception e) {
 			LOGGER.error(e);
-			throw e;
+			return null;
 		}
 		// END USER CODE
 	}

@@ -23,7 +23,7 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
  * Use this microflow operation to execute an image generations API call based on a prompt string input. The Response object needs to be processed to create a single or multiple images.
  * 
  * Inputs:
- * - DeployedModel: The DeployedModel entity replaces the Connection entity for all chat completion operations. It contains the name of the microflow to be executed for the specified model and other information relevant to connect to a model. The ModelType needs to be of type text generation.
+ * - DeployedModel: The DeployedModel entity replaces the Connection entity. It contains the name of the microflow to be executed for the specified model and other information relevant to connect to a model. The OutputModality needs to be Image.
  * - UserPrompt: String that describes the content of the image that is generated.
  * - ImageOptions (optional): This can be used to pass optional request attributes.
  * 
@@ -62,7 +62,7 @@ public class ImageGenerations extends CustomJavaAction<IMendixObject>
 
 		} catch (Exception e) {
 			LOGGER.error(e);
-			throw e;
+			return null;
 		}
 		// END USER CODE
 	}
@@ -84,7 +84,7 @@ public class ImageGenerations extends CustomJavaAction<IMendixObject>
 		if (UserPrompt == null || UserPrompt.isBlank()) {
 			throw new IllegalArgumentException("UserPrompt is required.");
 		}
-		DeployedModelImpl.validate(DeployedModel, ENUM_ModelModality.ImageGeneration);
+		DeployedModelImpl.validate(DeployedModel, ENUM_ModelModality.Image);
 	}
 	
 	private Map<String, Object> mapInputParameters() {

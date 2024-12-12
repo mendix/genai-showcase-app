@@ -53,7 +53,7 @@ public class ChatContext_Create_SetActionMicroflow extends CustomJavaAction<IMen
 
 		} catch (Exception e) {
 		    LOGGER.error(e);
-		    throw e;
+		    return null;
 		}
 		
 		// END USER CODE

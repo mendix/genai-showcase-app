@@ -54,7 +54,7 @@ public class Response_GetSingleResponseImage extends CustomJavaAction<IMendixObj
 			
 		} catch (Exception e) {
 			LOGGER.error(e);
-			throw e;
+			return null;
 		}
 		// END USER CODE
 	}

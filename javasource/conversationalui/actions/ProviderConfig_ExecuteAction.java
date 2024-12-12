@@ -48,7 +48,7 @@ public class ProviderConfig_ExecuteAction extends CustomJavaAction<java.lang.Boo
 		
 		} catch (Exception e) {
 			LOGGER.error(e);
-			throw e;
+			return false;
 		}
 		// END USER CODE
 	}

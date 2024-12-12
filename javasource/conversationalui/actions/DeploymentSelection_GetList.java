@@ -42,7 +42,7 @@ public class DeploymentSelection_GetList extends CustomJavaAction<java.util.List
 			}).map(e -> e.getMendixObject()).collect(Collectors.toList());
 		} catch (Exception e) {
 			LOGGER.error(e);
-			throw e;
+			return null;
 		}
 		// END USER CODE
 	}

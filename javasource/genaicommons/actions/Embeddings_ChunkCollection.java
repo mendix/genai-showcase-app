@@ -24,7 +24,7 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
  * Use the microflow Embeddings_Execute_ChunkCollection to execute an embeddings API call with a ChunkCollection containing one or multiple Chunk objects. The resulting embedding vectors returned by the model end up in the EmbeddingVector string attribute of the original Chunks.
  * Inputs:
  * - ChunkCollection: This is a wrapper object for a list of Chunk objects with InputTexts for which an embeddings vector should be generated. Use operations from GenAI commons to create a ChunkCollection and add Chunks or KnowledgeBaseChunks to it.
- * - DeployedModel: The DeployedModel entity replaces the Connection entity for all chat completion operations. It contains the name of the microflow to be executed for the specified model and other information relevant to connect to a model. The ModelType needs to be of type embeddings.
+ * - DeployedModel: The DeployedModel entity replaces the Connection entity. It contains the name of the microflow to be executed for the specified model and other information relevant to connect to a model. The OutputModality needs to be Embeddings.
  * - EmbeddingOptions (optional): This can be used to specify optional attributes like vector dimension. Note that not all models may support all embeddings options attributes.
  * 
  * Output: 
@@ -66,7 +66,7 @@ public class Embeddings_ChunkCollection extends CustomJavaAction<IMendixObject>
 
 		} catch (Exception e) {
 			LOGGER.error(e);
-			throw e;
+			return null;
 		}
 		// END USER CODE
 	}

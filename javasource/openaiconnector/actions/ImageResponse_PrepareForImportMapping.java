@@ -17,7 +17,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
 import genaicommons.proxies.ENUM_ContentType;
-import openaiconnector.impl.MxLogger;
 
 public class ImageResponse_PrepareForImportMapping extends CustomJavaAction<java.lang.String>
 {
@@ -42,7 +41,6 @@ public class ImageResponse_PrepareForImportMapping extends CustomJavaAction<java
 			return MAPPER.writeValueAsString(rootNode);
 			
 		} catch (Exception e) {
-			LOGGER.error(e);
 			throw e;
 		}
 		// END USER CODE
@@ -59,7 +57,6 @@ public class ImageResponse_PrepareForImportMapping extends CustomJavaAction<java
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new MxLogger(ImageResponse_PrepareForImportMapping.class);
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 	private JsonNode rootNode;
 	

@@ -24,7 +24,7 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
  * - Input parameters: GenAICommons.Request and GenAICommons.DeployedModel
  * - Return type: GenAICommons.Response
  */
-public class DeployedModel_SetMicroflow extends CustomJavaAction<java.lang.Void>
+public class DeployedModel_SetMicroflow extends CustomJavaAction<java.lang.Boolean>
 {
 	private IMendixObject __DeployedModel;
 	private genaicommons.proxies.DeployedModel DeployedModel;
@@ -38,7 +38,7 @@ public class DeployedModel_SetMicroflow extends CustomJavaAction<java.lang.Void>
 	}
 
 	@java.lang.Override
-	public java.lang.Void executeAction() throws Exception
+	public java.lang.Boolean executeAction() throws Exception
 	{
 		this.DeployedModel = this.__DeployedModel == null ? null : genaicommons.proxies.DeployedModel.initialize(getContext(), __DeployedModel);
 
@@ -51,11 +51,11 @@ public class DeployedModel_SetMicroflow extends CustomJavaAction<java.lang.Void>
 			
 			DeployedModel.setMicroflow(Microflow);
 			
-			return null;
+			return true;
 			
 		} catch (Exception e) {
 			LOGGER.error(e);
-			throw e;
+			return false;
 		}
 		// END USER CODE
 	}

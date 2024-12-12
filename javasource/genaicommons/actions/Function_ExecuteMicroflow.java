@@ -45,7 +45,6 @@ public class Function_ExecuteMicroflow extends CustomJavaAction<java.lang.String
 			return executeFunctionMicroflow();
 		
 		} catch (Exception e) {
-			LOGGER.error(e);
 			throw e;
 		}
 		// END USER CODE

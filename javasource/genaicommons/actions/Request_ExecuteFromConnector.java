@@ -55,9 +55,13 @@ public class Request_ExecuteFromConnector extends CustomJavaAction<IMendixObject
 		try {
 			validate();
 			startTime = System.currentTimeMillis();
-			return processRequest().getMendixObject();
+			Response response = processRequest();
+			if(response != null) {
+				return response.getMendixObject();
+			} else {
+				return null;
+			}
 		} catch (Exception e) {
-			LOGGER.error(e);
 			throw e;
 		}
 		// END USER CODE
@@ -74,8 +78,7 @@ public class Request_ExecuteFromConnector extends CustomJavaAction<IMendixObject
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new MxLogger(Request_ExecuteFromConnector.class);
-	
+	private static final MxLogger LOGGER = new genaicommons.impl.MxLogger(Request_ExecuteFromConnector.class);
 	private int totalTokens = 0;
 	private int requestTokens = 0;
 	private int responseTokens = 0;
@@ -85,7 +88,8 @@ public class Request_ExecuteFromConnector extends CustomJavaAction<IMendixObject
 	private Response processRequest() throws CoreException {
 		IMendixObject responseMendixObject = Core.microflowCall(CallModelMicroflow).withParam("DeployedModel", DeployedModel.getMendixObject()).withParam("Request", Request.getMendixObject()).execute(this.getContext());
 		if(responseMendixObject == null) {
-			throw new NullPointerException("Microflow " + CallModelMicroflow  + " returned null.");
+			LOGGER.debug("Microflow " + CallModelMicroflow  + " returned null.");
+			return null;
 		}
 		Response response = genaicommons.proxies.Response.load(getContext(), responseMendixObject.getId());
 		
@@ -125,7 +129,7 @@ public class Request_ExecuteFromConnector extends CustomJavaAction<IMendixObject
 			throw new IllegalArgumentException("CallModelMicroflow is required.");
 		}
 		
-		DeployedModelImpl.validate(DeployedModel, ENUM_ModelModality.TextGeneration);
+		DeployedModelImpl.validate(DeployedModel, ENUM_ModelModality.Text);
 	}
 	// END EXTRA CODE
 }

@@ -54,7 +54,7 @@ public class Response_GetResponseImageList extends CustomJavaAction<java.util.Li
 			
 		} catch (Exception e) {
 			LOGGER.error(e);
-			throw e;
+			return null;
 		}
 		// END USER CODE
 	}

@@ -2,11 +2,8 @@ package synthiaconnector.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Base64;
-import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -23,7 +20,7 @@ public class ConverseVisionDocument{
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 	
 	//Loop over FileCollection and map to Converse format
-	public static void mapFileCollection(JsonNode messagesNode, int iteratorMessage) throws MalformedURLException, URISyntaxException, IOException {
+	public static void mapFileCollection(JsonNode messagesNode, int iteratorMessage) throws Exception {
 		JsonNode messageNode = messagesNode.get(iteratorMessage);
 		JsonNode fileCollectionNode = messageNode.path("fileCollection");
 		if(fileCollectionNode != null && fileCollectionNode.size() != 0) {
@@ -94,7 +91,7 @@ public class ConverseVisionDocument{
 	}
 	
 	//Set bytes of SourceNode based on ContentType
-	private static void setSourceBytes(ObjectNode sourceNode, JsonNode fileContent) throws URISyntaxException, MalformedURLException, IOException{
+	private static void setSourceBytes(ObjectNode sourceNode, JsonNode fileContent) throws IOException{
 		String bytes = "";
 		if (fileContent.path("contentType") != null && fileContent.path("contentType").asText().equals(ENUM_ContentType.Base64.toString())) {
 			bytes = fileContent.path("fileContent").asText();
@@ -106,7 +103,7 @@ public class ConverseVisionDocument{
 	}
 	
 	//Convert URI to base64 bytes
-	private static String getImageBytesFromURI(String uriInput) throws URISyntaxException, MalformedURLException, IOException {
+	private static String getImageBytesFromURI(String uriInput) throws IOException {
 		URL url = new URL(uriInput); 
 		try (InputStream is = url.openStream ()) {
 		  return Base64.getEncoder().encodeToString(IOUtils.toByteArray(is));

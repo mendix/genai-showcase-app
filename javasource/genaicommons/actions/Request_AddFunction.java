@@ -59,7 +59,7 @@ public class Request_AddFunction extends CustomJavaAction<IMendixObject>
 
 		} catch (Exception e) {
 			LOGGER.error(e);
-			throw e;
+			return null;
 		}
 		// END USER CODE
 	}
@@ -75,6 +75,6 @@ public class Request_AddFunction extends CustomJavaAction<IMendixObject>
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new MxLogger(Request_AddFunction.class);
+	private static final MxLogger LOGGER = new genaicommons.impl.MxLogger(Request_AddFunction.class);
 	// END EXTRA CODE
 }

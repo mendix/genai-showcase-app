@@ -66,7 +66,7 @@ public class ChunkCollection_AddKnowledgeBaseChunk extends CustomJavaAction<IMen
 			
 			} catch (Exception e) {
 				LOGGER.error(e);
-				throw e;
+				return null;
 			}
 		// END USER CODE
 	}

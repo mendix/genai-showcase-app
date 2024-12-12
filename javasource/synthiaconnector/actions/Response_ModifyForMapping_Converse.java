@@ -16,7 +16,6 @@ import static java.util.Objects.requireNonNull;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import synthiaconnector.impl.MxLogger;
 
 public class Response_ModifyForMapping_Converse extends CustomJavaAction<java.lang.String>
 {
@@ -43,10 +42,9 @@ public class Response_ModifyForMapping_Converse extends CustomJavaAction<java.la
 			
 			return MAPPER.writeValueAsString(rootNode);
 
-			} catch (Exception e) {
-				LOGGER.error(e, "An error occurred while modifying the Converse response body.");
-				throw e;
-			}
+		} catch (Exception e) {
+			throw e;
+		}
 		// END USER CODE
 	}
 
@@ -61,7 +59,6 @@ public class Response_ModifyForMapping_Converse extends CustomJavaAction<java.la
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new MxLogger(Response_ModifyForMapping_Converse.class);
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 	
 	//Map ToolUse to mappable JSON that represents GenAICommons.ToolCall

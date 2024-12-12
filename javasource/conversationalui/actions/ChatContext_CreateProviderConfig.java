@@ -61,7 +61,7 @@ public class ChatContext_CreateProviderConfig extends CustomJavaAction<IMendixOb
 
 		} catch (Exception e) {
 		    LOGGER.error(e);
-		    throw e;
+		    return null;
 		}
 		
 		// END USER CODE

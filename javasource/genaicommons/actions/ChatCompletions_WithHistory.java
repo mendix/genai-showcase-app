@@ -20,11 +20,6 @@ import genaicommons.impl.MxLogger;
 import genaicommons.proxies.ENUM_ModelModality;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
-/**
- * Action can be used to invoke a chat completions API with a request containing a list of (historical) messages comprising the conversation so far. This action is provider agnostic and will execute the microflow that is saved on the object as "Microflow" attribute.
- * - Request: Contains messages and optional attributes.
- * - DeployedModel: Configuration object that contains the model, endpoint and API key. The ModelType needs to be of type text generation.
- */
 public class ChatCompletions_WithHistory extends CustomJavaAction<IMendixObject>
 {
 	private IMendixObject __Request;
@@ -55,7 +50,7 @@ public class ChatCompletions_WithHistory extends CustomJavaAction<IMendixObject>
 
 		} catch (Exception e) {
 			LOGGER.error(e);
-			throw e;
+			return null;
 		}
 		// END USER CODE
 	}
@@ -75,7 +70,7 @@ public class ChatCompletions_WithHistory extends CustomJavaAction<IMendixObject>
 	
 	private void validate() {
 		requireNonNull(Request, "Request is required.");
-		DeployedModelImpl.validate(DeployedModel, ENUM_ModelModality.TextGeneration);
+		DeployedModelImpl.validate(DeployedModel, ENUM_ModelModality.Text);
 	}
 	
 	private Map<String, Object> mapInputParameters() {
