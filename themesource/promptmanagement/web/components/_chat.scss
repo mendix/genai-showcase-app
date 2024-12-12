@@ -13,6 +13,10 @@
     .chat-container{
         margin-left: $spacing-medium;
         padding-right: $spacing-medium;
+
+        .d-inline-block{
+            visibility: hidden;
+        }
     }
 
     //customizations on conversational UI

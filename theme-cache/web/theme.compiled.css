@@ -24221,6 +24221,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-left: 16px;
   padding-right: 16px;
 }
+.chat-container-prompting .chat-container .d-inline-block {
+  visibility: hidden;
+}
 .chat-container-prompting .chat-bubble-wrapper .chat-message-card {
   background: #fff;
   border-radius: 8px;
