@@ -31,6 +31,7 @@
         width: 90%;
         max-width: 1200px;
         margin: $spacing-large;
+        flex-direction: column;
         
         .td {
             border-bottom: none;
@@ -45,6 +46,7 @@
 
         .prompting-container-row {
             width: 100%;
+            padding-bottom: $spacing-small;
         }
     }
 
@@ -55,20 +57,21 @@
         .prompting-container-column {
             height: 100%;
             width: 100%;
+            flex-direction: row;
 
             .prompting-container-column--small {
                 margin-left: $spacing-large;
                 width: 45%;
-                padding-bottom: unset;
+                padding-bottom: $spacing-small;
                 padding-top: $spacing-medium;
             }
 
             .prompting-container-column--big {
                 width: 55%; 
-                padding-bottom: unset;
-                
+                .prompting-container-prompts{
+                    padding-bottom: $spacing-smaller;
+                }
             }
-            
         }
     }
 
@@ -172,6 +175,10 @@
     .text-output {
         min-width: 60%;
         margin-bottom: auto;
+        padding-left: $spacing-medium;
+        padding-right: $spacing-small;
+        
+        
     }
     .text-token {
         min-width: 10%;

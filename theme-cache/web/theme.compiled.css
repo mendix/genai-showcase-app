@@ -24381,6 +24381,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 90%;
   max-width: 1200px;
   margin: 24px;
+  flex-direction: column;
 }
 .prompting-page-content-container .prompting-container--overview .td {
   border-bottom: none;
@@ -24393,6 +24394,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .prompting-page-content-container .prompting-container--overview .prompting-container-row {
   width: 100%;
+  padding-bottom: 8px;
 }
 .prompting-page-content-container .prompting-justify-space-between {
   display: flex !important;
@@ -24400,16 +24402,19 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .prompting-page-content-container .prompting-justify-space-between .prompting-container-column {
   height: 100%;
   width: 100%;
+  flex-direction: row;
 }
 .prompting-page-content-container .prompting-justify-space-between .prompting-container-column .prompting-container-column--small {
   margin-left: 24px;
   width: 45%;
-  padding-bottom: unset;
+  padding-bottom: 8px;
   padding-top: 16px;
 }
 .prompting-page-content-container .prompting-justify-space-between .prompting-container-column .prompting-container-column--big {
   width: 55%;
-  padding-bottom: unset;
+}
+.prompting-page-content-container .prompting-justify-space-between .prompting-container-column .prompting-container-column--big .prompting-container-prompts {
+  padding-bottom: 4px;
 }
 .prompting-page-content-container .pageheader-with-buttons {
   display: flex !important;
@@ -24502,6 +24507,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .output-table .text-output {
   min-width: 60%;
   margin-bottom: auto;
+  padding-left: 16px;
+  padding-right: 8px;
 }
 .output-table .text-token {
   min-width: 10%;
