@@ -21,7 +21,7 @@ public class DeployedModelImpl {
 	public static void validate(DeployedModel deployedModel, ENUM_ModelModality outputModality) {
 		requireNonNull(deployedModel, "DeployedModel is required.");
 		
-		if (deployedModel.getOutputModality() == null || deployedModel.getOutputModality() != outputModality) {
+		if (deployedModel.getOutputModality() != outputModality) {
 			throw new IllegalArgumentException("The DeployedModel needs to have the " + outputModality.getCaption() + " output modality.");
 		}
 		
@@ -29,12 +29,17 @@ public class DeployedModelImpl {
 	}
 
 	public static void validateMicroflow(String microflow, ENUM_ModelModality outputModality) {
-		if (outputModality == ENUM_ModelModality.Text) {
-			DeployedModelImpl.validateChatCompletionsMicroflow(microflow);
-		} else if (outputModality == ENUM_ModelModality.Embeddings) {
-			DeployedModelImpl.validateEmbeddingsMicroflow(microflow);
-		} else if (outputModality == ENUM_ModelModality.Image) {
-			DeployedModelImpl.validateImageGenerationsMicroflow(microflow);
+		switch (outputModality)	{
+			case Text:
+				DeployedModelImpl.validateChatCompletionsMicroflow(microflow);
+				break;
+			case Embeddings:
+				DeployedModelImpl.validateEmbeddingsMicroflow(microflow);
+				break;
+			case Image:
+				DeployedModelImpl.validateImageGenerationsMicroflow(microflow);
+			default:
+				break;
 		}
 	}
 	
@@ -45,7 +50,7 @@ public class DeployedModelImpl {
 		
 		Map<String, IDataType> inputParameters = Core.getInputParameters(chatCompletionsMicroflow);
 		if (inputParameters == null || inputParameters.entrySet().isEmpty() || inputParameters.size() != 2) {
-			throw new IllegalArgumentException("Chat Completions Microflow " + chatCompletionsMicroflow + " does not exist or has wrong input parameters. It should only have one input parameter of type " + Request.getType() + " and one input parameter of type " + DeployedModel.getType() + ".");
+			throw new IllegalArgumentException("Chat Completions Microflow " + chatCompletionsMicroflow + " does not exist or has the wrong number of input parameters. It should only have one input parameter of type " + Request.getType() + " and one input parameter of type " + DeployedModel.getType() + ".");
 		}
 		
 		boolean requestFound = false;
@@ -76,7 +81,7 @@ public class DeployedModelImpl {
 		
 		Map<String, IDataType> inputParameters = Core.getInputParameters(embeddingsMicroflow);
 		if (inputParameters == null || inputParameters.entrySet().isEmpty() || (inputParameters.size() < 2 && inputParameters.size() > 3)) {
-			throw new IllegalArgumentException("Embeddings Microflow " + embeddingsMicroflow + " does not exist or has wrong input parameters. It should only have one input parameter of type " + ChunkCollection.getType() + " and one input parameter of type " + DeployedModel.getType() + ". Optionally an input parameter of type " + EmbeddingsOptions.getType() + " can be passed.");
+			throw new IllegalArgumentException("Embeddings Microflow " + embeddingsMicroflow + " does not exist or has the wrong number of input parameters. It should only have one input parameter of type " + ChunkCollection.getType() + " and one input parameter of type " + DeployedModel.getType() + ". Optionally an input parameter of type " + EmbeddingsOptions.getType() + " can be passed.");
 		}
 		
 		boolean chunkCollectionFound = false;
@@ -92,7 +97,7 @@ public class DeployedModelImpl {
 		}
 		
 		if(!chunkCollectionFound || !deployedModelFound) {
-			throw new IllegalArgumentException("Embeddings Microflow " + embeddingsMicroflow + " does not exist or has wrong input parameters. It should only have one input parameter of type " + ChunkCollection.getType() + " and one input parameter of type " + DeployedModel.getType() + ". Optionally an input parameter of type " + EmbeddingsOptions.getType() + " can be passed.");		}
+			throw new IllegalArgumentException("Embeddings Microflow " + embeddingsMicroflow + " has wrong input parameters. It should only have one input parameter of type " + ChunkCollection.getType() + " and one input parameter of type " + DeployedModel.getType() + ". Optionally an input parameter of type " + EmbeddingsOptions.getType() + " can be passed.");		}
 		
 		if(Core.getReturnType(embeddingsMicroflow) == null || !Core.getMetaObject(Core.getReturnType(embeddingsMicroflow).getObjectType()).isSubClassOf(EmbeddingsResponse.getType())) {
 			throw new IllegalArgumentException("Embeddings Microflow " + embeddingsMicroflow + " should have a return value of type " + EmbeddingsResponse.getType() + ".");		
@@ -106,7 +111,7 @@ public class DeployedModelImpl {
 		
 		Map<String, IDataType> inputParameters = Core.getInputParameters(imageGenerationsMicroflow);
 		if (inputParameters == null || inputParameters.entrySet().isEmpty() || (inputParameters.size() < 2 && inputParameters.size() > 3)) {
-			throw new IllegalArgumentException("Image Generations Microflow " + imageGenerationsMicroflow + " does not exist or has wrong input parameters. It should only have one String input parameter containing the UserPrompt and one input parameter of type " + DeployedModel.getType() + ". Optionally an input parameter of type " + ImageOptions.getType() + " can be passed.");
+			throw new IllegalArgumentException("Image Generations Microflow " + imageGenerationsMicroflow + " does not exist or has the wrong number of input parameters. It should only have one String input parameter containing the UserPrompt and one input parameter of type " + DeployedModel.getType() + ". Optionally an input parameter of type " + ImageOptions.getType() + " can be passed.");
 		}
 		
 		boolean userPromptFound = false;
@@ -122,7 +127,7 @@ public class DeployedModelImpl {
 		}
 		
 		if(!userPromptFound || !deployedModelFound) {
-			throw new IllegalArgumentException("Image Generations Microflow " + imageGenerationsMicroflow + " does not exist or has wrong input parameters. It should only have one String input parameter containing the UserPrompt and one input parameter of type " + DeployedModel.getType() + ". Optionally an input parameter of type " + ImageOptions.getType() + " can be passed.");		}
+			throw new IllegalArgumentException("Image Generations Microflow " + imageGenerationsMicroflow + " has wrong input parameters. It should only have one String input parameter containing the UserPrompt and one input parameter of type " + DeployedModel.getType() + ". Optionally an input parameter of type " + ImageOptions.getType() + " can be passed.");		}
 		
 		if(Core.getReturnType(imageGenerationsMicroflow) == null || !Core.getMetaObject(Core.getReturnType(imageGenerationsMicroflow).getObjectType()).isSubClassOf(Response.getType())) {
 			throw new IllegalArgumentException("Image Generations Microflow " + imageGenerationsMicroflow + " should have a return value of type " + Response.getType() + ".");		

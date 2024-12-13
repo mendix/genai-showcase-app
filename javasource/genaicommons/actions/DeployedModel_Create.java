@@ -15,6 +15,7 @@ import com.mendix.webui.CustomJavaAction;
 import genaicommons.impl.DeployedModelImpl;
 import genaicommons.impl.MxLogger;
 import genaicommons.proxies.DeployedModel;
+import genaicommons.proxies.ENUM_ModelModality;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
@@ -28,8 +29,13 @@ public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 	private genaicommons.proxies.ENUM_ModelModality OutputModality;
 	private java.lang.String Microflow;
 	private java.lang.String DeployedModelSpecialization;
+	private java.util.List<IMendixObject> __InputModelList;
+	private java.util.List<genaicommons.proxies.InputModality> InputModelList;
+	private genaicommons.proxies.ENUM_ModelSupport SupportsSystemPrompt;
+	private genaicommons.proxies.ENUM_ModelSupport SupportsFunctionCalling;
+	private genaicommons.proxies.ENUM_ModelSupport SupportsConversationsWithHistory;
 
-	public DeployedModel_Create(IContext context, java.lang.String DisplayName, java.lang.String Architecture, java.lang.String Model, java.lang.String OutputModality, java.lang.String Microflow, java.lang.String DeployedModelSpecialization)
+	public DeployedModel_Create(IContext context, java.lang.String DisplayName, java.lang.String Architecture, java.lang.String Model, java.lang.String OutputModality, java.lang.String Microflow, java.lang.String DeployedModelSpecialization, java.util.List<IMendixObject> InputModelList, java.lang.String SupportsSystemPrompt, java.lang.String SupportsFunctionCalling, java.lang.String SupportsConversationsWithHistory)
 	{
 		super(context);
 		this.DisplayName = DisplayName;
@@ -38,11 +44,21 @@ public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 		this.OutputModality = OutputModality == null ? null : genaicommons.proxies.ENUM_ModelModality.valueOf(OutputModality);
 		this.Microflow = Microflow;
 		this.DeployedModelSpecialization = DeployedModelSpecialization;
+		this.__InputModelList = InputModelList;
+		this.SupportsSystemPrompt = SupportsSystemPrompt == null ? null : genaicommons.proxies.ENUM_ModelSupport.valueOf(SupportsSystemPrompt);
+		this.SupportsFunctionCalling = SupportsFunctionCalling == null ? null : genaicommons.proxies.ENUM_ModelSupport.valueOf(SupportsFunctionCalling);
+		this.SupportsConversationsWithHistory = SupportsConversationsWithHistory == null ? null : genaicommons.proxies.ENUM_ModelSupport.valueOf(SupportsConversationsWithHistory);
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
+		this.InputModelList = java.util.Optional.ofNullable(this.__InputModelList)
+			.orElse(java.util.Collections.emptyList())
+			.stream()
+			.map(__InputModelListElement -> genaicommons.proxies.InputModality.initialize(getContext(), __InputModelListElement))
+			.collect(java.util.stream.Collectors.toList());
+
 		// BEGIN USER CODE
 		try {
 			if (OutputModality != null)
@@ -82,21 +98,27 @@ public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 		deployedModel.setDisplayName(DisplayName);
 		deployedModel.setModel(Model);
 		deployedModel.setOutputModality(OutputModality);
+		deployedModel.setDeployedModel_InputModality(InputModelList);
+		if(OutputModality != null && OutputModality == ENUM_ModelModality.Text) {
+			deployedModel.setSupportsConversationsWithHistory(SupportsConversationsWithHistory);
+			deployedModel.setSupportsFunctionCalling(SupportsFunctionCalling);
+			deployedModel.setSupportsSystemPrompt(SupportsSystemPrompt);
+		}
 		return deployedModel;
 	}
 
 	private IMendixObject createDeployedModel() {
-		if (!DeployedModelSpecialization.isBlank()) {
+		if (DeployedModelSpecialization != null && !DeployedModelSpecialization.isBlank()) {
 			IMendixObject deployedModelSpecialization = Core.instantiate(getContext(), DeployedModelSpecialization);
 			return deployedModelSpecialization;
 		} else { // if no object is passed, then a GenAICOmmons.DeployedModel object is created
 			DeployedModel deployedModel = new DeployedModel(getContext());
-			return (IMendixObject) deployedModel;
+			return deployedModel.getMendixObject();
 		}
 	}
 	
 	private void validateDeployedModelSpecialization(IMendixObject deployedModelSpecialization) {
-		if (!deployedModelSpecialization.isInstanceOf(DeployedModel.entityName)){
+		if (!deployedModelSpecialization.isInstanceOf(DeployedModel.entityName)){	
 			throw new IllegalArgumentException(DeployedModel.entityName + " or a specialization of such is required.");
 		}
 	}

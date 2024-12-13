@@ -97,8 +97,7 @@ public class ImageGenerations extends CustomJavaAction<IMendixObject>
 				inputParameters.put(t, DeployedModel.getMendixObject());
 			} else if(ImageOptions != null && Core.getMetaObject(u.getObjectType()).isSubClassOf(genaicommons.proxies.ImageOptions.getType())) {
 				inputParameters.put(t, ImageOptions.getMendixObject());
-			}
-			
+			}	
 		}
 		);
 		return inputParameters;
