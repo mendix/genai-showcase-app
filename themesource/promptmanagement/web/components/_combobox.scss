@@ -1,0 +1,28 @@
+@import '../../../../theme/web/custom-variables';
+
+.combobox-selection {
+    display: flex;
+    flex-grow: 1;
+    margin: 0px !important;
+    height: 30px !important;
+
+    .item-selection {
+        align-items: center;
+        height: max-content;
+
+    }
+    .mx-image {
+        height: $font-size-default;
+        margin-right: $spacing-small;
+        margin-left: auto;
+        float:right;
+    }
+}
+
+.combobox-border-danger{
+  .widget-combobox{
+    border: 1px solid $brand-danger;
+  }
+  margin-bottom: $spacing-smaller !important;
+}
+

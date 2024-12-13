@@ -1,0 +1,47 @@
+@import '../../../../theme/web/custom-variables';
+
+.btn-without-border.mx-link {
+    color: $font-color-default;
+    text-decoration: none;
+    border: 1px solid transparent;
+
+    &.disabled {
+        background-color: transparent !important;
+        cursor: default;
+    }
+
+    &:hover {
+        background-color: transparent;
+    }
+}
+
+.btn-no-hover.mx-link:hover {
+    background-color: transparent !important;
+    cursor: default;
+}
+
+.btn-run-single {
+    border-radius: 4px 4px 4px 4px;
+}
+
+.btn-run {
+    border-radius: 4px 0 0 4px;
+}
+.btn-run-all {
+    border-radius: 0 4px 4px 0;
+    border-left: 1px solid white;
+    fill: white;
+
+    &:active, &:focus, &:hover {
+        border-left: 1px solid white;
+    }
+
+}
+
+.btn-icon {
+    display: flex;
+    padding: 0.6em;
+    img{
+        margin-right: 0;
+    }
+}
