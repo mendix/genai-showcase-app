@@ -29,13 +29,13 @@ public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 	private genaicommons.proxies.ENUM_ModelModality OutputModality;
 	private java.lang.String Microflow;
 	private java.lang.String DeployedModelSpecialization;
-	private java.util.List<IMendixObject> __InputModelList;
-	private java.util.List<genaicommons.proxies.InputModality> InputModelList;
+	private java.util.List<IMendixObject> __InputModalityList;
+	private java.util.List<genaicommons.proxies.InputModality> InputModalityList;
 	private genaicommons.proxies.ENUM_ModelSupport SupportsSystemPrompt;
 	private genaicommons.proxies.ENUM_ModelSupport SupportsFunctionCalling;
 	private genaicommons.proxies.ENUM_ModelSupport SupportsConversationsWithHistory;
 
-	public DeployedModel_Create(IContext context, java.lang.String DisplayName, java.lang.String Architecture, java.lang.String Model, java.lang.String OutputModality, java.lang.String Microflow, java.lang.String DeployedModelSpecialization, java.util.List<IMendixObject> InputModelList, java.lang.String SupportsSystemPrompt, java.lang.String SupportsFunctionCalling, java.lang.String SupportsConversationsWithHistory)
+	public DeployedModel_Create(IContext context, java.lang.String DisplayName, java.lang.String Architecture, java.lang.String Model, java.lang.String OutputModality, java.lang.String Microflow, java.lang.String DeployedModelSpecialization, java.util.List<IMendixObject> InputModalityList, java.lang.String SupportsSystemPrompt, java.lang.String SupportsFunctionCalling, java.lang.String SupportsConversationsWithHistory)
 	{
 		super(context);
 		this.DisplayName = DisplayName;
@@ -44,7 +44,7 @@ public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 		this.OutputModality = OutputModality == null ? null : genaicommons.proxies.ENUM_ModelModality.valueOf(OutputModality);
 		this.Microflow = Microflow;
 		this.DeployedModelSpecialization = DeployedModelSpecialization;
-		this.__InputModelList = InputModelList;
+		this.__InputModalityList = InputModalityList;
 		this.SupportsSystemPrompt = SupportsSystemPrompt == null ? null : genaicommons.proxies.ENUM_ModelSupport.valueOf(SupportsSystemPrompt);
 		this.SupportsFunctionCalling = SupportsFunctionCalling == null ? null : genaicommons.proxies.ENUM_ModelSupport.valueOf(SupportsFunctionCalling);
 		this.SupportsConversationsWithHistory = SupportsConversationsWithHistory == null ? null : genaicommons.proxies.ENUM_ModelSupport.valueOf(SupportsConversationsWithHistory);
@@ -53,10 +53,10 @@ public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.InputModelList = java.util.Optional.ofNullable(this.__InputModelList)
+		this.InputModalityList = java.util.Optional.ofNullable(this.__InputModalityList)
 			.orElse(java.util.Collections.emptyList())
 			.stream()
-			.map(__InputModelListElement -> genaicommons.proxies.InputModality.initialize(getContext(), __InputModelListElement))
+			.map(__InputModalityListElement -> genaicommons.proxies.InputModality.initialize(getContext(), __InputModalityListElement))
 			.collect(java.util.stream.Collectors.toList());
 
 		// BEGIN USER CODE
@@ -98,7 +98,7 @@ public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
 		deployedModel.setDisplayName(DisplayName);
 		deployedModel.setModel(Model);
 		deployedModel.setOutputModality(OutputModality);
-		deployedModel.setDeployedModel_InputModality(InputModelList);
+		deployedModel.setDeployedModel_InputModality(InputModalityList);
 		if(OutputModality != null && OutputModality == ENUM_ModelModality.Text) {
 			deployedModel.setSupportsConversationsWithHistory(SupportsConversationsWithHistory);
 			deployedModel.setSupportsFunctionCalling(SupportsFunctionCalling);
