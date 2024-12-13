@@ -7,15 +7,15 @@
 // Other code you write will be lost the next time you deploy the project.
 // Special characters, e.g., é, ö, à, etc. are supported in comments.
 
-package promptmanagement.actions;
+package conversationalui.actions;
 
 import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
-import promptmanagement.impl.MxLogger;
-import promptmanagement.proxies.EntityAttribute;
+import conversationalui.impl.MxLogger;
+import conversationalui.proxies.EntityAttribute;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.meta.IMetaObject;
 import com.mendix.systemwideinterfaces.core.meta.IMetaPrimitive;

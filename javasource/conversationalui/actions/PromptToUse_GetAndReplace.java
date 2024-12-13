@@ -7,7 +7,7 @@
 // Other code you write will be lost the next time you deploy the project.
 // Special characters, e.g., é, ö, à, etc. are supported in comments.
 
-package promptmanagement.actions;
+package conversationalui.actions;
 
 import static java.util.Objects.requireNonNull;
 import java.util.List;
@@ -15,10 +15,10 @@ import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
-import promptmanagement.impl.MxLogger;
-import promptmanagement.proxies.Prompt;
-import promptmanagement.proxies.PromptToUse;
-import promptmanagement.proxies.Version;
+import conversationalui.impl.MxLogger;
+import conversationalui.proxies.Prompt;
+import conversationalui.proxies.PromptToUse;
+import conversationalui.proxies.Version;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
@@ -48,7 +48,7 @@ public class PromptToUse_GetAndReplace extends CustomJavaAction<IMendixObject>
 			requireNonNull(PromptName, "PromptName is required.");
 
 			// get Version In Use (alternatively Draft) and set values
-			Version versionInUse = promptmanagement.proxies.microflows.Microflows
+			Version versionInUse = conversationalui.proxies.microflows.Microflows
 					.version_GetForPromptTitle(getContext(), PromptName);
 			requireNonNull(versionInUse, "No version marked as 'In Use' was found, so no PromptInUse can be created.");
 
@@ -106,7 +106,7 @@ public class PromptToUse_GetAndReplace extends CustomJavaAction<IMendixObject>
 		// Get all variables associated to the Prompt and replace placeholders with
 		// values from attributes.
 		List<IMendixObject> variableList = Core.retrieveByPath(getContext(), prompt.getMendixObject(),
-				"PromptManagement.Variable_Prompt");
+				"ConversationalUI.Variable_Prompt");
 
 		// Replacement of variables if they are found in the passed object
 
@@ -118,7 +118,7 @@ public class PromptToUse_GetAndReplace extends CustomJavaAction<IMendixObject>
 
 	private void applyVariable(PromptToUse promptToUse, IMendixObject variablesObject, IMendixObject variable) {
 
-		String variableKey = promptmanagement.proxies.Variable.initialize(getContext(), variable).getKey(getContext());
+		String variableKey = conversationalui.proxies.Variable.initialize(getContext(), variable).getKey(getContext());
 		// Check variable key is not empty
 		if (variableKey == null || variableKey.isBlank()) {
 			LOGGER.warn("Skipping variable with empty Key attribute");
@@ -142,7 +142,7 @@ public class PromptToUse_GetAndReplace extends CustomJavaAction<IMendixObject>
 	}
 
 	private void replaceVariable(PromptToUse promptToUse, String variableKey, String value) {
-		promptmanagement.proxies.microflows.Microflows.promptToUse_ApplyVariable(getContext(), promptToUse, variableKey,
+		conversationalui.proxies.microflows.Microflows.promptToUse_ApplyVariable(getContext(), promptToUse, variableKey,
 				value);
 	}
 
