@@ -35,6 +35,7 @@ import software.amazon.awssdk.services.bedrockagentruntime.model.RetrieveAndGene
 import software.amazon.awssdk.services.bedrockagentruntime.model.RetrieveAndGenerateSessionConfiguration;
 import software.amazon.awssdk.services.bedrockagentruntime.model.RetrieveAndGenerateType;
 import software.amazon.awssdk.services.bedrockagentruntime.model.TextInferenceConfig;
+import software.amazon.awssdk.services.bedrockagentruntime.model.PromptTemplate;
 
 public class RetrieveAndGenerate extends CustomJavaAction<IMendixObject>
 {
@@ -180,6 +181,7 @@ public class RetrieveAndGenerate extends CustomJavaAction<IMendixObject>
 		String sessionId = RetrieveAndGenerateRequest.getSessionId();
 		if (sessionId != null && !sessionId.isBlank()) {
 			awsRequestBuilder.sessionId(sessionId);
+			
 		}
 		
 		String kmsKeyARN = RetrieveAndGenerateRequest.getKmsKeyARN();
@@ -204,6 +206,7 @@ public class RetrieveAndGenerate extends CustomJavaAction<IMendixObject>
 		return builder.build();
 	}
 	
+	
 	private RetrieveAndGenerateConfiguration getRetrieveAndGenerateConfiguration(Request commonRequest) throws Exception {
 		var builder = RetrieveAndGenerateConfiguration.builder();
 		
@@ -219,6 +222,8 @@ public class RetrieveAndGenerate extends CustomJavaAction<IMendixObject>
 		builder.knowledgeBaseId(getKnowledgeBaseId(commonRequest))
 			.modelArn(AmazonBedrockConnection.getModel())
 			.generationConfiguration(getGenerationConfiguration(commonRequest));
+			
+		
 		
 		return builder.build();
 	}
@@ -226,11 +231,17 @@ public class RetrieveAndGenerate extends CustomJavaAction<IMendixObject>
 	private GenerationConfiguration getGenerationConfiguration(Request commonRequest) throws CoreException {
 		var builder = GenerationConfiguration.builder();
 		
-		builder.inferenceConfig(getInferenceConfig(commonRequest));
-		
+		builder.inferenceConfig(getInferenceConfig(commonRequest))
+				.promptTemplate(getPromptTemplate());
+	
 		return  builder.build();
 	}
-	
+	private  PromptTemplate getPromptTemplate() throws CoreException {
+		var builder = PromptTemplate.builder();
+		builder.textPromptTemplate(RetrieveAndGenerateRequest.getPromptTemplate());
+		
+		return builder.build();
+	}
 	private InferenceConfig getInferenceConfig(Request commonRequest) throws CoreException {
 		var builder = InferenceConfig.builder();
 		

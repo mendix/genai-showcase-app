@@ -65,8 +65,8 @@ public class ChunkCollection_AddKnowledgeBaseChunk extends CustomJavaAction<IMen
 			return kbChunk.getMendixObject();
 			
 			} catch (Exception e) {
-				LOGGER.error(e.getMessage());
-				throw e;
+				LOGGER.error(e);
+				return null;
 			}
 		// END USER CODE
 	}

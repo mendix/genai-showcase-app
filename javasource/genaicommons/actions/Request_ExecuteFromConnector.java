@@ -10,15 +10,15 @@
 package genaicommons.actions;
 
 import static java.util.Objects.requireNonNull;
-import java.util.Map;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.webui.CustomJavaAction;
+import genaicommons.proxies.ENUM_ModelModality;
 import genaicommons.proxies.Response;
 import genaicommons.proxies.microflows.Microflows;
+import genaicommons.impl.DeployedModelImpl;
 import genaicommons.impl.MxLogger;
 
 /**
@@ -32,18 +32,16 @@ public class Request_ExecuteFromConnector extends CustomJavaAction<IMendixObject
 {
 	private IMendixObject __Request;
 	private genaicommons.proxies.Request Request;
-	private IMendixObject __Connection;
-	private genaicommons.proxies.Connection Connection;
+	private IMendixObject __DeployedModel;
+	private genaicommons.proxies.DeployedModel DeployedModel;
 	private java.lang.String CallModelMicroflow;
-	private java.lang.String DeploymentIdentifier;
 
-	public Request_ExecuteFromConnector(IContext context, IMendixObject Request, IMendixObject Connection, java.lang.String CallModelMicroflow, java.lang.String DeploymentIdentifier)
+	public Request_ExecuteFromConnector(IContext context, IMendixObject Request, IMendixObject DeployedModel, java.lang.String CallModelMicroflow)
 	{
 		super(context);
 		this.__Request = Request;
-		this.__Connection = Connection;
+		this.__DeployedModel = DeployedModel;
 		this.CallModelMicroflow = CallModelMicroflow;
-		this.DeploymentIdentifier = DeploymentIdentifier;
 	}
 
 	@java.lang.Override
@@ -51,19 +49,19 @@ public class Request_ExecuteFromConnector extends CustomJavaAction<IMendixObject
 	{
 		this.Request = this.__Request == null ? null : genaicommons.proxies.Request.initialize(getContext(), __Request);
 
-		this.Connection = this.__Connection == null ? null : genaicommons.proxies.Connection.initialize(getContext(), __Connection);
+		this.DeployedModel = this.__DeployedModel == null ? null : genaicommons.proxies.DeployedModel.initialize(getContext(), __DeployedModel);
 
 		// BEGIN USER CODE
-		
-		//Validations
-		requireNonNull(Request, "Request is required.");
-		requireNonNull(Connection, "Connection is required.");
-		validateMicroflow(CallModelMicroflow);
 		try {
+			validate();
 			startTime = System.currentTimeMillis();
-			return processRequest().getMendixObject();
+			Response response = processRequest();
+			if(response != null) {
+				return response.getMendixObject();
+			} else {
+				return null;
+			}
 		} catch (Exception e) {
-			LOGGER.error(e);
 			throw e;
 		}
 		// END USER CODE
@@ -80,8 +78,7 @@ public class Request_ExecuteFromConnector extends CustomJavaAction<IMendixObject
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new MxLogger(Request_ExecuteFromConnector.class);
-	
+	private static final MxLogger LOGGER = new genaicommons.impl.MxLogger(Request_ExecuteFromConnector.class);
 	private int totalTokens = 0;
 	private int requestTokens = 0;
 	private int responseTokens = 0;
@@ -89,9 +86,10 @@ public class Request_ExecuteFromConnector extends CustomJavaAction<IMendixObject
 	
 	//Recursive response processing until there is no ToolCall available
 	private Response processRequest() throws CoreException {
-		IMendixObject responseMendixObject = Core.microflowCall(CallModelMicroflow).withParam("Connection", Connection.getMendixObject()).withParam("Request", Request.getMendixObject()).execute(this.getContext());
+		IMendixObject responseMendixObject = Core.microflowCall(CallModelMicroflow).withParam("DeployedModel", DeployedModel.getMendixObject()).withParam("Request", Request.getMendixObject()).execute(this.getContext());
 		if(responseMendixObject == null) {
-			throw new NullPointerException("Microflow " + CallModelMicroflow + " returned null.");
+			LOGGER.debug("Microflow " + CallModelMicroflow  + " returned null.");
+			return null;
 		}
 		Response response = genaicommons.proxies.Response.load(getContext(), responseMendixObject.getId());
 		
@@ -110,8 +108,8 @@ public class Request_ExecuteFromConnector extends CustomJavaAction<IMendixObject
 
 	private void responseStoreDurationAndUsage(Response response) {
 		response.setDurationMilliseconds((int) Math.ceil(System.currentTimeMillis() - startTime));
-		if (genaicommons.proxies.constants.Constants.getStoreUsageMetrics() && DeploymentIdentifier != null && !DeploymentIdentifier.isBlank()) {
-			Microflows.usage_Create_TextAndFiles(getContext(), response, DeploymentIdentifier);
+		if (genaicommons.proxies.constants.Constants.getStoreUsageMetrics()) {
+			Microflows.usage_Create_TextAndFiles(getContext(), response, DeployedModel);
 		}
 	}
 	
@@ -124,33 +122,14 @@ public class Request_ExecuteFromConnector extends CustomJavaAction<IMendixObject
 		response.setTotalTokens(totalTokens);
 	}
 	
-	//Validate input (Request, Connection) and output (Response) entities
-	private static void validateMicroflow(String CallModelMicroflow) {
+	private void validate() {
+		requireNonNull(Request, "Request is required.");
+		
 		if (CallModelMicroflow == null || CallModelMicroflow.isBlank()) {
 			throw new IllegalArgumentException("CallModelMicroflow is required.");
 		}
 		
-		validateMicroflowInput(CallModelMicroflow);
-		
-		//Check if the return Type is a Response object
-		if(!Core.getReturnType(CallModelMicroflow).getObjectType().equals(genaicommons.proxies.Response.entityName)) {
-			throw new IllegalArgumentException("The CallModelMicroflow " + CallModelMicroflow + " should have " + genaicommons.proxies.Response.entityName + " as return object.");
-		}
-	}
-	
-	
-	//Check if the input parameters match exactly Connection and Request
-	private static void validateMicroflowInput(String CallModelMicroflow){
-		Map<String, IDataType> inputParameters = Core.getInputParameters(CallModelMicroflow);
-		if (inputParameters == null || inputParameters.size() != 2) {
-			throw new IllegalArgumentException("The CallModelMicroflow " + CallModelMicroflow + " should have input parameters of type " + genaicommons.proxies.Request.getType() + " and " + genaicommons.proxies.Connection.getType()+".");
-		}
-		for(Map.Entry<String, IDataType> entry : inputParameters.entrySet()) {
-			String value = entry.getValue().getObjectType();
-            if (!value.equals(genaicommons.proxies.Request.entityName) && !value.equals(genaicommons.proxies.Connection.entityName)) {
-            	throw new IllegalArgumentException("The CallModelMicroflow " + CallModelMicroflow + " should have input parameters of type " + genaicommons.proxies.Request.getType() + " and " + genaicommons.proxies.Connection.getType()+".");
-            }
-		}
+		DeployedModelImpl.validate(DeployedModel, ENUM_ModelModality.Text);
 	}
 	// END EXTRA CODE
 }

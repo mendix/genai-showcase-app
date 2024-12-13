@@ -1,5 +1,71 @@
 @charset "UTF-8";
 @import url("resources/fonts/open-sans/open-sans.css");
+.popupmenu--display-flex.popupmenu {
+  display: flex;
+}
+
+.popupmenu-custom-item-container {
+  padding: 8px;
+}
+.popupmenu-custom-item-container .mx-link {
+  display: block;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item {
+  background-color: #fff;
+}
+.popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:hover, .popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:focus, .popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:active {
+  cursor: pointer;
+  border-color: #f8f8f8;
+  background-color: #f8f8f8;
+}
+
+.btn-without-border.mx-link {
+  text-decoration: none;
+  border: 1px solid transparent;
+  color: #6c717e;
+}
+.btn-without-border.mx-link.disabled {
+  background-color: transparent !important;
+  cursor: default;
+}
+.btn-without-border.mx-link:hover {
+  background-color: #ced0d3;
+}
+
+.btn-no-hover.mx-link:hover {
+  background-color: transparent !important;
+}
+
+.listview-horizontal.mx-listview > ul {
+  display: inline-block;
+  margin-bottom: 0;
+}
+.listview-horizontal.mx-listview > ul > li {
+  display: inline-block;
+}
+
+.listview-empty-deployed-models.mx-listview > ul > li.mx-listview-empty > label {
+  display: none;
+}
+.listview-empty-deployed-models.mx-listview > ul > li.mx-listview-empty::before {
+  content: "Please add deployed models on the Edit page to be able to use this configuration.";
+  color: #e33f4e;
+}
+
+.label-with-text > label {
+  overflow: hidden;
+  margin-bottom: 4px;
+  text-align: left;
+  text-overflow: ellipsis;
+  color: #24276c;
+  font-size: 14px;
+  font-weight: 600;
+  display: block;
+}
+
 /* ==========================================================================
   Take picture styles
 ========================================================================== */
@@ -23871,6 +23937,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .combo-deployment-selection {
   min-width: 360px;
+  z-index: 200;
 }
 .combo-deployment-selection .deployment-selection {
   display: flex;

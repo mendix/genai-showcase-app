@@ -10,9 +10,6 @@
 package synthiaconnector.actions;
 
 import static java.util.Objects.requireNonNull;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.webui.CustomJavaAction;
@@ -20,7 +17,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import synthiaconnector.impl.MxLogger;
 import synthiaconnector.impl.ConverseVisionDocument;
 import synthiaconnector.impl.ConverseFunctionCalling;
 
@@ -57,10 +53,9 @@ public class Request_Modify_Converse extends CustomJavaAction<java.lang.String>
 			
 			return MAPPER.writeValueAsString(rootNode);
 
-			} catch (Exception e) {
-				LOGGER.error(e, "An error occurred while modifying Converse Request body.");
-				throw e;
-			}
+		} catch (Exception e) {
+			throw e;
+		}
 		// END USER CODE
 	}
 
@@ -75,7 +70,6 @@ public class Request_Modify_Converse extends CustomJavaAction<java.lang.String>
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new MxLogger(Request_Modify_Converse.class);
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 	
 	

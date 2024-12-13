@@ -20,7 +20,7 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
  * ProviderConfig_SetActionMicroflow can be used to set a custom ActionMicroflow for your ProviderConfig that will be executed once a new message is sent.
  * The ActionMicroflow is expected to have an Input of ConversationalUI.ChatContext and returns a Boolean.
  */
-public class ProviderConfig_SetActionMicroflow extends CustomJavaAction<java.lang.Void>
+public class ProviderConfig_SetActionMicroflow extends CustomJavaAction<java.lang.Boolean>
 {
 	private IMendixObject __ProviderConfig;
 	private conversationalui.proxies.ProviderConfig ProviderConfig;
@@ -34,7 +34,7 @@ public class ProviderConfig_SetActionMicroflow extends CustomJavaAction<java.lan
 	}
 
 	@java.lang.Override
-	public java.lang.Void executeAction() throws Exception
+	public java.lang.Boolean executeAction() throws Exception
 	{
 		this.ProviderConfig = this.__ProviderConfig == null ? null : conversationalui.proxies.ProviderConfig.initialize(getContext(), __ProviderConfig);
 
@@ -46,11 +46,11 @@ public class ProviderConfig_SetActionMicroflow extends CustomJavaAction<java.lan
 			ProviderConfigImpl.validateActionMicroflow(ActionMicroflow);
 			
 			ProviderConfig.setActionMicroflow(ActionMicroflow);	
-			return null;
+			return true;
 			
 		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-			throw e;
+			LOGGER.error(e);
+			return false;
 		}
 		
 		// END USER CODE
