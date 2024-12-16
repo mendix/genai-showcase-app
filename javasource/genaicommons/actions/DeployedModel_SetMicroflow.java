@@ -46,7 +46,7 @@ public class DeployedModel_SetMicroflow extends CustomJavaAction<java.lang.Boole
 		try {
 			requireNonNull(Microflow, "Microflow is required.");
 			requireNonNull(DeployedModel, "DeployedModel is required.");
-			if (DeployedModel.getOutputModality() != null && DeployedModel.getOutputModality() == ENUM_ModelModality.TextGeneration)
+			if (DeployedModel.getOutputModality() != null)
 				DeployedModelImpl.validateMicroflow(Microflow, DeployedModel.getOutputModality());
 			
 			DeployedModel.setMicroflow(Microflow);

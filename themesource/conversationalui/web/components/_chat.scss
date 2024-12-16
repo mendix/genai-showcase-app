@@ -1,3 +1,5 @@
+@import "../../../atlas_core/web/_variables.scss";
+@import "../../../../theme/web/custom-variables.scss";
 .chat-loading-wrapper {
     display: flex;
     justify-content: left;
@@ -145,4 +147,38 @@
 
 .user-input-instructions {
     font-style: italic;
+}
+
+
+.chat-container-prompting {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-left: 1px solid $table-border-separator-color;
+    padding-top: $spacing-medium;
+    margin-bottom: unset;   
+    padding-left: unset;
+    padding-right: unset;
+    .chat-container{
+        margin-left: $spacing-medium;
+        padding-right: $spacing-larger;
+
+        .d-inline-block{
+            visibility: hidden;
+        }
+    }
+    .chat-bubble-wrapper {
+        .chat-message-card {
+            background: $bg-color-secondary;
+            border-radius: 8px;
+            border: 1px solid $border-color-default;
+            padding: $spacing-medium;
+        }
+
+        &--user .chat-message-card {
+            background: $gray-lighter;
+            border: 1px solid $gray-lighter;
+        }
+    }
 }

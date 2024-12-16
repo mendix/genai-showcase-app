@@ -1,0 +1,10 @@
+//PromptManagement
+
+//fix for datagrid scrollbar caused by popupmenu
+.datagrid--no-scroll {
+    &.widget-datagrid {
+        .widget-datagrid-content {
+            overflow-y: visible;
+        }
+    }
+}
