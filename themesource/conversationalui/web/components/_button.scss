@@ -1,5 +1,3 @@
-//@import '../../../../theme/web/custom-variables';
-
 .btn-without-border.mx-link {
     color: $font-color-default;
     text-decoration: none;
@@ -28,10 +26,13 @@
     border-radius: 4px 0 0 4px;
 }
 .btn-run-all {
+    padding: 0.6em;
     border-radius: 0 4px 4px 0;
     border-left: 1px solid white;
     fill: white;
-
+    img{
+        margin-right: 0;
+    }
     &:active, &:focus, &:hover {
         border-left: 1px solid white;
     }

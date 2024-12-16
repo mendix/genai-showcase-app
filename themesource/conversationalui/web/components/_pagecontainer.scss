@@ -1,3 +1,5 @@
+@import "../../../atlas_core/web/_variables.scss";
+@import "../../../../theme/web/custom-variables.scss";
 //Prompt Management
 .prompting-page-container{
     min-height: -webkit-fill-available;
@@ -63,13 +65,13 @@
                 padding-bottom: $spacing-small;
                 padding-top: $spacing-medium;
             }
-
+            /*
             .prompting-container-column--big {
                 width: 55%; 
                 .prompting-container-prompts{
                     padding-bottom: $spacing-smaller;
                 }
-            }
+            }*/
         }
     }
 
@@ -135,20 +137,7 @@
     }
 }
 
-.header-conversational-prompt{
-    border-bottom: 1px solid $table-border-separator-color;
-    padding-bottom: $spacing-small;
-    .header-text{
-        margin-left: $spacing-medium;
-        width: 100%;
-    }
-    .close-icon{
-        border-left : 1px solid $table-border-separator-color;
-        padding-left: $spacing-medium;
-        margin-right: $spacing-medium;
-    }
-    
-}
+
 
 .table-header{
     margin-top: $spacing-medium;
@@ -222,5 +211,147 @@
     .delete-icon{
         min-width: 5%;
         color: $brand-danger;
+    }
+}
+
+
+
+
+
+
+
+
+.page-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+
+    .page-container-main {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .page-container-side {
+        width: 100%;
+        max-width: 540px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .page-container-header{
+        //Removed height
+        //height: 150px;
+        display: flex;
+        flex-direction: row;
+        //Needed somehow, why?
+        background: white;
+        padding-bottom: $spacing-large;
+    }
+
+    .page-header-content{
+        margin-top: $spacing-medium;
+        padding-left: $spacing-larger;
+        padding-right: $spacing-larger;
+        width: 100%;
+        .pageheader-with-buttons {
+            display: flex !important;
+            justify-content: space-between;
+        }
+    }
+
+     .pageheader-navigation {
+        display: flex !important;
+        align-items: center !important;
+        flex-flow: row !important;
+        justify-content: flex-start !important;
+    }
+    .page-content-wrapper{
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        flex: 1 1 0;
+        overflow-y: auto;
+        margin: $spacing-medium;
+    }
+    .page-content{
+        width: 100%;
+        //Increased width to also account for margin
+        max-width: 1280px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .content-main{
+        width: 100%;
+        max-width: 760px;
+        display: flex;
+        flex-direction: column;
+        margin-right: $spacing-medium;
+        //background: orange;
+
+        .prompt-fields{
+            padding-bottom: $spacing-small;
+        }
+
+        .version-selection{
+            width:100%;
+        }
+    }
+
+    .content-column{
+        width: 100%;
+        max-width: 480px;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: $spacing-small;
+        height: fit-content;
+        //background: red;
+    }
+
+    .content-fullwidth{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        //background: purple;
+    }
+
+    .panel-header{
+        &::after{
+            content: "";
+            height: 80px;
+        }
+        display: flex;
+        flex-direction: row;
+        border-bottom: 1px solid $table-border-separator-color;
+        padding-right: $spacing-small;
+        height: 50px;
+        //background: blue;
+        .header-text{
+            margin-left: $spacing-medium;
+            width: 100%;
+        }
+        .close-icon{
+            border-left : 1px solid $table-border-separator-color;
+            padding-left: $spacing-small;
+            margin-right: $spacing-small;
+            margin-left: $spacing-small;
+            margin-top: $spacing-small;
+        }
+        .new-chat-icon{
+            margin-top: $spacing-small;
+        }
+    }
+
+    .panel-content{
+        flex: 1 1 0;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        //background: green;
+
     }
 }

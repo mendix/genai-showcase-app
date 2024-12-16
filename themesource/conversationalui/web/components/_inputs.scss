@@ -43,8 +43,7 @@
 
 }
 
-//Prompt Management, might need renaming!
-//Prev. _combobox.scss
+//Prompt Management
 .combobox-selection {
     display: flex;
     flex-grow: 1;
@@ -64,6 +63,11 @@
     }
 }
 
+.widget-combobox .widget-combobox-input-container {
+    flex-grow: 0;
+    transition: box-shadow .15s ease 0s;
+}
+
 .combobox-border-danger{
   .widget-combobox{
     border: 1px solid $brand-danger;
@@ -71,7 +75,6 @@
   margin-bottom: $spacing-smaller !important;
 }
 
-//Prev. _textarea.scss
 .texbox-loading-wrapper {
     position: relative;
 

@@ -75,53 +75,6 @@
     }
 }
 
-
-
-//Prompt Management
-
-.prompting-listview-stylingless.mx-listview { //same as listview-stylingless and listview-sm
-    ul > li, ol > li {
-        cursor: default;
-        border: none; // remove borders from listview-bordered
-        background-color: transparent;
-        border-bottom: none;
-
-        &:hover,
-        &:focus,
-        &:active {
-            background-color: transparent;
-        }
-
-        &.selected {
-            background-color: transparent !important;
-
-            &:hover,
-            &:focus,
-            &:active {
-                background-color: transparent !important;
-            }
-        }
-
-        &:first-child { // remove border from listview-lined
-            border-top: none;
-        }
-
-        &:last-child { // remove border from listview-lined
-            border-bottom: none;
-        }
-
-        &:nth-child(2n+1) { // remove background from listview-striped
-            background-color: transparent;
-        }
-
-    } ol > li {
-        padding: 0px; //used for ordered lists in markdown viewer
-    } ul > li {
-        padding: 8px; //from listview-sm
-    }
-}
-
-
 .listview-bullet-points{
     > ul {
         list-style-type: disc;
