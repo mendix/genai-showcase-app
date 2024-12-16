@@ -11,3 +11,10 @@
         display: contents;
     }
 }
+
+//Prompt Management
+.dataview-without-border{
+    .mx-dataview-controls{
+        border-top: none;
+    }
+}
