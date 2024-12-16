@@ -121,35 +121,6 @@
     }
 }
 
-.prompting-listview-horizontal.mx-listview {
-    > ul {
-        display: contents;
-        margin-bottom: none;
-        > li {
-            display: inline-block;
-            padding: 4px; //default listview-sm
-
-            .mx-dataview-content > button {
-                display: -webkit-box;
-                word-break: break-word;
-                overflow: hidden;
-                -webkit-line-clamp: 1;
-                line-clamp: 1;
-                -webkit-box-orient: vertical;
-                text-overflow: ellipsis;
-                box-sizing: border-box;
-                text-wrap: wrap;
-                padding: 5px 10px; //Default btn
-                line-height: 2;
-            }
-
-            &:hover {
-                background-color: transparent;
-            }
-        }
-    }
-}
-
 
 .listview-bullet-points{
     > ul {
