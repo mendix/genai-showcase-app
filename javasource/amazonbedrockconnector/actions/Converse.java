@@ -84,13 +84,15 @@ public class Converse extends CustomJavaAction<IMendixObject>
 	private amazonbedrockconnector.proxies.ChatCompletionsRequest_Extension ConverseRequest;
 	private IMendixObject __BedrockDeployedModel;
 	private amazonbedrockconnector.proxies.BedrockDeployedModel BedrockDeployedModel;
+	private awsauthentication.proxies.ENUM_Region Region;
 
-	public Converse(IContext context, IMendixObject Credentials, IMendixObject ConverseRequest, IMendixObject BedrockDeployedModel)
+	public Converse(IContext context, IMendixObject Credentials, IMendixObject ConverseRequest, IMendixObject BedrockDeployedModel, java.lang.String Region)
 	{
 		super(context);
 		this.__Credentials = Credentials;
 		this.__ConverseRequest = ConverseRequest;
 		this.__BedrockDeployedModel = BedrockDeployedModel;
+		this.Region = Region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(Region);
 	}
 
 	@java.lang.Override
@@ -108,7 +110,7 @@ public class Converse extends CustomJavaAction<IMendixObject>
 			requireNonNull(this.ConverseRequest, "A ConverseRequest_Extension object is required");
 			requireNonNull(this.BedrockDeployedModel, "A BedrockDeployedModel object is required");
 			
-			var client = AmazonBedrockClient.getBedrockRuntimeClient(Credentials, BedrockDeployedModel.getBedrockDeployedModel_AmazonBedrockRegion().getRegion(), ConverseRequest);
+			var client = AmazonBedrockClient.getBedrockRuntimeClient(Credentials, Region, ConverseRequest);
 			
 			var awsRequest = getAwsRequest();
 			LOGGER.debug("AWS Request: " + awsRequest);
