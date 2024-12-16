@@ -1,0 +1,357 @@
+@import "../../../atlas_core/web/_variables.scss";
+@import "../../../../theme/web/custom-variables.scss";
+//Prompt Management
+.prompting-page-container{
+    min-height: -webkit-fill-available;
+    min-height:  -moz-available;
+    //check if needed, used to stretch the chat container
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.promting-page-wrapper{
+    width: 100%;
+    //display: flex;
+    min-height: 100%;
+}
+
+.prompting-page-content-container {
+    min-height: -webkit-fill-available;
+    min-height:  -moz-available;
+
+    
+    display: flex;
+    justify-content: center;
+    
+
+    .prompting-container--overview {
+        width: 90%;
+        max-width: 1200px;
+        margin: $spacing-large;
+        flex-direction: column;
+        
+        .td {
+            border-bottom: none;
+        }
+        
+        .card {
+            overflow: unset;
+            border-radius: $spacing-medium;
+            border: 1px solid $gray-primary;
+            padding-top: $spacing-medium;
+        }
+
+        .prompting-container-row {
+            width: 100%;
+            padding-bottom: $spacing-small;
+        }
+    }
+
+
+    .prompting-justify-space-between {
+        display: flex !important;
+
+        .prompting-container-column {
+            height: 100%;
+            width: 100%;
+            flex-direction: row;
+
+            .prompting-container-column--small {
+                margin-left: $spacing-large;
+                width: 45%;
+                padding-bottom: $spacing-small;
+                padding-top: $spacing-medium;
+            }
+            /*
+            .prompting-container-column--big {
+                width: 55%; 
+                .prompting-container-prompts{
+                    padding-bottom: $spacing-smaller;
+                }
+            }*/
+        }
+    }
+
+    .pageheader-with-buttons {
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .pageheader-navigation {
+        display: flex !important;
+        align-items: center !important;
+        flex-flow: row !important;
+        justify-content: flex-start !important;
+    }
+
+}
+
+
+.pageheader {
+    background-color: white;
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    
+    .pageheader-content {
+        width: 100%;
+        max-width: 1250px;
+    }
+
+    .pageheader-with-buttons {
+        display: flex !important;
+    }
+
+    .pageheader-navigation {
+        display: flex !important;
+        align-items: center !important;
+        flex-flow: row !important;
+        justify-content: flex-start !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .pageheader-content {
+        max-width: 70%;
+    }
+}
+
+@media(max-width: 1900px){
+    .prompting-justify-space-between--screen {
+        flex-direction: column !important;
+    }
+    .prompting-container-column--small--screen {
+        margin-left: 0px;
+        width: 50%;
+        min-width: 400px;
+    }
+
+    .prompting-container-column--big--screen {
+        max-width: 100%;
+    }
+}
+
+
+
+.table-header{
+    margin-top: $spacing-medium;
+    padding-bottom: $spacing-medium;
+    border-bottom: 1px solid $table-border-separator-color;
+}
+
+.table-header-background{
+    padding-top: $spacing-small;
+    padding-bottom: $spacing-small;
+    padding-left: $spacing-small;
+    background-color: $table-border-separator-color;
+}
+
+.output-table{
+    display: flex;
+
+    .text-test-case {
+        min-width: 10%;
+        margin-bottom: auto;
+    }
+    .text-output {
+        min-width: 60%;
+        margin-bottom: auto;
+        padding-left: $spacing-medium;
+        padding-right: $spacing-small;
+        
+        
+    }
+    .text-token {
+        min-width: 10%;
+        margin-bottom: auto;
+    }
+    .text-duration {
+        min-width: 10%;
+        margin-bottom: auto;
+    }
+}
+
+.version-table{
+    display: flex;
+
+    .text-version {
+        width: 10%;
+    }
+    .text-title {
+        width: 35%;
+    }
+    .text-in-use {
+        width: 10%;
+    }
+    .text-owner {
+        width: 20%;
+    }
+    .text-last-edited {
+        width: 20%;
+    }
+    .delete-icon {
+        width: 5%;
+        color: $brand-danger;
+    }
+}
+
+.testcase-table{
+    display: flex;
+    padding-left: $spacing-small;
+
+    .text-testcase{
+        min-width: 95%;
+    }
+    .delete-icon{
+        min-width: 5%;
+        color: $brand-danger;
+    }
+}
+
+
+
+
+
+
+
+
+.page-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+
+    .page-container-main {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .page-container-side {
+        width: 100%;
+        max-width: 540px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .page-container-header{
+        //Removed height
+        //height: 150px;
+        display: flex;
+        flex-direction: row;
+        //Needed somehow, why?
+        background: white;
+        padding-bottom: $spacing-large;
+    }
+
+    .page-header-content{
+        margin-top: $spacing-medium;
+        padding-left: $spacing-larger;
+        padding-right: $spacing-larger;
+        width: 100%;
+        .pageheader-with-buttons {
+            display: flex !important;
+            justify-content: space-between;
+        }
+    }
+
+     .pageheader-navigation {
+        display: flex !important;
+        align-items: center !important;
+        flex-flow: row !important;
+        justify-content: flex-start !important;
+    }
+    .page-content-wrapper{
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        flex: 1 1 0;
+        overflow-y: auto;
+        margin: $spacing-medium;
+    }
+    .page-content{
+        width: 100%;
+        //Increased width to also account for margin
+        max-width: 1280px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .content-main{
+        width: 100%;
+        max-width: 760px;
+        display: flex;
+        flex-direction: column;
+        margin-right: $spacing-medium;
+        //background: orange;
+
+        .prompt-fields{
+            padding-bottom: $spacing-small;
+        }
+
+        .version-selection{
+            width:100%;
+        }
+    }
+
+    .content-column{
+        width: 100%;
+        max-width: 480px;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: $spacing-small;
+        height: fit-content;
+        //background: red;
+    }
+
+    .content-fullwidth{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        //background: purple;
+    }
+
+    .panel-header{
+        &::after{
+            content: "";
+            height: 80px;
+        }
+        display: flex;
+        flex-direction: row;
+        border-bottom: 1px solid $table-border-separator-color;
+        padding-right: $spacing-small;
+        height: 50px;
+        //background: blue;
+        .header-text{
+            margin-left: $spacing-medium;
+            width: 100%;
+        }
+        .close-icon{
+            border-left : 1px solid $table-border-separator-color;
+            padding-left: $spacing-small;
+            margin-right: $spacing-small;
+            margin-left: $spacing-small;
+            margin-top: $spacing-small;
+        }
+        .new-chat-icon{
+            margin-top: $spacing-small;
+        }
+    }
+
+    .panel-content{
+        flex: 1 1 0;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        //background: green;
+
+    }
+}
