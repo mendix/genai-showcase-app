@@ -22,32 +22,39 @@ import conversationalui.proxies.ProviderConfig;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
- * Creates a new chat context and a new provider config (or a specialization of such depending on the input). The provider config is added to the chat context and set to active. Additionally the action microflow of the new provider config is set.
+ * Creates a new chat context with a provider config that is associated to the passed deployed model. Additionally, the system prompt and the action microflow of the new provider config is set.
  */
 public class ChatContext_Create_SetActionMicroflow extends CustomJavaAction<IMendixObject>
 {
-	private java.lang.String ProviderConfigSpecialization;
+	private IMendixObject __DeployedModel;
+	private genaicommons.proxies.DeployedModel DeployedModel;
 	private java.lang.String ActionMicroflow;
+	private java.lang.String SystemPrompt;
 	private java.lang.String ProviderName;
 
-	public ChatContext_Create_SetActionMicroflow(IContext context, java.lang.String ProviderConfigSpecialization, java.lang.String ActionMicroflow, java.lang.String ProviderName)
+	public ChatContext_Create_SetActionMicroflow(IContext context, IMendixObject DeployedModel, java.lang.String ActionMicroflow, java.lang.String SystemPrompt, java.lang.String ProviderName)
 	{
 		super(context);
-		this.ProviderConfigSpecialization = ProviderConfigSpecialization;
+		this.__DeployedModel = DeployedModel;
 		this.ActionMicroflow = ActionMicroflow;
+		this.SystemPrompt = SystemPrompt;
 		this.ProviderName = ProviderName;
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
+		this.DeployedModel = this.__DeployedModel == null ? null : genaicommons.proxies.DeployedModel.initialize(getContext(), __DeployedModel);
+
 		// BEGIN USER CODE
 		
 		try {
 		    requireNonNull(ActionMicroflow, "ActionMicroflow is required.");
+		    requireNonNull(DeployedModel, "DeployedModel is required.");
+		    
 		    ProviderConfigImpl.validateActionMicroflow(ActionMicroflow);
 
-		    ProviderConfig providerConfig = ProviderConfigImpl.createAndSetProviderConfigSpecialization(getContext(), ProviderConfigSpecialization, ActionMicroflow, ProviderName);
+		    ProviderConfig providerConfig = ProviderConfigImpl.createAndSetProviderConfigSpecialization(getContext(), null, ActionMicroflow, ProviderName, DeployedModel, SystemPrompt);
 
 		    return createAndSetChatContext(providerConfig).getMendixObject();
 
