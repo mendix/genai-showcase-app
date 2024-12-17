@@ -19,7 +19,7 @@ import conversationalui.proxies.ProviderConfig;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
- * Creates a new chat context with a provider config that is associated to the passed deployed model. Additionally, the system prompt and the action microflow of the new provider config is set.
+ * Creates a new chat context with a provider config that is associated to the passed deployed model. Additionally, the system prompt and the action microflow of the new provider config are set.
  */
 public class ChatContext_Create_SetActionMicroflow extends CustomJavaAction<IMendixObject>
 {
