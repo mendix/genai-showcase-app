@@ -50,8 +50,8 @@ public class EntityAttribute_GetList extends CustomJavaAction<java.util.List<IMe
 			}
 			return attributeList;	
 			} catch (Exception e) {
-				LOGGER.error(e.getMessage());
-				throw e;
+				LOGGER.error(e);
+				return null;
 		}
 
 		// END USER CODE
