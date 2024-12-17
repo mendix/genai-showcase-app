@@ -17,6 +17,10 @@ import conversationalui.impl.MxLogger;
 import conversationalui.proxies.PromptToUse;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
+/**
+ * This action is a combination of 'Get Prompt' and 'New Chat'.
+ * First the variables in the prompt are replaced with attributes from the VariablesObject to get the final system prompt. Then a new chat context is created with a provider config that is associated to a deployed model. Additionally, the system prompt is set based on the Prompt and the action microflow of the new provider config is set.
+ */
 public class ChatContext_Create_ForPrompt extends CustomJavaAction<IMendixObject>
 {
 	private IMendixObject __OverwritingDeployedModel;
