@@ -50,16 +50,17 @@ public class ChatContext_Create_ForPrompt extends CustomJavaAction<IMendixObject
 		
 		try {
 		    requireNonNull(Prompt, "Prompt is required.");
-		    
-		    PromptToUse promptToUse = Core.userActionCall(PromptToUse_GetAndReplace.class.toString())
+		    IMendixObject returnValue = Core.userActionCall("ConversationalUI." + PromptToUse_GetAndReplace.class.getSimpleName())
 		    		.withParams(Prompt.getTitle(), VariablesObject)
 		    		.execute(getContext());
-		    if (promptToUse == null) {
+		    if (returnValue == null) {
 		    	return null;
 		    }
 		    
-		    return Core.userActionCall(ChatContext_Create_SetActionMicroflow.class.toString())
-		    		.withParams((OverwritingDeployedModel != null ? OverwritingDeployedModel : Prompt.getPrompt_DeployedModel()), ActionMicroflow, promptToUse.getSystemPrompt(), Prompt.getTitle())
+		    PromptToUse promptToUse = PromptToUse.initialize(getContext(), returnValue);
+		  
+		    return Core.userActionCall("ConversationalUI." + ChatContext_Create_SetActionMicroflow.class.getSimpleName())
+		    		.withParams((OverwritingDeployedModel != null ? OverwritingDeployedModel.getMendixObject() : Prompt.getPrompt_DeployedModel().getMendixObject()), ActionMicroflow, promptToUse.getSystemPrompt(), Prompt.getTitle())
 		    		.execute(getContext());
 
 		} catch (Exception e) {

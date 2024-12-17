@@ -163,9 +163,10 @@
     .chat-container{
         margin-left: $spacing-medium;
         padding-right: $spacing-larger;
-
+    
         .d-inline-block{
-            visibility: hidden;
+            //Hides the timestamp
+            display: none !important;
         }
     }
     .chat-bubble-wrapper {
