@@ -10,14 +10,11 @@
 package conversationalui.actions;
 
 import static java.util.Objects.requireNonNull;
-import java.util.LinkedList;
-import java.util.List;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
+import conversationalui.impl.ChatContextImpl;
 import conversationalui.impl.MxLogger;
 import conversationalui.impl.ProviderConfigImpl;
-import conversationalui.proxies.ChatContext;
-import conversationalui.proxies.ENUM_ChatContextStatus;
 import conversationalui.proxies.ProviderConfig;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
@@ -56,7 +53,7 @@ public class ChatContext_Create_SetActionMicroflow extends CustomJavaAction<IMen
 
 		    ProviderConfig providerConfig = ProviderConfigImpl.createAndSetProviderConfigSpecialization(getContext(), null, ActionMicroflow, ProviderName, DeployedModel, SystemPrompt);
 
-		    return createAndSetChatContext(providerConfig).getMendixObject();
+		    return ChatContextImpl.createAndSetChatContext(getContext(), providerConfig).getMendixObject();
 
 		} catch (Exception e) {
 		    LOGGER.error(e);
@@ -79,19 +76,6 @@ public class ChatContext_Create_SetActionMicroflow extends CustomJavaAction<IMen
 	// BEGIN EXTRA CODE
 	
 	private static final MxLogger LOGGER = new MxLogger(ChatContext_Create_SetActionMicroflow.class);
-	
-	private ChatContext createAndSetChatContext(ProviderConfig providerConfig) {
-		// Create ChatContext and set attributes and associations
-		ChatContext chatContext = new ChatContext(getContext());
-		chatContext.setStatus(ENUM_ChatContextStatus.Ready);
-		chatContext.setChatContext_ProviderConfig_Active(providerConfig);
-
-		//Add to ProviderConfigList
-		List<ProviderConfig> providerConfigList = new LinkedList<>();
-		providerConfigList.add(providerConfig);
-		chatContext.setChatContext_ProviderConfig(providerConfigList);
-		return chatContext;
-	}
 	
 	// END EXTRA CODE
 }

@@ -62,8 +62,8 @@ public class PromptToUse_GetAndReplace extends CustomJavaAction<IMendixObject>
 			return promptToUse.getMendixObject();
 
 		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-			throw e;
+			LOGGER.error(e);
+			throw null;
 		}
 		// END USER CODE
 	}
