@@ -63,7 +63,7 @@ public class PromptToUse_GetAndReplace extends CustomJavaAction<IMendixObject>
 
 		} catch (Exception e) {
 			LOGGER.error(e);
-			throw null;
+			return null;
 		}
 		// END USER CODE
 	}

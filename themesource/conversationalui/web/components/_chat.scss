@@ -161,8 +161,8 @@
     padding-left: unset;
     padding-right: unset;
     .chat-container{
-        margin-left: $spacing-medium;
-        padding-right: $spacing-larger;
+        padding-left: $spacing-medium;
+        padding-right: $spacing-medium;
     
         .d-inline-block{
             //Hides the timestamp
