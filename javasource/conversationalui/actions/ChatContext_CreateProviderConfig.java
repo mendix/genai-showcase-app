@@ -58,6 +58,7 @@ public class ChatContext_CreateProviderConfig extends CustomJavaAction<IMendixOb
 		try {
 		    requireNonNull(ActionMicroflow, "ActionMicroflow is required.");
 		    requireNonNull(ChatContext, "ChatContext is required.");
+		    requireNonNull(DeployedModel, "DeployedModel is required.");
 		    ProviderConfigImpl.validateActionMicroflow(ActionMicroflow);
 
 		    ProviderConfig providerConfig = ProviderConfigImpl.createAndSetProviderConfigSpecialization(getContext(), ProviderConfigSpecialization, ActionMicroflow, ProviderName, DeployedModel, SystemPrompt);
