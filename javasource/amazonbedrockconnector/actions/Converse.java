@@ -113,10 +113,10 @@ public class Converse extends CustomJavaAction<IMendixObject>
 			var client = AmazonBedrockClient.getBedrockRuntimeClient(Credentials, Region, ConverseRequest);
 			
 			var awsRequest = getAwsRequest();
-			LOGGER.debug("AWS Request: " + awsRequest);
+			LOGGER.info("AWS Request: " + awsRequest);
 			
 			var awsResponse = client.converse(awsRequest);
-			LOGGER.debug("AWS Response: " + awsResponse);
+			LOGGER.info("AWS Response: " + awsResponse);
 			
 			Response mxResponse = getMxResponse(awsResponse);
 			
