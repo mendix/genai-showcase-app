@@ -63,6 +63,24 @@
     }
 }
 
+.combo-model-selection {
+    min-width: 360px;
+    z-index: 200;
+    .model-selection{
+        display: flex;
+        align-items: center;
+        height: max-content;
+    }
+    .mx-image {
+        height: $font-size-default;
+        margin-right: $spacing-small;
+        border: 1px solid $light-border-color;
+        height: 24px;
+        width: 24px;
+    }
+
+}
+
 .widget-combobox .widget-combobox-input-container {
     flex-grow: 0;
     transition: box-shadow .15s ease 0s;

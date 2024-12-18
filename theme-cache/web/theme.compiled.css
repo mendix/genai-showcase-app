@@ -24186,6 +24186,23 @@ input[type=checkbox].three-state-checkbox + .control-label {
   float: right;
 }
 
+.combo-model-selection {
+  min-width: 360px;
+  z-index: 200;
+}
+.combo-model-selection .model-selection {
+  display: flex;
+  align-items: center;
+  height: max-content;
+}
+.combo-model-selection .mx-image {
+  height: 14px;
+  margin-right: 8px;
+  border: 1px solid #f3f3f4;
+  height: 24px;
+  width: 24px;
+}
+
 .widget-combobox .widget-combobox-input-container {
   flex-grow: 0;
   transition: box-shadow 0.15s ease 0s;
