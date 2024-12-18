@@ -23642,20 +23642,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   line-height: 1;
 }
 
-.segmented-control {
-  height: fit-content;
-  border: 1px solid #ced0d3;
-  border-radius: 4px;
-  padding: 4px;
-  width: fit-content;
-  background-color: #f8f8f8;
-}
-.segmented-control .btn.btn-default {
-  border: 1px solid transparent;
-  background: transparent;
-  color: #0a1325;
-}
-
 .spacing-outer-bottom-medium {
   margin-bottom: 16px;
 }
@@ -24014,8 +24000,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding-right: unset;
 }
 .chat-container-prompting .chat-container {
-  margin-left: 16px;
-  padding-right: 32px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 .chat-container-prompting .chat-container .d-inline-block {
   display: none !important;
@@ -24029,6 +24015,28 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .chat-container-prompting .chat-bubble-wrapper--user .chat-message-card {
   background: #f8f8f8;
   border: 1px solid #f8f8f8;
+}
+
+.chat-container-disabled .panel-content {
+  flex-direction: column;
+  overflow: hidden;
+}
+.chat-container-disabled .messages-container {
+  display: none;
+}
+.chat-container-disabled .chat-input-wrapper {
+  padding-top: 100%;
+}
+.chat-container-disabled .chat-input-wrapper .form-group .form-control {
+  background-color: #f8f8f8;
+  opacity: 1;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.chat-container-disabled .send-btn-container .send-btn {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.65;
 }
 
 .chart-input.widget-chart .fills .js-fill,
@@ -24176,6 +24184,23 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-right: 8px;
   margin-left: auto;
   float: right;
+}
+
+.combo-model-selection {
+  min-width: 360px;
+  z-index: 200;
+}
+.combo-model-selection .model-selection {
+  display: flex;
+  align-items: center;
+  height: max-content;
+}
+.combo-model-selection .mx-image {
+  height: 14px;
+  margin-right: 8px;
+  border: 1px solid #f3f3f4;
+  height: 24px;
+  width: 24px;
 }
 
 .widget-combobox .widget-combobox-input-container {
@@ -24728,5 +24753,19 @@ input[type=checkbox].three-state-checkbox + .control-label {
 @import "./layouts/all";
 @import "./pages/all";
 */
+.layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a img {
+  width: 52px;
+  padding: 4px 14px;
+}
+
+.layout-atlas-responsive .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree .navbar-inner > ul > li > a,
+.layout-atlas-responsive-default .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree .navbar-inner > ul > li > a {
+  white-space: normal;
+}
+
+/*    Mendix 10   */
+.layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a {
+  padding: 8px 0;
+}
 
 /*# sourceMappingURL=theme.compiled.css.map */

@@ -15,6 +15,7 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
 import conversationalui.impl.MxLogger;
 import conversationalui.proxies.PromptToUse;
+import genaicommons.proxies.DeployedModel;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
@@ -50,6 +51,9 @@ public class ChatContext_Create_ForPrompt extends CustomJavaAction<IMendixObject
 		
 		try {
 		    requireNonNull(Prompt, "Prompt is required.");
+		    DeployedModel deployedModel = OverwritingDeployedModel != null ? OverwritingDeployedModel : Prompt.getPrompt_DeployedModel();
+		    requireNonNull(deployedModel, "No DeployedModel could be used for creating the ChatContext. Either pass the OverwritingDeployedModel or make sure to use a Prompt that has a DeployedModel associated.");
+		    
 		    IMendixObject returnValue = Core.userActionCall("ConversationalUI." + PromptToUse_GetAndReplace.class.getSimpleName())
 		    		.withParams(Prompt.getTitle(), VariablesObject)
 		    		.execute(getContext());
@@ -58,9 +62,8 @@ public class ChatContext_Create_ForPrompt extends CustomJavaAction<IMendixObject
 		    }
 		    
 		    PromptToUse promptToUse = PromptToUse.initialize(getContext(), returnValue);
-		  
 		    return Core.userActionCall("ConversationalUI." + ChatContext_Create_SetActionMicroflow.class.getSimpleName())
-		    		.withParams((OverwritingDeployedModel != null ? OverwritingDeployedModel.getMendixObject() : Prompt.getPrompt_DeployedModel().getMendixObject()), ActionMicroflow, promptToUse.getSystemPrompt(), Prompt.getTitle())
+		    		.withParams(deployedModel.getMendixObject(), ActionMicroflow, promptToUse.getSystemPrompt(), Prompt.getTitle())
 		    		.execute(getContext());
 
 		} catch (Exception e) {

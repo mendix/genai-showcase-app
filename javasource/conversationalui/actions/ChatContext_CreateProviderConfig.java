@@ -20,7 +20,7 @@ import conversationalui.proxies.ProviderConfig;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
- * Adds a new provider config (or a specialization of such depending on the input) that is associated to the passed deployed model to a chat context. The provider config is added to the chat context and set to active if IsActive is set to true. Additionally, the system prompt action microflow of the new provider config is set.
+ * Adds a new ProviderConfig (or a specialization of such depending on the input entity parameter) to the ChatContext. The passed DeployedModel will be associated to it. The ProviderConfig is set to active/selected only if IsActive is set to "true". In any case, the specified SystemPrompt and ActionMicroflow will be set on the new ProviderConfig.
  */
 public class ChatContext_CreateProviderConfig extends CustomJavaAction<IMendixObject>
 {
@@ -58,6 +58,7 @@ public class ChatContext_CreateProviderConfig extends CustomJavaAction<IMendixOb
 		try {
 		    requireNonNull(ActionMicroflow, "ActionMicroflow is required.");
 		    requireNonNull(ChatContext, "ChatContext is required.");
+		    requireNonNull(DeployedModel, "DeployedModel is required.");
 		    ProviderConfigImpl.validateActionMicroflow(ActionMicroflow);
 
 		    ProviderConfig providerConfig = ProviderConfigImpl.createAndSetProviderConfigSpecialization(getContext(), ProviderConfigSpecialization, ActionMicroflow, ProviderName, DeployedModel, SystemPrompt);
