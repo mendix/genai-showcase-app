@@ -24750,5 +24750,19 @@ input[type=checkbox].three-state-checkbox + .control-label {
 @import "./layouts/all";
 @import "./pages/all";
 */
+.layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a img {
+  width: 52px;
+  padding: 4px 14px;
+}
+
+.layout-atlas-responsive .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree .navbar-inner > ul > li > a,
+.layout-atlas-responsive-default .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree .navbar-inner > ul > li > a {
+  white-space: normal;
+}
+
+/*    Mendix 10   */
+.layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a {
+  padding: 8px 0;
+}
 
 /*# sourceMappingURL=theme.compiled.css.map */
