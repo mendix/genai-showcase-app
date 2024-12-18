@@ -24031,6 +24031,28 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border: 1px solid #f8f8f8;
 }
 
+.chat-container-disabled .panel-content {
+  flex-direction: column;
+  overflow: hidden;
+}
+.chat-container-disabled .messages-container {
+  display: none;
+}
+.chat-container-disabled .chat-input-wrapper {
+  padding-top: 100%;
+}
+.chat-container-disabled .chat-input-wrapper .form-group .form-control {
+  background-color: #f8f8f8;
+  opacity: 1;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.chat-container-disabled .send-btn-container .send-btn {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.65;
+}
+
 .chart-input.widget-chart .fills .js-fill,
 .chart-input.widget-chart .legendfill .js-fill {
   fill: #8a9df1 !important;

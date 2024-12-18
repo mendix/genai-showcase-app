@@ -183,3 +183,32 @@
         }
     }
 }
+
+.chat-container-disabled{
+    .panel-content{
+        flex-direction: column;      
+        overflow: hidden;  
+    }
+    .messages-container{
+        display: none;
+    }
+    .chat-input-wrapper{
+        padding-top: 100% ;
+        .form-group{
+            .form-control{
+                background-color: $form-input-bg-disabled;
+                opacity: 1;
+                cursor: not-allowed;
+                pointer-events: none;
+            }
+        }
+    }
+    .send-btn-container{
+        .send-btn {
+            cursor: not-allowed;
+            pointer-events: none;
+            opacity: 0.65;
+        }
+    }
+    
+}
