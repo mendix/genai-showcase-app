@@ -24394,7 +24394,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .page-container .page-container-side {
   width: 100%;
-  max-width: 450px;
+  max-width: 540px;
   display: flex;
   flex-direction: column;
 }
@@ -24433,8 +24433,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex: 1 1 0;
   overflow-y: auto;
   margin-top: 24px;
-  margin-left: 12px;
-  margin-right: 12px;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 .page-container .page-content {
   width: 100%;
