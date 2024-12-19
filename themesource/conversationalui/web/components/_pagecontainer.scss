@@ -97,9 +97,9 @@
         justify-content: space-around;
         flex: 1 1 0;
         overflow-y: auto;
-        margin-top: $spacing-medium;
-        margin-left: $spacing-medium;
-        margin-right: $spacing-medium;
+        margin-top: $spacing-large;
+        margin-left: $spacing-large / 2;
+        margin-right: $spacing-large / 2;
     }
     .page-content{
         width: 100%;
@@ -114,10 +114,14 @@
         width: 60%;
         display: flex;
         flex-direction: column;
-        padding-right: $spacing-medium;
+        //padding-right: $spacing-medium;
         height: fit-content;
         .prompt-fields{
             padding-bottom: $spacing-small;
+        }
+        .card{
+            margin-left:  $spacing-large / 2;
+            margin-right:  $spacing-large / 2;
         }
 
         .version-selection{
@@ -130,8 +134,12 @@
         width: 40%;
         display: flex;
         flex-direction: column;
-        padding-bottom: $spacing-small;
+        //padding-bottom: $spacing-small;
         height: fit-content;
+        .card{
+            margin-left:  $spacing-large / 2;
+            margin-right:  $spacing-large / 2;
+        }
     }
 
     //For screens smaller the containers grow to max width
