@@ -24649,6 +24649,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
 }
 
+.popupmenu--full-width ul {
+  width: 100%;
+}
+.popupmenu--full-width ul .btn {
+  width: 100%;
+}
+
 .popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item {
   background-color: #fff;
 }
