@@ -6,7 +6,7 @@
 
 .prompting-page-content-container {
     min-height: -webkit-fill-available;
-    min-height:  -moz-available;
+    min-height: -moz-available;
     display: flex;
     justify-content: center;
     
@@ -37,7 +37,7 @@
     .pageheader-with-buttons {
         display: flex !important;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-start;
     }
 }
 

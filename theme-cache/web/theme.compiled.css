@@ -24385,7 +24385,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .prompting-page-content-container .pageheader-with-buttons {
   display: flex !important;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .page-container {
