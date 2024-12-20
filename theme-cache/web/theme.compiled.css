@@ -23772,17 +23772,23 @@ input[type=checkbox].three-state-checkbox + .control-label {
   text-transform: uppercase;
 }
 
-.btn-without-border.mx-link {
+.btn-without-border {
   color: #0a1325;
-  text-decoration: none;
   border: 1px solid transparent;
 }
-.btn-without-border.mx-link.disabled {
+.btn-without-border.mx-link {
+  text-decoration: none;
+}
+.btn-without-border.disabled {
   background-color: transparent !important;
   cursor: default;
 }
-.btn-without-border.mx-link:hover {
-  background-color: transparent;
+.btn-without-border:hover {
+  background-color: #e7e7e9;
+  border: 1px solid #e7e7e9;
+}
+.btn-without-border:hover, .btn-without-border:active, .btn-without-border:focus {
+  color: #0a1325;
 }
 
 .btn-no-hover.mx-link:hover {
@@ -23816,7 +23822,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 0.6em;
 }
 .btn-icon img {
-  margin-right: 0;
+  margin: 1px;
 }
 
 .chat-card--full-height {
@@ -24709,6 +24715,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .segmented-control .btn.btn-default {
   border: 1px solid transparent;
   background: transparent;
+}
+.segmented-control .btn.btn-default.disabled {
+  background-color: transparent !important;
+  cursor: default;
+}
+.segmented-control .btn.btn-default:hover {
+  background-color: #e7e7e9;
 }
 
 .layout-chat-sidebar {
