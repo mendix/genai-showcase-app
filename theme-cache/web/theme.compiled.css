@@ -24194,11 +24194,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
   align-items: center;
   height: max-content;
+  font-weight: 600;
 }
 .combo-model-selection .mx-image {
   height: 14px;
   margin-right: 8px;
   border: 1px solid #f3f3f4;
+  padding: 4px;
+  border-radius: 4px;
   height: 24px;
   width: 24px;
 }
@@ -24394,7 +24397,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .page-container .page-container-side {
   width: 100%;
-  max-width: 450px;
+  max-width: 540px;
   display: flex;
   flex-direction: column;
 }
@@ -24432,9 +24435,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: space-around;
   flex: 1 1 0;
   overflow-y: auto;
-  margin-top: 16px;
-  margin-left: 16px;
-  margin-right: 16px;
+  margin-top: 24px;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 .page-container .page-content {
   width: 100%;
@@ -24448,11 +24451,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 60%;
   display: flex;
   flex-direction: column;
-  padding-right: 16px;
   height: fit-content;
 }
 .page-container .content-main .prompt-fields {
   padding-bottom: 8px;
+}
+.page-container .content-main .card {
+  margin-left: 12px;
+  margin-right: 12px;
 }
 .page-container .content-main .version-selection {
   width: 100%;
@@ -24462,8 +24468,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 40%;
   display: flex;
   flex-direction: column;
-  padding-bottom: 8px;
   height: fit-content;
+}
+.page-container .content-column .card {
+  margin-left: 12px;
+  margin-right: 12px;
 }
 @media (max-width: 1200px) {
   .page-container .content-main {
@@ -24647,6 +24656,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .popupmenu--display-flex.popupmenu {
   display: flex;
+}
+
+.popupmenu--full-width ul {
+  width: 100%;
+}
+.popupmenu--full-width ul .btn {
+  width: 100%;
 }
 
 .popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item {

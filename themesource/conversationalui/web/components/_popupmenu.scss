@@ -4,6 +4,16 @@
     }
 }
 
+.popupmenu--full-width {
+    ul {
+        width: 100%;
+
+        .btn {
+            width: 100%;
+        }
+    }
+}
+
 .popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item {
     background-color: $bg-color-secondary;
 
