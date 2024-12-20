@@ -8,5 +8,14 @@
     .btn.btn-default{
         border: 1px solid transparent;
         background: transparent;
+        &.disabled {
+            background-color: transparent !important;
+            cursor: default;
+        }
+    
+        &:hover {
+            background-color: $btn-default-bg-hover;
+        }
     }
+    
 }

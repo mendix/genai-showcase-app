@@ -1,7 +1,9 @@
-.btn-without-border.mx-link {
+.btn-without-border {
     color: $font-color-default;
-    text-decoration: none;
     border: 1px solid transparent;
+    &.mx-link{
+        text-decoration: none;
+    }
 
     &.disabled {
         background-color: transparent !important;
@@ -9,9 +11,16 @@
     }
 
     &:hover {
-        background-color: transparent;
+        background-color: $btn-default-bg-hover;
+        border: 1px solid $btn-default-bg-hover;
+    }
+    &:hover,
+    &:active,
+    &:focus {
+        color: $font-color-default;
     }
 }
+
 
 .btn-no-hover.mx-link:hover {
     background-color: transparent !important;
@@ -43,6 +52,6 @@
     display: flex;
     padding: 0.6em;
     img{
-        margin-right: 0;
+        margin: 1px;
     }
 }

@@ -23772,17 +23772,23 @@ input[type=checkbox].three-state-checkbox + .control-label {
   text-transform: uppercase;
 }
 
-.btn-without-border.mx-link {
+.btn-without-border {
   color: #0a1325;
-  text-decoration: none;
   border: 1px solid transparent;
 }
-.btn-without-border.mx-link.disabled {
+.btn-without-border.mx-link {
+  text-decoration: none;
+}
+.btn-without-border.disabled {
   background-color: transparent !important;
   cursor: default;
 }
-.btn-without-border.mx-link:hover {
-  background-color: transparent;
+.btn-without-border:hover {
+  background-color: #e7e7e9;
+  border: 1px solid #e7e7e9;
+}
+.btn-without-border:hover, .btn-without-border:active, .btn-without-border:focus {
+  color: #0a1325;
 }
 
 .btn-no-hover.mx-link:hover {
@@ -23816,7 +23822,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 0.6em;
 }
 .btn-icon img {
-  margin-right: 0;
+  margin: 1px;
 }
 
 .chat-card--full-height {
@@ -24207,10 +24213,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: 14px;
   margin-right: 8px;
   border: 1px solid #f3f3f4;
-  padding: 4px;
   border-radius: 4px;
-  height: 24px;
-  width: 24px;
 }
 
 .widget-combobox .widget-combobox-input-container {
@@ -24388,7 +24391,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .prompting-page-content-container .pageheader-with-buttons {
   display: flex !important;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .page-container {
@@ -24442,7 +24445,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: space-around;
   flex: 1 1 0;
   overflow-y: auto;
-  margin-top: 24px;
   padding-left: 12px;
   padding-right: 12px;
 }
@@ -24452,6 +24454,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  height: fit-content;
+  padding-top: 24px;
+  padding-bottom: 24px;
 }
 .page-container .content-main {
   min-width: 450px;
@@ -24481,7 +24486,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 @media (max-width: 1200px) {
   .page-container .content-main {
     width: 100%;
-    padding-right: unset;
   }
   .page-container .content-column {
     width: 100%;
@@ -24501,6 +24505,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+.page-container .content-fullwidth .card {
+  margin-left: 12px;
+  margin-right: 12px;
 }
 .page-container .panel-header {
   display: flex;
@@ -24531,6 +24539,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex: 1 1 0;
   overflow-y: auto;
   display: flex;
+  flex-direction: column;
 }
 
 .table-header {
@@ -24706,6 +24715,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .segmented-control .btn.btn-default {
   border: 1px solid transparent;
   background: transparent;
+}
+.segmented-control .btn.btn-default.disabled {
+  background-color: transparent !important;
+  cursor: default;
+}
+.segmented-control .btn.btn-default:hover {
+  background-color: #e7e7e9;
 }
 
 .layout-chat-sidebar {
