@@ -38,3 +38,13 @@
     overflow: unset;
 }
 
+.card{
+    .card-header{
+        display: flex;
+        flex-direction: row;
+        
+        .widget-combobox .widget-combobox-input-container{
+            height: 100%;
+        }
+    }
+}

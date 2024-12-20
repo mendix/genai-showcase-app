@@ -23700,8 +23700,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
   font-weight: normal;
 }
 
-.icon-action-padding {
-  padding-top: 5px;
+.icon-info-wrapper {
+  display: flex;
+  align-items: center;
+}
+.icon-info-wrapper img {
+  margin-right: 0;
+  margin-bottom: 4px;
 }
 
 .accordion-chat-sources .widget-accordion-group {
@@ -23852,6 +23857,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .overflow-unset {
   overflow: unset;
+}
+
+.card .card-header {
+  display: flex;
+  flex-direction: row;
+}
+.card .card-header .widget-combobox .widget-combobox-input-container {
+  height: 100%;
 }
 
 .chat-loading-wrapper {
@@ -24453,9 +24466,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .page-container .content-main .card {
   margin-left: 12px;
   margin-right: 12px;
-}
-.page-container .content-main .version-selection {
-  width: 100%;
 }
 .page-container .content-column {
   min-width: 400px;
