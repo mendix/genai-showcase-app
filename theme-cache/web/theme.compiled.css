@@ -24448,6 +24448,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  height: fit-content;
   padding-top: 24px;
   padding-bottom: 24px;
 }
