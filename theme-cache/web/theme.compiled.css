@@ -24194,11 +24194,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
   align-items: center;
   height: max-content;
+  font-weight: 600;
 }
 .combo-model-selection .mx-image {
   height: 14px;
   margin-right: 8px;
   border: 1px solid #f3f3f4;
+  padding: 4px;
+  border-radius: 4px;
   height: 24px;
   width: 24px;
 }
