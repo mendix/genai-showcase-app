@@ -24533,6 +24533,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex: 1 1 0;
   overflow-y: auto;
   display: flex;
+  flex-direction: column;
 }
 
 .table-header {

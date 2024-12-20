@@ -148,7 +148,6 @@
     @media(max-width: 1200px) {
         .content-main {
             width: 100%;
-            //padding-right: unset;
         }
 
         .content-column {
@@ -214,7 +213,7 @@
         flex: 1 1 0;
         overflow-y: auto;
         display: flex;
-        //flex-direction: column;
+        flex-direction: column;
     }
 }
 
