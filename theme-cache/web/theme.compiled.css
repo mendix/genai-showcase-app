@@ -24479,7 +24479,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 @media (max-width: 1200px) {
   .page-container .content-main {
     width: 100%;
-    padding-right: unset;
   }
   .page-container .content-column {
     width: 100%;
@@ -24499,6 +24498,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+.page-container .content-fullwidth .card {
+  margin-left: 12px;
+  margin-right: 12px;
 }
 .page-container .panel-header {
   display: flex;
