@@ -24207,10 +24207,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: 14px;
   margin-right: 8px;
   border: 1px solid #f3f3f4;
-  padding: 4px;
   border-radius: 4px;
-  height: 24px;
-  width: 24px;
 }
 
 .widget-combobox .widget-combobox-input-container {
