@@ -29,15 +29,15 @@ public class ChatContext_Create_ForPrompt extends CustomJavaAction<IMendixObject
 	private java.lang.String ActionMicroflow;
 	private IMendixObject __Prompt;
 	private conversationalui.proxies.Prompt Prompt;
-	private IMendixObject VariablesObject;
+	private IMendixObject ContextObject;
 
-	public ChatContext_Create_ForPrompt(IContext context, IMendixObject OverwritingDeployedModel, java.lang.String ActionMicroflow, IMendixObject Prompt, IMendixObject VariablesObject)
+	public ChatContext_Create_ForPrompt(IContext context, IMendixObject OverwritingDeployedModel, java.lang.String ActionMicroflow, IMendixObject Prompt, IMendixObject ContextObject)
 	{
 		super(context);
 		this.__OverwritingDeployedModel = OverwritingDeployedModel;
 		this.ActionMicroflow = ActionMicroflow;
 		this.__Prompt = Prompt;
-		this.VariablesObject = VariablesObject;
+		this.ContextObject = ContextObject;
 	}
 
 	@java.lang.Override
@@ -55,7 +55,7 @@ public class ChatContext_Create_ForPrompt extends CustomJavaAction<IMendixObject
 		    requireNonNull(deployedModel, "No DeployedModel could be used for creating the ChatContext. Either pass the OverwritingDeployedModel or make sure to use a Prompt that has a DeployedModel associated.");
 		    
 		    IMendixObject returnValue = Core.userActionCall("ConversationalUI." + PromptToUse_GetAndReplace.class.getSimpleName())
-		    		.withParams(Prompt.getTitle(), VariablesObject)
+		    		.withParams(__Prompt, ContextObject)
 		    		.execute(getContext());
 		    if (returnValue == null) {
 		    	return null;

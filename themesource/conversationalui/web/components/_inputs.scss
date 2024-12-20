@@ -1,3 +1,4 @@
+@import "../../../../theme/web/custom-variables.scss";
 .datetime-inputs-wrapper {
     display: flex;
     justify-content: flex-end;
@@ -70,15 +71,17 @@
         display: flex;
         align-items: center;
         height: max-content;
+        font-weight: $font-weight-semibold;
     }
     .mx-image {
         height: $font-size-default;
         margin-right: $spacing-small;
         border: 1px solid $light-border-color;
+        padding: $spacing-smaller;
+        border-radius: $border-radius-default;
         height: 24px;
         width: 24px;
     }
-
 }
 
 .widget-combobox .widget-combobox-input-container {

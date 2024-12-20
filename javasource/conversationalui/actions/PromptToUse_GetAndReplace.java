@@ -22,7 +22,7 @@ import conversationalui.proxies.Version;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
- * Use this action to get a prompt that was configured in the app by passing the prompt's name. If you pass an object, all variables that match the prompt's variables are replaced with the actual values extracted from the attributes with the exact same name as a variable. This works for string, integer/long, decimal, date time, boolean and enum attribute types. Note that the key of an ENUM will be used to replace a variable. To ensure a fixed format (for other types than string), it is recommended to convert values to string first and only pass string attributes for value replacement.
+ * Use this action to get a PromptInUse based on a prompt that was configured in the app. If you pass a context object, all variables that match the prompt's variables are replaced with the actual values extracted from the attributes with the exact same name as a variable. This works for string, integer/long, decimal, date time, boolean and enum attribute types. Note that the key of an ENUM will be used to replace a variable. To ensure a fixed format (for other types than string), it is recommended to convert values to string first and only pass string attributes for value replacement.
  * 
  * 
  * Output:
@@ -30,33 +30,36 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
  */
 public class PromptToUse_GetAndReplace extends CustomJavaAction<IMendixObject>
 {
-	private java.lang.String PromptName;
-	private IMendixObject VariablesObject;
+	private IMendixObject __Prompt;
+	private conversationalui.proxies.Prompt Prompt;
+	private IMendixObject ContextObject;
 
-	public PromptToUse_GetAndReplace(IContext context, java.lang.String PromptName, IMendixObject VariablesObject)
+	public PromptToUse_GetAndReplace(IContext context, IMendixObject Prompt, IMendixObject ContextObject)
 	{
 		super(context);
-		this.PromptName = PromptName;
-		this.VariablesObject = VariablesObject;
+		this.__Prompt = Prompt;
+		this.ContextObject = ContextObject;
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
+		this.Prompt = this.__Prompt == null ? null : conversationalui.proxies.Prompt.initialize(getContext(), __Prompt);
+
 		// BEGIN USER CODE
 		try {
-			requireNonNull(PromptName, "PromptName is required.");
+			requireNonNull(Prompt, "Prompt is required.");
 
 			// get Version In Use (alternatively Draft) and set values
-			Version versionInUse = conversationalui.proxies.microflows.Microflows
-					.version_GetForPromptTitle(getContext(), PromptName);
+			
+			Version versionInUse = Prompt.getPrompt_Version_InUse();
 			requireNonNull(versionInUse, "No version marked as 'In Use' was found, so no PromptInUse can be created.");
 
 			PromptToUse promptToUse = createPromptToUse(versionInUse);
 
 			// if a VariablesObject was passed, replace the placeholders with actual values.
-			if (VariablesObject != null) {
-				applyVariables(promptToUse, versionInUse, VariablesObject);
+			if (ContextObject != null) {
+				applyVariables(promptToUse, versionInUse, ContextObject);
 			}
 
 			return promptToUse.getMendixObject();
@@ -99,7 +102,7 @@ public class PromptToUse_GetAndReplace extends CustomJavaAction<IMendixObject>
 		if (!variablesObject.getMetaObject().getName().equals(prompt.getEntity())) {
 			throw new IllegalArgumentException(
 					"Cannot replace variables for the passed VariablesObject because it does not match the Variables Entity that was configured for this Prompt."
-							+ " Passed object's entity: " + VariablesObject.getMetaObject().getName() + ", expected: "
+							+ " Passed object's entity: " + ContextObject.getMetaObject().getName() + ", expected: "
 							+ prompt.getEntity());
 		}
 
