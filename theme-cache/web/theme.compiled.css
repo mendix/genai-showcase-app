@@ -23700,8 +23700,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
   font-weight: normal;
 }
 
-.icon-action-padding {
-  padding-top: 5px;
+.icon-info-wrapper {
+  display: flex;
+  align-items: center;
+}
+.icon-info-wrapper img {
+  margin-right: 0;
+  margin-bottom: 4px;
 }
 
 .accordion-chat-sources .widget-accordion-group {
@@ -23852,6 +23857,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .overflow-unset {
   overflow: unset;
+}
+
+.card .card-header {
+  display: flex;
+  flex-direction: row;
+}
+.card .card-header .widget-combobox .widget-combobox-input-container {
+  height: 100%;
 }
 
 .chat-loading-wrapper {
@@ -24172,12 +24185,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .combobox-selection {
   display: flex;
   flex-grow: 1;
-  margin: 0px !important;
-  height: 30px !important;
-}
-.combobox-selection .item-selection {
-  align-items: center;
-  height: max-content;
 }
 .combobox-selection .mx-image {
   height: 14px;
@@ -24200,10 +24207,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: 14px;
   margin-right: 8px;
   border: 1px solid #f3f3f4;
-  padding: 4px;
   border-radius: 4px;
-  height: 24px;
-  width: 24px;
 }
 
 .widget-combobox .widget-combobox-input-container {
@@ -24381,7 +24385,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .prompting-page-content-container .pageheader-with-buttons {
   display: flex !important;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .page-container {
@@ -24435,7 +24439,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: space-around;
   flex: 1 1 0;
   overflow-y: auto;
-  margin-top: 24px;
   padding-left: 12px;
   padding-right: 12px;
 }
@@ -24445,6 +24448,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  height: fit-content;
+  padding-top: 24px;
+  padding-bottom: 24px;
 }
 .page-container .content-main {
   min-width: 450px;
@@ -24460,9 +24466,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-left: 12px;
   margin-right: 12px;
 }
-.page-container .content-main .version-selection {
-  width: 100%;
-}
 .page-container .content-column {
   min-width: 400px;
   width: 40%;
@@ -24477,7 +24480,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 @media (max-width: 1200px) {
   .page-container .content-main {
     width: 100%;
-    padding-right: unset;
   }
   .page-container .content-column {
     width: 100%;
@@ -24497,6 +24499,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+.page-container .content-fullwidth .card {
+  margin-left: 12px;
+  margin-right: 12px;
 }
 .page-container .panel-header {
   display: flex;
@@ -24527,6 +24533,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex: 1 1 0;
   overflow-y: auto;
   display: flex;
+  flex-direction: column;
 }
 
 .table-header {

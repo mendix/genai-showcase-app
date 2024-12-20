@@ -35,8 +35,8 @@
 }
 
 .flexbox-space-between {
-    display: flex !important;
-    justify-content: space-between;
+  display: flex !important;
+  justify-content: space-between;
 }
 
 .container-disabled {
@@ -63,13 +63,15 @@
   font-weight: $form-label-weight;
 }
 
-.alert-danger-text{
+.alert-danger-text {
   margin-bottom: $spacing-large;
-  .alert-circle-filled{
+
+  .alert-circle-filled {
     width: 14px;
     margin-right: $spacing-smaller;
   }
-  .alert-text{
+
+  .alert-text {
     color: $brand-danger;
   }
 }
@@ -89,6 +91,13 @@
   font-weight: normal;
 }
 
-.icon-action-padding {
-  padding-top: 5px;
+.icon-info-wrapper {
+  display: flex;
+  align-items: center;
+
+  img {
+    margin-right: 0;
+    margin-bottom: $spacing-small / 2;
+  }
+
 }

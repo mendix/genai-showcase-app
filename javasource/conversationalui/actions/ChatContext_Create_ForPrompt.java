@@ -21,6 +21,8 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 /**
  * This action is a combination of 'Get Prompt' and 'New Chat'.
  * First the variables in the prompt are replaced with attributes from the ContextObject to get the final system prompt. Then a new chat context is created with a provider config that is associated to a deployed model. Additionally, the system prompt is set based on the Prompt and the action microflow of the new provider config is set.
+ * 
+ * If an internal error occurs, the operation will return empty and the error is logged.
  */
 public class ChatContext_Create_ForPrompt extends CustomJavaAction<IMendixObject>
 {
@@ -55,7 +57,7 @@ public class ChatContext_Create_ForPrompt extends CustomJavaAction<IMendixObject
 		    requireNonNull(deployedModel, "No DeployedModel could be used for creating the ChatContext. Either pass the OverwritingDeployedModel or make sure to use a Prompt that has a DeployedModel associated.");
 		    
 		    IMendixObject returnValue = Core.userActionCall("ConversationalUI." + PromptToUse_GetAndReplace.class.getSimpleName())
-		    		.withParams(__Prompt, ContextObject)
+		    		.withParams(Prompt.getMendixObject(), ContextObject)
 		    		.execute(getContext());
 		    if (returnValue == null) {
 		    	return null;
