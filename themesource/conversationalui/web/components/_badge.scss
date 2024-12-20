@@ -1,3 +1,4 @@
+@import "../../../../theme/web/custom-variables.scss";
 .badge-with-circle {
     display: flex;
     align-items: center;
@@ -29,7 +30,7 @@
     height: auto;
     padding-left: $spacing-smaller;
     padding-right: $spacing-smaller;
-    border-radius: 4px;
+    border-radius: $border-radius-default;
     border: 1px solid $border-color-in-use;
     background-color: $background-color-in-use;
     .badge-text{
