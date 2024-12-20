@@ -24172,12 +24172,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .combobox-selection {
   display: flex;
   flex-grow: 1;
-  margin: 0px !important;
-  height: 30px !important;
-}
-.combobox-selection .item-selection {
-  align-items: center;
-  height: max-content;
 }
 .combobox-selection .mx-image {
   height: 14px;
