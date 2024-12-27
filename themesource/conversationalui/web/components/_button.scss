@@ -6,7 +6,8 @@
     }
 
     &.disabled {
-        background-color: transparent !important;
+        background-color: transparent;
+        border: 1px solid transparent;
         cursor: default;
     }
 
@@ -23,7 +24,7 @@
 
 
 .btn-no-hover.mx-link:hover {
-    background-color: transparent !important;
+    background-color: transparent;
     border: 1px solid transparent;
     cursor: default;
 }

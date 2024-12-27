@@ -23780,7 +23780,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
   text-decoration: none;
 }
 .btn-without-border.disabled {
-  background-color: transparent !important;
+  background-color: transparent;
+  border: 1px solid transparent;
   cursor: default;
 }
 .btn-without-border:hover {
@@ -23792,7 +23793,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .btn-no-hover.mx-link:hover {
-  background-color: transparent !important;
+  background-color: transparent;
   border: 1px solid transparent;
   cursor: default;
 }
