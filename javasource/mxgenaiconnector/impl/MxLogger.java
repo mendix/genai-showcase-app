@@ -1,4 +1,4 @@
-package synthiaconnector.impl;
+package mxgenaiconnector.impl;
 
 import com.mendix.core.Core;
 import com.mendix.logging.ILogNode;

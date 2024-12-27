@@ -7,7 +7,7 @@
 // Other code you write will be lost the next time you deploy the project.
 // Special characters, e.g., é, ö, à, etc. are supported in comments.
 
-package synthiaconnector.actions;
+package mxgenaiconnector.actions;
 
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
@@ -15,8 +15,8 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.meta.IMetaObject;
 import com.mendix.webui.CustomJavaAction;
 import genaicommons.proxies.KnowledgeBaseChunk;
-import synthiaconnector.impl.ChunkUtils;
-import synthiaconnector.impl.MxLogger;
+import mxgenaiconnector.impl.ChunkUtils;
+import mxgenaiconnector.impl.MxLogger;
 
 /**
  * Use this operation to retrieve chunks from the knowledge base and set associations to the related mendix objects (if applicable). This operation returns a list of the same type of the TargetChunk input variable. 
@@ -62,7 +62,7 @@ public class KnowledgeBaseChunkList_Retrieve_SetAssociation extends CustomJavaAc
 			ChunkUtils.validateTargetChunk(targetChunk);
 			
 			// call a microflow to retrieve chunks
-			java.util.List<KnowledgeBaseChunk> chunkList = synthiaconnector.proxies.microflows.Microflows.knowledgeBaseChunkList_Retrieve(
+			java.util.List<KnowledgeBaseChunk> chunkList = mxgenaiconnector.proxies.microflows.Microflows.knowledgeBaseChunkList_Retrieve(
 					getContext(), MetadataCollection, MaxNumberOfResults, Connection, null, Offset);
 			
 			//map to target chunks to return

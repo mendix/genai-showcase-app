@@ -1,4 +1,4 @@
-package synthiaconnector.impl;
+package mxgenaiconnector.impl;
 
 import static java.util.Objects.requireNonNull;
 

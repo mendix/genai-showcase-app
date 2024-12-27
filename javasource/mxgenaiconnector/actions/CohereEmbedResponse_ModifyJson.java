@@ -7,7 +7,7 @@
 // Other code you write will be lost the next time you deploy the project.
 // Special characters, e.g., é, ö, à, etc. are supported in comments.
 
-package synthiaconnector.actions;
+package mxgenaiconnector.actions;
 
 import static java.util.Objects.requireNonNull;
 import com.mendix.systemwideinterfaces.core.IContext;
@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import synthiaconnector.impl.MxLogger;
+import mxgenaiconnector.impl.MxLogger;
 
 public class CohereEmbedResponse_ModifyJson extends CustomJavaAction<java.lang.String>
 {

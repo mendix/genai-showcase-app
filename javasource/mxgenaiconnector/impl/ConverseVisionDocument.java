@@ -1,4 +1,4 @@
-package synthiaconnector.impl;
+package mxgenaiconnector.impl;
 
 import java.io.IOException;
 import java.io.InputStream;

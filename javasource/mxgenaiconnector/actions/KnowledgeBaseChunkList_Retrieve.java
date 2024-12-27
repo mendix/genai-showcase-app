@@ -7,15 +7,15 @@
 // Other code you write will be lost the next time you deploy the project.
 // Special characters, e.g., é, ö, à, etc. are supported in comments.
 
-package synthiaconnector.actions;
+package mxgenaiconnector.actions;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
 import genaicommons.proxies.KnowledgeBaseChunk;
-import synthiaconnector.impl.ChunkUtils;
-import synthiaconnector.impl.MxLogger;
+import mxgenaiconnector.impl.ChunkUtils;
+import mxgenaiconnector.impl.MxLogger;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
@@ -65,7 +65,7 @@ public class KnowledgeBaseChunkList_Retrieve extends CustomJavaAction<java.util.
 			else {
 				ChunkUtils.addChunkWithMxObjectID(getContext(), MxObject, chunkList);
 			}
-			java.util.List<KnowledgeBaseChunk> knowledgeBaseChunkList = synthiaconnector.proxies.microflows.Microflows.knowledgeBaseChunkList_Retrieve(getContext(), MetadataCollection, MaxNumberOfResults, Connection, chunkList, Offset);
+			java.util.List<KnowledgeBaseChunk> knowledgeBaseChunkList = mxgenaiconnector.proxies.microflows.Microflows.knowledgeBaseChunkList_Retrieve(getContext(), MetadataCollection, MaxNumberOfResults, Connection, chunkList, Offset);
 			java.util.List<IMendixObject> returnList = knowledgeBaseChunkList.stream().map(o -> o.getMendixObject()).collect(Collectors.toList());
 			return returnList;
 		} catch (Error e) {

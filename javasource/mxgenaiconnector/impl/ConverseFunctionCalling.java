@@ -1,4 +1,4 @@
-package synthiaconnector.impl;
+package mxgenaiconnector.impl;
 
 import java.util.List;
 
@@ -13,8 +13,8 @@ import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
-import synthiaconnector.proxies.RequestExtension;
-import synthiaconnector.genaicommons_impl.FunctionMappingImpl;
+import mxgenaiconnector.proxies.RequestExtension;
+import mxgenaiconnector.genaicommons_impl.FunctionMappingImpl;
 import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.Request;
 

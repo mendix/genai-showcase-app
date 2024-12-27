@@ -1,4 +1,4 @@
-package synthiaconnector.genaicommons_impl;
+package mxgenaiconnector.genaicommons_impl;
 
 import java.util.Map;
 

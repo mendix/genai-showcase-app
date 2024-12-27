@@ -7,7 +7,7 @@
 // Other code you write will be lost the next time you deploy the project.
 // Special characters, e.g., é, ö, à, etc. are supported in comments.
 
-package synthiaconnector.actions;
+package mxgenaiconnector.actions;
 
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
@@ -15,8 +15,8 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.meta.IMetaObject;
 import com.mendix.webui.CustomJavaAction;
 import genaicommons.proxies.KnowledgeBaseChunk;
-import synthiaconnector.impl.ChunkUtils;
-import synthiaconnector.impl.MxLogger;
+import mxgenaiconnector.impl.ChunkUtils;
+import mxgenaiconnector.impl.MxLogger;
 
 /**
  * Use this operation to retrieve chunks from the knowledge base and set associations to the related mendix objects (if applicable). The retrieval is based on similarity with respect to the input string (Content) provided.  This operation returns a list of the same type of the TargetChunk input variable.  The returned list is sorted on vector similarity which is handled internally.
@@ -64,7 +64,7 @@ public class KnowledgeBaseChunkList_Embed_RetrieveNearestNeighbors_SetAssociatio
 			ChunkUtils.validateTargetChunk(targetChunk);
 			
 			// call a microflow to retrieve chunks
-			java.util.List<KnowledgeBaseChunk> chunkList = synthiaconnector.proxies.microflows.Microflows.knowledgeBaseChunkList_Embed_RetrieveNearestNeighbors(
+			java.util.List<KnowledgeBaseChunk> chunkList = mxgenaiconnector.proxies.microflows.Microflows.knowledgeBaseChunkList_Embed_RetrieveNearestNeighbors(
 					getContext(), Content, MinimumSimilarity, MaxNumberOfResults, Connection, MetadataCollection);
 			
 			//map to target chunks to return

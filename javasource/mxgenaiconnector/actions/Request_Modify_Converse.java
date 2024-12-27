@@ -7,7 +7,7 @@
 // Other code you write will be lost the next time you deploy the project.
 // Special characters, e.g., é, ö, à, etc. are supported in comments.
 
-package synthiaconnector.actions;
+package mxgenaiconnector.actions;
 
 import static java.util.Objects.requireNonNull;
 import com.mendix.systemwideinterfaces.core.IContext;
@@ -17,8 +17,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import synthiaconnector.impl.ConverseVisionDocument;
-import synthiaconnector.impl.ConverseFunctionCalling;
+import mxgenaiconnector.impl.ConverseVisionDocument;
+import mxgenaiconnector.impl.ConverseFunctionCalling;
 
 public class Request_Modify_Converse extends CustomJavaAction<java.lang.String>
 {

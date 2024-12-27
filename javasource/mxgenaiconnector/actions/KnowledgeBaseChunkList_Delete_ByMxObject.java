@@ -7,14 +7,14 @@
 // Other code you write will be lost the next time you deploy the project.
 // Special characters, e.g., é, ö, à, etc. are supported in comments.
 
-package synthiaconnector.actions;
+package mxgenaiconnector.actions;
 
 import java.util.ArrayList;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
 import genaicommons.proxies.KnowledgeBaseChunk;
-import synthiaconnector.impl.ChunkUtils;
-import synthiaconnector.impl.MxLogger;
+import mxgenaiconnector.impl.ChunkUtils;
+import mxgenaiconnector.impl.MxLogger;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
@@ -50,7 +50,7 @@ public class KnowledgeBaseChunkList_Delete_ByMxObject extends CustomJavaAction<j
 			else {
 				ChunkUtils.addChunkWithMxObjectID(getContext(), MxObject, chunkList);
 			}
-			return synthiaconnector.proxies.microflows.Microflows.knowledgeBaseChunkList_Delete_FromKnowledgeBase(getContext(), chunkList, Connection);
+			return mxgenaiconnector.proxies.microflows.Microflows.knowledgeBaseChunkList_Delete_FromKnowledgeBase(getContext(), chunkList, Connection);
 		} catch (Error e) {
 			LOGGER.error(e, "Delete was not successful.");
 			return false;
