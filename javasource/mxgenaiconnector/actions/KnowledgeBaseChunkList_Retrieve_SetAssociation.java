@@ -19,13 +19,13 @@ import mxgenaiconnector.impl.ChunkUtils;
 import mxgenaiconnector.impl.MxLogger;
 
 /**
- * Use this operation to retrieve chunks from the knowledge base and set associations to the related mendix objects (if applicable). This operation returns a list of the same type of the TargetChunk input variable. 
+ * Use this operation to retrieve chunks from a collection and set associations to the related mendix objects (if applicable). This operation returns a list of the same type of the TargetChunk input variable. 
  * Additional selection and filtering can be done by specifying the optional input parameters:
  * -Offset: This is for skipping a number of records in the retrieve (e.g. for batching purposes)
  * -MaxNumberOfResults: limit of the amount of records returned
  * -MetadataCollection: when provided, this operation only returns chunks that are conform with all of the labels in the collection.
  * 
- * The Connection entity passed must be of type MxGenAIConnection and must contain the KnowledgeBaseName string attribute filled and a Knowledgebase Configuration associated with the connection details to the knowledge base service. By providing the KnowledgeBaseName on the Connection, you determine the knowledge base.
+ * The Connection entity passed must be of type MxKnowledgeBaseConnection and must contain the CollectionName string attribute filled and a Knowledgebase Configuration associated with the connection details to the knowledge base service. By providing the CollectionName on the Connection, you determine the collection for which the retrieve should happen.
  * The TargetChunk entity must be a specialization of the KnowledgeBaseChunk entity from the GenAICommons. If it contains associations to (specializations of) the related mendix object for which the chunk was created originally, this will be set by this operation for easy processing afterwards.
  */
 public class KnowledgeBaseChunkList_Retrieve_SetAssociation extends CustomJavaAction<java.util.List<IMendixObject>>
