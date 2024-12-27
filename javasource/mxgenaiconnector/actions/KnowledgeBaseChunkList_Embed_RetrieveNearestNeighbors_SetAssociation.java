@@ -25,7 +25,7 @@ import mxgenaiconnector.impl.MxLogger;
  * -MaxNumberOfResults: determines the max number of similar chunks that are returned.
  * -MetadataCollection: when provided, this operation only returns chunks that are conform with all of the metadata key/value pairs in the collection.
  * 
- * The Connection entity passed must be of type SynthiaConnection and must contain the KnowledgeBaseName string attribute filled and a KnowledgebaseConfiguration associated with the connection details to the knowledge base service. By providing the KnowledgeBaseName on the Connection, you determine the knowledge base. 
+ * The Connection entity passed must be of type MxGenAIConnection and must contain the KnowledgeBaseName string attribute filled and a KnowledgebaseConfiguration associated with the connection details to the knowledge base service. By providing the KnowledgeBaseName on the Connection, you determine the knowledge base. 
  * The TargetChunk entity (entity parameter) must be a specialization of the KnowledgeBaseChunk entity from the GenAICommons. If it contains associations to (specializations of) the related mendix object for which the chunk was created originally, this will be set by this operation for easy processing afterwards.
  */
 public class KnowledgeBaseChunkList_Embed_RetrieveNearestNeighbors_SetAssociation extends CustomJavaAction<java.util.List<IMendixObject>>
