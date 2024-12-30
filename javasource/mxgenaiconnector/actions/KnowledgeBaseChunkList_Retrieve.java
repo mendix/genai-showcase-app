@@ -25,9 +25,9 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
  * -Offset: this is for skipping a number of records in the retrieve (e.g. for batching purposes)
  * -MaxNumberOfResults: limit of the amount of records returned
  * -MetadataCollection: when provided, this operation only returns chunks that are conform with all of the metadata key/value pairs in the list.
- * -MxObject: This is the (original) Mendix object that the chunks in the knowledge base represent. Only chunks related to this Mendix object are retrieved. If no filtering on Mendix object is needed, you can pass "empty".
+ * -MxObject: This is the (original) Mendix object that the chunks in the collection represent. Only chunks related to this Mendix object are retrieved. If no filtering on Mendix object is needed, you can pass "empty".
  * 
- * The Connection entity passed must be of type MxKnowledgeBaseConnection and must contain the CollectionName string attribute filled and a Knowledgebase Configuration associated with the connection details to the knowledge base service. By providing the Collection on the Connection, you determine the collection for which the retrieve should happen. 
+ * The Connection entity passed must be of type MxKnowledgeBaseConnection and must contain the CollectionName string attribute filled and a MxCloudKnowledgeBase associated with the connection details to the knowledge base service. By providing the Collection on the Connection, you determine the collection for which the retrieve should happen. 
  */
 public class KnowledgeBaseChunkList_Retrieve extends CustomJavaAction<java.util.List<IMendixObject>>
 {

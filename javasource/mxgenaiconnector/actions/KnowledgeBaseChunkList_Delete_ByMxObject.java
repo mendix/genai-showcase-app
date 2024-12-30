@@ -19,9 +19,9 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
  * Use this operation to delete existing chunks and corresponding metadata in a collection, based on the MxObjectID. 
- * MxObject is the (original) Mendix object that the chunks in the knowledge base represent. Only chunks related to this Mendix object are to be deleted.
+ * MxObject is the (original) Mendix object that the chunks in the collection represent. Only chunks related to this Mendix object are to be deleted.
  * 
- * Mandatory: The Connection entity passed must be of type MxKnowledgeBaseConnection and must contain the CollectionName string attribute filled and a Knowledgebase Configuration associated with the connection details to the knowledge base. By providing the CollectionName on the Connection, you determine the collection from which the chunks should be deleted.
+ * Mandatory: The Connection entity passed must be of type MxKnowledgeBaseConnection and must contain the CollectionName string attribute filled and a MxCloudKnowledgeBase associated with the connection details to the knowledge base. By providing the CollectionName on the Connection, you determine the collection from which the chunks should be deleted.
  */
 public class KnowledgeBaseChunkList_Delete_ByMxObject extends CustomJavaAction<java.lang.Boolean>
 {
