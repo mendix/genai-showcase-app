@@ -24789,6 +24789,22 @@ input[type=checkbox].three-state-checkbox + .control-label {
 @import "./layouts/all";
 @import "./pages/all";
 */
+.bg-openai {
+  background-color: #0078D4;
+}
+
+.bg-aws {
+  background-color: #EC7211 !important;
+}
+
+.bg-mxgenai {
+  background-color: #146FF4 !important;
+}
+
+.bg-pgvector {
+  background-color: #C6D92F !important;
+}
+
 .layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a img {
   width: 52px;
   padding: 4px 14px;
