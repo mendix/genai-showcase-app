@@ -28,6 +28,7 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
  * -MxObject: This is the (original) Mendix object that the chunks in the collection represent. Only chunks related to this Mendix object are retrieved. If no filtering on Mendix object is needed, you can pass "empty".
  * 
  * The Connection entity passed must be of type MxKnowledgeBaseConnection and must contain the CollectionName string attribute filled and a MxCloudKnowledgeBase associated with the connection details to the knowledge base service. By providing the Collection on the Connection, you determine the collection for which the retrieve should happen. 
+ * Use MxKnowledgeBaseConnection_Create to create it.
  */
 public class KnowledgeBaseChunkList_Retrieve extends CustomJavaAction<java.util.List<IMendixObject>>
 {

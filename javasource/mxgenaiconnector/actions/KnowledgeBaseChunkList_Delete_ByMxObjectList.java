@@ -22,6 +22,7 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
  * MxObjectList is the list of (original) Mendix objects that the chunks in the knowledge base represent. Only chunks related to these Mendix objects are to be deleted.
  * 
  * The Connection entity passed must be of type MxKnowledgeBaseConnection and must contain the CollectionName string attribute filled and a MxCloudKnowledgeBase associated with the connection details to the knowledge base. By providing the CollectionName on the Connection, you determine the collection from which the chunks should be deleted.
+ * Use MxKnowledgeBaseConnection_Create to create it.
  */
 public class KnowledgeBaseChunkList_Delete_ByMxObjectList extends CustomJavaAction<java.lang.Boolean>
 {
