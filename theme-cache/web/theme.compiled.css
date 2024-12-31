@@ -24214,8 +24214,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .combo-model-selection .mx-image {
   height: 14px;
   margin-right: 8px;
-  border: 1px solid #f3f3f4;
-  border-radius: 4px;
 }
 
 .widget-combobox .widget-combobox-input-container {
