@@ -29,3 +29,8 @@ $brand-openai: #0078D4;
 .bg-pgvector{
     background-color: $brand-pgvector !important;
 }
+
+.card_scroll-to
+{
+    //only needed to use in JS-Action for scrolling to element
+}
