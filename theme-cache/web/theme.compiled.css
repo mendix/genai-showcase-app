@@ -24862,4 +24862,25 @@ $brand-openai: #0078D4;
   border-radius: 4px;
 }
 
+.provider-badge .badge > label {
+  margin: auto;
+  display: -webkit-box;
+  word-break: break-all;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+  text-wrap: wrap;
+  line-height: normal;
+}
+.provider-badge .badge .mx-image-viewer {
+  width: auto;
+}
+.provider-badge .badge .mx-image-viewer-responsive > img {
+  max-height: none;
+  max-width: none;
+}
+
 /*# sourceMappingURL=theme.compiled.css.map */
