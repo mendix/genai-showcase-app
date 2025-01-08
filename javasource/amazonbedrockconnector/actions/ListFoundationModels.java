@@ -101,7 +101,7 @@ public class ListFoundationModels extends CustomJavaAction<IMendixObject>
 			awsRequestBuilder.byCustomizationType(this.ListFoundationModelsRequest.getByCustomizationType().getCaption());
 		}
 		if (this.ListFoundationModelsRequest.getByInferenceType() != null) {
-			awsRequestBuilder.byInferenceType(this.ListFoundationModelsRequest.getByInferenceType().getCaption());
+			awsRequestBuilder.byInferenceType(this.ListFoundationModelsRequest.getByInferenceType().name());
 		}
 		if (this.ListFoundationModelsRequest.getByOutputModality() != null) {
 			awsRequestBuilder.byOutputModality(this.ListFoundationModelsRequest.getByOutputModality().getCaption());

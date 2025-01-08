@@ -1,5 +1,13 @@
 @charset "UTF-8";
 @import url("resources/fonts/open-sans/open-sans.css");
+.listview-horizontal.mx-listview > ul {
+  display: inline-block;
+  margin-bottom: 0;
+}
+.listview-horizontal.mx-listview > ul > li {
+  display: inline-block;
+}
+
 .popupmenu--display-flex.popupmenu {
   display: flex;
 }
