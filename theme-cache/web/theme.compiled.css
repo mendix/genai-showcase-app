@@ -24176,20 +24176,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   align-items: start;
 }
 
-.combo-deployment-selection {
-  min-width: 360px;
-  z-index: 200;
-}
-.combo-deployment-selection .deployment-selection {
-  display: flex;
-  align-items: center;
-  height: max-content;
-}
-.combo-deployment-selection .mx-image {
-  height: 14px;
-  margin-right: 8px;
-}
-
 .combobox-selection {
   display: flex;
   flex-grow: 1;
@@ -24209,7 +24195,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
   align-items: center;
   height: max-content;
-  font-weight: 600;
 }
 .combo-model-selection .mx-image {
   height: 14px;
