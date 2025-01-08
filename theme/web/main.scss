@@ -1,8 +1,13 @@
 @import "custom-variables";
 
-//Fix navigation
+$brand-aws: #EC7211;
+$brand-pgvector: #C6D92F;
+$brand-mxgenai: #146FF4;
+$brand-openai: #0078D4;
+
+
+//Navigation
 .layout-atlas .region-sidebar {
-  //background: $brand-gradient-vertical;
   .mx-navigationtree .navbar-inner > ul > li > a img {
     width: 52px;
     padding: 4px 14px;
@@ -20,4 +25,83 @@
 /*    Mendix 10   */
 .layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a {
   padding: 8px 0;
+}
+
+//Homepage
+.bg-openai {
+    background-color: $brand-openai;
+}
+
+.bg-aws {
+    background-color: $brand-aws !important;
+}
+
+.bg-mxgenai {
+    background-color: $brand-mxgenai !important;
+}
+
+.bg-pgvector {
+    background-color: $brand-pgvector !important;
+}
+
+.provider-badge {
+  .badge {
+    > label {
+      margin: auto;
+      display: -webkit-box;
+      word-break: break-all;
+      overflow: hidden;
+      -webkit-line-clamp: 1;
+      line-clamp: 1;
+      -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
+      box-sizing: border-box;
+      text-wrap: wrap;
+      line-height: normal;
+    }
+    .mx-image-viewer {
+      width: auto;
+    }
+    .mx-image-viewer-responsive > img {
+        max-height: none;
+        max-width: none;
+    }
+  }
+}
+
+
+//Helpers
+.container-border-primary {
+  border: 1px solid $brand-primary;
+  border-radius: $border-radius-default;
+}
+
+//Fixes for examples
+
+//SemanticSearchMultiColumn
+.card_scroll-to {
+    //only needed to use in JS-Action for scrolling to element
+}
+
+//Custom tag for the product description
+.product-tag {
+  .form-control {
+    padding: 3px 8px;
+    border: none;
+    background: transparent;
+  }
+}
+
+//Anychart in clustering example
+.anychart-extension__container {
+    .widget-charts-playground .widget-charts-playground-toggle .btn {
+        right: unset;
+        left: 10px;
+    }
+    .widget-charts .plot-container .main-svg {
+        Background: none !important;
+    }
+    .legend .bg {
+        fill-opacity: 0 !important;
+    }
 }
