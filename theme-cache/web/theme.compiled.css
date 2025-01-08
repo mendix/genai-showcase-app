@@ -24851,17 +24851,6 @@ $brand-openai: #0078D4;
   background-color: #C6D92F !important;
 }
 
-.product-tag .form-control {
-  padding: 3px 8px;
-  border: none;
-  background: transparent;
-}
-
-.container-border-primary {
-  border: 1px solid #264ae5;
-  border-radius: 4px;
-}
-
 .provider-badge .badge > label {
   margin: auto;
   display: -webkit-box;
@@ -24881,6 +24870,28 @@ $brand-openai: #0078D4;
 .provider-badge .badge .mx-image-viewer-responsive > img {
   max-height: none;
   max-width: none;
+}
+
+.container-border-primary {
+  border: 1px solid #264ae5;
+  border-radius: 4px;
+}
+
+.product-tag .form-control {
+  padding: 3px 8px;
+  border: none;
+  background: transparent;
+}
+
+.anychart-extension__container .widget-charts-playground .widget-charts-playground-toggle .btn {
+  right: unset;
+  left: 10px;
+}
+.anychart-extension__container .widget-charts .plot-container .main-svg {
+  Background: none !important;
+}
+.anychart-extension__container .legend .bg {
+  fill-opacity: 0 !important;
 }
 
 /*# sourceMappingURL=theme.compiled.css.map */
