@@ -1,5 +1,11 @@
 @import "custom-variables";
 
+$brand-aws: #EC7211;
+$brand-pgvector: #C6D92F;
+$brand-mxgenai: #146FF4;
+$brand-openai: #0078D4;
+
+
 //Fix navigation
 .layout-atlas .region-sidebar {
   //background: $brand-gradient-vertical;
@@ -20,4 +26,39 @@
 /*    Mendix 10   */
 .layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a {
   padding: 8px 0;
+}
+
+
+.bg-openai {
+    background-color: $brand-openai;
+}
+
+.bg-aws {
+    background-color: $brand-aws !important;
+}
+
+.bg-mxgenai {
+    background-color: $brand-mxgenai !important;
+}
+
+.bg-pgvector {
+    background-color: $brand-pgvector !important;
+}
+
+.card_scroll-to {
+    //only needed to use in JS-Action for scrolling to element
+}
+
+//custom tag for the product description
+.product-tag {
+  .form-control {
+    padding: 3px 8px;
+    border: none;
+    background: transparent;
+  }
+}
+
+.container-border-primary {
+  border: 1px solid $brand-primary;
+  border-radius: $border-radius-default;
 }

@@ -24782,6 +24782,59 @@ input[type=checkbox].three-state-checkbox + .control-label {
 @import "./layouts/all";
 @import "./pages/all";
 */
+/*Temporary reimport of some styling elements
+@import '../../../theme/web/custom-variables';
+
+$brand-aws: #EC7211;
+$brand-pgvector: #C6D92F;
+$brand-mxgenai: #146FF4;
+$brand-openai: #0078D4;
+
+.bg-openai {
+    background-color: $brand-openai;
+}
+
+.bg-aws {
+    background-color: $brand-aws !important;
+}
+
+.bg-mxgenai {
+    background-color: $brand-mxgenai !important;
+}
+
+.bg-pgvector {
+    background-color: $brand-pgvector !important;
+}
+
+.card_scroll-to {
+    //only needed to use in JS-Action for scrolling to element
+}
+
+//custom tag for the product description
+.product-tag {
+    border: 1px solid $brand-primary;
+    border-radius: $border-radius-default;
+    .form-control {
+        padding: 3px 8px;
+        border: none;
+        background: transparent;
+    }
+}*/
+.layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a img {
+  width: 52px;
+  padding: 4px 14px;
+}
+
+.layout-atlas-responsive .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree .navbar-inner > ul > li > a,
+.layout-atlas-responsive-default .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree .navbar-inner > ul > li > a {
+  white-space: normal;
+}
+
+/*    Mendix 10   */
+.layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a {
+  padding: 8px 0;
+}
+
 .bg-openai {
   background-color: #0078D4;
 }
@@ -24798,29 +24851,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background-color: #C6D92F !important;
 }
 
-.product-tag {
-  border: 1px solid #264ae5;
-  border-radius: 4px;
-}
 .product-tag .form-control {
   padding: 3px 8px;
   border: none;
   background: transparent;
 }
 
-.layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a img {
-  width: 52px;
-  padding: 4px 14px;
-}
-
-.layout-atlas-responsive .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree .navbar-inner > ul > li > a,
-.layout-atlas-responsive-default .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree .navbar-inner > ul > li > a {
-  white-space: normal;
-}
-
-/*    Mendix 10   */
-.layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a {
-  padding: 8px 0;
+.container-border-primary {
+  border: 1px solid #264ae5;
+  border-radius: 4px;
 }
 
 /*# sourceMappingURL=theme.compiled.css.map */
