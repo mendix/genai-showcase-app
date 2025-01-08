@@ -14,23 +14,33 @@ $brand-pgvector: #C6D92F;
 $brand-mxgenai: #146FF4;
 $brand-openai: #0078D4;
 
-.bg-openai{
+.bg-openai {
     background-color: $brand-openai;
 }
 
-.bg-aws{
+.bg-aws {
     background-color: $brand-aws !important;
 }
 
-.bg-mxgenai{
+.bg-mxgenai {
     background-color: $brand-mxgenai !important;
 }
 
-.bg-pgvector{
+.bg-pgvector {
     background-color: $brand-pgvector !important;
 }
 
-.card_scroll-to
-{
+.card_scroll-to {
     //only needed to use in JS-Action for scrolling to element
+}
+
+//custom tag for the product description
+.product-tag {
+    border: 1px solid $brand-primary;
+    border-radius: $border-radius-default;
+    .form-control {
+        padding: 3px 8px;
+        border: none;
+        background: transparent;
+    }
 }

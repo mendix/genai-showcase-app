@@ -24798,6 +24798,16 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background-color: #C6D92F !important;
 }
 
+.product-tag {
+  border: 1px solid #264ae5;
+  border-radius: 4px;
+}
+.product-tag .form-control {
+  padding: 3px 8px;
+  border: none;
+  background: transparent;
+}
+
 .layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a img {
   width: 52px;
   padding: 4px 14px;
