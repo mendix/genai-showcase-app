@@ -24521,9 +24521,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding-right: 8px;
   padding-bottom: 8px;
 }
-.page-container .panel-header .close-icon-area {
-  border-left: 1px solid #E7E7E9;
-}
 .page-container .panel-header .close-icon-area .close-icon {
   padding-left: 8px;
   margin-right: 8px;
