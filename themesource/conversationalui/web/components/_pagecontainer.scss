@@ -1,3 +1,4 @@
+@import "../../../../theme/web/custom-variables.scss";
 //Prompt_Overview
 .promting-page-wrapper {
     width: 100%;
@@ -141,6 +142,7 @@
         .card {
             margin-left: $spacing-large / 2;
             margin-right: $spacing-large / 2;
+            padding-bottom: $spacing-small;
         }
     }
 
