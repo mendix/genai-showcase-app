@@ -62,9 +62,11 @@ $brand-openai: #0078D4;
     .mx-image-viewer {
       width: auto;
     }
-    .mx-image-viewer-responsive > img {
+    .mx-image-viewer-responsive  {
+      > img {
       max-height: none;
       max-width: none;
+       }
     }
   }
 }

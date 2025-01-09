@@ -16,7 +16,6 @@ import com.mendix.webui.CustomJavaAction;
 import amazonbedrockconnector.impl.MxLogger;
 import amazonbedrockconnector.genaicommons_impl.ReferenceImpl;
 import amazonbedrockconnector.proxies.AgentSummary;
-import amazonbedrockconnector.proxies.ENUM_AgentStatus;
 import amazonbedrockconnector.proxies.ListAgentsResponse;
 import software.amazon.awssdk.services.bedrockagent.BedrockAgentClient;
 import com.mendix.systemwideinterfaces.core.IMendixObject;

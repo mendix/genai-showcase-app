@@ -20,9 +20,7 @@ import amazonbedrockconnector.proxies.GetAgentResponse;
 import amazonbedrockconnector.proxies.RecommendedAction;
 import amazonbedrockconnector.proxies.Agent;
 import amazonbedrockconnector.proxies.AgentFailureReason;
-import amazonbedrockconnector.proxies.ENUM_AgentStatus;
 import software.amazon.awssdk.services.bedrockagent.BedrockAgentClient;
-import software.amazon.awssdk.services.bedrockagent.model.AgentStatus;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 public class GetAgent extends CustomJavaAction<IMendixObject>
