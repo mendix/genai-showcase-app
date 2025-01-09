@@ -24509,25 +24509,31 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-direction: row;
   border-bottom: 1px solid #E7E7E9;
   padding-right: 8px;
-  height: 50px;
+  height: fit-content;
 }
 .page-container .panel-header::after {
   content: "";
   height: 80px;
 }
 .page-container .panel-header .header-text {
+  flex-direction: column;
   margin-left: 16px;
-  width: 100%;
+  padding-right: 8px;
+  padding-bottom: 8px;
 }
-.page-container .panel-header .close-icon {
+.page-container .panel-header .close-icon-area {
   border-left: 1px solid #E7E7E9;
+}
+.page-container .panel-header .close-icon-area .close-icon {
   padding-left: 8px;
   margin-right: 8px;
   margin-left: 8px;
   margin-top: 8px;
+  height: fit-content;
 }
 .page-container .panel-header .new-chat-icon {
   margin-top: 8px;
+  height: fit-content;
 }
 .page-container .panel-content {
   flex: 1 1 0;

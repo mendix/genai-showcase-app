@@ -191,23 +191,27 @@
         flex-direction: row;
         border-bottom: 1px solid $table-border-separator-color;
         padding-right: $spacing-small;
-        height: 50px;
+        height: fit-content;
 
-        .header-text {
+        .header-text{
+            flex-direction: column;
             margin-left: $spacing-medium;
-            width: 100%;
+            padding-right: $spacing-small;
+            padding-bottom: $spacing-small;
         }
-
-        .close-icon {
+        .close-icon-area {
             border-left: 1px solid $table-border-separator-color;
-            padding-left: $spacing-small;
-            margin-right: $spacing-small;
-            margin-left: $spacing-small;
-            margin-top: $spacing-small;
+            .close-icon {
+                padding-left: $spacing-small;
+                margin-right: $spacing-small;
+                margin-left: $spacing-small;
+                margin-top: $spacing-small;
+                height: fit-content;
+            } 
         }
-
         .new-chat-icon {
             margin-top: $spacing-small;
+            height: fit-content;
         }
     }
 
