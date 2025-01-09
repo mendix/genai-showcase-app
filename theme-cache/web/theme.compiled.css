@@ -24884,6 +24884,16 @@ $brand-openai: #0078D4;
   border-radius: 4px;
 }
 
+.height--85 {
+  height: 85%;
+}
+
+.arrow-position {
+  position: fixed;
+  bottom: 5vh;
+  right: 8vw;
+}
+
 .product-tag .form-control {
   padding: 3px 8px;
   border: none;

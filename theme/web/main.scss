@@ -76,7 +76,18 @@ $brand-openai: #0078D4;
   border-radius: $border-radius-default;
 }
 
+.height--85{
+    height: 85%;
+}
+
 //Fixes for examples
+
+//ConversationalUI 
+.arrow-position {
+    position: fixed;
+    bottom: 5vh;
+    right: 8vw;
+}
 
 //SemanticSearchMultiColumn
 .card_scroll-to {
