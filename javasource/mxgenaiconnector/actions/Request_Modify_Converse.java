@@ -93,7 +93,7 @@ public class Request_Modify_Converse extends CustomJavaAction<java.lang.String>
 	private void removeSystemPromptIfEmpty(ObjectNode rootNode) {
 		if (rootNode.has("system")) {
             JsonNode systemNode = rootNode.get("system").get(0);
-            if (systemNode != null && systemNode.size() == 0) {
+            if (systemNode != null && (systemNode.size() == 0 || systemNode.get("text").isEmpty())) {
                 rootNode.remove("system");
             }
 		}
