@@ -9,6 +9,7 @@ import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import conversationalui.proxies.ChatContext;
 import conversationalui.proxies.ProviderConfig;
+import genaicommons.proxies.DeployedModel;
 
 public class ProviderConfigImpl{
 	
@@ -38,17 +39,32 @@ public class ProviderConfigImpl{
 		}		
 	}
 	
-	public static ProviderConfig createAndSetProviderConfigSpecialization(IContext context, String ProviderConfigSpecialization, String ActionMicroflow, String ProviderName) throws Exception {
+	public static ProviderConfig createAndSetProviderConfigSpecialization(IContext context, String providerConfigSpecialization, String actionMicroflow, String providerName, DeployedModel deployedModel, String systemPrompt) throws Exception {
+		ProviderConfig providerConfig = createProviderConfig(context, providerConfigSpecialization);
+		providerConfig.setActionMicroflow(actionMicroflow);
+		providerConfig.setProviderConfig_DeployedModel(deployedModel);
+		if (providerName != null && !providerName.isBlank()) {
+			providerConfig.setDisplayName(providerName);
+		}
+		if (systemPrompt != null && !systemPrompt.isBlank()) {
+			providerConfig.setSystemPrompt(systemPrompt);
+		}
+		return providerConfig;
+	}
+
+	private static ProviderConfig createProviderConfig(IContext context, String providerConfigSpecializationString)
+			throws Exception {
+		if (providerConfigSpecializationString == null || providerConfigSpecializationString.isBlank()) {
+			ProviderConfig providerConfig = new ProviderConfig(context);
+			return providerConfig;
+		}	
+		
 		// Create an instance of the specialized ProviderConfig object
-		IMendixObject providerConfigSpecialization = Core.instantiate(context, ProviderConfigSpecialization);
+		IMendixObject providerConfigSpecialization = Core.instantiate(context, providerConfigSpecializationString);
 		ProviderConfigImpl.validateSpecialization(providerConfigSpecialization);
 
 		// Use the specialized proxy class to wrap the generic IMendixObject to set attributes
 		ProviderConfig providerConfig = ProviderConfig.initialize(context, providerConfigSpecialization);
-		providerConfig.setActionMicroflow(ActionMicroflow);
-		if (ProviderName != null && !ProviderName.isBlank()) {
-			providerConfig.setDisplayName(ProviderName.trim());
-		}
 		return providerConfig;
 	}
 }

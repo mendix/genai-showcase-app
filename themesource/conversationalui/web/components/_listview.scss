@@ -75,3 +75,11 @@
     }
 }
 
+.listview-bullet-points{
+    > ul {
+        list-style-type: disc;
+        > li{
+            list-style-position: outside;
+        }
+    }
+}

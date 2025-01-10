@@ -1,2 +1,87 @@
 @import '../../../theme/web/custom-variables';
 
+//Popup menu customizations and fixes
+.popupmenu--display-flex {
+    &.popupmenu {
+        display: flex;
+    }
+}
+
+.popupmenu-custom-item-container {
+    padding: $spacing-small;
+
+    .mx-link {
+        display: block;
+        padding-left: $spacing-small;
+        padding-right: $spacing-small;
+    }
+}
+
+.popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item {
+    background-color: $bg-color-secondary;
+
+    &:hover,
+    &:focus,
+    &:active {
+        cursor: pointer;
+        border-color: $bg-color;
+        background-color: $bg-color;
+    }
+}
+
+//Buttons
+.btn-without-border.mx-link {
+    text-decoration: none;
+    border: 1px solid transparent;
+    color: $font-color-default;
+
+    &.disabled {
+        background-color: transparent !important;
+        cursor: default;
+    }
+
+    &:hover {
+        background-color: $btn-default-bg-hover;
+    }
+}
+
+.btn-no-hover.mx-link:hover {
+    background-color: transparent !important;
+}
+
+//Listview
+.listview-horizontal.mx-listview {
+    > ul {
+        display: inline-block;
+        margin-bottom: 0;
+        > li {
+            display: inline-block;
+        }
+    }
+}
+
+.listview-empty-deployed-models.mx-listview {
+    > ul > li.mx-listview-empty {
+        > label {
+            display: none;
+        }
+        &::before {
+            content: "Please add deployed models on the Edit page to be able to use this configuration.";
+            color: $brand-danger;
+        }
+    }
+}
+
+.label-with-text {
+    >label {
+        //from .form-group .control-label
+        overflow: hidden;
+        margin-bottom: 4px;
+        text-align: left;
+        text-overflow: ellipsis;
+        color: $form-label-color;
+        font-size: $form-label-size;
+        font-weight: $form-label-weight;
+        display: block;
+    }
+}

@@ -74,7 +74,6 @@ public class RequestMapping_ManipulateJson extends CustomJavaAction<java.lang.St
 
 			return MAPPER.writeValueAsString(rootNode);
 		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
 			throw e;
 		}
 		// END USER CODE

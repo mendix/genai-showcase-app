@@ -29,3 +29,75 @@
 .line-height--1 {
   line-height: 1;
 }
+
+.spacing-outer-bottom-medium {
+  margin-bottom: $spacing-medium;
+}
+
+.flexbox-space-between {
+  display: flex !important;
+  justify-content: space-between;
+}
+
+.container-disabled {
+  height: fit-content;
+  border: 1px solid $border-color-default;
+  border-radius: $btn-border-radius;
+  padding: $spacing-small;
+  width: auto;
+  background-color: $gray-lighter;
+  display: flex;
+  align-items: center;
+  flex-flow: row;
+  justify-content: flex-start;
+}
+
+.custom-control-label {
+  display: block;
+  overflow: hidden;
+  margin-bottom: $spacing-smaller;
+  text-align: left;
+  text-overflow: ellipsis;
+  color: $form-label-color;
+  font-size: $form-label-size;
+  font-weight: $form-label-weight;
+}
+
+.alert-danger-text {
+  margin-bottom: $spacing-large;
+
+  .alert-circle-filled {
+    width: 14px;
+    margin-right: $spacing-smaller;
+  }
+
+  .alert-text {
+    color: $brand-danger;
+  }
+}
+
+//Following might be moved, all related to prompt library
+.border-selected {
+  border-color: $brand-primary;
+  border-width: 2px;
+  border: 1px solid;
+  padding: $spacing-small;
+}
+
+.badge--purple {
+  color: #2F008C;
+  background-color: #E2E0FC;
+  font-size: $font-size-small;
+  font-weight: normal;
+}
+
+.icon-info-wrapper {
+  display: flex;
+  align-items: center;
+
+  img {
+    margin-right: 0;
+    margin-bottom: $spacing-small / 2;
+  }
+
+}

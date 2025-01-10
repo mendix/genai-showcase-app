@@ -53,8 +53,8 @@ public class Response_GetSingleResponseImage extends CustomJavaAction<IMendixObj
 			return generatedImage;
 			
 		} catch (Exception e) {
-			LOGGER.error("An error ocurred while creating the single response image: " + e.getMessage());
-			throw e;
+			LOGGER.error(e);
+			return null;
 		}
 		// END USER CODE
 	}

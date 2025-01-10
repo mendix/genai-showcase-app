@@ -14,6 +14,7 @@ import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.connectionbus.data.IDataTable;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
+import conversationalui.impl.MxLogger;
 import conversationalui.proxies.DeploymentSelection;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
@@ -28,16 +29,21 @@ public class DeploymentSelection_GetList extends CustomJavaAction<java.util.List
 	public java.util.List<IMendixObject> executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		String deploymentIdentifierAttribute = genaicommons.proxies.Usage.MemberNames.DeploymentIdentifier.toString();
-		String usageEntity = genaicommons.proxies.Usage.entityName.toString();
-		String oqlQuery = "SELECT DISTINCT " + deploymentIdentifierAttribute + " FROM " + usageEntity + " ORDER BY " + deploymentIdentifierAttribute;
-		IDataTable oqlResult = Core.retrieveOQLDataTable(getContext(), oqlQuery);
-		
-		return oqlResult.getRows().stream().map(e -> {
-			DeploymentSelection newDeploymentSelection = new DeploymentSelection(getContext());
-			newDeploymentSelection.setDeploymentIdentifier(getContext(), e.getValue(getContext(), 0));
-			return newDeploymentSelection;
-		}).map(e -> e.getMendixObject()).collect(Collectors.toList());
+		try {
+			String deploymentIdentifierAttribute = genaicommons.proxies.Usage.MemberNames._DeploymentIdentifier.toString();
+			String usageEntity = genaicommons.proxies.Usage.entityName.toString();
+			String oqlQuery = "SELECT DISTINCT " + deploymentIdentifierAttribute + " FROM " + usageEntity + " ORDER BY " + deploymentIdentifierAttribute;
+			IDataTable oqlResult = Core.retrieveOQLDataTable(getContext(), oqlQuery);
+			
+			return oqlResult.getRows().stream().map(e -> {
+				DeploymentSelection newDeploymentSelection = new DeploymentSelection(getContext());
+				newDeploymentSelection.setDeploymentIdentifier(getContext(), e.getValue(getContext(), 0));
+				return newDeploymentSelection;
+			}).map(e -> e.getMendixObject()).collect(Collectors.toList());
+		} catch (Exception e) {
+			LOGGER.error(e);
+			return null;
+		}
 		// END USER CODE
 	}
 
@@ -52,5 +58,6 @@ public class DeploymentSelection_GetList extends CustomJavaAction<java.util.List
 	}
 
 	// BEGIN EXTRA CODE
+	private static final MxLogger LOGGER = new MxLogger(DeploymentSelection_GetList.class);
 	// END EXTRA CODE
 }

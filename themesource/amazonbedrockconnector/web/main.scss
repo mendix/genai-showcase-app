@@ -1,2 +1,12 @@
 @import '../../../theme/web/custom-variables';
 
+//Listview
+.listview-horizontal.mx-listview {
+    > ul {
+        display: inline-block;
+        margin-bottom: 0;
+        > li {
+            display: inline-block;
+        }
+    }
+}

@@ -35,6 +35,7 @@ import software.amazon.awssdk.services.bedrockagentruntime.model.RetrieveAndGene
 import software.amazon.awssdk.services.bedrockagentruntime.model.RetrieveAndGenerateSessionConfiguration;
 import software.amazon.awssdk.services.bedrockagentruntime.model.RetrieveAndGenerateType;
 import software.amazon.awssdk.services.bedrockagentruntime.model.TextInferenceConfig;
+import software.amazon.awssdk.services.bedrockagentruntime.model.PromptTemplate;
 
 public class RetrieveAndGenerate extends CustomJavaAction<IMendixObject>
 {
@@ -42,15 +43,17 @@ public class RetrieveAndGenerate extends CustomJavaAction<IMendixObject>
 	private awsauthentication.proxies.Credentials Credentials;
 	private IMendixObject __RetrieveAndGenerateRequest;
 	private amazonbedrockconnector.proxies.RetrieveAndGenerateRequest_Extension RetrieveAndGenerateRequest;
-	private IMendixObject __AmazonBedrockConnection;
-	private amazonbedrockconnector.proxies.AmazonBedrockConnection AmazonBedrockConnection;
+	private IMendixObject __DeployedModel;
+	private amazonbedrockconnector.proxies.BedrockDeployedModel DeployedModel;
+	private awsauthentication.proxies.ENUM_Region Region;
 
-	public RetrieveAndGenerate(IContext context, IMendixObject Credentials, IMendixObject RetrieveAndGenerateRequest, IMendixObject AmazonBedrockConnection)
+	public RetrieveAndGenerate(IContext context, IMendixObject Credentials, IMendixObject RetrieveAndGenerateRequest, IMendixObject DeployedModel, java.lang.String Region)
 	{
 		super(context);
 		this.__Credentials = Credentials;
 		this.__RetrieveAndGenerateRequest = RetrieveAndGenerateRequest;
-		this.__AmazonBedrockConnection = AmazonBedrockConnection;
+		this.__DeployedModel = DeployedModel;
+		this.Region = Region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(Region);
 	}
 
 	@java.lang.Override
@@ -60,17 +63,18 @@ public class RetrieveAndGenerate extends CustomJavaAction<IMendixObject>
 
 		this.RetrieveAndGenerateRequest = this.__RetrieveAndGenerateRequest == null ? null : amazonbedrockconnector.proxies.RetrieveAndGenerateRequest_Extension.initialize(getContext(), __RetrieveAndGenerateRequest);
 
-		this.AmazonBedrockConnection = this.__AmazonBedrockConnection == null ? null : amazonbedrockconnector.proxies.AmazonBedrockConnection.initialize(getContext(), __AmazonBedrockConnection);
+		this.DeployedModel = this.__DeployedModel == null ? null : amazonbedrockconnector.proxies.BedrockDeployedModel.initialize(getContext(), __DeployedModel);
 
 		// BEGIN USER CODE
 		try {
 			requireNonNull(Credentials, "AWS Credentials are required");
 			requireNonNull(RetrieveAndGenerateRequest, "RetrieveAndGenerateRequest_Extension object is required");
-			requireNonNull(AmazonBedrockConnection, "AmazonBedrockConnection is required");
+			requireNonNull(DeployedModel, "Deployed Model is required");
+			requireNonNull(Region, "Region is required");
 			
 			validateRequest();
 			
-			var client = AmazonBedrockClient.getBedrockAgentRuntimeClient(Credentials, AmazonBedrockConnection.getRegion(), RetrieveAndGenerateRequest);
+			var client = AmazonBedrockClient.getBedrockAgentRuntimeClient(Credentials, Region, RetrieveAndGenerateRequest);
 			
 			software.amazon.awssdk.services.bedrockagentruntime.model.RetrieveAndGenerateRequest awsRequest = getAwsRequest();
 			LOGGER.info("AWS request: " + awsRequest);
@@ -159,13 +163,10 @@ public class RetrieveAndGenerate extends CustomJavaAction<IMendixObject>
 			throw new IllegalArgumentException("The RetrieveAndGenerateType attribute of the RetrieveAndGenerateRequest_Extension object is required.");
 		}
 		
-		if (AmazonBedrockConnection.getModel() == null || AmazonBedrockConnection.getModel().isBlank()) {
-			throw new IllegalArgumentException("The Model attribute of the AmazonBedrockConnection is required.");
+		if (DeployedModel.getModel() == null || DeployedModel.getModel().isBlank()) {
+			throw new IllegalArgumentException("The Model attribute of the DeployedModel is required.");
 		}
-		
-		if (AmazonBedrockConnection.getRegion()== null) {
-			throw new IllegalArgumentException("The Region attribute of the AmazonBedrockConnection is required.");
-		}
+
 		
 	}
 	
@@ -180,6 +181,7 @@ public class RetrieveAndGenerate extends CustomJavaAction<IMendixObject>
 		String sessionId = RetrieveAndGenerateRequest.getSessionId();
 		if (sessionId != null && !sessionId.isBlank()) {
 			awsRequestBuilder.sessionId(sessionId);
+			
 		}
 		
 		String kmsKeyARN = RetrieveAndGenerateRequest.getKmsKeyARN();
@@ -204,6 +206,7 @@ public class RetrieveAndGenerate extends CustomJavaAction<IMendixObject>
 		return builder.build();
 	}
 	
+	
 	private RetrieveAndGenerateConfiguration getRetrieveAndGenerateConfiguration(Request commonRequest) throws Exception {
 		var builder = RetrieveAndGenerateConfiguration.builder();
 		
@@ -217,8 +220,10 @@ public class RetrieveAndGenerate extends CustomJavaAction<IMendixObject>
 		var builder = KnowledgeBaseRetrieveAndGenerateConfiguration.builder();
 		
 		builder.knowledgeBaseId(getKnowledgeBaseId(commonRequest))
-			.modelArn(AmazonBedrockConnection.getModel())
+			.modelArn(DeployedModel.getModel())
 			.generationConfiguration(getGenerationConfiguration(commonRequest));
+			
+		
 		
 		return builder.build();
 	}
@@ -226,11 +231,17 @@ public class RetrieveAndGenerate extends CustomJavaAction<IMendixObject>
 	private GenerationConfiguration getGenerationConfiguration(Request commonRequest) throws CoreException {
 		var builder = GenerationConfiguration.builder();
 		
-		builder.inferenceConfig(getInferenceConfig(commonRequest));
-		
+		builder.inferenceConfig(getInferenceConfig(commonRequest))
+				.promptTemplate(getPromptTemplate());
+	
 		return  builder.build();
 	}
-	
+	private  PromptTemplate getPromptTemplate() throws CoreException {
+		var builder = PromptTemplate.builder();
+		builder.textPromptTemplate(RetrieveAndGenerateRequest.getPromptTemplate());
+		
+		return builder.build();
+	}
 	private InferenceConfig getInferenceConfig(Request commonRequest) throws CoreException {
 		var builder = InferenceConfig.builder();
 		

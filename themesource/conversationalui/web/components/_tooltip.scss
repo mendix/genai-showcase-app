@@ -1,0 +1,34 @@
+.hide-tooltip {
+    .widget-tooltip-arrow-top {
+        display: none;
+    }
+    .widget-tooltip-content {
+        display: none;
+    }
+}
+
+.prompt-tooltip {
+    .widget-tooltip-content {
+        position: relative;
+        z-index: 1000;
+        text-align: unset; 
+        word-break: break-word;
+        background-color: white;
+        border-radius: 4px;
+    }
+}
+
+
+.prompt-tooltip-w330 {
+    .widget-tooltip-content {
+        width: 330px;
+        padding: 0 15px 0 15px;
+    }
+}
+
+.prompt-tooltip-w250 {
+    .widget-tooltip-content {
+        width: 280px;
+        padding: 15px;
+    }
+}

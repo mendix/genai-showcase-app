@@ -1,0 +1,59 @@
+.btn-without-border {
+    color: $font-color-default;
+    border: 1px solid transparent;
+    &.mx-link{
+        text-decoration: none;
+    }
+
+    &.disabled {
+        background-color: transparent;
+        border: 1px solid transparent;
+        cursor: default;
+    }
+
+    &:hover {
+        background-color: $btn-default-bg-hover;
+        border: 1px solid $btn-default-bg-hover;
+    }
+    &:hover,
+    &:active,
+    &:focus {
+        color: $font-color-default;
+    }
+}
+
+
+.btn-no-hover.mx-link:hover {
+    background-color: transparent;
+    border: 1px solid transparent;
+    cursor: default;
+}
+
+.btn-run-single {
+    border-radius: 4px 4px 4px 4px;
+}
+
+.btn-run {
+    border-radius: 4px 0 0 4px;
+}
+.btn-run-all {
+    padding: 0.6em;
+    border-radius: 0 4px 4px 0;
+    border-left: 1px solid white;
+    fill: white;
+    img{
+        margin-right: 0;
+    }
+    &:active, &:focus, &:hover {
+        border-left: 1px solid white;
+    }
+
+}
+
+.btn-icon {
+    display: flex;
+    padding: 0.6em;
+    img{
+        margin: 1px;
+    }
+}

@@ -29,3 +29,22 @@
     padding-top: $spacing-large;
     z-index: 101;
 }
+
+.w306 {
+    width: 25.5rem;;
+}
+
+.overflow-unset {
+    overflow: unset;
+}
+
+.card{
+    .card-header{
+        display: flex;
+        flex-direction: row;
+        
+        .widget-combobox .widget-combobox-input-container{
+            height: 100%;
+        }
+    }
+}

@@ -1,0 +1,11 @@
+/ChatCompletions_WithHistory.class
+/ChunkCollection_AddKnowledgeBaseChunk.class
+/DeployedModel_Create.class
+/DeployedModel_SetMicroflow.class
+/Embeddings_ChunkCollection.class
+/Function_ExecuteMicroflow.class
+/Request_AddFunction.class
+/Request_ExecuteFromConnector.class
+/Response_GetResponseImageList.class
+/Response_GetSingleResponseImage.class
+/ImageGenerations.class
