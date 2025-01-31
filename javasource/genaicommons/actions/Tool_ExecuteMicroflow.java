@@ -21,18 +21,18 @@ import genaicommons.proxies.Tool;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class Function_ExecuteMicroflow extends CustomJavaAction<java.lang.String>
+public class Tool_ExecuteMicroflow extends CustomJavaAction<java.lang.String>
 {
-	private IMendixObject __Function;
-	private genaicommons.proxies.Function Function;
+	private IMendixObject __Tool;
+	private genaicommons.proxies.Tool Tool;
 	private IMendixObject __Request;
 	private genaicommons.proxies.Request Request;
 	private java.lang.String Arguments;
 
-	public Function_ExecuteMicroflow(IContext context, IMendixObject Function, IMendixObject Request, java.lang.String Arguments)
+	public Tool_ExecuteMicroflow(IContext context, IMendixObject Tool, IMendixObject Request, java.lang.String Arguments)
 	{
 		super(context);
-		this.__Function = Function;
+		this.__Tool = Tool;
 		this.__Request = Request;
 		this.Arguments = Arguments;
 	}
@@ -40,14 +40,14 @@ public class Function_ExecuteMicroflow extends CustomJavaAction<java.lang.String
 	@java.lang.Override
 	public java.lang.String executeAction() throws Exception
 	{
-		this.Function = this.__Function == null ? null : genaicommons.proxies.Function.initialize(getContext(), __Function);
+		this.Tool = this.__Tool == null ? null : genaicommons.proxies.Tool.initialize(getContext(), __Tool);
 
 		this.Request = this.__Request == null ? null : genaicommons.proxies.Request.initialize(getContext(), __Request);
 
 		// BEGIN USER CODE
 		try {
-			requireNonNull(Function, "Function is required.");
-			requireNonNull(Function.getMicroflow(), "Function has no FunctionMicroflow.");
+			requireNonNull(Tool, "Function is required.");
+			requireNonNull(Tool.getMicroflow(), "Tool has no Microflow.");
 			
 			return executeFunctionMicroflow();
 		
@@ -64,18 +64,18 @@ public class Function_ExecuteMicroflow extends CustomJavaAction<java.lang.String
 	@java.lang.Override
 	public java.lang.String toString()
 	{
-		return "Function_ExecuteMicroflow";
+		return "Tool_ExecuteMicroflow";
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new genaicommons.impl.MxLogger(Function_ExecuteMicroflow.class);
+	private static final MxLogger LOGGER = new genaicommons.impl.MxLogger(Tool_ExecuteMicroflow.class);
 
 	private String executeFunctionMicroflow() throws Exception {		
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode rootNodeArguments = mapper.readTree(Arguments);
 		Map<String, Object> parametersAndValues = new java.util.HashMap<>();
 		//Iterate over input params
-		Map<String, IDataType> parametersAndTypes = Core.getInputParameters(Function.getMicroflow());
+		Map<String, IDataType> parametersAndTypes = Core.getInputParameters(Tool.getMicroflow());
 		for(Map.Entry<String, IDataType> entry : parametersAndTypes.entrySet()) {
 			IDataType value = entry.getValue();
 			String key = entry.getKey();
@@ -84,8 +84,8 @@ public class Function_ExecuteMicroflow extends CustomJavaAction<java.lang.String
 				JsonNode inputParamNode = rootNodeArguments.path(key);
 				parametersAndValues.put(key, inputParamNode.asText());
 			}
-			else if (Core.getMetaObject(value.getObjectType()).isSubClassOf(Tool.getType())){
-				parametersAndValues.put(key,  Function.getMendixObject());
+			else if (Core.getMetaObject(value.getObjectType()).isSubClassOf(genaicommons.proxies.Tool.getType())){
+				parametersAndValues.put(key,  Tool.getMendixObject());
 			}
 			else if (Core.getMetaObject(value.getObjectType()).isSubClassOf(genaicommons.proxies.Request.getType())){
 				parametersAndValues.put(key, Request.getMendixObject());
@@ -96,15 +96,15 @@ public class Function_ExecuteMicroflow extends CustomJavaAction<java.lang.String
 	
 	private String executeAndLogFunctionMicroflow(Map<String, Object> params) {
 		String response;
-		String logMessageInfo = "Finished calling microflow " + Function.getMicroflow() + " with " + getContext();
+		String logMessageInfo = "Finished calling microflow " + Tool.getMicroflow() + " with " + getContext();
 		String logMessageTrace = logMessageInfo;
 		long startTime = System.currentTimeMillis();
 		if(params == null || params.isEmpty()) {
 			logMessageTrace = logMessageTrace + "\nwithout input parameters ";
-			response = Core.microflowCall(Function.getMicroflow()).execute(getContext());
+			response = Core.microflowCall(Tool.getMicroflow()).execute(getContext());
 		} else {
 			logMessageTrace = logMessageTrace +  "\n\nInput parameter(s): " + params.toString();
-			response = Core.microflowCall(Function.getMicroflow()).withParams(params).execute(getContext());
+			response = Core.microflowCall(Tool.getMicroflow()).withParams(params).execute(getContext());
 		}
 		long endTime = System.currentTimeMillis();
 		long executionTime = endTime - startTime;
