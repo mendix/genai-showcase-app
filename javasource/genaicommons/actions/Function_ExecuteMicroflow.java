@@ -10,12 +10,14 @@
 package genaicommons.actions;
 
 import static java.util.Objects.requireNonNull;
+import java.util.Map;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
+import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.webui.CustomJavaAction;
-import genaicommons.impl.FunctionMappingImpl;
 import genaicommons.impl.MxLogger;
+import genaicommons.proxies.Tool;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -23,12 +25,15 @@ public class Function_ExecuteMicroflow extends CustomJavaAction<java.lang.String
 {
 	private IMendixObject __Function;
 	private genaicommons.proxies.Function Function;
+	private IMendixObject __Request;
+	private genaicommons.proxies.Request Request;
 	private java.lang.String Arguments;
 
-	public Function_ExecuteMicroflow(IContext context, IMendixObject Function, java.lang.String Arguments)
+	public Function_ExecuteMicroflow(IContext context, IMendixObject Function, IMendixObject Request, java.lang.String Arguments)
 	{
 		super(context);
 		this.__Function = Function;
+		this.__Request = Request;
 		this.Arguments = Arguments;
 	}
 
@@ -36,6 +41,8 @@ public class Function_ExecuteMicroflow extends CustomJavaAction<java.lang.String
 	public java.lang.String executeAction() throws Exception
 	{
 		this.Function = this.__Function == null ? null : genaicommons.proxies.Function.initialize(getContext(), __Function);
+
+		this.Request = this.__Request == null ? null : genaicommons.proxies.Request.initialize(getContext(), __Request);
 
 		// BEGIN USER CODE
 		try {
@@ -62,37 +69,42 @@ public class Function_ExecuteMicroflow extends CustomJavaAction<java.lang.String
 
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new genaicommons.impl.MxLogger(Function_ExecuteMicroflow.class);
-	private static ObjectMapper mapper = new ObjectMapper();
-	private JsonNode rootNodeArguments;
-	
-	private String executeFunctionMicroflow() throws Exception {
-		String firstInputParamName = FunctionMappingImpl.getFirstInputParamName(Function.getMicroflow());
-		
-		if(firstInputParamName == null || firstInputParamName.isBlank()){
-			return executeAndLogFunctionMicroflow(null, null);
-		
-		} else {
-			rootNodeArguments = mapper.readTree(Arguments);
-			JsonNode firstInputParamNode = rootNodeArguments.path(firstInputParamName);
+
+	private String executeFunctionMicroflow() throws Exception {		
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode rootNodeArguments = mapper.readTree(Arguments);
+		Map<String, Object> parametersAndValues = new java.util.HashMap<>();
+		//Iterate over input params
+		Map<String, IDataType> parametersAndTypes = Core.getInputParameters(Function.getMicroflow());
+		for(Map.Entry<String, IDataType> entry : parametersAndTypes.entrySet()) {
+			IDataType value = entry.getValue();
+			String key = entry.getKey();
 			
-			if (!firstInputParamNode.isTextual()) {
-				throw new IllegalArgumentException("Arguments " + Arguments + " does not match the expected input of the function microflow " + Function.getMicroflow()+ ".");		
+			if(IDataType.DataTypeEnum.String.equals(value.getType())) {
+				JsonNode inputParamNode = rootNodeArguments.path(key);
+				parametersAndValues.put(key, inputParamNode.asText());
 			}
-			return executeAndLogFunctionMicroflow(firstInputParamName, firstInputParamNode.asText());
+			else if (Core.getMetaObject(value.getObjectType()).isSubClassOf(Tool.getType())){
+				parametersAndValues.put(key,  Function.getMendixObject());
+			}
+			else if (Core.getMetaObject(value.getObjectType()).isSubClassOf(genaicommons.proxies.Request.getType())){
+				parametersAndValues.put(key, Request.getMendixObject());
+			}
 		}
+		return executeAndLogFunctionMicroflow(parametersAndValues);
 	}
 	
-	private String executeAndLogFunctionMicroflow(String firstInputParamName, String firstInputParamValue) {
+	private String executeAndLogFunctionMicroflow(Map<String, Object> params) {
 		String response;
 		String logMessageInfo = "Finished calling microflow " + Function.getMicroflow() + " with " + getContext();
 		String logMessageTrace = logMessageInfo;
 		long startTime = System.currentTimeMillis();
-		if(firstInputParamName == null || firstInputParamName.isBlank()) {
+		if(params == null || params.isEmpty()) {
 			logMessageTrace = logMessageTrace + "\nwithout input parameters ";
 			response = Core.microflowCall(Function.getMicroflow()).execute(getContext());
 		} else {
-			logMessageTrace = logMessageTrace +  "\n\nInput parameter [" + firstInputParamName + "]:\n" + firstInputParamValue;
-			response = Core.microflowCall(Function.getMicroflow()).withParam(firstInputParamName, firstInputParamValue).execute(getContext());
+			logMessageTrace = logMessageTrace +  "\n\nInput parameter(s): " + params.toString();
+			response = Core.microflowCall(Function.getMicroflow()).withParams(params).execute(getContext());
 		}
 		long endTime = System.currentTimeMillis();
 		long executionTime = endTime - startTime;
