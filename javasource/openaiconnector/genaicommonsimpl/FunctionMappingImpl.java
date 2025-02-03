@@ -23,6 +23,7 @@ public class FunctionMappingImpl {
 		
 		for(Map.Entry<String, IDataType> entry : inputParameters.entrySet()) {
 			String objectType = entry.getValue().getObjectType();
+			//Ignore Object Input Parameters
 			if (objectType == null) {
 				inputParametersModified.put(entry.getKey(), entry.getValue());
 			}

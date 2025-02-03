@@ -17,7 +17,6 @@ import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.webui.CustomJavaAction;
 import genaicommons.impl.MxLogger;
-import genaicommons.proxies.Tool;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -46,10 +45,10 @@ public class Tool_ExecuteMicroflow extends CustomJavaAction<java.lang.String>
 
 		// BEGIN USER CODE
 		try {
-			requireNonNull(Tool, "Function is required.");
+			requireNonNull(Tool, "Tool is required.");
 			requireNonNull(Tool.getMicroflow(), "Tool has no Microflow.");
 			
-			return executeFunctionMicroflow();
+			return executeToolMicroflow();
 		
 		} catch (Exception e) {
 			throw e;
@@ -70,7 +69,7 @@ public class Tool_ExecuteMicroflow extends CustomJavaAction<java.lang.String>
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new genaicommons.impl.MxLogger(Tool_ExecuteMicroflow.class);
 
-	private String executeFunctionMicroflow() throws Exception {		
+	private String executeToolMicroflow() throws Exception {		
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode rootNodeArguments = mapper.readTree(Arguments);
 		Map<String, Object> parametersAndValues = new java.util.HashMap<>();
@@ -91,10 +90,10 @@ public class Tool_ExecuteMicroflow extends CustomJavaAction<java.lang.String>
 				parametersAndValues.put(key, Request.getMendixObject());
 			}
 		}
-		return executeAndLogFunctionMicroflow(parametersAndValues);
+		return executeAndLogToolMicroflow(parametersAndValues);
 	}
 	
-	private String executeAndLogFunctionMicroflow(Map<String, Object> params) {
+	private String executeAndLogToolMicroflow(Map<String, Object> params) {
 		String response;
 		String logMessageInfo = "Finished calling microflow " + Tool.getMicroflow() + " with " + getContext();
 		String logMessageTrace = logMessageInfo;

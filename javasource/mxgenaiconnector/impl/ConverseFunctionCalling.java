@@ -19,7 +19,6 @@ import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.Request;
 
 
-
 public class ConverseFunctionCalling{
 	
 	private static final ObjectMapper MAPPER = new ObjectMapper();
