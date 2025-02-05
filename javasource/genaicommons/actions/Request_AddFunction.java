@@ -25,6 +25,8 @@ import genaicommons.proxies.ToolCollection;
  * - ToolName: The name of the tool to call.
  * - FunctionMicroflow: The microflow that is called within this function.
  * - ToolDescription (optional): A description of what the function does, used by the model to choose when and how to call the function.
+ * 
+ * The action returns empty if adding the function was not successful (errors are logged).
  */
 public class Request_AddFunction extends CustomJavaAction<IMendixObject>
 {
