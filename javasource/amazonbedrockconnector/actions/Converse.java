@@ -921,7 +921,12 @@ public class Converse extends CustomJavaAction<IMendixObject>
 		Map.Entry<String, Document> entry = awsDoc.asMap().entrySet().iterator().next();
 		
 		String key = entry.getKey();
-		String value = entry.getValue().asString();
+		String value;
+		if (entry.getValue().isString()) {
+			value = entry.getValue().asString();
+		} else {
+			value = entry.getValue().toString();
+		}
 		
 		Map<String, String> stringMap = Map.of(key, value);
 		
