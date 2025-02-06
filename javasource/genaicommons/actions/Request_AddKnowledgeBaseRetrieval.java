@@ -10,14 +10,19 @@
 package genaicommons.actions;
 
 import static java.util.Objects.requireNonNull;
+import java.math.BigDecimal;
+import java.util.List;
+import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.webui.CustomJavaAction;
 import genaicommons.impl.FunctionImpl;
-import genaicommons.impl.KnowledgeBaseRetrievalImpl;
 import genaicommons.impl.MxLogger;
 import genaicommons.impl.ToolCollectionImpl;
+import genaicommons.proxies.Connection;
 import genaicommons.proxies.KnowledgeBaseRetrieval;
+import genaicommons.proxies.MetadataCollection;
+import genaicommons.proxies.Tool;
 import genaicommons.proxies.ToolCollection;
 
 public class Request_AddKnowledgeBaseRetrieval extends CustomJavaAction<IMendixObject>
@@ -59,13 +64,14 @@ public class Request_AddKnowledgeBaseRetrieval extends CustomJavaAction<IMendixO
 		// BEGIN USER CODE
 		try{
 			requireNonNull(Request, "Request is required.");
-			KnowledgeBaseRetrievalImpl.validateInput(FunctionMicroflow, ToolName);
+			validateInput(FunctionMicroflow, ToolName);
+			validateOptionalInput(MetadataCollection, MinimumSimilarity, MaxNumberOfResults);
 			
 			ToolCollection toolCollection = ToolCollectionImpl.getOrCreateToolCollection(getContext(), Request);
 			
-			IMendixObject knowledgeBaseRetrievalMxObject = KnowledgeBaseRetrievalImpl.createKnowledgeBaseRetrieval(getContext(), FunctionMicroflow, ToolName, toolCollection, Connection).getMendixObject();
+			IMendixObject knowledgeBaseRetrievalMxObject = createKnowledgeBaseRetrieval(getContext(), FunctionMicroflow, ToolName, toolCollection, Connection).getMendixObject();
 			KnowledgeBaseRetrieval knowledgeBaseRetrieval = KnowledgeBaseRetrieval.load(getContext(), knowledgeBaseRetrievalMxObject.getId());
-			KnowledgeBaseRetrievalImpl.addOptionalParameters(knowledgeBaseRetrieval, ToolDescription, MetadataCollection, MinimumSimilarity, MaxNumberOfResults);
+			addOptionalParameters(knowledgeBaseRetrieval, ToolDescription, MetadataCollection, MinimumSimilarity, MaxNumberOfResults);
 			
 			return knowledgeBaseRetrievalMxObject;
 			
@@ -88,5 +94,44 @@ public class Request_AddKnowledgeBaseRetrieval extends CustomJavaAction<IMendixO
 
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new genaicommons.impl.MxLogger(Request_AddKnowledgeBaseRetrieval.class);
+	
+	private static void validateInput(String microflow, String toolName) throws Exception{
+		requireNonNull(toolName, "Tool Name is required.");
+		if(!microflow.isBlank()) {
+			FunctionImpl.validateFunctionMicroflow(microflow);
+		}
+	}
+	
+	private static void validateOptionalInput(MetadataCollection metadataCollection, BigDecimal minimumSimilarity, Long maxNumberOfResults) throws CoreException {
+		if(metadataCollection != null && metadataCollection.getMetadataCollection_Metadata().size() == 0) {
+			throw new IllegalArgumentException("MetadataCollection was added without any meta data.");
+		}
+		if(minimumSimilarity != null && (minimumSimilarity.doubleValue() < 0 || minimumSimilarity.doubleValue() > 1)) {
+			throw new IllegalArgumentException("MinimumSimilarity value was " + minimumSimilarity +", but is only valid for values from 0.0 to 1.0.");
+		}
+		if(maxNumberOfResults != null && maxNumberOfResults <= 0) {
+			throw new IllegalArgumentException("MaxNumberOfResults value was " + maxNumberOfResults +", but is only valid for values greater than 0.");
+		}
+	}
+	
+	private static KnowledgeBaseRetrieval createKnowledgeBaseRetrieval(IContext context, String microflow, String name, ToolCollection toolCollection, Connection connection) throws CoreException {
+		KnowledgeBaseRetrieval knowledgeBaseRetrieval = new KnowledgeBaseRetrieval(context);
+		knowledgeBaseRetrieval.setMicroflow(microflow);
+		knowledgeBaseRetrieval.setName(name);	
+		knowledgeBaseRetrieval.setKnowledgeBaseRetrieval_Connection(connection);
+		List<Tool> ToolList = toolCollection.getToolCollection_Tool();
+		ToolList.add(knowledgeBaseRetrieval);
+		toolCollection.setToolCollection_Tool(ToolList); 
+		return knowledgeBaseRetrieval;
+	}
+	
+	private static void addOptionalParameters(KnowledgeBaseRetrieval knowledgeBaseRetrieval, String description, MetadataCollection metadataCollection, BigDecimal minimumSimilarity, Long maxNumberOfResults) {
+		knowledgeBaseRetrieval.setDescription(description);
+		knowledgeBaseRetrieval.setKnowledgeBaseRetrieval_MetadataCollection(metadataCollection);
+		knowledgeBaseRetrieval.setMinimumSimilarity(minimumSimilarity);
+		if(maxNumberOfResults != null) {
+			knowledgeBaseRetrieval.setMaxNumberOfResults(maxNumberOfResults.intValue());
+		}
+	}
 	// END EXTRA CODE
 }
