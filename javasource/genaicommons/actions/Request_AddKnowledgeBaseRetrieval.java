@@ -29,24 +29,24 @@ public class Request_AddKnowledgeBaseRetrieval extends CustomJavaAction<IMendixO
 {
 	private IMendixObject __Request;
 	private genaicommons.proxies.Request Request;
+	private java.lang.String ToolName;
+	private java.lang.String FunctionMicroflow;
 	private IMendixObject __Connection;
 	private genaicommons.proxies.Connection Connection;
-	private java.lang.String ToolName;
 	private java.lang.String ToolDescription;
-	private java.lang.String FunctionMicroflow;
 	private IMendixObject __MetadataCollection;
 	private genaicommons.proxies.MetadataCollection MetadataCollection;
 	private java.math.BigDecimal MinimumSimilarity;
 	private java.lang.Long MaxNumberOfResults;
 
-	public Request_AddKnowledgeBaseRetrieval(IContext context, IMendixObject Request, IMendixObject Connection, java.lang.String ToolName, java.lang.String ToolDescription, java.lang.String FunctionMicroflow, IMendixObject MetadataCollection, java.math.BigDecimal MinimumSimilarity, java.lang.Long MaxNumberOfResults)
+	public Request_AddKnowledgeBaseRetrieval(IContext context, IMendixObject Request, java.lang.String ToolName, java.lang.String FunctionMicroflow, IMendixObject Connection, java.lang.String ToolDescription, IMendixObject MetadataCollection, java.math.BigDecimal MinimumSimilarity, java.lang.Long MaxNumberOfResults)
 	{
 		super(context);
 		this.__Request = Request;
-		this.__Connection = Connection;
 		this.ToolName = ToolName;
-		this.ToolDescription = ToolDescription;
 		this.FunctionMicroflow = FunctionMicroflow;
+		this.__Connection = Connection;
+		this.ToolDescription = ToolDescription;
 		this.__MetadataCollection = MetadataCollection;
 		this.MinimumSimilarity = MinimumSimilarity;
 		this.MaxNumberOfResults = MaxNumberOfResults;
