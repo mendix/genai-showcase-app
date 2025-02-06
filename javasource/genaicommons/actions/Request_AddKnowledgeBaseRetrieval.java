@@ -30,7 +30,7 @@ public class Request_AddKnowledgeBaseRetrieval extends CustomJavaAction<IMendixO
 	private IMendixObject __Request;
 	private genaicommons.proxies.Request Request;
 	private java.lang.String ToolName;
-	private java.lang.String FunctionMicroflow;
+	private java.lang.String RetrieveMicroflow;
 	private IMendixObject __Connection;
 	private genaicommons.proxies.Connection Connection;
 	private java.lang.String ToolDescription;
@@ -39,12 +39,12 @@ public class Request_AddKnowledgeBaseRetrieval extends CustomJavaAction<IMendixO
 	private java.math.BigDecimal MinimumSimilarity;
 	private java.lang.Long MaxNumberOfResults;
 
-	public Request_AddKnowledgeBaseRetrieval(IContext context, IMendixObject Request, java.lang.String ToolName, java.lang.String FunctionMicroflow, IMendixObject Connection, java.lang.String ToolDescription, IMendixObject MetadataCollection, java.math.BigDecimal MinimumSimilarity, java.lang.Long MaxNumberOfResults)
+	public Request_AddKnowledgeBaseRetrieval(IContext context, IMendixObject Request, java.lang.String ToolName, java.lang.String RetrieveMicroflow, IMendixObject Connection, java.lang.String ToolDescription, IMendixObject MetadataCollection, java.math.BigDecimal MinimumSimilarity, java.lang.Long MaxNumberOfResults)
 	{
 		super(context);
 		this.__Request = Request;
 		this.ToolName = ToolName;
-		this.FunctionMicroflow = FunctionMicroflow;
+		this.RetrieveMicroflow = RetrieveMicroflow;
 		this.__Connection = Connection;
 		this.ToolDescription = ToolDescription;
 		this.__MetadataCollection = MetadataCollection;
@@ -64,12 +64,12 @@ public class Request_AddKnowledgeBaseRetrieval extends CustomJavaAction<IMendixO
 		// BEGIN USER CODE
 		try{
 			requireNonNull(Request, "Request is required.");
-			validateInput(FunctionMicroflow, ToolName);
+			validateInput(RetrieveMicroflow, ToolName);
 			validateOptionalInput(MetadataCollection, MinimumSimilarity, MaxNumberOfResults);
 			
 			ToolCollection toolCollection = ToolCollectionImpl.getOrCreateToolCollection(getContext(), Request);
 			
-			IMendixObject knowledgeBaseRetrievalMxObject = createKnowledgeBaseRetrieval(getContext(), FunctionMicroflow, ToolName, toolCollection, Connection).getMendixObject();
+			IMendixObject knowledgeBaseRetrievalMxObject = createKnowledgeBaseRetrieval(getContext(), RetrieveMicroflow, ToolName, toolCollection, Connection).getMendixObject();
 			KnowledgeBaseRetrieval knowledgeBaseRetrieval = KnowledgeBaseRetrieval.load(getContext(), knowledgeBaseRetrievalMxObject.getId());
 			addOptionalParameters(knowledgeBaseRetrieval, ToolDescription, MetadataCollection, MinimumSimilarity, MaxNumberOfResults);
 			
