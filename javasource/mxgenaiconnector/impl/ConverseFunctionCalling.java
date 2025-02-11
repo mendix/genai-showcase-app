@@ -19,7 +19,6 @@ import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.Request;
 
 
-
 public class ConverseFunctionCalling{
 	
 	private static final ObjectMapper MAPPER = new ObjectMapper();
@@ -37,10 +36,10 @@ public class ConverseFunctionCalling{
 		ArrayNode toolsNode = (ArrayNode) rootNode.path("toolConfig").path("tools");
 		for (int i = 0; i < toolsNode.size(); i++) {
 			JsonNode toolNode = toolsNode.get(i);
-			String functionMicroflow = toolNode.path("functionMicroflow").asText();
-			if (functionMicroflow.isBlank() == false) {
+			String microflow = toolNode.path("microflow").asText();
+			if (microflow.isBlank() == false) {
 				ObjectNode toolNodeObject = (ObjectNode) toolNode;
-				setInputSchemaForToolNode(functionMicroflow,toolNodeObject);
+				setInputSchemaForToolNode(microflow,toolNodeObject);
 				
 				//Add toolSpec node around tool
 				ObjectNode toolSpecNode = MAPPER.createObjectNode();
@@ -49,20 +48,20 @@ public class ConverseFunctionCalling{
 				toolsNode.set(i,toolSpecNode);
 				
 				//Remove functionMicrofow node which is not part of the Converse request
-				((ObjectNode) toolNode).remove("functionMicroflow");
+				((ObjectNode) toolNode).remove("microflow");
 			}
 		}
 	}
 	
 	//This will create the input schema JSON needed for specifying the input of a tool
-	private static void setInputSchemaForToolNode(String functionMicroflow, ObjectNode toolNode) {
+	private static void setInputSchemaForToolNode(String microflow, ObjectNode toolNode) {
 		
 		// Create the root object node
         ObjectNode inputSchemaNode = MAPPER.createObjectNode();
         inputSchemaNode.put("type", "object");
 
         // Create the properties node (if input parameter is available)
-        String parameterName = FunctionMappingImpl.getFirstInputParamName(functionMicroflow);
+        String parameterName = FunctionMappingImpl.getFirstInputParamName(microflow);
 		if(parameterName != null && parameterName.isBlank() == false) {
 			ObjectNode propertiesNode = MAPPER.createObjectNode();
 	        ObjectNode fieldNode = MAPPER.createObjectNode();
