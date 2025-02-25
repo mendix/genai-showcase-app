@@ -25217,108 +25217,6 @@ html div.dj_ios .widget-switch.auto .widget-switch-btn-wrapper.checked.widget-sw
   opacity: 0.6;
 }
 
-.widget-datagrid-export-alert {
-  background-color: rgb(255, 255, 255);
-  border-radius: 4px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  display: flex;
-  flex-direction: column;
-  padding: 54px;
-  min-width: 200px;
-  max-width: 378px;
-  width: 100%;
-  position: relative;
-}
-.widget-datagrid-export-alert-cancel {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-.widget-datagrid-export-alert-cancel.btn {
-  display: flex;
-  padding: 4px;
-}
-.widget-datagrid-export-alert-cancel.btn:focus-visible {
-  outline: 1px solid #264ae5;
-}
-.widget-datagrid-export-alert-message {
-  color: rgb(38, 74, 229);
-  font-size: 18px;
-  font-weight: 700;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.widget-datagrid-export-alert-failed .widget-datagrid-export-progress-indicator {
-  background-color: rgb(227, 63, 78);
-}
-
-.widget-datagrid-export-progress {
-  align-items: center;
-  background-color: rgb(240, 241, 242);
-  border-radius: 4px;
-  display: flex;
-  height: 18px;
-  overflow: hidden;
-  position: relative;
-  transform: translateZ(0);
-  width: 100%;
-}
-.widget-datagrid-export-progress-indicator {
-  background-color: rgb(38, 74, 229);
-  border-radius: 4px;
-  height: 17px;
-  transition: transform 100ms cubic-bezier(0.65, 0, 0.35, 1);
-  width: 100%;
-}
-.widget-datagrid-export-progress-indicator-indeterminate {
-  animation: indeterminateAnimation 1s infinite linear;
-  transform-origin: 0% 50%;
-  transition: none;
-}
-
-@keyframes indeterminateAnimation {
-  0% {
-    transform: translateX(0) scaleX(0);
-  }
-  40% {
-    transform: translateX(0) scaleX(0.4);
-  }
-  100% {
-    transform: translateX(100%) scaleX(0.5);
-  }
-}
-.widget-datagrid-modal-overlay {
-  animation: fade-in 300ms cubic-bezier(0.16, 1, 0.3, 1);
-  background-color: rgba(128, 128, 128, 0.5);
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 50;
-}
-.widget-datagrid-modal-main {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 55;
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 .table {
   position: relative;
   border-width: 0;
@@ -25637,111 +25535,18 @@ html div.dj_ios .widget-switch.auto .widget-switch-btn-wrapper.checked.widget-sw
   white-space: nowrap;
 }
 
-.widget-datagrid {
-  position: relative;
-}
 .widget-datagrid.widget-datagrid-selection-method-click .tr.tr-selected .td {
   background-color: #e6eaff;
 }
-.widget-datagrid .th.widget-datagrid-col-select,
-.widget-datagrid .td.widget-datagrid-col-select {
-  align-items: center;
-}
-.widget-datagrid-exporting .widget-datagrid-top-bar,
-.widget-datagrid-exporting .widget-datagrid-header,
-.widget-datagrid-exporting .widget-datagrid-content,
-.widget-datagrid-exporting .widget-datagrid-footer {
-  visibility: hidden;
-}
-.widget-datagrid-exporting .widget-datagrid-top-bar *,
-.widget-datagrid-exporting .widget-datagrid-header *,
-.widget-datagrid-exporting .widget-datagrid-content *,
-.widget-datagrid-exporting .widget-datagrid-footer * {
-  transition: unset;
-}
+
 .widget-datagrid-col-select input:focus-visible {
   outline-offset: 0;
 }
+
 .widget-datagrid-content {
   overflow-y: auto;
 }
-.widget-datagrid-loader-container {
-  align-items: center;
-  background-color: rgb(255, 255, 255);
-  display: flex;
-  height: 400px;
-  justify-content: center;
-}
-.widget-datagrid-skeleton, .widget-datagrid-spinner {
-  align-content: center;
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  overflow: hidden;
-}
-.widget-datagrid-skeleton {
-  padding: 6px var(--dropdown-outer-padding, 10px);
-}
-.widget-datagrid-skeleton-loader {
-  animation: skeleton-loading 1s linear infinite alternate;
-  background: var(--dg-skeleton-background, linear-gradient(90deg, rgba(194, 194, 194, 0.2) 0%, #d2d2d2 100%));
-  background-size: 300% 100%;
-  border-radius: 4px;
-  height: 16px;
-  width: 148px;
-}
-.widget-datagrid-skeleton-loader-small {
-  margin-right: 8px;
-  width: 16px;
-}
-.widget-datagrid-spinner {
-  justify-content: center;
-  width: 100%;
-}
-.widget-datagrid-spinner-margin {
-  margin: 52px 0;
-}
-.widget-datagrid-spinner-loader {
-  --widget-combobox-spinner-loader: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
-  animation: rotate 1s infinite linear;
-  aspect-ratio: 1;
-  background: var(--brand-primary, #264ae5);
-  border-radius: 50%;
-  mask: var(--widget-combobox-spinner-loader);
-  mask-composite: subtract;
-}
-.widget-datagrid-spinner-loader-large {
-  height: 48px;
-  padding: 7px;
-  width: 48px;
-}
-.widget-datagrid-spinner-loader-medium {
-  height: 24px;
-  padding: 3.5px;
-  width: 24px;
-}
-.widget-datagrid-spinner-loader-small {
-  height: 16px;
-  padding: 2.3px;
-  width: 16px;
-}
 
-.widget-datagrid .widget-datagrid-load-more {
-  display: block !important;
-  margin: 0 auto;
-}
-
-@keyframes skeleton-loading {
-  0% {
-    background-position: right;
-  }
-}
-@keyframes rotate {
-  to {
-    transform: rotate(1turn);
-  }
-}
 /**
     Classes for React Date-Picker font-unit and color adjustments
 */
@@ -25940,21 +25745,47 @@ Space between the fields and the popup
   padding-left: 4px;
   /* The font has spaces in the right side, so to align in the middle we need this */
 }
-
-.filter-selectors {
+.filter-selector .filter-selector-content .filter-selectors {
   position: absolute;
   width: max-content;
   left: 0;
+  margin: 0 var(--spacing-small, 8px);
   padding: 0;
-  margin: 0;
   background: var(--bg-color-secondary, #fff);
-  z-index: 51;
+  z-index: 102;
   border-radius: 8px;
   list-style-type: none;
   box-shadow: 0 2px 20px 1px rgba(5, 15, 129, 0.05), 0 2px 16px 0 rgba(33, 43, 54, 0.08);
   overflow: hidden;
+  z-index: 102;
 }
-.filter-selectors .filter-listitem,
+.filter-selector .filter-selector-content .filter-selectors li {
+  display: flex;
+  align-items: center;
+  font-weight: normal;
+  line-height: 32px;
+  cursor: pointer;
+}
+.filter-selector .filter-selector-content .filter-selectors li .filter-label {
+  padding-right: 8px;
+}
+.filter-selector .filter-selector-content .filter-selectors li.filter-selected {
+  background-color: var(--gray-lighter, #f8f8f8);
+  color: var(--brand-primary, #264ae5);
+}
+.filter-selector .filter-selector-content .filter-selectors li:hover, .filter-selector .filter-selector-content .filter-selectors li:focus {
+  background-color: var(--gray-lighter, #f8f8f8);
+}
+
+.filter-selectors {
+  padding: 0;
+  background: var(--bg-color-secondary, #fff);
+  border-radius: 8px;
+  list-style-type: none;
+  box-shadow: 0 2px 20px 1px rgba(5, 15, 129, 0.05), 0 2px 16px 0 rgba(33, 43, 54, 0.08);
+  overflow: hidden;
+  z-index: 102;
+}
 .filter-selectors li {
   display: flex;
   align-items: center;
@@ -25962,18 +25793,14 @@ Space between the fields and the popup
   line-height: 32px;
   cursor: pointer;
 }
-.filter-selectors .filter-listitem .filter-label,
 .filter-selectors li .filter-label {
   padding-right: 8px;
 }
-.filter-selectors .filter-listitem.filter-selected,
 .filter-selectors li.filter-selected {
   background-color: var(--gray-lighter, #f8f8f8);
   color: var(--brand-primary, #264ae5);
 }
-.filter-selectors .filter-listitem:hover, .filter-selectors .filter-listitem.filter-highlighted,
-.filter-selectors li:hover,
-.filter-selectors li.filter-highlighted {
+.filter-selectors li:hover, .filter-selectors li:focus {
   background-color: var(--gray-lighter, #f8f8f8);
 }
 
@@ -26285,20 +26112,11 @@ div:not(.table-compact) > .table .th .dropdown-container .dropdown-list {
   border: 0;
 }
 
-.container-stuck + .table .th {
+.sticky-sentinel.container-stuck + .widget-datagrid-grid .th, .sticky-sentinel.container-stuck + .table .th {
   position: -webkit-sticky;
   /* Safari */
   position: sticky;
   z-index: 50;
-}
-
-/**
- * Another hack for sticky header and filters.
- * Don't use this code anywhere else, and if you can, please remove it.
- * If we moved headers out of the grid body, please, remove this piece of guano.
- */
-.container-stuck + .table .th:has(.filter-selectors.visible) {
-  z-index: 51;
 }
 
 .widget-datagrid-content.infinite-loading {
