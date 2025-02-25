@@ -26749,13 +26749,12 @@ input[type=checkbox].three-state-checkbox + .control-label {
   color: #e33f4e;
 }
 
-.border-selected {
-  border-color: #264ae5;
+/*.border-selected {
+  border-color: $brand-primary;
   border-width: 2px;
   border: 1px solid;
-  padding: 8px;
-}
-
+  padding: $spacing-small;
+}*/
 .badge--purple {
   color: #2F008C;
   background-color: #E2E0FC;
