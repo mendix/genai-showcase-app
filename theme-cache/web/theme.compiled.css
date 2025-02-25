@@ -27891,6 +27891,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: 85%;
 }
 
+.height--95 {
+  height: 95%;
+}
+
 .display--inline {
   display: inline;
 }
