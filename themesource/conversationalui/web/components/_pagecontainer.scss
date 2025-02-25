@@ -56,8 +56,9 @@
     }
 
     .page-container-side {
+        z-index: 1000;
         width: 100%;
-        max-width: 540px;
+        max-width: 600px;
         display: flex;
         flex-direction: column;
     }
@@ -110,7 +111,7 @@
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        height: fit-content;
+        height: 600px; //height: fit-content;
         padding-top: $spacing-large;
         padding-bottom: $spacing-large;
     }
@@ -120,15 +121,17 @@
         width: 60%;
         display: flex;
         flex-direction: column;
-        height: fit-content;
 
         .prompt-fields {
+            height: 600px;
             padding-bottom: $spacing-small;
         }
 
         .card {
             margin-left: $spacing-large / 2;
             margin-right: $spacing-large / 2;
+            overflow-y: auto;
+            max-height: 600px; 
         }
     }
 
@@ -137,12 +140,13 @@
         width: 40%;
         display: flex;
         flex-direction: column;
-        height: fit-content;
 
         .card {
             margin-left: $spacing-large / 2;
             margin-right: $spacing-large / 2;
             padding-bottom: $spacing-small;
+            overflow-y: auto;
+            height: 600px; 
         }
     }
 
@@ -184,7 +188,7 @@
     .panel-header {
         &::after {
             content: "";
-            height: 80px;
+            //height: 80px;
         }
 
         display: flex;
@@ -199,18 +203,28 @@
             padding-right: $spacing-small;
             padding-bottom: $spacing-small;
         }
-        .close-icon-area {
+        .icon-area {
+            margin-top: $spacing-small;
+            .new-chat-icon {
+                img {
+                    height: 24px;
+                    width: 24px;
+                    margin-right: 0;
+                }
+            }
             .close-icon {
+                border-left: 2px solid $gray-primary;
                 padding-left: $spacing-small;
                 margin-right: $spacing-small;
                 margin-left: $spacing-small;
-                margin-top: $spacing-small;
+                
                 height: fit-content;
+                img {
+                    height: 24px;
+                    width: 24px;
+                    margin-right: 0;
+                }
             } 
-        }
-        .new-chat-icon {
-            margin-top: $spacing-small;
-            height: fit-content;
         }
     }
 
@@ -304,3 +318,4 @@
         color: $brand-danger;
     }
 }
+

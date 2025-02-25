@@ -38,6 +38,10 @@
     overflow: unset;
 }
 
+.overflow-y-auto {
+    overflow-y: auto !important;
+}
+
 .card{
     .card-header{
         display: flex;
@@ -46,5 +50,13 @@
         .widget-combobox .widget-combobox-input-container{
             height: 100%;
         }
+    }
+}
+
+/* prompt output card */
+.output-all-card {
+    .card {
+        max-height: 600px;
+        overflow-y: auto;
     }
 }
