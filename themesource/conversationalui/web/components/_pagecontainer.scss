@@ -111,7 +111,7 @@
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        height: 600px; //height: fit-content;
+        height: fit-content;
         padding-top: $spacing-large;
         padding-bottom: $spacing-large;
     }
@@ -122,16 +122,10 @@
         display: flex;
         flex-direction: column;
 
-        .prompt-fields {
-            height: 600px;
-            padding-bottom: $spacing-small;
-        }
-
         .card {
             margin-left: $spacing-large / 2;
             margin-right: $spacing-large / 2;
-            overflow-y: auto;
-            max-height: 600px; 
+            max-height: 47vh;
         }
     }
 
@@ -140,13 +134,12 @@
         width: 40%;
         display: flex;
         flex-direction: column;
-
+        
         .card {
             margin-left: $spacing-large / 2;
             margin-right: $spacing-large / 2;
-            padding-bottom: $spacing-small;
-            overflow-y: auto;
-            height: 600px; 
+            max-height: 47vh;
+            padding-bottom: $spacing-large;
         }
     }
 
@@ -179,10 +172,14 @@
         width: 100%;
         display: flex;
         flex-direction: column;
+
         .card {
             margin-left: $spacing-large / 2;
             margin-right: $spacing-large / 2;
+            max-height: 50vh;
+            padding-bottom: $spacing-large;
         }
+
     }
 
     .panel-header {
@@ -233,6 +230,21 @@
         overflow-y: auto;
         display: flex;
         flex-direction: column;
+    }
+
+    //* Card content of ever card */
+    .card-content {
+        overflow-y: auto;
+        overflow-x: hidden;
+        max-height: 37vh;
+        padding-bottom: $spacing-smaller;
+    }
+
+    .card-header {
+        position: sticky;
+        display: flex;
+        flex-direction: row;
+        z-index: 2;
     }
 }
 
@@ -318,4 +330,5 @@
         color: $brand-danger;
     }
 }
+
 

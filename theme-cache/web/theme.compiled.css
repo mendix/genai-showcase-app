@@ -26921,7 +26921,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 0 8px;
 }
 
-/* custom button image size */
+/* custom button image size - please use this for custom size icon*/
 .custom-img img {
   height: 22px;
   width: 22px;
@@ -26970,20 +26970,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .overflow-y-auto {
   overflow-y: auto !important;
-}
-
-.card .card-header {
-  display: flex;
-  flex-direction: row;
-}
-.card .card-header .widget-combobox .widget-combobox-input-container {
-  height: 100%;
-}
-
-/* prompt output card */
-.output-all-card .card {
-  max-height: 600px;
-  overflow-y: auto;
 }
 
 .chat-loading-wrapper {
@@ -27557,7 +27543,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  height: 600px;
+  height: fit-content;
   padding-top: 24px;
   padding-bottom: 24px;
 }
@@ -27567,15 +27553,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
   flex-direction: column;
 }
-.page-container .content-main .prompt-fields {
-  height: 600px;
-  padding-bottom: 8px;
-}
 .page-container .content-main .card {
   margin-left: 12px;
   margin-right: 12px;
-  overflow-y: auto;
-  max-height: 600px;
+  max-height: 47vh;
 }
 .page-container .content-column {
   min-width: 400px;
@@ -27586,9 +27567,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .page-container .content-column .card {
   margin-left: 12px;
   margin-right: 12px;
-  padding-bottom: 8px;
-  overflow-y: auto;
-  height: 600px;
+  max-height: 47vh;
+  padding-bottom: 24px;
 }
 @media (max-width: 1200px) {
   .page-container .content-main {
@@ -27616,6 +27596,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .page-container .content-fullwidth .card {
   margin-left: 12px;
   margin-right: 12px;
+  max-height: 50vh;
+  padding-bottom: 24px;
 }
 .page-container .panel-header {
   display: flex;
@@ -27658,6 +27640,18 @@ input[type=checkbox].three-state-checkbox + .control-label {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+}
+.page-container .card-content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 37vh;
+  padding-bottom: 4px;
+}
+.page-container .card-header {
+  position: sticky;
+  display: flex;
+  flex-direction: row;
+  z-index: 2;
 }
 
 .table-header {
@@ -27820,6 +27814,24 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .popupmenu-custom-item-container .mx-link:hover {
   background-color: transparent;
+}
+
+.dropdown-hover {
+  background-color: #fff;
+  width: 100%;
+  padding: 10px;
+}
+.dropdown-hover:hover, .dropdown-hover:focus, .dropdown-hover:active {
+  cursor: pointer;
+  border-color: #f8f8f8;
+  background-color: #f8f8f8;
+}
+
+.custom-widget-combobox-menu .widget-combobox-menu .widget-combobox-menu-footer {
+  padding: unset;
+}
+.custom-widget-combobox-menu .combobox-footer-action {
+  padding: 10px;
 }
 
 .segmented-control {
