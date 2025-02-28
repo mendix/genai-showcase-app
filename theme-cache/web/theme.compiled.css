@@ -26758,6 +26758,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-bottom: 4px;
 }
 
+.border-right {
+  border-right: 2px;
+}
+
 .accordion-chat-sources .widget-accordion-group {
   background: transparent;
   border-bottom: none;
