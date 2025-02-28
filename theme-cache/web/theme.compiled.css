@@ -27210,14 +27210,16 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .datetime-inputs-wrapper {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 .datetime-inputs-wrapper .time-input {
+  display: unset;
   max-width: 100px;
   margin-left: -1px;
   margin-bottom: 0;
 }
 .datetime-inputs-wrapper .date-input {
+  display: unset;
   max-width: 150px;
   margin-left: 16px;
   margin-bottom: 0;
@@ -27226,6 +27228,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-left: -44px;
   border: 1px solid transparent;
   background: transparent;
+}
+.datetime-inputs-wrapper .has-error .alert {
+  margin-top: 0.5px;
 }
 
 .input-container {
