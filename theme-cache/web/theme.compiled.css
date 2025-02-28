@@ -26908,7 +26908,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 0 8px;
 }
 
-/* custom button image size - please use this for custom size icon*/
 .custom-img img {
   height: 22px;
   width: 22px;
