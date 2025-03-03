@@ -22,7 +22,7 @@
     padding-top: 0;
 }
 
-.sticky-header{
+.sticky-header {
     position: sticky;
     background-color: inherit;
     top: 0px;
@@ -38,13 +38,7 @@
     overflow: unset;
 }
 
-.card{
-    .card-header{
-        display: flex;
-        flex-direction: row;
-        
-        .widget-combobox .widget-combobox-input-container{
-            height: 100%;
-        }
-    }
+.overflow-y-auto {
+    overflow-y: auto !important;
 }
+

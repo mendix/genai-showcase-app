@@ -56,8 +56,9 @@
     }
 
     .page-container-side {
+        z-index: 1000;
         width: 100%;
-        max-width: 540px;
+        max-width: 600px;
         display: flex;
         flex-direction: column;
     }
@@ -120,15 +121,11 @@
         width: 60%;
         display: flex;
         flex-direction: column;
-        height: fit-content;
-
-        .prompt-fields {
-            padding-bottom: $spacing-small;
-        }
 
         .card {
             margin-left: $spacing-large / 2;
             margin-right: $spacing-large / 2;
+            max-height: 47vh;
         }
     }
 
@@ -137,12 +134,12 @@
         width: 40%;
         display: flex;
         flex-direction: column;
-        height: fit-content;
-
+        
         .card {
             margin-left: $spacing-large / 2;
             margin-right: $spacing-large / 2;
-            padding-bottom: $spacing-small;
+            max-height: 47vh;
+            padding-bottom: $spacing-large;
         }
     }
 
@@ -175,16 +172,18 @@
         width: 100%;
         display: flex;
         flex-direction: column;
+
         .card {
             margin-left: $spacing-large / 2;
             margin-right: $spacing-large / 2;
+            max-height: 50vh;
+            padding-bottom: $spacing-large;
         }
     }
 
     .panel-header {
         &::after {
             content: "";
-            height: 80px;
         }
 
         display: flex;
@@ -199,18 +198,29 @@
             padding-right: $spacing-small;
             padding-bottom: $spacing-small;
         }
-        .close-icon-area {
+        .icon-area {
+            margin-top: $spacing-small;
+            margin-left: auto;
+            max-width: 75px;
+            .new-chat-icon {
+                img {
+                    height: 24px;
+                    width: 24px;
+                    margin-right: 0;
+                }
+            }
             .close-icon {
+                border-left: 2px solid $gray-primary;
                 padding-left: $spacing-small;
                 margin-right: $spacing-small;
                 margin-left: $spacing-small;
-                margin-top: $spacing-small;
                 height: fit-content;
+                img {
+                    height: 24px;
+                    width: 24px;
+                    margin-right: 0;
+                }
             } 
-        }
-        .new-chat-icon {
-            margin-top: $spacing-small;
-            height: fit-content;
         }
     }
 
@@ -219,6 +229,20 @@
         overflow-y: auto;
         display: flex;
         flex-direction: column;
+    }
+
+    .card-content {
+        overflow-y: auto;
+        overflow-x: hidden;
+        max-height: 37vh;
+        padding-bottom: $spacing-smaller;
+    }
+
+    .card-header {
+        position: sticky;
+        display: flex;
+        flex-direction: row;
+        z-index: 2;
     }
 }
 

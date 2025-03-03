@@ -44,3 +44,30 @@
         }
     }
 }
+
+.dropdown-hover {
+    background-color: $bg-color-secondary;
+    width: 100%;
+    padding: 10px;
+
+    &:hover,
+    &:focus,
+    &:active {
+        cursor: pointer;
+        border-color: $bg-color;
+        background-color: $bg-color;
+    }
+}
+
+
+
+.custom-widget-combobox-menu {
+    .widget-combobox-menu {
+        .widget-combobox-menu-footer {
+            padding: unset;
+        }
+    }
+    .combobox-footer-action {
+        padding: 10px;
+    }
+}

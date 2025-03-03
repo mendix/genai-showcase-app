@@ -34,6 +34,10 @@
   margin-bottom: $spacing-medium;
 }
 
+.spacing-outer-top-smaller {
+  margin-top: $spacing-smaller;
+}
+
 .flexbox-space-between {
   display: flex !important;
   justify-content: space-between;
@@ -76,21 +80,6 @@
   }
 }
 
-//Following might be moved, all related to prompt library
-.border-selected {
-  border-color: $brand-primary;
-  border-width: 2px;
-  border: 1px solid;
-  padding: $spacing-small;
-}
-
-.badge--purple {
-  color: #2F008C;
-  background-color: #E2E0FC;
-  font-size: $font-size-small;
-  font-weight: normal;
-}
-
 .icon-info-wrapper {
   display: flex;
   align-items: center;
@@ -99,5 +88,8 @@
     margin-right: 0;
     margin-bottom: $spacing-small / 2;
   }
+}
 
+.border-right{
+  border-right: 2px;
 }
