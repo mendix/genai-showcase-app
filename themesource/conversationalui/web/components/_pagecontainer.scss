@@ -179,13 +179,11 @@
             max-height: 50vh;
             padding-bottom: $spacing-large;
         }
-
     }
 
     .panel-header {
         &::after {
             content: "";
-            //height: 80px;
         }
 
         display: flex;
@@ -202,6 +200,8 @@
         }
         .icon-area {
             margin-top: $spacing-small;
+            margin-left: auto;
+            max-width: 75px;
             .new-chat-icon {
                 img {
                     height: 24px;
@@ -214,7 +214,6 @@
                 padding-left: $spacing-small;
                 margin-right: $spacing-small;
                 margin-left: $spacing-small;
-                
                 height: fit-content;
                 img {
                     height: 24px;
@@ -232,7 +231,6 @@
         flex-direction: column;
     }
 
-    //* Card content of ever card */
     .card-content {
         overflow-y: auto;
         overflow-x: hidden;
@@ -330,5 +328,3 @@
         color: $brand-danger;
     }
 }
-
-

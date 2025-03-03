@@ -27607,6 +27607,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .page-container .panel-header .icon-area {
   margin-top: 8px;
+  margin-left: auto;
+  max-width: 75px;
 }
 .page-container .panel-header .icon-area .new-chat-icon img {
   height: 24px;
