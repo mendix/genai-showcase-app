@@ -90,10 +90,10 @@ delete netty-codec-http-4.1.112.Final.jar
 delete netty-codec-http-4.1.112.Final.jar.AWSAuthentication.RequiredLib
 delete netty-codec-http2-4.1.112.Final.jar
 delete netty-codec-http2-4.1.112.Final.jar.AWSAuthentication.RequiredLib
-delete netty-common-4.1.115.Final.jar
-delete netty-common-4.1.115.Final.jar.AWSAuthentication.RequiredLib
-delete netty-handler-4.1.112.Final.jar
-delete netty-handler-4.1.112.Final.jar.AWSAuthentication.RequiredLib
+delete netty-common-4.1.119.Final.jar
+delete netty-common-4.1.119.Final.jar.AWSAuthentication.RequiredLib
+delete netty-handler-4.1.119.Final.jar
+delete netty-handler-4.1.119.Final.jar.AWSAuthentication.RequiredLib
 delete netty-nio-client-2.27.17.jar
 delete netty-nio-client-2.27.17.jar.AWSAuthentication.RequiredLib
 delete netty-resolver-4.1.112.Final.jar
