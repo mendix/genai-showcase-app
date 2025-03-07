@@ -27971,6 +27971,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: 85%;
 }
 
+.height--95 {
+  height: 95%;
+}
+
 .display--inline {
   display: inline;
 }
@@ -28007,6 +28011,40 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .mx-layoutgrid.card-container > .row .col > .card .widget-datagrid {
   margin-right: -24px;
   margin-left: -24px;
+}
+
+.container-clickable {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 4px 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+}
+.container-clickable .btn-wrapper {
+  min-width: 5em;
+  display: flex;
+  justify-content: flex-end;
+}
+.container-clickable .mx-text {
+  margin: 0;
+  line-height: 1.428571429;
+}
+.container-clickable .btn {
+  transition: all 0.2s ease-in-out;
+  border: none;
+  background-color: transparent;
+  color: #0a1325;
+  height: 44px;
+}
+.container-clickable .btn.btn-hover {
+  visibility: hidden;
+}
+.container-clickable:hover {
+  background-color: #e7e7e9;
+}
+.container-clickable:hover .btn.btn-hover {
+  visibility: visible;
 }
 
 .arrow-position {
