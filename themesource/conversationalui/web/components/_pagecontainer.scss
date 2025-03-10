@@ -249,7 +249,7 @@
 //Tables
 .table-header {
     margin-top: $spacing-medium;
-    padding-bottom: $spacing-medium;
+    //padding-bottom: $spacing-medium;
     border-bottom: 1px solid $table-border-separator-color;
 }
 
@@ -317,7 +317,7 @@
 
 .testcase-table {
     display: flex;
-    padding-left: $spacing-small;
+    //padding-left: $spacing-small;
 
     .text-testcase {
         min-width: 95%;

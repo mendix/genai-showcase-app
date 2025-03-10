@@ -26701,6 +26701,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   line-height: 1;
 }
 
+.spacing-outer-bottom-6 {
+  margin-bottom: 6px;
+}
+
 .spacing-outer-bottom-medium {
   margin-bottom: 16px;
 }
@@ -26760,6 +26764,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .border-right {
   border-right: 2px;
+}
+
+.width-full {
+  width: 100%;
 }
 
 .accordion-chat-sources .widget-accordion-group {
@@ -27653,7 +27661,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .table-header {
   margin-top: 16px;
-  padding-bottom: 16px;
   border-bottom: 1px solid #E7E7E9;
 }
 
@@ -27711,7 +27718,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .testcase-table {
   display: flex;
-  padding-left: 8px;
 }
 .testcase-table .text-testcase {
   min-width: 95%;
@@ -27815,7 +27821,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .dropdown-hover {
   background-color: #fff;
-  width: 100%;
   padding: 10px;
 }
 .dropdown-hover:hover, .dropdown-hover:focus, .dropdown-hover:active {
