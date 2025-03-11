@@ -123,6 +123,7 @@
         flex-direction: column;
 
         .card {
+            overflow: visible;
             margin-left: $spacing-large / 2;
             margin-right: $spacing-large / 2;
             max-height: 47vh;
@@ -136,6 +137,7 @@
         flex-direction: column;
         
         .card {
+            overflow: visible;
             margin-left: $spacing-large / 2;
             margin-right: $spacing-large / 2;
             max-height: 47vh;

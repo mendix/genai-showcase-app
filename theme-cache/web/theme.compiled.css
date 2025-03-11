@@ -27557,6 +27557,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-direction: column;
 }
 .page-container .content-main .card {
+  overflow: visible;
   margin-left: 12px;
   margin-right: 12px;
   max-height: 47vh;
@@ -27568,6 +27569,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-direction: column;
 }
 .page-container .content-column .card {
+  overflow: visible;
   margin-left: 12px;
   margin-right: 12px;
   max-height: 47vh;
