@@ -24,7 +24,7 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
  * Mandatory: The Connection entity passed must be of type MxKnowledgeBaseConnection and must contain the CollectionName string attribute filled and a MxCloudKnowledgeBase associated with the connection details to the knowledge base. By providing the CollectionName on the Connection, you determine the collection from which the chunks should be deleted.
  * Use MxKnowledgeBaseConnection_Create to create it.
  * 
- * The chunks are no longer available in the knowledge base after 60 seconds due to the synchronization cycle.
+ * Once deleted, chunks are no longer available for read operations in the KB after 60-120 seconds due to asynchronous data synchronization for better scalability.
  */
 public class KnowledgeBaseChunkList_Delete_ByMxObject extends CustomJavaAction<java.lang.Boolean>
 {
