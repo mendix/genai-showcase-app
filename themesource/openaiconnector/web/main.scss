@@ -60,6 +60,12 @@
     }
 }
 
+.listview-hide-on-empty.mx-listview {
+    > ul > li.mx-listview-empty {
+        display: none;
+    }
+}
+
 .listview-empty-deployed-models.mx-listview {
     > ul > li.mx-listview-empty {
         > label {
