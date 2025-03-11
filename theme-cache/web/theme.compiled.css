@@ -27499,7 +27499,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .page-container .page-container-side {
   z-index: 1000;
   width: 100%;
-  max-width: 600px;
+  max-width: 25vw;
   display: flex;
   flex-direction: column;
 }
@@ -27571,7 +27571,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-left: 12px;
   margin-right: 12px;
   max-height: 47vh;
-  padding-bottom: 24px;
+  z-index: 0;
 }
 @media (max-width: 1200px) {
   .page-container .content-main {
@@ -27649,14 +27649,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .page-container .card-content {
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 37vh;
-  padding-bottom: 4px;
+  max-height: 33vh;
+  margin-bottom: 0;
 }
 .page-container .card-header {
   position: sticky;
   display: flex;
   flex-direction: row;
-  z-index: 2;
+  z-index: 1;
 }
 
 .table-header {
