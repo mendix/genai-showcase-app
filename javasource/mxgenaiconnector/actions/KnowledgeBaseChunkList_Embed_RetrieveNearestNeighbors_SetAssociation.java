@@ -29,6 +29,8 @@ import mxgenaiconnector.impl.MxLogger;
  * Use MxKnowledgeBaseConnection_Create to create it.
  * 
  * The TargetChunk entity (entity parameter) must be a specialization of the KnowledgeBaseChunk entity from the GenAICommons. If it contains associations to (specializations of) the related mendix object for which the chunk was created originally, this will be set by this operation for easy processing afterwards.
+ * 
+ * Previously inserted or changed chunks are only available in the knowledge base after 60 seconds due to the synchronization cycle.
  */
 public class KnowledgeBaseChunkList_Embed_RetrieveNearestNeighbors_SetAssociation extends CustomJavaAction<java.util.List<IMendixObject>>
 {
