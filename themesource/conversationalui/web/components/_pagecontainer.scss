@@ -58,7 +58,7 @@
     .page-container-side {
         z-index: 1000;
         width: 100%;
-        max-width: 600px;
+        max-width: 25vw;
         display: flex;
         flex-direction: column;
     }
@@ -123,6 +123,7 @@
         flex-direction: column;
 
         .card {
+            overflow: visible;
             margin-left: $spacing-large / 2;
             margin-right: $spacing-large / 2;
             max-height: 47vh;
@@ -136,10 +137,11 @@
         flex-direction: column;
         
         .card {
+            overflow: visible;
             margin-left: $spacing-large / 2;
             margin-right: $spacing-large / 2;
             max-height: 47vh;
-            padding-bottom: $spacing-large;
+            z-index: 0;
         }
     }
 
@@ -234,22 +236,21 @@
     .card-content {
         overflow-y: auto;
         overflow-x: hidden;
-        max-height: 37vh;
-        padding-bottom: $spacing-smaller;
+        max-height: 33vh;
+        margin-bottom: 0;
     }
 
     .card-header {
         position: sticky;
         display: flex;
         flex-direction: row;
-        z-index: 2;
+        z-index: 1;
     }
 }
 
 //Tables
 .table-header {
     margin-top: $spacing-medium;
-    padding-bottom: $spacing-medium;
     border-bottom: 1px solid $table-border-separator-color;
 }
 
@@ -317,7 +318,6 @@
 
 .testcase-table {
     display: flex;
-    padding-left: $spacing-small;
 
     .text-testcase {
         min-width: 95%;
