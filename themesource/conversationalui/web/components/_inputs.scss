@@ -2,15 +2,17 @@
 
 .datetime-inputs-wrapper {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
 
     .time-input {
+        display: unset;
         max-width: 100px;
         margin-left: -1px;
         margin-bottom: 0;
     }
 
     .date-input {
+        display: unset;
         max-width: 150px;
         margin-left: $spacing-medium;
         margin-bottom: 0;
@@ -20,6 +22,10 @@
         margin-left: -44px;
         border: 1px solid transparent;
         background: transparent;
+    }
+
+    .has-error .alert {
+        margin-top: 0.5px;
     }
 }
 
@@ -35,10 +41,19 @@
     display: flex;
     flex-grow: 1;
     .mx-image {
-        height: $font-size-default;
+        height: $font-size-large;
         margin-right: $spacing-small;
         margin-left: auto;
         float: right;
+    }
+}
+
+//Prompt Management custom height - small
+.combobox-selection-height-small {
+    .widget-combobox-input-container {
+        align-items: center;
+        justify-content: center;
+        height: 32px !important;
     }
 }
 
@@ -51,7 +66,7 @@
         height: max-content;
     }
     .mx-image {
-        height: $font-size-default;
+        height: $font-size-large;
         margin-right: $spacing-small;
     }
 }
@@ -78,7 +93,7 @@
         width: 100%;
         justify-content: center;
         align-items: center;
-        top: 0;
+        //top: 0;
 
         .loading-dot {
             border-radius: 100%;

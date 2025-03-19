@@ -16,7 +16,6 @@
 
 .popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item {
     background-color: $bg-color-secondary;
-
     &:hover,
     &:focus,
     &:active {
@@ -42,5 +41,31 @@
         &:hover {
             background-color: transparent;
         }
+    }
+}
+
+.dropdown-hover {
+    background-color: $bg-color-secondary;
+    padding: 10px;
+
+    &:hover,
+    &:focus,
+    &:active {
+        cursor: pointer;
+        border-color: $bg-color;
+        background-color: $bg-color;
+    }
+}
+
+
+
+.custom-widget-combobox-menu {
+    .widget-combobox-menu {
+        .widget-combobox-menu-footer {
+            padding: unset;
+        }
+    }
+    .combobox-footer-action {
+        padding: 10px;
     }
 }
