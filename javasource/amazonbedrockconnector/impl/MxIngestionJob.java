@@ -39,7 +39,7 @@ public class MxIngestionJob {
 		return mxResponse;
 	} 
     
-	private static ENUM_IngestionJobStatus getENUMStatus(IngestionJobStatus status){
+	public static ENUM_IngestionJobStatus getENUMStatus(IngestionJobStatus status){
 		switch (status) {
 			case COMPLETE:
 				return ENUM_IngestionJobStatus.COMPLETE;

@@ -11,6 +11,8 @@ package amazonbedrockconnector.actions;
 
 import static java.util.Objects.requireNonNull;
 import java.util.Date;
+import java.util.stream.Collectors;
+import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
@@ -21,7 +23,9 @@ import amazonbedrockconnector.proxies.CreateDataSourceResponse;
 import amazonbedrockconnector.proxies.ENUM_DataSourceStatus;
 import amazonbedrockconnector.proxies.ENUM_DataSourceType;
 import amazonbedrockconnector.proxies.S3DataSourceConfiguration;
+import amazonbedrockconnector.proxies.SessionAttribute;
 import amazonbedrockconnector.proxies.SharePointSourceConfiguration;
+import amazonbedrockconnector.proxies.Site;
 import software.amazon.awssdk.services.bedrockagent.BedrockAgentClient;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
@@ -240,11 +244,16 @@ public class CreateDataSource extends CustomJavaAction<IMendixObject>
 		
 		SharePointSourceConfiguration mxSharePointSourceConfiguration= this.CreateDataSourceRequest.getCreateDataSourceConfiguration_CreateDataSourceRequest().getSharePointDataSourceConfiguration_DataSourceConfiguration().getSharePointSourceConfiguration_SharePointDataSourceConfiguration();
 		
+		var mxSiteList =  Core.retrieveByPath(getContext(), mxSharePointSourceConfiguration.getMendixObject(), Site.MemberNames.Site_SharePointSourceConfiguration.toString()).stream()
+				.map(mxObj -> Site.initialize(getContext(), mxObj))
+				.collect(Collectors.toList());
+				
 		software.amazon.awssdk.services.bedrockagent.model.SharePointSourceConfiguration awsRequest = software.amazon.awssdk.services.bedrockagent.model.SharePointSourceConfiguration.builder()
 				.authType(mxSharePointSourceConfiguration.getAuthType().name())	
 				.credentialsSecretArn(mxSharePointSourceConfiguration.getCredentialsSecretArn())
 				.domain(mxSharePointSourceConfiguration.getDomain())
 				.hostType(mxSharePointSourceConfiguration.getHostType().name())	
+				.siteUrls(mxSiteList.toArray().toString())
 				.build();
 		
 		return awsRequest;
@@ -270,10 +279,14 @@ public class CreateDataSource extends CustomJavaAction<IMendixObject>
 		if (mxSharePointSourceConfiguration.getHostType() == null) {
 			throw new IllegalArgumentException("HostType is required.");
 		} 
-		// ADD SITE CHECK TODO AYCA
-		//if (mxSharePointSourceConfiguration.site) {
-			//throw new IllegalArgumentException("HostURL is required.");
-		//} 
+		
+		var mxSiteList =  Core.retrieveByPath(getContext(), mxSharePointSourceConfiguration.getMendixObject(), Site.MemberNames.Site_SharePointSourceConfiguration.toString()).stream()
+			.map(mxObj -> Site.initialize(getContext(), mxObj))
+			.collect(Collectors.toList());
+		
+		if (mxSiteList != null) {
+			throw new IllegalArgumentException("Minimum one SiteURL is required.");
+		} 
 	}
 	
 	
