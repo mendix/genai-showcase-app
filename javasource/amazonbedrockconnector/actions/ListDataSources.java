@@ -51,6 +51,8 @@ public class ListDataSources extends CustomJavaAction<IMendixObject>
 			requireNonNull(Credentials, "AWS Credentials are required");
 			requireNonNull(ListDataSourcesRequest, "ListDataSourcesRequest is required");
 			requireNonNull(Region, "AWS Region is required");
+			
+			validateRequest();
 						
 			BedrockAgentClient client = AmazonBedrockClient.getBedrockAgentClient(Credentials, Region, ListDataSourcesRequest);
 			
@@ -80,7 +82,14 @@ public class ListDataSources extends CustomJavaAction<IMendixObject>
 	}
 
 	// BEGIN EXTRA CODE
-private static final MxLogger LOGGER = new MxLogger(ListDataSources.class);
+	private static final MxLogger LOGGER = new MxLogger(ListDataSources.class);
+	
+	private void validateRequest() throws CoreException {
+		
+		if (this.ListDataSourcesRequest.getKnowledgeBaseId() == null || this.ListDataSourcesRequest.getKnowledgeBaseId().isBlank()) {
+			throw new IllegalArgumentException("KnowledgeBaseId is required.");
+		}
+	}
 	
 	private software.amazon.awssdk.services.bedrockagent.model.ListDataSourcesRequest createAwsRequest() throws CoreException{
 		

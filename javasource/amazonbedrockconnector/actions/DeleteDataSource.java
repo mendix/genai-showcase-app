@@ -49,6 +49,8 @@ public class DeleteDataSource extends CustomJavaAction<IMendixObject>
 			requireNonNull(Credentials, "AWS Credentials are required");
 			requireNonNull(DeleteDataSourceRequest, "DeleteDataSourceRequest is required");
 			requireNonNull(Region, "AWS Region is required");
+			
+			validateRequest();
 						
 			BedrockAgentClient client = AmazonBedrockClient.getBedrockAgentClient(Credentials, Region, DeleteDataSourceRequest);
 			
@@ -79,6 +81,16 @@ public class DeleteDataSource extends CustomJavaAction<IMendixObject>
 
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new MxLogger(DeleteDataSource.class);
+	
+	private void validateRequest() throws CoreException {
+		
+		if (this.DeleteDataSourceRequest.getKnowledgeBaseId() == null || this.DeleteDataSourceRequest.getKnowledgeBaseId().isBlank()) {
+			throw new IllegalArgumentException("KnowledgeBaseId is required.");
+		}
+		if (this.DeleteDataSourceRequest.getDataSourceId() == null || this.DeleteDataSourceRequest.getDataSourceId().isBlank()) {
+			throw new IllegalArgumentException("DataSourceId is required.");
+		}
+	}
 	
 	private software.amazon.awssdk.services.bedrockagent.model.DeleteDataSourceRequest createAwsRequest() throws CoreException{
 			
