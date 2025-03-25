@@ -27609,12 +27609,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 100%;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 .page-container .content-fullwidth .card {
+  flex-grow: 1;
   margin-left: 12px;
   margin-right: 12px;
-  max-height: 50vh;
+  max-height: 100%;
   padding-bottom: 24px;
+  overflow: visible;
 }
 .page-container .panel-header {
   display: flex;
@@ -27661,9 +27664,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-direction: column;
 }
 .page-container .card-content {
-  overflow-y: auto;
+  overflow-y: visible;
   overflow-x: hidden;
-  max-height: 33vh;
+  scrollbar-gutter: stable;
+  max-height: 35vh;
   margin-bottom: 0;
 }
 .page-container .card-header {
@@ -27921,18 +27925,18 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .output-tooltip .widget-tooltip-content {
   width: 330px;
+  height: auto;
   text-align: left;
   margin-bottom: 0;
   padding: 16px;
-  padding-bottom: 4px;
+  padding-bottom: 0;
 }
 
 .output-tooltip-grid {
   display: grid;
-  line-height: 1;
-  grid-template-columns: 35% 60%;
-  grid-template-rows: 24px;
-  gap: 16px;
+  grid-template-columns: 40% 60%;
+  grid-template-rows: auto;
+  gap: 8px;
   padding: 0;
   margin: 0;
 }
