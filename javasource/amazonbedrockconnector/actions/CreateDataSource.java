@@ -10,20 +10,18 @@
 package amazonbedrockconnector.actions;
 
 import static java.util.Objects.requireNonNull;
-import java.util.Date;
 import java.util.stream.Collectors;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
 import amazonbedrockconnector.impl.AmazonBedrockClient;
+import amazonbedrockconnector.impl.MxDataSource;
 import amazonbedrockconnector.impl.MxLogger;
 import amazonbedrockconnector.proxies.ConfluenceSourceConfiguration;
 import amazonbedrockconnector.proxies.CreateDataSourceResponse;
-import amazonbedrockconnector.proxies.ENUM_DataSourceStatus;
 import amazonbedrockconnector.proxies.ENUM_DataSourceType;
 import amazonbedrockconnector.proxies.S3DataSourceConfiguration;
-import amazonbedrockconnector.proxies.SessionAttribute;
 import amazonbedrockconnector.proxies.SharePointSourceConfiguration;
 import amazonbedrockconnector.proxies.Site;
 import software.amazon.awssdk.services.bedrockagent.BedrockAgentClient;
@@ -293,12 +291,7 @@ public class CreateDataSource extends CustomJavaAction<IMendixObject>
 	private CreateDataSourceResponse getMxResponse(software.amazon.awssdk.services.bedrockagent.model.CreateDataSourceResponse awsResponse) {
 			
 		CreateDataSourceResponse mxResponse = new CreateDataSourceResponse(getContext());
-		mxResponse.setCreatedAt(Date.from(awsResponse.dataSource().createdAt()));
-		mxResponse.setDataSourceId(awsResponse.dataSource().dataSourceId());
-		mxResponse.setKnowledgeBaseId(awsResponse.dataSource().knowledgeBaseId());
-		mxResponse.setName(awsResponse.dataSource().name());
-		mxResponse.setStatus(ENUM_DataSourceStatus.valueOf(awsResponse.dataSource().statusAsString().toUpperCase()));
-		mxResponse.setUpdatedAt(Date.from(awsResponse.dataSource().updatedAt()));
+		MxDataSource.getMxDataSource(mxResponse,awsResponse.dataSource(),getContext());
 		
 		return mxResponse;
 	}

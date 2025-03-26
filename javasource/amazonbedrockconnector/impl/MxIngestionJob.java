@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.mendix.systemwideinterfaces.core.IContext;
-
 import amazonbedrockconnector.proxies.ENUM_IngestionJobStatus;
 import amazonbedrockconnector.proxies.FailureReason;
 import amazonbedrockconnector.proxies.GetIngestionJob;

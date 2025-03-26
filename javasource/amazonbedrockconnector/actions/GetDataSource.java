@@ -9,21 +9,62 @@
 
 package amazonbedrockconnector.actions;
 
+import static java.util.Objects.requireNonNull;
+import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
+import amazonbedrockconnector.impl.AmazonBedrockClient;
+import amazonbedrockconnector.impl.MxLogger;
+import amazonbedrockconnector.proxies.GetDataSourceResponse;
+import amazonbedrockconnector.impl.MxDataSource;
+import com.mendix.systemwideinterfaces.core.IMendixObject;
 
-public class GetDataSource extends CustomJavaAction<java.lang.Void>
+public class GetDataSource extends CustomJavaAction<IMendixObject>
 {
-	public GetDataSource(IContext context)
+	private IMendixObject __Credentials;
+	private awsauthentication.proxies.Credentials Credentials;
+	private awsauthentication.proxies.ENUM_Region Region;
+	private IMendixObject __GetDataSourceRequest;
+	private amazonbedrockconnector.proxies.GetDataSourceRequest GetDataSourceRequest;
+
+	public GetDataSource(IContext context, IMendixObject Credentials, java.lang.String Region, IMendixObject GetDataSourceRequest)
 	{
 		super(context);
+		this.__Credentials = Credentials;
+		this.Region = Region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(Region);
+		this.__GetDataSourceRequest = GetDataSourceRequest;
 	}
 
 	@java.lang.Override
-	public java.lang.Void executeAction() throws Exception
+	public IMendixObject executeAction() throws Exception
 	{
+		this.Credentials = this.__Credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), __Credentials);
+
+		this.GetDataSourceRequest = this.__GetDataSourceRequest == null ? null : amazonbedrockconnector.proxies.GetDataSourceRequest.initialize(getContext(), __GetDataSourceRequest);
+
 		// BEGIN USER CODE
-		throw new com.mendix.systemwideinterfaces.MendixRuntimeException("Java action was not implemented");
+		try {
+			// Validating JA input parameters
+			requireNonNull(Credentials, "AWS Credentials are required");
+			requireNonNull(GetDataSourceRequest, "GetDataSourceRequest is required");
+			requireNonNull(Region, "Region is required");
+			
+			validateRequest();
+						
+			software.amazon.awssdk.services.bedrockagent.BedrockAgentClient client = AmazonBedrockClient.getBedrockAgentClient(Credentials, Region, GetDataSourceRequest);
+			
+			software.amazon.awssdk.services.bedrockagent.model.GetDataSourceRequest awsRequest = createAwsRequest();
+			LOGGER.info("AWS request: " + awsRequest);
+			
+			software.amazon.awssdk.services.bedrockagent.model.GetDataSourceResponse awsResponse = client.getDataSource(awsRequest);
+			LOGGER.info("AWS response: " + awsResponse);
+			
+			return getMxResponse(awsResponse).getMendixObject();
+		
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+			throw e;
+		}
 		// END USER CODE
 	}
 
@@ -38,5 +79,34 @@ public class GetDataSource extends CustomJavaAction<java.lang.Void>
 	}
 
 	// BEGIN EXTRA CODE
+	private static final MxLogger LOGGER = new MxLogger(GetDataSource.class);
+	
+	private void validateRequest() throws CoreException {
+		
+		if (this.GetDataSourceRequest.getKnowledgeBaseId() == null || this.GetDataSourceRequest.getKnowledgeBaseId().isBlank()) {
+			throw new IllegalArgumentException("KnowledgeBaseId is required.");
+		}
+		if (this.GetDataSourceRequest.getDataSourceId() == null || this.GetDataSourceRequest.getDataSourceId().isBlank()) {
+			throw new IllegalArgumentException("DataSourceId is required.");
+		}	
+	}
+	
+	private software.amazon.awssdk.services.bedrockagent.model.GetDataSourceRequest createAwsRequest() throws CoreException{
+			
+			software.amazon.awssdk.services.bedrockagent.model.GetDataSourceRequest.Builder awsRequestBuilder = software.amazon.awssdk.services.bedrockagent.model.GetDataSourceRequest.builder();
+			awsRequestBuilder.knowledgeBaseId(this.GetDataSourceRequest.getKnowledgeBaseId());
+			awsRequestBuilder.dataSourceId(this.GetDataSourceRequest.getDataSourceId());
+			return awsRequestBuilder.build();
+			
+	}
+	
+	private GetDataSourceResponse getMxResponse(software.amazon.awssdk.services.bedrockagent.model.GetDataSourceResponse awsResponse) {
+		
+		GetDataSourceResponse mxResponse = new GetDataSourceResponse(getContext());
+		MxDataSource.getMxDataSource(mxResponse,awsResponse.dataSource(),getContext());
+		
+		return mxResponse;
+	
+	}
 	// END EXTRA CODE
 }

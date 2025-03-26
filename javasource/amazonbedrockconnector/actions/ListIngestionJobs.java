@@ -15,7 +15,6 @@ import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
 import amazonbedrockconnector.impl.MxLogger;
-import amazonbedrockconnector.proxies.ENUM_IngestionJobStatus;
 import amazonbedrockconnector.proxies.IngestionJobStats;
 import amazonbedrockconnector.proxies.IngestionJobSummary;
 import amazonbedrockconnector.proxies.ListIngestionJobsResponse;
