@@ -14,6 +14,7 @@ import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
 import amazonbedrockconnector.impl.AmazonBedrockClient;
+import amazonbedrockconnector.impl.MxDataSource;
 import amazonbedrockconnector.impl.MxLogger;
 import amazonbedrockconnector.proxies.DeleteDataSourceResponse;
 import amazonbedrockconnector.proxies.ENUM_DataSourceStatus;
@@ -106,7 +107,7 @@ public class DeleteDataSource extends CustomJavaAction<IMendixObject>
 		
 		mxResponse.setDataSourceId(awsResponse.dataSourceId());
 		mxResponse.setKnowledgeBaseId(awsResponse.knowledgeBaseId());
-		mxResponse.setStatus(ENUM_DataSourceStatus.valueOf(awsResponse.statusAsString().toUpperCase()));
+		mxResponse.setStatus(MxDataSource.getMxDataSourceStatus(awsResponse.status()));
 		return mxResponse;
 	}
 	// END EXTRA CODE

@@ -171,7 +171,7 @@ public class CreateDataSource extends CustomJavaAction<IMendixObject>
 		software.amazon.awssdk.services.bedrockagent.model.ConfluenceSourceConfiguration awsRequest = software.amazon.awssdk.services.bedrockagent.model.ConfluenceSourceConfiguration.builder()
 				.authType(mxConfluenceSourceConfiguration.getAuthType().name())	
 				.credentialsSecretArn(mxConfluenceSourceConfiguration.getCredentialsSecretARN())		
-				.hostType(mxConfluenceSourceConfiguration.getHostType())	
+				.hostType(mxConfluenceSourceConfiguration.getHostType().name())	
 				.hostUrl(mxConfluenceSourceConfiguration.getHostURL())
 				.build();
 		

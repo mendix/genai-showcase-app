@@ -8,6 +8,7 @@ import amazonbedrockconnector.proxies.ConfluenceSourceConfiguration;
 import amazonbedrockconnector.proxies.DataSource;
 import amazonbedrockconnector.proxies.DataSourceConfiguration;
 import amazonbedrockconnector.proxies.ENUM_ConfluenceAuthType;
+import amazonbedrockconnector.proxies.ENUM_ConfluenceHostType;
 import amazonbedrockconnector.proxies.ENUM_DataSourceStatus;
 import amazonbedrockconnector.proxies.ENUM_DataSourceType;
 import amazonbedrockconnector.proxies.ENUM_SharePointAuthType;
@@ -27,7 +28,7 @@ public class MxDataSource {
 		mxDataSource.setDataSourceId(awsDataSource.dataSourceId());
 		mxDataSource.setKnowledgeBaseId(awsDataSource.knowledgeBaseId());
 		mxDataSource.setName(awsDataSource.name());
-		mxDataSource.setStatus(ENUM_DataSourceStatus.valueOf(awsDataSource.statusAsString().toUpperCase()));
+		mxDataSource.setStatus(getMxDataSourceStatus(awsDataSource.status()));
 		mxDataSource.setUpdatedAt(Date.from(awsDataSource.updatedAt()));
 		mxDataSource.setDescription(awsDataSource.description());
 		
@@ -57,6 +58,7 @@ public class MxDataSource {
 			break;
 
 		default:
+			mxDataSourceConfiguration.setDataSourceType(ENUM_DataSourceType.UNKNOWN_TO_SDK_VERSION);
 			LOGGER.warn("The DataSource type is currently not supported.");
 			break;
 		}
@@ -69,9 +71,9 @@ public class MxDataSource {
 		
 		ConfluenceSourceConfiguration mxConfluenceSourceConfiguration = new ConfluenceSourceConfiguration(mxContext);
 		software.amazon.awssdk.services.bedrockagent.model.ConfluenceSourceConfiguration awsConfluenceSourceConfiguration = awsDataSourceConfiguration.confluenceConfiguration().sourceConfiguration();		
-		mxConfluenceSourceConfiguration.setAuthType(ENUM_ConfluenceAuthType.valueOf(awsConfluenceSourceConfiguration.authTypeAsString().toUpperCase()));
+		mxConfluenceSourceConfiguration.setAuthType(getConfluenceAuthType(awsConfluenceSourceConfiguration.authType()));
 		mxConfluenceSourceConfiguration.setCredentialsSecretARN(awsConfluenceSourceConfiguration.credentialsSecretArn());
-		mxConfluenceSourceConfiguration.setHostType(awsConfluenceSourceConfiguration.hostTypeAsString());
+		mxConfluenceSourceConfiguration.setHostType(getConfluenceHostType(awsConfluenceSourceConfiguration.hostType()));
 		mxConfluenceSourceConfiguration.setHostURL(awsConfluenceSourceConfiguration.hostUrl());
 		mxConfluenceSourceConfiguration.setConfluenceSourceConfiguration_ConfluenceDataSourceConfiguration(mxConfluenceDataSourceConfiguration);
 	}
@@ -93,10 +95,10 @@ public class MxDataSource {
 		
 		SharePointSourceConfiguration mxSharePointSourceConfiguration = new SharePointSourceConfiguration(mxContext);
 		software.amazon.awssdk.services.bedrockagent.model.SharePointSourceConfiguration awsSharePointSourceConfiguration = awsDataSourceConfiguration.sharePointConfiguration().sourceConfiguration();		
-		mxSharePointSourceConfiguration.setAuthType(ENUM_SharePointAuthType.valueOf(awsSharePointSourceConfiguration.authTypeAsString().toUpperCase()));
+		mxSharePointSourceConfiguration.setAuthType(getSharePointAuthType(awsSharePointSourceConfiguration.authType()));
 		mxSharePointSourceConfiguration.setCredentialsSecretArn(awsSharePointSourceConfiguration.credentialsSecretArn());
 		mxSharePointSourceConfiguration.setDomain(awsSharePointSourceConfiguration.domain());
-		mxSharePointSourceConfiguration.setHostType(ENUM_SharePointHostType.valueOf(awsSharePointSourceConfiguration.hostTypeAsString()));
+		mxSharePointSourceConfiguration.setHostType(getSharePointHostType(awsSharePointSourceConfiguration.hostType()));
 		mxSharePointSourceConfiguration.setTenantId(awsSharePointSourceConfiguration.tenantId());
 		mxSharePointSourceConfiguration.setSharePointSourceConfiguration_SharePointDataSourceConfiguration(mxSharePointDataSourceConfiguration);
 		awsSharePointSourceConfiguration.siteUrls().forEach(awsSiteUrl -> createMxSite(awsSiteUrl, mxSharePointSourceConfiguration, mxContext));
@@ -108,6 +110,80 @@ public class MxDataSource {
 		mxSite.setSiteURL(awsSiteUrl);
 		mxSite.setSite_SharePointSourceConfiguration(mxSharePointSourceConfiguration);
 	
+		
+	}
+	
+	public static ENUM_DataSourceStatus getMxDataSourceStatus(software.amazon.awssdk.services.bedrockagent.model.DataSourceStatus awsStatus) {
+		
+		switch (awsStatus) {
+		
+		case AVAILABLE : 
+			return ENUM_DataSourceStatus.AVAILABLE;
+			
+		case DELETING:
+			return ENUM_DataSourceStatus.DELETING;
+		
+		case DELETE_UNSUCCESSFUL:
+			return ENUM_DataSourceStatus.DELETING;
+		
+		default:
+			return ENUM_DataSourceStatus.UNKNOWN_TO_SDK_VERSION;
+		}
+		
+	}
+	
+	private static ENUM_ConfluenceAuthType getConfluenceAuthType(software.amazon.awssdk.services.bedrockagent.model.ConfluenceAuthType awsConfluenceAuthType) {
+		
+		switch (awsConfluenceAuthType) {
+		
+		case BASIC : 
+			return ENUM_ConfluenceAuthType.BASIC;
+			
+		case OAUTH2_CLIENT_CREDENTIALS:
+			return ENUM_ConfluenceAuthType.OAUTH2_CLIENT_CREDENTIALS;
+		
+		default:
+			return ENUM_ConfluenceAuthType.UNKNOWN_TO_SDK_VERSION;
+		}
+		
+	}
+	
+	private static ENUM_ConfluenceHostType getConfluenceHostType(software.amazon.awssdk.services.bedrockagent.model.ConfluenceHostType awsConfluenceHostType) {
+		
+		switch (awsConfluenceHostType) {
+		
+		case SAAS: 
+			return ENUM_ConfluenceHostType.SAAS;
+		
+		default:
+			return ENUM_ConfluenceHostType.UNKNOWN_TO_SDK_VERSION;
+		}
+		
+	}
+	
+	private static ENUM_SharePointAuthType getSharePointAuthType(software.amazon.awssdk.services.bedrockagent.model.SharePointAuthType awsSharePointAuthType) {
+		
+		switch (awsSharePointAuthType) {
+		
+		case OAUTH2_CLIENT_CREDENTIALS:
+			return ENUM_SharePointAuthType.OAUTH2_CLIENT_CREDENTIALS;
+		
+		default:
+			return ENUM_SharePointAuthType.UNKNOWN_TO_SDK_VERSION;
+		}
+		
+	}
+	
+	private static ENUM_SharePointHostType getSharePointHostType(software.amazon.awssdk.services.bedrockagent.model.SharePointHostType awsSharePointHostType) {
+		
+		switch (awsSharePointHostType) {
+		
+		case ONLINE:
+			return ENUM_SharePointHostType.ONLINE;
+		
+		default:
+			return ENUM_SharePointHostType.UNKNOWN_TO_SDK_VERSION;
+		}
 		
 	}
 

@@ -50,7 +50,7 @@ public class MxIngestionJob {
 				return ENUM_IngestionJobStatus.STARTING;
 			default:
 				LOGGER.warn("The ENUM value \"" + status.toString() + "\" could not be found for ENUM_IngestionJobStatus");
-				return null;
+				return ENUM_IngestionJobStatus.UNKNOWN_TO_SDK_VERSION;
 		}
 	}
 

@@ -15,9 +15,9 @@ import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
 import amazonbedrockconnector.impl.AmazonBedrockClient;
+import amazonbedrockconnector.impl.MxDataSource;
 import amazonbedrockconnector.impl.MxLogger;
 import amazonbedrockconnector.proxies.DataSourceSummary;
-import amazonbedrockconnector.proxies.ENUM_DataSourceStatus;
 import amazonbedrockconnector.proxies.ListDataSourcesResponse;
 import software.amazon.awssdk.services.bedrockagent.BedrockAgentClient;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
@@ -124,7 +124,7 @@ public class ListDataSources extends CustomJavaAction<IMendixObject>
 		mxDataSourceSummary.setDescription(awsDataSourceSummary.description());
 		mxDataSourceSummary.setKnowledgeBaseId(awsDataSourceSummary.knowledgeBaseId());
 		mxDataSourceSummary.setName(awsDataSourceSummary.name());
-		mxDataSourceSummary.setStatus(ENUM_DataSourceStatus.valueOf(awsDataSourceSummary.statusAsString().toUpperCase()));
+		mxDataSourceSummary.setStatus(MxDataSource.getMxDataSourceStatus(awsDataSourceSummary.status()));
 		mxDataSourceSummary.setUpdatedAt(Date.from(awsDataSourceSummary.updatedAt()));
 		mxDataSourceSummary.setDataSourceSummary_ListDataSourcesResponse(mxResponse);
 	}
