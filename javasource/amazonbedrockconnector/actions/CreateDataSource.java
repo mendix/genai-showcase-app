@@ -219,7 +219,7 @@ public class CreateDataSource extends CustomJavaAction<IMendixObject>
 	
 	private void validateS3DataSourceConfiguration(S3DataSourceConfiguration mxS3DataSourceConfiguration ) throws CoreException {
 		if (this.CreateDataSourceRequest.getCreateDataSourceConfiguration_CreateDataSourceRequest().getS3DataSourceConfiguration_DataSourceConfiguration() == null) {
-			throw new IllegalArgumentException("S3DataSourceConfiguration is required if 'Confluence' is chosen as the datasource type.");
+			throw new IllegalArgumentException("S3DataSourceConfiguration is required if 'S3' is chosen as the datasource type.");
 		}
 		if (mxS3DataSourceConfiguration.getBucketARN() == null || mxS3DataSourceConfiguration.getBucketARN().isBlank()) {
 			throw new IllegalArgumentException("BucketARN is required.");
