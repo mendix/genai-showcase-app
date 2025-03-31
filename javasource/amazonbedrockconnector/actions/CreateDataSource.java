@@ -10,6 +10,8 @@
 package amazonbedrockconnector.actions;
 
 import static java.util.Objects.requireNonNull;
+
+import java.util.List;
 import java.util.stream.Collectors;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
@@ -242,7 +244,7 @@ public class CreateDataSource extends CustomJavaAction<IMendixObject>
 		
 		SharePointSourceConfiguration mxSharePointSourceConfiguration= this.CreateDataSourceRequest.getCreateDataSourceConfiguration_CreateDataSourceRequest().getSharePointDataSourceConfiguration_DataSourceConfiguration().getSharePointSourceConfiguration_SharePointDataSourceConfiguration();
 		
-		var mxSiteList =  Core.retrieveByPath(getContext(), mxSharePointSourceConfiguration.getMendixObject(), Site.MemberNames.Site_SharePointSourceConfiguration.toString()).stream()
+		List<Site> mxSiteList =  Core.retrieveByPath(getContext(), mxSharePointSourceConfiguration.getMendixObject(), Site.MemberNames.Site_SharePointSourceConfiguration.toString()).stream()
 				.map(mxObj -> Site.initialize(getContext(), mxObj))
 				.collect(Collectors.toList());
 				
@@ -278,7 +280,7 @@ public class CreateDataSource extends CustomJavaAction<IMendixObject>
 			throw new IllegalArgumentException("HostType is required.");
 		} 
 		
-		var mxSiteList =  Core.retrieveByPath(getContext(), mxSharePointSourceConfiguration.getMendixObject(), Site.MemberNames.Site_SharePointSourceConfiguration.toString()).stream()
+		List<Site> mxSiteList =  Core.retrieveByPath(getContext(), mxSharePointSourceConfiguration.getMendixObject(), Site.MemberNames.Site_SharePointSourceConfiguration.toString()).stream()
 			.map(mxObj -> Site.initialize(getContext(), mxObj))
 			.collect(Collectors.toList());
 		
