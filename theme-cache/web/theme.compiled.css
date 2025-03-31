@@ -27983,6 +27983,32 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin: 0;
 }
 
+.grid-deployed-model {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 0.5fr 150px;
+}
+.grid-deployed-model .item {
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.grid-header {
+  margin-left: 16px;
+  margin-right: 16px;
+  margin-bottom: 16px;
+}
+
+.grid-knowledge-bases {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) 0.5fr 150px;
+}
+.grid-knowledge-bases .item {
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .listview-horizontal.mx-listview > ul {
   display: inline-block;
   margin-bottom: 0;
