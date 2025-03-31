@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.mendix.systemwideinterfaces.core.IContext;
-
 import amazonbedrockconnector.proxies.ENUM_IngestionJobStatus;
 import amazonbedrockconnector.proxies.FailureReason;
 import amazonbedrockconnector.proxies.GetIngestionJob;
@@ -39,7 +38,7 @@ public class MxIngestionJob {
 		return mxResponse;
 	} 
     
-	private static ENUM_IngestionJobStatus getENUMStatus(IngestionJobStatus status){
+	public static ENUM_IngestionJobStatus getENUMStatus(IngestionJobStatus status){
 		switch (status) {
 			case COMPLETE:
 				return ENUM_IngestionJobStatus.COMPLETE;
@@ -51,7 +50,7 @@ public class MxIngestionJob {
 				return ENUM_IngestionJobStatus.STARTING;
 			default:
 				LOGGER.warn("The ENUM value \"" + status.toString() + "\" could not be found for ENUM_IngestionJobStatus");
-				return null;
+				return ENUM_IngestionJobStatus.UNKNOWN_TO_SDK_VERSION;
 		}
 	}
 
