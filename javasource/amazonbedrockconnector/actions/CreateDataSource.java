@@ -142,8 +142,9 @@ public class CreateDataSource extends CustomJavaAction<IMendixObject>
 			break;
 			
 		case SHAREPOINT:
-			awsRequestBuilder.sharePointConfiguration(getSharePointDataSourceConfiguration());
-			break;
+			throw new IllegalArgumentException("The chosen datasource type is not supported. Please look into the documentation of the connector.");
+			//awsRequestBuilder.sharePointConfiguration(getSharePointDataSourceConfiguration());
+			//break;
 			
 		default:
 			throw new IllegalArgumentException("The chosen datasource type is not supported. Please look into the documentation of the connector.");
