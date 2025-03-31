@@ -26709,6 +26709,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
   line-height: 1;
 }
 
+.spacing-inner-left-20 {
+  padding-left: 20px;
+}
+
+.spacing-outer-bottom-6 {
+  margin-bottom: 6px;
+}
+
 .spacing-outer-bottom-medium {
   margin-bottom: 16px;
 }
@@ -26768,6 +26776,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .border-right {
   border-right: 2px;
+}
+
+.width-full {
+  width: 100%;
 }
 
 .accordion-chat-sources .widget-accordion-group {
@@ -27329,7 +27341,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 100%;
   justify-content: center;
   align-items: center;
-  top: 0;
 }
 .texbox-loading-wrapper .generating-loading-wrapper .loading-dot {
   border-radius: 100%;
@@ -27447,6 +27458,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .pop-up-without-border .modal-header {
   border-bottom: none;
+  padding-bottom: 10px !important;
 }
 
 .promting-page-wrapper {
@@ -27499,7 +27511,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .page-container .page-container-side {
   z-index: 1000;
   width: 100%;
-  max-width: 600px;
+  max-width: 25vw;
   display: flex;
   flex-direction: column;
 }
@@ -27557,6 +27569,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-direction: column;
 }
 .page-container .content-main .card {
+  overflow: visible;
   margin-left: 12px;
   margin-right: 12px;
   max-height: 47vh;
@@ -27568,10 +27581,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-direction: column;
 }
 .page-container .content-column .card {
+  overflow: visible;
   margin-left: 12px;
   margin-right: 12px;
   max-height: 47vh;
-  padding-bottom: 24px;
+  z-index: 0;
 }
 @media (max-width: 1200px) {
   .page-container .content-main {
@@ -27649,19 +27663,18 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .page-container .card-content {
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 37vh;
-  padding-bottom: 4px;
+  max-height: 33vh;
+  margin-bottom: 0;
 }
 .page-container .card-header {
   position: sticky;
   display: flex;
   flex-direction: row;
-  z-index: 2;
+  z-index: 1;
 }
 
 .table-header {
   margin-top: 16px;
-  padding-bottom: 16px;
   border-bottom: 1px solid #E7E7E9;
 }
 
@@ -27719,7 +27732,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .testcase-table {
   display: flex;
-  padding-left: 8px;
 }
 .testcase-table .text-testcase {
   min-width: 95%;
@@ -27823,7 +27835,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .dropdown-hover {
   background-color: #fff;
-  width: 100%;
   padding: 10px;
 }
 .dropdown-hover:hover, .dropdown-hover:focus, .dropdown-hover:active {
@@ -27916,6 +27927,18 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .prompt-tooltip-w280 .widget-tooltip-content {
   width: 280px;
   padding: 0 15px 0 15px;
+}
+
+.listview-horizontal.mx-listview > ul {
+  display: inline-block;
+  margin-bottom: 0;
+}
+.listview-horizontal.mx-listview > ul > li {
+  display: inline-block;
+}
+
+.listview-hide-on-empty.mx-listview > ul > li.mx-listview-empty {
+  display: none;
 }
 
 .layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a img {

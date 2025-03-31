@@ -1,3 +1,4 @@
+@import "../../../atlas_core/web/_variables.scss";
 .hover-trigger {
   .show-on-hover {
     visibility: hidden; // Initially hide the hover content
@@ -28,6 +29,14 @@
 
 .line-height--1 {
   line-height: 1;
+}
+
+.spacing-inner-left-20 {
+  padding-left: 20px;
+}
+
+.spacing-outer-bottom-6 {
+  margin-bottom: 6px;
 }
 
 .spacing-outer-bottom-medium {
@@ -92,4 +101,8 @@
 
 .border-right{
   border-right: 2px;
+}
+
+.width-full {
+  width: 100%;
 }
