@@ -41,11 +41,12 @@
 .output-tooltip {
     .widget-tooltip-content {
         width: 330px;
-        height: auto;
+        max-height: 230px;
         text-align: left;
         margin-bottom: 0;
         padding: $spacing-medium;
         padding-bottom: 0;
+        overflow-y: auto;
     }
 }
 

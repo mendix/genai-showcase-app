@@ -127,7 +127,7 @@
             overflow: visible;
             margin-left: $spacing-large / 2;
             margin-right: $spacing-large / 2;
-            max-height: 47vh;
+            max-height: 38rem;
         }
     }
 
@@ -141,7 +141,7 @@
             overflow: visible;
             margin-left: $spacing-large / 2;
             margin-right: $spacing-large / 2;
-            max-height: 47vh;
+            max-height: 38rem;
             z-index: 0;
         }
     }
@@ -176,15 +176,34 @@
         display: flex;
         flex-direction: column;
         height: 100%;
-
+        
         .card {
             flex-grow: 1;
             margin-left: $spacing-large / 2;
             margin-right: $spacing-large / 2;
-            max-height: 100%;
+            margin-bottom: 0;
+            max-height: 39rem;
             padding-bottom: $spacing-large;
-            overflow: visible;
+            //overflow: visible;            
         }
+
+        .card-content {
+            overflow-y: scroll;
+            overflow-x: hidden;
+            scrollbar-gutter: stable;
+            max-height: 25rem;
+            margin-bottom: 0;
+            padding-right: 8px;
+    }
+
+    .card-header {
+        position: sticky;
+        display: flex;
+        flex-direction: row;
+        z-index: 1;
+        padding-bottom: 10px;
+    }
+
     }
 
     .panel-header {
@@ -238,11 +257,13 @@
     }
 
     .card-content {
-        overflow-y: visible;
+        overflow-y: auto;
         overflow-x: hidden;
         scrollbar-gutter: stable;
-        max-height: 35vh;
+        max-height: 25rem;
         margin-bottom: 0;
+        padding-right: 8px;
+        
     }
 
     .card-header {
@@ -250,6 +271,7 @@
         display: flex;
         flex-direction: row;
         z-index: 1;
+        padding-right: 10px;
     }
 }
 
@@ -263,7 +285,7 @@
 .output-grid-container {
     display: grid;
     width: 100%;
-    grid-template-columns: 10% 60% 9% 9% 9%;
+    grid-template-columns: 10% 59% 9% 9% 10%;
     gap: 12px;
     margin-top: $spacing-small;
     margin-bottom: $spacing-medium;
@@ -276,8 +298,16 @@
 }
 
 .output-grid-icon {
-    margin-top: 2.5px;
+    margin-top: 3.5px;
 }
+
+.output-align-header {
+    margin-right: 2.2%;
+    @supports (-moz-appearance: none) {
+        margin-right: $spacing-medium;
+    }
+}
+
 
 //Version table
 .version-table {

@@ -27572,7 +27572,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   overflow: visible;
   margin-left: 12px;
   margin-right: 12px;
-  max-height: 47vh;
+  max-height: 38rem;
 }
 .page-container .content-column {
   min-width: 400px;
@@ -27584,7 +27584,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   overflow: visible;
   margin-left: 12px;
   margin-right: 12px;
-  max-height: 47vh;
+  max-height: 38rem;
   z-index: 0;
 }
 @media (max-width: 1200px) {
@@ -27615,9 +27615,24 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-grow: 1;
   margin-left: 12px;
   margin-right: 12px;
-  max-height: 100%;
+  margin-bottom: 0;
+  max-height: 39rem;
   padding-bottom: 24px;
-  overflow: visible;
+}
+.page-container .content-fullwidth .card-content {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  max-height: 25rem;
+  margin-bottom: 0;
+  padding-right: 8px;
+}
+.page-container .content-fullwidth .card-header {
+  position: sticky;
+  display: flex;
+  flex-direction: row;
+  z-index: 1;
+  padding-bottom: 10px;
 }
 .page-container .panel-header {
   display: flex;
@@ -27664,17 +27679,19 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-direction: column;
 }
 .page-container .card-content {
-  overflow-y: visible;
+  overflow-y: auto;
   overflow-x: hidden;
   scrollbar-gutter: stable;
-  max-height: 35vh;
+  max-height: 25rem;
   margin-bottom: 0;
+  padding-right: 8px;
 }
 .page-container .card-header {
   position: sticky;
   display: flex;
   flex-direction: row;
   z-index: 1;
+  padding-right: 10px;
 }
 
 .table-header {
@@ -27685,7 +27702,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .output-grid-container {
   display: grid;
   width: 100%;
-  grid-template-columns: 10% 60% 9% 9% 9%;
+  grid-template-columns: 10% 59% 9% 9% 10%;
   gap: 12px;
   margin-top: 8px;
   margin-bottom: 16px;
@@ -27698,7 +27715,16 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .output-grid-icon {
-  margin-top: 2.5px;
+  margin-top: 3.5px;
+}
+
+.output-align-header {
+  margin-right: 2.2%;
+}
+@supports (-moz-appearance: none) {
+  .output-align-header {
+    margin-right: 16px;
+  }
 }
 
 .version-table {
@@ -27925,11 +27951,12 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .output-tooltip .widget-tooltip-content {
   width: 330px;
-  height: auto;
+  max-height: 230px;
   text-align: left;
   margin-bottom: 0;
   padding: 16px;
   padding-bottom: 0;
+  overflow-y: auto;
 }
 
 .output-tooltip-grid {
