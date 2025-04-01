@@ -125,7 +125,7 @@ public class DecryptString extends UserAction<java.lang.String>
 		if (s.length < 2)
 			throw new MendixRuntimeException("Unexpected prefix when trying to decrypt string using legacy algorithm.");
 
-		Cipher c = Cipher.getInstance("AES/GCM/PKCS5PADDING");
+		Cipher c = Cipher.getInstance("AES/GCM/NoPadding");
 		SecretKeySpec k = new SecretKeySpec(this.legacyKey.getBytes(), "AES"); // ignore Snyk Code warning; false positive
 
 		byte[] iv = Base64.getDecoder().decode(s[0].getBytes());
