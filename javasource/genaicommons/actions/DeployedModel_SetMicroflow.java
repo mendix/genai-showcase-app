@@ -15,6 +15,7 @@ import com.mendix.webui.CustomJavaAction;
 import genaicommons.impl.DeployedModelImpl;
 import genaicommons.impl.MxLogger;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * Sets the microflow to execute for the specified model and type of the DeployedModel. The microflow should follow the principles from GenAI commons that are applicable for the model type.
@@ -23,24 +24,29 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
  * - Input parameters: GenAICommons.Request and GenAICommons.DeployedModel
  * - Return type: GenAICommons.Response
  */
-public class DeployedModel_SetMicroflow extends CustomJavaAction<java.lang.Boolean>
+public class DeployedModel_SetMicroflow extends UserAction<java.lang.Boolean>
 {
-	private IMendixObject __DeployedModel;
-	private genaicommons.proxies.DeployedModel DeployedModel;
-	private java.lang.String Microflow;
+	/** @deprecated use DeployedModel.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __DeployedModel;
+	private final genaicommons.proxies.DeployedModel DeployedModel;
+	private final java.lang.String Microflow;
 
-	public DeployedModel_SetMicroflow(IContext context, IMendixObject DeployedModel, java.lang.String Microflow)
+	public DeployedModel_SetMicroflow(
+		IContext context,
+		IMendixObject _deployedModel,
+		java.lang.String _microflow
+	)
 	{
 		super(context);
-		this.__DeployedModel = DeployedModel;
-		this.Microflow = Microflow;
+		this.__DeployedModel = _deployedModel;
+		this.DeployedModel = _deployedModel == null ? null : genaicommons.proxies.DeployedModel.initialize(getContext(), _deployedModel);
+		this.Microflow = _microflow;
 	}
 
 	@java.lang.Override
 	public java.lang.Boolean executeAction() throws Exception
 	{
-		this.DeployedModel = this.__DeployedModel == null ? null : genaicommons.proxies.DeployedModel.initialize(getContext(), __DeployedModel);
-
 		// BEGIN USER CODE
 		try {
 			requireNonNull(Microflow, "Microflow is required.");

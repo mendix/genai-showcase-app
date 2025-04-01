@@ -17,6 +17,7 @@ import com.mendix.webui.CustomJavaAction;
 import genaicommons.proxies.KnowledgeBaseChunk;
 import pgvectorknowledgebase.impl.ChunkUtils;
 import pgvectorknowledgebase.impl.MxLogger;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * The Retrieve Nearest Neighbors & Associate activity is used to retrieve chunks from the knowledge base ordered by similarity based on the given vector. In addition to the Retrieve Nearest Neighbors operation, this operation also sets the associations to the Mendix objects for which the chunks were created. In order for this to work, it is necessary to create a custom specialization of the KnowledgeBaseChunk entity in the domain model of the application and to make sure the necessary associations exist towards the Mendix objects that the chunks represent. This specialization must be passed as an entity parameter called TargetChunk. A list of this type is then returned which can be used for retrieval of the Mendix objects in custom logic. For additional filtering, provide a MetadataCollection (see the Initialize MetadataCollection with Metadata section and the Add Metadata to MetadataCollection section). Lastly, MinimumSimilarity (range 0 - 1.0) and MaxNumberOfResults can be used for optional filtering. This operation returns a list of the same type of the TargetChunk input variable. The returned list is sorted on similarity.
@@ -32,35 +33,45 @@ import pgvectorknowledgebase.impl.MxLogger;
  * The Connection entity passed must be of type PgVectorKnowledgebaseConnection and must contain the KnowledgeBaseName string attribute filled and a DatabaseConfiguration associated with the connection details to a PostgreSQL database server with the PgVector extension installed. This DatabaseConfiguration entity is typically configured at runtime or in after-startup logic. By providing the KnowledgeBaseName on the Connection, you determine the knowledge base. 
  * The TargetChunk entity (type parameter) must be a specialization of the Chunk entity from this module. If it contains associations to (specializations of) the related mendix object for which the chunk was created, this will be set by this operation for easy processing afterwards.
  */
-public class KnowledgeBaseChunkList_RetrieveNearestNeighbors_SetAssociation extends CustomJavaAction<java.util.List<IMendixObject>>
+public class KnowledgeBaseChunkList_RetrieveNearestNeighbors_SetAssociation extends UserAction<java.util.List<IMendixObject>>
 {
-	private IMendixObject __Connection;
-	private genaicommons.proxies.Connection Connection;
-	private java.lang.String TargetChunk;
-	private java.lang.String Vector;
-	private IMendixObject __MetadataCollection;
-	private genaicommons.proxies.MetadataCollection MetadataCollection;
-	private java.lang.Long MaxNumberOfResults;
-	private java.math.BigDecimal MinimumSimilarity;
+	/** @deprecated use Connection.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Connection;
+	private final genaicommons.proxies.Connection Connection;
+	private final java.lang.String TargetChunk;
+	private final java.lang.String Vector;
+	/** @deprecated use MetadataCollection.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __MetadataCollection;
+	private final genaicommons.proxies.MetadataCollection MetadataCollection;
+	private final java.lang.Long MaxNumberOfResults;
+	private final java.math.BigDecimal MinimumSimilarity;
 
-	public KnowledgeBaseChunkList_RetrieveNearestNeighbors_SetAssociation(IContext context, IMendixObject Connection, java.lang.String TargetChunk, java.lang.String Vector, IMendixObject MetadataCollection, java.lang.Long MaxNumberOfResults, java.math.BigDecimal MinimumSimilarity)
+	public KnowledgeBaseChunkList_RetrieveNearestNeighbors_SetAssociation(
+		IContext context,
+		IMendixObject _connection,
+		java.lang.String _targetChunk,
+		java.lang.String _vector,
+		IMendixObject _metadataCollection,
+		java.lang.Long _maxNumberOfResults,
+		java.math.BigDecimal _minimumSimilarity
+	)
 	{
 		super(context);
-		this.__Connection = Connection;
-		this.TargetChunk = TargetChunk;
-		this.Vector = Vector;
-		this.__MetadataCollection = MetadataCollection;
-		this.MaxNumberOfResults = MaxNumberOfResults;
-		this.MinimumSimilarity = MinimumSimilarity;
+		this.__Connection = _connection;
+		this.Connection = _connection == null ? null : genaicommons.proxies.Connection.initialize(getContext(), _connection);
+		this.TargetChunk = _targetChunk;
+		this.Vector = _vector;
+		this.__MetadataCollection = _metadataCollection;
+		this.MetadataCollection = _metadataCollection == null ? null : genaicommons.proxies.MetadataCollection.initialize(getContext(), _metadataCollection);
+		this.MaxNumberOfResults = _maxNumberOfResults;
+		this.MinimumSimilarity = _minimumSimilarity;
 	}
 
 	@java.lang.Override
 	public java.util.List<IMendixObject> executeAction() throws Exception
 	{
-		this.Connection = this.__Connection == null ? null : genaicommons.proxies.Connection.initialize(getContext(), __Connection);
-
-		this.MetadataCollection = this.__MetadataCollection == null ? null : genaicommons.proxies.MetadataCollection.initialize(getContext(), __MetadataCollection);
-
 		// BEGIN USER CODE
 		
 		try { 

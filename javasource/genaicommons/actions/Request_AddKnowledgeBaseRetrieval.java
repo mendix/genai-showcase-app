@@ -24,43 +24,57 @@ import genaicommons.proxies.KnowledgeBaseRetrieval;
 import genaicommons.proxies.MetadataCollection;
 import genaicommons.proxies.Tool;
 import genaicommons.proxies.ToolCollection;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class Request_AddKnowledgeBaseRetrieval extends CustomJavaAction<IMendixObject>
+public class Request_AddKnowledgeBaseRetrieval extends UserAction<IMendixObject>
 {
-	private IMendixObject __Request;
-	private genaicommons.proxies.Request Request;
-	private java.lang.String ToolName;
-	private java.lang.String RetrieveMicroflow;
-	private IMendixObject __Connection;
-	private genaicommons.proxies.Connection Connection;
-	private java.lang.String ToolDescription;
-	private IMendixObject __MetadataCollection;
-	private genaicommons.proxies.MetadataCollection MetadataCollection;
-	private java.math.BigDecimal MinimumSimilarity;
-	private java.lang.Long MaxNumberOfResults;
+	/** @deprecated use Request.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Request;
+	private final genaicommons.proxies.Request Request;
+	private final java.lang.String ToolName;
+	private final java.lang.String RetrieveMicroflow;
+	/** @deprecated use Connection.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Connection;
+	private final genaicommons.proxies.Connection Connection;
+	private final java.lang.String ToolDescription;
+	/** @deprecated use MetadataCollection.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __MetadataCollection;
+	private final genaicommons.proxies.MetadataCollection MetadataCollection;
+	private final java.math.BigDecimal MinimumSimilarity;
+	private final java.lang.Long MaxNumberOfResults;
 
-	public Request_AddKnowledgeBaseRetrieval(IContext context, IMendixObject Request, java.lang.String ToolName, java.lang.String RetrieveMicroflow, IMendixObject Connection, java.lang.String ToolDescription, IMendixObject MetadataCollection, java.math.BigDecimal MinimumSimilarity, java.lang.Long MaxNumberOfResults)
+	public Request_AddKnowledgeBaseRetrieval(
+		IContext context,
+		IMendixObject _request,
+		java.lang.String _toolName,
+		java.lang.String _retrieveMicroflow,
+		IMendixObject _connection,
+		java.lang.String _toolDescription,
+		IMendixObject _metadataCollection,
+		java.math.BigDecimal _minimumSimilarity,
+		java.lang.Long _maxNumberOfResults
+	)
 	{
 		super(context);
-		this.__Request = Request;
-		this.ToolName = ToolName;
-		this.RetrieveMicroflow = RetrieveMicroflow;
-		this.__Connection = Connection;
-		this.ToolDescription = ToolDescription;
-		this.__MetadataCollection = MetadataCollection;
-		this.MinimumSimilarity = MinimumSimilarity;
-		this.MaxNumberOfResults = MaxNumberOfResults;
+		this.__Request = _request;
+		this.Request = _request == null ? null : genaicommons.proxies.Request.initialize(getContext(), _request);
+		this.ToolName = _toolName;
+		this.RetrieveMicroflow = _retrieveMicroflow;
+		this.__Connection = _connection;
+		this.Connection = _connection == null ? null : genaicommons.proxies.Connection.initialize(getContext(), _connection);
+		this.ToolDescription = _toolDescription;
+		this.__MetadataCollection = _metadataCollection;
+		this.MetadataCollection = _metadataCollection == null ? null : genaicommons.proxies.MetadataCollection.initialize(getContext(), _metadataCollection);
+		this.MinimumSimilarity = _minimumSimilarity;
+		this.MaxNumberOfResults = _maxNumberOfResults;
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.Request = this.__Request == null ? null : genaicommons.proxies.Request.initialize(getContext(), __Request);
-
-		this.Connection = this.__Connection == null ? null : genaicommons.proxies.Connection.initialize(getContext(), __Connection);
-
-		this.MetadataCollection = this.__MetadataCollection == null ? null : genaicommons.proxies.MetadataCollection.initialize(getContext(), __MetadataCollection);
-
 		// BEGIN USER CODE
 		try{
 			requireNonNull(Request, "Request is required.");

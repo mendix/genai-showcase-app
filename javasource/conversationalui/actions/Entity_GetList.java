@@ -16,8 +16,9 @@ import com.mendix.webui.CustomJavaAction;
 import conversationalui.proxies.Entity;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.meta.IMetaObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class Entity_GetList extends CustomJavaAction<java.util.List<IMendixObject>>
+public class Entity_GetList extends UserAction<java.util.List<IMendixObject>>
 {
 	public Entity_GetList(IContext context)
 	{

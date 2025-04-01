@@ -17,6 +17,7 @@ import conversationalui.impl.MxLogger;
 import conversationalui.proxies.PromptToUse;
 import genaicommons.proxies.DeployedModel;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * This action is a combination of 'Get Prompt' and 'New Chat'.
@@ -24,31 +25,39 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
  * 
  * If an internal error occurs, the operation will return empty and the error is logged.
  */
-public class ChatContext_Create_ForPrompt extends CustomJavaAction<IMendixObject>
+public class ChatContext_Create_ForPrompt extends UserAction<IMendixObject>
 {
-	private IMendixObject __OverwritingDeployedModel;
-	private genaicommons.proxies.DeployedModel OverwritingDeployedModel;
-	private java.lang.String ActionMicroflow;
-	private IMendixObject __Prompt;
-	private conversationalui.proxies.Prompt Prompt;
-	private IMendixObject ContextObject;
+	/** @deprecated use OverwritingDeployedModel.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __OverwritingDeployedModel;
+	private final genaicommons.proxies.DeployedModel OverwritingDeployedModel;
+	private final java.lang.String ActionMicroflow;
+	/** @deprecated use Prompt.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Prompt;
+	private final conversationalui.proxies.Prompt Prompt;
+	private final IMendixObject ContextObject;
 
-	public ChatContext_Create_ForPrompt(IContext context, IMendixObject OverwritingDeployedModel, java.lang.String ActionMicroflow, IMendixObject Prompt, IMendixObject ContextObject)
+	public ChatContext_Create_ForPrompt(
+		IContext context,
+		IMendixObject _overwritingDeployedModel,
+		java.lang.String _actionMicroflow,
+		IMendixObject _prompt,
+		IMendixObject _contextObject
+	)
 	{
 		super(context);
-		this.__OverwritingDeployedModel = OverwritingDeployedModel;
-		this.ActionMicroflow = ActionMicroflow;
-		this.__Prompt = Prompt;
-		this.ContextObject = ContextObject;
+		this.__OverwritingDeployedModel = _overwritingDeployedModel;
+		this.OverwritingDeployedModel = _overwritingDeployedModel == null ? null : genaicommons.proxies.DeployedModel.initialize(getContext(), _overwritingDeployedModel);
+		this.ActionMicroflow = _actionMicroflow;
+		this.__Prompt = _prompt;
+		this.Prompt = _prompt == null ? null : conversationalui.proxies.Prompt.initialize(getContext(), _prompt);
+		this.ContextObject = _contextObject;
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.OverwritingDeployedModel = this.__OverwritingDeployedModel == null ? null : genaicommons.proxies.DeployedModel.initialize(getContext(), __OverwritingDeployedModel);
-
-		this.Prompt = this.__Prompt == null ? null : conversationalui.proxies.Prompt.initialize(getContext(), __Prompt);
-
 		// BEGIN USER CODE
 		
 		try {

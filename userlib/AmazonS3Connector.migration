@@ -1,3 +1,0 @@
-dependency software.amazon.awssdk:s3:[2,3)
-delete s3-2.27.17.jar
-delete s3-2.27.17.jar.AmazonS3Connector.RequiredLib

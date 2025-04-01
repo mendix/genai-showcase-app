@@ -27,30 +27,38 @@ import amazonbedrockconnector.proxies.SharePointSourceConfiguration;
 import amazonbedrockconnector.proxies.Site;
 import software.amazon.awssdk.services.bedrockagent.BedrockAgentClient;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class CreateDataSource extends CustomJavaAction<IMendixObject>
+public class CreateDataSource extends UserAction<IMendixObject>
 {
-	private IMendixObject __Credentials;
-	private awsauthentication.proxies.Credentials Credentials;
-	private awsauthentication.proxies.ENUM_Region Region;
-	private IMendixObject __CreateDataSourceRequest;
-	private amazonbedrockconnector.proxies.CreateDataSourceRequest CreateDataSourceRequest;
+	/** @deprecated use Credentials.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Credentials;
+	private final awsauthentication.proxies.Credentials Credentials;
+	private final awsauthentication.proxies.ENUM_Region Region;
+	/** @deprecated use CreateDataSourceRequest.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __CreateDataSourceRequest;
+	private final amazonbedrockconnector.proxies.CreateDataSourceRequest CreateDataSourceRequest;
 
-	public CreateDataSource(IContext context, IMendixObject Credentials, java.lang.String Region, IMendixObject CreateDataSourceRequest)
+	public CreateDataSource(
+		IContext context,
+		IMendixObject _credentials,
+		java.lang.String _region,
+		IMendixObject _createDataSourceRequest
+	)
 	{
 		super(context);
-		this.__Credentials = Credentials;
-		this.Region = Region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(Region);
-		this.__CreateDataSourceRequest = CreateDataSourceRequest;
+		this.__Credentials = _credentials;
+		this.Credentials = _credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), _credentials);
+		this.Region = _region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(_region);
+		this.__CreateDataSourceRequest = _createDataSourceRequest;
+		this.CreateDataSourceRequest = _createDataSourceRequest == null ? null : amazonbedrockconnector.proxies.CreateDataSourceRequest.initialize(getContext(), _createDataSourceRequest);
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.Credentials = this.__Credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), __Credentials);
-
-		this.CreateDataSourceRequest = this.__CreateDataSourceRequest == null ? null : amazonbedrockconnector.proxies.CreateDataSourceRequest.initialize(getContext(), __CreateDataSourceRequest);
-
 		// BEGIN USER CODE
 		try {
 			// Validating JA input parameters

@@ -14,6 +14,7 @@ import com.mendix.logging.ILogNode;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
 import databaseconnector.impl.JdbcConnector;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * For a more detailed documentation, please visit the website at
@@ -50,20 +51,26 @@ import databaseconnector.impl.JdbcConnector;
  * 
  * @return Number of affected rows.
  */
-public class ExecuteStatement extends CustomJavaAction<java.lang.Long>
+public class ExecuteStatement extends UserAction<java.lang.Long>
 {
-	private java.lang.String jdbcUrl;
-	private java.lang.String userName;
-	private java.lang.String password;
-	private java.lang.String sql;
+	private final java.lang.String jdbcUrl;
+	private final java.lang.String userName;
+	private final java.lang.String password;
+	private final java.lang.String sql;
 
-	public ExecuteStatement(IContext context, java.lang.String jdbcUrl, java.lang.String userName, java.lang.String password, java.lang.String sql)
+	public ExecuteStatement(
+		IContext context,
+		java.lang.String _jdbcUrl,
+		java.lang.String _userName,
+		java.lang.String _password,
+		java.lang.String _sql
+	)
 	{
 		super(context);
-		this.jdbcUrl = jdbcUrl;
-		this.userName = userName;
-		this.password = password;
-		this.sql = sql;
+		this.jdbcUrl = _jdbcUrl;
+		this.userName = _userName;
+		this.password = _password;
+		this.sql = _sql;
 	}
 
 	@java.lang.Override

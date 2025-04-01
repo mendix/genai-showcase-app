@@ -36,51 +36,62 @@ import awsauthentication.impl.Utils;
 import awsauthentication.proxies.SigV4Headers;
 import awsauthentication.proxies.SigV4Parameter;
 import awsauthentication.proxies.TemporaryCredentials;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * GetSigV4Headers java action calculates and provides headers needed to make a RESTful call to AWS Services.
  * Description of all input entity attributes and the output entity attributes can be found in the attribute documentation in the Domain Model.
  * Note - If you are using temporary credentials (object of type TemporaryCredentials), then add the header 'x-amz-security-token' with value as the TemporaryCredentials/Token attribute in the REST request.
  */
-public class GetSigV4Headers extends CustomJavaAction<IMendixObject>
+public class GetSigV4Headers extends UserAction<IMendixObject>
 {
-	private IMendixObject __Credentials;
-	private awsauthentication.proxies.Credentials Credentials;
-	private IMendixObject __SigV4Builder;
-	private awsauthentication.proxies.SigV4Builder SigV4Builder;
-	private java.util.List<IMendixObject> __Headers;
-	private java.util.List<awsauthentication.proxies.SigV4Parameter> Headers;
-	private java.util.List<IMendixObject> __QueryParameters;
-	private java.util.List<awsauthentication.proxies.SigV4Parameter> QueryParameters;
+	/** @deprecated use Credentials.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Credentials;
+	private final awsauthentication.proxies.Credentials Credentials;
+	/** @deprecated use SigV4Builder.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __SigV4Builder;
+	private final awsauthentication.proxies.SigV4Builder SigV4Builder;
+	/** @deprecated use com.mendix.utils.ListUtils.map(Headers, com.mendix.systemwideinterfaces.core.IEntityProxy::getMendixObject) instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final java.util.List<IMendixObject> __Headers;
+	private final java.util.List<awsauthentication.proxies.SigV4Parameter> Headers;
+	/** @deprecated use com.mendix.utils.ListUtils.map(QueryParameters, com.mendix.systemwideinterfaces.core.IEntityProxy::getMendixObject) instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final java.util.List<IMendixObject> __QueryParameters;
+	private final java.util.List<awsauthentication.proxies.SigV4Parameter> QueryParameters;
 
-	public GetSigV4Headers(IContext context, IMendixObject Credentials, IMendixObject SigV4Builder, java.util.List<IMendixObject> Headers, java.util.List<IMendixObject> QueryParameters)
+	public GetSigV4Headers(
+		IContext context,
+		IMendixObject _credentials,
+		IMendixObject _sigV4Builder,
+		java.util.List<IMendixObject> _headers,
+		java.util.List<IMendixObject> _queryParameters
+	)
 	{
 		super(context);
-		this.__Credentials = Credentials;
-		this.__SigV4Builder = SigV4Builder;
-		this.__Headers = Headers;
-		this.__QueryParameters = QueryParameters;
+		this.__Credentials = _credentials;
+		this.Credentials = _credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), _credentials);
+		this.__SigV4Builder = _sigV4Builder;
+		this.SigV4Builder = _sigV4Builder == null ? null : awsauthentication.proxies.SigV4Builder.initialize(getContext(), _sigV4Builder);
+		this.__Headers = _headers;
+		this.Headers = java.util.Optional.ofNullable(_headers)
+			.orElse(java.util.Collections.emptyList())
+			.stream()
+			.map(headersElement -> awsauthentication.proxies.SigV4Parameter.initialize(getContext(), headersElement))
+			.collect(java.util.stream.Collectors.toList());
+		this.__QueryParameters = _queryParameters;
+		this.QueryParameters = java.util.Optional.ofNullable(_queryParameters)
+			.orElse(java.util.Collections.emptyList())
+			.stream()
+			.map(queryParametersElement -> awsauthentication.proxies.SigV4Parameter.initialize(getContext(), queryParametersElement))
+			.collect(java.util.stream.Collectors.toList());
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.Credentials = this.__Credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), __Credentials);
-
-		this.SigV4Builder = this.__SigV4Builder == null ? null : awsauthentication.proxies.SigV4Builder.initialize(getContext(), __SigV4Builder);
-
-		this.Headers = java.util.Optional.ofNullable(this.__Headers)
-			.orElse(java.util.Collections.emptyList())
-			.stream()
-			.map(__HeadersElement -> awsauthentication.proxies.SigV4Parameter.initialize(getContext(), __HeadersElement))
-			.collect(java.util.stream.Collectors.toList());
-
-		this.QueryParameters = java.util.Optional.ofNullable(this.__QueryParameters)
-			.orElse(java.util.Collections.emptyList())
-			.stream()
-			.map(__QueryParametersElement -> awsauthentication.proxies.SigV4Parameter.initialize(getContext(), __QueryParametersElement))
-			.collect(java.util.stream.Collectors.toList());
-
 		// BEGIN USER CODE
 		try {
 			requireNonNull(Credentials, "AWS Credentials are required");

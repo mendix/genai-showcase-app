@@ -43,28 +43,35 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.webui.CustomJavaAction;
 import encryption.pgp.PGPFileProcessor;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class GeneratePGPKeyRing extends CustomJavaAction<java.lang.Boolean>
+public class GeneratePGPKeyRing extends UserAction<java.lang.Boolean>
 {
-	private IMendixObject __CertPrivateKey;
-	private encryption.proxies.PGPCertificate CertPrivateKey;
-	private IMendixObject __CertPublicKey;
-	private encryption.proxies.PGPCertificate CertPublicKey;
+	/** @deprecated use CertPrivateKey.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __CertPrivateKey;
+	private final encryption.proxies.PGPCertificate CertPrivateKey;
+	/** @deprecated use CertPublicKey.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __CertPublicKey;
+	private final encryption.proxies.PGPCertificate CertPublicKey;
 
-	public GeneratePGPKeyRing(IContext context, IMendixObject CertPrivateKey, IMendixObject CertPublicKey)
+	public GeneratePGPKeyRing(
+		IContext context,
+		IMendixObject _certPrivateKey,
+		IMendixObject _certPublicKey
+	)
 	{
 		super(context);
-		this.__CertPrivateKey = CertPrivateKey;
-		this.__CertPublicKey = CertPublicKey;
+		this.__CertPrivateKey = _certPrivateKey;
+		this.CertPrivateKey = _certPrivateKey == null ? null : encryption.proxies.PGPCertificate.initialize(getContext(), _certPrivateKey);
+		this.__CertPublicKey = _certPublicKey;
+		this.CertPublicKey = _certPublicKey == null ? null : encryption.proxies.PGPCertificate.initialize(getContext(), _certPublicKey);
 	}
 
 	@java.lang.Override
 	public java.lang.Boolean executeAction() throws Exception
 	{
-		this.CertPrivateKey = this.__CertPrivateKey == null ? null : encryption.proxies.PGPCertificate.initialize(getContext(), __CertPrivateKey);
-
-		this.CertPublicKey = this.__CertPublicKey == null ? null : encryption.proxies.PGPCertificate.initialize(getContext(), __CertPublicKey);
-
 		// BEGIN USER CODE
 		
 		//Do we generate all files as ASCII armored files?

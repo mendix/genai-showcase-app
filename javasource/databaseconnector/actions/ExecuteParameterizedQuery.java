@@ -17,6 +17,7 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.meta.IMetaObject;
 import com.mendix.webui.CustomJavaAction;
 import databaseconnector.impl.JdbcConnector;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * For a more detailed documentation, please visit the website at
@@ -48,22 +49,29 @@ import databaseconnector.impl.JdbcConnector;
  * 
  * @return Result of the query as a list of mendix objects.
  */
-public class ExecuteParameterizedQuery extends CustomJavaAction<java.util.List<IMendixObject>>
+public class ExecuteParameterizedQuery extends UserAction<java.util.List<IMendixObject>>
 {
-	private java.lang.String jdbcUrl;
-	private java.lang.String userName;
-	private java.lang.String password;
-	private com.mendix.systemwideinterfaces.javaactions.parameters.IStringTemplate sql;
-	private java.lang.String resultObjectType;
+	private final java.lang.String jdbcUrl;
+	private final java.lang.String userName;
+	private final java.lang.String password;
+	private final com.mendix.systemwideinterfaces.javaactions.parameters.IStringTemplate sql;
+	private final java.lang.String resultObjectType;
 
-	public ExecuteParameterizedQuery(IContext context, java.lang.String jdbcUrl, java.lang.String userName, java.lang.String password, com.mendix.systemwideinterfaces.javaactions.parameters.IStringTemplate sql, java.lang.String resultObjectType)
+	public ExecuteParameterizedQuery(
+		IContext context,
+		java.lang.String _jdbcUrl,
+		java.lang.String _userName,
+		java.lang.String _password,
+		com.mendix.systemwideinterfaces.javaactions.parameters.IStringTemplate _sql,
+		java.lang.String _resultObjectType
+	)
 	{
 		super(context);
-		this.jdbcUrl = jdbcUrl;
-		this.userName = userName;
-		this.password = password;
-		this.sql = sql;
-		this.resultObjectType = resultObjectType;
+		this.jdbcUrl = _jdbcUrl;
+		this.userName = _userName;
+		this.password = _password;
+		this.sql = _sql;
+		this.resultObjectType = _resultObjectType;
 	}
 
 	@java.lang.Override

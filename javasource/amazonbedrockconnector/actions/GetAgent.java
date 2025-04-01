@@ -22,30 +22,38 @@ import amazonbedrockconnector.proxies.Agent;
 import amazonbedrockconnector.proxies.AgentFailureReason;
 import software.amazon.awssdk.services.bedrockagent.BedrockAgentClient;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class GetAgent extends CustomJavaAction<IMendixObject>
+public class GetAgent extends UserAction<IMendixObject>
 {
-	private IMendixObject __Credentials;
-	private awsauthentication.proxies.Credentials Credentials;
-	private awsauthentication.proxies.ENUM_Region Region;
-	private IMendixObject __GetAgentRequest;
-	private amazonbedrockconnector.proxies.GetAgentRequest GetAgentRequest;
+	/** @deprecated use Credentials.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Credentials;
+	private final awsauthentication.proxies.Credentials Credentials;
+	private final awsauthentication.proxies.ENUM_Region Region;
+	/** @deprecated use GetAgentRequest.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __GetAgentRequest;
+	private final amazonbedrockconnector.proxies.GetAgentRequest GetAgentRequest;
 
-	public GetAgent(IContext context, IMendixObject Credentials, java.lang.String Region, IMendixObject GetAgentRequest)
+	public GetAgent(
+		IContext context,
+		IMendixObject _credentials,
+		java.lang.String _region,
+		IMendixObject _getAgentRequest
+	)
 	{
 		super(context);
-		this.__Credentials = Credentials;
-		this.Region = Region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(Region);
-		this.__GetAgentRequest = GetAgentRequest;
+		this.__Credentials = _credentials;
+		this.Credentials = _credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), _credentials);
+		this.Region = _region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(_region);
+		this.__GetAgentRequest = _getAgentRequest;
+		this.GetAgentRequest = _getAgentRequest == null ? null : amazonbedrockconnector.proxies.GetAgentRequest.initialize(getContext(), _getAgentRequest);
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.Credentials = this.__Credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), __Credentials);
-
-		this.GetAgentRequest = this.__GetAgentRequest == null ? null : amazonbedrockconnector.proxies.GetAgentRequest.initialize(getContext(), __GetAgentRequest);
-
 		// BEGIN USER CODE
 		try {
 			requireNonNull(Credentials, "AWS Credentials are required");

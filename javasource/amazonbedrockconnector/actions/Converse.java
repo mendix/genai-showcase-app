@@ -75,35 +75,45 @@ import software.amazon.awssdk.services.bedrockruntime.model.ToolResultBlock;
 import software.amazon.awssdk.services.bedrockruntime.model.ToolResultContentBlock;
 import software.amazon.awssdk.services.bedrockruntime.model.ToolSpecification;
 import software.amazon.awssdk.services.bedrockruntime.model.ToolUseBlock;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class Converse extends CustomJavaAction<IMendixObject>
+public class Converse extends UserAction<IMendixObject>
 {
-	private IMendixObject __Credentials;
-	private awsauthentication.proxies.Credentials Credentials;
-	private IMendixObject __ConverseRequest;
-	private amazonbedrockconnector.proxies.ChatCompletionsRequest_Extension ConverseRequest;
-	private IMendixObject __BedrockDeployedModel;
-	private amazonbedrockconnector.proxies.BedrockDeployedModel BedrockDeployedModel;
-	private awsauthentication.proxies.ENUM_Region Region;
+	/** @deprecated use Credentials.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Credentials;
+	private final awsauthentication.proxies.Credentials Credentials;
+	/** @deprecated use ConverseRequest.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __ConverseRequest;
+	private final amazonbedrockconnector.proxies.ChatCompletionsRequest_Extension ConverseRequest;
+	/** @deprecated use BedrockDeployedModel.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __BedrockDeployedModel;
+	private final amazonbedrockconnector.proxies.BedrockDeployedModel BedrockDeployedModel;
+	private final awsauthentication.proxies.ENUM_Region Region;
 
-	public Converse(IContext context, IMendixObject Credentials, IMendixObject ConverseRequest, IMendixObject BedrockDeployedModel, java.lang.String Region)
+	public Converse(
+		IContext context,
+		IMendixObject _credentials,
+		IMendixObject _converseRequest,
+		IMendixObject _bedrockDeployedModel,
+		java.lang.String _region
+	)
 	{
 		super(context);
-		this.__Credentials = Credentials;
-		this.__ConverseRequest = ConverseRequest;
-		this.__BedrockDeployedModel = BedrockDeployedModel;
-		this.Region = Region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(Region);
+		this.__Credentials = _credentials;
+		this.Credentials = _credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), _credentials);
+		this.__ConverseRequest = _converseRequest;
+		this.ConverseRequest = _converseRequest == null ? null : amazonbedrockconnector.proxies.ChatCompletionsRequest_Extension.initialize(getContext(), _converseRequest);
+		this.__BedrockDeployedModel = _bedrockDeployedModel;
+		this.BedrockDeployedModel = _bedrockDeployedModel == null ? null : amazonbedrockconnector.proxies.BedrockDeployedModel.initialize(getContext(), _bedrockDeployedModel);
+		this.Region = _region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(_region);
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.Credentials = this.__Credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), __Credentials);
-
-		this.ConverseRequest = this.__ConverseRequest == null ? null : amazonbedrockconnector.proxies.ChatCompletionsRequest_Extension.initialize(getContext(), __ConverseRequest);
-
-		this.BedrockDeployedModel = this.__BedrockDeployedModel == null ? null : amazonbedrockconnector.proxies.BedrockDeployedModel.initialize(getContext(), __BedrockDeployedModel);
-
 		// BEGIN USER CODE
 		try {
 			requireNonNull(this.Credentials, "A Credentials object is required");

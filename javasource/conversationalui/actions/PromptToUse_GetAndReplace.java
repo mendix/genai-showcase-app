@@ -20,6 +20,7 @@ import conversationalui.proxies.Prompt;
 import conversationalui.proxies.PromptToUse;
 import conversationalui.proxies.Version;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * Use this action to get a PromptInUse based on a prompt that was configured in the app. If you pass a context object, all variables that match the prompt's variables are replaced with the actual values extracted from the attributes with the exact same name as a variable. String, integer/long, decimal, date time, boolean and enum attribute types are supported. Note that for ENUM attributes the key will be used to replace a variable. To ensure a fixed format (for other types than string), it is recommended to convert values to type string first and only pass string attributes for value replacement.
@@ -28,24 +29,29 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
  * Output:
  * -PromptToUse: object that contains the system and user prompt which you can use to pass the prompts to the request and operations.
  */
-public class PromptToUse_GetAndReplace extends CustomJavaAction<IMendixObject>
+public class PromptToUse_GetAndReplace extends UserAction<IMendixObject>
 {
-	private IMendixObject __Prompt;
-	private conversationalui.proxies.Prompt Prompt;
-	private IMendixObject ContextObject;
+	/** @deprecated use Prompt.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Prompt;
+	private final conversationalui.proxies.Prompt Prompt;
+	private final IMendixObject ContextObject;
 
-	public PromptToUse_GetAndReplace(IContext context, IMendixObject Prompt, IMendixObject ContextObject)
+	public PromptToUse_GetAndReplace(
+		IContext context,
+		IMendixObject _prompt,
+		IMendixObject _contextObject
+	)
 	{
 		super(context);
-		this.__Prompt = Prompt;
-		this.ContextObject = ContextObject;
+		this.__Prompt = _prompt;
+		this.Prompt = _prompt == null ? null : conversationalui.proxies.Prompt.initialize(getContext(), _prompt);
+		this.ContextObject = _contextObject;
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.Prompt = this.__Prompt == null ? null : conversationalui.proxies.Prompt.initialize(getContext(), __Prompt);
-
 		// BEGIN USER CODE
 		try {
 			requireNonNull(Prompt, "Prompt is required.");

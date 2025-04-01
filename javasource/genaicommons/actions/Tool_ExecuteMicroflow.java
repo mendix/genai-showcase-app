@@ -19,30 +19,38 @@ import com.mendix.webui.CustomJavaAction;
 import genaicommons.impl.MxLogger;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class Tool_ExecuteMicroflow extends CustomJavaAction<java.lang.String>
+public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 {
-	private IMendixObject __Tool;
-	private genaicommons.proxies.Tool Tool;
-	private IMendixObject __Request;
-	private genaicommons.proxies.Request Request;
-	private java.lang.String Arguments;
+	/** @deprecated use Tool.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Tool;
+	private final genaicommons.proxies.Tool Tool;
+	/** @deprecated use Request.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Request;
+	private final genaicommons.proxies.Request Request;
+	private final java.lang.String Arguments;
 
-	public Tool_ExecuteMicroflow(IContext context, IMendixObject Tool, IMendixObject Request, java.lang.String Arguments)
+	public Tool_ExecuteMicroflow(
+		IContext context,
+		IMendixObject _tool,
+		IMendixObject _request,
+		java.lang.String _arguments
+	)
 	{
 		super(context);
-		this.__Tool = Tool;
-		this.__Request = Request;
-		this.Arguments = Arguments;
+		this.__Tool = _tool;
+		this.Tool = _tool == null ? null : genaicommons.proxies.Tool.initialize(getContext(), _tool);
+		this.__Request = _request;
+		this.Request = _request == null ? null : genaicommons.proxies.Request.initialize(getContext(), _request);
+		this.Arguments = _arguments;
 	}
 
 	@java.lang.Override
 	public java.lang.String executeAction() throws Exception
 	{
-		this.Tool = this.__Tool == null ? null : genaicommons.proxies.Tool.initialize(getContext(), __Tool);
-
-		this.Request = this.__Request == null ? null : genaicommons.proxies.Request.initialize(getContext(), __Request);
-
 		// BEGIN USER CODE
 		try {
 			requireNonNull(Tool, "Tool is required.");

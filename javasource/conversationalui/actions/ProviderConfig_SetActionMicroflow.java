@@ -15,29 +15,35 @@ import com.mendix.webui.CustomJavaAction;
 import conversationalui.impl.MxLogger;
 import conversationalui.impl.ProviderConfigImpl;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * This can be used to set a (custom) ActionMicroflow for your ProviderConfig (or specialization_ that will be executed once a new message is sent.
  * The ActionMicroflow is expected to have an Input of ConversationalUI.ChatContext and must return a Boolean.
  */
-public class ProviderConfig_SetActionMicroflow extends CustomJavaAction<java.lang.Boolean>
+public class ProviderConfig_SetActionMicroflow extends UserAction<java.lang.Boolean>
 {
-	private IMendixObject __ProviderConfig;
-	private conversationalui.proxies.ProviderConfig ProviderConfig;
-	private java.lang.String ActionMicroflow;
+	/** @deprecated use ProviderConfig.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __ProviderConfig;
+	private final conversationalui.proxies.ProviderConfig ProviderConfig;
+	private final java.lang.String ActionMicroflow;
 
-	public ProviderConfig_SetActionMicroflow(IContext context, IMendixObject ProviderConfig, java.lang.String ActionMicroflow)
+	public ProviderConfig_SetActionMicroflow(
+		IContext context,
+		IMendixObject _providerConfig,
+		java.lang.String _actionMicroflow
+	)
 	{
 		super(context);
-		this.__ProviderConfig = ProviderConfig;
-		this.ActionMicroflow = ActionMicroflow;
+		this.__ProviderConfig = _providerConfig;
+		this.ProviderConfig = _providerConfig == null ? null : conversationalui.proxies.ProviderConfig.initialize(getContext(), _providerConfig);
+		this.ActionMicroflow = _actionMicroflow;
 	}
 
 	@java.lang.Override
 	public java.lang.Boolean executeAction() throws Exception
 	{
-		this.ProviderConfig = this.__ProviderConfig == null ? null : conversationalui.proxies.ProviderConfig.initialize(getContext(), __ProviderConfig);
-
 		// BEGIN USER CODE
 
 		try {

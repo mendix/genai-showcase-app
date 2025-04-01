@@ -14,3 +14,6 @@
 /nativemobile/builds/
 /genai showcase app.mpr.bak
 /genai showcase app.mpr.lock
+/vendorlib/temp/
+.DS_Store
+/.svn/

@@ -37,25 +37,31 @@ import genaicommons.proxies.Function;
 import genaicommons.proxies.ToolCall;
 import genaicommons.proxies.ToolCollection;
 import genaicommons.proxies.ENUM_MessageRole;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class RequestMapping_ManipulateJson extends CustomJavaAction<java.lang.String>
+public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 {
-	private IMendixObject __RequestMapping;
-	private openaiconnector.proxies.RequestMapping RequestMapping;
-	private java.lang.String Request_Json;
+	/** @deprecated use RequestMapping.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __RequestMapping;
+	private final openaiconnector.proxies.RequestMapping RequestMapping;
+	private final java.lang.String Request_Json;
 
-	public RequestMapping_ManipulateJson(IContext context, IMendixObject RequestMapping, java.lang.String Request_Json)
+	public RequestMapping_ManipulateJson(
+		IContext context,
+		IMendixObject _requestMapping,
+		java.lang.String _request_Json
+	)
 	{
 		super(context);
-		this.__RequestMapping = RequestMapping;
-		this.Request_Json = Request_Json;
+		this.__RequestMapping = _requestMapping;
+		this.RequestMapping = _requestMapping == null ? null : openaiconnector.proxies.RequestMapping.initialize(getContext(), _requestMapping);
+		this.Request_Json = _request_Json;
 	}
 
 	@java.lang.Override
 	public java.lang.String executeAction() throws Exception
 	{
-		this.RequestMapping = this.__RequestMapping == null ? null : openaiconnector.proxies.RequestMapping.initialize(getContext(), __RequestMapping);
-
 		// BEGIN USER CODE
 		try {
 			requireNonNull(RequestMapping, "RequestMapping is required.");

@@ -18,30 +18,38 @@ import amazons3connector.impl.AmazonS3Client;
 import amazons3connector.impl.MxLogger;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.CopyObjectRequest.Builder;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class CopyObject extends CustomJavaAction<java.lang.Boolean>
+public class CopyObject extends UserAction<java.lang.Boolean>
 {
-	private IMendixObject __CopyObjectRequest;
-	private amazons3connector.proxies.CopyObjectRequest CopyObjectRequest;
-	private awsauthentication.proxies.ENUM_Region Region;
-	private IMendixObject __Credentials;
-	private awsauthentication.proxies.Credentials Credentials;
+	/** @deprecated use CopyObjectRequest.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __CopyObjectRequest;
+	private final amazons3connector.proxies.CopyObjectRequest CopyObjectRequest;
+	private final awsauthentication.proxies.ENUM_Region Region;
+	/** @deprecated use Credentials.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Credentials;
+	private final awsauthentication.proxies.Credentials Credentials;
 
-	public CopyObject(IContext context, IMendixObject CopyObjectRequest, java.lang.String Region, IMendixObject Credentials)
+	public CopyObject(
+		IContext context,
+		IMendixObject _copyObjectRequest,
+		java.lang.String _region,
+		IMendixObject _credentials
+	)
 	{
 		super(context);
-		this.__CopyObjectRequest = CopyObjectRequest;
-		this.Region = Region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(Region);
-		this.__Credentials = Credentials;
+		this.__CopyObjectRequest = _copyObjectRequest;
+		this.CopyObjectRequest = _copyObjectRequest == null ? null : amazons3connector.proxies.CopyObjectRequest.initialize(getContext(), _copyObjectRequest);
+		this.Region = _region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(_region);
+		this.__Credentials = _credentials;
+		this.Credentials = _credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), _credentials);
 	}
 
 	@java.lang.Override
 	public java.lang.Boolean executeAction() throws Exception
 	{
-		this.CopyObjectRequest = this.__CopyObjectRequest == null ? null : amazons3connector.proxies.CopyObjectRequest.initialize(getContext(), __CopyObjectRequest);
-
-		this.Credentials = this.__Credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), __Credentials);
-
 		// BEGIN USER CODE
 		software.amazon.awssdk.services.s3.model.CopyObjectResponse awsResponse = null;
 		try {

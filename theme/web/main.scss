@@ -22,9 +22,12 @@ $brand-openai: #0078D4;
   }
 }
 
-/*    Mendix 10   */
-.layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a {
+/*    Navigation Bar  */
+.layout-atlas-responsive-default .region-sidebar .mx-scrollcontainer-wrapper
+.mx-navigationtree .navbar-inner > ul > li > a {
   padding: 8px 0;
+  margin-top: 2px;
+  white-space: normal;
 }
 
 //Homepage

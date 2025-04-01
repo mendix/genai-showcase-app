@@ -20,30 +20,38 @@ import amazons3connector.proxies.Bucket;
 import amazons3connector.proxies.ListBucketsResponse;
 import awsauthentication.proxies.AbstractRequest;
 import software.amazon.awssdk.services.s3.S3Client;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class ListBuckets extends CustomJavaAction<IMendixObject>
+public class ListBuckets extends UserAction<IMendixObject>
 {
-	private awsauthentication.proxies.ENUM_Region Region;
-	private IMendixObject __Credentials;
-	private awsauthentication.proxies.Credentials Credentials;
-	private IMendixObject __ListBucketsRequest;
-	private amazons3connector.proxies.ListBucketsRequest ListBucketsRequest;
+	private final awsauthentication.proxies.ENUM_Region Region;
+	/** @deprecated use Credentials.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Credentials;
+	private final awsauthentication.proxies.Credentials Credentials;
+	/** @deprecated use ListBucketsRequest.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __ListBucketsRequest;
+	private final amazons3connector.proxies.ListBucketsRequest ListBucketsRequest;
 
-	public ListBuckets(IContext context, java.lang.String Region, IMendixObject Credentials, IMendixObject ListBucketsRequest)
+	public ListBuckets(
+		IContext context,
+		java.lang.String _region,
+		IMendixObject _credentials,
+		IMendixObject _listBucketsRequest
+	)
 	{
 		super(context);
-		this.Region = Region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(Region);
-		this.__Credentials = Credentials;
-		this.__ListBucketsRequest = ListBucketsRequest;
+		this.Region = _region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(_region);
+		this.__Credentials = _credentials;
+		this.Credentials = _credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), _credentials);
+		this.__ListBucketsRequest = _listBucketsRequest;
+		this.ListBucketsRequest = _listBucketsRequest == null ? null : amazons3connector.proxies.ListBucketsRequest.initialize(getContext(), _listBucketsRequest);
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.Credentials = this.__Credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), __Credentials);
-
-		this.ListBucketsRequest = this.__ListBucketsRequest == null ? null : amazons3connector.proxies.ListBucketsRequest.initialize(getContext(), __ListBucketsRequest);
-
 		// BEGIN USER CODE
 		software.amazon.awssdk.services.s3.model.ListBucketsResponse awsResponse = null;
 		try {

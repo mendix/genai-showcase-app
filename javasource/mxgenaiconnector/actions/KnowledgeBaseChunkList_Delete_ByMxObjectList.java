@@ -16,6 +16,7 @@ import genaicommons.proxies.KnowledgeBaseChunk;
 import mxgenaiconnector.impl.ChunkUtils;
 import mxgenaiconnector.impl.MxLogger;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * Use this operation to delete existing chunks in a collection based on the MxObjectID. 
@@ -26,24 +27,29 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
  * 
  * Once deleted, chunks are no longer available for read operations in the KB after 60-120 seconds due to asynchronous data synchronization for better scalability.
  */
-public class KnowledgeBaseChunkList_Delete_ByMxObjectList extends CustomJavaAction<java.lang.Boolean>
+public class KnowledgeBaseChunkList_Delete_ByMxObjectList extends UserAction<java.lang.Boolean>
 {
-	private IMendixObject __Connection;
-	private genaicommons.proxies.Connection Connection;
-	private java.util.List<IMendixObject> MxObjectList;
+	/** @deprecated use Connection.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Connection;
+	private final genaicommons.proxies.Connection Connection;
+	private final java.util.List<IMendixObject> MxObjectList;
 
-	public KnowledgeBaseChunkList_Delete_ByMxObjectList(IContext context, IMendixObject Connection, java.util.List<IMendixObject> MxObjectList)
+	public KnowledgeBaseChunkList_Delete_ByMxObjectList(
+		IContext context,
+		IMendixObject _connection,
+		java.util.List<IMendixObject> _mxObjectList
+	)
 	{
 		super(context);
-		this.__Connection = Connection;
-		this.MxObjectList = MxObjectList;
+		this.__Connection = _connection;
+		this.Connection = _connection == null ? null : genaicommons.proxies.Connection.initialize(getContext(), _connection);
+		this.MxObjectList = _mxObjectList;
 	}
 
 	@java.lang.Override
 	public java.lang.Boolean executeAction() throws Exception
 	{
-		this.Connection = this.__Connection == null ? null : genaicommons.proxies.Connection.initialize(getContext(), __Connection);
-
 		// BEGIN USER CODE
 		try {
 			if (MxObjectList.isEmpty()) {

@@ -22,6 +22,7 @@ import awsauthentication.proxies.ENUM_Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.endpoints.internal.Value.Bool;
 import software.amazon.awssdk.services.s3.model.NoSuchBucketException;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * You can use the HeadBucket operation to retrieve the AWS Region the bucket is located and determine if a bucket exists and if you have permission to access it. Additionally, it will indicate whether the bucket name used in the request is an access point alias.
@@ -31,29 +32,36 @@ import software.amazon.awssdk.services.s3.model.NoSuchBucketException;
  * - GetObjectRequest (Object)
  * - Credentials (Object)
  */
-public class HeadBucket extends CustomJavaAction<IMendixObject>
+public class HeadBucket extends UserAction<IMendixObject>
 {
-	private IMendixObject __Credentials;
-	private awsauthentication.proxies.Credentials Credentials;
-	private IMendixObject __HeadBucketRequest;
-	private amazons3connector.proxies.HeadBucketRequest HeadBucketRequest;
-	private awsauthentication.proxies.ENUM_Region Region;
+	/** @deprecated use Credentials.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Credentials;
+	private final awsauthentication.proxies.Credentials Credentials;
+	/** @deprecated use HeadBucketRequest.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __HeadBucketRequest;
+	private final amazons3connector.proxies.HeadBucketRequest HeadBucketRequest;
+	private final awsauthentication.proxies.ENUM_Region Region;
 
-	public HeadBucket(IContext context, IMendixObject Credentials, IMendixObject HeadBucketRequest, java.lang.String Region)
+	public HeadBucket(
+		IContext context,
+		IMendixObject _credentials,
+		IMendixObject _headBucketRequest,
+		java.lang.String _region
+	)
 	{
 		super(context);
-		this.__Credentials = Credentials;
-		this.__HeadBucketRequest = HeadBucketRequest;
-		this.Region = Region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(Region);
+		this.__Credentials = _credentials;
+		this.Credentials = _credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), _credentials);
+		this.__HeadBucketRequest = _headBucketRequest;
+		this.HeadBucketRequest = _headBucketRequest == null ? null : amazons3connector.proxies.HeadBucketRequest.initialize(getContext(), _headBucketRequest);
+		this.Region = _region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(_region);
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.Credentials = this.__Credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), __Credentials);
-
-		this.HeadBucketRequest = this.__HeadBucketRequest == null ? null : amazons3connector.proxies.HeadBucketRequest.initialize(getContext(), __HeadBucketRequest);
-
 		// BEGIN USER CODE
 		software.amazon.awssdk.services.s3.model.HeadBucketResponse awsResponse = null;
 		try {

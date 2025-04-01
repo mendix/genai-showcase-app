@@ -16,15 +16,19 @@ import static java.util.Objects.requireNonNull;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class Response_ModifyForMapping_Converse extends CustomJavaAction<java.lang.String>
+public class Response_ModifyForMapping_Converse extends UserAction<java.lang.String>
 {
-	private java.lang.String ResponseJSON;
+	private final java.lang.String ResponseJSON;
 
-	public Response_ModifyForMapping_Converse(IContext context, java.lang.String ResponseJSON)
+	public Response_ModifyForMapping_Converse(
+		IContext context,
+		java.lang.String _responseJSON
+	)
 	{
 		super(context);
-		this.ResponseJSON = ResponseJSON;
+		this.ResponseJSON = _responseJSON;
 	}
 
 	@java.lang.Override

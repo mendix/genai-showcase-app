@@ -20,33 +20,41 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.webui.CustomJavaAction;
 import embeddings_clustering.impl.clusteringUtils;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class JA_TSNE_2D extends CustomJavaAction<java.util.List<IMendixObject>>
+public class JA_TSNE_2D extends UserAction<java.util.List<IMendixObject>>
 {
-	private java.util.List<IMendixObject> __EmbeddingList;
-	private java.util.List<embeddings_clustering.proxies.Embedding> EmbeddingList;
-	private java.lang.Long Perplexity;
-	private java.lang.Long MaxIterations;
-	private java.math.BigDecimal Theta;
+	/** @deprecated use com.mendix.utils.ListUtils.map(EmbeddingList, com.mendix.systemwideinterfaces.core.IEntityProxy::getMendixObject) instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final java.util.List<IMendixObject> __EmbeddingList;
+	private final java.util.List<embeddings_clustering.proxies.Embedding> EmbeddingList;
+	private final java.lang.Long Perplexity;
+	private final java.lang.Long MaxIterations;
+	private final java.math.BigDecimal Theta;
 
-	public JA_TSNE_2D(IContext context, java.util.List<IMendixObject> EmbeddingList, java.lang.Long Perplexity, java.lang.Long MaxIterations, java.math.BigDecimal Theta)
+	public JA_TSNE_2D(
+		IContext context,
+		java.util.List<IMendixObject> _embeddingList,
+		java.lang.Long _perplexity,
+		java.lang.Long _maxIterations,
+		java.math.BigDecimal _theta
+	)
 	{
 		super(context);
-		this.__EmbeddingList = EmbeddingList;
-		this.Perplexity = Perplexity;
-		this.MaxIterations = MaxIterations;
-		this.Theta = Theta;
+		this.__EmbeddingList = _embeddingList;
+		this.EmbeddingList = java.util.Optional.ofNullable(_embeddingList)
+			.orElse(java.util.Collections.emptyList())
+			.stream()
+			.map(embeddingListElement -> embeddings_clustering.proxies.Embedding.initialize(getContext(), embeddingListElement))
+			.collect(java.util.stream.Collectors.toList());
+		this.Perplexity = _perplexity;
+		this.MaxIterations = _maxIterations;
+		this.Theta = _theta;
 	}
 
 	@java.lang.Override
 	public java.util.List<IMendixObject> executeAction() throws Exception
 	{
-		this.EmbeddingList = java.util.Optional.ofNullable(this.__EmbeddingList)
-			.orElse(java.util.Collections.emptyList())
-			.stream()
-			.map(__EmbeddingListElement -> embeddings_clustering.proxies.Embedding.initialize(getContext(), __EmbeddingListElement))
-			.collect(java.util.stream.Collectors.toList());
-
 		// BEGIN USER CODE
 		double[][] points = clusteringUtils.getEmbeddingsAsDoubles(EmbeddingList, getContext());	
 		
