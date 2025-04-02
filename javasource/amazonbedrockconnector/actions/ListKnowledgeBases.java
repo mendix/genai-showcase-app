@@ -20,30 +20,38 @@ import amazonbedrockconnector.proxies.ListKnowledgeBasesResponse;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import amazonbedrockconnector.impl.AmazonBedrockClient;
 import software.amazon.awssdk.services.bedrockagent.model.KnowledgeBaseStatus;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class ListKnowledgeBases extends CustomJavaAction<IMendixObject>
+public class ListKnowledgeBases extends UserAction<IMendixObject>
 {
-	private IMendixObject __Credentials;
-	private awsauthentication.proxies.Credentials Credentials;
-	private awsauthentication.proxies.ENUM_Region Region;
-	private IMendixObject __ListKnowledgeBasesRequest;
-	private amazonbedrockconnector.proxies.ListKnowledgeBasesRequest ListKnowledgeBasesRequest;
+	/** @deprecated use Credentials.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Credentials;
+	private final awsauthentication.proxies.Credentials Credentials;
+	private final awsauthentication.proxies.ENUM_Region Region;
+	/** @deprecated use ListKnowledgeBasesRequest.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __ListKnowledgeBasesRequest;
+	private final amazonbedrockconnector.proxies.ListKnowledgeBasesRequest ListKnowledgeBasesRequest;
 
-	public ListKnowledgeBases(IContext context, IMendixObject Credentials, java.lang.String Region, IMendixObject ListKnowledgeBasesRequest)
+	public ListKnowledgeBases(
+		IContext context,
+		IMendixObject _credentials,
+		java.lang.String _region,
+		IMendixObject _listKnowledgeBasesRequest
+	)
 	{
 		super(context);
-		this.__Credentials = Credentials;
-		this.Region = Region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(Region);
-		this.__ListKnowledgeBasesRequest = ListKnowledgeBasesRequest;
+		this.__Credentials = _credentials;
+		this.Credentials = _credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), _credentials);
+		this.Region = _region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(_region);
+		this.__ListKnowledgeBasesRequest = _listKnowledgeBasesRequest;
+		this.ListKnowledgeBasesRequest = _listKnowledgeBasesRequest == null ? null : amazonbedrockconnector.proxies.ListKnowledgeBasesRequest.initialize(getContext(), _listKnowledgeBasesRequest);
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.Credentials = this.__Credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), __Credentials);
-
-		this.ListKnowledgeBasesRequest = this.__ListKnowledgeBasesRequest == null ? null : amazonbedrockconnector.proxies.ListKnowledgeBasesRequest.initialize(getContext(), __ListKnowledgeBasesRequest);
-
 		// BEGIN USER CODE
 		try {
 			requireNonNull(Credentials, "AWS Credentials are required");

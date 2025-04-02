@@ -16,15 +16,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class EmbeddingsResponse_PrepareForImportMapping extends CustomJavaAction<java.lang.String>
+public class EmbeddingsResponse_PrepareForImportMapping extends UserAction<java.lang.String>
 {
-	private java.lang.String EmbeddingsResponse;
+	private final java.lang.String EmbeddingsResponse;
 
-	public EmbeddingsResponse_PrepareForImportMapping(IContext context, java.lang.String EmbeddingsResponse)
+	public EmbeddingsResponse_PrepareForImportMapping(
+		IContext context,
+		java.lang.String _embeddingsResponse
+	)
 	{
 		super(context);
-		this.EmbeddingsResponse = EmbeddingsResponse;
+		this.EmbeddingsResponse = _embeddingsResponse;
 	}
 
 	@java.lang.Override

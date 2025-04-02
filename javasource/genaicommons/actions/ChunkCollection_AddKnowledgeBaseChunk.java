@@ -19,6 +19,7 @@ import communitycommons.StringUtils;
 import genaicommons.impl.MxLogger;
 import genaicommons.proxies.Chunk;
 import genaicommons.proxies.KnowledgeBaseChunk;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * Adds a new KnowledgeBaseChunk to the ChunkCollection to create the input for embeddings or knowledge base operations.
@@ -26,33 +27,42 @@ import genaicommons.proxies.KnowledgeBaseChunk;
  * 
  * Please check the documentation for each parameter for more detailed information on how to use this operation in your project.
  */
-public class ChunkCollection_AddKnowledgeBaseChunk extends CustomJavaAction<IMendixObject>
+public class ChunkCollection_AddKnowledgeBaseChunk extends UserAction<IMendixObject>
 {
-	private IMendixObject __ChunkCollection;
-	private genaicommons.proxies.ChunkCollection ChunkCollection;
-	private java.lang.String InputText;
-	private java.lang.String HumanReadableID;
-	private IMendixObject MxObject;
-	private IMendixObject __MetadataCollection;
-	private genaicommons.proxies.MetadataCollection MetadataCollection;
+	/** @deprecated use ChunkCollection.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __ChunkCollection;
+	private final genaicommons.proxies.ChunkCollection ChunkCollection;
+	private final java.lang.String InputText;
+	private final java.lang.String HumanReadableID;
+	private final IMendixObject MxObject;
+	/** @deprecated use MetadataCollection.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __MetadataCollection;
+	private final genaicommons.proxies.MetadataCollection MetadataCollection;
 
-	public ChunkCollection_AddKnowledgeBaseChunk(IContext context, IMendixObject ChunkCollection, java.lang.String InputText, java.lang.String HumanReadableID, IMendixObject MxObject, IMendixObject MetadataCollection)
+	public ChunkCollection_AddKnowledgeBaseChunk(
+		IContext context,
+		IMendixObject _chunkCollection,
+		java.lang.String _inputText,
+		java.lang.String _humanReadableID,
+		IMendixObject _mxObject,
+		IMendixObject _metadataCollection
+	)
 	{
 		super(context);
-		this.__ChunkCollection = ChunkCollection;
-		this.InputText = InputText;
-		this.HumanReadableID = HumanReadableID;
-		this.MxObject = MxObject;
-		this.__MetadataCollection = MetadataCollection;
+		this.__ChunkCollection = _chunkCollection;
+		this.ChunkCollection = _chunkCollection == null ? null : genaicommons.proxies.ChunkCollection.initialize(getContext(), _chunkCollection);
+		this.InputText = _inputText;
+		this.HumanReadableID = _humanReadableID;
+		this.MxObject = _mxObject;
+		this.__MetadataCollection = _metadataCollection;
+		this.MetadataCollection = _metadataCollection == null ? null : genaicommons.proxies.MetadataCollection.initialize(getContext(), _metadataCollection);
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.ChunkCollection = this.__ChunkCollection == null ? null : genaicommons.proxies.ChunkCollection.initialize(getContext(), __ChunkCollection);
-
-		this.MetadataCollection = this.__MetadataCollection == null ? null : genaicommons.proxies.MetadataCollection.initialize(getContext(), __MetadataCollection);
-
 		// BEGIN USER CODE
 		try {
 			requireNonNull(ChunkCollection, "ChunkCollection is required.");

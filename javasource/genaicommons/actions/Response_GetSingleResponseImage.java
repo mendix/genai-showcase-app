@@ -18,28 +18,34 @@ import genaicommons.impl.ImageGenImpl;
 import genaicommons.impl.MxLogger;
 import genaicommons.proxies.FileContent;
 import static java.util.Objects.requireNonNull;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * This operation processes a response that was created by an image generation operation. A return entity can be specified using ResponseImageEntity (needs to be of type System.Image or its specialization). An image of that type will be created and returned.
  */
-public class Response_GetSingleResponseImage extends CustomJavaAction<IMendixObject>
+public class Response_GetSingleResponseImage extends UserAction<IMendixObject>
 {
-	private java.lang.String ResponseImageEntity;
-	private IMendixObject __Response;
-	private genaicommons.proxies.Response Response;
+	private final java.lang.String ResponseImageEntity;
+	/** @deprecated use Response.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Response;
+	private final genaicommons.proxies.Response Response;
 
-	public Response_GetSingleResponseImage(IContext context, java.lang.String ResponseImageEntity, IMendixObject Response)
+	public Response_GetSingleResponseImage(
+		IContext context,
+		java.lang.String _responseImageEntity,
+		IMendixObject _response
+	)
 	{
 		super(context);
-		this.ResponseImageEntity = ResponseImageEntity;
-		this.__Response = Response;
+		this.ResponseImageEntity = _responseImageEntity;
+		this.__Response = _response;
+		this.Response = _response == null ? null : genaicommons.proxies.Response.initialize(getContext(), _response);
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.Response = this.__Response == null ? null : genaicommons.proxies.Response.initialize(getContext(), __Response);
-
 		// BEGIN USER CODE
 		try {
 			requireNonNull(Response, "Response is required.");

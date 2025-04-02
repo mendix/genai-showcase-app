@@ -19,6 +19,7 @@ import genaicommons.impl.DeployedModelImpl;
 import genaicommons.impl.MxLogger;
 import genaicommons.proxies.ENUM_ModelModality;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * Use the microflow Embeddings_Execute_ChunkCollection to execute an embeddings API call with a ChunkCollection containing one or multiple Chunk objects. The resulting embedding vectors returned by the model end up in the EmbeddingVector string attribute of the original Chunks.
@@ -30,32 +31,40 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
  * Output: 
  * This is a response object containing token usage metric and pointing to a ChunkCollection. The ChunkCollection contains the chunk for which an embedding vector was created. Note that the EmbeddingVector gets updated on the original objects. So for further logic, the ChunkCollection used as input for this operation can be reused and is the same as the ChunkCollection to which the EmbeddingsResponse is pointing.
  */
-public class Embeddings_ChunkCollection extends CustomJavaAction<IMendixObject>
+public class Embeddings_ChunkCollection extends UserAction<IMendixObject>
 {
-	private IMendixObject __DeployedModel;
-	private genaicommons.proxies.DeployedModel DeployedModel;
-	private IMendixObject __ChunkCollection;
-	private genaicommons.proxies.ChunkCollection ChunkCollection;
-	private IMendixObject __EmbeddingsOptions;
-	private genaicommons.proxies.EmbeddingsOptions EmbeddingsOptions;
+	/** @deprecated use DeployedModel.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __DeployedModel;
+	private final genaicommons.proxies.DeployedModel DeployedModel;
+	/** @deprecated use ChunkCollection.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __ChunkCollection;
+	private final genaicommons.proxies.ChunkCollection ChunkCollection;
+	/** @deprecated use EmbeddingsOptions.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __EmbeddingsOptions;
+	private final genaicommons.proxies.EmbeddingsOptions EmbeddingsOptions;
 
-	public Embeddings_ChunkCollection(IContext context, IMendixObject DeployedModel, IMendixObject ChunkCollection, IMendixObject EmbeddingsOptions)
+	public Embeddings_ChunkCollection(
+		IContext context,
+		IMendixObject _deployedModel,
+		IMendixObject _chunkCollection,
+		IMendixObject _embeddingsOptions
+	)
 	{
 		super(context);
-		this.__DeployedModel = DeployedModel;
-		this.__ChunkCollection = ChunkCollection;
-		this.__EmbeddingsOptions = EmbeddingsOptions;
+		this.__DeployedModel = _deployedModel;
+		this.DeployedModel = _deployedModel == null ? null : genaicommons.proxies.DeployedModel.initialize(getContext(), _deployedModel);
+		this.__ChunkCollection = _chunkCollection;
+		this.ChunkCollection = _chunkCollection == null ? null : genaicommons.proxies.ChunkCollection.initialize(getContext(), _chunkCollection);
+		this.__EmbeddingsOptions = _embeddingsOptions;
+		this.EmbeddingsOptions = _embeddingsOptions == null ? null : genaicommons.proxies.EmbeddingsOptions.initialize(getContext(), _embeddingsOptions);
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.DeployedModel = this.__DeployedModel == null ? null : genaicommons.proxies.DeployedModel.initialize(getContext(), __DeployedModel);
-
-		this.ChunkCollection = this.__ChunkCollection == null ? null : genaicommons.proxies.ChunkCollection.initialize(getContext(), __ChunkCollection);
-
-		this.EmbeddingsOptions = this.__EmbeddingsOptions == null ? null : genaicommons.proxies.EmbeddingsOptions.initialize(getContext(), __EmbeddingsOptions);
-
 		// BEGIN USER CODE
 		try {
 			validate();

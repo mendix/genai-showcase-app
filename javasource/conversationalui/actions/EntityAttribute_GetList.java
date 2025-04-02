@@ -19,15 +19,19 @@ import conversationalui.proxies.EntityAttribute;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.meta.IMetaObject;
 import com.mendix.systemwideinterfaces.core.meta.IMetaPrimitive;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class EntityAttribute_GetList extends CustomJavaAction<java.util.List<IMendixObject>>
+public class EntityAttribute_GetList extends UserAction<java.util.List<IMendixObject>>
 {
-	private java.lang.String EntityName;
+	private final java.lang.String EntityName;
 
-	public EntityAttribute_GetList(IContext context, java.lang.String EntityName)
+	public EntityAttribute_GetList(
+		IContext context,
+		java.lang.String _entityName
+	)
 	{
 		super(context);
-		this.EntityName = EntityName;
+		this.EntityName = _entityName;
 	}
 
 	@java.lang.Override

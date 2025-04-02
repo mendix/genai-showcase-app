@@ -25,35 +25,45 @@ import software.amazon.awssdk.core.ResponseInputStream;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest.Builder;
 import software.amazon.awssdk.services.s3.model.StorageClass;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class GetObject extends CustomJavaAction<IMendixObject>
+public class GetObject extends UserAction<IMendixObject>
 {
-	private IMendixObject __Credentials;
-	private awsauthentication.proxies.Credentials Credentials;
-	private awsauthentication.proxies.ENUM_Region Region;
-	private IMendixObject __GetObjectRequest;
-	private amazons3connector.proxies.GetObjectRequest GetObjectRequest;
-	private IMendixObject __TargetFile;
-	private system.proxies.FileDocument TargetFile;
+	/** @deprecated use Credentials.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Credentials;
+	private final awsauthentication.proxies.Credentials Credentials;
+	private final awsauthentication.proxies.ENUM_Region Region;
+	/** @deprecated use GetObjectRequest.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __GetObjectRequest;
+	private final amazons3connector.proxies.GetObjectRequest GetObjectRequest;
+	/** @deprecated use TargetFile.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __TargetFile;
+	private final system.proxies.FileDocument TargetFile;
 
-	public GetObject(IContext context, IMendixObject Credentials, java.lang.String Region, IMendixObject GetObjectRequest, IMendixObject TargetFile)
+	public GetObject(
+		IContext context,
+		IMendixObject _credentials,
+		java.lang.String _region,
+		IMendixObject _getObjectRequest,
+		IMendixObject _targetFile
+	)
 	{
 		super(context);
-		this.__Credentials = Credentials;
-		this.Region = Region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(Region);
-		this.__GetObjectRequest = GetObjectRequest;
-		this.__TargetFile = TargetFile;
+		this.__Credentials = _credentials;
+		this.Credentials = _credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), _credentials);
+		this.Region = _region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(_region);
+		this.__GetObjectRequest = _getObjectRequest;
+		this.GetObjectRequest = _getObjectRequest == null ? null : amazons3connector.proxies.GetObjectRequest.initialize(getContext(), _getObjectRequest);
+		this.__TargetFile = _targetFile;
+		this.TargetFile = _targetFile == null ? null : system.proxies.FileDocument.initialize(getContext(), _targetFile);
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.Credentials = this.__Credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), __Credentials);
-
-		this.GetObjectRequest = this.__GetObjectRequest == null ? null : amazons3connector.proxies.GetObjectRequest.initialize(getContext(), __GetObjectRequest);
-
-		this.TargetFile = this.__TargetFile == null ? null : system.proxies.FileDocument.initialize(getContext(), __TargetFile);
-
 		// BEGIN USER CODE
 		try {
 			//Validation of the input parameters

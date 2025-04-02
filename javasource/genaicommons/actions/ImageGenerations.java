@@ -18,6 +18,7 @@ import genaicommons.impl.DeployedModelImpl;
 import genaicommons.impl.MxLogger;
 import genaicommons.proxies.ENUM_ModelModality;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * Use this microflow operation to execute an image generations API call based on a prompt string input. The Response object needs to be processed to create a single or multiple images.
@@ -30,29 +31,36 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
  * Outputs:
  * - Response: This is a Response object pointing to a message with a FileCollection containing one or multiple FileContent objects. These FileContent objects can be converted into a single or multiple images using the response handling microflows.
  */
-public class ImageGenerations extends CustomJavaAction<IMendixObject>
+public class ImageGenerations extends UserAction<IMendixObject>
 {
-	private java.lang.String UserPrompt;
-	private IMendixObject __DeployedModel;
-	private genaicommons.proxies.DeployedModel DeployedModel;
-	private IMendixObject __ImageOptions;
-	private genaicommons.proxies.ImageOptions ImageOptions;
+	private final java.lang.String UserPrompt;
+	/** @deprecated use DeployedModel.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __DeployedModel;
+	private final genaicommons.proxies.DeployedModel DeployedModel;
+	/** @deprecated use ImageOptions.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __ImageOptions;
+	private final genaicommons.proxies.ImageOptions ImageOptions;
 
-	public ImageGenerations(IContext context, java.lang.String UserPrompt, IMendixObject DeployedModel, IMendixObject ImageOptions)
+	public ImageGenerations(
+		IContext context,
+		java.lang.String _userPrompt,
+		IMendixObject _deployedModel,
+		IMendixObject _imageOptions
+	)
 	{
 		super(context);
-		this.UserPrompt = UserPrompt;
-		this.__DeployedModel = DeployedModel;
-		this.__ImageOptions = ImageOptions;
+		this.UserPrompt = _userPrompt;
+		this.__DeployedModel = _deployedModel;
+		this.DeployedModel = _deployedModel == null ? null : genaicommons.proxies.DeployedModel.initialize(getContext(), _deployedModel);
+		this.__ImageOptions = _imageOptions;
+		this.ImageOptions = _imageOptions == null ? null : genaicommons.proxies.ImageOptions.initialize(getContext(), _imageOptions);
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.DeployedModel = this.__DeployedModel == null ? null : genaicommons.proxies.DeployedModel.initialize(getContext(), __DeployedModel);
-
-		this.ImageOptions = this.__ImageOptions == null ? null : genaicommons.proxies.ImageOptions.initialize(getContext(), __ImageOptions);
-
 		// BEGIN USER CODE
 		try {
 			validate();

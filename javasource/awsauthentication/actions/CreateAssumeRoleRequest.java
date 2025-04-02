@@ -35,6 +35,7 @@ import com.mendix.webui.CustomJavaAction;
 import awsauthentication.impl.MxLogger;
 import awsauthentication.impl.Utils;
 import awsauthentication.proxies.AssumeRoleRequest;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * This action is used to generate credentials for AWS call by assuming AWS role using IAM Roles Anywhere.
@@ -48,26 +49,35 @@ import awsauthentication.proxies.AssumeRoleRequest;
  * >Duration: Duration for which the session token should be valid.
  * >Session Name: An identifier for the assumed role session.
  */
-public class CreateAssumeRoleRequest extends CustomJavaAction<IMendixObject>
+public class CreateAssumeRoleRequest extends UserAction<IMendixObject>
 {
-	private awsauthentication.proxies.ENUM_Region Region;
-	private java.lang.String RoleARN;
-	private java.lang.String ProfileARN;
-	private java.lang.String TrustAnchorARN;
-	private java.lang.String ClientCertificateID;
-	private java.lang.Long Duration;
-	private java.lang.String SessionName;
+	private final awsauthentication.proxies.ENUM_Region Region;
+	private final java.lang.String RoleARN;
+	private final java.lang.String ProfileARN;
+	private final java.lang.String TrustAnchorARN;
+	private final java.lang.String ClientCertificateID;
+	private final java.lang.Long Duration;
+	private final java.lang.String SessionName;
 
-	public CreateAssumeRoleRequest(IContext context, java.lang.String Region, java.lang.String RoleARN, java.lang.String ProfileARN, java.lang.String TrustAnchorARN, java.lang.String ClientCertificateID, java.lang.Long Duration, java.lang.String SessionName)
+	public CreateAssumeRoleRequest(
+		IContext context,
+		java.lang.String _region,
+		java.lang.String _roleARN,
+		java.lang.String _profileARN,
+		java.lang.String _trustAnchorARN,
+		java.lang.String _clientCertificateID,
+		java.lang.Long _duration,
+		java.lang.String _sessionName
+	)
 	{
 		super(context);
-		this.Region = Region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(Region);
-		this.RoleARN = RoleARN;
-		this.ProfileARN = ProfileARN;
-		this.TrustAnchorARN = TrustAnchorARN;
-		this.ClientCertificateID = ClientCertificateID;
-		this.Duration = Duration;
-		this.SessionName = SessionName;
+		this.Region = _region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(_region);
+		this.RoleARN = _roleARN;
+		this.ProfileARN = _profileARN;
+		this.TrustAnchorARN = _trustAnchorARN;
+		this.ClientCertificateID = _clientCertificateID;
+		this.Duration = _duration;
+		this.SessionName = _sessionName;
 	}
 
 	@java.lang.Override

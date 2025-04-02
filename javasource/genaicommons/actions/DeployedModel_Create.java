@@ -17,48 +17,62 @@ import genaicommons.impl.MxLogger;
 import genaicommons.proxies.DeployedModel;
 import genaicommons.proxies.ENUM_ModelModality;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * Creates a DeployedModel object (or a specialization of such if the specialization is passed) and sets all passed attributes. The DeployedModel entity replaces the Connection entity and is a required input parameter for all chat completion operations. It contains the name of the microflow to be executed for the specified model and other information relevant to connect to a model.
  */
-public class DeployedModel_Create extends CustomJavaAction<IMendixObject>
+public class DeployedModel_Create extends UserAction<IMendixObject>
 {
-	private java.lang.String DisplayName;
-	private java.lang.String Architecture;
-	private java.lang.String Model;
-	private genaicommons.proxies.ENUM_ModelModality OutputModality;
-	private java.lang.String Microflow;
-	private java.lang.String DeployedModelSpecialization;
-	private java.util.List<IMendixObject> __InputModalityList;
-	private java.util.List<genaicommons.proxies.InputModality> InputModalityList;
-	private genaicommons.proxies.ENUM_ModelSupport SupportsSystemPrompt;
-	private genaicommons.proxies.ENUM_ModelSupport SupportsFunctionCalling;
-	private genaicommons.proxies.ENUM_ModelSupport SupportsConversationsWithHistory;
+	private final java.lang.String DisplayName;
+	private final java.lang.String Architecture;
+	private final java.lang.String Model;
+	private final genaicommons.proxies.ENUM_ModelModality OutputModality;
+	private final java.lang.String Microflow;
+	private final java.lang.String DeployedModelSpecialization;
+	/** @deprecated use com.mendix.utils.ListUtils.map(InputModalityList, com.mendix.systemwideinterfaces.core.IEntityProxy::getMendixObject) instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final java.util.List<IMendixObject> __InputModalityList;
+	private final java.util.List<genaicommons.proxies.InputModality> InputModalityList;
+	private final genaicommons.proxies.ENUM_ModelSupport SupportsSystemPrompt;
+	private final genaicommons.proxies.ENUM_ModelSupport SupportsFunctionCalling;
+	private final genaicommons.proxies.ENUM_ModelSupport SupportsConversationsWithHistory;
 
-	public DeployedModel_Create(IContext context, java.lang.String DisplayName, java.lang.String Architecture, java.lang.String Model, java.lang.String OutputModality, java.lang.String Microflow, java.lang.String DeployedModelSpecialization, java.util.List<IMendixObject> InputModalityList, java.lang.String SupportsSystemPrompt, java.lang.String SupportsFunctionCalling, java.lang.String SupportsConversationsWithHistory)
+	public DeployedModel_Create(
+		IContext context,
+		java.lang.String _displayName,
+		java.lang.String _architecture,
+		java.lang.String _model,
+		java.lang.String _outputModality,
+		java.lang.String _microflow,
+		java.lang.String _deployedModelSpecialization,
+		java.util.List<IMendixObject> _inputModalityList,
+		java.lang.String _supportsSystemPrompt,
+		java.lang.String _supportsFunctionCalling,
+		java.lang.String _supportsConversationsWithHistory
+	)
 	{
 		super(context);
-		this.DisplayName = DisplayName;
-		this.Architecture = Architecture;
-		this.Model = Model;
-		this.OutputModality = OutputModality == null ? null : genaicommons.proxies.ENUM_ModelModality.valueOf(OutputModality);
-		this.Microflow = Microflow;
-		this.DeployedModelSpecialization = DeployedModelSpecialization;
-		this.__InputModalityList = InputModalityList;
-		this.SupportsSystemPrompt = SupportsSystemPrompt == null ? null : genaicommons.proxies.ENUM_ModelSupport.valueOf(SupportsSystemPrompt);
-		this.SupportsFunctionCalling = SupportsFunctionCalling == null ? null : genaicommons.proxies.ENUM_ModelSupport.valueOf(SupportsFunctionCalling);
-		this.SupportsConversationsWithHistory = SupportsConversationsWithHistory == null ? null : genaicommons.proxies.ENUM_ModelSupport.valueOf(SupportsConversationsWithHistory);
+		this.DisplayName = _displayName;
+		this.Architecture = _architecture;
+		this.Model = _model;
+		this.OutputModality = _outputModality == null ? null : genaicommons.proxies.ENUM_ModelModality.valueOf(_outputModality);
+		this.Microflow = _microflow;
+		this.DeployedModelSpecialization = _deployedModelSpecialization;
+		this.__InputModalityList = _inputModalityList;
+		this.InputModalityList = java.util.Optional.ofNullable(_inputModalityList)
+			.orElse(java.util.Collections.emptyList())
+			.stream()
+			.map(inputModalityListElement -> genaicommons.proxies.InputModality.initialize(getContext(), inputModalityListElement))
+			.collect(java.util.stream.Collectors.toList());
+		this.SupportsSystemPrompt = _supportsSystemPrompt == null ? null : genaicommons.proxies.ENUM_ModelSupport.valueOf(_supportsSystemPrompt);
+		this.SupportsFunctionCalling = _supportsFunctionCalling == null ? null : genaicommons.proxies.ENUM_ModelSupport.valueOf(_supportsFunctionCalling);
+		this.SupportsConversationsWithHistory = _supportsConversationsWithHistory == null ? null : genaicommons.proxies.ENUM_ModelSupport.valueOf(_supportsConversationsWithHistory);
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.InputModalityList = java.util.Optional.ofNullable(this.__InputModalityList)
-			.orElse(java.util.Collections.emptyList())
-			.stream()
-			.map(__InputModalityListElement -> genaicommons.proxies.InputModality.initialize(getContext(), __InputModalityListElement))
-			.collect(java.util.stream.Collectors.toList());
-
 		// BEGIN USER CODE
 		try {
 			if (OutputModality != null)

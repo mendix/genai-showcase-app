@@ -18,30 +18,38 @@ import amazonbedrockconnector.impl.MxLogger;
 import amazonbedrockconnector.proxies.GetDataSourceResponse;
 import amazonbedrockconnector.impl.MxDataSource;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class GetDataSource extends CustomJavaAction<IMendixObject>
+public class GetDataSource extends UserAction<IMendixObject>
 {
-	private IMendixObject __Credentials;
-	private awsauthentication.proxies.Credentials Credentials;
-	private awsauthentication.proxies.ENUM_Region Region;
-	private IMendixObject __GetDataSourceRequest;
-	private amazonbedrockconnector.proxies.GetDataSourceRequest GetDataSourceRequest;
+	/** @deprecated use Credentials.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Credentials;
+	private final awsauthentication.proxies.Credentials Credentials;
+	private final awsauthentication.proxies.ENUM_Region Region;
+	/** @deprecated use GetDataSourceRequest.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __GetDataSourceRequest;
+	private final amazonbedrockconnector.proxies.GetDataSourceRequest GetDataSourceRequest;
 
-	public GetDataSource(IContext context, IMendixObject Credentials, java.lang.String Region, IMendixObject GetDataSourceRequest)
+	public GetDataSource(
+		IContext context,
+		IMendixObject _credentials,
+		java.lang.String _region,
+		IMendixObject _getDataSourceRequest
+	)
 	{
 		super(context);
-		this.__Credentials = Credentials;
-		this.Region = Region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(Region);
-		this.__GetDataSourceRequest = GetDataSourceRequest;
+		this.__Credentials = _credentials;
+		this.Credentials = _credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), _credentials);
+		this.Region = _region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(_region);
+		this.__GetDataSourceRequest = _getDataSourceRequest;
+		this.GetDataSourceRequest = _getDataSourceRequest == null ? null : amazonbedrockconnector.proxies.GetDataSourceRequest.initialize(getContext(), _getDataSourceRequest);
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.Credentials = this.__Credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), __Credentials);
-
-		this.GetDataSourceRequest = this.__GetDataSourceRequest == null ? null : amazonbedrockconnector.proxies.GetDataSourceRequest.initialize(getContext(), __GetDataSourceRequest);
-
 		// BEGIN USER CODE
 		try {
 			// Validating JA input parameters

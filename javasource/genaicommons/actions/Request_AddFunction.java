@@ -17,6 +17,7 @@ import genaicommons.impl.FunctionImpl;
 import genaicommons.impl.MxLogger;
 import genaicommons.impl.ToolCollectionImpl;
 import genaicommons.proxies.ToolCollection;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * Adds a new Function to a Request.
@@ -28,28 +29,35 @@ import genaicommons.proxies.ToolCollection;
  * 
  * The action returns empty if adding the function was not successful (errors are logged).
  */
-public class Request_AddFunction extends CustomJavaAction<IMendixObject>
+public class Request_AddFunction extends UserAction<IMendixObject>
 {
-	private IMendixObject __Request;
-	private genaicommons.proxies.Request Request;
-	private java.lang.String ToolName;
-	private java.lang.String ToolDescription;
-	private java.lang.String FunctionMicroflow;
+	/** @deprecated use Request.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Request;
+	private final genaicommons.proxies.Request Request;
+	private final java.lang.String ToolName;
+	private final java.lang.String ToolDescription;
+	private final java.lang.String FunctionMicroflow;
 
-	public Request_AddFunction(IContext context, IMendixObject Request, java.lang.String ToolName, java.lang.String ToolDescription, java.lang.String FunctionMicroflow)
+	public Request_AddFunction(
+		IContext context,
+		IMendixObject _request,
+		java.lang.String _toolName,
+		java.lang.String _toolDescription,
+		java.lang.String _functionMicroflow
+	)
 	{
 		super(context);
-		this.__Request = Request;
-		this.ToolName = ToolName;
-		this.ToolDescription = ToolDescription;
-		this.FunctionMicroflow = FunctionMicroflow;
+		this.__Request = _request;
+		this.Request = _request == null ? null : genaicommons.proxies.Request.initialize(getContext(), _request);
+		this.ToolName = _toolName;
+		this.ToolDescription = _toolDescription;
+		this.FunctionMicroflow = _functionMicroflow;
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.Request = this.__Request == null ? null : genaicommons.proxies.Request.initialize(getContext(), __Request);
-
 		// BEGIN USER CODE
 		try{
 			requireNonNull(Request, "Request is required.");

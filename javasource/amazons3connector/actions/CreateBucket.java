@@ -22,30 +22,38 @@ import awsauthentication.proxies.ENUM_Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.BucketLocationConstraint;
 import software.amazon.awssdk.services.s3.model.CreateBucketRequest.Builder;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class CreateBucket extends CustomJavaAction<IMendixObject>
+public class CreateBucket extends UserAction<IMendixObject>
 {
-	private IMendixObject __CreateBucketRequest;
-	private amazons3connector.proxies.CreateBucketRequest CreateBucketRequest;
-	private IMendixObject __Credentials;
-	private awsauthentication.proxies.Credentials Credentials;
-	private awsauthentication.proxies.ENUM_Region Region;
+	/** @deprecated use CreateBucketRequest.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __CreateBucketRequest;
+	private final amazons3connector.proxies.CreateBucketRequest CreateBucketRequest;
+	/** @deprecated use Credentials.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Credentials;
+	private final awsauthentication.proxies.Credentials Credentials;
+	private final awsauthentication.proxies.ENUM_Region Region;
 
-	public CreateBucket(IContext context, IMendixObject CreateBucketRequest, IMendixObject Credentials, java.lang.String Region)
+	public CreateBucket(
+		IContext context,
+		IMendixObject _createBucketRequest,
+		IMendixObject _credentials,
+		java.lang.String _region
+	)
 	{
 		super(context);
-		this.__CreateBucketRequest = CreateBucketRequest;
-		this.__Credentials = Credentials;
-		this.Region = Region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(Region);
+		this.__CreateBucketRequest = _createBucketRequest;
+		this.CreateBucketRequest = _createBucketRequest == null ? null : amazons3connector.proxies.CreateBucketRequest.initialize(getContext(), _createBucketRequest);
+		this.__Credentials = _credentials;
+		this.Credentials = _credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), _credentials);
+		this.Region = _region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(_region);
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.CreateBucketRequest = this.__CreateBucketRequest == null ? null : amazons3connector.proxies.CreateBucketRequest.initialize(getContext(), __CreateBucketRequest);
-
-		this.Credentials = this.__Credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), __Credentials);
-
 		// BEGIN USER CODE
 		software.amazon.awssdk.services.s3.model.CreateBucketResponse awsResponse = null;
 		try {

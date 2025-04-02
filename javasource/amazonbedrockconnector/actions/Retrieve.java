@@ -29,30 +29,38 @@ import genaicommons.proxies.Message;
 import genaicommons.proxies.Reference;
 import genaicommons.proxies.Request;
 import software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeClient;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class Retrieve extends CustomJavaAction<IMendixObject>
+public class Retrieve extends UserAction<IMendixObject>
 {
-	private awsauthentication.proxies.ENUM_Region Region;
-	private IMendixObject __Credentials;
-	private awsauthentication.proxies.Credentials Credentials;
-	private IMendixObject __RetrieveRequest;
-	private amazonbedrockconnector.proxies.RetrieveRequest_Extension RetrieveRequest;
+	private final awsauthentication.proxies.ENUM_Region Region;
+	/** @deprecated use Credentials.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Credentials;
+	private final awsauthentication.proxies.Credentials Credentials;
+	/** @deprecated use RetrieveRequest.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __RetrieveRequest;
+	private final amazonbedrockconnector.proxies.RetrieveRequest_Extension RetrieveRequest;
 
-	public Retrieve(IContext context, java.lang.String Region, IMendixObject Credentials, IMendixObject RetrieveRequest)
+	public Retrieve(
+		IContext context,
+		java.lang.String _region,
+		IMendixObject _credentials,
+		IMendixObject _retrieveRequest
+	)
 	{
 		super(context);
-		this.Region = Region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(Region);
-		this.__Credentials = Credentials;
-		this.__RetrieveRequest = RetrieveRequest;
+		this.Region = _region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(_region);
+		this.__Credentials = _credentials;
+		this.Credentials = _credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), _credentials);
+		this.__RetrieveRequest = _retrieveRequest;
+		this.RetrieveRequest = _retrieveRequest == null ? null : amazonbedrockconnector.proxies.RetrieveRequest_Extension.initialize(getContext(), _retrieveRequest);
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.Credentials = this.__Credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), __Credentials);
-
-		this.RetrieveRequest = this.__RetrieveRequest == null ? null : amazonbedrockconnector.proxies.RetrieveRequest_Extension.initialize(getContext(), __RetrieveRequest);
-
 		// BEGIN USER CODE
 		try {
 			// Validating JA input parameters

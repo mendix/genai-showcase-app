@@ -16,6 +16,7 @@ import genaicommons.proxies.KnowledgeBaseChunk;
 import mxgenaiconnector.impl.ChunkUtils;
 import mxgenaiconnector.impl.MxLogger;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * Use this operation to delete existing chunks and corresponding metadata in a collection, based on the MxObjectID. 
@@ -26,24 +27,29 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
  * 
  * Once deleted, chunks are no longer available for read operations in the KB after 60-120 seconds due to asynchronous data synchronization for better scalability.
  */
-public class KnowledgeBaseChunkList_Delete_ByMxObject extends CustomJavaAction<java.lang.Boolean>
+public class KnowledgeBaseChunkList_Delete_ByMxObject extends UserAction<java.lang.Boolean>
 {
-	private IMendixObject __Connection;
-	private genaicommons.proxies.Connection Connection;
-	private IMendixObject MxObject;
+	/** @deprecated use Connection.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Connection;
+	private final genaicommons.proxies.Connection Connection;
+	private final IMendixObject MxObject;
 
-	public KnowledgeBaseChunkList_Delete_ByMxObject(IContext context, IMendixObject Connection, IMendixObject MxObject)
+	public KnowledgeBaseChunkList_Delete_ByMxObject(
+		IContext context,
+		IMendixObject _connection,
+		IMendixObject _mxObject
+	)
 	{
 		super(context);
-		this.__Connection = Connection;
-		this.MxObject = MxObject;
+		this.__Connection = _connection;
+		this.Connection = _connection == null ? null : genaicommons.proxies.Connection.initialize(getContext(), _connection);
+		this.MxObject = _mxObject;
 	}
 
 	@java.lang.Override
 	public java.lang.Boolean executeAction() throws Exception
 	{
-		this.Connection = this.__Connection == null ? null : genaicommons.proxies.Connection.initialize(getContext(), __Connection);
-
 		// BEGIN USER CODE
 		try {
 			java.util.List<KnowledgeBaseChunk> chunkList = new ArrayList<>();

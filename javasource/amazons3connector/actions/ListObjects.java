@@ -24,30 +24,38 @@ import amazons3connector.proxies.CommonPrefix;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.ListObjectsV2Response;
 import software.amazon.awssdk.services.s3.model.ObjectStorageClass;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class ListObjects extends CustomJavaAction<IMendixObject>
+public class ListObjects extends UserAction<IMendixObject>
 {
-	private IMendixObject __ListObjectsRequest;
-	private amazons3connector.proxies.ListObjectsRequest ListObjectsRequest;
-	private awsauthentication.proxies.ENUM_Region Region;
-	private IMendixObject __Credentials;
-	private awsauthentication.proxies.Credentials Credentials;
+	/** @deprecated use ListObjectsRequest.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __ListObjectsRequest;
+	private final amazons3connector.proxies.ListObjectsRequest ListObjectsRequest;
+	private final awsauthentication.proxies.ENUM_Region Region;
+	/** @deprecated use Credentials.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Credentials;
+	private final awsauthentication.proxies.Credentials Credentials;
 
-	public ListObjects(IContext context, IMendixObject ListObjectsRequest, java.lang.String Region, IMendixObject Credentials)
+	public ListObjects(
+		IContext context,
+		IMendixObject _listObjectsRequest,
+		java.lang.String _region,
+		IMendixObject _credentials
+	)
 	{
 		super(context);
-		this.__ListObjectsRequest = ListObjectsRequest;
-		this.Region = Region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(Region);
-		this.__Credentials = Credentials;
+		this.__ListObjectsRequest = _listObjectsRequest;
+		this.ListObjectsRequest = _listObjectsRequest == null ? null : amazons3connector.proxies.ListObjectsRequest.initialize(getContext(), _listObjectsRequest);
+		this.Region = _region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(_region);
+		this.__Credentials = _credentials;
+		this.Credentials = _credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), _credentials);
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.ListObjectsRequest = this.__ListObjectsRequest == null ? null : amazons3connector.proxies.ListObjectsRequest.initialize(getContext(), __ListObjectsRequest);
-
-		this.Credentials = this.__Credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), __Credentials);
-
 		// BEGIN USER CODE
 		ListObjectsV2Response awsResponse = null;
 		try {	

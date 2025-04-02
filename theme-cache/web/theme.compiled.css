@@ -2952,6 +2952,18 @@
   content: "\ea6d";
 }
 
+.mx-administration-lv-dg-list.mx-listview > ul {
+  margin: 0;
+}
+.mx-administration-lv-dg-list .mx-listview-empty {
+  display: none;
+}
+.mx-administration-lv-dg-list .mx-button.mx-listview-loadMore {
+  text-align: left;
+  width: auto;
+  margin: 8px 0 0 0;
+}
+
 .listview-horizontal.mx-listview > ul {
   display: inline-block;
   margin-bottom: 0;
@@ -3201,6 +3213,618 @@
     iOS Safari will in certain cases put the top and/or bottom bar on top of the overlay of this widget. */
 .mx-scrollcontainer-wrapper:not(.mx-scrollcontainer-nested) {
   -webkit-overflow-scrolling: auto;
+}
+
+:root {
+  /*
+   DISCLAIMER:
+   This is a mapping file which will be used to help moving towards CSS variables over time.
+   Do not change this file because it is core styling.
+   Customizing core files will make updating Atlas much more difficult in the future.
+   To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+
+
+   ██████╗  █████╗ ███████╗██╗ ██████╗
+   ██╔══██╗██╔══██╗██╔════╝██║██╔════╝
+   ██████╔╝███████║███████╗██║██║
+   ██╔══██╗██╔══██║╚════██║██║██║
+   ██████╔╝██║  ██║███████║██║╚██████╗
+   ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝ ╚═════╝
+  */
+  /*== Gray Shades*/
+  /*## Different gray shades to be used for our variables and components */
+  --gray-darker: #0a1325;
+  --gray-dark: #474e5c;
+  --gray: #787d87;
+  --gray-light: #a9acb3;
+  --gray-primary: #e7e7e9;
+  --gray-lighter: #f8f8f8;
+  /*== Step 1: Brand Colors */
+  --brand-default: #e7e7e9;
+  --brand-primary: #264ae5;
+  --brand-success: #3cb33d;
+  --brand-warning: #eca51c;
+  --brand-danger: #e33f4e;
+  --brand-logo: false;
+  --brand-logo-height: 32px;
+  --brand-logo-width: 32px;
+  /* Only used for CSS brand logo */
+  /*== Step 2: UI Customization */
+  /* Default Font Size & Color */
+  --font-size-default: 14px;
+  --font-color-default: #0a1325;
+  /* Global Border Color */
+  --border-color-default: #ced0d3;
+  --border-radius-default: 4px;
+  /* Topbar */
+  --topbar-bg: #020557;
+  --topbar-minimalheight: 48px;
+  --topbar-border-color: #ced0d3;
+  /* Topbar mobile */
+  --m-header-height: 45px;
+  --m-header-bg: #020557;
+  --m-header-color: #fff;
+  --m-header-title-size: 16px;
+  /* Navbar Brand Name / For your company, product, or project name (used in layouts/base/) */
+  --navbar-brand-name: #fff;
+  /* Background Colors */
+  /* Backgrounds */
+  --bg-color: #f8f8f8;
+  --bg-color: #f8f8f8;
+  --bg-color-secondary: #fff;
+  /* Default Link Color */
+  --link-color: #264ae5;
+  --link-hover-color: #1431aa;
+  /*
+    █████╗ ██████╗ ██╗   ██╗ █████╗ ███╗   ██╗ ██████╗███████╗██████╗
+   ██╔══██╗██╔══██╗██║   ██║██╔══██╗████╗  ██║██╔════╝██╔════╝██╔══██╗
+   ███████║██║  ██║██║   ██║███████║██╔██╗ ██║██║     █████╗  ██║  ██║
+   ██╔══██║██║  ██║╚██╗ ██╔╝██╔══██║██║╚██╗██║██║     ██╔══╝  ██║  ██║
+   ██║  ██║██████╔╝ ╚████╔╝ ██║  ██║██║ ╚████║╚██████╗███████╗██████╔╝
+   ╚═╝  ╚═╝╚═════╝   ╚═══╝  ╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝╚══════╝╚═════╝
+  */
+  /*== Typography */
+  /*## Change your font family, weight, line-height, headings and more (used in components/typography) */
+  /* Font Family Import (Used for google font plugin in theme creater) */
+  --font-family-import: resources/fonts/open-sans/open-sans.css;
+  /* Font Family / False = fallback from Bootstrap (Helvetica Neue) */
+  --font-family-base: Open Sans, sans-serif;
+  /* Font Sizes */
+  --font-size-large: 18px;
+  --font-size-small: 12px;
+  /* Font Weights */
+  --font-weight-light: 100;
+  --font-weight-normal: normal;
+  --font-weight-semibold: 600;
+  --font-weight-bold: bold;
+  /* Font Size Headers */
+  --font-size-h1: 31px;
+  --font-size-h2: 26px;
+  --font-size-h3: 24px;
+  --font-size-h4: 18px;
+  --font-size-h5: 14px;
+  --font-size-h6: 12px;
+  /* Font Weight Headers */
+  --font-weight-header: 600;
+  /* Line Height */
+  --line-height-base: 1.428571429;
+  /* Spacing */
+  --font-header-margin: 0 0 8px 0;
+  /* Text Colors */
+  --font-color-detail: #6c717e;
+  --font-color-header: #0a1325;
+  /*== Navigation */
+  /*## Used in components/navigation
+
+  /* Default Navigation styling */
+  --navigation-item-height: unset;
+  --navigation-item-padding: 8px;
+  --navigation-font-size: 14px;
+  --navigation-sub-font-size: 12px;
+  --navigation-glyph-size: 20px;
+  /* For glyphicons that you can select in the Mendix Modeler */
+  --navigation-color: #fff;
+  --navigation-color-hover: #fff;
+  --navigation-color-active: #fff;
+  --navigation-sub-color: #fff;
+  --navigation-sub-color-hover: #fff;
+  --navigation-sub-color-active: #fff;
+  /* Navigation Sidebar */
+  --navsidebar-font-size: 14px;
+  --navsidebar-sub-font-size: 12px;
+  --navsidebar-glyph-size: 20px;
+  /* For glyphicons that you can select in the Mendix Modeler */
+  --navsidebar-color: #fff;
+  --navsidebar-color-hover: #fff;
+  --navsidebar-color-active: #fff;
+  --navsidebar-sub-color: #fff;
+  --navsidebar-sub-color-hover: #fff;
+  --navsidebar-sub-color-active: #fff;
+  --navsidebar-width-closed: 52px;
+  --navsidebar-width-open: 232px;
+  /* Navigation topbar */
+  --navtopbar-font-size: 14px;
+  --navtopbar-sub-font-size: 12px;
+  --navtopbar-glyph-size: 1.2em;
+  --navtopbar-bg: #020557;
+  --navtopbar-bg-hover: #282b70;
+  --navtopbar-bg-active: #282b70;
+  --navtopbar-color: #fff;
+  --navtopbar-color-hover: #fff;
+  --navtopbar-color-active: #fff;
+  --navtopbar-sub-bg: #020557;
+  --navtopbar-sub-bg-hover: #282b70;
+  --navtopbar-sub-bg-active: #282b70;
+  --navtopbar-sub-color: #fff;
+  --navtopbar-sub-color-hover: #fff;
+  --navtopbar-sub-color-active: #fff;
+  /*== Cards */
+  /* Shadow color */
+  --shadow-color-border: rgba(231, 231, 233, 0.5);
+  --shadow-color: rgba(231, 231, 233, 0.66);
+  /*Shadow size */
+  --shadow-small: 0 2px 4px 0;
+  --shadow-medium: 0 5px 7px 0;
+  --shadow-large: 0 8px 10px 0;
+  /*## Used in layouts/base */
+  --navtopbar-border-color: #ced0d3;
+  /*== Form */
+  /*## Used in components/inputs */
+  /* Values that can be used default | lined */
+  --form-input-style: default;
+  /* Form Label */
+  --form-label-size: 14px;
+  --form-label-weight: 600;
+  --form-label-gutter: 8px;
+  /* Form Input dimensions */
+  --form-input-height: auto;
+  --form-input-padding-y: 8px;
+  --form-input-padding-x: 8px;
+  --form-input-static-padding-y: 8px;
+  --form-input-static-padding-x: 0;
+  --form-input-font-size: 14px;
+  --form-input-line-height: 1.428571429;
+  --form-input-border-radius: 4px;
+  /* Form Input styling */
+  --form-input-bg: #fff;
+  --form-input-bg-focus: #fff;
+  --form-input-bg-hover: #e7e7e9;
+  --form-input-bg-disabled: #f8f8f8;
+  --form-input-color: #0a1325;
+  --form-input-focus-color: #0a1325;
+  --form-input-disabled-color: #9da1a8;
+  --form-input-placeholder-color: #6c717c;
+  --form-input-border-color: #e7e7e9;
+  --form-input-border-focus-color: #264ae5;
+  /* Form Input Static styling */
+  --form-input-static-border-color: #e7e7e9;
+  /* Form Group */
+  --form-group-margin-bottom: 16px;
+  --form-group-gutter: 16px;
+  /*== Buttons */
+  /*## Define background-color, border-color and text. Used in components/buttons */
+  /* Default button style */
+  --btn-font-size: 14px;
+  --btn-bordered: false;
+  /* Default value false, set to true if you want this effect */
+  --btn-border-radius: 4px;
+  /* Button Background Color */
+  --btn-default-bg: #fff;
+  --btn-primary-bg: #264ae5;
+  --btn-success-bg: #3cb33d;
+  --btn-warning-bg: #eca51c;
+  --btn-danger-bg: #e33f4e;
+  /* Button Border Color */
+  --btn-default-border-color: #e7e7e9;
+  --btn-primary-border-color: #264ae5;
+  --btn-success-border-color: #3cb33d;
+  --btn-warning-border-color: #eca51c;
+  --btn-danger-border-color: #e33f4e;
+  /* Button Text Color */
+  --btn-default-color: #264ae5;
+  --btn-primary-color: #fff;
+  --btn-success-color: #fff;
+  --btn-warning-color: #fff;
+  --btn-danger-color: #fff;
+  /* Button Icon Color */
+  --btn-default-icon-color: #787d87;
+  /* Button Background Color */
+  --btn-default-bg-hover: #e7e7e9;
+  --btn-primary-bg-hover: #1e3bb7;
+  --btn-success-bg-hover: #308f31;
+  --btn-warning-bg-hover: #bd8416;
+  --btn-danger-bg-hover: #b6323e;
+  --btn-link-bg-hover: #f8f8f8;
+  /*== Header blocks */
+  /*## Define look and feel over multible building blocks that serve as header */
+  --header-min-height: 240px;
+  --header-bg-color: #264ae5;
+  --header-bgimage-filter: brightness(60%);
+  --header-text-color: #fff;
+  --header-text-color-detail: rgba(0, 0, 0, 0.2);
+  /*
+   ███████╗██╗  ██╗██████╗ ███████╗██████╗ ████████╗
+   ██╔════╝╚██╗██╔╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝
+   █████╗   ╚███╔╝ ██████╔╝█████╗  ██████╔╝   ██║
+   ██╔══╝   ██╔██╗ ██╔═══╝ ██╔══╝  ██╔══██╗   ██║
+   ███████╗██╔╝ ██╗██║     ███████╗██║  ██║   ██║
+   ╚══════╝╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝
+  */
+  /*== Color variations */
+  /*## These variations are used to support several other variables and components */
+  /* Color variations */
+  --color-default-darker: #8b8b8c;
+  --color-default-dark: #a2a2a3;
+  --color-default-light: #f5f5f6;
+  --color-default-lighter: #fafafb;
+  --color-primary-darker: #172c89;
+  --color-primary-dark: #1b34a0;
+  --color-primary-light: #a8b7f5;
+  --color-primary-lighter: #d4dbfa;
+  --color-success-darker: #246b25;
+  --color-success-dark: #2a7d2b;
+  --color-success-light: #b1e1b1;
+  --color-success-lighter: #d8f0d8;
+  --color-warning-darker: #8e6311;
+  --color-warning-dark: #a57414;
+  --color-warning-light: #f7dba4;
+  --color-warning-lighter: #fbedd2;
+  --color-danger-darker: #88262f;
+  --color-danger-dark: #9f2c37;
+  --color-danger-light: #f4b2b8;
+  --color-danger-lighter: #f9d9dc;
+  --brand-gradient: linear-gradient(to right top, #264ae5, #2239c5, #1b29a6, #111988, #03096c);
+  /*== Grids */
+  /*## Used for Datagrid, Templategrid, Listview & Tables (see components folder) */
+  /* Default Border Colors */
+  --grid-border-color: #ced0d3;
+  /* Spacing */
+  /* Default */
+  --grid-padding-top: 16px;
+  --grid-padding-right: 16px;
+  --grid-padding-bottom: 16px;
+  --grid-padding-left: 16px;
+  /* Listview */
+  --listview-padding-top: 16px;
+  --listview-padding-right: 16px;
+  --listview-padding-bottom: 16px;
+  --listview-padding-left: 16px;
+  /* Background Colors */
+  --grid-bg: transparent;
+  --grid-bg-header: transparent;
+  --grid-bg-hover: #f5f6f6;
+  --grid-bg-selected: #f0f1f2;
+  --grid-bg-selected-hover: #e7e8e9;
+  /* Striped Background Color */
+  --grid-bg-striped: #fafafb;
+  /* Background Footer Color */
+  --grid-footer-bg: #e7e7e9;
+  /* Text Color */
+  --grid-selected-color: #0a1325;
+  /* Paging Colors */
+  --grid-paging-bg: transparent;
+  --grid-paging-bg-hover: transparent;
+  --grid-paging-border-color: transparent;
+  --grid-paging-border-color-hover: transparent;
+  --grid-paging-color: #a9acb3;
+  --grid-paging-color-hover: #264ae5;
+  /*== Tabs */
+  /*## Default variables for Tab Container Widget (used in components/tabcontainer) */
+  /* Text Color */
+  --tabs-color: #6c717e;
+  --tabs-color-active: #0a1325;
+  --tabs-lined-color-active: #0a1325;
+  --tabs-lined-border-width: 3px;
+  /* Border Color */
+  --tabs-border-color: #ced0d3;
+  --tabs-lined-border-color: #264ae5;
+  /* Background Color */
+  --tabs-bg: transparent;
+  --tabs-bg-pills: #e7e7e9;
+  --tabs-bg-hover: #dbdddf;
+  --tabs-bg-active: #264ae5;
+  /*== Modals */
+  /*## Default Mendix Modal, Blocking Modal and Login Modal (used in components/modals) */
+  /* Background Color */
+  --modal-header-bg: transparent;
+  /* Border Color */
+  --modal-header-border-color: #ced0d3;
+  /* Text Color */
+  --modal-header-color: #0a1325;
+  /*== Dataview */
+  /*## Default variables for Dataview Widget (used in components/dataview) */
+  /* Controls */
+  --dataview-controls-bg: transparent;
+  --dataview-controls-border-color: #ced0d3;
+  /* Empty Message */
+  --dataview-emptymessage-bg: #f8f8f8;
+  --dataview-emptymessage-color: #0a1325;
+  /*== Alerts */
+  /*## Default Bootstrap alerts, not a widget in the Modeler (used in components/alerts) */
+  /* Background Color */
+  --alert-primary-bg: #d4dbfa;
+  --alert-secondary-bg: #d4dbfa;
+  --alert-success-bg: #d8f0d8;
+  --alert-warning-bg: #fbedd2;
+  --alert-danger-bg: #f9d9dc;
+  /* Text Color */
+  --alert-primary-color: #172c89;
+  --alert-secondary-color: #172c89;
+  --alert-success-color: #246b25;
+  --alert-warning-color: #8e6311;
+  --alert-danger-color: #88262f;
+  /* Border Color */
+  --alert-primary-border-color: #1b34a0;
+  --alert-secondary-border-color: #1b34a0;
+  --alert-success-border-color: #2a7d2b;
+  --alert-warning-border-color: #a57414;
+  --alert-danger-border-color: #9f2c37;
+  /*== Wizard */
+  --wizard-step-height: 48px;
+  --wizard-step-number-size: 64px;
+  --wizard-step-number-font-size: 24px;
+  /*Wizard states */
+  --wizard-default: #fff;
+  --wizard-active: #264ae5;
+  --wizard-visited: #3cb33d;
+  /*Wizard step states */
+  --wizard-default-bg: #fff;
+  --wizard-default-color: #fff;
+  --wizard-default-step-color: #0a1325;
+  --wizard-default-border-color: #ced0d3;
+  --wizard-active-bg: #d4dbfa;
+  --wizard-active-color: #1b34a0;
+  --wizard-active-step-color: #1b34a0;
+  --wizard-active-border-color: #1b34a0;
+  --wizard-visited-bg: #d8f0d8;
+  --wizard-visited-color: #2a7d2b;
+  --wizard-visited-step-color: #2a7d2b;
+  --wizard-visited-border-color: #2a7d2b;
+  /*== Labels */
+  /*## Default Bootstrap Labels, not a widget in the Modeler (used in components/labels) */
+  /* Background Color */
+  --label-default-bg: #e7e7e9;
+  --label-primary-bg: #264ae5;
+  --label-success-bg: #3cb33d;
+  --label-warning-bg: #eca51c;
+  --label-danger-bg: #e33f4e;
+  /* Border Color */
+  --label-default-border-color: #e7e7e9;
+  --label-primary-border-color: #264ae5;
+  --label-success-border-color: #3cb33d;
+  --label-warning-border-color: #eca51c;
+  --label-danger-border-color: #e33f4e;
+  /* Text Color */
+  --label-default-color: #0a1325;
+  --label-primary-color: #fff;
+  --label-success-color: #fff;
+  --label-warning-color: #fff;
+  --label-danger-color: #fff;
+  /*== Groupbox */
+  /*## Default variables for Groupbox Widget (used in components/groupbox) */
+  /* Background Color */
+  --groupbox-default-bg: #e7e7e9;
+  --groupbox-primary-bg: #264ae5;
+  --groupbox-success-bg: #3cb33d;
+  --groupbox-warning-bg: #eca51c;
+  --groupbox-danger-bg: #e33f4e;
+  --groupbox-white-bg: #fff;
+  /* Text Color */
+  --groupbox-default-color: #0a1325;
+  --groupbox-primary-color: #fff;
+  --groupbox-success-color: #fff;
+  --groupbox-warning-color: #fff;
+  --groupbox-danger-color: #fff;
+  --groupbox-white-color: #0a1325;
+  /*== Callout (groupbox) Colors */
+  /*## Extended variables for Groupbox Widget (used in components/groupbox) */
+  /* Text and Border Color */
+  --callout-default-color: #0a1325;
+  --callout-primary-color: #264ae5;
+  --callout-success-color: #3cb33d;
+  --callout-warning-color: #eca51c;
+  --callout-danger-color: #e33f4e;
+  /* Background Color */
+  --callout-default-bg: #fafafb;
+  --callout-primary-bg: #d4dbfa;
+  --callout-success-bg: #d8f0d8;
+  --callout-warning-bg: #fbedd2;
+  --callout-danger-bg: #f9d9dc;
+  /*== Timeline */
+  /*## Extended variables for Timeline Widget */
+  /* Colors */
+  --timeline-icon-color: #264ae5;
+  --timeline-border-color: #ced0d3;
+  --timeline-event-time-color: #264ae5;
+  /* Sizes */
+  --timeline-icon-size: 18px;
+  --timeline-image-size: 36px;
+  /*Timeline grouping */
+  --timeline-grouping-size: 120px;
+  --timeline-grouping-border-radius: 30px;
+  --timeline-grouping-border-color: #ced0d3;
+  /*== Accordions */
+  /*## Extended variables for Accordion Widget */
+  /* Default */
+  --accordion-header-default-bg: #fff;
+  --accordion-header-default-bg-hover: #f8f8f8;
+  --accordion-header-default-color: #0a1325;
+  --accordion-default-border-color: #ced0d3;
+  --accordion-bg-striped: #fafafb;
+  --accordion-bg-striped-hover: #f0f1f2;
+  /* Semantic background colors */
+  --accordion-header-primary-bg: #264ae5;
+  --accordion-header-secondary-bg: #fff;
+  --accordion-header-success-bg: #3cb33d;
+  --accordion-header-warning-bg: #eca51c;
+  --accordion-header-danger-bg: #e33f4e;
+  --accordion-header-primary-bg-hover: #1e3bb7;
+  --accordion-header-secondary-bg-hover: #e7e7e9;
+  --accordion-header-success-bg-hover: #308f31;
+  --accordion-header-warning-bg-hover: #bd8416;
+  --accordion-header-danger-bg-hover: #b6323e;
+  /* Semantic text colors */
+  --accordion-header-primary-color: #fff;
+  --accordion-header-secondary-color: #264ae5;
+  --accordion-header-success-color: #fff;
+  --accordion-header-warning-color: #fff;
+  --accordion-header-danger-color: #fff;
+  /* Semantic border colors */
+  --accordion-primary-border-color: #264ae5;
+  --accordion-secondary-border-color: #e7e7e9;
+  --accordion-success-border-color: #3cb33d;
+  --accordion-warning-border-color: #eca51c;
+  --accordion-danger-border-color: #e33f4e;
+  /*== Spacing */
+  /*## Advanced layout options (used in base/mixins/default-spacing) */
+  /* Smallest spacing */
+  --spacing-smallest: 2px;
+  /* Smaller spacing */
+  --spacing-smaller: 4px;
+  /* Small spacing */
+  --spacing-small: 8px;
+  /* Medium spacing */
+  --spacing-medium: 16px;
+  --t-spacing-medium: 16px;
+  --m-spacing-medium: 16px;
+  /* Large spacing */
+  --spacing-large: 24px;
+  --t-spacing-large: 24px;
+  --m-spacing-large: 16px;
+  /* Larger spacing */
+  --spacing-larger: 32px;
+  /* Largest spacing */
+  --spacing-largest: 48px;
+  /* Layout spacing */
+  --layout-spacing-top: 24px;
+  --layout-spacing-right: 24px;
+  --layout-spacing-bottom: 24px;
+  --layout-spacing-left: 24px;
+  --t-layout-spacing-top: 24px;
+  --t-layout-spacing-right: 24px;
+  --t-layout-spacing-bottom: 24px;
+  --t-layout-spacing-left: 24px;
+  --m-layout-spacing-top: 16px;
+  --m-layout-spacing-right: 16px;
+  --m-layout-spacing-bottom: 16px;
+  --m-layout-spacing-left: 16px;
+  /* Combined layout spacing */
+  --layout-spacing: 24px 24px 24px 24px;
+  --m-layout-spacing: 16px 16px 16px 16px;
+  --t-layout-spacing: 24px 24px 24px 24px;
+  /* Gutter size */
+  --gutter-size: 8px;
+  /*== Tables */
+  /*## Table spacing options (used in components/tables) */
+  --padding-table-cell-top: 8px;
+  --padding-table-cell-bottom: 8px;
+  --padding-table-cell-left: 8px;
+  --padding-table-cell-right: 8px;
+  /*== Media queries breakpoints */
+  /*## Define the breakpoints at which your layout will change, adapting to different screen sizes. */
+  --screen-xs: 480px;
+  --screen-sm: 576px;
+  --screen-md: 768px;
+  --screen-lg: 992px;
+  --screen-xl: 1200px;
+  /* So media queries don't overlap when required, provide a maximum (used for max-width) */
+  --screen-xs-max: calc(576px - 1px);
+  --screen-sm-max: calc(768px - 1px);
+  --screen-md-max: calc(992px - 1px);
+  --screen-lg-max: calc(1200px - 1px);
+  /*== Settings */
+  /*## Enable or disable your desired framework features */
+  /* Use of !important */
+  --important-flex: true;
+  --important-spacing: true;
+  --important-helpers: true;
+  /*===== Legacy variables ===== */
+  /*== Step 1: Brand Colors */
+  --brand-inverse: #24276c;
+  --brand-info: #0086d9;
+  /*== Step 2: UI Customization */
+  /* Sidebar */
+  --sidebar-bg: #24276c;
+  /*== Navigation */
+  /*## Used in components/navigation */
+  /* Default Navigation styling */
+  --navigation-bg: #24276c;
+  --navigation-bg-hover: #292d7b;
+  --navigation-bg-active: #2e328b;
+  --navigation-sub-bg: #1f215d;
+  --navigation-sub-bg-hover: #1f215d;
+  --navigation-sub-bg-active: #1f215d;
+  --navigation-border-color: #292d7b;
+  /* Navigation Sidebar */
+  --navsidebar-bg: #24276c;
+  --navsidebar-bg-hover: #171946;
+  --navsidebar-bg-active: #171946;
+  --navsidebar-sub-bg: #171946;
+  --navsidebar-sub-bg-hover: #24276c;
+  --navsidebar-sub-bg-active: #24276c;
+  --navsidebar-border-color: #171946;
+  /*== Form */
+  /*## Used in components/inputs */
+  /* Form Label */
+  --form-label-color: #0a1325;
+  /*== Buttons */
+  /*## Define background-color, border-color and text. Used in components/buttons */
+  /* Button Background Color */
+  --btn-inverse-bg: #24276c;
+  --btn-info-bg: #0086d9;
+  /* Button Border Color */
+  --btn-inverse-border-color: #24276c;
+  --btn-info-border-color: #0086d9;
+  /* Button Text Color */
+  --btn-inverse-color: #fff;
+  --btn-info-color: #fff;
+  /* Button Background Color */
+  --btn-inverse-bg-hover: #505289;
+  --btn-info-bg-hover: #006bae;
+  /*== Color variations */
+  /*## These variations are used to support several other variables and components */
+  /* Color variations */
+  --color-inverse-darker: #161741;
+  --color-inverse-dark: #191b4c;
+  --color-inverse-light: #7c7da7;
+  --color-inverse-lighter: #d3d4e2;
+  --color-info-darker: #005082;
+  --color-info-dark: #005e98;
+  --color-info-light: #66b6e8;
+  --color-info-lighter: #cce7f7;
+  /*== Alerts */
+  /*## Default Bootstrap alerts, not a widget in the Modeler (used in components/alerts) */
+  /* Background Color */
+  --alert-info-bg: #d4dbfa;
+  /* Text Color */
+  --alert-info-color: #172c89;
+  /* Border Color */
+  --alert-info-border-color: #1b34a0;
+  /*== Labels */
+  /*## Default Bootstrap Labels, not a widget in the Modeler (used in components/labels) */
+  /* Background Color */
+  --label-info-bg: #0086d9;
+  --label-inverse-bg: #24276c;
+  /* Border Color */
+  --label-info-border-color: #0086d9;
+  --label-inverse-border-color: #24276c;
+  /* Text Color */
+  --label-info-color: #fff;
+  --label-inverse-color: #fff;
+  /*== Groupbox */
+  /*## Default variables for Groupbox Widget (used in components/groupbox) */
+  /* Background Color */
+  --groupbox-inverse-bg: #24276c;
+  --groupbox-info-bg: #0086d9;
+  /* Text Color */
+  --groupbox-inverse-color: #fff;
+  --groupbox-info-color: #fff;
+  /*== Callout (groupbox) Colors */
+  /*## Extended variables for Groupbox Widget (used in components/groupbox) */
+  /* Text and Border Color */
+  --callout-info-color: #0086d9;
+  /* Background Color */
+  --callout-info-bg: #cce7f7;
 }
 
 /*!
@@ -18303,8 +18927,13 @@ input[type=checkbox] + .control-label {
    Default Mendix data view widget. The data view is used for showing the contents of exactly one object
 ========================================================================== */
 .mx-dataview {
-  /* Dataview-content gives problems for nexted layout grid containers */
+  display: flex;
+  flex-direction: column;
+  /* Dataview-content gives problems for nested layout grid containers */
   /* Dataview empty message */
+}
+.mx-dataview > .mx-dataview-content {
+  flex-grow: 1;
 }
 .mx-dataview > .mx-dataview-content > .mx-container-nested > .row {
   margin-right: 0;
@@ -18316,12 +18945,12 @@ input[type=checkbox] + .control-label {
 }
 
 .mx-dataview-controls {
-  margin-top: 16px;
   padding: 16px 0 0;
   border-top: 1px solid #ced0d3;
   border-radius: 0;
   background-color: transparent;
   /* Buttons */
+  /* Fix for Dojo rendering in react client */
   background-color: inherit;
 }
 .mx-dataview-controls .mx-button {
@@ -18330,6 +18959,9 @@ input[type=checkbox] + .control-label {
 }
 .mx-dataview-controls .mx-button:last-child {
   margin-right: 0;
+}
+.mx-dataview-controls [id^=mxui_widget_Wrapper]:has(> .mx-button) .mx-button {
+  margin-right: 8px;
 }
 
 /* ==========================================================================
@@ -18679,7 +19311,7 @@ body[dir=rtl] .mx-header-right {
 .groupbox-callout > .mx-groupbox-header,
 .groupbox-callout > .mx-groupbox-body {
   border: 0;
-  background-color: #e9edfc;
+  background-color: #d4dbfa;
 }
 .groupbox-callout > .mx-groupbox-header {
   color: #264ae5;
@@ -19189,7 +19821,7 @@ img.img-scale-down,
   color: #0a1325;
   text-shadow: none;
 }
-.modal-dialog .modal-content .modal-header .close:focus {
+.modal-dialog .modal-content .modal-header .close:focus-visible {
   border-radius: 4px;
   outline: 2px solid #264ae5;
 }
@@ -19444,11 +20076,12 @@ img.img-scale-down,
   box-shadow: 0px 2px 2px rgba(194, 196, 201, 0.30354);
 }
 .region-topbar .mx-navbar ul.nav > .mx-navbar-item.open .dropdown-menu > li.mx-navbar-subitem a {
-  padding: 8px;
-  color: #fff;
   border-radius: 4px;
-  margin-bottom: 8px;
+  color: #fff;
+  font-size: 12px;
   line-height: 1.2;
+  margin: 0 0 8px;
+  padding: 8px;
 }
 .region-topbar .mx-navbar ul.nav > .mx-navbar-item.open .dropdown-menu > li.mx-navbar-subitem a:hover, .region-topbar .mx-navbar ul.nav > .mx-navbar-item.open .dropdown-menu > li.mx-navbar-subitem a:focus {
   color: #fff;
@@ -23129,27 +23762,27 @@ h6,
 }
 
 .shadow-small {
-  box-shadow: 0 2px 4px 0 rgba(206, 208, 211, 0.66);
+  box-shadow: 0 2px 4px 0 rgba(231, 231, 233, 0.66);
   margin-bottom: 5px;
   border-width: 1px  !important;
   border-style: solid;
-  border-color: rgba(206, 208, 211, 0.5);
+  border-color: rgba(231, 231, 233, 0.5);
 }
 
 .shadow-medium {
-  box-shadow: 0 5px 7px 0 rgba(206, 208, 211, 0.66);
+  box-shadow: 0 5px 7px 0 rgba(231, 231, 233, 0.66);
   margin-bottom: 15px;
   border-width: 1px  !important;
   border-style: solid;
-  border-color: rgba(206, 208, 211, 0.5);
+  border-color: rgba(231, 231, 233, 0.5);
 }
 
 .shadow-large {
-  box-shadow: 0 8px 10px 0 rgba(206, 208, 211, 0.66);
+  box-shadow: 0 8px 10px 0 rgba(231, 231, 233, 0.66);
   margin-bottom: 25px;
   border-width: 1px  !important;
   border-style: solid;
-  border-color: rgba(206, 208, 211, 0.5);
+  border-color: rgba(231, 231, 233, 0.5);
 }
 
 @media (max-width: calc(768px - 1px)) {
@@ -23157,11 +23790,19 @@ h6,
     display: none  !important;
   }
 }
+.profile-phone .hide-phone {
+  display: none  !important;
+}
+
 @media (min-width: 768px) and (max-width: calc(992px - 1px)) {
   .hide-tablet {
     display: none  !important;
   }
 }
+.profile-tablet .hide-tablet {
+  display: none  !important;
+}
+
 @media (min-width: 992px) {
   .hide-desktop {
     display: none  !important;
@@ -24438,7 +25079,7 @@ html div.dj_ios .widget-switch.auto .widget-switch-btn-wrapper.checked.widget-sw
 .layout-atlas-responsive-default .mx-scrollcontainer-slide:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper .mx-navigationtree ul li.mx-navigationtree-has-items:hover > ul {
     position: absolute;
     z-index: 100;
-    top: 0;
+    top: 48px;
     bottom: 0;
     left: 52px;
     display: block;
@@ -24451,6 +25092,7 @@ html div.dj_ios .widget-switch.auto .widget-switch-btn-wrapper.checked.widget-sw
 .layout-atlas-responsive-default .mx-scrollcontainer-shrink:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper .mx-navigationtree ul li.mx-navigationtree-has-items:hover > ul > li.mx-navigationtree-has-items:hover > ul,
 .layout-atlas-responsive-default .mx-scrollcontainer-push:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper .mx-navigationtree ul li.mx-navigationtree-has-items:hover > ul > li.mx-navigationtree-has-items:hover > ul,
 .layout-atlas-responsive-default .mx-scrollcontainer-slide:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper .mx-navigationtree ul li.mx-navigationtree-has-items:hover > ul > li.mx-navigationtree-has-items:hover > ul {
+    top: 0;
     left: 100%;
   }
   .layout-atlas-responsive .mx-scrollcontainer-shrink:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper .mx-navigationtree ul li.mx-navigationtree-collapsed ul, .layout-atlas-responsive .mx-scrollcontainer-shrink:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper .mx-navigationtree ul li.mx-navigationtree-has-items ul,
@@ -24588,6 +25230,14 @@ html div.dj_ios .widget-switch.auto .widget-switch-btn-wrapper.checked.widget-sw
   .layout-atlas-responsive-topbar .region-topbar {
     padding: 0 8px;
   }
+}
+.layout-atlas-responsive-topbar .region-topbar .mx-scrollcontainer-wrapper .mx-layoutgrid,
+.layout-atlas-responsive-topbar .region-topbar .mx-scrollcontainer-wrapper .mx-layoutgrid-fluid {
+  padding: 0 8px;
+}
+.layout-atlas-responsive-topbar .region-topbar .mx-icon-filled,
+.layout-atlas-responsive-topbar .region-topbar .mx-icon-lined {
+  font-size: 20px;
 }
 
 .profile-tablet .mx-scrollcontainer:not(.mx-scrollcontainer-open) > .region-sidebar {
@@ -27983,6 +28633,32 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin: 0;
 }
 
+.grid-deployed-model {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 0.5fr 150px;
+}
+.grid-deployed-model .item {
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.grid-header {
+  margin-left: 16px;
+  margin-right: 16px;
+  margin-bottom: 16px;
+}
+
+.grid-knowledge-bases {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) 0.5fr 150px;
+}
+.grid-knowledge-bases .item {
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .listview-horizontal.mx-listview > ul {
   display: inline-block;
   margin-bottom: 0;
@@ -28005,9 +28681,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
   white-space: normal;
 }
 
-/*    Mendix 10   */
-.layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a {
+/*    Navigation Bar  */
+.layout-atlas-responsive-default .region-sidebar .mx-scrollcontainer-wrapper .mx-navigationtree .navbar-inner > ul > li > a {
   padding: 8px 0;
+  margin-top: 2px;
+  white-space: normal;
 }
 
 .bg-openai {

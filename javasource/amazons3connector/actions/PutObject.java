@@ -20,35 +20,45 @@ import software.amazon.awssdk.services.s3.S3Client;
 import java.io.InputStream;
 import com.mendix.core.Core;
 import software.amazon.awssdk.core.sync.RequestBody;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class PutObject extends CustomJavaAction<java.lang.Boolean>
+public class PutObject extends UserAction<java.lang.Boolean>
 {
-	private IMendixObject __PutObjectRequest;
-	private amazons3connector.proxies.PutObjectRequest PutObjectRequest;
-	private IMendixObject __Credentials;
-	private awsauthentication.proxies.Credentials Credentials;
-	private awsauthentication.proxies.ENUM_Region Region;
-	private IMendixObject __FileDocument;
-	private system.proxies.FileDocument FileDocument;
+	/** @deprecated use PutObjectRequest.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __PutObjectRequest;
+	private final amazons3connector.proxies.PutObjectRequest PutObjectRequest;
+	/** @deprecated use Credentials.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Credentials;
+	private final awsauthentication.proxies.Credentials Credentials;
+	private final awsauthentication.proxies.ENUM_Region Region;
+	/** @deprecated use FileDocument.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __FileDocument;
+	private final system.proxies.FileDocument FileDocument;
 
-	public PutObject(IContext context, IMendixObject PutObjectRequest, IMendixObject Credentials, java.lang.String Region, IMendixObject FileDocument)
+	public PutObject(
+		IContext context,
+		IMendixObject _putObjectRequest,
+		IMendixObject _credentials,
+		java.lang.String _region,
+		IMendixObject _fileDocument
+	)
 	{
 		super(context);
-		this.__PutObjectRequest = PutObjectRequest;
-		this.__Credentials = Credentials;
-		this.Region = Region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(Region);
-		this.__FileDocument = FileDocument;
+		this.__PutObjectRequest = _putObjectRequest;
+		this.PutObjectRequest = _putObjectRequest == null ? null : amazons3connector.proxies.PutObjectRequest.initialize(getContext(), _putObjectRequest);
+		this.__Credentials = _credentials;
+		this.Credentials = _credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), _credentials);
+		this.Region = _region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(_region);
+		this.__FileDocument = _fileDocument;
+		this.FileDocument = _fileDocument == null ? null : system.proxies.FileDocument.initialize(getContext(), _fileDocument);
 	}
 
 	@java.lang.Override
 	public java.lang.Boolean executeAction() throws Exception
 	{
-		this.PutObjectRequest = this.__PutObjectRequest == null ? null : amazons3connector.proxies.PutObjectRequest.initialize(getContext(), __PutObjectRequest);
-
-		this.Credentials = this.__Credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), __Credentials);
-
-		this.FileDocument = this.__FileDocument == null ? null : system.proxies.FileDocument.initialize(getContext(), __FileDocument);
-
 		// BEGIN USER CODE
 		software.amazon.awssdk.services.s3.model.PutObjectResponse awsResponse = null;
 		try {	

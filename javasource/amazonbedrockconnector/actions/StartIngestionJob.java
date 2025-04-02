@@ -18,30 +18,38 @@ import amazonbedrockconnector.impl.MxIngestionJob;
 import amazonbedrockconnector.impl.MxLogger;
 import software.amazon.awssdk.services.bedrockagent.BedrockAgentClient;
 import software.amazon.awssdk.services.bedrockagent.model.StartIngestionJobRequest;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class StartIngestionJob extends CustomJavaAction<IMendixObject>
+public class StartIngestionJob extends UserAction<IMendixObject>
 {
-	private IMendixObject __Credentials;
-	private awsauthentication.proxies.Credentials Credentials;
-	private awsauthentication.proxies.ENUM_Region ENUM_Region;
-	private IMendixObject __StartIngestionJobRequest;
-	private amazonbedrockconnector.proxies.StartIngestionJobRequest StartIngestionJobRequest;
+	/** @deprecated use Credentials.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Credentials;
+	private final awsauthentication.proxies.Credentials Credentials;
+	private final awsauthentication.proxies.ENUM_Region ENUM_Region;
+	/** @deprecated use StartIngestionJobRequest.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __StartIngestionJobRequest;
+	private final amazonbedrockconnector.proxies.StartIngestionJobRequest StartIngestionJobRequest;
 
-	public StartIngestionJob(IContext context, IMendixObject Credentials, java.lang.String ENUM_Region, IMendixObject StartIngestionJobRequest)
+	public StartIngestionJob(
+		IContext context,
+		IMendixObject _credentials,
+		java.lang.String _eNUM_Region,
+		IMendixObject _startIngestionJobRequest
+	)
 	{
 		super(context);
-		this.__Credentials = Credentials;
-		this.ENUM_Region = ENUM_Region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(ENUM_Region);
-		this.__StartIngestionJobRequest = StartIngestionJobRequest;
+		this.__Credentials = _credentials;
+		this.Credentials = _credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), _credentials);
+		this.ENUM_Region = _eNUM_Region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(_eNUM_Region);
+		this.__StartIngestionJobRequest = _startIngestionJobRequest;
+		this.StartIngestionJobRequest = _startIngestionJobRequest == null ? null : amazonbedrockconnector.proxies.StartIngestionJobRequest.initialize(getContext(), _startIngestionJobRequest);
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.Credentials = this.__Credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), __Credentials);
-
-		this.StartIngestionJobRequest = this.__StartIngestionJobRequest == null ? null : amazonbedrockconnector.proxies.StartIngestionJobRequest.initialize(getContext(), __StartIngestionJobRequest);
-
 		// BEGIN USER CODE
 		try {
 			// Validating JA input parameters

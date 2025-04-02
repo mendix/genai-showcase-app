@@ -17,32 +17,40 @@ import conversationalui.impl.MxLogger;
 import conversationalui.impl.ProviderConfigImpl;
 import conversationalui.proxies.ProviderConfig;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * Creates a new chat context with a provider config that is associated to the passed deployed model. Additionally, the system prompt and the action microflow of the new provider config are set.
  */
-public class ChatContext_Create_SetActionMicroflow extends CustomJavaAction<IMendixObject>
+public class ChatContext_Create_SetActionMicroflow extends UserAction<IMendixObject>
 {
-	private IMendixObject __DeployedModel;
-	private genaicommons.proxies.DeployedModel DeployedModel;
-	private java.lang.String ActionMicroflow;
-	private java.lang.String SystemPrompt;
-	private java.lang.String ProviderName;
+	/** @deprecated use DeployedModel.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __DeployedModel;
+	private final genaicommons.proxies.DeployedModel DeployedModel;
+	private final java.lang.String ActionMicroflow;
+	private final java.lang.String SystemPrompt;
+	private final java.lang.String ProviderName;
 
-	public ChatContext_Create_SetActionMicroflow(IContext context, IMendixObject DeployedModel, java.lang.String ActionMicroflow, java.lang.String SystemPrompt, java.lang.String ProviderName)
+	public ChatContext_Create_SetActionMicroflow(
+		IContext context,
+		IMendixObject _deployedModel,
+		java.lang.String _actionMicroflow,
+		java.lang.String _systemPrompt,
+		java.lang.String _providerName
+	)
 	{
 		super(context);
-		this.__DeployedModel = DeployedModel;
-		this.ActionMicroflow = ActionMicroflow;
-		this.SystemPrompt = SystemPrompt;
-		this.ProviderName = ProviderName;
+		this.__DeployedModel = _deployedModel;
+		this.DeployedModel = _deployedModel == null ? null : genaicommons.proxies.DeployedModel.initialize(getContext(), _deployedModel);
+		this.ActionMicroflow = _actionMicroflow;
+		this.SystemPrompt = _systemPrompt;
+		this.ProviderName = _providerName;
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.DeployedModel = this.__DeployedModel == null ? null : genaicommons.proxies.DeployedModel.initialize(getContext(), __DeployedModel);
-
 		// BEGIN USER CODE
 		
 		try {

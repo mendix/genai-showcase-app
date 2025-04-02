@@ -19,28 +19,35 @@ import genaicommons.impl.DeployedModelImpl;
 import genaicommons.impl.MxLogger;
 import genaicommons.proxies.ENUM_ModelModality;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class ChatCompletions_WithHistory extends CustomJavaAction<IMendixObject>
+public class ChatCompletions_WithHistory extends UserAction<IMendixObject>
 {
-	private IMendixObject __Request;
-	private genaicommons.proxies.Request Request;
-	private IMendixObject __DeployedModel;
-	private genaicommons.proxies.DeployedModel DeployedModel;
+	/** @deprecated use Request.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Request;
+	private final genaicommons.proxies.Request Request;
+	/** @deprecated use DeployedModel.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __DeployedModel;
+	private final genaicommons.proxies.DeployedModel DeployedModel;
 
-	public ChatCompletions_WithHistory(IContext context, IMendixObject Request, IMendixObject DeployedModel)
+	public ChatCompletions_WithHistory(
+		IContext context,
+		IMendixObject _request,
+		IMendixObject _deployedModel
+	)
 	{
 		super(context);
-		this.__Request = Request;
-		this.__DeployedModel = DeployedModel;
+		this.__Request = _request;
+		this.Request = _request == null ? null : genaicommons.proxies.Request.initialize(getContext(), _request);
+		this.__DeployedModel = _deployedModel;
+		this.DeployedModel = _deployedModel == null ? null : genaicommons.proxies.DeployedModel.initialize(getContext(), _deployedModel);
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.Request = this.__Request == null ? null : genaicommons.proxies.Request.initialize(getContext(), __Request);
-
-		this.DeployedModel = this.__DeployedModel == null ? null : genaicommons.proxies.DeployedModel.initialize(getContext(), __DeployedModel);
-
 		// BEGIN USER CODE
 		try {
 			validate();

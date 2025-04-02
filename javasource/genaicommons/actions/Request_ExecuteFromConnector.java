@@ -20,6 +20,7 @@ import genaicommons.proxies.Response;
 import genaicommons.proxies.microflows.Microflows;
 import genaicommons.impl.DeployedModelImpl;
 import genaicommons.impl.MxLogger;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * This Java Action should only be used by connector developers. It executes the Request by calling an LLM via the passed ModelCallMicroflow.
@@ -28,29 +29,36 @@ import genaicommons.impl.MxLogger;
  * 
  * Additionally, this java action takes care of storing token usage metrics by calling the Usage_Create_TextAndFiles microflow, if the StoreUsageMetrics constant was set to true by the developer.
  */
-public class Request_ExecuteFromConnector extends CustomJavaAction<IMendixObject>
+public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 {
-	private IMendixObject __Request;
-	private genaicommons.proxies.Request Request;
-	private IMendixObject __DeployedModel;
-	private genaicommons.proxies.DeployedModel DeployedModel;
-	private java.lang.String CallModelMicroflow;
+	/** @deprecated use Request.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Request;
+	private final genaicommons.proxies.Request Request;
+	/** @deprecated use DeployedModel.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __DeployedModel;
+	private final genaicommons.proxies.DeployedModel DeployedModel;
+	private final java.lang.String CallModelMicroflow;
 
-	public Request_ExecuteFromConnector(IContext context, IMendixObject Request, IMendixObject DeployedModel, java.lang.String CallModelMicroflow)
+	public Request_ExecuteFromConnector(
+		IContext context,
+		IMendixObject _request,
+		IMendixObject _deployedModel,
+		java.lang.String _callModelMicroflow
+	)
 	{
 		super(context);
-		this.__Request = Request;
-		this.__DeployedModel = DeployedModel;
-		this.CallModelMicroflow = CallModelMicroflow;
+		this.__Request = _request;
+		this.Request = _request == null ? null : genaicommons.proxies.Request.initialize(getContext(), _request);
+		this.__DeployedModel = _deployedModel;
+		this.DeployedModel = _deployedModel == null ? null : genaicommons.proxies.DeployedModel.initialize(getContext(), _deployedModel);
+		this.CallModelMicroflow = _callModelMicroflow;
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.Request = this.__Request == null ? null : genaicommons.proxies.Request.initialize(getContext(), __Request);
-
-		this.DeployedModel = this.__DeployedModel == null ? null : genaicommons.proxies.DeployedModel.initialize(getContext(), __DeployedModel);
-
 		// BEGIN USER CODE
 		try {
 			validate();

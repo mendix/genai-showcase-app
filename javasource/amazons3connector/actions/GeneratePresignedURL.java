@@ -25,30 +25,38 @@ import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 import software.amazon.awssdk.services.s3.presigner.model.PresignedDeleteObjectRequest;
 import software.amazon.awssdk.services.s3.presigner.model.PresignedGetObjectRequest;
 import software.amazon.awssdk.services.s3.presigner.model.PresignedPutObjectRequest;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class GeneratePresignedURL extends CustomJavaAction<java.lang.String>
+public class GeneratePresignedURL extends UserAction<java.lang.String>
 {
-	private IMendixObject __Credentials;
-	private awsauthentication.proxies.Credentials Credentials;
-	private IMendixObject __S3Request;
-	private amazons3connector.proxies.AbstractS3Request S3Request;
-	private awsauthentication.proxies.ENUM_Region Region;
+	/** @deprecated use Credentials.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Credentials;
+	private final awsauthentication.proxies.Credentials Credentials;
+	/** @deprecated use S3Request.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __S3Request;
+	private final amazons3connector.proxies.AbstractS3Request S3Request;
+	private final awsauthentication.proxies.ENUM_Region Region;
 
-	public GeneratePresignedURL(IContext context, IMendixObject Credentials, IMendixObject S3Request, java.lang.String Region)
+	public GeneratePresignedURL(
+		IContext context,
+		IMendixObject _credentials,
+		IMendixObject _s3Request,
+		java.lang.String _region
+	)
 	{
 		super(context);
-		this.__Credentials = Credentials;
-		this.__S3Request = S3Request;
-		this.Region = Region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(Region);
+		this.__Credentials = _credentials;
+		this.Credentials = _credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), _credentials);
+		this.__S3Request = _s3Request;
+		this.S3Request = _s3Request == null ? null : amazons3connector.proxies.AbstractS3Request.initialize(getContext(), _s3Request);
+		this.Region = _region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(_region);
 	}
 
 	@java.lang.Override
 	public java.lang.String executeAction() throws Exception
 	{
-		this.Credentials = this.__Credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), __Credentials);
-
-		this.S3Request = this.__S3Request == null ? null : amazons3connector.proxies.AbstractS3Request.initialize(getContext(), __S3Request);
-
 		// BEGIN USER CODE
 		String presignedUrl = "";
 		

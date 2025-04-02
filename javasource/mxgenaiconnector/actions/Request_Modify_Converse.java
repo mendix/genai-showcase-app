@@ -19,25 +19,31 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import mxgenaiconnector.impl.ConverseVisionDocument;
 import mxgenaiconnector.impl.ConverseFunctionCalling;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class Request_Modify_Converse extends CustomJavaAction<java.lang.String>
+public class Request_Modify_Converse extends UserAction<java.lang.String>
 {
-	private IMendixObject __Request;
-	private genaicommons.proxies.Request Request;
-	private java.lang.String RequestBodyJSON;
+	/** @deprecated use Request.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Request;
+	private final genaicommons.proxies.Request Request;
+	private final java.lang.String RequestBodyJSON;
 
-	public Request_Modify_Converse(IContext context, IMendixObject Request, java.lang.String RequestBodyJSON)
+	public Request_Modify_Converse(
+		IContext context,
+		IMendixObject _request,
+		java.lang.String _requestBodyJSON
+	)
 	{
 		super(context);
-		this.__Request = Request;
-		this.RequestBodyJSON = RequestBodyJSON;
+		this.__Request = _request;
+		this.Request = _request == null ? null : genaicommons.proxies.Request.initialize(getContext(), _request);
+		this.RequestBodyJSON = _requestBodyJSON;
 	}
 
 	@java.lang.Override
 	public java.lang.String executeAction() throws Exception
 	{
-		this.Request = this.__Request == null ? null : genaicommons.proxies.Request.initialize(getContext(), __Request);
-
 		// BEGIN USER CODE
 		try {
 			requireNonNull(this.RequestBodyJSON, "RequestBody JSON is required");

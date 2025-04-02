@@ -15,6 +15,7 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
 import databaseconnector.impl.JdbcConnector;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * For a more detailed documentation, please visit the website at
@@ -42,28 +43,35 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
  * @param statement An instance of the Statement NPE containing both the content of the
  *                  statement to be called as well as all of its parameters.
  */
-public class ExecuteCallableStatement extends CustomJavaAction<java.lang.Void>
+public class ExecuteCallableStatement extends UserAction<java.lang.Void>
 {
-	private java.lang.String jdbcUrl;
-	private java.lang.String userName;
-	private java.lang.String password;
-	private IMendixObject __statement;
-	private databaseconnector.proxies.Statement statement;
+	private final java.lang.String jdbcUrl;
+	private final java.lang.String userName;
+	private final java.lang.String password;
+	/** @deprecated use statement.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __statement;
+	private final databaseconnector.proxies.Statement statement;
 
-	public ExecuteCallableStatement(IContext context, java.lang.String jdbcUrl, java.lang.String userName, java.lang.String password, IMendixObject statement)
+	public ExecuteCallableStatement(
+		IContext context,
+		java.lang.String _jdbcUrl,
+		java.lang.String _userName,
+		java.lang.String _password,
+		IMendixObject _statement
+	)
 	{
 		super(context);
-		this.jdbcUrl = jdbcUrl;
-		this.userName = userName;
-		this.password = password;
-		this.__statement = statement;
+		this.jdbcUrl = _jdbcUrl;
+		this.userName = _userName;
+		this.password = _password;
+		this.__statement = _statement;
+		this.statement = _statement == null ? null : databaseconnector.proxies.Statement.initialize(getContext(), _statement);
 	}
 
 	@java.lang.Override
 	public java.lang.Void executeAction() throws Exception
 	{
-		this.statement = this.__statement == null ? null : databaseconnector.proxies.Statement.initialize(getContext(), __statement);
-
 		// BEGIN USER CODE
 		if (this.statement == null) {
 			throw new IllegalArgumentException("Execute callable statement was called with an empty value.");

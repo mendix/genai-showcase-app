@@ -17,8 +17,9 @@ import com.mendix.webui.CustomJavaAction;
 import conversationalui.impl.MxLogger;
 import conversationalui.proxies.DeploymentSelection;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class DeploymentSelection_GetList extends CustomJavaAction<java.util.List<IMendixObject>>
+public class DeploymentSelection_GetList extends UserAction<java.util.List<IMendixObject>>
 {
 	public DeploymentSelection_GetList(IContext context)
 	{

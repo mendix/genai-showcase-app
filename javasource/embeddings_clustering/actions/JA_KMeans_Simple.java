@@ -19,35 +19,42 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import pl.ksitarski.simplekmeans.KMeansBuilder;
 import pl.ksitarski.simplekmeans.KMeansCluster;
 import pl.ksitarski.simplekmeans.KMeans;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * k-means algorithm to identify and assign a predetermined number of clusters to a set of vectors.
  * Clustering can help discover valuable, hidden groupings within the data.
  */
-public class JA_KMeans_Simple extends CustomJavaAction<java.lang.Void>
+public class JA_KMeans_Simple extends UserAction<java.lang.Void>
 {
-	private java.util.List<IMendixObject> __EmbeddingList;
-	private java.util.List<embeddings_clustering.proxies.Embedding> EmbeddingList;
-	private java.lang.Long NumberOfClusters;
-	private java.lang.Long Iterations;
+	/** @deprecated use com.mendix.utils.ListUtils.map(EmbeddingList, com.mendix.systemwideinterfaces.core.IEntityProxy::getMendixObject) instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final java.util.List<IMendixObject> __EmbeddingList;
+	private final java.util.List<embeddings_clustering.proxies.Embedding> EmbeddingList;
+	private final java.lang.Long NumberOfClusters;
+	private final java.lang.Long Iterations;
 
-	public JA_KMeans_Simple(IContext context, java.util.List<IMendixObject> EmbeddingList, java.lang.Long NumberOfClusters, java.lang.Long Iterations)
+	public JA_KMeans_Simple(
+		IContext context,
+		java.util.List<IMendixObject> _embeddingList,
+		java.lang.Long _numberOfClusters,
+		java.lang.Long _iterations
+	)
 	{
 		super(context);
-		this.__EmbeddingList = EmbeddingList;
-		this.NumberOfClusters = NumberOfClusters;
-		this.Iterations = Iterations;
+		this.__EmbeddingList = _embeddingList;
+		this.EmbeddingList = java.util.Optional.ofNullable(_embeddingList)
+			.orElse(java.util.Collections.emptyList())
+			.stream()
+			.map(embeddingListElement -> embeddings_clustering.proxies.Embedding.initialize(getContext(), embeddingListElement))
+			.collect(java.util.stream.Collectors.toList());
+		this.NumberOfClusters = _numberOfClusters;
+		this.Iterations = _iterations;
 	}
 
 	@java.lang.Override
 	public java.lang.Void executeAction() throws Exception
 	{
-		this.EmbeddingList = java.util.Optional.ofNullable(this.__EmbeddingList)
-			.orElse(java.util.Collections.emptyList())
-			.stream()
-			.map(__EmbeddingListElement -> embeddings_clustering.proxies.Embedding.initialize(getContext(), __EmbeddingListElement))
-			.collect(java.util.stream.Collectors.toList());
-
 		// BEGIN USER CODE
 		
 		// TODO replace by validation

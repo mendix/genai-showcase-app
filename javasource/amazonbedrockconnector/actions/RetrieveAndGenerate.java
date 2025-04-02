@@ -36,35 +36,45 @@ import software.amazon.awssdk.services.bedrockagentruntime.model.RetrieveAndGene
 import software.amazon.awssdk.services.bedrockagentruntime.model.RetrieveAndGenerateType;
 import software.amazon.awssdk.services.bedrockagentruntime.model.TextInferenceConfig;
 import software.amazon.awssdk.services.bedrockagentruntime.model.PromptTemplate;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class RetrieveAndGenerate extends CustomJavaAction<IMendixObject>
+public class RetrieveAndGenerate extends UserAction<IMendixObject>
 {
-	private IMendixObject __Credentials;
-	private awsauthentication.proxies.Credentials Credentials;
-	private IMendixObject __RetrieveAndGenerateRequest;
-	private amazonbedrockconnector.proxies.RetrieveAndGenerateRequest_Extension RetrieveAndGenerateRequest;
-	private IMendixObject __DeployedModel;
-	private amazonbedrockconnector.proxies.BedrockDeployedModel DeployedModel;
-	private awsauthentication.proxies.ENUM_Region Region;
+	/** @deprecated use Credentials.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Credentials;
+	private final awsauthentication.proxies.Credentials Credentials;
+	/** @deprecated use RetrieveAndGenerateRequest.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __RetrieveAndGenerateRequest;
+	private final amazonbedrockconnector.proxies.RetrieveAndGenerateRequest_Extension RetrieveAndGenerateRequest;
+	/** @deprecated use DeployedModel.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __DeployedModel;
+	private final amazonbedrockconnector.proxies.BedrockDeployedModel DeployedModel;
+	private final awsauthentication.proxies.ENUM_Region Region;
 
-	public RetrieveAndGenerate(IContext context, IMendixObject Credentials, IMendixObject RetrieveAndGenerateRequest, IMendixObject DeployedModel, java.lang.String Region)
+	public RetrieveAndGenerate(
+		IContext context,
+		IMendixObject _credentials,
+		IMendixObject _retrieveAndGenerateRequest,
+		IMendixObject _deployedModel,
+		java.lang.String _region
+	)
 	{
 		super(context);
-		this.__Credentials = Credentials;
-		this.__RetrieveAndGenerateRequest = RetrieveAndGenerateRequest;
-		this.__DeployedModel = DeployedModel;
-		this.Region = Region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(Region);
+		this.__Credentials = _credentials;
+		this.Credentials = _credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), _credentials);
+		this.__RetrieveAndGenerateRequest = _retrieveAndGenerateRequest;
+		this.RetrieveAndGenerateRequest = _retrieveAndGenerateRequest == null ? null : amazonbedrockconnector.proxies.RetrieveAndGenerateRequest_Extension.initialize(getContext(), _retrieveAndGenerateRequest);
+		this.__DeployedModel = _deployedModel;
+		this.DeployedModel = _deployedModel == null ? null : amazonbedrockconnector.proxies.BedrockDeployedModel.initialize(getContext(), _deployedModel);
+		this.Region = _region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(_region);
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		this.Credentials = this.__Credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), __Credentials);
-
-		this.RetrieveAndGenerateRequest = this.__RetrieveAndGenerateRequest == null ? null : amazonbedrockconnector.proxies.RetrieveAndGenerateRequest_Extension.initialize(getContext(), __RetrieveAndGenerateRequest);
-
-		this.DeployedModel = this.__DeployedModel == null ? null : amazonbedrockconnector.proxies.BedrockDeployedModel.initialize(getContext(), __DeployedModel);
-
 		// BEGIN USER CODE
 		try {
 			requireNonNull(Credentials, "AWS Credentials are required");

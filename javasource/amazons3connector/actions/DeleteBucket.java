@@ -18,30 +18,38 @@ import amazons3connector.impl.AmazonS3Client;
 import amazons3connector.impl.MxLogger;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.NoSuchBucketException;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class DeleteBucket extends CustomJavaAction<java.lang.Boolean>
+public class DeleteBucket extends UserAction<java.lang.Boolean>
 {
-	private IMendixObject __Credentials;
-	private awsauthentication.proxies.Credentials Credentials;
-	private IMendixObject __DeleteBucketRequest;
-	private amazons3connector.proxies.DeleteBucketRequest DeleteBucketRequest;
-	private awsauthentication.proxies.ENUM_Region Region;
+	/** @deprecated use Credentials.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Credentials;
+	private final awsauthentication.proxies.Credentials Credentials;
+	/** @deprecated use DeleteBucketRequest.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __DeleteBucketRequest;
+	private final amazons3connector.proxies.DeleteBucketRequest DeleteBucketRequest;
+	private final awsauthentication.proxies.ENUM_Region Region;
 
-	public DeleteBucket(IContext context, IMendixObject Credentials, IMendixObject DeleteBucketRequest, java.lang.String Region)
+	public DeleteBucket(
+		IContext context,
+		IMendixObject _credentials,
+		IMendixObject _deleteBucketRequest,
+		java.lang.String _region
+	)
 	{
 		super(context);
-		this.__Credentials = Credentials;
-		this.__DeleteBucketRequest = DeleteBucketRequest;
-		this.Region = Region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(Region);
+		this.__Credentials = _credentials;
+		this.Credentials = _credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), _credentials);
+		this.__DeleteBucketRequest = _deleteBucketRequest;
+		this.DeleteBucketRequest = _deleteBucketRequest == null ? null : amazons3connector.proxies.DeleteBucketRequest.initialize(getContext(), _deleteBucketRequest);
+		this.Region = _region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(_region);
 	}
 
 	@java.lang.Override
 	public java.lang.Boolean executeAction() throws Exception
 	{
-		this.Credentials = this.__Credentials == null ? null : awsauthentication.proxies.Credentials.initialize(getContext(), __Credentials);
-
-		this.DeleteBucketRequest = this.__DeleteBucketRequest == null ? null : amazons3connector.proxies.DeleteBucketRequest.initialize(getContext(), __DeleteBucketRequest);
-
 		// BEGIN USER CODE
 		software.amazon.awssdk.services.s3.model.DeleteBucketResponse awsResponse = null;
 		try {
