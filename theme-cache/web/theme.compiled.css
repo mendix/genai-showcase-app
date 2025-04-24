@@ -28671,6 +28671,297 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: none;
 }
 
+.promting-page-wrapper {
+  width: 100%;
+  min-height: 100%;
+}
+
+.agents-page-content-container {
+  min-height: -webkit-fill-available;
+  min-height: -moz-available;
+  display: flex;
+  justify-content: center;
+}
+.agents-page-content-container .agents-container--overview {
+  width: 90%;
+  max-width: 1200px;
+  margin: 24px;
+  flex-direction: column;
+}
+.agents-page-content-container .agents-container--overview .td {
+  border-bottom: none;
+}
+.agents-page-content-container .agents-container--overview .card {
+  overflow: unset;
+  border-radius: 16px;
+  border: 1px solid #e7e7e9;
+  padding-top: 16px;
+}
+.agents-page-content-container .pageheader-with-buttons {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.agent-page-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+.agent-page-container .page-container-main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.agent-page-container .page-container-side {
+  z-index: 1000;
+  width: 100%;
+  max-width: 25vw;
+  display: flex;
+  flex-direction: column;
+}
+.agent-page-container .page-container-header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background: white;
+  padding-bottom: 24px;
+  justify-content: center;
+}
+.agent-page-container .page-header-content {
+  width: 100%;
+  max-width: 1800px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+.agent-page-container .page-header-content .pageheader-with-buttons {
+  display: flex !important;
+  justify-content: space-between;
+}
+.agent-page-container .pageheader-navigation {
+  display: flex !important;
+  align-items: center !important;
+  flex-flow: row !important;
+  justify-content: flex-start !important;
+}
+.agent-page-container .page-content-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex: 1 1 0;
+  overflow-y: auto;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.agent-page-container .page-content {
+  width: 100%;
+  max-width: 1800px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: fit-content;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+.agent-page-container .content-main {
+  min-width: 450px;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+.agent-page-container .content-main .card {
+  overflow: visible;
+  margin-left: 12px;
+  margin-right: 12px;
+}
+.agent-page-container .content-column {
+  min-width: 400px;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+}
+.agent-page-container .content-column .card {
+  overflow: visible;
+  margin-left: 12px;
+  margin-right: 12px;
+  z-index: 0;
+}
+@media (max-width: 1200px) {
+  .agent-page-container .content-main {
+    width: 100%;
+  }
+  .agent-page-container .content-column {
+    width: 100%;
+  }
+}
+.agent-page-container .content-chat {
+  display: block;
+}
+.agent-page-container .content-chat .content-main {
+  width: 100%;
+  padding-right: unset;
+}
+.agent-page-container .content-chat .content-column {
+  width: 100%;
+}
+.agent-page-container .content-fullwidth {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.agent-page-container .content-fullwidth .card {
+  flex-grow: 1;
+  margin-left: 12px;
+  margin-right: 12px;
+  margin-bottom: 0;
+  max-height: 39rem;
+  padding-bottom: 24px;
+}
+.agent-page-container .content-fullwidth .card-content {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  max-height: 25rem;
+  margin-bottom: 0;
+  padding-right: 8px;
+}
+.agent-page-container .content-fullwidth .card-header {
+  position: sticky;
+  display: flex;
+  flex-direction: row;
+  z-index: 1;
+  padding-bottom: 10px;
+}
+.agent-page-container .panel-header {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #E7E7E9;
+  padding-right: 8px;
+  height: fit-content;
+}
+.agent-page-container .panel-header::after {
+  content: "";
+}
+.agent-page-container .panel-header .header-text {
+  flex-direction: column;
+  margin-left: 16px;
+  padding-right: 8px;
+  padding-bottom: 8px;
+}
+.agent-page-container .panel-header .icon-area {
+  margin-top: 8px;
+  margin-left: auto;
+  max-width: 75px;
+}
+.agent-page-container .panel-header .icon-area .new-chat-icon img {
+  height: 24px;
+  width: 24px;
+  margin-right: 0;
+}
+.agent-page-container .panel-header .icon-area .close-icon {
+  border-left: 2px solid #e7e7e9;
+  padding-left: 8px;
+  margin-right: 8px;
+  margin-left: 8px;
+  height: fit-content;
+}
+.agent-page-container .panel-header .icon-area .close-icon img {
+  height: 24px;
+  width: 24px;
+  margin-right: 0;
+}
+.agent-page-container .panel-content {
+  flex: 1 1 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.agent-page-container .card-content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-bottom: 0;
+}
+.agent-page-container .card-header {
+  position: sticky;
+  display: flex;
+  flex-direction: row;
+  z-index: 1;
+  padding-right: 10px;
+}
+
+.table-header {
+  margin-top: 16px;
+  border-bottom: 1px solid #E7E7E9;
+}
+
+.output-grid-container {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 10% 59% 9% 9% 10%;
+  gap: 12px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+.output-grid-item {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 0;
+}
+
+.output-grid-icon {
+  margin-top: 3.5px;
+}
+
+.output-align-header {
+  margin-right: 2.2%;
+}
+@supports (-moz-appearance: none) {
+  .output-align-header {
+    margin-right: 16px;
+  }
+}
+
+.version-table {
+  display: flex;
+}
+.version-table .text-version {
+  width: 10%;
+}
+.version-table .text-title {
+  width: 35%;
+}
+.version-table .text-in-use {
+  width: 10%;
+}
+.version-table .text-owner {
+  width: 20%;
+}
+.version-table .text-last-edited {
+  width: 20%;
+}
+.version-table .delete-icon {
+  width: 5%;
+  color: #e33f4e;
+}
+
+.testcase-table {
+  display: flex;
+}
+.testcase-table .text-testcase {
+  min-width: 95%;
+}
+.testcase-table .delete-icon {
+  min-width: 5%;
+  color: #e33f4e;
+}
+
 .layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a img {
   width: 52px;
   padding: 4px 14px;
