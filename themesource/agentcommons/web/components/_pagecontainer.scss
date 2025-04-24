@@ -1,10 +1,6 @@
 @import "../../../atlas_core/web/_variables.scss";
 @import "../../../../theme/web/custom-variables.scss";
-//Prompt_Overview
-.promting-page-wrapper {
-    width: 100%;
-    min-height: 100%;
-}
+//Agents Overview
 
 .agents-page-content-container {
     min-height: -webkit-fill-available;
@@ -261,7 +257,6 @@
         display: flex;
         flex-direction: row;
         z-index: 1;
-        padding-right: 10px;
     }
 
     

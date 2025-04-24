@@ -28671,11 +28671,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: none;
 }
 
-.promting-page-wrapper {
-  width: 100%;
-  min-height: 100%;
-}
-
 .agents-page-content-container {
   min-height: -webkit-fill-available;
   min-height: -moz-available;
@@ -28892,7 +28887,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
   flex-direction: row;
   z-index: 1;
-  padding-right: 10px;
 }
 
 .table-header {
