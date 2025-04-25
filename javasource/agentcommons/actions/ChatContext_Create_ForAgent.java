@@ -20,8 +20,9 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
- * This action is a combination of 'Get Prompt' and 'New Chat'.
- * First the variables in the prompt are replaced with attributes from the ContextObject to get the final system prompt. Then a new chat context is created with a provider config that is associated to a deployed model. Additionally, the system prompt is set based on the Prompt and the action microflow of the new provider config is set.
+ * This action creates a ChatContext based on an Agent and optionally a ContextObject.
+ * 
+ * If a ContextObject is passed, the variables in the prompt are replaced with attributes from the ContextObject to get the final system prompt. Then a new chat context is created with a provider config that is associated to a deployed model as configured for the agent.. Additionally, the system prompt is set based on the prompt of the agent. Finally, the action microflow of the new provider config is set.
  * 
  * If an internal error occurs, the operation will return empty and the error is logged.
  */
