@@ -22,7 +22,7 @@ import com.mendix.systemwideinterfaces.core.UserAction;
 /**
  * This action creates a ChatContext based on an Agent and optionally a ContextObject.
  * 
- * If a ContextObject is passed, the variables in the prompt are replaced with attributes from the ContextObject to get the final system prompt. Then a new chat context is created with a provider config that is associated to a deployed model as configured for the agent.. Additionally, the system prompt is set based on the prompt of the agent. Finally, the action microflow of the new provider config is set.
+ * If a ContextObject is passed, the variables in the prompt are replaced with attributes from the ContextObject to get the final system prompt. Then a new chat context is created with a provider config that is associated to a deployed model as configured for the agent. Additionally, the system prompt is set based on the prompt of the agent. Finally, the action microflow of the new provider config is set.
  * 
  * If an internal error occurs, the operation will return empty and the error is logged.
  */
