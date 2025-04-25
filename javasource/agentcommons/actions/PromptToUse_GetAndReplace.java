@@ -115,7 +115,7 @@ public class PromptToUse_GetAndReplace extends UserAction<IMendixObject>
 		// Get all variables associated to the Prompt and replace placeholders with
 		// values from attributes.
 		List<IMendixObject> variableList = Core.retrieveByPath(getContext(), agent.getMendixObject(),
-				"ConversationalUI.Variable_Prompt");
+				"AgentCommons.Variable_Agent");
 
 		// Replacement of variables if they are found in the passed object
 
