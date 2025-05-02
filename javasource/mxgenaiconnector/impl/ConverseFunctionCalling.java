@@ -1,9 +1,8 @@
+
+
 package mxgenaiconnector.impl;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -15,15 +14,11 @@ import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-
 import mxgenaiconnector.proxies.RequestExtension;
-import openaiconnector.genaicommonsimpl.MessageImpl;
-import mxgenaiconnector.genaicommons_impl.FunctionMappingImpl;
 import genaicommons.proxies.ENUM_MessageRole;
-import genaicommons.proxies.Message;
+
 import genaicommons.proxies.Request;
-import genaicommons.proxies.Tool;
-import genaicommons.proxies.ToolCall;
+
 
 
 public class ConverseFunctionCalling{
