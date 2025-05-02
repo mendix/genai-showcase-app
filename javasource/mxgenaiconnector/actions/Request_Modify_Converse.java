@@ -10,16 +10,30 @@
 package mxgenaiconnector.actions;
 
 import static java.util.Objects.requireNonNull;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import org.jblas.util.Logger;
+import com.mendix.core.Core;
+import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.webui.CustomJavaAction;
+import genaicommons.proxies.ENUM_MessageRole;
+import genaicommons.proxies.Message;
+import genaicommons.proxies.Request;
+import genaicommons.proxies.Tool;
+import genaicommons.proxies.ToolCall;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import mxgenaiconnector.impl.ConverseVisionDocument;
+import openaiconnector.genaicommonsimpl.MessageImpl;
+import mxgenaiconnector.genaicommons_impl.FunctionMappingImpl;
 import mxgenaiconnector.impl.ConverseFunctionCalling;
 import com.mendix.systemwideinterfaces.core.UserAction;
+import mxgenaiconnector.impl.MxLogger;
 
 public class Request_Modify_Converse extends UserAction<java.lang.String>
 {
@@ -55,7 +69,7 @@ public class Request_Modify_Converse extends UserAction<java.lang.String>
 			//Add image for vision or ToolResults/ToolUse for function calling
 			updateMessages(rootNode);
 			//ToolConfig describes the available functions/tools to the model
-			ConverseFunctionCalling.addToolConfig(rootNode);
+			addToolConfig(rootNode);
 			
 			return MAPPER.writeValueAsString(rootNode);
 
@@ -77,6 +91,8 @@ public class Request_Modify_Converse extends UserAction<java.lang.String>
 
 	// BEGIN EXTRA CODE
 	private static final ObjectMapper MAPPER = new ObjectMapper();
+	
+	private static final MxLogger LOGGER = new MxLogger(Request_Modify_Converse.class);
 	
 	
 	private void updateMessages(ObjectNode rootNode)throws Exception {
@@ -104,5 +120,171 @@ public class Request_Modify_Converse extends UserAction<java.lang.String>
             }
 		}
 	}
+	//........Add ToolConfig to Request........
+	//Creates toolConfig node
+		private void addToolConfig(ObjectNode rootNode) {
+			if(rootNode == null || (rootNode.path("toolConfig").asText().isBlank() && rootNode.path("toolConfig").path("tools").size() == 0)) {
+				//If there is no ToolCollection (toolConfig), this needs to be removed
+				rootNode.remove("toolConfig");
+				return;
+			}
+			
+			ArrayNode toolsNode = (ArrayNode) rootNode.path("toolConfig").path("tools");
+			for (int i = 0; i < toolsNode.size(); i++) {
+				JsonNode toolNode = toolsNode.get(i);
+				String microflow = toolNode.path("microflow").asText();
+				if (microflow.isBlank() == false) {
+					ObjectNode toolNodeObject = (ObjectNode) toolNode;
+					setInputSchemaForToolNode(microflow,toolNodeObject);
+					
+					//Add toolSpec node around tool
+					ObjectNode toolSpecNode = MAPPER.createObjectNode();
+					toolSpecNode.set("toolSpec",toolNode);
+					//Existing node is replaced by new toolSpec node.
+					toolsNode.set(i,toolSpecNode);
+					
+					//Remove functionMicrofow node which is not part of the Converse request
+					((ObjectNode) toolNode).remove("microflow");
+				}
+			}
+			
+			setToolChoice(rootNode);
+		}
+		
+		//This will create the input schema JSON needed for specifying the input of a tool
+		private static void setInputSchemaForToolNode(String microflow, ObjectNode toolNode) {
+			
+			// Create the root object node
+	        ObjectNode inputSchemaNode = MAPPER.createObjectNode();
+	        inputSchemaNode.put("type", "object");
+
+	        // Create the properties node (if input parameter is available)
+	        String parameterName = FunctionMappingImpl.getFirstInputParamName(microflow);
+			if(parameterName != null && parameterName.isBlank() == false) {
+				ObjectNode propertiesNode = MAPPER.createObjectNode();
+		        ObjectNode fieldNode = MAPPER.createObjectNode();
+		        fieldNode.put("type", "string");
+		        propertiesNode.set(parameterName, fieldNode);
+		        inputSchemaNode.set("properties", propertiesNode);
+		        inputSchemaNode.putArray("required").add(parameterName);
+			}
+	        
+	        //Add a "json" wrapper around the inputSchema
+	        ObjectNode jsonNode = MAPPER.createObjectNode();
+	        jsonNode.set("json", inputSchemaNode);
+	        
+	        //Set the whole InputSchema as new node to toolNode
+	        toolNode.set("inputSchema",jsonNode);
+		}
+		
+		private void setToolChoice(ObjectNode rootNode) {
+			JsonNode toolConfig = rootNode.path("toolConfig");
+			if(toolConfig.isEmpty()) {
+				return;
+			}
+			JsonNode toolChoiceNode = toolConfig.path("toolChoice");
+			if (toolChoiceNode != null && toolChoiceNode.isObject()) {
+	            String toolType = toolChoiceNode.has("toolChoiceType") ? toolChoiceNode.path("toolChoiceType").asText() : "";
+	            switch (toolType) {
+	            	//"tool" choice can only be used once for the same function to prevent infinity loops
+	                case "tool":
+	                	JsonNode toolNode = toolChoiceNode.get("tool");
+	                	if(!toolNode.isEmpty() && isToolRecall(toolNode.path("name").asText())) {
+	                		((ObjectNode) toolConfig).remove("toolChoice");
+	                	}
+	                    break;
+	                
+	                //"any" choice can only be used once at the first iteration to prevent infinity loops
+	                case "any":
+	                	if(getToolCallMessages().size() == 0) {
+	                		ObjectNode wrapper = MAPPER.createObjectNode();
+		                    wrapper.set(toolType, MAPPER.createObjectNode());
+		                    ((ObjectNode) toolConfig).set("toolChoice", wrapper);
+	                	}
+	                	else {
+	                		((ObjectNode) toolConfig).remove("toolChoice");
+	                	}
+	                	break;
+	                //"auto" is the default
+	   	            case "auto":
+	   	            	ObjectNode wrapper = MAPPER.createObjectNode();
+	                    wrapper.set(toolType, MAPPER.createObjectNode());
+	                    ((ObjectNode) toolConfig).set("toolChoice", wrapper);
+	                    break;
+
+	                default:
+	                    LOGGER.warn(("Unknown or missing type for ToolChoice: " + toolType));
+	                    break;
+	            }
+	            ((ObjectNode) toolChoiceNode).remove("toolChoiceType");
+	        }
+			
+		}
+		
+		// Get all messages where ToolCallId is set. These messages indicate that a tool has been called
+		private List<Message> getToolCallMessages() {
+			return Core.retrieveByPath(getContext(), Request.getMendixObject(), 
+					genaicommons.proxies.Request.MemberNames.Request_Message.toString()).stream()
+					.map(msg -> genaicommons.proxies.Message.initialize(getContext(), msg))
+					.filter(msg -> msg.getToolCallId() != null && !msg.getToolCallId().isEmpty())
+					.collect(Collectors.toList());
+		}
+		
+		private boolean isToolRecall(String toolChoiceFunctionName) {
+			List<genaicommons.proxies.Message> messageListTool = getToolCallMessages();
+
+			// No tool calls yet; thus no tool recall
+			if (messageListTool.size() == 0) {
+				return false;
+			}
+
+			// Get all messages with role assistant
+			// Assistant messages optionally have an array of tool_calls that contain an id and the functionName
+			List<Message> messageListAssistant = MessageImpl
+					.retrieveMessageListByRole(Request, ENUM_MessageRole.assistant, getContext());
+
+			// HashMap with ToolCall._id and ToolCallFunction.Name created from the messageListAssistant
+			// The map contains only those tool calls, where functionName equals the toolChoiceFunctionName
+			Map<String, String> toolChoiceToolCallMap = new HashMap<>();
+
+			for (Message message : messageListAssistant) {
+
+				// Get ToolCall list for each assistant message where the function name equals
+				// the function name from the tool choice (toolChoiceFunctionName)
+				List<ToolCall> toolCallList = Core.retrieveByPath(getContext(), message.getMendixObject(),
+								Message.MemberNames.Message_ToolCall.toString())
+						.stream()
+						.filter(mxObject -> {
+							return filterToolCallByFunctionName(toolChoiceFunctionName, mxObject);
+						})
+						.map(mxObject -> ToolCall.initialize(getContext(), mxObject))
+						.collect(Collectors.toList());
+
+				// Loop over toolCallList and add _id and functionName to a HashMap
+				for (ToolCall toolCall : toolCallList) {
+					String toolCallId = toolCall.getToolCallId();
+					String toolName = toolCall.getName();
+					toolChoiceToolCallMap.put(toolCallId, toolName);
+				}
+			}
+
+			// Loop over Tool messages and compare ToolCallId with Ids from Assistant
+			// messages in HashMap to see whether the function from the Tool Choice has
+			// already been called
+			for (Message messageTool : messageListTool) {
+				String toolId = messageTool.getToolCallId();
+				if (toolChoiceToolCallMap.containsKey(toolId)) {
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		private boolean filterToolCallByFunctionName(String toolChoiceFunctionName, IMendixObject mxObject) {
+			String functionName = "";
+			functionName = ToolCall.initialize(getContext(), mxObject).getName();
+			// Return true if the functionName equals toolChoiceFunctionName
+			return functionName.equals(toolChoiceFunctionName);
+		}
 	// END EXTRA CODE
 }

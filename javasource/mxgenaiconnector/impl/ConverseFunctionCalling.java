@@ -1,6 +1,9 @@
 package mxgenaiconnector.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -14,71 +17,18 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 import mxgenaiconnector.proxies.RequestExtension;
+import openaiconnector.genaicommonsimpl.MessageImpl;
 import mxgenaiconnector.genaicommons_impl.FunctionMappingImpl;
 import genaicommons.proxies.ENUM_MessageRole;
+import genaicommons.proxies.Message;
 import genaicommons.proxies.Request;
+import genaicommons.proxies.Tool;
+import genaicommons.proxies.ToolCall;
 
 
 public class ConverseFunctionCalling{
 	
-	private static final ObjectMapper MAPPER = new ObjectMapper();
-	
-	//........Add ToolConfig to Request........
-	
-	//Creates toolConfig node
-	public static void addToolConfig(ObjectNode rootNode) {
-		if(rootNode == null || (rootNode.path("toolConfig").asText().isBlank() && rootNode.path("toolConfig").path("tools").size() == 0)) {
-			//If there is no ToolCollection (toolConfig), this needs to be removed
-			rootNode.remove("toolConfig");
-			return;
-		}
-		
-		ArrayNode toolsNode = (ArrayNode) rootNode.path("toolConfig").path("tools");
-		for (int i = 0; i < toolsNode.size(); i++) {
-			JsonNode toolNode = toolsNode.get(i);
-			String microflow = toolNode.path("microflow").asText();
-			if (microflow.isBlank() == false) {
-				ObjectNode toolNodeObject = (ObjectNode) toolNode;
-				setInputSchemaForToolNode(microflow,toolNodeObject);
-				
-				//Add toolSpec node around tool
-				ObjectNode toolSpecNode = MAPPER.createObjectNode();
-				toolSpecNode.set("toolSpec",toolNode);
-				//Existing node is replaced by new toolSpec node.
-				toolsNode.set(i,toolSpecNode);
-				
-				//Remove functionMicrofow node which is not part of the Converse request
-				((ObjectNode) toolNode).remove("microflow");
-			}
-		}
-	}
-	
-	//This will create the input schema JSON needed for specifying the input of a tool
-	private static void setInputSchemaForToolNode(String microflow, ObjectNode toolNode) {
-		
-		// Create the root object node
-        ObjectNode inputSchemaNode = MAPPER.createObjectNode();
-        inputSchemaNode.put("type", "object");
-
-        // Create the properties node (if input parameter is available)
-        String parameterName = FunctionMappingImpl.getFirstInputParamName(microflow);
-		if(parameterName != null && parameterName.isBlank() == false) {
-			ObjectNode propertiesNode = MAPPER.createObjectNode();
-	        ObjectNode fieldNode = MAPPER.createObjectNode();
-	        fieldNode.put("type", "string");
-	        propertiesNode.set(parameterName, fieldNode);
-	        inputSchemaNode.set("properties", propertiesNode);
-	        inputSchemaNode.putArray("required").add(parameterName);
-		}
-        
-        //Add a "json" wrapper around the inputSchema
-        ObjectNode jsonNode = MAPPER.createObjectNode();
-        jsonNode.set("json", inputSchemaNode);
-        
-        //Set the whole InputSchema as new node to toolNode
-        toolNode.set("inputSchema",jsonNode);
-	}
-	
+	private static final ObjectMapper MAPPER = new ObjectMapper();	
 	
 	//........Handle ToolCall and ToolResult........
 	
