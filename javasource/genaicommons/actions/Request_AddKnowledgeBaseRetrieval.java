@@ -19,7 +19,7 @@ import com.mendix.webui.CustomJavaAction;
 import genaicommons.impl.FunctionImpl;
 import genaicommons.impl.MxLogger;
 import genaicommons.impl.ToolCollectionImpl;
-import genaicommons.proxies.Connection;
+import genaicommons.proxies.DeployedKnowledgeBase;
 import genaicommons.proxies.KnowledgeBaseRetrieval;
 import genaicommons.proxies.MetadataCollection;
 import genaicommons.proxies.Tool;
@@ -34,10 +34,10 @@ public class Request_AddKnowledgeBaseRetrieval extends UserAction<IMendixObject>
 	private final genaicommons.proxies.Request Request;
 	private final java.lang.String ToolName;
 	private final java.lang.String RetrieveMicroflow;
-	/** @deprecated use Connection.getMendixObject() instead. */
+	/** @deprecated use DeployedKnowledgeBase.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
-	private final IMendixObject __Connection;
-	private final genaicommons.proxies.Connection Connection;
+	private final IMendixObject __DeployedKnowledgeBase;
+	private final genaicommons.proxies.DeployedKnowledgeBase DeployedKnowledgeBase;
 	private final java.lang.String ToolDescription;
 	/** @deprecated use MetadataCollection.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
@@ -51,7 +51,7 @@ public class Request_AddKnowledgeBaseRetrieval extends UserAction<IMendixObject>
 		IMendixObject _request,
 		java.lang.String _toolName,
 		java.lang.String _retrieveMicroflow,
-		IMendixObject _connection,
+		IMendixObject _deployedKnowledgeBase,
 		java.lang.String _toolDescription,
 		IMendixObject _metadataCollection,
 		java.math.BigDecimal _minimumSimilarity,
@@ -63,8 +63,8 @@ public class Request_AddKnowledgeBaseRetrieval extends UserAction<IMendixObject>
 		this.Request = _request == null ? null : genaicommons.proxies.Request.initialize(getContext(), _request);
 		this.ToolName = _toolName;
 		this.RetrieveMicroflow = _retrieveMicroflow;
-		this.__Connection = _connection;
-		this.Connection = _connection == null ? null : genaicommons.proxies.Connection.initialize(getContext(), _connection);
+		this.__DeployedKnowledgeBase = _deployedKnowledgeBase;
+		this.DeployedKnowledgeBase = _deployedKnowledgeBase == null ? null : genaicommons.proxies.DeployedKnowledgeBase.initialize(getContext(), _deployedKnowledgeBase);
 		this.ToolDescription = _toolDescription;
 		this.__MetadataCollection = _metadataCollection;
 		this.MetadataCollection = _metadataCollection == null ? null : genaicommons.proxies.MetadataCollection.initialize(getContext(), _metadataCollection);
@@ -83,7 +83,7 @@ public class Request_AddKnowledgeBaseRetrieval extends UserAction<IMendixObject>
 			
 			ToolCollection toolCollection = ToolCollectionImpl.getOrCreateToolCollection(getContext(), Request);
 			
-			IMendixObject knowledgeBaseRetrievalMxObject = createKnowledgeBaseRetrieval(getContext(), RetrieveMicroflow, ToolName, toolCollection, Connection).getMendixObject();
+			IMendixObject knowledgeBaseRetrievalMxObject = createKnowledgeBaseRetrieval(getContext(), RetrieveMicroflow, ToolName, toolCollection, DeployedKnowledgeBase).getMendixObject();
 			KnowledgeBaseRetrieval knowledgeBaseRetrieval = KnowledgeBaseRetrieval.load(getContext(), knowledgeBaseRetrievalMxObject.getId());
 			addOptionalParameters(knowledgeBaseRetrieval, ToolDescription, MetadataCollection, MinimumSimilarity, MaxNumberOfResults);
 			
@@ -128,11 +128,11 @@ public class Request_AddKnowledgeBaseRetrieval extends UserAction<IMendixObject>
 		}
 	}
 	
-	private static KnowledgeBaseRetrieval createKnowledgeBaseRetrieval(IContext context, String microflow, String name, ToolCollection toolCollection, Connection connection) throws CoreException {
+	private static KnowledgeBaseRetrieval createKnowledgeBaseRetrieval(IContext context, String microflow, String name, ToolCollection toolCollection, DeployedKnowledgeBase deployedKnowledgeBase) throws CoreException {
 		KnowledgeBaseRetrieval knowledgeBaseRetrieval = new KnowledgeBaseRetrieval(context);
 		knowledgeBaseRetrieval.setMicroflow(microflow);
 		knowledgeBaseRetrieval.setName(name);	
-		knowledgeBaseRetrieval.setKnowledgeBaseRetrieval_Connection(connection);
+		knowledgeBaseRetrieval.setKnowledgeBaseRetrieval_DeployedKnowledgeBase(deployedKnowledgeBase);
 		List<Tool> ToolList = toolCollection.getToolCollection_Tool();
 		ToolList.add(knowledgeBaseRetrieval);
 		toolCollection.setToolCollection_Tool(ToolList); 

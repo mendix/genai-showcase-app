@@ -29,21 +29,21 @@ import com.mendix.systemwideinterfaces.core.UserAction;
  */
 public class KnowledgeBaseChunkList_Delete_ByMxObject extends UserAction<java.lang.Boolean>
 {
-	/** @deprecated use Connection.getMendixObject() instead. */
+	/** @deprecated use DeployedKnowledgeBase.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
-	private final IMendixObject __Connection;
-	private final genaicommons.proxies.Connection Connection;
+	private final IMendixObject __DeployedKnowledgeBase;
+	private final genaicommons.proxies.DeployedKnowledgeBase DeployedKnowledgeBase;
 	private final IMendixObject MxObject;
 
 	public KnowledgeBaseChunkList_Delete_ByMxObject(
 		IContext context,
-		IMendixObject _connection,
+		IMendixObject _deployedKnowledgeBase,
 		IMendixObject _mxObject
 	)
 	{
 		super(context);
-		this.__Connection = _connection;
-		this.Connection = _connection == null ? null : genaicommons.proxies.Connection.initialize(getContext(), _connection);
+		this.__DeployedKnowledgeBase = _deployedKnowledgeBase;
+		this.DeployedKnowledgeBase = _deployedKnowledgeBase == null ? null : genaicommons.proxies.DeployedKnowledgeBase.initialize(getContext(), _deployedKnowledgeBase);
 		this.MxObject = _mxObject;
 	}
 
@@ -59,7 +59,7 @@ public class KnowledgeBaseChunkList_Delete_ByMxObject extends UserAction<java.la
 			else {
 				ChunkUtils.addChunkWithMxObjectID(getContext(), MxObject, chunkList);
 			}
-			return mxgenaiconnector.proxies.microflows.Microflows.knowledgeBaseChunkList_Delete_FromKnowledgeBase(getContext(), chunkList, Connection);
+			return mxgenaiconnector.proxies.microflows.Microflows.knowledgeBaseChunkList_Delete_FromKnowledgeBase(getContext(), chunkList, DeployedKnowledgeBase);
 		} catch (Error e) {
 			LOGGER.error(e, "Delete was not successful.");
 			return false;

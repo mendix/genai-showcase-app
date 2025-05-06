@@ -35,10 +35,10 @@ import com.mendix.systemwideinterfaces.core.UserAction;
  */
 public class KnowledgeBaseChunkList_Retrieve_SetAssociation extends UserAction<java.util.List<IMendixObject>>
 {
-	/** @deprecated use Connection.getMendixObject() instead. */
+	/** @deprecated use DeployedKnowledgeBase.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
-	private final IMendixObject __Connection;
-	private final genaicommons.proxies.Connection Connection;
+	private final IMendixObject __DeployedKnowledgeBase;
+	private final genaicommons.proxies.DeployedKnowledgeBase DeployedKnowledgeBase;
 	private final java.lang.String TargetChunk;
 	/** @deprecated use MetadataCollection.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
@@ -49,7 +49,7 @@ public class KnowledgeBaseChunkList_Retrieve_SetAssociation extends UserAction<j
 
 	public KnowledgeBaseChunkList_Retrieve_SetAssociation(
 		IContext context,
-		IMendixObject _connection,
+		IMendixObject _deployedKnowledgeBase,
 		java.lang.String _targetChunk,
 		IMendixObject _metadataCollection,
 		java.lang.Long _maxNumberOfResults,
@@ -57,8 +57,8 @@ public class KnowledgeBaseChunkList_Retrieve_SetAssociation extends UserAction<j
 	)
 	{
 		super(context);
-		this.__Connection = _connection;
-		this.Connection = _connection == null ? null : genaicommons.proxies.Connection.initialize(getContext(), _connection);
+		this.__DeployedKnowledgeBase = _deployedKnowledgeBase;
+		this.DeployedKnowledgeBase = _deployedKnowledgeBase == null ? null : genaicommons.proxies.DeployedKnowledgeBase.initialize(getContext(), _deployedKnowledgeBase);
 		this.TargetChunk = _targetChunk;
 		this.__MetadataCollection = _metadataCollection;
 		this.MetadataCollection = _metadataCollection == null ? null : genaicommons.proxies.MetadataCollection.initialize(getContext(), _metadataCollection);
@@ -77,7 +77,7 @@ public class KnowledgeBaseChunkList_Retrieve_SetAssociation extends UserAction<j
 			
 			// call a microflow to retrieve chunks
 			java.util.List<KnowledgeBaseChunk> chunkList = mxgenaiconnector.proxies.microflows.Microflows.knowledgeBaseChunkList_Retrieve(
-					getContext(), MetadataCollection, MaxNumberOfResults, Connection, null, Offset);
+					getContext(), MetadataCollection, MaxNumberOfResults, DeployedKnowledgeBase, null, Offset);
 			
 			//map to target chunks to return
 			return ChunkUtils.getTargetChunkList(getContext(), chunkList, targetChunk);
