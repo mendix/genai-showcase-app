@@ -22,12 +22,12 @@ import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
+import genaicommons.impl.FunctionMappingImpl;
+import genaicommons.impl.MessageImpl;
 import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.Message;
 import genaicommons.proxies.ToolCall;
 import mxgenaiconnector.impl.ConverseVisionDocument;
-import mxgenaiconnector.genaicommons_impl.MessageImpl;
-import mxgenaiconnector.genaicommons_impl.FunctionMappingImpl;
 import mxgenaiconnector.impl.ConverseFunctionCalling;
 import mxgenaiconnector.impl.MxLogger;
 

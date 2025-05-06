@@ -12,12 +12,11 @@ package mxgenaiconnector.actions;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.webui.CustomJavaAction;
+import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 import genaicommons.proxies.KnowledgeBaseChunk;
 import mxgenaiconnector.impl.ChunkUtils;
 import mxgenaiconnector.impl.MxLogger;
-import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * Use this operation to retrieve chunks from a collection. This operation returns a list of KnowledgeBaseChunks.
