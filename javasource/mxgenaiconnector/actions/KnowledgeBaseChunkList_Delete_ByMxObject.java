@@ -15,6 +15,7 @@ import com.mendix.webui.CustomJavaAction;
 import genaicommons.proxies.KnowledgeBaseChunk;
 import mxgenaiconnector.impl.ChunkUtils;
 import mxgenaiconnector.impl.MxLogger;
+import mxgenaiconnector.proxies.Collection;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
@@ -59,7 +60,7 @@ public class KnowledgeBaseChunkList_Delete_ByMxObject extends UserAction<java.la
 			else {
 				ChunkUtils.addChunkWithMxObjectID(getContext(), MxObject, chunkList);
 			}
-			return mxgenaiconnector.proxies.microflows.Microflows.knowledgeBaseChunkList_Delete_FromKnowledgeBase(getContext(), chunkList, DeployedKnowledgeBase);
+			return mxgenaiconnector.proxies.microflows.Microflows.knowledgeBaseChunkList_Delete_FromKnowledgeBase(getContext(), chunkList, Collection.initialize(getContext(), DeployedKnowledgeBase.getMendixObject()));
 		} catch (Error e) {
 			LOGGER.error(e, "Delete was not successful.");
 			return false;

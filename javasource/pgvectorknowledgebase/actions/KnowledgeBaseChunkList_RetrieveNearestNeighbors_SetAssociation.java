@@ -35,10 +35,10 @@ import com.mendix.systemwideinterfaces.core.UserAction;
  */
 public class KnowledgeBaseChunkList_RetrieveNearestNeighbors_SetAssociation extends UserAction<java.util.List<IMendixObject>>
 {
-	/** @deprecated use Connection.getMendixObject() instead. */
+	/** @deprecated use DeployedKnowledgeBase.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
-	private final IMendixObject __Connection;
-	private final genaicommons.proxies.Connection Connection;
+	private final IMendixObject __DeployedKnowledgeBase;
+	private final genaicommons.proxies.DeployedKnowledgeBase DeployedKnowledgeBase;
 	private final java.lang.String TargetChunk;
 	private final java.lang.String Vector;
 	/** @deprecated use MetadataCollection.getMendixObject() instead. */
@@ -50,7 +50,7 @@ public class KnowledgeBaseChunkList_RetrieveNearestNeighbors_SetAssociation exte
 
 	public KnowledgeBaseChunkList_RetrieveNearestNeighbors_SetAssociation(
 		IContext context,
-		IMendixObject _connection,
+		IMendixObject _deployedKnowledgeBase,
 		java.lang.String _targetChunk,
 		java.lang.String _vector,
 		IMendixObject _metadataCollection,
@@ -59,8 +59,8 @@ public class KnowledgeBaseChunkList_RetrieveNearestNeighbors_SetAssociation exte
 	)
 	{
 		super(context);
-		this.__Connection = _connection;
-		this.Connection = _connection == null ? null : genaicommons.proxies.Connection.initialize(getContext(), _connection);
+		this.__DeployedKnowledgeBase = _deployedKnowledgeBase;
+		this.DeployedKnowledgeBase = _deployedKnowledgeBase == null ? null : genaicommons.proxies.DeployedKnowledgeBase.initialize(getContext(), _deployedKnowledgeBase);
 		this.TargetChunk = _targetChunk;
 		this.Vector = _vector;
 		this.__MetadataCollection = _metadataCollection;
@@ -80,7 +80,7 @@ public class KnowledgeBaseChunkList_RetrieveNearestNeighbors_SetAssociation exte
 			
 			// call a microflow to retrieve chunks
 			java.util.List<KnowledgeBaseChunk> chunkList = pgvectorknowledgebase.proxies.microflows.Microflows.knowledgeBaseChunkList_RetrieveNearestNeighbors(
-					getContext(), Vector, MinimumSimilarity, MaxNumberOfResults, Connection, MetadataCollection);
+					getContext(), Vector, MinimumSimilarity, MaxNumberOfResults, DeployedKnowledgeBase, MetadataCollection);
 			
 			//map to target chunks to return
 			return ChunkUtils.getTargetChunkList(getContext(), chunkList, targetChunk);
