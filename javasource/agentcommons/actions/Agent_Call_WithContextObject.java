@@ -9,6 +9,7 @@
 
 package agentcommons.actions;
 
+import static java.util.Objects.requireNonNull;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
@@ -48,12 +49,13 @@ public class Agent_Call_WithContextObject extends UserAction<IMendixObject>
 	{
 		// BEGIN USER CODE
 		try{
-			PromptToUse promptToUse = Core.userActionCall(PromptToUse_GetAndReplace.class.getName())
-					.withParams(Agent, ContextObject)
+			requireNonNull(Agent, "Agent is required.");
+			IMendixObject returnValue = Core.userActionCall("AgentCommons." + PromptToUse_GetAndReplace.class.getSimpleName())
+					.withParams(Agent.getMendixObject(), ContextObject)
 					.execute(getContext());
+			PromptToUse promptToUse = PromptToUse.initialize(getContext(), returnValue);
 			agentcommons.proxies.microflows.Microflows.request_AddAgentCapabilities(getContext(), Request, promptToUse);
 			return genaicommons.proxies.microflows.Microflows.chatCompletions_WithHistory(getContext(), Request, Agent.getAgent_DeployedModel()).getMendixObject();
-			
 			
 		} catch (Exception e) {
 		    LOGGER.error(e);
