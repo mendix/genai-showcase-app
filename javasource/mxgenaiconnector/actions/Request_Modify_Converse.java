@@ -179,41 +179,46 @@ public class Request_Modify_Converse extends UserAction<java.lang.String>
 				return;
 			}
 			JsonNode toolChoiceNode = toolConfig.path("toolChoice");
-			if (toolChoiceNode != null && toolChoiceNode.isObject()) {
-	            String toolType = toolChoiceNode.has("toolChoiceType") ? toolChoiceNode.path("toolChoiceType").asText() : "";
-	            switch (toolType) {
-	            	//"tool" choice can only be used once for the same function to prevent infinity loops
-	                case "tool":
-	                	JsonNode toolNode = toolChoiceNode.get("tool");
-	                	if(!toolNode.isEmpty() && isToolRecall(toolNode.path("name").asText())) {
-	                		((ObjectNode) toolConfig).remove("toolChoice");
-	                	}
-	                    break;
-	                
-	                //"any" choice can only be used once at the first iteration to prevent infinity loops
-	                case "any":
-	                	if(getToolCallMessages().size() == 0) {
-	                		ObjectNode wrapper = MAPPER.createObjectNode();
-		                    wrapper.set(toolType, MAPPER.createObjectNode());
-		                    ((ObjectNode) toolConfig).set("toolChoice", wrapper);
-	                	}
-	                	else {
-	                		((ObjectNode) toolConfig).remove("toolChoice");
-	                	}
-	                	break;
-	                //"auto" is the default
-	   	            case "auto":
-	   	            	ObjectNode wrapper = MAPPER.createObjectNode();
+			
+			if(toolChoiceNode.isEmpty()) {
+				((ObjectNode) toolConfig).remove("toolChoice");
+				return;
+			}
+	
+            String toolType = toolChoiceNode.has("toolChoiceType") ? toolChoiceNode.path("toolChoiceType").asText() : "";
+            switch (toolType) {
+            	//"tool" choice can only be used once for the same function to prevent infinity loops
+                case "tool":
+                	JsonNode toolNode = toolChoiceNode.get("tool");
+                	if(!toolNode.isEmpty() && isToolRecall(toolNode.path("name").asText())) {
+                		((ObjectNode) toolConfig).remove("toolChoice");
+                	}
+                    break;
+                
+                //"any" choice can only be used once at the first iteration to prevent infinity loops
+                case "any":
+                	if(getToolCallMessages().size() == 0) {
+                		ObjectNode wrapper = MAPPER.createObjectNode();
 	                    wrapper.set(toolType, MAPPER.createObjectNode());
 	                    ((ObjectNode) toolConfig).set("toolChoice", wrapper);
-	                    break;
+                	}
+                	else {
+                		((ObjectNode) toolConfig).remove("toolChoice");
+                	}
+                	break;
+                //"auto" is the default
+   	            case "auto":
+   	            	ObjectNode wrapper = MAPPER.createObjectNode();
+                    wrapper.set(toolType, MAPPER.createObjectNode());
+                    ((ObjectNode) toolConfig).set("toolChoice", wrapper);
+                    break;
 
-	                default:
-	                    LOGGER.warn(("Unknown or missing type for ToolChoice: " + toolType));
-	                    break;
-	            }
-	            ((ObjectNode) toolChoiceNode).remove("toolChoiceType");
-	        }
+                default:
+                    LOGGER.warn(("Unknown or missing type for ToolChoice: " + toolType));
+                    break;
+            }
+            ((ObjectNode) toolChoiceNode).remove("toolChoiceType");
+	        
 			
 		}
 		
