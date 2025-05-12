@@ -17,6 +17,9 @@ import com.mendix.systemwideinterfaces.core.UserAction;
 import agentcommons.impl.MxLogger;
 import agentcommons.proxies.PromptToUse;
 
+/**
+ * This action calls the Agent with the specified request. It executes a Chat Completions (With History) operation based on the defined Agent. All agent configurations, such as the selected model, system prompt, tools, knowledge base or model parameter settings are used. If a context object is passed, all variables are replaced in the system prompt. A response is returned that contains the final assistant's message.
+ */
 public class Agent_Call_WithHistory extends UserAction<IMendixObject>
 {
 	/** @deprecated use Agent.getMendixObject() instead. */

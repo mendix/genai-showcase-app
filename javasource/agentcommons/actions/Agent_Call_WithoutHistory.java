@@ -15,10 +15,14 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import agentcommons.impl.MxLogger;
+import agentcommons.proxies.ENUM_Agent_UsageType;
 import agentcommons.proxies.PromptToUse;
 import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.Request;
 
+/**
+ * This action calls the Agent with the specified request. It executes a Chat Completions operation based on the defined Agent. All agent configurations, such as the selected model, system prompt, user prompt, tools, knowledge base or model parameter settings are used. If a context object is passed, all variables are replaced in the system prompt. A response is returned that contains the final assistant's message.
+ */
 public class Agent_Call_WithoutHistory extends UserAction<IMendixObject>
 {
 	/** @deprecated use Agent.getMendixObject() instead. */
@@ -59,6 +63,8 @@ public class Agent_Call_WithoutHistory extends UserAction<IMendixObject>
 		// BEGIN USER CODE
 		try{
 			requireNonNull(Agent, "Agent is required.");
+			if (Agent.getUsageType() != ENUM_Agent_UsageType.Single_Call)
+				throw new IllegalArgumentException("The passed agent must be of usage type single call. Use Call Agent With History instead.");
 			IMendixObject promptObject = Core.userActionCall("AgentCommons." + PromptToUse_GetAndReplace.class.getSimpleName())
 					.withParams(Agent.getMendixObject(), OptionalContextObject)
 					.execute(getContext());
