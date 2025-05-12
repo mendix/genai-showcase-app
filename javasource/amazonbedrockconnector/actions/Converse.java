@@ -700,8 +700,8 @@ public class Converse extends UserAction<IMendixObject>
 	// Getting the Input Schema of a Tool
 	private ToolInputSchema getToolInputSchema(Tool mxTool) throws JsonProcessingException {
 		// All Tools to be called are function objects
-		Function function = (Function) mxTool;
-		String inputParamName = FunctionMappingImpl.getFirstInputParamName(function.getMicroflow());
+		//Function function = (Function) mxTool;
+		String inputParamName = FunctionMappingImpl.getFirstInputParamName(mxTool.getMicroflow());
 		if (inputParamName == null) {
 			LOGGER.debug("Function Microflow without input parameter");
 			
