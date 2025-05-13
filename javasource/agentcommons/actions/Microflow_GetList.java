@@ -10,10 +10,12 @@
 package agentcommons.actions;
 
 import java.util.stream.Collectors;
+import java.util.List;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IDataType;
 import agentcommons.proxies.Microflow;
+import agentcommons.proxies.Module;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
@@ -28,8 +30,9 @@ public class Microflow_GetList extends UserAction<java.util.List<IMendixObject>>
 	public java.util.List<IMendixObject> executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		java.util.List<Module>;
-		java.util.List<IMendixObject> modelMicroflowList = Core.getMicroflowNames().stream()
+		//List<Module> moduleList;
+		
+		List<IMendixObject> modelMicroflowList = Core.getMicroflowNames().stream()
 				.filter(microflowName -> !microflowName.isBlank() && microflowName.contains("."))
 				.filter(microflow -> Core.getReturnType(microflow).getType().equals(IDataType.DataTypeEnum.String))
 				.sorted()
@@ -39,6 +42,12 @@ public class Microflow_GetList extends UserAction<java.util.List<IMendixObject>>
 		        	microflowImport.setValue(getContext(), Microflow.MemberNames.FullName.toString(), microflowName);
 		        	microflowImport.setValue(getContext(), Microflow.MemberNames.ModuleName.toString(), parts[0]);
 		        	microflowImport.setValue(getContext(), Microflow.MemberNames.MicroflowName.toString(), parts[1]);
+		        	/*if(moduleList.isEmpty()) {
+		        		Module module = new Module(getContext());
+		        		module.setModuleName(parts[0]);
+		        		microflowImport.set(getContext(), Microflow.MemberNames.Microflow_Module, module.getMendixObject().);
+		        		
+		        	}*/
 		        	return microflowImport;
 				})
 				.collect(Collectors.toList());
