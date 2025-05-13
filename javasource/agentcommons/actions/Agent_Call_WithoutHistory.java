@@ -19,6 +19,7 @@ import agentcommons.proxies.ENUM_Agent_UsageType;
 import agentcommons.proxies.PromptToUse;
 import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.Request;
+import genaicommons.proxies.Response;
 
 /**
  * This action calls the Agent with the specified request. It executes a Chat Completions operation based on the defined Agent. All agent configurations, such as the selected model, system prompt, user prompt, tools, knowledge base or model parameter settings are used. If a context object is passed, all variables are replaced in the system and user prompt. A response is returned that contains the final assistant's message.
@@ -74,7 +75,8 @@ public class Agent_Call_WithoutHistory extends UserAction<IMendixObject>
 			Request request = genaicommons.proxies.microflows.Microflows.request_GetCreate(getContext(), OptionalRequest);
 			agentcommons.proxies.microflows.Microflows.request_AddAgentCapabilities(getContext(), request, promptToUse);
 			genaicommons.proxies.microflows.Microflows.request_AddMessage(getContext(), request, ENUM_MessageRole.user, OptionalFileCollection, promptToUse.getUserPrompt());
-			return genaicommons.proxies.microflows.Microflows.chatCompletions_WithHistory(getContext(), request, Agent.getAgent_DeployedModel()).getMendixObject();
+			Response response = genaicommons.proxies.microflows.Microflows.chatCompletions_WithHistory(getContext(), request, Agent.getAgent_DeployedModel());
+			return response.getMendixObject();
 			
 		} catch (Exception e) {
 		    LOGGER.error(e);
