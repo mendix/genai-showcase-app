@@ -21,7 +21,7 @@ import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.Request;
 
 /**
- * This action calls the Agent with the specified request. It executes a Chat Completions operation based on the defined Agent. All agent configurations, such as the selected model, system prompt, user prompt, tools, knowledge base or model parameter settings are used. If a context object is passed, all variables are replaced in the system prompt. A response is returned that contains the final assistant's message.
+ * This action calls the Agent with the specified request. It executes a Chat Completions operation based on the defined Agent. All agent configurations, such as the selected model, system prompt, user prompt, tools, knowledge base or model parameter settings are used. If a context object is passed, all variables are replaced in the system and user prompt. A response is returned that contains the final assistant's message.
  */
 public class Agent_Call_WithoutHistory extends UserAction<IMendixObject>
 {

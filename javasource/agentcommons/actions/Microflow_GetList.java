@@ -12,6 +12,7 @@ package agentcommons.actions;
 import java.util.stream.Collectors;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
+import com.mendix.systemwideinterfaces.core.IDataType;
 import agentcommons.proxies.Microflow;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
@@ -27,8 +28,10 @@ public class Microflow_GetList extends UserAction<java.util.List<IMendixObject>>
 	public java.util.List<IMendixObject> executeAction() throws Exception
 	{
 		// BEGIN USER CODE
+		java.util.List<Module>;
 		java.util.List<IMendixObject> modelMicroflowList = Core.getMicroflowNames().stream()
 				.filter(microflowName -> !microflowName.isBlank() && microflowName.contains("."))
+				.filter(microflow -> Core.getReturnType(microflow).getType().equals(IDataType.DataTypeEnum.String))
 				.sorted()
 				.map(microflowName -> {
 					IMendixObject microflowImport = Core.instantiate(getContext(), Microflow.getType());
