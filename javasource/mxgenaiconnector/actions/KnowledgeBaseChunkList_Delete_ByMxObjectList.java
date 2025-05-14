@@ -23,8 +23,7 @@ import com.mendix.systemwideinterfaces.core.UserAction;
  * Use this operation to delete existing chunks in a collection based on the MxObjectID. 
  * MxObjectList is the list of (original) Mendix objects that the chunks in the knowledge base represent. Only chunks related to these Mendix objects are to be deleted.
  * 
- * The Connection entity passed must be of type MxKnowledgeBaseConnection and must contain the CollectionName string attribute filled and a MxCloudKnowledgeBase associated with the connection details to the knowledge base. By providing the CollectionName on the Connection, you determine the collection from which the chunks should be deleted.
- * Use MxKnowledgeBaseConnection_Create to create it.
+ * The DeployedKnowledgeBase entity passed must be of type Collection and must contain the Name string attribute filled and a MxCloudKnowledgeBaseResource associated with the connection details to the knowledge base. By providing the Name on the DeployedKnowledgeBase, you determine the collection from which the chunks should be deleted.
  * 
  * Once deleted, chunks are no longer available for read operations in the KB after 60-120 seconds due to asynchronous data synchronization for better scalability.
  */

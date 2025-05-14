@@ -111,8 +111,8 @@ public class Request_AddKnowledgeBaseRetrieval extends UserAction<IMendixObject>
 	
 	private static void validateInput(String microflow, String toolName) throws Exception{
 		requireNonNull(toolName, "Tool Name is required.");
-		if(!microflow.isBlank()) {
-			FunctionImpl.validateFunctionMicroflow(microflow);
+		if(microflow == null || microflow.isBlank()) {
+			throw new IllegalArgumentException("Microflow is required.");
 		}
 	}
 	

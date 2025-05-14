@@ -28,8 +28,7 @@ import com.mendix.systemwideinterfaces.core.UserAction;
  * -MetadataCollection: when provided, this operation only returns chunks that are conform with all of the metadata key/value pairs in the list.
  * -MxObject: This is the (original) Mendix object that the chunks in the collection represent. Only chunks related to this Mendix object are retrieved. If no filtering on Mendix object is needed, you can pass "empty".
  * 
- * The Connection entity passed must be of type MxKnowledgeBaseConnection and must contain the CollectionName string attribute filled and a MxCloudKnowledgeBase associated with the connection details to the knowledge base service. By providing the Collection on the Connection, you determine the collection for which the retrieve should happen. 
- * Use MxKnowledgeBaseConnection_Create to create it.
+ * The DeployedKnowledgeBase entity passed must be of type Collection and must contain the Name string attribute filled and a MxCloudKnowledgeBaseResource associated with the connection details to the knowledge base. By providing the Name on the DeployedKnowledgeBase, you determine the collection for which the retrieve should happen. 
  * 
  * Previously inserted or changed chunks are only available in the knowledge base after 60-120 seconds due to asynchronous data synchronization for better scalability.
  */
