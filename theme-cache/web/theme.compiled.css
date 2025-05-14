@@ -28742,6 +28742,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: inline;
 }
 
+.margin-top-medium {
+  margin-top: 16px;
+}
+
 .inline-link.mx-link {
   padding-left: 4px;
   line-height: 1.7857142863;

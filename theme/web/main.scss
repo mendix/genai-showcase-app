@@ -93,6 +93,10 @@ $brand-openai: #0078D4;
   display: inline;
 }
 
+.margin-top-medium{
+  margin-top: $spacing-medium;
+}
+
 .inline-link.mx-link {
   padding-left: $spacing-smaller;
   line-height: $line-height-base * 1.25;
