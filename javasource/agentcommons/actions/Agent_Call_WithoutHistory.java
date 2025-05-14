@@ -76,7 +76,7 @@ public class Agent_Call_WithoutHistory extends UserAction<IMendixObject>
 			agentcommons.proxies.microflows.Microflows.request_AddAgentCapabilities(getContext(), request, promptToUse);
 			genaicommons.proxies.microflows.Microflows.request_AddMessage(getContext(), request, ENUM_MessageRole.user, OptionalFileCollection, promptToUse.getUserPrompt());
 			Response response = genaicommons.proxies.microflows.Microflows.chatCompletions_WithHistory(getContext(), request, Agent.getAgent_DeployedModel());
-			return response.getMendixObject();
+			return response == null ? null : response.getMendixObject();
 			
 		} catch (Exception e) {
 		    LOGGER.error(e);
