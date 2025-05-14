@@ -1,3 +1,4 @@
+@import "../../themesource/atlas_core/web/_variables.scss";
 @import "custom-variables";
 
 $brand-aws: #EC7211;
@@ -95,6 +96,10 @@ $brand-openai: #0078D4;
 
 .margin-top-medium{
   margin-top: $spacing-medium;
+}
+
+.margin-right-xxs{
+  margin-right: $spacing-smallest;
 }
 
 .inline-link.mx-link {
