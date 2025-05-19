@@ -127,7 +127,7 @@
         width: 40%;
         display: flex;
         flex-direction: column;
-        
+
         .card {
             overflow: visible;
             margin-left: $spacing-large / 2;
@@ -166,7 +166,7 @@
         display: flex;
         flex-direction: column;
         height: 100%;
-        
+
         .card {
             flex-grow: 1;
             margin-left: $spacing-large / 2;
@@ -183,19 +183,17 @@
             max-height: 25rem;
             margin-bottom: 0;
             padding-right: 8px;
-    }
-
-    .card-header {
-        position: sticky;
-        display: flex;
-        flex-direction: row;
-        padding-bottom: 10px;
-        z-index: 1;
-        &--version{
-            z-index: 1; 
         }
-    }
 
+        .card-header {
+            display: flex;
+            flex-direction: row;
+            padding-bottom: 10px;
+
+            &--version {
+                z-index: 1;
+            }
+        }
     }
 
     .panel-header {
@@ -209,16 +207,18 @@
         padding-right: $spacing-small;
         height: fit-content;
 
-        .header-text{
+        .header-text {
             flex-direction: column;
             margin-left: $spacing-medium;
             padding-right: $spacing-small;
             padding-bottom: $spacing-small;
         }
+
         .icon-area {
             margin-top: $spacing-small;
             margin-left: auto;
             max-width: 75px;
+
             .new-chat-icon {
                 img {
                     height: 24px;
@@ -226,18 +226,20 @@
                     margin-right: 0;
                 }
             }
+
             .close-icon {
                 border-left: 2px solid $gray-primary;
                 padding-left: $spacing-small;
                 margin-right: $spacing-small;
                 margin-left: $spacing-small;
                 height: fit-content;
+
                 img {
                     height: 24px;
                     width: 24px;
                     margin-right: 0;
                 }
-            } 
+            }
         }
     }
 
@@ -252,20 +254,19 @@
         overflow-y: auto;
         overflow-x: hidden;
         margin-bottom: 0;
-      
+
     }
 
     .card-header {
-        position: sticky;
         display: flex;
         flex-direction: row;
-        z-index: 1;
-        &--version{
-            z-index: 2; 
+
+        &--version {
+            z-index: 1;
         }
     }
 
-    
+
 }
 
 //Tables
@@ -296,6 +297,7 @@
 
 .output-align-header {
     margin-right: 2.2%;
+
     @supports (-moz-appearance: none) {
         margin-right: $spacing-medium;
     }

@@ -28867,11 +28867,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding-right: 8px;
 }
 .agent-page-container .content-fullwidth .card-header {
-  position: sticky;
   display: flex;
   flex-direction: row;
   padding-bottom: 10px;
-  z-index: 1;
 }
 .agent-page-container .content-fullwidth .card-header--version {
   z-index: 1;
@@ -28926,13 +28924,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-bottom: 0;
 }
 .agent-page-container .card-header {
-  position: sticky;
   display: flex;
   flex-direction: row;
-  z-index: 1;
 }
 .agent-page-container .card-header--version {
-  z-index: 2;
+  z-index: 1;
 }
 
 .table-header {
