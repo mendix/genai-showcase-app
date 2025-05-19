@@ -29063,6 +29063,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin: 0;
 }
 
+.tooltip-container .form-group {
+  flex: 1;
+}
+.tooltip-container .widget-tooltip {
+  margin-bottom: 16px;
+  align-self: flex-end;
+  padding-bottom: 9px;
+}
+
 .layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a img {
   width: 52px;
   padding: 4px 14px;

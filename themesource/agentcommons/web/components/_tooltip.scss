@@ -76,3 +76,14 @@
         margin: 0;
     }
 }
+
+.tooltip-container{
+    .form-group {
+        flex: 1
+    }
+    .widget-tooltip{
+        margin-bottom: $form-group-margin-bottom;
+        align-self: flex-end;
+        padding-bottom: calc($form-input-padding-y + 1px); 
+    }
+}
