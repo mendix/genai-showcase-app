@@ -11,7 +11,6 @@ package mxgenaiconnector.actions;
 
 import java.util.ArrayList;
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.webui.CustomJavaAction;
 import genaicommons.proxies.KnowledgeBaseChunk;
 import mxgenaiconnector.impl.ChunkUtils;
 import mxgenaiconnector.impl.MxLogger;
