@@ -28700,6 +28700,17 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border: 1px solid #f8f8f8;
 }
 
+.custom-control-label {
+  display: block;
+  overflow: hidden;
+  margin-bottom: 4px;
+  text-align: left;
+  text-overflow: ellipsis;
+  color: #0a1325;
+  font-size: 14px;
+  font-weight: 600;
+}
+
 .agents-page-content-container {
   min-height: -webkit-fill-available;
   min-height: -moz-available;
@@ -28856,11 +28867,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding-right: 8px;
 }
 .agent-page-container .content-fullwidth .card-header {
-  position: sticky;
   display: flex;
   flex-direction: row;
   padding-bottom: 10px;
-  z-index: 1;
 }
 .agent-page-container .content-fullwidth .card-header--version {
   z-index: 1;
@@ -28915,13 +28924,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-bottom: 0;
 }
 .agent-page-container .card-header {
-  position: sticky;
   display: flex;
   flex-direction: row;
-  z-index: 1;
 }
 .agent-page-container .card-header--version {
-  z-index: 2;
+  z-index: 1;
 }
 
 .table-header {
@@ -29007,6 +29014,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border-radius: 4px;
   color: black;
 }
+.agent-tooltip .mx-link {
+  font-weight: normal;
+  line-height: 1.7857142863;
+}
 
 .agent-tooltip-w330 .widget-tooltip-content {
   width: 330px;
@@ -29050,6 +29061,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .custom-tooltip-listview ul {
   padding: 0;
   margin: 0;
+}
+
+.tooltip-container .form-group {
+  flex: 1;
+}
+.tooltip-container .widget-tooltip {
+  margin-bottom: 16px;
+  align-self: flex-end;
+  padding-bottom: 9px;
 }
 
 .layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a img {

@@ -10,37 +10,59 @@
 package agentcommons.actions;
 
 import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
+import com.mendix.systemwideinterfaces.core.IDataType;
+import agentcommons.impl.MxLogger;
 import agentcommons.proxies.Microflow;
+import agentcommons.proxies.Module;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
 public class Microflow_GetList extends UserAction<java.util.List<IMendixObject>>
 {
-	public Microflow_GetList(IContext context)
+	/** @deprecated use MicroflowSelection.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __MicroflowSelection;
+	private final agentcommons.proxies.MicroflowSelection MicroflowSelection;
+
+	public Microflow_GetList(
+		IContext context,
+		IMendixObject _microflowSelection
+	)
 	{
 		super(context);
+		this.__MicroflowSelection = _microflowSelection;
+		this.MicroflowSelection = _microflowSelection == null ? null : agentcommons.proxies.MicroflowSelection.initialize(getContext(), _microflowSelection);
 	}
 
 	@java.lang.Override
 	public java.util.List<IMendixObject> executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		java.util.List<IMendixObject> modelMicroflowList = Core.getMicroflowNames().stream()
+		try {
+			List<IMendixObject> modelMicroflowList = Core.getMicroflowNames().stream()
 				.filter(microflowName -> !microflowName.isBlank() && microflowName.contains("."))
+				.filter(microflow -> Core.getReturnType(microflow).getType().equals(IDataType.DataTypeEnum.String))
 				.sorted()
 				.map(microflowName -> {
-					IMendixObject microflowImport = Core.instantiate(getContext(), Microflow.getType());
+					Microflow microflowImport = new Microflow(getContext());
 		        	String[] parts = microflowName.split("\\.", 2);
-		        	microflowImport.setValue(getContext(), Microflow.MemberNames.FullName.toString(), microflowName);
-		        	microflowImport.setValue(getContext(), Microflow.MemberNames.ModuleName.toString(), parts[0]);
-		        	microflowImport.setValue(getContext(), Microflow.MemberNames.MicroflowName.toString(), parts[1]);
-		        	return microflowImport;
+		        	microflowImport.setFullName(microflowName);
+		        	microflowImport.setMicroflowName(parts[1]);
+		        	Module module = getCreateModule(parts[0]);
+		        	microflowImport.setMicroflow_Module(module);
+		        	return microflowImport.getMendixObject();
 				})
 				.collect(Collectors.toList());
-		
-		return modelMicroflowList; 
+			MicroflowSelection.setMicroflowSelection_Module(moduleList);
+			return modelMicroflowList; 
+		} catch (Exception e) {
+		    LOGGER.error(e);
+		    return null;
+		}
 		// END USER CODE
 	}
 
@@ -55,5 +77,24 @@ public class Microflow_GetList extends UserAction<java.util.List<IMendixObject>>
 	}
 
 	// BEGIN EXTRA CODE
+	private static final MxLogger LOGGER = new MxLogger(Microflow_GetList.class);
+	private List<Module> moduleList = new ArrayList<Module>();
+
+	
+	private Module getCreateModule(String moduleName) {
+		Module moduleInList = moduleList.stream()
+				.filter(o -> o.getModuleName().equals(moduleName))
+				.findFirst()
+				.orElse(null);
+		
+		if(moduleInList != null) {
+			return moduleInList;
+		}
+		
+		Module module = new Module(getContext());
+		module.setModuleName(moduleName);
+		moduleList.add(module);
+		return module;
+	}
 	// END EXTRA CODE
 }
