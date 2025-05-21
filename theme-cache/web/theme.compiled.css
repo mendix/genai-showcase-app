@@ -29014,6 +29014,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border-radius: 4px;
   color: black;
 }
+.agent-tooltip .mx-link {
+  font-weight: normal;
+  line-height: 1.7857142863;
+}
 
 .agent-tooltip-w330 .widget-tooltip-content {
   width: 330px;

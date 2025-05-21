@@ -1,9 +1,11 @@
 @import "../../../../theme/web/custom-variables.scss";
 @import "../../../atlas_core/web/_variables.scss";
+
 .hide-tooltip {
     .widget-tooltip-arrow-top {
         display: none;
     }
+
     .widget-tooltip-content {
         display: none;
     }
@@ -13,11 +15,16 @@
     .widget-tooltip-content {
         position: relative;
         z-index: 1000;
-        text-align: unset; 
+        text-align: unset;
         word-break: break-word;
         background-color: white;
         border-radius: 4px;
         color: black;
+    }
+
+    .mx-link {
+        font-weight: normal;
+        line-height: $line-height-base * 1.25;
     }
 }
 
@@ -77,13 +84,14 @@
     }
 }
 
-.tooltip-container{
+.tooltip-container {
     .form-group {
         flex: 1
     }
-    .widget-tooltip{
+
+    .widget-tooltip {
         margin-bottom: $form-group-margin-bottom;
         align-self: flex-end;
-        padding-bottom: calc($form-input-padding-y + 1px); 
+        padding-bottom: calc($form-input-padding-y + 1px);
     }
 }
