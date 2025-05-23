@@ -37,6 +37,7 @@ import amazonbedrockconnector.impl.AmazonBedrockClient;
 import amazonbedrockconnector.impl.MxLogger;
 import amazonbedrockconnector.proxies.AbstractRequestParameter;
 import amazonbedrockconnector.proxies.ChatCompletionsResponse;
+import amazonbedrockconnector.proxies.ComputerUseTool;
 import amazonbedrockconnector.proxies.DecimalRequestParameter;
 import amazonbedrockconnector.proxies.IntegerRequestParameter;
 import amazonbedrockconnector.proxies.RequestedResponseField;
@@ -45,9 +46,11 @@ import amazonbedrockconnector.proxies.StringRequestParameter;
 import genaicommons.proxies.ENUM_FileType;
 import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.ENUM_ToolChoice;
+import genaicommons.proxies.Computer;
 import genaicommons.proxies.FileCollection;
 import genaicommons.proxies.FileContent;
 import genaicommons.proxies.Function;
+import genaicommons.proxies.KnowledgeBaseChunk;
 import genaicommons.proxies.Request;
 import genaicommons.proxies.Response;
 import genaicommons.proxies.StopSequence;
@@ -239,6 +242,7 @@ public class Converse extends UserAction<IMendixObject>
 	private Document getAdditionalRequestParams() throws CoreException {
 		LOGGER.debug("Getting additional request parameters");
 		List<AbstractRequestParameter> abstractParams = ConverseRequest.getChatCompletionsRequest_Extension_AbstractRequestParameter();
+		List<ComputerUseTool> computerUseToolParams = new ArrayList<ComputerUseTool>();
 		
 		var builder = Document.mapBuilder();
 		
@@ -262,11 +266,65 @@ public class Converse extends UserAction<IMendixObject>
 				continue;
 			}
 			
+			if (param instanceof ComputerUseTool) {
+				computerUseToolParams.add(ComputerUseTool.initialize(getContext(), param.getMendixObject()));
+				continue;
+			}
+			
+			
 			// If object is not of a supported type
 			LOGGER.error("Skipping invalid additional request parameter. To add additional request parameters use 'StringRequestParameter', 'DecimalRequestParameter' or 'IntegerRequestParameter' entities.");
 			
 		}
+		
+		if (computerUseToolParams.size()>0)
+			addComputerUse(builder, computerUseToolParams);
+		
 		return builder.build();
+	}
+	
+	// Getting additional request params dependent on type
+	private void addComputerUse(software.amazon.awssdk.core.document.Document.MapBuilder mainBuilder, List<ComputerUseTool> computerUseToolParams) throws CoreException {
+		
+		var listBuilder = Document.listBuilder();
+		
+		for (ComputerUseTool computerUseParam : computerUseToolParams) {
+			
+			var builder = Document.mapBuilder();
+			
+			List<AbstractRequestParameter> abstractParams = computerUseParam.getComputerUseTool_AbstractRequestParameter();
+			
+			for (AbstractRequestParameter param : abstractParams) {
+				
+				if (param instanceof StringRequestParameter) {
+					StringRequestParameter strParam = (StringRequestParameter) param;
+					builder.putString(strParam.getKey(), strParam.getValue());
+					continue;
+				}
+				
+				if (param instanceof IntegerRequestParameter) {
+					IntegerRequestParameter intParam = (IntegerRequestParameter) param;
+					builder.putNumber(intParam.getKey(), intParam.getValue());
+					continue;
+				}
+				
+				if (param instanceof DecimalRequestParameter) {
+					DecimalRequestParameter decParam = (DecimalRequestParameter) param;
+					builder.putNumber(decParam.getKey(), decParam.getValue());
+					continue;
+				}
+				
+				
+				// If object is not of a supported type
+				LOGGER.error("Skipping invalid additional request parameter. To add additional request parameters use 'StringRequestParameter', 'DecimalRequestParameter' or 'IntegerRequestParameter' entities.");
+				
+			}
+			listBuilder.addDocument(builder.build());
+		}
+		mainBuilder.putDocument("tools", listBuilder.build());
+		var builder_anthropic = Document.listBuilder();
+		builder_anthropic.addString("computer-use-2025-01-24");
+		mainBuilder.putDocument("anthropic_beta", builder_anthropic.build());
 	}
 	
 	private boolean hasAdditionalResponseFieldRequests() throws CoreException {
@@ -680,11 +738,15 @@ public class Converse extends UserAction<IMendixObject>
 		List<software.amazon.awssdk.services.bedrockruntime.model.Tool> awsTools = new ArrayList<>();
 		
 		for (Tool mxTool : mxTools) {
+			if (mxTool.getMendixObject().getMetaObject().isSubClassOf(Computer.entityName)) {
+				continue;
+			}
 			var awsTool = getAwsTool(mxTool);
 			awsTools.add(awsTool);
 		}
-		
-		return awsTools;
+		if(awsTools.size() > 0)
+			return awsTools;
+		return null;
 	}
 	
 	// Mapping Mendix Tool to aws tool
@@ -927,20 +989,20 @@ public class Converse extends UserAction<IMendixObject>
 			LOGGER.debug("Tool without parameter called");
 			return null;
 		}
-		// Returned map always has only one value because Function microflows have single parameter
-		Map.Entry<String, Document> entry = awsDoc.asMap().entrySet().iterator().next();
-		
-		String key = entry.getKey();
-		String value;
-		if (entry.getValue().isString()) {
-			value = entry.getValue().asString();
-		} else {
-			value = entry.getValue().toString();
-		}
-		
-		Map<String, String> stringMap = Map.of(key, value);
-		
-		return MAPPER.writeValueAsString(stringMap);
+		Map<String, String> stringMap = new HashMap<>();
+
+	    for (Map.Entry<String, Document> entry : awsDoc.asMap().entrySet()) {
+	        String key = entry.getKey();
+	        String value;
+	        if (entry.getValue().isString()) {
+	            value = entry.getValue().asString();
+	        } else {
+	            value = entry.getValue().toString();
+	        }
+	        stringMap.put(key, value);
+	    }
+
+	    return MAPPER.writeValueAsString(stringMap);
 	}
 	
 	private void setMxResponseExtension(Document awsDoc, ChatCompletionsResponse mxResponse) {
