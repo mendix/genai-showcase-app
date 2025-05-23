@@ -18,7 +18,7 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
- * Sets the microflow to execute for retrieval for the  type of the DeployedModel. The microflow should follow the principles from GenAI commons that are applicable for the model type.
+ * Sets the microflow to execute for retrieval for the type of the DeployedKnowledgeBase. 
  */
 public class DeployedKnowledgeBase_SetMicroflow extends UserAction<java.lang.Boolean>
 {

@@ -73,12 +73,12 @@ public class Retrieve extends UserAction<IMendixObject>
 			
 			// Mapping and logging of the request body to AWS request object
 			var awsRequest = createAwsRequest();
-			LOGGER.debug("The following request was sent to AWS: ", awsRequest);
+			LOGGER.info("AWS request: " + awsRequest);
 			
 			// Client creation, executing request, logging response
 			BedrockAgentRuntimeClient bedrockClient = AmazonBedrockClient.getBedrockAgentRuntimeClient(Credentials, Region, RetrieveRequest);
 			var awsResponse = bedrockClient.retrieve(awsRequest);
-			LOGGER.debug("The following response was received from AWS: ", awsResponse);
+			LOGGER.info("AWS response: " + awsResponse);
 			
 			// Return the AWS request that's mapped to the MX model
 			return createMxResponse(awsResponse).getMendixObject();
