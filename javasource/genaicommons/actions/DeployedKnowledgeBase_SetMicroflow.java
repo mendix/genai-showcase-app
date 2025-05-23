@@ -18,11 +18,7 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
- * Sets the microflow to execute for the specified model and type of the DeployedModel. The microflow should follow the principles from GenAI commons that are applicable for the model type.
- * 
- * E.g. For text generation, the following input and response parameters are required:
- * - Input parameters: GenAICommons.Request and GenAICommons.DeployedModel
- * - Return type: GenAICommons.Response
+ * Sets the microflow to execute for retrieval for the  type of the DeployedModel. The microflow should follow the principles from GenAI commons that are applicable for the model type.
  */
 public class DeployedKnowledgeBase_SetMicroflow extends UserAction<java.lang.Boolean>
 {
@@ -74,7 +70,7 @@ public class DeployedKnowledgeBase_SetMicroflow extends UserAction<java.lang.Boo
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new MxLogger(DeployedModel_SetMicroflow.class);
+	private static final MxLogger LOGGER = new MxLogger(DeployedKnowledgeBase_SetMicroflow.class);
 
 	// END EXTRA CODE
 }
