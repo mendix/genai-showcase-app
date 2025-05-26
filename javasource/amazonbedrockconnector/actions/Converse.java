@@ -50,7 +50,6 @@ import genaicommons.proxies.Computer;
 import genaicommons.proxies.FileCollection;
 import genaicommons.proxies.FileContent;
 import genaicommons.proxies.Function;
-import genaicommons.proxies.KnowledgeBaseChunk;
 import genaicommons.proxies.Request;
 import genaicommons.proxies.Response;
 import genaicommons.proxies.StopSequence;
@@ -407,6 +406,25 @@ public class Converse extends UserAction<IMendixObject>
 		
 		List<ContentBlock> contentBlockList = new ArrayList<>();
 		
+		// Case 2: After a Function Call, a Tool Result message is being sent	
+		if (isToolResultMessage(mxMsg)) {
+					LOGGER.debug("Tool Result Message found");
+					ContentBlock toolResultContent = getToolResultContent(mxMsg);
+					contentBlockList.add(toolResultContent);
+					
+					// Bedrock expects all subsequent tool results as part of a single message
+					// Looking for subsequent tool results and adding them to this message until a different message type is found
+					while ((i+1) < mxMessages.size()) {
+						genaicommons.proxies.Message next = mxMessages.get(i+1);
+						if (!isToolResultMessage(next)) {
+							break;
+						}
+						ContentBlock nextToolResultContent = getToolResultContent(next);
+						contentBlockList.add(nextToolResultContent);
+						i++;
+					}
+		}
+		
 		// Case 1: Message has a FileCollection with FileContent(s). 
 		if (hasFiles(mxMsg)) {
 			LOGGER.debug("Message with Files found");
@@ -460,23 +478,7 @@ public class Converse extends UserAction<IMendixObject>
 				
 			}
 		
-		// Case 2: After a Function Call, a Tool Result message is being sent	
-		} else if (isToolResultMessage(mxMsg)) {
-			LOGGER.debug("Tool Result Message found");
-			ContentBlock toolResultContent = getToolResultContent(mxMsg);
-			contentBlockList.add(toolResultContent);
-			
-			// Bedrock expects all subsequent tool results as part of a single message
-			// Looking for subsequent tool results and adding them to this message until a different message type is found
-			while ((i+1) < mxMessages.size()) {
-				genaicommons.proxies.Message next = mxMessages.get(i+1);
-				if (!isToolResultMessage(next)) {
-					break;
-				}
-				ContentBlock nextToolResultContent = getToolResultContent(next);
-				contentBlockList.add(nextToolResultContent);
-				i++;
-			}
+		
 			
 		// Case 3: A Message requesting the use of tool (function call)
 		} else if (hasToolUse(mxMsg)) {
@@ -622,7 +624,7 @@ public class Converse extends UserAction<IMendixObject>
 		}
 	}
 	
-	// Bedrock accetps "jpeg", not "jpp"
+	// Bedrock accetps "jpeg", not "jpg"
 	private String getImageExtension(FileContent fc) {
 		String extension = getFileExtension(fc);
 		if (extension != null && extension.equals("jpg")) {
@@ -645,6 +647,7 @@ public class Converse extends UserAction<IMendixObject>
 	private ContentBlock getToolResultContent(genaicommons.proxies.Message mxMsg) {
 		var toolResultContentBuilder = ToolResultContentBlock.builder()
 				.text(mxMsg.getContent());
+		
 		
 		var toolResultBuilder = ToolResultBlock.builder()
 				.toolUseId(mxMsg.getToolCallId())
