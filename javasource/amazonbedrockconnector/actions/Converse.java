@@ -402,7 +402,7 @@ public class Converse extends UserAction<IMendixObject>
 	// Method to map a Mx Message to the correct type of aws message
 	private Message getAwsMessage(genaicommons.proxies.Message mxMsg, List<genaicommons.proxies.Message> mxMessages, int i) throws CoreException, MalformedURLException, URISyntaxException, IOException {
 		var msgBuilder = Message.builder()
-				.role(mxMsg.getRole().name());
+				.role(getAwsMessageRole(mxMsg));
 		
 		List<ContentBlock> contentBlockList = new ArrayList<>();
 		
@@ -505,6 +505,14 @@ public class Converse extends UserAction<IMendixObject>
 		
 		msgBuilder.content(contentBlockList);
 		return msgBuilder.build();
+	}
+
+	private String getAwsMessageRole(genaicommons.proxies.Message mxMsg) {
+		if(mxMsg.getRole() == ENUM_MessageRole.tool) {
+			return ENUM_MessageRole.user.name(); //Tool message is mapped to user message for converse
+		} else {
+			return mxMsg.getRole().name();
+		}
 	}
 	
 	// Check if the message has images
@@ -741,6 +749,7 @@ public class Converse extends UserAction<IMendixObject>
 		List<software.amazon.awssdk.services.bedrockruntime.model.Tool> awsTools = new ArrayList<>();
 		
 		for (Tool mxTool : mxTools) {
+			//Skipping computer use tools, because they are added as additional request parameters
 			if (mxTool.getMendixObject().getMetaObject().isSubClassOf(Computer.entityName)) {
 				continue;
 			}
