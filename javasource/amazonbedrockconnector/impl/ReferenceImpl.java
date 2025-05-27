@@ -1,13 +1,9 @@
-package amazonbedrockconnector.genaicommons_impl;
+package amazonbedrockconnector.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import com.mendix.systemwideinterfaces.core.IContext;
-
-import amazonbedrockconnector.impl.MxLocation;
-
 import amazonbedrockconnector.proxies.ENUM_AgentStatus;
 import amazonbedrockconnector.proxies.ENUM_DataSourceType;
 import genaicommons.proxies.ENUM_SourceType;
@@ -15,12 +11,10 @@ import genaicommons.proxies.Reference;
 import software.amazon.awssdk.services.bedrockagent.model.AgentStatus;
 import software.amazon.awssdk.services.bedrockagentruntime.model.Citation;
 import software.amazon.awssdk.services.bedrockagentruntime.model.RetrievalResultLocation;
-import amazonbedrockconnector.impl.MxLogger;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.MalformedURLException;
-
 
 
 public class ReferenceImpl {

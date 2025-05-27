@@ -16,7 +16,7 @@ import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.webui.CustomJavaAction;
-import amazonbedrockconnector.genaicommons_impl.ReferenceImpl;
+import amazonbedrockconnector.impl.ReferenceImpl;
 import amazonbedrockconnector.impl.AmazonBedrockClient;
 import amazonbedrockconnector.impl.MxLogger;
 import amazonbedrockconnector.proxies.KnowledgeBaseTool;

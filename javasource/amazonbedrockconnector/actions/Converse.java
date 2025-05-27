@@ -31,8 +31,6 @@ import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.webui.CustomJavaAction;
-import amazonbedrockconnector.genaicommons_impl.FunctionMappingImpl;
-import amazonbedrockconnector.genaicommons_impl.MessageImpl;
 import amazonbedrockconnector.impl.AmazonBedrockClient;
 import amazonbedrockconnector.impl.MxLogger;
 import amazonbedrockconnector.proxies.AbstractRequestParameter;
@@ -701,7 +699,7 @@ public class Converse extends UserAction<IMendixObject>
 	private ToolInputSchema getToolInputSchema(Tool mxTool) throws JsonProcessingException {
 		// All Tools to be called are function objects
 		//Function function = (Function) mxTool;
-		String inputParamName = FunctionMappingImpl.getFirstInputParamName(mxTool.getMicroflow());
+		String inputParamName = genaicommons.impl.FunctionMappingImpl.getFirstInputParamName(mxTool.getMicroflow());
 		if (inputParamName == null) {
 			LOGGER.debug("Function Microflow without input parameter");
 			
@@ -752,7 +750,7 @@ public class Converse extends UserAction<IMendixObject>
 		
 		// Get all messages with role assistant
 		// Assistant messages optionally have an array of tool_calls that contain an id and the functionName
-		List<genaicommons.proxies.Message> messageListAssistant = MessageImpl
+		List<genaicommons.proxies.Message> messageListAssistant = genaicommons.impl.MessageImpl
 				.retrieveMessageListByRole(commonRequest, ENUM_MessageRole.assistant, getContext());
 
 		// HashMap with ToolCall._id and ToolCallFunction.Name created from the messageListAssistant

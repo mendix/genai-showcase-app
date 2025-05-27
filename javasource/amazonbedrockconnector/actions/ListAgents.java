@@ -14,7 +14,7 @@ import java.util.Date;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.webui.CustomJavaAction;
 import amazonbedrockconnector.impl.MxLogger;
-import amazonbedrockconnector.genaicommons_impl.ReferenceImpl;
+import amazonbedrockconnector.impl.ReferenceImpl;
 import amazonbedrockconnector.proxies.AgentSummary;
 import amazonbedrockconnector.proxies.ListAgentsResponse;
 import software.amazon.awssdk.services.bedrockagent.BedrockAgentClient;
