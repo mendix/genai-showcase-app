@@ -30,7 +30,7 @@ import com.mendix.systemwideinterfaces.core.UserAction;
  * Output:
  * -TargetChunkList: This list is the result of the retrieval.
  * 
- * The Connection entity passed must be of type PgVectorKnowledgebaseConnection. It must contain the KnowledgeBaseName string attribute filled and a DatabaseConfiguration associated with the connection details to a PostgreSQL database server with the PgVector extension installed. This DatabaseConfiguration entity is typically configured at runtime or in after-startup logic. By providing the KnowledgeBaseName on the Connection, you determine the knowledge base. 
+ * The DeployedKnowledgeBase entity passed must be of type PgVectorKnowledgeBase. It must contain the Name string attribute filled and a DatabaseConfiguration associated with the connection details to a PostgreSQL database server with the PgVector extension installed. This DatabaseConfiguration entity is typically configured at runtime or in after-startup logic. By providing the Name on the DeployedKnowledgeBase, you determine the knowledge base.
  * The TargetChunk entity (type parameter) must be a specialization of the Chunk entity from this module. If it contains associations to (specializations of) the related mendix object for which the chunk was created, this will be set by this operation for easy processing afterwards.
  */
 public class KnowledgeBaseChunkList_Retrieve_SetAssociation extends UserAction<java.util.List<IMendixObject>>
