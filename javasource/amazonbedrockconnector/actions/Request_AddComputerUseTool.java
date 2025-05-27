@@ -7,14 +7,17 @@
 // Other code you write will be lost the next time you deploy the project.
 // Special characters, e.g., é, ö, à, etc. are supported in comments.
 
-package genaicommons.actions;
+package amazonbedrockconnector.actions;
 
 import static java.util.Objects.requireNonNull;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import genaicommons.impl.MxLogger;
+import amazonbedrockconnector.impl.MxLogger;
 import genaicommons.impl.ToolCollectionImpl;
 import genaicommons.proxies.Computer;
 import genaicommons.proxies.Tool;
@@ -22,36 +25,39 @@ import genaicommons.proxies.ToolCollection;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
- * Adds a new Function to a Request.
- * Parameters: 
- * - Request: The request to add the function to.
- * - ToolName: The name of the tool to call.
- * - FunctionMicroflow: The microflow that is called within this function.
- * - ToolDescription (optional): A description of what the function does, used by the model to choose when and how to call the function.
- * 
- * The action returns empty if adding the function was not successful (errors are logged).
+ * Adds a new Comuter Tool to the Request. Note this is only supported by recent Anthropic Claude models. Please view the Amazon Bedrock documentation for more info.
+ * Computer use is an anthropic beta feature, and anthropic beta version computer-use-2025-01-24 is used.
  */
-public class Request_AddComputer extends UserAction<IMendixObject>
+public class Request_AddComputerUseTool extends UserAction<IMendixObject>
 {
 	/** @deprecated use Request.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __Request;
 	private final genaicommons.proxies.Request Request;
-	private final java.lang.String ToolName;
 	private final java.lang.String ComputerUseMicroflow;
+	private final java.lang.Long DisplayNumber;
+	private final java.lang.Long DisplayHeight;
+	private final java.lang.Long DisplayWidth;
+	private final java.lang.String _Type;
 
-	public Request_AddComputer(
+	public Request_AddComputerUseTool(
 		IContext context,
 		IMendixObject _request,
-		java.lang.String _toolName,
-		java.lang.String _computerUseMicroflow
+		java.lang.String _computerUseMicroflow,
+		java.lang.Long _displayNumber,
+		java.lang.Long _displayHeight,
+		java.lang.Long _displayWidth,
+		java.lang.String __Type
 	)
 	{
 		super(context);
 		this.__Request = _request;
 		this.Request = _request == null ? null : genaicommons.proxies.Request.initialize(getContext(), _request);
-		this.ToolName = _toolName;
 		this.ComputerUseMicroflow = _computerUseMicroflow;
+		this.DisplayNumber = _displayNumber;
+		this.DisplayHeight = _displayHeight;
+		this.DisplayWidth = _displayWidth;
+		this._Type = __Type;
 	}
 
 	@java.lang.Override
@@ -62,8 +68,10 @@ public class Request_AddComputer extends UserAction<IMendixObject>
 			requireNonNull(Request, "Request is required.");
 			
 			ToolCollection toolCollection = ToolCollectionImpl.getOrCreateToolCollection(getContext(), Request);
-			
-			return createComputer(getContext(), ComputerUseMicroflow, ToolName, toolCollection).getMendixObject();
+			String toolName = "computer"; //only name accepted by converse
+			Map<String,Object> params = createParamMap(toolName);
+			Core.microflowCall("AmazonBedrockConnector.Request_CreateAdditionalRequestParameter_ComputerUse").withParams(params).execute(getContext());
+			return createComputer(getContext(), ComputerUseMicroflow, toolName, toolCollection).getMendixObject();
 
 		} catch (Exception e) {
 			LOGGER.error(e);
@@ -79,11 +87,11 @@ public class Request_AddComputer extends UserAction<IMendixObject>
 	@java.lang.Override
 	public java.lang.String toString()
 	{
-		return "Request_AddComputer";
+		return "Request_AddComputerUseTool";
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new genaicommons.impl.MxLogger(Request_AddComputer.class);
+	private static final MxLogger LOGGER = new MxLogger(Request_AddComputerUseTool.class);
 	
 	public static Computer createComputer(IContext context, String computerUseMicroflow, String toolName, ToolCollection toolCollection) throws CoreException {
 		Computer computer = new Computer(context);
@@ -93,6 +101,26 @@ public class Request_AddComputer extends UserAction<IMendixObject>
 		ToolList.add(computer);
 		toolCollection.setToolCollection_Tool(ToolList); 
 		return computer;
+	}
+	
+	//Microflow has optional params which cannot be added as explicitly empty
+	private Map<String,Object> createParamMap(String toolName) {
+		Map<String,Object> params =  new HashMap<>();
+		if (DisplayNumber != null && DisplayNumber >= 0) {
+			params.put("DisplayNumber", DisplayNumber);
+		}
+		if (DisplayHeight != null && DisplayHeight >= 0) {
+			params.put("DisplayHeight", DisplayHeight);
+		}
+		if (DisplayWidth != null && DisplayWidth >= 0) {
+			params.put("DisplayWidth", DisplayWidth);
+		}
+		if (_Type != null && !_Type.isBlank()) {
+			params.put("Type", _Type);
+		}
+		params.put("Request", Request);
+		params.put("ToolName", toolName);
+		return params;
 	}
 	// END EXTRA CODE
 }
