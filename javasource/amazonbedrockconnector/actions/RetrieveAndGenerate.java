@@ -97,7 +97,7 @@ public class RetrieveAndGenerate extends UserAction<IMendixObject>
 			return mxResponse.getMendixObject();
 			
 		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error(e);
 			throw e;
 		}
 		// END USER CODE

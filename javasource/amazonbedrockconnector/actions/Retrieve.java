@@ -83,7 +83,7 @@ public class Retrieve extends UserAction<IMendixObject>
 			// Return the AWS request that's mapped to the MX model
 			return createMxResponse(awsResponse).getMendixObject();
 		} catch (Exception e) {
-			LOGGER.error("Exception occurred: ", e.getMessage());
+			LOGGER.error(e);
 			throw e;
 		} 
 		// END USER CODE
