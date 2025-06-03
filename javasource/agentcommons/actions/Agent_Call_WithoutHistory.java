@@ -14,9 +14,11 @@ import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
+import agentcommons.impl.AgentImpl;
 import agentcommons.impl.MxLogger;
 import agentcommons.proxies.ENUM_Agent_UsageType;
 import agentcommons.proxies.PromptToUse;
+import genaicommons.proxies.DeployedModel;
 import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.Request;
 import genaicommons.proxies.Response;
@@ -66,6 +68,8 @@ public class Agent_Call_WithoutHistory extends UserAction<IMendixObject>
 			requireNonNull(Agent, "Agent is required.");
 			if (Agent.getUsageType() != ENUM_Agent_UsageType.Single_Call)
 				throw new IllegalArgumentException("The passed agent must be of usage type single call. Use Call Agent With History instead.");
+			DeployedModel deployedModel = AgentImpl.getDeployedModel(Agent);
+			requireNonNull(deployedModel, "Select a model on the agent version in use.");
 			IMendixObject promptObject = Core.userActionCall("AgentCommons." + PromptToUse_GetAndReplace.class.getSimpleName())
 					.withParams(Agent.getMendixObject(), OptionalContextObject)
 					.execute(getContext());
@@ -75,7 +79,7 @@ public class Agent_Call_WithoutHistory extends UserAction<IMendixObject>
 			Request request = genaicommons.proxies.microflows.Microflows.request_GetCreate(getContext(), OptionalRequest);
 			agentcommons.proxies.microflows.Microflows.request_AddAgentCapabilities(getContext(), request, promptToUse);
 			genaicommons.proxies.microflows.Microflows.request_AddMessage(getContext(), request, ENUM_MessageRole.user, OptionalFileCollection, promptToUse.getUserPrompt());
-			Response response = genaicommons.proxies.microflows.Microflows.chatCompletions_WithHistory(getContext(), request, Agent.getAgent_DeployedModel());
+			Response response = genaicommons.proxies.microflows.Microflows.chatCompletions_WithHistory(getContext(), request, deployedModel);
 			return response == null ? null : response.getMendixObject();
 			
 		} catch (Exception e) {

@@ -28874,6 +28874,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .agent-page-container .content-fullwidth .card-header--version {
   z-index: 1;
 }
+.agent-page-container .content-fullwidth .card-header--model {
+  z-index: 0;
+}
 .agent-page-container .panel-header {
   display: flex;
   flex-direction: row;
@@ -28929,6 +28932,24 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .agent-page-container .card-header--version {
   z-index: 1;
+}
+
+.combobox-model-selection {
+  display: flex;
+  flex-grow: 1;
+  min-width: 360px;
+}
+.combobox-model-selection .model-selection {
+  display: flex;
+  align-items: center;
+  height: max-content;
+}
+.combobox-model-selection .model-selection .mx-image {
+  height: 18px;
+  margin-right: 8px;
+  float: right;
+  height: 18px;
+  margin-right: 8px;
 }
 
 .table-header {
