@@ -18,7 +18,7 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
- * Sets the microflow to execute for retrieval for the type of the DeployedKnowledgeBase. 
+ * Sets the microflow to retrieve data from the selected type of DeployedKnowledgeBase.
  */
 public class DeployedKnowledgeBase_SetMicroflow extends UserAction<java.lang.Boolean>
 {

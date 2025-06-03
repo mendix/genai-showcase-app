@@ -26,7 +26,7 @@ import com.mendix.systemwideinterfaces.core.UserAction;
  * -MaxNumberOfResults: limit of the amount of records returned
  * -MetadataCollection: when provided, this operation only returns chunks that are conform with all of the labels in the collection.
  * 
- * The DeployedKnowledgeBase entity passed must be of type Collection and must contain the Name string attribute filled and a MxCloudKnowledgeBaseResource associated with the connection details to the knowledge base service. By providing the Name on the DeployedKnowledgeBase, you determine the collection for which the retrieve should happen.
+ * The DeployedKnowledgeBase entity passed must be of type Collection and must contain the Name string attribute filled and a MxCloudKnowledgeBaseResource associated with the configuration to the knowledge base service. By providing the Name on the DeployedKnowledgeBase, you determine the collection for which the retrieve should happen.
  * 
  * The TargetChunk entity must be a specialization of the KnowledgeBaseChunk entity from the GenAICommons. If it contains associations to (specializations of) the related mendix object for which the chunk was created originally, this will be set by this operation for easy processing afterwards.
  * 
