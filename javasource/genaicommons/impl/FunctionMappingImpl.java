@@ -35,6 +35,7 @@ public class FunctionMappingImpl {
 		return inputParametersModified;
 	}
 	
+	// Get all messages where ToolCallId is set. These messages indicate that a tool has been called
 	public static List<Message> getToolCallMessages(Request request, IContext context) {
 		return Core.retrieveByPath(context, request.getMendixObject(), 
 				genaicommons.proxies.Request.MemberNames.Request_Message.toString()).stream()

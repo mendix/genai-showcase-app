@@ -40,6 +40,7 @@ import amazonbedrockconnector.proxies.IntegerRequestParameter;
 import amazonbedrockconnector.proxies.RequestedResponseField;
 import amazonbedrockconnector.proxies.ResponseFieldRequest;
 import amazonbedrockconnector.proxies.StringRequestParameter;
+import genaicommons.impl.FunctionMappingImpl;
 import genaicommons.proxies.ENUM_FileType;
 import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.ENUM_ToolChoice;
@@ -647,7 +648,7 @@ public class Converse extends UserAction<IMendixObject>
 	        
 	        //"any" choice can only be used once at the first iteration to prevent infinity loops
 	        case any:
-	        	if(getToolCallMessages(commonRequest).size() == 0) {
+	        	if(FunctionMappingImpl.getToolCallMessages(commonRequest,getContext()).size() == 0) {
 	        		//any
 	        		ToolChoice awsToolChoiceAny = ToolChoice.builder()
 	        	            .any(AnyToolChoice.builder().build())
@@ -837,15 +838,6 @@ public class Converse extends UserAction<IMendixObject>
 		functionName = ToolCall.initialize(getContext(), mxObject).getName();
 		// Return true if the functionName equals toolChoiceFunctionName
 		return functionName.equals(toolChoiceFunctionName);
-	}
-	
-	// Get all messages where ToolCallId is set. These messages indicate that a tool has been called
-	private List<genaicommons.proxies.Message> getToolCallMessages(Request commonRequest) {
-		return Core.retrieveByPath(getContext(), commonRequest.getMendixObject(), 
-				genaicommons.proxies.Request.MemberNames.Request_Message.toString()).stream()
-				.map(msg -> genaicommons.proxies.Message.initialize(getContext(), msg))
-				.filter(msg -> msg.getToolCallId() != null && !msg.getToolCallId().isEmpty())
-				.collect(Collectors.toList());
 	}
 	
 	// Getting aws Tool Choice set to the name of the specified tool choice tool
