@@ -26,7 +26,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import genaicommons.impl.MessageImpl;
 import genaicommons.impl.FunctionMappingImpl;
-import genaicommons.proxies.ENUM_ToolChoice;
 import genaicommons.proxies.Message;
 import genaicommons.proxies.Request;
 import genaicommons.proxies.Tool;
@@ -177,11 +176,42 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 
 	private void setFunctionToolChoice(JsonNode rootNode) throws CoreException {
 		// ToolChoice is not function and thus empty, auto or none
-		if (RequestMapping.getToolChoice() == null || !RequestMapping.getToolChoice().equals(ENUM_ToolChoice.tool)) {
+		if (RequestMapping.getToolChoice() == null) {
 			return;
-
+		}
+			
+		switch (RequestMapping.getToolChoice()) {
+        case tool:
+        	setToolChoiceTool();
+            break;
+        case any:
+        	setToolChoiceAny();
+            break;
+        //auto and none work out of the box
+        case auto:
+        	break;
+        case none:
+        	break;
+        default:
+        	LOGGER.warn(("Unknown type for ToolChoice: " + RequestMapping.getToolChoice().toString()));
+            break;
+		}
+		
+	}
+	
+	//"any" choice can only be used once at the first iteration to prevent infinity loops
+	private void setToolChoiceAny() throws CoreException {
+		if(FunctionMappingImpl.getToolCallMessages(getRequest(RequestMapping),getContext()).size() == 0) {
+            ((ObjectNode) rootNode).put("tool_choice", "required");
+    	}
+    	else {
+    		((ObjectNode) rootNode).remove("tool_choice");
+    	}
+	}
+	
+	private void setToolChoiceTool() throws CoreException {
 		// Add ToolChoice Tool if it has not yet been called in a previous iteration
-		} else if (getToolCollection(RequestMapping) != null) {
+		if(getToolCollection(RequestMapping) != null) {
 			Tool toolChoiceTool = getToolCollection(RequestMapping).getToolCollection_ToolChoice();
 			
 			// Remove tool choice function, because it has already been called
