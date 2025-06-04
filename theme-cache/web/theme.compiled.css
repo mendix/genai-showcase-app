@@ -28933,6 +28933,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .agent-page-container .card-header--version {
   z-index: 1;
 }
+.agent-page-container .card-header .mx-text {
+  align-self: center;
+  margin-bottom: 0;
+}
+
+.margin-right-45 {
+  margin-right: 45px;
+}
 
 .combobox-model-selection {
   display: flex;

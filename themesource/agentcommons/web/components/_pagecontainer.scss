@@ -268,15 +268,21 @@
         &--version {
             z-index: 1;
         }
+        .mx-text {
+            align-self: center;
+            margin-bottom: 0;
+        }
     }
+}
 
+.margin-right-45{
+    margin-right: 45px;
 }
 
 .combobox-model-selection {
     display: flex;
     flex-grow: 1;
     min-width: 360px;
-    //z-index: 200;
     .model-selection{
         display: flex;
         align-items: center;
@@ -285,7 +291,6 @@
     .mx-image {
         height: $font-size-large;
         margin-right: $spacing-small;
-        //margin-left: auto;
         float: right;
         height: $font-size-large;
         margin-right: $spacing-small;
