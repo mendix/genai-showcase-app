@@ -11,13 +11,12 @@ package mxgenaiconnector.actions;
 
 import java.util.ArrayList;
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.webui.CustomJavaAction;
+import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 import genaicommons.proxies.KnowledgeBaseChunk;
 import mxgenaiconnector.impl.ChunkUtils;
 import mxgenaiconnector.impl.MxLogger;
 import mxgenaiconnector.proxies.Collection;
-import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * Use this operation to delete existing chunks in a collection based on the MxObjectID. 
