@@ -26,11 +26,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.webui.CustomJavaAction;
 import amazonbedrockconnector.impl.AmazonBedrockClient;
 import amazonbedrockconnector.impl.MxLogger;
 import amazonbedrockconnector.proxies.AbstractRequestParameter;
@@ -54,6 +54,8 @@ import genaicommons.proxies.ToolCall;
 import genaicommons.proxies.ToolCollection;
 import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.core.document.Document;
+import software.amazon.awssdk.services.bedrockruntime.model.AnyToolChoice;
+import software.amazon.awssdk.services.bedrockruntime.model.AutoToolChoice;
 import software.amazon.awssdk.services.bedrockruntime.model.ContentBlock;
 import software.amazon.awssdk.services.bedrockruntime.model.ConversationRole;
 import software.amazon.awssdk.services.bedrockruntime.model.ConverseOutput;
@@ -620,22 +622,52 @@ public class Converse extends UserAction<IMendixObject>
 	
 	// Adding the available tools to the request
 	private ToolConfiguration getAwsToolConfig(Request commonRequest) throws CoreException, JsonProcessingException {
-		var builder = ToolConfiguration.builder();
-		// Checking if Tool Choice attribute is set to Tool
-		// Other values will be mapped to the default: auto
-		if (commonRequest.getToolChoice() == ENUM_ToolChoice.tool) {
-			if (hasToolChoice(commonRequest)) {
-				Tool toolChoiceTool = commonRequest.getRequest_ToolCollection().getToolCollection_ToolChoice();
-				if (!isToolRecall(toolChoiceTool, commonRequest)) {
-					ToolChoice awsToolChoice = getAwsToolChoice(toolChoiceTool);
-					builder.toolChoice(awsToolChoice);
-				}
-			}
-		}
-		
+		var builder = ToolConfiguration.builder();		
 		List<software.amazon.awssdk.services.bedrockruntime.model.Tool> awsTools = getAwsTools(commonRequest);
 		builder.tools(awsTools);
 		
+		ENUM_ToolChoice toolChoice = commonRequest.getToolChoice();
+		if(toolChoice == null) {
+			return builder.build();
+		}
+		
+		switch (toolChoice) {
+    		//"tool" choice can only be used once for the same function to prevent infinity loops
+	        case tool:
+	        	if (commonRequest.getToolChoice() == ENUM_ToolChoice.tool) {
+	    			if (hasToolChoice(commonRequest)) {
+	    				Tool toolChoiceTool = commonRequest.getRequest_ToolCollection().getToolCollection_ToolChoice();
+	    				if (!isToolRecall(toolChoiceTool, commonRequest)) {
+	    					ToolChoice awsToolChoice = getAwsToolChoice(toolChoiceTool);
+	    					builder.toolChoice(awsToolChoice);
+	    				}
+	    			}
+	    		}
+	        	break;
+	        
+	        //"any" choice can only be used once at the first iteration to prevent infinity loops
+	        case any:
+	        	if(getToolCallMessages(commonRequest).size() == 0) {
+	        		//any
+	        		ToolChoice awsToolChoiceAny = ToolChoice.builder()
+	        	            .any(AnyToolChoice.builder().build())
+	        	            .build();
+        	        builder.toolChoice(awsToolChoiceAny);
+  	        	}
+	        	break;
+	        	
+	        //"auto" let's the model choose if a tool needs to be called
+           case auto:
+        	   ToolChoice awsToolChoiceAuto = ToolChoice.builder()
+	               .auto(AutoToolChoice.builder().build())
+	               .build();
+        	   builder.toolChoice(awsToolChoiceAuto);
+        	   break;
+	
+	        default:
+	           LOGGER.warn(("Unknown type for ToolChoice: " + toolChoice.toString()));
+	           break;
+		}
 		return builder.build();
 	}
 	
@@ -805,6 +837,15 @@ public class Converse extends UserAction<IMendixObject>
 		functionName = ToolCall.initialize(getContext(), mxObject).getName();
 		// Return true if the functionName equals toolChoiceFunctionName
 		return functionName.equals(toolChoiceFunctionName);
+	}
+	
+	// Get all messages where ToolCallId is set. These messages indicate that a tool has been called
+	private List<genaicommons.proxies.Message> getToolCallMessages(Request commonRequest) {
+		return Core.retrieveByPath(getContext(), commonRequest.getMendixObject(), 
+				genaicommons.proxies.Request.MemberNames.Request_Message.toString()).stream()
+				.map(msg -> genaicommons.proxies.Message.initialize(getContext(), msg))
+				.filter(msg -> msg.getToolCallId() != null && !msg.getToolCallId().isEmpty())
+				.collect(Collectors.toList());
 	}
 	
 	// Getting aws Tool Choice set to the name of the specified tool choice tool
