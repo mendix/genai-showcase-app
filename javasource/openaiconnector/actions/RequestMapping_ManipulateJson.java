@@ -33,6 +33,7 @@ import genaicommons.proxies.Tool;
 import genaicommons.proxies.Function;
 import genaicommons.proxies.ToolCall;
 import genaicommons.proxies.ToolCollection;
+import genaicommons.proxies.ENUM_FileType;
 import genaicommons.proxies.ENUM_MessageRole;
 import openaiconnector.impl.MxLogger;
 import openaiconnector.proxies.OpenAIRequest_Extension;
@@ -116,7 +117,7 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
             removeEmptyArrayNode(messageNode, "tool_calls");
             
             //If a fileCollection has been added replace content node with array of text content and file content
-            updateImageMessages(messageNode);
+            updateMessagesWithFiles(messageNode);
         }
 		//Update messages within rootNode
 		((ObjectNode) rootNode).set("messages", messagesNode);
@@ -130,7 +131,7 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 	}
 	
 	
-	private void updateImageMessages(JsonNode messageNode) {
+	private void updateMessagesWithFiles(JsonNode messageNode) {
 		JsonNode fileCollection = messageNode.path("filecollection");
 		
 		//Return if there no images will be sent
@@ -144,27 +145,51 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 		
 		//add image content to array
 		for (JsonNode file : fileCollection) {
-			ObjectNode imageURL = MAPPER.createObjectNode();
-			if(file.path("textcontent") != null && !file.path("textcontent").asText().isBlank()) {
-				addTextContentNode(content, file.path("textcontent").asText());
+			String filetype = file.path("filetype") != null ? file.path("filetype").asText() : null;
+			LOGGER.info("filetype ", filetype, " file ", file);
+			if(filetype != null && filetype.equals("image")) {
+				addImage(content, file);
+			} else if (filetype != null && filetype.equals("document")) {
+				addDocument(content, file);
 			}
-			
-			imageURL.put("url", file.path("filecontent").asText());
-			
-			if(file.path("detail") != null && !file.path("detail").asText().isBlank()) {
-				imageURL.put("detail", file.path("detail").asText());
-			}
-			
-			ObjectNode imageContent = MAPPER.createObjectNode();
-			imageContent.put("type", "image_url");
-			imageContent.set("image_url", imageURL);
-			content.add(imageContent);
 		}
 			
 		//Remove imageCollection helper structure
 		((ObjectNode) messageNode).remove("filecollection");
 		//Overwrite content node including images
 		((ObjectNode) messageNode).set("content", content);
+	}
+
+	private void addImage(ArrayNode content, JsonNode file) {
+		ObjectNode imageURL = MAPPER.createObjectNode();
+		if(file.path("textcontent") != null && !file.path("textcontent").asText().isBlank()) {
+			addTextContentNode(content, file.path("textcontent").asText());
+		}
+		
+		imageURL.put("url", file.path("filecontent").asText());
+		
+		if(file.path("detail") != null && !file.path("detail").asText().isBlank()) {
+			imageURL.put("detail", file.path("detail").asText());
+		}
+		
+		ObjectNode imageContent = MAPPER.createObjectNode();
+		imageContent.put("type", "image_url");
+		imageContent.set("image_url", imageURL);
+		content.add(imageContent);
+	}
+	
+	private void addDocument(ArrayNode content, JsonNode file) {
+		ObjectNode document = MAPPER.createObjectNode();
+		if(file.path("textcontent") != null && !file.path("textcontent").asText().isBlank()) {
+			addTextContentNode(content, file.path("textcontent").asText());
+		}
+		document.put("file_data", file.path("filecontent").asText());
+		document.put("filename", file.path("filename") != null ? file.path("filename").asText() : null);
+		ObjectNode documentContent = MAPPER.createObjectNode();
+		documentContent.put("type", "file");
+		documentContent.set("file", document);
+		LOGGER.info("documentContent ", documentContent);
+		content.add(documentContent);
 	}
 
 	private void addTextContentNode(ArrayNode content, String text) {
