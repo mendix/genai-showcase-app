@@ -45,7 +45,12 @@ public class ConverseVisionDocument{
 					contentWrapper.set("image", contentNode);
 				}
 				else if(fileContent.path("fileType").asText().equals(ENUM_FileType.document.toString())){
-					setDocumentName(fileContent, contentNode, iteratorMessage, iteratorFile);	
+					setDocumentName(fileContent, contentNode, iteratorMessage, iteratorFile);
+					if(fileContent.path("textContent") != null && !fileContent.path("textContent").asText().isBlank()) {
+						ObjectNode textContent = MAPPER.createObjectNode();
+						textContent.put("text", fileContent.path("textContent").asText());
+						contentArrayNode.add(textContent);
+					}
 					contentWrapper.set("document", contentNode);
 				}
 				contentArrayNode.add(contentWrapper);
@@ -60,11 +65,11 @@ public class ConverseVisionDocument{
 	//Only applicable for DocumentChat. Either use the TextContent attribute or a static value
 	private static void setDocumentName(JsonNode fileContent, ObjectNode documentNode, int iteratorMessage, int iteratorFile) {
 		String documentName;
-		if(fileContent.path("textContent").asText().isBlank()) {
-			documentName = String.format("%s-%s-%s", "Document_", iteratorMessage, "_", iteratorFile);
+		if (fileContent.path("fileName") != null && !fileContent.path("fileName").asText().isBlank()) {
+			documentName = fileContent.path("fileName").asText();	
 		}
 		else {
-			documentName = fileContent.path("textContent").asText();	
+			documentName = String.format("%s-%s-%s", "Document_", iteratorMessage, "_", iteratorFile);
 		}
 		documentNode.put("name", documentName);
 	}

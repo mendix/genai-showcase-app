@@ -367,7 +367,12 @@ public class Converse extends UserAction<IMendixObject>
 			List<FileContent> files = getFiles(mxMsg);
 			for (FileContent file : files) {
 				
-				// Adding additional text content if TextContent attribute contains content
+				// Adding additional text content of filename as text content
+				if (file.getFileName() != null && !file.getFileName().isBlank()) {
+					ContentBlock fileName = getTextContent(file.getFileName());
+					contentBlockList.add(fileName);
+				}
+				
 				if (file.getTextContent() != null && !file.getTextContent().isBlank()) {
 					ContentBlock imgTextContent = getTextContent(file.getTextContent());
 					contentBlockList.add(imgTextContent);
