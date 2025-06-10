@@ -20,12 +20,8 @@ import mxgenaiconnector.impl.MxLogger;
 
 /**
  * Use this operation to retrieve chunks from a collection and set associations to the related mendix objects (if applicable). This operation returns a list of the same type of the TargetChunk input variable. 
- * Additional selection and filtering can be done by specifying the optional input parameters:
- * -Offset: This is for skipping a number of records in the retrieve (e.g. for batching purposes)
- * -MaxNumberOfResults: limit of the amount of records returned
- * -MetadataCollection: when provided, this operation only returns chunks that are conform with all of the labels in the collection.
  * 
- * The DeployedKnowledgeBase entity passed must be of type Collection and must contain the Name string attribute filled and a MxCloudKnowledgeBaseResource associated with the configuration to the knowledge base service. By providing the Name on the DeployedKnowledgeBase, you determine the collection for which the retrieve should happen.
+ * Additional selection and filtering can be done by specifying the optional input parameters.
  * 
  * The TargetChunk entity must be a specialization of the KnowledgeBaseChunk entity from the GenAICommons. If it contains associations to (specializations of) the related mendix object for which the chunk was created originally, this will be set by this operation for easy processing afterwards.
  * 

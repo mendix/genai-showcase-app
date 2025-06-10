@@ -19,15 +19,10 @@ import mxgenaiconnector.impl.ChunkUtils;
 import mxgenaiconnector.impl.MxLogger;
 
 /**
- * Use this operation to retrieve chunks from a collection and set associations to the related mendix objects (if applicable). The retrieval is based on similarity with respect to the input string (Content) provided.  This operation returns a list of the same type of the TargetChunk input variable.  The returned list is sorted on vector similarity which is handled internally.
- * Additional filtering can be done by specifying the optional input parameters:
- * -MinimumSimilarity (in the range 0-1.0): acts as a cut-off: chunks are not retrieved if they have a similarity below this value.
- * -MaxNumberOfResults: determines the max number of similar chunks that are returned.
- * -MetadataCollection: when provided, this operation only returns chunks that are conform with all of the metadata key/value pairs in the collection.
+ * Use this operation to retrieve chunks from a collection. The retrieval is based on similarity with respect to the input query string (Content) provided.  This operation returns a list of KnowledgeBaseChunk. The returned list is sorted on vector similarity which is handled internally.
+ * Additional filtering can be done by specifying the optional input parameters.
  * 
- * The DeployedKnowledgeBase entity passed must be of type Collection and must contain the Name string attribute filled and a MxCloudKnowledgeBaseResource associated with the connection details to the knowledge base. By providing the Name on the DeployedKnowledgeBase, you determine the collection for which the retrieve should happen. 
- * 
- * The TargetChunk entity (entity parameter) must be a specialization of the KnowledgeBaseChunk entity from the GenAICommons. If it contains associations to (specializations of) the related mendix object for which the chunk was created originally, this will be set by this operation for easy processing afterwards.
+ * The TargetChunk entity (type parameter) must be a specialization of the KnowledgeBaseChunk entity from the GenAICommons. If it contains associations to (specializations of) the related mendix object for which the chunk was created originally, this will be set by this operation for easy processing afterwards.
  * 
  * Previously inserted or changed chunks are only available in the knowledge base after 60-120 seconds due to asynchronous data synchronization for better scalability.
  */

@@ -21,13 +21,7 @@ import mxgenaiconnector.impl.MxLogger;
 /**
  * Use this operation to retrieve chunks from a collection. This operation returns a list of KnowledgeBaseChunks.
  * 
- * Additional selection and filtering can be done by specifying the optional input parameters:
- * -Offset: this is for skipping a number of records in the retrieve (e.g. for batching purposes)
- * -MaxNumberOfResults: limit of the amount of records returned
- * -MetadataCollection: when provided, this operation only returns chunks that are conform with all of the metadata key/value pairs in the list.
- * -MxObject: This is the (original) Mendix object that the chunks in the collection represent. Only chunks related to this Mendix object are retrieved. If no filtering on Mendix object is needed, you can pass "empty".
- * 
- * The DeployedKnowledgeBase entity passed must be of type Collection and must contain the Name string attribute filled and a MxCloudKnowledgeBaseResource associated with the connection details to the knowledge base. By providing the Name on the DeployedKnowledgeBase, you determine the collection for which the retrieve should happen. 
+ * Additional selection and filtering can be done by specifying the optional input parameters.
  * 
  * Previously inserted or changed chunks are only available in the knowledge base after 60-120 seconds due to asynchronous data synchronization for better scalability.
  */

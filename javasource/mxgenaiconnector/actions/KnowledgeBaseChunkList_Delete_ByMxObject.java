@@ -22,8 +22,6 @@ import com.mendix.systemwideinterfaces.core.UserAction;
  * Use this operation to delete existing chunks and corresponding metadata in a collection, based on the MxObjectID. 
  * MxObject is the (original) Mendix object that the chunks in the collection represent. Only chunks related to this Mendix object are to be deleted.
  * 
- * Mandatory: The DeployedKnowledgeBase entity passed must be of type Collection and must contain the Name string attribute filled and a MxCloudKnowledgeBaseResource associated with the connection details to the knowledge base. By providing the Name on the DeployedKnowledgeBase, you determine the collection from which the chunks should be deleted.
- * 
  * Once deleted, chunks are no longer available for read operations in the KB after 60-120 seconds due to asynchronous data synchronization for better scalability.
  */
 public class KnowledgeBaseChunkList_Delete_ByMxObject extends UserAction<java.lang.Boolean>
