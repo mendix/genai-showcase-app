@@ -145,7 +145,7 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 		//add image content to array
 		for (JsonNode file : fileCollection) {
 			String filetype = file.path("filetype") != null ? file.path("filetype").asText() : null;
-			LOGGER.info("filetype ", filetype, " file ", file);
+			LOGGER.debug("filetype ", filetype, " file ", file);
 			if(filetype != null && filetype.equals("image")) {
 				addImage(content, file);
 			} else if (filetype != null && filetype.equals("document")) {
@@ -187,7 +187,7 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 		ObjectNode documentContent = MAPPER.createObjectNode();
 		documentContent.put("type", "file");
 		documentContent.set("file", document);
-		LOGGER.info("documentContent ", documentContent);
+		LOGGER.debug("documentContent ", documentContent);
 		content.add(documentContent);
 	}
 
