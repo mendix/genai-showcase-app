@@ -28700,6 +28700,48 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border: 1px solid #f8f8f8;
 }
 
+.badge-with-circle {
+  display: flex;
+  align-items: center;
+  flex-flow: row;
+  justify-content: flex-start;
+  margin-left: 16px;
+}
+.badge-with-circle .circle {
+  border-radius: 100%;
+  background-color: #264ae5;
+  width: 8px;
+  height: 8px;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+.badge-with-circle .badge-text {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 12px;
+}
+.badge-with-circle.badge-with-circle--success .circle {
+  background-color: #3cb33d;
+}
+.badge-with-circle.badge-with-circle--info .circle {
+  background-color: #0086d9;
+}
+
+.badge--in-use {
+  max-width: fit-content;
+  height: auto;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: 4px;
+  border: 1px solid #4FD84F;
+  background-color: #E1FAE1;
+}
+.badge--in-use .badge-text {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
 .custom-control-label {
   display: block;
   overflow: hidden;
