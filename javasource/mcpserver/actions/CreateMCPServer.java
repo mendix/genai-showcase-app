@@ -57,7 +57,8 @@ public class CreateMCPServer extends UserAction<IMendixObject>
 
 		// Create request handler and McpServer object
 		McpServerRequestHandler mcpRequestHandler = new McpServerRequestHandler(
-				new ObjectMapper(), "/" + Path + "/messages", "/" + Path + "/sse");
+				new ObjectMapper(), mcpServer, getContext() ,  "/" + Path + "/messages", "/" + Path + "/sse");
+				//new ObjectMapper(), "/" + Path + "/messages", "/" + Path + "/sse");
 		Core.addRequestHandler(Path + "/", mcpRequestHandler);
 
 		McpSyncServer server = McpServer.sync(mcpRequestHandler)
