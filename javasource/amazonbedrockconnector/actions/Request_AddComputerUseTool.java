@@ -13,6 +13,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
@@ -67,6 +68,8 @@ public class Request_AddComputerUseTool extends UserAction<IMendixObject>
 		// BEGIN USER CODE
 		try{
 			requireNonNull(Request, "Request is required.");
+			validateMicroflow();
+			
 			
 			ToolCollection toolCollection = ToolCollectionImpl.getOrCreateToolCollection(getContext(), Request);
 			String toolName = "computer"; //only name accepted by converse
@@ -122,6 +125,14 @@ public class Request_AddComputerUseTool extends UserAction<IMendixObject>
 		params.put("Request", Request);
 		params.put("ToolName", toolName);
 		return params;
+	}
+	
+	private void validateMicroflow() {
+		requireNonNull(ComputerUseMicroflow, "ComputerUseMicroflow is required.");
+		Set<String> microflowNames = Core.getMicroflowNames();
+		if(!microflowNames.contains(ComputerUseMicroflow)) {
+			throw new IllegalArgumentException("ComputerUseMicroflow with name " + ComputerUseMicroflow + " does not exist.");
+		}
 	}
 	// END EXTRA CODE
 }
