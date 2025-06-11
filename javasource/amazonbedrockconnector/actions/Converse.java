@@ -276,13 +276,14 @@ public class Converse extends UserAction<IMendixObject>
 			
 		}
 		
-		if (computerUseToolParams.size()>0)
+		if (computerUseToolParams.size()>0) {
 			addComputerUse(builder, computerUseToolParams);
+		}
 		
 		return builder.build();
 	}
 	
-	// Getting additional request params dependent on type
+	// Adding computer use tool and setting additional request params dependent on type
 	private void addComputerUse(software.amazon.awssdk.core.document.Document.MapBuilder mainBuilder, List<ComputerUseTool> computerUseToolParams) throws CoreException {
 		
 		var listBuilder = Document.listBuilder();
@@ -313,7 +314,6 @@ public class Converse extends UserAction<IMendixObject>
 					continue;
 				}
 				
-				
 				// If object is not of a supported type
 				LOGGER.error("Skipping invalid additional request parameter. To add additional request parameters use 'StringRequestParameter', 'DecimalRequestParameter' or 'IntegerRequestParameter' entities.");
 				
@@ -325,7 +325,7 @@ public class Converse extends UserAction<IMendixObject>
 		builder_anthropic.addString("computer-use-2025-01-24");
 		mainBuilder.putDocument("anthropic_beta", builder_anthropic.build());
 	}
-	
+
 	private boolean hasAdditionalResponseFieldRequests() throws CoreException {
 		List<ResponseFieldRequest> responseFields = ConverseRequest.getChatCompletionsRequest_Extension_ResponseFieldRequest();
 		return responseFields.size() > 0;
@@ -747,15 +747,27 @@ public class Converse extends UserAction<IMendixObject>
 	private List<software.amazon.awssdk.services.bedrockruntime.model.Tool> getAwsTools(Request commonRequest) throws CoreException, JsonProcessingException {
 		List<Tool> mxTools = commonRequest.getRequest_ToolCollection().getToolCollection_Tool();
 		List<software.amazon.awssdk.services.bedrockruntime.model.Tool> awsTools = new ArrayList<>();
-		
+		Boolean hasComputerTool = false;
 		for (Tool mxTool : mxTools) {
 			//Skipping computer use tools, because they are added as additional request parameters
 			if (mxTool.getMendixObject().getMetaObject().isSubClassOf(Computer.entityName)) {
+				hasComputerTool = true;
 				continue;
 			}
 			var awsTool = getAwsTool(mxTool);
 			awsTools.add(awsTool);
 		}
+		
+		//Add a dummy tool so that a toolconfig is created and the API does not return errors about a missing toolconfig in the agent loop
+		//This is only needed when a computer tool is added while no other tools are present
+		if (awsTools.size() == 0 && hasComputerTool) {
+			var toolSpecBuilder = ToolSpecification.builder()
+					.name("Dummy")
+					.description("Do not use this tool.")
+					.inputSchema(createEmptyToolInputSchema());
+			awsTools.add(software.amazon.awssdk.services.bedrockruntime.model.Tool.builder().toolSpec(toolSpecBuilder.build()).build());
+		}
+		
 		if(awsTools.size() > 0)
 			return awsTools;
 		return null;
@@ -779,11 +791,7 @@ public class Converse extends UserAction<IMendixObject>
 		if (inputParamName == null) {
 			LOGGER.debug("Function Microflow without input parameter");
 			
-			Document json = Document.mapBuilder()
-					.putString("type", "object")
-					.build();
-			
-			return ToolInputSchema.builder().json(json).build();
+			return createEmptyToolInputSchema();
 		}
 		// Must be created using Document.mapBuilder()
 		// Constructing the JSON in a different way causes errors
@@ -805,6 +813,14 @@ public class Converse extends UserAction<IMendixObject>
 				.putString("type", "object")
 				.putDocument("properties", properties)
 				.putDocument("required", required)
+				.build();
+		
+		return ToolInputSchema.builder().json(json).build();
+	}
+
+	private ToolInputSchema createEmptyToolInputSchema() {
+		Document json = Document.mapBuilder()
+				.putString("type", "object")
 				.build();
 		
 		return ToolInputSchema.builder().json(json).build();
