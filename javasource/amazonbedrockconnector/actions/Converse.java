@@ -406,7 +406,7 @@ public class Converse extends UserAction<IMendixObject>
 		
 		List<ContentBlock> contentBlockList = new ArrayList<>();
 		
-		// Case 2: After a Function Call, a Tool Result message is being sent	
+		// Case 1: After a Function Call, a Tool Result message is being sent	
 		if (isToolResultMessage(mxMsg)) {
 					LOGGER.debug("Tool Result Message found");
 					ContentBlock toolResultContent = getToolResultContent(mxMsg);
@@ -425,7 +425,7 @@ public class Converse extends UserAction<IMendixObject>
 					}
 		}
 		
-		// Case 1: Message has a FileCollection with FileContent(s). 
+		// Case 2: Message has a FileCollection with FileContent(s). Note: Computer Use Tool messages can also contain a file collection
 		if (hasFiles(mxMsg)) {
 			LOGGER.debug("Message with Files found");
 			
