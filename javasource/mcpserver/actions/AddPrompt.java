@@ -10,7 +10,6 @@
 package mcpserver.actions;
 
 import com.mendix.core.Core;
-import com.mendix.logging.ILogNode;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
@@ -18,7 +17,7 @@ import io.modelcontextprotocol.server.McpServerFeatures;
 import io.modelcontextprotocol.server.McpSyncServer;
 import io.modelcontextprotocol.spec.McpSchema;
 import mcpserver.impl.McpServerRegistry;
-import mcpserver.impl.McpServerUtils;
+import mcpserver.impl.MxLogger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -132,6 +131,6 @@ public class AddPrompt extends UserAction<IMendixObject>
 	}
 
 	// BEGIN EXTRA CODE
-	private static final ILogNode LOGGER = Core.getLogger(McpServerUtils.LOGGER_NAME);
+	private static final MxLogger LOGGER = new mcpserver.impl.MxLogger(AddPrompt.class);
 	// END EXTRA CODE
 }

@@ -2,13 +2,14 @@ package mcpserver.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mendix.core.Core;
 import com.mendix.externalinterface.connector.RequestHandler;
-import com.mendix.logging.ILogNode;
 import com.mendix.m2ee.api.IMxRuntimeRequest;
 import com.mendix.m2ee.api.IMxRuntimeResponse;
+
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import system.proxies.Session;
+import system.proxies.User;
 
 import javax.servlet.AsyncContext;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import io.modelcontextprotocol.spec.*;
+import mcpserver.proxies.McpServer;
 
 /**
  * Based on https://github.com/modelcontextprotocol/java-sdk/blob/v0.8.1/mcp/src/main/java/io/modelcontextprotocol/server/transport/HttpServletSseServerTransportProvider.java
@@ -28,7 +30,9 @@ import io.modelcontextprotocol.spec.*;
 public class McpServerRequestHandler extends RequestHandler implements McpServerTransportProvider {
 
     /** Logger instance for Mendix **/
-    private final ILogNode logger = Core.getLogger("MCP");
+    //private final ILogNode logger = Core.getLogger("MCP");
+    
+	private static final MxLogger LOGGER = new mcpserver.impl.MxLogger(McpServerRequestHandler.class);
 
     public static final String UTF_8 = "UTF-8";
 
@@ -115,7 +119,7 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
 
     @Override
     public void processRequest(IMxRuntimeRequest iMxRuntimeRequest, IMxRuntimeResponse iMxRuntimeResponse, String s) throws Exception {
-        logger.info(iMxRuntimeRequest.getHttpServletRequest().getMethod() + " " + iMxRuntimeRequest.getHttpServletRequest().getRequestURI());
+        LOGGER.info(iMxRuntimeRequest.getHttpServletRequest().getMethod() + " " + iMxRuntimeRequest.getHttpServletRequest().getRequestURI());
         switch (iMxRuntimeRequest.getHttpServletRequest().getMethod()) {
             case "GET":
                 doGet(iMxRuntimeRequest, iMxRuntimeResponse, s);
@@ -134,7 +138,10 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
     protected void doGet(IMxRuntimeRequest iMxRuntimeRequest, IMxRuntimeResponse iMxRuntimeResponse, String s) throws Exception {
         HttpServletRequest request = iMxRuntimeRequest.getHttpServletRequest();
         HttpServletResponse response = iMxRuntimeResponse.getHttpServletResponse();
-
+        
+        //Authenticate, get session by logged in user
+        //authenticateUser(request, null);
+        
         String requestURI = request.getRequestURI();
         if (!requestURI.endsWith(sseEndpoint)) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -231,7 +238,7 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
             response.setStatus(HttpServletResponse.SC_OK);
         }
         catch (Exception e) {
-            logger.error("Error processing message: " + e.getMessage());
+            LOGGER.error("Error processing message: " + e.getMessage());
             try {
                 McpError mcpError = new McpError(e.getMessage());
                 response.setContentType(APPLICATION_JSON);
@@ -243,23 +250,29 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
                 writer.flush();
             }
             catch (IOException ex) {
-                logger.error(FAILED_TO_SEND_ERROR_RESPONSE, ex);
+                LOGGER.error(FAILED_TO_SEND_ERROR_RESPONSE, ex);
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error processing message");
             }
         }
 
     }
+    
+    protected Session authenticateUser(HttpServletRequest httpRequest, McpServer mcpServer) {
+		
+    	
+    	return null;    	
+    }
 
     @Override
     public Mono<Void> notifyClients(String method, Object params) {
         if (sessions.isEmpty()) {
-            logger.debug("No active sessions for broadcast");
+            LOGGER.debug("No active sessions for broadcast");
             return Mono.empty();
         }
 
         return Flux.fromIterable(sessions.values())
                 .flatMap(session -> session.sendNotification(method, params)
-                        .doOnError(err -> logger.error("Failed to send message to session " + session.getId() + ": " + err.getMessage())))
+                        .doOnError(err -> LOGGER.error("Failed to send message to session " + session.getId() + ": " + err.getMessage())))
                 .onErrorComplete()
                 .then();
     }
@@ -267,7 +280,7 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
     @Override
     public Mono<Void> closeGracefully() {
         isClosing.set(true);
-        logger.debug("Initiating graceful shutdown with " + sessions.size() + " active sessions");
+        LOGGER.debug("Initiating graceful shutdown with " + sessions.size() + " active sessions");
 
         return Flux.fromIterable(sessions.values()).flatMap(McpServerSession::closeGracefully).then();
     }
@@ -311,7 +324,7 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
             this.sessionId = sessionId;
             this.asyncContext = asyncContext;
             this.writer = writer;
-            logger.debug(String.format("Session transport %s initialized with SSE writer",  sessionId));
+            LOGGER.debug(String.format("Session transport %s initialized with SSE writer",  sessionId));
         }
 
         /**
@@ -325,10 +338,10 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
                 try {
                     String jsonText = objectMapper.writeValueAsString(message);
                     sendEvent(writer, MESSAGE_EVENT_TYPE, jsonText);
-                    logger.debug(String.format("Message sent to session %s", sessionId));
+                    LOGGER.debug(String.format("Message sent to session %s", sessionId));
                 }
                 catch (Exception e) {
-                    logger.error(String.format("Failed to send message to session %s: %s", sessionId, e.getMessage()));
+                    LOGGER.error(String.format("Failed to send message to session %s: %s", sessionId, e.getMessage()));
                     sessions.remove(sessionId);
                     asyncContext.complete();
                 }
@@ -354,14 +367,14 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
         @Override
         public Mono<Void> closeGracefully() {
             return Mono.fromRunnable(() -> {
-                logger.debug(String.format("Closing session transport: %s", sessionId));
+                LOGGER.debug(String.format("Closing session transport: %s", sessionId));
                 try {
                     sessions.remove(sessionId);
                     asyncContext.complete();
-                    logger.debug(String.format("Successfully completed async context for session %s", sessionId));
+                    LOGGER.debug(String.format("Successfully completed async context for session %s", sessionId));
                 }
                 catch (Exception e) {
-                    logger.warn(String.format("Failed to complete async context for session %s: %s", sessionId, e.getMessage()));
+                    LOGGER.warn(String.format("Failed to complete async context for session %s: %s", sessionId, e.getMessage()));
                 }
             });
         }
@@ -374,10 +387,10 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
             try {
                 sessions.remove(sessionId);
                 asyncContext.complete();
-                logger.debug(String.format("Successfully completed async context for session %s", sessionId));
+                LOGGER.debug(String.format("Successfully completed async context for session %s", sessionId));
             }
             catch (Exception e) {
-                logger.warn(String.format("Failed to complete async context for session %s: %s", sessionId, e.getMessage()));
+                LOGGER.warn(String.format("Failed to complete async context for session %s: %s", sessionId, e.getMessage()));
             }
         }
     }

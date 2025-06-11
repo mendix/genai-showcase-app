@@ -28,18 +28,21 @@ public class CreateMCPServer extends UserAction<IMendixObject>
 	private final java.lang.String Path;
 	private final java.lang.String Name;
 	private final java.lang.String Version;
+	private final java.lang.String AuthenticationMicroflow;
 
 	public CreateMCPServer(
 		IContext context,
 		java.lang.String _path,
 		java.lang.String _name,
-		java.lang.String _version
+		java.lang.String _version,
+		java.lang.String _authenticationMicroflow
 	)
 	{
 		super(context);
 		this.Path = _path;
 		this.Name = _name;
 		this.Version = _version;
+		this.AuthenticationMicroflow = _authenticationMicroflow;
 	}
 
 	@java.lang.Override
@@ -50,6 +53,7 @@ public class CreateMCPServer extends UserAction<IMendixObject>
 		mcpserver.proxies.McpServer mcpServer = new mcpserver.proxies.McpServer(getContext());
 		mcpServer.setName(Name);
 		mcpServer.setVersion(Version);
+		mcpServer.setAuthenticationMicroflow(AuthenticationMicroflow);
 
 		// Create request handler and McpServer object
 		McpServerRequestHandler mcpRequestHandler = new McpServerRequestHandler(
