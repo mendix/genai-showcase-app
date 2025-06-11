@@ -21,7 +21,9 @@ import genaicommons.proxies.DeployedModel;
 import genaicommons.proxies.Response;
 
 /**
- * This action calls the Agent with the specified request. It executes a Chat Completions (With History) operation based on the defined Agent. All agent configurations, such as the selected model, system prompt, tools, knowledge base or model parameter settings are used. If a context object is passed, all variables are replaced in the system prompt. A response is returned that contains the final assistant's message.
+ * This action calls the Agent with the specified request. It executes a Chat Completions (With History) operation based on the defined Agent. All agent configurations, such as the selected model, system prompt, tools, knowledge base or model parameter settings are used. 
+ * If a request object is passed that already contains a system prompt, or a value for the parameters temperature, top P or max tokens, those values have priority and will not be overwritten by the agent configurations.
+ * If a context object is passed, all variables are replaced in the system prompt. A response is returned that contains the final assistant's message.
  */
 public class Agent_Call_WithHistory extends UserAction<IMendixObject>
 {
