@@ -28,7 +28,7 @@ import com.mendix.systemwideinterfaces.core.UserAction;
 /**
  * Adds a new Computer Tool to the Request.
  * Note this is only supported by recent Anthropic Claude models. Please view the Amazon Bedrock documentation for more info.
- * Computer use is an anthropic beta feature, and anthropic beta version computer-use-2025-01-24 is used.
+ * Computer use is an Anthropic beta feature, and anthropic beta version computer-use-2025-01-24 is used.
  */
 public class Request_AddComputerUseTool extends UserAction<IMendixObject>
 {
