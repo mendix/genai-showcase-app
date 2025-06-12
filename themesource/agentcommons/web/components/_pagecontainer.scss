@@ -193,6 +193,10 @@
             &--version {
                 z-index: 1;
             }
+
+            &--model {
+                z-index: 0;
+            }
         }
     }
 
@@ -264,9 +268,34 @@
         &--version {
             z-index: 1;
         }
+        .mx-text {
+            align-self: center;
+            margin-bottom: 0;
+        }
     }
+}
 
+.margin-right-45{
+    margin-right: 45px;
+}
 
+.combobox-model-selection {
+    display: flex;
+    flex-grow: 1;
+    min-width: 360px;
+    .model-selection{
+        display: flex;
+        align-items: center;
+        height: max-content;
+    
+    .mx-image {
+        height: $font-size-large;
+        margin-right: $spacing-small;
+        float: right;
+        height: $font-size-large;
+        margin-right: $spacing-small;
+    }
+    }
 }
 
 //Tables

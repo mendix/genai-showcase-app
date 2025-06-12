@@ -12,6 +12,7 @@ package agentcommons.actions;
 import static java.util.Objects.requireNonNull;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
+import agentcommons.impl.AgentImpl;
 import agentcommons.impl.MxLogger;
 import agentcommons.proxies.PromptToUse;
 import genaicommons.proxies.DeployedModel;
@@ -61,9 +62,9 @@ public class ChatContext_Create_ForAgent extends UserAction<IMendixObject>
 		// BEGIN USER CODE
 		
 		try {
-		    requireNonNull(Agent, "Prompt is required.");
-		    DeployedModel deployedModel = OverwritingDeployedModel != null ? OverwritingDeployedModel : Agent.getAgent_DeployedModel();
-		    requireNonNull(deployedModel, "No DeployedModel could be used for creating the ChatContext. Either pass the OverwritingDeployedModel or make sure to use a Prompt that has a DeployedModel associated.");
+		    requireNonNull(Agent, "Agent is required.");
+		    DeployedModel deployedModel = OverwritingDeployedModel != null ? OverwritingDeployedModel : AgentImpl.getDeployedModel(Agent);
+		    requireNonNull(deployedModel, "No DeployedModel could be found for creating the ChatContext. Either pass the OverwritingDeployedModel or select a model on the agent version in use.");
 		    
 		    IMendixObject returnValue = Core.userActionCall("AgentCommons." + PromptToUse_GetAndReplace.class.getSimpleName())
 		    		.withParams(Agent.getMendixObject(), ContextObject)
