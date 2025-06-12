@@ -9,6 +9,9 @@ import com.mendix.m2ee.api.IMxRuntimeRequest;
 import com.mendix.m2ee.api.IMxRuntimeResponse;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IDataType;
+import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.ISession;
+import com.mendix.systemwideinterfaces.core.IUser;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -23,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collections;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -156,9 +160,8 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
         
         //Authenticate, get session by logged in user
         String sessionId = getSessionId(iMxRuntimeRequest.getHttpServletRequest(), mcpServer);
-        //some handling
         if(sessionId == null || sessionId.isEmpty()) {
-        	response.sendError(HttpServletResponse.SC_NOT_FOUND, "User could not be authenticated.");
+        	response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "User is not authorized to use the MCP Server.");
             return;
         }
                
@@ -278,42 +281,50 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
     
     // returns sessionID for either an authenticated (logged-in) user or a random-generated ID
     protected String getSessionId(HttpServletRequest httpServletRequest, McpServer mcpServer) throws CoreException {
-	   	if(mcpServer.getAuthenticationMicroflow().isEmpty())
+	   	if(mcpServer.getAuthenticationMicroflow() == null || mcpServer.getAuthenticationMicroflow().isEmpty())
 		{
 	   		return UUID.randomUUID().toString();
 		}
 		
-	   	Session session = createSessionForUser(httpServletRequest,mcpServer);
-		if (session != null) {
-			return session.getSessionId();
+	   	ISession iSession = createSessionForUser(httpServletRequest,mcpServer);
+		if (iSession != null) {
+			return iSession.getId().toString();
 		}
 		return null;    	
     }
     
     //Executes the provided authentication microflow to get the user and initializes a session
-    protected Session createSessionForUser(HttpServletRequest httpServletRequest, McpServer mcpServer) throws CoreException {   	
-    	User user = Core.microflowCall(mcpServer.getAuthenticationMicroflow())
-				.withParams(mapInputParametersAuthentication(mcpServer, createHttpRequest(httpServletRequest)))
+    protected ISession createSessionForUser(HttpServletRequest httpServletRequest, McpServer mcpServer) throws CoreException {   	
+    	IMendixObject userIMx = Core.microflowCall(mcpServer.getAuthenticationMicroflow())
+				.withParams(mapInputParametersAuthentication(mcpServer, createHttpRequestMx(httpServletRequest)))
 				.execute(this.iContext);
-    	if(user == null) {
+    	if(userIMx == null) {
     		return null;
     	}
-    	return (Session) Core.initializeSession(Core.getUser(iContext, user.getName()), null);
+    	IUser iUser = Core.getUser(iContext, User.initialize(iContext, userIMx).getName());
+    	
+    	return  Core.initializeSession(iUser, null);
     }
     
     // HttpRequest is created based on the HttpServletRequest
-    protected HttpRequest createHttpRequest(HttpServletRequest httpServletRequest) {  	
-    	HttpRequest httpRequest = new HttpRequest(iContext);
-    	setHttpHeader(httpRequest,"testkey","testvalue");
-    	return httpRequest;
+    protected HttpRequest createHttpRequestMx(HttpServletRequest httpServletRequest) {  	
+    	HttpRequest httpRequestMx = new HttpRequest(iContext);
+    	
+    	Collections.list(httpServletRequest.getHeaderNames())
+        .forEach(headerName -> {
+            String headerValue = httpServletRequest.getHeader(headerName);
+            setHttpHeader(httpRequestMx,headerName, headerValue);
+        });
+    	
+    	return httpRequestMx;
     }
     
     //Creates HttpHeaders for a given HttpRequest
-    protected void setHttpHeader(HttpRequest httpRequest, String key, String value ) {
+    protected void setHttpHeader(HttpRequest httpRequestMx, String key, String value ) {
     	system.proxies.HttpHeader httpHeader = new HttpHeader(iContext);
     	httpHeader.setKey(key);
     	httpHeader.setValue(value);
-    	httpHeader.setHttpHeaders(httpRequest);
+    	httpHeader.setHttpHeaders(httpRequestMx);
     }
     
     //Gets the input parameters for the authentication microflow
