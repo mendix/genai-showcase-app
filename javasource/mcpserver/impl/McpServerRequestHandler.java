@@ -13,13 +13,6 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.ISession;
 import com.mendix.systemwideinterfaces.core.IUser;
 
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-import system.proxies.HttpHeader;
-import system.proxies.HttpRequest;
-import system.proxies.Session;
-import system.proxies.User;
-
 import javax.servlet.AsyncContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,8 +24,15 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import io.modelcontextprotocol.spec.*;
+
 import mcpserver.proxies.McpServer;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import system.proxies.HttpHeader;
+import system.proxies.HttpRequest;
+import system.proxies.User;
 
 /**
  * Based on https://github.com/modelcontextprotocol/java-sdk/blob/v0.8.1/mcp/src/main/java/io/modelcontextprotocol/server/transport/HttpServletSseServerTransportProvider.java
@@ -158,7 +158,7 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
         HttpServletRequest request = iMxRuntimeRequest.getHttpServletRequest();
         HttpServletResponse response = iMxRuntimeResponse.getHttpServletResponse();
         
-        //Authenticate, get session by logged in user
+        //Authenticate if microflow was set; get sessionId by logged in user
         String sessionId = getSessionId(iMxRuntimeRequest.getHttpServletRequest(), mcpServer);
         if(sessionId == null || sessionId.isEmpty()) {
         	response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "User is not authorized to use the MCP Server.");
@@ -279,8 +279,14 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
 
     }
     
-    // returns sessionID for either an authenticated (logged-in) user or a random-generated ID
+    //Returns sessionID for either an authenticated (logged-in) user or a random-generated ID
     protected String getSessionId(HttpServletRequest httpServletRequest, McpServer mcpServer) throws CoreException {
+    	
+    	String sessionIdRequest = httpServletRequest.getParameter("sessionId");
+    	if(sessionIdRequest != null && sessions.get(sessionIdRequest) != null) {
+    		return sessionIdRequest;
+    	}
+    	
 	   	if(mcpServer.getAuthenticationMicroflow() == null || mcpServer.getAuthenticationMicroflow().isEmpty())
 		{
 	   		return UUID.randomUUID().toString();
