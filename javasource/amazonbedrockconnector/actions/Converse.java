@@ -26,7 +26,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
@@ -46,7 +45,6 @@ import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.ENUM_ToolChoice;
 import genaicommons.proxies.FileCollection;
 import genaicommons.proxies.FileContent;
-import genaicommons.proxies.Function;
 import genaicommons.proxies.Request;
 import genaicommons.proxies.Response;
 import genaicommons.proxies.StopSequence;
@@ -135,7 +133,7 @@ public class Converse extends UserAction<IMendixObject>
 			
 		} catch (Exception e) {
 			LOGGER.error(e);
-			throw e;
+			return null;
 		}
 		
 		// END USER CODE
@@ -154,13 +152,6 @@ public class Converse extends UserAction<IMendixObject>
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new MxLogger(Converse.class);
 	private static final ObjectMapper MAPPER = new ObjectMapper();
-	
-	/* 
-	 * The name attribute of a document that is sent to the model.
-	 * This field is vulnerable to prompt injections, because the model might inadvertently interpret it as instructions
-	 * Therefore, it is recommended to use a hardcoded name. 
-	 */
-	private static final String DOC_NAME = "user document";
 	
 	//Request Mapping 
 	
