@@ -16,7 +16,7 @@ import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.webui.CustomJavaAction;
-import amazonbedrockconnector.genaicommons_impl.ReferenceImpl;
+import amazonbedrockconnector.impl.ReferenceImpl;
 import amazonbedrockconnector.impl.AmazonBedrockClient;
 import amazonbedrockconnector.impl.MxLogger;
 import amazonbedrockconnector.proxies.KnowledgeBaseTool;
@@ -97,7 +97,7 @@ public class RetrieveAndGenerate extends UserAction<IMendixObject>
 			return mxResponse.getMendixObject();
 			
 		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error(e);
 			throw e;
 		}
 		// END USER CODE
@@ -188,7 +188,7 @@ public class RetrieveAndGenerate extends UserAction<IMendixObject>
 			.input(getInput(commonRequest))
 			.retrieveAndGenerateConfiguration(getRetrieveAndGenerateConfiguration(commonRequest));
 		
-		String sessionId = RetrieveAndGenerateRequest.getSessionId();
+		String sessionId = commonRequest.get_ID();
 		if (sessionId != null && !sessionId.isBlank()) {
 			awsRequestBuilder.sessionId(sessionId);
 			
@@ -290,7 +290,7 @@ public class RetrieveAndGenerate extends UserAction<IMendixObject>
 	private amazonbedrockconnector.proxies.RetrieveAndGenerateResponse getMxResponse(RetrieveAndGenerateResponse awsResponse) {
 		amazonbedrockconnector.proxies.RetrieveAndGenerateResponse mxResponse = new amazonbedrockconnector.proxies.RetrieveAndGenerateResponse(getContext());
 		
-		mxResponse.setSessionId(awsResponse.sessionId());
+		mxResponse.set_ID(awsResponse.sessionId());
 		
 		Message responseMsg = new Message(getContext());
 		responseMsg.setContent(awsResponse.output().text());

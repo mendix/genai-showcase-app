@@ -26,6 +26,7 @@ import genaicommons.impl.FunctionMappingImpl;
 import genaicommons.impl.MessageImpl;
 import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.Message;
+import genaicommons.proxies.Request;
 import genaicommons.proxies.ToolCall;
 import mxgenaiconnector.impl.ConverseVisionDocument;
 import mxgenaiconnector.impl.ConverseFunctionCalling;
@@ -197,7 +198,7 @@ public class Request_Modify_Converse extends UserAction<java.lang.String>
                 
                 //"any" choice can only be used once at the first iteration to prevent infinity loops
                 case "any":
-                	if(getToolCallMessages().size() == 0) {
+                	if(FunctionMappingImpl.getToolCallMessages(Request,getContext()).size() == 0) {
                 		ObjectNode wrapper = MAPPER.createObjectNode();
 	                    wrapper.set(toolType, MAPPER.createObjectNode());
 	                    ((ObjectNode) toolConfig).set("toolChoice", wrapper);
@@ -222,17 +223,8 @@ public class Request_Modify_Converse extends UserAction<java.lang.String>
 			
 		}
 		
-		// Get all messages where ToolCallId is set. These messages indicate that a tool has been called
-		private List<Message> getToolCallMessages() {
-			return Core.retrieveByPath(getContext(), Request.getMendixObject(), 
-					genaicommons.proxies.Request.MemberNames.Request_Message.toString()).stream()
-					.map(msg -> genaicommons.proxies.Message.initialize(getContext(), msg))
-					.filter(msg -> msg.getToolCallId() != null && !msg.getToolCallId().isEmpty())
-					.collect(Collectors.toList());
-		}
-		
 		private boolean isToolRecall(String toolChoiceFunctionName) {
-			List<genaicommons.proxies.Message> messageListTool = getToolCallMessages();
+			List<genaicommons.proxies.Message> messageListTool = FunctionMappingImpl.getToolCallMessages(Request,getContext());
 
 			// No tool calls yet; thus no tool recall
 			if (messageListTool.size() == 0) {

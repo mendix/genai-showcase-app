@@ -76,7 +76,7 @@ public class JA_TitanEmbeddings_ModifyJson_Response extends UserAction<java.lang
 
 
 			} catch (Exception e) {
-				LOGGER.error("Error occurred while modifying Titan Embeddings response body: " + e.getMessage());
+				LOGGER.error("Error occurred while modifying Titan Embeddings response body: " + e);
 				throw e;
 			}
 

@@ -20,13 +20,8 @@ import mxgenaiconnector.impl.MxLogger;
 
 /**
  * Use this operation to retrieve chunks from a collection and set associations to the related mendix objects (if applicable). This operation returns a list of the same type of the TargetChunk input variable. 
- * Additional selection and filtering can be done by specifying the optional input parameters:
- * -Offset: This is for skipping a number of records in the retrieve (e.g. for batching purposes)
- * -MaxNumberOfResults: limit of the amount of records returned
- * -MetadataCollection: when provided, this operation only returns chunks that are conform with all of the labels in the collection.
  * 
- * The Connection entity passed must be of type MxKnowledgeBaseConnection and must contain the CollectionName string attribute filled and a MxCloudKnowledgeBase associated with the connection details to the knowledge base service. By providing the CollectionName on the Connection, you determine the collection for which the retrieve should happen.
- * Use MxKnowledgeBaseConnection_Create to create it.
+ * Additional selection and filtering can be done by specifying the optional input parameters.
  * 
  * The TargetChunk entity must be a specialization of the KnowledgeBaseChunk entity from the GenAICommons. If it contains associations to (specializations of) the related mendix object for which the chunk was created originally, this will be set by this operation for easy processing afterwards.
  * 
@@ -34,10 +29,10 @@ import mxgenaiconnector.impl.MxLogger;
  */
 public class KnowledgeBaseChunkList_Retrieve_SetAssociation extends UserAction<java.util.List<IMendixObject>>
 {
-	/** @deprecated use Connection.getMendixObject() instead. */
+	/** @deprecated use DeployedKnowledgeBase.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
-	private final IMendixObject __Connection;
-	private final genaicommons.proxies.Connection Connection;
+	private final IMendixObject __DeployedKnowledgeBase;
+	private final genaicommons.proxies.DeployedKnowledgeBase DeployedKnowledgeBase;
 	private final java.lang.String TargetChunk;
 	/** @deprecated use MetadataCollection.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
@@ -48,7 +43,7 @@ public class KnowledgeBaseChunkList_Retrieve_SetAssociation extends UserAction<j
 
 	public KnowledgeBaseChunkList_Retrieve_SetAssociation(
 		IContext context,
-		IMendixObject _connection,
+		IMendixObject _deployedKnowledgeBase,
 		java.lang.String _targetChunk,
 		IMendixObject _metadataCollection,
 		java.lang.Long _maxNumberOfResults,
@@ -56,8 +51,8 @@ public class KnowledgeBaseChunkList_Retrieve_SetAssociation extends UserAction<j
 	)
 	{
 		super(context);
-		this.__Connection = _connection;
-		this.Connection = _connection == null ? null : genaicommons.proxies.Connection.initialize(getContext(), _connection);
+		this.__DeployedKnowledgeBase = _deployedKnowledgeBase;
+		this.DeployedKnowledgeBase = _deployedKnowledgeBase == null ? null : genaicommons.proxies.DeployedKnowledgeBase.initialize(getContext(), _deployedKnowledgeBase);
 		this.TargetChunk = _targetChunk;
 		this.__MetadataCollection = _metadataCollection;
 		this.MetadataCollection = _metadataCollection == null ? null : genaicommons.proxies.MetadataCollection.initialize(getContext(), _metadataCollection);
@@ -76,7 +71,7 @@ public class KnowledgeBaseChunkList_Retrieve_SetAssociation extends UserAction<j
 			
 			// call a microflow to retrieve chunks
 			java.util.List<KnowledgeBaseChunk> chunkList = mxgenaiconnector.proxies.microflows.Microflows.knowledgeBaseChunkList_Retrieve(
-					getContext(), MetadataCollection, MaxNumberOfResults, Connection, null, Offset);
+					getContext(), MetadataCollection, MaxNumberOfResults, DeployedKnowledgeBase, null, Offset);
 			
 			//map to target chunks to return
 			return ChunkUtils.getTargetChunkList(getContext(), chunkList, targetChunk);
