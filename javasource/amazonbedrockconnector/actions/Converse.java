@@ -26,13 +26,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.webui.CustomJavaAction;
-import amazonbedrockconnector.genaicommons_impl.FunctionMappingImpl;
-import amazonbedrockconnector.genaicommons_impl.MessageImpl;
 import amazonbedrockconnector.impl.AmazonBedrockClient;
 import amazonbedrockconnector.impl.MxLogger;
 import amazonbedrockconnector.proxies.AbstractRequestParameter;
@@ -43,6 +41,7 @@ import amazonbedrockconnector.proxies.IntegerRequestParameter;
 import amazonbedrockconnector.proxies.RequestedResponseField;
 import amazonbedrockconnector.proxies.ResponseFieldRequest;
 import amazonbedrockconnector.proxies.StringRequestParameter;
+import genaicommons.impl.FunctionMappingImpl;
 import genaicommons.proxies.ENUM_FileType;
 import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.ENUM_ToolChoice;
@@ -58,6 +57,8 @@ import genaicommons.proxies.ToolCall;
 import genaicommons.proxies.ToolCollection;
 import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.core.document.Document;
+import software.amazon.awssdk.services.bedrockruntime.model.AnyToolChoice;
+import software.amazon.awssdk.services.bedrockruntime.model.AutoToolChoice;
 import software.amazon.awssdk.services.bedrockruntime.model.ContentBlock;
 import software.amazon.awssdk.services.bedrockruntime.model.ConversationRole;
 import software.amazon.awssdk.services.bedrockruntime.model.ConverseOutput;
@@ -135,7 +136,7 @@ public class Converse extends UserAction<IMendixObject>
 			return mxResponse.getMendixObject();
 			
 		} catch (Exception e) {
-			LOGGER.error("An error ocurred during Converse operation. " + e.getMessage());
+			LOGGER.error(e);
 			throw e;
 		}
 		
@@ -435,15 +436,16 @@ public class Converse extends UserAction<IMendixObject>
 				contentBlockList.add(textContent);
 			}
 			
-			// Count for documents in message
-			// Used for unique document name
-			int j = 0; 
-			
 			// Adding file content for each file
 			List<FileContent> files = getFiles(mxMsg);
 			for (FileContent file : files) {
 				
-				// Adding additional text content if TextContent attribute contains content
+				// Adding additional text content of filename as text content
+				if (file.getFileName() != null && !file.getFileName().isBlank()) {
+					ContentBlock fileName = getTextContent(file.getFileName());
+					contentBlockList.add(fileName);
+				}
+				
 				if (file.getTextContent() != null && !file.getTextContent().isBlank()) {
 					ContentBlock imgTextContent = getTextContent(file.getTextContent());
 					contentBlockList.add(imgTextContent);
@@ -463,9 +465,8 @@ public class Converse extends UserAction<IMendixObject>
 						break;
 					}
 					case document: {
-						ContentBlock documentContentBlock = getDocumentContent(file, i, j);
+						ContentBlock documentContentBlock = getDocumentContent(file);
 						contentBlockList.add(documentContentBlock);
-						j++;
 						break;
 					}
 					default:
@@ -530,17 +531,16 @@ public class Converse extends UserAction<IMendixObject>
 		return true;
 	}
 	
-	private ContentBlock getDocumentContent(FileContent doc, int i, int j) {
+	private ContentBlock getDocumentContent(FileContent doc) {
 		// Creating document content block
 		// Using fixed name because this field is vulnerable to prompt injection
 		// source is fileContent attribute as byte[] from base64 string
 		String format = getFileExtension(doc);
-		String name = String.format("%s-%s-%s", DOC_NAME, i, j);
 		DocumentSource source = getDocSource(doc);
 		
 		DocumentBlock docBlock = DocumentBlock.builder()
 				.format(format)
-				.name(name)
+				.name(doc.getFileName())
 				.source(source)
 				.build();
 		
@@ -691,22 +691,52 @@ public class Converse extends UserAction<IMendixObject>
 	
 	// Adding the available tools to the request
 	private ToolConfiguration getAwsToolConfig(Request commonRequest) throws CoreException, JsonProcessingException {
-		var builder = ToolConfiguration.builder();
-		// Checking if Tool Choice attribute is set to Tool
-		// Other values will be mapped to the default: auto
-		if (commonRequest.getToolChoice() == ENUM_ToolChoice.tool) {
-			if (hasToolChoice(commonRequest)) {
-				Tool toolChoiceTool = commonRequest.getRequest_ToolCollection().getToolCollection_ToolChoice();
-				if (!isToolRecall(toolChoiceTool, commonRequest)) {
-					ToolChoice awsToolChoice = getAwsToolChoice(toolChoiceTool);
-					builder.toolChoice(awsToolChoice);
-				}
-			}
-		}
-		
+		var builder = ToolConfiguration.builder();		
 		List<software.amazon.awssdk.services.bedrockruntime.model.Tool> awsTools = getAwsTools(commonRequest);
 		builder.tools(awsTools);
 		
+		ENUM_ToolChoice toolChoice = commonRequest.getToolChoice();
+		if(toolChoice == null) {
+			return builder.build();
+		}
+		
+		switch (toolChoice) {
+    		//"tool" choice can only be used once for the same function to prevent infinity loops
+	        case tool:
+	        	if (commonRequest.getToolChoice() == ENUM_ToolChoice.tool) {
+	    			if (hasToolChoice(commonRequest)) {
+	    				Tool toolChoiceTool = commonRequest.getRequest_ToolCollection().getToolCollection_ToolChoice();
+	    				if (!isToolRecall(toolChoiceTool, commonRequest)) {
+	    					ToolChoice awsToolChoice = getAwsToolChoice(toolChoiceTool);
+	    					builder.toolChoice(awsToolChoice);
+	    				}
+	    			}
+	    		}
+	        	break;
+	        
+	        //"any" choice can only be used once at the first iteration to prevent infinity loops
+	        case any:
+	        	if(FunctionMappingImpl.getToolCallMessages(commonRequest,getContext()).size() == 0) {
+	        		//any
+	        		ToolChoice awsToolChoiceAny = ToolChoice.builder()
+	        	            .any(AnyToolChoice.builder().build())
+	        	            .build();
+        	        builder.toolChoice(awsToolChoiceAny);
+  	        	}
+	        	break;
+	        	
+	        //"auto" let's the model choose if a tool needs to be called
+           case auto:
+        	   ToolChoice awsToolChoiceAuto = ToolChoice.builder()
+	               .auto(AutoToolChoice.builder().build())
+	               .build();
+        	   builder.toolChoice(awsToolChoiceAuto);
+        	   break;
+	
+	        default:
+	           LOGGER.warn(("Unknown type for ToolChoice: " + toolChoice.toString()));
+	           break;
+		}
 		return builder.build();
 	}
 	
@@ -786,8 +816,8 @@ public class Converse extends UserAction<IMendixObject>
 	// Getting the Input Schema of a Tool
 	private ToolInputSchema getToolInputSchema(Tool mxTool) throws JsonProcessingException {
 		// All Tools to be called are function objects
-		Function function = (Function) mxTool;
-		String inputParamName = FunctionMappingImpl.getFirstInputParamName(function.getMicroflow());
+		//Function function = (Function) mxTool;
+		String inputParamName = genaicommons.impl.FunctionMappingImpl.getFirstInputParamName(mxTool.getMicroflow());
 		if (inputParamName == null) {
 			LOGGER.debug("Function Microflow without input parameter");
 			
@@ -842,7 +872,7 @@ public class Converse extends UserAction<IMendixObject>
 		
 		// Get all messages with role assistant
 		// Assistant messages optionally have an array of tool_calls that contain an id and the functionName
-		List<genaicommons.proxies.Message> messageListAssistant = MessageImpl
+		List<genaicommons.proxies.Message> messageListAssistant = genaicommons.impl.MessageImpl
 				.retrieveMessageListByRole(commonRequest, ENUM_MessageRole.assistant, getContext());
 
 		// HashMap with ToolCall._id and ToolCallFunction.Name created from the messageListAssistant
