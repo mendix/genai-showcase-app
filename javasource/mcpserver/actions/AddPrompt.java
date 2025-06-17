@@ -22,6 +22,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Registers a prompt the with MCP Server that gets exposed to MCP clients. If the user chooses to use the prompt in the MCP host application, the selected microflow gets executed which can construct the final prompt (based on input or other logic).
+ * 
+ * Currently, the current User is not in scope of the prompt microflow.
+ */
 public class AddPrompt extends UserAction<IMendixObject>
 {
 	private final java.lang.String Name;

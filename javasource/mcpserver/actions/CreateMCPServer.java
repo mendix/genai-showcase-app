@@ -21,7 +21,9 @@ import mcpserver.impl.McpServerRequestHandler;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
- * Create an MCP Server in Java. The input follows the MCP entity model, no abstractions are made. 
+ * Create and start an MCP Server. The input follows the MCP specifications.
+ * 
+ * Note that no authentication method is applied if no authentication microflow as added, thus making the MCP server usable for anyone. It is recommended to add an authentication microflow if the Mendix application is reachable outside of your local environment.
  */
 public class CreateMCPServer extends UserAction<IMendixObject>
 {

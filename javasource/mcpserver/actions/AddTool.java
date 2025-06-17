@@ -22,6 +22,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Registers a tool the with MCP Server that gets exposed to MCP clients. If the model chooses to call the tool, the selected microflow gets executed.
+ * 
+ * Currently, the current User is not in scope of the tool microflow.
+ */
 public class AddTool extends UserAction<IMendixObject>
 {
 	private final java.lang.String Name;

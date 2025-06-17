@@ -38,9 +38,6 @@ import system.proxies.User;
  * Based on https://github.com/modelcontextprotocol/java-sdk/blob/v0.8.1/mcp/src/main/java/io/modelcontextprotocol/server/transport/HttpServletSseServerTransportProvider.java
  */
 public class McpServerRequestHandler extends RequestHandler implements McpServerTransportProvider {
-
-    /** Logger instance for Mendix **/
-    //private final ILogNode logger = Core.getLogger("MCP");
     
 	private static final MxLogger LOGGER = new mcpserver.impl.MxLogger(McpServerRequestHandler.class);
 
@@ -97,7 +94,7 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
      */
     public McpServerRequestHandler(ObjectMapper objectMapper, mcpserver.proxies.McpServer mcpServer, IContext iContext, String messageEndpoint,
                                                  String sseEndpoint) {
-        this(objectMapper, mcpServer,iContext , DEFAULT_BASE_URL, messageEndpoint, sseEndpoint);
+        this(objectMapper, mcpServer, iContext, DEFAULT_BASE_URL, messageEndpoint, sseEndpoint);
     }
 
     /**
@@ -279,7 +276,14 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
 
     }
     
-    //Returns sessionID for either an authenticated (logged-in) user or a random-generated ID
+    /**
+     * Returns sessionID for either an authenticated (logged-in) user or
+     * a random-generated ID
+     * @param httpServletRequest
+     * @param mcpServer
+     * @return
+     * @throws CoreException
+     */
     protected String getSessionId(HttpServletRequest httpServletRequest, McpServer mcpServer) throws CoreException {
     	
     	String sessionIdRequest = httpServletRequest.getParameter("sessionId");
@@ -292,14 +296,20 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
 	   		return UUID.randomUUID().toString();
 		}
 		
-	   	ISession iSession = createSessionForUser(httpServletRequest,mcpServer);
+	   	ISession iSession = createSessionForUser(httpServletRequest, mcpServer);
 		if (iSession != null) {
 			return iSession.getId().toString();
 		}
 		return null;    	
     }
-    
-    //Executes the provided authentication microflow to get the user and initializes a session
+    /**
+     * Executes the provided authentication microflow to get the user and initializes a session
+ 
+     * @param httpServletRequest
+     * @param mcpServer
+     * @return ISession
+     * @throws CoreException
+     */  
     protected ISession createSessionForUser(HttpServletRequest httpServletRequest, McpServer mcpServer) throws CoreException {   	
     	IMendixObject userIMx = Core.microflowCall(mcpServer.getAuthenticationMicroflow())
 				.withParams(mapInputParametersAuthentication(mcpServer, createHttpRequestMx(httpServletRequest)))
@@ -308,32 +318,46 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
     		return null;
     	}
     	IUser iUser = Core.getUser(iContext, User.initialize(iContext, userIMx).getName());
-    	
+    	if(!iUser.isActive() || iUser.isBlocked()){
+    		return null;
+    	}
     	return  Core.initializeSession(iUser, null);
     }
-    
-    // HttpRequest is created based on the HttpServletRequest
+    /**
+     * HttpRequest is created based on the HttpServletRequest
+     * @param httpServletRequest
+     * @return
+     */
     protected HttpRequest createHttpRequestMx(HttpServletRequest httpServletRequest) {  	
     	HttpRequest httpRequestMx = new HttpRequest(iContext);
     	
     	Collections.list(httpServletRequest.getHeaderNames())
         .forEach(headerName -> {
             String headerValue = httpServletRequest.getHeader(headerName);
-            setHttpHeader(httpRequestMx,headerName, headerValue);
+            setHttpHeader(httpRequestMx, headerName, headerValue);
         });
     	
     	return httpRequestMx;
     }
-    
-    //Creates HttpHeaders for a given HttpRequest
-    protected void setHttpHeader(HttpRequest httpRequestMx, String key, String value ) {
+    /**
+     * Creates HttpHeaders for a given HttpRequest
+     * @param httpRequestMx
+     * @param key
+     * @param value
+     */
+    protected void setHttpHeader(HttpRequest httpRequestMx, String key, String value) {
     	system.proxies.HttpHeader httpHeader = new HttpHeader(iContext);
     	httpHeader.setKey(key);
     	httpHeader.setValue(value);
     	httpHeader.setHttpHeaders(httpRequestMx);
     }
-    
-    //Gets the input parameters for the authentication microflow
+    /**
+     * Gets the input parameters of the authentication microflow and fills in the (optional) objects
+     * to be used as input for the microflow
+     * @param mcpServer
+     * @param httpRequest
+     * @return String Map
+     */
     protected Map<String, Object> mapInputParametersAuthentication(McpServer mcpServer, HttpRequest httpRequest) {
 		Map<String, Object> inputParameters = new java.util.HashMap<>();
 		Map<String, IDataType> parametersAndTypes = Core.getInputParameters(mcpServer.getAuthenticationMicroflow());
