@@ -34,6 +34,7 @@ import amazonbedrockconnector.impl.AmazonBedrockClient;
 import amazonbedrockconnector.impl.MxLogger;
 import amazonbedrockconnector.proxies.AbstractRequestParameter;
 import amazonbedrockconnector.proxies.ChatCompletionsResponse;
+import amazonbedrockconnector.proxies.ComputerUseTool;
 import amazonbedrockconnector.proxies.DecimalRequestParameter;
 import amazonbedrockconnector.proxies.IntegerRequestParameter;
 import amazonbedrockconnector.proxies.RequestedResponseField;
@@ -43,6 +44,7 @@ import genaicommons.impl.FunctionMappingImpl;
 import genaicommons.proxies.ENUM_FileType;
 import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.ENUM_ToolChoice;
+import genaicommons.proxies.Computer;
 import genaicommons.proxies.FileCollection;
 import genaicommons.proxies.FileContent;
 import genaicommons.proxies.Request;
@@ -231,6 +233,7 @@ public class Converse extends UserAction<IMendixObject>
 	private Document getAdditionalRequestParams() throws CoreException {
 		LOGGER.debug("Getting additional request parameters");
 		List<AbstractRequestParameter> abstractParams = ConverseRequest.getChatCompletionsRequest_Extension_AbstractRequestParameter();
+		List<ComputerUseTool> computerUseToolParams = new ArrayList<ComputerUseTool>();
 		
 		var builder = Document.mapBuilder();
 		
@@ -254,13 +257,67 @@ public class Converse extends UserAction<IMendixObject>
 				continue;
 			}
 			
+			if (param instanceof ComputerUseTool) {
+				computerUseToolParams.add(ComputerUseTool.initialize(getContext(), param.getMendixObject()));
+				continue;
+			}
+			
+			
 			// If object is not of a supported type
 			LOGGER.error("Skipping invalid additional request parameter. To add additional request parameters use 'StringRequestParameter', 'DecimalRequestParameter' or 'IntegerRequestParameter' entities.");
 			
 		}
+		
+		if (computerUseToolParams.size()>0) {
+			addComputerUse(builder, computerUseToolParams);
+		}
+		
 		return builder.build();
 	}
 	
+	// Adding computer use tool and setting additional request params dependent on type
+	private void addComputerUse(software.amazon.awssdk.core.document.Document.MapBuilder mainBuilder, List<ComputerUseTool> computerUseToolParams) throws CoreException {
+		
+		var listBuilder = Document.listBuilder();
+		
+		for (ComputerUseTool computerUseParam : computerUseToolParams) {
+			
+			var builder = Document.mapBuilder();
+			
+			List<AbstractRequestParameter> abstractParams = computerUseParam.getComputerUseTool_AbstractRequestParameter();
+			
+			for (AbstractRequestParameter param : abstractParams) {
+				
+				if (param instanceof StringRequestParameter) {
+					StringRequestParameter strParam = (StringRequestParameter) param;
+					builder.putString(strParam.getKey(), strParam.getValue());
+					continue;
+				}
+				
+				if (param instanceof IntegerRequestParameter) {
+					IntegerRequestParameter intParam = (IntegerRequestParameter) param;
+					builder.putNumber(intParam.getKey(), intParam.getValue());
+					continue;
+				}
+				
+				if (param instanceof DecimalRequestParameter) {
+					DecimalRequestParameter decParam = (DecimalRequestParameter) param;
+					builder.putNumber(decParam.getKey(), decParam.getValue());
+					continue;
+				}
+				
+				// If object is not of a supported type
+				LOGGER.error("Skipping invalid additional request parameter. To add additional request parameters use 'StringRequestParameter', 'DecimalRequestParameter' or 'IntegerRequestParameter' entities.");
+				
+			}
+			listBuilder.addDocument(builder.build());
+		}
+		mainBuilder.putDocument("tools", listBuilder.build());
+		var builder_anthropic = Document.listBuilder();
+		builder_anthropic.addString("computer-use-2025-01-24");
+		mainBuilder.putDocument("anthropic_beta", builder_anthropic.build());
+	}
+
 	private boolean hasAdditionalResponseFieldRequests() throws CoreException {
 		List<ResponseFieldRequest> responseFields = ConverseRequest.getChatCompletionsRequest_Extension_ResponseFieldRequest();
 		return responseFields.size() > 0;
@@ -337,11 +394,30 @@ public class Converse extends UserAction<IMendixObject>
 	// Method to map a Mx Message to the correct type of aws message
 	private Message getAwsMessage(genaicommons.proxies.Message mxMsg, List<genaicommons.proxies.Message> mxMessages, int i) throws CoreException, MalformedURLException, URISyntaxException, IOException {
 		var msgBuilder = Message.builder()
-				.role(mxMsg.getRole().name());
+				.role(getAwsMessageRole(mxMsg));
 		
 		List<ContentBlock> contentBlockList = new ArrayList<>();
 		
-		// Case 1: Message has a FileCollection with FileContent(s). 
+		// Case 1: After a Function Call, a Tool Result message is being sent	
+		if (isToolResultMessage(mxMsg)) {
+					LOGGER.debug("Tool Result Message found");
+					ContentBlock toolResultContent = getToolResultContent(mxMsg);
+					contentBlockList.add(toolResultContent);
+					
+					// Bedrock expects all subsequent tool results as part of a single message
+					// Looking for subsequent tool results and adding them to this message until a different message type is found
+					while ((i+1) < mxMessages.size()) {
+						genaicommons.proxies.Message next = mxMessages.get(i+1);
+						if (!isToolResultMessage(next)) {
+							break;
+						}
+						ContentBlock nextToolResultContent = getToolResultContent(next);
+						contentBlockList.add(nextToolResultContent);
+						i++;
+					}
+		}
+		
+		// Case 2: Message has a FileCollection with FileContent(s). Note: Computer Use Tool messages can also contain a file collection
 		if (hasFiles(mxMsg)) {
 			LOGGER.debug("Message with Files found");
 			
@@ -394,23 +470,7 @@ public class Converse extends UserAction<IMendixObject>
 				
 			}
 		
-		// Case 2: After a Function Call, a Tool Result message is being sent	
-		} else if (isToolResultMessage(mxMsg)) {
-			LOGGER.debug("Tool Result Message found");
-			ContentBlock toolResultContent = getToolResultContent(mxMsg);
-			contentBlockList.add(toolResultContent);
-			
-			// Bedrock expects all subsequent tool results as part of a single message
-			// Looking for subsequent tool results and adding them to this message until a different message type is found
-			while ((i+1) < mxMessages.size()) {
-				genaicommons.proxies.Message next = mxMessages.get(i+1);
-				if (!isToolResultMessage(next)) {
-					break;
-				}
-				ContentBlock nextToolResultContent = getToolResultContent(next);
-				contentBlockList.add(nextToolResultContent);
-				i++;
-			}
+		
 			
 		// Case 3: A Message requesting the use of tool (function call)
 		} else if (hasToolUse(mxMsg)) {
@@ -437,6 +497,14 @@ public class Converse extends UserAction<IMendixObject>
 		
 		msgBuilder.content(contentBlockList);
 		return msgBuilder.build();
+	}
+
+	private String getAwsMessageRole(genaicommons.proxies.Message mxMsg) {
+		if(mxMsg.getRole() == ENUM_MessageRole.tool) {
+			return ENUM_MessageRole.user.name(); //Tool message is mapped to user message for converse
+		} else {
+			return mxMsg.getRole().name();
+		}
 	}
 	
 	// Check if the message has images
@@ -555,7 +623,7 @@ public class Converse extends UserAction<IMendixObject>
 		}
 	}
 	
-	// Bedrock accetps "jpeg", not "jpp"
+	// Bedrock accetps "jpeg", not "jpg"
 	private String getImageExtension(FileContent fc) {
 		String extension = getFileExtension(fc);
 		if (extension != null && extension.equals("jpg")) {
@@ -578,6 +646,7 @@ public class Converse extends UserAction<IMendixObject>
 	private ContentBlock getToolResultContent(genaicommons.proxies.Message mxMsg) {
 		var toolResultContentBuilder = ToolResultContentBlock.builder()
 				.text(mxMsg.getContent());
+		
 		
 		var toolResultBuilder = ToolResultBlock.builder()
 				.toolUseId(mxMsg.getToolCallId())
@@ -699,13 +768,30 @@ public class Converse extends UserAction<IMendixObject>
 	private List<software.amazon.awssdk.services.bedrockruntime.model.Tool> getAwsTools(Request commonRequest) throws CoreException, JsonProcessingException {
 		List<Tool> mxTools = commonRequest.getRequest_ToolCollection().getToolCollection_Tool();
 		List<software.amazon.awssdk.services.bedrockruntime.model.Tool> awsTools = new ArrayList<>();
-		
+		Boolean hasComputerTool = false;
 		for (Tool mxTool : mxTools) {
+			//Skipping computer use tools, because they are added as additional request parameters
+			if (mxTool.getMendixObject().getMetaObject().isSubClassOf(Computer.entityName)) {
+				hasComputerTool = true;
+				continue;
+			}
 			var awsTool = getAwsTool(mxTool);
 			awsTools.add(awsTool);
 		}
 		
-		return awsTools;
+		//Add a dummy tool so that a toolconfig is created and the API does not return errors about a missing toolconfig in the agent loop
+		//This is only needed when a computer tool is added while no other tools are present
+		if (awsTools.size() == 0 && hasComputerTool) {
+			var toolSpecBuilder = ToolSpecification.builder()
+					.name("Dummy")
+					.description("Do not use this tool.")
+					.inputSchema(createEmptyToolInputSchema());
+			awsTools.add(software.amazon.awssdk.services.bedrockruntime.model.Tool.builder().toolSpec(toolSpecBuilder.build()).build());
+		}
+		
+		if(awsTools.size() > 0)
+			return awsTools;
+		return null;
 	}
 	
 	// Mapping Mendix Tool to aws tool
@@ -726,11 +812,7 @@ public class Converse extends UserAction<IMendixObject>
 		if (inputParamName == null) {
 			LOGGER.debug("Function Microflow without input parameter");
 			
-			Document json = Document.mapBuilder()
-					.putString("type", "object")
-					.build();
-			
-			return ToolInputSchema.builder().json(json).build();
+			return createEmptyToolInputSchema();
 		}
 		// Must be created using Document.mapBuilder()
 		// Constructing the JSON in a different way causes errors
@@ -752,6 +834,14 @@ public class Converse extends UserAction<IMendixObject>
 				.putString("type", "object")
 				.putDocument("properties", properties)
 				.putDocument("required", required)
+				.build();
+		
+		return ToolInputSchema.builder().json(json).build();
+	}
+
+	private ToolInputSchema createEmptyToolInputSchema() {
+		Document json = Document.mapBuilder()
+				.putString("type", "object")
 				.build();
 		
 		return ToolInputSchema.builder().json(json).build();
@@ -948,20 +1038,20 @@ public class Converse extends UserAction<IMendixObject>
 			LOGGER.debug("Tool without parameter called");
 			return null;
 		}
-		// Returned map always has only one value because Function microflows have single parameter
-		Map.Entry<String, Document> entry = awsDoc.asMap().entrySet().iterator().next();
-		
-		String key = entry.getKey();
-		String value;
-		if (entry.getValue().isString()) {
-			value = entry.getValue().asString();
-		} else {
-			value = entry.getValue().toString();
-		}
-		
-		Map<String, String> stringMap = Map.of(key, value);
-		
-		return MAPPER.writeValueAsString(stringMap);
+		Map<String, String> stringMap = new HashMap<>();
+
+	    for (Map.Entry<String, Document> entry : awsDoc.asMap().entrySet()) {
+	        String key = entry.getKey();
+	        String value;
+	        if (entry.getValue().isString()) {
+	            value = entry.getValue().asString();
+	        } else {
+	            value = entry.getValue().toString();
+	        }
+	        stringMap.put(key, value);
+	    }
+
+	    return MAPPER.writeValueAsString(stringMap);
 	}
 	
 	private void setMxResponseExtension(Document awsDoc, ChatCompletionsResponse mxResponse) {
