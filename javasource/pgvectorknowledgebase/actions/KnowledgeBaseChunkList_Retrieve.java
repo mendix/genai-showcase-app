@@ -31,14 +31,14 @@ import com.mendix.systemwideinterfaces.core.UserAction;
  * Output:
  * -KnowledgeBaseChunkList: This list is the result of the retrieval.
  * 
- * The Connection entity passed must be of type PgVectorKnowledgebaseConnection. It must contain the KnowledgeBaseName string attribute filled and a DatabaseConfiguration associated with the connection details to a PostgreSQL database server with the PgVector extension installed. This DatabaseConfiguration entity is typically configured at runtime or in after-startup logic. By providing the KnowledgeBaseName on the Connection, you determine the knowledge base. 
+ * The DeployedKnowledgeBase entity passed must be of type PgVectorKnowledgeBase. It must contain the Name string attribute filled and a DatabaseConfiguration associated with the connection details to a PostgreSQL database server with the PgVector extension installed. This DatabaseConfiguration entity is typically configured at runtime or in after-startup logic. By providing the Name on the DeployedKnowledgeBase, you determine the knowledge base.
  */
 public class KnowledgeBaseChunkList_Retrieve extends UserAction<java.util.List<IMendixObject>>
 {
-	/** @deprecated use Connection.getMendixObject() instead. */
+	/** @deprecated use DeployedKnowledgeBase.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
-	private final IMendixObject __Connection;
-	private final genaicommons.proxies.Connection Connection;
+	private final IMendixObject __DeployedKnowledgeBase;
+	private final genaicommons.proxies.DeployedKnowledgeBase DeployedKnowledgeBase;
 	private final IMendixObject MxObject;
 	/** @deprecated use MetadataCollection.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
@@ -49,7 +49,7 @@ public class KnowledgeBaseChunkList_Retrieve extends UserAction<java.util.List<I
 
 	public KnowledgeBaseChunkList_Retrieve(
 		IContext context,
-		IMendixObject _connection,
+		IMendixObject _deployedKnowledgeBase,
 		IMendixObject _mxObject,
 		IMendixObject _metadataCollection,
 		java.lang.Long _maxNumberOfResults,
@@ -57,8 +57,8 @@ public class KnowledgeBaseChunkList_Retrieve extends UserAction<java.util.List<I
 	)
 	{
 		super(context);
-		this.__Connection = _connection;
-		this.Connection = _connection == null ? null : genaicommons.proxies.Connection.initialize(getContext(), _connection);
+		this.__DeployedKnowledgeBase = _deployedKnowledgeBase;
+		this.DeployedKnowledgeBase = _deployedKnowledgeBase == null ? null : genaicommons.proxies.DeployedKnowledgeBase.initialize(getContext(), _deployedKnowledgeBase);
 		this.MxObject = _mxObject;
 		this.__MetadataCollection = _metadataCollection;
 		this.MetadataCollection = _metadataCollection == null ? null : genaicommons.proxies.MetadataCollection.initialize(getContext(), _metadataCollection);
@@ -78,7 +78,7 @@ public class KnowledgeBaseChunkList_Retrieve extends UserAction<java.util.List<I
 			else {
 				ChunkUtils.addChunkWithMxObjectID(getContext(), MxObject, chunkList);
 			}
-			java.util.List<KnowledgeBaseChunk> knowledgeBaseChunkList = pgvectorknowledgebase.proxies.microflows.Microflows.knowledgeBaseChunkList_Retrieve_ByMxObjectIDs( getContext(), MaxNumberOfResults, Offset, MetadataCollection, Connection, chunkList);
+			java.util.List<KnowledgeBaseChunk> knowledgeBaseChunkList = pgvectorknowledgebase.proxies.microflows.Microflows.knowledgeBaseChunkList_Retrieve_ByMxObjectIDs( getContext(), MaxNumberOfResults, Offset, MetadataCollection, DeployedKnowledgeBase, chunkList);
 			java.util.List<IMendixObject> returnList = knowledgeBaseChunkList.stream().map(o -> o.getMendixObject()).collect(Collectors.toList());
 			return returnList;
 		} catch (Error e) {

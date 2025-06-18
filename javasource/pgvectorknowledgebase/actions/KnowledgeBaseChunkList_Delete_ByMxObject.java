@@ -23,30 +23,30 @@ import com.mendix.systemwideinterfaces.core.UserAction;
  * 
  * Input:
  * - MxObject: `This is the (original) Mendix object that the chunks in the knowledge base represent. Only chunks related to this Mendix object are to be deleted.
- * - Connectoin  This is a connection object that holds the knowledge base name and database connection details. This must be of type PgVectorKnowledgeBaseConnection.
+ * - DeployedKnowledgeBase: This is a knowledge base object that holds the knowledge base name and database connection details. This must be of type PgVectorKnowledgeBase.
  * 
  * Output:
  * - IsSuccess: This Boolean indicates if the deletion of data in the knowledge base was successful. This can be used for custom error-handling.
  * 
- * The Connection entity passed must be of type PgVectorKnowledgebaseConnection. It must contain the KnowledgeBaseName string attribute filled and a DatabaseConfiguration associated with the connection details to a PostgreSQL database server with the PgVector extension installed. This DatabaseConfiguration entity is typically configured at runtime or in after-startup logic. By providing the KnowledgeBaseName on the Connection, you determine the knowledge base.
+ * The DeployedKnowledgeBase entity passed must be of type PgVectorKnowledgeBase. It must contain the Name string attribute filled and a DatabaseConfiguration associated with the connection details to a PostgreSQL database server with the PgVector extension installed. This DatabaseConfiguration entity is typically configured at runtime or in after-startup logic. By providing the Name on the DeployedKnowledgeBase, you determine the knowledge base.
  */
 public class KnowledgeBaseChunkList_Delete_ByMxObject extends UserAction<java.lang.Boolean>
 {
-	/** @deprecated use Connection.getMendixObject() instead. */
+	/** @deprecated use DeployedKnowledgeBase.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
-	private final IMendixObject __Connection;
-	private final genaicommons.proxies.Connection Connection;
+	private final IMendixObject __DeployedKnowledgeBase;
+	private final genaicommons.proxies.DeployedKnowledgeBase DeployedKnowledgeBase;
 	private final IMendixObject MxObject;
 
 	public KnowledgeBaseChunkList_Delete_ByMxObject(
 		IContext context,
-		IMendixObject _connection,
+		IMendixObject _deployedKnowledgeBase,
 		IMendixObject _mxObject
 	)
 	{
 		super(context);
-		this.__Connection = _connection;
-		this.Connection = _connection == null ? null : genaicommons.proxies.Connection.initialize(getContext(), _connection);
+		this.__DeployedKnowledgeBase = _deployedKnowledgeBase;
+		this.DeployedKnowledgeBase = _deployedKnowledgeBase == null ? null : genaicommons.proxies.DeployedKnowledgeBase.initialize(getContext(), _deployedKnowledgeBase);
 		this.MxObject = _mxObject;
 	}
 
@@ -62,7 +62,7 @@ public class KnowledgeBaseChunkList_Delete_ByMxObject extends UserAction<java.la
 			else {
 				ChunkUtils.addChunkWithMxObjectID(getContext(), MxObject, chunkList);
 			}
-			return pgvectorknowledgebase.proxies.microflows.Microflows.knowledgeBaseChunkList_Delete_FromKnowledgeBase(getContext(), chunkList, Connection);
+			return pgvectorknowledgebase.proxies.microflows.Microflows.knowledgeBaseChunkList_Delete_FromKnowledgeBase(getContext(), chunkList, DeployedKnowledgeBase);
 		} catch (Error e) {
 			LOGGER.error(e, "Something went wrong while deleting a chunk from the knowledge base.");
 			return false;
