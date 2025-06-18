@@ -57,7 +57,7 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
     public static final String ENDPOINT_EVENT_TYPE = "endpoint";
 
     public static final String DEFAULT_BASE_URL = "";
-
+    
     /** JSON object mapper for serialization/deserialization */
     private final ObjectMapper objectMapper;
 
@@ -73,9 +73,6 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
     /** The Mendix MCPServer object */
     private final McpServer mcpServer;
     
-    /** The IContext object passed from the initial action */
-    private final IContext iContext;
-
     /** Map of active client sessions, keyed by session ID */
     private final Map<String, McpServerSession> sessions = new ConcurrentHashMap<>();
 
@@ -83,6 +80,9 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
     private final AtomicBoolean isClosing = new AtomicBoolean(false);
     /** Session factory for creating new sessions */
     private McpServerSession.Factory sessionFactory;
+    
+    /** stores the session across the application
+    private static final ThreadLocal<String> sessionHolder = new ThreadLocal<>();
 
     /**
      * Creates a new HttpServletSseServerTransportProvider instance with a custom SSE
@@ -92,9 +92,9 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
      * @param messageEndpoint The endpoint path where clients will send their messages
      * @param sseEndpoint The endpoint path where clients will establish SSE connections
      */
-    public McpServerRequestHandler(ObjectMapper objectMapper, mcpserver.proxies.McpServer mcpServer, IContext iContext, String messageEndpoint,
+    public McpServerRequestHandler(ObjectMapper objectMapper, mcpserver.proxies.McpServer mcpServer, String messageEndpoint,
                                                  String sseEndpoint) {
-        this(objectMapper, mcpServer, iContext, DEFAULT_BASE_URL, messageEndpoint, sseEndpoint);
+        this(objectMapper, mcpServer, DEFAULT_BASE_URL, messageEndpoint, sseEndpoint);
     }
 
     /**
@@ -106,14 +106,13 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
      * @param messageEndpoint The endpoint path where clients will send their messages
      * @param sseEndpoint The endpoint path where clients will establish SSE connections
      */
-    public McpServerRequestHandler(ObjectMapper objectMapper, mcpserver.proxies.McpServer mcpServer, IContext iContext, String baseUrl, String messageEndpoint,
+    public McpServerRequestHandler(ObjectMapper objectMapper, mcpserver.proxies.McpServer mcpServer, String baseUrl, String messageEndpoint,
                                                  String sseEndpoint) {
         this.objectMapper = objectMapper;
         this.baseUrl = baseUrl;
         this.messageEndpoint = messageEndpoint;
         this.sseEndpoint = sseEndpoint;
         this.mcpServer = mcpServer;
-        this.iContext = iContext;
     }
 
     /**
@@ -124,7 +123,7 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
      * @param messageEndpoint The endpoint path where clients will send their messages
      */
     public McpServerRequestHandler(ObjectMapper objectMapper, String messageEndpoint, mcpserver.proxies.McpServer mcpServer, IContext iContext) {
-        this(objectMapper, mcpServer, iContext, messageEndpoint, DEFAULT_SSE_ENDPOINT);
+        this(objectMapper, mcpServer, messageEndpoint, DEFAULT_SSE_ENDPOINT);
     }
 
     @Override
@@ -161,6 +160,11 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
         	response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "User is not authorized to use the MCP Server.");
             return;
         }
+        LOGGER.debug(sessionId);
+        McpSessionHandler.setSessionId(sessionId);
+        //TODO
+        
+        LOGGER.debug("After set: " + McpSessionHandler.getSessionId());
                
         String requestURI = request.getRequestURI();
         if (!requestURI.endsWith(sseEndpoint)) {
@@ -250,7 +254,9 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
             }
 
             McpSchema.JSONRPCMessage message = McpSchema.deserializeJsonRpcMessage(objectMapper, body.toString());
-
+            //TODO
+            //session id needs to be set to local thread variable; in a new class that both the requesthandler and addtool classes can use
+            McpSessionHandler.setSessionId(sessionId);
             // Process the message through the session's handle method
             session.handle(message).block(); // Block for Servlet compatibility
 
@@ -272,7 +278,10 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
                 LOGGER.error(FAILED_TO_SEND_ERROR_RESPONSE, ex);
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error processing message");
             }
+        } finally{
+        	McpSessionHandler.clearSessionId();
         }
+        //TODO: catch/finally block here to clean up session ID from local thread variable
 
     }
     
@@ -288,6 +297,8 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
     	
     	String sessionIdRequest = httpServletRequest.getParameter("sessionId");
     	if(sessionIdRequest != null && sessions.get(sessionIdRequest) != null) {
+    		//keep alive session TODO check
+    		Core.getSessionById(UUID.fromString(sessionIdRequest)).keepAlive();
     		return sessionIdRequest;
     	}
     	
@@ -302,6 +313,7 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
 		}
 		return null;    	
     }
+    
     /**
      * Executes the provided authentication microflow to get the user and initializes a session
  
@@ -310,25 +322,31 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
      * @return ISession
      * @throws CoreException
      */  
-    protected ISession createSessionForUser(HttpServletRequest httpServletRequest, McpServer mcpServer) throws CoreException {   	
+    protected ISession createSessionForUser(HttpServletRequest httpServletRequest, McpServer mcpServer) throws CoreException { 
+    	IContext systemContext = Core.createSystemContext();
+    	// Use System Context https://apidocs.rnd.mendix.com/10/runtime/com/mendix/core/Core.html#createSystemContext()
+    	//TODO check
     	IMendixObject userIMx = Core.microflowCall(mcpServer.getAuthenticationMicroflow())
-				.withParams(mapInputParametersAuthentication(mcpServer, createHttpRequestMx(httpServletRequest)))
-				.execute(this.iContext);
+				.withParams(mapInputParametersAuthentication(mcpServer, createHttpRequestMx(httpServletRequest, systemContext)))
+				.execute(systemContext);
     	if(userIMx == null) {
     		return null;
     	}
-    	IUser iUser = Core.getUser(iContext, User.initialize(iContext, userIMx).getName());
+    	//System Context instead of IContext
+    	IUser iUser = Core.getUser(systemContext, User.initialize(systemContext, userIMx).getName());
     	if(!iUser.isActive() || iUser.isBlocked()){
     		return null;
     	}
+    	//test if the System session is conntected to User
     	return  Core.initializeSession(iUser, null);
     }
+    
     /**
      * HttpRequest is created based on the HttpServletRequest
      * @param httpServletRequest
      * @return
      */
-    protected HttpRequest createHttpRequestMx(HttpServletRequest httpServletRequest) {  	
+    protected HttpRequest createHttpRequestMx(HttpServletRequest httpServletRequest, IContext iContext) {  	
     	HttpRequest httpRequestMx = new HttpRequest(iContext);
     	
     	Collections.list(httpServletRequest.getHeaderNames())
@@ -339,6 +357,7 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
     	
     	return httpRequestMx;
     }
+    
     /**
      * Creates HttpHeaders for a given HttpRequest
      * @param httpRequestMx
@@ -346,7 +365,7 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
      * @param value
      */
     protected void setHttpHeader(HttpRequest httpRequestMx, String key, String value) {
-    	system.proxies.HttpHeader httpHeader = new HttpHeader(iContext);
+    	system.proxies.HttpHeader httpHeader = new HttpHeader(httpRequestMx.getContext());
     	httpHeader.setKey(key);
     	httpHeader.setValue(value);
     	httpHeader.setHttpHeaders(httpRequestMx);
