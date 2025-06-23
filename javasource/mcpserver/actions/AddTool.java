@@ -12,18 +12,15 @@ package mcpserver.actions;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.systemwideinterfaces.core.ISession;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import io.modelcontextprotocol.server.McpServerFeatures;
 import io.modelcontextprotocol.server.McpSyncServer;
 import io.modelcontextprotocol.spec.McpSchema;
 import mcpserver.impl.McpServerRegistry;
-import mcpserver.impl.McpSessionHandler;
 import mcpserver.impl.MxLogger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * Registers a tool the with MCP Server that gets exposed to MCP clients. If the model chooses to call the tool, the selected microflow gets executed.
@@ -117,20 +114,12 @@ public class AddTool extends UserAction<IMendixObject>
 
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new mcpserver.impl.MxLogger(AddTool.class);
-	
+	/**
+	 * Returns a context object for the tool microflow. Currently, a system session is returned.
+	 * @return Context object
+	 */
 	private IContext getContextFromSession() {
-		// process the request, create a new context first
-		//Find the context/session that was created in the auth microflow; read from thread local variable
-		String sessionId = McpSessionHandler.getSessionId();
-		LOGGER.debug(sessionId);
-		if(sessionId != null && !sessionId.isEmpty()) {
-			ISession session = Core.getSessionById(UUID.fromString(sessionId));
-			return session.createContext();
-		}
-		//TODO fallback should be removed once session local thread works
 		return Core.createSystemContext();
-		
-
 	}
 	// END EXTRA CODE
 }

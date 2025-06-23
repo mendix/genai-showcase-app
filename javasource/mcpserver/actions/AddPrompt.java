@@ -99,7 +99,7 @@ public class AddPrompt extends UserAction<IMendixObject>
 					LOGGER.trace(threadName + ": Start processing getPrompt " + Name + ", MF: " + Microflow);
 
 					// process the request, create a new context first
-					IContext ctx = Core.createSystemContext();
+					IContext ctx = getContextFromSession();
 
 					Map<String, Object> args = new HashMap<>(request.arguments());
 					args.put("Prompt", promptNpe);
@@ -137,5 +137,13 @@ public class AddPrompt extends UserAction<IMendixObject>
 
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new mcpserver.impl.MxLogger(AddPrompt.class);
+	
+	/**
+	 * Returns a context object for the tool microflow. Currently, a system session is returned.
+	 * @return Context object
+	 */
+	private IContext getContextFromSession() {
+		return Core.createSystemContext();
+	}
 	// END EXTRA CODE
 }

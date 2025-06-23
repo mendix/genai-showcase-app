@@ -12,13 +12,13 @@ public class McpServerRegistry {
 	private static final MxLogger LOGGER = new mcpserver.impl.MxLogger(McpServerRegistry.class);
 
     public static McpSyncServer getServerInstance(Long id) {
-    	LOGGER.info("Getting server with id: " + id);
+    	LOGGER.debug("Getting server with id: " + id);
 
         return serverInstances.get(id);
     }
 
     public static void putServerInstance(Long id, McpSyncServer server) {
-    	LOGGER.info("Put server with id: " + id);
+    	LOGGER.debug("Put server with id: " + id);
 
         serverInstances.put(id, server);
     }

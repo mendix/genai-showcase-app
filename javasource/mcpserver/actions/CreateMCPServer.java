@@ -30,6 +30,7 @@ public class CreateMCPServer extends UserAction<IMendixObject>
 	private final java.lang.String Path;
 	private final java.lang.String Name;
 	private final java.lang.String Version;
+	private final mcpserver.proxies.ENUM_ProtocolVersion ProtocolVersion;
 	private final java.lang.String AuthenticationMicroflow;
 
 	public CreateMCPServer(
@@ -37,6 +38,7 @@ public class CreateMCPServer extends UserAction<IMendixObject>
 		java.lang.String _path,
 		java.lang.String _name,
 		java.lang.String _version,
+		java.lang.String _protocolVersion,
 		java.lang.String _authenticationMicroflow
 	)
 	{
@@ -44,6 +46,7 @@ public class CreateMCPServer extends UserAction<IMendixObject>
 		this.Path = _path;
 		this.Name = _name;
 		this.Version = _version;
+		this.ProtocolVersion = _protocolVersion == null ? null : mcpserver.proxies.ENUM_ProtocolVersion.valueOf(_protocolVersion);
 		this.AuthenticationMicroflow = _authenticationMicroflow;
 	}
 
@@ -55,13 +58,12 @@ public class CreateMCPServer extends UserAction<IMendixObject>
 		mcpserver.proxies.McpServer mcpServer = new mcpserver.proxies.McpServer(getContext());
 		mcpServer.setName(Name);
 		mcpServer.setVersion(Version);
+		mcpServer.setProtocolVersion(ProtocolVersion);
 		mcpServer.setAuthenticationMicroflow(AuthenticationMicroflow);
-
+		
 		// Create request handler and McpServer object
 		McpServerRequestHandler mcpRequestHandler = new McpServerRequestHandler(
-				new ObjectMapper(), mcpServer ,  "/" + Path + "/messages", "/" + Path + "/sse");
-				//TODO: should we remove messages and SSE path from input?
-				//new ObjectMapper(), "/" + Path + "/messages", "/" + Path + "/sse");
+				new ObjectMapper(), mcpServer,  "/" + Path + "/messages", "/" + Path + "/sse");
 		Core.addRequestHandler(Path + "/", mcpRequestHandler);
 
 		McpSyncServer server = McpServer.sync(mcpRequestHandler)
