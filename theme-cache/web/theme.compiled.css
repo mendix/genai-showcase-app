@@ -28659,18 +28659,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   text-overflow: ellipsis;
 }
 
-.listview-horizontal.mx-listview > ul {
-  display: inline-block;
-  margin-bottom: 0;
-}
-.listview-horizontal.mx-listview > ul > li {
-  display: inline-block;
-}
-
-.listview-hide-on-empty.mx-listview > ul > li.mx-listview-empty {
-  display: none;
-}
-
 .chat-container-agent {
   max-width: 100%;
   display: flex;
@@ -29143,6 +29131,18 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding-bottom: 9px;
 }
 
+.listview-horizontal.mx-listview > ul {
+  display: inline-block;
+  margin-bottom: 0;
+}
+.listview-horizontal.mx-listview > ul > li {
+  display: inline-block;
+}
+
+.listview-hide-on-empty.mx-listview > ul > li.mx-listview-empty {
+  display: none;
+}
+
 .layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a img {
   width: 52px;
   padding: 4px 14px;
@@ -29212,6 +29212,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .display--inline {
   display: inline;
+}
+
+.margin-top-medium {
+  margin-top: 16px;
+}
+
+.margin-right-xxs {
+  margin-right: 2px;
 }
 
 .inline-link.mx-link {

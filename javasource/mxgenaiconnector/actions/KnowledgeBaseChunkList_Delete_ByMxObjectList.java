@@ -16,33 +16,31 @@ import com.mendix.systemwideinterfaces.core.UserAction;
 import genaicommons.proxies.KnowledgeBaseChunk;
 import mxgenaiconnector.impl.ChunkUtils;
 import mxgenaiconnector.impl.MxLogger;
+import mxgenaiconnector.proxies.Collection;
 
 /**
  * Use this operation to delete existing chunks in a collection based on the MxObjectID. 
  * MxObjectList is the list of (original) Mendix objects that the chunks in the knowledge base represent. Only chunks related to these Mendix objects are to be deleted.
  * 
- * The Connection entity passed must be of type MxKnowledgeBaseConnection and must contain the CollectionName string attribute filled and a MxCloudKnowledgeBase associated with the connection details to the knowledge base. By providing the CollectionName on the Connection, you determine the collection from which the chunks should be deleted.
- * Use MxKnowledgeBaseConnection_Create to create it.
- * 
  * Once deleted, chunks are no longer available for read operations in the KB after 60-120 seconds due to asynchronous data synchronization for better scalability.
  */
 public class KnowledgeBaseChunkList_Delete_ByMxObjectList extends UserAction<java.lang.Boolean>
 {
-	/** @deprecated use Connection.getMendixObject() instead. */
+	/** @deprecated use DeployedKnowledgeBase.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
-	private final IMendixObject __Connection;
-	private final genaicommons.proxies.Connection Connection;
+	private final IMendixObject __DeployedKnowledgeBase;
+	private final genaicommons.proxies.DeployedKnowledgeBase DeployedKnowledgeBase;
 	private final java.util.List<IMendixObject> MxObjectList;
 
 	public KnowledgeBaseChunkList_Delete_ByMxObjectList(
 		IContext context,
-		IMendixObject _connection,
+		IMendixObject _deployedKnowledgeBase,
 		java.util.List<IMendixObject> _mxObjectList
 	)
 	{
 		super(context);
-		this.__Connection = _connection;
-		this.Connection = _connection == null ? null : genaicommons.proxies.Connection.initialize(getContext(), _connection);
+		this.__DeployedKnowledgeBase = _deployedKnowledgeBase;
+		this.DeployedKnowledgeBase = _deployedKnowledgeBase == null ? null : genaicommons.proxies.DeployedKnowledgeBase.initialize(getContext(), _deployedKnowledgeBase);
 		this.MxObjectList = _mxObjectList;
 	}
 
@@ -56,7 +54,7 @@ public class KnowledgeBaseChunkList_Delete_ByMxObjectList extends UserAction<jav
 			}
 			java.util.List<KnowledgeBaseChunk> chunkList = new ArrayList<>();
 			MxObjectList.forEach(o -> ChunkUtils.addChunkWithMxObjectID(getContext(), o, chunkList));
-			return mxgenaiconnector.proxies.microflows.Microflows.knowledgeBaseChunkList_Delete_FromKnowledgeBase(getContext(), chunkList, Connection);
+			return mxgenaiconnector.proxies.microflows.Microflows.knowledgeBaseChunkList_Delete_FromKnowledgeBase(getContext(), chunkList, Collection.initialize(getContext(), DeployedKnowledgeBase.getMendixObject()));
 		} catch (Error e) {
 			LOGGER.error(e, "Delete list was not successful.");
 			return false;
