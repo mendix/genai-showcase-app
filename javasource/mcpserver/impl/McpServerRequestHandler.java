@@ -517,7 +517,8 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
     	sessions.remove(sessionId);
     	ISession session = Core.getSessionById(UUID.fromString(sessionId));
     	if (session != null) {
-        	Core.delete(Core.createSystemContext(), session.getMendixObject());  
+    		LOGGER.debug("Close user session.");
+    		Core.logout(session);
     	}
     }
 
