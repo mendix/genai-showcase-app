@@ -1,0 +1,97 @@
+@import "../../../../theme/web/custom-variables.scss";
+@import "../../../atlas_core/web/_variables.scss";
+
+.hide-tooltip {
+    .widget-tooltip-arrow-top {
+        display: none;
+    }
+
+    .widget-tooltip-content {
+        display: none;
+    }
+}
+
+.agent-tooltip {
+    .widget-tooltip-content {
+        position: relative;
+        z-index: 1000;
+        text-align: unset;
+        word-break: break-word;
+        background-color: white;
+        border-radius: 4px;
+        color: black;
+    }
+
+    .mx-link {
+        font-weight: normal;
+        line-height: $line-height-base * 1.25;
+    }
+}
+
+
+.agent-tooltip-w330 {
+    .widget-tooltip-content {
+        width: 330px;
+        padding: 0 15px 0 15px;
+    }
+}
+
+.agent-tooltip-w280 {
+    .widget-tooltip-content {
+        width: 280px;
+        padding: 0 15px 0 15px;
+    }
+}
+
+
+// Output List Tooltip
+.output-tooltip {
+    .widget-tooltip-content {
+        width: 330px;
+        max-height: 230px;
+        text-align: left;
+        margin-bottom: 0;
+        padding: $spacing-medium;
+        padding-bottom: 0;
+        overflow-y: auto;
+    }
+}
+
+.output-tooltip-grid {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-template-rows: auto;
+    gap: $spacing-small;
+    padding: 0;
+    margin: 0;
+}
+
+.output-tooltip-with-icon {
+    grid-template-columns: 10% 80%;
+    gap: $spacing-smallest;
+    padding: 0;
+    margin: 0;
+
+    .tooltip-icon {
+        padding-bottom: $spacing-smallest;
+    }
+}
+
+.custom-tooltip-listview {
+    ul {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.tooltip-container {
+    .form-group {
+        flex: 1
+    }
+
+    .widget-tooltip {
+        margin-bottom: $form-group-margin-bottom;
+        align-self: flex-end;
+        padding-bottom: calc($form-input-padding-y + 1px);
+    }
+}
