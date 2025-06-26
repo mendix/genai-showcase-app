@@ -18,6 +18,7 @@ import io.modelcontextprotocol.server.McpSyncServer;
 import io.modelcontextprotocol.spec.McpSchema;
 import mcpserver.impl.McpServerRegistry;
 import mcpserver.impl.MxLogger;
+import static java.util.Objects.requireNonNull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,6 +69,10 @@ public class AddPrompt extends UserAction<IMendixObject>
 	public IMendixObject executeAction() throws Exception
 	{
 		// BEGIN USER CODE
+		requireNonNull(Name,"Name is required.");
+		requireNonNull(Description,"Description is required.");
+		requireNonNull(McpServer,"MCPServer is required.");		
+		
 		// Create Prompt NPE
 		mcpserver.proxies.Prompt promptNpe = new mcpserver.proxies.Prompt(getContext());
 		promptNpe.setName(Name);

@@ -9,6 +9,7 @@
 
 package mcpserver.actions;
 
+import static java.util.Objects.requireNonNull;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
@@ -54,6 +55,11 @@ public class CreateMCPServer extends UserAction<IMendixObject>
 	public IMendixObject executeAction() throws Exception
 	{
 		// BEGIN USER CODE
+		requireNonNull(Path,"Path is required.");
+		requireNonNull(Name,"Name is required.");
+		requireNonNull(Version,"Version is required.");
+		requireNonNull(ProtocolVersion,"Protocol version is required.");	
+		
 		// Create McpServer NPE
 		mcpserver.proxies.McpServer mcpServer = new mcpserver.proxies.McpServer(getContext());
 		mcpServer.setName(Name);
