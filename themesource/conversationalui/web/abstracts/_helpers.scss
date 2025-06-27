@@ -65,17 +65,6 @@
   justify-content: flex-start;
 }
 
-.custom-control-label {
-  display: block;
-  overflow: hidden;
-  margin-bottom: $spacing-smaller;
-  text-align: left;
-  text-overflow: ellipsis;
-  color: $form-label-color;
-  font-size: $form-label-size;
-  font-weight: $form-label-weight;
-}
-
 .alert-danger-text {
   margin-bottom: $spacing-large;
 

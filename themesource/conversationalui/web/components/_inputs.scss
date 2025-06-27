@@ -36,7 +36,7 @@
     align-items: start;
 }
 
-//Prompt Management & token consumption monitor
+//token consumption monitor
 .combobox-selection {
     display: flex;
     flex-grow: 1;
@@ -48,7 +48,6 @@
     }
 }
 
-//Prompt Management custom height - small
 .combobox-selection-height-small {
     .widget-combobox-input-container {
         align-items: center;
@@ -93,7 +92,6 @@
         width: 100%;
         justify-content: center;
         align-items: center;
-        //top: 0;
 
         .loading-dot {
             border-radius: 100%;
