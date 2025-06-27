@@ -29322,7 +29322,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .landing-page {
   height: auto;
-  max-width: 146.2rem;
+  max-width: 153.5rem;
   padding: 40px;
   margin: 32px auto 32px auto;
   gap: 24px;
@@ -29348,8 +29348,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
  * .card-content  → Content wrapper; holds actual content (text, icons, etc.)
  */
 .card-base, .card-orange, .card-yellow, .card-violet, .card-lightpurple, .card-darkpurple, .card-blue, .card-green, .card-grey {
-  width: 327px;
-  height: 148px;
+  width: 345px;
+  height: 168px;
   flex-shrink: 0;
   border-radius: 8px;
   background: white;
@@ -29364,8 +29364,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .card-inner {
   display: flex;
-  width: 321px;
-  height: 148px;
+  width: 339px;
+  height: 155px;
   padding: 16px 16px 20px 16px;
   flex-direction: column;
   align-items: flex-start;
