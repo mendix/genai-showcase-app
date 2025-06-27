@@ -6,13 +6,14 @@ $brand-pgvector: #C6D92F;
 $brand-mxgenai: #146FF4;
 $brand-openai: #0078D4;
 $light-grey-2: #F2F2F3;
-$light-grey-8: #535965;
-$light-green-10: #076407;
-$dark-purple-10: #2F008C;
+$light-grey-7: #6B707B;
+$light-green-10: #C6D92F;
+$dark-purple-8: #4701D4;
 $light-purple-7: #8568F8;
 $dark-violet-7: #CD59F7;
-$light-red-5: #FB4A4C;
+$light-red-4: #FD7072;
 $light-yellow-5: #FCC73A;
+$light-orange: #EC7211;
 
 
 /* Label Colors */
@@ -39,7 +40,7 @@ $label-color-pgvector: #076407;
 .layout-atlas-responsive-default {
   .region-sidebar .mx-scrollcontainer-wrapper  > .mx-navigationtree
     .navbar-inner > ul > li > a {
-    white-space: normal;
+      white-space: normal;
   }
 }
 
@@ -55,6 +56,8 @@ $label-color-pgvector: #076407;
 .bg-openai {
   background-color: $brand-openai;
 }
+
+/* Can be deleted after PR - wom't be used with the new landing page. Also delete the Variable */
 
 .bg-aws {
     background-color: $brand-aws !important;
@@ -238,21 +241,61 @@ $label-color-pgvector: #076407;
 
 
 
-/* Landing Page Styling */
+/* --------------------------------------- Landing Page Styling -----------------------------------*/
+
+
+.display-none {
+  display: none;
+}
+
+.landing-page {
+  height:auto;
+  max-width: 146.2rem;
+  padding: 40px;
+  margin: 32px auto 32px auto;
+  gap: 24px;
+  border-radius: 16px;
+  border: 1px solid var(--color-border-default, #E7E7E9);
+  background: var(--color-background-default, #FFF);
+}
 
 /* Grid: defines the columns of the the cards */
 .grid-landing-page {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(auto, 327px));
-  gap: 16px;
+  gap: 24px;
   box-sizing: border-box;
+  margin-top: 16px;
+  margin-bottom: 32px;
 }
 
 /* Card Structure Overview (outer to inner)
- * .card-grey     → Outer wrapper; sets background, left border and shadow
+ * .card-base     → Outer wrapper; sets background, left border and shadow
+ * .card-color    → Set left border color
  * .card-inner    → Inner container; handles padding and layout
  * .card-content  → Content wrapper; holds actual content (text, icons, etc.)
  */
+
+.card-base {
+  width: 327px;
+  height: 148px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: white;
+  box-shadow:
+    0px 1px 1px 0px rgba(0, 0, 0, 0.10),
+    0px 2px 1px 0px rgba(0, 0, 0, 0.08),
+    0px 1px 3px 0px rgba(0, 0, 0, 0.15);
+  border-left: 8px solid transparent; // default fallback
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    box-shadow:
+      0px 4px 6px rgba(0, 0, 0, 0.15),
+      0px 6px 12px rgba(0, 0, 0, 0.10);
+    transform: translateY(-2px);
+  }
+}
 
 .card-inner {
   display: flex;
@@ -272,9 +315,61 @@ $label-color-pgvector: #076407;
   align-self: stretch;
 }
 
-.card-label-layout {
+.card-grey         { 
+  @extend .card-base; 
+  border-left-color: $light-grey-7; 
+}
+
+.card-green        { 
+  @extend .card-base; 
+  border-left-color: $light-green-10; 
+}
+
+.card-blue         { 
+  @extend .card-base; 
+  border-left-color: $brand-mxgenai; 
+}
+.card-darkpurple   { 
+  @extend .card-base; 
+  border-left-color: $dark-purple-8; 
+}
+
+.card-lightpurple  { 
+  @extend .card-base; 
+  border-left-color: $light-purple-7;
+}
+
+.card-violet       { 
+  @extend .card-base; 
+  border-left-color: $dark-violet-7; 
+}
+
+.card-yellow         { 
+  @extend .card-base; 
+  border-left-color: $light-yellow-5;
+}
+
+.card-orange      { 
+  @extend .card-base; 
+  border-left-color: $light-orange; 
+}
+
+/*-----------------------------------------------------------------------------------------*/ 
+
+/* Card Labels */
+
+.card-label-base {
   display: inline-flex;
-  //align-items: flex-start;
+  display: flex;
+  height: 25px;
+  padding: 6px;
+  margin-right: 2px;
+  gap: 6px;
+  align-items: center;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
 }
 
 .container-img-label {
@@ -289,152 +384,34 @@ $label-color-pgvector: #076407;
   flex-shrink: 0; /* icon doesn’t shrink */
 }
 
-.card-grey {
-  width: 327px;
-  height: 148px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  border-left: 8px solid $light-grey-8;
-  background: white;
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.10), 0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
-}
-
-.card-green {
-  width: 327px;
-  height: 148px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  border-left: 8px solid $light-green-10;
-  background: white;
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.10), 0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
-}
-
-.card-blue {
-  width: 327px;
-  height: 148px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  border-left: 8px solid $brand-mxgenai;
-  background: white;
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.10), 0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
-}
-
-.card-darkpurple {
-  width: 327px;
-  height: 148px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  border-left: 8px solid $dark-purple-10;
-  background: white;
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.10), 0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
-}
-
-.card-lightpurple {
-  width: 327px;
-  height: 148px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  border-left: 8px solid $light-purple-7;
-  background: white;
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.10), 0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
-}
-
-.card-violet {
-  width: 327px;
-  height: 148px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  border-left: 8px solid $dark-violet-7;
-  background: white;
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.10), 0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
-}
-
-.card-red {
-  width: 327px;
-  height: 148px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  border-left: 8px solid $light-red-5;
-  background: white;
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.10), 0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
-}
-
-.card-yellow {
-  width: 327px;
-  height: 148px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  border-left: 8px solid $light-yellow-5;
-  background: white;
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.10), 0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
-}
-
-/* Card Labels */
-
 .card-label-openai {
-  display: flex;
-  width: auto;
-  height: 24px;
-  padding: 8px;
-  gap: 6px;
-  align-items: center;
-  border-radius: 9999px;
+  @extend .card-label-base;
   background: $light-grey-2;
-  font-size: 12px;
 }
 
 .card-label-bedrock {
-  display: flex;
-  width: auto-fit;
-  height: 24px;
-  padding: 8px;
-  gap: 6px;
-  align-items: center;
-  border-radius: 9999px;
+  @extend .card-label-base;
   background: $label-bg-bedrock;
   color: $label-color-bedrock;
-  font-size: 12px;
 }
 
 .card-label-mxcloudgenai {
-  display: flex;
-  height: 24px;
-  padding: 8px;
-  gap: 6px;
-  align-items: center;
-  border-radius: 9999px;
+  @extend .card-label-base;
   background: $label-bg-mxcloudgenai;
   color: $label-color-mxcloudgenai;
-  font-size: 12px;
 }
 
 .card-label-all {
-  display: flex;
-  height: 24px;
-  padding: 8px;
-  gap: 6px;
-  align-items: center;
-  border-radius: 9999px;
+  @extend .card-label-base;
   background: $label-bg-all;
   color: $label-color-all;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 100%
 }
-
 
 .card-label-pgvector {
-  display: flex;
-  height: 24px;
-  padding: 8px;
-  gap: 6px;
-  align-items: center;
-  border-radius: 9999px;
+  @extend .card-label-base;
   background: $label-bg-pgvector;
   color: $label-color-pgvector;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 100%
 }
+
+
+

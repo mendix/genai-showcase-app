@@ -29165,6 +29165,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background-color: #0078D4;
 }
 
+/* Can be deleted after PR - wom't be used with the new landing page. Also delete the Variable */
 .bg-aws {
   background-color: #EC7211 !important;
 }
@@ -29314,20 +29315,53 @@ input[type=checkbox].three-state-checkbox + .control-label {
   fill-opacity: 0 !important;
 }
 
-/* Landing Page Styling */
+/* --------------------------------------- Landing Page Styling -----------------------------------*/
+.display-none {
+  display: none;
+}
+
+.landing-page {
+  height: auto;
+  max-width: 146.2rem;
+  padding: 40px;
+  margin: 32px auto 32px auto;
+  gap: 24px;
+  border-radius: 16px;
+  border: 1px solid var(--color-border-default, #E7E7E9);
+  background: var(--color-background-default, #FFF);
+}
+
 /* Grid: defines the columns of the the cards */
 .grid-landing-page {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(auto, 327px));
-  gap: 16px;
+  gap: 24px;
   box-sizing: border-box;
+  margin-top: 16px;
+  margin-bottom: 32px;
 }
 
 /* Card Structure Overview (outer to inner)
- * .card-grey     → Outer wrapper; sets background, left border and shadow
+ * .card-base     → Outer wrapper; sets background, left border and shadow
+ * .card-color    → Set left border color
  * .card-inner    → Inner container; handles padding and layout
  * .card-content  → Content wrapper; holds actual content (text, icons, etc.)
  */
+.card-base, .card-orange, .card-yellow, .card-violet, .card-lightpurple, .card-darkpurple, .card-blue, .card-green, .card-grey {
+  width: 327px;
+  height: 148px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1), 0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
+  border-left: 8px solid transparent;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.card-base:hover, .card-orange:hover, .card-yellow:hover, .card-violet:hover, .card-lightpurple:hover, .card-darkpurple:hover, .card-blue:hover, .card-green:hover, .card-grey:hover {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15), 0px 6px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
 .card-inner {
   display: flex;
   width: 321px;
@@ -29345,8 +29379,52 @@ input[type=checkbox].three-state-checkbox + .control-label {
   align-self: stretch;
 }
 
-.card-label-layout {
+.card-grey {
+  border-left-color: #6B707B;
+}
+
+.card-green {
+  border-left-color: #C6D92F;
+}
+
+.card-blue {
+  border-left-color: #146FF4;
+}
+
+.card-darkpurple {
+  border-left-color: #4701D4;
+}
+
+.card-lightpurple {
+  border-left-color: #8568F8;
+}
+
+.card-violet {
+  border-left-color: #CD59F7;
+}
+
+.card-yellow {
+  border-left-color: #FCC73A;
+}
+
+.card-orange {
+  border-left-color: #EC7211;
+}
+
+/*-----------------------------------------------------------------------------------------*/
+/* Card Labels */
+.card-label-base, .card-label-pgvector, .card-label-all, .card-label-mxcloudgenai, .card-label-bedrock, .card-label-openai {
   display: inline-flex;
+  display: flex;
+  height: 25px;
+  padding: 6px;
+  margin-right: 2px;
+  gap: 6px;
+  align-items: center;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
 }
 
 .container-img-label {
@@ -29362,152 +29440,28 @@ input[type=checkbox].three-state-checkbox + .control-label {
   /* icon doesn’t shrink */
 }
 
-.card-grey {
-  width: 327px;
-  height: 148px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  border-left: 8px solid #535965;
-  background: white;
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1), 0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
-}
-
-.card-green {
-  width: 327px;
-  height: 148px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  border-left: 8px solid #076407;
-  background: white;
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1), 0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
-}
-
-.card-blue {
-  width: 327px;
-  height: 148px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  border-left: 8px solid #146FF4;
-  background: white;
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1), 0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
-}
-
-.card-darkpurple {
-  width: 327px;
-  height: 148px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  border-left: 8px solid #2F008C;
-  background: white;
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1), 0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
-}
-
-.card-lightpurple {
-  width: 327px;
-  height: 148px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  border-left: 8px solid #8568F8;
-  background: white;
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1), 0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
-}
-
-.card-violet {
-  width: 327px;
-  height: 148px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  border-left: 8px solid #CD59F7;
-  background: white;
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1), 0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
-}
-
-.card-red {
-  width: 327px;
-  height: 148px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  border-left: 8px solid #FB4A4C;
-  background: white;
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1), 0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
-}
-
-.card-yellow {
-  width: 327px;
-  height: 148px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  border-left: 8px solid #FCC73A;
-  background: white;
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1), 0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
-}
-
-/* Card Labels */
 .card-label-openai {
-  display: flex;
-  width: auto;
-  height: 24px;
-  padding: 8px;
-  gap: 6px;
-  align-items: center;
-  border-radius: 9999px;
   background: #F2F2F3;
-  font-size: 12px;
 }
 
 .card-label-bedrock {
-  display: flex;
-  width: auto-fit;
-  height: 24px;
-  padding: 8px;
-  gap: 6px;
-  align-items: center;
-  border-radius: 9999px;
   background: #FFEAC3;
   color: #A05700;
-  font-size: 12px;
 }
 
 .card-label-mxcloudgenai {
-  display: flex;
-  height: 24px;
-  padding: 8px;
-  gap: 6px;
-  align-items: center;
-  border-radius: 9999px;
   background: #DCEEFE;
   color: #0006AB;
-  font-size: 12px;
 }
 
 .card-label-all {
-  display: flex;
-  height: 24px;
-  padding: 8px;
-  gap: 6px;
-  align-items: center;
-  border-radius: 9999px;
   background: #E2E0FC;
   color: #2F008C;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 100%;
 }
 
 .card-label-pgvector {
-  display: flex;
-  height: 24px;
-  padding: 8px;
-  gap: 6px;
-  align-items: center;
-  border-radius: 9999px;
   background: #E1FAE1;
   color: #076407;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 100%;
 }
 
 /*# sourceMappingURL=theme.compiled.css.map */
