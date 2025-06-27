@@ -3,12 +3,15 @@ package mcpserver.impl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mendix.core.Core;
+import com.mendix.core.CoreException;
 import com.mendix.externalinterface.connector.RequestHandler;
-import com.mendix.logging.ILogNode;
 import com.mendix.m2ee.api.IMxRuntimeRequest;
 import com.mendix.m2ee.api.IMxRuntimeResponse;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+import com.mendix.systemwideinterfaces.core.IContext;
+import com.mendix.systemwideinterfaces.core.IDataType;
+import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.ISession;
+import com.mendix.systemwideinterfaces.core.IUser;
 
 import javax.servlet.AsyncContext;
 import javax.servlet.http.HttpServletRequest;
@@ -16,19 +19,27 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collections;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import io.modelcontextprotocol.spec.*;
+
+import mcpserver.proxies.McpServer;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import system.proxies.HttpHeader;
+import system.proxies.HttpRequest;
+import system.proxies.User;
 
 /**
  * Based on https://github.com/modelcontextprotocol/java-sdk/blob/v0.8.1/mcp/src/main/java/io/modelcontextprotocol/server/transport/HttpServletSseServerTransportProvider.java
  */
 public class McpServerRequestHandler extends RequestHandler implements McpServerTransportProvider {
-
-    /** Logger instance for Mendix **/
-    private final ILogNode logger = Core.getLogger("MCP");
+    
+	private static final MxLogger LOGGER = new mcpserver.impl.MxLogger(McpServerRequestHandler.class);
 
     public static final String UTF_8 = "UTF-8";
 
@@ -46,7 +57,7 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
     public static final String ENDPOINT_EVENT_TYPE = "endpoint";
 
     public static final String DEFAULT_BASE_URL = "";
-
+    
     /** JSON object mapper for serialization/deserialization */
     private final ObjectMapper objectMapper;
 
@@ -58,7 +69,10 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
 
     /** The endpoint path for handling SSE connections */
     private final String sseEndpoint;
-
+    
+    /** The Mendix MCPServer object */
+    private final McpServer mcpServer;
+    
     /** Map of active client sessions, keyed by session ID */
     private final Map<String, McpServerSession> sessions = new ConcurrentHashMap<>();
 
@@ -66,6 +80,9 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
     private final AtomicBoolean isClosing = new AtomicBoolean(false);
     /** Session factory for creating new sessions */
     private McpServerSession.Factory sessionFactory;
+    
+    /** stores the session across the application
+    private static final ThreadLocal<String> sessionHolder = new ThreadLocal<>();
 
     /**
      * Creates a new HttpServletSseServerTransportProvider instance with a custom SSE
@@ -75,9 +92,9 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
      * @param messageEndpoint The endpoint path where clients will send their messages
      * @param sseEndpoint The endpoint path where clients will establish SSE connections
      */
-    public McpServerRequestHandler(ObjectMapper objectMapper, String messageEndpoint,
+    public McpServerRequestHandler(ObjectMapper objectMapper, mcpserver.proxies.McpServer mcpServer, String messageEndpoint,
                                                  String sseEndpoint) {
-        this(objectMapper, DEFAULT_BASE_URL, messageEndpoint, sseEndpoint);
+        this(objectMapper, mcpServer, DEFAULT_BASE_URL, messageEndpoint, sseEndpoint);
     }
 
     /**
@@ -89,12 +106,13 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
      * @param messageEndpoint The endpoint path where clients will send their messages
      * @param sseEndpoint The endpoint path where clients will establish SSE connections
      */
-    public McpServerRequestHandler(ObjectMapper objectMapper, String baseUrl, String messageEndpoint,
+    public McpServerRequestHandler(ObjectMapper objectMapper, mcpserver.proxies.McpServer mcpServer, String baseUrl, String messageEndpoint,
                                                  String sseEndpoint) {
         this.objectMapper = objectMapper;
         this.baseUrl = baseUrl;
         this.messageEndpoint = messageEndpoint;
         this.sseEndpoint = sseEndpoint;
+        this.mcpServer = mcpServer;
     }
 
     /**
@@ -104,8 +122,8 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
      * serialization/deserialization
      * @param messageEndpoint The endpoint path where clients will send their messages
      */
-    public McpServerRequestHandler(ObjectMapper objectMapper, String messageEndpoint) {
-        this(objectMapper, messageEndpoint, DEFAULT_SSE_ENDPOINT);
+    public McpServerRequestHandler(ObjectMapper objectMapper, String messageEndpoint, mcpserver.proxies.McpServer mcpServer, IContext iContext) {
+        this(objectMapper, mcpServer, messageEndpoint, DEFAULT_SSE_ENDPOINT);
     }
 
     @Override
@@ -115,7 +133,8 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
 
     @Override
     public void processRequest(IMxRuntimeRequest iMxRuntimeRequest, IMxRuntimeResponse iMxRuntimeResponse, String s) throws Exception {
-        logger.info(iMxRuntimeRequest.getHttpServletRequest().getMethod() + " " + iMxRuntimeRequest.getHttpServletRequest().getRequestURI());
+        LOGGER.trace(iMxRuntimeRequest.getHttpServletRequest().getMethod() + " " + iMxRuntimeRequest.getHttpServletRequest().getRequestURI());
+               
         switch (iMxRuntimeRequest.getHttpServletRequest().getMethod()) {
             case "GET":
                 doGet(iMxRuntimeRequest, iMxRuntimeResponse, s);
@@ -134,7 +153,14 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
     protected void doGet(IMxRuntimeRequest iMxRuntimeRequest, IMxRuntimeResponse iMxRuntimeResponse, String s) throws Exception {
         HttpServletRequest request = iMxRuntimeRequest.getHttpServletRequest();
         HttpServletResponse response = iMxRuntimeResponse.getHttpServletResponse();
-
+        
+        //Authenticate if microflow was set; get sessionId by logged in user
+        String sessionId = getSessionId(iMxRuntimeRequest.getHttpServletRequest(), mcpServer);
+        if(sessionId == null || sessionId.isEmpty()) {
+        	response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "User is not authorized to use the MCP Server.");
+            return;
+        }
+                      
         String requestURI = request.getRequestURI();
         if (!requestURI.endsWith(sseEndpoint)) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -152,7 +178,6 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
         response.setHeader("Connection", "keep-alive");
         response.setHeader("Access-Control-Allow-Origin", "*");
 
-        String sessionId = UUID.randomUUID().toString();
         AsyncContext asyncContext = request.startAsync();
         asyncContext.setTimeout(15 * 60 * 1000);
 
@@ -189,8 +214,8 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
             return;
         }
 
-        // Get the session ID from the request parameter
-        String sessionId = request.getParameter("sessionId");
+        // Get the session ID from the request parameter, otherwise re-authenticate
+        String sessionId = getSessionId(request, mcpServer);
         if (sessionId == null) {
             response.setContentType(APPLICATION_JSON);
             response.setCharacterEncoding(UTF_8);
@@ -224,14 +249,13 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
             }
 
             McpSchema.JSONRPCMessage message = McpSchema.deserializeJsonRpcMessage(objectMapper, body.toString());
-
             // Process the message through the session's handle method
             session.handle(message).block(); // Block for Servlet compatibility
 
             response.setStatus(HttpServletResponse.SC_OK);
         }
         catch (Exception e) {
-            logger.error("Error processing message: " + e.getMessage());
+            LOGGER.error("Error processing message: " + e.getMessage());
             try {
                 McpError mcpError = new McpError(e.getMessage());
                 response.setContentType(APPLICATION_JSON);
@@ -243,23 +267,129 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
                 writer.flush();
             }
             catch (IOException ex) {
-                logger.error(FAILED_TO_SEND_ERROR_RESPONSE, ex);
+                LOGGER.error(FAILED_TO_SEND_ERROR_RESPONSE, ex);
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error processing message");
             }
         }
-
     }
+    
+    /**
+     * Returns sessionID for either an authenticated (logged-in) user,
+     * a random-generated ID, or from the request
+     * @param httpServletRequest
+     * @param mcpServer
+     * @return
+     * @throws CoreException
+     */
+    protected String getSessionId(HttpServletRequest httpServletRequest, McpServer mcpServer) throws CoreException {
+    	//Passed as part of the request
+    	String sessionIdRequest = httpServletRequest.getParameter("sessionId");
+    	if(sessionIdRequest != null && sessions.get(sessionIdRequest) != null) {
+    		ISession session = Core.getSessionById(UUID.fromString(sessionIdRequest));
+    		if(session != null) {
+    			session.keepAlive();
+    		}
+    		return sessionIdRequest;
+    	}
+    	
+    	//No sessionId passed and no authentication microflow enabled
+	   	if(mcpServer.getAuthenticationMicroflow() == null || mcpServer.getAuthenticationMicroflow().isEmpty())
+		{
+	   		return UUID.randomUUID().toString();
+		}
+		//No sessionId; new session is created if user is authorized
+	   	ISession iSession = createSessionForUser(httpServletRequest, mcpServer);
+		if (iSession != null) {
+			return iSession.getId().toString();
+		}
+		return null;    	
+    }
+    
+    /**
+     * Executes the provided authentication microflow to get the user and initializes a session
+ 	* 
+     * @param httpServletRequest
+     * @param mcpServer
+     * @return ISession
+     * @throws CoreException
+     */  
+    protected ISession createSessionForUser(HttpServletRequest httpServletRequest, McpServer mcpServer) throws CoreException { 
+    	IContext systemContext = Core.createSystemContext();
+    	Map<String, Object> microflowArgs = mapInputParametersAuthentication(mcpServer, createHttpRequestMx(httpServletRequest, systemContext));
+    	IMendixObject userIMx = Core.microflowCall(mcpServer.getAuthenticationMicroflow())
+				.withParams(microflowArgs)
+				.execute(systemContext);
+    	if(userIMx == null) {
+    		return null;
+    	}
+
+    	IUser iUser = Core.getUser(systemContext, User.initialize(systemContext, userIMx).getName());
+    	if(!iUser.isActive() || iUser.isBlocked()){
+    		return null;
+    	}
+    	return  Core.initializeSession(iUser, null);
+    }
+    
+    /**
+     * HttpRequest is created based on the HttpServletRequest that is passed to authentication microflow
+     * @param httpServletRequest
+     * @return HttpRequest
+     */
+    protected HttpRequest createHttpRequestMx(HttpServletRequest httpServletRequest, IContext iContext) {  	
+    	HttpRequest httpRequestMx = new HttpRequest(iContext);
+    	
+    	Collections.list(httpServletRequest.getHeaderNames())
+        .forEach(headerName -> {
+            String headerValue = httpServletRequest.getHeader(headerName);
+            setHttpHeader(httpRequestMx, headerName, headerValue);
+        });
+    	
+    	return httpRequestMx;
+    }
+    
+    /**
+     * Creates HttpHeaders for a given HttpRequest
+     * @param httpRequestMx
+     * @param key
+     * @param value
+     */
+    protected void setHttpHeader(HttpRequest httpRequestMx, String key, String value) {
+    	system.proxies.HttpHeader httpHeader = new HttpHeader(httpRequestMx.getContext());
+    	httpHeader.setKey(key);
+    	httpHeader.setValue(value);
+    	httpHeader.setHttpHeaders(httpRequestMx);
+    }
+    /**
+     * Gets the input parameters of the authentication microflow and fills in the (optional) objects
+     * to be used as input for the microflow
+     * @param mcpServer
+     * @param httpRequest
+     * @return String Map
+     */
+    protected Map<String, Object> mapInputParametersAuthentication(McpServer mcpServer, HttpRequest httpRequest) {
+		Map<String, Object> inputParameters = new java.util.HashMap<>();
+		Map<String, IDataType> parametersAndTypes = Core.getInputParameters(mcpServer.getAuthenticationMicroflow());
+		parametersAndTypes.forEach((t, u) -> {
+			if(Core.getMetaObject(u.getObjectType()).isSubClassOf(mcpserver.proxies.McpServer.getType())) {
+				inputParameters.put(t, mcpServer.getMendixObject());
+			} else if(Core.getMetaObject(u.getObjectType()).isSubClassOf(HttpRequest.getType())) {
+				inputParameters.put(t, httpRequest.getMendixObject());
+			}
+		}
+		);
+		return inputParameters;
+	}
 
     @Override
     public Mono<Void> notifyClients(String method, Object params) {
         if (sessions.isEmpty()) {
-            logger.debug("No active sessions for broadcast");
+            LOGGER.debug("No active sessions for broadcast");
             return Mono.empty();
         }
 
         return Flux.fromIterable(sessions.values())
                 .flatMap(session -> session.sendNotification(method, params)
-                        .doOnError(err -> logger.error("Failed to send message to session " + session.getId() + ": " + err.getMessage())))
+                        .doOnError(err -> LOGGER.error("Failed to send message to session " + session.getId() + ": " + err.getMessage())))
                 .onErrorComplete()
                 .then();
     }
@@ -267,7 +397,7 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
     @Override
     public Mono<Void> closeGracefully() {
         isClosing.set(true);
-        logger.debug("Initiating graceful shutdown with " + sessions.size() + " active sessions");
+        LOGGER.debug("Initiating graceful shutdown with " + sessions.size() + " active sessions");
 
         return Flux.fromIterable(sessions.values()).flatMap(McpServerSession::closeGracefully).then();
     }
@@ -311,7 +441,7 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
             this.sessionId = sessionId;
             this.asyncContext = asyncContext;
             this.writer = writer;
-            logger.debug(String.format("Session transport %s initialized with SSE writer",  sessionId));
+            LOGGER.debug(String.format("Session transport %s initialized with SSE writer",  sessionId));
         }
 
         /**
@@ -325,11 +455,11 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
                 try {
                     String jsonText = objectMapper.writeValueAsString(message);
                     sendEvent(writer, MESSAGE_EVENT_TYPE, jsonText);
-                    logger.debug(String.format("Message sent to session %s", sessionId));
+                    LOGGER.debug(String.format("Message sent to session %s", sessionId));
                 }
                 catch (Exception e) {
-                    logger.error(String.format("Failed to send message to session %s: %s", sessionId, e.getMessage()));
-                    sessions.remove(sessionId);
+                    LOGGER.error(String.format("Failed to send message to session %s: %s", sessionId, e.getMessage()));
+                    sessionClose(sessionId);
                     asyncContext.complete();
                 }
             });
@@ -354,14 +484,14 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
         @Override
         public Mono<Void> closeGracefully() {
             return Mono.fromRunnable(() -> {
-                logger.debug(String.format("Closing session transport: %s", sessionId));
+                LOGGER.debug(String.format("Closing session transport: %s", sessionId));
                 try {
-                    sessions.remove(sessionId);
+                	sessionClose(sessionId);
                     asyncContext.complete();
-                    logger.debug(String.format("Successfully completed async context for session %s", sessionId));
+                    LOGGER.debug(String.format("Successfully completed async context for session %s", sessionId));
                 }
                 catch (Exception e) {
-                    logger.warn(String.format("Failed to complete async context for session %s: %s", sessionId, e.getMessage()));
+                    LOGGER.warn(String.format("Failed to complete async context for session %s: %s", sessionId, e.getMessage()));
                 }
             });
         }
@@ -372,14 +502,27 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
         @Override
         public void close() {
             try {
-                sessions.remove(sessionId);
+                sessionClose(sessionId);
                 asyncContext.complete();
-                logger.debug(String.format("Successfully completed async context for session %s", sessionId));
+                LOGGER.debug(String.format("Successfully completed async context for session %s", sessionId));
             }
             catch (Exception e) {
-                logger.warn(String.format("Failed to complete async context for session %s: %s", sessionId, e.getMessage()));
+                LOGGER.warn(String.format("Failed to complete async context for session %s: %s", sessionId, e.getMessage()));
             }
         }
+    }
+    
+    /** 
+     * Removes sessionId from sessions; deletes session MxObject (=closes user session)
+     * @param sessionId
+     */
+    private void sessionClose(String sessionId) {
+    	sessions.remove(sessionId);
+    	ISession session = Core.getSessionById(UUID.fromString(sessionId));
+    	if (session != null) {
+    		LOGGER.debug("Close user session.");
+    		Core.logout(session);
+    	}
     }
 
 

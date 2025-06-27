@@ -9,6 +9,7 @@
 
 package mcpserver.actions;
 
+import static java.util.Objects.requireNonNull;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
@@ -21,39 +22,54 @@ import mcpserver.impl.McpServerRequestHandler;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
- * Create an MCP Server in Java. The input follows the MCP entity model, no abstractions are made. 
+ * Create and start an MCP Server. The input follows the MCP specifications.
+ * 
+ * Note that no authentication method is applied if no authentication microflow as added, thus making the MCP server usable for anyone. It is recommended to add an authentication microflow if the Mendix application is reachable outside of your local environment.
  */
 public class CreateMCPServer extends UserAction<IMendixObject>
 {
 	private final java.lang.String Path;
 	private final java.lang.String Name;
 	private final java.lang.String Version;
+	private final mcpserver.proxies.ENUM_ProtocolVersion ProtocolVersion;
+	private final java.lang.String AuthenticationMicroflow;
 
 	public CreateMCPServer(
 		IContext context,
 		java.lang.String _path,
 		java.lang.String _name,
-		java.lang.String _version
+		java.lang.String _version,
+		java.lang.String _protocolVersion,
+		java.lang.String _authenticationMicroflow
 	)
 	{
 		super(context);
 		this.Path = _path;
 		this.Name = _name;
 		this.Version = _version;
+		this.ProtocolVersion = _protocolVersion == null ? null : mcpserver.proxies.ENUM_ProtocolVersion.valueOf(_protocolVersion);
+		this.AuthenticationMicroflow = _authenticationMicroflow;
 	}
 
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
 		// BEGIN USER CODE
+		requireNonNull(Path,"Path is required.");
+		requireNonNull(Name,"Name is required.");
+		requireNonNull(Version,"Version is required.");
+		requireNonNull(ProtocolVersion,"Protocol version is required.");	
+		
 		// Create McpServer NPE
 		mcpserver.proxies.McpServer mcpServer = new mcpserver.proxies.McpServer(getContext());
 		mcpServer.setName(Name);
 		mcpServer.setVersion(Version);
-
+		mcpServer.setProtocolVersion(ProtocolVersion);
+		mcpServer.setAuthenticationMicroflow(AuthenticationMicroflow);
+		
 		// Create request handler and McpServer object
 		McpServerRequestHandler mcpRequestHandler = new McpServerRequestHandler(
-				new ObjectMapper(), "/" + Path + "/messages", "/" + Path + "/sse");
+				new ObjectMapper(), mcpServer,  "/" + Path + "/messages", "/" + Path + "/sse");
 		Core.addRequestHandler(Path + "/", mcpRequestHandler);
 
 		McpSyncServer server = McpServer.sync(mcpRequestHandler)

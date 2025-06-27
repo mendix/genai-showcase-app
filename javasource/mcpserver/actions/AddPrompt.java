@@ -10,7 +10,6 @@
 package mcpserver.actions;
 
 import com.mendix.core.Core;
-import com.mendix.logging.ILogNode;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
@@ -18,11 +17,17 @@ import io.modelcontextprotocol.server.McpServerFeatures;
 import io.modelcontextprotocol.server.McpSyncServer;
 import io.modelcontextprotocol.spec.McpSchema;
 import mcpserver.impl.McpServerRegistry;
-import mcpserver.impl.McpServerUtils;
+import mcpserver.impl.MxLogger;
+import static java.util.Objects.requireNonNull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Registers a prompt the with MCP Server that gets exposed to MCP clients. If the user chooses to use the prompt in the MCP host application, the selected microflow gets executed which can construct the final prompt (based on input or other logic).
+ * 
+ * Currently, the current User is not in scope of the prompt microflow.
+ */
 public class AddPrompt extends UserAction<IMendixObject>
 {
 	private final java.lang.String Name;
@@ -64,6 +69,10 @@ public class AddPrompt extends UserAction<IMendixObject>
 	public IMendixObject executeAction() throws Exception
 	{
 		// BEGIN USER CODE
+		requireNonNull(Name,"Name is required.");
+		requireNonNull(Description,"Description is required.");
+		requireNonNull(McpServer,"MCPServer is required.");		
+		
 		// Create Prompt NPE
 		mcpserver.proxies.Prompt promptNpe = new mcpserver.proxies.Prompt(getContext());
 		promptNpe.setName(Name);
@@ -95,7 +104,7 @@ public class AddPrompt extends UserAction<IMendixObject>
 					LOGGER.trace(threadName + ": Start processing getPrompt " + Name + ", MF: " + Microflow);
 
 					// process the request, create a new context first
-					IContext ctx = Core.createSystemContext();
+					IContext ctx = getContextFromSession();
 
 					Map<String, Object> args = new HashMap<>(request.arguments());
 					args.put("Prompt", promptNpe);
@@ -132,6 +141,14 @@ public class AddPrompt extends UserAction<IMendixObject>
 	}
 
 	// BEGIN EXTRA CODE
-	private static final ILogNode LOGGER = Core.getLogger(McpServerUtils.LOGGER_NAME);
+	private static final MxLogger LOGGER = new mcpserver.impl.MxLogger(AddPrompt.class);
+	
+	/**
+	 * Returns a context object for the tool microflow. Currently, a system session is returned.
+	 * @return Context object
+	 */
+	private IContext getContextFromSession() {
+		return Core.createSystemContext();
+	}
 	// END EXTRA CODE
 }
