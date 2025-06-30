@@ -248,6 +248,32 @@ $label-color-pgvector: #076407;
   display: none;
 }
 
+.break-text-2 {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.group-tooltip {
+    .widget-tooltip-content {
+        max-width: 500px;
+        text-align: left;
+        margin-bottom: 0;
+        padding: $spacing-medium;
+        overflow-y: auto;
+        font-weight: 400;
+        color: black;
+    }
+}
+
+.info-icon {
+  padding-bottom: 4px;
+}
+
 .landing-page {
   height:auto;
   max-width: 153.5rem;
@@ -278,7 +304,7 @@ $label-color-pgvector: #076407;
 
 .card-base {
   width: 345px;
-  height: 168px;
+  height: 178px;
   flex-shrink: 0;
   border-radius: 8px;
   background: white;
@@ -295,25 +321,51 @@ $label-color-pgvector: #076407;
       0px 6px 12px rgba(0, 0, 0, 0.10);
     transform: translateY(-2px);
   }
+
+  .card-inner {
+    display: flex;
+    width: 339px;
+    padding: 16px 16px 16px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
 }
 
-.card-inner {
-  display: flex;
-  width: 339px;
-  height: 155px;
-  padding: 16px 16px 20px 16px;
-  flex-direction: column;
-  align-items: flex-start;
-  flex-shrink: 0;
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-self: stretch;
+
+    .card-icon {
+      display: flex;
+      width: 42px;
+      height: 42px;
+      padding: 4px;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+
+      border-radius: var(--border-radius-8, 8px);
+      border: 1px solid #BEC1C5;
+      background: #F7F7F7;
+    }
+
+    .card-title {
+      @extend .break-text-2;
+      height: 45px;
+    }
+
+    .card-description {
+      @extend .break-text-2;
+      height: 40px;
+    }
+  }
 }
 
-.card-content {
-  display: flex;
-  flex-direction: column;
-  //align-items: flex-start;
-  gap: 12px;
-  align-self: stretch;
-}
+
+
+
 
 .card-grey         { 
   @extend .card-base; 
@@ -363,7 +415,6 @@ $label-color-pgvector: #076407;
   display: flex;
   height: 25px;
   padding: 6px;
-  margin-right: 2px;
   gap: 6px;
   align-items: center;
   border-radius: 9999px;
@@ -378,9 +429,15 @@ $label-color-pgvector: #076407;
   justify-content: space-between; 
 }
 
+.container-label {
+  display: flex;
+  justify-content: flex-end;
+  gap: 3px;
+}
+
 .label-icon {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   flex-shrink: 0; /* icon doesn’t shrink */
 }
 
