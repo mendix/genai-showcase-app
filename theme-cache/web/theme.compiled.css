@@ -29143,6 +29143,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: none;
 }
 
+/* Card Colors */
 /* Label Colors */
 .layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a img {
   width: 52px;
@@ -29355,7 +29356,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background: var(--color-background-default, #FFF);
 }
 
-/* Grid: defines the columns of the the cards */
+/* Grid: defines the columns of the the cards per group */
 .grid-landing-page {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(auto, 327px));
@@ -29365,6 +29366,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-bottom: 32px;
 }
 
+/* --------------------------------------- Cards -----------------------------------*/
 /* Card Structure Overview (outer to inner)
  * .card-base     → Outer wrapper; sets background, left border and shadow
  * .card-color    → Set left border color
@@ -29388,7 +29390,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .card-base .card-inner, .card-orange .card-inner, .card-yellow .card-inner, .card-violet .card-inner, .card-lightpurple .card-inner, .card-darkpurple .card-inner, .card-blue .card-inner, .card-green .card-inner, .card-grey .card-inner {
   display: flex;
   width: 339px;
-  padding: 16px 16px 16px 16px;
+  padding: 16px;
   flex-direction: column;
   align-items: flex-start;
   flex-shrink: 0;
@@ -29450,8 +29452,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border-left-color: #EC7211;
 }
 
-/*-----------------------------------------------------------------------------------------*/
-/* Card Labels */
+/* --------------------------------------- Card Labels -----------------------------------*/
 .card-label-base, .card-label-pgvector, .card-label-all, .card-label-mxcloudgenai, .card-label-bedrock, .card-label-openai {
   display: inline-flex;
   display: flex;
@@ -29481,7 +29482,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 14px;
   height: 14px;
   flex-shrink: 0;
-  /* icon doesn’t shrink */
 }
 
 .card-label-openai {
