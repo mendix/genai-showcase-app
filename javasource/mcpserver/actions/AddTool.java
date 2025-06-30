@@ -10,7 +10,6 @@
 package mcpserver.actions;
 
 import com.mendix.core.Core;
-import com.mendix.logging.ILogNode;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
@@ -18,11 +17,17 @@ import io.modelcontextprotocol.server.McpServerFeatures;
 import io.modelcontextprotocol.server.McpSyncServer;
 import io.modelcontextprotocol.spec.McpSchema;
 import mcpserver.impl.McpServerRegistry;
-import mcpserver.impl.McpServerUtils;
+import mcpserver.impl.MxLogger;
+import static java.util.Objects.requireNonNull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Registers a tool the with MCP Server that gets exposed to MCP clients. If the model chooses to call the tool, the selected microflow gets executed.
+ * 
+ * Currently, the current User is not in scope of the tool microflow.
+ */
 public class AddTool extends UserAction<IMendixObject>
 {
 	private final java.lang.String Name;
@@ -56,6 +61,11 @@ public class AddTool extends UserAction<IMendixObject>
 	public IMendixObject executeAction() throws Exception
 	{
 		// BEGIN USER CODE
+		requireNonNull(Name,"Name is required.");
+		requireNonNull(Description,"Description is required.");
+		requireNonNull(Schema,"Schema is required.");
+		requireNonNull(McpServer,"MCPServer is required.");		
+		
 		// Create NPE for the tool
 		mcpserver.proxies.Tool toolNpe = new mcpserver.proxies.Tool(getContext());
 		toolNpe.setName(Name);
@@ -75,8 +85,7 @@ public class AddTool extends UserAction<IMendixObject>
 					long start = System.currentTimeMillis();
 					LOGGER.trace(threadName + ": Start processing tool call " + Name + ", MF: " + ExecutingMicroflow);
 
-					// process the request, create a new context first
-					IContext ctx = Core.createSystemContext();
+					IContext ctx = getContextFromSession();
 
 					Map<String, Object> args = new HashMap<>(arguments);
 					args.put("Tool", toolNpe);
@@ -110,6 +119,13 @@ public class AddTool extends UserAction<IMendixObject>
 	}
 
 	// BEGIN EXTRA CODE
-	private final static ILogNode LOGGER = Core.getLogger(McpServerUtils.LOGGER_NAME);
+	private static final MxLogger LOGGER = new mcpserver.impl.MxLogger(AddTool.class);
+	/**
+	 * Returns a context object for the tool microflow. Currently, a system session is returned.
+	 * @return Context object
+	 */
+	private IContext getContextFromSession() {
+		return Core.createSystemContext();
+	}
 	// END EXTRA CODE
 }
