@@ -328,7 +328,7 @@ $label-color-pgvector: #076407;
 
   .card-inner {
     display: flex;
-    width: 339px;
+    width: 340px;
     padding: 16px;
     flex-direction: column;
     align-items: flex-start;
@@ -357,7 +357,7 @@ $label-color-pgvector: #076407;
 
     .card-title {
       @extend .break-text-2;
-      height: 45px;
+      height: 46px;
     }
 
     .card-description {
@@ -430,7 +430,7 @@ $label-color-pgvector: #076407;
 .container-label {
   display: flex;
   justify-content: flex-end;
-  gap: 3px;
+  gap: 2px;
 }
 
 .label-icon {
