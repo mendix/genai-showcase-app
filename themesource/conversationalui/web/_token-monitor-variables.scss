@@ -1,4 +1,4 @@
-$light-border-color: mix($gray-primary, #fff, 50%);
+$light-border-color: color-mix(in srgb, 50% $gray-primary, #fff);
 
 $input-graph-line-color: mix($brand-primary, white, 90%);
 $output-graph-line-color: mix($brand-primary, white, 40%);
