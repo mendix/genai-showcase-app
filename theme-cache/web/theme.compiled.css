@@ -28803,6 +28803,62 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
   flex-direction: row;
   height: 100%;
+  /*.page-header-content {
+      width: 100%;
+      max-width: 1800px;
+      display: flex;
+      flex-direction: column;
+      margin-top: $spacing-medium;
+      padding-left: $spacing-larger;
+      padding-right: $spacing-larger;
+
+      .pageheader-with-buttons {
+          display: flex !important;
+          justify-content: space-between;
+      }
+  }*/
+  /*.content-main {
+      min-width: 450px;
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+
+      .card {
+          overflow: visible;
+          margin-left: $spacing-large / 2;
+          margin-right: $spacing-large / 2;
+      }
+  }*/
+}
+.agent-page-container .input-label-width {
+  width: 160px;
+}
+.agent-page-container .info-icon {
+  margin: 0 8px 4px 8px;
+}
+.agent-page-container .info-icon img {
+  height: 16px;
+  width: 16px;
+}
+.agent-page-container .card {
+  overflow: unset;
+  border-radius: 16px;
+  border: 1px solid #e7e7e9;
+  margin: 16px;
+}
+.agent-page-container .divider {
+  display: flex;
+  height: 2px;
+  align-items: flex-start;
+  align-self: stretch;
+  border: 1px solid #E7E7E9;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+.agent-page-container .page-title-alignment {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 .agent-page-container .page-container-main {
   width: 100%;
@@ -28825,17 +28881,23 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: center;
 }
 .agent-page-container .page-header-content {
-  width: 100%;
-  max-width: 1800px;
   display: flex;
   flex-direction: column;
-  margin-top: 16px;
-  padding-left: 32px;
-  padding-right: 32px;
+  gap: 8px;
+  align-self: stretch;
 }
 .agent-page-container .page-header-content .pageheader-with-buttons {
   display: flex !important;
+  align-items: start !important;
   justify-content: space-between;
+}
+.agent-page-container .page-header-content .btn-without-border img {
+  height: 21px;
+  width: 21px;
+}
+.agent-page-container .page-header-content .page-header-menu {
+  display: flex !important;
+  align-items: end !important;
 }
 .agent-page-container .pageheader-navigation {
   display: flex !important;
@@ -28860,12 +28922,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-direction: row;
   flex-wrap: wrap;
   height: fit-content;
-  padding-top: 24px;
-  padding-bottom: 24px;
 }
 .agent-page-container .content-main {
   min-width: 450px;
-  width: 60%;
   display: flex;
   flex-direction: column;
 }

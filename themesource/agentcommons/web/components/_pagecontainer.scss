@@ -42,6 +42,42 @@
     flex-direction: row;
     height: 100%;
 
+    .input-label-width {
+        width: 160px;
+    }
+    
+    .info-icon {
+        margin: 0 $spacing-small $spacing-smaller $spacing-small;
+        img {
+            height: 16px;
+            width: 16px;
+        }
+
+    }
+
+    .card {
+        overflow: unset;
+        border-radius: $spacing-medium;
+        border: 1px solid $gray-primary;
+        margin: $spacing-medium;
+    }
+
+    .divider {
+        display: flex;
+        height: 2px;
+        align-items: flex-start;
+        align-self: stretch;
+        border: 1px solid #E7E7E9;
+        margin-top: $spacing-medium;
+        margin-bottom: $spacing-medium;
+    }
+
+    .page-title-alignment {
+        display: flex;
+        justify-content: flex-start; 
+        align-items: center; 
+    }
+
     .page-container-main {
         width: 100%;
         display: flex;
@@ -65,7 +101,7 @@
         justify-content: center;
     }
 
-    .page-header-content {
+    /*.page-header-content {
         width: 100%;
         max-width: 1800px;
         display: flex;
@@ -77,6 +113,33 @@
         .pageheader-with-buttons {
             display: flex !important;
             justify-content: space-between;
+        }
+    }*/
+
+    
+
+    .page-header-content {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-small;
+        align-self: stretch;
+
+        .pageheader-with-buttons {
+            display: flex !important;
+            align-items: start !important;
+            justify-content: space-between;
+        }
+
+        .btn-without-border {
+            img {
+            height: 21px;
+            width: 21px;
+            }
+        }
+
+        .page-header-menu {
+            display: flex !important;
+            align-items: end !important;
         }
     }
 
@@ -105,13 +168,23 @@
         flex-direction: row;
         flex-wrap: wrap;
         height: fit-content;
-        padding-top: $spacing-large;
-        padding-bottom: $spacing-large;
     }
+
+    /*.content-main {
+        min-width: 450px;
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+
+        .card {
+            overflow: visible;
+            margin-left: $spacing-large / 2;
+            margin-right: $spacing-large / 2;
+        }
+    }*/
 
     .content-main {
         min-width: 450px;
-        width: 60%;
         display: flex;
         flex-direction: column;
 
