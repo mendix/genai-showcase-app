@@ -366,7 +366,7 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 					})
 					.findFirst();
 			if(toolMatch.isPresent()) {
-				Function functionMatch = Function.load(getContext(), toolMatch.get().getMendixObject().getId());
+				Tool functionMatch = Tool.load(getContext(), toolMatch.get().getMendixObject().getId());
 				if(functionMatch != null) {
 				ObjectNode parametersNode = createFunctionParametersNode(functionMatch.getMicroflow());
 					if(parametersNode != null) {
