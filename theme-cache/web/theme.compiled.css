@@ -28848,14 +28848,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .agent-page-container .divider {
   display: flex;
-  height: 2px;
+  height: 1px;
   align-items: flex-start;
   align-self: stretch;
   border: 1px solid #E7E7E9;
   margin-top: 16px;
   margin-bottom: 16px;
 }
-.agent-page-container .page-title-alignment {
+.agent-page-container .title-alignment {
   display: flex;
   justify-content: flex-start;
   align-items: center;
