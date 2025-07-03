@@ -28800,8 +28800,41 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 160px;
 }
 
-.input-text-width {
-  width: 100%;
+.list {
+  display: grid;
+  height: 48px;
+  padding: 4px 4px 8px;
+  grid-template-columns: 20px 61rem auto auto;
+  align-items: center;
+  gap: 2px;
+  background-color: white;
+}
+.list .hover-btn {
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.02s ease;
+}
+.list:hover, .list:focus, .list:active {
+  cursor: pointer;
+  border-radius: 4px;
+  border-color: #E7E7E9;
+  background-color: #E7E7E9;
+}
+.list:hover .hover-btn, .list:focus .hover-btn, .list:active .hover-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.text-line-clamp--1 {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .agents-page-content-container {
@@ -28915,12 +28948,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .agent-page-container .page-header-content .pageheader-with-buttons {
   display: flex !important;
+  margin-bottom: 0;
   align-items: start !important;
+  justify-items: center;
   justify-content: space-between;
-}
-.agent-page-container .page-header-content .btn-without-border img {
-  height: 21px;
-  width: 21px;
 }
 .agent-page-container .page-header-content .page-header-menu {
   display: flex !important;

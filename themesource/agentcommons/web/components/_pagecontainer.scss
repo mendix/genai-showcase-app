@@ -122,7 +122,6 @@
     }*/
 
     
-
     .page-header-content {
         display: flex;
         flex-direction: column;
@@ -131,15 +130,10 @@
 
         .pageheader-with-buttons {
             display: flex !important;
+            margin-bottom: 0;
             align-items: start !important;
+            justify-items: center;
             justify-content: space-between;
-        }
-
-        .btn-without-border {
-            img {
-            height: 21px;
-            width: 21px;
-            }
         }
 
         .page-header-menu {
