@@ -29351,7 +29351,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: none;
 }
 
-.break-text-2, .card-base .card-content .card-description, .card-orange .card-content .card-description, .card-yellow .card-content .card-description, .card-violet .card-content .card-description, .card-lightpurple .card-content .card-description, .card-darkpurple .card-content .card-description, .card-blue .card-content .card-description, .card-green .card-content .card-description, .card-grey .card-content .card-description, .card-base .card-content .card-title, .card-orange .card-content .card-title, .card-yellow .card-content .card-title, .card-violet .card-content .card-title, .card-lightpurple .card-content .card-title, .card-darkpurple .card-content .card-title, .card-blue .card-content .card-title, .card-green .card-content .card-title, .card-grey .card-content .card-title {
+.text-break--2-lines, .card-base .card-content .card-description, .card-orange .card-content .card-description, .card-yellow .card-content .card-description, .card-violet .card-content .card-description, .card-lightpurple .card-content .card-description, .card-darkpurple .card-content .card-description, .card-blue .card-content .card-description, .card-green .card-content .card-description, .card-grey .card-content .card-description, .card-base .card-content .card-title, .card-orange .card-content .card-title, .card-yellow .card-content .card-title, .card-violet .card-content .card-title, .card-lightpurple .card-content .card-title, .card-darkpurple .card-content .card-title, .card-blue .card-content .card-title, .card-green .card-content .card-title, .card-grey .card-content .card-title {
   word-break: break-word;
   overflow-wrap: break-word;
   display: -webkit-box;

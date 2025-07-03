@@ -250,7 +250,7 @@ $label-color-pgvector: #076407;
   display: none;
 }
 
-.break-text-2 {
+.text-break--2-lines {
     word-break: break-word;
     overflow-wrap: break-word;
     display: -webkit-box;
@@ -356,12 +356,12 @@ $label-color-pgvector: #076407;
     }
 
     .card-title {
-      @extend .break-text-2;
+      @extend .text-break--2-lines;
       height: 46px;
     }
 
     .card-description {
-      @extend .break-text-2;
+      @extend .text-break--2-lines;
       height: 40px;
     }
   }
