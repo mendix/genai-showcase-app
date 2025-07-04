@@ -17,9 +17,9 @@
   display: grid;
   height: 48px;
   padding: $spacing-smaller $spacing-smaller $spacing-small;
-  grid-template-columns: 20px 61rem auto auto;
+  grid-template-columns: 25px minmax(0, 930px) auto;
   align-items: center;
-  gap: $spacing-smallest;
+  gap: $spacing-small;
   background-color: white;
 
   .hover-btn {
