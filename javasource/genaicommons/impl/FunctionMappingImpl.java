@@ -21,7 +21,11 @@ public class FunctionMappingImpl {
 			return null;
 		}
 	}
-	
+	/**
+	 * gets input parameters for a function microflow without Mendix objects
+	 * @param functionMicroflow
+	 * @return Map<String, IDataType> inputParameters
+	 */
 	public static Map<String, IDataType> getInputParameterForModel(String functionMicroflow) {
 		Map<String, IDataType> inputParameters = Core.getInputParameters(functionMicroflow);
 		Map<String, IDataType> inputParametersModified = new HashMap<>();

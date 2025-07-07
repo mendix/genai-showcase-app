@@ -42,11 +42,6 @@ public class FunctionImpl {
 			throw new IllegalArgumentException("Function Microflow with name " + functionMicroflow + " does not exist.");
 		}
 		
-		Map<String, IDataType> inputParametersForModel = FunctionMappingImpl.getInputParameterForModel(functionMicroflow);
-		if (inputParametersForModel != null && inputParametersForModel.size() > 1) {
-			throw new IllegalArgumentException("Function Microflow " + functionMicroflow + " can only have an input parameter of type String and/or a Request and/or Tool object.");
-		}
-		
 		Map<String, IDataType> inputParameters = Core.getInputParameters(functionMicroflow);
 		for(IDataType value : inputParameters.values()) {
 			validateFunctionInputParameter(value, functionMicroflow);
@@ -59,8 +54,16 @@ public class FunctionImpl {
 	}
 	
 	private static void validateFunctionInputParameter(IDataType value, String functionMicroflow){
-		if (IDataType.DataTypeEnum.String.equals(value.getType())){
-			return;
+		if (
+			    IDataType.DataTypeEnum.String.equals(value.getType()) ||
+			    IDataType.DataTypeEnum.Boolean.equals(value.getType()) ||
+			    IDataType.DataTypeEnum.Integer.equals(value.getType()) ||
+			    IDataType.DataTypeEnum.Long.equals(value.getType()) ||
+			    IDataType.DataTypeEnum.Enumeration.equals(value.getType()) ||
+			    IDataType.DataTypeEnum.Decimal.equals(value.getType()) ||
+			    IDataType.DataTypeEnum.Datetime.equals(value.getType())
+		) {
+		    return;
 		}
 		
 		String objectType = value.getObjectType();
