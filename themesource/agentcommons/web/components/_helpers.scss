@@ -13,6 +13,11 @@
   width: 160px;
 }
 
+.input-label-grid {
+  display: grid;
+  grid-template-columns: 150px auto 50px;
+}
+
 .list {
   display: grid;
   height: 48px;
@@ -53,4 +58,12 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.info-icon {
+    margin: 0 $spacing-smaller 6px $spacing-smaller;
+    img {
+        height: 16px;
+        width: 16px;
+    }
 }
