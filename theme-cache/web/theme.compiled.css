@@ -28789,6 +28789,48 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-right: 0;
 }
 
+.switch .widget-switch .widget-switch-btn-wrapper {
+  width: 30px;
+  height: 15px;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 1px solid #dfdfdf;
+  position: relative;
+  transition: border 0.4s, box-shadow 0.4s, transform 0.4s, background-color 1.2s;
+  cursor: pointer;
+  display: inline-block;
+  -webkit-background-clip: content-box;
+  background-clip: content-box;
+  box-sizing: content-box;
+}
+.switch .widget-switch .widget-switch-btn-wrapper .widget-switch-btn {
+  width: 15px;
+  height: 15px;
+  background: #fff;
+  border-radius: 100%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: background-color 0.4s, left 0.2s;
+}
+.switch .widget-switch .widget-switch-btn-wrapper.checked {
+  background-color: #2F3646 !important;
+  border-color: #2F3646 !important;
+  box-shadow: inset 0 0 0 16px #2F3646;
+}
+.switch .widget-switch .widget-switch-btn-wrapper.checked .widget-switch-btn {
+  left: 15px;
+}
+.switch .widget-switch .widget-switch-btn-wrapper .widget-switch-btn:active {
+  border-radius: 45%;
+  width: 70%;
+}
+.switch .widget-switch .widget-switch-btn-wrapper.disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
 .custom-control-label {
   display: block;
   overflow: hidden;
@@ -28906,13 +28948,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: 32px;
   flex-shrink: 0;
 }
-.agent-page-container .info-icon {
-  margin: 0 4px 6px 4px;
-}
-.agent-page-container .info-icon img {
-  height: 16px;
-  width: 16px;
-}
 .agent-page-container .card {
   width: 100%;
   border-radius: 16px;
@@ -28924,7 +28959,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   box-sizing: border-box;
 }
 .agent-page-container .card * {
-  min-width: 0;
   word-break: break-word;
   overflow-wrap: break-word;
   white-space: normal;
