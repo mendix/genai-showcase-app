@@ -12,7 +12,6 @@ package genaicommons.actions;
 import java.util.List;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.webui.CustomJavaAction;
 import genaicommons.impl.FileContentImpl;
 import genaicommons.impl.ImageGenImpl;
 import genaicommons.impl.MxLogger;

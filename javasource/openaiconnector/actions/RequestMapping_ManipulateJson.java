@@ -28,6 +28,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import genaicommons.impl.MessageImpl;
+import genaicommons.impl.FunctionImpl;
 import genaicommons.impl.FunctionMappingImpl;
 import genaicommons.proxies.Message;
 import genaicommons.proxies.Request;
@@ -415,37 +416,13 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 		ObjectNode parametersNode = MAPPER.createObjectNode();
 		ObjectNode propertiesNode = MAPPER.createObjectNode();
 		ArrayNode requiredNode = MAPPER.createArrayNode();
-		inputParameters.entrySet().forEach(t -> addProperty(propertiesNode, requiredNode, t));
+		inputParameters.entrySet().forEach(t -> FunctionImpl.addProperty(propertiesNode, requiredNode, t));
 		
 		parametersNode.put("type", "object");
 		parametersNode.set("properties", propertiesNode);
 		parametersNode.set("required", requiredNode);
 		
 		return parametersNode;
-	}
-	
-	private void addProperty(ObjectNode propertiesNode, ArrayNode requiredNode, Entry<String, IDataType> inputParameter) {
-		//add validation or allow other types apart from string
-		ObjectNode propertyNode = MAPPER.createObjectNode(); 
-		String type = inputParameter.getValue().toString().toLowerCase();
-		Boolean enumerationType = type.equals("enumeration");
-		
-		if(type.equals("long") || type.equals("decimal") || type.equals("datetime")) {
-			type = "number";
-		} else if (enumerationType) {
-			type = "string";
-		}
-		
-		propertyNode.put("type", type);
-		//For enums, all possible keys are specified
-		if (enumerationType) {
-			Set<String> enumKeySet = inputParameter.getValue().getEnumeration().getEnumValues().keySet();
-			ArrayNode enumKeyArrayNode = MAPPER.valueToTree(enumKeySet);
-            propertyNode.set("enum", enumKeyArrayNode);	
-		}
-		propertiesNode.set(inputParameter.getKey(), propertyNode);
-		requiredNode.add(inputParameter.getKey());
-	}
-		
+	}		
 	// END EXTRA CODE
 }

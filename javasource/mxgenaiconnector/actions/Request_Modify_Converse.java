@@ -20,13 +20,14 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
+import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
+import genaicommons.impl.FunctionImpl;
 import genaicommons.impl.FunctionMappingImpl;
 import genaicommons.impl.MessageImpl;
 import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.Message;
-import genaicommons.proxies.Request;
 import genaicommons.proxies.ToolCall;
 import mxgenaiconnector.impl.ConverseVisionDocument;
 import mxgenaiconnector.impl.ConverseFunctionCalling;
@@ -149,23 +150,22 @@ public class Request_Modify_Converse extends UserAction<java.lang.String>
 		}
 		
 		//This will create the input schema JSON needed for specifying the input of a tool
-		private static void setInputSchemaForToolNode(String microflow, ObjectNode toolNode) {
+		private void setInputSchemaForToolNode(String microflow, ObjectNode toolNode) {
 			
 			// Create the root object node
 	        ObjectNode inputSchemaNode = MAPPER.createObjectNode();
 	        inputSchemaNode.put("type", "object");
 
 	        // Create the properties node (if input parameter is available)
-	        String parameterName = FunctionMappingImpl.getFirstInputParamName(microflow);
-			if(parameterName != null && parameterName.isBlank() == false) {
-				ObjectNode propertiesNode = MAPPER.createObjectNode();
-		        ObjectNode fieldNode = MAPPER.createObjectNode();
-		        fieldNode.put("type", "string");
-		        propertiesNode.set(parameterName, fieldNode);
-		        inputSchemaNode.set("properties", propertiesNode);
-		        inputSchemaNode.putArray("required").add(parameterName);
-			}
+	        Map<String, IDataType> parameterList = FunctionMappingImpl.getInputParameterForModel(microflow);
 	        
+			ObjectNode propertiesNode = MAPPER.createObjectNode();
+			ArrayNode requiredNode = MAPPER.createArrayNode();
+	        
+	        parameterList.entrySet().forEach(t -> FunctionImpl.addProperty(propertiesNode, requiredNode, t));
+		        
+	        inputSchemaNode.set("properties", propertiesNode);
+	        inputSchemaNode.set("required", requiredNode);
 	        //Add a "json" wrapper around the inputSchema
 	        ObjectNode jsonNode = MAPPER.createObjectNode();
 	        jsonNode.set("json", inputSchemaNode);

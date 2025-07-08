@@ -14,7 +14,6 @@ import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.webui.CustomJavaAction;
 import genaicommons.proxies.ENUM_ModelModality;
 import genaicommons.proxies.Response;
 import genaicommons.proxies.microflows.Microflows;
