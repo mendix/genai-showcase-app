@@ -407,7 +407,7 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 	}
 	
 	private ObjectNode createFunctionParametersNode(String functionMicroflow) {
-		Map<String, IDataType> inputParameters = FunctionMappingImpl.getInputParameterForModel(functionMicroflow);
+		Map<String, IDataType> inputParameters = FunctionMappingImpl.getInputParametersForModel(functionMicroflow);
 		
 		if (inputParameters == null || inputParameters.entrySet().isEmpty()) {
 			return null;

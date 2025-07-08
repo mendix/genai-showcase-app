@@ -12,9 +12,9 @@ import genaicommons.proxies.Request;
 import genaicommons.proxies.Message;
 
 public class FunctionMappingImpl {
-	// Used in Function_ExecuteMicroflow
+	// Used in Function_ExecuteMicroflow, TODO Deprecated
 	public static String getFirstInputParamName(String functionMicroflow) {
-		Map<String, IDataType> inputParameters = getInputParameterForModel(functionMicroflow);
+		Map<String, IDataType> inputParameters = getInputParametersForModel(functionMicroflow);
 		if(inputParameters != null && !inputParameters.entrySet().isEmpty()) {
 			return inputParameters.entrySet().iterator().next().getKey();
 		} else {
@@ -26,7 +26,7 @@ public class FunctionMappingImpl {
 	 * @param functionMicroflow
 	 * @return Map<String, IDataType> inputParameters
 	 */
-	public static Map<String, IDataType> getInputParameterForModel(String functionMicroflow) {
+	public static Map<String, IDataType> getInputParametersForModel(String functionMicroflow) {
 		Map<String, IDataType> inputParameters = Core.getInputParameters(functionMicroflow);
 		Map<String, IDataType> inputParametersModified = new HashMap<>();
 		

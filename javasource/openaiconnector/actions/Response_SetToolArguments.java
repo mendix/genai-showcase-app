@@ -100,7 +100,6 @@ public class Response_SetToolArguments extends UserAction<java.lang.String>
 				}
 			}
 			((ObjectNode) message).set("tool_calls", toolCalls);
-			//((ObjectNode) choice).set("messages", message);
 		}
 		((ObjectNode) rootNode).set("choices", choices);
 	}

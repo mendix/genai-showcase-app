@@ -20,6 +20,7 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import org.apache.commons.io.IOUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -29,6 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
+import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import amazonbedrockconnector.impl.AmazonBedrockClient;
 import amazonbedrockconnector.impl.MxLogger;
@@ -40,10 +42,12 @@ import amazonbedrockconnector.proxies.IntegerRequestParameter;
 import amazonbedrockconnector.proxies.RequestedResponseField;
 import amazonbedrockconnector.proxies.ResponseFieldRequest;
 import amazonbedrockconnector.proxies.StringRequestParameter;
+import genaicommons.impl.FunctionImpl;
 import genaicommons.impl.FunctionMappingImpl;
 import genaicommons.proxies.ENUM_FileType;
 import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.ENUM_ToolChoice;
+import genaicommons.proxies.Argument;
 import genaicommons.proxies.Computer;
 import genaicommons.proxies.FileCollection;
 import genaicommons.proxies.FileContent;
@@ -76,6 +80,7 @@ import software.amazon.awssdk.services.bedrockruntime.model.ToolResultBlock;
 import software.amazon.awssdk.services.bedrockruntime.model.ToolResultContentBlock;
 import software.amazon.awssdk.services.bedrockruntime.model.ToolSpecification;
 import software.amazon.awssdk.services.bedrockruntime.model.ToolUseBlock;
+import software.amazon.awssdk.services.bedrockruntime.model.ToolUseBlock.Builder;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
 public class Converse extends UserAction<IMendixObject>
@@ -393,7 +398,7 @@ public class Converse extends UserAction<IMendixObject>
 	
 	// Method to map a Mx Message to the correct type of aws message
 	private Message getAwsMessage(genaicommons.proxies.Message mxMsg, List<genaicommons.proxies.Message> mxMessages, int i) throws CoreException, MalformedURLException, URISyntaxException, IOException {
-		var msgBuilder = Message.builder()
+		software.amazon.awssdk.services.bedrockruntime.model.Message.Builder msgBuilder = Message.builder()
 				.role(getAwsMessageRole(mxMsg));
 		
 		List<ContentBlock> contentBlockList = new ArrayList<>();
@@ -552,7 +557,7 @@ public class Converse extends UserAction<IMendixObject>
 	
 	private DocumentSource getDocSource(FileContent doc) {
 		byte[] bytes = Base64.getDecoder().decode(doc.getFileContent());
-		var builder = DocumentSource.builder()
+		software.amazon.awssdk.services.bedrockruntime.model.DocumentSource.Builder builder = DocumentSource.builder()
 				.bytes(SdkBytes.fromByteArray(bytes));
 		return builder.build();
 	}
@@ -585,10 +590,10 @@ public class Converse extends UserAction<IMendixObject>
 	
 	// ContentBlock with image
 	private ContentBlock getImageContentBlock(String format, byte[] bytes) {
-		var imageBuilder = ImageBlock.builder()
+		software.amazon.awssdk.services.bedrockruntime.model.ImageBlock.Builder imageBuilder = ImageBlock.builder()
 				.format(format);
 		
-		var imageSourceBuilder = ImageSource.builder()
+		software.amazon.awssdk.services.bedrockruntime.model.ImageSource.Builder imageSourceBuilder = ImageSource.builder()
 				.bytes(SdkBytes.fromByteArray(bytes));
 		
 		imageBuilder.source(imageSourceBuilder.build());
@@ -644,11 +649,11 @@ public class Converse extends UserAction<IMendixObject>
 	
 	// Content Block with tool result
 	private ContentBlock getToolResultContent(genaicommons.proxies.Message mxMsg) {
-		var toolResultContentBuilder = ToolResultContentBlock.builder()
+		software.amazon.awssdk.services.bedrockruntime.model.ToolResultContentBlock.Builder toolResultContentBuilder = ToolResultContentBlock.builder()
 				.text(mxMsg.getContent());
 		
 		
-		var toolResultBuilder = ToolResultBlock.builder()
+		software.amazon.awssdk.services.bedrockruntime.model.ToolResultBlock.Builder toolResultBuilder = ToolResultBlock.builder()
 				.toolUseId(mxMsg.getToolCallId())
 				.content(toolResultContentBuilder.build());
 		
@@ -657,24 +662,23 @@ public class Converse extends UserAction<IMendixObject>
 	
 	// ContentBlock with tool use
 	// Needed when the LLM is requesting a function call
-	private ContentBlock getToolUseContent(ToolCall mxToolCall) throws JsonMappingException, JsonProcessingException {
-		var builder = ToolUseBlock.builder()
+	private ContentBlock getToolUseContent(ToolCall mxToolCall) throws CoreException, JsonMappingException, JsonProcessingException {
+		Builder builder = ToolUseBlock.builder()
 				.name(mxToolCall.getName())
 				.toolUseId(mxToolCall.getToolCallId());
 		
-		if (mxToolCall.getArguments() == null || mxToolCall.getArguments().isBlank()) {
+		java.util.List<genaicommons.proxies.Argument> args = mxToolCall.getToolCall_Argument();
+		if (args == null) {
 			builder.input(Document.mapBuilder().build());
 			
 		} else {
-			// Arguments JSON must be build by Document.mapBuilder()
-			// Getting the arguments as JSON from the arguments attribute as specified by the LLM
-			JsonNode args = MAPPER.readTree(mxToolCall.getArguments());
-			String key = args.fieldNames().next();
-			Document input = Document.mapBuilder()
-					.putString(key, args.get(key).asText())
+			// Arguments must be build by Document.mapBuilder()
+			for (Argument arg : args) {
+				Document input = Document.mapBuilder()
+					.putString(arg.getKey(), arg.getValue())
 					.build();
-			
-			builder.input(input);
+				builder.input(input);
+			}
 		}
 		
 		return ContentBlock.builder().toolUse(builder.build()).build();
@@ -808,27 +812,33 @@ public class Converse extends UserAction<IMendixObject>
 	private ToolInputSchema getToolInputSchema(Tool mxTool) throws JsonProcessingException {
 		// All Tools to be called are function objects
 		//Function function = (Function) mxTool;
-		String inputParamName = genaicommons.impl.FunctionMappingImpl.getFirstInputParamName(mxTool.getMicroflow());
-		if (inputParamName == null) {
+		Map<String, IDataType> parameterList = genaicommons.impl.FunctionMappingImpl.getInputParametersForModel(mxTool.getMicroflow());
+		if (parameterList == null) {
 			LOGGER.debug("Function Microflow without input parameter");
 			
 			return createEmptyToolInputSchema();
 		}
-		// Must be created using Document.mapBuilder()
-		// Constructing the JSON in a different way causes errors
-		// Only One Parameter of type String is supported
 		
-		Document input = Document.mapBuilder()
-				.putString("type", "string")
-				.build();
+		// Must be created using Document.mapBuilder()		
+		Document.MapBuilder propertiesBuilder = Document.mapBuilder();
+		Document.ListBuilder requiredBuilder = Document.listBuilder();
 		
-		Document required = Document.listBuilder()
-				.addString(inputParamName)
-				.build();
+		//Loop over parameters of microflow to add properties and required Document
+		for(Entry<String, IDataType> param : parameterList.entrySet()) {			
+			String type = FunctionImpl.parameterGetType(param);
+		    String paramName = param.getKey();
+
+		    Document input = Document.mapBuilder()
+		        .putString("type", type)
+		        .build();
+
+		    propertiesBuilder.putDocument(paramName, input);
+		    requiredBuilder.addString(paramName);
 		
-		Document properties = Document.mapBuilder()
-				.putDocument(inputParamName, input)
-				.build();
+		}
+		//Build both outside of loop to be added to final json field
+		Document properties = propertiesBuilder.build();
+		Document required = requiredBuilder.build();
 		
 		Document json = Document.mapBuilder()
 				.putString("type", "object")
@@ -1025,11 +1035,36 @@ public class Converse extends UserAction<IMendixObject>
 	private void setMessageToolUseContent(List<ToolCall> toolCallList, ToolUseBlock awsToolUse) throws JsonProcessingException {
 		ToolCall mxToolCall = new ToolCall(getContext());
 		
-		mxToolCall.setArguments(getInputParamsJson(awsToolUse.input()));
+		toolCallSetArguments(mxToolCall, awsToolUse);
 		mxToolCall.setName(awsToolUse.name());
 		mxToolCall.setToolCallId(awsToolUse.toolUseId());
 		
 		toolCallList.add(mxToolCall);
+	}
+	
+	private void toolCallSetArguments(ToolCall mxToolCall, ToolUseBlock awsToolUse) {
+		Document awsToolDocument = awsToolUse.input();
+		if (!awsToolDocument.isMap() || awsToolDocument.asMap().isEmpty()) {
+			LOGGER.debug("Tool without parameter called");
+			return;
+		}
+
+		 List<Argument> argumentList = new ArrayList<>();
+		
+	    for (Map.Entry<String, Document> entry : awsToolDocument.asMap().entrySet()) {
+	        String key = entry.getKey();
+	        String value;
+	        if (entry.getValue().isString()) {
+	            value = entry.getValue().asString();
+	        } else {
+	            value = entry.getValue().toString();
+	        }
+	        genaicommons.proxies.Argument mxArgument = new genaicommons.proxies.Argument(getContext());
+	        mxArgument.setKey(key);
+	        mxArgument.setValue(value);
+	        argumentList.add(mxArgument);
+	    }
+	    mxToolCall.setToolCall_Argument(argumentList);
 	}
 	
 	// Getting requested input parameters and storing them as Json string

@@ -30,7 +30,6 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __Request;
 	private final genaicommons.proxies.Request Request;
-	private final java.lang.String Arguments;
 	/** @deprecated use com.mendix.utils.ListUtils.map(ArgumentList, com.mendix.systemwideinterfaces.core.IEntityProxy::getMendixObject) instead. */
 	@java.lang.Deprecated(forRemoval = true)
 	private final java.util.List<IMendixObject> __ArgumentList;
@@ -40,7 +39,6 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		IContext context,
 		IMendixObject _tool,
 		IMendixObject _request,
-		java.lang.String _arguments,
 		java.util.List<IMendixObject> _argumentList
 	)
 	{
@@ -49,7 +47,6 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		this.Tool = _tool == null ? null : genaicommons.proxies.Tool.initialize(getContext(), _tool);
 		this.__Request = _request;
 		this.Request = _request == null ? null : genaicommons.proxies.Request.initialize(getContext(), _request);
-		this.Arguments = _arguments;
 		this.__ArgumentList = _argumentList;
 		this.ArgumentList = java.util.Optional.ofNullable(_argumentList)
 			.orElse(java.util.Collections.emptyList())

@@ -157,7 +157,7 @@ public class Request_Modify_Converse extends UserAction<java.lang.String>
 	        inputSchemaNode.put("type", "object");
 
 	        // Create the properties node (if input parameter is available)
-	        Map<String, IDataType> parameterList = FunctionMappingImpl.getInputParameterForModel(microflow);
+	        Map<String, IDataType> parameterList = FunctionMappingImpl.getInputParametersForModel(microflow);
 	        
 			ObjectNode propertiesNode = MAPPER.createObjectNode();
 			ArrayNode requiredNode = MAPPER.createArrayNode();
