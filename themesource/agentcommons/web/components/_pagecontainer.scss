@@ -77,6 +77,7 @@
             white-space: normal; 
         }
     }
+
     .divider {
         display: flex;
         height: 1px;
@@ -353,18 +354,17 @@
     display: flex;
     flex-grow: 1;
     min-width: 360px;
+
     .model-selection{
         display: flex;
         align-items: center;
         height: max-content;
     
-    .mx-image {
-        height: $font-size-large;
-        margin-right: $spacing-small;
-        float: right;
-        height: $font-size-large;
-        margin-right: $spacing-small;
-    }
+        .mx-image-viewer {
+            height: auto;
+            width: auto;
+            margin-right: $spacing-small;
+        }
     }
 }
 

@@ -29193,11 +29193,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   align-items: center;
   height: max-content;
 }
-.combobox-model-selection .model-selection .mx-image {
-  height: 18px;
-  margin-right: 8px;
-  float: right;
-  height: 18px;
+.combobox-model-selection .model-selection .mx-image-viewer {
+  height: auto;
+  width: auto;
   margin-right: 8px;
 }
 
