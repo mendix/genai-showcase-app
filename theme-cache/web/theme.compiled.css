@@ -28932,7 +28932,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: center;
   margin: auto;
   gap: 24px;
-  padding: 32px;
+  padding: 16px 32px 16px 32px;
   overflow: auto;
   box-sizing: border-box;
   /*DEPRECATED*/
@@ -28988,21 +28988,18 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  padding-top: 28px;
 }
 .agent-page-container .page-container-grid .card {
   margin-bottom: 0;
 }
-.agent-page-container .page-content-wrapper-main {
-  height: 100%;
-  padding-right: 8px;
-  overflow-y: auto;
-}
 .agent-page-container .page-container-side {
-  z-index: 1000;
+  z-index: 100;
   width: 100%;
   max-width: 25vw;
   display: flex;
   flex-direction: column;
+  padding-top: 28px;
 }
 .agent-page-container .page-container-header {
   width: 100%;
@@ -29041,6 +29038,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .agent-page-container .page-content {
   width: 100%;
+  max-width: 1800px;
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   height: fit-content;

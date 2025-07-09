@@ -47,7 +47,7 @@
     justify-content: center;
     margin: auto;
     gap: $spacing-large;
-    padding: $spacing-larger;
+    padding: $spacing-medium $spacing-larger $spacing-medium $spacing-larger;
     overflow: auto;
     box-sizing: border-box;
 
@@ -105,24 +105,20 @@
         display: flex;
         flex-direction: column;
         gap: $spacing-large;
+        padding-top: 28px;
 
         .card {
             margin-bottom: 0;
         }
     }
 
-    .page-content-wrapper-main {
-        height: 100%;
-        padding-right: $spacing-small;
-        overflow-y: auto;
-    }
-
     .page-container-side {
-        z-index: 1000;
+        z-index: 100;
         width: 100%;
         max-width: 25vw;
         display: flex;
         flex-direction: column;
+        padding-top: 28px;
     }
 
    /*DEPRECATED*/
@@ -168,12 +164,10 @@
         overflow-y: auto;
     }
 
-    
-    /*DEPRECATED*/
     .page-content {
         width: 100%;
-        //max-width: 1800px;
-        //display: flex; //check wether needed or done differently
+        max-width: 1800px;
+        display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         height: fit-content;
@@ -209,6 +203,7 @@
         }
     }
 
+    /*DEPRECATED*/
     //For screens smaller the containers grow to max width
     @media(max-width: 1200px) {
         .content-main {
