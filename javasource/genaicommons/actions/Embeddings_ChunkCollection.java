@@ -17,6 +17,9 @@ import com.mendix.systemwideinterfaces.core.IDataType;
 import genaicommons.impl.DeployedModelImpl;
 import genaicommons.impl.MxLogger;
 import genaicommons.proxies.ENUM_ModelModality;
+import genaicommons.proxies.EmbeddingsResponse;
+import genaicommons.proxies.Response;
+import genaicommons.proxies.microflows.Microflows;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
@@ -68,9 +71,16 @@ public class Embeddings_ChunkCollection extends UserAction<IMendixObject>
 		try {
 			validate();
 			
-			return Core.microflowCall(DeployedModel.getMicroflow())
+			long startTime = System.currentTimeMillis();
+			
+			IMendixObject responseMendixObject = Core.microflowCall(DeployedModel.getMicroflow())
 					.withParams(mapInputParameters())
 					.execute(this.getContext());
+			
+			EmbeddingsResponse embeddingsResponse = genaicommons.proxies.EmbeddingsResponse.load(getContext(), responseMendixObject.getId());
+			responseStoreDurationAndUsage(embeddingsResponse, startTime);
+			
+			return responseMendixObject;
 
 		} catch (Exception e) {
 			LOGGER.error(e);
@@ -95,6 +105,13 @@ public class Embeddings_ChunkCollection extends UserAction<IMendixObject>
 	private void validate() {
 		requireNonNull(ChunkCollection, "ChunkCollection is required.");
 		DeployedModelImpl.validate(DeployedModel, ENUM_ModelModality.Embeddings);
+	}
+	
+	private void responseStoreDurationAndUsage(EmbeddingsResponse embeddingsResponse, Long startTime) {
+		embeddingsResponse.setDurationMilliseconds((int) Math.ceil(System.currentTimeMillis() - startTime));
+		if (genaicommons.proxies.constants.Constants.getStoreUsageMetrics()) {
+			Microflows.usage_Create_Embeddings(getContext(), embeddingsResponse, DeployedModel);
+		}
 	}
 	
 	private Map<String, Object> mapInputParameters() {
