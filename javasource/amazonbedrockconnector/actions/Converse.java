@@ -20,13 +20,16 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import org.apache.commons.io.IOUtils;
+import org.bouncycastle.asn1.x9.DHValidationParms;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
@@ -59,6 +62,8 @@ import genaicommons.proxies.ToolCall;
 import genaicommons.proxies.ToolCollection;
 import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.core.document.Document;
+import software.amazon.awssdk.core.document.Document.MapBuilder;
+import software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeClient;
 import software.amazon.awssdk.services.bedrockruntime.model.AnyToolChoice;
 import software.amazon.awssdk.services.bedrockruntime.model.AutoToolChoice;
 import software.amazon.awssdk.services.bedrockruntime.model.ContentBlock;
@@ -126,12 +131,12 @@ public class Converse extends UserAction<IMendixObject>
 			requireNonNull(this.ConverseRequest, "A ConverseRequest_Extension object is required");
 			requireNonNull(this.BedrockDeployedModel, "A BedrockDeployedModel object is required");
 			
-			var client = AmazonBedrockClient.getBedrockRuntimeClient(Credentials, Region, ConverseRequest);
+			BedrockRuntimeClient client = AmazonBedrockClient.getBedrockRuntimeClient(Credentials, Region, ConverseRequest);
 			
-			var awsRequest = getAwsRequest();
+			software.amazon.awssdk.services.bedrockruntime.model.ConverseRequest awsRequest = getAwsRequest();
 			LOGGER.info("AWS Request: " + awsRequest);
 			
-			var awsResponse = client.converse(awsRequest);
+			ConverseResponse awsResponse = client.converse(awsRequest);
 			LOGGER.info("AWS Response: " + awsResponse);
 			
 			Response mxResponse = getMxResponse(awsResponse);
@@ -666,9 +671,9 @@ public class Converse extends UserAction<IMendixObject>
 		Builder builder = ToolUseBlock.builder()
 				.name(mxToolCall.getName())
 				.toolUseId(mxToolCall.getToolCallId());
-		
 		java.util.List<genaicommons.proxies.Argument> args = mxToolCall.getToolCall_Argument();
-		if (args == null) {
+		
+		if (args.isEmpty()) {
 			builder.input(Document.mapBuilder().build());
 			
 		} else {
@@ -779,7 +784,7 @@ public class Converse extends UserAction<IMendixObject>
 				hasComputerTool = true;
 				continue;
 			}
-			var awsTool = getAwsTool(mxTool);
+			software.amazon.awssdk.services.bedrockruntime.model.Tool awsTool = getAwsTool(mxTool);
 			awsTools.add(awsTool);
 		}
 		
@@ -811,7 +816,6 @@ public class Converse extends UserAction<IMendixObject>
 	// Getting the Input Schema of a Tool
 	private ToolInputSchema getToolInputSchema(Tool mxTool) throws JsonProcessingException {
 		// All Tools to be called are function objects
-		//Function function = (Function) mxTool;
 		Map<String, IDataType> parameterList = genaicommons.impl.FunctionMappingImpl.getInputParametersForModel(mxTool.getMicroflow());
 		if (parameterList == null) {
 			LOGGER.debug("Function Microflow without input parameter");
@@ -824,13 +828,24 @@ public class Converse extends UserAction<IMendixObject>
 		Document.ListBuilder requiredBuilder = Document.listBuilder();
 		
 		//Loop over parameters of microflow to add properties and required Document
-		for(Entry<String, IDataType> param : parameterList.entrySet()) {			
+		for(Entry<String, IDataType> param : parameterList.entrySet()) {	
+			//First see if the type is Enumeration before it gets changed to "String" in paramterGetType()
+			Boolean enumerationType = param.getValue().toString().toLowerCase().equals("enumeration");
 			String type = FunctionImpl.parameterGetType(param);
 		    String paramName = param.getKey();
-
-		    Document input = Document.mapBuilder()
-		        .putString("type", type)
-		        .build();
+		    
+		    MapBuilder inputBuilder = Document.mapBuilder();
+		    
+		    // For Enum types, expose the possible values with an array node
+		    if(enumerationType) {
+		    	Set<String> enumKeySet = param.getValue().getEnumeration().getEnumValues().keySet();
+				ArrayNode enumKeyArrayNode = MAPPER.valueToTree(enumKeySet);
+				inputBuilder.putString("enum", enumKeyArrayNode.toString());	
+				
+		    } else {
+		    	inputBuilder.putString("type", type);
+		    }
+		    Document input = inputBuilder.build();
 
 		    propertiesBuilder.putDocument(paramName, input);
 		    requiredBuilder.addString(paramName);
@@ -1065,28 +1080,6 @@ public class Converse extends UserAction<IMendixObject>
 	        argumentList.add(mxArgument);
 	    }
 	    mxToolCall.setToolCall_Argument(argumentList);
-	}
-	
-	// Getting requested input parameters and storing them as Json string
-	private String getInputParamsJson(Document awsDoc) throws JsonProcessingException {
-		if (!awsDoc.isMap() || awsDoc.asMap().isEmpty()) {
-			LOGGER.debug("Tool without parameter called");
-			return null;
-		}
-		Map<String, String> stringMap = new HashMap<>();
-
-	    for (Map.Entry<String, Document> entry : awsDoc.asMap().entrySet()) {
-	        String key = entry.getKey();
-	        String value;
-	        if (entry.getValue().isString()) {
-	            value = entry.getValue().asString();
-	        } else {
-	            value = entry.getValue().toString();
-	        }
-	        stringMap.put(key, value);
-	    }
-
-	    return MAPPER.writeValueAsString(stringMap);
 	}
 	
 	private void setMxResponseExtension(Document awsDoc, ChatCompletionsResponse mxResponse) {

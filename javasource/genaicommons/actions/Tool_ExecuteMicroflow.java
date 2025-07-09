@@ -19,6 +19,7 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import genaicommons.impl.MxLogger;
 import genaicommons.proxies.Argument;
 import com.mendix.systemwideinterfaces.core.UserAction;
+import com.mendix.systemwideinterfaces.core.meta.IMetaObject;
 
 public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 {
@@ -100,6 +101,20 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 				    .findFirst()
 				    .orElse(null);
 			
+			//If there is no argumentValue, it is either a Mendix Object or nothing was passed
+			if (argumentValue == null && isMetaObjectSubClass(value,genaicommons.proxies.Tool.getType())){
+				parametersAndValues.put(key,  Tool.getMendixObject());
+				continue;
+				
+			} else if (argumentValue == null && isMetaObjectSubClass(value, genaicommons.proxies.Request.getType())){
+				parametersAndValues.put(key, Request.getMendixObject());
+				continue;
+				
+			} else if (argumentValue == null) {
+				parametersAndValues.put(key, null);
+				continue;
+			}
+						
 			// Convert input into type of tool microflow's parameter type and add to list
 			if (IDataType.DataTypeEnum.Boolean.equals(value.getType())) {
 				parametersAndValues.put(key, Boolean.parseBoolean(argumentValue));
@@ -120,14 +135,30 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 			} else if(IDataType.DataTypeEnum.Enumeration.equals(value.getType())){
 				parametersAndValues.put(key, argumentValue);	
 				
-			} else if (Core.getMetaObject(value.getObjectType()).isSubClassOf(genaicommons.proxies.Tool.getType())){
-				parametersAndValues.put(key,  Tool.getMendixObject());
-				
-			} else if (Core.getMetaObject(value.getObjectType()).isSubClassOf(genaicommons.proxies.Request.getType())){
-				parametersAndValues.put(key, Request.getMendixObject());
 			}
 		}		
 		return executeAndLogToolMicroflow(parametersAndValues);
+	}
+	
+	/**
+	 * Checks if the input object of a parameter (as IDataType) matches the (Sub)class of a given String type (should be passed using the class.getType() method)
+	 * @param value
+	 * @param type
+	 * @return true if the Object matches the Sub(class).
+	 */
+	private Boolean isMetaObjectSubClass(IDataType value, String type) {
+		String objectType = value.getObjectType();
+		
+		if(objectType == null) {
+			return false;
+		}
+		
+		IMetaObject metaObject = Core.getMetaObject(objectType);
+		if (metaObject != null) {
+			return metaObject.isSubClassOf(type);
+		}
+	
+		return false;		
 	}
 	
 	private String executeAndLogToolMicroflow(Map<String, Object> params) {
