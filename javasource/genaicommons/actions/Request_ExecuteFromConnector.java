@@ -121,9 +121,10 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 	}
 	
 	private void responseUpdateTokenCount(Response response) {
-		requestTokens += response.getRequestTokens();
-		responseTokens += response.getResponseTokens();
-		totalTokens += response.getTotalTokens();
+		requestTokens += response.getRequestTokens() != null ? response.getRequestTokens() : 0;
+		responseTokens += response.getResponseTokens() != null ? response.getResponseTokens() : 0;
+		totalTokens += response.getTotalTokens() != null ? response.getTotalTokens() : 0;
+		
 		response.setRequestTokens(requestTokens);
 		response.setResponseTokens(responseTokens);
 		response.setTotalTokens(totalTokens);
