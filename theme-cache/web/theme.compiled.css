@@ -28013,7 +28013,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background-color: inherit;
   top: 0px;
   padding-top: 24px;
-  z-index: 101;
+  z-index: 50;
 }
 
 .w306 {
@@ -28353,7 +28353,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .combo-model-selection {
   min-width: 360px;
-  z-index: 200;
+  z-index: 50;
 }
 .combo-model-selection .model-selection {
   display: flex;
@@ -29173,6 +29173,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: none;
 }
 
+/* Card Colors */
+/* Label Colors */
 .layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a img {
   width: 52px;
   padding: 4px 14px;
@@ -29194,6 +29196,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background-color: #0078D4;
 }
 
+/* Can be deleted after PR - wom't be used with the new landing page. Also delete the Variable */
 .bg-aws {
   background-color: #EC7211 !important;
 }
@@ -29341,6 +29344,200 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .anychart-extension__container .legend .bg {
   fill-opacity: 0 !important;
+}
+
+/* --------------------------------------- Landing Page Styling -----------------------------------*/
+.display-none {
+  display: none;
+}
+
+.text-break--2-lines, .card-base .card-content .card-description, .card-orange .card-content .card-description, .card-yellow .card-content .card-description, .card-violet .card-content .card-description, .card-lightpurple .card-content .card-description, .card-darkpurple .card-content .card-description, .card-blue .card-content .card-description, .card-green .card-content .card-description, .card-grey .card-content .card-description, .card-base .card-content .card-title, .card-orange .card-content .card-title, .card-yellow .card-content .card-title, .card-violet .card-content .card-title, .card-lightpurple .card-content .card-title, .card-darkpurple .card-content .card-title, .card-blue .card-content .card-title, .card-green .card-content .card-title, .card-grey .card-content .card-title {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.group-tooltip .widget-tooltip-content {
+  max-width: 500px;
+  text-align: left;
+  margin-bottom: 0;
+  padding: 16px;
+  overflow-y: auto;
+  font-weight: 400;
+  color: black;
+}
+
+.info-icon {
+  padding-bottom: 4px;
+}
+
+.landing-page {
+  height: auto;
+  max-width: 153.5rem;
+  padding: 40px;
+  margin: 32px auto 32px auto;
+  gap: 24px;
+  border-radius: 16px;
+  border: 1px solid var(--color-border-default, #E7E7E9);
+  background: var(--color-background-default, #FFF);
+}
+
+/* Grid: defines the columns of the the cards per group */
+.grid-landing-page {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(auto, 327px));
+  gap: 24px;
+  box-sizing: border-box;
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
+
+/* --------------------------------------- Cards -----------------------------------*/
+/* Card Structure Overview (outer to inner)
+ * .card-base     → Outer wrapper; sets background, left border and shadow
+ * .card-color    → Set left border color
+ * .card-inner    → Inner container; handles padding and layout
+ * .card-content  → Content wrapper; holds actual content (text, icons, etc.)
+ */
+.card-base, .card-orange, .card-yellow, .card-violet, .card-lightpurple, .card-darkpurple, .card-blue, .card-green, .card-grey {
+  width: 345px;
+  height: 178px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border-top: 1px grey;
+  background: white;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1), 0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--color-border-card, #E7E7E9);
+  border-left: 8px solid transparent;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.card-base:hover, .card-orange:hover, .card-yellow:hover, .card-violet:hover, .card-lightpurple:hover, .card-darkpurple:hover, .card-blue:hover, .card-green:hover, .card-grey:hover {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15), 0px 6px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+.card-base .card-inner, .card-orange .card-inner, .card-yellow .card-inner, .card-violet .card-inner, .card-lightpurple .card-inner, .card-darkpurple .card-inner, .card-blue .card-inner, .card-green .card-inner, .card-grey .card-inner {
+  display: flex;
+  width: 340px;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+.card-base .card-content, .card-orange .card-content, .card-yellow .card-content, .card-violet .card-content, .card-lightpurple .card-content, .card-darkpurple .card-content, .card-blue .card-content, .card-green .card-content, .card-grey .card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-self: stretch;
+}
+.card-base .card-content .card-icon, .card-orange .card-content .card-icon, .card-yellow .card-content .card-icon, .card-violet .card-content .card-icon, .card-lightpurple .card-content .card-icon, .card-darkpurple .card-content .card-icon, .card-blue .card-content .card-icon, .card-green .card-content .card-icon, .card-grey .card-content .card-icon {
+  display: flex;
+  width: 42px;
+  height: 42px;
+  padding: 4px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: var(--border-radius-8, 8px);
+  border: 1px solid #BEC1C5;
+  background: #F7F7F7;
+}
+.card-base .card-content .card-title, .card-orange .card-content .card-title, .card-yellow .card-content .card-title, .card-violet .card-content .card-title, .card-lightpurple .card-content .card-title, .card-darkpurple .card-content .card-title, .card-blue .card-content .card-title, .card-green .card-content .card-title, .card-grey .card-content .card-title {
+  height: 46px;
+}
+.card-base .card-content .card-description, .card-orange .card-content .card-description, .card-yellow .card-content .card-description, .card-violet .card-content .card-description, .card-lightpurple .card-content .card-description, .card-darkpurple .card-content .card-description, .card-blue .card-content .card-description, .card-green .card-content .card-description, .card-grey .card-content .card-description {
+  height: 40px;
+}
+
+.card-grey {
+  border-left-color: #6B707B;
+}
+
+.card-green {
+  border-left-color: #C6D92F;
+}
+
+.card-blue {
+  border-left-color: #146FF4;
+}
+
+.card-darkpurple {
+  border-left-color: #4701D4;
+}
+
+.card-lightpurple {
+  border-left-color: #8568F8;
+}
+
+.card-violet {
+  border-left-color: #CD59F7;
+}
+
+.card-yellow {
+  border-left-color: #FCC73A;
+}
+
+.card-orange {
+  border-left-color: #EC7211;
+}
+
+/* --------------------------------------- Card Labels -----------------------------------*/
+.card-label-base, .card-label-pgvector, .card-label-all, .card-label-mxcloudgenai, .card-label-bedrock, .card-label-openai {
+  display: inline-flex;
+  display: flex;
+  height: 25px;
+  padding: 6px;
+  gap: 6px;
+  align-items: center;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.container-img-label {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.container-label {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2px;
+}
+
+.label-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.card-label-openai {
+  background: #F2F2F3;
+}
+
+.card-label-bedrock {
+  background: #FFEAC3;
+  color: #A05700;
+}
+
+.card-label-mxcloudgenai {
+  background: #DCEEFE;
+  color: #0006AB;
+}
+
+.card-label-all {
+  background: #E2E0FC;
+  color: #2F008C;
+}
+
+.card-label-pgvector {
+  background: #E1FAE1;
+  color: #076407;
 }
 
 /*# sourceMappingURL=theme.compiled.css.map */
