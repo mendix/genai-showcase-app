@@ -1,0 +1,9 @@
+.listview-bullet-points{
+    > ul {
+        list-style-type: disc;
+        margin-bottom: 0px;
+        > li{
+            list-style-position: outside;
+        }
+    }
+}

@@ -28486,13 +28486,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: none;
 }
 
-.listview-bullet-points > ul {
-  list-style-type: disc;
-}
-.listview-bullet-points > ul > li {
-  list-style-position: outside;
-}
-
 .popup-mid-size {
   width: 60vw;
 }
@@ -28896,6 +28889,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 16px;
 }
 
+.listview-bullet-points > ul {
+  list-style-type: disc;
+  margin-bottom: 0px;
+}
+.listview-bullet-points > ul > li {
+  list-style-position: outside;
+}
+
 .agents-page-content-container {
   min-height: -webkit-fill-available;
   min-height: -moz-available;
@@ -28935,12 +28936,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 16px 32px 16px 32px;
   overflow: auto;
   box-sizing: border-box;
-  /*DEPRECATED*/
-  /*DEPRECATED*/
-  /*DEPRECATED*/
-  /*DEPRECATED*/
-  /*DEPRECATED*/
-  /*DEPRECATED*/
 }
 .agent-page-container .agent-page-container::after {
   content: "";
@@ -29001,14 +28996,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-direction: column;
   padding-top: 28px;
 }
-.agent-page-container .page-container-header {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  background: white;
-  padding-bottom: 24px;
-  justify-content: center;
-}
 .agent-page-container .page-header-content {
   display: flex;
   flex-direction: column;
@@ -29032,10 +29019,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-flow: row !important;
   justify-content: flex-start !important;
 }
-.agent-page-container .page-content-wrapper {
-  height: 100%;
-  overflow-y: auto;
-}
 .agent-page-container .page-content {
   width: 100%;
   max-width: 1800px;
@@ -29043,37 +29026,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-direction: row;
   flex-wrap: wrap;
   height: fit-content;
-}
-.agent-page-container .content-main {
-  min-width: 450px;
-  width: 60%;
-  display: flex;
-  flex-direction: column;
-}
-.agent-page-container .content-main .card {
-  overflow: visible;
-  margin-left: 12px;
-  margin-right: 12px;
-}
-.agent-page-container .content-column {
-  min-width: 400px;
-  width: 40%;
-  display: flex;
-  flex-direction: column;
-}
-.agent-page-container .content-column .card {
-  overflow: visible;
-  margin-left: 12px;
-  margin-right: 12px;
-  z-index: 0;
-}
-@media (max-width: 1200px) {
-  .agent-page-container .content-main {
-    width: 100%;
-  }
-  .agent-page-container .content-column {
-    width: 100%;
-  }
 }
 .agent-page-container .content-chat {
   display: block;
@@ -29084,39 +29036,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .agent-page-container .content-chat .content-column {
   width: 100%;
-}
-.agent-page-container .content-fullwidth {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-.agent-page-container .content-fullwidth .card {
-  flex-grow: 1;
-  margin-left: 12px;
-  margin-right: 12px;
-  margin-bottom: 0;
-  max-height: 39rem;
-  padding-bottom: 24px;
-}
-.agent-page-container .content-fullwidth .card-content {
-  overflow-y: scroll;
-  overflow-x: hidden;
-  scrollbar-gutter: stable;
-  max-height: 25rem;
-  margin-bottom: 0;
-  padding-right: 8px;
-}
-.agent-page-container .content-fullwidth .card-header {
-  display: flex;
-  flex-direction: row;
-  padding-bottom: 10px;
-}
-.agent-page-container .content-fullwidth .card-header--version {
-  z-index: 1;
-}
-.agent-page-container .content-fullwidth .card-header--model {
-  z-index: 0;
 }
 .agent-page-container .panel-header {
   display: flex;
@@ -29290,12 +29209,12 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .agent-tooltip-w330 .widget-tooltip-content {
   width: 330px;
-  padding: 0 15px 0 15px;
+  padding: 8px 15px 0px 15px;
 }
 
 .agent-tooltip-w280 .widget-tooltip-content {
   width: 280px;
-  padding: 0 15px 0 15px;
+  padding: 8px 15px 0px 15px;
 }
 
 .output-tooltip .widget-tooltip-content {
