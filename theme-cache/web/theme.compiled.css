@@ -27891,99 +27891,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding-bottom: 0;
 }
 
-.btn-without-border {
-  color: #0a1325;
-  border: 1px solid transparent;
-}
-.btn-without-border.mx-link {
-  text-decoration: none;
-}
-.btn-without-border.disabled {
-  background-color: transparent;
-  border: 1px solid transparent;
-  cursor: default;
-}
-.btn-without-border:hover {
-  background-color: #e7e7e9;
-  border: 1px solid #e7e7e9;
-}
-.btn-without-border:hover, .btn-without-border:active, .btn-without-border:focus {
-  color: #0a1325;
-}
-
-.btn-no-hover.mx-link:hover {
-  background-color: transparent;
-  border: 1px solid transparent;
-  cursor: default;
-}
-
-.btn-run-single {
-  border-radius: 4px 4px 4px 4px;
-  padding-top: 1rem;
-}
-.btn-run-single img {
-  height: 22px;
-  width: 22px;
-  margin-right: 0;
-}
-
-.btn-run {
-  border-radius: 4px 0 0 4px;
-}
-.btn-run img {
-  height: 22px;
-  width: 22px;
-  margin-right: 0;
-}
-
-.btn-run-all {
-  padding: 0.6em;
-  border-radius: 0 4px 4px 0;
-  border-left: 1px solid white;
-  fill: white;
-}
-.btn-run-all:active, .btn-run-all:focus, .btn-run-all:hover {
-  border-left: 1px solid white;
-}
-
-.btn-icon {
-  display: flex;
-  padding: 0.6em;
-}
-.btn-icon img {
-  height: 22px;
-  width: 22px;
-  margin: 1px;
-}
-
-.btn-icon-small {
-  height: 32px;
-  width: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 8px;
-}
-.btn-icon-small img {
-  height: 20px;
-  width: 20px;
-  margin: 1px;
-}
-
-.btn-small {
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 8px;
-}
-
-.custom-img img {
-  height: 22px;
-  width: 22px;
-  margin-right: 0;
-}
-
 .chat-card--full-height {
   height: 100%;
 }
@@ -28160,35 +28067,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .user-input-instructions {
   font-style: italic;
-}
-
-.chat-container-prompting {
-  max-width: 100%;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  border-left: 1px solid #E7E7E9;
-  padding-top: 16px;
-  margin-bottom: unset;
-  padding-left: unset;
-  padding-right: unset;
-}
-.chat-container-prompting .chat-container {
-  padding-left: 16px;
-  padding-right: 16px;
-}
-.chat-container-prompting .chat-container .d-inline-block {
-  display: none !important;
-}
-.chat-container-prompting .chat-bubble-wrapper .chat-message-card {
-  background: #fff;
-  border-radius: 8px;
-  border: 1px solid #ced0d3;
-  padding: 16px;
-}
-.chat-container-prompting .chat-bubble-wrapper--user .chat-message-card {
-  background: #f8f8f8;
-  border: 1px solid #f8f8f8;
 }
 
 .chat-container-disabled .panel-content {
@@ -28486,15 +28364,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: none;
 }
 
-.popup-mid-size {
-  width: 60vw;
-}
-
-.pop-up-without-border .modal-header {
-  border-bottom: none;
-  padding-bottom: 10px !important;
-}
-
 .btn-chat-popup {
   position: fixed;
   right: 3vw;
@@ -28753,6 +28622,48 @@ input[type=checkbox].three-state-checkbox + .control-label {
   text-transform: uppercase;
 }
 
+.btn-without-border {
+  color: #0a1325;
+  border: 1px solid transparent;
+}
+.btn-without-border.mx-link {
+  text-decoration: none;
+}
+.btn-without-border.disabled {
+  background-color: transparent;
+  border: 1px solid transparent;
+  cursor: default;
+}
+.btn-without-border:hover {
+  background-color: #e7e7e9;
+  border: 1px solid #e7e7e9;
+}
+.btn-without-border:hover, .btn-without-border:active, .btn-without-border:focus {
+  color: #0a1325;
+}
+
+.btn-no-hover.mx-link:hover {
+  background-color: transparent;
+  border: 1px solid transparent;
+  cursor: default;
+}
+
+.btn-icon {
+  display: flex;
+  padding: 0.6em;
+}
+.btn-icon img {
+  height: 22px;
+  width: 22px;
+  margin: 1px;
+}
+
+.custom-img img {
+  height: 22px;
+  width: 22px;
+  margin-right: 0;
+}
+
 .btn-test-single, .btn-test-all, .btn-test {
   height: 32px;
   border-radius: 4px 4px 4px 4px;
@@ -28824,6 +28735,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
   cursor: default;
 }
 
+.btn-small {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
 .custom-control-label {
   display: block;
   overflow: hidden;
@@ -28889,12 +28808,36 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 16px;
 }
 
+.text-area-height--5 .form-group .form-control {
+  max-height: 7.142857145;
+  overflow: auto;
+}
+
 .listview-bullet-points > ul {
   list-style-type: disc;
   margin-bottom: 0px;
 }
 .listview-bullet-points > ul > li {
   list-style-position: outside;
+}
+
+.listview-empty-text.mx-listview > ul > li.mx-listview-empty {
+  text-align: left;
+}
+.listview-empty-text.mx-listview > ul > li.mx-listview-empty > label {
+  display: none;
+}
+
+.listview-empty-text--tools > ul > li.mx-listview-empty::before {
+  content: "Provide your agent with access to app functionality by adding microflows as tools";
+}
+
+.listview-empty-text--KB > ul > li.mx-listview-empty::before {
+  content: "Ground your agent in your company data by adding knowledge bases.";
+}
+
+.popup-mid-size {
+  width: 60vw;
 }
 
 .agents-page-content-container {
@@ -28912,7 +28855,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .agents-page-content-container .agents-container--overview .td {
   border-bottom: none;
 }
-.agents-page-content-container .agents-container--overview .card {
+.agents-page-content-container .agents-container--overview.card {
   overflow: unset;
   border-radius: 16px;
   border: 1px solid #e7e7e9;
@@ -28971,6 +28914,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+}
+.agent-page-container .title-alignment-top {
+  display: flex;
+  justify-content: flex-start;
+  align-items: top;
 }
 .agent-page-container .page-container-main {
   flex: 1 1 0;
@@ -29440,6 +29388,16 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .anychart-extension__container .legend .bg {
   fill-opacity: 0 !important;
+}
+
+.btn-icon {
+  display: flex;
+  padding: 0.6em;
+}
+.btn-icon img {
+  height: 22px;
+  width: 22px;
+  margin: 1px;
 }
 
 /*# sourceMappingURL=theme.compiled.css.map */

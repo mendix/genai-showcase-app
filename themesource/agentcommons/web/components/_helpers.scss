@@ -1,3 +1,4 @@
+@import "../../../../theme/web/custom-variables.scss";
 .custom-control-label {
   display: block;
   overflow: hidden;
@@ -70,4 +71,13 @@
 
 .scroll-to-multiple-output {
     //only needed to use in JS-Action for scrolling to element
+}
+
+.text-area-height--5 {
+    .form-group {
+        .form-control {
+            max-height: $line-height-base * 5;
+            overflow: auto;
+        }
+    }
 }

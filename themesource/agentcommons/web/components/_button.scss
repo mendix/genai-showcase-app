@@ -1,5 +1,53 @@
 @import '../../../../theme/web/custom-variables';
 
+.btn-without-border {
+    color: $font-color-default;
+    border: 1px solid transparent;
+    &.mx-link{
+        text-decoration: none;
+    }
+
+    &.disabled {
+        background-color: transparent;
+        border: 1px solid transparent;
+        cursor: default;
+    }
+
+    &:hover {
+        background-color: $btn-default-bg-hover;
+        border: 1px solid $btn-default-bg-hover;
+    }
+    &:hover,
+    &:active,
+    &:focus {
+        color: $font-color-default;
+    }
+}
+
+.btn-no-hover.mx-link:hover {
+    background-color: transparent;
+    border: 1px solid transparent;
+    cursor: default;
+}
+
+.btn-icon {
+    display: flex;
+    padding: 0.6em;
+    img {
+        height: 22px;
+        width: 22px;
+        margin: 1px;
+    }
+}
+
+.custom-img {
+    img{
+        height: 22px;
+        width: 22px;
+        margin-right: 0;
+    }
+}
+
 .btn-test-single {
     height: 32px;
     border-radius: 4px 4px 4px 4px;
@@ -80,4 +128,12 @@
         opacity: 0.5;
         cursor: default;
     }  
+}
+
+.btn-small {
+    height: $size-small;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px; 
 }
