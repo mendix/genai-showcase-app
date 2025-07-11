@@ -28758,6 +28758,12 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 160px;
 }
 
+.test-variable-width {
+  width: 180px;
+  margin-right: 8px;
+  padding-top: 8px;
+}
+
 .input-label-grid {
   display: grid;
   grid-template-columns: 150px auto 50px;
@@ -28808,9 +28814,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 16px;
 }
 
-.text-area-height--5 .form-group .form-control {
-  max-height: 7.142857145;
-  overflow: auto;
+.width-flex-full {
+  display: flex;
+  flex-grow: 1;
+}
+
+.overflow-visible {
+  overflow: visible !important;
 }
 
 .listview-bullet-points > ul {

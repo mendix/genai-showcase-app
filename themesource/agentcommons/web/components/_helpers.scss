@@ -1,4 +1,5 @@
 @import "../../../../theme/web/custom-variables.scss";
+
 .custom-control-label {
   display: block;
   overflow: hidden;
@@ -12,6 +13,12 @@
 
 .input-label-width {
   width: 160px;
+}
+
+.test-variable-width {
+  width: 180px;
+  margin-right: $spacing-small;
+  padding-top: $spacing-small;
 }
 
 .input-label-grid {
@@ -73,11 +80,11 @@
     //only needed to use in JS-Action for scrolling to element
 }
 
-.text-area-height--5 {
-    .form-group {
-        .form-control {
-            max-height: $line-height-base * 5;
-            overflow: auto;
-        }
-    }
+.width-flex-full {
+  display: flex;
+  flex-grow: 1;
+}
+
+.overflow-visible {
+  overflow: visible !important;
 }
