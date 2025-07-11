@@ -108,22 +108,22 @@ public class FunctionImpl {
 	 */
 	public static void addProperty(ObjectNode propertiesNode, ArrayNode requiredNode, Entry<String, IDataType> inputParameter) {
 		ObjectNode propertyNode = MAPPER.createObjectNode(); 
-		Boolean enumerationType = inputParameter.getValue().toString().toLowerCase().equals("enumeration");
 		String type = parameterGetType(inputParameter);
-		
-		propertyNode.put("type", type);
+				
 		//For enums, all possible keys are specified
-		if (enumerationType) {
+		if (type == "enum") {
 			Set<String> enumKeySet = inputParameter.getValue().getEnumeration().getEnumValues().keySet();
 			ArrayNode enumKeyArrayNode = MAPPER.valueToTree(enumKeySet);
-            propertyNode.set("enum", enumKeyArrayNode);	
+            propertyNode.set(type, enumKeyArrayNode);	
+		} else {
+			propertyNode.put("type", type);
 		}
 		propertiesNode.set(inputParameter.getKey(), propertyNode);
 		requiredNode.add(inputParameter.getKey());
 	}
 	
 	/**
-	 * Returns the type of an input parameter of a microflow. (Long, Decimal, Datetime will be number, Enumeration will be String)
+	 * Returns the type of an input parameter of a microflow. (Long, Decimal, Datetime will be number, Enumeration will be enum)
 	 * @param inputParameter
 	 * @return type as String
 	 */
@@ -132,7 +132,7 @@ public class FunctionImpl {
 		if(type.equals("long") || type.equals("decimal") || type.equals("datetime")) {
 			type = "number";
 		} else if (type.equals("enumeration")) {
-			type = "string";
+			type = "enum";
 		}
 		return type;
 	}

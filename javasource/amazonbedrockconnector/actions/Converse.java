@@ -62,6 +62,7 @@ import genaicommons.proxies.ToolCall;
 import genaicommons.proxies.ToolCollection;
 import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.core.document.Document;
+import software.amazon.awssdk.core.document.Document.ListBuilder;
 import software.amazon.awssdk.core.document.Document.MapBuilder;
 import software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeClient;
 import software.amazon.awssdk.services.bedrockruntime.model.AnyToolChoice;
@@ -829,18 +830,19 @@ public class Converse extends UserAction<IMendixObject>
 		
 		//Loop over parameters of microflow to add properties and required Document
 		for(Entry<String, IDataType> param : parameterList.entrySet()) {	
-			//First see if the type is Enumeration before it gets changed to "String" in paramterGetType()
-			Boolean enumerationType = param.getValue().toString().toLowerCase().equals("enumeration");
 			String type = FunctionImpl.parameterGetType(param);
 		    String paramName = param.getKey();
 		    
 		    MapBuilder inputBuilder = Document.mapBuilder();
 		    
-		    // For Enum types, expose the possible values with an array node
-		    if(enumerationType) {
+		    // For Enum types, expose the possible keys with a listBuilder Document
+		    if(type == "enum") {
 		    	Set<String> enumKeySet = param.getValue().getEnumeration().getEnumValues().keySet();
-				ArrayNode enumKeyArrayNode = MAPPER.valueToTree(enumKeySet);
-				inputBuilder.putString("enum", enumKeyArrayNode.toString());	
+		    	ListBuilder inputDocumentBuilderEnum = Document.listBuilder();
+		    	for(String enumKey : enumKeySet) {
+		    		inputDocumentBuilderEnum.addString(enumKey);
+		    	}
+		    	inputBuilder.putDocument(type, inputDocumentBuilderEnum.build());
 				
 		    } else {
 		    	inputBuilder.putString("type", type);
