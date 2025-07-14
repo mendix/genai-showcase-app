@@ -28650,7 +28650,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .btn-icon {
   display: flex;
-  padding: 0.6em;
 }
 .btn-icon img {
   height: 22px;
@@ -29402,7 +29401,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .btn-icon {
   display: flex;
-  padding: 0.6em;
 }
 .btn-icon img {
   height: 22px;
