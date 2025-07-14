@@ -1,10 +1,33 @@
 @import "../../themesource/atlas_core/web/_variables.scss";
 @import "custom-variables";
 
-$brand-aws: #EC7211;
-$brand-pgvector: #C6D92F;
-$brand-mxgenai: #146FF4;
+$brand-aws: #EC7211; 
+$brand-pgvector: #C6D92F; 
+$brand-mxgenai: #146FF4;  
 $brand-openai: #0078D4;
+
+/* Card Colors */
+$light-grey-2: #F2F2F3;
+$light-grey-7: #6B707B;
+$light-green-10: #C6D92F;
+$dark-purple-8: #4701D4;
+$light-purple-7: #8568F8;
+$dark-violet-7: #CD59F7;
+$light-red-4: #FD7072;
+$light-yellow-5: #FCC73A;
+$light-orange: #EC7211;
+
+
+/* Label Colors */
+$label-bg-bedrock: #FFEAC3;
+$label-color-bedrock: #A05700;
+$label-bg-mxcloudgenai: #DCEEFE;
+$label-color-mxcloudgenai: #0006AB;
+$label-bg-all: #E2E0FC;
+$label-color-all: #2F008C;
+$label-bg-pgvector: #E1FAE1;
+$label-color-pgvector: #076407;
+
 
 
 //Navigation
@@ -19,7 +42,7 @@ $brand-openai: #0078D4;
 .layout-atlas-responsive-default {
   .region-sidebar .mx-scrollcontainer-wrapper  > .mx-navigationtree
     .navbar-inner > ul > li > a {
-    white-space: normal;
+      white-space: normal;
   }
 }
 
@@ -35,6 +58,8 @@ $brand-openai: #0078D4;
 .bg-openai {
   background-color: $brand-openai;
 }
+
+/* Can be deleted after PR - wom't be used with the new landing page. Also delete the Variable */
 
 .bg-aws {
     background-color: $brand-aws !important;
@@ -223,4 +248,231 @@ $brand-openai: #0078D4;
         width: 22px;
         margin: 1px;
     }
+}
+
+/* --------------------------------------- Landing Page Styling -----------------------------------*/
+
+
+.display-none {
+  display: none;
+}
+
+.text-break--2-lines {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.group-tooltip {
+    .widget-tooltip-content {
+        max-width: 500px;
+        text-align: left;
+        margin-bottom: 0;
+        padding: 16px;
+        overflow-y: auto;
+        font-weight: 400;
+        color: black;
+    }
+}
+
+.info-icon {
+  padding-bottom: 4px;
+}
+
+.landing-page {
+  height:auto;
+  max-width: 153.5rem;
+  padding: 40px;
+  margin: 32px auto 32px auto;
+  gap: 24px;
+  border-radius: 16px;
+  border: 1px solid var(--color-border-default, #E7E7E9);
+  background: var(--color-background-default, #FFF);
+}
+
+/* Grid: defines the columns of the the cards per group */
+.grid-landing-page {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(auto, 327px));
+  gap: 24px;
+  box-sizing: border-box;
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
+
+/* --------------------------------------- Cards -----------------------------------*/
+
+/* Card Structure Overview (outer to inner)
+ * .card-base     → Outer wrapper; sets background, left border and shadow
+ * .card-color    → Set left border color
+ * .card-inner    → Inner container; handles padding and layout
+ * .card-content  → Content wrapper; holds actual content (text, icons, etc.)
+ */
+
+.card-base {
+  width: 345px;
+  height: 178px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border-top: 1px grey;
+  background: white;
+  box-shadow:
+    0px 1px 1px 0px rgba(0, 0, 0, 0.10),
+    0px 2px 1px 0px rgba(0, 0, 0, 0.08),
+    0px 1px 3px 0px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--color-border-card, #E7E7E9);
+  border-left: 8px solid transparent; // default fallback
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    box-shadow:
+      0px 4px 6px rgba(0, 0, 0, 0.15),
+      0px 6px 12px rgba(0, 0, 0, 0.10);
+    transform: translateY(-2px);
+  }
+
+  .card-inner {
+    display: flex;
+    width: 340px;
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-self: stretch;
+
+    .card-icon {
+      display: flex;
+      width: 42px;
+      height: 42px;
+      padding: 4px;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+
+      border-radius: var(--border-radius-8, 8px);
+      border: 1px solid #BEC1C5;
+      background: #F7F7F7;
+    }
+
+    .card-title {
+      @extend .text-break--2-lines;
+      height: 46px;
+    }
+
+    .card-description {
+      @extend .text-break--2-lines;
+      height: 40px;
+    }
+  }
+}
+
+.card-grey         { 
+  @extend .card-base; 
+  border-left-color: $light-grey-7; 
+}
+
+.card-green        { 
+  @extend .card-base; 
+  border-left-color: $light-green-10; 
+}
+
+.card-blue         { 
+  @extend .card-base; 
+  border-left-color: $brand-mxgenai; 
+}
+.card-darkpurple   { 
+  @extend .card-base; 
+  border-left-color: $dark-purple-8; 
+}
+
+.card-lightpurple  { 
+  @extend .card-base; 
+  border-left-color: $light-purple-7;
+}
+
+.card-violet       { 
+  @extend .card-base; 
+  border-left-color: $dark-violet-7; 
+}
+
+.card-yellow         { 
+  @extend .card-base; 
+  border-left-color: $light-yellow-5;
+}
+
+.card-orange      { 
+  @extend .card-base; 
+  border-left-color: $light-orange; 
+}
+
+/* --------------------------------------- Card Labels -----------------------------------*/
+
+.card-label-base {
+  display: inline-flex;
+  display: flex;
+  height: 25px;
+  padding: 6px;
+  gap: 6px;
+  align-items: center;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.container-img-label {
+  display: flex;
+  align-items: start;
+  justify-content: space-between; 
+}
+
+.container-label {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2px;
+}
+
+.label-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.card-label-openai {
+  @extend .card-label-base;
+  background: $light-grey-2;
+}
+
+.card-label-bedrock {
+  @extend .card-label-base;
+  background: $label-bg-bedrock;
+  color: $label-color-bedrock;
+}
+
+.card-label-mxcloudgenai {
+  @extend .card-label-base;
+  background: $label-bg-mxcloudgenai;
+  color: $label-color-mxcloudgenai;
+}
+
+.card-label-all {
+  @extend .card-label-base;
+  background: $label-bg-all;
+  color: $label-color-all;
+}
+
+.card-label-pgvector {
+  @extend .card-label-base;
+  background: $label-bg-pgvector;
+  color: $label-color-pgvector;
 }
