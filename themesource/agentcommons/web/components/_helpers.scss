@@ -76,6 +76,16 @@
     }
 }
 
+.icon-info-wrapper {
+  display: flex;
+  align-items: center;
+
+  img {
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+}
+
 .scroll-to-multiple-output {
     //only needed to use in JS-Action for scrolling to element
 }
