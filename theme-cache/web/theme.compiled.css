@@ -28557,14 +28557,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding-left: 16px;
   padding-right: 16px;
 }
-.chat-container-agent .chat-container .d-inline-block {
-  display: none !important;
-}
 .chat-container-agent .chat-bubble-wrapper .chat-message-card {
   background: #fff;
   border-radius: 8px;
   border: 1px solid #ced0d3;
-  padding: 16px;
 }
 .chat-container-agent .chat-bubble-wrapper--user .chat-message-card {
   background: #f8f8f8;
@@ -28654,11 +28650,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-right: 0;
 }
 
-.btn-test-single, .btn-test-all, .btn-test {
-  height: 32px;
-  border-radius: 4px 4px 4px 4px;
-  padding: 0 16px 0 8px;
-}
 .btn-test-single img, .btn-test-all img, .btn-test img {
   height: 20px;
   width: 20px;
@@ -28672,7 +28663,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .btn-test-all {
   border-radius: 0 4px 4px 0;
   border-left: 1px solid white;
-  padding-right: 8px;
+  padding: 0.6em;
 }
 .btn-test-all:active, .btn-test-all:focus, .btn-test-all:hover {
   border-left: 1px solid white;
@@ -28797,7 +28788,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .info-icon {
-  margin: 0 4px 6px 4px;
+  margin: 0 0 0 4px;
+  padding: 0;
 }
 .info-icon img {
   height: 16px;
@@ -28935,6 +28927,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
   flex-direction: column;
   overflow: visible;
+  height: 100%;
+  overflow-y: auto;
+}
+.agent-page-container .page-container-main .card {
+  overflow: unset;
 }
 .agent-page-container .page-container-grid {
   display: flex;
@@ -28952,6 +28949,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
   flex-direction: column;
   padding-top: 28px;
+  height: 100%;
 }
 .agent-page-container .page-header-content {
   display: flex;
@@ -28962,7 +28960,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .agent-page-container .page-header-content .pageheader-with-buttons {
   display: flex !important;
   margin-bottom: 0;
-  align-items: start !important;
+  align-items: center !important;
   justify-items: center;
   justify-content: space-between;
 }
@@ -29039,7 +29037,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-direction: column;
 }
 .agent-page-container .card-content {
-  overflow-y: auto;
   overflow-x: hidden;
   margin-bottom: 0;
 }
@@ -29141,6 +29138,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .testcase-table .delete-icon {
   min-width: 5%;
   color: #e33f4e;
+}
+
+.space-between {
+  display: flex !important;
+  align-items: center !important;
+  justify-items: center;
+  justify-content: space-between;
 }
 
 .hide-tooltip .widget-tooltip-arrow-top {
@@ -29434,10 +29438,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   overflow-y: auto;
   font-weight: 400;
   color: black;
-}
-
-.info-icon {
-  padding-bottom: 4px;
 }
 
 .landing-page {

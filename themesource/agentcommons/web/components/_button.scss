@@ -48,9 +48,6 @@
 }
 
 .btn-test-single {
-    height: 32px;
-    border-radius: 4px 4px 4px 4px;
-    padding: 0 $spacing-medium 0 $spacing-small;
     img {
         height: 20px;
         width: 20px;
@@ -68,7 +65,7 @@
     @extend .btn-test-single;
     border-radius: 0 4px 4px 0;
     border-left: 1px solid white;
-    padding-right: $spacing-small;
+    padding: 0.6em;
     &:active, &:focus, &:hover {
         border-left: 1px solid white;
     }

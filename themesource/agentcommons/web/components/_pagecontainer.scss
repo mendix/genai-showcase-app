@@ -102,6 +102,11 @@
         display: flex;
         flex-direction: column;
         overflow: visible;
+        height: 100%;
+        overflow-y: auto;
+        .card {
+            overflow: unset;
+        }
     }
 
     .page-container-grid {
@@ -122,6 +127,7 @@
         display: flex;
         flex-direction: column;
         padding-top: 28px;
+        height:100%;
     }
     
     .page-header-content {
@@ -133,7 +139,7 @@
         .pageheader-with-buttons {
             display: flex !important;
             margin-bottom: 0;
-            align-items: start !important;
+            align-items: center !important;
             justify-items: center;
             justify-content: space-between;
         }
@@ -230,7 +236,7 @@
     }
 
     .card-content {
-        overflow-y: auto;
+        //overflow-y: auto;
         overflow-x: hidden;
         margin-bottom: 0;
     }
@@ -349,5 +355,12 @@
         min-width: 5%;
         color: $brand-danger;
     }
+}
+
+.space-between {
+    display: flex !important;
+    align-items: center !important;
+    justify-items: center;
+    justify-content: space-between;
 }
 
