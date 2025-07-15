@@ -9,8 +9,13 @@
 
 package mcpserver.actions;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
+import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import io.modelcontextprotocol.server.McpServerFeatures;
@@ -18,10 +23,13 @@ import io.modelcontextprotocol.server.McpSyncServer;
 import io.modelcontextprotocol.spec.McpSchema;
 import mcpserver.impl.McpServerRegistry;
 import mcpserver.impl.MxLogger;
+import mcpserver.proxies.Tool;
 import static java.util.Objects.requireNonNull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 
 /**
  * Registers a tool the with MCP Server that gets exposed to MCP clients. If the model chooses to call the tool, the selected microflow gets executed.
@@ -63,14 +71,15 @@ public class AddTool extends UserAction<IMendixObject>
 		// BEGIN USER CODE
 		requireNonNull(Name,"Name is required.");
 		requireNonNull(Description,"Description is required.");
-		requireNonNull(Schema,"Schema is required.");
+		//requireNonNull(Schema,"Schema is required.");
 		requireNonNull(McpServer,"MCPServer is required.");		
 		
 		// Create NPE for the tool
 		mcpserver.proxies.Tool toolNpe = new mcpserver.proxies.Tool(getContext());
 		toolNpe.setName(Name);
 		toolNpe.setDescription(Description);
-		toolNpe.setSchema(Schema);
+		//toolNpe.setSchema(Schema);
+		setToolSchema(toolNpe);
 		toolNpe.setMicroflowName(ExecutingMicroflow);
 		toolNpe.setTool_McpServer(McpServer);
 
@@ -78,7 +87,7 @@ public class AddTool extends UserAction<IMendixObject>
 		McpSyncServer server = McpServerRegistry.getServerInstance(this.McpServer.getMendixObject().getId().toLong());
 
 		McpServerFeatures.SyncToolSpecification tool = new McpServerFeatures.SyncToolSpecification(
-				new McpSchema.Tool(Name, Description,Schema),
+				new McpSchema.Tool(toolNpe.getName(), toolNpe.getDescription(), toolNpe.getSchema()),
 				(exchange, arguments) -> {
 					// some request logging
 					String threadName = Thread.currentThread().getName();
@@ -120,6 +129,9 @@ public class AddTool extends UserAction<IMendixObject>
 
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new mcpserver.impl.MxLogger(AddTool.class);
+	
+	private static final ObjectMapper MAPPER = new ObjectMapper();
+	
 	/**
 	 * Returns a context object for the tool microflow. Currently, a system session is returned.
 	 * @return Context object
@@ -127,5 +139,93 @@ public class AddTool extends UserAction<IMendixObject>
 	private IContext getContextFromSession() {
 		return Core.createSystemContext();
 	}
+	
+	/**
+	 * sets the Schema definition either passed as argument of the JavaAction or extracted from the tool microflow
+	 * @param tool
+	 * @throws JsonProcessingException
+	 */
+	private void setToolSchema(Tool tool) throws JsonProcessingException {
+		try {
+			if(Schema != null && !Schema.isEmpty()) {
+				tool.setSchema(Schema);
+				
+			} else {
+				tool.setSchema(getSchemaFromMicroflow());
+			}
+		} catch (JsonProcessingException e) {
+			LOGGER.error(e);
+		}
+	}
+	
+	/**
+	 * Creates a Schema definition for all primitive input parameters of the tool microflow
+	 * @return Schema definition as String
+	 * @throws JsonProcessingException
+	 */
+	private String getSchemaFromMicroflow() throws JsonProcessingException {
+		Map<String, IDataType> inputParameters = getInputParametersPrimitives();	
+		ObjectNode root = MAPPER.createObjectNode();
+        root.put("type", "object");
+        root.put("id", "urn:jsonschema:Operation");
+
+        ObjectNode propertiesNode = MAPPER.createObjectNode();
+        LOGGER.info(inputParameters);
+
+        for (Map.Entry<String, IDataType> param : inputParameters.entrySet()) {  	
+            String name = param.getKey();
+            String type = parameterGetType(param);
+
+            ObjectNode typeNode = MAPPER.createObjectNode();
+            typeNode.put("type", type);
+
+            // Handle enum case
+            if ("enum".equals(type)) {
+                Set<String> enumKeySet = param.getValue().getEnumeration().getEnumValues().keySet();
+                ArrayNode enumKeyArrayNode = MAPPER.valueToTree(enumKeySet);
+                typeNode.set("enum", enumKeyArrayNode);
+            }
+
+            // Add to "properties"
+            propertiesNode.set(name, typeNode);
+        }
+        root.set("properties",propertiesNode);
+        
+        LOGGER.info(MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(root));
+		return MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(root);
+	}
+	
+	/**
+	 * determines the type of parameter. Long/Decimal/Datetime converted to "number", enumeration to "enum"
+	 * @param inputParameter
+	 * @return parameter type
+	 */
+	private String parameterGetType(Entry<String, IDataType> inputParameter) {
+		String type = inputParameter.getValue().toString().toLowerCase();
+		if(type.equals("long") || type.equals("decimal") || type.equals("datetime")) {
+			type = "number";
+		} else if (type.equals("enumeration")) {
+			type = "enum";
+		}
+		return type;
+	}
+	/**
+	 * Returns a list of primitive input parameters for the tool microflow
+	 * @return
+	 */
+	private Map<String, IDataType> getInputParametersPrimitives(){
+		Map<String, IDataType> inputParameters = Core.getInputParameters(ExecutingMicroflow);
+		Map<String, IDataType> inputParametersModified = new HashMap<>();
+
+		for(Map.Entry<String, IDataType> entry : inputParameters.entrySet()) {
+			String objectType = entry.getValue().getObjectType();
+			if (objectType == null) {
+				inputParametersModified.put(entry.getKey(), entry.getValue());
+			}
+		}
+		return inputParametersModified;
+	}
+	
+	
 	// END EXTRA CODE
 }
