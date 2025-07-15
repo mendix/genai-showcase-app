@@ -27,6 +27,7 @@ import mcpserver.proxies.TextContent;
 import mcpserver.proxies.Tool;
 import software.amazon.awssdk.regions.regionmetadata.MxCentral1;
 import static java.util.Objects.requireNonNull;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,14 +74,12 @@ public class AddTool extends UserAction<IMendixObject>
 		// BEGIN USER CODE
 		requireNonNull(Name,"Name is required.");
 		requireNonNull(Description,"Description is required.");
-		//requireNonNull(Schema,"Schema is required.");
 		requireNonNull(McpServer,"MCPServer is required.");		
 		
 		// Create NPE for the tool
 		mcpserver.proxies.Tool toolNpe = new mcpserver.proxies.Tool(getContext());
 		toolNpe.setName(Name);
 		toolNpe.setDescription(Description);
-		//toolNpe.setSchema(Schema);
 		setToolSchema(toolNpe);
 		toolNpe.setMicroflowName(ExecutingMicroflow);
 		toolNpe.setTool_McpServer(McpServer);
@@ -91,17 +90,15 @@ public class AddTool extends UserAction<IMendixObject>
 		McpServerFeatures.SyncToolSpecification tool = new McpServerFeatures.SyncToolSpecification(
 				new McpSchema.Tool(toolNpe.getName(), toolNpe.getDescription(), toolNpe.getSchema()),
 				(exchange, arguments) -> {
-					// some request logging
 					String threadName = Thread.currentThread().getName();
 					long start = System.currentTimeMillis();
 					LOGGER.trace(threadName + ": Start processing tool call " + Name + ", MF: " + ExecutingMicroflow);
 
 					IContext ctx = getContextFromSession();
-
 					Map<String, Object> args = new HashMap<>(arguments);
-					args.put("Tool", toolNpe);
-
+					
 					try {
+						manipulateArgsForMicroflowCall(toolNpe, args);
 						mcpserver.proxies.TextContent mxTextContent = getTextContextFromToolMicroflow(args,ctx);
 
 						McpSchema.TextContent mcpTextContent = new McpSchema.TextContent(mxTextContent.getContent());
@@ -141,6 +138,29 @@ public class AddTool extends UserAction<IMendixObject>
 	}
 	
 	/**
+	 * Convert DateTime input values to correct DataType. Add Tool to args
+	 * @param tool that gets added to the args
+	 * @param args args that get manipulated
+	 */
+	private void manipulateArgsForMicroflowCall(Tool tool, Map<String, Object> args) {
+		Map<String, IDataType> parametersAndTypes = getInputParametersPrimitives();
+		
+		
+		for (Entry<String, IDataType> entry : parametersAndTypes.entrySet()) {
+	        String paramName = entry.getKey();
+	        IDataType type = entry.getValue();
+	        // DateTime values need to be converted
+	        if (IDataType.DataTypeEnum.Datetime.equals(type.getType()) && args.containsKey(paramName)) {
+	        	Object originalValue = args.get(paramName);
+	        	Date date = new Date(Long.parseLong(originalValue.toString()));
+	            args.put(paramName, date);
+	        }
+	    }
+		args.put("Tool", tool);
+	}
+	
+	
+	/**
 	 * executes the tool microflow; if the microflow returns a String, a new TextContent is created and the Content is set with the string.
 	 * If the microflow already returns a TextContext, it gets returned
 	 * @param args list of parameters with values
@@ -164,7 +184,6 @@ public class AddTool extends UserAction<IMendixObject>
 	
 	/**
 	 * checks if the return type of the tool microflow is of Type string
-	 * @return
 	 */
 	private boolean isToolReturnTypeString() {
 		IDataType returnType = Core.getReturnType(ExecutingMicroflow);
@@ -231,7 +250,6 @@ public class AddTool extends UserAction<IMendixObject>
 	/**
 	 * determines the type of parameter. Long/Decimal/Datetime converted to "number", enumeration to "enum"
 	 * @param inputParameter
-	 * @return parameter type
 	 */
 	private String parameterGetType(Entry<String, IDataType> inputParameter) {
 		String type = inputParameter.getValue().toString().toLowerCase();
@@ -244,7 +262,6 @@ public class AddTool extends UserAction<IMendixObject>
 	}
 	/**
 	 * Returns a list of primitive input parameters for the tool microflow
-	 * @return
 	 */
 	private Map<String, IDataType> getInputParametersPrimitives(){
 		Map<String, IDataType> inputParameters = Core.getInputParameters(ExecutingMicroflow);
