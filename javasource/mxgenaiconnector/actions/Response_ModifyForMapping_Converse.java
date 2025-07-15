@@ -12,10 +12,13 @@ package mxgenaiconnector.actions;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import static java.util.Objects.requireNonNull;
+import java.util.Iterator;
+import java.util.Map;
 
 public class Response_ModifyForMapping_Converse extends UserAction<java.lang.String>
 {
@@ -71,11 +74,26 @@ public class Response_ModifyForMapping_Converse extends UserAction<java.lang.Str
             for (JsonNode contentNode : contentArray) {
                 JsonNode toolUseNode = contentNode.path("toolUse");
                 if (toolUseNode != null && toolUseNode.isObject()) {
-                	//Replace old "input" field by new "arguments" field to store the input as JSON string
+                	//Replace old "input" field by GenAICommons arguments for later processing
                     ObjectNode toolUseObjectNode = (ObjectNode) toolUseNode;
                     JsonNode inputNode = toolUseObjectNode.remove("input");
-                    String inputJsonString = MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(inputNode);
-                    toolUseObjectNode.put("arguments", inputJsonString);
+                    
+                    ArrayNode argumentsArray = MAPPER.createArrayNode();
+                 // Iterate over the fields of the arguments node
+			        Iterator<Map.Entry<String, JsonNode>> fields = inputNode.properties().iterator();
+			        while (fields.hasNext()) {
+			            Map.Entry<String, JsonNode> field = fields.next();
+
+			            // Create an object node for each key-value pair
+			            ObjectNode keyValueNode = MAPPER.createObjectNode();
+			            keyValueNode.put("key", field.getKey());
+			            keyValueNode.set("value", field.getValue());
+
+			            // Add the key-value node to the array
+			            argumentsArray.add(keyValueNode);
+			        }
+                    
+                    toolUseObjectNode.set("arguments", argumentsArray);
                 }
                 else if (toolUseNode != null){
                 	//Remove ToolUse if it is not an object

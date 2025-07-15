@@ -14,7 +14,6 @@ import java.util.List;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.webui.CustomJavaAction;
 import communitycommons.StringUtils;
 import genaicommons.impl.MxLogger;
 import genaicommons.proxies.Chunk;
