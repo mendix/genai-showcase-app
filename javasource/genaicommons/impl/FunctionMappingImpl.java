@@ -12,15 +12,7 @@ import genaicommons.proxies.Request;
 import genaicommons.proxies.Message;
 
 public class FunctionMappingImpl {
-	// Used in Function_ExecuteMicroflow, TODO Deprecated
-	public static String getFirstInputParamName(String functionMicroflow) {
-		Map<String, IDataType> inputParameters = getInputParametersForModel(functionMicroflow);
-		if(inputParameters != null && !inputParameters.entrySet().isEmpty()) {
-			return inputParameters.entrySet().iterator().next().getKey();
-		} else {
-			return null;
-		}
-	}
+
 	/**
 	 * gets input parameters for a function microflow without Mendix objects
 	 * @param functionMicroflow
