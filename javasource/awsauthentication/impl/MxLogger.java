@@ -38,66 +38,88 @@ public class MxLogger {
 	}
 
 	private final Class<?> clazz;
-
 	/**
 	 * Constructor, to be used for each class with logging to the Mendix Log system.
-	 * @param clazz  The class which is logging, so where the log statement are located.
+	 * @param clazz  The class which is logging, so where the log statements are located.
 	 */
 	public MxLogger(final Class<?> clazz) {
 		this.clazz = clazz;
 	}
-
 	//this method is called by the instance method, but is also used for injection in the LibLogger (see comments in static block).
 	private static void critical(final Class<?> clazz, final String msg) {
 		LOGGER.critical(formatMsg(clazz, msg));
 	}
-
+	private static void critical(final Class<?> clazz, final String msg, final Throwable t) {
+		LOGGER.critical(formatMsg(clazz, msg), t);
+	}
 	//this method is called by the instance method, but is also used for injection in the LibLogger (see comments in static block).
 	private static void error(final Class<?> clazz, final String msg) {
 		LOGGER.error(formatMsg(clazz, msg));
 	}
-
+	private static void error(final Class<?> clazz, final String msg, final Throwable t) {
+		LOGGER.error(formatMsg(clazz, msg), t);
+	}
 	//this method is called by the instance method, but is also used for injection in the LibLogger (see comments in static block).
 	private static void warn(final Class<?> clazz, final String msg) {
 		LOGGER.warn(formatMsg(clazz, msg));
 	}
-
+	private static void warn(final Class<?> clazz, final String msg, final Throwable t) {
+		LOGGER.warn(formatMsg(clazz, msg), t);
+	}
 	//this method is called by the instance method, but is also used for injection in the LibLogger (see comments in static block).
 	private static void info(final Class<?> clazz, final String msg) {
 		LOGGER.info(formatMsg(clazz, msg));
 	}
-
+	private static void info(final Class<?> clazz, final String msg, final Throwable t) {
+		LOGGER.info(formatMsg(clazz, msg), t);
+	}
 	//this method is called by the instance method, but is also used for injection in the LibLogger (see comments in static block).
 	private static void debug(final Class<?> clazz, final String msg) {
 		LOGGER.debug(formatMsg(clazz, msg));
 	}
-
+	private static void debug(final Class<?> clazz, final String msg, final Throwable t) {
+		LOGGER.debug(formatMsg(clazz, msg), t);
+	}
 	//this method is called by the instance method, but is also used for injection in the LibLogger (see comments in static block).
 	private static void trace(final Class<?> clazz, final String msg) {
 		LOGGER.trace(formatMsg(clazz, msg));
 	}
-
+	private static void trace(final Class<?> clazz, final String msg, final Throwable t) {
+		LOGGER.trace(formatMsg(clazz, msg), t);
+	}
 	//this method is called by the instance method, but is also used for injection in the LibLogger (see comments in static block).
 	private static boolean isDebugEnabledStatic() {
 		return LOGGER.isDebugEnabled();
 	}
-
 	//this method is called by the instance method, but is also used for injection in the LibLogger (see comments in static block).
 	private static boolean isTraceEnabledStatic() {
 		return LOGGER.isTraceEnabled();
 	}
-
 	//format the message to log in Mendix, so all log messages from this class have the same format.
 	private static String formatMsg(final Class<?> clazz, final String msg) {
 		return clazz.getSimpleName() + ": " + msg;
 	}
-
 	/**
 	 * Log a critical message to the Mendix log system.
 	 * @param msg message to log
 	 */
 	public void critical(final String msg) {
 		critical(clazz, msg);
+	}
+	/**
+	 * Log a critical message to the Mendix log system.
+	 * @param t throwable (exception) to log
+	 */
+	public void critical(final Throwable t) {
+		critical(clazz, t.getMessage(), t);
+	}
+	/**
+	 * Log a critical message to the Mendix log system.
+	 * @param t throwable (exception) to log
+	 * @param msg message to log
+	 */
+	public void critical(final Throwable t, final String msg) {
+		critical(clazz, msg, t);
 	}
 	/**
 	 * Log a critical message to the Mendix log system.
@@ -113,6 +135,19 @@ public class MxLogger {
 	}
 	/**
 	 * Log a critical message to the Mendix log system.
+	 * All arguments will be joined together to one message.
+	 * @param t throwable (exception) to log
+	 * @param msgs messages to log
+	 */
+	public void critical(final Throwable t, final String... msgs) {
+		StringBuilder msg = new StringBuilder();
+		for (String s : msgs) {
+			msg.append(s);
+		}
+		critical(clazz, msg.toString(), t);
+	}
+	/**
+	 * Log a critical message to the Mendix log system.
 	 * All objects will be converted to String and joined together to one message.
 	 * @param objs objects to log
 	 */
@@ -123,13 +158,40 @@ public class MxLogger {
 		}
 		critical(clazz, msg.toString());
 	}
-
+	/**
+	 * Log a critical message to the Mendix log system.
+	 * All objects will be converted to String and joined together to one message.
+	 * @param t throwable (exception) to log
+	 * @param objs objects to log
+	 */
+	public void critical(final Throwable t, final Object... objs) {
+		StringBuilder msg = new StringBuilder();
+		for (Object o : objs) {
+			msg.append(o);
+		}
+		critical(clazz, msg.toString(), t);
+	}
 	/**
 	 * Log an error message to the Mendix log system.
 	 * @param msg message to log
 	 */
 	public void error(final String msg) {
 		error(clazz, msg);
+	}
+	/**
+	 * Log an error message to the Mendix log system.
+	 * @param t throwable (exception) to log
+	 */
+	public void error(final Throwable t) {
+		error(clazz, t.getMessage(), t);
+	}
+	/**
+	 * Log an error message to the Mendix log system.
+	 * @param t throwable (exception) to log
+	 * @param msg message to log
+	 */
+	public void error(final Throwable t, final String msg) {
+		error(clazz, msg, t);
 	}
 	/**
 	 * Log an error message to the Mendix log system.
@@ -145,6 +207,19 @@ public class MxLogger {
 	}
 	/**
 	 * Log an error message to the Mendix log system.
+	 * All arguments will be joined together to one message.
+	 * @param t throwable (exception) to log
+	 * @param msgs messages to log
+	 */
+	public void error(final Throwable t, final String... msgs) {
+		StringBuilder msg = new StringBuilder();
+		for (String s : msgs) {
+			msg.append(s);
+		}
+		error(clazz, msg.toString(), t);
+	}
+	/**
+	 * Log an error message to the Mendix log system.
 	 * All objects will be converted to String and joined together to one message.
 	 * @param objs objects to log
 	 */
@@ -155,13 +230,41 @@ public class MxLogger {
 		}
 		error(clazz, msg.toString());
 	}
-
+	/**
+	 * Log an error message to the Mendix log system.
+	 * All objects will be converted to String and joined together to one message.
+	 * @param t throwable (exception) to log
+	 * @param objs objects to log
+	 */
+	public void error(final Throwable t, final Object... objs) {
+		StringBuilder msg = new StringBuilder();
+		for (Object o : objs) {
+			msg.append(o);
+		}
+		error(clazz, msg.toString(), t);
+	}
 	/**
 	 * Log a warn message to the Mendix log system.
 	 * @param msg message to log
 	 */
 	public void warn(final String msg) {
 		warn(clazz, msg);
+	}
+	/**
+	 * Log a warn message to the Mendix log system.
+	 * @param t throwable (exception) to log
+	 * @param msg message to log
+	 */
+	public void warn(final Throwable t) {
+		warn(clazz, t.getMessage(), t);
+	}
+	/**
+	 * Log a warn message to the Mendix log system.
+	 * @param t throwable (exception) to log
+	 * @param msg message to log
+	 */
+	public void warn(final Throwable t, final String msg) {
+		warn(clazz, msg, t);
 	}
 	/**
 	 * Log a warn message to the Mendix log system.
@@ -177,6 +280,19 @@ public class MxLogger {
 	}
 	/**
 	 * Log a warn message to the Mendix log system.
+	 * All arguments will be joined together to one message.
+	 * @param t throwable (exception) to log
+	 * @param msgs messages to log
+	 */
+	public void warn(final Throwable t, final String... msgs) {
+		StringBuilder msg = new StringBuilder();
+		for (String s : msgs) {
+			msg.append(s);
+		}
+		warn(clazz, msg.toString(), t);
+	}
+	/**
+	 * Log a warn message to the Mendix log system.
 	 * All objects will be converted to String and joined together to one message.
 	 * @param objs objects to log
 	 */
@@ -187,13 +303,40 @@ public class MxLogger {
 		}
 		warn(clazz, msg.toString());
 	}
-
+	/**
+	 * Log a warn message to the Mendix log system.
+	 * All objects will be converted to String and joined together to one message.
+	 * @param t throwable (exception) to log
+	 * @param objs objects to log
+	 */
+	public void warn(final Throwable t, final Object... objs) {
+		StringBuilder msg = new StringBuilder();
+		for (Object o : objs) {
+			msg.append(o);
+		}
+		warn(clazz, msg.toString(), t);
+	}
 	/**
 	 * Log an info message to the Mendix log system.
 	 * @param msg message to log
 	 */
 	public void info(final String msg) {
 		info(clazz, msg);
+	}
+	/**
+	 * Log an info message to the Mendix log system.
+	 * @param t throwable (exception) to log
+	 */
+	public void info(final Throwable t) {
+		info(clazz, t.getMessage(), t);
+	}
+	/**
+	 * Log an info message to the Mendix log system.
+	 * @param t throwable (exception) to log
+	 * @param msg message to log
+	 */
+	public void info(final Throwable t, final String msg) {
+		info(clazz, msg, t);
 	}
 	/**
 	 * Log an info message to the Mendix log system.
@@ -209,6 +352,19 @@ public class MxLogger {
 	}
 	/**
 	 * Log an info message to the Mendix log system.
+	 * All arguments will be joined together to one message.
+	 * @param t throwable (exception) to log
+	 * @param msgs messages to log
+	 */
+	public void info(final Throwable t, final String... msgs) {
+		StringBuilder msg = new StringBuilder();
+		for (String s : msgs) {
+			msg.append(s);
+		}
+		info(clazz, msg.toString(), t);
+	}
+	/**
+	 * Log an info message to the Mendix log system.
 	 * All objects will be converted to String and joined together to one message.
 	 * @param objs objects to log
 	 */
@@ -219,13 +375,40 @@ public class MxLogger {
 		}
 		info(clazz, msg.toString());
 	}
-
+	/**
+	 * Log an info message to the Mendix log system.
+	 * All objects will be converted to String and joined together to one message.
+	 * @param t throwable (exception) to log
+	 * @param objs objects to log
+	 */
+	public void info(final Throwable t, final Object... objs) {
+		StringBuilder msg = new StringBuilder();
+		for (Object o : objs) {
+			msg.append(o);
+		}
+		info(clazz, msg.toString(), t);
+	}
 	/**
 	 * Log a debug message to the Mendix log system.
 	 * @param msg message to log
 	 */
 	public void debug(final String msg) {
 		debug(clazz, msg);
+	}
+	/**
+	 * Log a debug message to the Mendix log system.
+	 * @param t throwable (exception) to log
+	 */
+	public void debug(final Throwable t) {
+		debug(clazz,t.getMessage(), t);
+	}
+	/**
+	 * Log a debug message to the Mendix log system.
+	 * @param t throwable (exception) to log
+	 * @param msg message to log
+	 */
+	public void debug(final Throwable t, final String msg) {
+		debug(clazz, msg, t);
 	}
 	/**
 	 * Log a debug message to the Mendix log system.
@@ -243,6 +426,21 @@ public class MxLogger {
 	}
 	/**
 	 * Log a debug message to the Mendix log system.
+	 * All arguments will be joined together to one message.
+	 * @param t throwable (exception) to log
+	 * @param msgs messages to log
+	 */
+	public void debug(final Throwable t, final String... msgs) {
+		if (isDebugEnabled()) {
+			StringBuilder msg = new StringBuilder();
+			for (String s : msgs) {
+				msg.append(s);
+			}
+			debug(clazz, msg.toString(), t);
+		}
+	}
+	/**
+	 * Log a debug message to the Mendix log system.
 	 * All objects will be converted to String and joined together to one message.
 	 * @param objs objects to log
 	 */
@@ -255,13 +453,42 @@ public class MxLogger {
 			debug(clazz, msg.toString());
 		}
 	}
-
+	/**
+	 * Log a debug message to the Mendix log system.
+	 * All objects will be converted to String and joined together to one message.
+	 * @param t throwable (exception) to log
+	 * @param objs objects to log
+	 */
+	public void debug(final Throwable t, Object... objs) {
+		if (isDebugEnabled()) {
+			StringBuilder msg = new StringBuilder();
+			for (Object o : objs) {
+				msg.append(o);
+			}
+			debug(clazz, msg.toString(), t);
+		}
+	}
 	/**
 	 * Log a trace message to the Mendix log system.
 	 * @param msg message to log
 	 */
 	public void trace(final String msg) {
 		trace(clazz, msg);
+	}
+	/**
+	 * Log a trace message to the Mendix log system.
+	 * @param t throwable (exception) to log
+	 */
+	public void trace(final Throwable t) {
+		trace(clazz, t.getMessage(), t);
+	}
+	/**
+	 * Log a trace message to the Mendix log system.
+	 * @param t throwable (exception) to log
+	 * @param msg message to log
+	 */
+	public void trace(final Throwable t, final String msg) {
+		trace(clazz, msg, t);
 	}
 	/**
 	 * Log a trace message to the Mendix log system.
@@ -279,6 +506,21 @@ public class MxLogger {
 	}
 	/**
 	 * Log a trace message to the Mendix log system.
+	 * All arguments will be joined together to one message.
+	 * @param t throwable (exception) to log
+	 * @param msgs messages to log
+	 */
+	public void trace(final Throwable t, final String... msgs) {
+		if (isTraceEnabled()) {
+			StringBuilder msg = new StringBuilder();
+			for (String s : msgs) {
+				msg.append(s);
+			}
+			trace(clazz, msg.toString(), t);
+		}
+	}
+	/**
+	 * Log a trace message to the Mendix log system.
 	 * All objects will be converted to String and joined together to one message.
 	 * @param objs objects to log
 	 */
@@ -291,7 +533,21 @@ public class MxLogger {
 			trace(clazz, msg.toString());
 		}
 	}
-
+	/**
+	 * Log a trace message to the Mendix log system.
+	 * All objects will be converted to String and joined together to one message.
+	 * @param t throwable (exception) to log
+	 * @param objs objects to log
+	 */
+	public void trace(final Throwable t, final Object... objs) {
+		if (isTraceEnabled()) {
+			StringBuilder msg = new StringBuilder();
+			for (Object o : objs) {
+				msg.append(o);
+			}
+			trace(clazz, msg.toString(), t);
+		}
+	}
 	/**
 	 * Returns true when debug output is enabled for this Mendix Log node.<br>
 	 * This will be when logging of the node is set to debug or below (trace).<br>
@@ -310,7 +566,6 @@ public class MxLogger {
 	public boolean isDebugEnabled() {
 		return isDebugEnabledStatic();
 	}
-
 	/**
 	 * Returns true when trace output is enabled for this Mendix Log node.<br>
 	 * This will be when logging of the node is set to trace.
@@ -329,5 +584,4 @@ public class MxLogger {
 	public boolean isTraceEnabled() {
 		return isTraceEnabledStatic();
 	}
-
 }
