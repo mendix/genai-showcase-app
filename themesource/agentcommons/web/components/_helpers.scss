@@ -103,3 +103,18 @@
 .overflow-visible {
   overflow: visible !important;
 }
+
+.space-between {
+    display: flex !important;
+    align-items: center !important;
+    justify-items: center;
+    justify-content: space-between;
+}
+
+.width--40-percent {
+  width: 40%;
+}
+
+.align-flex-end {
+  align-items: flex-end !important;
+}

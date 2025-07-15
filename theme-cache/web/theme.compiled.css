@@ -28213,6 +28213,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-left: auto;
   float: right;
 }
+.combobox-selection .widget-combobox {
+  min-height: 20px;
+}
 
 .combobox-selection-height-small .widget-combobox-input-container {
   align-items: center;
@@ -28814,6 +28817,21 @@ input[type=checkbox].three-state-checkbox + .control-label {
   overflow: visible !important;
 }
 
+.space-between {
+  display: flex !important;
+  align-items: center !important;
+  justify-items: center;
+  justify-content: space-between;
+}
+
+.width--40-percent {
+  width: 40%;
+}
+
+.align-flex-end {
+  align-items: flex-end !important;
+}
+
 .listview-bullet-points > ul {
   list-style-type: disc;
   margin-bottom: 0px;
@@ -29110,22 +29128,25 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
 }
 .version-table .text-version {
-  width: 10%;
+  width: 9%;
 }
 .version-table .text-title {
-  width: 35%;
+  width: 25%;
 }
 .version-table .text-in-use {
   width: 10%;
 }
 .version-table .text-owner {
-  width: 20%;
+  width: 18%;
 }
 .version-table .text-last-edited {
-  width: 20%;
+  width: 18%;
+}
+.version-table .text-edited-by {
+  width: 18%;
 }
 .version-table .delete-icon {
-  width: 5%;
+  width: 2%;
   color: #e33f4e;
 }
 
@@ -29138,13 +29159,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .testcase-table .delete-icon {
   min-width: 5%;
   color: #e33f4e;
-}
-
-.space-between {
-  display: flex !important;
-  align-items: center !important;
-  justify-items: center;
-  justify-content: space-between;
 }
 
 .hide-tooltip .widget-tooltip-arrow-top {

@@ -319,11 +319,11 @@
     display: flex;
 
     .text-version {
-        width: 10%;
+        width: 9%;
     }
 
     .text-title {
-        width: 35%;
+        width: 25%;
     }
 
     .text-in-use {
@@ -331,15 +331,19 @@
     }
 
     .text-owner {
-        width: 20%;
+        width: 18%;
     }
 
     .text-last-edited {
-        width: 20%;
+        width: 18%;
+    }
+
+    .text-edited-by {
+        width: 18%;
     }
 
     .delete-icon {
-        width: 5%;
+        width: 2%;
         color: $brand-danger;
     }
 }
@@ -355,12 +359,5 @@
         min-width: 5%;
         color: $brand-danger;
     }
-}
-
-.space-between {
-    display: flex !important;
-    align-items: center !important;
-    justify-items: center;
-    justify-content: space-between;
 }
 
