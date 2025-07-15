@@ -23,7 +23,9 @@ import io.modelcontextprotocol.server.McpSyncServer;
 import io.modelcontextprotocol.spec.McpSchema;
 import mcpserver.impl.McpServerRegistry;
 import mcpserver.impl.MxLogger;
+import mcpserver.proxies.TextContent;
 import mcpserver.proxies.Tool;
+import software.amazon.awssdk.regions.regionmetadata.MxCentral1;
 import static java.util.Objects.requireNonNull;
 import java.util.HashMap;
 import java.util.List;
@@ -100,15 +102,13 @@ public class AddTool extends UserAction<IMendixObject>
 					args.put("Tool", toolNpe);
 
 					try {
-						IMendixObject mxExecResult = Core.microflowCall(ExecutingMicroflow).withParams(args).execute(ctx);
-						mcpserver.proxies.TextContent mxTextContent = mcpserver.proxies.TextContent.initialize(ctx, mxExecResult);
+						mcpserver.proxies.TextContent mxTextContent = getTextContextFromToolMicroflow(args,ctx);
 
 						McpSchema.TextContent mcpTextContent = new McpSchema.TextContent(mxTextContent.getContent());
 						return new McpSchema.CallToolResult(List.of(mcpTextContent), false);
 					} finally {
 						LOGGER.trace(threadName + ": End processing tool call '" + Name + ". Duration: " + (System.currentTimeMillis() - start) + "ms.");
 					}
-
 				}
 		);
 		server.addTool(tool);
@@ -141,6 +141,43 @@ public class AddTool extends UserAction<IMendixObject>
 	}
 	
 	/**
+	 * executes the tool microflow; if the microflow returns a String, a new TextContent is created and the Content is set with the string.
+	 * If the microflow already returns a TextContext, it gets returned
+	 * @param args list of parameters with values
+	 * @param ctx context to execute to microflow
+	 * @return TextContent
+	 */
+	private mcpserver.proxies.TextContent getTextContextFromToolMicroflow(Map<String, Object> args, IContext ctx){
+		if(isToolReturnTypeString()) {
+			String stringResult = Core.microflowCall(ExecutingMicroflow).withParams(args).execute(ctx);
+			mcpserver.proxies.TextContent mxTextContentFromString = new TextContent(ctx);
+			mxTextContentFromString.setContent(stringResult);
+			return mxTextContentFromString;
+			
+		} else
+		{
+			IMendixObject mxExecResult = Core.microflowCall(ExecutingMicroflow).withParams(args).execute(ctx);
+			return mcpserver.proxies.TextContent.initialize(ctx, mxExecResult);
+			
+		}		
+	}
+	
+	/**
+	 * checks if the return type of the tool microflow is of Type string
+	 * @return
+	 */
+	private boolean isToolReturnTypeString() {
+		IDataType returnType = Core.getReturnType(ExecutingMicroflow);
+		
+		if(returnType != null && IDataType.DataTypeEnum.String.equals(returnType.getType())) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	
+	/**
 	 * sets the Schema definition either passed as argument of the JavaAction or extracted from the tool microflow
 	 * @param tool
 	 * @throws JsonProcessingException
@@ -170,7 +207,6 @@ public class AddTool extends UserAction<IMendixObject>
         root.put("id", "urn:jsonschema:Operation");
 
         ObjectNode propertiesNode = MAPPER.createObjectNode();
-        LOGGER.info(inputParameters);
 
         for (Map.Entry<String, IDataType> param : inputParameters.entrySet()) {  	
             String name = param.getKey();
@@ -179,19 +215,16 @@ public class AddTool extends UserAction<IMendixObject>
             ObjectNode typeNode = MAPPER.createObjectNode();
             typeNode.put("type", type);
 
-            // Handle enum case
+            // Handle enum case to expose possible enum values
             if ("enum".equals(type)) {
                 Set<String> enumKeySet = param.getValue().getEnumeration().getEnumValues().keySet();
                 ArrayNode enumKeyArrayNode = MAPPER.valueToTree(enumKeySet);
                 typeNode.set("enum", enumKeyArrayNode);
+                typeNode.put("type", "string");
             }
-
-            // Add to "properties"
             propertiesNode.set(name, typeNode);
         }
         root.set("properties",propertiesNode);
-        
-        LOGGER.info(MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(root));
 		return MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(root);
 	}
 	
