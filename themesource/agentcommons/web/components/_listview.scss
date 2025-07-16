@@ -71,34 +71,15 @@
 
 //Version table
 .version-table {
-    display: flex;
+    display: grid;
+    grid-template-columns: 9% auto 10% 18% 18% 18% 2%;
 
-    .text-version {
-        width: 9%;
-    }
-
-    .text-title {
-        width: 25%;
-    }
-
-    .text-in-use {
-        width: 10%;
-    }
-
-    .text-owner {
-        width: 18%;
-    }
-
-    .text-last-edited {
-        width: 18%;
-    }
-
-    .text-edited-by {
-        width: 18%;
-    }
-
+    .version-grid-item {
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 0;
+}
     .delete-icon {
-        width: 2%;
         color: $brand-danger;
     }
 }

@@ -28894,28 +28894,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .version-table {
+  display: grid;
+  grid-template-columns: 9% auto 10% 18% 18% 18% 2%;
+}
+.version-table .version-grid-item {
   display: flex;
-}
-.version-table .text-version {
-  width: 9%;
-}
-.version-table .text-title {
-  width: 25%;
-}
-.version-table .text-in-use {
-  width: 10%;
-}
-.version-table .text-owner {
-  width: 18%;
-}
-.version-table .text-last-edited {
-  width: 18%;
-}
-.version-table .text-edited-by {
-  width: 18%;
+  justify-content: flex-start;
+  margin-bottom: 0;
 }
 .version-table .delete-icon {
-  width: 2%;
   color: #e33f4e;
 }
 
