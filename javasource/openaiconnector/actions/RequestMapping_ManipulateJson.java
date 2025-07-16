@@ -12,12 +12,15 @@ package openaiconnector.actions;
 import static java.util.Objects.requireNonNull;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.Set;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
+import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -25,11 +28,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import genaicommons.impl.MessageImpl;
+import genaicommons.impl.FunctionImpl;
 import genaicommons.impl.FunctionMappingImpl;
 import genaicommons.proxies.Message;
 import genaicommons.proxies.Request;
 import genaicommons.proxies.Tool;
-import genaicommons.proxies.Function;
 import genaicommons.proxies.ToolCall;
 import genaicommons.proxies.ToolCollection;
 import genaicommons.proxies.ENUM_MessageRole;
@@ -105,7 +108,7 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 		
 	}
 	
-	private void updateMessages(JsonNode rootNode) {
+	private void updateMessages(JsonNode rootNode) throws Exception {
 		//Get messages node
 		JsonNode messagesNode = rootNode.path("messages");
 		//Loop over all messages
@@ -116,6 +119,12 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
             
             //If a fileCollection has been added replace content node with array of text content and file content
             updateMessagesWithFiles(messageNode);
+            
+    		//Set Arguments in tool call messages
+            JsonNode toolCalls = messageNode.path("tool_calls");
+            if(toolCalls != null && !toolCalls.isEmpty()) {
+            	setToolCallArguments(toolCalls);
+            }
         }
 		//Update messages within rootNode
 		((ObjectNode) rootNode).set("messages", messagesNode);
@@ -156,6 +165,21 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 		((ObjectNode) messageNode).remove("filecollection");
 		//Overwrite content node including images
 		((ObjectNode) messageNode).set("content", content);
+	}
+	
+	private void setToolCallArguments(JsonNode toolCallsArray) throws Exception {
+		for (JsonNode toolCall : toolCallsArray) {
+			JsonNode function = toolCall.path("function");
+			JsonNode argumentsArray = function.path("arguments");
+			Map<String, String> argumentsMap = new HashMap<>();
+	        for (JsonNode argument : argumentsArray) {
+	            String key = argument.get("key").asText();
+	            String value = argument.get("value").asText();
+	            argumentsMap.put(key, value);
+	        }
+	        String argumentsString = MAPPER.writeValueAsString(argumentsMap);
+	       ((ObjectNode) function).put("arguments", argumentsString);
+		}
 	}
 
 	private void addImage(ArrayNode content, JsonNode file) {
@@ -383,29 +407,22 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 	}
 	
 	private ObjectNode createFunctionParametersNode(String functionMicroflow) {
-		String inputParamName = FunctionMappingImpl.getFirstInputParamName(functionMicroflow);
+		Map<String, IDataType> inputParameters = FunctionMappingImpl.getInputParametersForModel(functionMicroflow);
 		
-		if (inputParamName == null || inputParamName.isBlank()) {
+		if (inputParameters == null || inputParameters.entrySet().isEmpty()) {
 			return null;
 		}
-
+		
 		ObjectNode parametersNode = MAPPER.createObjectNode();
 		ObjectNode propertiesNode = MAPPER.createObjectNode();
-		ObjectNode propertyNode = MAPPER.createObjectNode(); 
 		ArrayNode requiredNode = MAPPER.createArrayNode();
-		
-		propertyNode.put("type", "string");
-		
-		propertiesNode.set(inputParamName, propertyNode);
-		
-		requiredNode.add(inputParamName);
+		inputParameters.entrySet().forEach(t -> FunctionImpl.addProperty(propertiesNode, requiredNode, t));
 		
 		parametersNode.put("type", "object");
 		parametersNode.set("properties", propertiesNode);
 		parametersNode.set("required", requiredNode);
 		
 		return parametersNode;
-	}
-		
+	}		
 	// END EXTRA CODE
 }

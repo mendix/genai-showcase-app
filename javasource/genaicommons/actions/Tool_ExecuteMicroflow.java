@@ -10,16 +10,16 @@
 package genaicommons.actions;
 
 import static java.util.Objects.requireNonNull;
+import java.util.Date;
 import java.util.Map;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.webui.CustomJavaAction;
 import genaicommons.impl.MxLogger;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import genaicommons.proxies.Argument;
 import com.mendix.systemwideinterfaces.core.UserAction;
+import com.mendix.systemwideinterfaces.core.meta.IMetaObject;
 
 public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 {
@@ -31,13 +31,16 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __Request;
 	private final genaicommons.proxies.Request Request;
-	private final java.lang.String Arguments;
+	/** @deprecated use com.mendix.utils.ListUtils.map(ArgumentList, com.mendix.systemwideinterfaces.core.IEntityProxy::getMendixObject) instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final java.util.List<IMendixObject> __ArgumentList;
+	private final java.util.List<genaicommons.proxies.Argument> ArgumentList;
 
 	public Tool_ExecuteMicroflow(
 		IContext context,
 		IMendixObject _tool,
 		IMendixObject _request,
-		java.lang.String _arguments
+		java.util.List<IMendixObject> _argumentList
 	)
 	{
 		super(context);
@@ -45,7 +48,12 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		this.Tool = _tool == null ? null : genaicommons.proxies.Tool.initialize(getContext(), _tool);
 		this.__Request = _request;
 		this.Request = _request == null ? null : genaicommons.proxies.Request.initialize(getContext(), _request);
-		this.Arguments = _arguments;
+		this.__ArgumentList = _argumentList;
+		this.ArgumentList = java.util.Optional.ofNullable(_argumentList)
+			.orElse(java.util.Collections.emptyList())
+			.stream()
+			.map(argumentListElement -> genaicommons.proxies.Argument.initialize(getContext(), argumentListElement))
+			.collect(java.util.stream.Collectors.toList());
 	}
 
 	@java.lang.Override
@@ -77,28 +85,80 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new genaicommons.impl.MxLogger(Tool_ExecuteMicroflow.class);
 
-	private String executeToolMicroflow() throws Exception {		
-		ObjectMapper mapper = new ObjectMapper();
-		JsonNode rootNodeArguments = mapper.readTree(Arguments);
+	private String executeToolMicroflow() throws Exception {
+		
 		Map<String, Object> parametersAndValues = new java.util.HashMap<>();
 		//Iterate over input params
 		Map<String, IDataType> parametersAndTypes = Core.getInputParameters(Tool.getMicroflow());
+		
 		for(Map.Entry<String, IDataType> entry : parametersAndTypes.entrySet()) {
 			IDataType value = entry.getValue();
 			String key = entry.getKey();
+			//find Argument.Value in ArgumentList
+			String argumentValue = ArgumentList.stream()
+				    .filter(arg -> key.equals(arg.getKey()))
+				    .map(Argument::getValue)
+				    .findFirst()
+				    .orElse(null);
 			
-			if(IDataType.DataTypeEnum.String.equals(value.getType())) {
-				JsonNode inputParamNode = rootNodeArguments.path(key);
-				parametersAndValues.put(key, inputParamNode.asText());
-			}
-			else if (Core.getMetaObject(value.getObjectType()).isSubClassOf(genaicommons.proxies.Tool.getType())){
+			//If there is no argumentValue, it is either a Mendix Object or nothing was passed
+			if (argumentValue == null && isMetaObjectSubClass(value,genaicommons.proxies.Tool.getType())){
 				parametersAndValues.put(key,  Tool.getMendixObject());
-			}
-			else if (Core.getMetaObject(value.getObjectType()).isSubClassOf(genaicommons.proxies.Request.getType())){
+				continue;
+				
+			} else if (argumentValue == null && isMetaObjectSubClass(value, genaicommons.proxies.Request.getType())){
 				parametersAndValues.put(key, Request.getMendixObject());
+				continue;
+				
+			} else if (argumentValue == null) {
+				parametersAndValues.put(key, null);
+				continue;
 			}
-		}
+						
+			// Convert input into type of tool microflow's parameter type and add to list
+			if (IDataType.DataTypeEnum.Boolean.equals(value.getType())) {
+				parametersAndValues.put(key, Boolean.parseBoolean(argumentValue));
+				
+			} else if (IDataType.DataTypeEnum.Integer.equals(value.getType()) || IDataType.DataTypeEnum.Long.equals(value.getType()) ) {
+					parametersAndValues.put(key, Long.parseLong(argumentValue));
+					
+			} else if (IDataType.DataTypeEnum.Datetime.equals(value.getType())) {
+				Date date = new Date(Long.parseLong(argumentValue) *1000L); //Convert UNIX timestamp to DateTime
+				parametersAndValues.put(key, date);
+				
+			} else if (IDataType.DataTypeEnum.Decimal.equals(value.getType())) {
+				parametersAndValues.put(key, Float.parseFloat(argumentValue));
+				
+			} else if(IDataType.DataTypeEnum.String.equals(value.getType())){
+				parametersAndValues.put(key, argumentValue);	
+				
+			} else if(IDataType.DataTypeEnum.Enumeration.equals(value.getType())){
+				parametersAndValues.put(key, argumentValue);	
+				
+			}
+		}		
 		return executeAndLogToolMicroflow(parametersAndValues);
+	}
+	
+	/**
+	 * Checks if the input object of a parameter (as IDataType) matches the (Sub)class of a given String type (should be passed using the class.getType() method)
+	 * @param value
+	 * @param type
+	 * @return true if the Object matches the Sub(class).
+	 */
+	private Boolean isMetaObjectSubClass(IDataType value, String type) {
+		String objectType = value.getObjectType();
+		
+		if(objectType == null) {
+			return false;
+		}
+		
+		IMetaObject metaObject = Core.getMetaObject(objectType);
+		if (metaObject != null) {
+			return metaObject.isSubClassOf(type);
+		}
+	
+		return false;		
 	}
 	
 	private String executeAndLogToolMicroflow(Map<String, Object> params) {

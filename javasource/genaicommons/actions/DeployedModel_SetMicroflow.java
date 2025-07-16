@@ -11,7 +11,6 @@ package genaicommons.actions;
 
 import static java.util.Objects.requireNonNull;
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.webui.CustomJavaAction;
 import genaicommons.impl.DeployedModelImpl;
 import genaicommons.impl.MxLogger;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
