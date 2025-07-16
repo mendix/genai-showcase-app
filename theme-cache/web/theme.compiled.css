@@ -28832,6 +28832,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   align-items: flex-end !important;
 }
 
+.display--inline {
+  display: inline;
+}
+
 .listview-bullet-points > ul {
   list-style-type: disc;
   margin-bottom: 0px;
@@ -28853,6 +28857,77 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .listview-empty-text--KB > ul > li.mx-listview-empty::before {
   content: "Ground your agent in your company data by adding knowledge bases.";
+}
+
+.table-header {
+  margin-top: 16px;
+  width: 100%;
+  border-bottom: 1px solid #E7E7E9;
+}
+
+.output-grid-container {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 20% auto 9% 9% 10%;
+  gap: 10px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+.output-grid-item {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 0;
+}
+
+.output-grid-icon {
+  margin-top: 3.5px;
+}
+
+.output-align-header {
+  margin-right: 1%;
+}
+@supports (-moz-appearance: none) {
+  .output-align-header {
+    margin-right: 16px;
+  }
+}
+
+.version-table {
+  display: flex;
+}
+.version-table .text-version {
+  width: 9%;
+}
+.version-table .text-title {
+  width: 25%;
+}
+.version-table .text-in-use {
+  width: 10%;
+}
+.version-table .text-owner {
+  width: 18%;
+}
+.version-table .text-last-edited {
+  width: 18%;
+}
+.version-table .text-edited-by {
+  width: 18%;
+}
+.version-table .delete-icon {
+  width: 2%;
+  color: #e33f4e;
+}
+
+.testcase-table {
+  display: flex;
+}
+.testcase-table .text-testcase {
+  min-width: 95%;
+}
+.testcase-table .delete-icon {
+  min-width: 5%;
+  color: #e33f4e;
 }
 
 .popup-mid-size {
@@ -29088,77 +29163,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: auto;
   width: auto;
   margin-right: 8px;
-}
-
-.table-header {
-  margin-top: 16px;
-  width: 100%;
-  border-bottom: 1px solid #E7E7E9;
-}
-
-.output-grid-container {
-  display: grid;
-  width: 100%;
-  grid-template-columns: 10% auto 9% 9% 10%;
-  gap: 12px;
-  margin-top: 8px;
-  margin-bottom: 16px;
-}
-
-.output-grid-item {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 0;
-}
-
-.output-grid-icon {
-  margin-top: 3.5px;
-}
-
-.output-align-header {
-  margin-right: 1%;
-}
-@supports (-moz-appearance: none) {
-  .output-align-header {
-    margin-right: 16px;
-  }
-}
-
-.version-table {
-  display: flex;
-}
-.version-table .text-version {
-  width: 9%;
-}
-.version-table .text-title {
-  width: 25%;
-}
-.version-table .text-in-use {
-  width: 10%;
-}
-.version-table .text-owner {
-  width: 18%;
-}
-.version-table .text-last-edited {
-  width: 18%;
-}
-.version-table .text-edited-by {
-  width: 18%;
-}
-.version-table .delete-icon {
-  width: 2%;
-  color: #e33f4e;
-}
-
-.testcase-table {
-  display: flex;
-}
-.testcase-table .text-testcase {
-  min-width: 95%;
-}
-.testcase-table .delete-icon {
-  min-width: 5%;
-  color: #e33f4e;
 }
 
 .hide-tooltip .widget-tooltip-arrow-top {
