@@ -20,7 +20,7 @@ import genaicommons.proxies.ENUM_ModelModality;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class ChatCompletions_WithHistory extends UserAction<IMendixObject>
+public class Request_ChatCompletions_WithHistory extends UserAction<IMendixObject>
 {
 	/** @deprecated use Request.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
@@ -31,7 +31,7 @@ public class ChatCompletions_WithHistory extends UserAction<IMendixObject>
 	private final IMendixObject __DeployedModel;
 	private final genaicommons.proxies.DeployedModel DeployedModel;
 
-	public ChatCompletions_WithHistory(
+	public Request_ChatCompletions_WithHistory(
 		IContext context,
 		IMendixObject _request,
 		IMendixObject _deployedModel
@@ -68,11 +68,11 @@ public class ChatCompletions_WithHistory extends UserAction<IMendixObject>
 	@java.lang.Override
 	public java.lang.String toString()
 	{
-		return "ChatCompletions_WithHistory";
+		return "Request_ChatCompletions_WithHistory";
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new MxLogger(ChatCompletions_WithHistory.class);
+	private static final MxLogger LOGGER = new MxLogger(Request_ChatCompletions_WithHistory.class);
 	
 	private void validate() {
 		requireNonNull(Request, "Request is required.");
