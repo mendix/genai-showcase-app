@@ -76,10 +76,9 @@
 
     .divider {
         display: flex;
-        height: 1px;
         align-items: flex-start;
         align-self: stretch;
-        border: 1px solid #E7E7E9;
+        border-bottom: 1px solid #E7E7E9;
         margin-top: $spacing-medium;
         margin-bottom: $spacing-medium;
     }

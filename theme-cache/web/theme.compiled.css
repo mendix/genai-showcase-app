@@ -28988,10 +28988,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .agent-page-container .divider {
   display: flex;
-  height: 1px;
   align-items: flex-start;
   align-self: stretch;
-  border: 1px solid #E7E7E9;
+  border-bottom: 1px solid #E7E7E9;
   margin-top: 16px;
   margin-bottom: 16px;
 }
