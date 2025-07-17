@@ -28594,7 +28594,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background-color: #3cb33d;
 }
 .badge-with-circle.badge-with-circle--info .circle {
-  background-color: #0086d9;
+  background-color: #264ae5;
 }
 
 .badge--in-use {
@@ -28834,6 +28834,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .display--inline {
   display: inline;
+}
+
+.mx-image-width-unset .mx-image-viewer {
+  width: unset;
 }
 
 .listview-bullet-points > ul {

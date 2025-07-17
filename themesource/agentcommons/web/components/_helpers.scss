@@ -122,3 +122,9 @@
 .display--inline {
   display: inline;
 }
+
+.mx-image-width-unset {
+  .mx-image-viewer {
+    width: unset;
+  }
+}
