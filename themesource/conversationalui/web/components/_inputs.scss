@@ -46,6 +46,9 @@
         margin-left: auto;
         float: right;
     }
+    .widget-combobox {
+        min-height: 20px;
+    }
 }
 
 .combobox-selection-height-small {
@@ -68,6 +71,7 @@
         height: $font-size-large;
         margin-right: $spacing-small;
     }
+    
 }
 
 .widget-combobox .widget-combobox-input-container {

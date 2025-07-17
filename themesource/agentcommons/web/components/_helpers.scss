@@ -1,3 +1,5 @@
+@import "../../../../theme/web/custom-variables.scss";
+
 .custom-control-label {
   display: block;
   overflow: hidden;
@@ -7,4 +9,122 @@
   color: $form-label-color;
   font-size: $form-label-size;
   font-weight: $form-label-weight;
+}
+
+.input-label-width {
+  width: 160px;
+}
+
+.test-variable-width {
+  width: 180px;
+  margin-right: $spacing-small;
+  padding-top: $spacing-small;
+}
+
+.input-label-grid {
+  display: grid;
+  grid-template-columns: 150px auto 50px;
+}
+
+.list {
+  display: grid;
+  height: 48px;
+  padding: $spacing-smaller $spacing-smaller $spacing-small;
+  grid-template-columns: 25px minmax(0, 930px) auto;
+  align-items: center;
+  gap: $spacing-small;
+  background-color: white;
+
+  .hover-btn {
+    display: flex;
+    gap: $spacing-small;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.02s ease;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    cursor: pointer;
+    border-radius: 4px;
+    border-color: #E7E7E9;
+    background-color: #E7E7E9;
+
+    .hover-btn {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+}
+
+.text-line-clamp--1 {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.info-icon {
+    margin: 0 0 0 $spacing-smaller;
+    padding: 0;
+    img {
+        height: 16px;
+        width: 16px;
+    }
+}
+
+.icon-info-wrapper {
+  display: flex;
+  align-items: center;
+
+  img {
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+}
+
+.scroll-to-multiple-output {
+    //only needed to use in JS-Action for scrolling to element
+}
+
+.scroll-to-single-output {
+    //only needed to use in JS-Action for scrolling to element
+}
+
+.width-flex-full {
+  display: flex;
+  flex-grow: 1;
+}
+
+.overflow-visible {
+  overflow: visible !important;
+}
+
+.space-between {
+    display: flex !important;
+    align-items: center !important;
+    justify-items: center;
+    justify-content: space-between;
+}
+
+.width--40-percent {
+  width: 40%;
+}
+
+.align-flex-end {
+  align-items: flex-end !important;
+}
+
+.display--inline {
+  display: inline;
+}
+
+.mx-image-width-unset {
+  .mx-image-viewer {
+    width: unset;
+  }
 }
