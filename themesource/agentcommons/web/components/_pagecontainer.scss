@@ -1,5 +1,6 @@
 @import "../../../atlas_core/web/_variables.scss";
 @import "../../../../theme/web/custom-variables.scss";
+
 //Agents Overview
 
 .agents-page-content-container {
@@ -7,7 +8,6 @@
     min-height: -moz-available;
     display: flex;
     justify-content: center;
-
 
     .agents-container--overview {
         width: 90%;
@@ -19,7 +19,7 @@
             border-bottom: none;
         }
 
-        .card {
+        &.card {
             overflow: unset;
             border-radius: $spacing-medium;
             border: 1px solid $gray-primary;
@@ -36,47 +36,116 @@
 }
 
 //Version_Details
+
 .agent-page-container {
-    width: 100%;
+    max-width: 1800px;
+    height: 100%;
     display: flex;
     flex-direction: row;
-    height: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+    gap: $spacing-large;
+    padding: $spacing-medium $spacing-larger $spacing-medium $spacing-larger;
+    overflow: auto;
+    box-sizing: border-box;
 
-    .page-container-main {
+    .agent-page-container::after {
+        content: '';
+        display: block;
+        height: $spacing-larger;
+        flex-shrink: 0;
+        }
+
+    .card {
         width: 100%;
+        border-radius: $spacing-medium;
+        border: 1px solid $gray-primary;
+        overflow: hidden;            
         display: flex;
         flex-direction: column;
+        max-width: 100%;             
+        box-sizing: border-box;  
+
+        * {
+            word-break: break-word;
+            overflow-wrap: break-word;
+            white-space: normal; 
+        }
+    }
+
+    .divider {
+        display: flex;
+        align-items: flex-start;
+        align-self: stretch;
+        border-bottom: 1px solid #E7E7E9;
+        margin-top: $spacing-medium;
+        margin-bottom: $spacing-medium;
+    }
+
+    .title-alignment {
+        display: flex;
+        justify-content: flex-start; 
+        align-items: center; 
+    }
+
+    .title-alignment-top {
+        display: flex;
+        justify-content: flex-start; 
+        align-items: top;
+    }
+
+    .page-container-main {
+        flex: 1 1 0;
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        overflow: visible;
+        height: 100%;
+        overflow-y: auto;
+        .card {
+            overflow: unset;
+        }
+    }
+
+    .page-container-grid {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-large;
+        padding-top: 28px;
+
+        .card {
+            margin-bottom: 0;
+        }
     }
 
     .page-container-side {
-        z-index: 1000;
+        z-index: 100;
         width: 100%;
         max-width: 25vw;
         display: flex;
         flex-direction: column;
+        padding-top: 28px;
+        height:100%;
     }
-
-    .page-container-header {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        background: white;
-        padding-bottom: $spacing-large;
-        justify-content: center;
-    }
-
+    
     .page-header-content {
-        width: 100%;
-        max-width: 1800px;
         display: flex;
-        flex-direction: column;
-        margin-top: $spacing-medium;
-        padding-left: $spacing-larger;
-        padding-right: $spacing-larger;
+        flex-direction: column; 
+        gap: $spacing-small;
+        align-self: stretch;
 
         .pageheader-with-buttons {
             display: flex !important;
+            margin-bottom: 0;
+            align-items: center !important;
+            justify-items: center;
             justify-content: space-between;
+        }
+
+        .page-header-menu {
+            display: flex !important;
+            align-items: end !important;
         }
     }
 
@@ -87,17 +156,6 @@
         justify-content: flex-start !important;
     }
 
-    .page-content-wrapper {
-        height: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        flex: 1 1 0;
-        overflow-y: auto;
-        padding-left: $spacing-large / 2;
-        padding-right: $spacing-large / 2;
-    }
-
     .page-content {
         width: 100%;
         max-width: 1800px;
@@ -105,47 +163,8 @@
         flex-direction: row;
         flex-wrap: wrap;
         height: fit-content;
-        padding-top: $spacing-large;
-        padding-bottom: $spacing-large;
     }
 
-    .content-main {
-        min-width: 450px;
-        width: 60%;
-        display: flex;
-        flex-direction: column;
-
-        .card {
-            overflow: visible;
-            margin-left: $spacing-large / 2;
-            margin-right: $spacing-large / 2;
-        }
-    }
-
-    .content-column {
-        min-width: 400px;
-        width: 40%;
-        display: flex;
-        flex-direction: column;
-
-        .card {
-            overflow: visible;
-            margin-left: $spacing-large / 2;
-            margin-right: $spacing-large / 2;
-            z-index: 0;
-        }
-    }
-
-    //For screens smaller the containers grow to max width
-    @media(max-width: 1200px) {
-        .content-main {
-            width: 100%;
-        }
-
-        .content-column {
-            width: 100%;
-        }
-    }
 
     //If a chat was opened, the containers grow to max width
     .content-chat {
@@ -158,45 +177,6 @@
 
         .content-column {
             width: 100%;
-        }
-    }
-
-    .content-fullwidth {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-
-        .card {
-            flex-grow: 1;
-            margin-left: $spacing-large / 2;
-            margin-right: $spacing-large / 2;
-            margin-bottom: 0;
-            max-height: 39rem;
-            padding-bottom: $spacing-large;
-        }
-
-        .card-content {
-            overflow-y: scroll;
-            overflow-x: hidden;
-            scrollbar-gutter: stable;
-            max-height: 25rem;
-            margin-bottom: 0;
-            padding-right: 8px;
-        }
-
-        .card-header {
-            display: flex;
-            flex-direction: row;
-            padding-bottom: 10px;
-
-            &--version {
-                z-index: 1;
-            }
-
-            &--model {
-                z-index: 0;
-            }
         }
     }
 
@@ -255,10 +235,9 @@
     }
 
     .card-content {
-        overflow-y: auto;
+        //overflow-y: auto;
         overflow-x: hidden;
         margin-bottom: 0;
-
     }
 
     .card-header {
@@ -275,6 +254,7 @@
     }
 }
 
+
 .margin-right-45{
     margin-right: 45px;
 }
@@ -283,95 +263,16 @@
     display: flex;
     flex-grow: 1;
     min-width: 360px;
+
     .model-selection{
         display: flex;
         align-items: center;
         height: max-content;
     
-    .mx-image {
-        height: $font-size-large;
-        margin-right: $spacing-small;
-        float: right;
-        height: $font-size-large;
-        margin-right: $spacing-small;
-    }
-    }
-}
-
-//Tables
-.table-header {
-    margin-top: $spacing-medium;
-    border-bottom: 1px solid $table-border-separator-color;
-}
-
-//Output list table
-.output-grid-container {
-    display: grid;
-    width: 100%;
-    grid-template-columns: 10% 59% 9% 9% 10%;
-    gap: 12px;
-    margin-top: $spacing-small;
-    margin-bottom: $spacing-medium;
-}
-
-.output-grid-item {
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 0;
-}
-
-.output-grid-icon {
-    margin-top: 3.5px;
-}
-
-.output-align-header {
-    margin-right: 2.2%;
-
-    @supports (-moz-appearance: none) {
-        margin-right: $spacing-medium;
-    }
-}
-
-
-//Version table
-.version-table {
-    display: flex;
-
-    .text-version {
-        width: 10%;
-    }
-
-    .text-title {
-        width: 35%;
-    }
-
-    .text-in-use {
-        width: 10%;
-    }
-
-    .text-owner {
-        width: 20%;
-    }
-
-    .text-last-edited {
-        width: 20%;
-    }
-
-    .delete-icon {
-        width: 5%;
-        color: $brand-danger;
-    }
-}
-
-.testcase-table {
-    display: flex;
-
-    .text-testcase {
-        min-width: 95%;
-    }
-
-    .delete-icon {
-        min-width: 5%;
-        color: $brand-danger;
+        .mx-image-viewer {
+            height: auto;
+            width: auto;
+            margin-right: $spacing-small;
+        }
     }
 }

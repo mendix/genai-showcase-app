@@ -241,7 +241,14 @@ $label-color-pgvector: #076407;
     }
 }
 
-
+.btn-icon {
+    display: flex;
+    img {
+        height: 22px;
+        width: 22px;
+        margin: 1px;
+    }
+}
 
 /* --------------------------------------- Landing Page Styling -----------------------------------*/
 
@@ -270,10 +277,6 @@ $label-color-pgvector: #076407;
         font-weight: 400;
         color: black;
     }
-}
-
-.info-icon {
-  padding-bottom: 4px;
 }
 
 .landing-page {
@@ -469,6 +472,3 @@ $label-color-pgvector: #076407;
   background: $label-bg-pgvector;
   color: $label-color-pgvector;
 }
-
-
-
