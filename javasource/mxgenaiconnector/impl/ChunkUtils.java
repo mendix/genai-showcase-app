@@ -41,7 +41,7 @@ public class ChunkUtils {
 				IMendixObject targetObject = MxObjectID == null ? null
 						: Core.retrieveId(context, Core.createMendixIdentifier(MxObjectID));
 				if (targetObject == null) {
-					LOGGER.warn("No mxObject " + c.getMxEntity(context) + " with mxID " + c.getMxObjectID(context)
+					LOGGER.debug("No mxObject " + c.getMxEntity(context) + " with mxID " + c.getMxObjectID(context)
 							+ " was found in the app database.");
 					return;
 				}
@@ -57,7 +57,7 @@ public class ChunkUtils {
 						.collect(Collectors.counting());
 				// set association if found, otherwise log a warning
 				if (assocationsSetCount == 0) {
-					LOGGER.warn("No eligible association found for mxObject " + c.getMxEntity(context) + " with mxID "
+					LOGGER.debug("No eligible association found for mxObject " + c.getMxEntity(context) + " with mxID "
 							+ c.getMxObjectID(context) + " on entity " + targetChunk.getName() + ".");
 				}
 				targetChunkList.add(targetChunkSpecialization);

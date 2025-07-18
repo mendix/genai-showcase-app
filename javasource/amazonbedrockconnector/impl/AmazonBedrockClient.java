@@ -2,6 +2,7 @@ package amazonbedrockconnector.impl;
 import com.mendix.systemwideinterfaces.MendixRuntimeException;
 
 import awsauthentication.impl.AWSBuilderConfigurator;
+import awsauthentication.impl.AWSAsyncBuilderConfigurator;
 import awsauthentication.proxies.AbstractRequest;
 import awsauthentication.proxies.Credentials;
 import awsauthentication.proxies.ENUM_Region;
