@@ -9,6 +9,7 @@
 
 package mcpclient.actions;
 
+import java.util.List;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
@@ -16,7 +17,9 @@ import com.mendix.systemwideinterfaces.core.UserAction;
 import io.modelcontextprotocol.client.McpClient;
 import io.modelcontextprotocol.client.McpSyncClient;
 import io.modelcontextprotocol.spec.McpSchema;
+import io.modelcontextprotocol.spec.McpSchema.PromptArgument;
 import mcpclient.impl.McpClientRegistry;
+import mcpclient.impl.MxLogger;
 import mcpclient.proxies.ListPromptResult;
 import mcpclient.proxies.Prompt;
 
@@ -53,6 +56,16 @@ public class ListPrompts extends UserAction<IMendixObject>
 			prompt.setPrompt_ListPromptResult(result);
 			prompt.setName(e.name());
 			prompt.setDescription(e.description());
+			
+			List<PromptArgument> args =  e.arguments();
+			
+			for(PromptArgument arg : args) {
+				mcpclient.proxies.PromptArgument promptArg = new mcpclient.proxies.PromptArgument(getContext());
+				promptArg.setDescription(arg.description());
+				promptArg.setName(arg.name());
+				promptArg.setRequired(arg.required());
+				promptArg.setPromptArgument_Prompt(prompt);
+			}
 		});
 
 
@@ -71,5 +84,6 @@ public class ListPrompts extends UserAction<IMendixObject>
 	}
 
 	// BEGIN EXTRA CODE
+	private static final MxLogger LOGGER = new mcpclient.impl.MxLogger(ListPrompts.class);
 	// END EXTRA CODE
 }

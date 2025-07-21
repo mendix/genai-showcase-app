@@ -18,6 +18,7 @@ import io.modelcontextprotocol.client.McpSyncClient;
 import io.modelcontextprotocol.client.transport.HttpClientSseClientTransport;
 import io.modelcontextprotocol.spec.McpSchema;
 import mcpclient.impl.McpClientRegistry;
+import mcpclient.impl.MxLogger;
 import mcpclient.proxies.MCPClient;
 import mcpserver.impl.McpServerRegistry;
 import java.time.Duration;
@@ -47,7 +48,7 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 		MCPClient clientNpe = new MCPClient(getContext());
 		clientNpe.setMCPEndpoint(ClientConfig.getMCPEndpoint());
 
-		var transport = HttpClientSseClientTransport
+		HttpClientSseClientTransport transport = HttpClientSseClientTransport
 				.builder(ClientConfig.getMCPEndpoint())
 				.build();
 
@@ -61,10 +62,10 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 				.build();
 
 		McpSchema.InitializeResult initResult = client.initialize();
-		Core.getLogger("MCPClient").info("Client connected using: " + initResult.protocolVersion());
+		LOGGER.info("Client connected using: " + initResult.protocolVersion());
 		clientNpe.setConnected(true);
 
-		McpClientRegistry.putClient(ClientConfig.getMendixObject().getId().toLong(), client);
+		McpClientRegistry.putClient(clientNpe.getMendixObject().getId().toLong(), client);
 		return clientNpe.getMendixObject();
 		// END USER CODE
 	}
@@ -80,5 +81,6 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 	}
 
 	// BEGIN EXTRA CODE
+	private static final MxLogger LOGGER = new mcpclient.impl.MxLogger(CreateMCPClient.class);
 	// END EXTRA CODE
 }
