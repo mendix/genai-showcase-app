@@ -1,0 +1,21 @@
+package mcpclient.impl;
+
+import io.modelcontextprotocol.client.McpClient;
+import io.modelcontextprotocol.client.McpSyncClient;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+public class McpClientRegistry {
+
+    private final static Map<Long, McpSyncClient> clientInstances = new ConcurrentHashMap<>();
+
+    public static McpSyncClient getClient(Long id) {
+        return clientInstances.get(id);
+    }
+
+    public static void putClient(Long id, McpSyncClient client) {
+        clientInstances.put(id, client);
+    }
+
+}
