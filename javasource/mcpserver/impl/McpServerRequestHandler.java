@@ -133,9 +133,20 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
 
     @Override
     public void processRequest(IMxRuntimeRequest iMxRuntimeRequest, IMxRuntimeResponse iMxRuntimeResponse, String s) throws Exception {
-        LOGGER.trace(iMxRuntimeRequest.getHttpServletRequest().getMethod() + " " + iMxRuntimeRequest.getHttpServletRequest().getRequestURI());
-               
-        switch (iMxRuntimeRequest.getHttpServletRequest().getMethod()) {
+        // generate a RequestID that can be used for logging, because Mendix doesn't log on thread level
+        String requestId = UUID.randomUUID().toString();
+        HttpServletRequest req = iMxRuntimeRequest.getHttpServletRequest();
+        req.setAttribute("MCP_REQUEST_ID", requestId);
+
+        LOGGER.trace("[RequestID: " + requestId
+                + "] " + req.getMethod()
+                + " " + req.getRequestURI());
+
+        switch (req.getMethod()) {
+            case "HEAD":
+                doHead(iMxRuntimeRequest, iMxRuntimeResponse, s);
+                break;
+
             case "GET":
                 doGet(iMxRuntimeRequest, iMxRuntimeResponse, s);
                 break;
@@ -148,19 +159,32 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
                 iMxRuntimeResponse.setStatus(405);
                 iMxRuntimeResponse.getWriter().write("Method not supported");
         }
+        LOGGER.debug("[RequestID: " + requestId
+                + "] " + req.getMethod()
+                + " " + req.getRequestURI()
+                + " " + iMxRuntimeResponse.getHttpServletResponse().getStatus());
+    }
+
+    protected void doHead(IMxRuntimeRequest iMxRuntimeRequest, IMxRuntimeResponse iMxRuntimeResponse, String s) throws Exception {
+        // HttpServletRequest request = iMxRuntimeRequest.getHttpServletRequest();
+        HttpServletResponse response = iMxRuntimeResponse.getHttpServletResponse();
+
+        // don't check headers for a session, not validate session.
+        // Langflow doesn't send auth headers when validating the url.
+        setSSEResponseHeaders(response);
     }
 
     protected void doGet(IMxRuntimeRequest iMxRuntimeRequest, IMxRuntimeResponse iMxRuntimeResponse, String s) throws Exception {
         HttpServletRequest request = iMxRuntimeRequest.getHttpServletRequest();
         HttpServletResponse response = iMxRuntimeResponse.getHttpServletResponse();
-        
+
         //Authenticate if microflow was set; get sessionId by logged in user
         String sessionId = getSessionId(iMxRuntimeRequest.getHttpServletRequest(), mcpServer);
         if(sessionId == null || sessionId.isEmpty()) {
-        	response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "User is not authorized to use the MCP Server.");
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "User is not authorized to use the MCP Server.");
             return;
         }
-                      
+
         String requestURI = request.getRequestURI();
         if (!requestURI.endsWith(sseEndpoint)) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -172,12 +196,9 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
             return;
         }
 
-        response.setContentType("text/event-stream");
-        response.setCharacterEncoding(UTF_8);
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Connection", "keep-alive");
-        response.setHeader("Access-Control-Allow-Origin", "*");
+        setSSEResponseHeaders(response);
 
+        // Start processing the request
         AsyncContext asyncContext = request.startAsync();
         asyncContext.setTimeout(15 * 60 * 1000);
 
@@ -197,6 +218,14 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
         // Mendix Runtime will close the connection when the request handler
         // finishes as it doesn't take into account the async mode.
         Thread.sleep(15 * 60 * 1000);
+    }
+
+    private void setSSEResponseHeaders(HttpServletResponse response) {
+        response.setContentType("text/event-stream");
+        response.setCharacterEncoding(UTF_8);
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Connection", "keep-alive");
+        response.setHeader("Access-Control-Allow-Origin", "*");
     }
 
     protected void doPost(IMxRuntimeRequest iMxRuntimeRequest, IMxRuntimeResponse iMxRuntimeResponse, String s) throws  Exception {
