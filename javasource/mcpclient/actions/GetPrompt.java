@@ -14,12 +14,16 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import io.modelcontextprotocol.client.McpSyncClient;
 import io.modelcontextprotocol.spec.McpSchema;
+import io.modelcontextprotocol.spec.McpSchema.Role;
+import io.modelcontextprotocol.spec.McpSchema.TextContent;
 import mcpclient.impl.McpClientRegistry;
-import mcpclient.proxies.Prompt;
+import mcpclient.impl.MxLogger;
+import mcpclient.proxies.Audience;
+import mcpclient.proxies.GetPromptResult;
+import mcpclient.proxies.PromptMessage;
 import mcpclient.proxies.PromptArgumentItem;
-import java.util.Map;
 import java.util.List;
-import java.util.stream.Collector;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class GetPrompt extends UserAction<IMendixObject>
@@ -64,11 +68,35 @@ public class GetPrompt extends UserAction<IMendixObject>
 		McpSyncClient client = McpClientRegistry.getClient(MCPClient.getMendixObject().getId().toLong());
 
 		Map<String, Object> arguments = Arguments.stream().collect(Collectors.toMap(PromptArgumentItem::getName, PromptArgumentItem::getValue));
+		LOGGER.info(arguments);
 		McpSchema.GetPromptRequest request = new McpSchema.GetPromptRequest(Prompt.getName(), arguments);
 
+		McpSchema.GetPromptResult resultMcp =  client.getPrompt(request);
+		
+		GetPromptResult resultMendix = new GetPromptResult(getContext());
+		resultMendix.setDescription(resultMcp.description());
+		
+		for(io.modelcontextprotocol.spec.McpSchema.PromptMessage messageMcp : resultMcp.messages()) {
+			
+			PromptMessage messageMendix = new PromptMessage(getContext());
+			TextContent textContent = (TextContent) messageMcp.content();
+			messageMendix.setContent(textContent.text());
+			
+			List<Role> audienceListMcp = textContent.audience();
+			if(audienceListMcp != null && !audienceListMcp.isEmpty()) {
+				for(Role role : audienceListMcp) {
+					Audience audienceMendix = new Audience(getContext());
+					audienceMendix.setRole(role.name());
+					audienceMendix.setAudience_PromptMessage(messageMendix);
+				}
+			}	
+			
+			messageMendix.setRole(messageMcp.role().toString());
+			messageMendix.setPromptMessage_GetPromptResult(resultMendix);
+		}
+		
+		return resultMendix.getMendixObject();
 
-
-		throw new com.mendix.systemwideinterfaces.MendixRuntimeException("Java action was not implemented");
 		// END USER CODE
 	}
 
@@ -83,5 +111,6 @@ public class GetPrompt extends UserAction<IMendixObject>
 	}
 
 	// BEGIN EXTRA CODE
+	private static final MxLogger LOGGER = new mcpclient.impl.MxLogger(GetPrompt.class);
 	// END EXTRA CODE
 }

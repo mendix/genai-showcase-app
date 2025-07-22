@@ -10,11 +10,9 @@
 package mcpclient.actions;
 
 import java.util.List;
-import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
-import io.modelcontextprotocol.client.McpClient;
 import io.modelcontextprotocol.client.McpSyncClient;
 import io.modelcontextprotocol.spec.McpSchema;
 import io.modelcontextprotocol.spec.McpSchema.PromptArgument;
@@ -46,30 +44,11 @@ public class ListPrompts extends UserAction<IMendixObject>
 		// BEGIN USER CODE
 		McpSyncClient client = McpClientRegistry.getClient(MCPClient.getMendixObject().getId().toLong());
 
-		McpSchema.ListPromptsResult lpr = client.listPrompts();
+		McpSchema.ListPromptsResult listPromptResultMcp = client.listPrompts();
 
-		ListPromptResult result = new ListPromptResult(getContext());
-		result.setNextCursor(lpr.nextCursor());
+		ListPromptResult listPromptResultMendix = createListPromptResult(listPromptResultMcp);
 
-		lpr.prompts().forEach(e -> {
-			Prompt prompt = new Prompt(getContext());
-			prompt.setPrompt_ListPromptResult(result);
-			prompt.setName(e.name());
-			prompt.setDescription(e.description());
-			
-			List<PromptArgument> args =  e.arguments();
-			
-			for(PromptArgument arg : args) {
-				mcpclient.proxies.PromptArgument promptArg = new mcpclient.proxies.PromptArgument(getContext());
-				promptArg.setDescription(arg.description());
-				promptArg.setName(arg.name());
-				promptArg.setRequired(arg.required());
-				promptArg.setPromptArgument_Prompt(prompt);
-			}
-		});
-
-
-		return result.getMendixObject();
+		return listPromptResultMendix.getMendixObject();
 		// END USER CODE
 	}
 
@@ -85,5 +64,45 @@ public class ListPrompts extends UserAction<IMendixObject>
 
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new mcpclient.impl.MxLogger(ListPrompts.class);
+	
+	private ListPromptResult createListPromptResult(McpSchema.ListPromptsResult listPromptResultMcp) {
+		ListPromptResult listPromptResultMendix = new ListPromptResult(getContext());
+		List<io.modelcontextprotocol.spec.McpSchema.Prompt> promptListMcp = listPromptResultMcp.prompts();
+		listPromptResultMendix.setNextCursor(listPromptResultMcp.nextCursor());
+		
+		if(promptListMcp == null || promptListMcp.isEmpty()) {
+			LOGGER.debug("List Prompt Result returned 0 prompts.");
+			return listPromptResultMendix;
+		}
+		
+		for(McpSchema.Prompt promptMcp : promptListMcp ) {
+			Prompt promptMendix = new Prompt(getContext());
+			promptMendix.setPrompt_ListPromptResult(listPromptResultMendix);
+			promptMendix.setName(promptMcp.name());
+			promptMendix.setDescription(promptMcp.description());
+			
+			List<PromptArgument> args =  promptMcp.arguments();
+			
+			if(args == null || args.isEmpty()) {
+				continue;
+			}
+			createPromptArguments(promptMcp, promptMendix);
+			
+		}
+		return listPromptResultMendix;
+		
+	}
+	
+	private void createPromptArguments(McpSchema.Prompt  promptMcp, Prompt promptMendix) {
+		List<PromptArgument> args =  promptMcp.arguments();
+		
+		for (McpSchema.PromptArgument promptArgumentMcp : args ) {
+			mcpclient.proxies.PromptArgument promptArg = new mcpclient.proxies.PromptArgument(getContext());
+			promptArg.setDescription(promptArgumentMcp.description());
+			promptArg.setName(promptArgumentMcp.name());
+			promptArg.setRequired(promptArgumentMcp.required());
+			promptArg.setPromptArgument_Prompt(promptMendix);
+		}
+	}
 	// END EXTRA CODE
 }
