@@ -25,7 +25,6 @@ import mcpserver.impl.McpServerRegistry;
 import mcpserver.impl.MxLogger;
 import mcpserver.proxies.TextContent;
 import mcpserver.proxies.Tool;
-import software.amazon.awssdk.regions.regionmetadata.MxCentral1;
 import static java.util.Objects.requireNonNull;
 import java.util.Date;
 import java.util.HashMap;
@@ -35,37 +34,37 @@ import java.util.Set;
 import java.util.Map.Entry;
 
 /**
- * Registers a tool the with MCP Server that gets exposed to MCP clients. If the model chooses to call the tool, the selected microflow gets executed.
+ * Registers a tool with the MCP Server that gets exposed to MCP clients. If the model chooses to call the tool, the selected microflow gets executed.
  * 
  * Currently, the current User is not in scope of the tool microflow.
  */
 public class AddTool extends UserAction<IMendixObject>
 {
-	private final java.lang.String Name;
-	private final java.lang.String Description;
-	private final java.lang.String Schema;
-	private final java.lang.String ExecutingMicroflow;
 	/** @deprecated use McpServer.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __McpServer;
 	private final mcpserver.proxies.McpServer McpServer;
+	private final java.lang.String Name;
+	private final java.lang.String Description;
+	private final java.lang.String ExecutingMicroflow;
+	private final java.lang.String Schema;
 
 	public AddTool(
 		IContext context,
+		IMendixObject _mcpServer,
 		java.lang.String _name,
 		java.lang.String _description,
-		java.lang.String _schema,
 		java.lang.String _executingMicroflow,
-		IMendixObject _mcpServer
+		java.lang.String _schema
 	)
 	{
 		super(context);
-		this.Name = _name;
-		this.Description = _description;
-		this.Schema = _schema;
-		this.ExecutingMicroflow = _executingMicroflow;
 		this.__McpServer = _mcpServer;
 		this.McpServer = _mcpServer == null ? null : mcpserver.proxies.McpServer.initialize(getContext(), _mcpServer);
+		this.Name = _name;
+		this.Description = _description;
+		this.ExecutingMicroflow = _executingMicroflow;
+		this.Schema = _schema;
 	}
 
 	@java.lang.Override
