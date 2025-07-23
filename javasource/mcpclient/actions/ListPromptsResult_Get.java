@@ -106,12 +106,12 @@ public class ListPromptsResult_Get extends UserAction<IMendixObject>
 		promptMendix.setName(promptMcp.name());
 		promptMendix.setDescription(promptMcp.description());
 		
-		List<PromptArgument> args =  promptMcp.arguments();
+		List<PromptArgument> argumentsMcp =  promptMcp.arguments();
 		
-		if(args == null || args.isEmpty()) {
+		if(argumentsMcp == null || argumentsMcp.isEmpty()) {
 			return;
 		}
-		createPromptArguments(promptMcp, promptMendix);
+		createPromptArguments(argumentsMcp, promptMendix);
 	}
 	
 	/**
@@ -119,10 +119,9 @@ public class ListPromptsResult_Get extends UserAction<IMendixObject>
 	 * @param promptMcp
 	 * @param promptMendix
 	 */
-	private void createPromptArguments(McpSchema.Prompt  promptMcp, Prompt promptMendix) {
-		List<PromptArgument> args =  promptMcp.arguments();
+	private void createPromptArguments(List<PromptArgument> argumentsMcp, Prompt promptMendix) {
 		
-		for (McpSchema.PromptArgument promptArgumentMcp : args ) {
+		for (McpSchema.PromptArgument promptArgumentMcp : argumentsMcp ) {
 			mcpclient.proxies.PromptArgument promptArg = new mcpclient.proxies.PromptArgument(getContext());
 			promptArg.setDescription(promptArgumentMcp.description());
 			promptArg.setName(promptArgumentMcp.name());

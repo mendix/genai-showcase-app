@@ -10,11 +10,13 @@
 package mcpclient.actions;
 
 import java.util.List;
+import java.util.Map;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import io.modelcontextprotocol.client.McpSyncClient;
 import io.modelcontextprotocol.spec.McpSchema;
+import io.modelcontextprotocol.spec.McpSchema.JsonSchema;
 import mcpclient.impl.McpClientRegistry;
 import mcpclient.impl.MxLogger;
 import mcpclient.proxies.ListToolsResult;
@@ -48,7 +50,13 @@ public class ListTools extends UserAction<IMendixObject>
 		
 		ListToolsResult listToolResultMendix = createListToolsResult(listToolsResultMcp);
 		
-		//listToolsResultMcp.tools().get(0).
+		//McpSchema.Tool tool = listToolsResultMcp.tools().get(0);
+		
+		//McpSchema.CallToolRequest request = new CallToolRequest(tool.name(), null);
+		
+		//client.callTool(listToolsResultMcp.tools().get(0));
+		
+		
 		
 		return listToolResultMendix.getMendixObject();
 		// END USER CODE
@@ -95,6 +103,18 @@ public class ListTools extends UserAction<IMendixObject>
 		toolMendix.setDescription(toolMcp.description());
 		toolMendix.setInputSchema(toolMcp.inputSchema().toString());
 		toolMendix.setTool_ListToolsResult(listToolResultMendix);
+		
+		JsonSchema inputSchema = toolMcp.inputSchema();
+		Map<String, Object> argumentsMcp = inputSchema.properties();
+		
+		if(argumentsMcp == null || argumentsMcp.isEmpty()) {
+			return;
+		}
+		createToolArguments(argumentsMcp, toolMendix);
+	}
+	
+	private void createToolArguments(Map<String, Object> argumentsMcp, Tool toolMendix) {
+		
 	}
 	
 	// END EXTRA CODE
