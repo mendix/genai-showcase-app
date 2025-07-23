@@ -22,7 +22,7 @@ import mcpclient.proxies.ListPromptsResult;
 import mcpclient.proxies.Prompt;
 
 /**
- * Returns a ListPromptResult which contains a list of all available prompts the MCP Server exposes. The Prompts can be used for the Get Prompt Result action.
+ * Returns a ListPromptsResult which contains a list of all available prompts the MCP Server exposes. The Prompts can be used in the Get Prompt Result action.
  * 
  */
 public class ListPromptsResult_Get extends UserAction<IMendixObject>
@@ -75,8 +75,8 @@ public class ListPromptsResult_Get extends UserAction<IMendixObject>
 	private static final MxLogger LOGGER = new mcpclient.impl.MxLogger(ListPromptsResult_Get.class);
 	
 	/**
-	 * Create a Mendix ListPromptResult based on the MCP ListPromptResult
-	 * @param listPromptResultMcp as returned from the server via MCP 
+	 * Create a Mendix ListPromptsResult based on the MCP ListPromptsResult
+	 * @param listPromptResultsMcp as returned from the server via MCP 
 	 */
 	private ListPromptsResult createListPromptsResult(McpSchema.ListPromptsResult listPromptsResultMcp) {
 		ListPromptsResult listPromptsResultMendix = new ListPromptsResult(getContext());

@@ -19,17 +19,22 @@ import io.modelcontextprotocol.spec.McpSchema;
 import io.modelcontextprotocol.spec.McpSchema.JsonSchema;
 import mcpclient.impl.McpClientRegistry;
 import mcpclient.impl.MxLogger;
+import mcpclient.proxies.EnumValue;
 import mcpclient.proxies.ListToolsResult;
 import mcpclient.proxies.Tool;
 
-public class ListTools extends UserAction<IMendixObject>
+/**
+ * Returns a ListToolsResult which contains a list of all available tools the MCP Server exposes. The Tools can be used in the Get Tool Result action.
+ * 
+ */
+public class ListToolsResult_Get extends UserAction<IMendixObject>
 {
 	/** @deprecated use MCPClient.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __MCPClient;
 	private final mcpclient.proxies.MCPClient MCPClient;
 
-	public ListTools(
+	public ListToolsResult_Get(
 		IContext context,
 		IMendixObject _mCPClient
 	)
@@ -43,21 +48,12 @@ public class ListTools extends UserAction<IMendixObject>
 	public IMendixObject executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		
-		McpSyncClient client = McpClientRegistry.getClient(MCPClient.getMendixObject().getId().toLong());
-		
-		McpSchema.ListToolsResult listToolsResultMcp = client.listTools();
-		
-		ListToolsResult listToolResultMendix = createListToolsResult(listToolsResultMcp);
-		
+		McpSyncClient client = McpClientRegistry.getClient(MCPClient.getMendixObject().getId().toLong());	
+		McpSchema.ListToolsResult listToolsResultMcp = client.listTools();	
+		ListToolsResult listToolResultMendix = createListToolsResult(listToolsResultMcp);	
 		//McpSchema.Tool tool = listToolsResultMcp.tools().get(0);
-		
 		//McpSchema.CallToolRequest request = new CallToolRequest(tool.name(), null);
-		
 		//client.callTool(listToolsResultMcp.tools().get(0));
-		
-		
-		
 		return listToolResultMendix.getMendixObject();
 		// END USER CODE
 	}
@@ -69,15 +65,19 @@ public class ListTools extends UserAction<IMendixObject>
 	@java.lang.Override
 	public java.lang.String toString()
 	{
-		return "ListTools";
+		return "ListToolsResult_Get";
 	}
 
 	// BEGIN EXTRA CODE
 	
-	private static final MxLogger LOGGER = new mcpclient.impl.MxLogger(ListTools.class);
+	private static final MxLogger LOGGER = new mcpclient.impl.MxLogger(ListToolsResult_Get.class);
 	
+	/**Create a Mendix ListToolsResult based on the MCP ListToolsResult
+	 * 
+	 * @param listToolsResultMcp
+	 * @return
+	 */
 	private ListToolsResult createListToolsResult(McpSchema.ListToolsResult listToolsResultMcp) {
-		
 		ListToolsResult listToolResultMendix = new ListToolsResult(getContext());
 		
 		listToolResultMendix.setNextCursor(listToolsResultMcp.nextCursor());
@@ -91,12 +91,14 @@ public class ListTools extends UserAction<IMendixObject>
 		for(McpSchema.Tool toolMcp : toolListMcp) {
 			createTool(toolMcp, listToolResultMendix);
 		}
-		
-		
 		return listToolResultMendix;
-		
 	}
 	
+	/**
+	 * Create the Mendix Tool with its argument based on the MCP Tools
+	 * @param toolMcp
+	 * @param listToolResultMendix
+	 */
 	private void createTool(McpSchema.Tool toolMcp, ListToolsResult listToolResultMendix) {
 		Tool toolMendix = new Tool(getContext());
 		toolMendix.setName(toolMcp.name());
@@ -106,15 +108,68 @@ public class ListTools extends UserAction<IMendixObject>
 		
 		JsonSchema inputSchema = toolMcp.inputSchema();
 		Map<String, Object> argumentsMcp = inputSchema.properties();
+		List<String> requiredList = inputSchema.required();
 		
 		if(argumentsMcp == null || argumentsMcp.isEmpty()) {
 			return;
 		}
-		createToolArguments(argumentsMcp, toolMendix);
+		createToolArguments(argumentsMcp, requiredList, toolMendix);
 	}
 	
-	private void createToolArguments(Map<String, Object> argumentsMcp, Tool toolMendix) {
-		
+	/**
+	 * Creates tool arguments based on the MCP tool's arguments. 
+	 * Handles Enum arguments to create EnumValue objects
+	 * @param argumentsMcp
+	 * @param requiredList
+	 * @param toolMendix
+	 */
+	private void createToolArguments(Map<String, Object> argumentsMcp,List<String> requiredList, Tool toolMendix) {	
+		for (Map.Entry<String, Object> entry : argumentsMcp.entrySet()) {
+		    String propertyName = entry.getKey();
+		    
+		    //Check if the value list is a list before mapping
+		    if (!(entry.getValue() instanceof Map<?, ?>)) {
+		    	continue;
+		    }
+		    
+		    Map<String, Object> propertyMap = (Map<String, Object>) entry.getValue();
+		    //Safety check to ensure that rawEnum is really the expected type
+		    List<Object> enumValues = null;
+		    Object rawEnum = propertyMap.get("enum");
+		    if (rawEnum instanceof List<?>) {
+		        enumValues = (List<Object>) rawEnum;
+		    }
+		    
+		    //Get type or change to enum if there are values
+		    String type = (String) propertyMap.get("type");
+		    if(enumValues != null) {
+		    	type = "enum";
+		    }
+
+		    // Create ToolArgument
+		    mcpclient.proxies.ToolArgument toolArg = new mcpclient.proxies.ToolArgument(getContext());
+		    toolArg.setName(propertyName);
+		    toolArg.set_Type(type);
+		    toolArg.setRequired(requiredList != null && requiredList.contains(propertyName));
+		    toolArg.setToolArgument_Tool(toolMendix);
+		    
+		    if (type == "enum") {
+		    	createEnumValues(enumValues, toolArg);
+		    }   
+		}
+	}
+	
+	/**
+	 * Creates EnumValues if the property is enum
+	 * @param enumValues
+	 * @param toolArg
+	 */
+	private void createEnumValues(List<Object> enumValues, mcpclient.proxies.ToolArgument toolArg) {
+		for (Object enumValueMcp : enumValues) {
+            EnumValue enumValueMendix = new mcpclient.proxies.EnumValue(getContext());
+            enumValueMendix.setValue(enumValueMcp.toString());
+            enumValueMendix.setEnumValue_ToolArgument(toolArg);
+        }
 	}
 	
 	// END EXTRA CODE
