@@ -62,7 +62,7 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 				.build();
 
 		McpSchema.InitializeResult initResult = client.initialize();
-		LOGGER.info("Client connected using: " + initResult.protocolVersion());
+		LOGGER.info("Client connected to server using: " + initResult.protocolVersion() + " version.");
 		clientNpe.setConnected(true);
 
 		McpClientRegistry.putClient(clientNpe.getMendixObject().getId().toLong(), client);
