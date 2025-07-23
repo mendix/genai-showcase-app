@@ -1,8 +1,6 @@
 package mcpclient.impl;
 
-import io.modelcontextprotocol.client.McpClient;
 import io.modelcontextprotocol.client.McpSyncClient;
-import mcpclient.actions.ListPrompts;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

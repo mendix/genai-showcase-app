@@ -9,7 +9,6 @@
 
 package mcpclient.actions;
 
-import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
@@ -20,9 +19,11 @@ import io.modelcontextprotocol.spec.McpSchema;
 import mcpclient.impl.McpClientRegistry;
 import mcpclient.impl.MxLogger;
 import mcpclient.proxies.MCPClient;
-import mcpserver.impl.McpServerRegistry;
 import java.time.Duration;
 
+/**
+ * Create an MCPClient that is connected to an MCP Server. The input follows the MCP specifications.
+ */
 public class CreateMCPClient extends UserAction<IMendixObject>
 {
 	/** @deprecated use ClientConfig.getMendixObject() instead. */
@@ -44,29 +45,31 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 	public IMendixObject executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		// Create Client NPE
-		MCPClient clientNpe = new MCPClient(getContext());
-		clientNpe.setMCPEndpoint(ClientConfig.getMCPEndpoint());
+		try {
+			// Create Client NPE
+			MCPClient clientNpe = new MCPClient(getContext());
+			clientNpe.setMCPEndpoint(ClientConfig.getMCPEndpoint());
 
-		HttpClientSseClientTransport transport = HttpClientSseClientTransport
-				.builder(ClientConfig.getMCPEndpoint())
-				.build();
+			HttpClientSseClientTransport transport = HttpClientSseClientTransport
+					.builder(ClientConfig.getMCPEndpoint())
+					.build();
 
-		McpSyncClient client = McpClient.sync(transport)
-				.requestTimeout(Duration.ofSeconds(10))
-				.capabilities(McpSchema.ClientCapabilities.builder()
-//						.roots(true)      // Enable roots capability
-//						.sampling()       // Enable sampling capability
-						.build())
-//				.sampling(request -> new McpSchema.CreateMessageResult(response))
-				.build();
+			McpSyncClient client = McpClient.sync(transport)
+					.requestTimeout(Duration.ofSeconds(10))
+					.capabilities(McpSchema.ClientCapabilities.builder()
+							.build())
+					.build();
 
-		McpSchema.InitializeResult initResult = client.initialize();
-		LOGGER.info("Client connected to server using: " + initResult.protocolVersion() + " version.");
-		clientNpe.setConnected(true);
+			McpSchema.InitializeResult initResult = client.initialize();
+			LOGGER.info("Client connected to server using: " + initResult.protocolVersion() + " version.");
+			clientNpe.setConnected(true);
 
-		McpClientRegistry.putClient(clientNpe.getMendixObject().getId().toLong(), client);
-		return clientNpe.getMendixObject();
+			McpClientRegistry.putClient(clientNpe.getMendixObject().getId().toLong(), client);
+			return clientNpe.getMendixObject();
+		} catch (Exception e) {
+			LOGGER.error(e);
+			return null;
+		}
 		// END USER CODE
 	}
 

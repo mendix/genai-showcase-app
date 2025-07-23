@@ -21,14 +21,18 @@ import mcpclient.impl.MxLogger;
 import mcpclient.proxies.ListPromptResult;
 import mcpclient.proxies.Prompt;
 
-public class ListPrompts extends UserAction<IMendixObject>
+/**
+ * Returns a ListPromptResult which contains a list of all available prompts the MCP Server exposes. The Prompts can be used for the Get Prompt Result action.
+ * 
+ */
+public class ListPromptResult_Get extends UserAction<IMendixObject>
 {
 	/** @deprecated use MCPClient.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __MCPClient;
 	private final mcpclient.proxies.MCPClient MCPClient;
 
-	public ListPrompts(
+	public ListPromptResult_Get(
 		IContext context,
 		IMendixObject _mCPClient
 	)
@@ -64,11 +68,11 @@ public class ListPrompts extends UserAction<IMendixObject>
 	@java.lang.Override
 	public java.lang.String toString()
 	{
-		return "ListPrompts";
+		return "ListPromptResult_Get";
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new mcpclient.impl.MxLogger(ListPrompts.class);
+	private static final MxLogger LOGGER = new mcpclient.impl.MxLogger(ListPromptResult_Get.class);
 	
 	/**
 	 * Create a Mendix ListPromptResult based on the MCP ListPromptResult

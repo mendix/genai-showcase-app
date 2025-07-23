@@ -26,7 +26,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class GetPrompt extends UserAction<IMendixObject>
+/**
+ * Returns a GetPromptResult from the MCP Server which contains the final prompt augmented with the prompt arguments (if applicable).
+ */
+public class GetPromptResult_Get extends UserAction<IMendixObject>
 {
 	/** @deprecated use MCPClient.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
@@ -41,7 +44,7 @@ public class GetPrompt extends UserAction<IMendixObject>
 	private final java.util.List<IMendixObject> __Arguments;
 	private final java.util.List<mcpclient.proxies.PromptArgumentItem> Arguments;
 
-	public GetPrompt(
+	public GetPromptResult_Get(
 		IContext context,
 		IMendixObject _mCPClient,
 		IMendixObject _prompt,
@@ -92,11 +95,11 @@ public class GetPrompt extends UserAction<IMendixObject>
 	@java.lang.Override
 	public java.lang.String toString()
 	{
-		return "GetPrompt";
+		return "GetPromptResult_Get";
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new mcpclient.impl.MxLogger(GetPrompt.class);
+	private static final MxLogger LOGGER = new mcpclient.impl.MxLogger(GetPromptResult_Get.class);
 	
 	/**
 	 * Create a Mendix GetPromptResult based on the MCP GetPromptResult
