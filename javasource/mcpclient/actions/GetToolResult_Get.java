@@ -66,7 +66,7 @@ public class GetToolResult_Get extends UserAction<IMendixObject>
 	@java.lang.Override
 	public IMendixObject executeAction() throws Exception
 	{
-		// BEGIN USER CODE		
+		// BEGIN USER CODE
 		try {
 			McpSyncClient client = McpClientRegistry.getClient(MCPClient.getMendixObject().getId().toLong());
 
