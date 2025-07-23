@@ -9,13 +9,16 @@
 
 package mcpclient.actions;
 
+import java.util.List;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import io.modelcontextprotocol.client.McpSyncClient;
 import io.modelcontextprotocol.spec.McpSchema;
 import mcpclient.impl.McpClientRegistry;
+import mcpclient.impl.MxLogger;
 import mcpclient.proxies.ListToolsResult;
+import mcpclient.proxies.Tool;
 
 public class ListTools extends UserAction<IMendixObject>
 {
@@ -63,14 +66,35 @@ public class ListTools extends UserAction<IMendixObject>
 
 	// BEGIN EXTRA CODE
 	
+	private static final MxLogger LOGGER = new mcpclient.impl.MxLogger(ListTools.class);
+	
 	private ListToolsResult createListToolsResult(McpSchema.ListToolsResult listToolsResultMcp) {
 		
 		ListToolsResult listToolResultMendix = new ListToolsResult(getContext());
 		
+		listToolResultMendix.setNextCursor(listToolsResultMcp.nextCursor());
+		List<McpSchema.Tool> toolListMcp = listToolsResultMcp.tools();
+		
+		if(toolListMcp == null || toolListMcp.isEmpty()){
+			LOGGER.debug("List Tools Result returned no tools.");
+			return listToolResultMendix;
+		}
+		
+		for(McpSchema.Tool toolMcp : toolListMcp) {
+			createTool(toolMcp, listToolResultMendix);
+		}
 		
 		
 		return listToolResultMendix;
 		
+	}
+	
+	private void createTool(McpSchema.Tool toolMcp, ListToolsResult listToolResultMendix) {
+		Tool toolMendix = new Tool(getContext());
+		toolMendix.setName(toolMcp.name());
+		toolMendix.setDescription(toolMcp.description());
+		toolMendix.setInputSchema(toolMcp.inputSchema().toString());
+		toolMendix.setTool_ListToolsResult(listToolResultMendix);
 	}
 	
 	// END EXTRA CODE

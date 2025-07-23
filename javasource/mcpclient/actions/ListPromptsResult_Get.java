@@ -84,12 +84,12 @@ public class ListPromptsResult_Get extends UserAction<IMendixObject>
 		listPromptsResultMendix.setNextCursor(listPromptsResultMcp.nextCursor());
 		
 		if(promptListMcp == null || promptListMcp.isEmpty()) {
-			LOGGER.debug("List Prompt Result returned no prompts.");
+			LOGGER.debug("List Prompts Result returned no prompts.");
 			return listPromptsResultMendix;
 		}
 		
 		for(McpSchema.Prompt promptMcp : promptListMcp ) {
-			createPrompts(listPromptsResultMendix, promptMcp);			
+			createPrompt(listPromptsResultMendix, promptMcp);			
 		}
 		
 		return listPromptsResultMendix;
@@ -100,7 +100,7 @@ public class ListPromptsResult_Get extends UserAction<IMendixObject>
 	 * @param listPromptResultMendix
 	 * @param promptMcp
 	 */
-	private void createPrompts(ListPromptsResult listPromptsResultMendix, McpSchema.Prompt promptMcp ) {
+	private void createPrompt(ListPromptsResult listPromptsResultMendix, McpSchema.Prompt promptMcp ) {
 		Prompt promptMendix = new Prompt(getContext());
 		promptMendix.setPrompt_ListPromptsResult(listPromptsResultMendix);
 		promptMendix.setName(promptMcp.name());
