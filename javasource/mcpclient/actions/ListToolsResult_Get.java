@@ -16,7 +16,9 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import io.modelcontextprotocol.client.McpSyncClient;
 import io.modelcontextprotocol.spec.McpSchema;
+import io.modelcontextprotocol.spec.McpSchema.Content;
 import io.modelcontextprotocol.spec.McpSchema.JsonSchema;
+import io.modelcontextprotocol.spec.McpSchema.TextContent;
 import mcpclient.impl.McpClientRegistry;
 import mcpclient.impl.MxLogger;
 import mcpclient.proxies.EnumValue;
@@ -48,13 +50,15 @@ public class ListToolsResult_Get extends UserAction<IMendixObject>
 	public IMendixObject executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		McpSyncClient client = McpClientRegistry.getClient(MCPClient.getMendixObject().getId().toLong());	
-		McpSchema.ListToolsResult listToolsResultMcp = client.listTools();	
-		ListToolsResult listToolResultMendix = createListToolsResult(listToolsResultMcp);	
-		//McpSchema.Tool tool = listToolsResultMcp.tools().get(0);
-		//McpSchema.CallToolRequest request = new CallToolRequest(tool.name(), null);
-		//client.callTool(listToolsResultMcp.tools().get(0));
-		return listToolResultMendix.getMendixObject();
+		try {
+			McpSyncClient client = McpClientRegistry.getClient(MCPClient.getMendixObject().getId().toLong());	
+			McpSchema.ListToolsResult listToolsResultMcp = client.listTools();	
+			ListToolsResult listToolResultMendix = createListToolsResult(listToolsResultMcp);	
+			return listToolResultMendix.getMendixObject();
+		} catch (Exception e) {
+			LOGGER.error(e);
+			return null;
+		}
 		// END USER CODE
 	}
 
