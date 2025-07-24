@@ -22,13 +22,10 @@ import io.modelcontextprotocol.spec.McpSchema.Content;
 import io.modelcontextprotocol.spec.McpSchema.TextContent;
 import mcpclient.impl.McpClientRegistry;
 import mcpclient.impl.MxLogger;
-import mcpclient.proxies.GetPromptResult;
-import mcpclient.proxies.GetToolResult;
-import mcpclient.proxies.ListToolsResult;
-import mcpclient.proxies.PromptArgumentItem;
+import mcpclient.proxies.ToolResult;
 import mcpclient.proxies.ToolArgumentItem;
 
-public class GetToolResult_Get extends UserAction<IMendixObject>
+public class ToolResult_Get extends UserAction<IMendixObject>
 {
 	/** @deprecated use MCPClient.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
@@ -43,7 +40,7 @@ public class GetToolResult_Get extends UserAction<IMendixObject>
 	private final java.util.List<IMendixObject> __ToolArgumentItemList;
 	private final java.util.List<mcpclient.proxies.ToolArgumentItem> ToolArgumentItemList;
 
-	public GetToolResult_Get(
+	public ToolResult_Get(
 		IContext context,
 		IMendixObject _mCPClient,
 		IMendixObject _tool,
@@ -73,23 +70,16 @@ public class GetToolResult_Get extends UserAction<IMendixObject>
 			Map<String, Object> arguments = ToolArgumentItemList.stream()
 					.collect(Collectors.toMap(ToolArgumentItem::getName, ToolArgumentItem::getValue));
 			
-			McpSchema.CallToolRequest request = new McpSchema.CallToolRequest(Tool.getName(), arguments);
+			McpSchema.CallToolRequest callToolRequest = new McpSchema.CallToolRequest(Tool.getName(), arguments);
 
-			CallToolResult resultMcp =  client.callTool(request);
+			CallToolResult callToolResultMcp =  client.callTool(callToolRequest);
+			ToolResult toolResultMendix = createToolResult(callToolResultMcp);
 			
-			List<Content> content = resultMcp.content();
-			TextContent textContent = (TextContent) content.get(0);
-			
-			GetToolResult getToolResultMendix = new GetToolResult(getContext());
-			
-			getToolResultMendix.setContent(textContent.text());
-			
-			return getToolResultMendix.getMendixObject();
+			return toolResultMendix.getMendixObject();
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
 		}
-		
 		// END USER CODE
 	}
 
@@ -100,10 +90,22 @@ public class GetToolResult_Get extends UserAction<IMendixObject>
 	@java.lang.Override
 	public java.lang.String toString()
 	{
-		return "GetToolResult_Get";
+		return "ToolResult_Get";
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new mcpclient.impl.MxLogger(GetToolResult_Get.class);
+	private static final MxLogger LOGGER = new mcpclient.impl.MxLogger(ToolResult_Get.class);
+	
+	/**
+	 * Create a Mendix ToolResult based on the MCP CallToolResult
+	 * @param callToolResultMcp
+	 */
+	private ToolResult createToolResult(CallToolResult callToolResultMcp) {
+		List<Content> content = callToolResultMcp.content();
+		TextContent textContent = (TextContent) content.get(0);
+		ToolResult toolResultMendix = new ToolResult(getContext());
+		toolResultMendix.setContent(textContent.text());
+		return toolResultMendix;
+	}	
 	// END EXTRA CODE
 }

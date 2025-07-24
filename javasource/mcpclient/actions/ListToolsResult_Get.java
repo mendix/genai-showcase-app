@@ -16,9 +16,7 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import io.modelcontextprotocol.client.McpSyncClient;
 import io.modelcontextprotocol.spec.McpSchema;
-import io.modelcontextprotocol.spec.McpSchema.Content;
 import io.modelcontextprotocol.spec.McpSchema.JsonSchema;
-import io.modelcontextprotocol.spec.McpSchema.TextContent;
 import mcpclient.impl.McpClientRegistry;
 import mcpclient.impl.MxLogger;
 import mcpclient.proxies.EnumValue;
@@ -107,7 +105,6 @@ public class ListToolsResult_Get extends UserAction<IMendixObject>
 		Tool toolMendix = new Tool(getContext());
 		toolMendix.setName(toolMcp.name());
 		toolMendix.setDescription(toolMcp.description());
-		toolMendix.setInputSchema(toolMcp.inputSchema().toString());
 		toolMendix.setTool_ListToolsResult(listToolResultMendix);
 		
 		JsonSchema inputSchema = toolMcp.inputSchema();
