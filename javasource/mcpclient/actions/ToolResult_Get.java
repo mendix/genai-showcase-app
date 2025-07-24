@@ -25,6 +25,9 @@ import mcpclient.impl.MxLogger;
 import mcpclient.proxies.ToolResult;
 import mcpclient.proxies.ToolArgumentItem;
 
+/**
+ * Call the Tool on the MCP Server which returns a ToolResult. The ToolResult contains the response of the tool which is passed to the model.
+ */
 public class ToolResult_Get extends UserAction<IMendixObject>
 {
 	/** @deprecated use MCPClient.getMendixObject() instead. */

@@ -9,6 +9,7 @@
 
 package mcpclient.actions;
 
+import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
@@ -19,7 +20,10 @@ import io.modelcontextprotocol.spec.McpSchema;
 import mcpclient.impl.McpClientRegistry;
 import mcpclient.impl.MxLogger;
 import mcpclient.proxies.MCPClient;
+import system.proxies.HttpHeader;
+import java.net.http.HttpRequest;
 import java.time.Duration;
+import java.util.List;
 
 /**
  * Create an MCPClient that is connected to an MCP Server. The input follows the MCP specifications.
@@ -46,12 +50,15 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 	{
 		// BEGIN USER CODE
 		try {
-			// Create Client NPE
+			//Client NPE creation
 			MCPClient clientNpe = new MCPClient(getContext());
 			clientNpe.setMCPEndpoint(ClientConfig.getMCPEndpoint());
-
+			
+			//Prepare connection
+			HttpRequest.Builder customRequestBuilder = getCustomRequestBuilder();
 			HttpClientSseClientTransport transport = HttpClientSseClientTransport
 					.builder(ClientConfig.getMCPEndpoint())
+					.requestBuilder(customRequestBuilder)
 					.build();
 
 			McpSyncClient client = McpClient.sync(transport)
@@ -59,13 +66,14 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 					.capabilities(McpSchema.ClientCapabilities.builder()
 							.build())
 					.build();
-
+			
+			//Connect to server
 			McpSchema.InitializeResult initResult = client.initialize();
 			LOGGER.info("Client connected to server using: " + initResult.protocolVersion() + " version.");
 			clientNpe.setConnected(true);
-
 			McpClientRegistry.putClient(clientNpe.getMendixObject().getId().toLong(), client);
 			return clientNpe.getMendixObject();
+			
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
@@ -85,5 +93,25 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new mcpclient.impl.MxLogger(CreateMCPClient.class);
+	
+	/**
+	 * Creates a custom request builder to add headers passed in the configuration
+	 * @return
+	 * @throws CoreException
+	 */
+	private HttpRequest.Builder getCustomRequestBuilder() throws CoreException{
+		List<HttpHeader> headersMendix = ClientConfig.getMCPClientConfig_HttpHeader();
+		
+		HttpRequest.Builder customRequestBuilder = HttpRequest.newBuilder();
+		for (system.proxies.HttpHeader header : headersMendix) {
+		    String name  = header.getKey();
+		    String value = header.getValue();
+		    if (name != null && value != null) {
+		    	customRequestBuilder.header(name, value);
+		    }
+		}
+		return customRequestBuilder;
+	}
+	
 	// END EXTRA CODE
 }
