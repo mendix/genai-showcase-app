@@ -9,6 +9,7 @@
 
 package mcpclient.actions;
 
+import static java.util.Objects.requireNonNull;
 import java.util.List;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
@@ -47,6 +48,8 @@ public class ListPromptsResult_Get extends UserAction<IMendixObject>
 	{
 		// BEGIN USER CODE
 		try {
+			requireNonNull(MCPClient,"MCP Client is required.");
+			
 			McpSyncClient client = McpClientRegistry.getClient(MCPClient.getMendixObject().getId().toLong());
 
 			McpSchema.ListPromptsResult listPromptResultMcp = client.listPrompts();

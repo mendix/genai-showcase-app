@@ -22,6 +22,7 @@ import mcpclient.proxies.Audience;
 import mcpclient.proxies.GetPromptResult;
 import mcpclient.proxies.PromptArgumentItem;
 import mcpclient.proxies.PromptMessage;
+import static java.util.Objects.requireNonNull;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -69,6 +70,9 @@ public class GetPromptResult_Get extends UserAction<IMendixObject>
 	{
 		// BEGIN USER CODE
 		try {
+			requireNonNull(MCPClient,"MCP Client is required.");
+			requireNonNull(Prompt,"Prompt is required.");
+			
 			McpSyncClient client = McpClientRegistry.getClient(MCPClient.getMendixObject().getId().toLong());
 
 			Map<String, Object> arguments = Arguments.stream()

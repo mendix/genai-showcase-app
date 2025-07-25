@@ -9,6 +9,7 @@
 
 package mcpclient.actions;
 
+import static java.util.Objects.requireNonNull;
 import java.util.List;
 import java.util.Map;
 import com.mendix.systemwideinterfaces.core.IContext;
@@ -49,6 +50,8 @@ public class ListToolsResult_Get extends UserAction<IMendixObject>
 	{
 		// BEGIN USER CODE
 		try {
+			requireNonNull(MCPClient,"MCP Client is required.");
+
 			McpSyncClient client = McpClientRegistry.getClient(MCPClient.getMendixObject().getId().toLong());	
 			McpSchema.ListToolsResult listToolsResultMcp = client.listTools();	
 			ListToolsResult listToolResultMendix = createListToolsResult(listToolsResultMcp);	
