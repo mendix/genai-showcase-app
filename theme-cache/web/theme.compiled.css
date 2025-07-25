@@ -28612,24 +28612,35 @@ input[type=checkbox].three-state-checkbox + .control-label {
   text-transform: uppercase;
 }
 
-.btn-without-border {
+.btn-without-border, .btn-without-border-red {
   color: #0a1325;
   border: 1px solid transparent;
 }
-.btn-without-border.mx-link {
+.btn-without-border.mx-link, .mx-link.btn-without-border-red {
   text-decoration: none;
 }
-.btn-without-border.disabled {
+.btn-without-border.disabled, .disabled.btn-without-border-red {
   background-color: transparent;
   border: 1px solid transparent;
   cursor: default;
 }
-.btn-without-border:hover {
+.btn-without-border:hover, .btn-without-border-red:hover {
   background-color: #e7e7e9;
   border: 1px solid #e7e7e9;
 }
-.btn-without-border:hover, .btn-without-border:active, .btn-without-border:focus {
+.btn-without-border:hover, .btn-without-border-red:hover, .btn-without-border:active, .btn-without-border-red:active, .btn-without-border:focus, .btn-without-border-red:focus {
   color: #0a1325;
+}
+
+.btn-without-border-red {
+  color: #D31E23;
+}
+.btn-without-border-red:hover {
+  background-color: #f9d9dc;
+  border: 1px solid #f9d9dc;
+}
+.btn-without-border-red:hover, .btn-without-border-red:active, .btn-without-border-red:focus {
+  color: #D31E23;
 }
 
 .btn-no-hover.mx-link:hover {

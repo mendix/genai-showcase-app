@@ -1,5 +1,7 @@
 @import '../../../../theme/web/custom-variables';
 
+$new-danger: #D31E23;
+
 .btn-without-border {
     color: $font-color-default;
     border: 1px solid transparent;
@@ -21,6 +23,22 @@
     &:active,
     &:focus {
         color: $font-color-default;
+    }
+}
+
+.btn-without-border-red {
+    @extend .btn-without-border;
+    color: $new-danger;
+
+     &:hover {
+        background-color: $color-danger-lighter;
+        border: 1px solid $color-danger-lighter;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+        color: $new-danger;
     }
 }
 
