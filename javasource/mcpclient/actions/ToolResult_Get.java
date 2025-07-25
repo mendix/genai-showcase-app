@@ -9,6 +9,7 @@
 
 package mcpclient.actions;
 
+import static java.util.Objects.requireNonNull;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -68,10 +69,16 @@ public class ToolResult_Get extends UserAction<IMendixObject>
 	{
 		// BEGIN USER CODE
 		try {
+			requireNonNull(Tool,"Tool is required.");
+			requireNonNull(MCPClient,"MCP Client is required.");
+			
 			McpSyncClient client = McpClientRegistry.getClient(MCPClient.getMendixObject().getId().toLong());
-
-			Map<String, Object> arguments = ToolArgumentItemList.stream()
+			
+			Map<String, Object> arguments = null;
+			if (ToolArgumentItemList != null && !ToolArgumentItemList.isEmpty()) {
+				arguments = ToolArgumentItemList.stream()
 					.collect(Collectors.toMap(ToolArgumentItem::getName, ToolArgumentItem::getValue));
+			}
 			
 			McpSchema.CallToolRequest callToolRequest = new McpSchema.CallToolRequest(Tool.getName(), arguments);
 
