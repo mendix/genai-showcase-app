@@ -28751,6 +28751,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .input-label-width {
   width: 160px;
+  padding: 5px;
 }
 
 .input-label-grid {
@@ -28965,6 +28966,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  padding: 2px;
 }
 .agent-page-container .title-alignment-top {
   display: flex;
@@ -29024,6 +29026,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   align-items: center !important;
   flex-flow: row !important;
   justify-content: flex-start !important;
+  margin-bottom: -16px;
 }
 .agent-page-container .page-content {
   width: 100%;
