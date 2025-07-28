@@ -23,12 +23,13 @@ import genaicommons.proxies.ToolCollection;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
- * Adds a new Function to a Request.
+ * Adds a new Tool to a Request.
  * Parameters: 
  * - Request: The request to add the function to.
+ * - ArgumentInputLIst (optional): describe the input parameters of a tool.
  * - ToolName: The name of the tool to call.
- * - FunctionMicroflow: The microflow that is called within this function.
- * - ToolDescription (optional): A description of what the function does, used by the model to choose when and how to call the function.
+ * - ToolOrchestrateMicroflow: The microflow that is called within this tool. Usually to pass the input to another serivce, but not to directly process the tool.
+ * - ToolDescription (optional): A description of what the tool does, used by the model to choose when and how to call the tool.
  * 
  * The action returns empty if adding the function was not successful (errors are logged).
  */
