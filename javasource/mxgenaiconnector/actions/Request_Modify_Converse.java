@@ -149,6 +149,55 @@ public class Request_Modify_Converse extends UserAction<java.lang.String>
 			setToolChoice(rootNode);
 		}
 		
+		//If the tool has no arguments attached, it has a tool microflow for each microflow added
+		private boolean isToolMendixTool(ObjectNode toolNode) {
+			JsonNode arguments = toolNode.get("arguments");
+		    for (JsonNode arg : arguments) {	
+		    	if(arg != null && arg.asText().isBlank()) {
+		    		return false;
+		    	}
+		    }
+		    return true;
+		}
+		
+		// For cases where Arguments are associated to the Tool
+		private void addPropertiesForTool(ObjectNode toolNode, ObjectNode propertiesNode, ArrayNode requiredNode) {
+			JsonNode arguments = toolNode.get("arguments");
+		    if (arguments != null && arguments.isArray()) {
+		        for (JsonNode arg : arguments) {
+		            String name = arg.get("name").asText();
+		            String type = arg.get("_type").asText().toLowerCase();
+
+		            // Map _type to JSON schema type because "enum" is not officially supported
+		            if(type.equals("enum")) {
+		            	type = "string";
+		            }
+
+		            // Create the property node
+		            ObjectNode property = propertiesNode.objectNode();
+		            property.put("type", type);
+
+		         	// add enum values if present (typically only if _type == "enum"
+		            if (arg.has("enumValues") && arg.get("enumValues").isArray()) {
+		                ArrayNode enumArray = property.putArray("enum");
+		                for (JsonNode enumVal : arg.get("enumValues")) {
+		                    if (enumVal.has("key")) {
+		                        enumArray.add(enumVal.get("key").asText());
+		                    }
+		                }
+		            }
+		            
+		            propertiesNode.set(name, property);
+		            // If Required == true, add to requiredNode
+		            if (arg.has("Required") && arg.get("Required").asBoolean()) {
+		                requiredNode.add(name);
+		            }
+		        }
+		    }
+		 // Remove the 'arguments' node as this was only needed for mapping purposes
+		    toolNode.remove("arguments");
+		}
+		
 		//This will create the input schema JSON needed for specifying the input of a tool
 		private void setInputSchemaForToolNode(String microflow, ObjectNode toolNode) {
 			
@@ -157,20 +206,25 @@ public class Request_Modify_Converse extends UserAction<java.lang.String>
 	        inputSchemaNode.put("type", "object");
 
 	        // Create the properties node (if input parameter is available)
-	        Map<String, IDataType> parameterList = FunctionMappingImpl.getInputParametersForModel(microflow);
-	        
 			ObjectNode propertiesNode = MAPPER.createObjectNode();
 			ArrayNode requiredNode = MAPPER.createArrayNode();
 	        
-	        parameterList.entrySet().forEach(t -> FunctionImpl.addProperty(propertiesNode, requiredNode, t));
+			// Add properties
+			if (isToolMendixTool(toolNode)) {
+				Map<String, IDataType> parameterList = FunctionMappingImpl.getInputParametersForModel(microflow);
+				parameterList.entrySet().forEach(t -> FunctionImpl.addProperty(propertiesNode, requiredNode, t));
+				
+			}else {
+				addPropertiesForTool(toolNode, propertiesNode, requiredNode);
+			}
 		        
 	        inputSchemaNode.set("properties", propertiesNode);
 	        inputSchemaNode.set("required", requiredNode);
-	        //Add a "json" wrapper around the inputSchema
+	        // Add a "json" wrapper around the inputSchema
 	        ObjectNode jsonNode = MAPPER.createObjectNode();
 	        jsonNode.set("json", inputSchemaNode);
 	        
-	        //Set the whole InputSchema as new node to toolNode
+	        // Set the whole InputSchema as new node to toolNode
 	        toolNode.set("inputSchema",jsonNode);
 		}
 		

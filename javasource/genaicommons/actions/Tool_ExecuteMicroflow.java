@@ -64,6 +64,16 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 			requireNonNull(Tool, "Tool is required.");
 			requireNonNull(Tool.getMicroflow(), "Tool has no Microflow.");
 			
+			//TODO clean up
+			if(Tool.getClass().equals(genaicommons.proxies.Tool.class)) {
+				
+				Map<String, Object> parametersAndValues = new java.util.HashMap<>();
+				parametersAndValues.put("Tool",  Tool.getMendixObject());
+				parametersAndValues.put("Request",  Request.getMendixObject());
+				
+				return executeAndLogToolMicroflow(parametersAndValues);
+			}
+			
 			return executeToolMicroflow();
 		
 		} catch (Exception e) {
