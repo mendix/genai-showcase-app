@@ -28753,12 +28753,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 160px;
 }
 
-.test-variable-width {
-  width: 180px;
-  margin-right: 8px;
-  padding-top: 8px;
-}
-
 .input-label-grid {
   display: grid;
   grid-template-columns: 150px auto 50px;
@@ -28802,53 +28796,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .info-icon {
-  margin: 0 0 0 4px;
-  padding: 0;
+  margin: 0 4px 6px 4px;
 }
 .info-icon img {
   height: 16px;
   width: 16px;
 }
 
-.icon-info-wrapper {
-  display: flex;
-  align-items: center;
-}
-.icon-info-wrapper img {
-  margin-right: 0;
-  margin-bottom: 0;
-}
-
-.width-flex-full {
-  display: flex;
-  flex-grow: 1;
-}
-
-.overflow-visible {
-  overflow: visible !important;
-}
-
-.space-between {
-  display: flex !important;
-  align-items: center !important;
-  justify-items: center;
-  justify-content: space-between;
-}
-
-.width--40-percent {
-  width: 40%;
-}
-
-.align-flex-end {
-  align-items: flex-end !important;
-}
-
-.display--inline {
-  display: inline;
-}
-
-.mx-image-width-unset .mx-image-viewer {
-  width: unset;
+.margin-right-45 {
+  margin-right: 45px;
 }
 
 .listview-bullet-points > ul {
@@ -28964,7 +28920,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .agent-page-container {
-  max-width: 1800px;
+  max-width: 77vw;
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -29017,12 +28973,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .agent-page-container .page-container-main {
   flex: 1 1 0;
-  width: 50%;
+  width: 48vw;
   display: flex;
   flex-direction: column;
   overflow: visible;
   height: 100%;
   overflow-y: auto;
+  gap: 24px;
 }
 .agent-page-container .page-container-main .card {
   overflow: unset;
@@ -29038,12 +28995,12 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .agent-page-container .page-container-side {
   z-index: 100;
-  width: 100%;
-  max-width: 25vw;
+  max-width: 27vw;
+  max-height: 100%;
   display: flex;
   flex-direction: column;
   padding-top: 28px;
-  height: 100%;
+  padding-bottom: 12px;
 }
 .agent-page-container .page-header-content {
   display: flex;
@@ -29146,14 +29103,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-bottom: 0;
 }
 
-.margin-right-45 {
-  margin-right: 45px;
-}
-
 .combobox-model-selection {
   display: flex;
   flex-grow: 1;
-  min-width: 360px;
 }
 .combobox-model-selection .model-selection {
   display: flex;

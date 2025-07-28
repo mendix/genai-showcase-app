@@ -38,7 +38,7 @@
 //Version_Details
 
 .agent-page-container {
-    max-width: 1800px;
+    max-width: 77vw;
     height: 100%;
     display: flex;
     flex-direction: row;
@@ -97,12 +97,13 @@
 
     .page-container-main {
         flex: 1 1 0;
-        width: 50%;
+        width: 48vw;
         display: flex;
         flex-direction: column;
         overflow: visible;
         height: 100%;
         overflow-y: auto;
+        gap: 24px;
         .card {
             overflow: unset;
         }
@@ -121,12 +122,12 @@
 
     .page-container-side {
         z-index: 100;
-        width: 100%;
-        max-width: 25vw;
+        max-width: 27vw;
+        max-height: 100%;
         display: flex;
         flex-direction: column;
         padding-top: 28px;
-        height:100%;
+        padding-bottom: 12px;
     }
     
     .page-header-content {
@@ -254,15 +255,9 @@
     }
 }
 
-
-.margin-right-45{
-    margin-right: 45px;
-}
-
 .combobox-model-selection {
     display: flex;
     flex-grow: 1;
-    min-width: 360px;
 
     .model-selection{
         display: flex;
