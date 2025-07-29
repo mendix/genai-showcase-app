@@ -184,8 +184,9 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 			logMessageTrace = logMessageTrace + "\nwithout input parameters ";
 			response = Core.microflowCall(Tool.getMicroflow()).execute(getContext());
 		} else {
-			logMessageTrace = logMessageTrace +  "\n\nInput parameter(s): " + params.toString();
+			logMessageTrace = logMessageTrace +  "\n\nInput parameter(s):";
 			logMessageTrace = addLogTracesForArguments(logMessageTrace);
+			logMessageTrace = logMessageTrace + params.toString();
 			response = Core.microflowCall(Tool.getMicroflow()).withParams(params).execute(getContext());
 		}
 		long endTime = System.currentTimeMillis();

@@ -20,5 +20,9 @@ public class McpClientRegistry {
     	LOGGER.debug("Putting client with id: " + id);
         clientInstances.put(id, client);
     }
-
+    
+    public static void closeClient(Long id, McpSyncClient client) {
+    	LOGGER.debug("Removing client with id: " + id);
+        clientInstances.remove(id, client);
+    }
 }
