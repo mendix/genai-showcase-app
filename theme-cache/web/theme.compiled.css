@@ -28901,7 +28901,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .agents-page-content-container .agents-container--overview {
   width: 90%;
-  max-width: 1600px;
+  max-width: 1200px;
   margin: 24px;
   flex-direction: column;
 }
@@ -28921,8 +28921,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .agent-page-container {
-  width: 90%;
-  max-width: 1600px;
+  min-height: -webkit-fill-available;
+  min-height: -moz-available;
+  max-width: 77vw;
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -28976,8 +28977,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .agent-page-container .page-container-main {
   flex: 1 1 0;
-  width: 60px;
-  max-width: 945px;
+  width: 48vw;
   display: flex;
   flex-direction: column;
   overflow: visible;
@@ -28999,12 +28999,16 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .agent-page-container .page-container-side {
   z-index: 100;
-  width: 30%;
-  max-width: 472px;
-  max-height: 100%;
+  max-width: 27vw;
+  max-height: 95vh;
   display: flex;
   flex-direction: column;
   padding-top: 28px;
+}
+@media (max-height: 800px) {
+  .agent-page-container .page-container-side {
+    height: 87vh;
+  }
 }
 .agent-page-container .page-header-content {
   display: flex;
