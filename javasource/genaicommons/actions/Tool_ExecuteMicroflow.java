@@ -11,13 +11,17 @@ package genaicommons.actions;
 
 import static java.util.Objects.requireNonNull;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import com.mendix.core.Core;
+import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import genaicommons.impl.MxLogger;
 import genaicommons.proxies.Argument;
+import genaicommons.proxies.ArgumentInput;
+import genaicommons.proxies.ToolCall;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import com.mendix.systemwideinterfaces.core.meta.IMetaObject;
 
@@ -171,7 +175,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		return false;		
 	}
 	
-	private String executeAndLogToolMicroflow(Map<String, Object> params) {
+	private String executeAndLogToolMicroflow(Map<String, Object> params) throws CoreException {
 		String response;
 		String logMessageInfo = "Finished calling microflow " + Tool.getMicroflow() + " with " + getContext();
 		String logMessageTrace = logMessageInfo;
@@ -181,6 +185,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 			response = Core.microflowCall(Tool.getMicroflow()).execute(getContext());
 		} else {
 			logMessageTrace = logMessageTrace +  "\n\nInput parameter(s): " + params.toString();
+			logMessageTrace = addLogTracesForArguments(logMessageTrace);
 			response = Core.microflowCall(Tool.getMicroflow()).withParams(params).execute(getContext());
 		}
 		long endTime = System.currentTimeMillis();
@@ -190,6 +195,25 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		LOGGER.trace(logMessageTrace+ "\n\nReturn value:\n" + response + duration);
 		return response;
 	}
+	
+	// If there are ArgumentInput objects associated to a Tool, they are likely not part of the input parameters and need to be added individually
+	private String addLogTracesForArguments(String logMessageTrace) throws CoreException{
+		List<ArgumentInput> args = Tool.getTool_ArgumentInput();
+		
+		if(args != null && !args.isEmpty()) {
+			logMessageTrace += "\n\n" + "{";
+			for (int i = 0; i < ArgumentList.size(); i++) {
+			    Argument arg = ArgumentList.get(i);
+			    logMessageTrace += arg.getKey() + "=" + arg.getValue();
+			    if (i < ArgumentList.size() - 1) {
+			        logMessageTrace += ", ";
+			    }
+			}
+			logMessageTrace += "}";
+		}
+		return logMessageTrace;
+	}
+	
 	
 	// END EXTRA CODE
 }
