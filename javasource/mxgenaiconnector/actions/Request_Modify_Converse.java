@@ -166,7 +166,7 @@ public class Request_Modify_Converse extends UserAction<java.lang.String>
 			// Add properties (either from microflow or if arguments are present based on those
 			Tool tool = FunctionImpl.getToolByName(Request, toolNode.get("name").asText() ,getContext());
 			List<ArgumentInput> arguments = tool.getTool_ArgumentInput();
-			if (arguments == null) {
+			if (arguments == null || arguments.isEmpty()) {
 				Map<String, IDataType> parameterList = FunctionMappingImpl.getInputParametersForModel(microflow);
 				parameterList.entrySet().forEach(t -> FunctionImpl.addProperty(propertiesNode, requiredNode, t));
 				
