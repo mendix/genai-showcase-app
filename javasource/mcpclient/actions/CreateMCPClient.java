@@ -9,6 +9,7 @@
 
 package mcpclient.actions;
 
+import static java.util.Objects.requireNonNull;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
@@ -50,6 +51,13 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 	{
 		// BEGIN USER CODE
 		try {
+			//Validating Config
+			requireNonNull(ClientConfig, "MCP Client Config is required.");
+			requireNonNull(ClientConfig.getMCPEndpoint(), "MCP Endpoint is required.");
+			requireNonNull(ClientConfig.getName(), "MCP Name is required.");
+			requireNonNull(ClientConfig.getVersion(), "Version is required.");
+			requireNonNull(ClientConfig.getProtocolVersion(), "Protocol Version is required.");			
+			
 			//Client NPE creation
 			MCPClient clientNpe = new MCPClient(getContext());
 			clientNpe.setMCPEndpoint(ClientConfig.getMCPEndpoint());

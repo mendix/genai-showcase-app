@@ -12,7 +12,6 @@ package openaiconnector.actions;
 import static java.util.Objects.requireNonNull;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 import com.mendix.core.Core;
