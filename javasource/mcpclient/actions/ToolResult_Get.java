@@ -36,10 +36,7 @@ public class ToolResult_Get extends UserAction<IMendixObject>
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __MCPClient;
 	private final mcpclient.proxies.MCPClient MCPClient;
-	/** @deprecated use Tool.getMendixObject() instead. */
-	@java.lang.Deprecated(forRemoval = true)
-	private final IMendixObject __Tool;
-	private final mcpclient.proxies.Tool Tool;
+	private final java.lang.String ToolName;
 	/** @deprecated use com.mendix.utils.ListUtils.map(ToolArgumentItemList, com.mendix.systemwideinterfaces.core.IEntityProxy::getMendixObject) instead. */
 	@java.lang.Deprecated(forRemoval = true)
 	private final java.util.List<IMendixObject> __ToolArgumentItemList;
@@ -48,15 +45,14 @@ public class ToolResult_Get extends UserAction<IMendixObject>
 	public ToolResult_Get(
 		IContext context,
 		IMendixObject _mCPClient,
-		IMendixObject _tool,
+		java.lang.String _toolName,
 		java.util.List<IMendixObject> _toolArgumentItemList
 	)
 	{
 		super(context);
 		this.__MCPClient = _mCPClient;
 		this.MCPClient = _mCPClient == null ? null : mcpclient.proxies.MCPClient.initialize(getContext(), _mCPClient);
-		this.__Tool = _tool;
-		this.Tool = _tool == null ? null : mcpclient.proxies.Tool.initialize(getContext(), _tool);
+		this.ToolName = _toolName;
 		this.__ToolArgumentItemList = _toolArgumentItemList;
 		this.ToolArgumentItemList = java.util.Optional.ofNullable(_toolArgumentItemList)
 			.orElse(java.util.Collections.emptyList())
@@ -70,7 +66,7 @@ public class ToolResult_Get extends UserAction<IMendixObject>
 	{
 		// BEGIN USER CODE
 		try {
-			requireNonNull(Tool,"Tool is required.");
+			requireNonNull(ToolName,"Toolname is required.");
 			requireNonNull(MCPClient,"MCP Client is required.");
 			
 			McpSyncClient client = McpClientRegistry.getClient(MCPClient.getMendixObject().getId().toLong());
@@ -81,7 +77,7 @@ public class ToolResult_Get extends UserAction<IMendixObject>
 					.collect(Collectors.toMap(ToolArgumentItem::getName, ToolArgumentItem::getValue));
 			}
 			
-			McpSchema.CallToolRequest callToolRequest = new McpSchema.CallToolRequest(Tool.getName(), arguments);
+			McpSchema.CallToolRequest callToolRequest = new McpSchema.CallToolRequest(ToolName, arguments);
 
 			CallToolResult callToolResultMcp =  client.callTool(callToolRequest);
 			ToolResult toolResultMendix = createToolResult(callToolResultMcp);
