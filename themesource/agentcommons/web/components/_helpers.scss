@@ -1,3 +1,5 @@
+@import "../../../../theme/web/custom-variables.scss";
+
 .custom-control-label {
   display: block;
   overflow: hidden;
@@ -11,7 +13,12 @@
 
 .input-label-width {
   width: 160px;
-  padding: 5px;
+}
+
+.test-variable-width {
+  width: 180px;
+  margin-right: $spacing-small;
+  padding-top: $spacing-small;
 }
 
 .input-label-grid {
@@ -62,13 +69,62 @@
 }
 
 .info-icon {
-    margin: 0 $spacing-smaller 6px $spacing-smaller;
+    margin: 0 0 0 $spacing-smaller;
+    padding: 0;
     img {
         height: 16px;
         width: 16px;
     }
 }
 
-.margin-right-45 {
-    margin-right: 45px;
+.icon-info-wrapper {
+  display: flex;
+  align-items: center;
+
+  img {
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+}
+
+.scroll-to-multiple-output {
+    //only needed to use in JS-Action for scrolling to element
+}
+
+.scroll-to-single-output {
+    //only needed to use in JS-Action for scrolling to element
+}
+
+.width-flex-full {
+  display: flex;
+  flex-grow: 1;
+}
+
+.overflow-visible {
+  overflow: visible !important;
+}
+
+.space-between {
+    display: flex !important;
+    align-items: center !important;
+    justify-items: center;
+    justify-content: space-between;
+}
+
+.width--40-percent {
+  width: 40%;
+}
+
+.align-flex-end {
+  align-items: flex-end !important;
+}
+
+.display--inline {
+  display: inline;
+}
+
+.mx-image-width-unset {
+  .mx-image-viewer {
+    width: unset;
+  }
 }

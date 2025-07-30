@@ -28751,7 +28751,12 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .input-label-width {
   width: 160px;
-  padding: 5px;
+}
+
+.test-variable-width {
+  width: 180px;
+  margin-right: 8px;
+  padding-top: 8px;
 }
 
 .input-label-grid {
@@ -28797,15 +28802,53 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .info-icon {
-  margin: 0 4px 6px 4px;
+  margin: 0 0 0 4px;
+  padding: 0;
 }
 .info-icon img {
   height: 16px;
   width: 16px;
 }
 
-.margin-right-45 {
-  margin-right: 45px;
+.icon-info-wrapper {
+  display: flex;
+  align-items: center;
+}
+.icon-info-wrapper img {
+  margin-right: 0;
+  margin-bottom: 0;
+}
+
+.width-flex-full {
+  display: flex;
+  flex-grow: 1;
+}
+
+.overflow-visible {
+  overflow: visible !important;
+}
+
+.space-between {
+  display: flex !important;
+  align-items: center !important;
+  justify-items: center;
+  justify-content: space-between;
+}
+
+.width--40-percent {
+  width: 40%;
+}
+
+.align-flex-end {
+  align-items: flex-end !important;
+}
+
+.display--inline {
+  display: inline;
+}
+
+.mx-image-width-unset .mx-image-viewer {
+  width: unset;
 }
 
 .listview-bullet-points > ul {
@@ -28921,9 +28964,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .agent-page-container {
-  min-height: -webkit-fill-available;
-  min-height: -moz-available;
-  max-width: 77vw;
+  width: 90%;
+  max-width: 1600px;
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -28977,16 +29019,20 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .agent-page-container .page-container-main {
   flex: 1 1 0;
-  width: 48vw;
+  width: 60%;
+  max-width: 945px;
   display: flex;
   flex-direction: column;
-  overflow: visible;
-  height: 100%;
   overflow-y: auto;
   gap: 24px;
 }
 .agent-page-container .page-container-main .card {
   overflow: unset;
+}
+@media (max-height: 800px) {
+  .agent-page-container .page-container-main {
+    height: 87vh;
+  }
 }
 .agent-page-container .page-container-grid {
   display: flex;
@@ -28999,8 +29045,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .agent-page-container .page-container-side {
   z-index: 100;
-  max-width: 27vw;
-  max-height: 95vh;
+  width: 30%;
+  max-width: 472px;
+  max-height: 92vh;
   display: flex;
   flex-direction: column;
   padding-top: 28px;
@@ -29125,6 +29172,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: auto;
   width: auto;
   margin-right: 8px;
+}
+
+.margin-right-45 {
+  margin-right: 45px;
 }
 
 .hide-tooltip .widget-tooltip-arrow-top {

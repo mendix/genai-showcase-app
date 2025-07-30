@@ -38,9 +38,8 @@
 //Version_Details
 
 .agent-page-container {
-    min-height: -webkit-fill-available;
-    min-height: -moz-available;
-    max-width: 77vw;
+    width: 90%;
+    max-width: 1600px;
     height: 100%;
     display: flex;
     flex-direction: row;
@@ -100,17 +99,23 @@
 
     .page-container-main {
         flex: 1 1 0;
-        width: 48vw;
+        width: 60%;
+        max-width: 945px;
         display: flex;
         flex-direction: column;
-        overflow: visible;
-        height: 100%;
         overflow-y: auto;
         gap: 24px;
         .card {
             overflow: unset;
         }
     }
+
+    @media (max-height: 800px) {
+        .page-container-main {
+            height: 87vh;
+        }
+    }
+
 
     .page-container-grid {
         display: flex;
@@ -125,8 +130,9 @@
 
     .page-container-side {
         z-index: 100;
-        max-width: 27vw;
-        max-height: 95vh;
+        width: 30%;
+        max-width: 472px;
+        max-height: 92vh;
         display: flex;
         flex-direction: column;
         padding-top: 28px;
@@ -268,7 +274,7 @@
     display: flex;
     flex-grow: 1;
 
-    .model-selection{
+    .model-selection {
         display: flex;
         align-items: center;
         height: max-content;
@@ -279,4 +285,8 @@
             margin-right: $spacing-small;
         }
     }
+}
+
+.margin-right-45 {
+    margin-right: 45px;
 }
