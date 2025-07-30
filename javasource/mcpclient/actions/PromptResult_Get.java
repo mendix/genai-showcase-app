@@ -19,9 +19,9 @@ import io.modelcontextprotocol.spec.McpSchema.TextContent;
 import mcpclient.impl.McpClientRegistry;
 import mcpclient.impl.MxLogger;
 import mcpclient.proxies.Audience;
-import mcpclient.proxies.GetPromptResult;
 import mcpclient.proxies.PromptArgumentItem;
 import mcpclient.proxies.PromptMessage;
+import mcpclient.proxies.PromptResult;
 import static java.util.Objects.requireNonNull;
 import java.util.List;
 import java.util.Map;
@@ -30,33 +30,29 @@ import java.util.stream.Collectors;
 /**
  * Returns a GetPromptResult from the MCP Server which contains the final prompt augmented with the prompt arguments (if applicable).
  */
-public class GetPromptResult_Get extends UserAction<IMendixObject>
+public class PromptResult_Get extends UserAction<IMendixObject>
 {
 	/** @deprecated use MCPClient.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __MCPClient;
 	private final mcpclient.proxies.MCPClient MCPClient;
-	/** @deprecated use Prompt.getMendixObject() instead. */
-	@java.lang.Deprecated(forRemoval = true)
-	private final IMendixObject __Prompt;
-	private final mcpclient.proxies.Prompt Prompt;
+	private final java.lang.String PromptName;
 	/** @deprecated use com.mendix.utils.ListUtils.map(Arguments, com.mendix.systemwideinterfaces.core.IEntityProxy::getMendixObject) instead. */
 	@java.lang.Deprecated(forRemoval = true)
 	private final java.util.List<IMendixObject> __Arguments;
 	private final java.util.List<mcpclient.proxies.PromptArgumentItem> Arguments;
 
-	public GetPromptResult_Get(
+	public PromptResult_Get(
 		IContext context,
 		IMendixObject _mCPClient,
-		IMendixObject _prompt,
+		java.lang.String _promptName,
 		java.util.List<IMendixObject> _arguments
 	)
 	{
 		super(context);
 		this.__MCPClient = _mCPClient;
 		this.MCPClient = _mCPClient == null ? null : mcpclient.proxies.MCPClient.initialize(getContext(), _mCPClient);
-		this.__Prompt = _prompt;
-		this.Prompt = _prompt == null ? null : mcpclient.proxies.Prompt.initialize(getContext(), _prompt);
+		this.PromptName = _promptName;
 		this.__Arguments = _arguments;
 		this.Arguments = java.util.Optional.ofNullable(_arguments)
 			.orElse(java.util.Collections.emptyList())
@@ -71,17 +67,17 @@ public class GetPromptResult_Get extends UserAction<IMendixObject>
 		// BEGIN USER CODE
 		try {
 			requireNonNull(MCPClient,"MCP Client is required.");
-			requireNonNull(Prompt,"Prompt is required.");
+			requireNonNull(PromptName,"Prompt name is required.");
 			
 			McpSyncClient client = McpClientRegistry.getClient(MCPClient.getMendixObject().getId().toLong());
 
 			Map<String, Object> arguments = Arguments.stream()
 					.collect(Collectors.toMap(PromptArgumentItem::getName, PromptArgumentItem::getValue));
 			
-			McpSchema.GetPromptRequest request = new McpSchema.GetPromptRequest(Prompt.getName(), arguments);
+			McpSchema.GetPromptRequest request = new McpSchema.GetPromptRequest(PromptName, arguments);
 
 			McpSchema.GetPromptResult resultMcp =  client.getPrompt(request);
-			GetPromptResult getPromptResultMendix = createPromptResult(resultMcp);
+			PromptResult getPromptResultMendix = createPromptResult(resultMcp);
 			
 			return getPromptResultMendix.getMendixObject();
 		} catch (Exception e) {
@@ -99,19 +95,19 @@ public class GetPromptResult_Get extends UserAction<IMendixObject>
 	@java.lang.Override
 	public java.lang.String toString()
 	{
-		return "GetPromptResult_Get";
+		return "PromptResult_Get";
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new mcpclient.impl.MxLogger(GetPromptResult_Get.class);
+	private static final MxLogger LOGGER = new mcpclient.impl.MxLogger(PromptResult_Get.class);
 	
 	/**
 	 * Create a Mendix GetPromptResult based on the MCP GetPromptResult
 	 * @param getPromptResultMcp as returned from the server via MCP 
 	 */
-	private GetPromptResult createPromptResult(McpSchema.GetPromptResult getPromptResultMcp) {
+	private PromptResult createPromptResult(McpSchema.GetPromptResult getPromptResultMcp) {
 		
-		GetPromptResult getPromptResultMendix = new GetPromptResult(getContext());
+		PromptResult getPromptResultMendix = new PromptResult(getContext());
 		getPromptResultMendix.setDescription(getPromptResultMcp.description());
 		
 		List<io.modelcontextprotocol.spec.McpSchema.PromptMessage> promptMessageListMcp = getPromptResultMcp.messages();
@@ -133,13 +129,13 @@ public class GetPromptResult_Get extends UserAction<IMendixObject>
 	 * @param promptMessageMcp
 	 * @param getPromptResultMendix
 	 */
-	private void createPromptMessages(io.modelcontextprotocol.spec.McpSchema.PromptMessage promptMessageMcp, GetPromptResult getPromptResultMendix) {
+	private void createPromptMessages(io.modelcontextprotocol.spec.McpSchema.PromptMessage promptMessageMcp, PromptResult getPromptResultMendix) {
 		PromptMessage promptMessageMendix = new PromptMessage(getContext());
 		TextContent textContent = (TextContent) promptMessageMcp.content();
 		createAudiences(textContent, promptMessageMendix);
 		promptMessageMendix.setContent(textContent.text());
 		promptMessageMendix.setRole(promptMessageMcp.role().toString());
-		promptMessageMendix.setPromptMessage_GetPromptResult(getPromptResultMendix);	
+		promptMessageMendix.setPromptMessage_PromptResult(getPromptResultMendix);	
 	}
 	
 	/**
