@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
@@ -25,7 +26,7 @@ import io.modelcontextprotocol.spec.McpSchema.TextContent;
 import mcpclient.impl.McpClientRegistry;
 import mcpclient.impl.MxLogger;
 import mcpclient.proxies.ToolResult;
-import mcpclient.proxies.ToolArgumentItem;
+import mcpclient.proxies.ArgumentInput;
 
 /**
  * Call the Tool on the MCP Server which returns a ToolResult. The ToolResult contains the response of the tool which is passed to the model.
@@ -37,28 +38,24 @@ public class ToolResult_Get extends UserAction<IMendixObject>
 	private final IMendixObject __MCPClient;
 	private final mcpclient.proxies.MCPClient MCPClient;
 	private final java.lang.String ToolName;
-	/** @deprecated use com.mendix.utils.ListUtils.map(ToolArgumentItemList, com.mendix.systemwideinterfaces.core.IEntityProxy::getMendixObject) instead. */
+	/** @deprecated use ArgumentCollection.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
-	private final java.util.List<IMendixObject> __ToolArgumentItemList;
-	private final java.util.List<mcpclient.proxies.ToolArgumentItem> ToolArgumentItemList;
+	private final IMendixObject __ArgumentCollection;
+	private final mcpclient.proxies.ArgumentCollection ArgumentCollection;
 
 	public ToolResult_Get(
 		IContext context,
 		IMendixObject _mCPClient,
 		java.lang.String _toolName,
-		java.util.List<IMendixObject> _toolArgumentItemList
+		IMendixObject _argumentCollection
 	)
 	{
 		super(context);
 		this.__MCPClient = _mCPClient;
 		this.MCPClient = _mCPClient == null ? null : mcpclient.proxies.MCPClient.initialize(getContext(), _mCPClient);
 		this.ToolName = _toolName;
-		this.__ToolArgumentItemList = _toolArgumentItemList;
-		this.ToolArgumentItemList = java.util.Optional.ofNullable(_toolArgumentItemList)
-			.orElse(java.util.Collections.emptyList())
-			.stream()
-			.map(toolArgumentItemListElement -> mcpclient.proxies.ToolArgumentItem.initialize(getContext(), toolArgumentItemListElement))
-			.collect(java.util.stream.Collectors.toList());
+		this.__ArgumentCollection = _argumentCollection;
+		this.ArgumentCollection = _argumentCollection == null ? null : mcpclient.proxies.ArgumentCollection.initialize(getContext(), _argumentCollection);
 	}
 
 	@java.lang.Override
@@ -71,11 +68,8 @@ public class ToolResult_Get extends UserAction<IMendixObject>
 			
 			McpSyncClient client = McpClientRegistry.getClient(MCPClient.getMendixObject().getId().toLong());
 			
-			Map<String, Object> arguments = new HashMap<>();;
-			if (ToolArgumentItemList != null && !ToolArgumentItemList.isEmpty()) {
-				arguments = ToolArgumentItemList.stream()
-					.collect(Collectors.toMap(ToolArgumentItem::getName, ToolArgumentItem::getValue));
-			}
+			Map<String, Object> arguments = getArguments();
+			
 			
 			McpSchema.CallToolRequest callToolRequest = new McpSchema.CallToolRequest(ToolName, arguments);
 
@@ -114,5 +108,25 @@ public class ToolResult_Get extends UserAction<IMendixObject>
 		toolResultMendix.setContent(textContent.text());
 		return toolResultMendix;
 	}	
+	
+	/**
+	 * Get arguments map as input for the tool call based on ArgumentCollection
+	 * @throws CoreException
+	 */
+	private Map<String, Object> getArguments() throws CoreException {
+		Map<String, Object> arguments = new HashMap<>();;
+		if(ArgumentCollection == null) {
+			return arguments;
+		}
+		
+		List<ArgumentInput> argumentInputList = ArgumentCollection.getArgumentCollection_ArgumentInput();
+		if(argumentInputList == null || argumentInputList.isEmpty()) {
+			return arguments;
+		}
+
+		arguments = argumentInputList.stream()
+				.collect(Collectors.toMap(ArgumentInput::getName, ArgumentInput::getValue));
+		return arguments;
+	}
 	// END EXTRA CODE
 }

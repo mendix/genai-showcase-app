@@ -9,6 +9,7 @@
 
 package mcpclient.actions;
 
+import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
@@ -18,11 +19,12 @@ import io.modelcontextprotocol.spec.McpSchema.Role;
 import io.modelcontextprotocol.spec.McpSchema.TextContent;
 import mcpclient.impl.McpClientRegistry;
 import mcpclient.impl.MxLogger;
+import mcpclient.proxies.ArgumentInput;
 import mcpclient.proxies.Audience;
-import mcpclient.proxies.PromptArgumentItem;
 import mcpclient.proxies.PromptMessage;
 import mcpclient.proxies.PromptResult;
 import static java.util.Objects.requireNonNull;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -37,28 +39,24 @@ public class PromptResult_Get extends UserAction<IMendixObject>
 	private final IMendixObject __MCPClient;
 	private final mcpclient.proxies.MCPClient MCPClient;
 	private final java.lang.String PromptName;
-	/** @deprecated use com.mendix.utils.ListUtils.map(Arguments, com.mendix.systemwideinterfaces.core.IEntityProxy::getMendixObject) instead. */
+	/** @deprecated use ArgumentCollection.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
-	private final java.util.List<IMendixObject> __Arguments;
-	private final java.util.List<mcpclient.proxies.PromptArgumentItem> Arguments;
+	private final IMendixObject __ArgumentCollection;
+	private final mcpclient.proxies.ArgumentCollection ArgumentCollection;
 
 	public PromptResult_Get(
 		IContext context,
 		IMendixObject _mCPClient,
 		java.lang.String _promptName,
-		java.util.List<IMendixObject> _arguments
+		IMendixObject _argumentCollection
 	)
 	{
 		super(context);
 		this.__MCPClient = _mCPClient;
 		this.MCPClient = _mCPClient == null ? null : mcpclient.proxies.MCPClient.initialize(getContext(), _mCPClient);
 		this.PromptName = _promptName;
-		this.__Arguments = _arguments;
-		this.Arguments = java.util.Optional.ofNullable(_arguments)
-			.orElse(java.util.Collections.emptyList())
-			.stream()
-			.map(argumentsElement -> mcpclient.proxies.PromptArgumentItem.initialize(getContext(), argumentsElement))
-			.collect(java.util.stream.Collectors.toList());
+		this.__ArgumentCollection = _argumentCollection;
+		this.ArgumentCollection = _argumentCollection == null ? null : mcpclient.proxies.ArgumentCollection.initialize(getContext(), _argumentCollection);
 	}
 
 	@java.lang.Override
@@ -71,8 +69,7 @@ public class PromptResult_Get extends UserAction<IMendixObject>
 			
 			McpSyncClient client = McpClientRegistry.getClient(MCPClient.getMendixObject().getId().toLong());
 
-			Map<String, Object> arguments = Arguments.stream()
-					.collect(Collectors.toMap(PromptArgumentItem::getName, PromptArgumentItem::getValue));
+			Map<String, Object> arguments = getArguments();
 			
 			McpSchema.GetPromptRequest request = new McpSchema.GetPromptRequest(PromptName, arguments);
 
@@ -154,6 +151,26 @@ public class PromptResult_Get extends UserAction<IMendixObject>
 			audienceMendix.setRole(role.name());
 			audienceMendix.setAudience_PromptMessage(promptMessageMendix);
 		}	
+	}
+	
+	/**
+	 * Get arguments map as input for the tool call based on ArgumentCollection
+	 * @throws CoreException
+	 */
+	private Map<String, Object> getArguments() throws CoreException {
+		Map<String, Object> arguments = new HashMap<>();;
+		if(ArgumentCollection == null) {
+			return arguments;
+		}
+		
+		List<ArgumentInput> argumentInputList = ArgumentCollection.getArgumentCollection_ArgumentInput();
+		if(argumentInputList == null || argumentInputList.isEmpty()) {
+			return arguments;
+		}
+
+		arguments = argumentInputList.stream()
+				.collect(Collectors.toMap(ArgumentInput::getName, ArgumentInput::getValue));
+		return arguments;
 	}
 	
 	// END EXTRA CODE

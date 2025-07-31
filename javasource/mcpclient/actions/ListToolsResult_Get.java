@@ -171,7 +171,7 @@ public class ListToolsResult_Get extends UserAction<IMendixObject>
 	private void createEnumValues(List<Object> enumValues, mcpclient.proxies.ToolArgument toolArg) {
 		for (Object enumValueMcp : enumValues) {
             EnumValue enumValueMendix = new mcpclient.proxies.EnumValue(getContext());
-            enumValueMendix.setValue(enumValueMcp.toString());
+            enumValueMendix.setKey(enumValueMcp.toString());
             enumValueMendix.setEnumValue_ToolArgument(toolArg);
         }
 	}
