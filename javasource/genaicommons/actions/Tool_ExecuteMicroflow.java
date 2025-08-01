@@ -34,16 +34,16 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __Request;
 	private final genaicommons.proxies.Request Request;
-	/** @deprecated use com.mendix.utils.ListUtils.map(ArgumentList, com.mendix.systemwideinterfaces.core.IEntityProxy::getMendixObject) instead. */
+	/** @deprecated use ToolCall.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
-	private final java.util.List<IMendixObject> __ArgumentList;
-	private final java.util.List<genaicommons.proxies.Argument> ArgumentList;
+	private final IMendixObject __ToolCall;
+	private final genaicommons.proxies.ToolCall ToolCall;
 
 	public Tool_ExecuteMicroflow(
 		IContext context,
 		IMendixObject _tool,
 		IMendixObject _request,
-		java.util.List<IMendixObject> _argumentList
+		IMendixObject _toolCall
 	)
 	{
 		super(context);
@@ -51,12 +51,8 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		this.Tool = _tool == null ? null : genaicommons.proxies.Tool.initialize(getContext(), _tool);
 		this.__Request = _request;
 		this.Request = _request == null ? null : genaicommons.proxies.Request.initialize(getContext(), _request);
-		this.__ArgumentList = _argumentList;
-		this.ArgumentList = java.util.Optional.ofNullable(_argumentList)
-			.orElse(java.util.Collections.emptyList())
-			.stream()
-			.map(argumentListElement -> genaicommons.proxies.Argument.initialize(getContext(), argumentListElement))
-			.collect(java.util.stream.Collectors.toList());
+		this.__ToolCall = _toolCall;
+		this.ToolCall = _toolCall == null ? null : genaicommons.proxies.ToolCall.initialize(getContext(), _toolCall);
 	}
 
 	@java.lang.Override
@@ -67,17 +63,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 			requireNonNull(Tool, "Tool is required.");
 			requireNonNull(Tool.getMicroflow(), "Tool has no Microflow.");
 			
-			//TODO clean up
-			if(Tool.getClass().equals(genaicommons.proxies.Tool.class)) {
-				
-				Map<String, Object> parametersAndValues = new java.util.HashMap<>();
-				parametersAndValues.put("Tool",  Tool.getMendixObject());
-				parametersAndValues.put("Request",  Request.getMendixObject());
-				
-				return executeAndLogToolMicroflow(parametersAndValues);
-			}
-			
-			return executeToolMicroflow();
+			return callTool();
 		
 		} catch (Exception e) {
 			throw e;
@@ -97,6 +83,24 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new genaicommons.impl.MxLogger(Tool_ExecuteMicroflow.class);
+	
+	/**
+	 * If the Tool is of the generalization type, only Tool and Request are added to the microflow
+	 * Otherwise the parameters from the microflow are mapped
+	 * @throws Exception
+	 */
+	private String callTool() throws Exception {
+		if(Tool.getClass().equals(genaicommons.proxies.Tool.class)) {
+			Map<String, Object> parametersAndValues = new java.util.HashMap<>();
+			parametersAndValues.put("Tool",  Tool.getMendixObject());
+			parametersAndValues.put("Request",  Request.getMendixObject());
+			return executeAndLogToolMicroflow(parametersAndValues);
+			
+		}
+		else {
+			return executeToolMicroflow();
+		}
+	}
 
 	private String executeToolMicroflow() throws Exception {
 		
@@ -108,7 +112,8 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 			IDataType value = entry.getValue();
 			String key = entry.getKey();
 			//find Argument.Value in ArgumentList
-			String argumentValue = ArgumentList.stream()
+			List<Argument> argumentList = ToolCall.getToolCall_Argument();
+			String argumentValue = argumentList.stream()
 				    .filter(arg -> key.equals(arg.getKey()))
 				    .map(Argument::getValue)
 				    .findFirst()
@@ -176,7 +181,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 	
 	private String executeAndLogToolMicroflow(Map<String, Object> params) throws CoreException {
 		String response;
-		String logMessageInfo = "Finished calling microflow " + Tool.getMicroflow() + " with " + getContext();
+		String logMessageInfo = "Finished toolcall " + ToolCall.getName() + " with Id " + ToolCall.getToolCallId() + " using microflow " + Tool.getMicroflow() + " with " + getContext();
 		String logMessageTrace = logMessageInfo;
 		long startTime = System.currentTimeMillis();
 		if(params == null || params.isEmpty()) {
@@ -199,13 +204,14 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 	// If there are ArgumentInput objects associated to a Tool, they are likely not part of the input parameters and need to be added individually
 	private String addLogTracesForArguments(String logMessageTrace) throws CoreException{
 		List<ArgumentInput> args = Tool.getTool_ArgumentInput();
+		List<Argument> argumentList = ToolCall.getToolCall_Argument();
 		
 		if(args != null && !args.isEmpty()) {
 			logMessageTrace += "\n\n" + "{";
-			for (int i = 0; i < ArgumentList.size(); i++) {
-			    Argument arg = ArgumentList.get(i);
+			for (int i = 0; i < argumentList.size(); i++) {
+			    Argument arg = argumentList.get(i);
 			    logMessageTrace += arg.getKey() + "=" + arg.getValue();
-			    if (i < ArgumentList.size() - 1) {
+			    if (i < argumentList.size() - 1) {
 			        logMessageTrace += ", ";
 			    }
 			}
