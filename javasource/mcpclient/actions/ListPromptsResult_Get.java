@@ -128,7 +128,7 @@ public class ListPromptsResult_Get extends UserAction<IMendixObject>
 			mcpclient.proxies.PromptArgument promptArg = new mcpclient.proxies.PromptArgument(getContext());
 			promptArg.setDescription(promptArgumentMcp.description());
 			promptArg.setName(promptArgumentMcp.name());
-			promptArg.setRequired(promptArgumentMcp.required());
+			promptArg.setRequired(promptArgumentMcp.required().booleanValue());
 			promptArg.setPromptArgument_Prompt(promptMendix);
 		}
 	}

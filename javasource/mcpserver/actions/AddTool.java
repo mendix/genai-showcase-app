@@ -225,6 +225,7 @@ public class AddTool extends UserAction<IMendixObject>
         root.put("id", "urn:jsonschema:Operation");
 
         ObjectNode propertiesNode = MAPPER.createObjectNode();
+        ArrayNode requiredNode = MAPPER.createArrayNode();
 
         for (Map.Entry<String, IDataType> param : inputParameters.entrySet()) {  	
             String name = param.getKey();
@@ -241,8 +242,10 @@ public class AddTool extends UserAction<IMendixObject>
                 typeNode.put("type", "string");
             }
             propertiesNode.set(name, typeNode);
+            requiredNode.add(name);
         }
         root.set("properties",propertiesNode);
+        root.set("required", requiredNode);
 		return MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(root);
 	}
 	
