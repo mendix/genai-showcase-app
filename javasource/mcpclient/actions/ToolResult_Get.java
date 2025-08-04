@@ -13,6 +13,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
@@ -125,6 +126,9 @@ public class ToolResult_Get extends UserAction<IMendixObject>
 		}
 
 		arguments = argumentInputList.stream()
+				.filter(Objects::nonNull)
+				.filter(arg -> arg.getName() != null)
+                .filter(arg -> arg.getValue() != null)
 				.collect(Collectors.toMap(ArgumentInput::getName, ArgumentInput::getValue));
 		return arguments;
 	}
