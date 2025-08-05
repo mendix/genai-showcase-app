@@ -9,8 +9,13 @@
 
 package mcpserver.actions;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
+import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import io.modelcontextprotocol.server.McpServerFeatures;
@@ -18,43 +23,48 @@ import io.modelcontextprotocol.server.McpSyncServer;
 import io.modelcontextprotocol.spec.McpSchema;
 import mcpserver.impl.McpServerRegistry;
 import mcpserver.impl.MxLogger;
+import mcpserver.proxies.TextContent;
+import mcpserver.proxies.Tool;
 import static java.util.Objects.requireNonNull;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 
 /**
- * Registers a tool the with MCP Server that gets exposed to MCP clients. If the model chooses to call the tool, the selected microflow gets executed.
+ * Registers a tool with the MCP Server that gets exposed to MCP clients. If the model chooses to call the tool, the selected microflow gets executed.
  * 
  * Currently, the current User is not in scope of the tool microflow.
  */
 public class AddTool extends UserAction<IMendixObject>
 {
-	private final java.lang.String Name;
-	private final java.lang.String Description;
-	private final java.lang.String Schema;
-	private final java.lang.String ExecutingMicroflow;
 	/** @deprecated use McpServer.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __McpServer;
 	private final mcpserver.proxies.McpServer McpServer;
+	private final java.lang.String Name;
+	private final java.lang.String Description;
+	private final java.lang.String ExecutingMicroflow;
+	private final java.lang.String Schema;
 
 	public AddTool(
 		IContext context,
+		IMendixObject _mcpServer,
 		java.lang.String _name,
 		java.lang.String _description,
-		java.lang.String _schema,
 		java.lang.String _executingMicroflow,
-		IMendixObject _mcpServer
+		java.lang.String _schema
 	)
 	{
 		super(context);
-		this.Name = _name;
-		this.Description = _description;
-		this.Schema = _schema;
-		this.ExecutingMicroflow = _executingMicroflow;
 		this.__McpServer = _mcpServer;
 		this.McpServer = _mcpServer == null ? null : mcpserver.proxies.McpServer.initialize(getContext(), _mcpServer);
+		this.Name = _name;
+		this.Description = _description;
+		this.ExecutingMicroflow = _executingMicroflow;
+		this.Schema = _schema;
 	}
 
 	@java.lang.Override
@@ -63,14 +73,13 @@ public class AddTool extends UserAction<IMendixObject>
 		// BEGIN USER CODE
 		requireNonNull(Name,"Name is required.");
 		requireNonNull(Description,"Description is required.");
-		requireNonNull(Schema,"Schema is required.");
 		requireNonNull(McpServer,"MCPServer is required.");		
 		
 		// Create NPE for the tool
 		mcpserver.proxies.Tool toolNpe = new mcpserver.proxies.Tool(getContext());
 		toolNpe.setName(Name);
 		toolNpe.setDescription(Description);
-		toolNpe.setSchema(Schema);
+		setToolSchema(toolNpe);
 		toolNpe.setMicroflowName(ExecutingMicroflow);
 		toolNpe.setTool_McpServer(McpServer);
 
@@ -78,28 +87,24 @@ public class AddTool extends UserAction<IMendixObject>
 		McpSyncServer server = McpServerRegistry.getServerInstance(this.McpServer.getMendixObject().getId().toLong());
 
 		McpServerFeatures.SyncToolSpecification tool = new McpServerFeatures.SyncToolSpecification(
-				new McpSchema.Tool(Name, Description,Schema),
+				new McpSchema.Tool(toolNpe.getName(), toolNpe.getDescription(), toolNpe.getSchema()),
 				(exchange, arguments) -> {
-					// some request logging
 					String threadName = Thread.currentThread().getName();
 					long start = System.currentTimeMillis();
 					LOGGER.trace(threadName + ": Start processing tool call " + Name + ", MF: " + ExecutingMicroflow);
 
 					IContext ctx = getContextFromSession();
-
 					Map<String, Object> args = new HashMap<>(arguments);
-					args.put("Tool", toolNpe);
-
+					
 					try {
-						IMendixObject mxExecResult = Core.microflowCall(ExecutingMicroflow).withParams(args).execute(ctx);
-						mcpserver.proxies.TextContent mxTextContent = mcpserver.proxies.TextContent.initialize(ctx, mxExecResult);
+						manipulateArgsForMicroflowCall(toolNpe, args);
+						mcpserver.proxies.TextContent mxTextContent = getTextContextFromToolMicroflow(args,ctx);
 
 						McpSchema.TextContent mcpTextContent = new McpSchema.TextContent(mxTextContent.getContent());
 						return new McpSchema.CallToolResult(List.of(mcpTextContent), false);
 					} finally {
 						LOGGER.trace(threadName + ": End processing tool call '" + Name + ". Duration: " + (System.currentTimeMillis() - start) + "ms.");
 					}
-
 				}
 		);
 		server.addTool(tool);
@@ -120,6 +125,9 @@ public class AddTool extends UserAction<IMendixObject>
 
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new mcpserver.impl.MxLogger(AddTool.class);
+	
+	private static final ObjectMapper MAPPER = new ObjectMapper();
+	
 	/**
 	 * Returns a context object for the tool microflow. Currently, a system session is returned.
 	 * @return Context object
@@ -127,5 +135,146 @@ public class AddTool extends UserAction<IMendixObject>
 	private IContext getContextFromSession() {
 		return Core.createSystemContext();
 	}
+	
+	/**
+	 * Convert DateTime input values to correct DataType. Add Tool to args
+	 * @param tool that gets added to the args
+	 * @param args args that get manipulated
+	 */
+	private void manipulateArgsForMicroflowCall(Tool tool, Map<String, Object> args) {
+		Map<String, IDataType> parametersAndTypes = getInputParametersPrimitives();
+		
+		
+		for (Entry<String, IDataType> entry : parametersAndTypes.entrySet()) {
+	        String paramName = entry.getKey();
+	        IDataType type = entry.getValue();
+	        // DateTime values need to be converted
+	        if (IDataType.DataTypeEnum.Datetime.equals(type.getType()) && args.containsKey(paramName)) {
+	        	Object originalValue = args.get(paramName);
+	        	Date date = new Date(Long.parseLong(originalValue.toString()));
+	            args.put(paramName, date);
+	        }
+	    }
+		args.put("Tool", tool);
+	}
+	
+	
+	/**
+	 * executes the tool microflow; if the microflow returns a String, a new TextContent is created and the Content is set with the string.
+	 * If the microflow already returns a TextContext, it gets returned
+	 * @param args list of parameters with values
+	 * @param ctx context to execute to microflow
+	 * @return TextContent
+	 */
+	private mcpserver.proxies.TextContent getTextContextFromToolMicroflow(Map<String, Object> args, IContext ctx){
+		if(isToolReturnTypeString()) {
+			String stringResult = Core.microflowCall(ExecutingMicroflow).withParams(args).execute(ctx);
+			mcpserver.proxies.TextContent mxTextContentFromString = new TextContent(ctx);
+			mxTextContentFromString.setContent(stringResult);
+			return mxTextContentFromString;
+			
+		} else
+		{
+			IMendixObject mxExecResult = Core.microflowCall(ExecutingMicroflow).withParams(args).execute(ctx);
+			return mcpserver.proxies.TextContent.initialize(ctx, mxExecResult);
+			
+		}		
+	}
+	
+	/**
+	 * checks if the return type of the tool microflow is of Type string
+	 */
+	private boolean isToolReturnTypeString() {
+		IDataType returnType = Core.getReturnType(ExecutingMicroflow);
+		
+		if(returnType != null && IDataType.DataTypeEnum.String.equals(returnType.getType())) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	
+	/**
+	 * sets the Schema definition either passed as argument of the JavaAction or extracted from the tool microflow
+	 * @param tool
+	 * @throws JsonProcessingException
+	 */
+	private void setToolSchema(Tool tool) throws JsonProcessingException {
+		try {
+			if(Schema != null && !Schema.isEmpty()) {
+				tool.setSchema(Schema);
+				
+			} else {
+				tool.setSchema(getSchemaFromMicroflow());
+			}
+		} catch (JsonProcessingException e) {
+			LOGGER.error(e);
+		}
+	}
+	
+	/**
+	 * Creates a Schema definition for all primitive input parameters of the tool microflow
+	 * @return Schema definition as String
+	 * @throws JsonProcessingException
+	 */
+	private String getSchemaFromMicroflow() throws JsonProcessingException {
+		Map<String, IDataType> inputParameters = getInputParametersPrimitives();	
+		ObjectNode root = MAPPER.createObjectNode();
+        root.put("type", "object");
+        root.put("id", "urn:jsonschema:Operation");
+
+        ObjectNode propertiesNode = MAPPER.createObjectNode();
+
+        for (Map.Entry<String, IDataType> param : inputParameters.entrySet()) {  	
+            String name = param.getKey();
+            String type = parameterGetType(param);
+
+            ObjectNode typeNode = MAPPER.createObjectNode();
+            typeNode.put("type", type);
+
+            // Handle enum case to expose possible enum values
+            if ("enum".equals(type)) {
+                Set<String> enumKeySet = param.getValue().getEnumeration().getEnumValues().keySet();
+                ArrayNode enumKeyArrayNode = MAPPER.valueToTree(enumKeySet);
+                typeNode.set("enum", enumKeyArrayNode);
+                typeNode.put("type", "string");
+            }
+            propertiesNode.set(name, typeNode);
+        }
+        root.set("properties",propertiesNode);
+		return MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(root);
+	}
+	
+	/**
+	 * determines the type of parameter. Long/Decimal/Datetime converted to "number", enumeration to "enum"
+	 * @param inputParameter
+	 */
+	private String parameterGetType(Entry<String, IDataType> inputParameter) {
+		String type = inputParameter.getValue().toString().toLowerCase();
+		if(type.equals("long") || type.equals("decimal") || type.equals("datetime")) {
+			type = "number";
+		} else if (type.equals("enumeration")) {
+			type = "enum";
+		}
+		return type;
+	}
+	/**
+	 * Returns a list of primitive input parameters for the tool microflow
+	 */
+	private Map<String, IDataType> getInputParametersPrimitives(){
+		Map<String, IDataType> inputParameters = Core.getInputParameters(ExecutingMicroflow);
+		Map<String, IDataType> inputParametersModified = new HashMap<>();
+
+		for(Map.Entry<String, IDataType> entry : inputParameters.entrySet()) {
+			String objectType = entry.getValue().getObjectType();
+			if (objectType == null) {
+				inputParametersModified.put(entry.getKey(), entry.getValue());
+			}
+		}
+		return inputParametersModified;
+	}
+	
+	
 	// END EXTRA CODE
 }

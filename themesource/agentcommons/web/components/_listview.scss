@@ -1,0 +1,98 @@
+.listview-bullet-points {
+    > ul {
+        list-style-type: disc;
+        margin-bottom: 0px;
+        > li {
+            list-style-position: outside;
+        }
+    }
+}
+
+.listview-empty-text.mx-listview {
+    > ul > li.mx-listview-empty {
+        text-align: left;
+        > label {
+            display: none;
+        }
+    }
+}
+
+.listview-empty-text--tools {
+    > ul > li.mx-listview-empty {
+        &::before {
+            content: "Provide your agent with access to app functionality by adding microflows as tools";
+        }
+    }
+}
+
+.listview-empty-text--KB {
+    > ul > li.mx-listview-empty {
+        &::before {
+            content: "Ground your agent in your company data by adding knowledge bases."
+        }
+    }
+}
+
+//Tables
+.table-header {
+    margin-top: $spacing-medium;
+    width: 100%;
+    border-bottom: 1px solid $table-border-separator-color;
+}
+
+//Output list table
+.output-grid-container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 20% auto 9% 9% 10%;
+    gap: 10px;
+    margin-top: $spacing-small;
+    margin-bottom: $spacing-medium;
+}
+
+.output-grid-item {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 0;
+}
+
+.output-grid-icon {
+    margin-top: 3.5px;
+}
+
+.output-align-header {
+    margin-right: 1%;
+
+    @supports (-moz-appearance: none) {
+        margin-right: $spacing-medium;
+    }
+}
+
+
+//Version table
+.version-table {
+    display: grid;
+    grid-template-columns: 9% auto 10% 18% 18% 18% 2%;
+
+    .version-grid-item {
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 0;
+}
+    .delete-icon {
+        color: $brand-danger;
+    }
+}
+
+.testcase-table {
+    display: flex;
+
+    .text-testcase {
+        min-width: 95%;
+    }
+
+    .delete-icon {
+        min-width: 5%;
+        color: $brand-danger;
+    }
+}

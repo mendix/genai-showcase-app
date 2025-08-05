@@ -33,6 +33,8 @@ public class Entity_GetList extends UserAction<java.util.List<IMendixObject>>
 		for(IMetaObject metaObject : Core.getMetaObjects()) {
 			IMendixObject entityImport = Core.instantiate(getContext(), Entity.getType());
 			entityImport.setValue(getContext(), Entity.MemberNames.Name.toString(), metaObject.getName());
+			entityImport.setValue(getContext(), Entity.MemberNames.IsPersistable.toString(), metaObject.isPersistable());
+			
 			modelEntityList.add(entityImport);
 		}
 		return modelEntityList; 
