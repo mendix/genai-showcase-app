@@ -27959,6 +27959,22 @@ input[type=checkbox].three-state-checkbox + .control-label {
   }
 }
 
+.chat-page--fullheight, .chat-page--fullheight-centered {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex: 1 1 0;
+  flex-wrap: wrap;
+  padding: 32px;
+  box-sizing: border-box;
+}
+
+.chat-page--fullheight-centered {
+  max-width: 153.5rem;
+  justify-content: center;
+  margin: auto;
+}
+
 .chat-container {
   display: flex;
   flex-direction: column;
