@@ -48,7 +48,7 @@
     margin: auto;
     gap: $spacing-large;
     padding: $spacing-medium $spacing-larger $spacing-medium $spacing-larger;
-    overflow: auto;
+    overflow: hidden;
     box-sizing: border-box;
 
     .agent-page-container::after {
@@ -101,6 +101,7 @@
         flex: 1 1 0;
         width: 60%;
         max-width: 945px;
+        height: 100%;
         display: flex;
         flex-direction: column;
         overflow-y: auto;
@@ -115,7 +116,6 @@
             height: 87vh;
         }
     }
-
 
     .page-container-grid {
         display: flex;

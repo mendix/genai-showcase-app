@@ -28828,6 +28828,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   overflow: visible !important;
 }
 
+.overflow-auto {
+  overflow: auto !important;
+}
+
 .space-between {
   display: flex !important;
   align-items: center !important;
@@ -28974,7 +28978,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin: auto;
   gap: 24px;
   padding: 16px 32px 16px 32px;
-  overflow: auto;
+  overflow: hidden;
   box-sizing: border-box;
 }
 .agent-page-container .agent-page-container::after {
@@ -29021,6 +29025,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex: 1 1 0;
   width: 60%;
   max-width: 945px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
