@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.webui.CustomJavaAction;
 import amazonbedrockconnector.impl.AmazonBedrockClient;
 import amazonbedrockconnector.impl.MxDataSource;
 import amazonbedrockconnector.impl.MxLogger;

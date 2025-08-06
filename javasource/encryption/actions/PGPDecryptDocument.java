@@ -11,7 +11,6 @@ package encryption.actions;
 
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.webui.CustomJavaAction;
 import encryption.pgp.PGPFileProcessor;
 import encryption.proxies.microflows.Microflows;
 import com.mendix.systemwideinterfaces.core.UserAction;
