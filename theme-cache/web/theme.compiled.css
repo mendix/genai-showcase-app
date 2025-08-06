@@ -26288,8 +26288,13 @@ html div.dj_ios .widget-switch.auto .widget-switch-btn-wrapper.checked.widget-sw
 .widget-datagrid {
   position: relative;
 }
-.widget-datagrid-grid {
+.widget-datagrid-grid.table {
   display: grid !important;
+  min-width: fit-content;
+  margin-bottom: 0;
+}
+.widget-datagrid-content {
+  overflow-x: auto;
 }
 .widget-datagrid-grid-head {
   display: contents;
@@ -26952,7 +26957,6 @@ div:not(.table-compact) > .table .th .dropdown-container .dropdown-list {
 }
 .widget-dropdown-filter-clear {
   align-items: center;
-  align-self: center;
   display: flex;
   flex-shrink: 0;
   justify-self: end;
@@ -26971,6 +26975,10 @@ div:not(.table-compact) > .table .th .dropdown-container .dropdown-list {
 }
 .widget-dropdown-filter-clear:has(+ .widget-dropdown-filter-state-icon), .widget-dropdown-filter-clear:has(+ .widget-dropdown-filter-toggle) {
   border-inline-end: 1px solid var(--gray, #787d87);
+}
+.widget-dropdown-filter-clear:focus-visible {
+  outline-offset: -2px;
+  outline: var(--brand-primary, #264ae5) solid 1px;
 }
 .widget-dropdown-filter-state-icon {
   transition: transform 0.2s;
@@ -27076,14 +27084,23 @@ div:not(.table-compact) > .table .th .dropdown-container .dropdown-list {
   justify-content: center;
   line-height: 1.334;
   padding: var(--wdf-tag-padding);
+  margin: var(--spacing-smallest, 2px);
 }
 :where(.widget-dropdown-filter.variant-tag-picker) .widget-dropdown-filter-selected-item:focus-visible {
   outline: var(--brand-primary, #264ae5) auto 1px;
+}
+:where(.widget-dropdown-filter.variant-tag-picker) .widget-dropdown-filter-selected-item:focus {
+  background-color: var(--color-primary-light, #a8b7f5);
 }
 :where(.widget-dropdown-filter.variant-tag-picker) .widget-dropdown-filter-input {
   flex-basis: 0;
   min-width: 50px;
   width: initial;
+}
+:where(.widget-dropdown-filter.variant-tag-picker):not(:focus-within):not([data-empty]) .widget-dropdown-filter-input {
+  opacity: 0;
+  flex-shrink: 1;
+  min-width: 1px;
 }
 :where(.widget-dropdown-filter.variant-tag-picker) .widget-dropdown-filter-clear {
   border-color: transparent;
@@ -27501,6 +27518,11 @@ div:not(.table-compact) > .table .th .dropdown-container .dropdown-list {
 
 .widget-gallery-item-button {
   width: inherit;
+}
+
+.widget-gallery-load-more {
+  display: flex;
+  justify-content: center;
 }
 
 /* ==========================================================================
