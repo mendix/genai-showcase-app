@@ -65,7 +65,8 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 			//Prepare connection
 			HttpRequest.Builder customRequestBuilder = getCustomRequestBuilder();
 			HttpClientSseClientTransport transport = HttpClientSseClientTransport
-					.builder(ClientConfig.getMCPEndpoint())
+					.builder(getBaseEndpoint())
+					.sseEndpoint(getSseEndpoint())
 					.requestBuilder(customRequestBuilder)
 					.build();
 
@@ -103,8 +104,34 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 	private static final MxLogger LOGGER = new mcpclient.impl.MxLogger(CreateMCPClient.class);
 	
 	/**
+	 * Creates the base endpoint for cases when "/" or "/sse" was part of the passed endpoint
+	 */
+	private String getBaseEndpoint() {
+	    String baseUrl = ClientConfig.getMCPEndpoint();
+	    
+	    //Remove trailing slash first
+	    if (baseUrl.endsWith("/")) {
+	        baseUrl = baseUrl.substring(0, baseUrl.length() - 1);
+	    }
+	    
+	    //Remove /sse suffix if present
+	    if (baseUrl.endsWith("/sse")) {
+	        baseUrl = baseUrl.substring(0, baseUrl.length() - 4);
+	    }
+	    return baseUrl;
+	}
+
+	/**
+	 *Sets "/sse" to the base endpoint
+	 */
+	private String getSseEndpoint() {
+	    String baseUrl = getBaseEndpoint(); // Use the cleaned base URL
+	    return baseUrl + "/sse";
+	}
+	
+	
+	/**
 	 * Creates a custom request builder to add headers passed in the configuration
-	 * @return
 	 * @throws CoreException
 	 */
 	private HttpRequest.Builder getCustomRequestBuilder() throws CoreException{
