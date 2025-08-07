@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.connectionbus.data.IDataTable;
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.webui.CustomJavaAction;
 import conversationalui.impl.MxLogger;
 import conversationalui.proxies.DeploymentSelection;
 import com.mendix.systemwideinterfaces.core.IMendixObject;

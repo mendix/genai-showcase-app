@@ -13,7 +13,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.Date;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.webui.CustomJavaAction;
 import amazons3connector.impl.AmazonS3Client;
 import amazons3connector.impl.MxLogger;
 import amazons3connector.proxies.Bucket;

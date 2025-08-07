@@ -12,7 +12,6 @@ package embeddings_clustering.actions;
 import java.util.List;
 import java.util.stream.Collectors;
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.webui.CustomJavaAction;
 import embeddings_clustering.impl.VectorEmbedding;
 import embeddings_clustering.impl.VectorEmbeddingUtils;
 import com.mendix.systemwideinterfaces.core.IMendixObject;

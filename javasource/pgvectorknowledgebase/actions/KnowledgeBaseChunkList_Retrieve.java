@@ -12,7 +12,6 @@ package pgvectorknowledgebase.actions;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.webui.CustomJavaAction;
 import genaicommons.proxies.KnowledgeBaseChunk;
 import pgvectorknowledgebase.impl.ChunkUtils;
 import pgvectorknowledgebase.impl.MxLogger;

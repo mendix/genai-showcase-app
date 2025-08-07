@@ -14,7 +14,6 @@ import java.util.Date;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.webui.CustomJavaAction;
 import amazons3connector.impl.AmazonS3Client;
 import amazons3connector.impl.MxLogger;
 import amazons3connector.proxies.ENUM_StorageClass;

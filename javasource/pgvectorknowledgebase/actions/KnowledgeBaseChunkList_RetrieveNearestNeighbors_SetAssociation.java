@@ -13,7 +13,6 @@ import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.meta.IMetaObject;
-import com.mendix.webui.CustomJavaAction;
 import genaicommons.proxies.KnowledgeBaseChunk;
 import pgvectorknowledgebase.impl.ChunkUtils;
 import pgvectorknowledgebase.impl.MxLogger;

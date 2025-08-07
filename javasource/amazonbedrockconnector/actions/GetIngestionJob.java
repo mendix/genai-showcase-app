@@ -12,7 +12,6 @@ package amazonbedrockconnector.actions;
 import static java.util.Objects.requireNonNull;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.webui.CustomJavaAction;
 import amazonbedrockconnector.impl.AmazonBedrockClient;
 import amazonbedrockconnector.impl.MxIngestionJob;
 import amazonbedrockconnector.impl.MxLogger;

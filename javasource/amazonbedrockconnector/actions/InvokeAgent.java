@@ -23,7 +23,6 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IDataType.DataTypeEnum;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.webui.CustomJavaAction;
 import amazonbedrockconnector.impl.AmazonBedrockClient;
 import amazonbedrockconnector.impl.MxCitation;
 import amazonbedrockconnector.impl.MxRetrievedReference;

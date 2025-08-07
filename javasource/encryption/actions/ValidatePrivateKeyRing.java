@@ -15,7 +15,6 @@ import org.bouncycastle.openpgp.operator.bc.BcKeyFingerprintCalculator;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.webui.CustomJavaAction;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
 public class ValidatePrivateKeyRing extends UserAction<java.lang.Boolean>
