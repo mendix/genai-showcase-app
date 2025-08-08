@@ -38,7 +38,8 @@
 //Version_Details
 
 .agent-page-container {
-    max-width: 1800px;
+    width: 90%;
+    max-width: 1600px;
     height: 100%;
     display: flex;
     flex-direction: row;
@@ -47,7 +48,7 @@
     margin: auto;
     gap: $spacing-large;
     padding: $spacing-medium $spacing-larger $spacing-medium $spacing-larger;
-    overflow: auto;
+    overflow: hidden;
     box-sizing: border-box;
 
     .agent-page-container::after {
@@ -87,6 +88,7 @@
         display: flex;
         justify-content: flex-start; 
         align-items: center; 
+        padding: 2px;
     }
 
     .title-alignment-top {
@@ -97,14 +99,21 @@
 
     .page-container-main {
         flex: 1 1 0;
-        width: 50%;
+        width: 60%;
+        max-width: 945px;
+        height: 100%;
         display: flex;
         flex-direction: column;
-        overflow: visible;
-        height: 100%;
         overflow-y: auto;
+        gap: 24px;
         .card {
             overflow: unset;
+        }
+    }
+
+    @media (max-height: 800px) {
+        .page-container-main {
+            height: 87vh;
         }
     }
 
@@ -121,12 +130,18 @@
 
     .page-container-side {
         z-index: 100;
-        width: 100%;
-        max-width: 25vw;
+        width: 30%;
+        max-width: 472px;
+        max-height: 92vh;
         display: flex;
         flex-direction: column;
         padding-top: 28px;
-        height:100%;
+    }
+
+    @media (max-height: 800px) {
+        .page-container-side {
+            height: 87vh;
+        }
     }
     
     .page-header-content {
@@ -154,6 +169,7 @@
         align-items: center !important;
         flex-flow: row !important;
         justify-content: flex-start !important;
+        margin-bottom: -16px;
     }
 
     .page-content {
@@ -254,17 +270,11 @@
     }
 }
 
-
-.margin-right-45{
-    margin-right: 45px;
-}
-
 .combobox-model-selection {
     display: flex;
     flex-grow: 1;
-    min-width: 360px;
 
-    .model-selection{
+    .model-selection {
         display: flex;
         align-items: center;
         height: max-content;
@@ -275,4 +285,8 @@
             margin-right: $spacing-small;
         }
     }
+}
+
+.margin-right-45 {
+    margin-right: 45px;
 }
