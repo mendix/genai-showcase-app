@@ -25,7 +25,7 @@ import mcpclient.proxies.ListToolsResult;
 import mcpclient.proxies.Tool;
 
 /**
- * Returns a ListToolsResult which contains a list of all available tools the MCP Server exposes. The Tools can be used in the Get Tool Result action.
+ * Returns a ListToolsResult which contains a list of all available tools the MCP Server exposes. The Tool's name can be used in the "Call Tool" action.
  * 
  */
 public class ListToolsResult_Get extends UserAction<IMendixObject>

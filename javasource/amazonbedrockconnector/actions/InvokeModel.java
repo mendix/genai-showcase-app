@@ -13,7 +13,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.Optional;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.webui.CustomJavaAction;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import amazonbedrockconnector.impl.AmazonBedrockClient;

@@ -31,7 +31,6 @@ import com.mendix.systemwideinterfaces.MendixRuntimeException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.thirdparty.org.json.JSONObject;
-import com.mendix.webui.CustomJavaAction;
 import awsauthentication.impl.MxLogger;
 import awsauthentication.impl.Utils;
 import awsauthentication.proxies.AssumeRoleRequest;

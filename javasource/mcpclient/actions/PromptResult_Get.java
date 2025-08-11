@@ -31,7 +31,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * Returns a GetPromptResult from the MCP Server which contains the final prompt augmented with the prompt arguments (if applicable).
+ * Returns a PromptResult from the MCP Server which contains the final prompt message(s) augmented with the prompt arguments (if applicable).
  */
 public class PromptResult_Get extends UserAction<IMendixObject>
 {

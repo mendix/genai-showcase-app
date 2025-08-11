@@ -17,7 +17,7 @@ import mcpclient.impl.McpClientRegistry;
 import mcpclient.impl.MxLogger;
 
 /**
- * Closes an MCPClient that is connected to an MCP Server. Each time a client connection was started (via the Create MCP Client action), Mendix registers a Sync client with the server. It is recommended to clean this up using this action after the connection is no longer needed, for example when the chat was closed.
+ * Closes an MCPClient that is connected to an MCP Server. Each time a client connection was started (via the "Create MCP Client" action), Mendix registers a sync client with the server. It is recommended to clean this up using this action after the connection is no longer needed, for example when the chat was closed.
  */
 public class CloseMCPClient extends UserAction<java.lang.Void>
 {

@@ -13,7 +13,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.Date;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.webui.CustomJavaAction;
 import amazonbedrockconnector.impl.MxLogger;
 import amazonbedrockconnector.proxies.IngestionJobStats;
 import amazonbedrockconnector.proxies.IngestionJobSummary;

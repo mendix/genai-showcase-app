@@ -24,6 +24,22 @@
     }
 }
 
+.btn-without-border-red {
+    @extend .btn-without-border;
+    color: $new-danger;
+
+     &:hover {
+        background-color: $color-danger-lighter;
+        border: 1px solid $color-danger-lighter;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+        color: $new-danger;
+    }
+}
+
 .btn-no-hover.mx-link:hover {
     background-color: transparent;
     border: 1px solid transparent;
