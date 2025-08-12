@@ -46,7 +46,7 @@ public class CloseMCPClient extends UserAction<java.lang.Void>
 				LOGGER.info("The client with id " + MCPClient.getMendixObject().getId().toLong() + " could not be closed because it is not registered (anymore).");
 				return null;
 			}
-			client.close();
+			client.closeGracefully();
 			McpClientRegistry.closeClient(MCPClient.getMendixObject().getId().toLong(), client);
 		} catch (Exception e) {
 			LOGGER.error("The client with id " + MCPClient.getMendixObject().getId().toLong() + " could not be closed.");
