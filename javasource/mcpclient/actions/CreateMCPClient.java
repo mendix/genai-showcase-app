@@ -65,25 +65,36 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 			//Prepare connection
 			HttpRequest.Builder customRequestBuilder = getCustomRequestBuilder();
 			HttpClientSseClientTransport transport = HttpClientSseClientTransport
-					.builder(ClientConfig.getMCPEndpoint())
+					.builder(getBaseEndpoint())
+					.sseEndpoint(getSseEndpoint())
 					.requestBuilder(customRequestBuilder)
 					.build();
+			
+			McpSchema.ClientCapabilities capabilities = McpSchema.ClientCapabilities.builder().build();
+			McpSchema.Implementation clientInfo = new McpSchema.Implementation(ClientConfig.getName(), ClientConfig.getVersion());
 
 			McpSyncClient client = McpClient.sync(transport)
 					.requestTimeout(Duration.ofSeconds(10))
-					.capabilities(McpSchema.ClientCapabilities.builder()
-							.build())
+					.loggingConsumer(notification -> {
+			            LOGGER.debug("MCP Log: " + notification.data());
+			        })
+					.capabilities(capabilities)
+					.clientInfo(clientInfo)
 					.build();
 			
 			//Connect to server
 			McpSchema.InitializeResult initResult = client.initialize();
 			LOGGER.info("Client connected to server using: " + initResult.protocolVersion() + " version.");
+			client.setLoggingLevel(McpSchema.LoggingLevel.DEBUG);
 			clientNpe.setConnected(true);
 			McpClientRegistry.putClient(clientNpe.getMendixObject().getId().toLong(), client);
 			return clientNpe.getMendixObject();
 			
 		} catch (Exception e) {
 			LOGGER.error(e);
+			if (e.getCause() != null) {
+	            LOGGER.error("Root cause:", e.getCause());
+	        }
 			return null;
 		}
 		// END USER CODE
@@ -101,10 +112,36 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new mcpclient.impl.MxLogger(CreateMCPClient.class);
+
+	/**
+	 * Creates the base endpoint for cases when "/" or "/sse" was part of the passed endpoint
+	 */
+	private String getBaseEndpoint() {
+	    String baseUrl = ClientConfig.getMCPEndpoint();
+	    
+	    //Remove trailing slash first
+	    if (baseUrl.endsWith("/")) {
+	        baseUrl = baseUrl.substring(0, baseUrl.length() - 1);
+	    }
+	    
+	    //Remove /sse suffix if present
+	    if (baseUrl.toLowerCase().endsWith("/sse")) {
+	        baseUrl = baseUrl.substring(0, baseUrl.length() - 4);
+	    }
+	    return baseUrl;
+	}
+
+	/**
+	 *Sets "/sse" to the base endpoint
+	 */
+	private String getSseEndpoint() {
+	    String baseUrl = getBaseEndpoint(); // Use the cleaned base URL
+	    return baseUrl + "/sse";
+	}
+	
 	
 	/**
 	 * Creates a custom request builder to add headers passed in the configuration
-	 * @return
 	 * @throws CoreException
 	 */
 	private HttpRequest.Builder getCustomRequestBuilder() throws CoreException{
@@ -118,6 +155,7 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 		    	customRequestBuilder.header(name, value);
 		    }
 		}
+		customRequestBuilder.header("Content-Type", "application/json");
 		return customRequestBuilder;
 	}
 	
