@@ -4,8 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -15,6 +17,8 @@ import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IDataType;
 
+import genaicommons.proxies.ArgumentInput;
+import genaicommons.proxies.EnumValue;
 import genaicommons.proxies.Function;
 import genaicommons.proxies.Request;
 import genaicommons.proxies.Tool;
@@ -135,6 +139,86 @@ public class FunctionImpl {
 			type = "enum";
 		}
 		return type;
+	}
+	
+	/**
+	 * Adds properties nodes for a given argument list, for cases where Arguments are associated to the Tool
+	 * @param arguments
+	 * @param propertiesNode
+	 * @param requiredNode
+	 * @throws CoreException
+	 */
+	public static void addPropertiesForTool(List<ArgumentInput> arguments, ObjectNode propertiesNode, ArrayNode requiredNode) throws CoreException {
+	    if (arguments != null && !arguments.isEmpty()) {
+	        for (ArgumentInput arg : arguments) {
+	            String name = arg.getName();
+	            String type = arg.get_Type().toLowerCase();
+
+	            // Map _type to JSON schema type because "enum" is not officially supported
+	            if(type.equals("enum")) {
+	            	type = "string";
+	            }
+
+	            // Create the property node
+	            ObjectNode property = propertiesNode.objectNode();
+	            property.put("type", type);
+	            
+	         	// add enum values if present (typically only if _type == "enum"
+	            List<EnumValue> enumValues = arg.getArgumentInput_EnumValue();
+	            if (enumValues != null && !enumValues.isEmpty()) {
+	                ArrayNode enumArray = property.putArray("enum");
+	                for (EnumValue enumVal : enumValues) {
+	                    if (enumVal.getKey() != null && !enumVal.getKey().isEmpty()) {
+	                        enumArray.add(enumVal.getKey());
+	                    }
+	                }
+	            }
+	            
+	            propertiesNode.set(name, property);
+	            // If Required == true, add to requiredNode
+	            if (arg.getRequired()) {
+	                requiredNode.add(name);
+	            }
+	        }
+	    }
+	}	
+	
+	/**
+	 * return a ToolObject from the Request for a given toolName
+	 * @param request
+	 * @param toolName
+	 * @param context
+	 * @throws CoreException
+	 */
+	public static Tool getToolByName(Request request, String toolName, IContext context) throws CoreException{
+		
+		ToolCollection toolCollection = request.getRequest_ToolCollection();
+		
+		if(toolCollection == null) {
+			return null;
+		}
+		
+		List<Tool> toolList = Core.retrieveByPath(context,
+				toolCollection.getMendixObject(), ToolCollection.MemberNames.ToolCollection_Tool.toString())
+				.stream()
+				.map(mxObject -> Tool.initialize(context, mxObject))
+				.collect(Collectors.toList());
+		
+		if( toolList == null || toolList.isEmpty()) {
+			return null;
+		}
+		
+		Optional<Tool> toolMatch = toolList.stream()
+				.filter(tool -> {
+					return tool.getName().equals(toolName);
+				})
+				.findFirst();
+		
+		if(toolMatch.isPresent()) {
+			Tool functionMatch = Tool.load(context, toolMatch.get().getMendixObject().getId());
+			return functionMatch;
+		}
+		return null;	
 	}
 }
 

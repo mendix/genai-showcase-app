@@ -24,7 +24,6 @@ import java.util.Set;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import org.apache.commons.io.IOUtils;
-import org.bouncycastle.asn1.x9.DHValidationParms;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -50,7 +49,9 @@ import genaicommons.impl.FunctionMappingImpl;
 import genaicommons.proxies.ENUM_FileType;
 import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.ENUM_ToolChoice;
+import genaicommons.proxies.EnumValue;
 import genaicommons.proxies.Argument;
+import genaicommons.proxies.ArgumentInput;
 import genaicommons.proxies.Computer;
 import genaicommons.proxies.FileCollection;
 import genaicommons.proxies.FileContent;
@@ -792,7 +793,7 @@ public class Converse extends UserAction<IMendixObject>
 		//Add a dummy tool so that a toolconfig is created and the API does not return errors about a missing toolconfig in the agent loop
 		//This is only needed when a computer tool is added while no other tools are present
 		if (awsTools.size() == 0 && hasComputerTool) {
-			var toolSpecBuilder = ToolSpecification.builder()
+			software.amazon.awssdk.services.bedrockruntime.model.ToolSpecification.Builder toolSpecBuilder = ToolSpecification.builder()
 					.name("Dummy")
 					.description("Do not use this tool.")
 					.inputSchema(createEmptyToolInputSchema());
@@ -805,8 +806,8 @@ public class Converse extends UserAction<IMendixObject>
 	}
 	
 	// Mapping Mendix Tool to aws tool
-	private software.amazon.awssdk.services.bedrockruntime.model.Tool getAwsTool(Tool mxTool) throws JsonProcessingException{
-		var toolSpecBuilder = ToolSpecification.builder()
+	private software.amazon.awssdk.services.bedrockruntime.model.Tool getAwsTool(Tool mxTool) throws JsonProcessingException, CoreException{
+		software.amazon.awssdk.services.bedrockruntime.model.ToolSpecification.Builder toolSpecBuilder = ToolSpecification.builder()
 				.name(mxTool.getName())
 				.description(mxTool.getDescription())
 				.inputSchema(getToolInputSchema(mxTool));
@@ -815,18 +816,72 @@ public class Converse extends UserAction<IMendixObject>
 	}
 	
 	// Getting the Input Schema of a Tool
-	private ToolInputSchema getToolInputSchema(Tool mxTool) throws JsonProcessingException {
+	private ToolInputSchema getToolInputSchema(Tool mxTool) throws JsonProcessingException, CoreException {
 		// All Tools to be called are function objects
+		List<ArgumentInput> arguments = mxTool.getTool_ArgumentInput();
 		Map<String, IDataType> parameterList = genaicommons.impl.FunctionMappingImpl.getInputParametersForModel(mxTool.getMicroflow());
-		if (parameterList == null) {
+		if (arguments == null && (parameterList == null || parameterList.entrySet().isEmpty())) {
 			LOGGER.debug("Function Microflow without input parameter");
-			
 			return createEmptyToolInputSchema();
 		}
 		
 		// Must be created using Document.mapBuilder()		
 		Document.MapBuilder propertiesBuilder = Document.mapBuilder();
 		Document.ListBuilder requiredBuilder = Document.listBuilder();
+		
+		if(arguments == null || arguments.isEmpty()) {
+			setPropertiesForMicroflowTool(parameterList, propertiesBuilder, requiredBuilder);
+			
+		} else {
+			setPropertiesForToolArguments(arguments, propertiesBuilder, requiredBuilder);
+		}
+
+		//Build both outside of loop to be added to final json field
+		Document properties = propertiesBuilder.build();
+		Document required = requiredBuilder.build();
+		
+		Document json = Document.mapBuilder()
+				.putString("type", "object")
+				.putDocument("properties", properties)
+				.putDocument("required", required)
+				.build();
+		
+		return ToolInputSchema.builder().json(json).build();
+	}
+	
+	// If Tool arguments are associated to Tool
+	private void setPropertiesForToolArguments(List<ArgumentInput> arguments, 
+			Document.MapBuilder propertiesBuilder, Document.ListBuilder requiredBuilder) throws CoreException{
+		
+		for(ArgumentInput arg : arguments) {
+			String type = arg.get_Type();
+		    String paramName = arg.getName();
+			MapBuilder inputBuilder = Document.mapBuilder();
+			
+			// For Enum types, expose the possible keys with a listBuilder Document
+		    if(type == "enum") {
+		    	List<EnumValue> enumValues = arg.getArgumentInput_EnumValue();
+		    	if (enumValues != null && !enumValues.isEmpty()) {
+		    		ListBuilder inputDocumentBuilderEnum = Document.listBuilder();
+			    	for(EnumValue enumValue : enumValues) {
+			    		inputDocumentBuilderEnum.addString(enumValue.getKey());
+			    	}
+			    	inputBuilder.putDocument(type, inputDocumentBuilderEnum.build());
+		    	}
+				
+		    } else {
+		    	inputBuilder.putString("type", type);
+		    }
+		    Document input = inputBuilder.build();
+
+		    propertiesBuilder.putDocument(paramName, input);
+		    requiredBuilder.addString(paramName);
+		}
+	}
+	
+	// If the microflow is the actual tool microflow
+	private void setPropertiesForMicroflowTool(Map<String, IDataType> parameterList, 
+			Document.MapBuilder propertiesBuilder, Document.ListBuilder requiredBuilder){
 		
 		//Loop over parameters of microflow to add properties and required Document
 		for(Entry<String, IDataType> param : parameterList.entrySet()) {	
@@ -851,19 +906,7 @@ public class Converse extends UserAction<IMendixObject>
 
 		    propertiesBuilder.putDocument(paramName, input);
 		    requiredBuilder.addString(paramName);
-		
 		}
-		//Build both outside of loop to be added to final json field
-		Document properties = propertiesBuilder.build();
-		Document required = requiredBuilder.build();
-		
-		Document json = Document.mapBuilder()
-				.putString("type", "object")
-				.putDocument("properties", properties)
-				.putDocument("required", required)
-				.build();
-		
-		return ToolInputSchema.builder().json(json).build();
 	}
 
 	private ToolInputSchema createEmptyToolInputSchema() {
