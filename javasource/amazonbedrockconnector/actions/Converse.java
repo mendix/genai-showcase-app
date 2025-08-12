@@ -1076,6 +1076,10 @@ public class Converse extends UserAction<IMendixObject>
 			setMessageToolUseContent(toolCallList, awsContent.toolUse());
 			break;
 		}
+		// reasoning content is ignored for now, will be implemented in the future
+		case REASONING_CONTENT: {
+			break;
+		}
 		default:
 			LOGGER.error("Unsupported message content returned: " + awsContent.type());
 			break;

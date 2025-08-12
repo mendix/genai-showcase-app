@@ -30,7 +30,7 @@ import mcpclient.proxies.ToolResult;
 import mcpclient.proxies.ArgumentInput;
 
 /**
- * Call the Tool on the MCP Server which returns a ToolResult. The ToolResult contains the response of the tool which is passed to the model.
+ * Calls the Tool on the MCP Server which returns a ToolResult. The ToolResult contains the response of the tool which is typically passed to the model.
  */
 public class ToolResult_Get extends UserAction<IMendixObject>
 {

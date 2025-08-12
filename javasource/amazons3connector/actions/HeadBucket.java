@@ -11,7 +11,6 @@ package amazons3connector.actions;
 
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.webui.CustomJavaAction;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import static java.util.Objects.requireNonNull;
 import amazons3connector.impl.AmazonS3Client;

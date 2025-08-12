@@ -23,7 +23,7 @@ import mcpclient.proxies.ListPromptsResult;
 import mcpclient.proxies.Prompt;
 
 /**
- * Returns a ListPromptsResult which contains a list of all available prompts the MCP Server exposes. The Prompts can be used in the Get Prompt Result action.
+ * Returns a ListPromptsResult which contains a list of all available prompts the MCP Server exposes. The Prompt's name can be used in the "Get Prompt" action.
  * 
  */
 public class ListPromptsResult_Get extends UserAction<IMendixObject>

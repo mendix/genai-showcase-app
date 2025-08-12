@@ -18,7 +18,6 @@ import com.jujutsu.tsne.TSneConfig;
 import com.jujutsu.tsne.TSneConfiguration;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.webui.CustomJavaAction;
 import embeddings_clustering.impl.clusteringUtils;
 import com.mendix.systemwideinterfaces.core.UserAction;
 

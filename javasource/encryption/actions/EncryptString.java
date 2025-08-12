@@ -14,7 +14,6 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import com.mendix.systemwideinterfaces.MendixRuntimeException;
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.webui.CustomJavaAction;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
 public class EncryptString extends UserAction<java.lang.String>
