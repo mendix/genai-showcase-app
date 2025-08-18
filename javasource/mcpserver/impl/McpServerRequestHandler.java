@@ -34,9 +34,6 @@ import system.proxies.HttpHeader;
 import system.proxies.HttpRequest;
 import system.proxies.User;
 
-/**
- * Based on https://github.com/modelcontextprotocol/java-sdk/blob/v0.8.1/mcp/src/main/java/io/modelcontextprotocol/server/transport/HttpServletSseServerTransportProvider.java
- */
 public class McpServerRequestHandler extends RequestHandler implements McpServerTransportProvider {
     
 	private static final MxLogger LOGGER = new mcpserver.impl.MxLogger(McpServerRequestHandler.class);

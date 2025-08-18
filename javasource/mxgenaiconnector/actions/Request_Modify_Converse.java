@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.mendix.core.Core;
+import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
@@ -26,8 +27,10 @@ import com.mendix.systemwideinterfaces.core.UserAction;
 import genaicommons.impl.FunctionImpl;
 import genaicommons.impl.FunctionMappingImpl;
 import genaicommons.impl.MessageImpl;
+import genaicommons.proxies.ArgumentInput;
 import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.Message;
+import genaicommons.proxies.Tool;
 import genaicommons.proxies.ToolCall;
 import mxgenaiconnector.impl.ConverseVisionDocument;
 import mxgenaiconnector.impl.ConverseFunctionCalling;
@@ -120,7 +123,7 @@ public class Request_Modify_Converse extends UserAction<java.lang.String>
 	}
 	//........Add ToolConfig to Request........
 	//Creates toolConfig node
-		private void addToolConfig(ObjectNode rootNode) {
+		private void addToolConfig(ObjectNode rootNode) throws CoreException {
 			if(rootNode == null || (rootNode.path("toolConfig").asText().isBlank() && rootNode.path("toolConfig").path("tools").size() == 0)) {
 				//If there is no ToolCollection (toolConfig), this needs to be removed
 				rootNode.remove("toolConfig");
@@ -150,27 +153,34 @@ public class Request_Modify_Converse extends UserAction<java.lang.String>
 		}
 		
 		//This will create the input schema JSON needed for specifying the input of a tool
-		private void setInputSchemaForToolNode(String microflow, ObjectNode toolNode) {
+		private void setInputSchemaForToolNode(String microflow, ObjectNode toolNode) throws CoreException {
 			
 			// Create the root object node
 	        ObjectNode inputSchemaNode = MAPPER.createObjectNode();
 	        inputSchemaNode.put("type", "object");
 
 	        // Create the properties node (if input parameter is available)
-	        Map<String, IDataType> parameterList = FunctionMappingImpl.getInputParametersForModel(microflow);
-	        
 			ObjectNode propertiesNode = MAPPER.createObjectNode();
 			ArrayNode requiredNode = MAPPER.createArrayNode();
 	        
-	        parameterList.entrySet().forEach(t -> FunctionImpl.addProperty(propertiesNode, requiredNode, t));
+			// Add properties (either from microflow or if arguments are present based on those
+			Tool tool = FunctionImpl.getToolByName(Request, toolNode.get("name").asText() ,getContext());
+			List<ArgumentInput> arguments = tool.getTool_ArgumentInput();
+			if (arguments == null || arguments.isEmpty()) {
+				Map<String, IDataType> parameterList = FunctionMappingImpl.getInputParametersForModel(microflow);
+				parameterList.entrySet().forEach(t -> FunctionImpl.addProperty(propertiesNode, requiredNode, t));
+				
+			}else {
+				FunctionImpl.addPropertiesForTool(tool.getTool_ArgumentInput(), propertiesNode, requiredNode);
+			}
 		        
 	        inputSchemaNode.set("properties", propertiesNode);
 	        inputSchemaNode.set("required", requiredNode);
-	        //Add a "json" wrapper around the inputSchema
+	        // Add a "json" wrapper around the inputSchema
 	        ObjectNode jsonNode = MAPPER.createObjectNode();
 	        jsonNode.set("json", inputSchemaNode);
 	        
-	        //Set the whole InputSchema as new node to toolNode
+	        // Set the whole InputSchema as new node to toolNode
 	        toolNode.set("inputSchema",jsonNode);
 		}
 		

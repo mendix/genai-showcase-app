@@ -12,9 +12,6 @@ package openaiconnector.actions;
 import static java.util.Objects.requireNonNull;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Optional;
-import java.util.Set;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 import com.mendix.core.Core;
@@ -35,6 +32,7 @@ import genaicommons.proxies.Request;
 import genaicommons.proxies.Tool;
 import genaicommons.proxies.ToolCall;
 import genaicommons.proxies.ToolCollection;
+import genaicommons.proxies.ArgumentInput;
 import genaicommons.proxies.ENUM_MessageRole;
 import openaiconnector.impl.MxLogger;
 import openaiconnector.proxies.OpenAIRequest_Extension;
@@ -368,55 +366,45 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 		return functionName.equals(toolChoiceFunctionName);
 	}
 	
-	private void mapFunctionParameters() throws CoreException {
-		ToolCollection toolCollection = getToolCollection(RequestMapping);
-		if(toolCollection == null) {
-			return;
-		}
-		List<Tool> toolList = Core.retrieveByPath(getContext(),
-				toolCollection.getMendixObject(), ToolCollection.MemberNames.ToolCollection_Tool.toString())
-				.stream()
-				.map(mxObject -> Tool.initialize(getContext(), mxObject))
-				.collect(Collectors.toList());
-		
+	private void mapFunctionParameters() throws CoreException {		
 		// Loop through all tools, find FunctionRequest object by functionName that contains the FunctionMicroflow,
 		// get InputParameterName of the FunctionMicroflow, create parametersNode and add to toolNode
 		JsonNode toolsNode = rootNode.path("tools");
 		for (JsonNode toolNode : toolsNode) {
 			String toolName = toolNode.path("function").path("name").asText();
-			Optional<Tool> toolMatch = toolList.stream()
-					.filter(tool -> {
-						return tool.getName().equals(toolName);
-					})
-					.findFirst();
-			if(toolMatch.isPresent()) {
-				Tool functionMatch = Tool.load(getContext(), toolMatch.get().getMendixObject().getId());
-				if(functionMatch != null) {
-				ObjectNode parametersNode = createFunctionParametersNode(functionMatch.getMicroflow());
-					if(parametersNode != null) {
-						JsonNode functionNode = toolNode.path("function");
-						((ObjectNode) functionNode).set("parameters", parametersNode);
-						((ObjectNode) toolNode).set("function", functionNode);
-					}
+			Tool functionMatch = FunctionImpl.getToolByName(getRequest(RequestMapping), toolName ,getContext());
+			if(functionMatch != null) {
+			ObjectNode parametersNode = createToolParametersNode(functionMatch);
+				if(parametersNode != null) {
+					JsonNode functionNode = toolNode.path("function");
+					((ObjectNode) functionNode).set("parameters", parametersNode);
+					((ObjectNode) toolNode).set("function", functionNode);
 				}
 			}
 		}
-		
 		// Update tools within rootNode
 		((ObjectNode) rootNode).set("tools", toolsNode);
 	}
 	
-	private ObjectNode createFunctionParametersNode(String functionMicroflow) {
-		Map<String, IDataType> inputParameters = FunctionMappingImpl.getInputParametersForModel(functionMicroflow);
+	private ObjectNode createToolParametersNode(Tool tool) throws CoreException {
 		
-		if (inputParameters == null || inputParameters.entrySet().isEmpty()) {
+		List<ArgumentInput> arguments = tool.getTool_ArgumentInput();
+		Map<String, IDataType> inputParameters = FunctionMappingImpl.getInputParametersForModel(tool.getMicroflow());
+		
+		if(arguments == null && (inputParameters == null || inputParameters.entrySet().isEmpty())) {
 			return null;
 		}
 		
 		ObjectNode parametersNode = MAPPER.createObjectNode();
 		ObjectNode propertiesNode = MAPPER.createObjectNode();
 		ArrayNode requiredNode = MAPPER.createArrayNode();
-		inputParameters.entrySet().forEach(t -> FunctionImpl.addProperty(propertiesNode, requiredNode, t));
+		if(arguments == null || arguments.isEmpty()) {
+			inputParameters.entrySet().forEach(t -> FunctionImpl.addProperty(propertiesNode, requiredNode, t));
+			
+		} else {
+			FunctionImpl.addPropertiesForTool(arguments, propertiesNode, requiredNode);
+		}
+		
 		
 		parametersNode.put("type", "object");
 		parametersNode.set("properties", propertiesNode);
