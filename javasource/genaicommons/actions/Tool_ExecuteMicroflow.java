@@ -35,12 +35,17 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 	@java.lang.Deprecated(forRemoval = true)
 	private final java.util.List<IMendixObject> __ArgumentList;
 	private final java.util.List<genaicommons.proxies.Argument> ArgumentList;
+	/** @deprecated use Trace.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Trace;
+	private final genaicommons.proxies.Trace Trace;
 
 	public Tool_ExecuteMicroflow(
 		IContext context,
 		IMendixObject _tool,
 		IMendixObject _request,
-		java.util.List<IMendixObject> _argumentList
+		java.util.List<IMendixObject> _argumentList,
+		IMendixObject _trace
 	)
 	{
 		super(context);
@@ -54,6 +59,8 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 			.stream()
 			.map(argumentListElement -> genaicommons.proxies.Argument.initialize(getContext(), argumentListElement))
 			.collect(java.util.stream.Collectors.toList());
+		this.__Trace = _trace;
+		this.Trace = _trace == null ? null : genaicommons.proxies.Trace.initialize(getContext(), _trace);
 	}
 
 	@java.lang.Override

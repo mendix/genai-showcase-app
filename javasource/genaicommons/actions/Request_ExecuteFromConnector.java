@@ -10,12 +10,16 @@
 package genaicommons.actions;
 
 import static java.util.Objects.requireNonNull;
+import java.util.Date;
+import java.util.UUID;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import genaicommons.proxies.ENUM_ModelModality;
 import genaicommons.proxies.Response;
+import genaicommons.proxies.Trace;
+import genaicommons.proxies.Usage;
 import genaicommons.proxies.microflows.Microflows;
 import genaicommons.impl.DeployedModelImpl;
 import genaicommons.impl.MxLogger;
@@ -62,7 +66,8 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 		try {
 			validate();
 			startTime = System.currentTimeMillis();
-			Response response = processRequest();
+			Trace newTrace = createTrace();
+			Response response = processRequest(newTrace);
 			if(response != null) {
 				return response.getMendixObject();
 			} else {
@@ -92,7 +97,7 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 	private long startTime;
 	
 	//Recursive response processing until there is no ToolCall available
-	private Response processRequest() throws CoreException {
+	private Response processRequest(Trace trace) throws CoreException {
 		IMendixObject responseMendixObject = Core.microflowCall(CallModelMicroflow).withParam("DeployedModel", DeployedModel.getMendixObject()).withParam("Request", Request.getMendixObject()).execute(this.getContext());
 		if(responseMendixObject == null) {
 			LOGGER.debug("Microflow " + CallModelMicroflow  + " returned null.");
@@ -102,22 +107,48 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 		
 		responseUpdateTokenCount(response);
 		
-		boolean toolCallsProcessed = Microflows.response_ProcessToolCalls(getContext(), response, Request);
+		boolean toolCallsProcessed = Microflows.response_ProcessToolCalls(getContext(), response, Request, trace);
 		
 		//Recursion if tool calls are available
 		if (toolCallsProcessed) {
-			return processRequest();
+			return processRequest(trace);
 		}
 		
-		responseStoreDurationAndUsage(response);
+		responseStoreDurationAndUsage(response, trace);
 		return response;
 	}
 
-	private void responseStoreDurationAndUsage(Response response) {
+	private void responseStoreDurationAndUsage(Response response, Trace trace) {
 		response.setDurationMilliseconds((int) Math.ceil(System.currentTimeMillis() - startTime));
 		if (genaicommons.proxies.constants.Constants.getStoreUsageMetrics()) {
-			Microflows.usage_Create_TextAndFiles(getContext(), response, DeployedModel);
+			Usage usage = Microflows.usage_Create_TextAndFiles(getContext(), response, DeployedModel);
+
+			if(trace != null) {
+				trace.setTrace_Usage(usage);
+				trace.setEndTime(currentDateTime());
+				trace.setDurationMilliseconds(response.getDurationMilliseconds());
+				//commit trace TODO
+				
+				//retrieve spans and commit list TODO, might be microflow
+				
+			}
 		}
+	}
+	
+	private Trace createTrace() {
+		if (genaicommons.proxies.constants.Constants.getStoreTraces()) {
+			Trace newTrace = new Trace(getContext());
+			newTrace.setTraceId(UUID.randomUUID().toString());
+			newTrace.setStartTime(new Date(startTime));
+			return newTrace;
+			
+		} else {
+			return null;
+		}
+	}
+	
+	private Date currentDateTime() {
+		return new Date(System.currentTimeMillis());
 	}
 	
 	private void responseUpdateTokenCount(Response response) {
