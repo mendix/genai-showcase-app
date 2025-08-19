@@ -17,6 +17,8 @@ import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import genaicommons.proxies.ENUM_ModelModality;
+import genaicommons.proxies.Message;
+import genaicommons.proxies.ModelSpan;
 import genaicommons.proxies.Response;
 import genaicommons.proxies.Trace;
 import genaicommons.proxies.Usage;
@@ -66,8 +68,7 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 		try {
 			validate();
 			startTime = System.currentTimeMillis();
-			Trace newTrace = createTrace();
-			Response response = processRequest(newTrace);
+			Response response = processRequest();
 			if(response != null) {
 				return response.getMendixObject();
 			} else {
@@ -97,7 +98,8 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 	private long startTime;
 	
 	//Recursive response processing until there is no ToolCall available
-	private Response processRequest(Trace trace) throws CoreException {
+	private Response processRequest() throws CoreException {
+		ModelSpan modelSpan = createModelSpan();
 		IMendixObject responseMendixObject = Core.microflowCall(CallModelMicroflow).withParam("DeployedModel", DeployedModel.getMendixObject()).withParam("Request", Request.getMendixObject()).execute(this.getContext());
 		if(responseMendixObject == null) {
 			LOGGER.debug("Microflow " + CallModelMicroflow  + " returned null.");
@@ -105,50 +107,64 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 		}
 		Response response = genaicommons.proxies.Response.load(getContext(), responseMendixObject.getId());
 		
+		Message assistantMessage = response.getResponse_Message();
+		response.setResponseText(assistantMessage.getContent());
+		updateModelSpan(modelSpan, response);
 		responseUpdateTokenCount(response);
 		
-		boolean toolCallsProcessed = Microflows.response_ProcessToolCalls(getContext(), response, Request, trace);
+		boolean toolCallsProcessed = Microflows.response_ProcessToolCalls(getContext(), response, Request);
 		
 		//Recursion if tool calls are available
 		if (toolCallsProcessed) {
-			return processRequest(trace);
+			return processRequest();
 		}
 		
-		responseStoreDurationAndUsage(response, trace);
+		responsePostProcessing(response);
 		return response;
 	}
 
-	private void responseStoreDurationAndUsage(Response response, Trace trace) {
+	private void responsePostProcessing(Response response) throws CoreException {
 		response.setDurationMilliseconds((int) Math.ceil(System.currentTimeMillis() - startTime));
-		if (genaicommons.proxies.constants.Constants.getStoreUsageMetrics()) {
+		
+		Trace trace = Request.getRequest_Trace();
+		
+		//trace == null if the constant was empty
+		if (trace != null || genaicommons.proxies.constants.Constants.getStoreUsageMetrics()) {
 			Usage usage = Microflows.usage_Create_TextAndFiles(getContext(), response, DeployedModel);
 
 			if(trace != null) {
 				trace.setTrace_Usage(usage);
-				trace.setEndTime(currentDateTime());
-				trace.setDurationMilliseconds(response.getDurationMilliseconds());
-				//commit trace TODO
-				
-				//retrieve spans and commit list TODO, might be microflow
-				
+				trace.setOutput(response.getResponseText());
 			}
 		}
 	}
 	
-	private Trace createTrace() {
-		if (genaicommons.proxies.constants.Constants.getStoreTraces()) {
-			Trace newTrace = new Trace(getContext());
-			newTrace.setTraceId(UUID.randomUUID().toString());
-			newTrace.setStartTime(new Date(startTime));
-			return newTrace;
+	//Updates modelspan after the response was created
+	private void updateModelSpan(ModelSpan modelSpan, Response response) throws CoreException {
+		if(modelSpan != null) {
+			Trace trace = Request.getRequest_Trace();
+			modelSpan.setSpan_Trace(trace);
+			modelSpan.setSpanId(UUID.randomUUID().toString());
+			modelSpan.setInputTokens(response.getRequestTokens());
+			modelSpan.setOutputTokens(response.getResponseTokens());
+			modelSpan.setOutput(response.getResponseText());
+			modelSpan.set_DeploymentIdentifier(DeployedModel.getArchitecture() + ' ' + DeployedModel.getDisplayName());
+			modelSpan.setEndTime(new Date(System.currentTimeMillis()));
+			modelSpan.setDurationMilliseconds((int) (modelSpan.getEndTime().getTime() -  modelSpan.getStartTime().getTime()));
+		}
+	}
+	
+	//Creates ModelSpan with known startTime
+	private ModelSpan createModelSpan() throws CoreException {
+		Trace trace = Request.getRequest_Trace();
+		if(trace != null) {
+			ModelSpan modelSpan = new ModelSpan(getContext());
+			modelSpan.setStartTime(new Date(System.currentTimeMillis()));
+			return modelSpan;
 			
 		} else {
 			return null;
 		}
-	}
-	
-	private Date currentDateTime() {
-		return new Date(System.currentTimeMillis());
 	}
 	
 	private void responseUpdateTokenCount(Response response) {
