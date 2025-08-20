@@ -1,0 +1,45 @@
+.link-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: $line-height-base;
+    border-radius: $btn-border-radius;
+
+    .btn-wrapper {
+        margin-left: $spacing-small;
+        min-width: 9em;
+        display: flex;
+        align-items: center;
+        padding: $spacing-smaller 0;
+        
+    }
+
+    .mx-text {
+        margin: 0;
+        line-height: $line-height-base;
+    }
+
+    .btn {
+        transition: all 0.2s ease-in-out;
+        border: none;
+        background-color: transparent;
+        color: $font-color-default;
+        padding: 0 $spacing-smaller;
+        height: $font-size-small;
+        display: flex;
+        align-items: center;
+
+        &.btn-hover {
+            visibility: hidden;
+        }
+
+    }
+
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        .btn.btn-hover {
+            visibility: visible;
+        }
+    }
+}
