@@ -28607,6 +28607,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background: #f8f8f8;
   border: 1px solid #f8f8f8;
 }
+.chat-container-agent .card {
+  margin-bottom: unset;
+}
 
 .badge-with-circle {
   display: flex;
@@ -28893,6 +28896,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: unset;
 }
 
+.spacing-outer-24 {
+  margin-bottom: 24px !important;
+}
+
 .listview-bullet-points > ul {
   list-style-type: disc;
   margin-bottom: 0px;
@@ -29063,11 +29070,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex: 1 1 0;
   width: 60%;
   max-width: 945px;
-  height: 100%;
+  max-height: 92vh;
   display: flex;
   flex-direction: column;
+}
+.agent-page-container .page-container-main .page-container-main-scroll {
   overflow-y: auto;
-  gap: 24px;
+  overflow-x: unset;
 }
 .agent-page-container .page-container-main .card {
   overflow: unset;
@@ -29117,12 +29126,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex !important;
   align-items: end !important;
 }
-.agent-page-container .pageheader-navigation {
+.agent-page-container .page-navigation {
+  position: sticky;
   display: flex !important;
   align-items: center !important;
   flex-flow: row !important;
   justify-content: flex-start !important;
-  margin-bottom: -16px;
+  margin-top: 0;
+  margin-bottom: 8px;
+  z-index: 10;
 }
 .agent-page-container .page-content {
   width: 100%;
