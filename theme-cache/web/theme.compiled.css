@@ -28618,7 +28618,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .link-container .btn-wrapper {
   margin-left: 8px;
-  min-width: 9em;
+  min-width: 8em;
   display: flex;
   align-items: center;
   padding: 4px 0;
@@ -28632,7 +28632,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border: none;
   background-color: transparent;
   color: #0a1325;
-  padding: 0 4px;
+  padding: 0 0;
   height: 12px;
   display: flex;
   align-items: center;

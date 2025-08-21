@@ -7,7 +7,7 @@
 
     .btn-wrapper {
         margin-left: $spacing-small;
-        min-width: 9em;
+        min-width: 8em;
         display: flex;
         align-items: center;
         padding: $spacing-smaller 0;
@@ -24,7 +24,7 @@
         border: none;
         background-color: transparent;
         color: $font-color-default;
-        padding: 0 $spacing-smaller;
+        padding: 0 0;
         height: $font-size-small;
         display: flex;
         align-items: center;
