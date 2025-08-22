@@ -1,5 +1,6 @@
 @import "../../../../theme/web/custom-variables.scss";
 
+
 .custom-control-label {
   display: block;
   overflow: hidden;
@@ -132,6 +133,6 @@
   }
 }
 
-.spacing-outer-24 {
-  margin-bottom: 24px !important;
+.spacing-inner-top-28 {
+  padding-top: $size-28; 
 }
