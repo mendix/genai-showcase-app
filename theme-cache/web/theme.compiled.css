@@ -29295,6 +29295,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding-bottom: 9px;
 }
 
+.icon-info-wrapper {
+  display: flex;
+  align-items: center;
+}
+.icon-info-wrapper img {
+  margin-right: 0;
+  margin-bottom: 0;
+}
+
 .listview-horizontal.mx-listview > ul {
   display: inline-block;
   margin-bottom: 0;

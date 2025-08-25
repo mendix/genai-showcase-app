@@ -1,2 +1,11 @@
 @import '../../../theme/web/custom-variables';
 
+.icon-info-wrapper {
+  display: flex;
+  align-items: center;
+
+  img {
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+}
