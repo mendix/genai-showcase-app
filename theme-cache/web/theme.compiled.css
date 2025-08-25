@@ -3034,6 +3034,11 @@
   display: block;
 }
 
+.datagrid--no-scroll .widget-datagrid-content {
+  overflow-y: visible;
+  overflow-x: visible;
+}
+
 /* ==========================================================================
   Take picture styles
 ========================================================================== */
@@ -28185,8 +28190,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: none;
 }
 
-.datagrid--no-scroll.widget-datagrid .widget-datagrid-content {
+.datagrid--no-scroll .widget-datagrid-content {
   overflow-y: visible;
+  overflow-x: visible;
 }
 
 .chat-dataview--display-contents {
@@ -28583,31 +28589,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   text-overflow: ellipsis;
 }
 
-.chat-container-agent {
-  max-width: 100%;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  border-left: 1px solid #E7E7E9;
-  padding-top: 16px;
-  margin-bottom: unset;
-  padding-left: unset;
-  padding-right: unset;
-}
-.chat-container-agent .chat-container {
-  padding-left: 16px;
-  padding-right: 16px;
-}
-.chat-container-agent .chat-bubble-wrapper .chat-message-card {
-  background: #fff;
-  border-radius: 8px;
-  border: 1px solid #ced0d3;
-}
-.chat-container-agent .chat-bubble-wrapper--user .chat-message-card {
-  background: #f8f8f8;
-  border: 1px solid #f8f8f8;
-}
-
 .badge-with-circle {
   display: flex;
   align-items: center;
@@ -28893,6 +28874,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: unset;
 }
 
+.spacing-inner-top-28 {
+  padding-top: 28px;
+}
+
 .listview-bullet-points > ul {
   list-style-type: disc;
   margin-bottom: 0px;
@@ -28986,8 +28971,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .agents-page-content-container .agents-container--overview {
   width: 90%;
-  max-width: 1200px;
-  margin: 24px;
+  max-width: 1600px;
+  margin: 44px;
   flex-direction: column;
 }
 .agents-page-content-container .agents-container--overview .td {
@@ -28997,7 +28982,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   overflow: unset;
   border-radius: 16px;
   border: 1px solid #e7e7e9;
-  padding-top: 16px;
+  padding: 24px;
 }
 .agents-page-content-container .pageheader-with-buttons {
   display: flex !important;
@@ -29018,6 +29003,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 16px 32px 16px 32px;
   overflow: hidden;
   box-sizing: border-box;
+  /* Test Agent */
+}
+@media (max-width: 800px) {
+  .agent-page-container {
+    gap: 0;
+    overflow: auto;
+  }
 }
 .agent-page-container .agent-page-container::after {
   content: "";
@@ -29063,28 +29055,26 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex: 1 1 0;
   width: 60%;
   max-width: 945px;
-  height: 100%;
+  max-height: 92vh;
   display: flex;
   flex-direction: column;
+  margin-bottom: 0;
+}
+.agent-page-container .page-container-main .page-container-main-scroll {
   overflow-y: auto;
-  gap: 24px;
+  overflow-x: unset;
 }
 .agent-page-container .page-container-main .card {
   overflow: unset;
 }
 @media (max-height: 800px) {
   .agent-page-container .page-container-main {
-    height: 87vh;
+    height: 85vh;
   }
 }
 .agent-page-container .page-container-grid {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding-top: 28px;
-}
-.agent-page-container .page-container-grid .card {
-  margin-bottom: 0;
 }
 .agent-page-container .page-container-side {
   z-index: 100;
@@ -29095,9 +29085,36 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-direction: column;
   padding-top: 28px;
 }
+.agent-page-container .chat-container-agent {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-left: 1px solid #E7E7E9;
+  padding-top: 16px;
+  margin-bottom: unset;
+  padding-left: unset;
+  padding-right: unset;
+}
+.agent-page-container .chat-container-agent .chat-container {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.agent-page-container .chat-container-agent .chat-bubble-wrapper .chat-message-card {
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #ced0d3;
+}
+.agent-page-container .chat-container-agent .chat-bubble-wrapper--user .chat-message-card {
+  background: #f8f8f8;
+  border: 1px solid #f8f8f8;
+}
 @media (max-height: 800px) {
   .agent-page-container .page-container-side {
     height: 87vh;
+  }
+  .agent-page-container .page-container-side .card {
+    margin-bottom: 0;
   }
 }
 .agent-page-container .page-header-content {
@@ -29117,12 +29134,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex !important;
   align-items: end !important;
 }
-.agent-page-container .pageheader-navigation {
+.agent-page-container .page-navigation {
+  position: sticky;
   display: flex !important;
   align-items: center !important;
   flex-flow: row !important;
   justify-content: flex-start !important;
-  margin-bottom: -16px;
+  margin-top: 0;
+  margin-bottom: 8px;
+  z-index: 10;
 }
 .agent-page-container .page-content {
   width: 100%;
