@@ -48,7 +48,7 @@ public class MCPServer_CreateMCPClient extends UserAction<IMendixObject>
 			mcpClientConfig.setProtocolVersion(MCPServer.getProtocolVersion());
 			mcpClientConfig.setVersion(MCPServer.getVersion());
 		
-			if(!MCPServer.getGetCredentialsMicroflow().isBlank()) {
+			if(MCPServer.getGetCredentialsMicroflow() != null && !MCPServer.getGetCredentialsMicroflow().isBlank()) {
 				List<HttpHeader> httpheaderList = Core.microflowCall(MCPServer.getGetCredentialsMicroflow()).execute(getContext());
 				mcpClientConfig.setMCPClientConfig_HttpHeader(httpheaderList);
 			}
