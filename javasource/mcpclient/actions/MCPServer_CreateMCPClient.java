@@ -12,15 +12,12 @@ package mcpclient.actions;
 import static java.util.Objects.requireNonNull;
 import java.util.List;
 import mcpclient.proxies.MCPClientConfig;
-import mcpclient.proxies.MCPClient;
+import mcpclient.impl.MxLogger;
 import system.proxies.HttpHeader;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
-import agentcommons.actions.PromptToUse_GetAndReplace;
-import agentcommons.proxies.PromptToUse;
-import io.modelcontextprotocol.spec.McpSchema.Role;
 
 public class MCPServer_CreateMCPClient extends UserAction<IMendixObject>
 {
@@ -43,22 +40,26 @@ public class MCPServer_CreateMCPClient extends UserAction<IMendixObject>
 	public IMendixObject executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		requireNonNull(MCPServer, "MCPServer is required.");
-		MCPClientConfig mcpClientConfig = new MCPClientConfig(getContext());
-		mcpClientConfig.setMCPEndpoint(MCPServer.getMCPEndpoint());
-		mcpClientConfig.setName(MCPServer.getName());
-		mcpClientConfig.setProtocolVersion(MCPServer.getProtocolVersion());
-		mcpClientConfig.setVersion(MCPServer.getVersion());
+		try {
+			requireNonNull(MCPServer, "MCPServer is required.");
+			MCPClientConfig mcpClientConfig = new MCPClientConfig(getContext());
+			mcpClientConfig.setMCPEndpoint(MCPServer.getMCPEndpoint());
+			mcpClientConfig.setName(MCPServer.getName());
+			mcpClientConfig.setProtocolVersion(MCPServer.getProtocolVersion());
+			mcpClientConfig.setVersion(MCPServer.getVersion());
 		
-		if(!MCPServer.getGetCredentialsMicroflow().isBlank()) {
-			List<HttpHeader> httpheaderList = Core.microflowCall(MCPServer.getGetCredentialsMicroflow()).execute(getContext());
-			mcpClientConfig.setMCPClientConfig_HttpHeader(httpheaderList);
+			if(!MCPServer.getGetCredentialsMicroflow().isBlank()) {
+				List<HttpHeader> httpheaderList = Core.microflowCall(MCPServer.getGetCredentialsMicroflow()).execute(getContext());
+				mcpClientConfig.setMCPClientConfig_HttpHeader(httpheaderList);
+			}
+		
+			return Core.userActionCall("MCPClient." + CreateMCPClient.class.getSimpleName())
+					.withParams(mcpClientConfig.getMendixObject())
+					.execute(getContext());
+		} catch (Exception e) {
+			LOGGER.error(e);
+			return null;
 		}
-		
-		return Core.userActionCall("MCPClient." + CreateMCPClient.class.getSimpleName())
-	    		.withParams(mcpClientConfig.getMendixObject())
-	    		.execute(getContext());
-	    		
 		// END USER CODE
 	}
 
@@ -73,5 +74,6 @@ public class MCPServer_CreateMCPClient extends UserAction<IMendixObject>
 	}
 
 	// BEGIN EXTRA CODE
+	private static final MxLogger LOGGER = new mcpclient.impl.MxLogger(MCPServer_CreateMCPClient.class);
 	// END EXTRA CODE
 }
