@@ -7,65 +7,62 @@
 // Other code you write will be lost the next time you deploy the project.
 // Special characters, e.g., é, ö, à, etc. are supported in comments.
 
-package genaicommons.actions;
+package mcpclient.actions;
 
 import static java.util.Objects.requireNonNull;
 import java.util.List;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import genaicommons.impl.MxLogger;
+import mcpclient.impl.MxLogger;
+import mcpclient.proxies.MCPTool;
 import genaicommons.impl.ToolCollectionImpl;
 import genaicommons.proxies.Tool;
 import genaicommons.proxies.ToolCollection;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
- * Adds a new Tool to a Request.
+ * Adds a new MCPTool to a Request.
  * Parameters: 
  * - Request: The request to add the tool to.
- * - ArgumentInputLIst (optional): describe the input parameters of a tool.
  * - Name: The name of the tool to call.
- * - ToolOrchestrateMicroflow: The microflow that is called within this tool. Usually to pass the input to another serivce, but not to directly process the tool.
  * - Description (optional): A description of what the tool does, used by the model to choose when and how to call the tool.
+ * - ArgumentInputList (optional): describe the input parameters of a tool.
  * 
  * The action returns empty if adding the tool was not successful (errors are logged).
  */
-public class Request_AddTool extends UserAction<IMendixObject>
+public class Request_AddMCPTool extends UserAction<IMendixObject>
 {
 	/** @deprecated use Request.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __Request;
 	private final genaicommons.proxies.Request Request;
+	private final java.lang.String Name;
+	private final java.lang.String Description;
 	/** @deprecated use com.mendix.utils.ListUtils.map(ArgumentInputList, com.mendix.systemwideinterfaces.core.IEntityProxy::getMendixObject) instead. */
 	@java.lang.Deprecated(forRemoval = true)
 	private final java.util.List<IMendixObject> __ArgumentInputList;
 	private final java.util.List<genaicommons.proxies.ArgumentInput> ArgumentInputList;
-	private final java.lang.String ToolOrchestrateMicroflow;
-	private final java.lang.String Name;
-	private final java.lang.String Description;
 
-	public Request_AddTool(
+	public Request_AddMCPTool(
 		IContext context,
 		IMendixObject _request,
-		java.util.List<IMendixObject> _argumentInputList,
-		java.lang.String _toolOrchestrateMicroflow,
 		java.lang.String _name,
-		java.lang.String _description
+		java.lang.String _description,
+		java.util.List<IMendixObject> _argumentInputList
 	)
 	{
 		super(context);
 		this.__Request = _request;
 		this.Request = _request == null ? null : genaicommons.proxies.Request.initialize(getContext(), _request);
+		this.Name = _name;
+		this.Description = _description;
 		this.__ArgumentInputList = _argumentInputList;
 		this.ArgumentInputList = java.util.Optional.ofNullable(_argumentInputList)
 			.orElse(java.util.Collections.emptyList())
 			.stream()
 			.map(argumentInputListElement -> genaicommons.proxies.ArgumentInput.initialize(getContext(), argumentInputListElement))
 			.collect(java.util.stream.Collectors.toList());
-		this.ToolOrchestrateMicroflow = _toolOrchestrateMicroflow;
-		this.Name = _name;
-		this.Description = _description;
 	}
 
 	@java.lang.Override
@@ -74,11 +71,11 @@ public class Request_AddTool extends UserAction<IMendixObject>
 		// BEGIN USER CODE
 		try{
 			requireNonNull(Request, "Request is required.");
-			//FunctionImpl.validateFunctionInput(FunctionMicroflow, ToolName);
+			requireNonNull(Name, "Name is required.");
 			
 			ToolCollection toolCollection = ToolCollectionImpl.getOrCreateToolCollection(getContext(), Request);
 			
-			return createTool(toolCollection).getMendixObject();
+			return createMCPTool(toolCollection).getMendixObject();
 
 		} catch (Exception e) {
 			LOGGER.error(e);
@@ -94,16 +91,16 @@ public class Request_AddTool extends UserAction<IMendixObject>
 	@java.lang.Override
 	public java.lang.String toString()
 	{
-		return "Request_AddTool";
+		return "Request_AddMCPTool";
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new genaicommons.impl.MxLogger(Request_AddTool.class);
+	private static final MxLogger LOGGER = new MxLogger(Request_AddMCPTool.class);
 	
-	public Tool createTool(ToolCollection toolCollection) throws CoreException {
-		Tool tool = new Tool(getContext());
+	private MCPTool createMCPTool(ToolCollection toolCollection) throws CoreException {
+		MCPTool tool = new MCPTool(getContext());
 		
-		tool.setMicroflow(ToolOrchestrateMicroflow);
+		tool.setMicroflow("MCPClient.MCPClient_ToolMicroflow");
 		tool.setTool_ArgumentInput(ArgumentInputList);
 		tool.setDescription(Description);
 		tool.setName(Name);

@@ -45,6 +45,7 @@ public class Microflow_GetList extends UserAction<java.util.List<IMendixObject>>
 				.filter(microflowName -> !microflowName.isBlank() && microflowName.contains("."))
 				.filter(microflow -> Core.getReturnType(microflow).isList())
 				.filter(microflow -> Core.getMetaObject(Core.getReturnType(microflow).getObjectType()).isSubClassOf(HttpHeader.getType()))
+				.filter(microflow -> Core.getInputParameters(microflow).isEmpty())
 				.sorted()
 				.map(microflowName -> {
 					Microflow microflowImport = new Microflow(getContext());
