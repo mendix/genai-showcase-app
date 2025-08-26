@@ -9,3 +9,16 @@
     margin-bottom: 0;
   }
 }
+
+.argument-listview {
+    > ul {
+    margin-bottom: 0;
+        > li {
+            padding: 8px;
+            border-top: none;
+            &:last-child {
+                border-bottom: none;
+            }
+        }   
+    }
+}

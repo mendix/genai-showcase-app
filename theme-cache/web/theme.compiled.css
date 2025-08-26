@@ -29304,6 +29304,17 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-bottom: 0;
 }
 
+.argument-listview > ul {
+  margin-bottom: 0;
+}
+.argument-listview > ul > li {
+  padding: 8px;
+  border-top: none;
+}
+.argument-listview > ul > li:last-child {
+  border-bottom: none;
+}
+
 .listview-horizontal.mx-listview > ul {
   display: inline-block;
   margin-bottom: 0;
