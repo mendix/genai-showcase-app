@@ -21,6 +21,9 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
+/**
+ * Create an MCP Client from an MCP Server Configuration.
+ */
 public class MCPServerConfiguration_CreateMCPClient extends UserAction<IMendixObject>
 {
 	/** @deprecated use MCPServerConfiguration.getMendixObject() instead. */
