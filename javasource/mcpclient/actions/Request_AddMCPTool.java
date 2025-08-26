@@ -37,6 +37,10 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __Request;
 	private final genaicommons.proxies.Request Request;
+	/** @deprecated use MCPServerConfiguration.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __MCPServerConfiguration;
+	private final mcpclient.proxies.MCPServerConfiguration MCPServerConfiguration;
 	private final java.lang.String Name;
 	private final java.lang.String Description;
 	/** @deprecated use com.mendix.utils.ListUtils.map(ArgumentInputList, com.mendix.systemwideinterfaces.core.IEntityProxy::getMendixObject) instead. */
@@ -47,6 +51,7 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 	public Request_AddMCPTool(
 		IContext context,
 		IMendixObject _request,
+		IMendixObject _mCPServerConfiguration,
 		java.lang.String _name,
 		java.lang.String _description,
 		java.util.List<IMendixObject> _argumentInputList
@@ -55,6 +60,8 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		super(context);
 		this.__Request = _request;
 		this.Request = _request == null ? null : genaicommons.proxies.Request.initialize(getContext(), _request);
+		this.__MCPServerConfiguration = _mCPServerConfiguration;
+		this.MCPServerConfiguration = _mCPServerConfiguration == null ? null : mcpclient.proxies.MCPServerConfiguration.initialize(getContext(), _mCPServerConfiguration);
 		this.Name = _name;
 		this.Description = _description;
 		this.__ArgumentInputList = _argumentInputList;
@@ -71,6 +78,7 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		// BEGIN USER CODE
 		try{
 			requireNonNull(Request, "Request is required.");
+			requireNonNull(MCPServerConfiguration, "MCPServerConfiguration is required.");
 			requireNonNull(Name, "Name is required.");
 			
 			ToolCollection toolCollection = ToolCollectionImpl.getOrCreateToolCollection(getContext(), Request);
@@ -104,6 +112,7 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		tool.setTool_ArgumentInput(ArgumentInputList);
 		tool.setDescription(Description);
 		tool.setName(Name);
+		tool.setMCPTool_MCPServerConfiguration(MCPServerConfiguration);
 		List<Tool> ToolList = toolCollection.getToolCollection_Tool();
 		ToolList.add(tool);
 		toolCollection.setToolCollection_Tool(ToolList); 
