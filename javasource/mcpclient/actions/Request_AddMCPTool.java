@@ -15,8 +15,9 @@ import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import mcpclient.impl.MxLogger;
-import mcpclient.proxies.MCPTool;
+import mcpclient.proxies.MCP;
 import genaicommons.impl.ToolCollectionImpl;
+import genaicommons.proxies.ArgumentInput;
 import genaicommons.proxies.Tool;
 import genaicommons.proxies.ToolCollection;
 import com.mendix.systemwideinterfaces.core.UserAction;
@@ -41,20 +42,16 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __MCPServerConfiguration;
 	private final mcpclient.proxies.MCPServerConfiguration MCPServerConfiguration;
-	private final java.lang.String Name;
-	private final java.lang.String Description;
-	/** @deprecated use com.mendix.utils.ListUtils.map(ArgumentInputList, com.mendix.systemwideinterfaces.core.IEntityProxy::getMendixObject) instead. */
+	/** @deprecated use Tool.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
-	private final java.util.List<IMendixObject> __ArgumentInputList;
-	private final java.util.List<genaicommons.proxies.ArgumentInput> ArgumentInputList;
+	private final IMendixObject __Tool;
+	private final mcpclient.proxies.Tool Tool;
 
 	public Request_AddMCPTool(
 		IContext context,
 		IMendixObject _request,
 		IMendixObject _mCPServerConfiguration,
-		java.lang.String _name,
-		java.lang.String _description,
-		java.util.List<IMendixObject> _argumentInputList
+		IMendixObject _tool
 	)
 	{
 		super(context);
@@ -62,14 +59,8 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		this.Request = _request == null ? null : genaicommons.proxies.Request.initialize(getContext(), _request);
 		this.__MCPServerConfiguration = _mCPServerConfiguration;
 		this.MCPServerConfiguration = _mCPServerConfiguration == null ? null : mcpclient.proxies.MCPServerConfiguration.initialize(getContext(), _mCPServerConfiguration);
-		this.Name = _name;
-		this.Description = _description;
-		this.__ArgumentInputList = _argumentInputList;
-		this.ArgumentInputList = java.util.Optional.ofNullable(_argumentInputList)
-			.orElse(java.util.Collections.emptyList())
-			.stream()
-			.map(argumentInputListElement -> genaicommons.proxies.ArgumentInput.initialize(getContext(), argumentInputListElement))
-			.collect(java.util.stream.Collectors.toList());
+		this.__Tool = _tool;
+		this.Tool = _tool == null ? null : mcpclient.proxies.Tool.initialize(getContext(), _tool);
 	}
 
 	@java.lang.Override
@@ -79,7 +70,7 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		try{
 			requireNonNull(Request, "Request is required.");
 			requireNonNull(MCPServerConfiguration, "MCPServerConfiguration is required.");
-			requireNonNull(Name, "Name is required.");
+			requireNonNull(Tool, "Tool is required.");
 			
 			ToolCollection toolCollection = ToolCollectionImpl.getOrCreateToolCollection(getContext(), Request);
 			
@@ -105,18 +96,22 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new MxLogger(Request_AddMCPTool.class);
 	
-	private MCPTool createMCPTool(ToolCollection toolCollection) throws CoreException {
-		MCPTool tool = new MCPTool(getContext());
+	private MCP createMCPTool(ToolCollection toolCollection) throws CoreException {
+		MCP tool = new MCP(getContext());
 		
 		tool.setMicroflow("MCPClient.MCPClient_ToolMicroflow");
-		tool.setTool_ArgumentInput(ArgumentInputList);
-		tool.setDescription(Description);
-		tool.setName(Name);
-		tool.setMCPTool_MCPServerConfiguration(MCPServerConfiguration);
+		tool.setTool_ArgumentInput(createArgumentInputList());
+		tool.setDescription(Tool.getDescription());
+		tool.setName(Tool.getName());
+		tool.setMCP_MCPServerConfiguration(MCPServerConfiguration);
 		List<Tool> ToolList = toolCollection.getToolCollection_Tool();
 		ToolList.add(tool);
 		toolCollection.setToolCollection_Tool(ToolList); 
 		return tool;
+	}
+	
+	private List<ArgumentInput> createArgumentInputList (){
+		return mcpclient.proxies.microflows.Microflows.tool_CreateArgumentInputList(getContext(), Tool);
 	}
 	// END EXTRA CODE
 }
