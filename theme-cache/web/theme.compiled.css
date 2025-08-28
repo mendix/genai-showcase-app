@@ -28757,6 +28757,42 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 0 4px;
 }
 
+.link-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 1.428571429;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+}
+.link-container .btn-wrapper {
+  margin-left: 8px;
+  min-width: 8em;
+  display: flex;
+  align-items: center;
+  padding: 4px 0;
+}
+.link-container .mx-text {
+  margin: 0;
+  line-height: 1.428571429;
+}
+.link-container .btn {
+  transition: all 0.2s ease-in-out;
+  border: none;
+  background-color: transparent;
+  color: #0a1325;
+  padding: 0 0;
+  height: 12px;
+  display: flex;
+  align-items: center;
+}
+.link-container .btn.btn-hover {
+  visibility: hidden;
+}
+.link-container:hover .btn.btn-hover {
+  visibility: visible;
+}
+
 .custom-control-label {
   display: block;
   overflow: hidden;
