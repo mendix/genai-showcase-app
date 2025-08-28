@@ -29351,6 +29351,26 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding-bottom: 9px;
 }
 
+.icon-info-wrapper {
+  display: flex;
+  align-items: center;
+}
+.icon-info-wrapper img {
+  margin-right: 0;
+  margin-bottom: 0;
+}
+
+.argument-listview > ul {
+  margin-bottom: 0;
+}
+.argument-listview > ul > li {
+  padding: 8px;
+  border-top: none;
+}
+.argument-listview > ul > li:last-child {
+  border-bottom: none;
+}
+
 .listview-horizontal.mx-listview > ul {
   display: inline-block;
   margin-bottom: 0;
