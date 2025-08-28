@@ -28793,6 +28793,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
   visibility: visible;
 }
 
+.datagrid--no-scroll .widget-datagrid-content {
+  overflow-y: visible;
+  overflow-x: visible;
+}
+
 .custom-control-label {
   display: block;
   overflow: hidden;

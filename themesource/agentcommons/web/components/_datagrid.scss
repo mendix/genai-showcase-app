@@ -1,0 +1,7 @@
+//fix for datagrid scrollbar caused by popupmenu
+.datagrid--no-scroll {
+    .widget-datagrid-content {
+        overflow-y: visible;
+        overflow-x: visible;
+    }
+}
