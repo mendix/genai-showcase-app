@@ -46,7 +46,7 @@ public class MCPServerConfiguration_CreateMCPClient extends UserAction<IMendixOb
 	{
 		// BEGIN USER CODE
 		try {
-			requireNonNull(MCPServerConfiguration, "MCPServer is required.");
+			requireNonNull(MCPServerConfiguration, "MCPServerConfiguration is required.");
 			MCPClientConfig mcpClientConfig = new MCPClientConfig(getContext());
 			mcpClientConfig.setMCPEndpoint(MCPServerConfiguration.getMCPEndpoint());
 			mcpClientConfig.setName(MCPServerConfiguration.getName());
