@@ -45,7 +45,8 @@ public class AWSAsyncBuilderConfigurator<BuilderT extends AwsAsyncClientBuilder<
 	@SuppressWarnings("unused")
 	private static final MxLogger LOGGER = new MxLogger(AWSAsyncBuilderConfigurator.class);
 	
-	private static final String AWS_HEADER_VALUE = "Mendix-Authentication-3.0.0";
+	//TODO Replace X.Y.Z below with correct version nr and delete this line in rc-branch
+	private static final String AWS_HEADER_VALUE = "Mendix-Authentication-4.1.1";
 	
 	private AbstractRequest abstractRequest;
 	private ENUM_Region region;
@@ -110,6 +111,7 @@ public class AWSAsyncBuilderConfigurator<BuilderT extends AwsAsyncClientBuilder<
 			this.awsHeaderValue = awsHeaderValue + "; " + AWS_HEADER_VALUE + "; Static Credentials";
 		}
 		
+		LOGGER.trace("awsHeaderValue set to:", this.awsHeaderValue);
 		return this;
 	}
 	
@@ -136,6 +138,7 @@ public class AWSAsyncBuilderConfigurator<BuilderT extends AwsAsyncClientBuilder<
 		if (region != null) {
 			Region awsRegion = Utils.convertAWSRegion(region);
 			builder.region(awsRegion);
+			LOGGER.debug("AWS region set: ", awsRegion);
 		}
 		if (credentials != null) {
 			AwsCredentialsProvider awsCredentialsProvider = AuthCredentialsProvider.getCredentialsProvider(credentials)
@@ -152,10 +155,12 @@ public class AWSAsyncBuilderConfigurator<BuilderT extends AwsAsyncClientBuilder<
 		ClientOverrideConfiguration clientOverrideConfiguration = AbstractRequestHelper.getClientOverrideConfiguration(abstractRequest, awsHeaderValue);
 		if (clientOverrideConfiguration!= null) {
 			builder.overrideConfiguration(clientOverrideConfiguration);
+			LOGGER.debug("client config overriden");
 		}
 		URI endpointOverride = AbstractRequestHelper.getEndpointOverride(abstractRequest);
 		if (endpointOverride != null) {
 			builder.endpointOverride(endpointOverride);
+			LOGGER.debug("endpoint url changed to: ", endpointOverride);
 		}
 		//TODO Use specific async sdkhttpclient with its own settings: but to implement this, the AbstractRequest entity in Auth Connector has to be extended
 		//with Async http client configs, so more child entities below the AbstractHttpConfig, 
@@ -163,6 +168,7 @@ public class AWSAsyncBuilderConfigurator<BuilderT extends AwsAsyncClientBuilder<
 //		SdkHttpClient sdkHttpClient = AbstractRequestHelper.getSdkHttpClient(abstractRequest);
 //		if (sdkHttpClient != null) {
 //			//builder.httpClient(sdkHttpClient);
+//		LOGGER.debug("sdk http clinet set");
 //		}
 	}
 }

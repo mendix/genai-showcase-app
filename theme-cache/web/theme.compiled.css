@@ -26227,7 +26227,7 @@ html div.dj_ios .widget-switch.auto .widget-switch-btn-wrapper.checked.widget-sw
   color: #0a1325;
 }
 .pagination-bar .paging-status {
-  padding: 0 8px 8px;
+  padding: 0 8px 0;
 }
 .pagination-bar .pagination-button {
   padding: 6px;
@@ -26408,6 +26408,33 @@ html div.dj_ios .widget-switch.auto .widget-switch-btn-wrapper.checked.widget-sw
 :where(.infinite-loading .widget-datagrid-grid-head .th) {
   position: sticky;
   z-index: 1;
+}
+
+:where(.widget-datagrid-paging-bottom) {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+:where(.widget-datagrid-pb-start, .widget-datagrid-pb-end, .widget-datagrid-pb-middle) {
+  flex-grow: 1;
+  flex-basis: 33.33%;
+  min-height: 20px;
+}
+
+:where(.widget-datagrid-pb-start) {
+  margin-block: var(--spacing-medium);
+  padding-inline: var(--spacing-medium);
+}
+
+.widget-datagrid-clear-selection {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  text-decoration: underline;
+  color: var(--link-color);
+  padding: 0;
+  display: inline-block;
 }
 
 @keyframes skeleton-loading {
@@ -26936,6 +26963,11 @@ div:not(.table-compact) > .table .th .dropdown-container .dropdown-list {
 }
 .widget-dropdown-filter-menu-item:where([data-highlighted]) {
   background-color: var(--wdf-highlighted-bg-color);
+}
+.widget-dropdown-filter-menu-item-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .widget-dropdown-filter-checkbox-slot {
   display: flex;
@@ -27525,9 +27557,30 @@ div:not(.table-compact) > .table .th .dropdown-container .dropdown-list {
   width: inherit;
 }
 
-.widget-gallery-load-more {
+:where(.widget-gallery-footer-controls) {
   display: flex;
-  justify-content: center;
+  flex-flow: row nowrap;
+}
+
+:where(.widget-gallery-fc-start) {
+  margin-block: var(--spacing-medium);
+  padding-inline: var(--spacing-medium);
+}
+
+:where(.widget-gallery-fc-start, .widget-gallery-fc-middle, .widget-gallery-fc-end) {
+  flex-grow: 1;
+  flex-basis: 33.33%;
+  min-height: 20px;
+}
+
+.widget-gallery-clear-selection {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  text-decoration: underline;
+  color: var(--link-color);
+  padding: 0;
+  display: inline-block;
 }
 
 /* ==========================================================================
@@ -27589,6 +27642,71 @@ div:not(.table-compact) > .table .th .dropdown-container .dropdown-list {
 
 .widget-gallery-pagination-center .widget-gallery-pagination .pagination-bar {
   justify-content: center;
+}
+
+.mx-refresh-container {
+  grid-column: 1/-1;
+  padding: 0;
+  position: relative;
+}
+.mx-refresh-container-padding {
+  padding: var(--spacing-small) 0;
+}
+
+.mx-refresh-indicator {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: var(--border-color-default, #ced0d3);
+  border: none;
+  border-radius: 2px;
+  color: var(--brand-primary, #264ae5);
+  height: 4px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.mx-refresh-indicator::-webkit-progress-bar {
+  background-color: transparent;
+}
+.mx-refresh-indicator::-webkit-progress-value {
+  background-color: currentColor;
+  transition: all 0.2s;
+}
+.mx-refresh-indicator::-moz-progress-bar {
+  background-color: currentColor;
+  transition: all 0.2s;
+}
+.mx-refresh-indicator::-ms-fill {
+  border: none;
+  background-color: currentColor;
+  transition: all 0.2s;
+}
+.mx-refresh-indicator:indeterminate {
+  background-size: 200% 100%;
+  background-image: linear-gradient(to right, transparent 50%, currentColor 50%, currentColor 60%, transparent 60%, transparent 71.5%, currentColor 71.5%, currentColor 84%, transparent 84%);
+  animation: progress-linear 3s infinite linear;
+}
+.mx-refresh-indicator:indeterminate::-moz-progress-bar {
+  background-color: transparent;
+}
+.mx-refresh-indicator:indeterminate::-ms-fill {
+  animation-name: none;
+}
+@keyframes progress-linear {
+  0% {
+    background-size: 200% 100%;
+    background-position: left -31.25% top 0%;
+  }
+  50% {
+    background-size: 800% 100%;
+    background-position: left -49% top 0%;
+  }
+  100% {
+    background-size: 400% 100%;
+    background-position: left -102% top 0%;
+  }
 }
 
 input[type=checkbox].three-state-checkbox {

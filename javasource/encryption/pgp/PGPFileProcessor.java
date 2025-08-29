@@ -42,16 +42,20 @@ public class PGPFileProcessor {
 		try (InputStream publicKeyIn = Core.getFileDocumentContent(context, this.publicKeyFileDocument)) {
 
 			String tempOutputFile = getNewTempFile("out");
-			try (FileOutputStream out = new FileOutputStream(tempOutputFile)) {
+			try {
+				try (FileOutputStream out = new FileOutputStream(tempOutputFile)) {
 
-				File tmpIn = writeInputDocumentToTempFile(context);
+					File tmpIn = writeInputDocumentToTempFile(context);
 
-				PGPUtils.encryptFile(out, tmpIn.getAbsolutePath(), PGPUtils.readPublicKey(publicKeyIn), this.isAsciiArmored(), this.isIntegrityCheck());
+					PGPUtils.encryptFile(out, tmpIn.getAbsolutePath(), PGPUtils.readPublicKey(publicKeyIn), this.isAsciiArmored(), this.isIntegrityCheck());
 
-				tmpIn.delete();
+					tmpIn.delete();
+				}
+
+				storeOutput(context, tempOutputFile);
+			} finally {
+				new File(tempOutputFile).delete();
 			}
-
-			storeOutput(context, tempOutputFile);
 		}
 
 		return true;

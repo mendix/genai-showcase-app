@@ -17,6 +17,7 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import amazons3connector.impl.AmazonS3Client;
 import amazons3connector.impl.MxLogger;
 import amazons3connector.proxies.ENUM_StorageClass;
+import amazons3connector.proxies.GetObjectMetaData;
 import amazons3connector.proxies.GetObjectResponse;
 import amazons3connector.proxies.GetS3ObjectUsage;
 import software.amazon.awssdk.services.s3.S3Client;
@@ -139,8 +140,16 @@ public class GetObject extends UserAction<IMendixObject>
 		TargetFile.commit(getContext());
 	}
 
-	private GetObjectResponse mapResponseToMxObject(ResponseInputStream<software.amazon.awssdk.services.s3.model.GetObjectResponse> awsResponseStream) {
+	private void addMetaData(GetObjectResponse mxResponse, String key, String value) {
+		// Get every MetaData object that's connected to the GetObject object and create a GetObjectMetaData with the same key/value
+		GetObjectMetaData getObjectMetaData = new GetObjectMetaData(getContext());
+		getObjectMetaData.setKey(key);
+		getObjectMetaData.setValue(value);
+		getObjectMetaData.setGetObjectMetaData_GetObjectResponse(mxResponse);
+		LOGGER.debug("getObjectMetaData: ", key , ':', value);			
+	}
 
+	private GetObjectResponse mapResponseToMxObject(ResponseInputStream<software.amazon.awssdk.services.s3.model.GetObjectResponse> awsResponseStream) {
 		GetObjectResponse mxResponse = new GetObjectResponse(getContext());
 		GetS3ObjectUsage mxGetS3ObjectUsage = new GetS3ObjectUsage(getContext());
 		software.amazon.awssdk.services.s3.model.GetObjectResponse awsResponse = awsResponseStream.response();
@@ -158,6 +167,9 @@ public class GetObject extends UserAction<IMendixObject>
 		mxGetS3ObjectUsage.setSize(awsResponse.contentLength());
 
 		mxResponse.setGetObjectResponse_GetS3ObjectUsage(mxGetS3ObjectUsage);
+
+		// Get all metadata from aws and use that inside the addMetaData call
+		awsResponse.metadata().forEach((key, value) -> addMetaData(mxResponse, key, value));
 		return mxResponse;
 	}
 

@@ -10,13 +10,18 @@
 package amazons3connector.actions;
 
 import static java.util.Objects.requireNonNull;
+import java.util.HashMap;
+import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import amazons3connector.impl.AmazonS3Client;
 import amazons3connector.impl.MxLogger;
+import amazons3connector.proxies.S3RequestMetaData;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.CopyObjectRequest.Builder;
+import java.util.List;
+import java.util.Map;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
 public class CopyObject extends UserAction<java.lang.Boolean>
@@ -115,12 +120,29 @@ public class CopyObject extends UserAction<java.lang.Boolean>
 		}
 	}
 	
+	private Map<String, String> getMetadata(amazons3connector.proxies.CopyObjectRequest CopyObjectRequest){
+		// Retrieve every MetaData object connected to PutObjectRequest inside a list
+		List<IMendixObject> s3MetaData = Core.retrieveByPath(getContext(),
+				CopyObjectRequest.getMendixObject(),
+				S3RequestMetaData.MemberNames.S3RequestMetaData_AbstractS3Request.toString());
+
+		// Convert the list into a HashMap by looping over the list and using put on the HashMap
+		Map<String, String> map = new HashMap<>();
+		for (IMendixObject iMendixObject : s3MetaData) {
+			S3RequestMetaData m = amazons3connector.proxies.S3RequestMetaData.initialize(getContext(), iMendixObject);
+			LOGGER.debug("S3RequestMetaData: ", m.getKey() , ':', m.getValue());			
+			map.put(m.getKey(), m.getValue());
+		}
+		return map;
+	}
+
 	private software.amazon.awssdk.services.s3.model.CopyObjectRequest createAWSRequest() {
 		Builder awsRequestBuilder = software.amazon.awssdk.services.s3.model.CopyObjectRequest.builder()
 				.destinationBucket(CopyObjectRequest.getDestinationBucketName())
 				.sourceBucket(CopyObjectRequest.getSourceBucketName())
 				.destinationKey(CopyObjectRequest.getDestinationKey())
-				.sourceKey(CopyObjectRequest.getSourceKey());
+				.sourceKey(CopyObjectRequest.getSourceKey())
+				.metadata(getMetadata(CopyObjectRequest));
 		return awsRequestBuilder.build();
 	}
 	
