@@ -59,8 +59,12 @@ public class AbstractRequestHelper {
 		
 		if (awsHeaderValue != null && !awsHeaderValue.isBlank()) {
 			clientOverrideConfigBuilder.putHeader(USER_AGENT, awsHeaderValue);
-		} else clientOverrideConfigBuilder.putHeader(USER_AGENT, HEADER_VALUE);
-		
+			LOGGER.trace("header on client set:", awsHeaderValue);
+		} 
+		else { 
+			clientOverrideConfigBuilder.putHeader(USER_AGENT, HEADER_VALUE);
+			LOGGER.trace("header on client set:", HEADER_VALUE);
+		}
 		
 		// check if both the request and the basicClientConfig are not null to prevent nullpointer exceptions. 
 		if (abstractRequest == null ) {
@@ -89,10 +93,12 @@ public class AbstractRequestHelper {
 	
 	public static SdkHttpClient getSdkHttpClient(final AbstractRequest abstractRequest) throws UnknownHostException, CoreException {
 		if (abstractRequest == null) {
+			LOGGER.debug("no AbstractRequest: default ApacheHttpClient");
 			return ApacheHttpClient.builder().build();
 		}
 		BasicClientConfig basicConfig = abstractRequest.getAbstractRequest_BasicClientConfig();
 		if (basicConfig == null) {
+			LOGGER.debug("no BasicClientConfig: default ApacheHttpClient");
 			return ApacheHttpClient.builder().build();
 		}
 		
@@ -101,6 +107,7 @@ public class AbstractRequestHelper {
 			return createSdkHttpClientFromSdkClientConfig(basicConfig);
 		}
 		default:
+			LOGGER.debug("unknown BasicClientConfig: default ApacheHttpClient");
 			return ApacheHttpClient.builder().build();
 		}
 	}
@@ -109,14 +116,17 @@ public class AbstractRequestHelper {
 			throws CoreException, UnknownHostException {
 		AbstractHttpConfig httpConfig = ((SdkClientConfig)basicConfig).getSdkClientConfig_AbstractHttpConfig();
 		if (httpConfig == null) {
+			LOGGER.debug("no AbstractHttpConfig: default ApacheHttpClient");
 			return ApacheHttpClient.builder().build();
 		}
 		switch (httpConfig.getMendixObject().getType()){
 		case ApacheHttpConfig.entityName: {
 			ApacheHttpConfig apacheHttpConfig = (ApacheHttpConfig)httpConfig;
+			LOGGER.debug("ApacheHttpConfig found");
 			return getApacheHttpClient(apacheHttpConfig);
 		}
 		case UrlHttpConfig.entityName: {
+			LOGGER.debug("UrlHttpConfig found");
 			UrlHttpConfig urlHttpConfig = (UrlHttpConfig)httpConfig;
 			return getUrlHttpClient(urlHttpConfig);
 		}
@@ -151,11 +161,13 @@ public class AbstractRequestHelper {
 	private static RetryPolicy getRetryPolicy(final AbstractRetryPolicy abstractRetryPolicy) {
 		switch (abstractRetryPolicy.getMendixObject().getType()) {
 		case NoRetryPolicy.entityName: {
+			LOGGER.debug("set NoRetryPolicy");
 			return RetryPolicy.none();
 		}
 		case NumberRetryPolicy.entityName: {
 			NumberRetryPolicy numRetryPolicy = (NumberRetryPolicy)abstractRetryPolicy;
 			RetryPolicy retryPolicy = RetryPolicy.builder().numRetries(numRetryPolicy.getMaxNumberOfRetries()).build();
+			LOGGER.debug("set NumberRetryPolicy: " + numRetryPolicy.getMaxNumberOfRetries());
 			return retryPolicy;
 		}
 		default:
@@ -169,48 +181,58 @@ public class AbstractRequestHelper {
 		
 		if (apacheHttpConfig.getConnectionAcquisitionTimeOutInMs() != null) {
 			clientBuilder.connectionAcquisitionTimeout(Duration.ofMillis(apacheHttpConfig.getConnectionAcquisitionTimeOutInMs()));
+			LOGGER.trace("connectionAcquisitionTimeout set on apacheHttpConfig: " +  apacheHttpConfig.getConnectionAcquisitionTimeOutInMs() + "ms");
 		}
 		
 		if (apacheHttpConfig.getConnectionMaxIdleTimeInMs() != null) {
 			clientBuilder.connectionMaxIdleTime(Duration.ofMillis(apacheHttpConfig.getConnectionMaxIdleTimeInMs()));
+			LOGGER.trace("connectionMaxIdleTime set on apacheHttpConfig: " +  apacheHttpConfig.getConnectionMaxIdleTimeInMs() + "ms");
 		}
 		
 		if (apacheHttpConfig.getConnectionTimeOutInMs() != null) {
 			clientBuilder.connectionTimeout(Duration.ofMillis(apacheHttpConfig.getConnectionTimeOutInMs()));
+			LOGGER.trace("getConnectionTimeOutInMs set on apacheHttpConfig: " +  apacheHttpConfig.getConnectionTimeOutInMs() + "ms");
 		}
 		
 		if (apacheHttpConfig.getConnectionTimeToLiveInMs() != null ) {
 			clientBuilder.connectionTimeToLive(Duration.ofMillis(apacheHttpConfig.getConnectionTimeToLiveInMs()));
+			LOGGER.trace("connectionTimeToLive set on apacheHttpConfig: " +  apacheHttpConfig.getConnectionTimeToLiveInMs() + "ms");
 		}
 		
 		if (apacheHttpConfig.getSocketTimeOutInMs() != null) {
 			clientBuilder.socketTimeout(Duration.ofMillis(apacheHttpConfig.getSocketTimeOutInMs()));
+			LOGGER.trace("socketTimeout set on apacheHttpConfig: " +  apacheHttpConfig.getSocketTimeOutInMs() + "ms");
 		}
 		
 		if (apacheHttpConfig.getLocalAddress() != null && !apacheHttpConfig.getLocalAddress().isBlank()) {
 			InetAddress inetAddress = InetAddress.getByName(apacheHttpConfig.getLocalAddress());
 			clientBuilder.localAddress(inetAddress);
+			LOGGER.trace("localAddress set on apacheHttpConfig: ", inetAddress, "ms");
 		}
 		
 		if (apacheHttpConfig.getMaxConnections() != null) {
 			clientBuilder.maxConnections(apacheHttpConfig.getMaxConnections());
+			LOGGER.trace("maxConnections set on apacheHttpConfig: " +  apacheHttpConfig.getMaxConnections());
 		}
 		
-		// the following values use a boolean enum. If the boolean enum is set to null, the system default value of the apache http client will be used. 
+		// the following values use a boolean enum. If the boolean enum is set to null, the system default value of the apache http client will be used.
 		//Therefore, these values are not set in the case of an empty/null value
 		Boolean expectContinueEnabled = convertBooleanEnum(apacheHttpConfig.getExpectContinueEnabled());
 		if (expectContinueEnabled != null) {
 			clientBuilder.expectContinueEnabled(expectContinueEnabled);
+			LOGGER.trace("expectContinueEnabled set on apacheHttpConfig: " +  expectContinueEnabled);
 		}
 		Boolean tcpKeepAlive = convertBooleanEnum(apacheHttpConfig.getTcpKeepAlive());
 		if (tcpKeepAlive != null) {
 			clientBuilder.tcpKeepAlive(tcpKeepAlive);
+			LOGGER.trace("tcpKeepAlive set on apacheHttpConfig: " +  tcpKeepAlive);
 		}
 		Boolean useIdleConnectionReaper = convertBooleanEnum(apacheHttpConfig.getUseIdleConnectionReaper());
 		if (useIdleConnectionReaper != null) {
 			clientBuilder.useIdleConnectionReaper(useIdleConnectionReaper);
+			LOGGER.trace("useIdleConnectionReaper set on apacheHttpConfig: " +  useIdleConnectionReaper);
 		}
-		
+		LOGGER.debug("return ApacheHttpClient");
 		return clientBuilder.build();
 	}
 	
@@ -218,11 +240,13 @@ public class AbstractRequestHelper {
 		UrlConnectionHttpClient.Builder clientBuilder = UrlConnectionHttpClient.builder();
 		if (urlHttpConfig.getConnectionTimeOutInMs() != null) {
 			clientBuilder.connectionTimeout(Duration.ofMillis(urlHttpConfig.getConnectionTimeOutInMs()));
+			LOGGER.trace("connectionTimeout set on urlHttpConfig: " +  urlHttpConfig.getConnectionTimeOutInMs() + "ms");
 		}
 		if (urlHttpConfig.getSocketTimeOutInMs() != null) {
 			clientBuilder.socketTimeout(Duration.ofMillis(urlHttpConfig.getSocketTimeOutInMs()));
+			LOGGER.trace("socketTimeout set on urlHttpConfig: " +  urlHttpConfig.getSocketTimeOutInMs() + "ms");
 		}
-		
+		LOGGER.debug("return UrlConnectionHttpClient");
 		return clientBuilder.build();
 	}
 	

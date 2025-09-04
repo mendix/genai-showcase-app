@@ -12,14 +12,13 @@ package amazons3connector.actions;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.MendixRuntimeException;
 import static java.util.Objects.requireNonNull;
 import amazons3connector.impl.AmazonS3Client;
 import amazons3connector.impl.MxLogger;
-import amazons3connector.proxies.ENUM_StorageClass;
 import amazons3connector.proxies.HeadBucketResponse;
 import awsauthentication.proxies.ENUM_Region;
 import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.endpoints.internal.Value.Bool;
 import software.amazon.awssdk.services.s3.model.NoSuchBucketException;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
@@ -139,70 +138,18 @@ public class HeadBucket extends UserAction<IMendixObject>
 	}
 
 	// String to ENUM_Region AWS Region Enumeration value
+	
 	private ENUM_Region getRegionEnumValue(String region) {
-		switch (region) {
-			case "af-south-1":
-				return ENUM_Region.af_south_1;
-			case "ap-east-1":
-				return ENUM_Region.ap_east_1;
-			case "ap-south-1":
-				return ENUM_Region.ap_south_1;
-			case "ap-south-2":
-				return ENUM_Region.ap_south_2;
-			case "ap-southeast-1":
-				return ENUM_Region.ap_southeast_1;
-			case "ap-southeast-2":
-				return ENUM_Region.ap_southeast_2;
-			case "ap-southeast-3":
-				return ENUM_Region.ap_southeast_3;
-			case "ap-southeast-4":
-				return ENUM_Region.ap_southeast_4;
-			case "ap-northeast-1":
-				return ENUM_Region.ap_northeast_1;
-			case "ap-northeast-2":
-				return ENUM_Region.ap_northeast_2;
-			case "ap-northeast-3":
-				return ENUM_Region.ap_northeast_3;
-			case "ca-central-1":
-				return ENUM_Region.ca_central_1;
-			case "eu-central-1":
-				return ENUM_Region.eu_central_1;
-			case "eu-central-2":
-				return ENUM_Region.eu_central_2;
-			case "eu-west-1":
-				return ENUM_Region.eu_west_1;
-			case "eu-west-2":
-				return ENUM_Region.eu_west_2;
-			case "eu-west-3":
-				return ENUM_Region.eu_west_3;
-			case "eu-north-1":
-				return ENUM_Region.eu_north_1;
-			case "eu-south-1":
-				return ENUM_Region.eu_south_1;
-			case "eu-south-2":
-				return ENUM_Region.eu_south_2;
-			case "il-central-1":
-				return ENUM_Region.il_central_1;
-			case "me-central-1":
-				return ENUM_Region.me_central_1;
-			case "me-south-1":
-				return ENUM_Region.me_south_1;
-			case "sa-east-1":
-				return ENUM_Region.sa_east_1;
-			case "us-east-1":
-				return ENUM_Region.us_east_1;
-			case "us-east-2":
-				return ENUM_Region.us_east_2;
-			case "us-west-1":
-				return ENUM_Region.us_west_1;
-			case "us-west-2":
-				return ENUM_Region.us_west_2;
-			case "us-gov-east-1":
-				return ENUM_Region.us_gov_east_1;
-			case "us-gov-west-1":
-				return ENUM_Region.us_gov_west_1;
-			default:
-				throw new IllegalArgumentException("Invalid region: " + region);
+		if (region != null && !region.isBlank()) {
+			try {
+				return ENUM_Region.valueOf(region.replace('-', '_'));
+			}
+			catch (IllegalArgumentException e) {
+				throw new MendixRuntimeException("No region returned from AWS response");
+			}
+		}
+		else {
+			throw new MendixRuntimeException("Unsupported region " + region);
 		}
 	}
 	// END EXTRA CODE

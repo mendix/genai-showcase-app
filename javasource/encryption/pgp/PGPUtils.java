@@ -89,7 +89,7 @@ public class PGPUtils {
             Iterator<PGPPublicKey> kIt = kRing.getPublicKeys();
             while (publicKey == null && kIt.hasNext()) {
                 PGPPublicKey key = kIt.next();
-                if (key.isEncryptionKey()) {
+                if (key.isEncryptionKey() && isForEncryption(key)) {
                     publicKey = key;
                 }
             }

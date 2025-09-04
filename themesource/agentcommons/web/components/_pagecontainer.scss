@@ -1,3 +1,4 @@
+@import "../agent-builder-variables.scss";
 @import "../../../atlas_core/web/_variables.scss";
 @import "../../../../theme/web/custom-variables.scss";
 
@@ -11,8 +12,8 @@
 
     .agents-container--overview {
         width: 90%;
-        max-width: 1200px;
-        margin: $spacing-large;
+        max-width: 1600px;
+        margin: $spacing-medium + $size-28;
         flex-direction: column;
 
         .td {
@@ -23,7 +24,7 @@
             overflow: unset;
             border-radius: $spacing-medium;
             border: 1px solid $gray-primary;
-            padding-top: $spacing-medium;
+            padding: $spacing-large;
         }
 
     }
@@ -33,6 +34,7 @@
         justify-content: space-between;
         align-items: flex-start;
     }
+
 }
 
 //Version_Details
@@ -51,12 +53,18 @@
     overflow: hidden;
     box-sizing: border-box;
 
+     @media (max-width: 800px) {
+        gap: 0;
+        overflow: auto;
+    }
+
+
     .agent-page-container::after {
         content: '';
         display: block;
         height: $spacing-larger;
         flex-shrink: 0;
-        }
+    }
 
     .card {
         width: 100%;
@@ -66,8 +74,7 @@
         display: flex;
         flex-direction: column;
         max-width: 100%;             
-        box-sizing: border-box;  
-
+        box-sizing: border-box;
         * {
             word-break: break-word;
             overflow-wrap: break-word;
@@ -101,46 +108,78 @@
         flex: 1 1 0;
         width: 60%;
         max-width: 945px;
-        height: 100%;
+        max-height: $page-custom-height;
         display: flex;
         flex-direction: column;
-        overflow-y: auto;
-        gap: 24px;
+        margin-bottom: 0;
+
+        .page-container-main-scroll {
+            overflow-y: auto;
+            overflow-x: unset;
+        }
+
         .card {
             overflow: unset;
         }
+        @media (max-height: 800px) {
+            height: 85vh;
+        }     
     }
-
-    @media (max-height: 800px) {
-        .page-container-main {
-            height: 87vh;
-        }
-    }
-
+    
     .page-container-grid {
         display: flex;
         flex-direction: column;
-        gap: $spacing-large;
-        padding-top: 28px;
-
-        .card {
-            margin-bottom: 0;
-        }
     }
 
+    /* Test Agent */
     .page-container-side {
         z-index: 100;
         width: 30%;
         max-width: 472px;
-        max-height: 92vh;
+        max-height: $page-custom-height;
         display: flex;
         flex-direction: column;
-        padding-top: 28px;
+        padding-top: $size-28;
     }
+
+    .chat-container-agent {
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        border-left: 1px solid $table-border-separator-color;
+        padding-top: $spacing-medium;
+        margin-bottom: unset;   
+        padding-left: unset;
+        padding-right: unset;
+
+        .chat-container {
+            padding-left: $spacing-medium;
+            padding-right: $spacing-medium;
+        }
+
+        .chat-bubble-wrapper {
+            .chat-message-card {
+                background: $bg-color-secondary;
+                border-radius: 8px;
+                border: 1px solid $border-color-default;
+            }
+
+            &--user .chat-message-card {
+                background: $gray-lighter;
+                border: 1px solid $gray-lighter;
+            }
+        }
+    }
+
 
     @media (max-height: 800px) {
         .page-container-side {
             height: 87vh;
+
+            .card {
+                margin-bottom: 0;
+            }
         }
     }
     
@@ -163,13 +202,15 @@
             align-items: end !important;
         }
     }
-
-    .pageheader-navigation {
+    .page-navigation {
+        position: sticky;
         display: flex !important;
         align-items: center !important;
         flex-flow: row !important;
         justify-content: flex-start !important;
-        margin-bottom: -16px;
+        margin-top: 0;
+        margin-bottom: $spacing-small;
+        z-index: 10;   
     }
 
     .page-content {
@@ -180,7 +221,6 @@
         flex-wrap: wrap;
         height: fit-content;
     }
-
 
     //If a chat was opened, the containers grow to max width
     .content-chat {
@@ -221,8 +261,8 @@
 
             .new-chat-icon {
                 img {
-                    height: 24px;
-                    width: 24px;
+                    height: $size-24;
+                    width: $size-24;
                     margin-right: 0;
                 }
             }
@@ -235,8 +275,8 @@
                 height: fit-content;
 
                 img {
-                    height: 24px;
-                    width: 24px;
+                    height: $size-24;
+                    width: $size-24;
                     margin-right: 0;
                 }
             }

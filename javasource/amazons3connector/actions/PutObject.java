@@ -15,8 +15,12 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import amazons3connector.impl.AmazonS3Client;
 import amazons3connector.impl.MxLogger;
+import amazons3connector.proxies.S3RequestMetaData;
 import software.amazon.awssdk.services.s3.S3Client;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import com.mendix.core.Core;
 import software.amazon.awssdk.core.sync.RequestBody;
 import com.mendix.systemwideinterfaces.core.UserAction;
@@ -60,37 +64,36 @@ public class PutObject extends UserAction<java.lang.Boolean>
 	{
 		// BEGIN USER CODE
 		software.amazon.awssdk.services.s3.model.PutObjectResponse awsResponse = null;
-		try {	
-		// Validation of input parameters
+		try {
+			// Validation of input parameters
 			requireNonNull(this.Credentials, "AWS Credentials are required.");
 			requireNonNull(this.Region, "AWS Region is required.");
 			requireNonNull(this.PutObjectRequest, "PutObjectRequest is required.");
 			requireNonNull(this.FileDocument, "File document is required");
-			
+
 			// Validation of the PutObjectRequest object
 			validateRequest();
-							
+
 			// Building the AWS PutObjectRequest
 			software.amazon.awssdk.services.s3.model.PutObjectRequest awsRequest = createAWSRequest();
-			
+
 			// Logging of the awsRequest
 			LOGGER.debug("AWS request:", awsRequest);
-			
+
 			// Client creation
 			S3Client client = AmazonS3Client.getS3Client(Credentials, Region, PutObjectRequest);
-			
+
 			// Create request
 			InputStream is = Core.getFileDocumentContent(getContext(), FileDocument.getMendixObject());
 			RequestBody body = RequestBody.fromInputStream(is, FileDocument.getSize());
-			
+
 			// Invoke action on AWS client
 			awsResponse = client.putObject(awsRequest, body);
-			is.close();	
-			
+			is.close();
+
 			// Log the response
 			LOGGER.debug("AWS response:", awsResponse);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 			throw e;
 		}
@@ -111,32 +114,51 @@ public class PutObject extends UserAction<java.lang.Boolean>
 
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new MxLogger(PutObject.class);
-	
-	private void validateRequest() throws CoreException {	
+
+	private void validateRequest() throws CoreException {
 		// Validate BucketName
 		requireNonNull(PutObjectRequest.getBucketName(), "Bucket name is required");
 		if (PutObjectRequest.getBucketName().isBlank()) {
 			throw new IllegalArgumentException("Bucket name cannot be blank");
-		} 
-		
+		}
+
 		// Validate Key
 		requireNonNull(PutObjectRequest.getKey(), "Key is required");
 		if (PutObjectRequest.getKey().isBlank()) {
 			throw new IllegalArgumentException("Key cannot be blank");
-		} 
-		
-		// Validate file size 
-		if (!this.FileDocument.getHasContents()){
+		}
+
+		// Validate file size
+		if (!this.FileDocument.getHasContents()) {
 			throw new NullPointerException("File size can not be empty");
 		}
-		
+
 	}
-	
+
+	private Map<String, String> getMetadata(amazons3connector.proxies.PutObjectRequest PutObjectRequest){
+		// Retrieve every MetaData object connected to PutObjectRequest inside a list
+		List<IMendixObject> s3MetaData = Core.retrieveByPath(getContext(),
+				PutObjectRequest.getMendixObject(),
+				S3RequestMetaData.MemberNames.S3RequestMetaData_AbstractS3Request.toString());
+
+		// Convert the list into a HashMap by looping over the list and using put on the HashMap
+		Map<String, String> map = new HashMap<>();
+		for (IMendixObject iMendixObject : s3MetaData) {
+			S3RequestMetaData m = amazons3connector.proxies.S3RequestMetaData.initialize(getContext(), iMendixObject);
+			LOGGER.debug("S3RequestMetaData: ", m.getKey() , ':', m.getValue());			
+			map.put(m.getKey(), m.getValue());
+		}
+		return map;
+	}
+
 	private software.amazon.awssdk.services.s3.model.PutObjectRequest createAWSRequest() {
-		software.amazon.awssdk.services.s3.model.PutObjectRequest awsRequest = software.amazon.awssdk.services.s3.model.PutObjectRequest.builder()
+		software.amazon.awssdk.services.s3.model.PutObjectRequest awsRequest = software.amazon.awssdk.services.s3.model.PutObjectRequest
+				.builder()
 				.bucket(PutObjectRequest.getBucketName())
 				.key(PutObjectRequest.getKey())
+				.metadata(getMetadata(PutObjectRequest))
 				.build();
+
 		return awsRequest;
 	}
 	// END EXTRA CODE

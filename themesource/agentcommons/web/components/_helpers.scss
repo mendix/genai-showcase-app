@@ -1,5 +1,6 @@
 @import "../../../../theme/web/custom-variables.scss";
 
+
 .custom-control-label {
   display: block;
   overflow: hidden;
@@ -130,4 +131,8 @@
   .mx-image-viewer {
     width: unset;
   }
+}
+
+.spacing-inner-top-28 {
+  padding-top: $size-28; 
 }

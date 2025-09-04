@@ -1,2 +1,24 @@
 @import '../../../theme/web/custom-variables';
 
+.icon-info-wrapper {
+  display: flex;
+  align-items: center;
+
+  img {
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+}
+
+.argument-listview {
+    > ul {
+    margin-bottom: 0;
+        > li {
+            padding: 8px;
+            border-top: none;
+            &:last-child {
+                border-bottom: none;
+            }
+        }   
+    }
+}
