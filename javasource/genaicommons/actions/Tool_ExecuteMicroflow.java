@@ -25,6 +25,7 @@ import genaicommons.proxies.ArgumentInput;
 import genaicommons.proxies.KnowledgeBaseSpan;
 import genaicommons.proxies.ToolSpan;
 import genaicommons.proxies.Trace;
+import genaicommons.proxies.microflows.Microflows;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import com.mendix.systemwideinterfaces.core.meta.IMetaObject;
 
@@ -71,6 +72,9 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 			return callTool();
 		
 		} catch (Exception e) {
+			//makes sure that a toolSpan exists; response/output is set in microflow later
+			long executionTime = System.currentTimeMillis() - startTime;
+			getCreateToolSpan(executionTime, "");
 			throw e;
 		}
 		// END USER CODE
@@ -200,17 +204,18 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 			response = Core.microflowCall(Tool.getMicroflow()).withParams(params).execute(getContext());
 		}
 		
-		long endTime = System.currentTimeMillis();
-		long executionTime = endTime - startTime;
+		long executionTime = System.currentTimeMillis() - startTime;
 		String duration = "\n\nDuration:\n" + executionTime + "ms";
 		LOGGER.info(logMessageInfo + duration);
 		LOGGER.trace(logMessageTrace+ "\n\nReturn value:\n" + response + duration);
 		
-		createToolSpanForTool(executionTime, response);
+		getCreateToolSpan(executionTime, response);
 		return response;
 	}
 	
-	// If there are ArgumentInput objects associated to a Tool, they are likely not part of the input parameters and need to be added individually
+	/**
+	 * If there are ArgumentInput objects associated to a Tool, they are likely not part of the input parameters and need to be added individually
+	 */
 	private String addLogTracesForArguments(String logMessageTrace) throws CoreException{
 		List<ArgumentInput> args = Tool.getTool_ArgumentInput();
 		
@@ -220,7 +225,9 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		return logMessageTrace;
 	}
 	
-	//Gets a string of input arguments (passed by the model only)
+	/**
+	 * Gets a string of input arguments (passed by the model only)
+	 */
 	private String getArgumentsString() throws CoreException {
 		List<Argument> argumentList = ToolCall.getToolCall_Argument();
 		String argumentString = "\n\n" + "{";
@@ -235,31 +242,47 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		return argumentString;
 	}
 	
-	//Creates ToolSpan and sets all attributes
-	private void createToolSpanForTool(long executionTime, String response) throws CoreException {
+	/**
+	 * Gets an existing toolSpan from the trace via the toolCallId or creates a new one based on the specialization
+	 * @throws CoreException
+	 */
+	private ToolSpan getCreateToolSpan(long executionTime, String response) throws CoreException {
+		//If there is no trace for the request, then traceability was not enabled
 		Trace trace = Request.getRequest_Trace();
-		if (trace != null) {
-			ToolSpan newToolSpan = createToolSpan();
-			newToolSpan.setSpanId(UUID.randomUUID().toString());
-			newToolSpan.setSpan_Trace(trace);
-			newToolSpan.setStartTime(new Date(startTime));
-			newToolSpan.setToolCallId(ToolCall.getToolCallId());
-			newToolSpan.setToolName(Tool.getName());
-			newToolSpan.setEndTime(new Date(System.currentTimeMillis()));			
-			newToolSpan.setInput(getArgumentsString());
-			newToolSpan.setDurationMilliseconds((int) executionTime);
-			newToolSpan.setOutput(response);
+		if(trace == null) {
+			return null;
 		}
-	}
-	
-	// Either creates Tool or KnowledgeBaseSpan based on the specialization
-	private ToolSpan createToolSpan() {
+		
+		ToolSpan toolSpan = Microflows.trace_GetToolSpan_ByToolCallId(getContext(), trace, ToolCall.getToolCallId());
+		if(toolSpan != null) {
+			return toolSpan;
+		}
+		
 		if(Tool.getClass().equals(genaicommons.proxies.KnowledgeBaseRetrieval.class)){
-			return new KnowledgeBaseSpan(getContext());
+			KnowledgeBaseSpan knowledgeBaseSpan = new KnowledgeBaseSpan(getContext());
+			setToolSpanAttributes(knowledgeBaseSpan, trace, executionTime, response);
+			return knowledgeBaseSpan;
 			
 		} else {
-			return new ToolSpan(getContext());
+			ToolSpan newToolSpan = new ToolSpan(getContext());
+			setToolSpanAttributes(newToolSpan, trace, executionTime, response);
+			return newToolSpan;
 		}	
+	}
+	
+	/**
+	 * Sets all attributes of the tool span
+	 */
+	private void setToolSpanAttributes(ToolSpan toolSpan, Trace trace, long executionTime, String response) throws CoreException {
+		toolSpan.setSpanId(UUID.randomUUID().toString());
+		toolSpan.setSpan_Trace(trace);
+		toolSpan.setStartTime(new Date(startTime));
+		toolSpan.set_ToolCallId(ToolCall.getToolCallId());
+		toolSpan.setToolName(Tool.getName());
+		toolSpan.setEndTime(new Date(System.currentTimeMillis()));			
+		toolSpan.setInput(getArgumentsString());
+		toolSpan.setDurationMilliseconds((int) executionTime);
+		toolSpan.setOutput(response);
 	}
 	
 	
