@@ -123,8 +123,21 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 		return response;
 	}
 
+	/**
+	 * Sets duration of final response, sets response Id; creates Usage and updates Trace.
+	 * @param response
+	 * @throws CoreException
+	 */
 	private void responsePostProcessing(Response response) throws CoreException {
 		response.setDurationMilliseconds((int) Math.ceil(System.currentTimeMillis() - startTime));
+		if(response.get_ID() == null || response.get_ID().isBlank()) {
+			if(Request.get_ID() != null && !Request.get_ID().isBlank()) {
+				response.set_ID(Request.get_ID());
+				
+			}else {
+				response.set_ID(UUID.randomUUID().toString());
+			}
+		}
 		
 		Trace trace = Request.getRequest_Trace();
 		
