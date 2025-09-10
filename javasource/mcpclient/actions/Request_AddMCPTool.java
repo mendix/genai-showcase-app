@@ -46,12 +46,18 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __Tool;
 	private final mcpclient.proxies.Tool Tool;
+	private final java.lang.String ToolName;
+	private final java.lang.String ToolDescription;
+	private final java.lang.String Microflow;
 
 	public Request_AddMCPTool(
 		IContext context,
 		IMendixObject _request,
 		IMendixObject _mCPServerConfiguration,
-		IMendixObject _tool
+		IMendixObject _tool,
+		java.lang.String _toolName,
+		java.lang.String _toolDescription,
+		java.lang.String _microflow
 	)
 	{
 		super(context);
@@ -61,6 +67,9 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		this.MCPServerConfiguration = _mCPServerConfiguration == null ? null : mcpclient.proxies.MCPServerConfiguration.initialize(getContext(), _mCPServerConfiguration);
 		this.__Tool = _tool;
 		this.Tool = _tool == null ? null : mcpclient.proxies.Tool.initialize(getContext(), _tool);
+		this.ToolName = _toolName;
+		this.ToolDescription = _toolDescription;
+		this.Microflow = _microflow;
 	}
 
 	@java.lang.Override
@@ -71,6 +80,7 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 			requireNonNull(Request, "Request is required.");
 			requireNonNull(MCPServerConfiguration, "MCPServerConfiguration is required.");
 			requireNonNull(Tool, "Tool is required.");
+			requireNonNull(Microflow, "Microflow is required.");
 			
 			ToolCollection toolCollection = ToolCollectionImpl.getOrCreateToolCollection(getContext(), Request);
 			
@@ -99,10 +109,19 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 	private MCP createMCPTool(ToolCollection toolCollection) throws CoreException {
 		MCP tool = new MCP(getContext());
 		
-		tool.setMicroflow("MCPClient.MCPClient_ToolMicroflow");
+		tool.setMicroflow(Microflow);
 		tool.setTool_ArgumentInput(createArgumentInputList());
-		tool.setDescription(Tool.getDescription());
-		tool.setName(Tool.getName());
+		if (ToolName != null && !ToolName.isBlank()) {
+			tool.setName(ToolName);
+		} else { 
+			tool.setName(Tool.getName());
+		}
+		if (ToolDescription != null && !ToolDescription.isBlank()) {
+			tool.setDescription(ToolDescription);
+		} else { 
+			tool.setDescription(Tool.getDescription()); 
+		}
+		tool.setOriginalMCPToolName(Tool.getName());
 		tool.setMCP_MCPServerConfiguration(MCPServerConfiguration);
 		List<Tool> ToolList = toolCollection.getToolCollection_Tool();
 		ToolList.add(tool);
