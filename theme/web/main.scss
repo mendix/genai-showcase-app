@@ -472,3 +472,7 @@ $label-color-pgvector: #076407;
   background: $label-bg-pgvector;
   color: $label-color-pgvector;
 }
+
+.text-strike {
+  text-decoration: line-through;
+}
