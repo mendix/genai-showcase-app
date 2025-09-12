@@ -29878,4 +29878,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
   color: #076407;
 }
 
+.text-strike {
+  text-decoration: line-through;
+}
+
 /*# sourceMappingURL=theme.compiled.css.map */
