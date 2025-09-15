@@ -13,6 +13,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
@@ -21,6 +22,10 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import genaicommons.impl.MxLogger;
 import genaicommons.proxies.Argument;
 import genaicommons.proxies.ArgumentInput;
+import genaicommons.proxies.KnowledgeBaseSpan;
+import genaicommons.proxies.ToolSpan;
+import genaicommons.proxies.Trace;
+import genaicommons.proxies.microflows.Microflows;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import com.mendix.systemwideinterfaces.core.meta.IMetaObject;
 
@@ -62,10 +67,14 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		try {
 			requireNonNull(Tool, "Tool is required.");
 			requireNonNull(Tool.getMicroflow(), "Tool has no Microflow.");
+			startTime = System.currentTimeMillis();
 			
 			return callTool();
 		
 		} catch (Exception e) {
+			//makes sure that a toolSpan exists; response/output is set in microflow later
+			long executionTime = System.currentTimeMillis() - startTime;
+			getCreateToolSpan(executionTime, "");
 			throw e;
 		}
 		// END USER CODE
@@ -83,6 +92,8 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new genaicommons.impl.MxLogger(Tool_ExecuteMicroflow.class);
+	
+	private long startTime;
 	
 	/**
 	 * If the Tool is of the generalization type, only Tool and Request are added to the microflow
@@ -183,7 +194,6 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		String response;
 		String logMessageInfo = "Finished toolcall " + ToolCall.getName() + " with Id " + ToolCall.getToolCallId() + " using microflow " + Tool.getMicroflow() + " with " + getContext();
 		String logMessageTrace = logMessageInfo;
-		long startTime = System.currentTimeMillis();
 		if(params == null || params.isEmpty()) {
 			logMessageTrace = logMessageTrace + "\nwithout input parameters ";
 			response = Core.microflowCall(Tool.getMicroflow()).execute(getContext());
@@ -193,31 +203,86 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 			logMessageTrace = logMessageTrace + params.toString();
 			response = Core.microflowCall(Tool.getMicroflow()).withParams(params).execute(getContext());
 		}
-		long endTime = System.currentTimeMillis();
-		long executionTime = endTime - startTime;
+		
+		long executionTime = System.currentTimeMillis() - startTime;
 		String duration = "\n\nDuration:\n" + executionTime + "ms";
 		LOGGER.info(logMessageInfo + duration);
 		LOGGER.trace(logMessageTrace+ "\n\nReturn value:\n" + response + duration);
+		
+		getCreateToolSpan(executionTime, response);
 		return response;
 	}
 	
-	// If there are ArgumentInput objects associated to a Tool, they are likely not part of the input parameters and need to be added individually
+	/**
+	 * If there are ArgumentInput objects associated to a Tool, they are likely not part of the input parameters and need to be added individually
+	 */
 	private String addLogTracesForArguments(String logMessageTrace) throws CoreException{
 		List<ArgumentInput> args = Tool.getTool_ArgumentInput();
-		List<Argument> argumentList = ToolCall.getToolCall_Argument();
 		
 		if(args != null && !args.isEmpty()) {
-			logMessageTrace += "\n\n" + "{";
-			for (int i = 0; i < argumentList.size(); i++) {
-			    Argument arg = argumentList.get(i);
-			    logMessageTrace += arg.getKey() + "=" + arg.getValue();
-			    if (i < argumentList.size() - 1) {
-			        logMessageTrace += ", ";
-			    }
-			}
-			logMessageTrace += "}";
+			logMessageTrace += getArgumentsString();
 		}
 		return logMessageTrace;
+	}
+	
+	/**
+	 * Gets a string of input arguments (passed by the model only)
+	 */
+	private String getArgumentsString() throws CoreException {
+		List<Argument> argumentList = ToolCall.getToolCall_Argument();
+		String argumentString = "\n\n" + "{";
+		for (int i = 0; i < argumentList.size(); i++) {
+		    Argument arg = argumentList.get(i);
+		    argumentString += arg.getKey() + "=" + arg.getValue();
+		    if (i < argumentList.size() - 1) {
+		        argumentString += ", ";
+		    }
+		}
+		argumentString += "}";
+		return argumentString;
+	}
+	
+	/**
+	 * Gets an existing toolSpan from the trace via the toolCallId or creates a new one based on the specialization
+	 * @throws CoreException
+	 */
+	private ToolSpan getCreateToolSpan(long executionTime, String response) throws CoreException {
+		//If there is no trace for the request, then traceability was not enabled
+		Trace trace = Request.getRequest_Trace();
+		if(trace == null) {
+			return null;
+		}
+		
+		ToolSpan toolSpan = Microflows.trace_GetToolSpan_ByToolCallId(getContext(), trace, ToolCall.getToolCallId());
+		if(toolSpan != null) {
+			return toolSpan;
+		}
+		
+		if(Tool.getClass().equals(genaicommons.proxies.KnowledgeBaseRetrieval.class)){
+			KnowledgeBaseSpan knowledgeBaseSpan = new KnowledgeBaseSpan(getContext());
+			setToolSpanAttributes(knowledgeBaseSpan, trace, executionTime, response);
+			return knowledgeBaseSpan;
+			
+		} else {
+			ToolSpan newToolSpan = new ToolSpan(getContext());
+			setToolSpanAttributes(newToolSpan, trace, executionTime, response);
+			return newToolSpan;
+		}	
+	}
+	
+	/**
+	 * Sets all attributes of the tool span
+	 */
+	private void setToolSpanAttributes(ToolSpan toolSpan, Trace trace, long executionTime, String response) throws CoreException {
+		toolSpan.setSpanId(UUID.randomUUID().toString());
+		toolSpan.setSpan_Trace(trace);
+		toolSpan.setStartTime(new Date(startTime));
+		toolSpan.set_ToolCallId(ToolCall.getToolCallId());
+		toolSpan.setToolName(Tool.getName());
+		toolSpan.setEndTime(new Date(System.currentTimeMillis()));			
+		toolSpan.setInput(getArgumentsString());
+		toolSpan.setDurationMilliseconds((int) executionTime);
+		toolSpan.setOutput(response);
 	}
 	
 	
