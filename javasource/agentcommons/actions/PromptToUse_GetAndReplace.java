@@ -106,7 +106,7 @@ public class PromptToUse_GetAndReplace extends UserAction<IMendixObject>
 		// Check if entity matches the passed object's entity
 		if (!variablesObject.getMetaObject().getName().equals(agent.getEntity()) && !variablesObject.getMetaObject().isSubClassOf(agent.getEntity())) {
 			throw new IllegalArgumentException(
-					"Cannot replace variables for the passed Context Object because it does not match the Variables Entity that was configured for this Prompt."
+					"Cannot replace variables for the passed Context Object because it does not match the Context Entity (or a specialization of it) that was configured for this Agent."
 							+ " Passed object's entity: " + ContextObject.getMetaObject().getName() + ", expected: "
 							+ agent.getEntity());
 		}
