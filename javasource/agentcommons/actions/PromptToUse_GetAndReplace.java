@@ -95,12 +95,12 @@ public class PromptToUse_GetAndReplace extends UserAction<IMendixObject>
 		// Get Prompt
 		Agent agent = versionInUse.getVersion_Agent(getContext());
 
-		requireNonNull(agent, "Cannot replace variables for the Version, as it has no Prompt linked");
+		requireNonNull(agent, "Cannot replace variables for the Version, as it has no Agent linked");
 
 		// Check if Entity name is not empty)
 		if (agent.getEntity() == null || agent.getEntity().isBlank()) {
 			throw new IllegalArgumentException(
-					"Cannot replace variables: no Variables Entity is configured for this Prompt.");
+					"Cannot replace variables: no Variables Entity is configured for this Agent.");
 		}
 
 		// Check if entity matches the passed object's entity
