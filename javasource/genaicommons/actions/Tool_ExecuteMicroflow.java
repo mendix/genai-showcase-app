@@ -23,6 +23,7 @@ import genaicommons.impl.MxLogger;
 import genaicommons.proxies.Argument;
 import genaicommons.proxies.ArgumentInput;
 import genaicommons.proxies.KnowledgeBaseSpan;
+import genaicommons.proxies.ModelSpan;
 import genaicommons.proxies.ToolSpan;
 import genaicommons.proxies.Trace;
 import genaicommons.proxies.microflows.Microflows;
@@ -43,12 +44,17 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __ToolCall;
 	private final genaicommons.proxies.ToolCall ToolCall;
+	/** @deprecated use ModelSpan.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __ModelSpan;
+	private final genaicommons.proxies.ModelSpan ModelSpan;
 
 	public Tool_ExecuteMicroflow(
 		IContext context,
 		IMendixObject _tool,
 		IMendixObject _request,
-		IMendixObject _toolCall
+		IMendixObject _toolCall,
+		IMendixObject _modelSpan
 	)
 	{
 		super(context);
@@ -58,6 +64,8 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		this.Request = _request == null ? null : genaicommons.proxies.Request.initialize(getContext(), _request);
 		this.__ToolCall = _toolCall;
 		this.ToolCall = _toolCall == null ? null : genaicommons.proxies.ToolCall.initialize(getContext(), _toolCall);
+		this.__ModelSpan = _modelSpan;
+		this.ModelSpan = _modelSpan == null ? null : genaicommons.proxies.ModelSpan.initialize(getContext(), _modelSpan);
 	}
 
 	@java.lang.Override
@@ -67,6 +75,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		try {
 			requireNonNull(Tool, "Tool is required.");
 			requireNonNull(Tool.getMicroflow(), "Tool has no Microflow.");
+			requireNonNull(ModelSpan,"Model Span is required.");
 			startTime = System.currentTimeMillis();
 			
 			return callTool();
@@ -74,7 +83,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		} catch (Exception e) {
 			//makes sure that a toolSpan exists; response/output is set in microflow later
 			long executionTime = System.currentTimeMillis() - startTime;
-			getCreateToolSpan(executionTime, "");
+			getCreateToolSpan(executionTime, "", ModelSpan);
 			throw e;
 		}
 		// END USER CODE
@@ -209,7 +218,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		LOGGER.info(logMessageInfo + duration);
 		LOGGER.trace(logMessageTrace+ "\n\nReturn value:\n" + response + duration);
 		
-		getCreateToolSpan(executionTime, response);
+		getCreateToolSpan(executionTime, response, ModelSpan);
 		return response;
 	}
 	
@@ -246,26 +255,26 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 	 * Gets an existing toolSpan from the trace via the toolCallId or creates a new one based on the specialization
 	 * @throws CoreException
 	 */
-	private ToolSpan getCreateToolSpan(long executionTime, String response) throws CoreException {
+	private ToolSpan getCreateToolSpan(long executionTime, String response, ModelSpan ModelSpan) throws CoreException {
 		//If there is no trace for the request, then traceability was not enabled
 		Trace trace = Request.getRequest_Trace();
 		if(trace == null) {
 			return null;
 		}
 		
-		ToolSpan toolSpan = Microflows.trace_GetToolSpan_ByToolCallId(getContext(), trace, ToolCall.getToolCallId());
+		ToolSpan toolSpan = Microflows.trace_GetToolSpan_ByToolCallId(getContext(), trace, ToolCall.getToolCallId()); 
 		if(toolSpan != null) {
 			return toolSpan;
 		}
 		
 		if(Tool.getClass().equals(genaicommons.proxies.KnowledgeBaseRetrieval.class)){
 			KnowledgeBaseSpan knowledgeBaseSpan = new KnowledgeBaseSpan(getContext());
-			setToolSpanAttributes(knowledgeBaseSpan, trace, executionTime, response);
+			setToolSpanAttributes(knowledgeBaseSpan, trace, executionTime, response, ModelSpan);
 			return knowledgeBaseSpan;
 			
 		} else {
 			ToolSpan newToolSpan = new ToolSpan(getContext());
-			setToolSpanAttributes(newToolSpan, trace, executionTime, response);
+			setToolSpanAttributes(newToolSpan, trace, executionTime, response, ModelSpan);
 			return newToolSpan;
 		}	
 	}
@@ -273,7 +282,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 	/**
 	 * Sets all attributes of the tool span
 	 */
-	private void setToolSpanAttributes(ToolSpan toolSpan, Trace trace, long executionTime, String response) throws CoreException {
+	private void setToolSpanAttributes(ToolSpan toolSpan, Trace trace, long executionTime, String response, ModelSpan modelSpan) throws CoreException {
 		toolSpan.setSpanId(UUID.randomUUID().toString());
 		toolSpan.setSpan_Trace(trace);
 		toolSpan.setStartTime(new Date(startTime));
@@ -283,6 +292,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		toolSpan.setInput(getArgumentsString());
 		toolSpan.setDurationMilliseconds((int) executionTime);
 		toolSpan.setOutput(response);
+		toolSpan.setSpan_SubSpan(modelSpan);
 	}
 	
 	
