@@ -1,3 +1,4 @@
+@import "../agent-builder-variables.scss";
 @import '../../../../theme/web/custom-variables';
 
 .badge-with-circle {
@@ -44,4 +45,22 @@
         font-weight: $font-weight-semibold;
         text-transform: uppercase;
   }
+}
+
+.agent-badge {
+  display: inline-flex;
+  display: flex;
+  height: 20px;
+  padding: 6px;
+  gap: 6px;
+  align-items: center;
+  border-radius: 4px;
+  font-size: 12px;
+  font-style: normal;
+}
+
+.agent-badge--purple {
+  @extend .agent-badge;
+  background: $agent-purple-light;
+  border: 1px solid $agent-purple;
 }

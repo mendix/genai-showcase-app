@@ -28749,6 +28749,23 @@ input[type=checkbox].three-state-checkbox + .control-label {
   text-transform: uppercase;
 }
 
+.agent-badge, .agent-badge--purple {
+  display: inline-flex;
+  display: flex;
+  height: 20px;
+  padding: 6px;
+  gap: 6px;
+  align-items: center;
+  border-radius: 4px;
+  font-size: 12px;
+  font-style: normal;
+}
+
+.agent-badge--purple {
+  background: #E2E0FC;
+  border: 1px solid #845EFF;
+}
+
 .btn.mx-button.btn-without-border, .btn.mx-button.btn-without-border-red {
   color: #0a1325;
   border: 1px solid transparent;
@@ -28938,7 +28955,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: grid;
   height: 48px;
   padding: 4px 4px 8px;
-  grid-template-columns: 25px minmax(0, 930px) auto;
+  grid-template-columns: 25px minmax(0, 930px) auto auto;
   align-items: center;
   gap: 8px;
   background-color: white;
@@ -29045,11 +29062,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .listview-empty-text--tools > ul > li.mx-listview-empty::before {
-  content: "Provide your agent with access to app functionality by adding microflows as tools";
+  content: "Provide your agent with access to app functionality by adding microflows as tools.";
 }
 
 .listview-empty-text--KB > ul > li.mx-listview-empty::before {
   content: "Ground your agent in your company data by adding knowledge bases.";
+}
+
+.listview-empty-text--mcp-tools > ul > li.mx-listview-empty::before {
+  content: "No tools found for this MCP server configuration.";
 }
 
 .table-header {
