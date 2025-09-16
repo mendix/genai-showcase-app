@@ -155,13 +155,11 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 	//Updates modelspan after the response was created
 	private void updateModelSpan(ModelSpan modelSpan, Response response) throws CoreException {
 		if(modelSpan != null) {
-			Trace trace = Request.getRequest_Trace();
-			modelSpan.setSpan_Trace(trace);
-			modelSpan.setSpanId(UUID.randomUUID().toString());
+			//modelSpan.setSpan_Trace(trace);
+			modelSpan.setIsError(false);
 			modelSpan.setInputTokens(response.getRequestTokens());
 			modelSpan.setOutputTokens(response.getResponseTokens());
 			modelSpan.setOutput(response.getResponseText());
-			modelSpan.set_DeploymentIdentifier(DeployedModel.getArchitecture() + ' ' + DeployedModel.getDisplayName());
 			modelSpan.setEndTime(new Date(System.currentTimeMillis()));
 			modelSpan.setDurationMilliseconds((int) (modelSpan.getEndTime().getTime() -  modelSpan.getStartTime().getTime()));
 		}
@@ -172,6 +170,10 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 		Trace trace = Request.getRequest_Trace();
 		if(trace != null) {
 			ModelSpan modelSpan = new ModelSpan(getContext());
+			modelSpan.setSpanId(UUID.randomUUID().toString());
+			modelSpan.setSpan_Trace(trace);
+			modelSpan.setIsError(true);
+			modelSpan.set_DeploymentIdentifier(DeployedModel.getArchitecture() + ' ' + DeployedModel.getDisplayName());
 			modelSpan.setStartTime(new Date(System.currentTimeMillis()));
 			return modelSpan;
 			
