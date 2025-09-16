@@ -10,7 +10,6 @@
 package mxgenaiconnector.actions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -42,10 +41,8 @@ public class Response_ModifyForMapping_Converse extends UserAction<java.lang.Str
 			ObjectNode rootNode = (ObjectNode) MAPPER.readTree(ResponseJSON);
 			
 			//Prepare JSON for Mendix ToolUse Objects (map the arguments)
-			mapToolUse(rootNode);
-			
-			//Deal with internal reasoning text content message
-			
+			normalizeMessage(rootNode);
+				
 			return MAPPER.writeValueAsString(rootNode);
 
 		} catch (Exception e) {
@@ -67,40 +64,59 @@ public class Response_ModifyForMapping_Converse extends UserAction<java.lang.Str
 	// BEGIN EXTRA CODE
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 	
-	//Map ToolUse to mappable JSON that represents GenAICommons.ToolCall
-	private void mapToolUse(ObjectNode rootNode) throws JsonProcessingException {
-		JsonNode contentArray = rootNode.path("output").path("message").path("content");
-		if (contentArray.isArray()) {
-            for (JsonNode contentNode : contentArray) {
-                JsonNode toolUseNode = contentNode.path("toolUse");
-                if (toolUseNode != null && toolUseNode.isObject()) {
-                	//Replace old "input" field by GenAICommons arguments for later processing
-                    ObjectNode toolUseObjectNode = (ObjectNode) toolUseNode;
-                    JsonNode inputNode = toolUseObjectNode.remove("input");
-                    
-                    ArrayNode argumentsArray = MAPPER.createArrayNode();
-                 // Iterate over the fields of the arguments node
-			        Iterator<Map.Entry<String, JsonNode>> fields = inputNode.properties().iterator();
-			        while (fields.hasNext()) {
-			            Map.Entry<String, JsonNode> field = fields.next();
+	//Prepare for mapping to GenAI Commons structure
+	private void normalizeMessage(ObjectNode rootNode) {
+	    JsonNode contentArray = rootNode.path("output").path("message").path("content");
+	    if (!contentArray.isArray()) return;
 
-			            // Create an object node for each key-value pair
-			            ObjectNode keyValueNode = MAPPER.createObjectNode();
-			            keyValueNode.put("key", field.getKey());
-			            keyValueNode.set("value", field.getValue());
+	    ObjectNode messageNode = (ObjectNode) rootNode.path("output").path("message");
 
-			            // Add the key-value node to the array
-			            argumentsArray.add(keyValueNode);
-			        }
-                    
-                    toolUseObjectNode.set("arguments", argumentsArray);
-                }
-                else if (toolUseNode != null){
-                	//Remove ToolUse if it is not an object
-                	((ObjectNode) contentNode).remove("toolUse");
-                }
-            }
-        }		
+	    // Collect text and tool calls
+	    String text = null;
+	    ArrayNode toolCallsArray = MAPPER.createArrayNode();
+
+	    for (JsonNode contentNode : contentArray) {
+	        // Extract first non-null text
+	        if (text == null && contentNode.has("text") && !contentNode.get("text").isNull()) {
+	            text = contentNode.get("text").asText();
+	        }
+
+	        // Extract toolUse and create GenAICommons-mappable nodes
+	        JsonNode toolUseNode = contentNode.path("toolUse");
+	        if (toolUseNode != null && toolUseNode.isObject()) {
+	            ObjectNode toolCall = toolUseNode.deepCopy();
+	            mapToolUse(toolCall);
+	            toolCallsArray.add(toolCall);
+	        }
+	    }
+
+	    // Replace "content" node
+	    messageNode.remove("content");
+	    if (text != null) {
+	        messageNode.put("text", text);
+	    }
+	    if (toolCallsArray.size() > 0) {
+	        messageNode.set("toolCalls", toolCallsArray);
+	    }
+	}
+	
+	private void mapToolUse(ObjectNode toolUseNode) {
+	    // Replace "input" with key and value attributes
+	    JsonNode inputNode = toolUseNode.remove("input");
+	    ArrayNode argumentsArray = MAPPER.createArrayNode();
+
+	    if (inputNode != null && inputNode.isObject()) {
+	        Iterator<Map.Entry<String, JsonNode>> fields = inputNode.fields();
+	        while (fields.hasNext()) {
+	            Map.Entry<String, JsonNode> field = fields.next();
+	            ObjectNode keyValueNode = MAPPER.createObjectNode();
+	            keyValueNode.put("key", field.getKey());
+	            keyValueNode.set("value", field.getValue());
+	            argumentsArray.add(keyValueNode);
+	        }
+	    }
+
+	    toolUseNode.set("arguments", argumentsArray);
 	}
 	
 	// END EXTRA CODE

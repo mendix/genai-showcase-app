@@ -28749,83 +28749,75 @@ input[type=checkbox].three-state-checkbox + .control-label {
   text-transform: uppercase;
 }
 
-.btn-without-border, .btn-without-border-red {
+.btn.mx-button.btn-without-border, .btn.mx-button.btn-without-border-red {
   color: #0a1325;
   border: 1px solid transparent;
 }
-.btn-without-border.mx-link, .mx-link.btn-without-border-red {
+.btn.mx-button.btn-without-border.mx-link, .btn.mx-button.mx-link.btn-without-border-red {
   text-decoration: none;
 }
-.btn-without-border.disabled, .disabled.btn-without-border-red {
+.btn.mx-button.btn-without-border.disabled, .btn.mx-button.disabled.btn-without-border-red {
   background-color: transparent;
   border: 1px solid transparent;
   cursor: default;
 }
-.btn-without-border:hover, .btn-without-border-red:hover {
+.btn.mx-button.btn-without-border:hover, .btn.mx-button.btn-without-border-red:hover {
   background-color: #e7e7e9;
   border: 1px solid #e7e7e9;
 }
-.btn-without-border:hover, .btn-without-border-red:hover, .btn-without-border:active, .btn-without-border-red:active, .btn-without-border:focus, .btn-without-border-red:focus {
+.btn.mx-button.btn-without-border:hover, .btn.mx-button.btn-without-border-red:hover, .btn.mx-button.btn-without-border:active, .btn.mx-button.btn-without-border-red:active, .btn.mx-button.btn-without-border:focus, .btn.mx-button.btn-without-border-red:focus {
   color: #0a1325;
 }
-
-.btn-without-border-red {
+.btn.mx-button.btn-without-border-red {
   color: #D31E23;
 }
-.btn-without-border-red:hover {
+.btn.mx-button.btn-without-border-red:hover {
   background-color: #f9d9dc;
   border: 1px solid #f9d9dc;
 }
-.btn-without-border-red:hover, .btn-without-border-red:active, .btn-without-border-red:focus {
+.btn.mx-button.btn-without-border-red:hover, .btn.mx-button.btn-without-border-red:active, .btn.mx-button.btn-without-border-red:focus {
   color: #D31E23;
 }
-
-.btn-no-hover.mx-link:hover {
+.btn.mx-button.btn-no-hover.mx-link:hover {
   background-color: transparent;
   border: 1px solid transparent;
   cursor: default;
 }
-
-.btn-icon {
+.btn.mx-button.btn-icon {
   display: flex;
 }
-.btn-icon img {
+.btn.mx-button.btn-icon img {
   height: 22px;
   width: 22px;
   margin: 1px;
 }
-
-.custom-img img {
+.btn.mx-button.custom-img img {
   height: 22px;
   width: 22px;
   margin-right: 0;
 }
-
-.btn-test-single img, .btn-test-all img, .btn-test img {
+.btn.mx-button.btn-test-single img, .btn.mx-button.btn-test-all img, .btn.mx-button.btn-test img {
   height: 20px;
   width: 20px;
   margin-right: 0;
 }
-
-.btn-test {
+.btn.mx-button.btn-test {
   border-radius: 4px 0 0 4px;
 }
-
-.btn-test-all {
+.btn.mx-button.btn-test-all {
   border-radius: 0 4px 4px 0;
   border-left: 1px solid white;
   padding: 0.6em;
 }
-.btn-test-all:active, .btn-test-all:focus, .btn-test-all:hover {
+.btn.mx-button.btn-test-all:active, .btn.mx-button.btn-test-all:focus, .btn.mx-button.btn-test-all:hover {
   border-left: 1px solid white;
 }
-.btn-test-all img {
+.btn.mx-button.btn-test-all img {
   height: 20px;
   width: 20px;
   margin-right: 0;
 }
-
-.switch .widget-switch .widget-switch-btn-wrapper {
+.btn.mx-button.switch .widget-switch .widget-switch-btn-wrapper {
   width: 30px;
   height: 15px;
   border-radius: 10px;
@@ -28839,7 +28831,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background-clip: content-box;
   box-sizing: content-box;
 }
-.switch .widget-switch .widget-switch-btn-wrapper .widget-switch-btn {
+.btn.mx-button.switch .widget-switch .widget-switch-btn-wrapper .widget-switch-btn {
   width: 15px;
   height: 15px;
   background: #fff;
@@ -28850,24 +28842,23 @@ input[type=checkbox].three-state-checkbox + .control-label {
   left: 0;
   transition: background-color 0.4s, left 0.2s;
 }
-.switch .widget-switch .widget-switch-btn-wrapper.checked {
+.btn.mx-button.switch .widget-switch .widget-switch-btn-wrapper.checked {
   background-color: #2F3646 !important;
   border-color: #2F3646 !important;
   box-shadow: inset 0 0 0 16px #2F3646;
 }
-.switch .widget-switch .widget-switch-btn-wrapper.checked .widget-switch-btn {
+.btn.mx-button.switch .widget-switch .widget-switch-btn-wrapper.checked .widget-switch-btn {
   left: 15px;
 }
-.switch .widget-switch .widget-switch-btn-wrapper .widget-switch-btn:active {
+.btn.mx-button.switch .widget-switch .widget-switch-btn-wrapper .widget-switch-btn:active {
   border-radius: 45%;
   width: 70%;
 }
-.switch .widget-switch .widget-switch-btn-wrapper.disabled {
+.btn.mx-button.switch .widget-switch .widget-switch-btn-wrapper.disabled {
   opacity: 0.5;
   cursor: default;
 }
-
-.btn-small {
+.btn.mx-button.btn-small {
   height: 32px;
   display: flex;
   align-items: center;
@@ -28894,7 +28885,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin: 0;
   line-height: 1.428571429;
 }
-.link-container .btn {
+.link-container .mx-button.btn {
   transition: all 0.2s ease-in-out;
   border: none;
   background-color: transparent;
@@ -28904,7 +28895,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
   align-items: center;
 }
-.link-container .btn.btn-hover {
+.link-container .mx-button.btn.btn-hover {
   visibility: hidden;
 }
 .link-container:hover .btn.btn-hover {
