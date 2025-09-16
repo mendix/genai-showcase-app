@@ -28817,7 +28817,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 20px;
   margin-right: 0;
 }
-.btn.mx-button.switch .widget-switch .widget-switch-btn-wrapper {
+.btn.mx-button.btn-small {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+.switch .widget-switch .widget-switch-btn-wrapper {
   width: 30px;
   height: 15px;
   border-radius: 10px;
@@ -28831,7 +28839,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background-clip: content-box;
   box-sizing: content-box;
 }
-.btn.mx-button.switch .widget-switch .widget-switch-btn-wrapper .widget-switch-btn {
+.switch .widget-switch .widget-switch-btn-wrapper .widget-switch-btn {
   width: 15px;
   height: 15px;
   background: #fff;
@@ -28842,28 +28850,21 @@ input[type=checkbox].three-state-checkbox + .control-label {
   left: 0;
   transition: background-color 0.4s, left 0.2s;
 }
-.btn.mx-button.switch .widget-switch .widget-switch-btn-wrapper.checked {
+.switch .widget-switch .widget-switch-btn-wrapper.checked {
   background-color: #2F3646 !important;
   border-color: #2F3646 !important;
   box-shadow: inset 0 0 0 16px #2F3646;
 }
-.btn.mx-button.switch .widget-switch .widget-switch-btn-wrapper.checked .widget-switch-btn {
+.switch .widget-switch .widget-switch-btn-wrapper.checked .widget-switch-btn {
   left: 15px;
 }
-.btn.mx-button.switch .widget-switch .widget-switch-btn-wrapper .widget-switch-btn:active {
+.switch .widget-switch .widget-switch-btn-wrapper .widget-switch-btn:active {
   border-radius: 45%;
   width: 70%;
 }
-.btn.mx-button.switch .widget-switch .widget-switch-btn-wrapper.disabled {
+.switch .widget-switch .widget-switch-btn-wrapper.disabled {
   opacity: 0.5;
   cursor: default;
-}
-.btn.mx-button.btn-small {
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 4px;
 }
 
 .link-container {
