@@ -83,7 +83,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		} catch (Exception e) {
 			//makes sure that a toolSpan exists; response/output is set in microflow later
 			long executionTime = System.currentTimeMillis() - startTime;
-			getCreateToolSpan(executionTime, "", ModelSpan);
+			getCreateToolSpan(executionTime, "");
 			throw e;
 		}
 		// END USER CODE
@@ -218,7 +218,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		LOGGER.info(logMessageInfo + duration);
 		LOGGER.trace(logMessageTrace+ "\n\nReturn value:\n" + response + duration);
 		
-		getCreateToolSpan(executionTime, response, ModelSpan);
+		getCreateToolSpan(executionTime, response);
 		return response;
 	}
 	
@@ -255,7 +255,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 	 * Gets an existing toolSpan from the trace via the toolCallId or creates a new one based on the specialization
 	 * @throws CoreException
 	 */
-	private ToolSpan getCreateToolSpan(long executionTime, String response, ModelSpan ModelSpan) throws CoreException {
+	private ToolSpan getCreateToolSpan(long executionTime, String response) throws CoreException {
 		//If there is no trace for the request, then traceability was not enabled
 		Trace trace = Request.getRequest_Trace();
 		if(trace == null) {
@@ -269,12 +269,12 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		
 		if(Tool.getClass().equals(genaicommons.proxies.KnowledgeBaseRetrieval.class)){
 			KnowledgeBaseSpan knowledgeBaseSpan = new KnowledgeBaseSpan(getContext());
-			setToolSpanAttributes(knowledgeBaseSpan, trace, executionTime, response, ModelSpan);
+			setToolSpanAttributes(knowledgeBaseSpan, trace, executionTime, response);
 			return knowledgeBaseSpan;
 			
 		} else {
 			ToolSpan newToolSpan = new ToolSpan(getContext());
-			setToolSpanAttributes(newToolSpan, trace, executionTime, response, ModelSpan);
+			setToolSpanAttributes(newToolSpan, trace, executionTime, response);
 			return newToolSpan;
 		}	
 	}
@@ -282,7 +282,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 	/**
 	 * Sets all attributes of the tool span
 	 */
-	private void setToolSpanAttributes(ToolSpan toolSpan, Trace trace, long executionTime, String response, ModelSpan modelSpan) throws CoreException {
+	private void setToolSpanAttributes(ToolSpan toolSpan, Trace trace, long executionTime, String response) throws CoreException {
 		toolSpan.setSpanId(UUID.randomUUID().toString());
 		toolSpan.setSpan_Trace(trace);
 		toolSpan.setStartTime(new Date(startTime));
@@ -292,7 +292,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		toolSpan.setInput(getArgumentsString());
 		toolSpan.setDurationMilliseconds((int) executionTime);
 		toolSpan.setOutput(response);
-		toolSpan.setSpan_SubSpan(modelSpan);
+		toolSpan.setSpan_SubSpan(ModelSpan);
 	}
 	
 	
