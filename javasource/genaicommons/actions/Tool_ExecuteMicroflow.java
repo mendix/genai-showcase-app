@@ -23,6 +23,7 @@ import genaicommons.impl.MxLogger;
 import genaicommons.proxies.Argument;
 import genaicommons.proxies.ArgumentInput;
 import genaicommons.proxies.KnowledgeBaseSpan;
+import genaicommons.proxies.ModelSpan;
 import genaicommons.proxies.ToolSpan;
 import genaicommons.proxies.Trace;
 import genaicommons.proxies.microflows.Microflows;
@@ -43,12 +44,17 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __ToolCall;
 	private final genaicommons.proxies.ToolCall ToolCall;
+	/** @deprecated use ModelSpan.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __ModelSpan;
+	private final genaicommons.proxies.ModelSpan ModelSpan;
 
 	public Tool_ExecuteMicroflow(
 		IContext context,
 		IMendixObject _tool,
 		IMendixObject _request,
-		IMendixObject _toolCall
+		IMendixObject _toolCall,
+		IMendixObject _modelSpan
 	)
 	{
 		super(context);
@@ -58,6 +64,8 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		this.Request = _request == null ? null : genaicommons.proxies.Request.initialize(getContext(), _request);
 		this.__ToolCall = _toolCall;
 		this.ToolCall = _toolCall == null ? null : genaicommons.proxies.ToolCall.initialize(getContext(), _toolCall);
+		this.__ModelSpan = _modelSpan;
+		this.ModelSpan = _modelSpan == null ? null : genaicommons.proxies.ModelSpan.initialize(getContext(), _modelSpan);
 	}
 
 	@java.lang.Override
@@ -67,6 +75,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		try {
 			requireNonNull(Tool, "Tool is required.");
 			requireNonNull(Tool.getMicroflow(), "Tool has no Microflow.");
+			requireNonNull(ModelSpan,"Model Span is required.");
 			startTime = System.currentTimeMillis();
 			
 			return callTool();
@@ -253,7 +262,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 			return null;
 		}
 		
-		ToolSpan toolSpan = Microflows.trace_GetToolSpan_ByToolCallId(getContext(), trace, ToolCall.getToolCallId());
+		ToolSpan toolSpan = Microflows.trace_GetToolSpan_ByToolCallId(getContext(), trace, ToolCall.getToolCallId()); 
 		if(toolSpan != null) {
 			return toolSpan;
 		}
@@ -283,6 +292,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		toolSpan.setInput(getArgumentsString());
 		toolSpan.setDurationMilliseconds((int) executionTime);
 		toolSpan.setOutput(response);
+		toolSpan.setSpan_SubSpan(ModelSpan);
 	}
 	
 	

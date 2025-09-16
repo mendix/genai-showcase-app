@@ -112,7 +112,7 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 		updateModelSpan(modelSpan, response);
 		responseUpdateTokenCount(response);
 		
-		boolean toolCallsProcessed = Microflows.response_ProcessToolCalls(getContext(), response, Request);
+		boolean toolCallsProcessed = Microflows.response_ProcessToolCalls(getContext(), response, Request, modelSpan);
 		
 		//Recursion if tool calls are available
 		if (toolCallsProcessed) {
