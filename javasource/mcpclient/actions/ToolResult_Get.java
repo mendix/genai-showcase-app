@@ -79,7 +79,7 @@ public class ToolResult_Get extends UserAction<IMendixObject>
 			
 			return toolResultMendix.getMendixObject();
 		} catch (Exception e) {
-			LOGGER.error(e);
+			LOGGER.error(e, "Failed to get tool result for endpoint: ", MCPClient.getMCPEndpoint(), " and tool name ", ToolName);
 			return null;
 		}
 		// END USER CODE

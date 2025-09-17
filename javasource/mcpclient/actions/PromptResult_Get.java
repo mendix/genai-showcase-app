@@ -79,7 +79,7 @@ public class PromptResult_Get extends UserAction<IMendixObject>
 			
 			return getPromptResultMendix.getMendixObject();
 		} catch (Exception e) {
-			LOGGER.error(e);
+			LOGGER.error(e, "Failed to get prompt result for endpoint: ", MCPClient.getMCPEndpoint(), " and prompt name ", PromptName);
 			return null;
 		}
 
