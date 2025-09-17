@@ -29046,6 +29046,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding-top: 28px;
 }
 
+.combobox-hidden-with-validation .widget-combobox .widget-combobox-input-container {
+  display: none !important;
+}
+
 .listview-bullet-points > ul {
   list-style-type: disc;
   margin-bottom: 0px;

@@ -136,3 +136,10 @@
 .spacing-inner-top-28 {
   padding-top: $size-28; 
 }
+
+//used to hide a combobox but validation message can still be shown
+.combobox-hidden-with-validation {
+  .widget-combobox .widget-combobox-input-container {
+    display: none !important;
+  }
+}
