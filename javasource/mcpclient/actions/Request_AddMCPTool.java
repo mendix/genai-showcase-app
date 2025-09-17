@@ -41,8 +41,8 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __Tool;
 	private final mcpclient.proxies.Tool Tool;
-	private final java.lang.String ToolName;
-	private final java.lang.String ToolDescription;
+	private final java.lang.String OverwritingToolName;
+	private final java.lang.String OverwritingToolDescription;
 	private final java.lang.String Microflow;
 
 	public Request_AddMCPTool(
@@ -50,8 +50,8 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		IMendixObject _request,
 		IMendixObject _mCPServerConfiguration,
 		IMendixObject _tool,
-		java.lang.String _toolName,
-		java.lang.String _toolDescription,
+		java.lang.String _overwritingToolName,
+		java.lang.String _overwritingToolDescription,
 		java.lang.String _microflow
 	)
 	{
@@ -62,8 +62,8 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		this.MCPServerConfiguration = _mCPServerConfiguration == null ? null : mcpclient.proxies.MCPServerConfiguration.initialize(getContext(), _mCPServerConfiguration);
 		this.__Tool = _tool;
 		this.Tool = _tool == null ? null : mcpclient.proxies.Tool.initialize(getContext(), _tool);
-		this.ToolName = _toolName;
-		this.ToolDescription = _toolDescription;
+		this.OverwritingToolName = _overwritingToolName;
+		this.OverwritingToolDescription = _overwritingToolDescription;
 		this.Microflow = _microflow;
 	}
 
@@ -106,13 +106,13 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		
 		tool.setMicroflow(Microflow);
 		tool.setTool_ArgumentInput(createArgumentInputList());
-		if (ToolName != null && !ToolName.isBlank()) {
-			tool.setName(ToolName);
+		if (OverwritingToolName != null && !OverwritingToolName.isBlank()) {
+			tool.setName(OverwritingToolName);
 		} else { 
 			tool.setName(Tool.getName());
 		}
-		if (ToolDescription != null && !ToolDescription.isBlank()) {
-			tool.setDescription(ToolDescription);
+		if (OverwritingToolDescription != null && !OverwritingToolDescription.isBlank()) {
+			tool.setDescription(OverwritingToolDescription);
 		} else { 
 			tool.setDescription(Tool.getDescription()); 
 		}
@@ -124,7 +124,7 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		return tool;
 	}
 	
-	private List<ArgumentInput> createArgumentInputList (){
+	private List<ArgumentInput> createArgumentInputList(){
 		return mcpclient.proxies.microflows.Microflows.tool_CreateArgumentInputList(getContext(), Tool);
 	}
 	// END EXTRA CODE

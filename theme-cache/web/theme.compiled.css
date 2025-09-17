@@ -29050,6 +29050,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: none !important;
 }
 
+.padding-right-4 {
+  padding-right: 4px;
+}
+
 .listview-bullet-points > ul {
   list-style-type: disc;
   margin-bottom: 0px;
