@@ -58,7 +58,7 @@ public class ListPromptsResult_Get extends UserAction<IMendixObject>
 
 			return listPromptResultMendix.getMendixObject();
 		} catch (Exception e) {
-			LOGGER.error(e, "Failed to list prompts for endpoint: ", MCPClient.getMCPEndpoint());
+			LOGGER.error(e, "Failed to list prompts for endpoint: ", MCPClient != null ? MCPClient.getMCPEndpoint() : null);
 			return null;
 		}
 		// END USER CODE

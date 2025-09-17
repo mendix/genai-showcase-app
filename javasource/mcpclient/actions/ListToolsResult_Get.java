@@ -57,7 +57,7 @@ public class ListToolsResult_Get extends UserAction<IMendixObject>
 			ListToolsResult listToolResultMendix = createListToolsResult(listToolsResultMcp);	
 			return listToolResultMendix.getMendixObject();
 		} catch (Exception e) {
-			LOGGER.error(e, "Failed to list tools for endpoint: ", MCPClient.getMCPEndpoint());
+			LOGGER.error(e, "Failed to list tools for endpoint: ", MCPClient != null ? MCPClient.getMCPEndpoint() : null);
 			return null;
 		}
 		// END USER CODE

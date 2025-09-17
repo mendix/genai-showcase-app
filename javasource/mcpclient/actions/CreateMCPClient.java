@@ -91,7 +91,7 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 			return clientNpe.getMendixObject();
 			
 		} catch (Exception e) {
-			LOGGER.error(e, "Failed to create MCP client for configuration with name: ", ClientConfig.getName());
+			LOGGER.error(e, "Failed to create MCP client for configuration with name: ", ClientConfig != null ? ClientConfig.getName(): null);
 			if (e.getCause() != null) {
 	            LOGGER.error("Root cause:", e.getCause());
 	        }
