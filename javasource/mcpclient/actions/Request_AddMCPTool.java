@@ -41,18 +41,18 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __Tool;
 	private final mcpclient.proxies.Tool Tool;
+	private final java.lang.String Microflow;
 	private final java.lang.String OverwritingToolName;
 	private final java.lang.String OverwritingToolDescription;
-	private final java.lang.String Microflow;
 
 	public Request_AddMCPTool(
 		IContext context,
 		IMendixObject _request,
 		IMendixObject _mCPServerConfiguration,
 		IMendixObject _tool,
+		java.lang.String _microflow,
 		java.lang.String _overwritingToolName,
-		java.lang.String _overwritingToolDescription,
-		java.lang.String _microflow
+		java.lang.String _overwritingToolDescription
 	)
 	{
 		super(context);
@@ -62,9 +62,9 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		this.MCPServerConfiguration = _mCPServerConfiguration == null ? null : mcpclient.proxies.MCPServerConfiguration.initialize(getContext(), _mCPServerConfiguration);
 		this.__Tool = _tool;
 		this.Tool = _tool == null ? null : mcpclient.proxies.Tool.initialize(getContext(), _tool);
+		this.Microflow = _microflow;
 		this.OverwritingToolName = _overwritingToolName;
 		this.OverwritingToolDescription = _overwritingToolDescription;
-		this.Microflow = _microflow;
 	}
 
 	@java.lang.Override
@@ -73,9 +73,9 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		// BEGIN USER CODE
 		try{
 			requireNonNull(Request, "Request is required.");
-			requireNonNull(MCPServerConfiguration, "MCPServerConfiguration is required.");
-			requireNonNull(Tool, "Tool is required.");
-			requireNonNull(Microflow, "Microflow is required.");
+			requireNonNull(MCPServerConfiguration, "MCPServerConfiguration is required for tool with name " + Tool.getName());
+			requireNonNull(Tool, "Tool is required for MCPServerConfiguration with name " + MCPServerConfiguration.getName());
+			requireNonNull(Microflow, "Microflow is required  for tool with name " + Tool.getName());
 			
 			ToolCollection toolCollection = ToolCollectionImpl.getOrCreateToolCollection(getContext(), Request);
 			
