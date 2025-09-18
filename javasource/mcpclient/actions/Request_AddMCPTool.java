@@ -24,11 +24,6 @@ import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * Adds a new MCPTool to a Request.
- * Parameters: 
- * - Request: The request to add the tool to.
- * - Name: The name of the tool to call.
- * - Description (optional): A description of what the tool does, used by the model to choose when and how to call the tool.
- * - ArgumentInputList (optional): describe the input parameters of a tool.
  * 
  * The action returns empty if adding the tool was not successful (errors are logged).
  */
@@ -46,12 +41,18 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __Tool;
 	private final mcpclient.proxies.Tool Tool;
+	private final java.lang.String Microflow;
+	private final java.lang.String OverwritingToolName;
+	private final java.lang.String OverwritingToolDescription;
 
 	public Request_AddMCPTool(
 		IContext context,
 		IMendixObject _request,
 		IMendixObject _mCPServerConfiguration,
-		IMendixObject _tool
+		IMendixObject _tool,
+		java.lang.String _microflow,
+		java.lang.String _overwritingToolName,
+		java.lang.String _overwritingToolDescription
 	)
 	{
 		super(context);
@@ -61,6 +62,9 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		this.MCPServerConfiguration = _mCPServerConfiguration == null ? null : mcpclient.proxies.MCPServerConfiguration.initialize(getContext(), _mCPServerConfiguration);
 		this.__Tool = _tool;
 		this.Tool = _tool == null ? null : mcpclient.proxies.Tool.initialize(getContext(), _tool);
+		this.Microflow = _microflow;
+		this.OverwritingToolName = _overwritingToolName;
+		this.OverwritingToolDescription = _overwritingToolDescription;
 	}
 
 	@java.lang.Override
@@ -69,8 +73,9 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		// BEGIN USER CODE
 		try{
 			requireNonNull(Request, "Request is required.");
-			requireNonNull(MCPServerConfiguration, "MCPServerConfiguration is required.");
-			requireNonNull(Tool, "Tool is required.");
+			requireNonNull(MCPServerConfiguration, "MCPServerConfiguration is required for tool with name " + Tool.getName());
+			requireNonNull(Tool, "Tool is required for MCPServerConfiguration with name " + MCPServerConfiguration.getName());
+			requireNonNull(Microflow, "Microflow is required  for tool with name " + Tool.getName());
 			
 			ToolCollection toolCollection = ToolCollectionImpl.getOrCreateToolCollection(getContext(), Request);
 			
@@ -99,10 +104,19 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 	private MCP createMCPTool(ToolCollection toolCollection) throws CoreException {
 		MCP tool = new MCP(getContext());
 		
-		tool.setMicroflow("MCPClient.MCPClient_ToolMicroflow");
+		tool.setMicroflow(Microflow);
 		tool.setTool_ArgumentInput(createArgumentInputList());
-		tool.setDescription(Tool.getDescription());
-		tool.setName(Tool.getName());
+		if (OverwritingToolName != null && !OverwritingToolName.isBlank()) {
+			tool.setName(OverwritingToolName);
+		} else { 
+			tool.setName(Tool.getName());
+		}
+		if (OverwritingToolDescription != null && !OverwritingToolDescription.isBlank()) {
+			tool.setDescription(OverwritingToolDescription);
+		} else { 
+			tool.setDescription(Tool.getDescription()); 
+		}
+		tool.setOriginalMCPToolName(Tool.getName());
 		tool.setMCP_MCPServerConfiguration(MCPServerConfiguration);
 		List<Tool> ToolList = toolCollection.getToolCollection_Tool();
 		ToolList.add(tool);
@@ -110,7 +124,7 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		return tool;
 	}
 	
-	private List<ArgumentInput> createArgumentInputList (){
+	private List<ArgumentInput> createArgumentInputList(){
 		return mcpclient.proxies.microflows.Microflows.tool_CreateArgumentInputList(getContext(), Tool);
 	}
 	// END EXTRA CODE

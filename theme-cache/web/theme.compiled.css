@@ -28749,6 +28749,23 @@ input[type=checkbox].three-state-checkbox + .control-label {
   text-transform: uppercase;
 }
 
+.agent-badge, .agent-badge--purple {
+  display: inline-flex;
+  display: flex;
+  height: 20px;
+  padding: 6px;
+  gap: 6px;
+  align-items: center;
+  border-radius: 4px;
+  font-size: 12px;
+  font-style: normal;
+}
+
+.agent-badge--purple {
+  background: #E2E0FC;
+  border: 1px solid #845EFF;
+}
+
 .btn.mx-button.btn-without-border, .btn.mx-button.btn-without-border-red {
   color: #0a1325;
   border: 1px solid transparent;
@@ -28817,7 +28834,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 20px;
   margin-right: 0;
 }
-.btn.mx-button.switch .widget-switch .widget-switch-btn-wrapper {
+.btn.mx-button.btn-small {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+.switch .widget-switch .widget-switch-btn-wrapper {
   width: 30px;
   height: 15px;
   border-radius: 10px;
@@ -28831,7 +28856,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background-clip: content-box;
   box-sizing: content-box;
 }
-.btn.mx-button.switch .widget-switch .widget-switch-btn-wrapper .widget-switch-btn {
+.switch .widget-switch .widget-switch-btn-wrapper .widget-switch-btn {
   width: 15px;
   height: 15px;
   background: #fff;
@@ -28842,28 +28867,21 @@ input[type=checkbox].three-state-checkbox + .control-label {
   left: 0;
   transition: background-color 0.4s, left 0.2s;
 }
-.btn.mx-button.switch .widget-switch .widget-switch-btn-wrapper.checked {
+.switch .widget-switch .widget-switch-btn-wrapper.checked {
   background-color: #2F3646 !important;
   border-color: #2F3646 !important;
   box-shadow: inset 0 0 0 16px #2F3646;
 }
-.btn.mx-button.switch .widget-switch .widget-switch-btn-wrapper.checked .widget-switch-btn {
+.switch .widget-switch .widget-switch-btn-wrapper.checked .widget-switch-btn {
   left: 15px;
 }
-.btn.mx-button.switch .widget-switch .widget-switch-btn-wrapper .widget-switch-btn:active {
+.switch .widget-switch .widget-switch-btn-wrapper .widget-switch-btn:active {
   border-radius: 45%;
   width: 70%;
 }
-.btn.mx-button.switch .widget-switch .widget-switch-btn-wrapper.disabled {
+.switch .widget-switch .widget-switch-btn-wrapper.disabled {
   opacity: 0.5;
   cursor: default;
-}
-.btn.mx-button.btn-small {
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 4px;
 }
 
 .link-container {
@@ -28937,7 +28955,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: grid;
   height: 48px;
   padding: 4px 4px 8px;
-  grid-template-columns: 25px minmax(0, 930px) auto;
+  grid-template-columns: 25px minmax(0, 930px) auto auto;
   align-items: center;
   gap: 8px;
   background-color: white;
@@ -29028,6 +29046,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding-top: 28px;
 }
 
+.combobox-hidden-with-validation .widget-combobox .widget-combobox-input-container {
+  display: none !important;
+}
+
+.padding-right-4 {
+  padding-right: 4px;
+}
+
 .listview-bullet-points > ul {
   list-style-type: disc;
   margin-bottom: 0px;
@@ -29044,11 +29070,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .listview-empty-text--tools > ul > li.mx-listview-empty::before {
-  content: "Provide your agent with access to app functionality by adding microflows as tools";
+  content: "Provide your agent with access to app functionality by adding microflows as tools.";
 }
 
 .listview-empty-text--KB > ul > li.mx-listview-empty::before {
   content: "Ground your agent in your company data by adding knowledge bases.";
+}
+
+.listview-empty-text--mcp-tools > ul > li.mx-listview-empty::before {
+  content: "No tools found for this MCP server configuration.";
 }
 
 .table-header {
@@ -29867,6 +29897,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .card-label-pgvector {
   background: #E1FAE1;
   color: #076407;
+}
+
+.text-strike {
+  text-decoration: line-through;
 }
 
 /*# sourceMappingURL=theme.compiled.css.map */

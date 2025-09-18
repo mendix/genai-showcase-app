@@ -31,7 +31,7 @@
   display: grid;
   height: 48px;
   padding: $spacing-smaller $spacing-smaller $spacing-small;
-  grid-template-columns: 25px minmax(0, 930px) auto;
+  grid-template-columns: 25px minmax(0, 930px) auto auto;
   align-items: center;
   gap: $spacing-small;
   background-color: white;
@@ -135,4 +135,15 @@
 
 .spacing-inner-top-28 {
   padding-top: $size-28; 
+}
+
+//used to hide a combobox but validation message can still be shown
+.combobox-hidden-with-validation {
+  .widget-combobox .widget-combobox-input-container {
+    display: none !important;
+  }
+}
+
+.padding-right-4 {
+  padding-right: 4px;
 }

@@ -20,7 +20,7 @@
 .listview-empty-text--tools {
     > ul > li.mx-listview-empty {
         &::before {
-            content: "Provide your agent with access to app functionality by adding microflows as tools";
+            content: "Provide your agent with access to app functionality by adding microflows as tools.";
         }
     }
 }
@@ -29,6 +29,14 @@
     > ul > li.mx-listview-empty {
         &::before {
             content: "Ground your agent in your company data by adding knowledge bases."
+        }
+    }
+}
+
+.listview-empty-text--mcp-tools {
+    > ul > li.mx-listview-empty {
+        &::before {
+            content: "No tools found for this MCP server configuration."
         }
     }
 }

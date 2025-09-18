@@ -56,7 +56,7 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 			requireNonNull(ClientConfig.getMCPEndpoint(), "MCP Endpoint is required.");
 			requireNonNull(ClientConfig.getName(), "MCP Name is required.");
 			requireNonNull(ClientConfig.getVersion(), "Version is required.");
-			requireNonNull(ClientConfig.getProtocolVersion(), "Protocol Version is required.");			
+			requireNonNull(ClientConfig.getProtocolVersion(), "Protocol version is required.");			
 			
 			//Client NPE creation
 			MCPClient clientNpe = new MCPClient(getContext());
@@ -91,7 +91,7 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 			return clientNpe.getMendixObject();
 			
 		} catch (Exception e) {
-			LOGGER.error(e);
+			LOGGER.error(e, "Failed to create MCP client for configuration with name: ", ClientConfig != null ? ClientConfig.getName(): null);
 			if (e.getCause() != null) {
 	            LOGGER.error("Root cause:", e.getCause());
 	        }
