@@ -10,7 +10,6 @@
 package agentcommons.actions;
 
 import static java.util.Objects.requireNonNull;
-import java.util.stream.Collectors;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.UserAction;
@@ -19,11 +18,11 @@ import agentcommons.impl.MxLogger;
 /**
  * Returns true if a microflow with the passed name exists.
  */
-public class Tool_FindMicroflow extends UserAction<java.lang.Boolean>
+public class Microflow_CheckIfExists extends UserAction<java.lang.Boolean>
 {
 	private final java.lang.String MicroflowName;
 
-	public Tool_FindMicroflow(
+	public Microflow_CheckIfExists(
 		IContext context,
 		java.lang.String _microflowName
 	)
@@ -40,8 +39,7 @@ public class Tool_FindMicroflow extends UserAction<java.lang.Boolean>
 			requireNonNull(MicroflowName, "MicroflowName is required.");
 			
 			return Core.getMicroflowNames().stream()
-					.filter(name -> name.equals(MicroflowName))
-					.collect(Collectors.toList()).size() > 0;
+					.anyMatch(name -> name.equals(MicroflowName));
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return false;
@@ -56,10 +54,10 @@ public class Tool_FindMicroflow extends UserAction<java.lang.Boolean>
 	@java.lang.Override
 	public java.lang.String toString()
 	{
-		return "Tool_FindMicroflow";
+		return "Microflow_CheckIfExists";
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new MxLogger(Tool_FindMicroflow.class);
+	private static final MxLogger LOGGER = new MxLogger(Microflow_CheckIfExists.class);
 	// END EXTRA CODE
 }

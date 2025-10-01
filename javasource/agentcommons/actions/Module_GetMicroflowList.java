@@ -9,18 +9,15 @@
 
 package agentcommons.actions;
 
-import java.util.stream.Collectors;
 import static java.util.Objects.requireNonNull;
-import java.util.ArrayList;
 import java.util.List;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IDataType;
-import agentcommons.impl.MxLogger;
-import agentcommons.proxies.Microflow;
-import agentcommons.proxies.Module;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
+import agentcommons.impl.MxLogger;
+import agentcommons.proxies.Microflow;
 
 /**
  * Gets a list of microflows available in the given module that have a string return type. Association MicroflowSelection_Microflow is set.

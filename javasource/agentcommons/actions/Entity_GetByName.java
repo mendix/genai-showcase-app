@@ -9,41 +9,51 @@
 
 package agentcommons.actions;
 
-import java.util.ArrayList;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
+import com.mendix.systemwideinterfaces.core.UserAction;
+import com.mendix.systemwideinterfaces.core.meta.IMetaObject;
 import agentcommons.impl.MxLogger;
 import agentcommons.proxies.Entity;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.systemwideinterfaces.core.meta.IMetaObject;
-import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class Entity_GetList extends UserAction<java.util.List<IMendixObject>>
+/**
+ * Returns an Entity object if it can be found in the metaobject list. Returns null, if no Entity with the specififed name exists.
+ */
+public class Entity_GetByName extends UserAction<IMendixObject>
 {
-	public Entity_GetList(IContext context)
+	private final java.lang.String EntityName;
+
+	public Entity_GetByName(
+		IContext context,
+		java.lang.String _entityName
+	)
 	{
 		super(context);
+		this.EntityName = _entityName;
 	}
 
 	@java.lang.Override
-	public java.util.List<IMendixObject> executeAction() throws Exception
+	public IMendixObject executeAction() throws Exception
 	{
 		// BEGIN USER CODE
 		try {
-			ArrayList<IMendixObject> modelEntityList = new ArrayList<IMendixObject>();
-			
-			for(IMetaObject metaObject : Core.getMetaObjects()) {
-				IMendixObject entityImport = Core.instantiate(getContext(), Entity.getType());
-				entityImport.setValue(getContext(), Entity.MemberNames.Name.toString(), metaObject.getName());
-				entityImport.setValue(getContext(), Entity.MemberNames.IsPersistable.toString(), metaObject.isPersistable());
-				
-				modelEntityList.add(entityImport);
+			if(EntityName == null || EntityName.isBlank()) {
+				return null;
 			}
-			return modelEntityList;
+			
+			for (IMetaObject metaObject : Core.getMetaObjects())
+			    if (metaObject.getName().equals(EntityName)) {
+			    	Entity entity = new Entity(getContext());
+			    	entity.setName(EntityName);
+			    	entity.setIsPersistable(metaObject.isPersistable());
+			    	return entity.getMendixObject();
+			    }
+			return null;
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
-	}
+		}
 		// END USER CODE
 	}
 
@@ -54,10 +64,10 @@ public class Entity_GetList extends UserAction<java.util.List<IMendixObject>>
 	@java.lang.Override
 	public java.lang.String toString()
 	{
-		return "Entity_GetList";
+		return "Entity_GetByName";
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new MxLogger(Entity_GetList.class);
+	private static final MxLogger LOGGER = new MxLogger(Entity_GetByName.class);
 	// END EXTRA CODE
 }
