@@ -17,6 +17,7 @@ import io.modelcontextprotocol.server.McpServerFeatures;
 import io.modelcontextprotocol.server.McpSyncServer;
 import io.modelcontextprotocol.spec.McpSchema;
 import mcpserver.impl.McpServerRegistry;
+import mcpserver.impl.McpSessionManager;
 import mcpserver.impl.MxLogger;
 import static java.util.Objects.requireNonNull;
 import java.util.HashMap;
@@ -101,25 +102,31 @@ public class AddPrompt extends UserAction<IMendixObject>
 					// some request logging
 					String threadName = Thread.currentThread().getName();
 					long start = System.currentTimeMillis();
-					LOGGER.trace(threadName + ": Start processing getPrompt " + Name + ", MF: " + Microflow);
+					LOGGER.trace(threadName + ": Start processing getPrompt " + Name + ", microflow: " + Microflow);
 
 					// process the request, create a new context first
-					IContext ctx = getContextFromSession();
+					
 
 					Map<String, Object> args = new HashMap<>(request.arguments());
 					args.put("Prompt", promptNpe);
 
 					try {
-						IMendixObject mxExecResult = Core.microflowCall(Microflow).withParams(args).execute(ctx);
-						mcpserver.proxies.PromptMessage mxPromptMessage = mcpserver.proxies.PromptMessage.initialize(ctx, mxExecResult);
+						IContext contextUser = McpSessionManager.getContextFromSession(exchange);
+						IMendixObject mxExecResult = Core.microflowCall(Microflow).withParams(args).execute(contextUser);
+						mcpserver.proxies.PromptMessage mxPromptMessage = mcpserver.proxies.PromptMessage.initialize(getContext(), mxExecResult);
 
 						McpSchema.PromptMessage mcpPromptMessage = new McpSchema.PromptMessage(
 								McpSchema.Role.valueOf(
 										mxPromptMessage.getRole()),
 								new McpSchema.TextContent(mxPromptMessage.getContent())
 						);
-						return new McpSchema.GetPromptResult(Description, List.of(mcpPromptMessage));
-					} finally {
+						return new McpSchema.GetPromptResult(Name, List.of(mcpPromptMessage));
+					}
+					catch(Exception e) {
+						LOGGER.error(e, threadName + ": Error occurred during get prompt call.");
+						return new McpSchema.GetPromptResult(Name, null);
+					}	
+					finally {
 						LOGGER.trace(threadName + ": End processing getPrompt '" + Name + ". Duration: " + (System.currentTimeMillis() - start) + "ms.");
 					}
 				}
@@ -142,13 +149,5 @@ public class AddPrompt extends UserAction<IMendixObject>
 
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new mcpserver.impl.MxLogger(AddPrompt.class);
-	
-	/**
-	 * Returns a context object for the tool microflow. Currently, a system session is returned.
-	 * @return Context object
-	 */
-	private IContext getContextFromSession() {
-		return Core.createSystemContext();
-	}
 	// END EXTRA CODE
 }

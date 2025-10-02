@@ -16,6 +16,9 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import agentcommons.impl.MxLogger;
 
+/**
+ * Returns true if a microflow with the passed name exists.
+ */
 public class Tool_FindMicroflow extends UserAction<java.lang.Boolean>
 {
 	private final java.lang.String MicroflowName;
