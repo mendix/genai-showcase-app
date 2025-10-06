@@ -21,7 +21,7 @@ import agentcommons.impl.MxLogger;
 import agentcommons.proxies.Module;
 
 /**
- * Returns a list of modules avalaibale in the current project.
+ * Returns a list of modules available in the current project.
  * Association MicroflowSelection_Module is set.
  */
 public class Module_GetList extends UserAction<java.util.List<IMendixObject>>
