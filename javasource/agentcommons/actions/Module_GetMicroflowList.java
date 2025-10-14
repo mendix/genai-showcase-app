@@ -9,33 +9,41 @@
 
 package agentcommons.actions;
 
-import java.util.stream.Collectors;
-import java.util.ArrayList;
+import static java.util.Objects.requireNonNull;
 import java.util.List;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IDataType;
-import agentcommons.impl.MxLogger;
-import agentcommons.proxies.Microflow;
-import agentcommons.proxies.Module;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
+import agentcommons.impl.MxLogger;
+import agentcommons.proxies.Microflow;
 
-public class Microflow_GetList extends UserAction<java.util.List<IMendixObject>>
+/**
+ * Gets a list of microflows available in the given module that have a string return type. Association MicroflowSelection_Microflow is set.
+ */
+public class Module_GetMicroflowList extends UserAction<java.util.List<IMendixObject>>
 {
 	/** @deprecated use MicroflowSelection.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __MicroflowSelection;
 	private final agentcommons.proxies.MicroflowSelection MicroflowSelection;
+	/** @deprecated use Module.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __Module;
+	private final agentcommons.proxies.Module Module;
 
-	public Microflow_GetList(
+	public Module_GetMicroflowList(
 		IContext context,
-		IMendixObject _microflowSelection
+		IMendixObject _microflowSelection,
+		IMendixObject _module
 	)
 	{
 		super(context);
 		this.__MicroflowSelection = _microflowSelection;
 		this.MicroflowSelection = _microflowSelection == null ? null : agentcommons.proxies.MicroflowSelection.initialize(getContext(), _microflowSelection);
+		this.__Module = _module;
+		this.Module = _module == null ? null : agentcommons.proxies.Module.initialize(getContext(), _module);
 	}
 
 	@java.lang.Override
@@ -43,22 +51,26 @@ public class Microflow_GetList extends UserAction<java.util.List<IMendixObject>>
 	{
 		// BEGIN USER CODE
 		try {
-			List<IMendixObject> modelMicroflowList = Core.getMicroflowNames().stream()
+			requireNonNull(MicroflowSelection, "MicroflowSelection is required.");
+			requireNonNull(Module, "Module is required.");
+			
+			List<Microflow> microflowList = Core.getMicroflowNames().stream()
 				.filter(microflowName -> !microflowName.isBlank() && microflowName.contains("."))
+				.filter(microflowName -> {
+					if(Module.getModuleName() == null || Module.getModuleName().isBlank() ) {
+						return false;
+					} else {
+						return microflowName.startsWith(Module.getModuleName());
+					}
+				})
 				.filter(microflow -> Core.getReturnType(microflow).getType().equals(IDataType.DataTypeEnum.String))
 				.sorted()
-				.map(microflowName -> {
-					Microflow microflowImport = new Microflow(getContext());
-		        	String[] parts = microflowName.split("\\.", 2);
-		        	microflowImport.setFullName(microflowName);
-		        	microflowImport.setMicroflowName(parts[1]);
-		        	Module module = getCreateModule(parts[0]);
-		        	microflowImport.setMicroflow_Module(module);
-		        	return microflowImport.getMendixObject();
-				})
-				.collect(Collectors.toList());
-			MicroflowSelection.setMicroflowSelection_Module(moduleList);
-			return modelMicroflowList; 
+				.map(microflowName -> createMicroflow(microflowName))
+				.toList();
+			
+			MicroflowSelection.setMicroflowSelection_Microflow(microflowList);
+			
+			return microflowList.stream().map(e -> e.getMendixObject()).toList();
 		} catch (Exception e) {
 		    LOGGER.error(e);
 		    return null;
@@ -73,28 +85,17 @@ public class Microflow_GetList extends UserAction<java.util.List<IMendixObject>>
 	@java.lang.Override
 	public java.lang.String toString()
 	{
-		return "Microflow_GetList";
+		return "Module_GetMicroflowList";
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new MxLogger(Microflow_GetList.class);
-	private List<Module> moduleList = new ArrayList<Module>();
-
+	private static final MxLogger LOGGER = new MxLogger(Module_GetMicroflowList.class);
 	
-	private Module getCreateModule(String moduleName) {
-		Module moduleInList = moduleList.stream()
-				.filter(o -> o.getModuleName().equals(moduleName))
-				.findFirst()
-				.orElse(null);
-		
-		if(moduleInList != null) {
-			return moduleInList;
-		}
-		
-		Module module = new Module(getContext());
-		module.setModuleName(moduleName);
-		moduleList.add(module);
-		return module;
+	private Microflow createMicroflow(String fullName) {
+		Microflow microflow = new Microflow(getContext());
+		microflow.setFullName(fullName);
+		microflow.setMicroflowName(fullName.substring(fullName.indexOf('.') + 1));
+		return microflow;
 	}
 	// END EXTRA CODE
 }

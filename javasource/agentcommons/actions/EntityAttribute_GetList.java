@@ -52,9 +52,9 @@ public class EntityAttribute_GetList extends UserAction<java.util.List<IMendixOb
 				attributeList.add(attribute);
 			}
 			return attributeList;	
-			} catch (Exception e) {
-				LOGGER.error(e);
-				return null;
+		} catch (Exception e) {
+			LOGGER.error(e);
+			return null;
 		}
 
 		// END USER CODE
