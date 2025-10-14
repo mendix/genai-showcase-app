@@ -17,11 +17,14 @@ import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.ISession;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import io.modelcontextprotocol.server.McpServerFeatures;
 import io.modelcontextprotocol.server.McpSyncServer;
+import io.modelcontextprotocol.server.McpSyncServerExchange;
 import io.modelcontextprotocol.spec.McpSchema;
 import mcpserver.impl.McpServerRegistry;
+import mcpserver.impl.McpSessionManager;
 import mcpserver.impl.MxLogger;
 import mcpserver.proxies.TextContent;
 import mcpserver.proxies.Tool;
@@ -92,17 +95,21 @@ public class AddTool extends UserAction<IMendixObject>
 					String threadName = Thread.currentThread().getName();
 					long start = System.currentTimeMillis();
 					LOGGER.trace(threadName + ": Start processing tool call " + Name + ", MF: " + ExecutingMicroflow);
-
-					IContext ctx = getContextFromSession();
-					Map<String, Object> args = new HashMap<>(arguments);
-					
 					try {
+						IContext contextUser = McpSessionManager.getContextFromSession(exchange);
+						Map<String, Object> args = new HashMap<>(arguments);
+
 						manipulateArgsForMicroflowCall(toolNpe, args);
-						mcpserver.proxies.TextContent mxTextContent = getTextContextFromToolMicroflow(args,ctx);
+						mcpserver.proxies.TextContent mxTextContent = getTextContextFromToolMicroflow(args, contextUser);
 
 						McpSchema.TextContent mcpTextContent = new McpSchema.TextContent(mxTextContent.getContent());
 						return new McpSchema.CallToolResult(List.of(mcpTextContent), false);
-					} finally {
+						
+					}catch (Exception e) { 
+						LOGGER.error(e, threadName + ": Error occurred during tool call.");
+						return new McpSchema.CallToolResult("Error occured during tool call", true);
+						
+					}finally {
 						LOGGER.trace(threadName + ": End processing tool call '" + Name + ". Duration: " + (System.currentTimeMillis() - start) + "ms.");
 					}
 				}
@@ -127,14 +134,6 @@ public class AddTool extends UserAction<IMendixObject>
 	private static final MxLogger LOGGER = new mcpserver.impl.MxLogger(AddTool.class);
 	
 	private static final ObjectMapper MAPPER = new ObjectMapper();
-	
-	/**
-	 * Returns a context object for the tool microflow. Currently, a system session is returned.
-	 * @return Context object
-	 */
-	private IContext getContextFromSession() {
-		return Core.createSystemContext();
-	}
 	
 	/**
 	 * Convert DateTime input values to correct DataType. Add Tool to args
@@ -167,17 +166,17 @@ public class AddTool extends UserAction<IMendixObject>
 	 * @return TextContent
 	 */
 	private mcpserver.proxies.TextContent getTextContextFromToolMicroflow(Map<String, Object> args, IContext ctx){
+		//Using getContext() for creating the TextContent (so there is no need for entity access for the user), while user ctx for microflow execution
 		if(isToolReturnTypeString()) {
 			String stringResult = Core.microflowCall(ExecutingMicroflow).withParams(args).execute(ctx);
-			mcpserver.proxies.TextContent mxTextContentFromString = new TextContent(ctx);
+			mcpserver.proxies.TextContent mxTextContentFromString = new TextContent(getContext());
 			mxTextContentFromString.setContent(stringResult);
 			return mxTextContentFromString;
 			
 		} else
 		{
 			IMendixObject mxExecResult = Core.microflowCall(ExecutingMicroflow).withParams(args).execute(ctx);
-			return mcpserver.proxies.TextContent.initialize(ctx, mxExecResult);
-			
+			return mcpserver.proxies.TextContent.initialize(getContext(), mxExecResult);
 		}		
 	}
 	
@@ -276,8 +275,6 @@ public class AddTool extends UserAction<IMendixObject>
 			}
 		}
 		return inputParametersModified;
-	}
-	
-	
+	}	
 	// END EXTRA CODE
 }
