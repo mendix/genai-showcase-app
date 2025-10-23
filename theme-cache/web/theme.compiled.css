@@ -26162,7 +26162,7 @@ html div.dj_ios .widget-switch.auto .widget-switch-btn-wrapper.checked.widget-sw
 .table .th .column-header svg {
   margin-left: 8px;
   flex: 0 0 var(--btn-font-size, 14px);
-  color: var(--gray-dark, #606671);
+  color: var(--gray-dark, #474e5c);
   height: var(--btn-font-size, 14px);
   align-self: center;
 }
@@ -26318,7 +26318,7 @@ html div.dj_ios .widget-switch.auto .widget-switch-btn-wrapper.checked.widget-sw
 }
 .pagination-bar .pagination-button {
   padding: 6px;
-  color: var(--gray-darker, #3b4251);
+  color: var(--gray-darker, #0a1325);
   border-color: transparent;
   background-color: transparent;
 }
@@ -26439,7 +26439,7 @@ html div.dj_ios .widget-switch.auto .widget-switch-btn-wrapper.checked.widget-sw
 }
 .widget-datagrid-skeleton-loader {
   animation: skeleton-loading 1s linear infinite alternate;
-  background: var(--dg-skeleton-background, linear-gradient(90deg, rgba(194, 194, 194, 0.2) 0%, #d2d2d2 100%));
+  background: var(--skeleton-background, linear-gradient(90deg, rgba(194, 194, 194, 0.2) 0%, #d2d2d2 100%));
   background-size: 300% 100%;
   border-radius: 4px;
   height: 16px;
@@ -26488,13 +26488,15 @@ html div.dj_ios .widget-switch.auto .widget-switch-btn-wrapper.checked.widget-sw
   margin: 0 auto;
 }
 
-:where(.widget-datagrid-grid.infinite-loading) {
+.infinite-loading.widget-datagrid-grid-body {
   overflow-y: auto;
 }
 
-:where(.infinite-loading .widget-datagrid-grid-head .th) {
-  position: sticky;
-  z-index: 1;
+.widget-datagrid-grid-head,
+.widget-datagrid-grid-body {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1/-1;
 }
 
 :where(.widget-datagrid-paging-bottom) {
@@ -26539,7 +26541,7 @@ html div.dj_ios .widget-switch.auto .widget-switch-btn-wrapper.checked.widget-sw
 */
 .react-datepicker {
   font-size: 1em;
-  border: 1px solid #d7d7d7;
+  border: 1px solid #ced0d3;
 }
 
 .react-datepicker-wrapper {
@@ -26554,7 +26556,7 @@ html div.dj_ios .widget-switch.auto .widget-switch-btn-wrapper.checked.widget-sw
 
 .react-datepicker__header {
   padding-top: 0.8em;
-  background-color: var(--bg-color, #fff);
+  background-color: var(--bg-color, #f8f8f8);
   border-color: transparent;
 }
 
@@ -27694,6 +27696,19 @@ div:not(.table-compact) > .table .th .dropdown-container .dropdown-list {
   border-width: 0;
   border-top-width: 1px;
   border-bottom-width: 1px;
+}
+
+.widget-gallery-divided-horizontal .widget-gallery-item {
+  position: relative;
+}
+.widget-gallery-divided-horizontal .widget-gallery-item:not(:last-child)::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid var(--grid-border-color, #ced0d3);
+  margin-top: calc(var(--spacing-small, 8px) / 2);
 }
 
 .widget-gallery-hover .widget-gallery-items .widget-gallery-item:hover {
