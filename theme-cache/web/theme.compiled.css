@@ -29617,6 +29617,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background-color: #146FF4 !important;
 }
 
+.bg-mistral {
+  background-color: #FA500F !important;
+}
+
 .bg-pgvector {
   background-color: #C6D92F !important;
 }
@@ -29902,7 +29906,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 /* --------------------------------------- Card Labels -----------------------------------*/
-.card-label-base, .card-label-pgvector, .card-label-all, .card-label-mxcloudgenai, .card-label-bedrock, .card-label-openai {
+.card-label-base, .card-label-pgvector, .card-label-mistral, .card-label-all, .card-label-mxcloudgenai, .card-label-bedrock, .card-label-openai {
   display: inline-flex;
   display: flex;
   height: 25px;
@@ -29950,6 +29954,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .card-label-all {
   background: #E2E0FC;
   color: #2F008C;
+}
+
+.card-label-mistral {
+  background: #fad08c;
+  color: #872702;
 }
 
 .card-label-pgvector {

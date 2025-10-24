@@ -5,6 +5,7 @@ $brand-aws: #EC7211;
 $brand-pgvector: #C6D92F; 
 $brand-mxgenai: #146FF4;  
 $brand-openai: #0078D4;
+$brand-mistral: #FA500F;
 
 /* Card Colors */
 $light-grey-2: #F2F2F3;
@@ -21,6 +22,8 @@ $light-orange: #EC7211;
 /* Label Colors */
 $label-bg-bedrock: #FFEAC3;
 $label-color-bedrock: #A05700;
+$label-bg-mistral: #fad08c;
+$label-color-mistral: #872702;
 $label-bg-mxcloudgenai: #DCEEFE;
 $label-color-mxcloudgenai: #0006AB;
 $label-bg-all: #E2E0FC;
@@ -67,6 +70,10 @@ $label-color-pgvector: #076407;
 
 .bg-mxgenai {
     background-color: $brand-mxgenai !important;
+}
+
+.bg-mistral {
+    background-color: $brand-mistral !important;
 }
 
 .bg-pgvector {
@@ -465,6 +472,12 @@ $label-color-pgvector: #076407;
   @extend .card-label-base;
   background: $label-bg-all;
   color: $label-color-all;
+}
+
+.card-label-mistral {
+  @extend .card-label-base;
+  background: $label-bg-mistral;
+  color: $label-color-mistral;
 }
 
 .card-label-pgvector {
