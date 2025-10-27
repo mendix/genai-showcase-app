@@ -29932,7 +29932,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .container-img-label {
   display: flex;
-  height: 50px;
+  height: 52px;
   align-items: start;
   justify-content: space-between;
 }
