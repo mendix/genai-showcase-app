@@ -29826,7 +29826,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
  */
 .card-base, .card-orange, .card-yellow, .card-violet, .card-lightpurple, .card-darkpurple, .card-blue, .card-green, .card-grey {
   width: 345px;
-  height: 178px;
+  height: 190px;
   flex-shrink: 0;
   border-radius: 8px;
   border-top: 1px grey;
@@ -29867,7 +29867,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background: #F7F7F7;
 }
 .card-base .card-content .card-title, .card-orange .card-content .card-title, .card-yellow .card-content .card-title, .card-violet .card-content .card-title, .card-lightpurple .card-content .card-title, .card-darkpurple .card-content .card-title, .card-blue .card-content .card-title, .card-green .card-content .card-title, .card-grey .card-content .card-title {
-  height: 46px;
+  height: 52px;
+  margin-bottom: 0;
 }
 .card-base .card-content .card-description, .card-orange .card-content .card-description, .card-yellow .card-content .card-description, .card-violet .card-content .card-description, .card-lightpurple .card-content .card-description, .card-darkpurple .card-content .card-description, .card-blue .card-content .card-description, .card-green .card-content .card-description, .card-grey .card-content .card-description {
   height: 40px;
@@ -29906,6 +29907,16 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 /* --------------------------------------- Card Labels -----------------------------------*/
+.card-label-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  max-width: 260px;
+  margin: 0 auto;
+  overflow: hidden;
+  max-height: 102px;
+}
+
 .card-label-base, .card-label-pgvector, .card-label-mistral, .card-label-all, .card-label-mxcloudgenai, .card-label-bedrock, .card-label-openai {
   display: inline-flex;
   display: flex;
