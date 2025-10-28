@@ -1,0 +1,41 @@
+.traces-page-content-container {
+    min-height: -webkit-fill-available;
+    min-height: -moz-available;
+    display: flex;
+    justify-content: center;
+
+    .traces-container--overview {
+        width: 90%;
+        max-width: 1600px;
+        margin: $spacing-medium + $size-28;
+        flex-direction: column;
+
+        .td {
+            border-bottom: none;
+        }
+
+        &.card {
+            overflow: unset;
+            border-radius: $spacing-medium;
+            border: 1px solid $gray-primary;
+            padding: $spacing-large;
+        }
+
+    }
+}
+
+    .pageheader-flex-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        align-self: stretch;
+
+        .pageheader-flex-items {
+            display: flex;
+            justify-content: space-between;
+            gap: auto;;
+            align-items: center;
+            align-self: stretch;
+        }
+    }

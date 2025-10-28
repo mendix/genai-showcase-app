@@ -29527,6 +29527,219 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: none;
 }
 
+.traces-page-content-container {
+  min-height: -webkit-fill-available;
+  min-height: -moz-available;
+  display: flex;
+  justify-content: center;
+}
+.traces-page-content-container .traces-container--overview {
+  width: 90%;
+  max-width: 1600px;
+  margin: 44px;
+  flex-direction: column;
+}
+.traces-page-content-container .traces-container--overview .td {
+  border-bottom: none;
+}
+.traces-page-content-container .traces-container--overview.card {
+  overflow: unset;
+  border-radius: 16px;
+  border: 1px solid #e7e7e9;
+  padding: 24px;
+}
+
+.pageheader-flex-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+}
+.pageheader-flex-container .pageheader-flex-items {
+  display: flex;
+  justify-content: space-between;
+  gap: auto;
+  align-items: center;
+  align-self: stretch;
+}
+
+.widget-datagrid-export-alert {
+  background-color: rgb(255, 255, 255);
+  border-radius: 4px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  padding: 54px;
+  min-width: 200px;
+  max-width: 378px;
+  width: 100%;
+  position: relative;
+}
+.widget-datagrid-export-alert-cancel {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.widget-datagrid-export-alert-cancel.btn {
+  display: flex;
+  padding: 4px;
+}
+.widget-datagrid-export-alert-cancel.btn:focus-visible {
+  outline: 1px solid #264ae5;
+}
+.widget-datagrid-export-alert-message {
+  color: rgb(38, 74, 229);
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.widget-datagrid-export-alert-failed .widget-datagrid-export-progress-indicator {
+  background-color: rgb(227, 63, 78);
+}
+
+.btn.mx-button.btn-border-primary {
+  color: #264ae5;
+  border: 1px solid #264ae5;
+  background-color: transparent;
+}
+.btn.mx-button.btn-border-primary.disabled {
+  background-color: transparent;
+  border: 1px solid #264ae5;
+  cursor: default;
+}
+.btn.mx-button.btn-border-primary:hover {
+  background-color: #e7e7e9;
+  border: 1px solid #264ae5;
+}
+.btn.mx-button.btn-border-primary:hover, .btn.mx-button.btn-border-primary:active, .btn.mx-button.btn-border-primary:focus {
+  color: #264ae5;
+}
+
+.mx-link.link-bold {
+  font-weight: 600;
+  line-height: 150%;
+}
+
+.tooltip-container-col-2 {
+  width: 370px;
+  display: grid;
+  grid-template-columns: 30% 69%;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 8px;
+}
+
+.tooltip-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 8px;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tooltip-container {
+  max-width: 230px;
+  display: inline-flex;
+  justify-content: center;
+  padding: 8px;
+}
+
+.tooltip-text {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.tooltip-img {
+  max-width: 24px;
+  max-height: 24px;
+  flex-shrink: 0;
+}
+
+.tooltip-row-text-icon {
+  height: 20px;
+}
+
+.tooltip-icon {
+  max-width: 14px;
+  max-height: 20px;
+  flex-shrink: 0;
+}
+
+.tooltip-info-icon {
+  margin: 0;
+  padding: 0;
+}
+.tooltip-info-icon img {
+  height: 16px;
+  width: 16px;
+}
+
+/* Alignment */
+.row-left-aligned {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-flow: row;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.row-text-img, .tooltip-row-text-icon {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Sizes */
+.unset-img-width {
+  width: 16px;
+}
+
+/* Text */
+.text-600--12 {
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.text-400--12 {
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.traces-segmented-control {
+  height: fit-content;
+  border: 1px solid #ced0d3;
+  border-radius: 6px;
+  padding: 2px;
+  width: fit-content;
+  background-color: #f8f8f8;
+}
+.traces-segmented-control .btn.btn-default {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: #0a1325;
+}
+.traces-segmented-control .btn.btn-default.disabled {
+  background-color: transparent !important;
+  cursor: default;
+}
+.traces-segmented-control .btn.btn-default:hover {
+  background-color: #e7e7e9;
+}
+
 /* Card Colors */
 /* Label Colors */
 .layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a img {
