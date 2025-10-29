@@ -27929,6 +27929,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   visibility: visible;
 }
 
+/* Text */
 .text-break-word {
   word-break: break-word;
 }
@@ -27946,6 +27947,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   line-height: 1;
 }
 
+/* Custom Spacing */
 .spacing-inner-top-smaller {
   padding-top: 4px;
 }
@@ -27966,6 +27968,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-top: 4px;
 }
 
+/* Custom Div */
 .flexbox-space-between {
   display: flex !important;
   justify-content: space-between;
@@ -27984,6 +27987,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: flex-start;
 }
 
+/* Custom Alert */
 .alert-danger-text {
   margin-bottom: 24px;
 }
@@ -27995,14 +27999,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   color: #e33f4e;
 }
 
-.border-right {
-  border-right: 2px;
-}
-
-.width-full {
-  width: 100%;
-}
-
+/* Alignment */
 .row-left-aligned {
   display: flex;
   align-items: center;
@@ -28022,26 +28019,54 @@ input[type=checkbox].three-state-checkbox + .control-label {
   white-space: nowrap;
 }
 
-/* Sizes */
+/* Custom Font */
+.font-size-small {
+  font-size: 12px;
+}
+
+.font-size-medium {
+  font-size: 16px;
+}
+
+.font-weight-normal {
+  font-weight: 400;
+}
+
+.font-weight-semibold {
+  font-weight: 600;
+}
+
+/* Custom Width */
+.width-full {
+  width: 100%;
+}
+
+.w306 {
+  width: 25.5rem;
+}
+
 .unset-img-width {
   width: 16px;
 }
 
-/* Font Weight */
-.text--600 {
-  font-weight: 600;
-}
-
-.text--400 {
-  font-weight: 400;
-}
-
-/* Divider */
+/* Custom Borders */
 .divider {
   width: auto;
   height: 1px;
   border-bottom: 1px solid #0a1325;
-  margin: 0 8px 0 8px;
+}
+
+.border-right {
+  border-right: 2px;
+}
+
+/* Overflow */
+.overflow-unset {
+  overflow: unset;
+}
+
+.overflow-y-auto {
+  overflow-y: auto !important;
 }
 
 .accordion-chat-sources .widget-accordion-group {
@@ -28078,12 +28103,42 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border: 1px solid #264ae5;
   cursor: default;
 }
-.btn.mx-button.btn-border-primary:hover {
-  background-color: #e7e7e9;
+.btn.mx-button.btn-border-primary:hover, .btn.mx-button.btn-border-primary:active, .btn.mx-button.btn-border-primary:focus {
+  color: #fff;
+  background-color: #264ae5;
   border: 1px solid #264ae5;
 }
-.btn.mx-button.btn-border-primary:hover, .btn.mx-button.btn-border-primary:active, .btn.mx-button.btn-border-primary:focus {
-  color: #264ae5;
+
+.btn.mx-button.btn-text-default {
+  color: #0a1325;
+  border: 1px solid transparent;
+  background-color: transparent;
+}
+.btn.mx-button.btn-text-default.disabled {
+  background-color: transparent;
+  border: 1px solid transparent;
+  cursor: default;
+}
+.btn.mx-button.btn-text-default:hover, .btn.mx-button.btn-text-default:active, .btn.mx-button.btn-text-default:focus {
+  color: #0a1325;
+  background-color: #e7e7e9;
+  border: 1px solid transparent;
+}
+
+.btn.mx-button.btn-text-danger {
+  color: #e33f4e;
+  border: 1px solid transparent;
+  background-color: transparent;
+}
+.btn.mx-button.btn-text-danger.disabled {
+  background-color: transparent;
+  border: none;
+  cursor: default;
+}
+.btn.mx-button.btn-text-danger:hover, .btn.mx-button.btn-text-danger:active, .btn.mx-button.btn-text-danger:focus {
+  color: #fff;
+  background-color: #e33f4e;
+  border: 1px solid #e33f4e;
 }
 
 .mx-link.link-bold {
@@ -28123,16 +28178,17 @@ input[type=checkbox].three-state-checkbox + .control-label {
   z-index: 50;
 }
 
-.w306 {
-  width: 25.5rem;
-}
-
-.overflow-unset {
-  overflow: unset;
-}
-
-.overflow-y-auto {
-  overflow-y: auto !important;
+.filter-card {
+  border-radius: 8px;
+  border: 1px solid #ced0d3;
+  background: #fff;
+  display: flex;
+  padding: 16px;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 48px;
+  align-self: stretch;
+  flex-wrap: wrap;
 }
 
 .chat-loading-wrapper {
@@ -28589,6 +28645,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   min-height: -moz-available;
   display: flex;
   justify-content: center;
+  margin: 0 auto;
 }
 .traces-page-content-container .traces-container--overview {
   width: 90%;
@@ -28796,6 +28853,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   align-items: flex-start;
   align-self: stretch;
   justify-content: space-between;
+  font-weight: 400;
 }
 .convui-tooltip .mx-link {
   font-weight: normal;
@@ -28854,12 +28912,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .tooltip-header {
   gap: 0;
   padding-left: 8px;
-}
-
-.tooltip-text {
-  text-align: left;
-  font-size: 12px;
-  font-weight: 500;
 }
 
 .tooltip-img {

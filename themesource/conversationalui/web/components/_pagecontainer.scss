@@ -6,12 +6,14 @@
     min-height: -moz-available;
     display: flex;
     justify-content: center;
+    margin: 0 auto;
 
     .traces-container--overview {
         width: 90%;
         max-width: 1600px;
         margin: $spacing-medium + $size-28;
         flex-direction: column;
+        
 
         .td {
             border-bottom: none;
@@ -22,6 +24,7 @@
             border-radius: $spacing-medium;
             border: 1px solid $gray-primary;
             padding: $spacing-large;
+            
         }
 
     }

@@ -16,6 +16,7 @@
         align-items: flex-start;
         align-self: stretch;
         justify-content: space-between;
+        font-weight: 400;
     }
 
     .mx-link {
@@ -81,12 +82,6 @@
     padding-left: $spacing-small;
 }
 
-
-.tooltip-text {
-    text-align: left;
-    font-size: 12px;
-    font-weight: 500;
-}
 
 .tooltip-img {
     max-width: 24px;

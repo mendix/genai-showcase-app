@@ -1,3 +1,5 @@
+@import "../../../../theme/web/custom-variables.scss";
+@import "../../../atlas_core/web/_variables.scss";
 .chat-card--full-height {
     height: 100%;
 }
@@ -30,15 +32,15 @@
     z-index: 50;
 }
 
-.w306 {
-    width: 25.5rem;;
+.filter-card {
+    border-radius: 8px;
+    border: 1px solid $border-color-default;
+    background: $bg-color-secondary;
+    display: flex;
+    padding: $spacing-medium;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 48px;
+    align-self: stretch;
+    flex-wrap: wrap;
 }
-
-.overflow-unset {
-    overflow: unset;
-}
-
-.overflow-y-auto {
-    overflow-y: auto !important;
-}
-

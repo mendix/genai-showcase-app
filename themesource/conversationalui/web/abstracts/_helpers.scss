@@ -11,6 +11,7 @@
   }
 }
 
+/* Text */
 .text-break-word {
   word-break: break-word;
 }
@@ -28,6 +29,7 @@
   line-height: 1;
 }
 
+/* Custom Spacing */
 .spacing-inner-top-smaller {
   padding-top: $spacing-smaller;
 }
@@ -48,6 +50,7 @@
   margin-top: $spacing-smaller;
 }
 
+/* Custom Div */
 .flexbox-space-between {
   display: flex !important;
   justify-content: space-between;
@@ -66,6 +69,7 @@
   justify-content: flex-start;
 }
 
+/* Custom Alert */
 .alert-danger-text {
   margin-bottom: $spacing-large;
 
@@ -79,53 +83,72 @@
   }
 }
 
-.border-right{
-  border-right: 2px;
+
+/* Alignment */
+.row-left-aligned {
+  display: flex;
+  align-items: center;
+  gap: $spacing-small;
+  flex-flow: row;
+  justify-content: flex-start;
+  text-align: left;
 }
 
+.row-text-img {
+  display: flex;
+  align-items: center;
+  gap: 6px;            
+  max-height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* Custom Font */
+.font-size-small {
+  font-size: 12px;
+}
+
+.font-size-medium {
+  font-size: 16px;
+}
+
+.font-weight-normal {
+  font-weight: 400;
+}
+
+.font-weight-semibold {
+  font-weight: 600;
+}
+
+/* Custom Width */
 .width-full {
   width: 100%;
 }
 
-.row-left-aligned {
-    display: flex;
-    align-items: center;
-    gap: $spacing-small;
-    flex-flow: row;
-    justify-content: flex-start;
-    text-align: left;
+.w306 {
+  width: 25.5rem;;
 }
 
-.row-text-img {
-    display: flex;
-    align-items: center;
-    gap: 6px;            
-    max-height: 24px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-/* Sizes */
 .unset-img-width { 
-    width: 16px;
+  width: 16px;
 }
 
-/* Font Weight */
-.text--600 {
-    font-weight: 600;
-}
-
-.text--400 {
-    font-weight: 400;
-}
-
-/* Divider */
+/* Custom Borders */
 .divider {
-    width: auto;
-    height: 1px;
-    border-bottom: 1px solid $font-color-default;
-    margin: 0 $spacing-small 0 $spacing-small;
+  width: auto;
+  height: 1px;
+  border-bottom: 1px solid $font-color-default;
 }
 
+.border-right {
+  border-right: 2px;
+}
 
+/* Overflow */
+.overflow-unset {
+  overflow: unset;
+}
+
+.overflow-y-auto {
+  overflow-y: auto !important;
+}
