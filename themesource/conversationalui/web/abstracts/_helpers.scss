@@ -85,3 +85,41 @@
 .width-full {
   width: 100%;
 }
+
+.row-left-aligned {
+    display: flex;
+    align-items: center;
+    gap: $spacing-small;
+    flex-flow: row;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.row-text-img {
+    display: flex;
+    align-items: center;
+    gap: 6px;            
+    max-height: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* Sizes */
+.unset-img-width { 
+    width: 16px;
+}
+
+/* Text */
+.text-600--12 {
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.text-400--12 {
+    font-weight: 400;
+    font-size: 12px; 
+}
+
+

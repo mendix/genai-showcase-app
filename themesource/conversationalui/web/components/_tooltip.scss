@@ -1,0 +1,62 @@
+@import '../../../../theme/web/custom-variables';
+
+// 2 column tooltip
+.tooltip-container-col-2 {
+    width: 370px;
+    display: grid;
+    grid-template-columns: 30% 69%;
+    gap: $spacing-small;
+    align-items: flex-start;
+    padding:  $spacing-small;
+}
+
+.tooltip-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    text-align: left;
+    gap: 8px;
+    word-wrap: break-word; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+// tooltip
+.tooltip-container {
+    max-width: 230px;
+    display: inline-flex;
+    justify-content: center;
+    padding:  $spacing-small;
+}
+
+.tooltip-text {
+    text-align: left;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.tooltip-img {
+    max-width: 24px;
+    max-height: 24px;
+    flex-shrink: 0;
+}
+
+.tooltip-row-text-icon {
+    @extend .row-text-img;
+    height: 20px;
+}
+
+.tooltip-icon {
+    max-width: 14px;
+    max-height: 20px;
+    flex-shrink: 0;
+}
+
+.tooltip-info-icon {
+    margin: 0;
+    padding: 0;
+    img {
+        height: 16px;
+        width: 16px;
+    }
+}
