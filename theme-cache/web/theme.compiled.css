@@ -27933,10 +27933,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   word-break: break-word;
 }
 
-.spacing-inner-top-smaller {
-  padding-top: 4px;
-}
-
 .text-clamp--2-lines {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -27948,6 +27944,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .line-height--1 {
   line-height: 1;
+}
+
+.spacing-inner-top-smaller {
+  padding-top: 4px;
 }
 
 .spacing-inner-left-20 {
@@ -28012,7 +28012,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   text-align: left;
 }
 
-.row-text-img, .tooltip-row-text-icon {
+.row-text-img, .tooltip-row-text-icon, .tooltip-header {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -28027,15 +28027,21 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 16px;
 }
 
-/* Text */
-.text-600--12 {
+/* Font Weight */
+.text--600 {
   font-weight: 600;
-  font-size: 12px;
 }
 
-.text-400--12 {
+.text--400 {
   font-weight: 400;
-  font-size: 12px;
+}
+
+/* Divider */
+.divider {
+  width: auto;
+  height: 1px;
+  border-bottom: 1px solid #0a1325;
+  margin: 0 8px 0 8px;
 }
 
 .accordion-chat-sources .widget-accordion-group {
@@ -28776,15 +28782,64 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: 100%;
 }
 
-.tooltip-container-col-2 {
-  width: 370px;
+/* tooltip basic styling */
+.convui-tooltip .widget-tooltip-content {
+  position: relative;
+  z-index: 100;
+  text-align: unset;
+  word-break: break-word;
+  background-color: white;
+  border-radius: 4px;
+  color: #0a1325;
+  font-size: 12px;
+  line-height: 200%;
+  align-items: flex-start;
+  align-self: stretch;
+  justify-content: space-between;
+}
+.convui-tooltip .mx-link {
+  font-weight: normal;
+  line-height: 1.7857142863;
+}
+
+/* tooltip adjustment for version */
+/* use in combination with .tooltip-col */
+.tooltip-container-version {
+  width: 350px;
   display: grid;
   grid-template-columns: 30% 69%;
+  padding: 2px 8px 4px 8px;
   gap: 8px;
+}
+
+/* tooltip adjustment for token */
+.tooltip-container-token {
+  display: flex;
+  justify-content: space-between;
   align-items: flex-start;
+  align-self: stretch;
+  gap: 8px;
+  padding: 8px;
+}
+.tooltip-container-token .tooltip-col {
+  flex-direction: unset;
+  overflow: auto;
+}
+
+/* tooltip adjustment for tools */
+.tooltip-container-tools {
+  padding: 0 8px 8px 8px;
+}
+
+/* tooltip adjustment text only */
+.tooltip-container {
+  max-width: 230px;
+  display: inline-flex;
+  justify-content: center;
   padding: 8px;
 }
 
+/* tooltip components */
 .tooltip-col {
   display: flex;
   flex-direction: column;
@@ -28796,11 +28851,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   text-overflow: ellipsis;
 }
 
-.tooltip-container {
-  max-width: 230px;
-  display: inline-flex;
-  justify-content: center;
-  padding: 8px;
+.tooltip-header {
+  gap: 0;
+  padding-left: 8px;
 }
 
 .tooltip-text {
@@ -28817,6 +28870,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .tooltip-row-text-icon {
   height: 20px;
+  padding-top: 4px;
 }
 
 .tooltip-icon {
