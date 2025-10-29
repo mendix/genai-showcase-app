@@ -27947,7 +27947,32 @@ input[type=checkbox].three-state-checkbox + .control-label {
   line-height: 1;
 }
 
+/* Custom Font */
+.font-size-small {
+  font-size: 12px;
+}
+
+.font-size-medium {
+  font-size: 16px;
+}
+
+.font-weight-normal {
+  font-weight: 400;
+}
+
+.font-weight-semibold {
+  font-weight: 600;
+}
+
 /* Custom Spacing */
+.spacing-inner-none {
+  padding: 0;
+}
+
+.spacing-inner-top-smallest {
+  padding-top: 2px;
+}
+
 .spacing-inner-top-smaller {
   padding-top: 4px;
 }
@@ -28017,23 +28042,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-/* Custom Font */
-.font-size-small {
-  font-size: 12px;
-}
-
-.font-size-medium {
-  font-size: 16px;
-}
-
-.font-weight-normal {
-  font-weight: 400;
-}
-
-.font-weight-semibold {
-  font-weight: 600;
 }
 
 /* Custom Width */
@@ -28676,6 +28684,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
   gap: auto;
   align-items: center;
   align-self: stretch;
+}
+
+.plan-container {
+  display: flex;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 16px 24px;
+  align-self: stretch;
+  flex-wrap: wrap;
 }
 
 .btn-chat-popup {

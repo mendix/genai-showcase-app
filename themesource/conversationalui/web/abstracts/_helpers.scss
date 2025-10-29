@@ -29,7 +29,31 @@
   line-height: 1;
 }
 
+/* Custom Font */
+.font-size-small {
+  font-size: 12px;
+}
+
+.font-size-medium {
+  font-size: 16px;
+}
+
+.font-weight-normal {
+  font-weight: 400;
+}
+
+.font-weight-semibold {
+  font-weight: 600;
+}
+
 /* Custom Spacing */
+.spacing-inner-none {
+  padding: 0;
+}
+
+.spacing-inner-top-smallest {
+  padding-top: $spacing-smallest;
+}
 .spacing-inner-top-smaller {
   padding-top: $spacing-smaller;
 }
@@ -83,7 +107,6 @@
   }
 }
 
-
 /* Alignment */
 .row-left-aligned {
   display: flex;
@@ -102,22 +125,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-/* Custom Font */
-.font-size-small {
-  font-size: 12px;
-}
-
-.font-size-medium {
-  font-size: 16px;
-}
-
-.font-weight-normal {
-  font-weight: 400;
-}
-
-.font-weight-semibold {
-  font-weight: 600;
 }
 
 /* Custom Width */
