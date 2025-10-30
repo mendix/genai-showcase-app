@@ -45,17 +45,20 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 	private final IMendixObject __RequestMapping;
 	private final openaiconnector.proxies.RequestMapping RequestMapping;
 	private final java.lang.String Request_Json;
+	private final java.lang.String Architecture;
 
 	public RequestMapping_ManipulateJson(
 		IContext context,
 		IMendixObject _requestMapping,
-		java.lang.String _request_Json
+		java.lang.String _request_Json,
+		java.lang.String _architecture
 	)
 	{
 		super(context);
 		this.__RequestMapping = _requestMapping;
 		this.RequestMapping = _requestMapping == null ? null : openaiconnector.proxies.RequestMapping.initialize(getContext(), _requestMapping);
 		this.Request_Json = _request_Json;
+		this.Architecture = _architecture;
 	}
 
 	@java.lang.Override
@@ -230,9 +233,9 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
         case tool:
         	setToolChoiceTool();
             break;
-        case any:
-        	setToolChoiceAny();
-            break;
+        case any: 			
+        	setToolChoiceAny();					
+			break;
         //auto and none work out of the box
         case auto:
         	break;
@@ -248,12 +251,15 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 	//"any" choice can only be used once at the first iteration to prevent infinity loops
 	private void setToolChoiceAny() throws CoreException {
 		if(FunctionMappingImpl.getToolCallMessages(getRequest(RequestMapping),getContext()).size() == 0) {
+			if (Architecture != null && Architecture.toLowerCase().contains("openai")) {
             ((ObjectNode) rootNode).put("tool_choice", "required");
-    	}
+			}
+		}
     	else {
     		((ObjectNode) rootNode).remove("tool_choice");
     	}
 	}
+	
 	
 	private void setToolChoiceTool() throws CoreException {
 		// Add ToolChoice Tool if it has not yet been called in a previous iteration

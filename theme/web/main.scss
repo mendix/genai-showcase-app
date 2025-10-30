@@ -5,6 +5,7 @@ $brand-aws: #EC7211;
 $brand-pgvector: #C6D92F; 
 $brand-mxgenai: #146FF4;  
 $brand-openai: #0078D4;
+$brand-mistral: #FA500F;
 
 /* Card Colors */
 $light-grey-2: #F2F2F3;
@@ -21,6 +22,8 @@ $light-orange: #EC7211;
 /* Label Colors */
 $label-bg-bedrock: #FFEAC3;
 $label-color-bedrock: #A05700;
+$label-bg-mistral: #fad08c;
+$label-color-mistral: #872702;
 $label-bg-mxcloudgenai: #DCEEFE;
 $label-color-mxcloudgenai: #0006AB;
 $label-bg-all: #E2E0FC;
@@ -67,6 +70,10 @@ $label-color-pgvector: #076407;
 
 .bg-mxgenai {
     background-color: $brand-mxgenai !important;
+}
+
+.bg-mistral {
+    background-color: $brand-mistral !important;
 }
 
 .bg-pgvector {
@@ -210,7 +217,7 @@ $label-color-pgvector: #076407;
 .arrow-position {
     position: fixed;
     bottom: 5vh;
-    right: 8vw;
+    right: 10vw;
 }
 
 //SemanticSearchMultiColumn
@@ -311,7 +318,7 @@ $label-color-pgvector: #076407;
 
 .card-base {
   width: 345px;
-  height: 178px;
+  height: 190px;
   flex-shrink: 0;
   border-radius: 8px;
   border-top: 1px grey;
@@ -362,7 +369,8 @@ $label-color-pgvector: #076407;
 
     .card-title {
       @extend .text-break--2-lines;
-      height: 46px;
+      height: 52px;
+      margin-bottom: 0
     }
 
     .card-description {
@@ -413,6 +421,16 @@ $label-color-pgvector: #076407;
 
 /* --------------------------------------- Card Labels -----------------------------------*/
 
+.card-label-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  max-width: 260px;
+  margin: 0 auto;
+  overflow: hidden; 
+  max-height: calc((50px * 2) + 2px);
+}
+
 .card-label-base {
   display: inline-flex;
   display: flex;
@@ -428,6 +446,7 @@ $label-color-pgvector: #076407;
 
 .container-img-label {
   display: flex;
+  height: 52px;
   align-items: start;
   justify-content: space-between; 
 }
@@ -465,6 +484,12 @@ $label-color-pgvector: #076407;
   @extend .card-label-base;
   background: $label-bg-all;
   color: $label-color-all;
+}
+
+.card-label-mistral {
+  @extend .card-label-base;
+  background: $label-bg-mistral;
+  color: $label-color-mistral;
 }
 
 .card-label-pgvector {
