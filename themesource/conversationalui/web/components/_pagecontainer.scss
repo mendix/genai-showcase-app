@@ -1,3 +1,4 @@
+@import "../../../datawidgets/web/variables.scss";
 @import '../../../../theme/web/custom-variables';
 @import '../traceability-variables.scss';
 
@@ -5,34 +6,23 @@
     min-height: -webkit-fill-available;
     min-height: -moz-available;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     margin: 0 auto;
 
     .traces-container--overview {
         flex-direction: column;
         width: 90%;
         max-width: 1600px;
-        height: 88vh;
+        height: 89vh;
         margin: 0;
-        
-        // For 1440p and smaller
-        @media (max-width: 1440px) {
-            height: 60vh;
-        }
-
-        // For Full HD (1080p)
-        @media (max-width: 1920px) {
-            max-width: 1600px;
-            height: 82vh;
-        }
 
         .td {
             border-bottom: none;
         }
 
         &.card {
-            overflow: unset;
+            overflow: auto;
             border-radius: $spacing-medium;
             border: 1px solid $gray-primary;
             padding: $spacing-large;

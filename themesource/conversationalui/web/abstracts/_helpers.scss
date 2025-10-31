@@ -131,7 +131,7 @@
     align-items: center;
     justify-content: flex-start;
     text-align: left;
-    gap: $spacing-small;
+    gap: $spacing-smaller;
     flex-flow: row wrap; // makes items wrap when needed
     word-break: break-word;
 }
@@ -139,7 +139,7 @@
 .row-right-aligned {
   display: flex;
   align-items: center;
-  gap: $spacing-small;
+  gap: $spacing-smaller;
   flex-flow: row wrap;
   justify-content: flex-end;
   text-align: left;
@@ -149,7 +149,7 @@
 .row-text-img {
   display: flex;
   align-items: center;
-  gap: 6px;            
+  gap: $spacing-smaller;            
   //max-height: 24px;
   overflow: hidden;
   text-overflow: ellipsis;

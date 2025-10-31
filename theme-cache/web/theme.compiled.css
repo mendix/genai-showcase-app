@@ -28149,7 +28149,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   align-items: center;
   justify-content: flex-start;
   text-align: left;
-  gap: 8px;
+  gap: 4px;
   flex-flow: row wrap;
   word-break: break-word;
 }
@@ -28157,7 +28157,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .row-right-aligned {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   flex-flow: row wrap;
   justify-content: flex-end;
   text-align: left;
@@ -28167,7 +28167,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .row-text-img, .tooltip-row-text-icon, .tooltip-header {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -28351,6 +28351,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background: #fff;
   display: flex;
   padding: 16px;
+  margin: 16px 0;
   align-items: flex-start;
   align-content: flex-start;
   gap: 48px;
@@ -28888,33 +28889,22 @@ input[type=checkbox].three-state-checkbox + .control-label {
   min-height: -webkit-fill-available;
   min-height: -moz-available;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   margin: 0 auto;
 }
 .traces-page-content-container .traces-container--overview {
   flex-direction: column;
   width: 90%;
   max-width: 1600px;
-  height: 88vh;
+  height: 89vh;
   margin: 0;
-}
-@media (max-width: 1440px) {
-  .traces-page-content-container .traces-container--overview {
-    height: 60vh;
-  }
-}
-@media (max-width: 1920px) {
-  .traces-page-content-container .traces-container--overview {
-    max-width: 1600px;
-    height: 82vh;
-  }
 }
 .traces-page-content-container .traces-container--overview .td {
   border-bottom: none;
 }
 .traces-page-content-container .traces-container--overview.card {
-  overflow: unset;
+  overflow: auto;
   border-radius: 16px;
   border: 1px solid #e7e7e9;
   padding: 24px;
