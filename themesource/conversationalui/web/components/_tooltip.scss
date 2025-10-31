@@ -55,7 +55,6 @@
     padding: 0 $spacing-small $spacing-small $spacing-small;
 }
 
-
 /* tooltip adjustment text only */
 .tooltip-container {
     max-width: 230px;
@@ -82,24 +81,12 @@
     padding-left: $spacing-small;
 }
 
-
-.tooltip-img {
-    max-width: 24px;
-    max-height: 24px;
-    flex-shrink: 0;
-}
-
 .tooltip-row-text-icon {
     @extend .row-text-img;
     height: 20px;
     padding-top: $spacing-smaller;
 }
 
-.tooltip-icon {
-    max-width: 14px;
-    max-height: 20px;
-    flex-shrink: 0;
-}
 
 .tooltip-info-icon {
     margin: 0;

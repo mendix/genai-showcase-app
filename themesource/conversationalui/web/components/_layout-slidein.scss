@@ -1,0 +1,86 @@
+@import '../../../../theme/web/custom-variables';
+/* reference for animation */
+@keyframes scale-in-right {
+  0% {
+    transform: scaleX(0.5) translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleX(1) translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scale-out-right {
+  0% {
+    transform: scaleX(1) translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(0.5) translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Slide-in styling - used in Layout_SlideIn*/
+.layout-slidein {
+    position: fixed;
+    top: 0 !important;
+    right: 0;
+    bottom: 0;
+    left: unset !important;
+    width: 32vw !important;
+    max-width: 600px;
+    height: 100vh !important;
+    padding: $spacing-small;
+    z-index: 999;
+    background: #fff;
+    box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.10), 0 3px 14px 0 rgba(0, 0, 0, 0.08), 0 5px 5px 0 rgba(0, 0, 0, 0.15);
+    animation: scale-in-right 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) forwards;
+
+    .mx-window-content {
+        pointer-events: all;
+        height: 100%;
+        border-radius: 0;
+        border: none;
+        background: inherit;
+        box-shadow: none;
+        padding: 0;
+
+        .mx-window-header {
+            min-height: 0;
+            background: none !important;
+            cursor: auto;
+            border: none;
+            padding: 0;
+
+            h4 {
+                display: none;
+            }
+
+            button.close {
+                display: none;
+            }
+        }
+
+        .mx-window-body {
+            overflow: hidden;
+            padding: $spacing-medium;
+            height: calc(100% - 50px);
+
+            .mx-placeholder {
+                height: 100%;
+            }
+        }
+    }
+
+}
+
+/* define animation of the close button */
+.slidein-close {
+    animation: scale-out-right 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+.layout-slidein + .mx-underlay {
+    display: none !important;
+}

@@ -42,6 +42,18 @@
             background-color: $btn-default-bg-hover;
             border: 1px solid transparent;
         }
+
+        &.btn-small {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        img {
+            height: 22px;
+            width: 22px;
+            margin: 1px;
+        }
     }
 }
 

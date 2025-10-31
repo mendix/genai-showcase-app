@@ -28045,17 +28045,26 @@ input[type=checkbox].three-state-checkbox + .control-label {
   line-clamp: 2;
 }
 
+.text-clamp--1-lines {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  line-clamp: 1;
+}
+
 .line-height--1 {
   line-height: 1;
 }
 
 /* Custom Font */
-.font-size-small {
-  font-size: 12px;
-}
-
 .font-size-medium {
   font-size: 16px;
+}
+
+.font-size-larger {
+  font-size: 20px;
 }
 
 .font-weight-normal {
@@ -28089,6 +28098,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .spacing-outer-bottom-medium {
   margin-bottom: 16px;
+}
+
+.spacing-outer-bottom-large {
+  margin-bottom: 24px;
 }
 
 .spacing-outer-top-smaller {
@@ -28136,6 +28149,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
   text-align: left;
 }
 
+.row-right-aligned {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-flow: row;
+  justify-content: flex-end;
+  text-align: left;
+}
+
 .row-text-img, .tooltip-row-text-icon, .tooltip-header {
   display: flex;
   align-items: center;
@@ -28144,6 +28166,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.grid-icon-text {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 24px 80%;
+  gap: 8px;
 }
 
 /* Custom Width */
@@ -28159,11 +28188,24 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 16px;
 }
 
+/* Custom image and icon sizes */
+.img--24-24 {
+  max-width: 24px;
+  max-height: 24px;
+  flex-shrink: 0;
+}
+
+.img--14-20 {
+  max-width: 14px;
+  max-height: 20px;
+  flex-shrink: 0;
+}
+
 /* Custom Borders */
 .divider {
   width: auto;
-  height: 1px;
-  border-bottom: 1px solid #0a1325;
+  border-bottom: 1px solid #e7e7e9;
+  padding: 8px 0 8px 0;
 }
 
 .border-right {
@@ -28233,6 +28275,16 @@ input[type=checkbox].three-state-checkbox + .control-label {
   color: #0a1325;
   background-color: #e7e7e9;
   border: 1px solid transparent;
+}
+.btn.mx-button.btn-text-default.btn-small {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn.mx-button.btn-text-default img {
+  height: 22px;
+  width: 22px;
+  margin: 1px;
 }
 
 .btn.mx-button.btn-text-danger {
@@ -28689,6 +28741,83 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: 100%;
 }
 
+/* reference for animation */
+@keyframes scale-in-right {
+  0% {
+    transform: scaleX(0.5) translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleX(1) translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes scale-out-right {
+  0% {
+    transform: scaleX(1) translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(0.5) translateX(100%);
+    opacity: 0;
+  }
+}
+/* Slide-in styling - used in Layout_SlideIn*/
+.layout-slidein {
+  position: fixed;
+  top: 0 !important;
+  right: 0;
+  bottom: 0;
+  left: unset !important;
+  width: 32vw !important;
+  max-width: 600px;
+  height: 100vh !important;
+  padding: 8px;
+  z-index: 999;
+  background: #fff;
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.1), 0 3px 14px 0 rgba(0, 0, 0, 0.08), 0 5px 5px 0 rgba(0, 0, 0, 0.15);
+  animation: scale-in-right 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+}
+.layout-slidein .mx-window-content {
+  pointer-events: all;
+  height: 100%;
+  border-radius: 0;
+  border: none;
+  background: inherit;
+  box-shadow: none;
+  padding: 0;
+}
+.layout-slidein .mx-window-content .mx-window-header {
+  min-height: 0;
+  background: none !important;
+  cursor: auto;
+  border: none;
+  padding: 0;
+}
+.layout-slidein .mx-window-content .mx-window-header h4 {
+  display: none;
+}
+.layout-slidein .mx-window-content .mx-window-header button.close {
+  display: none;
+}
+.layout-slidein .mx-window-content .mx-window-body {
+  overflow: hidden;
+  padding: 16px;
+  height: calc(100% - 50px);
+}
+.layout-slidein .mx-window-content .mx-window-body .mx-placeholder {
+  height: 100%;
+}
+
+/* define animation of the close button */
+.slidein-close {
+  animation: scale-out-right 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+
+.layout-slidein + .mx-underlay {
+  display: none !important;
+}
+
 .chat-listview-stylingless.mx-listview ul > li, .chat-listview-stylingless.mx-listview ol > li {
   cursor: default;
   border: none;
@@ -29036,21 +29165,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding-left: 8px;
 }
 
-.tooltip-img {
-  max-width: 24px;
-  max-height: 24px;
-  flex-shrink: 0;
-}
-
 .tooltip-row-text-icon {
   height: 20px;
   padding-top: 4px;
-}
-
-.tooltip-icon {
-  max-width: 14px;
-  max-height: 20px;
-  flex-shrink: 0;
 }
 
 .tooltip-info-icon {
