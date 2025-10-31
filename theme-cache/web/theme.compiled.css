@@ -28092,8 +28092,20 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding-left: 20px;
 }
 
+.spacing-outer-bottom-smallest {
+  margin-bottom: 2px;
+}
+
+.spacing-outer-bottom-smaller {
+  margin-bottom: 4px;
+}
+
 .spacing-outer-bottom-6 {
   margin-bottom: 6px;
+}
+
+.spacing-outer-bottom-small {
+  margin-bottom: 8px;
 }
 
 .spacing-outer-bottom-medium {

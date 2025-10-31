@@ -1,3 +1,4 @@
+@import "../../../datawidgets/web/variables.scss";
 @import "../../../../theme/web/custom-variables.scss";
 @import "../../../atlas_core/web/_variables.scss";
 .hover-trigger {
@@ -72,8 +73,20 @@
   padding-left: 20px;
 }
 
+.spacing-outer-bottom-smallest {
+  margin-bottom: $spacing-smallest;
+}
+
+.spacing-outer-bottom-smaller {
+  margin-bottom: $spacing-smaller;
+}
+
 .spacing-outer-bottom-6 {
   margin-bottom: 6px;
+}
+
+.spacing-outer-bottom-small {
+  margin-bottom: $spacing-small;
 }
 
 .spacing-outer-bottom-medium {
