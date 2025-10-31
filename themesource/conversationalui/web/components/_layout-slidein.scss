@@ -29,8 +29,9 @@
     right: 0;
     bottom: 0;
     left: unset !important;
-    width: 32vw !important;
-    max-width: 600px;
+    width: 40vw !important;
+    min-width: 400px;
+    max-width: 700px;
     height: 100vh !important;
     padding: $spacing-small;
     z-index: 999;
@@ -73,7 +74,6 @@
             }
         }
     }
-
 }
 
 /* define animation of the close button */

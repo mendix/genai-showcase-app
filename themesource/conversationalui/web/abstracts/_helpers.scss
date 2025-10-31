@@ -162,8 +162,7 @@
 .row-text-img {
   display: flex;
   align-items: center;
-  gap: $spacing-smaller;            
-  //max-height: 24px;
+  gap: $spacing-smaller;    
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -173,7 +172,7 @@
 .grid-icon-text {
   display: grid;
   align-items: center;
-  grid-template-columns: 24px 80%;
+  grid-template-columns: 24px 200px;
   gap: $spacing-small;
 }
 
