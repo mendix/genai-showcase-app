@@ -28907,19 +28907,50 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .traces-page-content-container .traces-container--overview {
   flex-direction: column;
-  width: 90%;
   max-width: 1600px;
   height: 89vh;
   margin: 0;
+  padding: 24px;
+}
+@media (max-width: 1600px) {
+  .traces-page-content-container .traces-container--overview {
+    max-width: 1200px;
+    height: 85vh;
+  }
+}
+@media (min-width: 1920px) {
+  .traces-page-content-container .traces-container--overview {
+    max-width: 1600px;
+    height: 89vh;
+  }
 }
 .traces-page-content-container .traces-container--overview .td {
   border-bottom: none;
 }
 .traces-page-content-container .traces-container--overview.card {
-  overflow: auto;
   border-radius: 16px;
   border: 1px solid #e7e7e9;
-  padding: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.traces-page-content-container .traces-container--overview.card * {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+.traces-page-content-container .traces-container--overview .card-content-scroll {
+  flex: 1 1 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  margin: 16px 0;
+}
+.traces-page-content-container .traces-container--overview .card-header {
+  overflow-y: auto;
+  flex-direction: row;
 }
 
 .pageheader-flex-container {

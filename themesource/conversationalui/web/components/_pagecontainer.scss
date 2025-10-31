@@ -12,21 +12,54 @@
 
     .traces-container--overview {
         flex-direction: column;
-        width: 90%;
         max-width: 1600px;
         height: 89vh;
         margin: 0;
+        padding: $spacing-large;
+        
+
+        @media (max-width: 1600px) {
+            max-width: 1200px;
+            height: 85vh;
+        }
+
+        @media (min-width: 1920px) {
+            max-width: 1600px;
+            height: 89vh;
+        }
 
         .td {
             border-bottom: none;
         }
 
         &.card {
-            overflow: auto;
             border-radius: $spacing-medium;
             border: 1px solid $gray-primary;
-            padding: $spacing-large;
+            overflow: hidden;            
+            display: flex;
+            flex-direction: column;
+            max-width: 100%;             
+            box-sizing: border-box;
+
+            * {
+                word-break: break-word;
+                overflow-wrap: break-word;
+                white-space: normal; 
+            }
             
+        }
+
+        .card-content-scroll {
+            flex: 1 1 0;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            margin: $spacing-medium 0;
+        }
+
+        .card-header {
+            overflow-y: auto;
+            flex-direction: row;
         }
     }
 }
