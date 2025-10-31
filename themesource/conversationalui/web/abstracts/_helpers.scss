@@ -84,9 +84,12 @@
   margin-bottom: $spacing-large;
 }
 
-
 .spacing-outer-top-smaller {
   margin-top: $spacing-smaller;
+}
+
+.spacing-outer-top-large {
+  margin-top: $spacing-large;
 }
 
 /* Custom Div */
@@ -124,31 +127,34 @@
 
 /* Alignment */
 .row-left-aligned {
-  display: flex;
-  align-items: center;
-  gap: $spacing-small;
-  flex-flow: row;
-  justify-content: flex-start;
-  text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    gap: $spacing-small;
+    flex-flow: row wrap; // makes items wrap when needed
+    word-break: break-word;
 }
 
 .row-right-aligned {
   display: flex;
   align-items: center;
   gap: $spacing-small;
-  flex-flow: row;
+  flex-flow: row wrap;
   justify-content: flex-end;
   text-align: left;
+  word-break: break-word;
 }
 
 .row-text-img {
   display: flex;
   align-items: center;
   gap: 6px;            
-  max-height: 24px;
+  //max-height: 24px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  word-break: break-word;  
 }
 
 .grid-icon-text {
