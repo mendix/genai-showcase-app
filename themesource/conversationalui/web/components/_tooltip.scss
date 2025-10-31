@@ -5,7 +5,6 @@
 .convui-tooltip {
     .widget-tooltip-content {
         position: relative;
-        z-index: 100;
         text-align: unset;
         word-break: break-word;
         background-color: white;
@@ -17,6 +16,8 @@
         align-self: stretch;
         justify-content: space-between;
         font-weight: 400;
+        max-height: 48vh;
+        overflow-y: auto;
     }
 
     .mx-link {
@@ -33,6 +34,7 @@
     grid-template-columns: 30% 69%;
     padding:  $spacing-smallest $spacing-small  $spacing-smaller $spacing-small;
     gap: $spacing-small;
+    overflow-x: hidden;
 }
 
 /* tooltip adjustment for token */

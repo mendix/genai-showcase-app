@@ -28036,6 +28036,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
   word-break: break-word;
 }
 
+.text-clamp--5-lines {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  line-clamp: 5;
+}
+
 .text-clamp--2-lines {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -28931,7 +28940,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .traces-page-content-container .traces-container--overview.card {
   border-radius: 16px;
   border: 1px solid #e7e7e9;
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   flex-direction: column;
   max-width: 100%;
@@ -28950,7 +28959,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin: 16px 0;
 }
 .traces-page-content-container .traces-container--overview .card-header {
-  overflow-y: auto;
   flex-direction: row;
 }
 
@@ -29147,7 +29155,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 /* tooltip basic styling */
 .convui-tooltip .widget-tooltip-content {
   position: relative;
-  z-index: 100;
   text-align: unset;
   word-break: break-word;
   background-color: white;
@@ -29159,6 +29166,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
   align-self: stretch;
   justify-content: space-between;
   font-weight: 400;
+  max-height: 48vh;
+  overflow-y: auto;
 }
 .convui-tooltip .mx-link {
   font-weight: normal;
@@ -29173,6 +29182,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   grid-template-columns: 30% 69%;
   padding: 2px 8px 4px 8px;
   gap: 8px;
+  overflow-x: hidden;
 }
 
 /* tooltip adjustment for token */
