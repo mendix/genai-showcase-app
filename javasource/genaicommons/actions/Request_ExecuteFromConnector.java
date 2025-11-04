@@ -148,6 +148,7 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 			if(trace != null) {
 				trace.setTrace_Usage(usage);
 				trace.setOutput(response.getResponseText());
+				trace.setSystemPrompt(Request.getSystemPrompt());
 			}
 		}
 	}
@@ -170,6 +171,7 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 		Trace trace = Request.getRequest_Trace();
 		if(trace != null) {
 			ModelSpan modelSpan = new ModelSpan(getContext());
+			modelSpan.setInput(Microflows.trace_GetModelSpanInput(getContext(),trace)); 
 			modelSpan.setSpanId(UUID.randomUUID().toString());
 			modelSpan.setSpan_Trace(trace);
 			modelSpan.setIsError(true);

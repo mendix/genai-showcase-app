@@ -268,8 +268,12 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		}
 		
 		if(Tool.getClass().equals(genaicommons.proxies.KnowledgeBaseRetrieval.class)){
+			genaicommons.proxies.KnowledgeBaseRetrieval mxKnowledgeBaseRetrieval = (genaicommons.proxies.KnowledgeBaseRetrieval)Tool;
 			KnowledgeBaseSpan knowledgeBaseSpan = new KnowledgeBaseSpan(getContext());
 			setToolSpanAttributes(knowledgeBaseSpan, trace, executionTime, response);
+			knowledgeBaseSpan.setMinimumSimilarity(mxKnowledgeBaseRetrieval.getMinimumSimilarity());
+			knowledgeBaseSpan.setMaxNumberOfResults(mxKnowledgeBaseRetrieval.getMaxNumberOfResults());
+			knowledgeBaseSpan.setArchitecture(mxKnowledgeBaseRetrieval.getKnowledgeBaseRetrieval_DeployedKnowledgeBase().getArchitecture());
 			return knowledgeBaseSpan;
 			
 		} else {
@@ -288,6 +292,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		toolSpan.setStartTime(new Date(startTime));
 		toolSpan.set_ToolCallId(ToolCall.getToolCallId());
 		toolSpan.setToolName(Tool.getName());
+		toolSpan.setToolDescription(Tool.getDescription());
 		toolSpan.setEndTime(new Date(System.currentTimeMillis()));			
 		toolSpan.setInput(getArgumentsString());
 		toolSpan.setDurationMilliseconds((int) executionTime);
