@@ -28300,6 +28300,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   overflow-y: auto !important;
 }
 
+.overflow-hidden {
+  overflow: hidden !important;
+}
+
 .accordion-chat-sources .widget-accordion-group {
   background: transparent;
   border-bottom: none;
@@ -28875,8 +28879,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background: #fff;
   box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.1), 0 3px 14px 0 rgba(0, 0, 0, 0.08), 0 5px 5px 0 rgba(0, 0, 0, 0.15);
   animation: scale-in-right 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 .layout-slidein .mx-window-content {
   pointer-events: all;
@@ -28885,7 +28888,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border: none;
   background: inherit;
   box-shadow: none;
-  padding: 0;
 }
 .layout-slidein .mx-window-content .mx-window-header {
   min-height: 0;
@@ -28901,12 +28903,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: none;
 }
 .layout-slidein .mx-window-content .mx-window-body {
-  overflow: hidden;
-  padding: 16px;
+  overflow-y: auto;
+  padding: 8px;
   height: calc(100% - 50px);
 }
 .layout-slidein .mx-window-content .mx-window-body .mx-placeholder {
   height: 100%;
+}
+.layout-slidein .mx-window-content .mx-placeholder > .mx-dataview > .mx-dataview-content {
+  overflow: hidden;
 }
 
 /* define animation of the close button */
@@ -28984,24 +28989,24 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
   justify-content: center;
   margin: 0 auto;
-  padding: 24px 0;
+  padding: 32px 0;
 }
 .traces-page-content-container .traces-content {
   flex-direction: column;
   width: 80vw;
   max-width: 1800px;
   max-height: 100%;
-  padding-bottom: 32px;
 }
 .traces-page-content-container .traces-content .card {
   border-radius: 16px;
-  border: 1px solid #e7e7e9;
+  border: 1px solid #e7e7e9 !important;
   overflow: visible;
   display: flex;
   flex-direction: column;
   max-width: 100%;
   height: 100%;
   box-sizing: border-box;
+  margin-bottom: 0;
 }
 .traces-page-content-container .traces-content .card * {
   word-break: break-word;
@@ -29047,48 +29052,49 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 16px 0;
 }
 
-.container-clickable {
+.text-container-clickable {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2px 8px !important;
+  padding: 12px !important;
+  padding-right: 0 !important;
   border-radius: 4px;
   border: 1px solid #e7e7e9;
-  margin-top: 4px;
+  margin: 4px 0;
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
-.container-clickable .btn-wrapper {
-  min-width: 5em;
-  display: flex;
-  justify-content: flex-end;
-}
-.container-clickable .mx-text {
+.text-container-clickable .mx-text {
   margin: 0;
   line-height: 1.428571429;
+  flex: 1 1 auto;
+  min-width: 0;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  white-space: normal;
 }
-.container-clickable .btn {
+.text-container-clickable .btn-wrapper {
+  min-width: 3em;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.text-container-clickable .btn {
   transition: all 0.2s ease-in-out;
   border: none;
   background-color: transparent;
   color: #0a1325;
-  height: 44px;
+  height: calc(12px + 2 * 16px);
+  visibility: hidden;
+  cursor: pointer;
 }
-.container-clickable .btn.btn-hover {
+.text-container-clickable .btn.btn-hover {
   visibility: hidden;
 }
-.container-clickable:hover {
+.text-container-clickable:hover {
   background-color: #e7e7e9;
 }
-.container-clickable:hover .btn.btn-hover {
-  visibility: visible;
-}
-
-.hover-trigger .show-on-hover {
-  display: none;
-  visibility: hidden;
-}
-.hover-trigger:hover .show-on-hover {
-  display: inline;
+.text-container-clickable:hover .btn {
   visibility: visible;
 }
 

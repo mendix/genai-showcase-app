@@ -1,3 +1,4 @@
+@import "../../../datawidgets/web/variables.scss";
 @import '../../../../theme/web/custom-variables';
 /* reference for animation */
 @keyframes scale-in-right {
@@ -37,8 +38,7 @@
     background: #fff;
     box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.10), 0 3px 14px 0 rgba(0, 0, 0, 0.08), 0 5px 5px 0 rgba(0, 0, 0, 0.15);
     animation: scale-in-right 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) forwards;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
 
     .mx-window-content {
         pointer-events: all;
@@ -47,7 +47,6 @@
         border: none;
         background: inherit;
         box-shadow: none;
-        padding: 0;
 
         .mx-window-header {
             min-height: 0;
@@ -66,14 +65,18 @@
         }
 
         .mx-window-body {
-            overflow: hidden;
-            padding: $spacing-medium;
+            overflow-y: auto;
+            padding: $spacing-small;
             height: calc(100% - 50px);
 
             .mx-placeholder {
                 height: 100%;
             }
         }
+
+        .mx-placeholder > .mx-dataview > .mx-dataview-content {
+          overflow: hidden;
+      }
     }
 }
 
