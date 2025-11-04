@@ -32,16 +32,17 @@
     width: 40vw !important;
     min-width: 400px;
     max-width: 700px;
-    height: 100vh !important;
-    padding: $spacing-small;
+    height: 100% !important;
     z-index: 999;
     background: #fff;
     box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.10), 0 3px 14px 0 rgba(0, 0, 0, 0.08), 0 5px 5px 0 rgba(0, 0, 0, 0.15);
     animation: scale-in-right 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) forwards;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     .mx-window-content {
         pointer-events: all;
-        height: 100%;
+        max-height: 100%;
         border-radius: 0;
         border: none;
         background: inherit;

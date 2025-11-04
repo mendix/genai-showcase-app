@@ -51,6 +51,10 @@
 
 /* Custom Font */
 
+.font-size-small {
+  font-size: 12px;
+}
+
 .font-size-medium {
   font-size: 16px;
 }
@@ -75,8 +79,21 @@
 .spacing-inner-top-smallest {
   padding-top: $spacing-smallest;
 }
+
 .spacing-inner-top-smaller {
   padding-top: $spacing-smaller;
+}
+
+.spacing-inner-top-small {
+  padding-top: $spacing-small;
+}
+
+.spacing-inner-top-medium {
+  padding-top: $spacing-medium;
+}
+
+.spacing-inner-bottom-small {
+  padding-top: $spacing-small;
 }
 
 .spacing-inner-left-20 {
@@ -109,6 +126,14 @@
 
 .spacing-outer-top-smaller {
   margin-top: $spacing-smaller;
+}
+
+.spacing-outer-top-smaller {
+  margin-top: $spacing-small;
+}
+
+.spacing-outer-top-medium {
+  margin-top: $spacing-medium;
 }
 
 .spacing-outer-top-large {
@@ -163,6 +188,21 @@
   flex-flow: row wrap; 
   word-break: break-word;
 }
+//allows only one row
+
+.flex-right {
+    float: right;
+}
+
+.row-text-img {
+  display: flex;
+  align-items: center;
+  gap: $spacing-smaller;    
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-word;  
+}
 
 .row-right-aligned {
   display: flex;
@@ -174,15 +214,18 @@
   word-break: break-word;
 }
 
-//allows only one row
-.row-text-img {
+.col-left-aligned {
   display: flex;
-  align-items: center;
-  gap: $spacing-smaller;    
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  word-break: break-word;  
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.col-right-aligned {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .grid-icon-text {
@@ -228,7 +271,8 @@
 .divider {
   width: auto;
   border-bottom: 1px solid $gray-primary;
-  padding: $spacing-small 0;
+  padding: 0;
+  margin: 0;
 }
 
 .border-right {
