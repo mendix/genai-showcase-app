@@ -1,0 +1,19 @@
+.badge {
+    display: inline-block;
+    height: 16px;
+    padding: 0 4px;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+
+}
+
+.blue-badge {
+    @extend .badge;
+    border: 1px solid var(--color-light-blue-5, #47A9FF);
+    background: var(--color-light-blue-1, #DCEEFE);
+}

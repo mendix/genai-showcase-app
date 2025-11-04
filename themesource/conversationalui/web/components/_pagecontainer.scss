@@ -1,3 +1,4 @@
+@import "../../../atlas_core/web/_variables.scss";
 @import "../../../datawidgets/web/variables.scss";
 @import '../../../../theme/web/custom-variables';
 @import '../traceability-variables.scss';
@@ -6,31 +7,17 @@
     min-height: -webkit-fill-available;
     min-height: -moz-available;
     display: flex;
-    align-items: center;
     justify-content: center;
     margin: 0 auto;
+    padding: 2vh 0;
 
-    .traces-container--overview {
+    .traces-content {
         flex-direction: column;
-        max-width: 1600px;
-        height: 89vh;
+        width: 80vw;
+        max-width: 1800px;
+        max-height: 92vh;
         margin: 0;
         padding: $spacing-large;
-        
-
-        @media (max-width: 1600px) {
-            max-width: 1200px;
-            height: 85vh;
-        }
-
-        @media (min-width: 1920px) {
-            max-width: 1600px;
-            height: 89vh;
-        }
-
-        .td {
-            border-bottom: none;
-        }
 
         &.card {
             border-radius: $spacing-medium;
@@ -46,12 +33,12 @@
                 overflow-wrap: break-word;
                 white-space: normal; 
             }
-            
         }
 
         .card-content-scroll {
             flex: 1 1 0;
             overflow-y: auto;
+            overflow-x: hidden;
             display: flex;
             flex-direction: column;
             margin: $spacing-medium 0;
@@ -87,4 +74,5 @@
     gap: 16px 24px;
     align-self: stretch;
     flex-wrap: wrap;
-}
+    padding: $spacing-medium 0;
+} 

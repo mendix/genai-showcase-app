@@ -1,6 +1,7 @@
 @import "../../../datawidgets/web/variables.scss";
 @import "../../../../theme/web/custom-variables.scss";
 @import "../../../atlas_core/web/_variables.scss";
+
 .hover-trigger {
   .show-on-hover {
     visibility: hidden; // Initially hide the hover content
@@ -114,6 +115,10 @@
   margin-top: $spacing-large;
 }
 
+.spacing-outer-right-smaller {
+  margin-right: $spacing-smaller;
+}
+
 /* Custom Div */
 .flexbox-space-between {
   display: flex !important;
@@ -148,14 +153,15 @@
 }
 
 /* Alignment */
+// allows wrapping to next row
 .row-left-aligned {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    text-align: left;
-    gap: $spacing-smaller;
-    flex-flow: row wrap; // makes items wrap when needed
-    word-break: break-word;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  gap: $spacing-smaller;
+  flex-flow: row wrap; 
+  word-break: break-word;
 }
 
 .row-right-aligned {
@@ -168,6 +174,7 @@
   word-break: break-word;
 }
 
+//allows only one row
 .row-text-img {
   display: flex;
   align-items: center;
@@ -188,6 +195,11 @@
 /* Custom Width */
 .width-full {
   width: 100%;
+}
+
+/* Custom Width */
+.height-full {
+  height: 100%;
 }
 
 
@@ -216,7 +228,7 @@
 .divider {
   width: auto;
   border-bottom: 1px solid $gray-primary;
-  padding: $spacing-small 0 $spacing-small 0;
+  padding: $spacing-small 0;
 }
 
 .border-right {
