@@ -23,6 +23,7 @@ import genaicommons.impl.MxLogger;
 import genaicommons.proxies.Argument;
 import genaicommons.proxies.ArgumentInput;
 import genaicommons.proxies.KnowledgeBaseSpan;
+import genaicommons.proxies.MCPSpan;
 import genaicommons.proxies.ModelSpan;
 import genaicommons.proxies.ToolSpan;
 import genaicommons.proxies.Trace;
@@ -267,7 +268,13 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 			return toolSpan;
 		}
 		
-		if(Tool.getClass().equals(genaicommons.proxies.KnowledgeBaseRetrieval.class)){
+		if (Tool.getMCPServerName()!= null) {
+			MCPSpan mxMCPSpan = new MCPSpan(getContext());
+			setToolSpanAttributes(mxMCPSpan, trace, executionTime, response);
+			mxMCPSpan.setServerName(Tool.getMCPServerName());
+			return mxMCPSpan;
+		}
+		else if(Tool.getClass().equals(genaicommons.proxies.KnowledgeBaseRetrieval.class)){
 			genaicommons.proxies.KnowledgeBaseRetrieval mxKnowledgeBaseRetrieval = (genaicommons.proxies.KnowledgeBaseRetrieval)Tool;
 			KnowledgeBaseSpan knowledgeBaseSpan = new KnowledgeBaseSpan(getContext());
 			setToolSpanAttributes(knowledgeBaseSpan, trace, executionTime, response);
