@@ -40,6 +40,7 @@
 .combobox-selection {
     display: flex;
     flex-grow: 1;
+
     .mx-image {
         height: $font-size-large;
         margin-right: $spacing-small;
@@ -59,19 +60,19 @@
     }
 }
 
-.combo-model-selection {
-    min-width: 360px;
-    z-index: 50;
-    .model-selection{
+.combobox-model-selection {
+    display: flex;
+    flex-grow: 1;
+
+    .model-selection {
         display: flex;
         align-items: center;
         height: max-content;
-    }
-    .mx-image {
-        height: $font-size-large;
-        margin-right: $spacing-small;
-    }
     
+        .mx-image-viewer {
+            margin-right: $spacing-small;
+        }
+    }
 }
 
 .widget-combobox .widget-combobox-input-container {
@@ -131,4 +132,20 @@
             }
         }
     }
+}
+
+.img--22-22 {
+    max-width: 22px;
+    max-height: 22px;
+    flex-shrink: 0;
+}
+
+.row-left-aligned {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  gap: $spacing-smaller;
+  flex-flow: row wrap; 
+  word-break: break-word;
 }
