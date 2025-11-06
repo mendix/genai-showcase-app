@@ -42,7 +42,8 @@
             overflow-x: hidden;
             display: flex;
             flex-direction: column;
-            margin: $spacing-medium 0;
+            margin-bottom: $spacing-medium;
+            margin-top: 0;
         }
 
         .card-header {
@@ -57,7 +58,6 @@
     align-items: flex-start;
     gap: 8px;
     align-self: stretch;
-    margin-bottom: $spacing-small;
 
     .pageheader-flex-items {
         display: flex;

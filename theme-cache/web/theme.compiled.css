@@ -28880,35 +28880,40 @@ input[type=checkbox].three-state-checkbox + .control-label {
   box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.1), 0 3px 14px 0 rgba(0, 0, 0, 0.08), 0 5px 5px 0 rgba(0, 0, 0, 0.15);
   animation: scale-in-right 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 .layout-slidein .mx-window-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   pointer-events: all;
-  max-height: 100%;
-  border-radius: 0;
   border: none;
+  border-radius: 0;
   background: inherit;
   box-shadow: none;
+  padding: 8px;
+  /* Scrollable content area */
+}
+.layout-slidein .mx-window-content .slidein-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #fff;
+}
+.layout-slidein .mx-window-content .slidein-body {
+  flex: 1;
+  max-height: 85vh;
+  overflow-y: auto;
 }
 .layout-slidein .mx-window-content .mx-window-header {
-  min-height: 0;
-  background: none !important;
-  cursor: auto;
-  border: none;
-  padding: 0;
+  display: none;
 }
 .layout-slidein .mx-window-content .mx-window-header h4 {
   display: none;
 }
 .layout-slidein .mx-window-content .mx-window-header button.close {
   display: none;
-}
-.layout-slidein .mx-window-content .mx-window-body {
-  overflow-y: auto;
-  padding: 8px;
-  height: calc(100% - 50px);
-}
-.layout-slidein .mx-window-content .mx-window-body .mx-placeholder {
-  height: 100%;
 }
 .layout-slidein .mx-window-content .mx-placeholder > .mx-dataview > .mx-dataview-content {
   overflow: hidden;
@@ -29020,7 +29025,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  margin: 16px 0;
+  margin-bottom: 16px;
+  margin-top: 0;
 }
 .traces-page-content-container .traces-content .card-header {
   flex-direction: row;
@@ -29032,7 +29038,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   align-items: flex-start;
   gap: 8px;
   align-self: stretch;
-  margin-bottom: 8px;
 }
 .pageheader-flex-container .pageheader-flex-items {
   display: flex;
@@ -29361,12 +29366,12 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .tree-duration-position-parent {
   position: absolute;
-  left: 330px;
+  left: 360px;
 }
 
 .tree-duration-position {
   position: absolute;
-  left: 350px;
+  left: 380px;
 }
 
 .grid-deployed-model {
