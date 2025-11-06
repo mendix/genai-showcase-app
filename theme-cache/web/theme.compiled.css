@@ -28090,7 +28090,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 /* Custom Spacing */
 .spacing-inner-none {
-  padding: 0;
+  padding: 0 !important;
 }
 
 .spacing-inner-top-smallest {
@@ -28244,7 +28244,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .grid-icon-text {
   display: grid;
   align-items: center;
-  grid-template-columns: 24px 200px;
+  grid-template-columns: 24px minmax(200px, 500px);
   gap: 8px;
 }
 
@@ -28986,6 +28986,17 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .listview-hide-on-empty.mx-listview > ul > li.mx-listview-empty {
   display: none;
+  margin: 0;
+  padding: 0;
+}
+
+.listview-remove-spacing.mx-listview {
+  margin: 0;
+  padding: 0;
+}
+.listview-remove-spacing.mx-listview > ul {
+  margin: 0;
+  padding: 0;
 }
 
 .traces-page-content-container {
@@ -29298,7 +29309,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: grid;
   grid-template-columns: 30% 69%;
   padding: 2px 8px 4px 8px;
-  gap: 8px;
+  gap: 4px;
   overflow-x: hidden;
 }
 
@@ -29308,7 +29319,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: space-between;
   align-items: flex-start;
   align-self: stretch;
-  gap: 8px;
+  gap: 24px;
   padding: 8px;
 }
 .tooltip-container-token .tooltip-col {
@@ -29319,14 +29330,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
 /* tooltip adjustment for tools */
 .tooltip-container-tools {
   padding: 0 8px 8px 8px;
+  min-width: 48px;
 }
 
 /* tooltip adjustment text only */
 .tooltip-container {
-  max-width: 230px;
+  max-width: 250px;
   display: inline-flex;
   justify-content: center;
-  padding: 8px;
+  padding: 2px;
 }
 
 /* tooltip components */
@@ -29335,15 +29347,17 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  gap: 8px;
+  gap: 4px;
   word-wrap: break-word;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin: 0;
 }
 
 .tooltip-header {
   gap: 0;
   padding-left: 8px;
+  padding-bottom: 4px;
 }
 
 .tooltip-row-text-icon {

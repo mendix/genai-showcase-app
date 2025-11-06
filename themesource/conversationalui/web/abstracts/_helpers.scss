@@ -73,7 +73,7 @@
 
 /* Custom Spacing */
 .spacing-inner-none {
-  padding: 0;
+  padding: 0 !important;
 }
 
 .spacing-inner-top-smallest {
@@ -231,7 +231,7 @@
 .grid-icon-text {
   display: grid;
   align-items: center;
-  grid-template-columns: 24px 200px;
+  grid-template-columns: 24px minmax(200px, 500px);
   gap: $spacing-small;
 }
 

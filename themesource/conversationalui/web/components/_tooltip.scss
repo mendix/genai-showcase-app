@@ -33,7 +33,7 @@
     display: grid;
     grid-template-columns: 30% 69%;
     padding:  $spacing-smallest $spacing-small  $spacing-smaller $spacing-small;
-    gap: $spacing-small;
+    gap: $spacing-smaller;
     overflow-x: hidden;
 }
 
@@ -43,7 +43,7 @@
     justify-content: space-between;
     align-items: flex-start;
     align-self: stretch;
-    gap: $spacing-small;
+    gap: $spacing-large;
     padding: $spacing-small;
 
     .tooltip-col {
@@ -55,14 +55,15 @@
 /* tooltip adjustment for tools */
 .tooltip-container-tools {
     padding: 0 $spacing-small $spacing-small $spacing-small;
+    min-width: 48px;
 }
 
 /* tooltip adjustment text only */
 .tooltip-container {
-    max-width: 230px;
+    max-width: 250px;
     display: inline-flex;
     justify-content: center;
-    padding:  $spacing-small;
+    padding: $spacing-smallest;
 }
 
 /* tooltip components */
@@ -71,16 +72,18 @@
     flex-direction: column;
     align-items: flex-start; 
     text-align: left;
-    gap: $spacing-small;
+    gap: $spacing-smaller;
     word-wrap: break-word; 
     overflow: hidden;
     text-overflow: ellipsis;
+    margin: 0;
 }
 
 .tooltip-header {
     @extend .row-text-img;
     gap: 0;
     padding-left: $spacing-small;
+    padding-bottom: $spacing-smaller
 }
 
 .tooltip-row-text-icon {

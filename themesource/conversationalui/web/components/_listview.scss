@@ -72,5 +72,17 @@
 .listview-hide-on-empty.mx-listview {
     > ul > li.mx-listview-empty {
         display: none;
+         margin: 0;
+    padding: 0;
+    }
+}
+
+.listview-remove-spacing.mx-listview {
+    margin: 0;
+    padding: 0;
+
+    > ul {
+      margin: 0;
+      padding: 0;
     }
 }
