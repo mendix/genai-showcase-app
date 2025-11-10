@@ -17,3 +17,17 @@
     border: 1px solid var(--color-light-blue-5, #47A9FF);
     background: var(--color-light-blue-1, #DCEEFE);
 }
+
+.purple-badge {
+    @extend .badge;
+    border: 1px solid var(--color-light-purple-5, #845EFF);
+    background: var(--color-light-purple-1, #E2E0FC);
+}
+
+.filter-tag {
+    display: flex;
+    padding-left: var(--size-8, 8px);
+    align-items: center;
+    border-radius: var(--border-radius-9999, 9999px);
+    background: var(--color-light-grey-3, #E7E7E9);
+}
