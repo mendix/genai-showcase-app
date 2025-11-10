@@ -28773,6 +28773,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
   }
 }
 
+.combobox-filter-height .widget-combobox-input-container {
+  align-items: center;
+  justify-content: center;
+  height: 47.5px !important;
+  border-color: #ced0d3;
+}
+
 .layoutgrid--full-height {
   height: 100%;
 }

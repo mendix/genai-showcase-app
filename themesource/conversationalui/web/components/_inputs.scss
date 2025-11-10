@@ -132,3 +132,13 @@
         }
     }
 }
+
+.combobox-filter-height {
+    .widget-combobox-input-container {
+        align-items: center;
+        justify-content: center;
+        height: 47.5px !important;
+        border-color: $border-color-default;
+    }
+}
+
