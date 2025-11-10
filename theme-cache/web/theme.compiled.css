@@ -28054,7 +28054,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   line-clamp: 2;
 }
 
-.text-clamp--1-lines {
+.text-clamp--1-lines, .filter-tag .filter-text {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -28280,10 +28280,25 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .filter-tag {
   display: flex;
-  padding-left: var(--size-8, 8px);
+  width: fit-content;
+  align-items: flex-start;
+  align-self: stretch;
+  padding: 4px;
+  border-radius: 1000px;
+  background: #e7e7e9;
+}
+.filter-tag .filter-item {
+  display: flex;
   align-items: center;
-  border-radius: var(--border-radius-9999, 9999px);
-  background: var(--color-light-grey-3, #E7E7E9);
+  gap: 4px;
+  overflow: hidden;
+}
+.filter-tag .filter-text {
+  font-size: 12px;
+}
+.filter-tag .icon {
+  width: 12px;
+  float: right;
 }
 
 .btn.mx-button.btn-border-primary {
@@ -28386,7 +28401,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background: #fff;
   display: flex;
   padding: 16px;
-  margin: 16px 0;
+  margin: 24px 0 0;
   align-items: flex-start;
   align-content: flex-start;
   gap: 48px;
@@ -28651,6 +28666,20 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border-top: none;
 }
 
+.filter-gallery .widget-gallery-items {
+  padding: 16px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+.filter-gallery :where(.widget-gallery-fc-start, .widget-gallery-fc-middle, .widget-gallery-fc-end) {
+  min-height: 0px;
+}
+.filter-gallery :where(.widget-gallery-footer-controls) {
+  display: unset;
+}
+
 .responsive-image.mx-image-viewer {
   max-width: 14px;
   max-height: 14px;
@@ -28659,10 +28688,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .datetime-inputs-wrapper {
   display: flex;
   justify-content: flex-start;
+  gap: 2px;
 }
 .datetime-inputs-wrapper .time-input {
   display: unset;
-  max-width: 100px;
+  max-width: 120px;
   margin-left: -1px;
   margin-bottom: 0;
 }
@@ -28875,26 +28905,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: none !important;
 }
 
-.pop-up-footer-flex-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  align-self: stretch;
-  margin: 0;
-  padding: 20px 0 0;
-  text-align: left;
-  border-top: 1px solid #ced0d3;
-}
-.pop-up-footer-flex-container .pop-up-flex-items {
-  display: flex;
-  justify-content: space-between;
-  gap: auto;
-  flex-wrap: wrap;
-  align-items: center;
-  align-self: stretch;
-}
-
 .chat-listview-stylingless.mx-listview ul > li, .chat-listview-stylingless.mx-listview ol > li {
   cursor: default;
   border: none;
@@ -28979,7 +28989,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 80vw;
   min-width: 1200px;
   max-width: 1800px;
-  height: 90vh;
+  height: 89vh;
 }
 .traces-page-content-container .traces-content .card {
   border-radius: 16px;
@@ -29000,6 +29010,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   white-space: normal;
 }
 .traces-page-content-container .traces-content .card-content-scroll {
+  max-height: 100%;
   flex: 1 1 0;
   overflow-y: auto;
   overflow-x: hidden;
@@ -29093,6 +29104,24 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border: 1px solid #e7e7e9;
   margin: 4px 0;
   background-color: #f8f8f8;
+}
+
+.pop-up-footer-flex-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+  margin: 0;
+  text-align: left;
+}
+.pop-up-footer-flex-container .pop-up-flex-items {
+  display: flex;
+  justify-content: space-between;
+  gap: auto;
+  flex-wrap: wrap;
+  align-items: center;
+  align-self: stretch;
 }
 
 .btn-chat-popup {
@@ -29504,7 +29533,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: space-between;
   font-weight: 400;
   max-height: 48vh;
-  overflow-y: auto;
 }
 .convui-tooltip .mx-link {
   font-weight: normal;
@@ -29515,11 +29543,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
 /* use in combination with .tooltip-col */
 .tooltip-container-version {
   width: 350px;
+  max-height: 300px;
   display: grid;
   grid-template-columns: 30% 69%;
   padding: 2px 8px 4px 8px;
   gap: 4px;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /* tooltip adjustment for token */
@@ -29539,7 +29569,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 /* tooltip adjustment for tools */
 .tooltip-container-tools {
   padding: 0 8px 8px 8px;
-  min-width: 48px;
+  width: 17vw;
 }
 
 /* tooltip adjustment text only */

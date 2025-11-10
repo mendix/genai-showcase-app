@@ -1,12 +1,14 @@
+@import "../../../atlas_core/web/_variables.scss";
 @import "../../../../theme/web/custom-variables.scss";
 
 .datetime-inputs-wrapper {
     display: flex;
     justify-content: flex-start;
+    gap: 2px;
 
     .time-input {
         display: unset;
-        max-width: 100px;
+        max-width: 120px;
         margin-left: -1px;
         margin-bottom: 0;
     }

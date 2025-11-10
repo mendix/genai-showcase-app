@@ -1,3 +1,4 @@
+@import "../../../../theme/web/custom-variables.scss";
 .badge {
     display: inline-block;
     height: 16px;
@@ -26,8 +27,27 @@
 
 .filter-tag {
     display: flex;
-    padding-left: var(--size-8, 8px);
-    align-items: center;
-    border-radius: var(--border-radius-9999, 9999px);
-    background: var(--color-light-grey-3, #E7E7E9);
+    width: fit-content;
+    align-items: flex-start;
+    align-self: stretch;
+    padding: $spacing-smaller;
+    border-radius: 1000px;
+    background: $gray-primary;
+
+    .filter-item {
+        display: flex;
+        align-items: center;
+        gap: $spacing-smaller;    
+        overflow: hidden;
+    }
+
+    .filter-text {
+        @extend .text-clamp--1-lines;
+        font-size: 12px;
+    }
+
+    .icon {
+        width: 12px;
+        float: right;
+    }
 }

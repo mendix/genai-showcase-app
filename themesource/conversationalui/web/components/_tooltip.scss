@@ -17,7 +17,6 @@
         justify-content: space-between;
         font-weight: 400;
         max-height: 48vh;
-        overflow-y: auto;
     }
 
     .mx-link {
@@ -30,11 +29,14 @@
 /* use in combination with .tooltip-col */
 .tooltip-container-version {
     width: 350px;
+    max-height: 300px;
     display: grid;
     grid-template-columns: 30% 69%;
-    padding:  $spacing-smallest $spacing-small  $spacing-smaller $spacing-small;
+    padding: $spacing-smallest $spacing-small $spacing-smaller $spacing-small;
     gap: $spacing-smaller;
     overflow-x: hidden;
+    overflow-y: auto;
+
 }
 
 /* tooltip adjustment for token */
@@ -55,7 +57,7 @@
 /* tooltip adjustment for tools */
 .tooltip-container-tools {
     padding: 0 $spacing-small $spacing-small $spacing-small;
-    min-width: 48px;
+    width: 17vw;
 }
 
 /* tooltip adjustment text only */
