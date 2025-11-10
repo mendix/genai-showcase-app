@@ -28283,7 +28283,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: fit-content;
   align-items: flex-start;
   align-self: stretch;
-  padding: 4px;
+  padding: 4px 8px;
   border-radius: 1000px;
   background: #e7e7e9;
 }
