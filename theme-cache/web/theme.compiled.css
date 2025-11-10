@@ -28827,6 +28827,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
   text-overflow: ellipsis;
 }
 
+.text-heading-4 {
+  font-weight: 600;
+  font-size: 18px;
+}
+
 .badge-with-circle {
   display: flex;
   align-items: center;
