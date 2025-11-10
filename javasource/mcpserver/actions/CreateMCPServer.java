@@ -10,7 +10,6 @@
 package mcpserver.actions;
 
 import static java.util.Objects.requireNonNull;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.UserAction;
@@ -69,7 +68,7 @@ public class CreateMCPServer extends UserAction<IMendixObject>
 		
 		// Create request handler and McpServer object
 		McpServerRequestHandler mcpRequestHandler = new McpServerRequestHandler(
-				new ObjectMapper(), mcpServer,  "/" + Path + "/messages", "/" + Path + "/sse");
+				mcpServer,  "/" + Path + "/messages", "/" + Path + "/sse");
 		Core.addRequestHandler(Path + "/", mcpRequestHandler);
 
 		McpSyncServer server = McpServer.sync(mcpRequestHandler)

@@ -1,7 +1,8 @@
 package mcpserver.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import io.modelcontextprotocol.json.McpJsonMapper;
+import io.modelcontextprotocol.json.TypeRef;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.externalinterface.connector.RequestHandler;
@@ -36,6 +37,9 @@ import system.proxies.User;
 public class McpServerRequestHandler extends RequestHandler implements McpServerTransportProvider {
     
 	private static final MxLogger LOGGER = new mcpserver.impl.MxLogger(McpServerRequestHandler.class);
+	
+	/** Shared JSON mapper instance for MCP message serialization/deserialization */
+	private static final McpJsonMapper MAPPER = McpJsonMapper.getDefault();
 
     public static final String UTF_8 = "UTF-8";
 
@@ -53,9 +57,6 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
     public static final String ENDPOINT_EVENT_TYPE = "endpoint";
 
     public static final String DEFAULT_BASE_URL = "";
-    
-    /** JSON object mapper for serialization/deserialization */
-    private final ObjectMapper objectMapper;
 
     /** Base URL for the server transport */
     private final String baseUrl;
@@ -81,28 +82,23 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
     /**
      * Creates a new HttpServletSseServerTransportProvider instance with a custom SSE
      * endpoint.
-     * @param objectMapper The JSON object mapper to use for message
-     * serialization/deserialization
      * @param messageEndpoint The endpoint path where clients will send their messages
      * @param sseEndpoint The endpoint path where clients will establish SSE connections
      */
-    public McpServerRequestHandler(ObjectMapper objectMapper, mcpserver.proxies.McpServer mcpServer, String messageEndpoint,
+    public McpServerRequestHandler(mcpserver.proxies.McpServer mcpServer, String messageEndpoint,
                                                  String sseEndpoint) {
-        this(objectMapper, mcpServer, DEFAULT_BASE_URL, messageEndpoint, sseEndpoint);
+        this(mcpServer, DEFAULT_BASE_URL, messageEndpoint, sseEndpoint);
     }
 
     /**
      * Creates a new HttpServletSseServerTransportProvider instance with a custom SSE
      * endpoint.
-     * @param objectMapper The JSON object mapper to use for message
-     * serialization/deserialization
      * @param baseUrl The base URL for the server transport
      * @param messageEndpoint The endpoint path where clients will send their messages
      * @param sseEndpoint The endpoint path where clients will establish SSE connections
      */
-    public McpServerRequestHandler(ObjectMapper objectMapper, mcpserver.proxies.McpServer mcpServer, String baseUrl, String messageEndpoint,
+    public McpServerRequestHandler(mcpserver.proxies.McpServer mcpServer, String baseUrl, String messageEndpoint,
                                                  String sseEndpoint) {
-        this.objectMapper = objectMapper;
         this.baseUrl = baseUrl;
         this.messageEndpoint = messageEndpoint;
         this.sseEndpoint = sseEndpoint;
@@ -112,12 +108,10 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
     /**
      * Creates a new HttpServletSseServerTransportProvider instance with the default SSE
      * endpoint.
-     * @param objectMapper The JSON object mapper to use for message
-     * serialization/deserialization
      * @param messageEndpoint The endpoint path where clients will send their messages
      */
-    public McpServerRequestHandler(ObjectMapper objectMapper, String messageEndpoint, mcpserver.proxies.McpServer mcpServer, IContext iContext) {
-        this(objectMapper, mcpServer, messageEndpoint, DEFAULT_SSE_ENDPOINT);
+    public McpServerRequestHandler(String messageEndpoint, mcpserver.proxies.McpServer mcpServer, IContext iContext) {
+        this(mcpServer, messageEndpoint, DEFAULT_SSE_ENDPOINT);
     }
 
     @Override
@@ -242,7 +236,7 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
             response.setContentType(APPLICATION_JSON);
             response.setCharacterEncoding(UTF_8);
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            String jsonError = objectMapper.writeValueAsString(new McpError("Session ID missing in message endpoint"));
+            String jsonError = MAPPER.writeValueAsString(new McpError("Session ID missing in message endpoint"));
             PrintWriter writer = response.getWriter();
             writer.write(jsonError);
             writer.flush();
@@ -255,7 +249,7 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
             response.setContentType(APPLICATION_JSON);
             response.setCharacterEncoding(UTF_8);
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            String jsonError = objectMapper.writeValueAsString(new McpError("Session not found: " + sessionId));
+            String jsonError = MAPPER.writeValueAsString(new McpError("Session not found: " + sessionId));
             PrintWriter writer = response.getWriter();
             writer.write(jsonError);
             writer.flush();
@@ -270,7 +264,7 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
                 body.append(line);
             }
 
-            McpSchema.JSONRPCMessage message = McpSchema.deserializeJsonRpcMessage(objectMapper, body.toString());
+            McpSchema.JSONRPCMessage message = McpSchema.deserializeJsonRpcMessage(MAPPER, body.toString());
             // Process the message through the session's handle method
             session.handle(message).block(); // Block for Servlet compatibility
 
@@ -283,7 +277,7 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
                 response.setContentType(APPLICATION_JSON);
                 response.setCharacterEncoding(UTF_8);
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                String jsonError = objectMapper.writeValueAsString(mcpError);
+                String jsonError = MAPPER.writeValueAsString(mcpError);
                 PrintWriter writer = response.getWriter();
                 writer.write(jsonError);
                 writer.flush();
@@ -475,7 +469,7 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
         public Mono<Void> sendMessage(McpSchema.JSONRPCMessage message) {
             return Mono.fromRunnable(() -> {
                 try {
-                    String jsonText = objectMapper.writeValueAsString(message);
+                    String jsonText = MAPPER.writeValueAsString(message);
                     sendEvent(writer, MESSAGE_EVENT_TYPE, jsonText);
                     LOGGER.debug(String.format("Message sent to session %s", sessionId));
                 }
@@ -488,15 +482,15 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
         }
 
         /**
-         * Converts data from one type to another using the configured ObjectMapper.
+         * Converts data from one type to another using the McpJsonMapper utility class.
          * @param data The source data object to convert
          * @param typeRef The target type reference
          * @return The converted object of type T
          * @param <T> The target type
          */
         @Override
-        public <T> T unmarshalFrom(Object data, TypeReference<T> typeRef) {
-            return objectMapper.convertValue(data, typeRef);
+        public <T> T unmarshalFrom(Object data, TypeRef<T> typeRef) {
+            return MAPPER.convertValue(data, typeRef);
         }
 
         /**
