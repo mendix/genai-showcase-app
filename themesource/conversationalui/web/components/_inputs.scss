@@ -34,14 +34,16 @@
 .filter-date-input-wrapper {
     display: flex;
     flex-direction: column;
+    gap: 1rem;
     width: 100%;
+
 
     .filter-time-input,
     .filter-date-input {
         flex: 1;
         display: block;
         width: 100%;
-        margin-top: $spacing-smaller;
+									 
         margin-bottom: 0;
         height: 7rem;
         position: relative;
@@ -80,6 +82,7 @@
 .combobox-selection {
     display: flex;
     flex-grow: 1;
+
     .mx-image {
         height: $font-size-large;
         margin-right: $spacing-small;
@@ -99,19 +102,20 @@
     }
 }
 
-.combo-model-selection {
-    min-width: 360px;
-    z-index: 50;
-    .model-selection{
+.combobox-model-selection {
+    display: flex;
+    flex-grow: 1;
+
+    .model-selection {
         display: flex;
         align-items: center;
+        flex-wrap: nowrap;
         height: max-content;
+	 
+        .mx-image-viewer {
+            margin-right: $spacing-small;
+        }
     }
-    .mx-image {
-        height: $font-size-large;
-        margin-right: $spacing-small;
-    }
-    
 }
 
 .widget-combobox .widget-combobox-input-container {
@@ -181,4 +185,3 @@
         border-color: $border-color-default;
     }
 }
-
