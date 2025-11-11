@@ -29132,7 +29132,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
   align-items: flex-start;
   align-content: flex-start;
-  gap: 16px 24px;
+  gap: 32px;
   align-self: stretch;
   flex-wrap: wrap;
   padding: 16px 0;
