@@ -29141,6 +29141,12 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .text-container-clickable:hover .btn {
   visibility: visible;
 }
+.text-container-clickable .copied-img-container {
+  float: right;
+  align-items: center;
+  width: 3em;
+  padding: 8px;
+}
 
 .text-container-empty {
   display: flex;
