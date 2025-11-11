@@ -29145,7 +29145,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   float: right;
   align-items: center;
   width: 3em;
-  padding: 8px;
+  padding: 9px;
 }
 
 .text-container-empty {
