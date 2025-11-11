@@ -1,3 +1,5 @@
+@import "../../../../theme/web/custom-variables.scss";
+@import "../../../atlas_core/web/_variables.scss";
 .tree-width {
     width: 300px;
 }
@@ -10,4 +12,11 @@
 .tree-duration-position {
     position: absolute;
     left: 380px;
+}
+
+.tree-item-selected {
+    width: 250px;
+    //border-radius: 4px;
+    //border: 2px solid $brand-primary;
+    background: $gray-primary;
 }

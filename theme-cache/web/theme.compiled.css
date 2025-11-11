@@ -29633,6 +29633,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
   left: 380px;
 }
 
+.tree-item-selected {
+  width: 250px;
+  background: #e7e7e9;
+}
+
 .grid-deployed-model {
   display: grid;
   grid-template-columns: repeat(4, 1fr) 0.5fr 150px;
