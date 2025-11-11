@@ -15,8 +15,8 @@
 
     .date-input {
         display: unset;
-        max-width: 150px;
-        margin-left: $spacing-medium;
+        max-width: 120px;
+        margin-left: -1px;
         margin-bottom: 0;
     }
 
@@ -30,6 +30,47 @@
         margin-top: 0.5px;
     }
 }
+
+.filter-date-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+
+
+    .filter-time-input,
+    .filter-date-input {
+        flex: 1;
+        display: block;
+        width: 100%;
+        margin-bottom: 0;
+        height: 7rem;
+        position: relative;
+    }
+
+    .mx-compound-control {
+        .btn {
+            margin-left: -44px;
+            border: 1px solid transparent;
+            background: transparent;
+        }
+    }
+
+    .has-error {
+        position: relative;
+        height: 7rem;
+
+        .alert {
+            position: absolute;
+            width: 100%;
+            margin: 0;
+            line-height: 1;
+        }
+    }
+}
+
+
+
 
 .input-container {
     border-bottom: 1px solid $light-border-color;

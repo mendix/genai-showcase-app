@@ -28704,8 +28704,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .datetime-inputs-wrapper .date-input {
   display: unset;
-  max-width: 150px;
-  margin-left: 16px;
+  max-width: 120px;
+  margin-left: -1px;
   margin-bottom: 0;
 }
 .datetime-inputs-wrapper .mx-compound-control .btn {
@@ -28715,6 +28715,37 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .datetime-inputs-wrapper .has-error .alert {
   margin-top: 0.5px;
+}
+
+.filter-date-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+.filter-date-input-wrapper .filter-time-input,
+.filter-date-input-wrapper .filter-date-input {
+  flex: 1;
+  display: block;
+  width: 100%;
+  margin-bottom: 0;
+  height: 7rem;
+  position: relative;
+}
+.filter-date-input-wrapper .mx-compound-control .btn {
+  margin-left: -44px;
+  border: 1px solid transparent;
+  background: transparent;
+}
+.filter-date-input-wrapper .has-error {
+  position: relative;
+  height: 7rem;
+}
+.filter-date-input-wrapper .has-error .alert {
+  position: absolute;
+  width: 100%;
+  margin: 0;
+  line-height: 1;
 }
 
 .input-container {
