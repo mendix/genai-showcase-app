@@ -28206,6 +28206,12 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-shrink: 0;
 }
 
+.img--14-14 {
+  max-width: 14px;
+  max-height: 14px;
+  flex-shrink: 0;
+}
+
 /* Custom Borders */
 .divider {
   width: auto;
