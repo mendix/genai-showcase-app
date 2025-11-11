@@ -2,15 +2,17 @@
 
 /* Paddings */
 
-/* Remove all paddings */
-.spacing-inner-none {
-  padding: 0 !important;
-}
+/* Remove paddings */
+.spacing-inner-none { padding: 0 !important; }
+.spacing-inner-top-none { padding-top: 0 !important; }
+.spacing-inner-bottom-none { padding-bottom: 0 !important; }
+.spacing-inner-left-none { padding-left: 0 !important; }
+.spacing-inner-right-none { padding-right: 0 !important; }
 
 /* Top */
 .spacing-inner-top-smallest { padding-top: $spacing-smallest; }
 .spacing-inner-top-smaller  { padding-top: $spacing-smaller; }
-.spacing-inner-top-small    { padding-top: $spacing-small; }
+.spacing-inner-top-small    { padding-top: $spacing-small !important; }
 .spacing-inner-top-medium   { padding-top: $spacing-medium; }
 .spacing-inner-top-large    { padding-top: $spacing-large; }
 .spacing-inner-top-larger   { padding-top: $spacing-larger; }
@@ -41,10 +43,14 @@
 
 /* Margin */
 
-/* Remove  margin */
-.spacing-outer-none { margin: 0 !important; }
 
+/* Remove margins */
+.spacing-outer-none { margin: 0 !important; }
+.spacing-outer-top-none { margin-top: 0; }
 .spacing-outer-bottom-none { margin-bottom: 0; }
+.spacing-outer-left-none { margin-left: 0; }
+.spacing-outer-right-none { margin-right: 0; }
+
 
 /* Top */
 .spacing-outer-top-smallest { margin-top: $spacing-smallest; }
