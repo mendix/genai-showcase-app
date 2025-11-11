@@ -28031,6 +28031,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
   visibility: visible;
 }
 
+.sticky-header {
+  position: sticky;
+  background-color: inherit;
+  top: 0px;
+  padding-top: 24px;
+}
+
 /* Text */
 .text-break-word {
   word-break: break-word;
@@ -28284,6 +28291,46 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background: var(--color-light-purple-1, #E2E0FC);
 }
 
+.circle-badge {
+  display: flex;
+  align-items: center;
+  flex-flow: row;
+  justify-content: flex-start;
+  margin-right: 4px;
+}
+.circle-badge .circle {
+  border-radius: 100%;
+  background-color: #264ae5;
+  width: 8px;
+  height: 8px;
+  margin-right: 4px;
+}
+.circle-badge .badge-text {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 12px;
+}
+.circle-badge.circle-badge--success .circle {
+  background-color: #3cb33d;
+}
+.circle-badge.circle-badge--info .circle {
+  background-color: #264ae5;
+}
+
+.version--in-use {
+  max-width: fit-content;
+  height: auto;
+  padding-right: 4px;
+  border-radius: 4px;
+  border: 1px solid #4FD84F;
+  background-color: #E1FAE1;
+}
+.version--in-use .badge-text {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
 .filter-tag {
   display: flex;
   width: fit-content;
@@ -28392,13 +28439,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .card--sticky-content {
   overflow: unset;
   padding-top: 0;
-}
-
-.sticky-header {
-  position: sticky;
-  background-color: inherit;
-  top: 0px;
-  padding-top: 24px;
 }
 
 .filter-card {
@@ -29166,6 +29206,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
+  padding: 24px;
+  padding-top: 8px;
   align-self: stretch;
   margin: 0;
   text-align: left;
@@ -29598,7 +29640,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 /* use in combination with .tooltip-col */
 .tooltip-container-version {
   width: 350px;
-  max-height: 300px;
+  max-height: 350px;
   display: grid;
   grid-template-columns: 30% 69%;
   padding: 2px 8px 4px 8px;

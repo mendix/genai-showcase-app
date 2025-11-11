@@ -1,6 +1,7 @@
 @import "../../../atlas_core/web/_variables.scss";
 @import "../../../datawidgets/web/variables.scss";
 @import '../../../../theme/web/custom-variables';
+
 /* reference for animation */
 @keyframes scale-in-right {
   0% {
@@ -26,62 +27,62 @@
 
 /* Slide-in styling - used in Layout_SlideIn*/
 .layout-slidein {
-    position: fixed;
-    top: 0 !important;
-    right: 0;
-    bottom: 0;
-    left: unset !important;
-    width: 40vw !important;
-    min-width: 400px;
-    max-width: 700px;
-    height: 100% !important;
-    z-index: 999;
-    background: #fff;
-    box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.10), 0 3px 14px 0 rgba(0, 0, 0, 0.08), 0 5px 5px 0 rgba(0, 0, 0, 0.15);
-    animation: scale-in-right 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) forwards;
-    overflow: hidden;
+  position: fixed;
+  top: 0 !important;
+  right: 0;
+  bottom: 0;
+  left: unset !important;
+  width: 40vw !important;
+  min-width: 400px;
+  max-width: 700px;
+  height: 100% !important;
+  z-index: 999;
+  background: #fff;
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.10), 0 3px 14px 0 rgba(0, 0, 0, 0.08), 0 5px 5px 0 rgba(0, 0, 0, 0.15);
+  animation: scale-in-right 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) forwards;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  .mx-window-content {
     display: flex;
     flex-direction: column;
+    height: 100%;
+    pointer-events: all;
+    border: none;
+    border-radius: 0;
+    background: inherit;
+    box-shadow: none;
+    padding: $spacing-small;
 
-    .mx-window-content {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      pointer-events: all;
-      border: none;
-      border-radius: 0;
-      background: inherit;
-      box-shadow: none;
-      padding: $spacing-small;
+    .slidein-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: #fff;
+    }
 
-      .slidein-header {
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        background: #fff;
-      }
+    /* Scrollable content area */
+    .slidein-body {
+      flex: 1;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+  
+    .mx-window-header {
+        display: none;
 
-      /* Scrollable content area */
-      .slidein-body {
-        flex: 1;
-        max-height: 85vh;
-        overflow-y: auto;
-      }
-    
-      .mx-window-header {
-          display: none;
+        h4 {
+            display: none;
+        }
 
-          h4 {
-              display: none;
-          }
+        button.close {
+            display: none;
+        }
+    }
 
-          button.close {
-              display: none;
-          }
-      }
-
-      .mx-placeholder > .mx-dataview > .mx-dataview-content {
-        overflow: hidden;
+    .mx-placeholder > .mx-dataview > .mx-dataview-content {
+      overflow: hidden;
     }
   }
 }

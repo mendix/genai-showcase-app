@@ -1,4 +1,6 @@
 @import "../../../../theme/web/custom-variables.scss";
+@import "../traceability-variables.scss";
+
 .badge {
     display: inline-block;
     height: 16px;
@@ -24,6 +26,53 @@
     border: 1px solid var(--color-light-purple-5, #845EFF);
     background: var(--color-light-purple-1, #E2E0FC);
 }
+
+.circle-badge {
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+    justify-content: flex-start;
+    margin-right: $spacing-smaller;
+
+    .circle {
+        border-radius: 100%;
+        background-color: $brand-primary;
+        width: $spacing-small;
+        height: $spacing-small;
+        margin-right: $spacing-smaller;
+    }
+    .badge-text {
+        text-transform: uppercase;
+        font-weight: $font-weight-semibold;
+        font-size: $font-size-small;
+    }
+    &.circle-badge--success {
+        .circle {
+            background-color: $brand-success;
+        }
+    }
+    &.circle-badge--info {
+        .circle {
+            background-color: $brand-primary;
+        }
+    }
+}
+
+.version--in-use {
+    max-width: fit-content;
+    height: auto;
+    padding-right: $spacing-smaller;
+    border-radius: $border-radius-default;
+    border: 1px solid $in-use;
+    background-color: $in-use-bg;
+
+    .badge-text{
+        font-size: $font-size-small;
+        font-weight: $font-weight-semibold;
+        text-transform: uppercase;
+  }
+}
+
 
 .filter-tag {
     display: flex;

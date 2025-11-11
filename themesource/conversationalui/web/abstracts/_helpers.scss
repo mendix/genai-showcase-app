@@ -13,6 +13,13 @@
   }
 }
 
+.sticky-header {
+    position: sticky;
+    background-color: inherit;
+    top: 0px;
+    padding-top: $spacing-large;
+}
+
 /* Text */
 .text-break-word {
   word-break: break-word;
