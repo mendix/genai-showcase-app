@@ -65,8 +65,9 @@
     /* Scrollable content area */
     .slidein-body {
       flex: 1;
-      max-height: 85vh;
+      max-height: 55vh;
       overflow-y: auto;
+      padding: $spacing-medium;
     }
   
     .mx-window-header {
