@@ -35,20 +35,17 @@
   width: 40vw !important;
   min-width: 400px;
   max-width: 700px;
-  height: 100% !important;
+  height: 100vh !important;
   z-index: 999;
   background: #fff;
   box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.10), 0 3px 14px 0 rgba(0, 0, 0, 0.08), 0 5px 5px 0 rgba(0, 0, 0, 0.15);
-  animation: scale-in-right 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) forwards;
+  animation: scale-in-right 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) forwards;overflow-y: auto;
   overflow: hidden;
   display: flex;
   flex-direction: column;
 
   .mx-window-content {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    pointer-events: all;
+    max-height: 100% !important;
     border: none;
     border-radius: 0;
     background: inherit;
@@ -64,10 +61,35 @@
 
     /* Scrollable content area */
     .slidein-body {
-      flex: 1;
-      max-height: 55vh;
+      box-sizing: border-box;
+      background: #fff;
+      height: 80vh;
+      max-height: 1300px;
       overflow-y: auto;
-      padding: $spacing-medium;
+      margin-bottom: $spacing-medium;
+
+      @media (max-width: 2000px) {
+        height: 75vh;
+        max-height: 1000px;
+      }
+
+      @media (max-width: 1600px) {
+        flex-direction: column;
+        height: 64vh;
+        max-height: 800px;
+      }
+
+    @media (max-width: 1200px) {
+        flex-direction: column;
+        height: 52vh;
+        max-height: 600px;
+    }
+
+    @media (max-width: 1000px) {
+        flex-direction: column;
+        height: 38vh;
+        max-height: 500px;
+      }
     }
   
     .mx-window-header {

@@ -90,7 +90,7 @@
   display: flex;
   align-items: flex-start;
   align-content: flex-start;
-  gap: $spacing-larger;
+  gap: $spacing-medium $spacing-larger;
   align-self: stretch;
   flex-wrap: wrap;
   padding: $spacing-medium 0;
@@ -103,17 +103,18 @@
   padding: 12px 0 12px 12px !important;
   border-radius: $border-radius-default;
   border: 1px solid $gray-primary;
-  margin: $spacing-smaller 0;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+  margin-top: $spacing-smaller;
+  margin-bottom: $spacing-medium;
 
   .mx-text {
-    margin: 0;
     flex: 1 1 auto;
     min-width: 0;
     word-break: break-word;
     overflow-wrap: anywhere;
     white-space: normal;
+    margin-bottom: $spacing-medium;
   }
 
   .btn-wrapper {
