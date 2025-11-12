@@ -55,7 +55,7 @@
       max-height: 100%;
       flex: 1 1 0;
       overflow-y: auto;
-      overflow-x: hidden;
+       overflow-x: auto;
       display: flex;
       flex-direction: column;
       margin-bottom: $spacing-medium;
