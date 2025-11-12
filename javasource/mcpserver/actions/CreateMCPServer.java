@@ -18,6 +18,7 @@ import io.modelcontextprotocol.server.McpSyncServer;
 import io.modelcontextprotocol.spec.McpSchema;
 import mcpserver.impl.McpServerRegistry;
 import mcpserver.impl.McpServerRequestHandler;
+import mcpserver.impl.MxLogger;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
@@ -65,7 +66,7 @@ public class CreateMCPServer extends UserAction<IMendixObject>
 		mcpServer.setVersion(Version);
 		mcpServer.setProtocolVersion(ProtocolVersion);
 		mcpServer.setAuthenticationMicroflow(AuthenticationMicroflow);
-		
+				
 		// Create request handler and McpServer object
 		McpServerRequestHandler mcpRequestHandler = new McpServerRequestHandler(
 				mcpServer,  "/" + Path + "/messages", "/" + Path + "/sse");
@@ -84,6 +85,7 @@ public class CreateMCPServer extends UserAction<IMendixObject>
 		// Associate NPE and server object for future update
 		Long serverId = mcpServer.getMendixObject().getId().toLong();
 		McpServerRegistry.putServerInstance(serverId, server);
+		LOGGER.info("MCP Server created using: " + mcpServer.getProtocolVersion() + " version.");
 
 		return mcpServer.getMendixObject();
 		// END USER CODE
@@ -100,5 +102,7 @@ public class CreateMCPServer extends UserAction<IMendixObject>
 	}
 
 	// BEGIN EXTRA CODE
+	private static final MxLogger LOGGER = new mcpserver.impl.MxLogger(CreateMCPServer.class);
+
 	// END EXTRA CODE
 }
