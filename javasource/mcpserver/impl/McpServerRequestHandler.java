@@ -202,9 +202,6 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
         // Send initial endpoint event
         this.sendEvent(writer, ENDPOINT_EVENT_TYPE, this.baseUrl + this.messageEndpoint + "?sessionId=" + sessionId);
 
-        // Mendix Runtime will close the connection when the request handler
-        // finishes as it doesn't take into account the async mode.
-        Thread.sleep(15 * 60 * 1000);
     }
 
     private void setSSEResponseHeaders(HttpServletResponse response) {
