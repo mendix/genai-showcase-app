@@ -92,8 +92,16 @@ public class AddTool extends UserAction<IMendixObject>
 		// Add the tool to the server
 		McpSyncServer server = McpServerRegistry.getServerInstance(this.McpServer.getMendixObject().getId().toLong());
 
+		// Create a simple output schema for a single string
+		Map <String, Object> outputSchema = Map.of(
+			"type", "object",
+			"properties", Map.of(	
+					"type", "string"
+					)
+				);
+
 		McpServerFeatures.SyncToolSpecification tool = new McpServerFeatures.SyncToolSpecification(
-				new McpSchema.Tool(toolNpe.getName(), null, toolNpe.getDescription(), inputSchema, new HashMap<>(), null, new HashMap<>()),
+				new McpSchema.Tool(toolNpe.getName(), null, toolNpe.getDescription(), inputSchema, outputSchema, null, new HashMap<>()),
 				(exchange, arguments) -> {
 					String threadName = Thread.currentThread().getName();
 					long start = System.currentTimeMillis();
