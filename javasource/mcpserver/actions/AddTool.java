@@ -93,7 +93,7 @@ public class AddTool extends UserAction<IMendixObject>
 		McpSyncServer server = McpServerRegistry.getServerInstance(this.McpServer.getMendixObject().getId().toLong());
 
 		McpServerFeatures.SyncToolSpecification tool = new McpServerFeatures.SyncToolSpecification(
-				new McpSchema.Tool(toolNpe.getName(), toolNpe.getDescription(), null, inputSchema, new HashMap<>(), null, new HashMap<>()),
+				new McpSchema.Tool(toolNpe.getName(), null, toolNpe.getDescription(), inputSchema, new HashMap<>(), null, new HashMap<>()),
 				(exchange, arguments) -> {
 					String threadName = Thread.currentThread().getName();
 					long start = System.currentTimeMillis();
