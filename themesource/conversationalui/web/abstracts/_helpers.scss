@@ -159,12 +159,6 @@
   justify-content: center;
 }
 
-.grid-icon-text {
-  display: grid;
-  align-items: center;
-  grid-template-columns: 24px minmax(200px, 500px);
-  gap: $spacing-small;
-}
 
 /* Custom Width */
 .width-full {
