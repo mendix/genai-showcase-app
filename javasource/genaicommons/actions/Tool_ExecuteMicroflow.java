@@ -281,6 +281,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 			knowledgeBaseSpan.setMinimumSimilarity(mxKnowledgeBaseRetrieval.getMinimumSimilarity());
 			knowledgeBaseSpan.setMaxNumberOfResults(mxKnowledgeBaseRetrieval.getMaxNumberOfResults());
 			knowledgeBaseSpan.setArchitecture(mxKnowledgeBaseRetrieval.getKnowledgeBaseRetrieval_DeployedKnowledgeBase().getArchitecture());
+			knowledgeBaseSpan.setKBDisplayName(mxKnowledgeBaseRetrieval.getKnowledgeBaseRetrieval_DeployedKnowledgeBase().getDisplayName());
 			return knowledgeBaseSpan;
 			
 		} else {
