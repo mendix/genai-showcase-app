@@ -88,12 +88,39 @@
     padding-bottom: $spacing-smaller
 }
 
+.tooltip-version-draft {
+    @extend .row-text-img;
+    gap: 0;
+    padding-left: $spacing-small;
+    padding-bottom: $spacing-smaller
+}
+
 .tooltip-row-text-icon {
     @extend .row-text-img;
     height: 20px;
     padding-top: $spacing-smaller;
 }
 
+.tooltip-icon-text-model {
+    @extend .row-text-img;
+    gap: 10px;
+    img {
+        height: 16px;
+        width: 16px;
+        margin: 0 2px;
+    }
+}
+
+.tooltip-icon-text-edited {
+    @extend .row-text-img;
+    gap: 8px;
+    margin-left: 2px;
+    img {
+        height: 16px;
+        width: 16px;
+        margin: 0 2px;
+    }
+}
 
 .tooltip-info-icon {
     margin: 0;

@@ -27,11 +27,6 @@
       height: 84vh;
     }
 
-    @media (max-width: 1200px) {
-      flex-direction: column;
-      height: 60vh;
-    }
-
     .card {
       border-radius: $spacing-medium;
       border: 1px solid $gray-primary !important;

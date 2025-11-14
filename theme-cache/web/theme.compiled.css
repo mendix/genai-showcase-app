@@ -28152,7 +28152,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   float: right;
 }
 
-.row-text-img, .tooltip-row-text-icon, .tooltip-header {
+.row-text-img, .tooltip-icon-text-edited, .tooltip-icon-text-model, .tooltip-row-text-icon, .tooltip-version-draft, .tooltip-header {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -28214,6 +28214,12 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .img--22-22 {
   max-width: 22px;
   max-height: 22px;
+  flex-shrink: 0;
+}
+
+.img--20-20 {
+  max-width: 20px;
+  max-height: 20px;
   flex-shrink: 0;
 }
 
@@ -28423,6 +28429,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .mx-link.link-bold {
+  font-weight: 600;
+  line-height: 150%;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+.breadcrumb-text:hover, .breadcrumb-text:active, .breadcrumb-text:focus {
   font-weight: 600;
   line-height: 150%;
   cursor: pointer;
@@ -29094,6 +29108,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 0;
 }
 
+.listview-custom-spacing.mx-listview > ul > li:not(:last-child) {
+  margin-bottom: 2px;
+}
+
 .traces-page-content-container {
   display: flex;
   justify-content: center;
@@ -29118,12 +29136,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 @media (max-width: 1600px) {
   .traces-page-content-container .traces-content {
     height: 84vh;
-  }
-}
-@media (max-width: 1200px) {
-  .traces-page-content-container .traces-content {
-    flex-direction: column;
-    height: 60vh;
   }
 }
 .traces-page-content-container .traces-content .card {
@@ -29772,9 +29784,34 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding-bottom: 4px;
 }
 
+.tooltip-version-draft {
+  gap: 0;
+  padding-left: 8px;
+  padding-bottom: 4px;
+}
+
 .tooltip-row-text-icon {
   height: 20px;
   padding-top: 4px;
+}
+
+.tooltip-icon-text-model {
+  gap: 10px;
+}
+.tooltip-icon-text-model img {
+  height: 16px;
+  width: 16px;
+  margin: 0 2px;
+}
+
+.tooltip-icon-text-edited {
+  gap: 8px;
+  margin-left: 2px;
+}
+.tooltip-icon-text-edited img {
+  height: 16px;
+  width: 16px;
+  margin: 0 2px;
 }
 
 .tooltip-info-icon {
@@ -29787,22 +29824,17 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .tree-width {
-  width: 500px;
+  width: 320px;
 }
 
 .tree-duration-position-parent {
   position: absolute;
-  left: 560px;
+  left: 380px;
 }
 
 .tree-duration-position {
   position: absolute;
-  left: 580px;
-}
-
-.tree-item-selected {
-  width: 250px;
-  background: #e7e7e9;
+  left: 400px;
 }
 
 .grid-deployed-model {

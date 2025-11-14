@@ -88,3 +88,16 @@
         text-decoration-thickness: 1px; 
     }
 }
+
+.breadcrumb-text {
+    &:hover,
+        &:active,
+        &:focus {
+            font-weight: 600;
+        line-height: 150%;
+        cursor: pointer;
+        text-decoration: underline;
+        text-decoration-thickness: 1px; 
+
+        }
+}

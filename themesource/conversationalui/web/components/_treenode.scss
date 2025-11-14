@@ -1,22 +1,16 @@
 @import "../../../../theme/web/custom-variables.scss";
 @import "../../../atlas_core/web/_variables.scss";
 .tree-width {
-    width: 500px;
+    width: 320px;
 }
 
 .tree-duration-position-parent {
     position: absolute;
-    left: 560px;
+    left: 380px;
 }
 
 .tree-duration-position {
     position: absolute;
-    left: 580px;
+    left: 400px;
 }
 
-.tree-item-selected {
-    width: 250px;
-    //border-radius: 4px;
-    //border: 2px solid $brand-primary;
-    background: $gray-primary;
-}
