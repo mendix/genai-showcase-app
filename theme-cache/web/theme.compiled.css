@@ -28425,6 +28425,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .mx-link.link-bold {
   font-weight: 600;
   line-height: 150%;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
 }
 
 .chat-card--full-height {
