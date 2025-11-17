@@ -63,32 +63,33 @@
     .slidein-body {
         box-sizing: border-box;
         background: #fff;
-        height: 80vh;
+        height: 83vh;
         max-height: 1300px;
         overflow-y: auto;
         margin-bottom: $spacing-medium;
 
       @media (max-width: 2000px) {
-        height: 75vh;
-        max-height: 1000px;
+        height: 80vh;
       }
 
       @media (max-width: 1600px) {
         flex-direction: column;
-        height: 66vh;
-        max-height: 800px;
+        height: 76vh;
       }
 
-      @media (max-width: 1200px) {
-          flex-direction: column;
-          height: 52vh;
-          max-height: 600px;
+      @media (max-width: 1400px) {
+        flex-direction: column;
+        height: 72vh;
       }
 
       @media (max-width: 1000px) {
         flex-direction: column;
+        height: 60vh;
+      }
+
+      @media (max-width: 800px) {
+        flex-direction: column;
         height: 38vh;
-        max-height: 500px;
       }
   }
   

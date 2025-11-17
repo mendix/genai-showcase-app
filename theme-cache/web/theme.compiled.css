@@ -28983,36 +28983,38 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .layout-slidein .mx-window-content .slidein-body {
   box-sizing: border-box;
   background: #fff;
-  height: 80vh;
+  height: 83vh;
   max-height: 1300px;
   overflow-y: auto;
   margin-bottom: 16px;
 }
 @media (max-width: 2000px) {
   .layout-slidein .mx-window-content .slidein-body {
-    height: 75vh;
-    max-height: 1000px;
+    height: 80vh;
   }
 }
 @media (max-width: 1600px) {
   .layout-slidein .mx-window-content .slidein-body {
     flex-direction: column;
-    height: 66vh;
-    max-height: 800px;
+    height: 76vh;
   }
 }
-@media (max-width: 1200px) {
+@media (max-width: 1400px) {
   .layout-slidein .mx-window-content .slidein-body {
     flex-direction: column;
-    height: 52vh;
-    max-height: 600px;
+    height: 72vh;
   }
 }
 @media (max-width: 1000px) {
   .layout-slidein .mx-window-content .slidein-body {
     flex-direction: column;
+    height: 60vh;
+  }
+}
+@media (max-width: 800px) {
+  .layout-slidein .mx-window-content .slidein-body {
+    flex-direction: column;
     height: 38vh;
-    max-height: 500px;
   }
 }
 .layout-slidein .mx-window-content .mx-window-header {
@@ -29814,7 +29816,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .tree-width {
-  width: 320px;
+  width: 300px;
 }
 
 .tree-duration-position-parent {
