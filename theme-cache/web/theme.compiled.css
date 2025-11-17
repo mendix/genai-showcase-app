@@ -28374,6 +28374,46 @@ input[type=checkbox].three-state-checkbox + .control-label {
   float: right;
 }
 
+.breadcrumb-text:hover, .breadcrumb-text:active, .breadcrumb-text:focus {
+  font-weight: 600;
+  line-height: 150%;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+.breadcrumb-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 1.428571429;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+}
+.breadcrumb-container .btn-wrapper {
+  min-width: 8em;
+  display: flex;
+  align-items: center;
+  padding: 4px 0;
+}
+.breadcrumb-container .mx-button.btn {
+  transition: all 0.2s ease-in-out;
+  border: none;
+  background-color: transparent;
+  color: #0a1325;
+  padding: 0 0;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  font-size: small;
+}
+.breadcrumb-container .mx-button.btn.btn-hover {
+  visibility: hidden;
+}
+.breadcrumb-container:hover .btn.btn-hover {
+  visibility: visible;
+}
+
 .btn.mx-button.btn-border-primary {
   color: #264ae5;
   border: 1px solid #264ae5;
@@ -29129,13 +29169,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 80vw;
   min-width: 1200px;
   max-width: 1800px;
-}
-.traces-page-content-container .traces-breadcrumb .breadcrumb-text:hover, .traces-page-content-container .traces-breadcrumb .breadcrumb-text:active, .traces-page-content-container .traces-breadcrumb .breadcrumb-text:focus {
-  font-weight: 600;
-  line-height: 150%;
-  cursor: pointer;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
 }
 .traces-page-content-container .traces-content {
   flex-direction: column;
