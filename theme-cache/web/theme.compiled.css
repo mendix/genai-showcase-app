@@ -28152,7 +28152,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   float: right;
 }
 
-.row-text-img, .tooltip-icon-text-edited, .tooltip-icon-text-model, .tooltip-row-text-icon, .tooltip-version-draft, .tooltip-header {
+.row-text-img, .tooltip-icon-text, .tooltip-row-text-icon, .tooltip-version-draft, .tooltip-header {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -29126,7 +29126,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 80vw;
   min-width: 1200px;
   max-width: 1800px;
-  height: 100vh;
+  height: 90vh;
 }
 @media (max-width: 2000px) {
   .traces-page-content-container .traces-content {
@@ -29785,9 +29785,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .tooltip-version-draft {
-  gap: 0;
-  padding-left: 8px;
-  padding-bottom: 4px;
+  gap: 2px;
+  line-height: 150% !important;
+  padding-left: 2px;
 }
 
 .tooltip-row-text-icon {
@@ -29795,20 +29795,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding-top: 4px;
 }
 
-.tooltip-icon-text-model {
+.tooltip-icon-text {
   gap: 10px;
 }
-.tooltip-icon-text-model img {
-  height: 16px;
-  width: 16px;
-  margin: 0 2px;
-}
-
-.tooltip-icon-text-edited {
-  gap: 8px;
-  margin-left: 2px;
-}
-.tooltip-icon-text-edited img {
+.tooltip-icon-text img {
   height: 16px;
   width: 16px;
   margin: 0 2px;
