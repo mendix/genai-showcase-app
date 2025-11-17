@@ -5,12 +5,18 @@
 
 .traces-page-content-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: -webkit-fill-available;
   height: -moz-available;
   margin: 0 auto;
-  padding: auto 0;
+
+  .traces-breadcrumb {
+      width: 80vw;
+      min-width: 1200px;
+      max-width: 1800px;
+  }
 
   .traces-content {
       flex-direction: column;
