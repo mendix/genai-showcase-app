@@ -1,5 +1,6 @@
 @import "../../../../theme/web/custom-variables.scss";
 @import "../../../atlas_core/web/_variables.scss";
+
 .tree-width {
     width: 300px;
 }
@@ -12,4 +13,15 @@
 .tree-duration-position {
     position: absolute;
     left: 400px;
+}
+
+.tree-item-hover {
+    &:hover,
+    &:active,
+    &:focus {
+        font-weight: 600;
+        line-height: 150%;
+        cursor: pointer;
+        text-decoration-thickness: 1px; 
+    }
 }

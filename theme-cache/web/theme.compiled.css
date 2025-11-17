@@ -28031,6 +28031,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   visibility: visible;
 }
 
+.display-none {
+  display: none;
+}
+
 .sticky-header {
   position: sticky;
   background-color: inherit;
@@ -28385,7 +28389,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background-color: #264ae5;
   border: 1px solid #264ae5;
 }
-
 .btn.mx-button.btn-text-default {
   color: #0a1325;
   border: 1px solid transparent;
@@ -28411,7 +28414,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 22px;
   margin: 1px;
 }
-
 .btn.mx-button.btn-text-danger {
   color: #e33f4e;
   border: 1px solid transparent;
@@ -28423,20 +28425,20 @@ input[type=checkbox].three-state-checkbox + .control-label {
   cursor: default;
 }
 .btn.mx-button.btn-text-danger:hover, .btn.mx-button.btn-text-danger:active, .btn.mx-button.btn-text-danger:focus {
-  color: #fff;
-  background-color: #e33f4e;
-  border: 1px solid #e33f4e;
+  color: #e33f4e;
+  background-color: #e7e7e9;
+  border: 1px solid #e7e7e9;
+}
+.btn.mx-button.btn-icon-only {
+  all: unset;
+  padding-top: 2px;
+}
+.btn.mx-button.btn-icon-only img {
+  height: 16px;
+  width: 16px;
 }
 
 .mx-link.link-bold {
-  font-weight: 600;
-  line-height: 150%;
-  cursor: pointer;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-}
-
-.breadcrumb-text:hover, .breadcrumb-text:active, .breadcrumb-text:focus {
   font-weight: 600;
   line-height: 150%;
   cursor: pointer;
@@ -29127,6 +29129,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 80vw;
   min-width: 1200px;
   max-width: 1800px;
+}
+.traces-page-content-container .traces-breadcrumb .breadcrumb-text:hover, .traces-page-content-container .traces-breadcrumb .breadcrumb-text:active, .traces-page-content-container .traces-breadcrumb .breadcrumb-text:focus {
+  font-weight: 600;
+  line-height: 150%;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
 }
 .traces-page-content-container .traces-content {
   flex-direction: column;
@@ -29834,6 +29843,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
   left: 400px;
 }
 
+.tree-item-hover:hover, .tree-item-hover:active, .tree-item-hover:focus {
+  font-weight: 600;
+  line-height: 150%;
+  cursor: pointer;
+  text-decoration-thickness: 1px;
+}
+
 .grid-deployed-model {
   display: grid;
   grid-template-columns: repeat(4, 1fr) 0.5fr 150px;
@@ -30481,6 +30497,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-top: 0;
   margin-bottom: 8px;
   z-index: 10;
+}
+.agent-page-container .page-navigation .clickable-hover:hover, .agent-page-container .page-navigation .clickable-hover:active, .agent-page-container .page-navigation .clickable-hover:focus {
+  font-weight: 600;
+  line-height: 150%;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
 }
 .agent-page-container .page-content {
   width: 100%;

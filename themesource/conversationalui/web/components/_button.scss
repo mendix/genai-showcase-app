@@ -21,9 +21,7 @@
             border: 1px solid $brand-primary;
         }
     }
-}
 
-.btn.mx-button {
     &.btn-text-default { 
         color: $font-color-default;
         border: 1px solid transparent;
@@ -55,9 +53,7 @@
             margin: 1px;
         }
     }
-}
 
-.btn.mx-button {
     &.btn-text-danger { 
         color: $brand-danger;
         border: 1px solid transparent;
@@ -72,9 +68,18 @@
         &:hover,
         &:active,
         &:focus {
-            color: $btn-danger-color;
-            background-color: $brand-danger;
-            border: 1px solid $brand-danger;
+            color: $brand-danger;
+            background-color: $btn-default-bg-hover;
+            border: 1px solid $btn-default-bg-hover;
+        }
+    }
+
+    &.btn-icon-only {
+        all: unset;
+        padding-top: $spacing-smallest;
+        img {
+            height: 16px;
+            width: 16px;
         }
     }
 }
@@ -89,15 +94,3 @@
     }
 }
 
-.breadcrumb-text {
-    &:hover,
-        &:active,
-        &:focus {
-            font-weight: 600;
-        line-height: 150%;
-        cursor: pointer;
-        text-decoration: underline;
-        text-decoration-thickness: 1px; 
-
-        }
-}

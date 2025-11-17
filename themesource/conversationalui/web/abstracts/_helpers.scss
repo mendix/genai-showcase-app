@@ -13,6 +13,10 @@
   }
 }
 
+.display-none {
+  display: none;
+}
+
 .sticky-header {
     position: sticky;
     background-color: inherit;
@@ -62,7 +66,6 @@
 .line-height--1 {
   line-height: 1;
 }
-
 
 /* Custom Font */
 .font-size-small {
