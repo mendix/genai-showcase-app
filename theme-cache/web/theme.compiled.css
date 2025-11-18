@@ -29161,8 +29161,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 100%;
   height: -webkit-fill-available;
-  height: -moz-available;
   margin: 0 auto;
 }
 .traces-page-content-container .traces-breadcrumb {
@@ -30764,44 +30764,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background-color: #0078D4;
 }
 
-/* Can be deleted after PR - wom't be used with the new landing page. Also delete the Variable */
-.bg-aws {
-  background-color: #EC7211 !important;
-}
-
-.bg-mxgenai {
-  background-color: #146FF4 !important;
-}
-
-.bg-mistral {
-  background-color: #FA500F !important;
-}
-
-.bg-pgvector {
-  background-color: #C6D92F !important;
-}
-
-.provider-badge .badge > label {
-  margin: auto;
-  display: -webkit-box;
-  word-break: break-all;
-  overflow: hidden;
-  -webkit-line-clamp: 1;
-  line-clamp: 1;
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
-  box-sizing: border-box;
-  text-wrap: wrap;
-  line-height: normal;
-}
-.provider-badge .badge .mx-image-viewer {
-  width: auto;
-}
-.provider-badge .badge .mx-image-viewer-responsive > img {
-  max-height: none;
-  max-width: none;
-}
-
 .container-border-primary {
   border: 1px solid #264ae5;
   border-radius: 4px;
@@ -31110,8 +31072,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .card-label-bedrock {
-  background: #FFEAC3;
-  color: #A05700;
+  background: #E2E0FC;
+  color: #2F008C;
 }
 
 .card-label-mxcloudgenai {
@@ -31120,13 +31082,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .card-label-all {
-  background: #E2E0FC;
-  color: #2F008C;
+  background: #DEDEDE;
+  color: #000000;
 }
 
 .card-label-mistral {
-  background: #fad08c;
-  color: #872702;
+  background: #FFEAC3;
+  color: #A05700;
 }
 
 .card-label-pgvector {
@@ -31136,6 +31098,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .text-strike {
   text-decoration: line-through;
+}
+
+.multi-label-position {
+  justify-content: flex-end;
 }
 
 /*# sourceMappingURL=theme.compiled.css.map */

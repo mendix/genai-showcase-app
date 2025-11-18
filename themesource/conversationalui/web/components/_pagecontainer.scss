@@ -8,8 +8,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 100%;
   height: -webkit-fill-available;
-  height: -moz-available;
   margin: 0 auto;
 
   .traces-breadcrumb {
