@@ -1,0 +1,99 @@
+@import '../../../../theme/web/custom-variables';
+
+/* Paddings */
+
+/* Remove paddings */
+.spacing-inner-none { padding: 0 !important; }
+.spacing-inner-top-none { padding-top: 0 !important; }
+.spacing-inner-bottom-none { padding-bottom: 0 !important; }
+.spacing-inner-left-none { padding-left: 0 !important; }
+.spacing-inner-right-none { padding-right: 0 !important; }
+
+/* Top */
+.spacing-inner-top-smallest { padding-top: $spacing-smallest; }
+.spacing-inner-top-smaller  { padding-top: $spacing-smaller; }
+.spacing-inner-top-small    { padding-top: $spacing-small !important; }
+.spacing-inner-top-medium   { padding-top: $spacing-medium; }
+.spacing-inner-top-large    { padding-top: $spacing-large; }
+.spacing-inner-top-larger   { padding-top: $spacing-larger; }
+
+/* Right */
+.spacing-inner-right-smallest { padding-right: $spacing-smallest; }
+.spacing-inner-right-smaller  { padding-right: $spacing-smaller; }
+.spacing-inner-right-small    { padding-right: $spacing-small; }
+.spacing-inner-right-medium   { padding-right: $spacing-medium; }
+.spacing-inner-right-large    { padding-right: $spacing-large; }
+.spacing-inner-right-larger   { padding-right: $spacing-larger; }
+
+/* Bottom */
+.spacing-inner-bottom-smallest { padding-bottom: $spacing-smallest; }
+.spacing-inner-bottom-smaller  { padding-bottom: $spacing-smaller; }
+.spacing-inner-bottom-small    { padding-bottom: $spacing-small; }
+.spacing-inner-bottom-medium   { padding-bottom: $spacing-medium; }
+.spacing-inner-bottom-large    { padding-bottom: $spacing-large; }
+.spacing-inner-bottom-larger   { padding-bottom: $spacing-larger; }
+
+/* Left */
+.spacing-inner-left-smallest { padding-left: $spacing-smallest; }
+.spacing-inner-left-smaller  { padding-left: $spacing-smaller; }
+.spacing-inner-left-small    { padding-left: $spacing-small; }
+.spacing-inner-left-medium   { padding-left: $spacing-medium; }
+.spacing-inner-left-large    { padding-left: $spacing-large; }
+.spacing-inner-left-larger   { padding-left: $spacing-larger; }
+
+/* Margin */
+
+
+/* Remove margins */
+.spacing-outer-none { margin: 0 !important; }
+.spacing-outer-top-none { margin-top: 0; }
+.spacing-outer-bottom-none { margin-bottom: 0; }
+.spacing-outer-left-none { margin-left: 0; }
+.spacing-outer-right-none { margin-right: 0; }
+
+
+/* Top */
+.spacing-outer-top-smallest { margin-top: $spacing-smallest; }
+.spacing-outer-top-smaller  { margin-top: $spacing-smaller; }
+.spacing-outer-top-small    { margin-top: $spacing-small; }
+.spacing-outer-top-medium   { margin-top: $spacing-medium; }
+.spacing-outer-top-large    { margin-top: $spacing-large; }
+.spacing-outer-top-larger   { margin-top: $spacing-larger; }
+
+/* Right */
+.spacing-outer-right-smallest { margin-right: $spacing-smallest; }
+.spacing-outer-right-smaller  { margin-right: $spacing-smaller; }
+.spacing-outer-right-small    { margin-right: $spacing-small; }
+.spacing-outer-right-medium   { margin-right: $spacing-medium; }
+.spacing-outer-right-large    { margin-right: $spacing-large; }
+.spacing-outer-right-larger   { margin-right: $spacing-larger; }
+
+/* Bottom */
+.spacing-outer-bottom-smallest { margin-bottom: $spacing-smallest; }
+.spacing-outer-bottom-smaller  { margin-bottom: $spacing-smaller; }
+.spacing-outer-bottom-small    { margin-bottom: $spacing-small; }
+.spacing-outer-bottom-medium   { margin-bottom: $spacing-medium; }
+.spacing-outer-bottom-large    { margin-bottom: $spacing-large; }
+.spacing-outer-bottom-larger   { margin-bottom: $spacing-larger; }
+
+/* Left */
+.spacing-outer-left-smallest { margin-left: $spacing-smallest; }
+.spacing-outer-left-smaller  { margin-left: $spacing-smaller; }
+.spacing-outer-left-small    { margin-left: $spacing-small; }
+.spacing-outer-left-medium   { margin-left: $spacing-medium; }
+.spacing-outer-left-large    { margin-left: $spacing-large; }
+.spacing-outer-left-larger   { margin-left: $spacing-larger; }
+
+
+/* Custom */
+.spacing-inner-left-20 {
+  padding-left: 20px;
+}
+
+.spacing-outer-bottom-6 {
+  margin-bottom: 6px;
+}
+
+.spacing-outer-bottom-none {
+  margin-bottom: 0;
+}

@@ -1,0 +1,51 @@
+@import '../../../../theme/web/custom-variables';
+
+.breadcrumb-text {
+    &:hover,
+    &:active,
+    &:focus {
+        font-weight: 600;
+        line-height: 150%;
+        cursor: pointer;
+        text-decoration: underline;
+        text-decoration-thickness: 1px; 
+    }
+}
+
+.breadcrumb-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: $line-height-base;
+    border-radius: $btn-border-radius;
+
+    .btn-wrapper {
+        min-width: 8em;
+        display: flex;
+        align-items: center;
+        padding: $spacing-smaller 0;
+    }
+    .mx-button.btn {
+        transition: all 0.2s ease-in-out;
+        border: none;
+        background-color: transparent;
+        color: $font-color-default;
+        padding: 0 0;
+        height: $font-size-small;
+        display: flex;
+        align-items: center;
+        font-size: small;
+
+        &.btn-hover {
+            visibility: hidden;
+        }
+    }
+
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        .btn.btn-hover {
+            visibility: visible;
+        }
+    }
+}

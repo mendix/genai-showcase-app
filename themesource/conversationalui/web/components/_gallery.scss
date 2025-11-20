@@ -1,0 +1,24 @@
+@import "../../../atlas_core/web/_variables.scss";
+@import "../../../datawidgets/web/variables.scss";
+@import '../../../../theme/web/custom-variables';
+
+.filter-gallery {
+    .widget-gallery-items {
+        padding: $spacing-medium 0  0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: flex-start;
+    }
+
+    :where(.widget-gallery-fc-start, .widget-gallery-fc-middle, .widget-gallery-fc-end) {
+        min-height: 0px;
+   }
+
+    :where(.widget-gallery-footer-controls) {
+        display: unset;
+    }
+   
+}
+
+    

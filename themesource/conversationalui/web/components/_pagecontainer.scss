@@ -1,0 +1,193 @@
+@import "../../../atlas_core/web/_variables.scss";
+@import "../../../datawidgets/web/variables.scss";
+@import '../../../../theme/web/custom-variables';
+@import '../traceability-variables.scss';
+
+.traces-page-content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  height: -webkit-fill-available;
+  margin: 0 auto;
+
+  .traces-breadcrumb {
+      width: 80vw;
+      min-width: 1200px;
+      max-width: 1800px;
+  }
+
+  .traces-content {
+      flex-direction: column;
+      width: 80vw;
+      min-width: 1200px;
+      max-width: 1800px;
+      height: 90vh;
+    
+    @media (max-width: 2000px) {
+      height: 87vh;
+    }
+
+    @media (max-width: 1600px) {
+      height: 84vh;
+    }
+
+    .card {
+      border-radius: $spacing-medium;
+      border: 1px solid $gray-primary !important;
+      overflow: visible;          
+      display: flex;
+      flex-direction: column;
+      max-width: 100%;  
+      height: 100%;      
+      box-sizing: border-box;
+      margin-bottom: 0;
+      padding: $spacing-large;
+      padding-bottom: 0;
+
+      * {
+          word-break: break-word;
+          overflow-wrap: break-word;
+          white-space: normal; 
+      }
+    }
+
+    .card-content-scroll {
+      max-height: 100%;
+      flex: 1 1 0;
+      overflow-y: auto;
+       overflow-x: auto;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: $spacing-medium;
+      margin-top: 0;
+    }
+
+    .card-header {
+      flex-direction: row;
+      margin-bottom: $spacing-small;
+    }
+  }
+}
+
+.pageheader-flex-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+
+  .pageheader-flex-items {
+      display: flex;
+      justify-content: space-between;
+      gap: auto;
+      flex-wrap: nowrap; 
+      align-items: center;
+      align-self: stretch;
+  }
+}
+
+.plan-container {
+  display: flex;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: $spacing-medium $spacing-larger;
+  align-self: stretch;
+  flex-wrap: wrap;
+  padding: $spacing-medium 0;
+} 
+
+.text-container-clickable {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0 12px 12px !important;
+  border-radius: $border-radius-default;
+  border: 1px solid $gray-primary;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  margin-top: $spacing-smaller;
+  margin-bottom: $spacing-medium;
+
+  .mx-text {
+    flex: 1 1 auto;
+    min-width: 0;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
+    margin-bottom: $spacing-medium;
+  }
+
+  .btn-wrapper {
+    min-width: 3em;
+    margin-left: $spacing-small;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .btn {
+    transition: all 0.2s ease-in-out;
+    border: none;
+    background-color: transparent;
+    color: $font-color-default;
+    height: 32px;
+    visibility: hidden;
+    cursor: pointer;
+
+    &.btn-hover {
+      visibility: hidden;
+    }
+  }
+
+  &:hover {
+    background-color: $btn-default-bg-hover;
+
+    .btn {
+      visibility: visible;
+    }
+  }
+
+  .copied-img-container {
+    float: right;
+    align-items: center;
+    width: 3em;
+    padding: 9px;
+  }
+}
+
+.text-container-empty {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+  padding: 0 $spacing-small !important;
+  border-radius: $border-radius-default;
+  border: 1px solid $gray-primary;
+  margin: $spacing-smaller 0;
+  background-color: $gray-lighter;
+}
+
+
+.pop-up-footer-flex-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: $spacing-large;
+  padding-top: $spacing-small;
+  align-self: stretch;
+  margin: 0;
+  text-align: left;
+
+  .pop-up-flex-items {
+    display: flex;
+    justify-content: space-between;
+    gap: auto;
+    flex-wrap: wrap; 
+    align-items: center;
+    align-self: stretch;
+  }
+}
+

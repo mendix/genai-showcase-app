@@ -1,11 +1,10 @@
 @import "../../themesource/atlas_core/web/_variables.scss";
 @import "custom-variables";
 
-$brand-aws: #EC7211; 
+$brand-mistral: #EC7211; 
 $brand-pgvector: #C6D92F; 
 $brand-mxgenai: #146FF4;  
 $brand-openai: #0078D4;
-$brand-mistral: #FA500F;
 
 /* Card Colors */
 $light-grey-2: #F2F2F3;
@@ -20,16 +19,16 @@ $light-orange: #EC7211;
 
 
 /* Label Colors */
-$label-bg-bedrock: #FFEAC3;
-$label-color-bedrock: #A05700;
-$label-bg-mistral: #fad08c;
-$label-color-mistral: #872702;
+$label-bg-mistral: #FFEAC3;
+$label-color-mistral: #A05700;
 $label-bg-mxcloudgenai: #DCEEFE;
 $label-color-mxcloudgenai: #0006AB;
-$label-bg-all: #E2E0FC;
-$label-color-all: #2F008C;
+$label-bg-bedrock: #E2E0FC;
+$label-color-bedrock: #2F008C;
 $label-bg-pgvector: #E1FAE1;
 $label-color-pgvector: #076407;
+$label-bg-all: #DEDEDE;
+$label-color-all: #000000;
 
 
 
@@ -61,52 +60,6 @@ $label-color-pgvector: #076407;
 .bg-openai {
   background-color: $brand-openai;
 }
-
-/* Can be deleted after PR - wom't be used with the new landing page. Also delete the Variable */
-
-.bg-aws {
-    background-color: $brand-aws !important;
-}
-
-.bg-mxgenai {
-    background-color: $brand-mxgenai !important;
-}
-
-.bg-mistral {
-    background-color: $brand-mistral !important;
-}
-
-.bg-pgvector {
-    background-color: $brand-pgvector !important;
-}
-
-.provider-badge {
-  .badge {
-    > label {
-      margin: auto;
-      display: -webkit-box;
-      word-break: break-all;
-      overflow: hidden;
-      -webkit-line-clamp: 1;
-      line-clamp: 1;
-      -webkit-box-orient: vertical;
-      text-overflow: ellipsis;
-      box-sizing: border-box;
-      text-wrap: wrap;
-      line-height: normal;
-    }
-    .mx-image-viewer {
-      width: auto;
-    }
-    .mx-image-viewer-responsive  {
-      > img {
-      max-height: none;
-      max-width: none;
-       }
-    }
-  }
-}
-
 
 //Helpers
 .container-border-primary {
@@ -500,4 +453,8 @@ $label-color-pgvector: #076407;
 
 .text-strike {
   text-decoration: line-through;
+}
+
+.multi-label-position {
+  justify-content: flex-end;
 }

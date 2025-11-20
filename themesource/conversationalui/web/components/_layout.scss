@@ -1,0 +1,122 @@
+@import "../../../atlas_core/web/_variables.scss";
+@import "../../../datawidgets/web/variables.scss";
+@import '../../../../theme/web/custom-variables';
+
+/* reference for animation */
+@keyframes scale-in-right {
+  0% {
+    transform: scaleX(0.5) translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleX(1) translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scale-out-right {
+  0% {
+    transform: scaleX(1) translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(0.5) translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Slide-in styling - used in Layout_SlideIn*/
+.layout-slidein {
+  position: fixed;
+  top: 0 !important;
+  right: 0;
+  bottom: 0;
+  left: unset !important;
+  width: 40vw !important;
+  min-width: 400px;
+  max-width: 700px;
+  height: 100vh !important;
+  z-index: 999;
+  background: #fff;
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.10), 0 3px 14px 0 rgba(0, 0, 0, 0.08), 0 5px 5px 0 rgba(0, 0, 0, 0.15);
+  animation: scale-in-right 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) forwards;overflow-y: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  .mx-window-content {
+    max-height: 100% !important;
+    border: none;
+    border-radius: 0;
+    background: inherit;
+    box-shadow: none;
+    padding: $spacing-small;
+
+    .slidein-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: #fff;
+    }
+
+    /* Scrollable content area */
+    .slidein-body {
+        box-sizing: border-box;
+        background: #fff;
+        height: 83vh;
+        max-height: 1300px;
+        overflow-y: auto;
+        margin-bottom: $spacing-medium;
+
+      @media (max-width: 2000px) {
+        height: 80vh;
+      }
+
+      @media (max-width: 1600px) {
+        flex-direction: column;
+        height: 76vh;
+      }
+
+      @media (max-width: 1400px) {
+        flex-direction: column;
+        height: 72vh;
+      }
+
+      @media (max-width: 1000px) {
+        flex-direction: column;
+        height: 60vh;
+      }
+
+      @media (max-width: 800px) {
+        flex-direction: column;
+        height: 38vh;
+      }
+  }
+  
+    .mx-window-header {
+        display: none;
+
+        h4 {
+            display: none;
+        }
+
+        button.close {
+            display: none;
+        }
+    }
+
+    .mx-placeholder > .mx-dataview > .mx-dataview-content {
+      overflow: hidden;
+    }
+  }
+}
+
+/* define animation of the close button */
+.slidein-close {
+    animation: scale-out-right 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+.layout-slidein + .mx-underlay {
+    display: none !important;
+}
+
