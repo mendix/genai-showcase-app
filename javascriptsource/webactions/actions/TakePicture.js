@@ -5,7 +5,6 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // - the code between BEGIN EXTRA CODE and END EXTRA CODE
 // Other code you write will be lost the next time you deploy the project.
-import "mx-global";
 import { Big } from "big.js";
 
 // BEGIN EXTRA CODE
@@ -223,7 +222,7 @@ export async function TakePicture(picture, showConfirmationScreen, pictureQualit
                             cleanupConfirmationElements();
                             onResumeFirstScreen();
                         });
-                        // eslint-disable-next-line no-inner-declarations
+                         
                         function cleanupConfirmationElements() {
                             document.body.removeChild(confirmationWrapper);
                             videoCanvas.remove();
@@ -393,9 +392,9 @@ export async function TakePicture(picture, showConfirmationScreen, pictureQualit
     function prepareLanguage() {
         const englishFn = english => english;
         try {
-            return mx.session.sessionData.locale.code.toLowerCase().includes("en")
-                ? englishFn
-                : (_english, dutch) => dutch;
+            return mx.session.sessionData.locale.code.toLowerCase().includes("nl")
+                ? (_english, dutch) => dutch
+                : englishFn;
         } catch (_) {
             return englishFn;
         }
