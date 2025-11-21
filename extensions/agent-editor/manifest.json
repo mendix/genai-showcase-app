@@ -1,0 +1,13 @@
+{
+  "mendixComponent": {
+    "entryPoints": {
+      "main": "main.js",
+      "ui": {
+        "agentEdit": "agentEdit.js",
+        "modelEdit": "modelEdit.js",
+        "consumedMCPServiceEdit": "consumedMCPServiceEdit.js",
+        "knowledgebaseEdit": "knowledgebaseEdit.js"
+      }
+    }
+  }
+}

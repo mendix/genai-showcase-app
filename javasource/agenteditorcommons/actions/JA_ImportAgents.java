@@ -14,8 +14,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ibm.db2.jcc.am.k;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
+import com.mendix.core.actionmanagement.MicroflowCallBuilder;
 import com.mendix.extensibility.CustomBlobDocumentInfo;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
@@ -45,6 +47,7 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 			LOGGER.error(e);
 			return null;
 		}
+		LOGGER.info("Finished JA_ImportAgents");
 		return true;
 		// END USER CODE
 	}
@@ -62,19 +65,6 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new MxLogger(JA_ImportAgents.class);
 
-	private void importAgents() {
-		java.util.List<CustomBlobDocumentInfo> agentDocuments = Core.extensibility()
-				.getCustomDocumentsOfType("agenteditor.agent");
-		LOGGER.info(agentDocuments.size() + " agent document(s) found in the Mendix Model");
-		agentDocuments.forEach(d -> {
-			try {
-				importAgent(d);
-			} catch (Exception e) {
-				LOGGER.error(e);
-			}
-		});
-	}
-
 	private void importModels() {
 		java.util.List<CustomBlobDocumentInfo> modelDocuments = Core.extensibility()
 				.getCustomDocumentsOfType("agenteditor.model");
@@ -82,6 +72,19 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 		modelDocuments.forEach(d -> {
 			try {
 				importModel(d);
+			} catch (Exception e) {
+				LOGGER.error(e);
+			}
+		});
+	}
+	
+	private void importAgents() {
+		java.util.List<CustomBlobDocumentInfo> agentDocuments = Core.extensibility()
+				.getCustomDocumentsOfType("agenteditor.agent");
+		LOGGER.info(agentDocuments.size() + " agent document(s) found in the Mendix Model");
+		agentDocuments.forEach(d -> {
+			try {
+				importAgent(d);
 			} catch (Exception e) {
 				LOGGER.error(e);
 			}
@@ -178,6 +181,7 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 		versionToKeep.setValue(getContext(), Version.MemberNames.SystemPrompt.toString(), systemPrompt);
 		versionToKeep.setValue(getContext(), Version.MemberNames.UserPrompt.toString(), userPrompt);
 		versionToKeep.setValue(getContext(), Version.MemberNames.VersionChangedDate.toString(), new java.util.Date());
+		versionToKeep.setValue(getContext(), Version.MemberNames.Version_DeployedModel.toString(), model.getId());
 		// TODO fix decimal/integer values and validate
 
 		Core.commit(getContext(), versionToKeep);
@@ -309,19 +313,32 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 
 		}
 		LOGGER.debug("Importing model with qualified name '" + qualifiedName + "'.");
-
+		String documentName = qualifiedName.split("\\.")[1];
 		String modelDocumentContent = modelDocument.content();
 
+		LOGGER.debug("Model document content: "+ modelDocumentContent);		
+		
 		ObjectMapper objectMapper = new ObjectMapper();
 
 		JsonNode rootNode = objectMapper.readTree(modelDocumentContent);
-
-		String agentModelDocumentUUID = rootNode.has("modelDocumentUUID") ? rootNode.get("modelDocumentUUID").asText()
+		
+		String modelDocumentUUID = rootNode.has("modelDocumentUUID") ? rootNode.get("modelDocumentUUID").asText()
 				: null;
-		LOGGER.debug(qualifiedName + " - modelDocumentUUID: " + agentModelDocumentUUID);
+		LOGGER.debug(qualifiedName + " - modelDocumentUUID: " + modelDocumentUUID);
 
-		String description = rootNode.has("description") ? rootNode.get("description").asText() : null;
-		LOGGER.debug(qualifiedName + " - description: " + description);
+		JsonNode providerFields = rootNode.has("providerFields") ? rootNode.get("providerFields") : null;
+		
+		String key = providerFields.has("key") ? providerFields.get("key").asText() : null;
+		LOGGER.debug(qualifiedName + " - key: " + key);
+		
+		boolean isSuccess = Core.microflowCall("AgentEditorCommons.MxCloudDeployedModel_CreateUpdate")
+			.withParam("DocumentName", documentName )
+			.withParam("Key", key)
+			.withParam("ModelDocumentUUID", modelDocumentUUID)
+			.execute(getContext());
+		if (!isSuccess) {
+			throw new IllegalArgumentException("Creating/Updating the Mendix Cloud Deployed model failed due to bad input");
+		}
 	}
 
 	// END EXTRA CODE
