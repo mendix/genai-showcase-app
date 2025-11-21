@@ -5,6 +5,7 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // - the code between BEGIN EXTRA CODE and END EXTRA CODE
 // Other code you write will be lost the next time you deploy the project.
+import "mx-global";
 import { Big } from "big.js";
 
 // BEGIN EXTRA CODE
@@ -41,7 +42,7 @@ export async function SetFavicon(iconUrl16x16, iconUrl32x32, appleTouchIconUrl) 
             const link = document.createElement("link");
             link.href = href;
             const bypassCacheHref = new URL(link.href);
-            bypassCacheHref.search = "v" + Date.now();
+            bypassCacheHref.searchParams.append("v", Date.now());
             link.href = bypassCacheHref.toString();
             link.rel = "icon";
             if (sizes) {
