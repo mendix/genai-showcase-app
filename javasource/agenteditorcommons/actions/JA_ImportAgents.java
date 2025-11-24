@@ -134,48 +134,51 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 				: null;
 		LOGGER.debug(qualifiedName + " - model: " + modelQualifiedName);
 
-		// get variables
+		// TODO get variables
 
-		// validate variables
+		// TODO validate variables
 
 		// get model document
-		IMendixObject model = findModelMxObject(modelQualifiedName);
+		String modelModelDocumentUUID = getModelModelDocumentUUID(modelQualifiedName);
 
-		// TODO check model document exists
+		// TODO check properly that model document exists
 
-		// if (model == null)
-		// throw new IllegalArgumentException(
-		// "Model for qualified name '" + modelDocumenQualifiedName + "' could not be
-		// found.");
+		boolean isSuccess = agenteditorcommons.proxies.microflows.Microflows.agent_CreateUpdate(getContext(),
+				agentModelDocumentUUID, documentName, description, systemPrompt, userPrompt, entity, usageType, null,
+				null, null, modelModelDocumentUUID);
+		if (!isSuccess) {
+			throw new IllegalArgumentException(
+					"Creating/Updating the Agent '" + qualifiedName + "'  failed due to bad input");
+		}
 
-		IMendixObject agent = getOrInstantiateAgent(qualifiedName, agentModelDocumentUUID);
-
-		// update agent fields
-		agent.setValue(getContext(), Agent.MemberNames.Title.toString(), documentName);
-		agent.setValue(getContext(), Agent.MemberNames.Description.toString(), description);
-		agent.setValue(getContext(), Agent.MemberNames.UsageType.toString(), usageType.toString());
-		agent.setValue(getContext(), Agent.MemberNames.Entity.toString(), entity);
-
-		java.util.List<IMendixObject> existingVersions = getVersions(agent);
-
-		IMendixObject versionToKeep = getOrCreateFirstVersion(agent, existingVersions);
-
-		agent.setValue(getContext(), Agent.MemberNames.Agent_Version_InUse.toString(), versionToKeep.getId());
-
-		existingVersions.remove(versionToKeep);
-		Core.delete(getContext(), existingVersions);
-		// TODO related objects cleanup
-
-		versionToKeep.setValue(getContext(), Version.MemberNames.Title.toString(), "Created From Model");
-		versionToKeep.setValue(getContext(), Version.MemberNames.Description.toString(), "Created From Model");
-		versionToKeep.setValue(getContext(), Version.MemberNames.SystemPrompt.toString(), systemPrompt);
-		versionToKeep.setValue(getContext(), Version.MemberNames.UserPrompt.toString(), userPrompt);
-		versionToKeep.setValue(getContext(), Version.MemberNames.VersionChangedDate.toString(), new java.util.Date());
-		versionToKeep.setValue(getContext(), Version.MemberNames.Version_DeployedModel.toString(), model.getId());
-		// TODO fix decimal/integer values and validate
-
-		Core.commit(getContext(), versionToKeep);
-		Core.commit(getContext(), agent);
+//		IMendixObject agent = getOrInstantiateAgent(qualifiedName, agentModelDocumentUUID);
+//
+//		// update agent fields
+//		agent.setValue(getContext(), Agent.MemberNames.Title.toString(), documentName);
+//		agent.setValue(getContext(), Agent.MemberNames.Description.toString(), description);
+//		agent.setValue(getContext(), Agent.MemberNames.UsageType.toString(), usageType.toString());
+//		agent.setValue(getContext(), Agent.MemberNames.Entity.toString(), entity);
+//
+//		java.util.List<IMendixObject> existingVersions = getVersions(agent);
+//
+//		IMendixObject versionToKeep = getOrCreateFirstVersion(agent, existingVersions);
+//
+//		agent.setValue(getContext(), Agent.MemberNames.Agent_Version_InUse.toString(), versionToKeep.getId());
+//
+//		existingVersions.remove(versionToKeep);
+//		Core.delete(getContext(), existingVersions);
+//		// TODO related objects cleanup
+//
+//		versionToKeep.setValue(getContext(), Version.MemberNames.Title.toString(), "Created From Model");
+//		versionToKeep.setValue(getContext(), Version.MemberNames.Description.toString(), "Created From Model");
+//		versionToKeep.setValue(getContext(), Version.MemberNames.SystemPrompt.toString(), systemPrompt);
+//		versionToKeep.setValue(getContext(), Version.MemberNames.UserPrompt.toString(), userPrompt);
+//		versionToKeep.setValue(getContext(), Version.MemberNames.VersionChangedDate.toString(), new java.util.Date());
+//		versionToKeep.setValue(getContext(), Version.MemberNames.Version_DeployedModel.toString(), model.getId());
+//		// TODO fix decimal/integer values and validate
+//
+//		Core.commit(getContext(), versionToKeep);
+//		Core.commit(getContext(), agent);
 
 	}
 
@@ -223,6 +226,22 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 		}
 
 		return deployedModels.getFirst();
+	}
+
+	private String getModelModelDocumentUUID(String modelQualifiedName) throws JsonProcessingException {
+		CustomBlobDocumentInfo modelDocument = Core.extensibility().getCustomDocumentByFullName(modelQualifiedName);
+		if (modelDocument == null)
+			return null;
+		ObjectMapper objectMapper = new ObjectMapper();
+		String modelModelDocumentUUID;
+
+		JsonNode modelRoot = objectMapper.readTree(modelDocument.content());
+		modelModelDocumentUUID = modelRoot.has("modelDocumentUUID") ? modelRoot.get("modelDocumentUUID").asText()
+				: null;
+		LOGGER.debug("Model for qualifiedName '" + modelQualifiedName + "' has modelDocumentUUID '"
+				+ modelModelDocumentUUID + "'.");
+
+		return modelModelDocumentUUID;
 	}
 
 	private java.util.List<IMendixObject> getVersions(IMendixObject agent) {
@@ -316,7 +335,6 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 		LOGGER.debug(qualifiedName + " - modelDocumentUUID: " + modelDocumentUUID);
 
 		JsonNode providerFields = rootNode.has("providerFields") ? rootNode.get("providerFields") : null;
-
 		String key = providerFields.has("key") ? providerFields.get("key").asText() : null;
 		LOGGER.debug(qualifiedName + " - key: " + key);
 
@@ -324,7 +342,7 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 				.mxCloudDeployedModel_CreateUpdate(getContext(), key, modelDocumentUUID, documentName);
 		if (!isSuccess) {
 			throw new IllegalArgumentException(
-					"Creating/Updating the Mendix Cloud Deployed model failed due to bad input");
+					"Creating/Updating the Mendix Cloud Deployed Model '" + qualifiedName + "' failed due to bad input");
 		}
 	}
 
