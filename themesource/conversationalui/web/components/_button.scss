@@ -1,0 +1,96 @@
+@import '../../../../theme/web/custom-variables';
+
+
+.btn.mx-button {
+    &.btn-border-primary { 
+        color: $brand-primary;
+        border: 1px solid $brand-primary;
+        background-color: transparent;
+
+        &.disabled {
+            background-color: transparent;
+            border: 1px solid $brand-primary;
+            cursor: default;
+        }
+
+        &:hover,
+        &:active,
+        &:focus {
+            color: $btn-primary-color;
+            background-color: $brand-primary;
+            border: 1px solid $brand-primary;
+        }
+    }
+
+    &.btn-text-default { 
+        color: $font-color-default;
+        border: 1px solid transparent;
+        background-color: transparent;
+
+        &.disabled {
+            background-color: transparent;
+            border: 1px solid transparent;
+            cursor: default;
+        }
+
+        &:hover,
+        &:active,
+        &:focus {
+            color: $font-color-default;
+            background-color: $btn-default-bg-hover;
+            border: 1px solid transparent;
+        }
+
+        &.btn-small {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        img {
+            height: 22px;
+            width: 22px;
+            margin: 1px;
+        }
+    }
+
+    &.btn-text-danger { 
+        color: $brand-danger;
+        border: 1px solid transparent;
+        background-color: transparent;
+
+        &.disabled {
+            background-color: transparent;
+            border: none;
+            cursor: default;
+        }
+
+        &:hover,
+        &:active,
+        &:focus {
+            color: $brand-danger;
+            background-color: $btn-default-bg-hover;
+            border: 1px solid $btn-default-bg-hover;
+        }
+    }
+
+    &.btn-icon-only {
+        all: unset;
+        padding-top: $spacing-smallest;
+        img {
+            height: 16px;
+            width: 16px;
+        }
+    }
+}
+
+.mx-link {
+    &.link-bold {
+        font-weight: 600;
+        line-height: 150%;
+        cursor: pointer;
+        text-decoration: underline;
+        text-decoration-thickness: 1px; 
+    }
+}
+

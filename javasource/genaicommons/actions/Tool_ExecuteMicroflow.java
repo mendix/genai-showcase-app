@@ -23,6 +23,7 @@ import genaicommons.impl.MxLogger;
 import genaicommons.proxies.Argument;
 import genaicommons.proxies.ArgumentInput;
 import genaicommons.proxies.KnowledgeBaseSpan;
+import genaicommons.proxies.MCPSpan;
 import genaicommons.proxies.ModelSpan;
 import genaicommons.proxies.ToolSpan;
 import genaicommons.proxies.Trace;
@@ -267,9 +268,20 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 			return toolSpan;
 		}
 		
-		if(Tool.getClass().equals(genaicommons.proxies.KnowledgeBaseRetrieval.class)){
+		if (Tool.getMCPServerName()!= null) {
+			MCPSpan mxMCPSpan = new MCPSpan(getContext());
+			setToolSpanAttributes(mxMCPSpan, trace, executionTime, response);
+			mxMCPSpan.setServerName(Tool.getMCPServerName());
+			return mxMCPSpan;
+		}
+		else if(Tool.getClass().equals(genaicommons.proxies.KnowledgeBaseRetrieval.class)){
+			genaicommons.proxies.KnowledgeBaseRetrieval mxKnowledgeBaseRetrieval = (genaicommons.proxies.KnowledgeBaseRetrieval)Tool;
 			KnowledgeBaseSpan knowledgeBaseSpan = new KnowledgeBaseSpan(getContext());
 			setToolSpanAttributes(knowledgeBaseSpan, trace, executionTime, response);
+			knowledgeBaseSpan.setMinimumSimilarity(mxKnowledgeBaseRetrieval.getMinimumSimilarity());
+			knowledgeBaseSpan.setMaxNumberOfResults(mxKnowledgeBaseRetrieval.getMaxNumberOfResults());
+			knowledgeBaseSpan.setArchitecture(mxKnowledgeBaseRetrieval.getKnowledgeBaseRetrieval_DeployedKnowledgeBase().getArchitecture());
+			knowledgeBaseSpan.setKBDisplayName(mxKnowledgeBaseRetrieval.getKnowledgeBaseRetrieval_DeployedKnowledgeBase().getDisplayName());
 			return knowledgeBaseSpan;
 			
 		} else {
@@ -288,6 +300,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		toolSpan.setStartTime(new Date(startTime));
 		toolSpan.set_ToolCallId(ToolCall.getToolCallId());
 		toolSpan.setToolName(Tool.getName());
+		toolSpan.setToolDescription(Tool.getDescription());
 		toolSpan.setEndTime(new Date(System.currentTimeMillis()));			
 		toolSpan.setInput(getArgumentsString());
 		toolSpan.setDurationMilliseconds((int) executionTime);

@@ -1,20 +1,22 @@
+@import "../../../atlas_core/web/_variables.scss";
 @import "../../../../theme/web/custom-variables.scss";
 
 .datetime-inputs-wrapper {
     display: flex;
     justify-content: flex-start;
+    gap: 2px;
 
     .time-input {
         display: unset;
-        max-width: 100px;
+        max-width: 120px;
         margin-left: -1px;
         margin-bottom: 0;
     }
 
     .date-input {
         display: unset;
-        max-width: 150px;
-        margin-left: $spacing-medium;
+        max-width: 120px;
+        margin-left: -1px;
         margin-bottom: 0;
     }
 
@@ -28,6 +30,46 @@
         margin-top: 0.5px;
     }
 }
+
+.filter-date-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+
+
+    .filter-time-input,
+    .filter-date-input {
+        flex: 1;
+        display: block;
+        width: 100%;
+									 
+        margin-bottom: 0;
+        height: 7rem;
+        position: relative;
+    }
+
+    .mx-compound-control {
+        .btn {
+            margin-left: -44px;
+            border: 1px solid transparent;
+            background: transparent;
+        }
+    }
+
+    .has-error {
+        position: relative;
+        height: 7rem;
+
+        .alert {
+            position: absolute;
+            width: 100%;
+            margin: 0;
+            line-height: 1;
+        }
+    }
+}
+
 
 .input-container {
     border-bottom: 1px solid $light-border-color;
@@ -67,8 +109,9 @@
     .model-selection {
         display: flex;
         align-items: center;
+        flex-wrap: nowrap;
         height: max-content;
-    
+	 
         .mx-image-viewer {
             margin-right: $spacing-small;
         }
@@ -134,18 +177,11 @@
     }
 }
 
-.img--22-22 {
-    max-width: 22px;
-    max-height: 22px;
-    flex-shrink: 0;
-}
-
-.row-left-aligned {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  text-align: left;
-  gap: $spacing-smaller;
-  flex-flow: row wrap; 
-  word-break: break-word;
+.combobox-filter-height {
+    .widget-combobox-input-container {
+        align-items: center;
+        justify-content: center;
+        height: 47.5px !important;
+        border-color: $border-color-default;
+    }
 }

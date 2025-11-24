@@ -1,0 +1,122 @@
+@import "../../../atlas_core/web/_variables.scss";
+@import '../../../../theme/web/custom-variables';
+
+/* tooltip basic styling */
+.convui-tooltip {
+    .widget-tooltip-content {
+        position: relative;
+        text-align: unset;
+        word-break: break-word;
+        background-color: white;
+        border-radius: 4px;
+        color: $gray-darker;
+        font-size: 12px;
+        line-height: 200%;
+        align-items: flex-start;
+        align-self: stretch;
+        justify-content: space-between;
+        font-weight: 400;
+        max-height: 48vh;
+    }
+
+    .mx-link {
+        font-weight: normal;
+        line-height: $line-height-base * 1.25;
+    }
+}
+
+/* tooltip adjustment for version */
+/* use in combination with .tooltip-col */
+.tooltip-container-version {
+    width: 350px;
+    max-height: 350px;
+    display: grid;
+    grid-template-columns: 30% 69%;
+    padding: $spacing-smallest $spacing-small $spacing-smaller $spacing-small;
+    gap: $spacing-smaller;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+}
+
+/* tooltip adjustment for token */
+.tooltip-container-token {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-self: stretch;
+    gap: $spacing-large;
+    padding: $spacing-small;
+
+    .tooltip-col {
+        flex-direction: unset;
+        overflow: auto;
+    }
+}
+
+/* tooltip adjustment for tools */
+.tooltip-container-tools {
+    padding: 0 $spacing-small $spacing-small $spacing-small;
+    width: 300px;
+}
+
+/* tooltip adjustment text only */
+.tooltip-container {
+    max-width: 250px;
+    display: inline-flex;
+    justify-content: center;
+    padding: $spacing-smallest;
+}
+
+/* tooltip components */
+.tooltip-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    text-align: left;
+    gap: $spacing-smaller;
+    word-wrap: break-word; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+}
+
+.tooltip-header {
+    @extend .row-text-img;
+    gap: 0;
+    padding-left: $spacing-small;
+    padding-bottom: $spacing-smaller
+}
+
+.tooltip-version-draft {
+    @extend .row-text-img;
+    gap: 2px;
+    line-height: 150% !important;
+    padding-left: $spacing-smallest;
+}
+
+.tooltip-row-text-icon {
+    @extend .row-text-img;
+    height: 20px;
+    padding-top: $spacing-smaller;
+}
+
+.tooltip-icon-text {
+    @extend .row-text-img;
+    gap: 10px;
+    img {
+        height: 16px;
+        width: 16px;
+        margin: 0 2px;
+    }
+}
+
+
+.tooltip-info-icon {
+    margin: 0;
+    padding: 0;
+    img {
+        height: 16px;
+        width: 16px;
+    }
+}
