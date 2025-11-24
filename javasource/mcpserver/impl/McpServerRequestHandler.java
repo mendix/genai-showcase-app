@@ -1,6 +1,5 @@
 package mcpserver.impl;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import io.modelcontextprotocol.json.McpJsonMapper;
 import io.modelcontextprotocol.json.TypeRef;
 import com.mendix.core.Core;

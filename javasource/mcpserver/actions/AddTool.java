@@ -10,17 +10,13 @@
 package mcpserver.actions;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.systemwideinterfaces.core.ISession;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import io.modelcontextprotocol.server.McpServerFeatures;
 import io.modelcontextprotocol.server.McpSyncServer;
-import io.modelcontextprotocol.server.McpSyncServerExchange;
 import io.modelcontextprotocol.spec.McpSchema;
 import mcpserver.impl.McpServerRegistry;
 import mcpserver.impl.McpSessionManager;
@@ -90,16 +86,8 @@ public class AddTool extends UserAction<IMendixObject>
 		// Add the tool to the server
 		McpSyncServer server = McpServerRegistry.getServerInstance(this.McpServer.getMendixObject().getId().toLong());
 
-		// Create a simple output schema for a single string
-		Map <String, Object> outputSchema = Map.of(
-			"type", "object",
-			"properties", Map.of(	
-					"type", "string"
-					)
-				);
-
 		McpServerFeatures.SyncToolSpecification tool = new McpServerFeatures.SyncToolSpecification(
-				new McpSchema.Tool(toolNpe.getName(), null, toolNpe.getDescription(), inputSchema, outputSchema, null, new HashMap<>()),
+				new McpSchema.Tool(toolNpe.getName(), null, toolNpe.getDescription(), inputSchema, null, null, new HashMap<>()),
 				(exchange, arguments) -> {
 					String threadName = Thread.currentThread().getName();
 					long start = System.currentTimeMillis();
@@ -114,8 +102,7 @@ public class AddTool extends UserAction<IMendixObject>
 						McpSchema.TextContent mcpTextContent = new McpSchema.TextContent(mxTextContent.getContent());
 						return new McpSchema.CallToolResult(
 							List.of(mcpTextContent),
-							false,
-							new HashMap<>()
+							false
 						);
 						
 					}catch (Exception e) { 
