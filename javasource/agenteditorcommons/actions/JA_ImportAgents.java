@@ -40,13 +40,10 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 	{
 		// BEGIN USER CODE
 		LOGGER.info("Starting JA_ImportAgents");
-		try {
-			importModels();
-			importAgents();
-		} catch (Exception e) {
-			LOGGER.error(e);
-			return null;
-		}
+
+		importModels();
+		importAgents();
+
 		LOGGER.info("Finished JA_ImportAgents");
 		return true;
 		// END USER CODE
@@ -65,34 +62,27 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new MxLogger(JA_ImportAgents.class);
 
-	private void importModels() {
+	private void importModels() throws JsonProcessingException {
 		java.util.List<CustomBlobDocumentInfo> modelDocuments = Core.extensibility()
 				.getCustomDocumentsOfType("agenteditor.model");
 		LOGGER.info(modelDocuments.size() + " model document(s) found in the Mendix Model");
-		modelDocuments.forEach(d -> {
-			try {
-				importModel(d);
-			} catch (Exception e) {
-				LOGGER.error(e);
-			}
-		});
+
+		for (CustomBlobDocumentInfo model : modelDocuments) {
+			importModel(model);
+		}
 	}
-	
-	private void importAgents() {
+
+	private void importAgents() throws JsonProcessingException, CoreException {
 		java.util.List<CustomBlobDocumentInfo> agentDocuments = Core.extensibility()
 				.getCustomDocumentsOfType("agenteditor.agent");
 		LOGGER.info(agentDocuments.size() + " agent document(s) found in the Mendix Model");
-		agentDocuments.forEach(d -> {
-			try {
-				importAgent(d);
-			} catch (Exception e) {
-				LOGGER.error(e);
-			}
-		});
+
+		for (CustomBlobDocumentInfo agent : agentDocuments) {
+			importAgent(agent);
+		}
 	}
 
-	private void importAgent(CustomBlobDocumentInfo agentDocument)
-			throws JsonMappingException, JsonProcessingException, CoreException {
+	private void importAgent(CustomBlobDocumentInfo agentDocument) throws JsonProcessingException, CoreException {
 
 		String qualifiedName = agentDocument.qualifiedDocumentName();
 		if (!validateQualifiedName(qualifiedName)) {
@@ -304,8 +294,7 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 		}
 	}
 
-	private void importModel(CustomBlobDocumentInfo modelDocument)
-			throws JsonMappingException, JsonProcessingException, CoreException {
+	private void importModel(CustomBlobDocumentInfo modelDocument) throws JsonProcessingException {
 		String qualifiedName = modelDocument.qualifiedDocumentName();
 		if (!validateQualifiedName(qualifiedName)) {
 			throw new IllegalArgumentException("Qualified name '" + qualifiedName
@@ -316,28 +305,26 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 		String documentName = qualifiedName.split("\\.")[1];
 		String modelDocumentContent = modelDocument.content();
 
-		LOGGER.debug("Model document content: "+ modelDocumentContent);		
-		
+		LOGGER.debug("Model document content: " + modelDocumentContent);
+
 		ObjectMapper objectMapper = new ObjectMapper();
 
 		JsonNode rootNode = objectMapper.readTree(modelDocumentContent);
-		
+
 		String modelDocumentUUID = rootNode.has("modelDocumentUUID") ? rootNode.get("modelDocumentUUID").asText()
 				: null;
 		LOGGER.debug(qualifiedName + " - modelDocumentUUID: " + modelDocumentUUID);
 
 		JsonNode providerFields = rootNode.has("providerFields") ? rootNode.get("providerFields") : null;
-		
+
 		String key = providerFields.has("key") ? providerFields.get("key").asText() : null;
 		LOGGER.debug(qualifiedName + " - key: " + key);
-		
-		boolean isSuccess = Core.microflowCall("AgentEditorCommons.MxCloudDeployedModel_CreateUpdate")
-			.withParam("DocumentName", documentName )
-			.withParam("Key", key)
-			.withParam("ModelDocumentUUID", modelDocumentUUID)
-			.execute(getContext());
+
+		boolean isSuccess = agenteditorcommons.proxies.microflows.Microflows
+				.mxCloudDeployedModel_CreateUpdate(getContext(), key, modelDocumentUUID, documentName);
 		if (!isSuccess) {
-			throw new IllegalArgumentException("Creating/Updating the Mendix Cloud Deployed model failed due to bad input");
+			throw new IllegalArgumentException(
+					"Creating/Updating the Mendix Cloud Deployed model failed due to bad input");
 		}
 	}
 
