@@ -38,8 +38,6 @@ import java.util.Map.Entry;
 
 /**
  * Registers a tool with the MCP Server that gets exposed to MCP clients. If the model chooses to call the tool, the selected microflow gets executed.
- * 
- * Currently, the current User is not in scope of the tool microflow.
  */
 public class AddTool extends UserAction<IMendixObject>
 {
@@ -105,7 +103,7 @@ public class AddTool extends UserAction<IMendixObject>
 				(exchange, arguments) -> {
 					String threadName = Thread.currentThread().getName();
 					long start = System.currentTimeMillis();
-					LOGGER.trace(threadName + ": Start processing tool call " + Name + ", MF: " + ExecutingMicroflow);
+					LOGGER.trace(threadName + ": Start processing tool call " + Name + ", microflow: " + ExecutingMicroflow);
 					try {
 						IContext contextUser = McpSessionManager.getContextFromSession(exchange);
 						Map<String, Object> args = new HashMap<>(arguments);
