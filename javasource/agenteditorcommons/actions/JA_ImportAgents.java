@@ -9,24 +9,15 @@
 
 package agenteditorcommons.actions;
 
-import java.util.stream.Collectors;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ibm.db2.jcc.am.k;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
-import com.mendix.core.actionmanagement.MicroflowCallBuilder;
 import com.mendix.extensibility.CustomBlobDocumentInfo;
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
-import agentcommons.proxies.Agent;
-import agentcommons.proxies.ENUM_Agent_UsageType;
-import agentcommons.proxies.Version;
 import agenteditorcommons.impl.MxLogger;
-import genaicommons.proxies.DeployedModel;
 
 public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 {
@@ -91,94 +82,26 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 		}
 
 		LOGGER.debug("Importing Agent with qualified name: '" + qualifiedName + "'.");
-		String documentName = qualifiedName.split("\\.")[1];
 		String agentDocumentContent = agentDocument.content();
 
 		ObjectMapper objectMapper = new ObjectMapper();
-
 		JsonNode rootNode = objectMapper.readTree(agentDocumentContent);
-
 		String agentModelDocumentUUID = rootNode.has("modelDocumentUUID") ? rootNode.get("modelDocumentUUID").asText()
 				: null;
-		LOGGER.debug(qualifiedName + " - modelDocumentUUID: " + agentModelDocumentUUID);
-
-		String description = rootNode.has("description") ? rootNode.get("description").asText() : null;
-		LOGGER.debug(qualifiedName + " - description: " + description);
-
-		String usageTypeString = rootNode.has("usageType") ? rootNode.get("usageType").asText() : null;
-		LOGGER.debug(qualifiedName + " - usageType: " + usageTypeString);
-
-		ENUM_Agent_UsageType usageType = fromUsageType(usageTypeString);
-		if (usageType == null)
-			throw new IllegalArgumentException("Usage Type '" + usageTypeString + "' is not valid.");
-
-		String entity = rootNode.has("entity") ? rootNode.get("entity").asText() : null;
-		LOGGER.debug(qualifiedName + " - entity: " + entity);
-
-		String systemPrompt = rootNode.has("systemPrompt") ? rootNode.get("systemPrompt").asText() : null;
-		LOGGER.debug(qualifiedName + " - systemPrompt: " + systemPrompt);
-
-		String userPrompt = rootNode.has("userPrompt") ? rootNode.get("userPrompt").asText() : null;
-		LOGGER.debug(qualifiedName + " - userPrompt: " + userPrompt);
-
-		String temperature = rootNode.has("temperature") ? rootNode.get("temperature").asText() : null;
-		LOGGER.debug(qualifiedName + " - temperature: " + temperature);
-
-		String maxTokens = rootNode.has("maxTokens") ? rootNode.get("maxTokens").asText() : null;
-		LOGGER.debug(qualifiedName + " - maxTokens: " + maxTokens);
-
-		String topP = rootNode.has("topP") ? rootNode.get("topP").asText() : null;
-		LOGGER.debug(qualifiedName + " - topP: " + topP);
+		LOGGER.debug(qualifiedName + " - UUID: " + agentModelDocumentUUID);
 
 		String modelQualifiedName = rootNode.has("modelQualifiedName") ? rootNode.get("modelQualifiedName").asText()
 				: null;
 		LOGGER.debug(qualifiedName + " - model: " + modelQualifiedName);
-
-		// TODO get variables
-
-		// TODO validate variables
-
-		// get model document
 		String modelModelDocumentUUID = getModelModelDocumentUUID(modelQualifiedName);
-
-		// TODO check properly that model document exists
+		LOGGER.debug(qualifiedName + " - model UUID: " + modelModelDocumentUUID);
 
 		boolean isSuccess = agenteditorcommons.proxies.microflows.Microflows.agent_CreateUpdate(getContext(),
-				agentModelDocumentUUID, documentName, description, systemPrompt, userPrompt, entity, usageType, null,
-				null, null, modelModelDocumentUUID);
+				agentDocumentContent, qualifiedName, agentModelDocumentUUID, modelModelDocumentUUID );
 		if (!isSuccess) {
 			throw new IllegalArgumentException(
 					"Creating/Updating the Agent '" + qualifiedName + "'  failed due to bad input");
 		}
-
-//		IMendixObject agent = getOrInstantiateAgent(qualifiedName, agentModelDocumentUUID);
-//
-//		// update agent fields
-//		agent.setValue(getContext(), Agent.MemberNames.Title.toString(), documentName);
-//		agent.setValue(getContext(), Agent.MemberNames.Description.toString(), description);
-//		agent.setValue(getContext(), Agent.MemberNames.UsageType.toString(), usageType.toString());
-//		agent.setValue(getContext(), Agent.MemberNames.Entity.toString(), entity);
-//
-//		java.util.List<IMendixObject> existingVersions = getVersions(agent);
-//
-//		IMendixObject versionToKeep = getOrCreateFirstVersion(agent, existingVersions);
-//
-//		agent.setValue(getContext(), Agent.MemberNames.Agent_Version_InUse.toString(), versionToKeep.getId());
-//
-//		existingVersions.remove(versionToKeep);
-//		Core.delete(getContext(), existingVersions);
-//		// TODO related objects cleanup
-//
-//		versionToKeep.setValue(getContext(), Version.MemberNames.Title.toString(), "Created From Model");
-//		versionToKeep.setValue(getContext(), Version.MemberNames.Description.toString(), "Created From Model");
-//		versionToKeep.setValue(getContext(), Version.MemberNames.SystemPrompt.toString(), systemPrompt);
-//		versionToKeep.setValue(getContext(), Version.MemberNames.UserPrompt.toString(), userPrompt);
-//		versionToKeep.setValue(getContext(), Version.MemberNames.VersionChangedDate.toString(), new java.util.Date());
-//		versionToKeep.setValue(getContext(), Version.MemberNames.Version_DeployedModel.toString(), model.getId());
-//		// TODO fix decimal/integer values and validate
-//
-//		Core.commit(getContext(), versionToKeep);
-//		Core.commit(getContext(), agent);
 
 	}
 
@@ -196,37 +119,7 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 		return true;
 	}
 
-	private IMendixObject findModelMxObject(String modelQualifiedName) {
-		CustomBlobDocumentInfo modelDocument = Core.extensibility().getCustomDocumentByFullName(modelQualifiedName);
-		if (modelDocument == null)
-			return null;
-		ObjectMapper objectMapper = new ObjectMapper();
-		String modelModelDocumentUUID;
-		try {
-			JsonNode modelRoot = objectMapper.readTree(modelDocument.content());
-			modelModelDocumentUUID = modelRoot.has("modelDocumentUUID") ? modelRoot.get("modelDocumentUUID").asText()
-					: null;
-			LOGGER.debug("Model for qualifiedName '" + modelQualifiedName + "' has modelDocumentUUID '"
-					+ modelModelDocumentUUID + "'.");
-		} catch (Exception e) {
-			LOGGER.error(e);
-			return null;
-		}
-		if (modelModelDocumentUUID == null)
-			return null;
-		java.util.List<IMendixObject> deployedModels = Core
-				.createXPathQuery("//" + DeployedModel.entityName + "[" + DeployedModel.MemberNames.ModelDocumentUUID
-						+ "=$modelDocumentUUID]")
-				.setVariable("modelDocumentUUID", modelModelDocumentUUID).execute(getContext());
-		if (deployedModels.size() != 1) {
-			LOGGER.warn("Expected to find exactly 1 " + DeployedModel.entityName + " instance for qualified name "
-					+ modelQualifiedName + " and modelDocumentUUID " + modelModelDocumentUUID + ". Found "
-					+ deployedModels.size() + " instead.");
-			return null;
-		}
-
-		return deployedModels.getFirst();
-	}
+	
 
 	private String getModelModelDocumentUUID(String modelQualifiedName) throws JsonProcessingException {
 		CustomBlobDocumentInfo modelDocument = Core.extensibility().getCustomDocumentByFullName(modelQualifiedName);
@@ -244,74 +137,6 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 		return modelModelDocumentUUID;
 	}
 
-	private java.util.List<IMendixObject> getVersions(IMendixObject agent) {
-		java.util.List<IMendixObject> versions = Core
-				.createXPathQuery("//" + Version.entityName + "[" + Version.MemberNames.Version_Agent + "=$agent]")
-				.setVariable("agent", agent).execute(getContext());
-		return versions;
-	}
-
-	private IMendixObject getOrCreateFirstVersion(IMendixObject agent, java.util.List<IMendixObject> versions) {
-		IMendixObject firstVersion;
-		if (versions.size() > 0) {
-			firstVersion = versions.stream()
-					.filter(v -> Version.initialize(getContext(), v).getVersionNumber(getContext()) == 1)
-					.collect(Collectors.toList()).getFirst();
-			if (firstVersion != null) {
-				LOGGER.debug("Found Version object with version number 1.");
-				return firstVersion;
-			}
-		}
-
-		firstVersion = Core.instantiate(getContext(), Version.entityName);
-		firstVersion.setValue(getContext(), Version.MemberNames.Version_Agent.toString(), agent.getId());
-		firstVersion.setValue(getContext(), Version.MemberNames.VersionNumber.toString(), 1);
-		LOGGER.debug("Instantiated new Version object with version number 1.");
-		return firstVersion;
-	}
-
-	private IMendixObject getOrInstantiateAgent(String agentDocumentQualifiedName, String agentModelDocumentUUID) {
-		java.util.List<IMendixObject> agents = Core
-				.createXPathQuery(
-						"//" + Agent.entityName + "[" + Agent.MemberNames.ModelDocumentUUID + "=$modelDocumentUUID]")
-				.setVariable("modelDocumentUUID", agentModelDocumentUUID).execute(getContext());
-		if (agents.size() > 1) {
-			throw new IllegalArgumentException("Expected to find 0 or 1 " + Agent.entityName
-					+ " instances for qualified name " + agentDocumentQualifiedName + " and modelDocumentUUID "
-					+ agentModelDocumentUUID + ". Found " + agents.size() + " instead.");
-		}
-		IMendixObject agent;
-		if (agents.size() == 1) {
-			agent = agents.getFirst();
-			LOGGER.debug("Agent with modelDocumentUUID '" + agentModelDocumentUUID + "' found ");
-		} else {
-			agent = Core.instantiate(getContext(), Agent.entityName);
-			agent.setValue(getContext(), Agent.MemberNames.ModelDocumentUUID.toString(), agentModelDocumentUUID);
-			LOGGER.debug("Agent with modelDocumentUUID '" + agentModelDocumentUUID + "' created ");
-		}
-
-		return agent;
-	}
-
-	private static ENUM_Agent_UsageType fromUsageType(String incomingUsageType) {
-		if (incomingUsageType == null) {
-			throw new IllegalArgumentException("Incoming UsageType string cannot be null.");
-		}
-
-		switch (incomingUsageType) {
-		case "Task":
-			LOGGER.debug("Mapping incoming usageType '" + incomingUsageType + "' to '"
-					+ ENUM_Agent_UsageType.Single_Call.getCaption() + "'.");
-			return ENUM_Agent_UsageType.Single_Call;
-		case "Chat":
-			LOGGER.debug("Mapping incoming usageType '" + incomingUsageType + "' to '"
-					+ ENUM_Agent_UsageType.Conversational.getCaption() + "'.");
-			return ENUM_Agent_UsageType.Conversational;
-		default:
-			throw new IllegalArgumentException(
-					"Invalid UsageType: '" + incomingUsageType + "'. Expected 'Task' or 'Chat'.");
-		}
-	}
 
 	private void importModel(CustomBlobDocumentInfo modelDocument) throws JsonProcessingException {
 		String qualifiedName = modelDocument.qualifiedDocumentName();
