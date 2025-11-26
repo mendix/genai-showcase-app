@@ -53,6 +53,8 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new MxLogger(JA_ImportAgents.class);
 
+	private static final ObjectMapper objectMapper = new ObjectMapper();
+
 	private void importModels() throws JsonProcessingException {
 		java.util.List<CustomBlobDocumentInfo> modelDocuments = Core.extensibility()
 				.getCustomDocumentsOfType("agenteditor.model");
@@ -76,16 +78,11 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 	private void importAgent(CustomBlobDocumentInfo agentDocument) throws JsonProcessingException, CoreException {
 
 		String qualifiedName = agentDocument.qualifiedDocumentName();
-		if (!validateQualifiedName(qualifiedName)) {
-			throw new IllegalArgumentException("Qualified name '" + qualifiedName
-					+ "' does not follow the ModuleName.DocumentName naming convention.");
-		}
-
 		LOGGER.debug("Importing Agent with qualified name: '" + qualifiedName + "'.");
-		String agentDocumentContent = agentDocument.content();
 
-		ObjectMapper objectMapper = new ObjectMapper();
+		String agentDocumentContent = agentDocument.content();
 		JsonNode rootNode = objectMapper.readTree(agentDocumentContent);
+
 		String agentModelDocumentUUID = rootNode.has("modelDocumentUUID") ? rootNode.get("modelDocumentUUID").asText()
 				: null;
 		LOGGER.debug(qualifiedName + " - UUID: " + agentModelDocumentUUID);
@@ -93,11 +90,13 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 		String modelQualifiedName = rootNode.has("modelQualifiedName") ? rootNode.get("modelQualifiedName").asText()
 				: null;
 		LOGGER.debug(qualifiedName + " - model: " + modelQualifiedName);
-		String modelModelDocumentUUID = getModelModelDocumentUUID(modelQualifiedName);
+
+		String modelModelDocumentUUID = modelQualifiedName != null ? getModelModelDocumentUUID(modelQualifiedName)
+				: null;
 		LOGGER.debug(qualifiedName + " - model UUID: " + modelModelDocumentUUID);
 
 		boolean isSuccess = agenteditorcommons.proxies.microflows.Microflows.agent_CreateUpdate(getContext(),
-				agentDocumentContent, qualifiedName, agentModelDocumentUUID, modelModelDocumentUUID );
+				agentDocumentContent, qualifiedName, modelModelDocumentUUID);
 		if (!isSuccess) {
 			throw new IllegalArgumentException(
 					"Creating/Updating the Agent '" + qualifiedName + "'  failed due to bad input");
@@ -105,27 +104,11 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 
 	}
 
-	private boolean validateQualifiedName(String qualifiedName) {
-		String[] parts = qualifiedName.split("\\.");
-		String moduleName = parts[0];
-		String documentName = parts[1];
-		if (parts.length == 2) {
-			moduleName = parts[0];
-			documentName = parts[1];
-			System.out.println("Found two parts: " + moduleName + " and " + documentName);
-		} else {
-			return false;
-		}
-		return true;
-	}
-
-	
-
 	private String getModelModelDocumentUUID(String modelQualifiedName) throws JsonProcessingException {
 		CustomBlobDocumentInfo modelDocument = Core.extensibility().getCustomDocumentByFullName(modelQualifiedName);
 		if (modelDocument == null)
 			return null;
-		ObjectMapper objectMapper = new ObjectMapper();
+
 		String modelModelDocumentUUID;
 
 		JsonNode modelRoot = objectMapper.readTree(modelDocument.content());
@@ -137,37 +120,22 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 		return modelModelDocumentUUID;
 	}
 
-
 	private void importModel(CustomBlobDocumentInfo modelDocument) throws JsonProcessingException {
 		String qualifiedName = modelDocument.qualifiedDocumentName();
-		if (!validateQualifiedName(qualifiedName)) {
-			throw new IllegalArgumentException("Qualified name '" + qualifiedName
-					+ "' does not follow the ModuleName.DocumentName naming convention.");
-
-		}
 		LOGGER.debug("Importing model with qualified name '" + qualifiedName + "'.");
-		String documentName = qualifiedName.split("\\.")[1];
+
 		String modelDocumentContent = modelDocument.content();
-
-		LOGGER.debug("Model document content: " + modelDocumentContent);
-
-		ObjectMapper objectMapper = new ObjectMapper();
-
 		JsonNode rootNode = objectMapper.readTree(modelDocumentContent);
 
 		String modelDocumentUUID = rootNode.has("modelDocumentUUID") ? rootNode.get("modelDocumentUUID").asText()
 				: null;
 		LOGGER.debug(qualifiedName + " - modelDocumentUUID: " + modelDocumentUUID);
 
-		JsonNode providerFields = rootNode.has("providerFields") ? rootNode.get("providerFields") : null;
-		String key = providerFields.has("key") ? providerFields.get("key").asText() : null;
-		LOGGER.debug(qualifiedName + " - key: " + key);
-
 		boolean isSuccess = agenteditorcommons.proxies.microflows.Microflows
-				.mxCloudDeployedModel_CreateUpdate(getContext(), key, modelDocumentUUID, documentName);
+				.deployedModel_CreateUpdate(getContext(), modelDocumentContent, qualifiedName);
 		if (!isSuccess) {
-			throw new IllegalArgumentException(
-					"Creating/Updating the Mendix Cloud Deployed Model '" + qualifiedName + "' failed due to bad input");
+			throw new IllegalArgumentException("Creating/Updating the Mendix Cloud Deployed Model '" + qualifiedName
+					+ "' failed due to bad input");
 		}
 	}
 
