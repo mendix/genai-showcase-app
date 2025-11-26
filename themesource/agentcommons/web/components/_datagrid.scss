@@ -1,7 +1,18 @@
+@import '../../../../theme/web/custom-variables';
+
 //fix for datagrid scrollbar caused by popupmenu
 .datagrid--no-scroll {
     .widget-datagrid-content {
         overflow-y: visible;
         overflow-x: visible;
     }
+}
+
+.datagrid--fixed-row-height .table .td {
+    height: 3 * $font-size-default + 2 * $spacing-small;
+    padding: $spacing-small; 
+}
+
+.datagrid--fixed-row-height .table .th {
+    padding: $spacing-small; 
 }
