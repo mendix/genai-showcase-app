@@ -30071,9 +30071,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
   text-transform: uppercase;
 }
 
-.agent-badge, .agent-badge--purple {
+.agent-badge, .agent-badge--primary, .agent-badge--default, .agent-badge--purple {
   display: inline-flex;
-  display: flex;
   height: 20px;
   padding: 6px;
   gap: 6px;
@@ -30086,6 +30085,16 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .agent-badge--purple {
   background: #E2E0FC;
   border: 1px solid #845EFF;
+}
+
+.agent-badge--default {
+  background: #fafafb;
+  border: 1px solid #a2a2a3;
+}
+
+.agent-badge--primary {
+  background: #d4dbfa;
+  border: 1px solid #1b34a0;
 }
 
 .btn.mx-button.btn-without-border, .btn.mx-button.btn-without-border-red {
@@ -30245,6 +30254,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .datagrid--no-scroll .widget-datagrid-content {
   overflow-y: visible;
   overflow-x: visible;
+}
+
+.datagrid--fixed-row-height .table .td {
+  height: 58px;
+  padding: 8px;
+}
+
+.datagrid--fixed-row-height .table .th {
+  padding: 8px;
 }
 
 .custom-control-label {
