@@ -30029,6 +30029,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 8px;
   border-bottom: none;
 }
+.datagrid--fixed-row-height .table .td .empty-placeholder {
+  display: flex;
+  justify-content: center;
+}
 
 .datagrid--fixed-row-height .table .th {
   padding: 8px;
