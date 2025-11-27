@@ -29998,6 +29998,46 @@ input[type=checkbox].three-state-checkbox + .control-label {
   text-decoration-thickness: 1px;
 }
 
+.model-badge, .model-badge--primary, .model-badge--default {
+  display: inline-flex;
+  height: 20px;
+  padding: 6px;
+  gap: 6px;
+  align-items: center;
+  border-radius: 4px;
+  font-size: 12px;
+  font-style: normal;
+}
+
+.model-badge--default {
+  background: #fafafb;
+  border: 1px solid #a2a2a3;
+}
+
+.model-badge--primary {
+  background: #d4dbfa;
+  border: 1px solid #1b34a0;
+}
+
+.datagrid--no-scroll .widget-datagrid-content {
+  overflow-y: visible;
+  overflow-x: visible;
+}
+
+.datagrid--fixed-row-height .table .td {
+  height: 58px;
+  padding: 8px;
+  border-bottom: none;
+}
+
+.datagrid--fixed-row-height .table .th {
+  padding: 8px;
+}
+
+.datagrid--fixed-row-height .table-header {
+  border: none;
+}
+
 .grid-deployed-model {
   display: grid;
   grid-template-columns: repeat(4, 1fr) 0.5fr 150px;
