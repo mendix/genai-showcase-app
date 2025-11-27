@@ -30684,7 +30684,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .agent-page-container .page-header-content {
   display: flex;
   flex-direction: column;
-  gap: 8px;
   align-self: stretch;
 }
 .agent-page-container .page-header-content .pageheader-with-buttons {
