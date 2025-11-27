@@ -35,9 +35,9 @@
         }
 
     } ol > li {
-        padding: 0px; //used for ordered lists in markdown viewer
+        padding: 0; //used for ordered lists in markdown viewer
     } ul > li {
-        padding: 8px; //from listview-sm
+        padding: $spacing-smaller; //from listview-sm
     }
 }
 
