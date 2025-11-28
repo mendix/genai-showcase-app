@@ -29095,9 +29095,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 1rem;
 }
 
+.custom-barchart {
+  padding-bottom: 5% !important;
+}
 .custom-barchart .main-svg {
   background: unset !important;
-  padding: 0;
+  height: 270px !important;
+  margin: 0 !important;
 }
 
 /* reference for animation */
@@ -30002,12 +30006,12 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .tree-duration-position-parent {
   position: absolute;
-  left: 380px;
+  left: 280px;
 }
 
 .tree-duration-position {
   position: absolute;
-  left: 400px;
+  left: 700px;
 }
 
 .tree-item-hover:hover, .tree-item-hover:active, .tree-item-hover:focus {

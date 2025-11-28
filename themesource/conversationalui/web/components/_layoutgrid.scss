@@ -23,9 +23,11 @@
 }
 
 .custom-barchart {
+  padding-bottom: 5% !important;
   .main-svg {
     background: unset !important;
-    padding: 0;
-
+    height: 270px !important;
+    margin: 0 !important;
+    //padding-bottom: 5% !important;
   }
 }
