@@ -29081,6 +29081,25 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: 100%;
 }
 
+.span-grid {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  gap: 1rem;
+}
+
+.treenode-col {
+  padding: 1rem;
+}
+
+.chart-col {
+  padding: 1rem;
+}
+
+.custom-barchart .main-svg {
+  background: unset !important;
+  padding: 0;
+}
+
 /* reference for animation */
 @keyframes scale-in-right {
   0% {

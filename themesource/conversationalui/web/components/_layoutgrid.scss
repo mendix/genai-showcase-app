@@ -7,3 +7,25 @@
         }
     }
 }
+
+.span-grid {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  gap: 1rem; 
+}
+
+.treenode-col {
+  padding: 1rem;
+}
+
+.chart-col {
+  padding: 1rem;
+}
+
+.custom-barchart {
+  .main-svg {
+    background: unset !important;
+    padding: 0;
+
+  }
+}
