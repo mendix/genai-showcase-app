@@ -9,6 +9,7 @@
 
 package agenteditorcommons.actions;
 
+import java.util.ArrayList;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,6 +19,7 @@ import com.mendix.extensibility.CustomBlobDocumentInfo;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import agenteditorcommons.impl.MxLogger;
+import agenteditorcommons.proxies.AgentModelDocument;
 
 public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 {
@@ -69,13 +71,22 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 		java.util.List<CustomBlobDocumentInfo> agentDocuments = Core.extensibility()
 				.getCustomDocumentsOfType("agenteditor.agent");
 		LOGGER.info(agentDocuments.size() + " agent document(s) found in the Mendix Model");
-
+		
+		java.util.List<AgentModelDocument> agentModelDocuments = new ArrayList<>();
 		for (CustomBlobDocumentInfo agent : agentDocuments) {
-			importAgent(agent);
+			agentModelDocuments.add(getAgentModleDocument(agent));
+		}
+
+		boolean isSuccess = agenteditorcommons.proxies.microflows.Microflows.agent_CreateUpdate_List(getContext(),
+				agentModelDocuments);
+		if (!isSuccess) {
+			throw new IllegalArgumentException(
+					"Creating/Updating the Agents failed due to bad input");
 		}
 	}
 
-	private void importAgent(CustomBlobDocumentInfo agentDocument) throws JsonProcessingException, CoreException {
+	private AgentModelDocument getAgentModleDocument(CustomBlobDocumentInfo agentDocument)
+			throws JsonProcessingException, CoreException {
 
 		String qualifiedName = agentDocument.qualifiedDocumentName();
 		LOGGER.debug("Importing Agent with qualified name: '" + qualifiedName + "'.");
@@ -95,12 +106,11 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 				: null;
 		LOGGER.debug(qualifiedName + " - model UUID: " + modelModelDocumentUUID);
 
-		boolean isSuccess = agenteditorcommons.proxies.microflows.Microflows.agent_CreateUpdate(getContext(),
-				agentDocumentContent, qualifiedName, modelModelDocumentUUID);
-		if (!isSuccess) {
-			throw new IllegalArgumentException(
-					"Creating/Updating the Agent '" + qualifiedName + "'  failed due to bad input");
-		}
+		AgentModelDocument agentModelDocument = new AgentModelDocument(getContext());
+		agentModelDocument.setContent(getContext(), agentDocumentContent);
+		agentModelDocument.setModelModelDocumentUUID(getContext(), modelModelDocumentUUID);
+		agentModelDocument.setQualifiedName(getContext(), qualifiedName);
+		return agentModelDocument;
 
 	}
 
@@ -131,8 +141,8 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 				: null;
 		LOGGER.debug(qualifiedName + " - modelDocumentUUID: " + modelDocumentUUID);
 
-		boolean isSuccess = agenteditorcommons.proxies.microflows.Microflows
-				.deployedModel_CreateUpdate(getContext(), modelDocumentContent, qualifiedName);
+		boolean isSuccess = agenteditorcommons.proxies.microflows.Microflows.deployedModel_CreateUpdate(getContext(),
+				modelDocumentContent, qualifiedName);
 		if (!isSuccess) {
 			throw new IllegalArgumentException("Creating/Updating the Mendix Cloud Deployed Model '" + qualifiedName
 					+ "' failed due to bad input");
