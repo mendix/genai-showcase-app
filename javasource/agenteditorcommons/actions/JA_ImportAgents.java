@@ -20,6 +20,7 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import agenteditorcommons.impl.MxLogger;
 import agenteditorcommons.proxies.AgentModelDocument;
+import agenteditorcommons.proxies.ModelModelDocument;
 
 public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 {
@@ -61,9 +62,16 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 		java.util.List<CustomBlobDocumentInfo> modelDocuments = Core.extensibility()
 				.getCustomDocumentsOfType("agenteditor.model");
 		LOGGER.info(modelDocuments.size() + " model document(s) found in the Mendix Model");
-
+		
+		java.util.List<ModelModelDocument> modelModelDocuments = new ArrayList<>();
 		for (CustomBlobDocumentInfo model : modelDocuments) {
-			importModel(model);
+			modelModelDocuments.add(getModelModelDocument(model));
+		}
+		
+		boolean isSuccess = agenteditorcommons.proxies.microflows.Microflows.deployedModel_CreateUpdate_List(getContext(),
+				modelModelDocuments);
+		if (!isSuccess) {
+			throw new IllegalArgumentException("Creating/Updating the Mendix Cloud Deployed Models failed due to bad input");
 		}
 	}
 
@@ -74,7 +82,7 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 		
 		java.util.List<AgentModelDocument> agentModelDocuments = new ArrayList<>();
 		for (CustomBlobDocumentInfo agent : agentDocuments) {
-			agentModelDocuments.add(getAgentModleDocument(agent));
+			agentModelDocuments.add(getAgentModelDocument(agent));
 		}
 
 		boolean isSuccess = agenteditorcommons.proxies.microflows.Microflows.agent_CreateUpdate_List(getContext(),
@@ -85,7 +93,7 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 		}
 	}
 
-	private AgentModelDocument getAgentModleDocument(CustomBlobDocumentInfo agentDocument)
+	private AgentModelDocument getAgentModelDocument(CustomBlobDocumentInfo agentDocument)
 			throws JsonProcessingException, CoreException {
 
 		String qualifiedName = agentDocument.qualifiedDocumentName();
@@ -130,7 +138,7 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 		return modelModelDocumentUUID;
 	}
 
-	private void importModel(CustomBlobDocumentInfo modelDocument) throws JsonProcessingException {
+	private ModelModelDocument getModelModelDocument(CustomBlobDocumentInfo modelDocument) throws JsonProcessingException {
 		String qualifiedName = modelDocument.qualifiedDocumentName();
 		LOGGER.debug("Importing model with qualified name '" + qualifiedName + "'.");
 
@@ -140,13 +148,12 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 		String modelDocumentUUID = rootNode.has("modelDocumentUUID") ? rootNode.get("modelDocumentUUID").asText()
 				: null;
 		LOGGER.debug(qualifiedName + " - modelDocumentUUID: " + modelDocumentUUID);
-
-		boolean isSuccess = agenteditorcommons.proxies.microflows.Microflows.deployedModel_CreateUpdate(getContext(),
-				modelDocumentContent, qualifiedName);
-		if (!isSuccess) {
-			throw new IllegalArgumentException("Creating/Updating the Mendix Cloud Deployed Model '" + qualifiedName
-					+ "' failed due to bad input");
-		}
+		
+		ModelModelDocument modelModelDocument = new ModelModelDocument(getContext());
+		modelModelDocument.setContent(getContext(), modelDocumentContent);
+		modelModelDocument.setQualifiedName(getContext(), qualifiedName);
+		return modelModelDocument;
+		
 	}
 
 	// END EXTRA CODE
