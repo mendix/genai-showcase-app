@@ -1,5 +1,9 @@
-import { aA as b, r as o, j as t, aB as w, aC as x, aD as C, aE as f, aF as D, aG as E } from "./componentLoader-kLajWKon.js";
-import { c as j } from "./knowledgebaseUtils-CyYrmqWg.js";
+import { W as b, r as o, j as t, X as w, Y as x, Z as f, _ as C, a0 as D, a1 as j } from "./componentLoader-DyfefHgs.js";
+function E(n) {
+  return {
+    name: ""
+  };
+}
 const v = (n, a, c, s, l) => async (r) => {
   console.log("knowledgebase change triggered for field ", a);
   const i = { ...c, [a]: r };
@@ -14,15 +18,15 @@ const v = (n, a, c, s, l) => async (r) => {
       message: s.message
     });
   }
-}, y = j(), B = ({ studioPro: n, documentId: a }) => {
-  const c = n.ui.messageBoxes, s = n.app.model.customBlobDocuments, [l, r] = o.useState(0), [i, h] = o.useState(!1), [g, d] = o.useState(y);
+}, y = E(), K = ({ studioPro: n, documentId: a }) => {
+  const c = n.ui.messageBoxes, s = n.app.model.customBlobDocuments, [l, r] = o.useState(0), [i, p] = o.useState(!1), [g, d] = o.useState(y);
   return o.useCallback(
     (e) => v(n, e, g, d, a),
     [n, g, d, a]
   ), o.useEffect(() => {
-    const e = (m) => {
-      const { documents: u } = m;
-      u.some((p) => p.id === a) && r((p) => p + 1);
+    const e = (u) => {
+      const { documents: m } = u;
+      m.some((h) => h.id === a) && r((h) => h + 1);
     };
     return s.addEventListener("documentsChanged", e), () => {
       s.removeEventListener("documentsChanged", e);
@@ -30,8 +34,8 @@ const v = (n, a, c, s, l) => async (r) => {
   }, []), o.useEffect(() => {
     s.getDocumentById(a).then(async (e) => {
       if (e && !("error" in e)) {
-        const m = e.document.contents, u = e.document.name;
-        d({ ...m, name: u }), h(!0);
+        const u = e.document.contents, m = e.document.name;
+        d({ ...u, name: m }), p(!0);
       } else
         throw new Error((e == null ? void 0 : e.error) || "Document not found");
     }).catch((e) => {
@@ -39,8 +43,8 @@ const v = (n, a, c, s, l) => async (r) => {
     });
   }, [l]), /* @__PURE__ */ t.jsx(w, { studioPro: n, children: /* @__PURE__ */ t.jsxs(x, { children: [
     !i && /* @__PURE__ */ t.jsx("span", { children: "Loading document content..." }),
-    i && /* @__PURE__ */ t.jsx(C, { children: /* @__PURE__ */ t.jsx(f, { children: /* @__PURE__ */ t.jsx(D, { label: "General", children: /* @__PURE__ */ t.jsx(
-      E,
+    i && /* @__PURE__ */ t.jsx(f, { children: /* @__PURE__ */ t.jsx(C, { children: /* @__PURE__ */ t.jsx(D, { label: "General", children: /* @__PURE__ */ t.jsx(
+      j,
       {
         label: "Name",
         ariaLabel: "Name",
@@ -51,7 +55,7 @@ const v = (n, a, c, s, l) => async (r) => {
       }
     ) }) }) })
   ] }) });
-}, A = b(B);
+}, B = b(K);
 export {
-  A as component
+  B as component
 };
