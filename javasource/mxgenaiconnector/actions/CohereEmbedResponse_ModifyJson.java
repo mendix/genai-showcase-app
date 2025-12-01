@@ -62,8 +62,20 @@ public class CohereEmbedResponse_ModifyJson extends UserAction<java.lang.String>
 				// Create the embeddings array for the output
 				ArrayNode outputEmbeddingsArray = mapper.createArrayNode();
 
-				// Get input embeddings and texts arrays
-				ArrayNode inputEmbeddingsArray = (ArrayNode) root.get("embeddings");
+				// Get input embeddings - handle both direct array and nested object formats
+				JsonNode embeddingsNode = root.get("embeddings");
+				ArrayNode inputEmbeddingsArray;
+				
+				if (embeddingsNode.isArray()) {
+					// Case 1: embeddings is a direct array
+					inputEmbeddingsArray = (ArrayNode) embeddingsNode;
+				} else if (embeddingsNode.isObject() && embeddingsNode.has("float")) {
+					// Case 2: embeddings is an object with a "float" key containing the array
+					inputEmbeddingsArray = (ArrayNode) embeddingsNode.get("float");
+				} else {
+					LOGGER.warn("Embeddings format not recognized.");
+					return null;
+				}
 				
 
 				// Iterate over the embeddings and texts
@@ -112,10 +124,22 @@ public class CohereEmbedResponse_ModifyJson extends UserAction<java.lang.String>
 	private static final MxLogger LOGGER = new MxLogger(CohereEmbedResponse_ModifyJson.class);
 
 	private boolean isRootEmpty(ObjectNode root) {
-		return root == null || !root.hasNonNull("id") || !root.hasNonNull("response_type") ||
-		       !root.hasNonNull("texts") || !root.hasNonNull("embeddings") ||
-		       !root.get("texts").isArray() || !root.get("embeddings").isArray() ||
-		       ((ArrayNode) root.get("texts")).size() == 0 || ((ArrayNode) root.get("embeddings")).size() == 0;
+		if (root == null || !root.hasNonNull("id") || !root.hasNonNull("response_type") ||
+		    !root.hasNonNull("texts") || !root.hasNonNull("embeddings") ||
+		    !root.get("texts").isArray() || ((ArrayNode) root.get("texts")).size() == 0) {
+			return true;
+		}
+		
+		// Check embeddings format - either direct array or object with "float" key
+		JsonNode embeddingsNode = root.get("embeddings");
+		if (embeddingsNode.isArray()) {
+			return ((ArrayNode) embeddingsNode).size() == 0;
+		} else if (embeddingsNode.isObject() && embeddingsNode.has("float")) {
+			JsonNode floatArray = embeddingsNode.get("float");
+			return !floatArray.isArray() || ((ArrayNode) floatArray).size() == 0;
+		}
+		
+		return true; // Unrecognized embeddings format
 	}
 
 	// END EXTRA CODE
