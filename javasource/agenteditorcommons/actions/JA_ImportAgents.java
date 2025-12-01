@@ -14,7 +14,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mendix.core.Core;
-import com.mendix.core.CoreException;
 import com.mendix.extensibility.CustomBlobDocumentInfo;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.UserAction;
@@ -75,7 +74,7 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 		}
 	}
 
-	private void importAgents() throws JsonProcessingException, CoreException {
+	private void importAgents() throws JsonProcessingException {
 		java.util.List<CustomBlobDocumentInfo> agentDocuments = Core.extensibility()
 				.getCustomDocumentsOfType("agenteditor.agent");
 		LOGGER.info(agentDocuments.size() + " agent document(s) found in the Mendix Model");
@@ -94,7 +93,7 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 	}
 
 	private AgentModelDocument getAgentModelDocument(CustomBlobDocumentInfo agentDocument)
-			throws JsonProcessingException, CoreException {
+			throws JsonProcessingException {
 
 		String qualifiedName = agentDocument.qualifiedDocumentName();
 		LOGGER.debug("Importing Agent with qualified name: '" + qualifiedName + "'.");
