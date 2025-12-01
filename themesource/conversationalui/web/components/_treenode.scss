@@ -1,27 +1,87 @@
 @import "../../../../theme/web/custom-variables.scss";
 @import "../../../atlas_core/web/_variables.scss";
 
-.tree-width {
-    width: 300px;
+.treenode-span-xaxis {
+    padding: 0;
+    padding-left: 16px;
+        .widget-tree-node-branch-header {
+            padding: 0;
+    }
 }
 
-.tree-duration-position-parent {
-    position: absolute;
-    left: 280px;
+.treenode-span-grid-xaxis {
+    display: grid;
+    grid-template-columns: 310px auto;
+    gap: 16px;
 }
 
-.tree-duration-position {
-    position: absolute;
-    left: 700px;
-}
-
-.tree-item-hover {
+.treenode-span-grid-parent {
+    display: grid;
+    grid-template-columns: 310px auto;
+    gap: 16px;
     &:hover,
     &:active,
     &:focus {
-        font-weight: 600;
-        line-height: 150%;
-        cursor: pointer;
-        text-decoration-thickness: 1px; 
+        border-radius: 2px;
+        outline: 2px solid $brand-primary; 
+        outline-offset: 0;
+    }
+}
+
+
+.treenode-span-grid {
+    display: grid;
+    grid-template-columns: 302px auto;
+    gap: 16px;
+    &:hover,
+    &:active,
+    &:focus {
+        border-radius: 2px;
+        outline: 2px solid $brand-primary; 
+        outline-offset: 0;
+    }
+}
+
+
+.treenode-span-grid-grandchild {
+    display: grid;
+    grid-template-columns: 295px auto;
+    gap: 16px;
+    &:hover,
+    &:active,
+    &:focus {
+        border-radius: 2px;
+        outline: 2px solid $brand-primary; 
+        outline-offset: 0;
+    }
+}
+
+.treenode-span-parent {
+    padding: 0;
+    
+    .widget-tree-node-branch-header {
+        padding: 2px 0;
+    }
+     .widget-tree-node-body {
+        padding-left: 0;
+    }
+    .treenode-span-child {
+        padding: 0;
+
+        .widget-tree-node-branch-header-icon-animated {
+            margin-left: 8px;
+        }
+
+        .widget-tree-node-branch-header {
+            padding: 2px 0;
+        }
+
+        .treenode-span-grandchild {
+            padding: 0;
+            padding-left: 30px;
+            .widget-tree-node-branch-header {
+                padding: 2px 0;
+            }
+        }
     }
 }

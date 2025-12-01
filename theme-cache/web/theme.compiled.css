@@ -29081,29 +29081,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: 100%;
 }
 
-.span-grid {
-  display: grid;
-  grid-template-columns: 30% 70%;
-  gap: 1rem;
-}
-
-.treenode-col {
-  padding: 1rem;
-}
-
-.chart-col {
-  padding: 1rem;
-}
-
-.custom-barchart {
-  padding-bottom: 5% !important;
-}
-.custom-barchart .main-svg {
-  background: unset !important;
-  height: 270px !important;
-  margin: 0 !important;
-}
-
 /* reference for animation */
 @keyframes scale-in-right {
   0% {
@@ -29304,14 +29281,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin: 0 auto;
 }
 .traces-page-content-container .traces-breadcrumb {
-  width: 80vw;
-  min-width: 1200px;
+  width: 90vw;
+  min-width: 1300px;
   max-width: 1800px;
 }
 .traces-page-content-container .traces-content {
   flex-direction: column;
-  width: 80vw;
-  min-width: 1200px;
+  width: 90vw;
+  min-width: 1300px;
   max-width: 1800px;
   height: 90vh;
 }
@@ -30000,25 +29977,77 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 16px;
 }
 
-.tree-width {
-  width: 300px;
+.treenode-span-xaxis {
+  padding: 0;
+  padding-left: 16px;
+}
+.treenode-span-xaxis .widget-tree-node-branch-header {
+  padding: 0;
 }
 
-.tree-duration-position-parent {
-  position: absolute;
-  left: 280px;
+.treenode-span-grid-xaxis {
+  display: grid;
+  grid-template-columns: 310px auto;
+  gap: 16px;
 }
 
-.tree-duration-position {
-  position: absolute;
-  left: 700px;
+.treenode-span-grid-parent {
+  display: grid;
+  grid-template-columns: 310px auto;
+  gap: 16px;
+}
+.treenode-span-grid-parent:hover, .treenode-span-grid-parent:active, .treenode-span-grid-parent:focus {
+  border-radius: 2px;
+  outline: 2px solid #264ae5;
+  outline-offset: 0;
 }
 
-.tree-item-hover:hover, .tree-item-hover:active, .tree-item-hover:focus {
-  font-weight: 600;
-  line-height: 150%;
-  cursor: pointer;
-  text-decoration-thickness: 1px;
+.treenode-span-grid {
+  display: grid;
+  grid-template-columns: 302px auto;
+  gap: 16px;
+}
+.treenode-span-grid:hover, .treenode-span-grid:active, .treenode-span-grid:focus {
+  border-radius: 2px;
+  outline: 2px solid #264ae5;
+  outline-offset: 0;
+}
+
+.treenode-span-grid-grandchild {
+  display: grid;
+  grid-template-columns: 295px auto;
+  gap: 16px;
+}
+.treenode-span-grid-grandchild:hover, .treenode-span-grid-grandchild:active, .treenode-span-grid-grandchild:focus {
+  border-radius: 2px;
+  outline: 2px solid #264ae5;
+  outline-offset: 0;
+}
+
+.treenode-span-parent {
+  padding: 0;
+}
+.treenode-span-parent .widget-tree-node-branch-header {
+  padding: 2px 0;
+}
+.treenode-span-parent .widget-tree-node-body {
+  padding-left: 0;
+}
+.treenode-span-parent .treenode-span-child {
+  padding: 0;
+}
+.treenode-span-parent .treenode-span-child .widget-tree-node-branch-header-icon-animated {
+  margin-left: 8px;
+}
+.treenode-span-parent .treenode-span-child .widget-tree-node-branch-header {
+  padding: 2px 0;
+}
+.treenode-span-parent .treenode-span-child .treenode-span-grandchild {
+  padding: 0;
+  padding-left: 30px;
+}
+.treenode-span-parent .treenode-span-child .treenode-span-grandchild .widget-tree-node-branch-header {
+  padding: 2px 0;
 }
 
 .grid-deployed-model {
