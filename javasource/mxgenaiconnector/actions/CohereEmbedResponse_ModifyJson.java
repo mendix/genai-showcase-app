@@ -43,66 +43,57 @@ public class CohereEmbedResponse_ModifyJson extends UserAction<java.lang.String>
         // Initialize ObjectMapper with full response body as received from Cohere Embed
 			ObjectMapper mapper = new ObjectMapper();
 			ObjectNode root = (ObjectNode) mapper.readTree(ResponseBody_ToBeModified);
-			ObjectNode outputNode = null;
-			
 			
 			if (isRootEmpty(root)) {
 				LOGGER.warn("Root node is empty or does not contain required fields.");
 				return null;
-			} {
-				
-				// Parse the input JSON
-				JsonNode inputNode = mapper.readTree(this.ResponseBody_ToBeModified);
-
-				// Create output JSON object
-				outputNode = mapper.createObjectNode();
-				outputNode.set("id", inputNode.get("id"));
-				outputNode.set("response_type", inputNode.get("response_type"));
-
-				// Create the embeddings array for the output
-				ArrayNode outputEmbeddingsArray = mapper.createArrayNode();
-
-				// Get input embeddings - handle both direct array and nested object formats
-				JsonNode embeddingsNode = root.get("embeddings");
-				ArrayNode inputEmbeddingsArray;
-				
-				if (embeddingsNode.isArray()) {
-					// Case 1: embeddings is a direct array
-					inputEmbeddingsArray = (ArrayNode) embeddingsNode;
-				} else if (embeddingsNode.isObject() && embeddingsNode.has("float")) {
-					// Case 2: embeddings is an object with a "float" key containing the array
-					inputEmbeddingsArray = (ArrayNode) embeddingsNode.get("float");
-				} else {
-					LOGGER.warn("Embeddings format not recognized.");
-					return null;
-				}
-				
-
-				// Iterate over the embeddings and texts
-				for (JsonNode embeddingArray : inputEmbeddingsArray) {
-                    ObjectNode embeddingObject = mapper.createObjectNode();
-
-                    // Convert embedding array to string
-                    String embeddingString = (embeddingArray != null ? mapper.writeValueAsString(embeddingArray) : "");
-
-                    // Populate the embedding object with vector and index
-                    embeddingObject.put("vector", embeddingString);
-                    embeddingObject.put("_index", outputEmbeddingsArray.size());
-
-                    // Add the object to the output array
-                    outputEmbeddingsArray.add(embeddingObject);
-                }
-
-            // Add embeddings array to output
-            outputNode.set("embeddings", outputEmbeddingsArray);
-
 			}
 
-				return mapper.writeValueAsString(outputNode);
+			// Create output JSON object
+			ObjectNode outputNode = mapper.createObjectNode();
+			outputNode.set("id", root.get("id"));
+			outputNode.set("response_type", root.get("response_type"));
 
-				// Convert outputNode to String and return
+			// Create the embeddings array for the output
+			ArrayNode outputEmbeddingsArray = mapper.createArrayNode();
 
-			} catch (Exception e) {
+			// Get input embeddings - handle both direct array and nested object formats
+			JsonNode embeddingsNode = root.get("embeddings");
+			ArrayNode inputEmbeddingsArray;
+			
+			if (embeddingsNode.isArray()) {
+				// Case 1: embeddings is a direct array
+				inputEmbeddingsArray = (ArrayNode) embeddingsNode;
+			} else if (embeddingsNode.isObject() && embeddingsNode.has("float")) {
+				// Case 2: embeddings is an object with a "float" key containing the array
+				inputEmbeddingsArray = (ArrayNode) embeddingsNode.get("float");
+			} else {
+				LOGGER.warn("Embeddings format not recognized.");
+				return null;
+			}
+			
+
+			// Iterate over the embeddings and texts
+			for (JsonNode embeddingArray : inputEmbeddingsArray) {
+				ObjectNode embeddingObject = mapper.createObjectNode();
+
+				// Convert embedding array to string
+				String embeddingString = (embeddingArray != null ? mapper.writeValueAsString(embeddingArray) : "");
+
+				// Populate the embedding object with vector and index
+				embeddingObject.put("vector", embeddingString);
+				embeddingObject.put("_index", outputEmbeddingsArray.size());
+
+				// Add the object to the output array
+				outputEmbeddingsArray.add(embeddingObject);
+			}
+
+			// Add embeddings array to output
+			outputNode.set("embeddings", outputEmbeddingsArray);
+
+			return mapper.writeValueAsString(outputNode);
+
+		} catch (Exception e) {
 				throw e;
 			}
 
