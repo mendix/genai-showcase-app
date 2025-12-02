@@ -13,12 +13,14 @@
     display: grid;
     grid-template-columns: 310px auto;
     gap: 16px;
+    height: 25px;
 }
 
 .treenode-span-grid-parent {
     display: grid;
     grid-template-columns: 310px auto;
     gap: 16px;
+    height: 25px;
     &:hover,
     &:active,
     &:focus {
@@ -33,6 +35,7 @@
     display: grid;
     grid-template-columns: 290px auto;
     gap: 16px;
+    height: 25px;
     &:hover,
     &:active,
     &:focus {
@@ -47,6 +50,7 @@
     display: grid;
     grid-template-columns: 266px auto;
     gap: 16px;
+    height: 25px;
     &:hover,
     &:active,
     &:focus {
@@ -59,10 +63,10 @@
 .treenode-span-parent {
     padding: 0;
     padding-right: 12px;
+    margin: 4px 0;
     
     .widget-tree-node-branch-header {
         padding:0;
-        margin: 2px 0;
     }
      .widget-tree-node-body {
         padding-left: 0;

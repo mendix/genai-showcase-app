@@ -29919,14 +29919,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 /* tooltip adjustment for tools */
 .tooltip-container-tools {
-  padding: 0 8px 8px 8px;
+  padding: 0 8px 2px 8px;
   width: 300px;
 }
 
 /* tooltip adjustment text only */
 .tooltip-container {
-  width: 190px;
-  max-width: 250px;
+  width: 10vw;
   display: inline-flex;
   justify-content: center;
   padding: 2px;
@@ -29991,12 +29990,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: grid;
   grid-template-columns: 310px auto;
   gap: 16px;
+  height: 25px;
 }
 
 .treenode-span-grid-parent {
   display: grid;
   grid-template-columns: 310px auto;
   gap: 16px;
+  height: 25px;
 }
 .treenode-span-grid-parent:hover, .treenode-span-grid-parent:active, .treenode-span-grid-parent:focus {
   border-radius: 2px;
@@ -30008,6 +30009,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: grid;
   grid-template-columns: 290px auto;
   gap: 16px;
+  height: 25px;
 }
 .treenode-span-grid:hover, .treenode-span-grid:active, .treenode-span-grid:focus {
   border-radius: 2px;
@@ -30019,6 +30021,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: grid;
   grid-template-columns: 266px auto;
   gap: 16px;
+  height: 25px;
 }
 .treenode-span-grid-grandchild:hover, .treenode-span-grid-grandchild:active, .treenode-span-grid-grandchild:focus {
   border-radius: 2px;
@@ -30029,10 +30032,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .treenode-span-parent {
   padding: 0;
   padding-right: 12px;
+  margin: 4px 0;
 }
 .treenode-span-parent .widget-tree-node-branch-header {
   padding: 0;
-  margin: 2px 0;
 }
 .treenode-span-parent .widget-tree-node-body {
   padding-left: 0;
