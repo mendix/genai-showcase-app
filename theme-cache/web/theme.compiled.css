@@ -29883,6 +29883,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: space-between;
   font-weight: 400;
   max-height: 48vh;
+  line-height: 150% !important;
 }
 .convui-tooltip .mx-link {
   font-weight: normal;
@@ -29924,6 +29925,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 /* tooltip adjustment text only */
 .tooltip-container {
+  width: 190px;
   max-width: 250px;
   display: inline-flex;
   justify-content: center;
@@ -29951,7 +29953,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .tooltip-version-draft {
   gap: 2px;
-  line-height: 150% !important;
   padding-left: 2px;
 }
 

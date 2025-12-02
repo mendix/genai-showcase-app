@@ -17,6 +17,7 @@
         justify-content: space-between;
         font-weight: 400;
         max-height: 48vh;
+        line-height: 150% !important;
     }
 
     .mx-link {
@@ -62,6 +63,7 @@
 
 /* tooltip adjustment text only */
 .tooltip-container {
+    width: 190px;
     max-width: 250px;
     display: inline-flex;
     justify-content: center;
@@ -81,6 +83,7 @@
     margin: 0;
 }
 
+
 .tooltip-header {
     @extend .row-text-img;
     gap: 0;
@@ -91,7 +94,6 @@
 .tooltip-version-draft {
     @extend .row-text-img;
     gap: 2px;
-    line-height: 150% !important;
     padding-left: $spacing-smallest;
 }
 
@@ -110,7 +112,6 @@
         margin: 0 2px;
     }
 }
-
 
 .tooltip-info-icon {
     margin: 0;
