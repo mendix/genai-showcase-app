@@ -2,15 +2,9 @@ package mcpserver.impl;
 
 import io.modelcontextprotocol.json.McpJsonMapper;
 import io.modelcontextprotocol.json.TypeRef;
-import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.m2ee.api.IMxRuntimeRequest;
 import com.mendix.m2ee.api.IMxRuntimeResponse;
-import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.systemwideinterfaces.core.IDataType;
-import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.systemwideinterfaces.core.ISession;
-import com.mendix.systemwideinterfaces.core.IUser;
 
 import javax.servlet.AsyncContext;
 import javax.servlet.http.HttpServletRequest;
@@ -18,18 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Collections;
-import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 import reactor.core.publisher.Mono;
 
 import io.modelcontextprotocol.spec.*;
 
 import mcpserver.proxies.McpServer;
-import system.proxies.HttpHeader;
-import system.proxies.HttpRequest;
-import system.proxies.User;
+
 
 /**
  * SSE (Server-Sent Events) transport handler for MCP protocol.
@@ -74,7 +63,6 @@ public class SseTransportHandler implements McpTransportHandler {
     public SseTransportHandler(McpServer mcpServer, String baseUrl, String basePath) {
         this.mcpServer = mcpServer;
         this.baseUrl = baseUrl;
-        // SSE protocol convention: separate endpoints for connection and messages
         this.sseEndpoint = "/" + basePath + "/sse";
         this.messageEndpoint = "/" + basePath + "/messages";
     }
@@ -83,7 +71,9 @@ public class SseTransportHandler implements McpTransportHandler {
     public boolean canHandlePath(String path) {
         // SSE handles both the SSE endpoint (GET) and the messages endpoint (POST)
         boolean canHandle = path.endsWith("sse") || path.endsWith("messages");
-        LOGGER.debug("SSE canHandlePath - Path: " + path + ", CanHandle: " + canHandle);
+        if(!canHandle) {
+        	LOGGER.debug("SSE canHandlePath - Path: " + path + ", CanHandle: " + canHandle);
+        }
         return canHandle;
     }
     
@@ -103,15 +93,7 @@ public class SseTransportHandler implements McpTransportHandler {
         HttpServletRequest httpRequest = request.getHttpServletRequest();
         HttpServletResponse httpResponse = response.getHttpServletResponse();
         
-        LOGGER.debug("SSE handleGet - Path: " + path);
-        
-        // GET is only valid for the SSE endpoint
-        if (!path.endsWith("sse")) {
-            httpResponse.sendError(HttpServletResponse.SC_NOT_FOUND, "GET only allowed on SSE endpoint");
-            return;
-        }
-        
-        // Authenticate if microflow was set; get sessionId by logged in user
+        // Authenticate if microflow was set; get sessionId for logged in user
         String sessionId = getSessionId(httpRequest, mcpServer);
         if (sessionId == null || sessionId.isEmpty()) {
             httpResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "User is not authorized to use the MCP Server.");
@@ -143,9 +125,7 @@ public class SseTransportHandler implements McpTransportHandler {
             LOGGER.debug("Sending SSE endpoint event with URL: " + endpointUrl);
             sendEvent(writer, ENDPOINT_EVENT_TYPE, endpointUrl);
             LOGGER.debug("SSE connection established successfully for session: " + sessionId);
-            
-            // IMPORTANT: Don't complete the async context here - keep the connection alive
-            // The connection will be closed when the session is closed or client disconnects
+     
         } catch (IOException e) {
             LOGGER.error("Failed to send SSE endpoint event: " + e.getMessage(), e);
             asyncContext.complete();
@@ -180,7 +160,7 @@ public class SseTransportHandler implements McpTransportHandler {
             PrintWriter writer = httpResponse.getWriter();
             writer.write(jsonError);
             writer.flush();
-            httpResponse.flushBuffer(); // Commit the response
+            httpResponse.flushBuffer();
             return;
         }
         
@@ -195,7 +175,7 @@ public class SseTransportHandler implements McpTransportHandler {
             PrintWriter writer = httpResponse.getWriter();
             writer.write(jsonError);
             writer.flush();
-            httpResponse.flushBuffer(); // Commit the response
+            httpResponse.flushBuffer();
             return;
         }
         
@@ -210,7 +190,7 @@ public class SseTransportHandler implements McpTransportHandler {
             String bodyString = body.toString();
             McpSchema.JSONRPCMessage message = McpSchema.deserializeJsonRpcMessage(MAPPER, bodyString);
             
-            // Set response headers BEFORE processing - the actual MCP response will be sent via SSE
+            // Set response headers beofre processing - the actual MCP response will be sent via SSE
             httpResponse.setStatus(HttpServletResponse.SC_ACCEPTED);
             httpResponse.setContentType(APPLICATION_JSON);
             httpResponse.setCharacterEncoding(UTF_8);
@@ -219,7 +199,7 @@ public class SseTransportHandler implements McpTransportHandler {
             
             httpResponse.getOutputStream().write("{}".getBytes(UTF_8));
             httpResponse.getOutputStream().flush();
-            httpResponse.flushBuffer(); // Commit the response BEFORE processing
+            httpResponse.flushBuffer();
             
             // Process the message through the session's handle method
             // The response will be sent via the SSE channel by the SDK

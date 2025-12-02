@@ -8,8 +8,6 @@ import io.modelcontextprotocol.spec.McpServerTransportProvider;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.UUID;
-
 import mcpserver.proxies.McpServer;
 
 /**
@@ -49,10 +47,10 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
             mcpServer.getProtocolVersion().toString() : "v2024_11_05";
         
         // Determine which transport to use based on protocol version
-        if (protocolVersion.contains("v2025")) {
-            return new StreamableHttpTransportHandler(mcpServer, basePath);
+        if (protocolVersion.contains("v2024")) {
+        	return new SseTransportHandler(mcpServer, basePath);
         } else {
-            return new SseTransportHandler(mcpServer, basePath);
+        	return new StreamableHttpTransportHandler(mcpServer, basePath);
         }
     }
     

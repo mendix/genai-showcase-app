@@ -2,33 +2,20 @@ package mcpserver.impl;
 
 import io.modelcontextprotocol.json.McpJsonMapper;
 import io.modelcontextprotocol.json.TypeRef;
-import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.m2ee.api.IMxRuntimeRequest;
 import com.mendix.m2ee.api.IMxRuntimeResponse;
-import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.systemwideinterfaces.core.IDataType;
-import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.systemwideinterfaces.core.ISession;
-import com.mendix.systemwideinterfaces.core.IUser;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Collections;
 import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 import reactor.core.publisher.Mono;
 
 import io.modelcontextprotocol.spec.*;
-
 import mcpserver.proxies.McpServer;
-import system.proxies.HttpHeader;
-import system.proxies.HttpRequest;
-import system.proxies.User;
 
 /**
  * Streamable HTTP transport handler for MCP protocol.
@@ -194,8 +181,6 @@ public class StreamableHttpTransportHandler implements McpTransportHandler {
         HttpServletRequest httpRequest = request.getHttpServletRequest();
         HttpServletResponse httpResponse = response.getHttpServletResponse();
         
-        LOGGER.info("DELETE request received - path: " + path);
-        
         if (!path.endsWith("mcp")) {
             LOGGER.warn("DELETE rejected - path does not end with 'mcp': " + path);
             httpResponse.sendError(HttpServletResponse.SC_NOT_FOUND, "DELETE only accepted on /mcp");
@@ -214,11 +199,11 @@ public class StreamableHttpTransportHandler implements McpTransportHandler {
         
         // Close the session
         McpServerSession session = sessionManager.getSession(sessionId);
-        LOGGER.info("DELETE - Session found: " + (session != null));
+        LOGGER.info("DELETE - Session for id: " + sessionId +" found: " + (session != null));
         
         if (session != null) {
             try {
-                LOGGER.info("Closing session gracefully: " + sessionId);
+                LOGGER.debug("Closing session gracefully: " + sessionId);
                 session.closeGracefully().block();
                 sessionManager.closeSession(sessionId);
                 transports.remove(sessionId);
@@ -226,7 +211,7 @@ public class StreamableHttpTransportHandler implements McpTransportHandler {
                 // 204 No Content must not have a body - just set status
                 httpResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
                 
-                LOGGER.info("Session closed successfully: " + sessionId);
+                LOGGER.debug("Session closed successfully: " + sessionId);
             } catch (Exception e) {
                 LOGGER.error("Error closing session: " + sessionId, e);
                 httpResponse.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
@@ -329,21 +314,21 @@ public class StreamableHttpTransportHandler implements McpTransportHandler {
                 synchronized (lock) {
                     // Drop notifications - Streamable HTTP clients cannot receive server-initiated notifications
                     if (message instanceof McpSchema.JSONRPCNotification) {
-                        LOGGER.info("Dropping notification for session: " + sessionId + 
+                        LOGGER.debug("Dropping notification for session: " + sessionId + 
                                    " - method: " + ((McpSchema.JSONRPCNotification) message).method());
                         return;
                     }
                     
                     // If already sent for this request, skip
                     if (messageSent) {
-                        LOGGER.info("Message already sent for this request, skipping duplicate send for session: " + sessionId);
+                        LOGGER.debug("Message already sent for this request, skipping duplicate send for session: " + sessionId);
                         return;
                     }
                     
-                    LOGGER.info("Sending response message for session: " + sessionId);
+                    LOGGER.debug("Sending response message for session: " + sessionId);
                     sendMessageNow(message);
                     messageSent = true;
-                    LOGGER.info("Response sent successfully for session: " + sessionId);
+                    LOGGER.debug("Response sent successfully for session: " + sessionId);
                 }
             });
         }
@@ -375,7 +360,7 @@ public class StreamableHttpTransportHandler implements McpTransportHandler {
                 String jsonText = MAPPER.writeValueAsString(message);
                 currentResponse.getOutputStream().write(jsonText.getBytes(UTF_8));
                 currentResponse.getOutputStream().flush();
-                currentResponse.flushBuffer(); // Commit the response
+                currentResponse.flushBuffer();
                 
                 LOGGER.debug("Message sent for session: " + sessionId);
                 

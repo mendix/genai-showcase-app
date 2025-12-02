@@ -82,7 +82,7 @@ public class McpSessionManager
 	}
 	
 	public ISession getMxRuntimeSession(McpSyncServerExchange exchange) throws Exception {
-		LOGGER.info(exchange.sessionId());
+		LOGGER.debug(exchange.sessionId());
 		if(!internalToExternalSessionMap.containsKey(exchange.sessionId())) {
 			throw new Exception("Could not find session");
 		}
@@ -155,20 +155,6 @@ public class McpSessionManager
 		}
 		
 		return null;
-	}
-	
-	/**
-	 * Gets context for MCP tool execution. Returns user context if available, otherwise system context as fallback.
-	 */
-	public IContext getContextForExecution(String sessionId) {
-		ISession session = getMxRuntimeSessionForSessionId(sessionId);
-		if (session != null) {
-			LOGGER.debug("Using user session context for tool execution");
-			return session.createContext();
-		} else {
-			LOGGER.warn("Mendix session not found for sessionId: " + sessionId + " - using system context as fallback");
-			return Core.createSystemContext();
-		}
 	}
 	
 	/**
