@@ -60,19 +60,19 @@ public class CreateMCPServer extends UserAction<IMendixObject>
 		requireNonNull(Version,"Version is required.");
 		requireNonNull(ProtocolVersion,"Protocol version is required.");	
 		
-		// Create McpServer NPE
-		mcpserver.proxies.McpServer mcpServer = new mcpserver.proxies.McpServer(getContext());
-		mcpServer.setName(Name);
-		mcpServer.setVersion(Version);
-		mcpServer.setProtocolVersion(ProtocolVersion);
-		mcpServer.setAuthenticationMicroflow(AuthenticationMicroflow);
-				
-		// Create request handler and McpServer object
-		McpServerRequestHandler mcpRequestHandler = new McpServerRequestHandler(
-				mcpServer,  "/" + Path + "/messages", "/" + Path + "/sse");
-		Core.addRequestHandler(Path + "/", mcpRequestHandler);
-
-		McpSyncServer server = McpServer.sync(mcpRequestHandler)
+        // Create McpServer NPE
+        mcpserver.proxies.McpServer mcpServer = new mcpserver.proxies.McpServer(getContext());
+        mcpServer.setName(Name);
+        mcpServer.setVersion(Version);
+        mcpServer.setProtocolVersion(ProtocolVersion);
+        mcpServer.setAuthenticationMicroflow(AuthenticationMicroflow);
+                
+        // Create request handler with protocol-aware transport selection
+        // The handler will automatically choose SSE or Streamable HTTP based on ProtocolVersion
+        // Each transport defines its own endpoint conventions internally
+        McpServerRequestHandler mcpRequestHandler = new McpServerRequestHandler(mcpServer, Path);
+        Core.addRequestHandler(Path + "/", mcpRequestHandler);		
+        McpSyncServer server = McpServer.sync(mcpRequestHandler)
 				.serverInfo(Name, Version)
 				.capabilities(
 						McpSchema.ServerCapabilities.builder()
