@@ -31,7 +31,7 @@
 
 .treenode-span-grid {
     display: grid;
-    grid-template-columns: 302px auto;
+    grid-template-columns: 290px auto;
     gap: 16px;
     &:hover,
     &:active,
@@ -45,7 +45,7 @@
 
 .treenode-span-grid-grandchild {
     display: grid;
-    grid-template-columns: 295px auto;
+    grid-template-columns: 266px auto;
     gap: 16px;
     &:hover,
     &:active,
@@ -58,15 +58,18 @@
 
 .treenode-span-parent {
     padding: 0;
+    padding-right: 12px;
     
     .widget-tree-node-branch-header {
-        padding: 2px 0;
+        padding:0;
+        margin: 2px 0;
     }
      .widget-tree-node-body {
         padding-left: 0;
     }
     .treenode-span-child {
         padding: 0;
+        padding-left: 12px;
 
         .widget-tree-node-branch-header-icon-animated {
             margin-left: 8px;
@@ -78,7 +81,7 @@
 
         .treenode-span-grandchild {
             padding: 0;
-            padding-left: 30px;
+            padding-left: 48px;
             .widget-tree-node-branch-header {
                 padding: 2px 0;
             }
