@@ -31004,6 +31004,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin: 1px;
 }
 
+.tooltip-info-icon-showcase {
+  margin-left: 4px;
+  margin-bottom: 16px;
+}
+
 /* --------------------------------------- Landing Page Styling -----------------------------------*/
 .display-none {
   display: none;

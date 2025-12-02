@@ -1,3 +1,4 @@
+@import "../../themesource/agentcommons/web/agent-builder-variables.scss";
 @import "../../themesource/atlas_core/web/_variables.scss";
 @import "custom-variables";
 
@@ -208,6 +209,11 @@ $label-color-all: #000000;
         width: 22px;
         margin: 1px;
     }
+}
+
+.tooltip-info-icon-showcase {
+    margin-left: $spacing-smaller;
+    margin-bottom: $spacing-medium;
 }
 
 /* --------------------------------------- Landing Page Styling -----------------------------------*/
