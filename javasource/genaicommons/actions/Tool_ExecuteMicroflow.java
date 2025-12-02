@@ -76,7 +76,6 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		try {
 			requireNonNull(Tool, "Tool is required.");
 			requireNonNull(Tool.getMicroflow(), "Tool has no Microflow.");
-			requireNonNull(ModelSpan,"Model Span is required.");
 			startTime = System.currentTimeMillis();
 			
 			return callTool();
