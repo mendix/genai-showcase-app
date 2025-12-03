@@ -17,6 +17,8 @@ import com.mendix.systemwideinterfaces.core.UserAction;
 import io.modelcontextprotocol.client.McpClient;
 import io.modelcontextprotocol.client.McpSyncClient;
 import io.modelcontextprotocol.client.transport.HttpClientSseClientTransport;
+import io.modelcontextprotocol.client.transport.HttpClientStreamableHttpTransport;
+import io.modelcontextprotocol.spec.McpClientTransport;
 import io.modelcontextprotocol.spec.McpSchema;
 import mcpclient.impl.McpClientRegistry;
 import mcpclient.impl.MxLogger;
@@ -63,12 +65,7 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 			clientNpe.setMCPEndpoint(ClientConfig.getMCPEndpoint());
 			
 			//Prepare connection
-			HttpRequest.Builder customRequestBuilder = getCustomRequestBuilder();
-			HttpClientSseClientTransport transport = HttpClientSseClientTransport
-					.builder(getBaseEndpoint())
-					.sseEndpoint(getSseEndpoint())
-					.requestBuilder(customRequestBuilder)
-					.build();
+			McpClientTransport transport = createTransport();
 			
 			McpSchema.ClientCapabilities capabilities = McpSchema.ClientCapabilities.builder().build();
 			McpSchema.Implementation clientInfo = new McpSchema.Implementation(ClientConfig.getName(), ClientConfig.getVersion());
@@ -82,19 +79,23 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 					.clientInfo(clientInfo)
 					.build();
 			
-			//Connect to server
+			//Connect to server (single attempt; endpoint normalization fixed path)
 			McpSchema.InitializeResult initResult = client.initialize();
 			LOGGER.info("Client connected to server using: " + initResult.protocolVersion() + " version.");
-			client.setLoggingLevel(McpSchema.LoggingLevel.DEBUG);
+			// Some servers do not enable logging capabilities; avoid failing hard
+			try {
+				client.setLoggingLevel(McpSchema.LoggingLevel.DEBUG);
+			} catch (IllegalStateException unsupported) {
+				LOGGER.info("Server logging capabilities not enabled; skipping setLoggingLevel.");
+			}
 			clientNpe.setConnected(true);
 			McpClientRegistry.putClient(clientNpe.getMendixObject().getId().toLong(), client);
 			return clientNpe.getMendixObject();
-			
 		} catch (Exception e) {
 			LOGGER.error(e, "Failed to create MCP client for configuration with name: ", ClientConfig != null ? ClientConfig.getName(): null);
 			if (e.getCause() != null) {
-	            LOGGER.error("Root cause:", e.getCause());
-	        }
+			    LOGGER.error("Root cause:", e.getCause());
+			}
 			return null;
 		}
 		// END USER CODE
@@ -114,7 +115,42 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 	private static final MxLogger LOGGER = new mcpclient.impl.MxLogger(CreateMCPClient.class);
 
 	/**
-	 * Creates the base endpoint for cases when "/" or "/sse" was part of the passed endpoint
+	 * Creates the appropriate MCP transport based on the protocol version.
+	 * Protocol version v2024-* uses SSE transport, newer versions use Streamable HTTP.
+	 * 
+	 * @return Transport instance (either HttpClientSseClientTransport or HttpClientStreamableHttpTransport)
+	 * @throws CoreException if there's an error creating the request builder
+	 */
+	private McpClientTransport createTransport() throws CoreException {
+		HttpRequest.Builder customRequestBuilder = getCustomRequestBuilder();
+		String protocolVersion = ClientConfig.getProtocolVersion().toString();
+		String endpoint;
+		
+		if (protocolVersion.startsWith("v2024")) {
+			// Use SSE transport for 2024 protocol versions
+			String base = getBaseEndpoint();
+			endpoint = getSseEndpoint();
+			LOGGER.info("Transport=SSE, protocol=" + protocolVersion + ", base=" + base + ", endpoint=" + endpoint);
+			return HttpClientSseClientTransport
+					.builder(base)
+					.sseEndpoint(endpoint)
+					.requestBuilder(customRequestBuilder)
+					.build();
+		} else {
+			// Use Streamable HTTP transport for newer protocol versions
+			String baseUrl = getBaseEndpoint();
+			endpoint = java.net.URI.create(baseUrl + "/mcp").getRawPath(); // Streamable HTTP requires this for some reason
+			LOGGER.info("Transport=HTTP, protocol=" + protocolVersion + ", base=" + baseUrl + ", endpoint=" + endpoint);
+			return HttpClientStreamableHttpTransport
+					.builder(baseUrl)
+					.endpoint(endpoint)
+					.requestBuilder(customRequestBuilder)
+					.build();
+		}
+	}
+
+	/**
+	 * Creates the base endpoint by removing trailing slashes and known MCP suffixes (/sse, /mcp)
 	 */
 	private String getBaseEndpoint() {
 	    String baseUrl = ClientConfig.getMCPEndpoint();
@@ -128,6 +164,12 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 	    if (baseUrl.toLowerCase().endsWith("/sse")) {
 	        baseUrl = baseUrl.substring(0, baseUrl.length() - 4);
 	    }
+	    
+	    //Remove /mcp suffix if present
+	    if (baseUrl.toLowerCase().endsWith("/mcp")) {
+	        baseUrl = baseUrl.substring(0, baseUrl.length() - 4);
+	    }
+	    
 	    return baseUrl;
 	}
 
@@ -135,10 +177,8 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 	 *Sets "/sse" to the base endpoint
 	 */
 	private String getSseEndpoint() {
-	    String baseUrl = getBaseEndpoint(); // Use the cleaned base URL
-	    return baseUrl + "/sse";
+	    return getBaseEndpoint() + "/sse";
 	}
-	
 	
 	/**
 	 * Creates a custom request builder to add headers passed in the configuration
@@ -155,7 +195,6 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 		    	customRequestBuilder.header(name, value);
 		    }
 		}
-		customRequestBuilder.header("Content-Type", "application/json");
 		return customRequestBuilder;
 	}
 	
