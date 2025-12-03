@@ -30,7 +30,7 @@
 /* use in combination with .tooltip-col */
 .tooltip-container-version {
     width: 350px;
-    max-height: 350px;
+    max-height: 45vh;
     display: grid;
     grid-template-columns: 30% 69%;
     padding: $spacing-smallest $spacing-small $spacing-smaller $spacing-small;
@@ -63,7 +63,7 @@
 
 /* tooltip adjustment text only */
 .tooltip-container {
-    width: 10vw;
+    width: fit-content;
     display: inline-flex;
     justify-content: center;
     padding: $spacing-smallest;

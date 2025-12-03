@@ -28325,8 +28325,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 /* Custom image and icon sizes */
 .img--24-24 {
-  max-width: 24px;
-  max-height: 24px;
+  width: 24px;
+  height: 24px;
   flex-shrink: 0;
 }
 
@@ -29894,7 +29894,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 /* use in combination with .tooltip-col */
 .tooltip-container-version {
   width: 350px;
-  max-height: 350px;
+  max-height: 45vh;
   display: grid;
   grid-template-columns: 30% 69%;
   padding: 2px 8px 4px 8px;
@@ -29925,7 +29925,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 /* tooltip adjustment text only */
 .tooltip-container {
-  width: 10vw;
+  width: fit-content;
   display: inline-flex;
   justify-content: center;
   padding: 2px;
