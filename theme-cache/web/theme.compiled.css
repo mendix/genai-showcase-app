@@ -28357,10 +28357,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .img--14-14 {
-  width: 20px;
-  height: 20px;
-  max-width: 20px;
-  max-height: 20px;
+  width: 14px;
+  height: 14px;
+  max-width: 14px;
+  max-height: 14px;
   flex-shrink: 0;
 }
 
