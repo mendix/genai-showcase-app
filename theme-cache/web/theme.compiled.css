@@ -30073,6 +30073,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   font-size: 18px;
 }
 
+.visibility-none {
+  visibility: none !important;
+}
+
 .badge-with-circle {
   display: flex;
   align-items: center;
