@@ -1,38 +1,38 @@
-import { W as b, r as o, j as t, X as w, Y as x, Z as f, _ as C, a0 as D, a1 as j } from "./componentLoader-CiJ_P7hp.js";
+import { Q as b, r as o, j as t, R as w, U as x, V as f, W as C, X as D, Y as j } from "./componentLoader-l-cCI7h-.js";
 function E(n) {
   return {
     name: ""
   };
 }
-const v = (n, a, c, s, l) => async (r) => {
-  console.log("knowledgebase change triggered for field ", a);
-  const i = { ...c, [a]: r };
-  s(i), await L(n, i, l);
-}, L = async (n, a, c) => {
+const v = (n, s, c, a, l) => async (r) => {
+  console.log("knowledgebase change triggered for field ", s);
+  const i = { ...c, [s]: r };
+  a(i), await L(n, i, l);
+}, L = async (n, s, c) => {
   console.log("Save logic triggered");
   try {
-    await n.app.model.customBlobDocuments.updateDocumentContent(c, a);
-  } catch (s) {
+    await n.app.model.customBlobDocuments.updateDocumentContent(c, s);
+  } catch (a) {
     n.ui.notifications.show({
       title: "Failed to save document",
-      message: s.message
+      message: a.message
     });
   }
-}, y = E(), K = ({ studioPro: n, documentId: a }) => {
-  const c = n.ui.messageBoxes, s = n.app.model.customBlobDocuments, [l, r] = o.useState(0), [i, p] = o.useState(!1), [g, d] = o.useState(y);
+}, y = E(), K = ({ studioPro: n, documentId: s }) => {
+  const c = n.ui.messageBoxes, a = n.app.model.customBlobDocuments, [l, r] = o.useState(0), [i, p] = o.useState(!1), [g, d] = o.useState(y);
   return o.useCallback(
-    (e) => v(n, e, g, d, a),
-    [n, g, d, a]
+    (e) => v(n, e, g, d, s),
+    [n, g, d, s]
   ), o.useEffect(() => {
     const e = (u) => {
       const { documents: m } = u;
-      m.some((h) => h.id === a) && r((h) => h + 1);
+      m.some((h) => h.id === s) && r((h) => h + 1);
     };
-    return s.addEventListener("documentsChanged", e), () => {
-      s.removeEventListener("documentsChanged", e);
+    return a.addEventListener("documentsChanged", e), () => {
+      a.removeEventListener("documentsChanged", e);
     };
   }, []), o.useEffect(() => {
-    s.getDocumentById(a).then(async (e) => {
+    a.getDocumentById(s).then(async (e) => {
       if (e && !("error" in e)) {
         const u = e.document.contents, m = e.document.name;
         d({ ...u, name: m }), p(!0);
@@ -59,3 +59,4 @@ const v = (n, a, c, s, l) => async (r) => {
 export {
   B as component
 };
+//# sourceMappingURL=knowledgebaseEdit.js.map

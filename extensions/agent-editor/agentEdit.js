@@ -1,271 +1,269 @@
-import { j as a, p as N, $ as z, a as be, b as E, c as M, d as he, e as pe, r as f, f as ge, g as ve, h as xe, i as $e, k as me, l as ye, m as we, n as Ce, o as Q, q as A, s as je, t as Pe, u as ke, v as Ve, w as De, x as K, y as Se, z as Be, A as Ae, B as Ee, C as Re, D as Le, E as Ie, F as Fe, G as I, H as k, I as R, T as W, J as Y, K as Oe, L as Me, M as Te, N as He, O as F, P as D, S as q, Q as We, R as J, U as Ne, V as qe, W as Ge, X as _e, Y as ze, Z as Ue, _ as U, a0 as O, a1 as Ze } from "./componentLoader-CiJ_P7hp.js";
-import { c as X, a as Qe, b as Ke, i as Ye, m as Je } from "./agentUtils-DWFrOytf.js";
-import { $ as Xe, a as et, b as tt } from "./TextArea-CqbH26zx.js";
-const at = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13%202.5H3C2.72386%202.5%202.5%202.72386%202.5%203V13C2.5%2013.2761%202.72386%2013.5%203%2013.5H13C13.2761%2013.5%2013.5%2013.2761%2013.5%2013V3C13.5%202.72386%2013.2761%202.5%2013%202.5Z'%20stroke='%23579BF9'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5V6.5C6.5%205.95%206.95%205.5%207.5%205.5H8.5C9.05%205.5%209.5%205.95%209.5%206.5V8H6.5'%20stroke='%23579BF9'%20stroke-linejoin='round'/%3e%3c/svg%3e", nt = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13%202.5H3C2.72386%202.5%202.5%202.72386%202.5%203V13C2.5%2013.2761%202.72386%2013.5%203%2013.5H13C13.2761%2013.5%2013.5%2013.2761%2013.5%2013V3C13.5%202.72386%2013.2761%202.5%2013%202.5Z'%20stroke='%23146FF4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5V6.5C6.5%205.95%206.95%205.5%207.5%205.5H8.5C9.05%205.5%209.5%205.95%209.5%206.5V8H6.5'%20stroke='%23146FF4'%20stroke-linejoin='round'/%3e%3c/svg%3e";
-var rt = Object.defineProperty, st = (e, t) => rt(e, "name", { value: t, configurable: !0 });
-const it = st((e) => a.jsx(N, { light: nt, dark: at, ...e }), "EntityIcon"), lt = (e, t, n, r, i) => async (s) => {
-  if (console.log("agent change triggered for field ", t), t === "userPrompt" || t === "systemPrompt") {
-    const l = { ...n, [t]: s.target.value }, o = X(l), u = { ...l, variables: o };
-    r(u), await S(e, u, i);
+import { j as t, p as te, $ as N, a as ne, b as R, c as T, d as se, e as ie, r as f, f as re, g as le, h as oe, i as de, k as ce, l as ue, m as fe, n as be, o as G, q as S, s as pe, t as he, u as ve, v as ge, w as xe, x as U, y as $e, z as me, A as ye, B as Ce, C as Pe, D as we, E as je, F as Ve, G as L, H as B, T as De, I as ke, J as I, K as D, S as W, L as Ee, M as q, N as Se, O as Re, P as Be, Q as Ae, R as Le, U as Ie, V as Fe, W as _, X as F, Y as Te } from "./componentLoader-l-cCI7h-.js";
+import { c as Q, a as Oe, b as Me, i as We, m as He } from "./agentUtils-rNdv1QzD.js";
+import { $ as Ne, a as qe, b as _e, I as ze, E as Ge } from "./TextArea-L6950ltw.js";
+const Ue = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13%202.5H3C2.72386%202.5%202.5%202.72386%202.5%203V13C2.5%2013.2761%202.72386%2013.5%203%2013.5H13C13.2761%2013.5%2013.5%2013.2761%2013.5%2013V3C13.5%202.72386%2013.2761%202.5%2013%202.5Z'%20stroke='%23579BF9'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5V6.5C6.5%205.95%206.95%205.5%207.5%205.5H8.5C9.05%205.5%209.5%205.95%209.5%206.5V8H6.5'%20stroke='%23579BF9'%20stroke-linejoin='round'/%3e%3c/svg%3e", Qe = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13%202.5H3C2.72386%202.5%202.5%202.72386%202.5%203V13C2.5%2013.2761%202.72386%2013.5%203%2013.5H13C13.2761%2013.5%2013.5%2013.2761%2013.5%2013V3C13.5%202.72386%2013.2761%202.5%2013%202.5Z'%20stroke='%23146FF4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5V6.5C6.5%205.95%206.95%205.5%207.5%205.5H8.5C9.05%205.5%209.5%205.95%209.5%206.5V8H6.5'%20stroke='%23146FF4'%20stroke-linejoin='round'/%3e%3c/svg%3e";
+var Ke = Object.defineProperty, Ye = (e, a) => Ke(e, "name", { value: a, configurable: !0 });
+const Ze = Ye((e) => t.jsx(te, { light: Qe, dark: Ue, ...e }), "EntityIcon"), Je = (e, a, n, i, r) => async (s) => {
+  if (console.log("agent change triggered for field ", a), a === "userPrompt" || a === "systemPrompt") {
+    const o = { ...n, [a]: s.target.value }, l = Q(o), u = { ...o, variables: l };
+    i(u), await k(e, u, r);
   } else {
-    const l = { ...n, [t]: s.target.value };
-    r(l), await S(e, l, i);
+    const o = { ...n, [a]: s.target.value };
+    i(o), await k(e, o, r);
   }
-}, ot = (e, t, n, r, i) => async (s) => {
-  if (console.log("agent change triggered for field ", t), t === "userPrompt" || t === "systemPrompt") {
-    const l = { ...n, [t]: s }, o = X(l), u = { ...l, variables: o };
-    r(u), await S(e, u, i);
+}, Xe = (e, a, n, i, r) => async (s) => {
+  if (console.log("agent change triggered for field ", a), a === "userPrompt" || a === "systemPrompt") {
+    const o = { ...n, [a]: s }, l = Q(o), u = { ...o, variables: l };
+    i(u), await k(e, u, r);
   } else {
-    const l = { ...n, [t]: s };
-    r(l), await S(e, l, i);
+    const o = { ...n, [a]: s };
+    i(o), await k(e, o, r);
   }
-}, dt = async (e, t, n, r) => {
-  const i = await e.ui.elementSelectors.selectEntity({ allowNone: !0 });
-  if (i.status === "ok") {
-    console.log(i);
-    const s = { ...t, entity: i.selected.module + "." + i.selected.name };
-    n(s), await S(e, s, r);
+}, ea = async (e, a, n, i) => {
+  const r = await e.ui.elementSelectors.selectEntity({ allowNone: !0 });
+  if (r.status === "ok") {
+    console.log(r);
+    const s = { ...a, entity: r.selected.module + "." + r.selected.name };
+    n(s), await k(e, s, i);
   }
-  if (i.status === "none") {
+  if (r.status === "none") {
     console.log('"None" selected for Entity');
-    const s = { ...t, entity: "" };
-    n(s), await S(e, s, r);
+    const s = { ...a, entity: "" };
+    n(s), await k(e, s, i);
   }
-}, ct = async (e, t, n, r, i) => {
+}, aa = async (e, a, n, i, r) => {
   const s = await e.ui.elementSelectors.selectDocument({ allowNone: !0 });
   if (s.status === "ok") {
     console.log(s);
-    const l = { ...t, [i]: s.selected.module + "." + s.selected.name };
-    console.log(s.selected.module + "." + s.selected.name), n(l), await S(e, l, r);
+    const o = { ...a, [r]: s.selected.module + "." + s.selected.name };
+    console.log(s.selected.module + "." + s.selected.name), n(o), await k(e, o, i);
   }
   if (s.status === "none") {
-    console.log('"None" selected for ' + i);
-    const l = { ...t, [i]: void 0 };
-    n(l), await S(e, l, r);
+    console.log('"None" selected for ' + r);
+    const o = { ...a, [r]: void 0 };
+    n(o), await k(e, o, i);
   }
-}, ut = (e, t, n, r) => async (i, s) => {
-  console.log("variable test value change triggered for index", i);
-  const l = [...t.variables];
-  l[i] = { ...l[i], testValue: s };
-  const o = { ...t, variables: l };
-  n(o), await S(e, o, r);
-}, S = async (e, t, n) => {
+}, ta = (e, a, n, i) => async (r, s) => {
+  console.log("variable test value change triggered for index", r);
+  const o = [...a.variables];
+  o[r] = { ...o[r], testValue: s };
+  const l = { ...a, variables: o };
+  n(l), await k(e, l, i);
+}, k = async (e, a, n) => {
   console.log("Save logic triggered");
   try {
-    await e.app.model.customBlobDocuments.updateDocumentContent(n, t);
-  } catch (r) {
+    await e.app.model.customBlobDocuments.updateDocumentContent(n, a);
+  } catch (i) {
     e.ui.notifications.show({
       title: "Failed to save document",
-      message: r.message
+      message: i.message
     });
   }
-}, ft = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M4.5%2011.5L11.5%204.5'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M11.5%2011.5L4.5%204.5'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", bt = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M4.5%2011.5L11.5%204.5'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M11.5%2011.5L4.5%204.5'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
-var ht = Object.defineProperty, pt = (e, t) => ht(e, "name", { value: t, configurable: !0 });
-const ee = pt((e) => a.jsx(N, { light: bt, dark: ft, ...e }), "CloseIcon"), te = /* @__PURE__ */ new WeakMap();
-function gt(e, t, n) {
-  let { value: r, children: i, "aria-label": s, "aria-labelledby": l, onPressStart: o, onPressEnd: u, onPressChange: h, onPress: p, onPressUp: x, onClick: d } = e;
-  const b = e.isDisabled || t.isDisabled;
-  let P = i != null, y = s != null || l != null;
-  !P && !y && process.env.NODE_ENV !== "production" && console.warn("If you do not provide children, you must specify an aria-label for accessibility");
-  let j = t.selectedValue === r, g = (L) => {
-    L.stopPropagation(), t.setSelectedValue(r);
-  }, { pressProps: w, isPressed: $ } = z({
-    onPressStart: o,
+}, K = /* @__PURE__ */ new WeakMap();
+function na(e, a, n) {
+  let { value: i, children: r, "aria-label": s, "aria-labelledby": o, onPressStart: l, onPressEnd: u, onPressChange: p, onPress: h, onPressUp: x, onClick: d } = e;
+  const b = e.isDisabled || a.isDisabled;
+  let j = r != null, y = s != null || o != null;
+  !j && !y && process.env.NODE_ENV !== "production" && console.warn("If you do not provide children, you must specify an aria-label for accessibility");
+  let w = a.selectedValue === i, v = (A) => {
+    A.stopPropagation(), a.setSelectedValue(i);
+  }, { pressProps: C, isPressed: $ } = N({
+    onPressStart: l,
     onPressEnd: u,
-    onPressChange: h,
-    onPress: p,
+    onPressChange: p,
+    onPress: h,
     onPressUp: x,
     onClick: d,
     isDisabled: b
-  }), { pressProps: c, isPressed: v } = z({
-    onPressStart: o,
+  }), { pressProps: c, isPressed: g } = N({
+    onPressStart: l,
     onPressEnd: u,
-    onPressChange: h,
+    onPressChange: p,
     onPressUp: x,
     onClick: d,
     isDisabled: b,
-    onPress(L) {
-      var T;
-      p == null || p(L), t.setSelectedValue(r), (T = n.current) === null || T === void 0 || T.focus();
+    onPress(A) {
+      var O;
+      h == null || h(A), a.setSelectedValue(i), (O = n.current) === null || O === void 0 || O.focus();
     }
-  }), { focusableProps: C } = be(E(e, {
-    onFocus: () => t.setLastFocusedValue(r)
-  }), n), m = E(w, C), V = M(e, {
+  }), { focusableProps: P } = ne(R(e, {
+    onFocus: () => a.setLastFocusedValue(i)
+  }), n), m = R(C, P), V = T(e, {
     labelable: !0
-  }), B = -1;
-  t.selectedValue != null ? t.selectedValue === r && (B = 0) : (t.lastFocusedValue === r || t.lastFocusedValue == null) && (B = 0), b && (B = void 0);
-  let { name: de, form: ce, descriptionId: ue, errorMessageId: fe, validationBehavior: _ } = te.get(t);
-  return he(n, t.defaultSelectedValue, t.setSelectedValue), pe({
-    validationBehavior: _
-  }, t, n), {
-    labelProps: E(c, f.useMemo(() => ({
-      onClick: (L) => L.preventDefault(),
+  }), E = -1;
+  a.selectedValue != null ? a.selectedValue === i && (E = 0) : (a.lastFocusedValue === i || a.lastFocusedValue == null) && (E = 0), b && (E = void 0);
+  let { name: J, form: X, descriptionId: ee, errorMessageId: ae, validationBehavior: H } = K.get(a);
+  return se(n, a.defaultSelectedValue, a.setSelectedValue), ie({
+    validationBehavior: H
+  }, a, n), {
+    labelProps: R(c, f.useMemo(() => ({
+      onClick: (A) => A.preventDefault(),
       // Prevent label from being focused when mouse down on it.
       // Note, this does not prevent the input from being focused in the `click` event.
-      onMouseDown: (L) => L.preventDefault()
+      onMouseDown: (A) => A.preventDefault()
     }), [])),
-    inputProps: E(V, {
+    inputProps: R(V, {
       ...m,
       type: "radio",
-      name: de,
-      form: ce,
-      tabIndex: B,
+      name: J,
+      form: X,
+      tabIndex: E,
       disabled: b,
-      required: t.isRequired && _ === "native",
-      checked: j,
-      value: r,
-      onChange: g,
+      required: a.isRequired && H === "native",
+      checked: w,
+      value: i,
+      onChange: v,
       "aria-describedby": [
         e["aria-describedby"],
-        t.isInvalid ? fe : null,
-        ue
+        a.isInvalid ? ae : null,
+        ee
       ].filter(Boolean).join(" ") || void 0
     }),
     isDisabled: b,
-    isSelected: j,
-    isPressed: $ || v
+    isSelected: w,
+    isPressed: $ || g
   };
 }
-function vt(e, t) {
-  let { name: n, form: r, isReadOnly: i, isRequired: s, isDisabled: l, orientation: o = "vertical", validationBehavior: u = "aria" } = e, { direction: h } = ge(), { isInvalid: p, validationErrors: x, validationDetails: d } = t.displayValidation, { labelProps: b, fieldProps: P, descriptionProps: y, errorMessageProps: j } = ve({
+function sa(e, a) {
+  let { name: n, form: i, isReadOnly: r, isRequired: s, isDisabled: o, orientation: l = "vertical", validationBehavior: u = "aria" } = e, { direction: p } = re(), { isInvalid: h, validationErrors: x, validationDetails: d } = a.displayValidation, { labelProps: b, fieldProps: j, descriptionProps: y, errorMessageProps: w } = le({
     ...e,
     // Radio group is not an HTML input element so it
     // shouldn't be labeled by a <label> element.
     labelElementType: "span",
-    isInvalid: t.isInvalid,
+    isInvalid: a.isInvalid,
     errorMessage: e.errorMessage || x
-  }), g = M(e, {
+  }), v = T(e, {
     labelable: !0
-  }), { focusWithinProps: w } = xe({
-    onBlurWithin(v) {
-      var C;
-      (C = e.onBlur) === null || C === void 0 || C.call(e, v), t.selectedValue || t.setLastFocusedValue(null);
+  }), { focusWithinProps: C } = oe({
+    onBlurWithin(g) {
+      var P;
+      (P = e.onBlur) === null || P === void 0 || P.call(e, g), a.selectedValue || a.setLastFocusedValue(null);
     },
     onFocusWithin: e.onFocus,
     onFocusWithinChange: e.onFocusChange
-  }), $ = (v) => {
-    let C;
-    switch (v.key) {
+  }), $ = (g) => {
+    let P;
+    switch (g.key) {
       case "ArrowRight":
-        h === "rtl" && o !== "vertical" ? C = "prev" : C = "next";
+        p === "rtl" && l !== "vertical" ? P = "prev" : P = "next";
         break;
       case "ArrowLeft":
-        h === "rtl" && o !== "vertical" ? C = "next" : C = "prev";
+        p === "rtl" && l !== "vertical" ? P = "next" : P = "prev";
         break;
       case "ArrowDown":
-        C = "next";
+        P = "next";
         break;
       case "ArrowUp":
-        C = "prev";
+        P = "prev";
         break;
       default:
         return;
     }
-    v.preventDefault();
-    let m = me(v.currentTarget, {
-      from: v.target,
-      accept: (B) => B instanceof ye(B).HTMLInputElement && B.type === "radio"
+    g.preventDefault();
+    let m = ce(g.currentTarget, {
+      from: g.target,
+      accept: (E) => E instanceof ue(E).HTMLInputElement && E.type === "radio"
     }), V;
-    C === "next" ? (V = m.nextNode(), V || (m.currentNode = v.currentTarget, V = m.firstChild())) : (V = m.previousNode(), V || (m.currentNode = v.currentTarget, V = m.lastChild())), V && (V.focus(), t.setSelectedValue(V.value));
-  }, c = $e(n);
-  return te.set(t, {
+    P === "next" ? (V = m.nextNode(), V || (m.currentNode = g.currentTarget, V = m.firstChild())) : (V = m.previousNode(), V || (m.currentNode = g.currentTarget, V = m.lastChild())), V && (V.focus(), a.setSelectedValue(V.value));
+  }, c = de(n);
+  return K.set(a, {
     name: c,
-    form: r,
+    form: i,
     descriptionId: y.id,
-    errorMessageId: j.id,
+    errorMessageId: w.id,
     validationBehavior: u
   }), {
-    radioGroupProps: E(g, {
+    radioGroupProps: R(v, {
       // https://www.w3.org/TR/wai-aria-1.2/#radiogroup
       role: "radiogroup",
       onKeyDown: $,
-      "aria-invalid": t.isInvalid || void 0,
+      "aria-invalid": a.isInvalid || void 0,
       "aria-errormessage": e["aria-errormessage"],
-      "aria-readonly": i || void 0,
+      "aria-readonly": r || void 0,
       "aria-required": s || void 0,
-      "aria-disabled": l || void 0,
-      "aria-orientation": o,
-      ...P,
-      ...w
+      "aria-disabled": o || void 0,
+      "aria-orientation": l,
+      ...j,
+      ...C
     }),
     labelProps: b,
     descriptionProps: y,
-    errorMessageProps: j,
-    isInvalid: p,
+    errorMessageProps: w,
+    isInvalid: h,
     validationErrors: x,
     validationDetails: d
   };
 }
-let xt = Math.round(Math.random() * 1e10), $t = 0;
-function mt(e) {
-  let t = f.useMemo(() => e.name || `radio-group-${xt}-${++$t}`, [
+let ia = Math.round(Math.random() * 1e10), ra = 0;
+function la(e) {
+  let a = f.useMemo(() => e.name || `radio-group-${ia}-${++ra}`, [
     e.name
   ]);
   var n;
-  let [r, i] = we(e.value, (n = e.defaultValue) !== null && n !== void 0 ? n : null, e.onChange), [s] = f.useState(r), [l, o] = f.useState(null), u = Ce({
+  let [i, r] = fe(e.value, (n = e.defaultValue) !== null && n !== void 0 ? n : null, e.onChange), [s] = f.useState(i), [o, l] = f.useState(null), u = be({
     ...e,
-    value: r
-  }), h = (d) => {
-    !e.isReadOnly && !e.isDisabled && (i(d), u.commitValidation());
-  }, p = u.displayValidation.isInvalid;
+    value: i
+  }), p = (d) => {
+    !e.isReadOnly && !e.isDisabled && (r(d), u.commitValidation());
+  }, h = u.displayValidation.isInvalid;
   var x;
   return {
     ...u,
-    name: t,
-    selectedValue: r,
+    name: a,
+    selectedValue: i,
     defaultSelectedValue: e.value !== void 0 ? s : (x = e.defaultValue) !== null && x !== void 0 ? x : null,
-    setSelectedValue: h,
-    lastFocusedValue: l,
-    setLastFocusedValue: o,
+    setSelectedValue: p,
+    lastFocusedValue: o,
+    setLastFocusedValue: l,
     isDisabled: e.isDisabled || !1,
     isReadOnly: e.isReadOnly || !1,
     isRequired: e.isRequired || !1,
-    validationState: e.validationState || (p ? "invalid" : null),
-    isInvalid: p
+    validationState: e.validationState || (h ? "invalid" : null),
+    isInvalid: h
   };
 }
-const yt = /* @__PURE__ */ f.createContext(null), wt = /* @__PURE__ */ f.createContext(null), ae = /* @__PURE__ */ f.createContext(null), Ct = /* @__PURE__ */ f.forwardRef(function(t, n) {
-  [t, n] = Q(t, n, yt);
-  let { validationBehavior: r } = Be(Ae) || {};
-  var i, s;
-  let l = (s = (i = t.validationBehavior) !== null && i !== void 0 ? i : r) !== null && s !== void 0 ? s : "native", o = mt({
-    ...t,
-    validationBehavior: l
-  }), [u, h] = Ee(!t["aria-label"] && !t["aria-labelledby"]), { radioGroupProps: p, labelProps: x, descriptionProps: d, errorMessageProps: b, ...P } = vt({
-    ...t,
-    label: h,
-    validationBehavior: l
-  }, o), y = K({
-    ...t,
+const oa = /* @__PURE__ */ f.createContext(null), da = /* @__PURE__ */ f.createContext(null), Y = /* @__PURE__ */ f.createContext(null), ca = /* @__PURE__ */ f.forwardRef(function(a, n) {
+  [a, n] = G(a, n, oa);
+  let { validationBehavior: i } = me(ye) || {};
+  var r, s;
+  let o = (s = (r = a.validationBehavior) !== null && r !== void 0 ? r : i) !== null && s !== void 0 ? s : "native", l = la({
+    ...a,
+    validationBehavior: o
+  }), [u, p] = Ce(!a["aria-label"] && !a["aria-labelledby"]), { radioGroupProps: h, labelProps: x, descriptionProps: d, errorMessageProps: b, ...j } = sa({
+    ...a,
+    label: p,
+    validationBehavior: o
+  }, l), y = U({
+    ...a,
     values: {
-      orientation: t.orientation || "vertical",
-      isDisabled: o.isDisabled,
-      isReadOnly: o.isReadOnly,
-      isRequired: o.isRequired,
-      isInvalid: o.isInvalid,
-      state: o
+      orientation: a.orientation || "vertical",
+      isDisabled: l.isDisabled,
+      isReadOnly: l.isReadOnly,
+      isRequired: l.isRequired,
+      isInvalid: l.isInvalid,
+      state: l
     },
     defaultClassName: "react-aria-RadioGroup"
-  }), j = M(t, {
+  }), w = T(a, {
     global: !0
   });
-  return /* @__PURE__ */ A.createElement("div", {
-    ...E(j, y, p),
+  return /* @__PURE__ */ S.createElement("div", {
+    ...R(w, y, h),
     ref: n,
-    slot: t.slot || void 0,
-    "data-orientation": t.orientation || "vertical",
-    "data-invalid": o.isInvalid || void 0,
-    "data-disabled": o.isDisabled || void 0,
-    "data-readonly": o.isReadOnly || void 0,
-    "data-required": o.isRequired || void 0
-  }, /* @__PURE__ */ A.createElement(Re, {
+    slot: a.slot || void 0,
+    "data-orientation": a.orientation || "vertical",
+    "data-invalid": l.isInvalid || void 0,
+    "data-disabled": l.isDisabled || void 0,
+    "data-readonly": l.isReadOnly || void 0,
+    "data-required": l.isRequired || void 0
+  }, /* @__PURE__ */ S.createElement(Pe, {
     values: [
       [
-        ae,
-        o
+        Y,
+        l
       ],
       [
-        Le,
+        we,
         {
           ...x,
           ref: u,
@@ -273,7 +271,7 @@ const yt = /* @__PURE__ */ f.createContext(null), wt = /* @__PURE__ */ f.createC
         }
       ],
       [
-        Ie,
+        je,
         {
           slots: {
             description: d,
@@ -282,167 +280,69 @@ const yt = /* @__PURE__ */ f.createContext(null), wt = /* @__PURE__ */ f.createC
         }
       ],
       [
-        Fe,
-        P
+        Ve,
+        j
       ]
     ]
-  }, /* @__PURE__ */ A.createElement(et, null, y.children)));
-}), jt = /* @__PURE__ */ f.forwardRef(function(t, n) {
-  let { inputRef: r = null, ...i } = t;
-  [t, n] = Q(i, n, wt);
-  let s = A.useContext(ae), l = je(f.useMemo(() => Pe(r, t.inputRef !== void 0 ? t.inputRef : null), [
-    r,
-    t.inputRef
-  ])), { labelProps: o, inputProps: u, isSelected: h, isDisabled: p, isPressed: x } = gt({
-    ...ke(t),
+  }, /* @__PURE__ */ S.createElement(qe, null, y.children)));
+}), ua = /* @__PURE__ */ f.forwardRef(function(a, n) {
+  let { inputRef: i = null, ...r } = a;
+  [a, n] = G(r, n, da);
+  let s = S.useContext(Y), o = pe(f.useMemo(() => he(i, a.inputRef !== void 0 ? a.inputRef : null), [
+    i,
+    a.inputRef
+  ])), { labelProps: l, inputProps: u, isSelected: p, isDisabled: h, isPressed: x } = na({
+    ...ve(a),
     // ReactNode type doesn't allow function children.
-    children: typeof t.children == "function" ? !0 : t.children
-  }, s, l), { isFocused: d, isFocusVisible: b, focusProps: P } = Ve(), y = p || s.isReadOnly, { hoverProps: j, isHovered: g } = De({
-    ...t,
+    children: typeof a.children == "function" ? !0 : a.children
+  }, s, o), { isFocused: d, isFocusVisible: b, focusProps: j } = ge(), y = h || s.isReadOnly, { hoverProps: w, isHovered: v } = xe({
+    ...a,
     isDisabled: y
-  }), w = K({
-    ...t,
+  }), C = U({
+    ...a,
     defaultClassName: "react-aria-Radio",
     values: {
-      isSelected: h,
+      isSelected: p,
       isPressed: x,
-      isHovered: g,
+      isHovered: v,
       isFocused: d,
       isFocusVisible: b,
-      isDisabled: p,
+      isDisabled: h,
       isReadOnly: s.isReadOnly,
       isInvalid: s.isInvalid,
       isRequired: s.isRequired
     }
-  }), $ = M(t, {
+  }), $ = T(a, {
     global: !0
   });
-  return delete $.id, delete $.onClick, /* @__PURE__ */ A.createElement("label", {
-    ...E($, o, j, w),
+  return delete $.id, delete $.onClick, /* @__PURE__ */ S.createElement("label", {
+    ...R($, l, w, C),
     ref: n,
-    "data-selected": h || void 0,
+    "data-selected": p || void 0,
     "data-pressed": x || void 0,
-    "data-hovered": g || void 0,
+    "data-hovered": v || void 0,
     "data-focused": d || void 0,
     "data-focus-visible": b || void 0,
-    "data-disabled": p || void 0,
+    "data-disabled": h || void 0,
     "data-readonly": s.isReadOnly || void 0,
     "data-invalid": s.isInvalid || void 0,
     "data-required": s.isRequired || void 0
-  }, /* @__PURE__ */ A.createElement(Se, {
+  }, /* @__PURE__ */ S.createElement($e, {
     elementType: "span"
-  }, /* @__PURE__ */ A.createElement("input", {
-    ...E(u, P),
-    ref: l
-  })), /* @__PURE__ */ A.createElement(Xe.Provider, {
+  }, /* @__PURE__ */ S.createElement("input", {
+    ...R(u, j),
+    ref: o
+  })), /* @__PURE__ */ S.createElement(Ne.Provider, {
     value: {
-      isSelected: h
+      isSelected: p
     }
-  }, w.children));
+  }, C.children));
 });
-var Pt = Object.defineProperty, G = (e, t) => Pt(e, "name", { value: t, configurable: !0 });
-function ne(e) {
-  throw new Error("Unexpected object", e);
-}
-G(ne, "assertNever");
-function kt(e, t, n) {
-  return e < t ? t : e > n ? n : e;
-}
-G(kt, "clamp");
-function Vt(e) {
-  return e.type === "url" ? e.url : `data:image/png;base64,${e.base64Png}`;
-}
-G(Vt, "getIconSrc");
-var Dt = Object.defineProperty, St = (e, t) => Dt(e, "name", { value: t, configurable: !0 });
-function re(e) {
-  switch (e) {
-    case "warning":
-      return I`
-                background-color: ${({ theme: t }) => t.colorsAccentSubtlestOrange};
-                border-color: ${({ theme: t }) => t.colorsAccentDefaultOrange};
-            `;
-    case "info":
-      return I`
-                background-color: ${({ theme: t }) => t.colorsAccentSubtlestBlue};
-                border-color: ${({ theme: t }) => t.colorsAccentDefaultBlue};
-            `;
-    case "success":
-      return I`
-                background-color: ${({ theme: t }) => t.colorsAccentSubtlestGreen};
-                border-color: ${({ theme: t }) => t.colorsAccentDefaultGreen};
-            `;
-    case "danger":
-      return I`
-                background-color: ${({ theme: t }) => t.colorsAccentSubtlestRed};
-                border-color: ${({ theme: t }) => t.colorsAccentDefaultRed};
-            `;
-    case "neutral":
-      return I`
-                background-color: ${({ theme: t }) => t.colorsAccentSubtlestGrey};
-                border-color: ${({ theme: t }) => t.colorsAccentDefaultGrey};
-            `;
-    default:
-      ne(e);
-  }
-}
-St(re, "getAlertStyleByType");
-const se = k.div`
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    align-items: center;
-    justify-content: stretch;
-
-    min-height: 28px;
-    height: fit-content;
-
-    padding: 0 8px;
-
-    ${({ $showBorder: e }) => e && I`
-            border-width: 1px 0;
-            border-style: solid;
-        `}
-
-    ${({ $type: e }) => re(e)}
-`, ie = k.div`
-    padding: ${R.spacing4} ${R.spacing0};
-    flex-grow: 1;
-
-    text-overflow: ellipsis;
-    overflow: hidden;
-`;
-var Bt = Object.defineProperty, At = (e, t) => Bt(e, "name", { value: t, configurable: !0 });
-const Et = At(({ type: e = "neutral", icon: t, children: n, button: r, onClose: i }) => a.jsxs(se, { $type: e, $showBorder: !0, role: "alert", children: [t, a.jsx(ie, { children: n }), r ? a.jsx(W, { onPress: r.onClick, children: r.caption }) : null, i ? a.jsx(Y, { icon: a.jsx(ee, {}), onPress: i }) : null] }), "Alert");
-var Rt = Object.defineProperty, Lt = (e, t) => Rt(e, "name", { value: t, configurable: !0 });
-Lt(({ type: e = "neutral", icon: t, children: n, onClose: r }) => a.jsxs(se, { $type: e, role: "alert", children: [t, a.jsx(ie, { children: n }), r ? a.jsx(Y, { icon: a.jsx(ee, {}), onPress: r }) : null] }), "InlineAlert");
-const It = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M1.57992%2012.6651L7.54492%202.76006C7.75492%202.41006%208.23992%202.41006%208.44992%202.76006L14.4149%2012.6651C14.6349%2013.0301%2014.3799%2013.5001%2013.9599%2013.5001H2.03492C1.61992%2013.5001%201.36492%2013.0301%201.57992%2012.6651Z'%20stroke='%23F69558'%20stroke-miterlimit='10'/%3e%3cpath%20d='M8%2012C8.41421%2012%208.75%2011.6642%208.75%2011.25C8.75%2010.8358%208.41421%2010.5%208%2010.5C7.58579%2010.5%207.25%2010.8358%207.25%2011.25C7.25%2011.6642%207.58579%2012%208%2012Z'%20fill='%23F69558'/%3e%3cpath%20d='M8%205.5V9.5'%20stroke='%23F69558'%20stroke-miterlimit='10'/%3e%3c/svg%3e", Ft = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M1.57992%2012.6651L7.54492%202.76006C7.75492%202.41006%208.23992%202.41006%208.44992%202.76006L14.4149%2012.6651C14.6349%2013.0301%2014.3799%2013.5001%2013.9599%2013.5001H2.03492C1.61992%2013.5001%201.36492%2013.0301%201.57992%2012.6651Z'%20stroke='%23DB5F12'%20stroke-miterlimit='10'/%3e%3cpath%20d='M8%2012C8.41421%2012%208.75%2011.6642%208.75%2011.25C8.75%2010.8358%208.41421%2010.5%208%2010.5C7.58579%2010.5%207.25%2010.8358%207.25%2011.25C7.25%2011.6642%207.58579%2012%208%2012Z'%20fill='%23DB5F12'/%3e%3cpath%20d='M8%205.5V9.5'%20stroke='%23DB5F12'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
-var Ot = Object.defineProperty, Mt = (e, t) => Ot(e, "name", { value: t, configurable: !0 });
-Mt((e) => a.jsx(N, { light: Ft, dark: It, ...e }), "WarningIcon");
-const le = ({
-  children: e,
-  type: t,
-  icon: n,
-  onClose: r,
-  buttonCaption: i,
-  buttonClick: s
-}) => {
-  const l = i && s;
-  return /* @__PURE__ */ a.jsx(
-    Et,
-    {
-      type: t,
-      icon: n,
-      onClose: r,
-      button: l ? { caption: i, onClick: s } : void 0,
-      children: e
-    }
-  );
-}, Tt = (e) => /* @__PURE__ */ a.jsx(le, { ...e, type: "info", icon: /* @__PURE__ */ a.jsx(Oe, {}) }), Ht = (e) => /* @__PURE__ */ a.jsx(le, { ...e, type: "danger", icon: /* @__PURE__ */ a.jsx(Me, {}) });
-var Wt = Object.defineProperty, Nt = (e, t) => Wt(e, "name", { value: t, configurable: !0 });
-const qt = Nt((e) => a.jsx(Gt, { ...e }), "RadioButton"), Gt = k(jt)`
+var fa = Object.defineProperty, ba = (e, a) => fa(e, "name", { value: a, configurable: !0 });
+const pa = ba((e) => t.jsx(ha, { ...e }), "RadioButton"), ha = B(ua)`
     display: flex;
     align-items: center;
-    gap: ${R.spacing4};
+    gap: ${L.spacing4};
     color: ${({ theme: e }) => e.colorsTextPrimaryDefault};
     cursor: pointer;
 
@@ -458,8 +358,8 @@ const qt = Nt((e) => a.jsx(Gt, { ...e }), "RadioButton"), Gt = k(jt)`
         height: 14px;
         width: 14px;
         padding: 3px;
-        border: ${R.spacing1} solid ${({ theme: e }) => e.colorsBorderSelectorUnselected};
-        margin: ${R.spacing1};
+        border: ${L.spacing1} solid ${({ theme: e }) => e.colorsBorderSelectorUnselected};
+        margin: ${L.spacing1};
         border-radius: 50%;
         background-clip: content-box;
     }
@@ -472,14 +372,14 @@ const qt = Nt((e) => a.jsx(Gt, { ...e }), "RadioButton"), Gt = k(jt)`
     &[data-hovered]::before,
     &[data-focused]::before,
     &[data-focus-visible]::before {
-        border: ${R.spacing1} solid ${({ theme: e }) => e.colorsBorderSelectorSelected};
+        border: ${L.spacing1} solid ${({ theme: e }) => e.colorsBorderSelectorSelected};
     }
 `;
-var _t = Object.defineProperty, zt = (e, t) => _t(e, "name", { value: t, configurable: !0 });
-const Ut = zt(({ orientation: e = "horizontal", label: t, description: n, children: r, ...i }) => {
-  const { isInvalid: s, validate: l, validationError: o } = Te(i);
-  return a.jsx(oe, { orientation: e, ...i, isInvalid: s, validate: l, children: a.jsx(He, { label: t, description: n, realtimeValidationError: o, children: a.jsx(Zt, { children: r }) }) });
-}, "RadioButtonGroup"), oe = k(Ct)`
+var va = Object.defineProperty, ga = (e, a) => va(e, "name", { value: a, configurable: !0 });
+const xa = ga(({ orientation: e = "horizontal", label: a, description: n, children: i, ...r }) => {
+  const { isInvalid: s, validate: o, validationError: l } = De(r);
+  return t.jsx(Z, { orientation: e, ...r, isInvalid: s, validate: o, children: t.jsx(ke, { label: a, description: n, realtimeValidationError: l, children: t.jsx($a, { children: i }) }) });
+}, "RadioButtonGroup"), Z = B(ca)`
     &[data-orientation="vertical"] {
         flex-direction: column;
     }
@@ -488,45 +388,45 @@ const Ut = zt(({ orientation: e = "horizontal", label: t, description: n, childr
         flex-direction: row;
         align-items: center;
     }
-`, Zt = k.div`
+`, $a = B.div`
     display: flex;
     flex-direction: row;
-    gap: ${R.spacing8};
-    padding: ${R.spacing4} 0;
+    gap: ${L.spacing8};
+    padding: ${L.spacing4} 0;
 
-    ${oe}[data-orientation="vertical"] & {
+    ${Z}[data-orientation="vertical"] & {
         flex-direction: column;
     }
-`, Qt = ({
+`, ma = ({
   label: e,
-  ariaLabel: t,
+  ariaLabel: a,
   options: n,
-  value: r,
-  onChange: i,
+  value: i,
+  onChange: r,
   hasMarginTop: s = !1
 }) => {
-  const l = s ? 8 : 0;
-  return /* @__PURE__ */ a.jsxs(F, { marginTop: l, children: [
-    e && /* @__PURE__ */ a.jsx(D, { children: /* @__PURE__ */ a.jsx(q, { children: e }) }),
-    /* @__PURE__ */ a.jsx(D, { fullWidth: !0, children: /* @__PURE__ */ a.jsx(
-      Ut,
+  const o = s ? 8 : 0;
+  return /* @__PURE__ */ t.jsxs(I, { marginTop: o, children: [
+    e && /* @__PURE__ */ t.jsx(D, { children: /* @__PURE__ */ t.jsx(W, { children: e }) }),
+    /* @__PURE__ */ t.jsx(D, { fullWidth: !0, children: /* @__PURE__ */ t.jsx(
+      xa,
       {
-        value: r,
-        onChange: i,
-        "aria-label": t,
-        children: n.map((o) => /* @__PURE__ */ a.jsx(
-          qt,
+        value: i,
+        onChange: r,
+        "aria-label": a,
+        children: n.map((l) => /* @__PURE__ */ t.jsx(
+          pa,
           {
-            value: o.value,
-            "aria-label": o.caption,
-            children: o.caption
+            value: l.value,
+            "aria-label": l.caption,
+            children: l.caption
           },
-          o.value
+          l.value
         ))
       }
     ) })
   ] });
-}, Kt = k(tt).withConfig({
+}, ya = B(_e).withConfig({
   shouldForwardProp: (e) => !["hasHighlighting"].includes(e)
 })`
   width: 100%;
@@ -543,7 +443,7 @@ const Ut = zt(({ orientation: e = "horizontal", label: t, description: n, childr
   position: relative;
   z-index: 1;
   margin-bottom: -3px;
-`, Yt = k.div`
+`, Ca = B.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -562,12 +462,12 @@ const Ut = zt(({ orientation: e = "horizontal", label: t, description: n, childr
   overflow: visible;
   z-index: 0;
   transform: translateY(var(--scroll-offset, 0px));
-`, Jt = k.div`
+`, Pa = B.div`
   position: relative;
   width: 100%;
   overflow: hidden;
   margin-bottom: 3px;
-`, Xt = k.div`
+`, wa = B.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -577,277 +477,268 @@ const Ut = zt(({ orientation: e = "horizontal", label: t, description: n, childr
   background-color: #fff;
   z-index: -1;
   border: 1px solid transparent;
-`, H = ({
+`, M = ({
   label: e,
-  ariaLabel: t,
+  ariaLabel: a,
   value: n,
-  onChange: r,
-  placeholder: i,
+  onChange: i,
+  placeholder: r,
   readOnly: s = !1,
-  defaultHeightRows: l,
-  highlightRules: o
+  defaultHeightRows: o,
+  highlightRules: l
 }) => {
-  const u = f.useRef(null), h = f.useRef(null), [p, x] = f.useState(0), d = l || 5, b = o && o.length > 0, P = () => {
+  const u = f.useRef(null), p = f.useRef(null), [h, x] = f.useState(0), d = o || 5, b = l && l.length > 0, j = () => {
     if (!b) return null;
-    const g = [];
-    o.forEach((c, v) => {
+    const v = [];
+    l.forEach((c, g) => {
       Array.from(n.matchAll(c.pattern)).forEach((m) => {
-        m.index !== void 0 && g.push({
+        m.index !== void 0 && v.push({
           start: m.index,
           end: m.index + m[0].length,
           text: m[0],
           style: c.style,
-          ruleIndex: v
+          ruleIndex: g
         });
       });
-    }), g.sort((c, v) => c.start - v.start);
-    const w = [];
+    }), v.sort((c, g) => c.start - g.start);
+    const C = [];
     let $ = 0;
-    return g.forEach((c, v) => {
-      c.start > $ && w.push(
-        /* @__PURE__ */ a.jsx("span", { children: n.slice($, c.start) }, `text-${$}-${c.start}`)
-      ), c.start >= $ && (w.push(
-        /* @__PURE__ */ a.jsx("span", { style: c.style, children: c.text }, `placeholder-${c.ruleIndex}-${v}`)
+    return v.forEach((c, g) => {
+      c.start > $ && C.push(
+        /* @__PURE__ */ t.jsx("span", { children: n.slice($, c.start) }, `text-${$}-${c.start}`)
+      ), c.start >= $ && (C.push(
+        /* @__PURE__ */ t.jsx("span", { style: c.style, children: c.text }, `placeholder-${c.ruleIndex}-${g}`)
       ), $ = c.end);
-    }), $ < n.length && w.push(
-      /* @__PURE__ */ a.jsx("span", { children: n.slice($) }, `text-${$}-end`)
-    ), w;
+    }), $ < n.length && C.push(
+      /* @__PURE__ */ t.jsx("span", { children: n.slice($) }, `text-${$}-end`)
+    ), C;
   }, y = f.useCallback(() => {
     if (u.current) {
-      const g = u.current.offsetWidth - u.current.clientWidth;
-      x(g);
+      const v = u.current.offsetWidth - u.current.clientWidth;
+      x(v);
     }
-  }, []), j = f.useCallback(() => {
-    if (u.current && h.current) {
-      const g = u.current.scrollTop;
-      h.current.style.setProperty("--scroll-offset", `-${g}px`);
+  }, []), w = f.useCallback(() => {
+    if (u.current && p.current) {
+      const v = u.current.scrollTop;
+      p.current.style.setProperty("--scroll-offset", `-${v}px`);
     }
   }, []);
   return f.useEffect(() => {
-    const g = u.current;
-    if (g) {
+    const v = u.current;
+    if (v) {
       y();
-      const w = new ResizeObserver(y);
-      return w.observe(g), g.addEventListener("scroll", j), () => {
-        w.disconnect(), g.removeEventListener("scroll", j);
+      const C = new ResizeObserver(y);
+      return C.observe(v), v.addEventListener("scroll", w), () => {
+        C.disconnect(), v.removeEventListener("scroll", w);
       };
     }
-  }, [j, y]), /* @__PURE__ */ a.jsxs(F, { marginBottom: -3, children: [
-    e && /* @__PURE__ */ a.jsx(D, { children: /* @__PURE__ */ a.jsx(q, { children: e }) }),
-    /* @__PURE__ */ a.jsx(D, { fullWidth: !0, children: /* @__PURE__ */ a.jsxs(Jt, { children: [
-      b && /* @__PURE__ */ a.jsxs(a.Fragment, { children: [
-        /* @__PURE__ */ a.jsx(Xt, {}),
-        /* @__PURE__ */ a.jsx(
-          Yt,
+  }, [w, y]), /* @__PURE__ */ t.jsxs(I, { marginBottom: -3, children: [
+    e && /* @__PURE__ */ t.jsx(D, { children: /* @__PURE__ */ t.jsx(W, { children: e }) }),
+    /* @__PURE__ */ t.jsx(D, { fullWidth: !0, children: /* @__PURE__ */ t.jsxs(Pa, { children: [
+      b && /* @__PURE__ */ t.jsxs(t.Fragment, { children: [
+        /* @__PURE__ */ t.jsx(wa, {}),
+        /* @__PURE__ */ t.jsx(
+          Ca,
           {
-            ref: h,
-            style: { paddingRight: `${2 + p}px` },
-            children: P()
+            ref: p,
+            style: { paddingRight: `${2 + h}px` },
+            children: j()
           }
         )
       ] }),
-      /* @__PURE__ */ a.jsx(
-        Kt,
+      /* @__PURE__ */ t.jsx(
+        ya,
         {
-          "aria-label": t,
+          "aria-label": a,
           ref: u,
           value: n,
-          placeholder: i,
+          placeholder: r,
           readOnly: s,
-          onChange: r,
+          onChange: i,
           rows: d,
           hasHighlighting: b
         }
       )
     ] }) })
   ] });
-}, ea = k.img`
-    width: 16px;
-    height: 16px;
-`, ta = k.div`
-    position: relative;
-    width: 100%;
-`, Z = ({
+}, z = ({
   label: e,
-  ariaLabel: t,
+  ariaLabel: a,
   value: n,
-  buttonCaption: r,
-  onClick: i,
+  buttonCaption: i,
+  onClick: r,
   buttonCaptionSecondary: s,
-  onClickSecondary: l,
-  placeholder: o,
+  onClickSecondary: o,
+  placeholder: l,
   hasMarginTop: u = !1,
-  icon: h
+  icon: p
 }) => {
-  const p = u ? 8 : 0;
-  return /* @__PURE__ */ a.jsxs(F, { marginTop: p, children: [
-    e && /* @__PURE__ */ a.jsx(D, { children: /* @__PURE__ */ a.jsx(q, { children: e }) }),
-    /* @__PURE__ */ a.jsx(D, { fullWidth: !0, children: /* @__PURE__ */ a.jsxs(F, { children: [
-      /* @__PURE__ */ a.jsx(D, { fullWidth: !0, children: /* @__PURE__ */ a.jsxs(ta, { children: [
-        h && /* @__PURE__ */ a.jsx(We, { children: typeof h == "string" ? /* @__PURE__ */ a.jsx(ea, { src: h }) : h }),
-        /* @__PURE__ */ a.jsx(
-          J,
-          {
-            value: n,
-            placeholder: o,
-            isReadOnly: !0,
-            "aria-label": t,
-            hasIcon: !!h
-          }
-        )
-      ] }) }),
-      /* @__PURE__ */ a.jsx(
-        W,
+  const h = u ? 8 : 0;
+  return /* @__PURE__ */ t.jsxs(I, { marginTop: h, children: [
+    e && /* @__PURE__ */ t.jsx(D, { children: /* @__PURE__ */ t.jsx(W, { children: e }) }),
+    /* @__PURE__ */ t.jsx(D, { fullWidth: !0, children: /* @__PURE__ */ t.jsxs(I, { children: [
+      /* @__PURE__ */ t.jsx(D, { fullWidth: !0, children: /* @__PURE__ */ t.jsx(
+        Ee,
         {
-          onPress: i,
-          children: r
+          ariaLabel: a,
+          value: n,
+          placeholder: l,
+          readOnly: !0,
+          icon: p
+        }
+      ) }),
+      /* @__PURE__ */ t.jsx(
+        q,
+        {
+          onPress: r,
+          children: i
         }
       ),
-      s && /* @__PURE__ */ a.jsx(
-        W,
+      s && /* @__PURE__ */ t.jsx(
+        q,
         {
-          onPress: l,
+          onPress: o,
           children: s
         }
       )
     ] }) })
   ] });
-}, aa = ({
+}, ja = ({
   label: e,
-  ariaLabel: t,
+  ariaLabel: a,
   value: n,
-  onChange: r,
-  placeholder: i,
+  onChange: i,
+  placeholder: r,
   readOnly: s = !1,
-  badgeBackgroundColor: l,
-  badgeBorderColor: o
-}) => /* @__PURE__ */ a.jsxs(F, { children: [
-  e && /* @__PURE__ */ a.jsx(D, { children: /* @__PURE__ */ a.jsx(Ne, { children: /* @__PURE__ */ a.jsx(qe, { backgroundColor: l, borderColor: o, children: "{{" + e + "}}" }) }) }),
-  /* @__PURE__ */ a.jsx(D, { fullWidth: !0, children: /* @__PURE__ */ a.jsx(
-    J,
+  badgeBackgroundColor: o,
+  badgeBorderColor: l
+}) => /* @__PURE__ */ t.jsxs(I, { children: [
+  e && /* @__PURE__ */ t.jsx(D, { children: /* @__PURE__ */ t.jsx(Se, { children: /* @__PURE__ */ t.jsx(Re, { backgroundColor: o, borderColor: l, children: "{{" + e + "}}" }) }) }),
+  /* @__PURE__ */ t.jsx(D, { fullWidth: !0, children: /* @__PURE__ */ t.jsx(
+    Be,
     {
       value: n,
-      placeholder: i,
+      placeholder: r,
       isReadOnly: s,
-      onChange: r,
-      "aria-label": t
+      onChange: i,
+      "aria-label": a
     }
   ) })
-] }), na = k.div`
+] }), Va = B.div`
     display: flex;
     flex-direction: column;
     gap: 8px;
-`, ra = ({ variables: e, onVariableChange: t }) => e.length > 0 ? /* @__PURE__ */ a.jsx(na, { children: e.map((n, r) => /* @__PURE__ */ a.jsx(
-  aa,
+`, Da = ({ variables: e, onVariableChange: a }) => e.length > 0 ? /* @__PURE__ */ t.jsx(Va, { children: e.map((n, i) => /* @__PURE__ */ t.jsx(
+  ja,
   {
     label: n.key,
     ariaLabel: "variable-" + n.key,
     value: n.testValue,
-    onChange: (i) => t(r, i),
+    onChange: (r) => a(i, r),
     badgeBackgroundColor: n.backgroundColor,
     badgeBorderColor: n.borderColor
   },
-  `${n.key}-${r}`
-)) }) : null, sa = Qe(), ia = [
+  `${n.key}-${i}`
+)) }) : null, ka = Oe(), Ea = [
   { caption: "Chat", value: "Chat" },
   { caption: "Task", value: "Task" }
-], la = ({ studioPro: e, documentId: t }) => {
-  const n = e.ui.messageBoxes, r = e.app.model.customBlobDocuments, [i, s] = f.useState(0), [l, o] = f.useState({}), [u, h] = f.useState(!1), [p, x] = f.useState(!0), [d, b] = f.useState(sa), P = f.useMemo(() => Ke(d.variables), [d.variables]), y = f.useCallback(
-    (c) => lt(e, c, d, b, t),
-    [e, d, b, t]
-  ), j = f.useCallback(
-    (c) => ot(e, c, d, b, t),
-    [e, d, b, t]
-  ), g = f.useCallback(
-    () => dt(e, d, b, t),
-    [e, d, b, t]
+], Sa = ({ studioPro: e, documentId: a }) => {
+  const n = e.ui.messageBoxes, i = e.app.model.customBlobDocuments, [r, s] = f.useState(0), [o, l] = f.useState({}), [u, p] = f.useState(!1), [h, x] = f.useState(!0), [d, b] = f.useState(ka), j = f.useMemo(() => Me(d.variables), [d.variables]), y = f.useCallback(
+    (c) => Je(e, c, d, b, a),
+    [e, d, b, a]
   ), w = f.useCallback(
-    () => ct(e, d, b, t, "modelQualifiedName"),
-    [e, d, b, t]
+    (c) => Xe(e, c, d, b, a),
+    [e, d, b, a]
+  ), v = f.useCallback(
+    () => ea(e, d, b, a),
+    [e, d, b, a]
+  ), C = f.useCallback(
+    () => aa(e, d, b, a, "modelQualifiedName"),
+    [e, d, b, a]
   ), $ = f.useCallback(
-    ut(e, d, b, t),
-    [e, d, b, t]
+    ta(e, d, b, a),
+    [e, d, b, a]
   );
   return f.useEffect(() => {
-    const c = (v) => {
-      const { documents: C } = v;
-      C.some((m) => m.id === t) && s((m) => m + 1);
+    const c = (g) => {
+      const { documents: P } = g;
+      P.some((m) => m.id === a) && s((m) => m + 1);
     };
-    return r.addEventListener("documentsChanged", c), () => {
-      r.removeEventListener("documentsChanged", c);
+    return i.addEventListener("documentsChanged", c), () => {
+      i.removeEventListener("documentsChanged", c);
     };
   }, []), f.useEffect(() => {
-    r.getDocumentById(t).then(async (c) => {
+    i.getDocumentById(a).then(async (c) => {
       if (c && !("error" in c)) {
-        const v = c.document.contents;
-        b(v), x(await Ye(e, v)), o({}), h(!0);
+        const g = c.document.contents;
+        b(g), x(await We(e, g)), l({}), p(!0);
       } else
         throw new Error((c == null ? void 0 : c.error) || "Document not found");
     }).catch((c) => {
       n.show("error", "Error loading document", "Details: " + (c == null ? void 0 : c.message) || c);
     });
-  }, [i]), /* @__PURE__ */ a.jsx(_e, { studioPro: e, children: /* @__PURE__ */ a.jsxs(ze, { children: [
-    !u && /* @__PURE__ */ a.jsx("span", { children: "Loading document content..." }),
-    u && /* @__PURE__ */ a.jsxs(Ue, { children: [
-      /* @__PURE__ */ a.jsxs(U, { children: [
-        /* @__PURE__ */ a.jsx(
-          Z,
+  }, [r]), /* @__PURE__ */ t.jsx(Le, { studioPro: e, children: /* @__PURE__ */ t.jsxs(Ie, { children: [
+    !u && /* @__PURE__ */ t.jsx("span", { children: "Loading document content..." }),
+    u && /* @__PURE__ */ t.jsxs(Fe, { children: [
+      /* @__PURE__ */ t.jsxs(_, { children: [
+        /* @__PURE__ */ t.jsx(
+          z,
           {
             ariaLabel: "Model",
             label: "Model",
             value: d.modelQualifiedName ? d.modelQualifiedName : "",
-            icon: d.modelQualifiedName ? Je : void 0,
+            icon: d.modelQualifiedName ? He : void 0,
             buttonCaption: "Select...",
-            onClick: w,
+            onClick: C,
             buttonCaptionSecondary: "Settings",
             onClickSecondary: () => {
             }
           }
         ),
-        /* @__PURE__ */ a.jsx(O, { label: "System prompt", children: /* @__PURE__ */ a.jsx(
-          H,
+        /* @__PURE__ */ t.jsx(F, { label: "System prompt", children: /* @__PURE__ */ t.jsx(
+          M,
           {
             ariaLabel: "System prompt",
             value: d.systemPrompt,
             onChange: y("systemPrompt"),
-            highlightRules: P
+            highlightRules: j
           }
         ) }),
-        /* @__PURE__ */ a.jsx(O, { label: "User prompt", children: /* @__PURE__ */ a.jsx(
-          H,
+        /* @__PURE__ */ t.jsx(F, { label: "User prompt", children: /* @__PURE__ */ t.jsx(
+          M,
           {
             ariaLabel: "User prompt",
             value: d.userPrompt + "",
             onChange: y("userPrompt"),
-            highlightRules: P
+            highlightRules: j
           }
         ) })
       ] }),
-      /* @__PURE__ */ a.jsxs(U, { children: [
-        /* @__PURE__ */ a.jsxs(O, { label: "Variables", children: [
-          /* @__PURE__ */ a.jsx(
-            ra,
+      /* @__PURE__ */ t.jsxs(_, { children: [
+        /* @__PURE__ */ t.jsxs(F, { label: "Variables", children: [
+          /* @__PURE__ */ t.jsx(
+            Da,
             {
               variables: d.variables,
               onVariableChange: $
             }
           ),
-          d.variables.length === 0 && /* @__PURE__ */ a.jsx(Tt, { children: "Create variables: Enclose a word or text in double curly brackets. For example, you can write {{Language}} in the system or user prompt." })
+          d.variables.length === 0 && /* @__PURE__ */ t.jsx(ze, { children: "Create variables: Enclose a word or text in double curly brackets. For example, you can write {{Language}} in the system or user prompt." })
         ] }),
-        /* @__PURE__ */ a.jsxs(O, { label: "General", children: [
-          /* @__PURE__ */ a.jsx(
-            Ze,
+        /* @__PURE__ */ t.jsxs(F, { label: "General", children: [
+          /* @__PURE__ */ t.jsx(
+            Te,
             {
               label: "Agent ID",
               ariaLabel: "Agent ID",
-              value: t,
+              value: a,
               onChange: () => {
               },
               readOnly: !0
             }
           ),
-          /* @__PURE__ */ a.jsx(
-            H,
+          /* @__PURE__ */ t.jsx(
+            M,
             {
               label: "Documentation",
               ariaLabel: "Documentation",
@@ -856,33 +747,34 @@ const Ut = zt(({ orientation: e = "horizontal", label: t, description: n, childr
               defaultHeightRows: 3
             }
           ),
-          /* @__PURE__ */ a.jsx(
-            Qt,
+          /* @__PURE__ */ t.jsx(
+            ma,
             {
-              options: ia,
+              options: Ea,
               label: "Agent type",
               ariaLabel: "Agent type",
-              onChange: j("usageType"),
+              onChange: w("usageType"),
               value: d.usageType
             }
           ),
-          /* @__PURE__ */ a.jsx(
-            Z,
+          /* @__PURE__ */ t.jsx(
+            z,
             {
               ariaLabel: "Entity",
               label: "Entity",
               value: d.entity,
-              icon: d.entity ? /* @__PURE__ */ a.jsx(it, {}) : void 0,
-              onClick: g,
+              icon: d.entity ? /* @__PURE__ */ t.jsx(Ze, {}) : void 0,
+              onClick: v,
               buttonCaption: "Select..."
             }
           ),
-          p || /* @__PURE__ */ a.jsx(Ht, { children: `Entity with name ${d.entity} does not exist (anymore). Please select a valid entity.` })
+          h || /* @__PURE__ */ t.jsx(Ge, { children: `Entity with name ${d.entity} does not exist (anymore). Please select a valid entity.` })
         ] })
       ] })
     ] })
   ] }) });
-}, ua = Ge(la);
+}, La = Ae(Sa);
 export {
-  ua as component
+  La as component
 };
+//# sourceMappingURL=agentEdit.js.map

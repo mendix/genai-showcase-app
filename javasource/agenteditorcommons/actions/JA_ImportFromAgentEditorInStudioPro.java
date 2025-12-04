@@ -32,12 +32,12 @@ public class JA_ImportFromAgentEditorInStudioPro extends UserAction<java.lang.Bo
 	public java.lang.Boolean executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		LOGGER.info("Starting JA_ImportAgents");
+		LOGGER.info("Starting JA_ImportFromAgentEditorInStudioPro");
 
 		importModels();
 		importAgents();
 
-		LOGGER.info("Finished JA_ImportAgents");
+		LOGGER.info("Finished JA_ImportFromAgentEditorInStudioPro");
 		return true;
 		// END USER CODE
 	}
@@ -87,8 +87,7 @@ public class JA_ImportFromAgentEditorInStudioPro extends UserAction<java.lang.Bo
 		boolean isSuccess = agenteditorcommons.proxies.microflows.Microflows.agent_CreateUpdate_List(getContext(),
 				agentModelDocuments);
 		if (!isSuccess) {
-			throw new IllegalArgumentException(
-					"Creating/Updating the Agents failed due to bad input");
+			throw new IllegalArgumentException("Creating/Updating the Agents failed due to bad input");
 		}
 	}
 

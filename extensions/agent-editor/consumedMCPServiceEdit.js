@@ -1,4 +1,4 @@
-import { W as p, r as c, j as a, X as v, Y as x, Z as S, _ as f, a0 as D, a1 as j } from "./componentLoader-CiJ_P7hp.js";
+import { Q as p, r as c, j as a, R as v, U as x, V as S, W as f, X as D, Y as j } from "./componentLoader-l-cCI7h-.js";
 function E(n) {
   return {
     name: ""
@@ -59,3 +59,4 @@ const P = (n, s, o, t, r) => async (u) => {
 export {
   B as component
 };
+//# sourceMappingURL=consumedMCPServiceEdit.js.map
