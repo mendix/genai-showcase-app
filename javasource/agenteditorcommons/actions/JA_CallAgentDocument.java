@@ -23,6 +23,10 @@ import agentcommons.proxies.PromptToUse;
 import genaicommons.proxies.Request;
 import genaicommons.proxies.Response;
 
+/**
+ * Imports all defined documents (such as agents and models) to the app's database so that they can be viewed at runtime and integrate with Agent Commons, Token Monitor, Observability etc.
+ * This action can be used as part of your app's after startup logic.
+ */
 public class JA_CallAgentDocument extends UserAction<IMendixObject>
 {
 	private final java.lang.String AgentDocumentID;

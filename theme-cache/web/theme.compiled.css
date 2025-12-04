@@ -30073,6 +30073,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   font-size: 18px;
 }
 
+.visibility-none {
+  visibility: none !important;
+}
+
 .badge-with-circle {
   display: flex;
   align-items: center;
@@ -30689,7 +30693,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .agent-page-container .page-header-content .pageheader-with-buttons {
   display: flex !important;
   margin-bottom: 0;
-  align-items: center !important;
+  align-items: start;
   justify-items: center;
   justify-content: space-between;
 }
