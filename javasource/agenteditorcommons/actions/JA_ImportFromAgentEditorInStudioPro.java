@@ -21,9 +21,9 @@ import agenteditorcommons.impl.MxLogger;
 import agenteditorcommons.proxies.AgentModelDocument;
 import agenteditorcommons.proxies.ModelModelDocument;
 
-public class JA_ImportAgents extends UserAction<java.lang.Boolean>
+public class JA_ImportFromAgentEditorInStudioPro extends UserAction<java.lang.Boolean>
 {
-	public JA_ImportAgents(IContext context)
+	public JA_ImportFromAgentEditorInStudioPro(IContext context)
 	{
 		super(context);
 	}
@@ -49,11 +49,11 @@ public class JA_ImportAgents extends UserAction<java.lang.Boolean>
 	@java.lang.Override
 	public java.lang.String toString()
 	{
-		return "JA_ImportAgents";
+		return "JA_ImportFromAgentEditorInStudioPro";
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new MxLogger(JA_ImportAgents.class);
+	private static final MxLogger LOGGER = new MxLogger(JA_ImportFromAgentEditorInStudioPro.class);
 
 	private static final ObjectMapper objectMapper = new ObjectMapper();
 
