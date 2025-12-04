@@ -30074,7 +30074,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .visibility-none {
-  visibility: none !important;
+  visibility: hidden !important;
 }
 
 .badge-with-circle {
