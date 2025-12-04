@@ -139,8 +139,10 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 		} else {
 			// Use Streamable HTTP transport for newer protocol versions
 			String baseUrl = getBaseEndpoint();
-			endpoint = java.net.URI.create(baseUrl + "/mcp").getRawPath(); // Streamable HTTP requires this for some reason
-			LOGGER.info("Transport=HTTP, protocol=" + protocolVersion + ", base=" + baseUrl + ", endpoint=" + endpoint);
+			// Add /mcp suffix only if not already present (idempotent)
+			String fullUrl = baseUrl.toLowerCase().endsWith("/mcp") ? baseUrl : baseUrl + "/mcp";
+			endpoint = java.net.URI.create(fullUrl).getRawPath();
+			LOGGER.info("Transport=HTTP, protocol=" + protocolVersion + ", fullUrl=" + fullUrl + ", endpoint=" + endpoint);
 			return HttpClientStreamableHttpTransport
 					.builder(baseUrl)
 					.endpoint(endpoint)
@@ -150,34 +152,30 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 	}
 
 	/**
-	 * Creates the base endpoint by removing trailing slashes and known MCP suffixes (/sse, /mcp)
+	 * Normalizes the endpoint by removing trailing slashes only.
+	 * Does NOT strip /mcp or /sse from the path to avoid breaking legitimate URLs.
 	 */
 	private String getBaseEndpoint() {
 	    String baseUrl = ClientConfig.getMCPEndpoint();
 	    
-	    //Remove trailing slash first
-	    if (baseUrl.endsWith("/")) {
+	    // Remove trailing slash only
+	    while (baseUrl.endsWith("/")) {
 	        baseUrl = baseUrl.substring(0, baseUrl.length() - 1);
-	    }
-	    
-	    //Remove /sse suffix if present
-	    if (baseUrl.toLowerCase().endsWith("/sse")) {
-	        baseUrl = baseUrl.substring(0, baseUrl.length() - 4);
-	    }
-	    
-	    //Remove /mcp suffix if present
-	    if (baseUrl.toLowerCase().endsWith("/mcp")) {
-	        baseUrl = baseUrl.substring(0, baseUrl.length() - 4);
 	    }
 	    
 	    return baseUrl;
 	}
 
 	/**
-	 *Sets "/sse" to the base endpoint
+	 * Returns the SSE endpoint, adding /sse suffix only if not already present.
+	 * This ensures idempotent behavior.
 	 */
 	private String getSseEndpoint() {
-	    return getBaseEndpoint() + "/sse";
+	    String base = getBaseEndpoint();
+	    if (base.toLowerCase().endsWith("/sse")) {
+	        return base; // Already has /sse, don't duplicate
+	    }
+	    return base + "/sse";
 	}
 	
 	/**
