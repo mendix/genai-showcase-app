@@ -192,7 +192,7 @@ public class AddTool extends UserAction<IMendixObject>
 	}
 	
 	/**
-	 * Parses a value to a Date, supporting Unix timestamps, ISO Instant, and ISO LocalDate formats
+	 * Parses a value to a Date, supporting ISO strings (primary) and Unix timestamps (fallback)
 	 * @param value the value to parse
 	 * @param paramName parameter name for logging
 	 * @return parsed Date
@@ -201,18 +201,28 @@ public class AddTool extends UserAction<IMendixObject>
 		String dateString = value.toString();
 		
 		try {
-			// Try parsing as Unix timestamp (original behavior)
-			return new Date(Long.parseLong(dateString));
-		} catch (NumberFormatException e) {
+			// Try parsing as ISO Instant first (e.g., 2025-12-06T10:00:00Z)
+			return Date.from(java.time.Instant.parse(dateString));
+		} catch (java.time.format.DateTimeParseException e) {
 			try {
-				// Try parsing as ISO Instant (e.g., 2023-01-01T12:00:00Z)
-				return Date.from(java.time.Instant.parse(dateString));
+				// Try parsing as ISO LocalDate (e.g., 2025-12-06 - converted to start-of-day)
+				return Date.from(java.time.LocalDate.parse(dateString)
+						.atStartOfDay(java.time.ZoneId.systemDefault()).toInstant());
 			} catch (java.time.format.DateTimeParseException e1) {
 				try {
-					// Try parsing as ISO LocalDate (e.g., 2023-01-01 - converted to start-of-day)
-					return Date.from(java.time.LocalDate.parse(dateString)
-							.atStartOfDay(java.time.ZoneId.systemDefault()).toInstant());
-				} catch (java.time.format.DateTimeParseException e2) {
+					// Fallback: Try parsing as Unix timestamp
+					long timestamp = Long.parseLong(dateString);
+					
+					// Detect if timestamp is in seconds or milliseconds
+					// Timestamps in seconds are typically 10 digits (until year 2286)
+					// Timestamps in milliseconds are typically 13 digits
+					if (timestamp < 10000000000L) {
+						// Timestamp is in seconds, convert to milliseconds
+						timestamp = timestamp * 1000;
+					}
+					
+					return new Date(timestamp);
+				} catch (NumberFormatException e2) {
 					LOGGER.error("Failed to parse datetime value for parameter '" + paramName + "': " + dateString);
 					throw e;
 				}
@@ -418,16 +428,26 @@ public class AddTool extends UserAction<IMendixObject>
 
 		for (Map.Entry<String, IDataType> param : inputParameters.entrySet()) {
 			String name = param.getKey();
-			String type = parameterGetType(param);
+			IDataType.DataTypeEnum dataType = param.getValue().getType();
 
 			Map<String, Object> typeNode = new HashMap<>();
-			typeNode.put("type", type);
-
+			
+			// Handle DateTime as string with date format for better LLM compatibility
+			if (IDataType.DataTypeEnum.Datetime.equals(dataType)) {
+				typeNode.put("type", "string");
+				typeNode.put("format", "date-time");
+				typeNode.put("description", "ISO 8601 date-time string (e.g., 2025-12-06T10:00:00Z) or date only (e.g., 2025-12-06)");
+			}
 			// Handle enum case to expose possible enum values
-			if ("enum".equals(type)) {
+			else if (dataType.toString().toLowerCase().equals("enumeration")) {
 				Set<String> enumKeySet = param.getValue().getEnumeration().getEnumValues().keySet();
 				typeNode.put("enum", new ArrayList<>(enumKeySet));
 				typeNode.put("type", "string");
+			}
+			// Handle other types
+			else {
+				String type = parameterGetType(param);
+				typeNode.put("type", type);
 			}
 			
 			properties.put(name, typeNode);
@@ -444,16 +464,16 @@ public class AddTool extends UserAction<IMendixObject>
 		);
 	}
 
-	
-	
 	/**
-	 * determines the type of parameter. Long/Decimal/Datetime converted to "number", enumeration to "enum"
+	 * determines the type of parameter. Long/Decimal converted to "number", enumeration to "enum"
 	 * @param inputParameter
 	 */
 	private String parameterGetType(Entry<String, IDataType> inputParameter) {
 		String type = inputParameter.getValue().toString().toLowerCase();
-		if(type.equals("long") || type.equals("decimal") || type.equals("datetime")) {
+		if(type.equals("long") || type.equals("decimal")) {
 			type = "number";
+		} else if (type.equals("integer")) {
+			type = "integer";
 		} else if (type.equals("enumeration")) {
 			type = "enum";
 		}
