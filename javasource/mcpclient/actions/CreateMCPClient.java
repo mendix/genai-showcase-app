@@ -71,7 +71,7 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 			McpSchema.Implementation clientInfo = new McpSchema.Implementation(ClientConfig.getName(), ClientConfig.getVersion());
 
 			McpSyncClient client = McpClient.sync(transport)
-					.requestTimeout(Duration.ofSeconds(10))
+					.requestTimeout(Duration.ofSeconds(getConnectionTimeout()))
 					.loggingConsumer(notification -> {
 			            LOGGER.debug("MCP Log: " + notification.data());
 			        })
@@ -79,7 +79,6 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 					.clientInfo(clientInfo)
 					.build();
 			
-			//Connect to server (single attempt; endpoint normalization fixed path)
 			McpSchema.InitializeResult initResult = client.initialize();
 			LOGGER.info("Client connected to server using: " + initResult.protocolVersion() + " version.");
 			// Some servers do not enable logging capabilities; avoid failing hard
@@ -194,6 +193,18 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 		    }
 		}
 		return customRequestBuilder;
+	}
+
+	/**
+	 * Either uses passed timeout settings or sets to default 10s
+	 * @return
+	 */
+	private Long getConnectionTimeout(){
+		if(ClientConfig.getConnectionTimeOutInSeconds() != null && ClientConfig.getConnectionTimeOutInSeconds() <= 0) {
+			LOGGER.warn("Iinvalid connection timeout specified; using default of 10 seconds.");
+			return 10L;
+		}
+		return ClientConfig.getConnectionTimeOutInSeconds() != null ? ClientConfig.getConnectionTimeOutInSeconds() : 10L;
 	}
 	
 	// END EXTRA CODE

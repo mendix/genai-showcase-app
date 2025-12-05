@@ -52,6 +52,7 @@ public class MCPServerConfiguration_CreateMCPClient extends UserAction<IMendixOb
 			mcpClientConfig.setName(MCPServerConfiguration.getName());
 			mcpClientConfig.setProtocolVersion(MCPServerConfiguration.getProtocolVersion());
 			mcpClientConfig.setVersion(MCPServerConfiguration.getVersion());
+			mcpClientConfig.setConnectionTimeOutInSeconds(MCPServerConfiguration.getConnectionTimeOutInSeconds());
 	
 		
 			if(MCPServerConfiguration.getGetCredentialsMicroflow() != null && !MCPServerConfiguration.getGetCredentialsMicroflow().isBlank()) {
