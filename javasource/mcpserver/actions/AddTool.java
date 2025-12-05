@@ -148,18 +148,147 @@ public class AddTool extends UserAction<IMendixObject>
 	private void manipulateArgsForMicroflowCall(Tool tool, Map<String, Object> args) {
 		Map<String, IDataType> parametersAndTypes = getInputParametersPrimitives();
 		
-		
 		for (Entry<String, IDataType> entry : parametersAndTypes.entrySet()) {
 	        String paramName = entry.getKey();
 	        IDataType type = entry.getValue();
-	        // DateTime values need to be converted
-	        if (IDataType.DataTypeEnum.Datetime.equals(type.getType()) && args.containsKey(paramName)) {
-	        	Object originalValue = args.get(paramName);
-	        	Date date = new Date(Long.parseLong(originalValue.toString()));
-	            args.put(paramName, date);
+	        
+	        if (!args.containsKey(paramName)) {
+	        	continue;
+	        }
+	        
+	        Object originalValue = args.get(paramName);
+	        Object convertedValue = convertValueToExpectedType(originalValue, type, paramName);
+	        
+	        if (convertedValue != null) {
+	        	args.put(paramName, convertedValue);
 	        }
 	    }
 		args.put("Tool", tool);
+	}
+	
+	/**
+	 * Converts a value to the expected Mendix data type
+	 * @param value the original value from the LLM
+	 * @param dataType the expected Mendix data type
+	 * @param paramName parameter name for logging purposes
+	 * @return converted value or null if no conversion needed
+	 */
+	private Object convertValueToExpectedType(Object value, IDataType dataType, String paramName) {
+		IDataType.DataTypeEnum type = dataType.getType();
+		
+		if (IDataType.DataTypeEnum.Datetime.equals(type)) {
+			return parseDateTime(value, paramName);
+		} else if (IDataType.DataTypeEnum.Long.equals(type)) {
+			return parseLong(value, paramName);
+		} else if (IDataType.DataTypeEnum.Integer.equals(type)) {
+			return parseInteger(value, paramName);
+		} else if (IDataType.DataTypeEnum.Decimal.equals(type)) {
+			return parseDecimal(value, paramName);
+		} else if (IDataType.DataTypeEnum.Boolean.equals(type)) {
+			return parseBoolean(value, paramName);
+		}
+		
+		return null; // No conversion needed
+	}
+	
+	/**
+	 * Parses a value to a Date, supporting Unix timestamps, ISO Instant, and ISO LocalDate formats
+	 * @param value the value to parse
+	 * @param paramName parameter name for logging
+	 * @return parsed Date
+	 */
+	private Date parseDateTime(Object value, String paramName) {
+		String dateString = value.toString();
+		
+		try {
+			// Try parsing as Unix timestamp (original behavior)
+			return new Date(Long.parseLong(dateString));
+		} catch (NumberFormatException e) {
+			try {
+				// Try parsing as ISO Instant (e.g., 2023-01-01T12:00:00Z)
+				return Date.from(java.time.Instant.parse(dateString));
+			} catch (java.time.format.DateTimeParseException e1) {
+				try {
+					// Try parsing as ISO LocalDate (e.g., 2023-01-01 - converted to start-of-day)
+					return Date.from(java.time.LocalDate.parse(dateString)
+							.atStartOfDay(java.time.ZoneId.systemDefault()).toInstant());
+				} catch (java.time.format.DateTimeParseException e2) {
+					LOGGER.error("Failed to parse datetime value for parameter '" + paramName + "': " + dateString);
+					throw e;
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Parses a value to Long if it's not already a Long
+	 * @param value the value to parse
+	 * @param paramName parameter name for logging
+	 * @return parsed Long or null if already a Long
+	 */
+	private Long parseLong(Object value, String paramName) {
+		if (value instanceof Long) {
+			return null; // Already correct type
+		}
+		
+		try {
+			return Long.parseLong(value.toString());
+		} catch (NumberFormatException e) {
+			LOGGER.error("Failed to parse Long value for parameter '" + paramName + "': " + value);
+			throw e;
+		}
+	}
+	
+	/**
+	 * Parses a value to Integer if it's not already an Integer
+	 * @param value the value to parse
+	 * @param paramName parameter name for logging
+	 * @return parsed Integer or null if already an Integer
+	 */
+	private Integer parseInteger(Object value, String paramName) {
+		if (value instanceof Integer) {
+			return null; // Already correct type
+		}
+		
+		try {
+			return Integer.parseInt(value.toString());
+		} catch (NumberFormatException e) {
+			LOGGER.error("Failed to parse Integer value for parameter '" + paramName + "': " + value);
+			throw e;
+		}
+	}
+	
+	/**
+	 * Parses a value to BigDecimal if it's not already a BigDecimal
+	 * @param value the value to parse
+	 * @param paramName parameter name for logging
+	 * @return parsed BigDecimal or null if already a BigDecimal
+	 */
+	private java.math.BigDecimal parseDecimal(Object value, String paramName) {
+		if (value instanceof java.math.BigDecimal) {
+			return null; // Already correct type
+		}
+		
+		try {
+			return new java.math.BigDecimal(value.toString());
+		} catch (NumberFormatException e) {
+			LOGGER.error("Failed to parse Decimal value for parameter '" + paramName + "': " + value);
+			throw e;
+		}
+	}
+	
+	/**
+	 * Parses a value to Boolean if it's not already a Boolean
+	 * @param value the value to parse
+	 * @param paramName parameter name for logging
+	 * @return parsed Boolean or null if already a Boolean
+	 */
+	private Boolean parseBoolean(Object value, String paramName) {
+		if (value instanceof Boolean) {
+			return null; // Already correct type
+		}
+		
+		return Boolean.parseBoolean(value.toString());
 	}
 	
 	
