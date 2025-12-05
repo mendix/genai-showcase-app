@@ -61,6 +61,7 @@ public class StreamableHttpTransportHandler implements McpTransportHandler {
     public void handleHead(IMxRuntimeRequest request, IMxRuntimeResponse response, String path) throws Exception {
         HttpServletResponse httpResponse = response.getHttpServletResponse();
         setStreamableHttpResponseHeaders(httpResponse);
+        httpResponse.setStatus(HttpServletResponse.SC_OK);
     }
     
     @Override
@@ -246,12 +247,14 @@ public class StreamableHttpTransportHandler implements McpTransportHandler {
      * Helper method to send a JSON error response with proper CORS headers.
      */
     private void sendJsonError(HttpServletResponse response, int statusCode, String message) throws IOException {
-        setStreamableHttpResponseHeaders(response);
-        response.setStatus(statusCode);
-        String jsonError = MAPPER.writeValueAsString(new McpError(message));
-        response.getOutputStream().write(jsonError.getBytes(UTF_8));
-        response.getOutputStream().flush();
-        response.flushBuffer(); // Commit the response
+        if (!response.isCommitted()) {
+            response.setStatus(statusCode);
+            setStreamableHttpResponseHeaders(response);
+            String jsonError = MAPPER.writeValueAsString(new McpError(message));
+            response.getOutputStream().write(jsonError.getBytes(UTF_8));
+            response.getOutputStream().flush();
+            response.flushBuffer(); // Commit the response
+        }
     }
     
     private void setStreamableHttpResponseHeaders(HttpServletResponse response) {
@@ -354,8 +357,8 @@ public class StreamableHttpTransportHandler implements McpTransportHandler {
                     }
                 }
                 
-                setStreamableHttpResponseHeaders(currentResponse);
                 currentResponse.setStatus(HttpServletResponse.SC_OK);
+                setStreamableHttpResponseHeaders(currentResponse);
                 
                 String jsonText = MAPPER.writeValueAsString(message);
                 currentResponse.getOutputStream().write(jsonText.getBytes(UTF_8));
