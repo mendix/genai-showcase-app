@@ -69,6 +69,13 @@
     padding: $spacing-smallest;
 }
 
+.tooltip-empty {
+    width: 11vw;
+    display: inline-flex;
+    justify-content: center;
+    padding: $spacing-smallest;
+}
+
 /* tooltip components */
 .tooltip-col {
     display: flex;
@@ -81,7 +88,6 @@
     text-overflow: ellipsis;
     margin: 0;
 }
-
 
 .tooltip-header {
     @extend .row-text-img;

@@ -29941,6 +29941,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 2px;
 }
 
+.tooltip-empty {
+  width: 11vw;
+  display: inline-flex;
+  justify-content: center;
+  padding: 2px;
+}
+
 /* tooltip components */
 .tooltip-col {
   display: flex;
