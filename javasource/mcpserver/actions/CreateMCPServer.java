@@ -61,8 +61,9 @@ public class CreateMCPServer extends UserAction<IMendixObject>
 		requireNonNull(ProtocolVersion,"Protocol version is required.");	
 		
 		// Validate path is not reserved
-		if ("mcp".equalsIgnoreCase(Path) || "sse".equalsIgnoreCase(Path)) {
-			throw new IllegalArgumentException("Path cannot be 'mcp' or 'sse' as these are reserved.");
+		if ("mcp".equalsIgnoreCase(Path) || "sse".equalsIgnoreCase(Path) || 
+		    Path.toLowerCase().endsWith("/mcp") || Path.toLowerCase().endsWith("/sse")) {
+			throw new IllegalArgumentException("Path cannot be 'mcp' or 'sse', or end with '/mcp' or '/sse' as these are reserved.");
 		}
 		
         // Create McpServer NPE
