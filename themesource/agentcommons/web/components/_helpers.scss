@@ -13,13 +13,7 @@
 }
 
 .input-label-width {
-  width: 160px;
-}
-
-.test-variable-width {
-  width: 180px;
-  margin-right: $spacing-small;
-  padding-top: $spacing-small;
+  width: 11vw;
 }
 
 .input-label-grid {
@@ -27,6 +21,11 @@
   grid-template-columns: 150px auto 50px;
 }
 
+.test-variable-width {
+  width: 180px;
+  margin-right: $spacing-small;
+  padding-top: $spacing-small;
+}
 
 .text-line-clamp--1 {
     word-break: break-word;

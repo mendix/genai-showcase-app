@@ -78,17 +78,32 @@
     align-items: start;
 }
 
-//token consumption monitor
 .combobox-selection {
     display: flex;
     flex-grow: 1;
 
-    .mx-image {
-        height: $font-size-large;
-        margin-right: $spacing-small;
-        margin-left: auto;
-        float: right;
+    .item-selection {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        height: max-content;  
+        overflow: hidden; 
+
+        .mx-image {
+            height: $font-size-large;
+            margin-right: $spacing-small;
+            margin-left: auto;
+            float: right;
+        }
+
+        .item-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-width: 0;      
+        }
     }
+
     .widget-combobox {
         min-height: 20px;
     }
@@ -99,6 +114,7 @@
         align-items: center;
         justify-content: center;
         height: 32px !important;
+        
     }
 }
 
@@ -110,10 +126,21 @@
         display: flex;
         align-items: center;
         flex-wrap: nowrap;
-        height: max-content;
+        height: max-content;  
+        overflow: hidden; 
 	 
         .mx-image-viewer {
             margin-right: $spacing-small;
+            flex-shrink: 0;
+            height: auto;
+            width: auto;
+        }
+
+        .combobox-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-width: 0;      
         }
     }
 }

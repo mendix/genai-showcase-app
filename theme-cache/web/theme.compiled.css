@@ -29210,11 +29210,24 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
   flex-grow: 1;
 }
-.combobox-selection .mx-image {
+.combobox-selection .item-selection {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  height: max-content;
+  overflow: hidden;
+}
+.combobox-selection .item-selection .mx-image {
   height: 18px;
   margin-right: 8px;
   margin-left: auto;
   float: right;
+}
+.combobox-selection .item-selection .item-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 .combobox-selection .widget-combobox {
   min-height: 20px;
@@ -29235,9 +29248,19 @@ input[type=checkbox].three-state-checkbox + .control-label {
   align-items: center;
   flex-wrap: nowrap;
   height: max-content;
+  overflow: hidden;
 }
 .combobox-model-selection .model-selection .mx-image-viewer {
   margin-right: 8px;
+  flex-shrink: 0;
+  height: auto;
+  width: auto;
+}
+.combobox-model-selection .model-selection .combobox-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 
 .widget-combobox .widget-combobox-input-container {
@@ -29499,12 +29522,12 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .convui-pagecontainer {
-  display: flex;
   flex-direction: column;
   align-items: flex-start;
   height: 100%;
   height: -webkit-fill-available;
-  max-width: 1600px;
+  width: 95vw;
+  max-width: 1800px;
   margin: 0 auto;
 }
 
@@ -30527,18 +30550,18 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .input-label-width {
-  width: 160px;
+  width: 11vw;
+}
+
+.input-label-grid {
+  display: grid;
+  grid-template-columns: 150px auto 50px;
 }
 
 .test-variable-width {
   width: 180px;
   margin-right: 8px;
   padding-top: 8px;
-}
-
-.input-label-grid {
-  display: grid;
-  grid-template-columns: 150px auto 50px;
 }
 
 .text-line-clamp--1 {
@@ -30784,6 +30807,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-bottom: 16px;
 }
 .agent-page-container .title-alignment {
+  width: 100%;
+  flex-wrap: wrap;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -30970,21 +30995,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .agent-page-container .card-header .mx-text {
   align-self: center;
   margin-bottom: 0;
-}
-
-.combobox-model-selection {
-  display: flex;
-  flex-grow: 1;
-}
-.combobox-model-selection .model-selection {
-  display: flex;
-  align-items: center;
-  height: max-content;
-}
-.combobox-model-selection .model-selection .mx-image-viewer {
-  height: auto;
-  width: auto;
-  margin-right: 8px;
 }
 
 .margin-right-45 {
