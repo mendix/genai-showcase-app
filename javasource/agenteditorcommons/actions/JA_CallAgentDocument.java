@@ -10,7 +10,6 @@
 package agenteditorcommons.actions;
 
 import static java.util.Objects.requireNonNull;
-
 import java.util.List;
 import com.mendix.core.Core;
 import com.mendix.extensibility.CustomBlobDocumentInfo;
@@ -27,24 +26,31 @@ import agentcommons.actions.Agent_Call_WithoutHistory;
 public class JA_CallAgentDocument extends UserAction<IMendixObject>
 {
 	private final java.lang.String Agent;
-	/** @deprecated use DeployedModel.getMendixObject() instead. */
-	@java.lang.Deprecated(forRemoval = true)
-	private final IMendixObject __DeployedModel;
-	private final genaicommons.proxies.DeployedModel DeployedModel;
 	private final IMendixObject OptionalContextObject;
+	/** @deprecated use OptionalRequest.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __OptionalRequest;
+	private final genaicommons.proxies.Request OptionalRequest;
+	/** @deprecated use OptionalFileCollection.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __OptionalFileCollection;
+	private final genaicommons.proxies.FileCollection OptionalFileCollection;
 
 	public JA_CallAgentDocument(
 		IContext context,
 		java.lang.String _agent,
-		IMendixObject _deployedModel,
-		IMendixObject _optionalContextObject
+		IMendixObject _optionalContextObject,
+		IMendixObject _optionalRequest,
+		IMendixObject _optionalFileCollection
 	)
 	{
 		super(context);
 		this.Agent = _agent;
-		this.__DeployedModel = _deployedModel;
-		this.DeployedModel = _deployedModel == null ? null : genaicommons.proxies.DeployedModel.initialize(getContext(), _deployedModel);
 		this.OptionalContextObject = _optionalContextObject;
+		this.__OptionalRequest = _optionalRequest;
+		this.OptionalRequest = _optionalRequest == null ? null : genaicommons.proxies.Request.initialize(getContext(), _optionalRequest);
+		this.__OptionalFileCollection = _optionalFileCollection;
+		this.OptionalFileCollection = _optionalFileCollection == null ? null : genaicommons.proxies.FileCollection.initialize(getContext(), _optionalFileCollection);
 	}
 
 	@java.lang.Override
@@ -67,7 +73,7 @@ public class JA_CallAgentDocument extends UserAction<IMendixObject>
 			IMendixObject agentIMendixObject = results.get(0);
 			
 			return Core.userActionCall("AgentCommons." + Agent_Call_WithoutHistory.class.getSimpleName())
-					.withParams(agentIMendixObject, OptionalContextObject)
+					.withParams(agentIMendixObject, OptionalContextObject, OptionalRequest, OptionalFileCollection)
 					.execute(getContext());
 			
 		} catch (Exception e) {
