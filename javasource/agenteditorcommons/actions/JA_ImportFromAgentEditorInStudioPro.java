@@ -98,11 +98,11 @@ public class JA_ImportFromAgentEditorInStudioPro extends UserAction<java.lang.Bo
 		LOGGER.debug("Importing Agent with qualified name: '" + qualifiedName + "'.");
 
 		String agentDocumentContent = agentDocument.content();
+		
+		String documentID = agentDocument.documentID().toString();
+		LOGGER.debug(qualifiedName + " - documentID: " + documentID);
+		
 		JsonNode rootNode = objectMapper.readTree(agentDocumentContent);
-
-		String agentModelDocumentUUID = rootNode.has("modelDocumentUUID") ? rootNode.get("modelDocumentUUID").asText()
-				: null;
-		LOGGER.debug(qualifiedName + " - UUID: " + agentModelDocumentUUID);
 
 		String modelQualifiedName = rootNode.has("modelQualifiedName") ? rootNode.get("modelQualifiedName").asText()
 				: null;
@@ -113,8 +113,9 @@ public class JA_ImportFromAgentEditorInStudioPro extends UserAction<java.lang.Bo
 		LOGGER.debug(qualifiedName + " - model UUID: " + modelModelDocumentUUID);
 
 		AgentModelDocument agentModelDocument = new AgentModelDocument(getContext());
+		agentModelDocument.setDocumentID(getContext(), documentID);
 		agentModelDocument.setContent(getContext(), agentDocumentContent);
-		agentModelDocument.setModelModelDocumentUUID(getContext(), modelModelDocumentUUID);
+		agentModelDocument.setModelDocumentID(getContext(), modelModelDocumentUUID);
 		agentModelDocument.setQualifiedName(getContext(), qualifiedName);
 		return agentModelDocument;
 
@@ -125,15 +126,11 @@ public class JA_ImportFromAgentEditorInStudioPro extends UserAction<java.lang.Bo
 		if (modelDocument == null)
 			return null;
 
-		String modelModelDocumentUUID;
+		String documentID = modelDocument.documentID().toString();
+		LOGGER.debug("Model for qualifiedName '" + modelQualifiedName + "' has documentID '"
+				+ documentID + "'.");
 
-		JsonNode modelRoot = objectMapper.readTree(modelDocument.content());
-		modelModelDocumentUUID = modelRoot.has("modelDocumentUUID") ? modelRoot.get("modelDocumentUUID").asText()
-				: null;
-		LOGGER.debug("Model for qualifiedName '" + modelQualifiedName + "' has modelDocumentUUID '"
-				+ modelModelDocumentUUID + "'.");
-
-		return modelModelDocumentUUID;
+		return documentID;
 	}
 
 	private ModelModelDocument getModelModelDocument(CustomBlobDocumentInfo modelDocument) throws JsonProcessingException {
@@ -141,13 +138,12 @@ public class JA_ImportFromAgentEditorInStudioPro extends UserAction<java.lang.Bo
 		LOGGER.debug("Importing model with qualified name '" + qualifiedName + "'.");
 
 		String modelDocumentContent = modelDocument.content();
-		JsonNode rootNode = objectMapper.readTree(modelDocumentContent);
 
-		String modelDocumentUUID = rootNode.has("modelDocumentUUID") ? rootNode.get("modelDocumentUUID").asText()
-				: null;
-		LOGGER.debug(qualifiedName + " - modelDocumentUUID: " + modelDocumentUUID);
+		String documentID = modelDocument.documentID().toString();
+		LOGGER.debug(qualifiedName + " - documentID: " + documentID);
 		
 		ModelModelDocument modelModelDocument = new ModelModelDocument(getContext());
+		modelModelDocument.setDocumentID(getContext(), documentID);
 		modelModelDocument.setContent(getContext(), modelDocumentContent);
 		modelModelDocument.setQualifiedName(getContext(), qualifiedName);
 		return modelModelDocument;
