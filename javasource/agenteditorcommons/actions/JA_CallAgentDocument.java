@@ -9,19 +9,16 @@
 
 package agenteditorcommons.actions;
 
-import java.util.UUID;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
 import com.mendix.core.Core;
-import com.mendix.core.CoreException;
 import com.mendix.extensibility.CustomBlobDocumentInfo;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import agenteditorcommons.impl.MxLogger;
-import agentcommons.proxies.PromptToUse;
-import genaicommons.proxies.Request;
-import genaicommons.proxies.Response;
+import agentcommons.actions.Agent_Call_WithoutHistory;
 
 /**
  * Imports all defined documents (such as agents and models) to the app's database so that they can be viewed at runtime and integrate with Agent Commons, Token Monitor, Observability etc.
@@ -29,7 +26,7 @@ import genaicommons.proxies.Response;
  */
 public class JA_CallAgentDocument extends UserAction<IMendixObject>
 {
-	private final java.lang.String AgentDocumentID;
+	private final java.lang.String Agent;
 	/** @deprecated use DeployedModel.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __DeployedModel;
@@ -38,13 +35,13 @@ public class JA_CallAgentDocument extends UserAction<IMendixObject>
 
 	public JA_CallAgentDocument(
 		IContext context,
-		java.lang.String _agentDocumentID,
+		java.lang.String _agent,
 		IMendixObject _deployedModel,
 		IMendixObject _optionalContextObject
 	)
 	{
 		super(context);
-		this.AgentDocumentID = _agentDocumentID;
+		this.Agent = _agent;
 		this.__DeployedModel = _deployedModel;
 		this.DeployedModel = _deployedModel == null ? null : genaicommons.proxies.DeployedModel.initialize(getContext(), _deployedModel);
 		this.OptionalContextObject = _optionalContextObject;
@@ -54,34 +51,29 @@ public class JA_CallAgentDocument extends UserAction<IMendixObject>
 	public IMendixObject executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		java.util.UUID agentUUID = UUID.fromString(AgentDocumentID);
-		
-		java.util.List<CustomBlobDocumentInfo> agents = Core.extensibility().getCustomDocumentsOfType("agenteditor.agent");
-		agents.forEach(a -> LOGGER.info("agent" + a.content()));
-		
-		java.util.List<CustomBlobDocumentInfo> agents2 = Core.extensibility().getCustomDocumentsOfType("Agent");
-		agents2.forEach(a -> LOGGER.info("agent2" + a.content()));
-		
-		CustomBlobDocumentInfo agentDocument = Core.extensibility().getCustomDocumentById(agentUUID);
-		String agentDocumentContent = agentDocument.content();
-		
-		ObjectMapper objectMapper = new ObjectMapper();
-		JsonNode rootNode = objectMapper.readTree(agentDocumentContent);
-		String systemPrompt = rootNode.has("systemPrompt") ? rootNode.get("systemPrompt").toString() : null;
-		String userPrompt = rootNode.has("userPrompt") ? rootNode.get("userPrompt").asText() : null;
-		String contextEntityName = rootNode.has("entity") ? rootNode.get("entity").asText() : null;
-		
-		PromptToUse promptToUse = createPromptToUse(systemPrompt, userPrompt);
-		
-
-		applyVariables(promptToUse, contextEntityName, OptionalContextObject);
-		
-		Request request = Request.initialize(getContext(), Core.instantiate(getContext(), Request.entityName));
-		request.setSystemPrompt(getContext(), promptToUse.getSystemPrompt(getContext()));
-		
-		Response response = genaicommons.proxies.microflows.Microflows.chatCompletions_WithoutHistory(getContext(), DeployedModel, promptToUse.getUserPrompt(getContext()), null, request);
-		
-		return response == null ? null : response.getMendixObject();
+		try {
+			CustomBlobDocumentInfo agentDocument = Core.extensibility().getCustomDocumentByFullName(Agent);
+			requireNonNull(agentDocument, "Agent document not found.");
+			
+			List<IMendixObject> results = Core.createXPathQuery("//AgentCommons.Agent[ModelDocumentID=$documentID]")
+		            .setVariable("documentID", agentDocument.documentID().toString())
+		            .setAmount(1)
+		            .execute(getContext());
+			
+			if (results.isEmpty() || results.get(0) == null) {
+			    throw new NullPointerException("Agent object with name " + Agent + " does not exist.");
+			}			
+			
+			IMendixObject agentIMendixObject = results.get(0);
+			
+			return Core.userActionCall("AgentCommons." + Agent_Call_WithoutHistory.class.getSimpleName())
+					.withParams(agentIMendixObject, OptionalContextObject)
+					.execute(getContext());
+			
+		} catch (Exception e) {
+		    LOGGER.error(e);
+		    return null;
+		}
 		// END USER CODE
 	}
 
@@ -98,77 +90,6 @@ public class JA_CallAgentDocument extends UserAction<IMendixObject>
 	// BEGIN EXTRA CODE
 	
 	private static final MxLogger LOGGER = new MxLogger(JA_CallAgentDocument.class);
-	
-	private void applyVariables(PromptToUse promptToUse, String contextEntityName, IMendixObject contextObject)
-			throws CoreException {
-		
-		if (contextObject == null) {
-			return;
-		}
-		
-
-		// Check if Entity name is not empty)
-		if (contextEntityName == null || contextEntityName.isBlank()) {
-			throw new IllegalArgumentException(
-					"Cannot replace variables: no Variables Entity is configured for this Agent.");
-		}
-
-		// Check if entity matches the passed object's entity
-		if (!contextObject.getMetaObject().getName().equals(contextEntityName)) {
-			throw new IllegalArgumentException(
-					"Cannot replace variables for the passed ContextObject because it does not match the Context Entity that was configured for this Agent."
-							+ " Passed object's entity: " + OptionalContextObject.getMetaObject().getName() + ", expected: "
-							+ contextEntityName);
-		}
-
-		java.util.List<String> variableKeys = new java.util.ArrayList<>();
-		// Replacement of variables if they are found in the passed object
-		contextObject.getMembers(getContext()).forEach((a, v) -> {variableKeys.add(a);});
-		
-		for (String variable : variableKeys) {
-			applyVariable(promptToUse, contextObject, variable);
-
-		}
-	}
-
-	private void applyVariable(PromptToUse promptToUse, IMendixObject contextObject, String variableKey) {
-
-	
-		// Check variable key is not empty
-		if (variableKey == null || variableKey.isBlank()) {
-			LOGGER.warn("Skipping variable with empty Key attribute");
-			return;
-		}
-		// Check variable is attribute of passed object
-		if (!contextObject.hasMember(variableKey)) {
-			LOGGER.warn(
-					"Cannot replace variable {{" + variableKey + "}} because it is not found in the passed object.");
-			replaceVariable(promptToUse, variableKey, "");
-			return;
-		}
-		// Check value is not empty
-		if (contextObject.getValue(getContext(), variableKey) == null) {
-			LOGGER.warn("Cannot replace variable {{" + variableKey + "}} because it is empty in the passed object.");
-			replaceVariable(promptToUse, variableKey, "");
-			return;
-		}
-		// Apply variable
-		replaceVariable(promptToUse, variableKey, contextObject.getValue(getContext(), variableKey).toString());
-	}
-
-	private void replaceVariable(PromptToUse promptToUse, String variableKey, String value) {
-		agentcommons.proxies.microflows.Microflows.promptToUse_ApplyVariable(getContext(), promptToUse, variableKey,
-				value);
-	}
-	
-	private PromptToUse createPromptToUse(String systemPrompt, String userPrompt) {
-		PromptToUse promptToUse = new PromptToUse(getContext());
-
-		promptToUse.setSystemPrompt(systemPrompt);
-		promptToUse.setUserPrompt(userPrompt);
-
-		return promptToUse;
-	}
 
 	// END EXTRA CODE
 }
