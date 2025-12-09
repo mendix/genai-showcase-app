@@ -1,4 +1,4 @@
-import { Q as p, r as c, j as a, R as v, U as x, V as S, W as f, X as D, Y as j } from "./componentLoader-l-cCI7h-.js";
+import { f as p, r as c, j as a, A as v, P as x, g as S, C as f, F as D, h as j } from "./TextInputLabeled-DX-tOSPn.js";
 function E(n) {
   return {
     name: ""
@@ -19,14 +19,14 @@ const P = (n, s, o, t, r) => async (u) => {
     });
   }
 }, w = E(), L = ({ studioPro: n, documentId: s }) => {
-  const o = n.ui.messageBoxes, t = n.app.model.customBlobDocuments, [r, u] = c.useState(0), [i, h] = c.useState(!1), [m, d] = c.useState(w);
+  const o = n.ui.messageBoxes, t = n.app.model.customBlobDocuments, [r, u] = c.useState(0), [i, h] = c.useState(!1), [m, C] = c.useState(w);
   return c.useCallback(
-    (e) => P(n, e, m, d, s),
-    [n, m, d, s]
+    (e) => P(n, e, m, C, s),
+    [n, m, C, s]
   ), c.useEffect(() => {
-    const e = (l) => {
-      const { documents: C } = l;
-      C.some((g) => g.id === s) && u((g) => g + 1);
+    const e = (d) => {
+      const { documents: l } = d;
+      l.some((g) => g.id === s) && u((g) => g + 1);
     };
     return t.addEventListener("documentsChanged", e), () => {
       t.removeEventListener("documentsChanged", e);
@@ -34,8 +34,8 @@ const P = (n, s, o, t, r) => async (u) => {
   }, []), c.useEffect(() => {
     t.getDocumentById(s).then(async (e) => {
       if (e && !("error" in e)) {
-        const l = e.document.contents, C = e.document.name;
-        d({ ...l, name: C }), h(!0);
+        const d = e.document.contents, l = e.document.name;
+        C({ ...d, name: l }), h(!0);
       } else
         throw new Error((e == null ? void 0 : e.error) || "Document not found");
     }).catch((e) => {
@@ -55,8 +55,8 @@ const P = (n, s, o, t, r) => async (u) => {
       }
     ) }) }) })
   ] }) });
-}, B = p(L);
+}, A = p(L);
 export {
-  B as component
+  A as component
 };
 //# sourceMappingURL=consumedMCPServiceEdit.js.map

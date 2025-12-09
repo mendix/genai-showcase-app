@@ -1,4 +1,4 @@
-import { Q as b, r as o, j as t, R as w, U as x, V as f, W as C, X as D, Y as j } from "./componentLoader-l-cCI7h-.js";
+import { f as b, r as o, j as t, A as w, P as x, g as f, C, F as D, h as j } from "./TextInputLabeled-DX-tOSPn.js";
 function E(n) {
   return {
     name: ""
@@ -55,8 +55,8 @@ const v = (n, s, c, a, l) => async (r) => {
       }
     ) }) }) })
   ] }) });
-}, B = b(K);
+}, A = b(K);
 export {
-  B as component
+  A as component
 };
 //# sourceMappingURL=knowledgebaseEdit.js.map
