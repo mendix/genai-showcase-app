@@ -21,9 +21,13 @@ import agenteditorcommons.impl.MxLogger;
 import agenteditorcommons.proxies.AgentModelDocument;
 import agenteditorcommons.proxies.ModelModelDocument;
 
-public class JA_ImportFromAgentEditorInStudioPro extends UserAction<java.lang.Boolean>
+/**
+ * Imports all defined documents (such as agents and models) to the app's database so that they can be viewed at runtime and integrate with Agent Commons, Token Monitor, Observability etc.
+ * This action can be used as part of your app's after startup logic.
+ */
+public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolean>
 {
-	public JA_ImportFromAgentEditorInStudioPro(IContext context)
+	public AgentEditor_ImportFromStudioPro(IContext context)
 	{
 		super(context);
 	}
@@ -49,11 +53,11 @@ public class JA_ImportFromAgentEditorInStudioPro extends UserAction<java.lang.Bo
 	@java.lang.Override
 	public java.lang.String toString()
 	{
-		return "JA_ImportFromAgentEditorInStudioPro";
+		return "AgentEditor_ImportFromStudioPro";
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new MxLogger(JA_ImportFromAgentEditorInStudioPro.class);
+	private static final MxLogger LOGGER = new MxLogger(AgentEditor_ImportFromStudioPro.class);
 
 	private static final ObjectMapper objectMapper = new ObjectMapper();
 

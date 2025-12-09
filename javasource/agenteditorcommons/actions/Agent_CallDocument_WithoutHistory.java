@@ -20,10 +20,11 @@ import agenteditorcommons.impl.MxLogger;
 import agentcommons.actions.Agent_Call_WithoutHistory;
 
 /**
- * Imports all defined documents (such as agents and models) to the app's database so that they can be viewed at runtime and integrate with Agent Commons, Token Monitor, Observability etc.
- * This action can be used as part of your app's after startup logic.
+ * This action calls the Agent with the specified request. It executes a Chat Completions operation based on the defined Agent. All agent configurations, such as the selected model, system prompt or user prompt are used. 
+ * If a request object is passed that already contains a system prompt, or a value for the parameters temperature, top P or max tokens, those values have priority and will not be overwritten by the agent configurations.
+ * If a context object is passed, all variables are replaced in the system and user prompt. A response is returned that contains the final assistant's message.
  */
-public class JA_CallAgentDocument extends UserAction<IMendixObject>
+public class Agent_CallDocument_WithoutHistory extends UserAction<IMendixObject>
 {
 	private final java.lang.String Agent;
 	private final IMendixObject OptionalContextObject;
@@ -36,7 +37,7 @@ public class JA_CallAgentDocument extends UserAction<IMendixObject>
 	private final IMendixObject __OptionalFileCollection;
 	private final genaicommons.proxies.FileCollection OptionalFileCollection;
 
-	public JA_CallAgentDocument(
+	public Agent_CallDocument_WithoutHistory(
 		IContext context,
 		java.lang.String _agent,
 		IMendixObject _optionalContextObject,
@@ -90,12 +91,12 @@ public class JA_CallAgentDocument extends UserAction<IMendixObject>
 	@java.lang.Override
 	public java.lang.String toString()
 	{
-		return "JA_CallAgentDocument";
+		return "Agent_CallDocument_WithoutHistory";
 	}
 
 	// BEGIN EXTRA CODE
 	
-	private static final MxLogger LOGGER = new MxLogger(JA_CallAgentDocument.class);
+	private static final MxLogger LOGGER = new MxLogger(Agent_CallDocument_WithoutHistory.class);
 
 	// END EXTRA CODE
 }
