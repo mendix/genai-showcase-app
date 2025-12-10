@@ -29282,30 +29282,19 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: center;
   align-items: center;
   min-height: 100%;
+  min-width: 100%;
   height: -webkit-fill-available;
   margin: 0 auto;
 }
 .traces-page-content-container .traces-breadcrumb {
-  width: 90vw;
-  min-width: 1300px;
+  width: 91vw;
   max-width: 1800px;
 }
 .traces-page-content-container .traces-content {
   flex-direction: column;
-  width: 90vw;
-  min-width: 1300px;
+  width: 91vw;
   max-width: 1800px;
   height: 90vh;
-}
-@media (max-width: 2000px) {
-  .traces-page-content-container .traces-content {
-    height: 87vh;
-  }
-}
-@media (max-width: 1600px) {
-  .traces-page-content-container .traces-content {
-    height: 84vh;
-  }
 }
 .traces-page-content-container .traces-content .card {
   border-radius: 16px;
@@ -29989,9 +29978,19 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 16px;
 }
 
+.treenode-span-grid-xaxis-test {
+  display: grid;
+  grid-template-columns: 334px auto;
+  gap: 16px;
+  height: 25px;
+  padding-right: 20px;
+  margin-bottom: 16px;
+}
+
 .treenode-span-xaxis {
   padding: 0;
   padding-left: 16px;
+  padding-right: 12px;
 }
 .treenode-span-xaxis .widget-tree-node-branch-header {
   padding: 0;
@@ -29999,7 +29998,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .treenode-span-grid-xaxis {
   display: grid;
-  grid-template-columns: 334px auto;
+  grid-template-columns: 310px auto;
   gap: 16px;
   height: 25px;
 }
@@ -30047,6 +30046,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .treenode-span-parent .widget-tree-node-branch-header {
   padding: 0;
+  margin-right: 0;
 }
 .treenode-span-parent .widget-tree-node-body {
   padding-left: 0;
@@ -30059,14 +30059,16 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-left: 8px;
 }
 .treenode-span-parent .treenode-span-child .widget-tree-node-branch-header {
-  padding: 2px 0;
+  padding: 4px 0;
+  margin-right: 0;
 }
 .treenode-span-parent .treenode-span-child .treenode-span-grandchild {
   padding: 0;
   padding-left: 48px;
 }
 .treenode-span-parent .treenode-span-child .treenode-span-grandchild .widget-tree-node-branch-header {
-  padding: 2px 0;
+  padding: 4px 0;
+  margin-right: 0;
 }
 
 .grid-deployed-model {

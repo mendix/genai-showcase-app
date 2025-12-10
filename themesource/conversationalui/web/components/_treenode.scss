@@ -1,9 +1,20 @@
 @import "../../../../theme/web/custom-variables.scss";
 @import "../../../atlas_core/web/_variables.scss";
 
+
+.treenode-span-grid-xaxis-test {
+    display: grid;
+    grid-template-columns: 334px auto;
+    gap: 16px;
+    height: 25px;
+    padding-right: 20px;
+    margin-bottom: $spacing-medium;
+}
+
 .treenode-span-xaxis {
     padding: 0;
     padding-left: 16px;
+    padding-right: 12px;
         .widget-tree-node-branch-header {
             padding: 0;
     }
@@ -11,7 +22,7 @@
 
 .treenode-span-grid-xaxis {
     display: grid;
-    grid-template-columns: 334px auto;
+    grid-template-columns: 310px auto;
     gap: 16px;
     height: 25px;
 }
@@ -30,7 +41,6 @@
     }
 }
 
-
 .treenode-span-grid {
     display: grid;
     grid-template-columns: 290px auto;
@@ -44,7 +54,6 @@
         outline-offset: 0;
     }
 }
-
 
 .treenode-span-grid-grandchild {
     display: grid;
@@ -66,7 +75,8 @@
     margin: 4px 0;
     
     .widget-tree-node-branch-header {
-        padding:0;
+        padding:0 ;
+        margin-right: 0;
     }
      .widget-tree-node-body {
         padding-left: 0;
@@ -80,15 +90,18 @@
         }
 
         .widget-tree-node-branch-header {
-            padding: 2px 0;
+            padding: 4px 0;
+            margin-right: 0;
         }
 
         .treenode-span-grandchild {
             padding: 0;
             padding-left: 48px;
             .widget-tree-node-branch-header {
-                padding: 2px 0;
+                padding: 4px 0;
+                margin-right: 0;
             }
         }
     }
 }
+
