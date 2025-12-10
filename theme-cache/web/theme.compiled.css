@@ -30001,8 +30001,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .model-badge, .model-badge--primary, .model-badge--default {
   display: inline-flex;
   height: 20px;
-  padding: 6px;
-  gap: 6px;
+  padding: 4px;
+  gap: 4px;
   align-items: center;
   border-radius: 4px;
   font-size: 12px;
@@ -30122,8 +30122,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .agent-badge, .agent-badge--primary, .agent-badge--default, .agent-badge--purple {
   display: inline-flex;
   height: 20px;
-  padding: 6px;
-  gap: 6px;
+  padding: 4px;
+  gap: 4px;
   align-items: center;
   border-radius: 4px;
   font-size: 12px;
