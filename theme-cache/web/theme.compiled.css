@@ -29134,7 +29134,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-direction: column;
 }
 .layout-slidein .mx-window-content {
-  max-height: 100% !important;
+  max-height: 100vh !important;
   border: none;
   border-radius: 0;
   background: inherit;
@@ -29154,17 +29154,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: 83vh;
   max-height: 1300px;
   overflow-y: auto;
-  margin-bottom: 16px;
+  padding-bottom: 24px;
 }
 @media (max-width: 2000px) {
   .layout-slidein .mx-window-content .slidein-body {
     height: 80vh;
-  }
-}
-@media (max-width: 1600px) {
-  .layout-slidein .mx-window-content .slidein-body {
-    flex-direction: column;
-    height: 76vh;
   }
 }
 @media (max-width: 1400px) {
@@ -30005,7 +29999,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .treenode-span-grid-xaxis {
   display: grid;
-  grid-template-columns: 310px auto;
+  grid-template-columns: 334px auto;
   gap: 16px;
   height: 25px;
 }

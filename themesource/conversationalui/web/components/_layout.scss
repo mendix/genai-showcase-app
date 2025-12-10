@@ -45,7 +45,7 @@
   flex-direction: column;
 
   .mx-window-content {
-    max-height: 100% !important;
+    max-height: 100vh !important;
     border: none;
     border-radius: 0;
     background: inherit;
@@ -66,15 +66,10 @@
         height: 83vh;
         max-height: 1300px;
         overflow-y: auto;
-        margin-bottom: $spacing-medium;
+        padding-bottom: $spacing-large;
 
       @media (max-width: 2000px) {
         height: 80vh;
-      }
-
-      @media (max-width: 1600px) {
-        flex-direction: column;
-        height: 76vh;
       }
 
       @media (max-width: 1400px) {
