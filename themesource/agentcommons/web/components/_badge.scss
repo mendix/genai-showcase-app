@@ -56,6 +56,12 @@
   border-radius: 4px;
   font-size: 12px;
   font-style: normal;
+  .agent-tooltip {
+    div,
+    .mx-link {
+      line-height: 1;
+    }
+  }
 }
 
 .agent-badge--purple {

@@ -30042,39 +30042,43 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border: none;
 }
 
-.grid-deployed-model {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr) 0.5fr 150px;
-}
-.grid-deployed-model .item {
-  white-space: wrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.grid-header {
-  margin-left: 16px;
-  margin-right: 16px;
-  margin-bottom: 16px;
-}
-
-.grid-knowledge-bases {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr) 0.5fr 150px;
-}
-.grid-knowledge-bases .item {
-  white-space: wrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .text-heading-4 {
-  font-weight: 600;
+  font-weight: bold;
   font-size: 18px;
 }
 
 .visibility-none {
   visibility: hidden !important;
+}
+
+.info-tooltip .widget-tooltip-content {
+  position: relative;
+  z-index: 1000;
+  text-align: unset;
+  word-break: break-word;
+  background-color: white;
+  border-radius: 4px;
+  color: black;
+  width: 330px;
+  padding: 8px;
+}
+
+.icon-info-wrapper {
+  display: flex;
+  align-items: center;
+}
+.icon-info-wrapper img {
+  margin-right: 0;
+  margin-bottom: 0;
+}
+
+.info-icon {
+  margin: 0 0 0 4px;
+  padding: 0;
+}
+.info-icon img {
+  height: 16px;
+  width: 16px;
 }
 
 .badge-with-circle {
@@ -30128,6 +30132,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border-radius: 4px;
   font-size: 12px;
   font-style: normal;
+}
+.agent-badge .agent-tooltip div, .agent-badge--primary .agent-tooltip div, .agent-badge--default .agent-tooltip div, .agent-badge--purple .agent-tooltip div,
+.agent-badge .agent-tooltip .mx-link,
+.agent-badge--primary .agent-tooltip .mx-link,
+.agent-badge--default .agent-tooltip .mx-link,
+.agent-badge--purple .agent-tooltip .mx-link {
+  line-height: 1;
 }
 
 .agent-badge--purple {
