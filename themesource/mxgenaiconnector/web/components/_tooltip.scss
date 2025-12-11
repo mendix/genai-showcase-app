@@ -1,0 +1,32 @@
+.info-tooltip {
+    .widget-tooltip-content {
+        position: relative;
+        z-index: 1000;
+        text-align: unset;
+        word-break: break-word;
+        background-color: white;
+        border-radius: 4px;
+        color: black;
+        width: 330px;
+        padding: 8px;
+    }
+}
+
+.icon-info-wrapper {
+  display: flex;
+  align-items: center;
+
+  img {
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+}
+
+.info-icon {
+    margin: 0 0 0 $spacing-smaller;
+    padding: 0;
+    img {
+        height: 16px;
+        width: 16px;
+    }
+}
