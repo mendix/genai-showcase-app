@@ -36,12 +36,12 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 	public java.lang.Boolean executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		LOGGER.info("Starting JA_ImportFromAgentEditorInStudioPro");
+		LOGGER.info("Starting AgentEditor_ImportFromStudioPro");
 
 		importModels();
 		importAgents();
 
-		LOGGER.info("Finished JA_ImportFromAgentEditorInStudioPro");
+		LOGGER.info("Finished AgentEditor_ImportFromStudioPro");
 		return true;
 		// END USER CODE
 	}
@@ -64,7 +64,7 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 	private void importModels() throws JsonProcessingException {
 		java.util.List<CustomBlobDocumentInfo> modelDocuments = Core.extensibility()
 				.getCustomDocumentsOfType("agenteditor.model");
-		LOGGER.info(modelDocuments.size() + " model document(s) found in the Mendix Model");
+		LOGGER.info(modelDocuments.size() + " model document(s) found in the Mendix Model.");
 		
 		java.util.List<ModelModelDocument> modelModelDocuments = new ArrayList<>();
 		for (CustomBlobDocumentInfo model : modelDocuments) {
@@ -74,7 +74,7 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 		boolean isSuccess = agenteditorcommons.proxies.microflows.Microflows.deployedModel_CreateUpdate_List(getContext(),
 				modelModelDocuments);
 		if (!isSuccess) {
-			throw new IllegalArgumentException("Creating/Updating the Mendix Cloud Deployed Models failed due to bad input");
+			throw new IllegalArgumentException("Creating/Updating the Mendix Cloud Deployed Models failed due to bad input.");
 		}
 	}
 
@@ -91,7 +91,7 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 		boolean isSuccess = agenteditorcommons.proxies.microflows.Microflows.agent_CreateUpdate_List(getContext(),
 				agentModelDocuments);
 		if (!isSuccess) {
-			throw new IllegalArgumentException("Creating/Updating the Agents failed due to bad input");
+			throw new IllegalArgumentException("Creating/Updating the Agents failed due to bad input.");
 		}
 	}
 
