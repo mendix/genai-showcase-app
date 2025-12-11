@@ -41,8 +41,9 @@
 .spacing-inner-left-large    { padding-left: $spacing-large; }
 .spacing-inner-left-larger   { padding-left: $spacing-larger; }
 
-/* Margin */
 
+
+/* Margin */
 
 /* Remove margins */
 .spacing-outer-none { margin: 0 !important; }
@@ -101,4 +102,9 @@
 
 .spacing-outer-bottom-none {
   margin-bottom: 0;
+}
+
+.spacing-inner-dataview {
+   padding: 24px;
+   padding-top: 0;
 }

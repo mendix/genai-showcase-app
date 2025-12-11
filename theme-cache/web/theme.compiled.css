@@ -30131,6 +30131,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-bottom: 0;
 }
 
+.spacing-inner-dataview {
+  padding: 24px;
+  padding-top: 0;
+}
+
 /* tooltip basic styling */
 .convui-tooltip .widget-tooltip-content {
   position: relative;
@@ -31282,19 +31287,27 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .landing-page {
   height: auto;
-  max-width: 153.5rem;
-  padding: 40px;
-  margin: 32px auto 32px auto;
+  width: 93.1vw;
+  max-width: 1772px;
+  padding: 24px;
+  margin: 0 auto;
   gap: 24px;
   border-radius: 16px;
   border: 1px solid var(--color-border-default, #E7E7E9);
   background: var(--color-background-default, #FFF);
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.landing-page-spacing {
+  margin: 14px;
 }
 
 /* Grid: defines the columns of the the cards per group */
 .grid-landing-page {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(auto, 327px));
+  grid-template-columns: repeat(auto-fit, minmax(0, 325px));
+  justify-content: start;
   gap: 24px;
   box-sizing: border-box;
   margin-top: 16px;
@@ -31309,12 +31322,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
  * .card-content  → Content wrapper; holds actual content (text, icons, etc.)
  */
 .card-base, .card-orange, .card-yellow, .card-violet, .card-lightpurple, .card-darkpurple, .card-blue, .card-green, .card-grey {
-  width: 345px;
-  height: 190px;
+  flex: 1 1 calc(25% - 16px);
+  width: 325px;
   flex-shrink: 0;
   border-radius: 8px;
   border-top: 1px grey;
   background: white;
+  box-sizing: border-box;
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1), 0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
   border: 1px solid var(--color-border-card, #E7E7E9);
   border-left: 8px solid transparent;
@@ -31326,11 +31340,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .card-base .card-inner, .card-orange .card-inner, .card-yellow .card-inner, .card-violet .card-inner, .card-lightpurple .card-inner, .card-darkpurple .card-inner, .card-blue .card-inner, .card-green .card-inner, .card-grey .card-inner {
   display: flex;
-  width: 340px;
-  padding: 16px;
-  flex-direction: column;
   align-items: flex-start;
   flex-shrink: 0;
+  width: 320px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-sizing: border-box;
 }
 .card-base .card-content, .card-orange .card-content, .card-yellow .card-content, .card-violet .card-content, .card-lightpurple .card-content, .card-darkpurple .card-content, .card-blue .card-content, .card-green .card-content, .card-grey .card-content {
   display: flex;
