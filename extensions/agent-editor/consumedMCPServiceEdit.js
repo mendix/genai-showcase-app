@@ -1,17 +1,18 @@
-import { f as p, r as c, j as a, A as v, P as x, g as S, C as f, F as D, h as j } from "./TextInputLabeled-DX-tOSPn.js";
+import { c as h, r as o, j as a, A as v, P as x, e as S, C as f, F as D } from "./TextInputWithIcon-BpSHc-Lp.js";
+import { T as j } from "./TextInputLabeled-G5mbtodI.js";
 function E(n) {
   return {
     name: ""
   };
 }
-const P = (n, s, o, t, r) => async (u) => {
+const P = (n, s, c, t, i) => async (m) => {
   console.log("ConsumedMCPService change triggered for field ", s);
-  const i = { ...o, [s]: u };
-  t(i), await b(n, i, r);
-}, b = async (n, s, o) => {
+  const r = { ...c, [s]: m };
+  t(r), await b(n, r, i);
+}, b = async (n, s, c) => {
   console.log("Save logic triggered");
   try {
-    await n.app.model.customBlobDocuments.updateDocumentContent(o, s);
+    await n.app.model.customBlobDocuments.updateDocumentContent(c, s);
   } catch (t) {
     n.ui.notifications.show({
       title: "Failed to save document",
@@ -19,44 +20,44 @@ const P = (n, s, o, t, r) => async (u) => {
     });
   }
 }, w = E(), L = ({ studioPro: n, documentId: s }) => {
-  const o = n.ui.messageBoxes, t = n.app.model.customBlobDocuments, [r, u] = c.useState(0), [i, h] = c.useState(!1), [m, C] = c.useState(w);
-  return c.useCallback(
-    (e) => P(n, e, m, C, s),
-    [n, m, C, s]
-  ), c.useEffect(() => {
+  const c = n.ui.messageBoxes, t = n.app.model.customBlobDocuments, [i, m] = o.useState(0), [r, p] = o.useState(!1), [u, C] = o.useState(w);
+  return o.useCallback(
+    (e) => P(n, e, u, C, s),
+    [n, u, C, s]
+  ), o.useEffect(() => {
     const e = (d) => {
       const { documents: l } = d;
-      l.some((g) => g.id === s) && u((g) => g + 1);
+      l.some((g) => g.id === s) && m((g) => g + 1);
     };
     return t.addEventListener("documentsChanged", e), () => {
       t.removeEventListener("documentsChanged", e);
     };
-  }, []), c.useEffect(() => {
+  }, []), o.useEffect(() => {
     t.getDocumentById(s).then(async (e) => {
       if (e && !("error" in e)) {
         const d = e.document.contents, l = e.document.name;
-        C({ ...d, name: l }), h(!0);
+        C({ ...d, name: l }), p(!0);
       } else
         throw new Error((e == null ? void 0 : e.error) || "Document not found");
     }).catch((e) => {
-      o.show("error", "Error loading document", "Details: " + (e == null ? void 0 : e.message) || e);
+      c.show("error", "Error loading document", "Details: " + (e == null ? void 0 : e.message) || e);
     });
-  }, [r]), /* @__PURE__ */ a.jsx(v, { studioPro: n, children: /* @__PURE__ */ a.jsxs(x, { children: [
-    !i && /* @__PURE__ */ a.jsx("span", { children: "Loading document content..." }),
-    i && /* @__PURE__ */ a.jsx(S, { children: /* @__PURE__ */ a.jsx(f, { children: /* @__PURE__ */ a.jsx(D, { label: "General", children: /* @__PURE__ */ a.jsx(
+  }, [i]), /* @__PURE__ */ a.jsx(v, { studioPro: n, children: /* @__PURE__ */ a.jsxs(x, { children: [
+    !r && /* @__PURE__ */ a.jsx("span", { children: "Loading document content..." }),
+    r && /* @__PURE__ */ a.jsx(S, { children: /* @__PURE__ */ a.jsx(f, { children: /* @__PURE__ */ a.jsx(D, { label: "General", children: /* @__PURE__ */ a.jsx(
       j,
       {
         label: "Name",
         ariaLabel: "Name",
-        value: m.name,
+        value: u.name,
         onChange: () => {
         },
         readOnly: !0
       }
     ) }) }) })
   ] }) });
-}, A = p(L);
+}, B = h(L);
 export {
-  A as component
+  B as component
 };
 //# sourceMappingURL=consumedMCPServiceEdit.js.map

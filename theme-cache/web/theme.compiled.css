@@ -30051,6 +30051,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
   visibility: hidden !important;
 }
 
+.line-clamp--1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
 .info-tooltip .widget-tooltip-content {
   position: relative;
   z-index: 1000;

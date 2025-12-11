@@ -1,13 +1,14 @@
-import { f as b, r as o, j as t, A as w, P as x, g as f, C, F as D, h as j } from "./TextInputLabeled-DX-tOSPn.js";
+import { c as b, r as o, j as t, A as w, P as x, e as f, C, F as D } from "./TextInputWithIcon-BpSHc-Lp.js";
+import { T as j } from "./TextInputLabeled-G5mbtodI.js";
 function E(n) {
   return {
     name: ""
   };
 }
-const v = (n, s, c, a, l) => async (r) => {
+const v = (n, s, c, a, i) => async (l) => {
   console.log("knowledgebase change triggered for field ", s);
-  const i = { ...c, [s]: r };
-  a(i), await L(n, i, l);
+  const r = { ...c, [s]: l };
+  a(r), await L(n, r, i);
 }, L = async (n, s, c) => {
   console.log("Save logic triggered");
   try {
@@ -19,14 +20,14 @@ const v = (n, s, c, a, l) => async (r) => {
     });
   }
 }, y = E(), K = ({ studioPro: n, documentId: s }) => {
-  const c = n.ui.messageBoxes, a = n.app.model.customBlobDocuments, [l, r] = o.useState(0), [i, p] = o.useState(!1), [g, d] = o.useState(y);
+  const c = n.ui.messageBoxes, a = n.app.model.customBlobDocuments, [i, l] = o.useState(0), [r, h] = o.useState(!1), [g, d] = o.useState(y);
   return o.useCallback(
     (e) => v(n, e, g, d, s),
     [n, g, d, s]
   ), o.useEffect(() => {
-    const e = (u) => {
-      const { documents: m } = u;
-      m.some((h) => h.id === s) && r((h) => h + 1);
+    const e = (m) => {
+      const { documents: u } = m;
+      u.some((p) => p.id === s) && l((p) => p + 1);
     };
     return a.addEventListener("documentsChanged", e), () => {
       a.removeEventListener("documentsChanged", e);
@@ -34,16 +35,16 @@ const v = (n, s, c, a, l) => async (r) => {
   }, []), o.useEffect(() => {
     a.getDocumentById(s).then(async (e) => {
       if (e && !("error" in e)) {
-        const u = e.document.contents, m = e.document.name;
-        d({ ...u, name: m }), p(!0);
+        const m = e.document.contents, u = e.document.name;
+        d({ ...m, name: u }), h(!0);
       } else
         throw new Error((e == null ? void 0 : e.error) || "Document not found");
     }).catch((e) => {
       c.show("error", "Error loading document", "Details: " + (e == null ? void 0 : e.message) || e);
     });
-  }, [l]), /* @__PURE__ */ t.jsx(w, { studioPro: n, children: /* @__PURE__ */ t.jsxs(x, { children: [
-    !i && /* @__PURE__ */ t.jsx("span", { children: "Loading document content..." }),
-    i && /* @__PURE__ */ t.jsx(f, { children: /* @__PURE__ */ t.jsx(C, { children: /* @__PURE__ */ t.jsx(D, { label: "General", children: /* @__PURE__ */ t.jsx(
+  }, [i]), /* @__PURE__ */ t.jsx(w, { studioPro: n, children: /* @__PURE__ */ t.jsxs(x, { children: [
+    !r && /* @__PURE__ */ t.jsx("span", { children: "Loading document content..." }),
+    r && /* @__PURE__ */ t.jsx(f, { children: /* @__PURE__ */ t.jsx(C, { children: /* @__PURE__ */ t.jsx(D, { label: "General", children: /* @__PURE__ */ t.jsx(
       j,
       {
         label: "Name",
@@ -55,8 +56,8 @@ const v = (n, s, c, a, l) => async (r) => {
       }
     ) }) }) })
   ] }) });
-}, A = b(K);
+}, B = b(K);
 export {
-  A as component
+  B as component
 };
 //# sourceMappingURL=knowledgebaseEdit.js.map
