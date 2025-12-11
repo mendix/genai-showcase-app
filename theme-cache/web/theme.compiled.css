@@ -29978,65 +29978,34 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 16px;
 }
 
-.treenode-span-grid-xaxis-test {
+.treenode-hover:hover, .treenode-span-grid-grandchild:hover, .treenode-span-grid:hover, .treenode-span-grid-parent:hover, .treenode-hover:active, .treenode-span-grid-grandchild:active, .treenode-span-grid:active, .treenode-span-grid-parent:active, .treenode-hover:focus, .treenode-span-grid-grandchild:focus, .treenode-span-grid:focus, .treenode-span-grid-parent:focus {
+  border-radius: 2px;
+  outline: 2px solid #264ae5;
+  outline-offset: 0;
+}
+
+.treenode-span-grid-grandchild, .treenode-span-grid, .treenode-span-grid-parent, .treenode-span-grid-xaxis {
   display: grid;
-  grid-template-columns: 334px auto;
   gap: 16px;
   height: 25px;
+}
+
+.treenode-span-grid-xaxis {
+  grid-template-columns: 318px auto;
   padding-right: 20px;
   margin-bottom: 16px;
 }
 
-.treenode-span-xaxis {
-  padding: 0;
-  padding-left: 16px;
-  padding-right: 12px;
-}
-.treenode-span-xaxis .widget-tree-node-branch-header {
-  padding: 0;
-}
-
-.treenode-span-grid-xaxis {
-  display: grid;
-  grid-template-columns: 310px auto;
-  gap: 16px;
-  height: 25px;
-}
-
 .treenode-span-grid-parent {
-  display: grid;
   grid-template-columns: 310px auto;
-  gap: 16px;
-  height: 25px;
-}
-.treenode-span-grid-parent:hover, .treenode-span-grid-parent:active, .treenode-span-grid-parent:focus {
-  border-radius: 2px;
-  outline: 2px solid #264ae5;
-  outline-offset: 0;
 }
 
 .treenode-span-grid {
-  display: grid;
-  grid-template-columns: 290px auto;
-  gap: 16px;
-  height: 25px;
-}
-.treenode-span-grid:hover, .treenode-span-grid:active, .treenode-span-grid:focus {
-  border-radius: 2px;
-  outline: 2px solid #264ae5;
-  outline-offset: 0;
+  grid-template-columns: 286px auto;
 }
 
 .treenode-span-grid-grandchild {
-  display: grid;
-  grid-template-columns: 266px auto;
-  gap: 16px;
-  height: 25px;
-}
-.treenode-span-grid-grandchild:hover, .treenode-span-grid-grandchild:active, .treenode-span-grid-grandchild:focus {
-  border-radius: 2px;
-  outline: 2px solid #264ae5;
-  outline-offset: 0;
+  grid-template-columns: 262px auto;
 }
 
 .treenode-span-parent {
@@ -30045,32 +30014,62 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin: 4px 0;
 }
 .treenode-span-parent .widget-tree-node-branch-header {
-  padding: 0;
+  padding: 4px 0;
   margin-right: 0;
 }
 .treenode-span-parent .widget-tree-node-body {
   padding-left: 0;
 }
 .treenode-span-parent .treenode-span-child {
-  padding: 0;
-  padding-left: 12px;
+  padding: 0 0 0 24px;
 }
 .treenode-span-parent .treenode-span-child .widget-tree-node-branch-header-icon-animated {
   margin-left: 8px;
 }
 .treenode-span-parent .treenode-span-child .widget-tree-node-branch-header {
-  padding: 4px 0;
+  padding: 2px 0;
   margin-right: 0;
 }
 .treenode-span-parent .treenode-span-child .treenode-span-grandchild {
-  padding: 0;
-  padding-left: 48px;
+  padding: 0 0 0 24px;
 }
 .treenode-span-parent .treenode-span-child .treenode-span-grandchild .widget-tree-node-branch-header {
   padding: 4px 0;
   margin-right: 0;
 }
 
+/* 
+   Add to Parent / Child Tree Node Structure 'treenode-span-parent' to add hover state to the whole row with chevron icon (collapse icon)*/
+/*
+.widget-tree-node-branch-header {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    left: 0;
+    width: 100%;
+    height: 29px;
+    background-color: transparent;
+    border-radius: 2px;
+    border: 2px solid $brand-primary;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    &::before {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+  }
+}
+*/
 .grid-deployed-model {
   display: grid;
   grid-template-columns: repeat(4, 1fr) 0.5fr 150px;
