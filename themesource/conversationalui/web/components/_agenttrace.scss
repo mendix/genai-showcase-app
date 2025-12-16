@@ -43,7 +43,7 @@
 // --------------------------------------
 
 .agent-trace-container {
-  padding: $spacing-medium;
+  padding: $spacing-small;
 
   .agent-trace-chart-container {
     padding-top: 0.75px;
@@ -51,5 +51,24 @@
 
   .agent-trace-icon-container {
     padding-left: 2px;
+  }
+}
+
+.agent-trace-tooltip {
+  .widget-tooltip-content {
+    position: relative;
+    text-align: unset;
+    word-break: break-word;
+    background-color: #858585;
+    border-radius: 4px;
+    color: white;
+    font-size: 12px;
+    line-height: 200%;
+    align-items: flex-start;
+    align-self: stretch;
+    justify-content: space-between;
+    font-weight: 400;
+    max-height: 48vh;
+    line-height: 150% !important;
   }
 }

@@ -24,6 +24,15 @@
       max-width: 1800px;
       height: 90vh;
 
+       @media (max-width: 2000px) {
+        height: 85vh;
+      }
+
+      @media (max-width: 1400px) {
+        flex-direction: column;
+        height: 80vh;
+      }
+
     .card {
       border-radius: $spacing-medium;
       border: 1px solid $gray-primary !important;
@@ -48,7 +57,7 @@
       max-height: 100%;
       flex: 1 1 0;
       overflow-y: auto;
-       overflow-x: auto;
+      overflow-x: auto;
       display: flex;
       flex-direction: column;
       margin-bottom: $spacing-medium;
