@@ -49,18 +49,35 @@
 
 .agent-badge {
   display: inline-flex;
-  display: flex;
   height: 20px;
-  padding: 6px;
-  gap: 6px;
+  padding: 4px;
+  gap: 4px;
   align-items: center;
   border-radius: 4px;
   font-size: 12px;
   font-style: normal;
+  .agent-tooltip {
+    div,
+    .mx-link {
+      line-height: 1;
+    }
+  }
 }
 
 .agent-badge--purple {
   @extend .agent-badge;
   background: $agent-purple-light;
   border: 1px solid $agent-purple;
+}
+
+.agent-badge--default {
+  @extend .agent-badge;
+  background: $color-default-lighter;
+  border: 1px solid $color-default-dark;
+}
+
+.agent-badge--primary {
+  @extend .agent-badge;
+  background: $color-primary-lighter;
+  border: 1px solid $color-primary-dark;
 }
