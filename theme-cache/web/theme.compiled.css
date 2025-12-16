@@ -28500,7 +28500,19 @@ input[type=checkbox].three-state-checkbox + .control-label {
   float: right;
 }
 
-.breadcrumb-text:hover, .breadcrumb-text:active, .breadcrumb-text:focus {
+.convui-breadcrumb {
+  position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 91vw;
+  max-width: 1800px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  z-index: 10;
+}
+
+.convui-breadcrumb-clickable:hover, .convui-breadcrumb-clickable:active, .convui-breadcrumb-clickable:focus {
   font-weight: 600;
   line-height: 150%;
   cursor: pointer;
@@ -28508,7 +28520,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   text-decoration-thickness: 1px;
 }
 
-.breadcrumb-container {
+.convui-breadcrumb-active {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -28516,27 +28528,31 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border-radius: 4px;
   transition: all 0.2s ease-in-out;
 }
-.breadcrumb-container .btn-wrapper {
+.convui-breadcrumb-active .btn-wrapper {
   min-width: 8em;
   display: flex;
   align-items: center;
   padding: 4px 0;
+  margin-left: 8px;
 }
-.breadcrumb-container .mx-button.btn {
+.convui-breadcrumb-active .convui-breadcrumb-text {
+  margin: 0;
+  line-height: 1.428571429;
+}
+.convui-breadcrumb-active .mx-button.btn {
   transition: all 0.2s ease-in-out;
   border: none;
   background-color: transparent;
   color: #0a1325;
-  padding: 0 0;
+  padding: 0;
   height: 12px;
   display: flex;
   align-items: center;
-  font-size: small;
 }
-.breadcrumb-container .mx-button.btn.btn-hover {
+.convui-breadcrumb-active .mx-button.btn.btn-hover {
   visibility: hidden;
 }
-.breadcrumb-container:hover .btn.btn-hover {
+.convui-breadcrumb-active:hover .btn.btn-hover {
   visibility: visible;
 }
 
@@ -29263,24 +29279,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: -webkit-fill-available;
   margin: 0 auto;
 }
-.traces-page-content-container .traces-breadcrumb {
-  width: 91vw;
-  max-width: 1800px;
-}
 .traces-page-content-container .traces-content {
   flex-direction: column;
   width: 91vw;
   max-width: 1800px;
   height: 90vh;
 }
-@media (max-width: 2000px) {
-  .traces-page-content-container .traces-content {
-    height: 85vh;
-  }
-}
 @media (max-width: 1400px) {
   .traces-page-content-container .traces-content {
-    flex-direction: column;
     height: 80vh;
   }
 }

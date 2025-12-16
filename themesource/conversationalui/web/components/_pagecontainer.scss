@@ -13,23 +13,13 @@
   height: -webkit-fill-available;
   margin: 0 auto;
 
-  .traces-breadcrumb {
-      width: 91vw;
-      max-width: 1800px;
-  }
-
   .traces-content {
       flex-direction: column;
       width: 91vw;
       max-width: 1800px;
       height: 90vh;
 
-       @media (max-width: 2000px) {
-        height: 85vh;
-      }
-
       @media (max-width: 1400px) {
-        flex-direction: column;
         height: 80vh;
       }
 
