@@ -1,32 +1,4 @@
-@import '../../../theme/web/custom-variables';
-
-.grid-deployed-model{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr) 0.5fr 150px;
-    .item{
-        white-space: wrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-}
-
-.grid-header{
-    margin-left: 16px;
-    margin-right: 16px;
-    margin-bottom: 16px;
-}
-
-.grid-knowledge-bases{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr) 0.5fr 150px;
-    .item{
-        white-space: wrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-}
-
-.text-heading-4{
-    font-weight: $font-weight-semibold;
-    font-size: $font-size-h4;
-}
+@import 'components/badge';
+@import 'components/grid';
+@import 'components/helpers';
+@import 'components/tooltip';

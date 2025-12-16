@@ -29998,35 +29998,95 @@ input[type=checkbox].three-state-checkbox + .control-label {
   text-decoration-thickness: 1px;
 }
 
-.grid-deployed-model {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr) 0.5fr 150px;
-}
-.grid-deployed-model .item {
-  white-space: wrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.grid-header {
-  margin-left: 16px;
-  margin-right: 16px;
-  margin-bottom: 16px;
+.model-badge, .model-badge--primary, .model-badge--default {
+  display: inline-flex;
+  height: 20px;
+  padding: 4px;
+  gap: 4px;
+  align-items: center;
+  border-radius: 4px;
+  font-size: 12px;
+  font-style: normal;
 }
 
-.grid-knowledge-bases {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr) 0.5fr 150px;
+.model-badge--default {
+  background: #fafafb;
+  border: 1px solid #a2a2a3;
 }
-.grid-knowledge-bases .item {
-  white-space: wrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+
+.model-badge--primary {
+  background: #d4dbfa;
+  border: 1px solid #1b34a0;
+}
+
+.datagrid--no-scroll .widget-datagrid-content {
+  overflow-y: visible;
+  overflow-x: visible;
+}
+
+.datagrid--fixed-row-height .table .td {
+  height: 58px;
+  padding: 8px;
+  border-bottom: none;
+}
+.datagrid--fixed-row-height .table .td .empty-placeholder {
+  display: flex;
+  justify-content: center;
+}
+
+.datagrid--fixed-row-height .table .th {
+  padding: 8px;
+}
+
+.datagrid--fixed-row-height .table-header {
+  border: none;
 }
 
 .text-heading-4 {
-  font-weight: 600;
+  font-weight: bold;
   font-size: 18px;
+}
+
+.visibility-none {
+  visibility: hidden !important;
+}
+
+.line-clamp--1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.info-tooltip .widget-tooltip-content {
+  position: relative;
+  z-index: 1000;
+  text-align: unset;
+  word-break: break-word;
+  background-color: white;
+  border-radius: 4px;
+  color: black;
+  width: 330px;
+  padding: 8px;
+}
+
+.icon-info-wrapper {
+  display: flex;
+  align-items: center;
+}
+.icon-info-wrapper img {
+  margin-right: 0;
+  margin-bottom: 0;
+}
+
+.info-icon {
+  margin: 0 0 0 4px;
+  padding: 0;
+}
+.info-icon img {
+  height: 16px;
+  width: 16px;
 }
 
 .badge-with-circle {
@@ -30071,21 +30131,37 @@ input[type=checkbox].three-state-checkbox + .control-label {
   text-transform: uppercase;
 }
 
-.agent-badge, .agent-badge--purple {
+.agent-badge, .agent-badge--primary, .agent-badge--default, .agent-badge--purple {
   display: inline-flex;
-  display: flex;
   height: 20px;
-  padding: 6px;
-  gap: 6px;
+  padding: 4px;
+  gap: 4px;
   align-items: center;
   border-radius: 4px;
   font-size: 12px;
   font-style: normal;
 }
+.agent-badge .agent-tooltip div, .agent-badge--primary .agent-tooltip div, .agent-badge--default .agent-tooltip div, .agent-badge--purple .agent-tooltip div,
+.agent-badge .agent-tooltip .mx-link,
+.agent-badge--primary .agent-tooltip .mx-link,
+.agent-badge--default .agent-tooltip .mx-link,
+.agent-badge--purple .agent-tooltip .mx-link {
+  line-height: 1;
+}
 
 .agent-badge--purple {
   background: #E2E0FC;
   border: 1px solid #845EFF;
+}
+
+.agent-badge--default {
+  background: #fafafb;
+  border: 1px solid #a2a2a3;
+}
+
+.agent-badge--primary {
+  background: #d4dbfa;
+  border: 1px solid #1b34a0;
 }
 
 .btn.mx-button.btn-without-border, .btn.mx-button.btn-without-border-red {
@@ -30245,6 +30321,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .datagrid--no-scroll .widget-datagrid-content {
   overflow-y: visible;
   overflow-x: visible;
+}
+
+.datagrid--fixed-row-height .table .td {
+  height: 58px;
+  padding: 8px;
+}
+
+.datagrid--fixed-row-height .table .th {
+  padding: 8px;
 }
 
 .custom-control-label {
@@ -30622,13 +30707,12 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .agent-page-container .page-header-content {
   display: flex;
   flex-direction: column;
-  gap: 8px;
   align-self: stretch;
 }
 .agent-page-container .page-header-content .pageheader-with-buttons {
   display: flex !important;
   margin-bottom: 0;
-  align-items: center !important;
+  align-items: start;
   justify-items: center;
   justify-content: space-between;
 }
