@@ -19,8 +19,12 @@
       max-width: 1800px;
       height: 90vh;
 
+      @media (max-width: 2000px) {
+        max-height: 84vh;
+      }
+
       @media (max-width: 1400px) {
-        height: 80vh;
+        max-height: 80vh;
       }
 
     .card {
@@ -99,6 +103,10 @@
   cursor: pointer;
   margin-top: $spacing-smaller;
   margin-bottom: $spacing-medium;
+  
+  p {
+    margin: 0;
+  }
 
   .mx-text {
     flex: 1 1 auto;
