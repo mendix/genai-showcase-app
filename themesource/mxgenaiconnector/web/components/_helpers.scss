@@ -1,0 +1,18 @@
+@import "../../../../theme/web/custom-variables.scss";
+
+.text-heading-4 {
+    font-weight: $font-weight-bold;
+    font-size: $font-size-h4;
+}
+
+.visibility-none {
+    visibility: hidden !important;
+}
+
+.line-clamp--1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+}

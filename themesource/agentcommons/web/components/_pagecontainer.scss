@@ -186,13 +186,12 @@
     .page-header-content {
         display: flex;
         flex-direction: column; 
-        gap: $spacing-small;
         align-self: stretch;
 
         .pageheader-with-buttons {
             display: flex !important;
             margin-bottom: 0;
-            align-items: center !important;
+            align-items: start;
             justify-items: center;
             justify-content: space-between;
         }
