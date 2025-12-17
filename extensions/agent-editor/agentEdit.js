@@ -1,6 +1,6 @@
-import { j as t, p as z, d as T, r as o, D as F, a as k, S as q, T as _, b as R, c as ee, A as te, P as se, e as ne, C as $, F as H } from "./TextInputWithIcon-DLyCj4tu.js";
-import { T as ae, y as ie, I as U, W as re } from "./TextAreaAutogrow-Da5KNI53.js";
-import { c as oe, a as le, i as ce, m as ue, b as de, d as he, g as me, e as pe, f as fe, h as ge } from "./index-DT3ea5x7.js";
+import { j as t, p as z, d as T, r as o, D as F, a as k, S as q, T as _, b as P, c as ee, A as te, P as se, e as ne, C as R, F as H } from "./TextInputWithIcon-el7gQ0vO.js";
+import { T as ae, y as ie, I as U, W as re } from "./TextAreaAutogrow-D91GHJbQ.js";
+import { c as oe, a as le, i as ce, m as ue, b as de, d as me, g as he, e as pe, f as fe, h as ge } from "./index-B60lTb-u.js";
 import { m as xe } from "./modelUtils-BKeUOTig.js";
 const be = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13%202.5H3C2.72386%202.5%202.5%202.72386%202.5%203V13C2.5%2013.2761%202.72386%2013.5%203%2013.5H13C13.2761%2013.5%2013.5%2013.2761%2013.5%2013V3C13.5%202.72386%2013.2761%202.5%2013%202.5Z'%20stroke='%23579BF9'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5V6.5C6.5%205.95%206.95%205.5%207.5%205.5H8.5C9.05%205.5%209.5%205.95%209.5%206.5V8H6.5'%20stroke='%23579BF9'%20stroke-linejoin='round'/%3e%3c/svg%3e", ye = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13%202.5H3C2.72386%202.5%202.5%202.72386%202.5%203V13C2.5%2013.2761%202.72386%2013.5%203%2013.5H13C13.2761%2013.5%2013.5%2013.2761%2013.5%2013V3C13.5%202.72386%2013.2761%202.5%2013%202.5Z'%20stroke='%23146FF4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5V6.5C6.5%205.95%206.95%205.5%207.5%205.5H8.5C9.05%205.5%209.5%205.95%209.5%206.5V8H6.5'%20stroke='%23146FF4'%20stroke-linejoin='round'/%3e%3c/svg%3e";
 var we = Object.defineProperty, ve = (e, n) => we(e, "name", { value: n, configurable: !0 });
@@ -23,7 +23,7 @@ const Ee = Ve((e) => t.jsx(z, { light: Ae, dark: je, ...e }), "EntityNonPersista
   }
   return a;
 }, Te = async (e, n, i, c) => {
-  const a = await e.ui.elementSelectors.selectDocument({ allowNone: !0 });
+  const a = await e.ui.elementSelectors.selectDocument({ allowNone: !0, query: { sdkName: "CustomBlobDocuments$CustomBlobDocument" } });
   let l;
   return a.status === "ok" && (l = { ...n, [c]: a.selected.module + "." + a.selected.name }), a.status === "none" && (l = { ...n, [c]: void 0 }), l && await L(e, l, i), l;
 }, I = async (e, n, i) => {
@@ -137,35 +137,35 @@ const Ee = Ve((e) => t.jsx(z, { light: Ae, dark: je, ...e }), "EntityNonPersista
         });
       });
     }), u.sort((p, w) => p.start - w.start);
-    const m = [];
+    const h = [];
     let d = 0;
     return u.forEach((p, w) => {
-      p.start > d && m.push(
+      p.start > d && h.push(
         /* @__PURE__ */ t.jsx("span", { children: i.slice(d, p.start) }, `text-${d}-${p.start}`)
-      ), p.start >= d && (m.push(
+      ), p.start >= d && (h.push(
         /* @__PURE__ */ t.jsx("span", { style: p.style, children: p.text }, `placeholder-${p.ruleIndex}-${w}`)
       ), d = p.end);
-    }), d < i.length && m.push(
+    }), d < i.length && h.push(
       /* @__PURE__ */ t.jsx("span", { children: i.slice(d) }, `text-${d}-end`)
-    ), m;
+    ), h;
   }, j = o.useCallback(() => {
-    var m;
-    const u = (m = g.current) == null ? void 0 : m.querySelector("textarea");
+    var h;
+    const u = (h = g.current) == null ? void 0 : h.querySelector("textarea");
     if (u) {
       const d = u.offsetWidth - u.clientWidth;
       b(d);
     }
   }, []), A = o.useCallback(() => {
-    var m;
-    const u = (m = g.current) == null ? void 0 : m.querySelector("textarea");
+    var h;
+    const u = (h = g.current) == null ? void 0 : h.querySelector("textarea");
     if (u && v.current) {
       const d = u.scrollTop;
       v.current.style.setProperty("--scroll-offset", `-${d}px`);
     }
   }, []);
   return o.useEffect(() => {
-    var m;
-    const u = (m = g.current) == null ? void 0 : m.querySelector("textarea");
+    var h;
+    const u = (h = g.current) == null ? void 0 : h.querySelector("textarea");
     if (u) {
       j();
       const d = new ResizeObserver(j);
@@ -230,14 +230,14 @@ const Ee = Ve((e) => t.jsx(z, { light: Ae, dark: je, ...e }), "EntityNonPersista
         }
       ) }),
       /* @__PURE__ */ t.jsx(
-        R,
+        P,
         {
           onPress: a,
           children: c
         }
       ),
       l && /* @__PURE__ */ t.jsx(
-        R,
+        P,
         {
           onPress: f,
           children: l
@@ -253,12 +253,12 @@ const Ee = Ve((e) => t.jsx(z, { light: Ae, dark: je, ...e }), "EntityNonPersista
   missingAttributes: [],
   unusedAttributes: []
 }, Ie = de(), Fe = ({ studioPro: e, documentId: n }) => {
-  const i = e.ui.messageBoxes, c = e.app.model.customBlobDocuments, [a, l] = o.useState(Be), [f, x] = o.useState(!1), [g, v] = o.useState(void 0), [r, b] = o.useState(Ie), [S, C] = o.useState(!1), [D, j] = o.useState(!1), [A, u] = o.useState(r.systemPrompt), [m, d] = o.useState(r.userPrompt ?? ""), [p, w] = o.useState(r.description), V = o.useRef(null), y = o.useRef(null), M = o.useRef(null);
+  const i = e.ui.messageBoxes, c = e.app.model.customBlobDocuments, [a, l] = o.useState(Be), [f, x] = o.useState(!1), [g, v] = o.useState(void 0), [r, b] = o.useState(Ie), [S, C] = o.useState(!1), [D, j] = o.useState(!1), [A, u] = o.useState(r.systemPrompt), [h, d] = o.useState(r.userPrompt ?? ""), [p, w] = o.useState(r.description), V = o.useRef(null), y = o.useRef(null), M = o.useRef(null);
   o.useEffect(() => {
     c.getDocumentById(n).then(async (s) => {
       if (s && !("error" in s)) {
-        const h = s.document.contents, E = await W(h);
-        b(h), u(h.systemPrompt), d(h.userPrompt ?? ""), w(h.description), l(E), x(!0);
+        const m = s.document.contents, E = await W(m);
+        b(m), u(m.systemPrompt), d(m.userPrompt ?? ""), w(m.description), l(E), x(!0);
       } else
         throw new Error((s == null ? void 0 : s.error) || "Document not found");
     }).catch((s) => {
@@ -266,32 +266,32 @@ const Ee = Ve((e) => t.jsx(z, { light: Ae, dark: je, ...e }), "EntityNonPersista
     });
   }, []), o.useEffect(() => {
     f && (async () => {
-      const h = await X(e, r.entity);
-      v(h);
+      const m = await X(e, r.entity);
+      v(m);
     })();
   }, [e, r.entity]), o.useEffect(() => {
     f && (async () => {
-      const h = await W(r);
-      l(h);
+      const m = await W(r);
+      l(m);
     })();
   }, [e, r]);
   const N = o.useMemo(
-    () => he(r.variables),
+    () => me(r.variables),
     [r.variables]
   ), G = o.useCallback((s) => {
     u(s), V.current && clearTimeout(V.current), V.current = setTimeout(async () => {
-      const h = await B(e, "systemPrompt", r, n)(s);
-      b(h);
+      const m = await B(e, "systemPrompt", r, n)(s);
+      b(m);
     }, 300);
   }, [e, r, n]), Z = o.useCallback((s) => {
     d(s), y.current && clearTimeout(y.current), y.current = setTimeout(async () => {
-      const h = await B(e, "userPrompt", r, n)(s);
-      b(h);
+      const m = await B(e, "userPrompt", r, n)(s);
+      b(m);
     }, 300);
   }, [e, r, n]), Y = o.useCallback((s) => {
     w(s), M.current && clearTimeout(M.current), M.current = setTimeout(async () => {
-      const h = await B(e, "description", r, n)(s);
-      b(h);
+      const m = await B(e, "description", r, n)(s);
+      b(m);
     }, 300);
   }, [e, r, n]), J = o.useCallback(async () => {
     const s = await Le(e, r, n);
@@ -299,27 +299,27 @@ const Ee = Ve((e) => t.jsx(z, { light: Ae, dark: je, ...e }), "EntityNonPersista
   }, [e, r, n]), K = o.useCallback(async () => {
     const s = await Te(e, r, n, "modelQualifiedName");
     s && b(s);
-  }, [e, r, n]), X = async (s, h) => {
-    if (!h)
+  }, [e, r, n]), X = async (s, m) => {
+    if (!m)
       return;
-    const E = await fe(s, h);
+    const E = await fe(s, m);
     if (!E)
       return;
-    const P = await ge(E, s);
-    if (P !== void 0)
-      return P ? /* @__PURE__ */ t.jsx(Ce, {}) : /* @__PURE__ */ t.jsx(Ee, {});
+    const $ = await ge(E, s);
+    if ($ !== void 0)
+      return $ ? /* @__PURE__ */ t.jsx(Ce, {}) : /* @__PURE__ */ t.jsx(Ee, {});
   }, W = async (s) => ({
     isValidModel: await I("modelQualifiedName", e, s),
     isValidEntity: await I("entity", e, s),
     isValidUserPrompt: await I("userPrompt", e, s),
     showCreateVariablesInfo: s.variables.length === 0,
     missingAttributes: await pe(e, s),
-    unusedAttributes: await me(e, s)
+    unusedAttributes: await he(e, s)
   });
   return /* @__PURE__ */ t.jsx(te, { studioPro: e, children: /* @__PURE__ */ t.jsxs(se, { children: [
     !f && /* @__PURE__ */ t.jsx("span", { children: "Loading document content..." }),
     f && /* @__PURE__ */ t.jsxs(ne, { children: [
-      /* @__PURE__ */ t.jsxs($, { children: [
+      /* @__PURE__ */ t.jsxs(R, { children: [
         /* @__PURE__ */ t.jsx(H, { label: "System prompt", children: /* @__PURE__ */ t.jsx(
           O,
           {
@@ -333,14 +333,14 @@ const Ee = Ve((e) => t.jsx(z, { light: Ae, dark: je, ...e }), "EntityNonPersista
           O,
           {
             ariaLabel: "User prompt",
-            value: m,
+            value: h,
             onChange: Z,
             highlightRules: N,
             validate: () => a.isValidUserPrompt
           }
         ) })
       ] }),
-      /* @__PURE__ */ t.jsx($, { children: /* @__PURE__ */ t.jsxs(H, { label: "General", children: [
+      /* @__PURE__ */ t.jsx(R, { children: /* @__PURE__ */ t.jsxs(H, { label: "General", children: [
         /* @__PURE__ */ t.jsx(
           Q,
           {
@@ -403,8 +403,8 @@ const Ee = Ve((e) => t.jsx(z, { light: Ae, dark: je, ...e }), "EntityNonPersista
       ] }) })
     ] })
   ] }) });
-}, $e = ee(Fe);
+}, Re = ee(Fe);
 export {
-  $e as component
+  Re as component
 };
 //# sourceMappingURL=agentEdit.js.map
