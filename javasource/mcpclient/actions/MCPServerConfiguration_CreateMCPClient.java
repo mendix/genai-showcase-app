@@ -71,8 +71,7 @@ public class MCPServerConfiguration_CreateMCPClient extends UserAction<IMendixOb
 					.withParams(mcpClientConfig.getMendixObject())
 					.execute(getContext());
 		} catch (Exception e) {
-			LOGGER.error(e);
-			return null;
+			throw e;
 		}
 		// END USER CODE
 	}
