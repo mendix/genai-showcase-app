@@ -380,7 +380,18 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 			String toolName = toolNode.path("function").path("name").asText();
 			Tool functionMatch = FunctionImpl.getToolByName(getRequest(RequestMapping), toolName ,getContext());
 			if(functionMatch != null) {
-			ObjectNode parametersNode = createToolParametersNode(functionMatch);
+				// Check if toolNode already has an "input" field
+				JsonNode inputNode = toolNode.path("input");
+				ObjectNode parametersNode = null;
+				
+				if (inputNode != null && !inputNode.isMissingNode() && !inputNode.isNull() && inputNode.isObject()) {
+					// Use the existing input as parameters
+					parametersNode = (ObjectNode) inputNode;
+				} else {
+					// Create parameters from function match
+					parametersNode = createToolParametersNode(functionMatch);
+				}
+				
 				if(parametersNode != null) {
 					JsonNode functionNode = toolNode.path("function");
 					((ObjectNode) functionNode).set("parameters", parametersNode);
@@ -394,6 +405,20 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 	
 	private ObjectNode createToolParametersNode(Tool tool) throws CoreException {
 		
+		// Check if tool has a schema field and use it if it's valid JSON
+		String schema = tool.getSchema();
+		if (schema != null && !schema.isEmpty()) {
+			try {
+				JsonNode schemaNode = MAPPER.readTree(schema);
+				if (schemaNode != null && schemaNode.isObject()) {
+					return (ObjectNode) schemaNode;
+				}
+			} catch (Exception e) {
+				LOGGER.warn("Failed to parse schema for tool " + tool.getName() + ": " + e.getMessage());
+			}
+		}
+		
+		// Fall back to creating parameters from arguments or input parameters
 		List<ArgumentInput> arguments = tool.getTool_ArgumentInput();
 		Map<String, IDataType> inputParameters = FunctionMappingImpl.getInputParametersForModel(tool.getMicroflow());
 		

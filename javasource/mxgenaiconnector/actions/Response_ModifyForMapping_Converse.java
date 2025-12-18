@@ -101,8 +101,8 @@ public class Response_ModifyForMapping_Converse extends UserAction<java.lang.Str
 	}
 	
 	private void mapToolUse(ObjectNode toolUseNode) {
-	    // Replace "input" with key and value attributes
-	    JsonNode inputNode = toolUseNode.remove("input");
+	    // Keep "input" and also create key and value attributes
+	    JsonNode inputNode = toolUseNode.get("input");
 	    ArrayNode argumentsArray = MAPPER.createArrayNode();
 
 	    if (inputNode != null && inputNode.isObject()) {

@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
@@ -43,12 +45,14 @@ public class ToolResult_Get extends UserAction<IMendixObject>
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __ArgumentCollection;
 	private final mcpclient.proxies.ArgumentCollection ArgumentCollection;
+	private final java.lang.String Input;
 
 	public ToolResult_Get(
 		IContext context,
 		IMendixObject _mCPClient,
 		java.lang.String _toolName,
-		IMendixObject _argumentCollection
+		IMendixObject _argumentCollection,
+		java.lang.String _input
 	)
 	{
 		super(context);
@@ -57,6 +61,7 @@ public class ToolResult_Get extends UserAction<IMendixObject>
 		this.ToolName = _toolName;
 		this.__ArgumentCollection = _argumentCollection;
 		this.ArgumentCollection = _argumentCollection == null ? null : mcpclient.proxies.ArgumentCollection.initialize(getContext(), _argumentCollection);
+		this.Input = _input;
 	}
 
 	@java.lang.Override
@@ -69,7 +74,15 @@ public class ToolResult_Get extends UserAction<IMendixObject>
 			
 			McpSyncClient client = McpClientRegistry.getClient(MCPClient.getMendixObject().getId().toLong());
 			
-			Map<String, Object> arguments = getArguments();
+			Map<String, Object> arguments;
+			if (Input != null && !Input.trim().isEmpty()) {
+				// Parse Input as JSON
+				ObjectMapper mapper = new ObjectMapper();
+				arguments = mapper.readValue(Input, new TypeReference<Map<String, Object>>(){});
+			} else {
+				// Fall back to ArgumentCollection
+				arguments = getArguments();
+			}
 			
 			
 			McpSchema.CallToolRequest callToolRequest = new McpSchema.CallToolRequest(ToolName, arguments);

@@ -119,6 +119,7 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		}
 		tool.setOriginalMCPToolName(Tool.getName());
 		tool.setMCP_MCPServerConfiguration(MCPServerConfiguration);
+		tool.setSchema(Tool.getSchema());
 		List<Tool> ToolList = toolCollection.getToolCollection_Tool();
 		ToolList.add(tool);
 		toolCollection.setToolCollection_Tool(ToolList); 

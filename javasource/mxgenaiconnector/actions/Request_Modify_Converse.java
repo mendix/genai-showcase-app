@@ -154,35 +154,65 @@ public class Request_Modify_Converse extends UserAction<java.lang.String>
 		
 		//This will create the input schema JSON needed for specifying the input of a tool
 		private void setInputSchemaForToolNode(String microflow, ObjectNode toolNode) throws CoreException {
-			
-			// Create the root object node
-	        ObjectNode inputSchemaNode = MAPPER.createObjectNode();
-	        inputSchemaNode.put("type", "object");
 
-	        // Create the properties node (if input parameter is available)
-			ObjectNode propertiesNode = MAPPER.createObjectNode();
-			ArrayNode requiredNode = MAPPER.createArrayNode();
-	        
-			// Add properties (either from microflow or if arguments are present based on those
-			Tool tool = FunctionImpl.getToolByName(Request, toolNode.get("name").asText() ,getContext());
-			List<ArgumentInput> arguments = tool.getTool_ArgumentInput();
-			if (arguments == null || arguments.isEmpty()) {
-				Map<String, IDataType> parameterList = FunctionMappingImpl.getInputParametersForModel(microflow);
-				parameterList.entrySet().forEach(t -> FunctionImpl.addProperty(propertiesNode, requiredNode, t));
-				
-			}else {
-				FunctionImpl.addPropertiesForTool(tool.getTool_ArgumentInput(), propertiesNode, requiredNode);
+		// Check if schema already exists in toolNode
+		if(toolNode.has("schema") && !toolNode.get("schema").isNull()) {
+			// Use existing schema
+			JsonNode existingSchema = toolNode.get("schema");
+			
+			// Parse schema if it's a string, otherwise use it directly
+			JsonNode schemaToUse;
+			if (existingSchema.isTextual()) {
+				try {
+					schemaToUse = MAPPER.readTree(existingSchema.asText());
+				} catch (Exception e) {
+					LOGGER.error("Failed to parse schema string: " + e.getMessage());
+					schemaToUse = existingSchema;
+				}
+			} else {
+				schemaToUse = existingSchema;
 			}
-		        
-	        inputSchemaNode.set("properties", propertiesNode);
-	        inputSchemaNode.set("required", requiredNode);
-	        // Add a "json" wrapper around the inputSchema
-	        ObjectNode jsonNode = MAPPER.createObjectNode();
-	        jsonNode.set("json", inputSchemaNode);
-	        
-	        // Set the whole InputSchema as new node to toolNode
-	        toolNode.set("inputSchema",jsonNode);
+			
+			// Add a "json" wrapper around the existing schema
+			ObjectNode jsonNode = MAPPER.createObjectNode();
+			jsonNode.set("json", schemaToUse);
+			
+			// Set the whole InputSchema as new node to toolNode
+			toolNode.set("inputSchema", jsonNode);
+			
+			// Remove the original schema field
+			toolNode.remove("schema");
+			return;
 		}
+
+		// Create the root object node
+        ObjectNode inputSchemaNode = MAPPER.createObjectNode();
+        inputSchemaNode.put("type", "object");
+
+        // Create the properties node (if input parameter is available)
+		ObjectNode propertiesNode = MAPPER.createObjectNode();
+		ArrayNode requiredNode = MAPPER.createArrayNode();
+	        
+		// Add properties (either from microflow or if arguments are present based on those
+		Tool tool = FunctionImpl.getToolByName(Request, toolNode.get("name").asText() ,getContext());
+		List<ArgumentInput> arguments = tool.getTool_ArgumentInput();
+		if (arguments == null || arguments.isEmpty()) {
+			Map<String, IDataType> parameterList = FunctionMappingImpl.getInputParametersForModel(microflow);
+			parameterList.entrySet().forEach(t -> FunctionImpl.addProperty(propertiesNode, requiredNode, t));
+			
+		}else {
+			FunctionImpl.addPropertiesForTool(tool.getTool_ArgumentInput(), propertiesNode, requiredNode);
+		}
+	        
+        inputSchemaNode.set("properties", propertiesNode);
+        inputSchemaNode.set("required", requiredNode);
+        // Add a "json" wrapper around the inputSchema
+        ObjectNode jsonNode = MAPPER.createObjectNode();
+        jsonNode.set("json", inputSchemaNode);
+        
+        // Set the whole InputSchema as new node to toolNode
+        toolNode.set("inputSchema",jsonNode);
+	}
 		
 		private void setToolChoice(ObjectNode rootNode) {
 			JsonNode toolConfig = rootNode.path("toolConfig");
