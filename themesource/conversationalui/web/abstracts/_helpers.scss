@@ -113,19 +113,6 @@
   justify-content: flex-start;
 }
 
-/* Custom Alert */
-.alert-danger-text {
-  margin-bottom: $spacing-large;
-
-  .alert-circle-filled {
-    width: 14px;
-    margin-right: $spacing-smaller;
-  }
-
-  .alert-text {
-    color: $brand-danger;
-  }
-}
 
 /* Alignment */
 .row-left-aligned {
@@ -138,8 +125,16 @@
   word-break: break-word;
 }
 
+.flex-left {
+  float: left;
+}
+
 .flex-right {
   float: right;
+}
+
+.centered-container {
+  justify-content: center ;
 }
 
 .row-text-img {

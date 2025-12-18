@@ -1,3 +1,4 @@
+@import "../../../atlas_core/web/_variables.scss";
 @import '../../../../theme/web/custom-variables';
 
 /* Paddings */
@@ -86,7 +87,6 @@
 .spacing-outer-left-large    { margin-left: $spacing-large; }
 .spacing-outer-left-larger   { margin-left: $spacing-larger; }
 
-
 /* Custom */
 .spacing-inner-left-20 {
   padding-left: 20px;
@@ -95,7 +95,6 @@
 .spacing-outer-bottom-18 {
   margin-bottom: 20px;
 }
-
 
 .spacing-inner-left-48 {
   padding-left: 48px;
@@ -113,3 +112,4 @@
    padding: 24px;
    padding-top: 0;
 }
+

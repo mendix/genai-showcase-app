@@ -28238,18 +28238,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: flex-start;
 }
 
-/* Custom Alert */
-.alert-danger-text {
-  margin-bottom: 24px;
-}
-.alert-danger-text .alert-circle-filled {
-  width: 14px;
-  margin-right: 4px;
-}
-.alert-danger-text .alert-text {
-  color: #e33f4e;
-}
-
 /* Alignment */
 .row-left-aligned {
   display: flex;
@@ -28261,8 +28249,16 @@ input[type=checkbox].three-state-checkbox + .control-label {
   word-break: break-word;
 }
 
+.flex-left {
+  float: left;
+}
+
 .flex-right {
   float: right;
+}
+
+.centered-container {
+  justify-content: center;
 }
 
 .row-text-img, .tooltip-icon-text, .tooltip-row-text-icon, .tooltip-version-draft, .tooltip-header {
@@ -28416,6 +28412,35 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding-left: 0;
   padding-right: 0;
   padding-bottom: 0;
+}
+
+/* Custom Alert */
+.alert-danger-text {
+  margin-bottom: 24px;
+}
+.alert-danger-text .alert-circle-filled {
+  width: 14px;
+  margin-right: 4px;
+}
+.alert-danger-text .alert-text {
+  color: #e33f4e;
+}
+
+.alert-info-box {
+  display: flex;
+  align-items: center;
+  height: auto;
+  gap: 12px;
+  border-radius: 4px;
+  border: 1px solid #C2E2FF;
+  background-color: #DCEEFE;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+.alert-info-box .alert-text {
+  color: #0A1324;
+  line-height: 150%;
+  font-weight: 600;
 }
 
 .badge, .purple-badge, .blue-badge {
@@ -29504,13 +29529,17 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .convui-pagecontainer {
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
-  height: 100%;
+  min-height: 100%;
+  min-width: 100%;
   height: -webkit-fill-available;
   width: 95vw;
-  max-width: 1800px;
+  max-width: 1420px;
   margin: 0 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .traces-page-content-container {
@@ -31219,10 +31248,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   white-space: normal;
 }
 
-.bg-openai {
-  background-color: #0078D4;
-}
-
 .container-border-primary {
   border: 1px solid #264ae5;
   border-radius: 4px;
@@ -31348,21 +31373,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin: 1px;
 }
 
-/* --------------------------------------- Landing Page Styling -----------------------------------*/
 .display-none {
   display: none;
 }
 
-.text-break--2-lines, .card-base .card-content .card-description, .card-orange .card-content .card-description, .card-yellow .card-content .card-description, .card-violet .card-content .card-description, .card-lightpurple .card-content .card-description, .card-darkpurple .card-content .card-description, .card-blue .card-content .card-description, .card-green .card-content .card-description, .card-grey .card-content .card-description, .card-base .card-content .card-title, .card-orange .card-content .card-title, .card-yellow .card-content .card-title, .card-violet .card-content .card-title, .card-lightpurple .card-content .card-title, .card-darkpurple .card-content .card-title, .card-blue .card-content .card-title, .card-green .card-content .card-title, .card-grey .card-content .card-title {
-  word-break: break-word;
-  overflow-wrap: break-word;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
+/* --------------------------------------- Landing Page Styling -----------------------------------*/
 .group-tooltip .widget-tooltip-content {
   max-width: 500px;
   text-align: left;
@@ -31374,32 +31389,93 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .landing-page {
-  height: auto;
-  width: 93.1vw;
-  max-width: 1772px;
-  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  min-width: 100%;
+  height: -webkit-fill-available;
   margin: 0 auto;
-  gap: 24px;
-  border-radius: 16px;
-  border: 1px solid var(--color-border-default, #E7E7E9);
-  background: var(--color-background-default, #FFF);
-  flex-wrap: wrap;
+}
+.landing-page .landing-page-content {
+  height: 90vh;
+  width: 93.1vw;
+  max-width: 1420px;
   box-sizing: border-box;
 }
-
-.landing-page-spacing {
-  margin: 14px;
+.landing-page .landing-page-content .card {
+  height: 100%;
+  border: 1px solid #E7E7E9;
+  border-radius: 16px;
+  padding: 24px 32px;
+  overflow: auto;
+  /* Grid: defines the columns of the the cards per group */
 }
-
-/* Grid: defines the columns of the the cards per group */
-.grid-landing-page {
+.landing-page .landing-page-content .card .grid-landing-page {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(0, 325px));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   justify-content: start;
   gap: 24px;
   box-sizing: border-box;
-  margin-top: 16px;
-  margin-bottom: 32px;
+  margin-top: 12px;
+}
+
+/* --------------------------------------- Tutorial -----------------------------------*/
+.tutorial-page {
+  min-height: 460px;
+}
+
+.tutorial-text {
+  height: 72px;
+  margin-bottom: 16px;
+}
+
+.tutorial-primary-btn {
+  width: 65px;
+  margin-left: 8px;
+}
+
+.tutorial-footer {
+  padding: 8px 24px 24px !important;
+}
+
+.tutorial-title {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.tutorial-slideshow {
+  position: relative;
+  width: 660px;
+  height: 460px;
+  overflow: hidden;
+  justify-content: center;
+}
+.tutorial-slideshow img {
+  height: 320px;
+  width: 650px;
+  padding-top: 12px;
+}
+
+.dots {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.dot, .active-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #C1C3C8;
+}
+
+.active-dot {
+  background: #264ae5;
 }
 
 /* --------------------------------------- Cards -----------------------------------*/
@@ -31409,9 +31485,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
  * .card-inner    → Inner container; handles padding and layout
  * .card-content  → Content wrapper; holds actual content (text, icons, etc.)
  */
-.card-base, .card-orange, .card-yellow, .card-violet, .card-lightpurple, .card-darkpurple, .card-blue, .card-green, .card-grey {
+.card-base, .card-orange, .card-yellow, .card-violet, .card-lightpurple, .card-darkpurple, .card-blue, .card-green, .card-turquoise, .card-grey, .card-light-grey, .card-lightest-grey {
   flex: 1 1 calc(25% - 16px);
-  width: 325px;
+  width: 100%;
   flex-shrink: 0;
   border-radius: 8px;
   border-top: 1px grey;
@@ -31422,31 +31498,32 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border-left: 8px solid transparent;
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
-.card-base:hover, .card-orange:hover, .card-yellow:hover, .card-violet:hover, .card-lightpurple:hover, .card-darkpurple:hover, .card-blue:hover, .card-green:hover, .card-grey:hover {
+.card-base:hover, .card-orange:hover, .card-yellow:hover, .card-violet:hover, .card-lightpurple:hover, .card-darkpurple:hover, .card-blue:hover, .card-green:hover, .card-turquoise:hover, .card-grey:hover, .card-light-grey:hover, .card-lightest-grey:hover {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15), 0px 6px 12px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
 }
-.card-base .card-inner, .card-orange .card-inner, .card-yellow .card-inner, .card-violet .card-inner, .card-lightpurple .card-inner, .card-darkpurple .card-inner, .card-blue .card-inner, .card-green .card-inner, .card-grey .card-inner {
+.card-base .card-inner, .card-orange .card-inner, .card-yellow .card-inner, .card-violet .card-inner, .card-lightpurple .card-inner, .card-darkpurple .card-inner, .card-blue .card-inner, .card-green .card-inner, .card-turquoise .card-inner, .card-grey .card-inner, .card-light-grey .card-inner, .card-lightest-grey .card-inner {
   display: flex;
   align-items: flex-start;
   flex-shrink: 0;
-  width: 320px;
   padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 12px;
   box-sizing: border-box;
 }
-.card-base .card-content, .card-orange .card-content, .card-yellow .card-content, .card-violet .card-content, .card-lightpurple .card-content, .card-darkpurple .card-content, .card-blue .card-content, .card-green .card-content, .card-grey .card-content {
+.card-base .card-content, .card-orange .card-content, .card-yellow .card-content, .card-violet .card-content, .card-lightpurple .card-content, .card-darkpurple .card-content, .card-blue .card-content, .card-green .card-content, .card-turquoise .card-content, .card-grey .card-content, .card-light-grey .card-content, .card-lightest-grey .card-content {
   display: flex;
   flex-direction: column;
   gap: 12px;
   align-self: stretch;
+  /* Title */
+  /* Description */
 }
-.card-base .card-content .card-icon, .card-orange .card-content .card-icon, .card-yellow .card-content .card-icon, .card-violet .card-content .card-icon, .card-lightpurple .card-content .card-icon, .card-darkpurple .card-content .card-icon, .card-blue .card-content .card-icon, .card-green .card-content .card-icon, .card-grey .card-content .card-icon {
+.card-base .card-content .card-icon, .card-orange .card-content .card-icon, .card-yellow .card-content .card-icon, .card-violet .card-content .card-icon, .card-lightpurple .card-content .card-icon, .card-darkpurple .card-content .card-icon, .card-blue .card-content .card-icon, .card-green .card-content .card-icon, .card-turquoise .card-content .card-icon, .card-grey .card-content .card-icon, .card-light-grey .card-content .card-icon, .card-lightest-grey .card-content .card-icon {
   display: flex;
-  width: 42px;
-  height: 42px;
+  width: 48px;
+  height: 48px;
   padding: 4px;
   justify-content: center;
   align-items: center;
@@ -31455,16 +31532,59 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border: 1px solid #BEC1C5;
   background: #F7F7F7;
 }
-.card-base .card-content .card-title, .card-orange .card-content .card-title, .card-yellow .card-content .card-title, .card-violet .card-content .card-title, .card-lightpurple .card-content .card-title, .card-darkpurple .card-content .card-title, .card-blue .card-content .card-title, .card-green .card-content .card-title, .card-grey .card-content .card-title {
-  height: 52px;
-  margin-bottom: 0;
+.card-base .card-content .container-img-label, .card-orange .card-content .container-img-label, .card-yellow .card-content .container-img-label, .card-violet .card-content .container-img-label, .card-lightpurple .card-content .container-img-label, .card-darkpurple .card-content .container-img-label, .card-blue .card-content .container-img-label, .card-green .card-content .container-img-label, .card-turquoise .card-content .container-img-label, .card-grey .card-content .container-img-label, .card-light-grey .card-content .container-img-label, .card-lightest-grey .card-content .container-img-label {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  /* label | icon */
+  align-items: start;
+  margin-bottom: 4px;
+  box-sizing: border-box;
+  overflow: hidden;
+  /* hard safety net */
 }
-.card-base .card-content .card-description, .card-orange .card-content .card-description, .card-yellow .card-content .card-description, .card-violet .card-content .card-description, .card-lightpurple .card-content .card-description, .card-darkpurple .card-content .card-description, .card-blue .card-content .card-description, .card-green .card-content .card-description, .card-grey .card-content .card-description {
+.card-base .card-content .card-title, .card-orange .card-content .card-title, .card-yellow .card-content .card-title, .card-violet .card-content .card-title, .card-lightpurple .card-content .card-title, .card-darkpurple .card-content .card-title, .card-blue .card-content .card-title, .card-green .card-content .card-title, .card-turquoise .card-content .card-title, .card-grey .card-content .card-title, .card-light-grey .card-content .card-title, .card-lightest-grey .card-content .card-title,
+.card-base .card-content .card-description,
+.card-orange .card-content .card-description,
+.card-yellow .card-content .card-description,
+.card-violet .card-content .card-description,
+.card-lightpurple .card-content .card-description,
+.card-darkpurple .card-content .card-description,
+.card-blue .card-content .card-description,
+.card-green .card-content .card-description,
+.card-turquoise .card-content .card-description,
+.card-grey .card-content .card-description,
+.card-light-grey .card-content .card-description,
+.card-lightest-grey .card-content .card-description {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card-base .card-content .card-title, .card-orange .card-content .card-title, .card-yellow .card-content .card-title, .card-violet .card-content .card-title, .card-lightpurple .card-content .card-title, .card-darkpurple .card-content .card-title, .card-blue .card-content .card-title, .card-green .card-content .card-title, .card-turquoise .card-content .card-title, .card-grey .card-content .card-title, .card-light-grey .card-content .card-title, .card-lightest-grey .card-content .card-title {
+  -webkit-line-clamp: 2;
+  margin-bottom: 8px;
+}
+.card-base .card-content .card-description, .card-orange .card-content .card-description, .card-yellow .card-content .card-description, .card-violet .card-content .card-description, .card-lightpurple .card-content .card-description, .card-darkpurple .card-content .card-description, .card-blue .card-content .card-description, .card-green .card-content .card-description, .card-turquoise .card-content .card-description, .card-grey .card-content .card-description, .card-light-grey .card-content .card-description, .card-lightest-grey .card-content .card-description {
+  -webkit-line-clamp: 2;
   height: 40px;
+}
+
+.card-lightest-grey {
+  border-left-color: #C1C3C8;
+}
+
+.card-light-grey {
+  border-left-color: #9EA2A9;
 }
 
 .card-grey {
   border-left-color: #6B707B;
+}
+
+.card-turquoise {
+  border-left-color: #12C1BE;
 }
 
 .card-green {
@@ -31499,11 +31619,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .card-label-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 2px;
-  max-width: 260px;
-  margin: 0 auto;
+  gap: 4px;
+  max-width: 290px;
   overflow: hidden;
-  max-height: 102px;
 }
 
 .card-label-base, .card-label-pgvector, .card-label-mistral, .card-label-all, .card-label-mxcloudgenai, .card-label-bedrock, .card-label-openai {
@@ -31517,13 +31635,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
-}
-
-.container-img-label {
-  display: flex;
-  height: 52px;
-  align-items: start;
-  justify-content: space-between;
 }
 
 .container-label {
@@ -31553,8 +31664,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .card-label-all {
-  background: #DEDEDE;
-  color: #000000;
+  background: #D4EDEE;
+  color: #00635A;
 }
 
 .card-label-mistral {

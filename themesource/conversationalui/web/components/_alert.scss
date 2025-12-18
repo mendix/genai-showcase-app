@@ -1,0 +1,36 @@
+@import '../../../../theme/web/custom-variables';
+
+
+/* Custom Alert */
+.alert-danger-text {
+  margin-bottom: $spacing-large;
+
+  .alert-circle-filled {
+    width: 14px;
+    margin-right: $spacing-smaller;
+  }
+
+  .alert-text {
+    color: $brand-danger;
+  }
+}
+
+
+.alert-info-box {
+    display: flex;
+    align-items: center;
+    height: auto;
+    gap: 12px;
+    border-radius: 4px;
+    border: 1px solid #C2E2FF;
+    background-color: #DCEEFE;
+    padding: 12px;
+    margin-bottom: 16px;
+
+    .alert-text {
+        color: #0A1324;
+        line-height: 150%;
+        font-weight: 600;
+
+    }
+}
