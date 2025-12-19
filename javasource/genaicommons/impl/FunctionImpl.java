@@ -152,16 +152,20 @@ public class FunctionImpl {
 	    if (arguments != null && !arguments.isEmpty()) {
 	        for (ArgumentInput arg : arguments) {
 	            String name = arg.getName();
-	            String type = arg.get_Type().toLowerCase();
-
-	            // Map _type to JSON schema type because "enum" is not officially supported
-	            if(type.equals("enum")) {
-	            	type = "string";
-	            }
+	            String type = null;
+				if (arg.get_Type() != null && !arg.get_Type().isEmpty()) {
+	            	type = arg.get_Type().toLowerCase();
+	            	// Map _type to JSON schema type because "enum" is not officially supported
+	            	if(type.equals("enum")) {
+	            		type = "string";
+	            	}
+				}
 
 	            // Create the property node
 	            ObjectNode property = propertiesNode.objectNode();
-	            property.put("type", type);
+	            if (type != null) {
+	            	property.put("type", type);
+	            }
 	            
 	         	// add enum values if present (typically only if _type == "enum"
 	            List<EnumValue> enumValues = arg.getArgumentInput_EnumValue();

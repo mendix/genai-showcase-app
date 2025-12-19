@@ -858,20 +858,23 @@ public class Converse extends UserAction<IMendixObject>
 		    String paramName = arg.getName();
 			MapBuilder inputBuilder = Document.mapBuilder();
 			
-			// For Enum types, expose the possible keys with a listBuilder Document
-		    if(type == "enum") {
-		    	List<EnumValue> enumValues = arg.getArgumentInput_EnumValue();
-		    	if (enumValues != null && !enumValues.isEmpty()) {
-		    		ListBuilder inputDocumentBuilderEnum = Document.listBuilder();
-			    	for(EnumValue enumValue : enumValues) {
-			    		inputDocumentBuilderEnum.addString(enumValue.getKey());
+			// Only process type if it's not null or empty
+			if (type != null && !type.trim().isEmpty()) {
+				// For Enum types, expose the possible keys with a listBuilder Document
+			    if(type.equals("enum")) {
+			    	List<EnumValue> enumValues = arg.getArgumentInput_EnumValue();
+			    	if (enumValues != null && !enumValues.isEmpty()) {
+			    		ListBuilder inputDocumentBuilderEnum = Document.listBuilder();
+				    	for(EnumValue enumValue : enumValues) {
+				    		inputDocumentBuilderEnum.addString(enumValue.getKey());
+				    	}
+				    	inputBuilder.putDocument(type, inputDocumentBuilderEnum.build());
 			    	}
-			    	inputBuilder.putDocument(type, inputDocumentBuilderEnum.build());
-		    	}
-				
-		    } else {
-		    	inputBuilder.putString("type", type);
-		    }
+					
+			    } else {
+			    	inputBuilder.putString("type", type);
+			    }
+			}
 		    Document input = inputBuilder.build();
 
 		    propertiesBuilder.putDocument(paramName, input);
