@@ -36,12 +36,12 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 	public java.lang.Boolean executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		LOGGER.info("Starting AgentEditor_ImportFromStudioPro");
+		LOGGER.info("Starting import.");
 
 		importModels();
 		importAgents();
 
-		LOGGER.info("Finished AgentEditor_ImportFromStudioPro");
+		LOGGER.info("Finished import.");
 		return true;
 		// END USER CODE
 	}

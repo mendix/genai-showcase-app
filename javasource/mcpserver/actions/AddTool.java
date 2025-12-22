@@ -10,18 +10,13 @@
 package mcpserver.actions;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.systemwideinterfaces.core.ISession;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import io.modelcontextprotocol.server.McpServerFeatures;
 import io.modelcontextprotocol.server.McpSyncServer;
-import io.modelcontextprotocol.server.McpSyncServerExchange;
 import io.modelcontextprotocol.spec.McpSchema;
 import mcpserver.impl.McpServerRegistry;
 import mcpserver.impl.McpSessionManager;
@@ -29,6 +24,7 @@ import mcpserver.impl.MxLogger;
 import mcpserver.proxies.TextContent;
 import mcpserver.proxies.Tool;
 import static java.util.Objects.requireNonNull;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -38,8 +34,6 @@ import java.util.Map.Entry;
 
 /**
  * Registers a tool with the MCP Server that gets exposed to MCP clients. If the model chooses to call the tool, the selected microflow gets executed.
- * 
- * Currently, the current User is not in scope of the tool microflow.
  */
 public class AddTool extends UserAction<IMendixObject>
 {
@@ -82,7 +76,10 @@ public class AddTool extends UserAction<IMendixObject>
 		mcpserver.proxies.Tool toolNpe = new mcpserver.proxies.Tool(getContext());
 		toolNpe.setName(Name);
 		toolNpe.setDescription(Description);
-		setToolSchema(toolNpe);
+		
+		// Get the JsonSchema for the tool
+		McpSchema.JsonSchema inputSchema = getJsonSchemaForTool();
+		
 		toolNpe.setMicroflowName(ExecutingMicroflow);
 		toolNpe.setTool_McpServer(McpServer);
 
@@ -90,11 +87,11 @@ public class AddTool extends UserAction<IMendixObject>
 		McpSyncServer server = McpServerRegistry.getServerInstance(this.McpServer.getMendixObject().getId().toLong());
 
 		McpServerFeatures.SyncToolSpecification tool = new McpServerFeatures.SyncToolSpecification(
-				new McpSchema.Tool(toolNpe.getName(), toolNpe.getDescription(), toolNpe.getSchema()),
+				new McpSchema.Tool(toolNpe.getName(), null, toolNpe.getDescription(), inputSchema, null, null, new HashMap<>()),
 				(exchange, arguments) -> {
 					String threadName = Thread.currentThread().getName();
 					long start = System.currentTimeMillis();
-					LOGGER.trace(threadName + ": Start processing tool call " + Name + ", MF: " + ExecutingMicroflow);
+					LOGGER.trace(threadName + ": Start processing tool call " + Name + ", microflow: " + ExecutingMicroflow);
 					try {
 						IContext contextUser = McpSessionManager.getContextFromSession(exchange);
 						Map<String, Object> args = new HashMap<>(arguments);
@@ -103,11 +100,21 @@ public class AddTool extends UserAction<IMendixObject>
 						mcpserver.proxies.TextContent mxTextContent = getTextContextFromToolMicroflow(args, contextUser);
 
 						McpSchema.TextContent mcpTextContent = new McpSchema.TextContent(mxTextContent.getContent());
-						return new McpSchema.CallToolResult(List.of(mcpTextContent), false);
+						return new McpSchema.CallToolResult(
+							List.of(mcpTextContent),
+							false
+						);
 						
 					}catch (Exception e) { 
 						LOGGER.error(e, threadName + ": Error occurred during tool call.");
-						return new McpSchema.CallToolResult("Error occured during tool call", true);
+						McpSchema.TextContent errorContent = new McpSchema.TextContent(
+							"Error occurred during tool call: " + e.getMessage()
+						);
+						return new McpSchema.CallToolResult(
+							List.of(errorContent),
+							true,
+							new HashMap<>()
+						);
 						
 					}finally {
 						LOGGER.trace(threadName + ": End processing tool call '" + Name + ". Duration: " + (System.currentTimeMillis() - start) + "ms.");
@@ -132,8 +139,6 @@ public class AddTool extends UserAction<IMendixObject>
 
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new mcpserver.impl.MxLogger(AddTool.class);
-	
-	private static final ObjectMapper MAPPER = new ObjectMapper();
 	
 	/**
 	 * Convert DateTime input values to correct DataType. Add Tool to args
@@ -193,60 +198,124 @@ public class AddTool extends UserAction<IMendixObject>
 		return false;
 	}
 	
-	
 	/**
-	 * sets the Schema definition either passed as argument of the JavaAction or extracted from the tool microflow
-	 * @param tool
+	 * Gets the JsonSchema for the tool, either from the provided Schema string or generated from the microflow
+	 * @return McpSchema.JsonSchema object
 	 * @throws JsonProcessingException
 	 */
-	private void setToolSchema(Tool tool) throws JsonProcessingException {
-		try {
-			if(Schema != null && !Schema.isEmpty()) {
-				tool.setSchema(Schema);
-				
-			} else {
-				tool.setSchema(getSchemaFromMicroflow());
-			}
-		} catch (JsonProcessingException e) {
-			LOGGER.error(e);
+	private McpSchema.JsonSchema getJsonSchemaForTool() throws JsonProcessingException {
+		if(Schema != null && !Schema.isEmpty()) {
+			return parseSchemaStringToJsonSchema(Schema);
+		} else {
+			return getSchemaFromMicroflow();
 		}
 	}
+
+
+	/**
+	 * Parses a JSON schema string into a McpSchema.JsonSchema object
+	 * @param schemaString JSON schema as string
+	 * @return McpSchema.JsonSchema object
+	 * @throws JsonProcessingException
+	 */
+	private McpSchema.JsonSchema parseSchemaStringToJsonSchema(String schemaString) throws JsonProcessingException {
+		// This is a simple parser
+		com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+		com.fasterxml.jackson.databind.JsonNode schemaNode = mapper.readTree(schemaString);
+		
+		// Extract type
+		String type = schemaNode.has("type") ? schemaNode.get("type").asText() : "object";
+		
+		// Extract properties
+		Map<String, Object> properties = new HashMap<>();
+		if (schemaNode.has("properties")) {
+			com.fasterxml.jackson.databind.JsonNode propertiesNode = schemaNode.get("properties");
+			propertiesNode.fields().forEachRemaining(entry -> {
+				properties.put(entry.getKey(), mapper.convertValue(entry.getValue(), Object.class));
+			});
+		}
+		
+		// Extract required fields
+		List<String> required = null;
+		if (schemaNode.has("required")) {
+			com.fasterxml.jackson.databind.JsonNode requiredNode = schemaNode.get("required");
+			required = new ArrayList<>();
+			for (com.fasterxml.jackson.databind.JsonNode item : requiredNode) {
+				required.add(item.asText());
+			}
+		}
+		
+		return new McpSchema.JsonSchema(
+			type,
+			properties,
+			required,
+			null,
+			new HashMap<>(),
+			new HashMap<>()
+		);
+	}
+	
+	/**
+	 * Creates an empty schema for tools with no parameters
+	 * @return Empty McpSchema.JsonSchema
+	 */
+	private McpSchema.JsonSchema createEmptySchema() {
+		return new McpSchema.JsonSchema(
+			"object",
+			new HashMap<>(),
+			null,
+			null,
+			new HashMap<>(),
+			new HashMap<>()
+		);
+	}
+	
 	
 	/**
 	 * Creates a Schema definition for all primitive input parameters of the tool microflow
 	 * @return Schema definition as String
 	 * @throws JsonProcessingException
 	 */
-	private String getSchemaFromMicroflow() throws JsonProcessingException {
-		Map<String, IDataType> inputParameters = getInputParametersPrimitives();	
-		ObjectNode root = MAPPER.createObjectNode();
-        root.put("type", "object");
-        root.put("id", "urn:jsonschema:Operation");
+	private McpSchema.JsonSchema getSchemaFromMicroflow() {
+		Map<String, IDataType> inputParameters = getInputParametersPrimitives();
+		
+		// If no parameters, return empty schema
+		if (inputParameters.isEmpty()) {
+			return createEmptySchema();
+		}
+		
+		Map<String, Object> properties = new HashMap<>();
+		List<String> required = new ArrayList<>();
 
-        ObjectNode propertiesNode = MAPPER.createObjectNode();
-        ArrayNode requiredNode = MAPPER.createArrayNode();
+		for (Map.Entry<String, IDataType> param : inputParameters.entrySet()) {
+			String name = param.getKey();
+			String type = parameterGetType(param);
 
-        for (Map.Entry<String, IDataType> param : inputParameters.entrySet()) {  	
-            String name = param.getKey();
-            String type = parameterGetType(param);
+			Map<String, Object> typeNode = new HashMap<>();
+			typeNode.put("type", type);
 
-            ObjectNode typeNode = MAPPER.createObjectNode();
-            typeNode.put("type", type);
-
-            // Handle enum case to expose possible enum values
-            if ("enum".equals(type)) {
-                Set<String> enumKeySet = param.getValue().getEnumeration().getEnumValues().keySet();
-                ArrayNode enumKeyArrayNode = MAPPER.valueToTree(enumKeySet);
-                typeNode.set("enum", enumKeyArrayNode);
-                typeNode.put("type", "string");
-            }
-            propertiesNode.set(name, typeNode);
-            requiredNode.add(name);
-        }
-        root.set("properties",propertiesNode);
-        root.set("required", requiredNode);
-		return MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(root);
+			// Handle enum case to expose possible enum values
+			if ("enum".equals(type)) {
+				Set<String> enumKeySet = param.getValue().getEnumeration().getEnumValues().keySet();
+				typeNode.put("enum", new ArrayList<>(enumKeySet));
+				typeNode.put("type", "string");
+			}
+			
+			properties.put(name, typeNode);
+			required.add(name);
+		}
+		
+		return new McpSchema.JsonSchema(
+			"object",
+			properties,
+			required,
+			null,
+			new HashMap<>(),
+			new HashMap<>()
+		);
 	}
+
+	
 	
 	/**
 	 * determines the type of parameter. Long/Decimal/Datetime converted to "number", enumeration to "enum"

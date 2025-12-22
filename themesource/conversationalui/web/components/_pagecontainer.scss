@@ -9,29 +9,23 @@
   justify-content: center;
   align-items: center;
   min-height: 100%;
+  min-width: 100%;
   height: -webkit-fill-available;
   margin: 0 auto;
 
-  .traces-breadcrumb {
-      width: 80vw;
-      min-width: 1200px;
-      max-width: 1800px;
-  }
-
   .traces-content {
       flex-direction: column;
-      width: 80vw;
-      min-width: 1200px;
+      width: 91vw;
       max-width: 1800px;
       height: 90vh;
-    
-    @media (max-width: 2000px) {
-      height: 87vh;
-    }
 
-    @media (max-width: 1600px) {
-      height: 84vh;
-    }
+      @media (max-width: 2000px) {
+        max-height: 84vh;
+      }
+
+      @media (max-width: 1400px) {
+        max-height: 80vh;
+      }
 
     .card {
       border-radius: $spacing-medium;
@@ -57,7 +51,7 @@
       max-height: 100%;
       flex: 1 1 0;
       overflow-y: auto;
-       overflow-x: auto;
+      overflow-x: auto;
       display: flex;
       flex-direction: column;
       margin-bottom: $spacing-medium;
@@ -109,6 +103,14 @@
   cursor: pointer;
   margin-top: $spacing-smaller;
   margin-bottom: $spacing-medium;
+  
+  p {
+    margin-bottom: 0;
+  }
+
+  .form-group {
+    margin-bottom: 0;
+  }
 
   .mx-text {
     flex: 1 1 auto;
