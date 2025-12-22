@@ -46,6 +46,17 @@
       flex-direction: column;
       height: 80vh;
     }
+      width: 91vw;
+      max-width: 1800px;
+      height: 90vh;
+
+      @media (max-width: 2000px) {
+        max-height: 84vh;
+      }
+
+      @media (max-width: 1400px) {
+        max-height: 80vh;
+      }
 
     .card {
       border-radius: $spacing-medium;
@@ -123,6 +134,14 @@
   cursor: pointer;
   margin-top: $spacing-smaller;
   margin-bottom: $spacing-medium;
+  
+  p {
+    margin-bottom: 0;
+  }
+
+  .form-group {
+    margin-bottom: 0;
+  }
 
   .mx-text {
     flex: 1 1 auto;
