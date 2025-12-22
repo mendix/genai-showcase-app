@@ -6,7 +6,8 @@
         "agentEdit": "agentEdit.js",
         "modelEdit": "modelEdit.js",
         "consumedMCPServiceEdit": "consumedMCPServiceEdit.js",
-        "knowledgebaseEdit": "knowledgebaseEdit.js"
+        "knowledgebaseEdit": "knowledgebaseEdit.js",
+        "modelSettingsEdit": "modelSettingsEdit.js"
       }
     }
   }

@@ -1,66 +1,113 @@
-import { j as t, p as z, d as T, r as o, D as F, a as k, S as q, T as _, b as P, c as ee, A as te, P as se, e as ne, C as R, F as H } from "./TextInputWithIcon-el7gQ0vO.js";
-import { T as ae, y as ie, I as U, W as re } from "./TextAreaAutogrow-D91GHJbQ.js";
-import { c as oe, a as le, i as ce, m as ue, b as de, d as me, g as he, e as pe, f as fe, h as ge } from "./index-B60lTb-u.js";
-import { m as xe } from "./modelUtils-BKeUOTig.js";
-const be = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13%202.5H3C2.72386%202.5%202.5%202.72386%202.5%203V13C2.5%2013.2761%202.72386%2013.5%203%2013.5H13C13.2761%2013.5%2013.5%2013.2761%2013.5%2013V3C13.5%202.72386%2013.2761%202.5%2013%202.5Z'%20stroke='%23579BF9'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5V6.5C6.5%205.95%206.95%205.5%207.5%205.5H8.5C9.05%205.5%209.5%205.95%209.5%206.5V8H6.5'%20stroke='%23579BF9'%20stroke-linejoin='round'/%3e%3c/svg%3e", ye = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13%202.5H3C2.72386%202.5%202.5%202.72386%202.5%203V13C2.5%2013.2761%202.72386%2013.5%203%2013.5H13C13.2761%2013.5%2013.5%2013.2761%2013.5%2013V3C13.5%202.72386%2013.2761%202.5%2013%202.5Z'%20stroke='%23146FF4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5V6.5C6.5%205.95%206.95%205.5%207.5%205.5H8.5C9.05%205.5%209.5%205.95%209.5%206.5V8H6.5'%20stroke='%23146FF4'%20stroke-linejoin='round'/%3e%3c/svg%3e";
-var we = Object.defineProperty, ve = (e, n) => we(e, "name", { value: n, configurable: !0 });
-const Ce = ve((e) => t.jsx(z, { light: ye, dark: be, ...e }), "EntityIcon"), je = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5L6.5%206.5C6.5%205.95%206.95%205.5%207.5%205.5L8.5%205.5C9.05%205.5%209.5%205.95%209.5%206.5V8L6.5%208'%20stroke='%23FBCF55'%20stroke-linejoin='round'/%3e%3cpath%20d='M9.5%202.5L6.5%202.5M11%202.5L13%202.5C13.2761%202.5%2013.5%202.72386%2013.5%203V5M5%202.5L3%202.5C2.72386%202.5%202.5%202.72386%202.5%203L2.5%205M2.5%209.5L2.5%206.5M2.5%2011L2.5%2013C2.5%2013.2761%202.72386%2013.5%203%2013.5H5M13.5%206.5L13.5%209.5M13.5%2011V13C13.5%2013.2761%2013.2761%2013.5%2013%2013.5H11M9.5%2013.5L6.5%2013.5'%20stroke='%23FBCF55'%20stroke-linejoin='round'/%3e%3c/svg%3e", Ae = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5L6.5%206.5C6.5%205.95%206.95%205.5%207.5%205.5L8.5%205.5C9.05%205.5%209.5%205.95%209.5%206.5V8L6.5%208'%20stroke='%23C97800'%20stroke-linejoin='round'/%3e%3cpath%20d='M9.5%202.5L6.5%202.5M11%202.5L13%202.5C13.2761%202.5%2013.5%202.72386%2013.5%203V5M5%202.5L3%202.5C2.72386%202.5%202.5%202.72386%202.5%203L2.5%205M2.5%209.5L2.5%206.5M2.5%2011L2.5%2013C2.5%2013.2761%202.72386%2013.5%203%2013.5H5M13.5%206.5L13.5%209.5M13.5%2011V13C13.5%2013.2761%2013.2761%2013.5%2013%2013.5H11M9.5%2013.5L6.5%2013.5'%20stroke='%23C97800'%20stroke-linejoin='round'/%3e%3c/svg%3e";
-var ke = Object.defineProperty, Ve = (e, n) => ke(e, "name", { value: n, configurable: !0 });
-const Ee = Ve((e) => t.jsx(z, { light: Ae, dark: je, ...e }), "EntityNonPersistableIcon"), B = (e, n, i, c) => async (a) => {
-  if (n === "userPrompt" || n === "systemPrompt") {
-    const l = { ...i, [n]: a }, f = await oe(e, l), x = { ...l, variables: f };
-    return await L(e, x, c), x;
+import { j as t, p as P, d as L, r as o, D as I, a as A, S as q, T as ae, b as Q, A as re, P as oe, c as le, C as O, F as B } from "./TextInputWithIcon-elAaw22_.js";
+import { T as ce, y as de } from "./TextAreaAutogrow-C3UX_QB_.js";
+import { c as ue } from "./componentLoader-QONLtPwE.js";
+import { c as me, a as he, m as G, g as Z, i as pe, b as ge, d as fe, e as xe, f as ye, h as be, j as we } from "./index-DOwxuSMs.js";
+import { I as U, W as ve } from "./Banner-DNWL7edh.js";
+import { m as Ce } from "./modelUtils-BKeUOTig.js";
+const je = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13%202.5H3C2.72386%202.5%202.5%202.72386%202.5%203V13C2.5%2013.2761%202.72386%2013.5%203%2013.5H13C13.2761%2013.5%2013.5%2013.2761%2013.5%2013V3C13.5%202.72386%2013.2761%202.5%2013%202.5Z'%20stroke='%23579BF9'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5V6.5C6.5%205.95%206.95%205.5%207.5%205.5H8.5C9.05%205.5%209.5%205.95%209.5%206.5V8H6.5'%20stroke='%23579BF9'%20stroke-linejoin='round'/%3e%3c/svg%3e", ke = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13%202.5H3C2.72386%202.5%202.5%202.72386%202.5%203V13C2.5%2013.2761%202.72386%2013.5%203%2013.5H13C13.2761%2013.5%2013.5%2013.2761%2013.5%2013V3C13.5%202.72386%2013.2761%202.5%2013%202.5Z'%20stroke='%23146FF4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5V6.5C6.5%205.95%206.95%205.5%207.5%205.5H8.5C9.05%205.5%209.5%205.95%209.5%206.5V8H6.5'%20stroke='%23146FF4'%20stroke-linejoin='round'/%3e%3c/svg%3e";
+var Ae = Object.defineProperty, Se = (e, i) => Ae(e, "name", { value: i, configurable: !0 });
+const Ee = Se((e) => t.jsx(P, { light: ke, dark: je, ...e }), "EntityIcon"), De = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5L6.5%206.5C6.5%205.95%206.95%205.5%207.5%205.5L8.5%205.5C9.05%205.5%209.5%205.95%209.5%206.5V8L6.5%208'%20stroke='%23FBCF55'%20stroke-linejoin='round'/%3e%3cpath%20d='M9.5%202.5L6.5%202.5M11%202.5L13%202.5C13.2761%202.5%2013.5%202.72386%2013.5%203V5M5%202.5L3%202.5C2.72386%202.5%202.5%202.72386%202.5%203L2.5%205M2.5%209.5L2.5%206.5M2.5%2011L2.5%2013C2.5%2013.2761%202.72386%2013.5%203%2013.5H5M13.5%206.5L13.5%209.5M13.5%2011V13C13.5%2013.2761%2013.2761%2013.5%2013%2013.5H11M9.5%2013.5L6.5%2013.5'%20stroke='%23FBCF55'%20stroke-linejoin='round'/%3e%3c/svg%3e", Le = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5L6.5%206.5C6.5%205.95%206.95%205.5%207.5%205.5L8.5%205.5C9.05%205.5%209.5%205.95%209.5%206.5V8L6.5%208'%20stroke='%23C97800'%20stroke-linejoin='round'/%3e%3cpath%20d='M9.5%202.5L6.5%202.5M11%202.5L13%202.5C13.2761%202.5%2013.5%202.72386%2013.5%203V5M5%202.5L3%202.5C2.72386%202.5%202.5%202.72386%202.5%203L2.5%205M2.5%209.5L2.5%206.5M2.5%2011L2.5%2013C2.5%2013.2761%202.72386%2013.5%203%2013.5H5M13.5%206.5L13.5%209.5M13.5%2011V13C13.5%2013.2761%2013.2761%2013.5%2013%2013.5H11M9.5%2013.5L6.5%2013.5'%20stroke='%23C97800'%20stroke-linejoin='round'/%3e%3c/svg%3e";
+var Me = Object.defineProperty, Te = (e, i) => Me(e, "name", { value: i, configurable: !0 });
+const Ve = Te((e) => t.jsx(P, { light: Le, dark: De, ...e }), "EntityNonPersistableIcon"), H = (e, i, r, l) => async (a) => {
+  if (i === "userPrompt" || i === "systemPrompt") {
+    const c = { ...r, [i]: a }, h = await me(e, c), y = { ...c, variables: h };
+    return await S(e, y, l), y;
   } else {
-    const l = { ...i, [n]: a };
-    return await L(e, l, c), l;
+    const c = { ...r, [i]: a };
+    return await S(e, c, l), c;
   }
-}, Le = async (e, n, i) => {
-  const c = await e.ui.elementSelectors.selectEntity({ allowNone: !0 });
+}, Be = async (e, i, r) => {
+  const l = await e.ui.elementSelectors.selectEntity({ allowNone: !0 });
   let a;
-  if (c.status === "ok" && (a = { ...n, entity: c.selected.module + "." + c.selected.name }), c.status === "none" && (a = { ...n, entity: "" }), a) {
-    const l = await le(e, n.variables, a);
-    a = { ...a, variables: l }, await L(e, a, i);
+  if (l.status === "ok" && (a = { ...i, entity: l.selected.module + "." + l.selected.name }), l.status === "none" && (a = { ...i, entity: "" }), a) {
+    const c = await he(e, i.variables, a);
+    a = { ...a, variables: c }, await S(e, a, r);
   }
   return a;
-}, Te = async (e, n, i, c) => {
+}, He = async (e, i, r, l) => {
   const a = await e.ui.elementSelectors.selectDocument({ allowNone: !0, query: { sdkName: "CustomBlobDocuments$CustomBlobDocument" } });
-  let l;
-  return a.status === "ok" && (l = { ...n, [c]: a.selected.module + "." + a.selected.name }), a.status === "none" && (l = { ...n, [c]: void 0 }), l && await L(e, l, i), l;
-}, I = async (e, n, i) => {
+  let c;
+  return a.status === "ok" && (c = { ...i, [l]: a.selected.module + "." + a.selected.name }), a.status === "none" && (c = { ...i, [l]: void 0 }), c && await S(e, c, r), c;
+}, N = async (e, i, r) => {
   switch (e) {
     case "modelQualifiedName":
-      if (!i.modelQualifiedName)
+      if (!r.modelQualifiedName)
         return "Please select a model.";
-      if (!(await n.app.model.customBlobDocuments.getDocumentsOfType(ue)).find((g) => g.moduleName + "." + g.name === i.modelQualifiedName))
+      if (!(await i.app.model.customBlobDocuments.getDocumentsOfType(G)).find((f) => f.moduleName + "." + f.name === r.modelQualifiedName))
         return "This document is invalid. Make sure to select a document of type Model.";
       break;
     case "entity":
-      if (i.variables.length > 0 && !i.entity)
+      if (r.variables.length > 0 && !r.entity)
         return "Please select an entity.";
-      const [l, f] = i.entity.split(".");
-      if (i.entity && (!l || !f))
+      const [c, h] = r.entity.split(".");
+      if (r.entity && (!c || !h))
         return "The selected entity is not valid.";
-      if (!await ce(n, i))
+      if (!await pe(i, r))
         return "Entity no longer exists.";
       break;
     case "userPrompt":
-      if (!i.userPrompt)
+      if (!r.userPrompt)
         return "Please provide a user prompt.";
       break;
     default:
       return !0;
   }
   return !0;
-}, L = async (e, n, i) => {
+}, Ne = async (e, i) => {
+  if (!i.modelQualifiedName)
+    return;
+  const r = (await e.app.model.customBlobDocuments.getDocumentsOfType(G)).find((l) => l.moduleName + "." + l.name === i.modelQualifiedName);
+  if (!r) {
+    await e.ui.messageBoxes.show(
+      "error",
+      "Could not find model.",
+      "This model might have been deleted or renamed. Please update the model selection."
+    );
+    return;
+  }
+  await e.ui.editors.editDocument(r.id);
+}, Fe = async (e, i) => {
+  var l;
+  if (!i.entity)
+    return;
+  const r = (l = await Z(e, i.entity)) == null ? void 0 : l.getContainer();
+  if (!r) {
+    await e.ui.messageBoxes.show(
+      "error",
+      "Could not find entity.",
+      "This entity might have been deleted or renamed. Please update the context entity selection."
+    );
+    return;
+  }
+  await e.ui.editors.editDocument(r.$ID);
+}, S = async (e, i, r) => {
   try {
-    await e.app.model.customBlobDocuments.updateDocumentContent(i, n);
-  } catch (c) {
+    await e.app.model.customBlobDocuments.updateDocumentContent(r, i);
+  } catch (l) {
     e.ui.notifications.show({
       title: "Failed to save document",
-      message: c.message
+      message: l.message
     });
   }
-}, Se = T(ae).withConfig({
+}, Ie = (e, i, r, l, a) => async () => {
+  const c = await e.ui.dialogs.showModal(
+    {
+      title: "Model settings",
+      contentSize: { height: 385, width: 600 }
+    },
+    {
+      componentName: i,
+      uiEntrypoint: "modelSettingsEdit",
+      queryParams: {
+        agent: encodeURIComponent(JSON.stringify(r))
+      }
+    }
+  );
+  if (c !== null) {
+    const h = c;
+    l(h), await S(e, h, a);
+  }
+}, We = L(ce).withConfig({
   shouldForwardProp: (e) => !["hasHighlighting"].includes(e)
 })`
   width: 100%;
@@ -80,7 +127,7 @@ const Ee = Ve((e) => t.jsx(z, { light: Ae, dark: je, ...e }), "EntityNonPersista
     position: relative;
     z-index: 1;
   }
-`, De = T.div`
+`, $e = L.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -99,11 +146,11 @@ const Ee = Ve((e) => t.jsx(z, { light: Ae, dark: je, ...e }), "EntityNonPersista
   overflow: visible;
   z-index: 0;
   transform: translateY(var(--scroll-offset, 0px));
-`, Me = T.div`
+`, Re = L.div`
   position: relative;
   width: 100%;
   overflow: hidden;
-`, He = T.div`
+`, Qe = L.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -113,280 +160,304 @@ const Ee = Ve((e) => t.jsx(z, { light: Ae, dark: je, ...e }), "EntityNonPersista
   background-color: #fff;
   z-index: -1;
   border: 1px solid transparent;
-`, O = ({
+`, z = ({
   label: e,
-  ariaLabel: n,
-  value: i,
-  onChange: c,
+  ariaLabel: i,
+  value: r,
+  onChange: l,
   readOnly: a = !1,
-  defaultHeightRows: l,
-  highlightRules: f,
-  validate: x
+  defaultHeightRows: c,
+  highlightRules: h,
+  validate: y
 }) => {
-  const g = o.useRef(null), v = o.useRef(null), [r, b] = o.useState(0), S = l || 5, C = f && f.length > 0, D = () => {
+  const f = o.useRef(null), v = o.useRef(null), [s, x] = o.useState(0), M = c || 5, C = h && h.length > 0, T = () => {
     if (!C) return null;
-    const u = [];
-    f.forEach((p, w) => {
-      Array.from(i.matchAll(p.pattern)).forEach((y) => {
-        y.index !== void 0 && u.push({
-          start: y.index,
-          end: y.index + y[0].length,
-          text: y[0],
-          style: p.style,
+    const d = [];
+    h.forEach((g, w) => {
+      Array.from(r.matchAll(g.pattern)).forEach((b) => {
+        b.index !== void 0 && d.push({
+          start: b.index,
+          end: b.index + b[0].length,
+          text: b[0],
+          style: g.style,
           ruleIndex: w
         });
       });
-    }), u.sort((p, w) => p.start - w.start);
-    const h = [];
-    let d = 0;
-    return u.forEach((p, w) => {
-      p.start > d && h.push(
-        /* @__PURE__ */ t.jsx("span", { children: i.slice(d, p.start) }, `text-${d}-${p.start}`)
-      ), p.start >= d && (h.push(
-        /* @__PURE__ */ t.jsx("span", { style: p.style, children: p.text }, `placeholder-${p.ruleIndex}-${w}`)
-      ), d = p.end);
-    }), d < i.length && h.push(
-      /* @__PURE__ */ t.jsx("span", { children: i.slice(d) }, `text-${d}-end`)
-    ), h;
+    }), d.sort((g, w) => g.start - w.start);
+    const p = [];
+    let u = 0;
+    return d.forEach((g, w) => {
+      g.start > u && p.push(
+        /* @__PURE__ */ t.jsx("span", { children: r.slice(u, g.start) }, `text-${u}-${g.start}`)
+      ), g.start >= u && (p.push(
+        /* @__PURE__ */ t.jsx("span", { style: g.style, children: g.text }, `placeholder-${g.ruleIndex}-${w}`)
+      ), u = g.end);
+    }), u < r.length && p.push(
+      /* @__PURE__ */ t.jsx("span", { children: r.slice(u) }, `text-${u}-end`)
+    ), p;
   }, j = o.useCallback(() => {
-    var h;
-    const u = (h = g.current) == null ? void 0 : h.querySelector("textarea");
-    if (u) {
-      const d = u.offsetWidth - u.clientWidth;
-      b(d);
+    var p;
+    const d = (p = f.current) == null ? void 0 : p.querySelector("textarea");
+    if (d) {
+      const u = d.offsetWidth - d.clientWidth;
+      x(u);
     }
-  }, []), A = o.useCallback(() => {
-    var h;
-    const u = (h = g.current) == null ? void 0 : h.querySelector("textarea");
-    if (u && v.current) {
-      const d = u.scrollTop;
-      v.current.style.setProperty("--scroll-offset", `-${d}px`);
+  }, []), k = o.useCallback(() => {
+    var p;
+    const d = (p = f.current) == null ? void 0 : p.querySelector("textarea");
+    if (d && v.current) {
+      const u = d.scrollTop;
+      v.current.style.setProperty("--scroll-offset", `-${u}px`);
     }
   }, []);
   return o.useEffect(() => {
-    var h;
-    const u = (h = g.current) == null ? void 0 : h.querySelector("textarea");
-    if (u) {
+    var p;
+    const d = (p = f.current) == null ? void 0 : p.querySelector("textarea");
+    if (d) {
       j();
-      const d = new ResizeObserver(j);
-      return d.observe(u), u.addEventListener("scroll", A), () => {
-        d.disconnect(), u.removeEventListener("scroll", A);
+      const u = new ResizeObserver(j);
+      return u.observe(d), d.addEventListener("scroll", k), () => {
+        u.disconnect(), d.removeEventListener("scroll", k);
       };
     }
-  }, [A, j]), /* @__PURE__ */ t.jsxs(F, { children: [
-    e && /* @__PURE__ */ t.jsx(k, { children: /* @__PURE__ */ t.jsx(q, { children: e }) }),
-    /* @__PURE__ */ t.jsx(k, { fullWidth: !0, children: /* @__PURE__ */ t.jsxs(Me, { ref: g, children: [
+  }, [k, j]), /* @__PURE__ */ t.jsxs(I, { children: [
+    e && /* @__PURE__ */ t.jsx(A, { children: /* @__PURE__ */ t.jsx(q, { children: e }) }),
+    /* @__PURE__ */ t.jsx(A, { fullWidth: !0, children: /* @__PURE__ */ t.jsxs(Re, { ref: f, children: [
       C && /* @__PURE__ */ t.jsxs(t.Fragment, { children: [
-        /* @__PURE__ */ t.jsx(He, {}),
+        /* @__PURE__ */ t.jsx(Qe, {}),
         /* @__PURE__ */ t.jsx(
-          De,
+          $e,
           {
             ref: v,
-            style: { paddingRight: `${2 + r}px` },
-            children: D()
+            style: { paddingRight: `${2 + s}px` },
+            children: T()
           }
         )
       ] }),
       /* @__PURE__ */ t.jsx(
-        Se,
+        We,
         {
-          ariaLabel: n,
-          value: i,
+          ariaLabel: i,
+          value: r,
           readOnly: a,
-          onChange: c,
-          rows: S,
+          onChange: l,
+          rows: M,
           hasHighlighting: C,
-          validate: x
+          validate: y
         }
       )
     ] }) })
   ] });
-}, Q = ({
+}, F = ({
   label: e,
-  ariaLabel: n,
-  value: i,
-  buttonCaption: c,
+  ariaLabel: i,
+  value: r,
+  buttonCaption: l,
   onClick: a,
-  buttonCaptionSecondary: l,
-  onClickSecondary: f,
-  placeholder: x,
-  hasMarginTop: g = !1,
+  buttonCaptionSecondary: c,
+  onClickSecondary: h,
+  placeholder: y,
+  hasMarginTop: f = !1,
   icon: v,
-  validate: r
+  validate: s
 }) => {
-  const b = g ? 8 : 0;
-  return /* @__PURE__ */ t.jsxs(F, { marginTop: b, children: [
-    e && /* @__PURE__ */ t.jsx(k, { children: /* @__PURE__ */ t.jsx(q, { children: e }) }),
-    /* @__PURE__ */ t.jsx(k, { fullWidth: !0, children: /* @__PURE__ */ t.jsxs(F, { children: [
-      /* @__PURE__ */ t.jsx(k, { fullWidth: !0, children: /* @__PURE__ */ t.jsx(
-        _,
+  const x = f ? 8 : 0;
+  return /* @__PURE__ */ t.jsxs(I, { marginTop: x, children: [
+    e && /* @__PURE__ */ t.jsx(A, { children: /* @__PURE__ */ t.jsx(q, { children: e }) }),
+    /* @__PURE__ */ t.jsx(A, { fullWidth: !0, children: /* @__PURE__ */ t.jsxs(I, { children: [
+      /* @__PURE__ */ t.jsx(A, { fullWidth: !0, children: /* @__PURE__ */ t.jsx(
+        ae,
         {
-          ariaLabel: n,
-          value: i,
-          placeholder: x,
+          ariaLabel: i,
+          value: r,
+          placeholder: y,
           readOnly: !0,
           icon: v,
-          validate: r
+          validate: s
         }
       ) }),
       /* @__PURE__ */ t.jsx(
-        P,
+        Q,
         {
           onPress: a,
-          children: c
+          children: l
         }
       ),
-      l && /* @__PURE__ */ t.jsx(
-        P,
+      c && /* @__PURE__ */ t.jsx(
+        Q,
         {
-          onPress: f,
-          children: l
+          onPress: h,
+          children: c
         }
       )
     ] }) })
   ] });
-}, Be = {
+}, Oe = {
   isValidModel: !0,
   isValidEntity: !0,
   isValidUserPrompt: !0,
   showCreateVariablesInfo: !1,
   missingAttributes: [],
   unusedAttributes: []
-}, Ie = de(), Fe = ({ studioPro: e, documentId: n }) => {
-  const i = e.ui.messageBoxes, c = e.app.model.customBlobDocuments, [a, l] = o.useState(Be), [f, x] = o.useState(!1), [g, v] = o.useState(void 0), [r, b] = o.useState(Ie), [S, C] = o.useState(!1), [D, j] = o.useState(!1), [A, u] = o.useState(r.systemPrompt), [h, d] = o.useState(r.userPrompt ?? ""), [p, w] = o.useState(r.description), V = o.useRef(null), y = o.useRef(null), M = o.useRef(null);
+}, Ue = ge(), ze = ({ studioPro: e, documentId: i }) => {
+  const r = e.ui.messageBoxes, l = e.app.model.customBlobDocuments, [a, c] = o.useState(Oe), [h, y] = o.useState(!1), [f, v] = o.useState(void 0), [s, x] = o.useState(Ue), [M, C] = o.useState(!1), [T, j] = o.useState(!1), [k, d] = o.useState(s.systemPrompt), [p, u] = o.useState(s.userPrompt ?? ""), [g, w] = o.useState(s.description), E = o.useRef(null), b = o.useRef(null), V = o.useRef(null);
   o.useEffect(() => {
-    c.getDocumentById(n).then(async (s) => {
-      if (s && !("error" in s)) {
-        const m = s.document.contents, E = await W(m);
-        b(m), u(m.systemPrompt), d(m.userPrompt ?? ""), w(m.description), l(E), x(!0);
+    l.getDocumentById(i).then(async (n) => {
+      if (n && !("error" in n)) {
+        const m = n.document.contents, D = await $(m);
+        x(m), d(m.systemPrompt), u(m.userPrompt ?? ""), w(m.description), c(D), y(!0);
       } else
-        throw new Error((s == null ? void 0 : s.error) || "Document not found");
-    }).catch((s) => {
-      i.show("error", "Error loading document", "Details: " + (s == null ? void 0 : s.message) || s), x(!0);
+        throw new Error((n == null ? void 0 : n.error) || "Document not found");
+    }).catch((n) => {
+      r.show("error", "Error loading document", "Details: " + (n == null ? void 0 : n.message) || n), y(!0);
     });
   }, []), o.useEffect(() => {
-    f && (async () => {
-      const m = await X(e, r.entity);
+    h && (async () => {
+      const m = await se(e, s.entity);
       v(m);
     })();
-  }, [e, r.entity]), o.useEffect(() => {
-    f && (async () => {
-      const m = await W(r);
-      l(m);
+  }, [e, s.entity]), o.useEffect(() => {
+    h && (async () => {
+      const m = await $(s);
+      c(m);
     })();
-  }, [e, r]);
-  const N = o.useMemo(
-    () => me(r.variables),
-    [r.variables]
-  ), G = o.useCallback((s) => {
-    u(s), V.current && clearTimeout(V.current), V.current = setTimeout(async () => {
-      const m = await B(e, "systemPrompt", r, n)(s);
-      b(m);
+  }, [e, s]);
+  const W = o.useMemo(
+    () => fe(s.variables),
+    [s.variables]
+  ), J = o.useCallback((n) => {
+    d(n), E.current && clearTimeout(E.current), E.current = setTimeout(async () => {
+      const m = await H(e, "systemPrompt", s, i)(n);
+      x(m);
     }, 300);
-  }, [e, r, n]), Z = o.useCallback((s) => {
-    d(s), y.current && clearTimeout(y.current), y.current = setTimeout(async () => {
-      const m = await B(e, "userPrompt", r, n)(s);
-      b(m);
+  }, [e, s, i]), Y = o.useCallback((n) => {
+    u(n), b.current && clearTimeout(b.current), b.current = setTimeout(async () => {
+      const m = await H(e, "userPrompt", s, i)(n);
+      x(m);
     }, 300);
-  }, [e, r, n]), Y = o.useCallback((s) => {
-    w(s), M.current && clearTimeout(M.current), M.current = setTimeout(async () => {
-      const m = await B(e, "description", r, n)(s);
-      b(m);
+  }, [e, s, i]), K = o.useCallback((n) => {
+    w(n), V.current && clearTimeout(V.current), V.current = setTimeout(async () => {
+      const m = await H(e, "description", s, i)(n);
+      x(m);
     }, 300);
-  }, [e, r, n]), J = o.useCallback(async () => {
-    const s = await Le(e, r, n);
-    s && b(s);
-  }, [e, r, n]), K = o.useCallback(async () => {
-    const s = await Te(e, r, n, "modelQualifiedName");
-    s && b(s);
-  }, [e, r, n]), X = async (s, m) => {
+  }, [e, s, i]), X = o.useCallback(async () => {
+    const n = await Be(e, s, i);
+    n && x(n);
+  }, [e, s, i]), _ = o.useCallback(async () => {
+    const n = await He(e, s, i, "modelQualifiedName");
+    n && x(n);
+  }, [e, s, i]), ee = o.useCallback(async () => {
+    await Ne(e, s);
+  }, [e, s]), te = o.useCallback(async () => {
+    await Fe(e, s);
+  }, [e, s]), ne = o.useCallback(async () => {
+    await Ie(e, we, s, x, i)();
+  }, [e, s, i]), se = o.useCallback(async (n, m) => {
     if (!m)
       return;
-    const E = await fe(s, m);
-    if (!E)
+    const D = await Z(n, m);
+    if (!D)
       return;
-    const $ = await ge(E, s);
-    if ($ !== void 0)
-      return $ ? /* @__PURE__ */ t.jsx(Ce, {}) : /* @__PURE__ */ t.jsx(Ee, {});
-  }, W = async (s) => ({
-    isValidModel: await I("modelQualifiedName", e, s),
-    isValidEntity: await I("entity", e, s),
-    isValidUserPrompt: await I("userPrompt", e, s),
-    showCreateVariablesInfo: s.variables.length === 0,
-    missingAttributes: await pe(e, s),
-    unusedAttributes: await he(e, s)
+    const R = await xe(D, n);
+    if (R !== void 0)
+      return R ? /* @__PURE__ */ t.jsx(Ee, {}) : /* @__PURE__ */ t.jsx(Ve, {});
+  }, [e, s.entity]), ie = o.useMemo(() => {
+    let n = "";
+    return s.maxTokens !== void 0 && (n += "Max tokens: " + s.maxTokens.toLocaleString()), s.temperature !== void 0 && (n.length > 0 && (n += ", "), n += "Temperature: " + s.temperature.toLocaleString(void 0, { minimumFractionDigits: 1, maximumFractionDigits: 2 })), s.topP !== void 0 && (n.length > 0 && (n += ", "), n += "Top P: " + s.topP.toLocaleString(void 0, { minimumFractionDigits: 1, maximumFractionDigits: 2 })), n;
+  }, [s.temperature, s.maxTokens, s.topP]), $ = async (n) => ({
+    isValidModel: await N("modelQualifiedName", e, n),
+    isValidEntity: await N("entity", e, n),
+    isValidUserPrompt: await N("userPrompt", e, n),
+    showCreateVariablesInfo: n.variables.length === 0,
+    missingAttributes: await be(e, n),
+    unusedAttributes: await ye(e, n)
   });
-  return /* @__PURE__ */ t.jsx(te, { studioPro: e, children: /* @__PURE__ */ t.jsxs(se, { children: [
-    !f && /* @__PURE__ */ t.jsx("span", { children: "Loading document content..." }),
-    f && /* @__PURE__ */ t.jsxs(ne, { children: [
-      /* @__PURE__ */ t.jsxs(R, { children: [
-        /* @__PURE__ */ t.jsx(H, { label: "System prompt", children: /* @__PURE__ */ t.jsx(
-          O,
+  return /* @__PURE__ */ t.jsx(re, { studioPro: e, children: /* @__PURE__ */ t.jsxs(oe, { children: [
+    !h && /* @__PURE__ */ t.jsx("span", { children: "Loading document content..." }),
+    h && /* @__PURE__ */ t.jsxs(le, { children: [
+      /* @__PURE__ */ t.jsxs(O, { children: [
+        /* @__PURE__ */ t.jsx(B, { label: "System prompt", children: /* @__PURE__ */ t.jsx(
+          z,
           {
             ariaLabel: "System prompt",
-            value: A,
-            onChange: G,
-            highlightRules: N
+            value: k,
+            onChange: J,
+            highlightRules: W
           }
         ) }),
-        /* @__PURE__ */ t.jsx(H, { label: "User prompt", children: /* @__PURE__ */ t.jsx(
-          O,
+        /* @__PURE__ */ t.jsx(B, { label: "User prompt", children: /* @__PURE__ */ t.jsx(
+          z,
           {
             ariaLabel: "User prompt",
-            value: h,
-            onChange: Z,
-            highlightRules: N,
+            value: p,
+            onChange: Y,
+            highlightRules: W,
             validate: () => a.isValidUserPrompt
           }
         ) })
       ] }),
-      /* @__PURE__ */ t.jsx(R, { children: /* @__PURE__ */ t.jsxs(H, { label: "General", children: [
+      /* @__PURE__ */ t.jsx(O, { children: /* @__PURE__ */ t.jsxs(B, { label: "General", children: [
         /* @__PURE__ */ t.jsx(
-          Q,
+          F,
           {
             ariaLabel: "Model",
             label: "Model",
-            value: r.modelQualifiedName ? r.modelQualifiedName : "",
-            icon: r.modelQualifiedName ? xe : void 0,
+            value: s.modelQualifiedName ? s.modelQualifiedName : "",
+            icon: s.modelQualifiedName ? Ce : void 0,
             buttonCaption: "Select...",
-            onClick: K,
-            validate: () => a.isValidModel
+            onClick: _,
+            validate: () => a.isValidModel,
+            buttonCaptionSecondary: s.modelQualifiedName ? "Show" : void 0,
+            onClickSecondary: s.modelQualifiedName ? ee : void 0
           }
         ),
         /* @__PURE__ */ t.jsx(
-          ie,
+          F,
+          {
+            ariaLabel: "Settings",
+            label: "Model settings",
+            value: ie,
+            buttonCaption: "Edit",
+            onClick: ne,
+            validate: void 0
+          }
+        ),
+        /* @__PURE__ */ t.jsx(
+          de,
           {
             label: "Documentation",
             "aria-label": "Documentation",
-            value: p,
-            onChange: Y,
+            value: g,
+            onChange: K,
             rows: 3
           }
         ),
         /* @__PURE__ */ t.jsx(
-          Q,
+          F,
           {
             ariaLabel: "Entity",
             label: "Entity",
-            value: r.entity,
-            icon: g,
-            onClick: J,
+            value: s.entity,
+            icon: f,
+            onClick: X,
             buttonCaption: "Select...",
-            validate: () => a.isValidEntity
+            validate: () => a.isValidEntity,
+            buttonCaptionSecondary: s.entity ? "Show" : void 0,
+            onClickSecondary: s.entity ? te : void 0
           }
         ),
-        a.showCreateVariablesInfo && a.unusedAttributes.length === 0 && !D && /* @__PURE__ */ t.jsx(
+        a.showCreateVariablesInfo && a.unusedAttributes.length === 0 && !T && /* @__PURE__ */ t.jsx(
           U,
           {
             onClose: () => j(!0),
             children: "Create variables: Enclose a word or text in double curly brackets. For example, you can write {{Language}} in the system or user prompt."
           }
         ),
-        a.missingAttributes.length > 0 && /* @__PURE__ */ t.jsxs(re, { children: [
+        a.missingAttributes.length > 0 && /* @__PURE__ */ t.jsxs(ve, { children: [
           /* @__PURE__ */ t.jsx("span", { children: "The following attributes cannot be found on the selected entity:" }),
-          /* @__PURE__ */ t.jsx("ul", { children: a.missingAttributes.map((s) => /* @__PURE__ */ t.jsx("li", { children: s }, s)) })
+          /* @__PURE__ */ t.jsx("ul", { children: a.missingAttributes.map((n) => /* @__PURE__ */ t.jsx("li", { children: n }, n)) })
         ] }),
-        a.unusedAttributes.length > 0 && !S && /* @__PURE__ */ t.jsxs(
+        a.unusedAttributes.length > 0 && !M && /* @__PURE__ */ t.jsxs(
           U,
           {
             onClose: () => C(!0),
@@ -396,15 +467,15 @@ const Ee = Ve((e) => t.jsx(z, { light: Ae, dark: je, ...e }), "EntityNonPersista
                 /* @__PURE__ */ t.jsx("br", {})
               ] }),
               /* @__PURE__ */ t.jsx("span", { children: "The following attributes are found on the selected entity, but are not used in the prompt:" }),
-              /* @__PURE__ */ t.jsx("ul", { children: a.unusedAttributes.map((s) => /* @__PURE__ */ t.jsx("li", { children: s }, s)) })
+              /* @__PURE__ */ t.jsx("ul", { children: a.unusedAttributes.map((n) => /* @__PURE__ */ t.jsx("li", { children: n }, n)) })
             ]
           }
         )
       ] }) })
     ] })
   ] }) });
-}, Re = ee(Fe);
+}, Ke = ue(ze);
 export {
-  Re as component
+  Ke as component
 };
 //# sourceMappingURL=agentEdit.js.map

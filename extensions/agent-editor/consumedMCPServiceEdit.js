@@ -1,5 +1,6 @@
-import { c as h, r as o, j as a, A as v, P as x, e as S, C as f, F as D } from "./TextInputWithIcon-el7gQ0vO.js";
-import { T as j } from "./TextInputLabeled-Ca65-0nc.js";
+import { r as o, j as a, A as h, P as v, c as f, C as x, F as S } from "./TextInputWithIcon-elAaw22_.js";
+import { T as D } from "./TextInputLabeled-BSwHRbEr.js";
+import { c as j } from "./componentLoader-QONLtPwE.js";
 function E(n) {
   return {
     name: ""
@@ -42,10 +43,10 @@ const P = (n, s, c, t, i) => async (m) => {
     }).catch((e) => {
       c.show("error", "Error loading document", "Details: " + (e == null ? void 0 : e.message) || e);
     });
-  }, [i]), /* @__PURE__ */ a.jsx(v, { studioPro: n, children: /* @__PURE__ */ a.jsxs(x, { children: [
+  }, [i]), /* @__PURE__ */ a.jsx(h, { studioPro: n, children: /* @__PURE__ */ a.jsxs(v, { children: [
     !r && /* @__PURE__ */ a.jsx("span", { children: "Loading document content..." }),
-    r && /* @__PURE__ */ a.jsx(S, { children: /* @__PURE__ */ a.jsx(f, { children: /* @__PURE__ */ a.jsx(D, { label: "General", children: /* @__PURE__ */ a.jsx(
-      j,
+    r && /* @__PURE__ */ a.jsx(f, { children: /* @__PURE__ */ a.jsx(x, { children: /* @__PURE__ */ a.jsx(S, { label: "General", children: /* @__PURE__ */ a.jsx(
+      D,
       {
         label: "Name",
         ariaLabel: "Name",
@@ -56,8 +57,8 @@ const P = (n, s, c, t, i) => async (m) => {
       }
     ) }) }) })
   ] }) });
-}, B = h(L);
+}, N = j(L);
 export {
-  B as component
+  N as component
 };
 //# sourceMappingURL=consumedMCPServiceEdit.js.map

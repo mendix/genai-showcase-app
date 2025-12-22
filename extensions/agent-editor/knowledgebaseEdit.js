@@ -1,5 +1,6 @@
-import { c as b, r as o, j as t, A as w, P as x, e as f, C, F as D } from "./TextInputWithIcon-el7gQ0vO.js";
-import { T as j } from "./TextInputLabeled-Ca65-0nc.js";
+import { r as o, j as t, A as b, P as w, c as f, C as x, F as C } from "./TextInputWithIcon-elAaw22_.js";
+import { T as D } from "./TextInputLabeled-BSwHRbEr.js";
+import { c as j } from "./componentLoader-QONLtPwE.js";
 function E(n) {
   return {
     name: ""
@@ -20,13 +21,13 @@ const v = (n, s, c, a, i) => async (l) => {
     });
   }
 }, y = E(), K = ({ studioPro: n, documentId: s }) => {
-  const c = n.ui.messageBoxes, a = n.app.model.customBlobDocuments, [i, l] = o.useState(0), [r, h] = o.useState(!1), [g, d] = o.useState(y);
+  const c = n.ui.messageBoxes, a = n.app.model.customBlobDocuments, [i, l] = o.useState(0), [r, h] = o.useState(!1), [g, m] = o.useState(y);
   return o.useCallback(
-    (e) => v(n, e, g, d, s),
-    [n, g, d, s]
+    (e) => v(n, e, g, m, s),
+    [n, g, m, s]
   ), o.useEffect(() => {
-    const e = (m) => {
-      const { documents: u } = m;
+    const e = (d) => {
+      const { documents: u } = d;
       u.some((p) => p.id === s) && l((p) => p + 1);
     };
     return a.addEventListener("documentsChanged", e), () => {
@@ -35,17 +36,17 @@ const v = (n, s, c, a, i) => async (l) => {
   }, []), o.useEffect(() => {
     a.getDocumentById(s).then(async (e) => {
       if (e && !("error" in e)) {
-        const m = e.document.contents, u = e.document.name;
-        d({ ...m, name: u }), h(!0);
+        const d = e.document.contents, u = e.document.name;
+        m({ ...d, name: u }), h(!0);
       } else
         throw new Error((e == null ? void 0 : e.error) || "Document not found");
     }).catch((e) => {
       c.show("error", "Error loading document", "Details: " + (e == null ? void 0 : e.message) || e);
     });
-  }, [i]), /* @__PURE__ */ t.jsx(w, { studioPro: n, children: /* @__PURE__ */ t.jsxs(x, { children: [
+  }, [i]), /* @__PURE__ */ t.jsx(b, { studioPro: n, children: /* @__PURE__ */ t.jsxs(w, { children: [
     !r && /* @__PURE__ */ t.jsx("span", { children: "Loading document content..." }),
-    r && /* @__PURE__ */ t.jsx(f, { children: /* @__PURE__ */ t.jsx(C, { children: /* @__PURE__ */ t.jsx(D, { label: "General", children: /* @__PURE__ */ t.jsx(
-      j,
+    r && /* @__PURE__ */ t.jsx(f, { children: /* @__PURE__ */ t.jsx(x, { children: /* @__PURE__ */ t.jsx(C, { label: "General", children: /* @__PURE__ */ t.jsx(
+      D,
       {
         label: "Name",
         ariaLabel: "Name",
@@ -56,8 +57,8 @@ const v = (n, s, c, a, i) => async (l) => {
       }
     ) }) }) })
   ] }) });
-}, B = b(K);
+}, N = j(K);
 export {
-  B as component
+  N as component
 };
 //# sourceMappingURL=knowledgebaseEdit.js.map
