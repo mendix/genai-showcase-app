@@ -14,6 +14,8 @@ import software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeAs
 import software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeAsyncClientBuilder;
 import software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeClient;
 import software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeClientBuilder;
+import software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeAsyncClient;
+import software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeAsyncClientBuilder;
 import software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeClient;
 import software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeClientBuilder;
 
@@ -55,6 +57,22 @@ public class AmazonBedrockClient {
 				throw new MendixRuntimeException(e);
 			}
 		}
+	
+	public static BedrockRuntimeAsyncClient getBedrockRuntimeAsyncClient(Credentials credentials, ENUM_Region region, AbstractRequest request) {
+		try {
+			var configurator = new AWSAsyncBuilderConfigurator<BedrockRuntimeAsyncClientBuilder, BedrockRuntimeAsyncClient>(BedrockRuntimeAsyncClient.builder());
+			var clientBuilder = configurator.setAbstractRequest(request)
+					.setCredentials(credentials)
+					.setRegion(region)
+					.setAwsHeaderValue(AWS_HEADER_VALUE)
+					.configure();
+			return clientBuilder.build();
+
+		} catch (Exception e) {
+			LOGGER.error("Exception in Java Code, Failed to Create Bedrock Async Client " + e.getMessage());
+			throw new MendixRuntimeException(e);
+		}
+	}
 		
 		public static BedrockAgentClient getBedrockAgentClient(Credentials credentials, ENUM_Region region, AbstractRequest request) {
 			

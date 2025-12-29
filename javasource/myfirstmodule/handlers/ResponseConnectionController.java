@@ -1,0 +1,47 @@
+package myfirstmodule.handlers;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URLEncoder;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+public class ResponseConnectionController {
+
+    private static ResponseConnectionController instance = new ResponseConnectionController();
+    private static Map<String, StreamingResponseWriter> writers = new ConcurrentHashMap<String, StreamingResponseWriter>();
+
+    public static ResponseConnectionController getInstance() {
+        return instance;
+    }
+
+    public boolean addStreamingResponseWriter(String id, StreamingResponseWriter writer) {
+        return writers.put(id, writer) == null;
+    }
+
+    public boolean removeStreamingResponseWriter(String id) {
+        return writers.remove(id) != null;
+    }
+
+    public StreamingResponseWriter getStreamingResponseWriter(String id) {
+        return writers.get(id);
+    }
+
+    public static class StreamingResponseWriter {
+        private final OutputStream outputStream;
+
+        public StreamingResponseWriter(OutputStream outputStream) {
+            this.outputStream = outputStream;
+        }
+
+        public void write(byte[] data) throws IOException {
+            outputStream.write("data: ".getBytes());
+            outputStream.write(Base64.getEncoder().encode(data));
+            outputStream.write("\n\n".getBytes());
+            outputStream.flush();
+        }
+    }
+
+}
