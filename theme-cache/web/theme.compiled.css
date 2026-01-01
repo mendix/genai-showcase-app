@@ -28228,7 +28228,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .container-disabled {
   height: fit-content;
   border: 1px solid #ced0d3;
-  border-radius: 4px;
+  border-radius: 5px;
   padding: 8px;
   width: auto;
   background-color: #f8f8f8;
@@ -28368,7 +28368,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 /* Custom Borders */
 .divider {
   width: auto;
-  border-bottom: 1px solid #e7e7e9;
+  border-bottom: 1px solid #ced0d3;
   padding: 0;
   margin: 0;
 }
@@ -28404,13 +28404,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 0;
 }
 .accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button.widget-accordion-group-header-button-clickable:hover, .accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button.widget-accordion-group-header-button-clickable:focus, .accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button.widget-accordion-group-header-button-clickable:active {
-  color: #0a1325;
+  color: #6c717e;
   background: transparent;
 }
 .accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button .widget-accordion-group-header-button-icon {
   align-self: left;
   display: inline-flex;
-  fill: #0a1325;
+  fill: #6c717e;
 }
 .accordion-chat-sources .widget-accordion-group .widget-accordion-group-content-wrapper .widget-accordion-group-content {
   padding-left: 0;
@@ -28477,7 +28477,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   align-self: stretch;
   padding: 4px 8px;
   border-radius: 1000px;
-  background: #e7e7e9;
+  background: #ced0d3;
 }
 .filter-tag .filter-item {
   display: flex;
@@ -28518,7 +28518,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   align-items: center;
   justify-content: space-between;
   height: 1.428571429;
-  border-radius: 4px;
+  border-radius: 5px;
   transition: all 0.2s ease-in-out;
 }
 .convui-breadcrumb-active .btn-wrapper {
@@ -28536,7 +28536,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   transition: all 0.2s ease-in-out;
   border: none;
   background-color: transparent;
-  color: #0a1325;
+  color: #6c717e;
   padding: 0;
   height: 12px;
   display: flex;
@@ -28565,7 +28565,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border: 1px solid #264ae5;
 }
 .btn.mx-button.btn-text-default {
-  color: #0a1325;
+  color: #6c717e;
   border: 1px solid transparent;
   background-color: transparent;
 }
@@ -28575,8 +28575,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
   cursor: default;
 }
 .btn.mx-button.btn-text-default:hover, .btn.mx-button.btn-text-default:active, .btn.mx-button.btn-text-default:focus {
-  color: #0a1325;
-  background-color: #e7e7e9;
+  color: #6c717e;
+  background-color: #ced0d3;
   border: 1px solid transparent;
 }
 .btn.mx-button.btn-text-default.btn-small {
@@ -28601,8 +28601,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .btn.mx-button.btn-text-danger:hover, .btn.mx-button.btn-text-danger:active, .btn.mx-button.btn-text-danger:focus {
   color: #e33f4e;
-  background-color: #e7e7e9;
-  border: 1px solid #e7e7e9;
+  background-color: #ced0d3;
+  border: 1px solid #ced0d3;
 }
 .btn.mx-button.btn-icon-only {
   all: unset;
@@ -28626,11 +28626,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .card-border {
-  border: 1px solid color-mix(in srgb, 50% #e7e7e9, #fff);
+  border: 1px solid color-mix(in srgb, 50% #ced0d3, #fff);
 }
 
 .card-border-top {
-  border-top: 1px solid color-mix(in srgb, 50% #e7e7e9, #fff);
+  border-top: 1px solid color-mix(in srgb, 50% #ced0d3, #fff);
 }
 
 .card-statistics {
@@ -28666,7 +28666,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .chat-loading-wrapper .loading-dot {
   border-radius: 100%;
-  background-color: #0a1325;
+  background-color: #6c717e;
   width: 4.6666666667px;
   height: 4.6666666667px;
 }
@@ -28732,9 +28732,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-flow: row !important;
   justify-content: center !important;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-  color: #0a1325;
-  border: 1px solid #e7e7e9;
-  border-radius: 4px;
+  color: #6c717e;
+  border: 1px solid #ced0d3;
+  border-radius: 5px;
   padding: 8px;
 }
 .chat-input-wrapper .form-group {
@@ -29217,7 +29217,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .input-container {
-  border-bottom: 1px solid color-mix(in srgb, 50% #e7e7e9, #fff);
+  border-bottom: 1px solid color-mix(in srgb, 50% #ced0d3, #fff);
   display: flex;
   justify-content: space-between;
   align-items: start;
@@ -30426,7 +30426,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: auto;
   padding-left: 4px;
   padding-right: 4px;
-  border-radius: 4px;
+  border-radius: 5px;
   border: 1px solid #4FD84F;
   background-color: #E1FAE1;
 }
@@ -30461,16 +30461,16 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .agent-badge--default {
   background: #fafafb;
-  border: 1px solid #a2a2a3;
+  border: 1px solid #909294;
 }
 
 .agent-badge--primary {
-  background: #d4dbfa;
+  background: #e9edfc;
   border: 1px solid #1b34a0;
 }
 
 .btn.mx-button.btn-without-border, .btn.mx-button.btn-without-border-red {
-  color: #0a1325;
+  color: #6c717e;
   border: 1px solid transparent;
 }
 .btn.mx-button.btn-without-border.mx-link, .btn.mx-button.mx-link.btn-without-border-red {
@@ -30482,18 +30482,18 @@ input[type=checkbox].three-state-checkbox + .control-label {
   cursor: default;
 }
 .btn.mx-button.btn-without-border:hover, .btn.mx-button.btn-without-border-red:hover {
-  background-color: #e7e7e9;
-  border: 1px solid #e7e7e9;
+  background-color: #ced0d3;
+  border: 1px solid #ced0d3;
 }
 .btn.mx-button.btn-without-border:hover, .btn.mx-button.btn-without-border-red:hover, .btn.mx-button.btn-without-border:active, .btn.mx-button.btn-without-border-red:active, .btn.mx-button.btn-without-border:focus, .btn.mx-button.btn-without-border-red:focus {
-  color: #0a1325;
+  color: #6c717e;
 }
 .btn.mx-button.btn-without-border-red {
   color: #D31E23;
 }
 .btn.mx-button.btn-without-border-red:hover {
-  background-color: #f9d9dc;
-  border: 1px solid #f9d9dc;
+  background-color: #fceced;
+  border: 1px solid #fceced;
 }
 .btn.mx-button.btn-without-border-red:hover, .btn.mx-button.btn-without-border-red:active, .btn.mx-button.btn-without-border-red:focus {
   color: #D31E23;
@@ -30592,7 +30592,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   align-items: center;
   justify-content: space-between;
   height: 1.428571429;
-  border-radius: 4px;
+  border-radius: 5px;
   transition: all 0.2s ease-in-out;
 }
 .link-container .btn-wrapper {
@@ -30610,7 +30610,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   transition: all 0.2s ease-in-out;
   border: none;
   background-color: transparent;
-  color: #0a1325;
+  color: #6c717e;
   padding: 0 0;
   height: 12px;
   display: flex;
@@ -30670,7 +30670,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-bottom: 4px;
   text-align: left;
   text-overflow: ellipsis;
-  color: #0a1325;
+  color: #24276c;
   font-size: 14px;
   font-weight: 600;
 }
@@ -30880,7 +30880,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: 100%;
   margin-bottom: 0;
   border-radius: 16px;
-  border: 1px solid #e7e7e9;
+  border: 1px solid #ced0d3;
   box-sizing: border-box;
   padding: 24px;
 }
@@ -30930,7 +30930,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .agent-page-container .card {
   width: 100%;
   border-radius: 16px;
-  border: 1px solid #e7e7e9;
+  border: 1px solid #ced0d3;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -31107,7 +31107,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-right: 0;
 }
 .agent-page-container .panel-header .icon-area .close-icon {
-  border-left: 2px solid #e7e7e9;
+  border-left: 2px solid #ced0d3;
   padding-left: 8px;
   margin-right: 8px;
   margin-left: 8px;
