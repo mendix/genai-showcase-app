@@ -43,7 +43,7 @@
     }
 
     .filter-text {
-        @extend .text-clamp--1-lines;
+        @extend .text-clamp--1-line;
         font-size: 12px;
     }
 

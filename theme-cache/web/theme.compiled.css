@@ -28180,7 +28180,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   line-clamp: 2;
 }
 
-.text-clamp--1-lines, .filter-tag .filter-text {
+.text-clamp--1-line, .filter-tag .filter-text {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
