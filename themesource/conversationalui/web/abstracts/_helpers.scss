@@ -1,5 +1,4 @@
 @import "../../../datawidgets/web/variables.scss";
-@import "../../../../theme/web/custom-variables.scss";
 @import "../../../atlas_core/web/_variables.scss";
 
 .hover-trigger {
@@ -133,6 +132,10 @@
   float: right;
 }
 
+.align-flex-end {
+  align-items: flex-end !important;
+}
+
 .centered-container {
   justify-content: center ;
 }
@@ -178,6 +181,8 @@
   align-items: center;
   justify-content: center; 
 }
+
+
 
 /* Custom Width */
 .width-full {

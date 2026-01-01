@@ -28257,6 +28257,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   float: right;
 }
 
+.align-flex-end {
+  align-items: flex-end !important;
+}
+
 .centered-container {
   justify-content: center;
 }
@@ -28443,7 +28447,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   font-weight: 600;
 }
 
-.badge, .purple-badge, .blue-badge {
+.convui-badge, .convui-purple-badge, .convui-blue-badge {
   display: inline-block;
   height: 16px;
   padding: 0 4px;
@@ -28456,54 +28460,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
   white-space: nowrap;
 }
 
-.blue-badge {
+.convui-blue-badge {
   border: 1px solid var(--color-light-blue-5, #47A9FF);
   background: var(--color-light-blue-1, #DCEEFE);
 }
 
-.purple-badge {
+.convui-purple-badge {
   border: 1px solid var(--color-light-purple-5, #845EFF);
   background: var(--color-light-purple-1, #E2E0FC);
-}
-
-.circle-badge {
-  display: flex;
-  align-items: center;
-  flex-flow: row;
-  justify-content: flex-start;
-  margin-right: 4px;
-}
-.circle-badge .circle {
-  border-radius: 100%;
-  background-color: #264ae5;
-  width: 8px;
-  height: 8px;
-  margin-right: 4px;
-}
-.circle-badge .badge-text {
-  text-transform: uppercase;
-  font-weight: 600;
-  font-size: 12px;
-}
-.circle-badge.circle-badge--success .circle {
-  background-color: #3cb33d;
-}
-.circle-badge.circle-badge--info .circle {
-  background-color: #264ae5;
-}
-
-.version--in-use {
-  max-width: fit-content;
-  height: auto;
-  padding-right: 4px;
-  border-radius: 4px;
-  border: 1px solid #4FD84F;
-  background-color: #E1FAE1;
-}
-.version--in-use .badge-text {
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
 }
 
 .filter-tag {
@@ -29467,6 +29431,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .layout-slidein + .mx-underlay {
   display: none !important;
+}
+
+.agent-popup-midsize {
+  width: 60vw;
 }
 
 .chat-listview-stylingless.mx-listview ul > li, .chat-listview-stylingless.mx-listview ol > li {
@@ -30774,10 +30742,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 40%;
 }
 
-.align-flex-end {
-  align-items: flex-end !important;
-}
-
 .display--inline {
   display: inline;
 }
@@ -30881,10 +30845,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .testcase-table .delete-icon {
   min-width: 5%;
   color: #e33f4e;
-}
-
-.popup-mid-size {
-  width: 60vw;
 }
 
 .agents-page-content-container {

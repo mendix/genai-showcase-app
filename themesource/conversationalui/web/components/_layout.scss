@@ -1,6 +1,5 @@
 @import "../../../atlas_core/web/_variables.scss";
 @import "../../../datawidgets/web/variables.scss";
-@import "../../../../theme/web/custom-variables";
 
 /* reference for animation */
 @keyframes scale-in-right {
@@ -94,4 +93,8 @@
 
 .layout-slidein + .mx-underlay {
   display: none !important;
+}
+
+.agent-popup-midsize {
+    width: 60vw;
 }

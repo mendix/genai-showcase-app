@@ -1,4 +1,5 @@
-@import "../../../../theme/web/custom-variables.scss";
+@import "../../../atlas_core/web/variables";
+
 .chat-listview-stylingless.mx-listview { //same as listview-stylingless and listview-sm
     ul > li, ol > li {
         cursor: default;
