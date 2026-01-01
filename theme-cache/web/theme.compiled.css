@@ -28228,7 +28228,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .container-disabled {
   height: fit-content;
   border: 1px solid #ced0d3;
-  border-radius: 5px;
+  border-radius: 4px;
   padding: 8px;
   width: auto;
   background-color: #f8f8f8;
@@ -28368,7 +28368,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 /* Custom Borders */
 .divider {
   width: auto;
-  border-bottom: 1px solid #ced0d3;
+  border-bottom: 1px solid #e7e7e9;
   padding: 0;
   margin: 0;
 }
@@ -28404,13 +28404,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 0;
 }
 .accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button.widget-accordion-group-header-button-clickable:hover, .accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button.widget-accordion-group-header-button-clickable:focus, .accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button.widget-accordion-group-header-button-clickable:active {
-  color: #6c717e;
+  color: #0a1325;
   background: transparent;
 }
 .accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button .widget-accordion-group-header-button-icon {
   align-self: left;
   display: inline-flex;
-  fill: #6c717e;
+  fill: #0a1325;
 }
 .accordion-chat-sources .widget-accordion-group .widget-accordion-group-content-wrapper .widget-accordion-group-content {
   padding-left: 0;
@@ -28477,7 +28477,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   align-self: stretch;
   padding: 4px 8px;
   border-radius: 1000px;
-  background: #ced0d3;
+  background: #e7e7e9;
 }
 .filter-tag .filter-item {
   display: flex;
@@ -28518,7 +28518,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   align-items: center;
   justify-content: space-between;
   height: 1.428571429;
-  border-radius: 5px;
+  border-radius: 4px;
   transition: all 0.2s ease-in-out;
 }
 .convui-breadcrumb-active .btn-wrapper {
@@ -28536,7 +28536,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   transition: all 0.2s ease-in-out;
   border: none;
   background-color: transparent;
-  color: #6c717e;
+  color: #0a1325;
   padding: 0;
   height: 12px;
   display: flex;
@@ -28565,7 +28565,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border: 1px solid #264ae5;
 }
 .btn.mx-button.btn-text-default {
-  color: #6c717e;
+  color: #0a1325;
   border: 1px solid transparent;
   background-color: transparent;
 }
@@ -28575,8 +28575,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
   cursor: default;
 }
 .btn.mx-button.btn-text-default:hover, .btn.mx-button.btn-text-default:active, .btn.mx-button.btn-text-default:focus {
-  color: #6c717e;
-  background-color: #ced0d3;
+  color: #0a1325;
+  background-color: #e7e7e9;
   border: 1px solid transparent;
 }
 .btn.mx-button.btn-text-default.btn-small {
@@ -28601,8 +28601,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .btn.mx-button.btn-text-danger:hover, .btn.mx-button.btn-text-danger:active, .btn.mx-button.btn-text-danger:focus {
   color: #e33f4e;
-  background-color: #ced0d3;
-  border: 1px solid #ced0d3;
+  background-color: #e7e7e9;
+  border: 1px solid #e7e7e9;
 }
 .btn.mx-button.btn-icon-only {
   all: unset;
@@ -28626,11 +28626,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .card-border {
-  border: 1px solid color-mix(in srgb, 50% #ced0d3, #fff);
+  border: 1px solid color-mix(in srgb, 50% #e7e7e9, #fff);
 }
 
 .card-border-top {
-  border-top: 1px solid color-mix(in srgb, 50% #ced0d3, #fff);
+  border-top: 1px solid color-mix(in srgb, 50% #e7e7e9, #fff);
 }
 
 .card-statistics {
@@ -28666,7 +28666,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .chat-loading-wrapper .loading-dot {
   border-radius: 100%;
-  background-color: #6c717e;
+  background-color: #0a1325;
   width: 4.6666666667px;
   height: 4.6666666667px;
 }
@@ -28732,9 +28732,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-flow: row !important;
   justify-content: center !important;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-  color: #6c717e;
-  border: 1px solid #ced0d3;
-  border-radius: 5px;
+  color: #0a1325;
+  border: 1px solid #e7e7e9;
+  border-radius: 4px;
   padding: 8px;
 }
 .chat-input-wrapper .form-group {
@@ -29217,7 +29217,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .input-container {
-  border-bottom: 1px solid color-mix(in srgb, 50% #ced0d3, #fff);
+  border-bottom: 1px solid color-mix(in srgb, 50% #e7e7e9, #fff);
   display: flex;
   justify-content: space-between;
   align-items: start;
@@ -29348,7 +29348,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: 100%;
 }
 
-/* reference for animation */
+/* ============================================================
+   Animations
+   ============================================================ */
+/* Reference animation: slide in from right */
 @keyframes scale-in-right {
   0% {
     transform: scaleX(0.5) translateX(100%);
@@ -29359,6 +29362,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
     opacity: 1;
   }
 }
+/* Reference animation: slide out to right */
 @keyframes scale-out-right {
   0% {
     transform: scaleX(1) translateX(0);
@@ -29369,7 +29373,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
     opacity: 0;
   }
 }
-/* Slide-in styling - used in Layout_SlideIn*/
+/* ============================================================
+   Slide-in Layout
+   Used in Layout_SlideIn
+   ============================================================ */
 .layout-slidein {
   position: fixed;
   top: 0 !important;
@@ -29382,29 +29389,30 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: 100vh !important;
   z-index: 999;
   background: #fff;
-  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.1), 0 3px 14px 0 rgba(0, 0, 0, 0.08), 0 5px 5px 0 rgba(0, 0, 0, 0.15);
-  animation: scale-in-right 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  padding: 24px;
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.1), 0 3px 14px 0 rgba(0, 0, 0, 0.08), 0 5px 5px 0 rgba(0, 0, 0, 0.15);
+  animation: scale-in-right 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
 }
 .layout-slidein .mx-window-content {
   max-height: 100vh !important;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
   border: none;
   border-radius: 0;
   background: inherit;
   box-shadow: none;
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
+  /* Hide default Mendix window header */
+  /* Prevent nested dataview scrolling issues */
+  /* Sticky header inside slide-in */
   /* Scrollable content area */
 }
 .layout-slidein .mx-window-content .mx-window-header {
   display: none;
 }
-.layout-slidein .mx-window-content .mx-window-header h4 {
-  display: none;
-}
+.layout-slidein .mx-window-content .mx-window-header h4,
 .layout-slidein .mx-window-content .mx-window-header button.close {
   display: none;
 }
@@ -29418,21 +29426,27 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background: #fff;
 }
 .layout-slidein .mx-window-content .slidein-body {
+  flex: 1 1 auto;
   box-sizing: border-box;
   background: #fff;
-  flex: 1 1 auto;
   overflow-y: auto;
 }
 
-/* define animation of the close button */
+/* ============================================================
+   Close animation
+   ============================================================ */
 .slidein-close {
   animation: scale-out-right 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
 }
 
+/* Hide background underlay when slide-in is active */
 .layout-slidein + .mx-underlay {
   display: none !important;
 }
 
+/* ============================================================
+   Page variants
+   ============================================================ */
 .agent-popup-midsize {
   width: 60vw;
 }
@@ -29517,10 +29531,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-direction: column;
   align-items: flex-start;
   min-height: 100%;
-  min-width: 100%;
   height: -webkit-fill-available;
   width: 95vw;
-  max-width: 1420px;
+  max-width: 1600px;
   margin: 0 auto;
   overflow-y: auto;
   overflow-x: hidden;
@@ -29884,136 +29897,161 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: 100%;
 }
 
-/* Paddings */
-/* Remove paddings */
+/* ==========================================================================
+   CSS SPACING TOKENS (with fallbacks)
+   ========================================================================== */
+:root {
+  --spacing-smallest: 2px;
+  --spacing-smaller: 4px;
+  --spacing-small: 8px;
+  --spacing-medium: 16px;
+  --spacing-large: 24px;
+  --spacing-larger: 32px;
+}
+
+/* ==========================================================================
+   CONFIG
+   ========================================================================== */
+/* Use of !important (kept for compatibility) */
+/* Spacing sizes using CSS vars with fallbacks */
+/* Sides map */
+/* ==========================================================================
+   PADDING UTILITIES
+   ========================================================================== */
+/* Remove all padding */
 .spacing-inner-none {
-  padding: 0 !important;
+  padding: 0;
 }
 
+/* Remove padding per side */
 .spacing-inner-top-none {
-  padding-top: 0 !important;
-}
-
-.spacing-inner-bottom-none {
-  padding-bottom: 0 !important;
-}
-
-.spacing-inner-left-none {
-  padding-left: 0 !important;
+  padding-top: 0;
 }
 
 .spacing-inner-right-none {
-  padding-right: 0 !important;
+  padding-right: 0;
 }
 
-/* Top */
+.spacing-inner-bottom-none {
+  padding-bottom: 0;
+}
+
+.spacing-inner-left-none {
+  padding-left: 0;
+}
+
+/* Generate padding classes */
 .spacing-inner-top-smallest {
-  padding-top: 2px;
+  padding-top: var(--spacing-smallest, 2px);
+}
+
+.spacing-inner-right-smallest {
+  padding-right: var(--spacing-smallest, 2px);
+}
+
+.spacing-inner-bottom-smallest {
+  padding-bottom: var(--spacing-smallest, 2px);
+}
+
+.spacing-inner-left-smallest {
+  padding-left: var(--spacing-smallest, 2px);
 }
 
 .spacing-inner-top-smaller {
-  padding-top: 4px;
-}
-
-.spacing-inner-top-small {
-  padding-top: 8px !important;
-}
-
-.spacing-inner-top-medium {
-  padding-top: 16px;
-}
-
-.spacing-inner-top-large {
-  padding-top: 24px;
-}
-
-.spacing-inner-top-larger {
-  padding-top: 32px;
-}
-
-/* Right */
-.spacing-inner-right-smallest {
-  padding-right: 2px;
+  padding-top: var(--spacing-smaller, 4px);
 }
 
 .spacing-inner-right-smaller {
-  padding-right: 4px;
-}
-
-.spacing-inner-right-small {
-  padding-right: 8px;
-}
-
-.spacing-inner-right-medium {
-  padding-right: 16px;
-}
-
-.spacing-inner-right-large {
-  padding-right: 24px;
-}
-
-.spacing-inner-right-larger {
-  padding-right: 32px;
-}
-
-/* Bottom */
-.spacing-inner-bottom-smallest {
-  padding-bottom: 2px;
+  padding-right: var(--spacing-smaller, 4px);
 }
 
 .spacing-inner-bottom-smaller {
-  padding-bottom: 4px;
-}
-
-.spacing-inner-bottom-small {
-  padding-bottom: 8px;
-}
-
-.spacing-inner-bottom-medium {
-  padding-bottom: 16px;
-}
-
-.spacing-inner-bottom-large {
-  padding-bottom: 24px;
-}
-
-.spacing-inner-bottom-larger {
-  padding-bottom: 32px;
-}
-
-/* Left */
-.spacing-inner-left-smallest {
-  padding-left: 2px;
+  padding-bottom: var(--spacing-smaller, 4px);
 }
 
 .spacing-inner-left-smaller {
-  padding-left: 4px;
+  padding-left: var(--spacing-smaller, 4px);
+}
+
+.spacing-inner-top-small {
+  padding-top: var(--spacing-small, 8px);
+}
+
+.spacing-inner-right-small {
+  padding-right: var(--spacing-small, 8px);
+}
+
+.spacing-inner-bottom-small {
+  padding-bottom: var(--spacing-small, 8px);
 }
 
 .spacing-inner-left-small {
-  padding-left: 8px;
+  padding-left: var(--spacing-small, 8px);
+}
+
+.spacing-inner-top-medium {
+  padding-top: var(--spacing-medium, 16px);
+}
+
+.spacing-inner-right-medium {
+  padding-right: var(--spacing-medium, 16px);
+}
+
+.spacing-inner-bottom-medium {
+  padding-bottom: var(--spacing-medium, 16px);
 }
 
 .spacing-inner-left-medium {
-  padding-left: 16px;
+  padding-left: var(--spacing-medium, 16px);
+}
+
+.spacing-inner-top-large {
+  padding-top: var(--spacing-large, 24px);
+}
+
+.spacing-inner-right-large {
+  padding-right: var(--spacing-large, 24px);
+}
+
+.spacing-inner-bottom-large {
+  padding-bottom: var(--spacing-large, 24px);
 }
 
 .spacing-inner-left-large {
-  padding-left: 24px;
+  padding-left: var(--spacing-large, 24px);
+}
+
+.spacing-inner-top-larger {
+  padding-top: var(--spacing-larger, 32px);
+}
+
+.spacing-inner-right-larger {
+  padding-right: var(--spacing-larger, 32px);
+}
+
+.spacing-inner-bottom-larger {
+  padding-bottom: var(--spacing-larger, 32px);
 }
 
 .spacing-inner-left-larger {
-  padding-left: 32px;
+  padding-left: var(--spacing-larger, 32px);
 }
 
-/* Margin */
-/* Remove margins */
+/* ==========================================================================
+   MARGIN UTILITIES
+   ========================================================================== */
+/* Remove all margins */
 .spacing-outer-none {
-  margin: 0 !important;
+  margin: 0;
 }
 
+/* Remove margin per side */
 .spacing-outer-top-none {
   margin-top: 0;
+}
+
+.spacing-outer-right-none {
+  margin-right: 0;
 }
 
 .spacing-outer-bottom-none {
@@ -30024,133 +30062,127 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-left: 0;
 }
 
-.spacing-outer-right-none {
-  margin-right: 0;
+/* Generate margin classes */
+.spacing-outer-top-smallest {
+  margin-top: var(--spacing-smallest, 2px);
 }
 
-/* Top */
-.spacing-outer-top-smallest {
-  margin-top: 2px;
+.spacing-outer-right-smallest {
+  margin-right: var(--spacing-smallest, 2px);
+}
+
+.spacing-outer-bottom-smallest {
+  margin-bottom: var(--spacing-smallest, 2px);
+}
+
+.spacing-outer-left-smallest {
+  margin-left: var(--spacing-smallest, 2px);
 }
 
 .spacing-outer-top-smaller {
-  margin-top: 4px;
-}
-
-.spacing-outer-top-small {
-  margin-top: 8px;
-}
-
-.spacing-outer-top-medium {
-  margin-top: 16px;
-}
-
-.spacing-outer-top-large {
-  margin-top: 24px;
-}
-
-.spacing-outer-top-larger {
-  margin-top: 32px;
-}
-
-/* Right */
-.spacing-outer-right-smallest {
-  margin-right: 2px;
+  margin-top: var(--spacing-smaller, 4px);
 }
 
 .spacing-outer-right-smaller {
-  margin-right: 4px;
-}
-
-.spacing-outer-right-small {
-  margin-right: 8px;
-}
-
-.spacing-outer-right-medium {
-  margin-right: 16px;
-}
-
-.spacing-outer-right-large {
-  margin-right: 24px;
-}
-
-.spacing-outer-right-larger {
-  margin-right: 32px;
-}
-
-/* Bottom */
-.spacing-outer-bottom-smallest {
-  margin-bottom: 2px;
+  margin-right: var(--spacing-smaller, 4px);
 }
 
 .spacing-outer-bottom-smaller {
-  margin-bottom: 4px;
-}
-
-.spacing-outer-bottom-small {
-  margin-bottom: 8px;
-}
-
-.spacing-outer-bottom-medium {
-  margin-bottom: 16px;
-}
-
-.spacing-outer-bottom-large {
-  margin-bottom: 24px;
-}
-
-.spacing-outer-bottom-larger {
-  margin-bottom: 32px;
-}
-
-/* Left */
-.spacing-outer-left-smallest {
-  margin-left: 2px;
+  margin-bottom: var(--spacing-smaller, 4px);
 }
 
 .spacing-outer-left-smaller {
-  margin-left: 4px;
+  margin-left: var(--spacing-smaller, 4px);
+}
+
+.spacing-outer-top-small {
+  margin-top: var(--spacing-small, 8px);
+}
+
+.spacing-outer-right-small {
+  margin-right: var(--spacing-small, 8px);
+}
+
+.spacing-outer-bottom-small {
+  margin-bottom: var(--spacing-small, 8px);
 }
 
 .spacing-outer-left-small {
-  margin-left: 8px;
+  margin-left: var(--spacing-small, 8px);
+}
+
+.spacing-outer-top-medium {
+  margin-top: var(--spacing-medium, 16px);
+}
+
+.spacing-outer-right-medium {
+  margin-right: var(--spacing-medium, 16px);
+}
+
+.spacing-outer-bottom-medium {
+  margin-bottom: var(--spacing-medium, 16px);
 }
 
 .spacing-outer-left-medium {
-  margin-left: 16px;
+  margin-left: var(--spacing-medium, 16px);
+}
+
+.spacing-outer-top-large {
+  margin-top: var(--spacing-large, 24px);
+}
+
+.spacing-outer-right-large {
+  margin-right: var(--spacing-large, 24px);
+}
+
+.spacing-outer-bottom-large {
+  margin-bottom: var(--spacing-large, 24px);
 }
 
 .spacing-outer-left-large {
-  margin-left: 24px;
+  margin-left: var(--spacing-large, 24px);
+}
+
+.spacing-outer-top-larger {
+  margin-top: var(--spacing-larger, 32px);
+}
+
+.spacing-outer-right-larger {
+  margin-right: var(--spacing-larger, 32px);
+}
+
+.spacing-outer-bottom-larger {
+  margin-bottom: var(--spacing-larger, 32px);
 }
 
 .spacing-outer-left-larger {
-  margin-left: 32px;
+  margin-left: var(--spacing-larger, 32px);
 }
 
-/* Custom */
+/* ==========================================================================
+   CUSTOM SPACING UTILITIES
+   ========================================================================== */
 .spacing-inner-left-20 {
   padding-left: 20px;
 }
 
-.spacing-outer-bottom-18 {
-  margin-bottom: 20px;
-}
-
 .spacing-inner-left-48 {
-  padding-left: 48px;
+  padding-left: var(--spacing-large, 24px);
 }
 
 .spacing-outer-bottom-6 {
   margin-bottom: 6px;
 }
 
-.spacing-outer-bottom-none {
-  margin-bottom: 0;
+.spacing-outer-bottom-18 {
+  margin-bottom: var(--spacing-medium, 16px);
 }
 
+/* ==========================================================================
+   COMPONENT-SPECIFIC SPACING
+   ========================================================================== */
 .spacing-inner-dataview {
-  padding: 24px;
+  padding: var(--spacing-large, 24px);
   padding-top: 0;
 }
 
