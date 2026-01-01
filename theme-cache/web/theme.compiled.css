@@ -30789,7 +30789,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   content: "No tools found for this MCP server configuration.";
 }
 
-.table-header {
+.agent-table-header {
   margin-top: 16px;
   width: 100%;
   border-bottom: 1px solid #E7E7E9;
