@@ -24,7 +24,6 @@ import amazonbedrockconnector.proxies.InvokeModelResponse;
 import com.mendix.thirdparty.org.json.JSONObject;
 import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeAsyncClient;
-import software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeClient;
 import software.amazon.awssdk.http.SdkHttpResponse;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import software.amazon.awssdk.services.bedrockruntime.model.InvokeModelWithResponseStreamRequest;

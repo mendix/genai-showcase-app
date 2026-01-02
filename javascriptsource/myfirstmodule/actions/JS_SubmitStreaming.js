@@ -18,7 +18,7 @@ import { Big } from "big.js";
  */
 export async function JS_SubmitStreaming(prompt, responseCollector) {
 	// BEGIN USER CODE
-	const response = await fetch("http://localhost:8080/llm-streaming", {
+	const response = await fetch("http://localhost:8080/llm-streaming-converse", {
 		method: "POST",
 		headers: {
 			"Content-Type": "text/plain",
