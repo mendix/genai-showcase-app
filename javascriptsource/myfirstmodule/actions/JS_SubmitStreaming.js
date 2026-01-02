@@ -12,19 +12,23 @@ import { Big } from "big.js";
 // END EXTRA CODE
 
 /**
- * @param {string} prompt
+ * @param {string} requestJSON
+ * @param {string} deployedModelID
  * @param {MxObject} responseCollector
  * @returns {Promise.<void>}
  */
-export async function JS_SubmitStreaming(prompt, responseCollector) {
+export async function JS_SubmitStreaming(requestJSON, deployedModelID, responseCollector) {
 	// BEGIN USER CODE
 	const response = await fetch("http://localhost:8080/llm-streaming", {
 		method: "POST",
-		headers: {
-			"Content-Type": "text/plain",
+		headers: {			
+			"Content-Type": "application/json",
 			"Accept": "text/event-stream"
 		},
-		body: prompt
+		body: JSON.stringify({
+			request: requestJSON,
+			deployedModelID: deployedModelID
+		})
 	})
 
 	const reader = response.body.getReader();
