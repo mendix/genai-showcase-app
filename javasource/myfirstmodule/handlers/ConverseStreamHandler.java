@@ -14,6 +14,7 @@ import com.mendix.externalinterface.connector.RequestHandler;
 import com.mendix.m2ee.api.IMxRuntimeRequest;
 import com.mendix.m2ee.api.IMxRuntimeResponse;
 import com.mendix.systemwideinterfaces.core.IContext;
+import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 import amazonbedrockconnector.impl.MxLogger;
 
@@ -25,6 +26,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class ConverseStreamHandler extends RequestHandler  {
 
 
@@ -32,34 +36,27 @@ public class ConverseStreamHandler extends RequestHandler  {
     @Override
     protected void processRequest(IMxRuntimeRequest req, IMxRuntimeResponse resp, String s) throws Exception {
     	
-    	final amazonbedrockconnector.impl.MxLogger LOGGER = new MxLogger(ConverseStreamHandler.class);
+    	//final amazonbedrockconnector.impl.MxLogger LOGGER = new MxLogger(ConverseStreamHandler.class);
     	
-        String userInput = new String(req.getInputStream().readAllBytes());
+    	 // Parse JSON request body
+        String jsonInput = new String(req.getInputStream().readAllBytes());
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonRequest = objectMapper.readTree(jsonInput);
+        
+        // Extract user message from JSON
+        String jsonRequestBody = jsonRequest.get("request").asText();
+        String deployedModelID = jsonRequest.get("deployedModelID").asText();
 
         IContext ctx = Core.createSystemContext();
         Credentials creds = awsauthentication.proxies.microflows.Microflows.getCredentials(ctx, true, ENUM_Region.eu_central_1);
-        LOGGER.info("StreamHandler 1");
+
+        List<IMendixObject> results = Core.createXPathQuery("//AmazonBedrockConnector.BedrockDeployedModel[Model=$value]")
+                .setVariable("value", deployedModelID)
+                .execute(ctx);
         
-        genaicommons.proxies.Request mxRequest = new genaicommons.proxies.Request(ctx);
-        amazonbedrockconnector.proxies.ChatCompletionsRequest_Extension mxChatCompletionsRequest_Extension =new amazonbedrockconnector.proxies.ChatCompletionsRequest_Extension(ctx);
-        mxChatCompletionsRequest_Extension.setChatCompletionsRequest_Extension_Request(mxRequest);
-        genaicommons.proxies.Message mxMessage = new genaicommons.proxies.Message(ctx);
-        mxMessage.setContent(userInput);
-        mxMessage.setRole(ENUM_MessageRole.user);
-        mxMessage.setMessageType(ENUM_MessageType.Text);
-        List<genaicommons.proxies.Message> mxMessageList = new ArrayList<genaicommons.proxies.Message>();
-        mxMessageList.add(mxMessage);
-        mxRequest.setRequest_Message(mxMessageList);
-        amazonbedrockconnector.proxies.BedrockDeployedModel mxDeployedModel = new amazonbedrockconnector.proxies.BedrockDeployedModel(ctx);
-        mxDeployedModel.setModel("eu.anthropic.claude-sonnet-4-20250514-v1:0");
+        amazonbedrockconnector.proxies.BedrockDeployedModel mxDeployedModel = amazonbedrockconnector.proxies.BedrockDeployedModel.initialize(ctx, results.get(0));
         
-        LOGGER.info("Content " + mxMessage.getContent());
-        LOGGER.info("Role " + mxMessage.getRole().name());
-        
-        for (genaicommons.proxies.Message msg : mxRequest.getRequest_Message()) {
-        	LOGGER.info("Content " + msg.getContent());
-            LOGGER.info("Role " + msg.getRole().name());
-        }
+        genaicommons.proxies.Request mxRequest = myfirstmodule.proxies.microflows.Microflows.request_GetFromJson(ctx, jsonRequestBody);
         
         AsyncContext asyncCtx = req.getHttpServletRequest().startAsync();
         asyncCtx.setTimeout(15 * 60 * 1000);
@@ -78,10 +75,6 @@ public class ConverseStreamHandler extends RequestHandler  {
         params.put("BedrockDeployedModel", mxDeployedModel);
         params.put("RequestID", requestId);
         Core.executeAsync(ctx, "MyFirstModule.ConverseStream", true, params);
-//      Core.executeAsync(Core.createSystemContext(), "MyFirstModule.ConverseStream", true, params);
-//        amazonbedrockconnector.proxies.microflows.Microflows.invokeModelWithResponseStream(ctx, awsRequest, creds, ENUM_Region.eu_central_1,
-//            "MyFirstModule.StreamCallback", requestId);
-
 
         Thread.sleep(15 * 60 * 1000);
 
