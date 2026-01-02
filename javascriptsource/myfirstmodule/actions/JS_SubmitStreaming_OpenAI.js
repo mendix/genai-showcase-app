@@ -16,9 +16,9 @@ import { Big } from "big.js";
  * @param {MxObject} responseCollector
  * @returns {Promise.<void>}
  */
-export async function JS_SubmitStreaming(prompt, responseCollector) {
+export async function JS_SubmitStreaming_OpenAI(prompt, responseCollector) {
 	// BEGIN USER CODE
-	const response = await fetch("http://localhost:8080/llm-streaming", {
+	const response = await fetch("http://localhost:8080/llm-streaming-openai", {
 		method: "POST",
 		headers: {
 			"Content-Type": "text/plain",
