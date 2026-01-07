@@ -266,11 +266,10 @@ $label-color-all: #00635A;
 /* --------------------------------------- Tutorial -----------------------------------*/
 
 .tutorial-page {
-  min-height: 460px;
+  //min-height: 480px;
 }
 
 .tutorial-text {
-  height: 72px;
   margin-bottom: $spacing-medium;
 }
 
@@ -285,13 +284,11 @@ $label-color-all: #00635A;
 
 .tutorial-title {
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .tutorial-slideshow {
-  position: relative;
   width: 660px;
-  height: 460px;
   overflow: hidden;
   justify-content: center;
 
@@ -304,7 +301,7 @@ $label-color-all: #00635A;
 
 .dots {
   position: absolute;
-  bottom: 0;
+  bottom: -20px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;

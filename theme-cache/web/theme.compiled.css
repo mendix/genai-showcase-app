@@ -31475,12 +31475,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 /* --------------------------------------- Tutorial -----------------------------------*/
-.tutorial-page {
-  min-height: 460px;
-}
-
 .tutorial-text {
-  height: 72px;
   margin-bottom: 16px;
 }
 
@@ -31495,13 +31490,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .tutorial-title {
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .tutorial-slideshow {
-  position: relative;
   width: 660px;
-  height: 460px;
   overflow: hidden;
   justify-content: center;
 }
@@ -31513,7 +31506,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .dots {
   position: absolute;
-  bottom: 0;
+  bottom: -20px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
