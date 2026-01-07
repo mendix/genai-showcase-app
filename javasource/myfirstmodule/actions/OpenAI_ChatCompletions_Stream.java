@@ -10,51 +10,26 @@
 package myfirstmodule.actions;
 
 import static java.util.Objects.requireNonNull;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Base64;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
-import java.util.concurrent.Future;
-import java.util.stream.Collectors;
-import org.apache.commons.io.IOUtils;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.JsonNode;
+import java.util.Optional;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.mendix.core.Core;
-import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import genaicommons.impl.FunctionImpl;
-import genaicommons.impl.FunctionMappingImpl;
-import genaicommons.proxies.ENUM_FileType;
-import genaicommons.proxies.ENUM_MessageRole;
-import genaicommons.proxies.ENUM_ToolChoice;
-import genaicommons.proxies.EnumValue;
-import genaicommons.proxies.Argument;
-import genaicommons.proxies.ArgumentInput;
-import genaicommons.proxies.FileCollection;
-import genaicommons.proxies.FileContent;
+import com.openai.client.OpenAIClient;
+import com.openai.client.okhttp.OpenAIOkHttpClient;
+import com.openai.models.chat.completions.ChatCompletionMessageParam;
+import com.openai.models.chat.completions.ChatCompletionUserMessageParam;
+import com.openai.models.chat.completions.ChatCompletionSystemMessageParam;
+import com.openai.models.chat.completions.ChatCompletionAssistantMessageParam;
+import com.openai.models.chat.completions.ChatCompletionCreateParams;
+import com.openai.models.chat.completions.ChatCompletionChunk;
+import genaicommons.impl.MxLogger;
 import genaicommons.proxies.Request;
-import genaicommons.proxies.Response;
-import genaicommons.proxies.StopSequence;
-import genaicommons.proxies.Tool;
-import genaicommons.proxies.ToolCall;
-import genaicommons.proxies.ToolCollection;
-import genaicommons.proxies.DeployedModel;
-import myfirstmodule.handlers.OpenAIStreamResponseHandler;
-import openaiconnector.proxies.OpenAIRequest_Extension;
 import openaiconnector.proxies.OpenAIDeployedModel;
+import openaiconnector.proxies.Configuration;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
 public class OpenAI_ChatCompletions_Stream extends UserAction<java.lang.Void>
@@ -99,22 +74,14 @@ public class OpenAI_ChatCompletions_Stream extends UserAction<java.lang.Void>
 			
 			LOGGER.info("Starting OpenAI streaming request with ID: " + RequestID);
 			
-			// Build the OpenAI request by calling the microflow
-			IMendixObject requestResult = Core.microflowCall("Request_CallAPI")
-				.withParam("Request", OpenAIRequest.getMendixObject())
-				.withParam("DeployedModel", OpenAIDeployedModel.getMendixObject())
-				.execute(getContext());
+			// Create OpenAI client with API key from deployed model
+			OpenAIClient client = createOpenAIClient();
 			
-			if (requestResult == null) {
-				LOGGER.error("Request_CallAPI returned null");
-				return null;
-			}
+			// Build the chat completion request with streaming enabled
+			ChatCompletionCreateParams requestParams = buildChatCompletionRequest();
 			
-			// Build the response stream handler
-			OpenAIStreamResponseHandler responseHandler = buildResponseHandler();
-			
-			// Execute the async streaming request
-			executeStreamingRequest(responseHandler);
+			// Execute the streaming request
+			executeStreamingRequest(client, requestParams);
 			
 			LOGGER.info("OpenAI streaming request initiated successfully");
 			return null;
@@ -139,39 +106,263 @@ public class OpenAI_ChatCompletions_Stream extends UserAction<java.lang.Void>
 	}
 
 	// BEGIN EXTRA CODE
-	private static final genaicommons.impl.MxLogger LOGGER = new genaicommons.impl.MxLogger(OpenAI_ChatCompletions_Stream.class);
+	private static final MxLogger LOGGER = new MxLogger(OpenAI_ChatCompletions_Stream.class);
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 	
 	/**
-	 * Builds the response stream handler that processes incoming chunks
+	 * Creates an OpenAI client using the API key from the deployed model's configuration
 	 */
-	private OpenAIStreamResponseHandler buildResponseHandler() {
-		return new OpenAIStreamResponseHandler(
-			getContext(),
-			RequestID,
-			CallbackMicroflow,
-			LOGGER
-		);
+	private OpenAIClient createOpenAIClient() throws Exception {
+		// Initialize the DeployedModel proxy
+		OpenAIDeployedModel deployedModel = OpenAIDeployedModel.initialize(getContext(), this.OpenAIDeployedModel.getMendixObject());
+		
+		// Get the Configuration object via the many-to-one relationship
+		Configuration configuration = deployedModel.getOpenAIDeployedModel_Configuration();
+		requireNonNull(configuration, "Configuration is required to retrieve API Key");
+		
+		// Get the encrypted API key from Configuration
+		String encryptedApiKey = configuration.getApiKey();
+		requireNonNull(encryptedApiKey, "API Key is required in Configuration");
+		
+		// Decrypt the API key using Encryption module microflow
+		String apiKey = encryption.proxies.microflows.Microflows.decrypt(getContext(), encryptedApiKey);
+		requireNonNull(apiKey, "Failed to decrypt API Key");
+		
+		LOGGER.debug("OpenAI client created successfully");
+		
+		return OpenAIOkHttpClient.builder()
+			.apiKey(apiKey)
+			.build();
 	}
 	
 	/**
-	 * Executes the async streaming request
-	 * This method handles the actual HTTP streaming communication with OpenAI
+	 * Builds the ChatCompletionCreateParams request from the GenAICommons.Request
+	 * Converts Mendix request object to OpenAI SDK format
 	 */
-	private void executeStreamingRequest(OpenAIStreamResponseHandler responseHandler) {
+	private ChatCompletionCreateParams buildChatCompletionRequest() throws Exception {
+		// Initialize the DeployedModel proxy to get the model name
+		OpenAIDeployedModel deployedModel = OpenAIDeployedModel.initialize(getContext(), this.OpenAIDeployedModel.getMendixObject());
+		String model = deployedModel.getModel();
+		requireNonNull(model, "Model name is required in DeployedModel");
+		
+		// Get the associated GenAICommons.Request via the association
+		Request request = this.OpenAIRequest.getOpenAIRequest_Extension_Request();
+		requireNonNull(request, "GenAICommons.Request is required via association");
+		
+		// Build messages list from request
+		List<ChatCompletionMessageParam> messages = buildMessagesList(request);
+		requireNonNull(messages, "Messages list cannot be null");
+		
+		if (messages.isEmpty()) {
+			LOGGER.warn("Request contains no messages");
+		}
+		
+		// Build the request parameters with streaming enabled
+		ChatCompletionCreateParams.Builder builder = ChatCompletionCreateParams.builder()
+			.model(model)
+			.messages(messages);
+		
+		// Add optional parameters if they exist
+		BigDecimal temperature = request.getTemperature();
+		if (temperature != null) {
+			// Convert BigDecimal to double
+			builder.temperature(temperature.doubleValue());
+		}
+		
+		Integer maxTokens = request.getMaxTokens();
+		if (maxTokens != null && maxTokens > 0) {
+			builder.maxTokens(maxTokens.longValue());
+		}
+		
+		BigDecimal topP = request.getTopP();
+		if (topP != null && topP.signum() > 0) {
+			builder.topP(topP.doubleValue());
+		}
+		
+		LOGGER.debug("Chat completion request built successfully with model: " + model);
+		
+		return builder.build();
+	}
+	
+	/**
+	 * Converts GenAICommons.Request messages to OpenAI SDK ChatCompletionMessage format
+	 * Accesses messages via the many-to-many relationship from Request
+	 */
+	private List<ChatCompletionMessageParam> buildMessagesList(Request request) throws Exception {
+		List<ChatCompletionMessageParam> messages = new ArrayList<>();
+		
 		try {
-			// TODO: Implement actual OpenAI API streaming call
-			// The implementation should:
-			// 1. Make HTTP request to OpenAI API with streaming enabled
-			// 2. Process each chunk as it arrives by calling responseHandler.onContentChunk(chunk)
-			// 3. Call responseHandler.onStreamComplete() when done
-			// 4. Call responseHandler.onStreamError(error) if an error occurs
+			// Retrieve messages via the association using the proxy's getter method
+			List<genaicommons.proxies.Message> messageList = request.getRequest_Message();
 			
-			LOGGER.warn("Streaming request execution not yet implemented");
-			responseHandler.onStreamError(new UnsupportedOperationException("Streaming not yet implemented"));
+			if (messageList == null || messageList.isEmpty()) {
+				LOGGER.warn("No messages found in Request object");
+				return messages;
+			}
+			
+			// Convert proxy objects to IMendixObjects for processing
+			List<IMendixObject> messageObjects = messageList.stream()
+				.map(msg -> msg.getMendixObject())
+				.toList();
+			
+			LOGGER.debug("Found " + messageObjects.size() + " messages in Request");
+			
+			// Convert each message object to ChatCompletionMessageParam
+			for (IMendixObject msgObj : messageObjects) {
+				try {
+					String role = (String) msgObj.getValue(getContext(), "Role");
+					String content = (String) msgObj.getValue(getContext(), "Content");
+					
+					if (content == null || content.trim().isEmpty()) {
+						LOGGER.warn("Skipping message with empty content");
+						continue;
+					}
+					
+					ChatCompletionMessageParam message = convertRoleToMessageParam(role, content);
+					
+					messages.add(message);
+					LOGGER.debug("Added message with role: " + role);
+					
+				} catch (Exception e) {
+					LOGGER.error("Error processing individual message: " + e.getMessage(), e);
+					// Continue processing remaining messages
+				}
+			}
+			
+		} catch (Exception e) {
+			LOGGER.error("Error building messages list: " + e.getMessage(), e);
+			throw new Exception("Failed to build messages list from Request", e);
+		}
+		
+		return messages;
+	}
+	
+	/**
+	 * Converts Mendix Message.Role to OpenAI SDK ChatCompletionMessageParam
+	 */
+	private ChatCompletionMessageParam convertRoleToMessageParam(String role, String content) {
+		String normalizedRole = normalizeRole(role);
+		
+		return switch (normalizedRole) {
+			case "system" -> ChatCompletionMessageParam.ofSystem(
+				ChatCompletionSystemMessageParam.builder()
+					.content(content)
+					.build()
+			);
+			case "assistant" -> ChatCompletionMessageParam.ofAssistant(
+				ChatCompletionAssistantMessageParam.builder()
+					.content(content)
+					.build()
+			);
+			case "user" -> ChatCompletionMessageParam.ofUser(
+				ChatCompletionUserMessageParam.builder()
+					.content(content)
+					.build()
+			);
+			default -> {
+				LOGGER.warn("Unknown role: " + normalizedRole + ", defaulting to USER");
+				yield ChatCompletionMessageParam.ofUser(
+					ChatCompletionUserMessageParam.builder()
+						.content(content)
+						.build()
+				);
+			}
+		};
+	}
+
+	private String normalizeRole(String role) {
+		if (role == null || role.trim().isEmpty()) {
+			LOGGER.debug("Role is null or empty, defaulting to USER");
+			return "user";
+		}
+		return role.trim().toLowerCase();
+	}
+		
+	/**
+	 * Executes the streaming request using OpenAI Java SDK (https://github.com/openai/openai-java/)
+	 * Processes each chunk as it arrives from the API
+	 */
+	/**
+ * Executes the streaming request using OpenAI Java SDK (https://github.com/openai/openai-java/)
+ * Processes each chunk as it arrives from the API
+ */
+	private void executeStreamingRequest(OpenAIClient client, ChatCompletionCreateParams requestParams) {
+		try {
+			LOGGER.info("Initiating OpenAI streaming request");
+			
+			// Create streaming request - returns a StreamResponse<ChatCompletionChunk>
+			try (com.openai.core.http.StreamResponse<ChatCompletionChunk> streamResponse = 
+				client.chat().completions().createStreaming(requestParams)) {
+				
+				// Process the stream of chunks
+				streamResponse.stream()
+					.forEach(chunk -> {
+						try {
+							processChunk(chunk);
+						} catch (Exception e) {
+							LOGGER.error("Error processing chunk: " + e.getMessage(), e);
+							// Continue processing remaining chunks
+						}
+					});
+			}
+			
+			LOGGER.info("Stream completed successfully for request: " + RequestID);
+			notifyCallbackOnStreamComplete();
+			
 		} catch (Exception e) {
 			LOGGER.error("Error executing streaming request: " + e.getMessage(), e);
-			responseHandler.onStreamError(e);
+			notifyCallbackOnError(e);
+		}
+	}
+
+	/**
+	 * Processes a single ChatCompletionChunk from the stream
+	 * Extracts the content delta and sends it to the callback microflow
+	 */
+	private void processChunk(ChatCompletionChunk chunk) throws Exception {
+		// Extract the content from the chunk
+		// The chunk contains choices with delta content
+		if (chunk.choices() != null && !chunk.choices().isEmpty()) {
+			chunk.choices().stream()
+				.forEach(choice -> {
+					if (choice.delta() != null && choice.delta().content().isPresent()) {
+						String content = choice.delta().content().get();
+						
+						LOGGER.debug("Received chunk content: " + content);
+						
+						// Send chunk to callback microflow
+						notifyCallbackOnChunk(content);
+					}
+				});
+		}
+	}
+	
+	
+	/**
+	 * Notifies the callback microflow of a new chunk
+	 */
+	private void notifyCallbackOnChunk(String content) {
+		try {
+			Core.microflowCall(CallbackMicroflow)
+				.withParam("RequestId", RequestID)
+				.withParam("Content", content)
+				.execute(getContext());
+		} catch (Exception e) {
+			LOGGER.error("Failed to notify callback of chunk: " + e.getMessage(), e);
+		}
+	}
+	
+	/**
+	 * Notifies the callback microflow that the stream is complete
+	 */
+	private void notifyCallbackOnStreamComplete() {
+		try {
+			Core.microflowCall(CallbackMicroflow)
+				.withParam("RequestId", RequestID)
+				.withParam("Content", "[STREAM_COMPLETE]")
+				.execute(getContext());
+		} catch (Exception e) {
+			LOGGER.error("Failed to notify callback of stream completion: " + e.getMessage(), e);
 		}
 	}
 	
@@ -182,7 +373,7 @@ public class OpenAI_ChatCompletions_Stream extends UserAction<java.lang.Void>
 		try {
 			Core.microflowCall(CallbackMicroflow)
 				.withParam("RequestId", RequestID)
-				.withParam("Content", "ERROR: " + e.getMessage())
+				.withParam("Content", "[ERROR] " + e.getMessage())
 				.execute(getContext());
 		} catch (Exception callbackError) {
 			LOGGER.error("Failed to notify callback of error: " + callbackError.getMessage(), callbackError);

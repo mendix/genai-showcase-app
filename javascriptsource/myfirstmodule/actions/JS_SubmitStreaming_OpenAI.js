@@ -12,88 +12,122 @@ import { Big } from "big.js";
 // END EXTRA CODE
 
 /**
- * @param {string} prompt
+ * @param {string} requestJSON
  * @param {MxObject} responseCollector
+ * @param {string} deployedModelUUID - UUID of the OpenAIDeployedModel to use
  * @returns {Promise.<void>}
  */
-export async function JS_SubmitStreaming_OpenAI(prompt, responseCollector) {
+export async function JS_SubmitStreaming_OpenAI(requestJSON, responseCollector, deployedModelUUID) {
 	// BEGIN USER CODE
-	const response = await fetch("http://localhost:8080/llm-streaming-openai", {
-		method: "POST",
-		headers: {
-			"Content-Type": "text/plain",
-			"Accept": "text/event-stream"
-		},
-		body: prompt
-	})
 
-	const reader = response.body.getReader();
-	const decoder = new TextDecoder('utf-8');
-	let buffer = ''; // Buffer to accumulate incomplete SSE messages
+	try{
+		console.info('start JS Action');
+		const baseUrl = mx.appUrl;
+		console.info('Mx App URL',baseUrl);
+		const endpoint = `${baseUrl}llm-streaming-openai`;
+		const response = await fetch(endpoint, {
+			method: "POST",
+			headers: {
+				"Content-Type": "text/plain",
+				"Accept": "text/event-stream"
+			},
+			body: JSON.stringify({
+				request: requestJSON,
+				deployedModelUUID: deployedModelUUID
+			})
+		})
 
-	// Function to process a complete SSE message
-	const processSseMessage = (message) => {
-		// SSE messages typically look like:
-		// id: 1
-		// event: update
-		// data: {"status": "online", "value": 123}
-		//
-		// data: {"status": "offline"}
-		//
-		// (empty line indicates end of message)
+		const reader = response.body.getReader();
+		const decoder = new TextDecoder('utf-8');
+		let buffer = ''; // Buffer to accumulate incomplete SSE messages
 
-		const lines = message.split('\n').filter(line => line.trim() !== '');
-		let id = null;
-		let event = 'message'; // Default event type
-		let data = '';
+		// Function to process a complete SSE message
+		const processSseMessage = (message) => {
+			// SSE messages typically look like:
+			// id: 1
+			// event: update
+			// data: {"status": "online", "value": 123}
+			//
+			// data: {"status": "offline"}
+			//
+			// (empty line indicates end of message)
 
-		for (const line of lines) {
-			if (line.startsWith('id:')) {
-				id = line.substring(3).trim();
-			} else if (line.startsWith('event:')) {
-				event = line.substring(6).trim();
-			} else if (line.startsWith('data:')) {
-				// Accumulate data lines, they can be multi-line
-				data += line.substring(5).trim();
+			const lines = message.split('\n').filter(line => line.trim() !== '');
+			let id = null;
+			let event = 'message'; // Default event type
+			let data = '';
+
+			for (const line of lines) {
+				if (line.startsWith('id:')) {
+					id = line.substring(3).trim();
+				} else if (line.startsWith('event:')) {
+					event = line.substring(6).trim();
+				} else if (line.startsWith('data:')) {
+					// Accumulate data lines, they can be multi-line
+					data += line.substring(5).trim();
+				}
+				// You might also handle 'retry:' fields if your server sends them
 			}
-			// You might also handle 'retry:' fields if your server sends them
-		}
 
-		if (data) {
-			try {
-				const decodedData = atob(data);
-				console.log('Data:', decodedData);
-				// Here you would update your UI or application state
-				
-				const currentText = responseCollector.get("Text")
-				responseCollector.set("Text", currentText + decodedData)
-			} catch (e) {
-				console.warn('Could not parse SSE data as JSON:', data, e);
-				// Handle non-JSON data if expected
-				updateUIWithStreamData(data, event);
+			if (data) {
+				try {
+					let decodedData = data;
+				try {
+					// Only attempt base64 decode if it looks like base64
+					if (/^[A-Za-z0-9+/=]+$/.test(data)) {
+						decodedData = atob(data);
+						console.info('Data:', decodedData);
+					}
+				} catch (e) {
+					console.warn('Base64 decode failed, using raw data:', e);
+					decodedData = data;
+				}		
+					const currentText = responseCollector.get("Text")
+					responseCollector.set("Text", currentText + decodedData)
+
+				} catch (e) {
+					console.warn('Could not parse SSE data as JSON:', data, e);
+					// Handle non-JSON data if expected
+					if (event === 'error') {
+						console.error('Stream error:', data);
+					} else {
+						console.info('Non-JSON data:', data);
+					}
+				}
+			}
+		};
+
+		while (true) {
+			const { done, value } = await reader.read();
+
+			if (done) {
+				console.info('Stream finished.');
+				break;
+			}
+
+			// Decode the chunk and add to buffer
+			buffer += decoder.decode(value, { stream: true });
+
+			// Process complete SSE messages from the buffer
+			// SSE messages are terminated by two newline characters (\n\n)
+			let messageEndIndex;
+			while ((messageEndIndex = buffer.indexOf('\n\n')) !== -1) {
+				const message = buffer.substring(0, messageEndIndex);
+				processSseMessage(message);
+				buffer = buffer.substring(messageEndIndex + 2); // Remove processed message and its delimiters
 			}
 		}
-	};
 
-	while (true) {
-		const { done, value } = await reader.read();
-
-		if (done) {
-			console.log('Stream finished.');
-			break;
+		// Process any remaining data in buffer after stream ends
+		if (buffer.trim()) {
+			processSseMessage(buffer);
 		}
+	}
 
-		// Decode the chunk and add to buffer
-		buffer += decoder.decode(value, { stream: true });
-
-		// Process complete SSE messages from the buffer
-		// SSE messages are terminated by two newline characters (\n\n)
-		let messageEndIndex;
-		while ((messageEndIndex = buffer.indexOf('\n\n')) !== -1) {
-			const message = buffer.substring(0, messageEndIndex);
-			processSseMessage(message);
-			buffer = buffer.substring(messageEndIndex + 2); // Remove processed message and its delimiters
-		}
+	catch (error) {
+		console.error('Streaming error:', error);
+		responseCollector.set("Text", `Error: ${error.message}`);
+		throw error; // Re-throw for Mendix error handling
 	}
 
 	// END USER CODE

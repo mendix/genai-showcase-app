@@ -13,11 +13,11 @@ import { Big } from "big.js";
 
 /**
  * @param {string} requestJSON
- * @param {string} deployedModelID
+ * @param {string} deployedModelUUID
  * @param {MxObject} responseCollector
  * @returns {Promise.<void>}
  */
-export async function JS_SubmitStreaming(requestJSON, deployedModelID, responseCollector) {
+export async function JS_SubmitStreaming(requestJSON, deployedModelUUID, responseCollector) {
 	// BEGIN USER CODE
 	const response = await fetch("http://localhost:8080/llm-streaming", {
 		method: "POST",
@@ -27,7 +27,7 @@ export async function JS_SubmitStreaming(requestJSON, deployedModelID, responseC
 		},
 		body: JSON.stringify({
 			request: requestJSON,
-			deployedModelID: deployedModelID
+			deployedModelUUID: deployedModelUUID
 		})
 	})
 
