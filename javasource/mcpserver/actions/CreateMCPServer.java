@@ -61,9 +61,8 @@ public class CreateMCPServer extends UserAction<IMendixObject>
 		requireNonNull(ProtocolVersion,"Protocol version is required.");	
 		
 		// Validate path is not reserved
-		if ("mcp".equalsIgnoreCase(Path) || "sse".equalsIgnoreCase(Path) || 
-		    Path.toLowerCase().endsWith("/mcp") || Path.toLowerCase().endsWith("/sse")) {
-			throw new IllegalArgumentException("Path cannot be 'mcp' or 'sse', or end with '/mcp' or '/sse' as these are reserved.");
+		if ("mcp".equalsIgnoreCase(Path) || Path.toLowerCase().endsWith("/mcp")) {
+			throw new IllegalArgumentException("Path cannot be 'mcp' or end with '/mcp' as this is reserved.");
 		}
 		
         // Create McpServer NPE
@@ -73,9 +72,8 @@ public class CreateMCPServer extends UserAction<IMendixObject>
         mcpServer.setProtocolVersion(ProtocolVersion);
         mcpServer.setAuthenticationMicroflow(AuthenticationMicroflow);
                 
-        // Create request handler with protocol-aware transport selection
-        // The handler will automatically choose SSE or Streamable HTTP based on ProtocolVersion
-        // Each transport defines its own endpoint conventions internally
+        // Create request handler with Streamable HTTP transport
+        // Uses /mcp endpoint for all MCP operations
         McpServerRequestHandler mcpRequestHandler = new McpServerRequestHandler(mcpServer, Path);
         Core.addRequestHandler(Path + "/", mcpRequestHandler);		
         McpSyncServer server = McpServer.sync(mcpRequestHandler)

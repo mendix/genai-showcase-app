@@ -39,10 +39,14 @@ public class McpSessionManager
 		return instance;
 	}
 	
-	/** Map of active client sessions, keyed by session ID */
+	/** Map of active client sessions, keyed by MCP session ID */
     private final Map<String, McpServerSession> sessions;
     
+    /** Map from SDK internal session ID to MCP session ID */
     private final Map<String, String> internalToExternalSessionMap;
+    
+    /** Map from MCP session ID to Mendix session ID (for user authentication) */
+    private final Map<String, String> mcpToMendixSessionMap;
     
     /** Session factory for creating new sessions */
     private McpServerSession.Factory sessionFactory;
@@ -50,6 +54,7 @@ public class McpSessionManager
 	private McpSessionManager()	{
 		sessions = new ConcurrentHashMap<>();
 		internalToExternalSessionMap = new ConcurrentHashMap<>();
+		mcpToMendixSessionMap = new ConcurrentHashMap<>();
 	}
 	
 	public void setSessionFactory(McpServerSession.Factory sessionFactory) {
@@ -63,6 +68,17 @@ public class McpSessionManager
 		McpServerSession session = sessionFactory.create(sessionTransport);
         sessions.put(sessionId, session);
         internalToExternalSessionMap.put(session.getId(), sessionId);
+	}
+	
+	/**
+	 * Associates a Mendix session ID with an MCP session ID.
+	 * This allows tool/prompt calls to execute with the authenticated user's context.
+	 */
+	public void setMendixSessionForMcpSession(String mcpSessionId, String mendixSessionId) {
+		if (mendixSessionId != null && mcpSessionId != null) {
+			mcpToMendixSessionMap.put(mcpSessionId, mendixSessionId);
+			LOGGER.debug("Associated MCP session " + mcpSessionId + " with Mendix session " + mendixSessionId);
+		}
 	}
 	
 	public McpServerSession getSession(String sessionId) {
@@ -82,114 +98,97 @@ public class McpSessionManager
 	}
 	
 	public ISession getMxRuntimeSession(McpSyncServerExchange exchange) throws Exception {
-		LOGGER.debug(exchange.sessionId());
-		if(!internalToExternalSessionMap.containsKey(exchange.sessionId())) {
-			throw new Exception("Could not find session");
+		LOGGER.debug("Looking up Mendix session for SDK session: " + exchange.sessionId());
+		
+		// Step 1: Map SDK internal session ID -> MCP session ID
+		String mcpSessionId = internalToExternalSessionMap.get(exchange.sessionId());
+		LOGGER.debug("MCP session ID: " + mcpSessionId);
+		
+		// Step 2: Map MCP session ID -> Mendix session ID
+		if (mcpSessionId != null) {
+			String mendixSessionId = mcpToMendixSessionMap.get(mcpSessionId);
+			LOGGER.debug("Mendix session ID from mapping: " + mendixSessionId);
+			if (mendixSessionId != null) {
+				return getMxRuntimeSessionForSessionId(mendixSessionId);
+			}
 		}
 		
-		String sessionId = internalToExternalSessionMap.get(exchange.sessionId());
-		return getMxRuntimeSessionForSessionId(sessionId);
+		// No session found - will fall back to system context
+		LOGGER.debug("No Mendix session found, will use system context");
+		return null;
 	}
 	
 	/**
 	 * Returns a context object for the tool microflow. If no user session can be found, a system session is returned.
+	 * Works in both stateful and stateless modes.
 	 * @param exchange 
 	 * @return Context object
 	 * @throws Exception 
 	 */
 	public static IContext getContextFromSession(McpSyncServerExchange exchange) throws Exception {
-		ISession session = McpSessionManager.getInstance().getMxRuntimeSession(exchange);
-		if (session != null) {
-			return session.createContext();
-			
-		} else {
-			return Core.createSystemContext();
+		try {
+			ISession session = McpSessionManager.getInstance().getMxRuntimeSession(exchange);
+			if (session != null) {
+				LOGGER.debug("Using user context for session: " + session.getId());
+				return session.createContext();
+			}
+		} catch (Exception e) {
+			LOGGER.debug("Could not retrieve user session: " + e.getMessage() + ", falling back to system context");
 		}
+		
+		// Fallback to system context
+		return Core.createSystemContext();
 	}
 	
 	private ISession getMxRuntimeSessionForSessionId(String sessionId) {
 		return Core.getSessionById(UUID.fromString(sessionId));
 	}
 	
-	public void closeSession(String sessionId) {
-		McpServerSession session = sessions.get(sessionId);
+	public void closeSession(String mcpSessionId) {
+		McpServerSession session = sessions.get(mcpSessionId);
 		
 		if(session != null) {
 			session.closeGracefully();
-			sessions.remove(sessionId);
+			sessions.remove(mcpSessionId);
 			
-			ISession mxRuntimeSession = getMxRuntimeSessionForSessionId(sessionId);
-	    	
-			if (mxRuntimeSession != null) {
-	    		LOGGER.debug("Close user session.");
-	    		Core.logout(mxRuntimeSession);
-	    	}
+			// Clean up internal session ID mapping
+			internalToExternalSessionMap.remove(session.getId());
+			
+			// Clean up and logout Mendix session if present
+			String mendixSessionId = mcpToMendixSessionMap.remove(mcpSessionId);
+			if (mendixSessionId != null) {
+				ISession mxRuntimeSession = getMxRuntimeSessionForSessionId(mendixSessionId);
+				if (mxRuntimeSession != null) {
+					LOGGER.debug("Closing Mendix user session: " + mendixSessionId);
+					Core.logout(mxRuntimeSession);
+				}
+			}
 		}
 		else {
-			LOGGER.debug(String.format("Closing session with id %s, but no session was found", sessionId));
+			LOGGER.debug(String.format("Closing session with id %s, but no session was found", mcpSessionId));
 		}
 	}
 	
 	/**
-	 * Validates and retrieves an existing session ID, keeping the Mendix session alive.
-	 * Returns null if session is invalid.
+	 * Authenticates a user via the configured authentication microflow and returns the Mendix session ID.
+	 * Returns null if authentication fails or no authentication is configured.
 	 */
-	public String validateAndKeepAlive(String sessionId) {
-		if (sessionId == null || sessionId.isEmpty()) {
+	public String authenticateAndCreateMendixSession(HttpServletRequest httpServletRequest, McpServer mcpServer) throws CoreException {
+		String authMicroflow = mcpServer.getAuthenticationMicroflow();
+		if (authMicroflow == null || authMicroflow.isEmpty()) {
+			LOGGER.debug("No authentication microflow configured, will use system context");
 			return null;
 		}
 		
-		if (getSession(sessionId) != null) {
-			// Try to keep the Mendix session alive if it exists
-			try {
-				ISession session = Core.getSessionById(UUID.fromString(sessionId));
-				if (session != null) {
-					session.keepAlive();
-				} else {
-					LOGGER.debug("Mendix session not found for sessionId - will use system context as fallback for tool execution");
-				}
-			} catch (IllegalArgumentException | CoreException e) {
-				LOGGER.debug("Error keeping Mendix session alive: " + e.getMessage() + " - will use system context as fallback");
-			}
-			return sessionId;
-		}
-		
-		return null;
-	}
-	
-	/**
-	 * Gets or creates a session ID from HTTP request.
-	 * Checks headers and parameters for existing sessions, or authenticates user if configured.
-	 */
-	public String getOrCreateSessionId(HttpServletRequest httpServletRequest, McpServer mcpServer,
-	                                     String headerName, String parameterName) throws CoreException {
-		// Check for existing session ID in header
-		if (headerName != null) {
-			String sessionIdHeader = httpServletRequest.getHeader(headerName);
-			String validated = validateAndKeepAlive(sessionIdHeader);
-			if (validated != null) {
-				return validated;
-			}
-		}
-		
-		// Check for session ID in request parameter
-		if (parameterName != null) {
-			String sessionIdRequest = httpServletRequest.getParameter(parameterName);
-			String validated = validateAndKeepAlive(sessionIdRequest);
-			if (validated != null) {
-				return validated;
-			}
-		}
-		
-		// No sessionId and no authentication microflow - generate new session ID
-		String authMicroflow = mcpServer.getAuthenticationMicroflow();
-		if (authMicroflow == null || authMicroflow.isEmpty()) {
-			return UUID.randomUUID().toString();
-		}
-		
-		// Create new session via authentication microflow
+		// Create new Mendix session via authentication microflow
 		ISession iSession = createSessionForUser(httpServletRequest, mcpServer);
-		return iSession != null ? iSession.getId().toString() : null;
+		if (iSession != null) {
+			LOGGER.debug("Created Mendix session for authenticated user: " + iSession.getId());
+			return iSession.getId().toString();
+		}
+		
+		LOGGER.debug("Authentication failed, will use system context");
+		return null;
 	}
 	
 	/**

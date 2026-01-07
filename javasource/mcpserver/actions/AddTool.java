@@ -93,6 +93,7 @@ public class AddTool extends UserAction<IMendixObject>
 					long start = System.currentTimeMillis();
 					LOGGER.trace(threadName + ": Start processing tool call " + Name + ", microflow: " + ExecutingMicroflow);
 					try {
+						// Get user context from session (falls back to system context if no session)
 						IContext contextUser = McpSessionManager.getContextFromSession(exchange);
 						Map<String, Object> args = new HashMap<>(arguments);
 

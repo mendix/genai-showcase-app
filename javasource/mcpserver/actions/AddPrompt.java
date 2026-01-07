@@ -109,6 +109,7 @@ public class AddPrompt extends UserAction<IMendixObject>
 					args.put("Prompt", promptNpe);
 
 					try {
+						// Get user context from session (falls back to system context if no session)
 						IContext contextUser = McpSessionManager.getContextFromSession(exchange);
 						IMendixObject mxExecResult = Core.microflowCall(Microflow).withParams(args).execute(contextUser);
 						mcpserver.proxies.PromptMessage mxPromptMessage = mcpserver.proxies.PromptMessage.initialize(getContext(), mxExecResult);

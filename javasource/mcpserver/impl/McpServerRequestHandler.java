@@ -11,8 +11,8 @@ import reactor.core.publisher.Mono;
 import mcpserver.proxies.McpServer;
 
 /**
- * Main request handler for MCP servers that delegates to protocol-specific transport handlers.
- * Supports both SSE and Streamable HTTP transports based on the configured protocol version.
+ * Main request handler for MCP servers that delegates to transport handlers.
+ * Uses Streamable HTTP transport for all MCP communication.
  */
 public class McpServerRequestHandler extends RequestHandler implements McpServerTransportProvider {
     
@@ -20,38 +20,31 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
     
     private final McpServer mcpServer;
     private final McpTransportHandler transportHandler;
-    private final McpSessionManager sessionManager = McpSessionManager.getInstance();
     
     /**
      * Creates a new MCP server request handler.
-     * Transport endpoints are defined internally based on protocol version.
-     * @param mcpServer The MCP server configuration
-     * @param basePath The base path for the server (e.g., "mcp-server")
+     * Uses Streamable HTTP transport with /mcp endpoint.
+     * @param mcpServer The MCP server configuration (must not be null)
+     * @param basePath The base path for the server (e.g., "mcp-server") - currently unused
+     * @throws IllegalArgumentException if mcpServer is null
      */
     public McpServerRequestHandler(McpServer mcpServer, String basePath) {
+        if (mcpServer == null) {
+            throw new IllegalArgumentException("mcpServer cannot be null");
+        }
         this.mcpServer = mcpServer;
-        this.transportHandler = createTransportHandler(mcpServer, basePath);
+        this.transportHandler = createTransportHandler(mcpServer);
+        LOGGER.info("MCP server request handler created for path: " + basePath);
     }
     
     /**
-     * Creates the appropriate transport handler based on the protocol version.
-     * Each transport defines its own endpoint conventions:
-     * - SSE: uses /sse (GET) and /messages (POST)
-     * - Streamable HTTP: uses /mcp (POST)
+     * Creates the transport handler for Streamable HTTP.
+     * Uses /mcp endpoint for all MCP operations.
      * @param mcpServer The MCP server configuration
-     * @param basePath The base path (e.g., "mcp-server")
-     * @return The appropriate transport handler
+     * @return The Streamable HTTP transport handler
      */
-    private McpTransportHandler createTransportHandler(McpServer mcpServer, String basePath) {
-        String protocolVersion = mcpServer.getProtocolVersion() != null ? 
-            mcpServer.getProtocolVersion().toString() : "v2024_11_05";
-        
-        // Determine which transport to use based on protocol version
-        if (protocolVersion.contains("v2024")) {
-        	return new SseTransportHandler(mcpServer, basePath);
-        } else {
-        	return new StreamableHttpTransportHandler(mcpServer, basePath);
-        }
+    private McpTransportHandler createTransportHandler(McpServer mcpServer) {
+        return new McpTransportHandler(mcpServer);
     }
     
     @Override
@@ -99,34 +92,68 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
             }
             
         } catch (Exception e) {
-            LOGGER.error("Error processing request: " + e.getMessage(), e);
+            LOGGER.error("Error processing " + method + " request to " + path + ": " + e.getMessage(), e);
+            // Send error response if not already committed
+            if (!response.getHttpServletResponse().isCommitted()) {
+                try {
+                    response.getHttpServletResponse().sendError(500, "Internal server error");
+                } catch (Exception responseEx) {
+                    LOGGER.warn("Failed to send error response: " + responseEx.getMessage());
+                }
+            }
             throw e;
         }
     }
     
     @Override
     public Mono<Void> notifyClients(String method, Object params) {
+        McpSessionManager sessionManager = McpSessionManager.getInstance();
         if (!sessionManager.hasSessions()) {
             return Mono.empty();
         }
         
+        // Track failed notifications for logging
+        java.util.concurrent.atomic.AtomicInteger failureCount = new java.util.concurrent.atomic.AtomicInteger(0);
+        int totalSessions = sessionManager.getNumberOfSessions();
+        
         return Flux.fromIterable(sessionManager.getAllSessions())
                 .flatMap(session -> session.sendNotification(method, params)
-                        .doOnError(err -> LOGGER.error("Failed to send notification to session: " + err.getMessage())))
-                .onErrorComplete()
-                .then();
+                        .doOnError(err -> {
+                            failureCount.incrementAndGet();
+                            LOGGER.warn("Failed to send notification '" + method + "' to session " + session.getId() + ": " + err.getMessage());
+                        }))
+                .onErrorResume(err -> Mono.empty())  // Continue on individual errors
+                .then()
+                .doOnTerminate(() -> {
+                    int failures = failureCount.get();
+                    if (failures > 0) {
+                        LOGGER.warn("Notification '" + method + "' failed for " + failures + "/" + totalSessions + " sessions");
+                    } else {
+                        LOGGER.debug("Notification '" + method + "' sent to " + totalSessions + " sessions");
+                    }
+                });
     }
     
     @Override
     public Mono<Void> closeGracefully() {
+        LOGGER.info("Closing MCP server request handler gracefully");
+        
         try {
             transportHandler.closeGracefully();
         } catch (Exception e) {
             LOGGER.error("Error during transport handler shutdown: " + e.getMessage(), e);
         }
         
-        return Flux.fromIterable(sessionManager.getAllSessions())
-                .flatMap(McpServerSession::closeGracefully)
-                .then();
+        // Close all sessions in the session manager
+        McpSessionManager sessionManager = McpSessionManager.getInstance();
+        return reactor.core.publisher.Flux.fromIterable(sessionManager.getAllSessions())
+                .flatMap(session -> session.closeGracefully()
+                        .timeout(java.time.Duration.ofSeconds(5))
+                        .onErrorResume(err -> {
+                            LOGGER.warn("Failed to close session " + session.getId() + ": " + err.getMessage());
+                            return Mono.empty();
+                        }))
+                .then()
+                .doOnTerminate(() -> LOGGER.info("All sessions closed"));
     }
 }
