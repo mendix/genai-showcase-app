@@ -141,6 +141,14 @@ public class ConverseStream extends UserAction<IMendixObject>
 			requireNonNull(this.ConverseRequest, "A ConverseRequest_Extension object is required");
 			requireNonNull(this.BedrockDeployedModel, "A BedrockDeployedModel object is required");
 			
+			// Initialize token counters
+			List<Integer> inputTokens = new ArrayList<>();
+			List<Integer> outputTokens = new ArrayList<>();
+			List<Integer> totalTokens = new ArrayList<>();
+			List<String> currentMessage = new ArrayList<>();
+			List<ToolCall> mxToolCallList = new ArrayList<>();
+			genaicommons.proxies.Message mxMsg = new genaicommons.proxies.Message(getContext());
+			
 			BedrockRuntimeAsyncClient client = AmazonBedrockClient.getBedrockRuntimeAsyncClient(Credentials, Region, ConverseRequest);
 			
 			software.amazon.awssdk.services.bedrockruntime.model.ConverseStreamRequest awsRequest = getAwsRequest();
@@ -150,12 +158,36 @@ public class ConverseStream extends UserAction<IMendixObject>
 	                .subscriber(ConverseStreamResponseHandler.Visitor.builder()
 	                        .onContentBlockDelta(chunk -> {
 	                            String responseText = chunk.delta().text();
+	                            currentMessage.add(responseText);
 	                            if (responseText != null && !responseText.isBlank()) {
 	                            	Core.microflowCall(CallbackMicroflow)
 									.withParam("RequestId", RequestID)
 									.withParam("Content", responseText).execute(getContext());
 	                            }
-	                        }).build()).build();
+	                        })
+	                        // content block stopped -> clear currentMessage
+//	                        .onContentBlockStop(chunk -> {
+//	                            currentMessage.clear();	                            
+//	                        })
+	                        .onMessageStop(chunk -> {
+	                            if (chunk.stopReasonAsString() == "tool_use") {
+	                            	for (String i : currentMessage) {
+	                            		LOGGER.info(i);
+	                            	}
+	                            }                        
+	                        })
+	                        // tool call started, must get all tool call info
+	                        .onContentBlockStart(chunk -> {
+	                        	if (chunk.start().toolUse() != null) {
+										setMessageToolUseContent(mxToolCallList,chunk.start());
+	                        	}
+	                        })
+	                        .onMetadata(chunk -> {
+	                        	 inputTokens.add(chunk.usage().inputTokens());
+	                             outputTokens.add(chunk.usage().outputTokens());
+	                             totalTokens.add(chunk.usage().totalTokens());
+	                        })
+	                        .build()).build();
 			
 
 			Future<Void> r = client.converseStream(awsRequest, responseStreamHandler);
@@ -1032,23 +1064,23 @@ public class ConverseStream extends UserAction<IMendixObject>
 	// Response Mapping
 	
 	// Method to map aws response to mendix response
-	private Response getMxResponse(ConverseResponse awsResponse) throws JsonProcessingException {
-		ChatCompletionsResponse mxResponse = new ChatCompletionsResponse(getContext());
-		
-		mxResponse.setRequestTokens(awsResponse.usage().inputTokens());
-		mxResponse.setResponseTokens(awsResponse.usage().outputTokens());
-		mxResponse.setTotalTokens(awsResponse.usage().totalTokens());
-		mxResponse.setStopReason(awsResponse.stopReasonAsString());
-		mxResponse.setLatencyMs(awsResponse.metrics().latencyMs().intValue());
-		
-		mxResponse.setResponse_Message(getMxResponseMessage(awsResponse.output()));
-		
-		if (awsResponse.additionalModelResponseFields() != null) {
-			setMxResponseExtension(awsResponse.additionalModelResponseFields(), mxResponse);
-		}
-		
-		return mxResponse;
-	}
+//	private Response getMxResponse(ConverseResponse awsResponse) throws JsonProcessingException {
+//		ChatCompletionsResponse mxResponse = new ChatCompletionsResponse(getContext());
+//		
+//		mxResponse.setRequestTokens(awsResponse.usage().inputTokens());
+//		mxResponse.setResponseTokens(awsResponse.usage().outputTokens());
+//		mxResponse.setTotalTokens(awsResponse.usage().totalTokens());
+//		mxResponse.setStopReason(awsResponse.stopReasonAsString());
+//		mxResponse.setLatencyMs(awsResponse.metrics().latencyMs().intValue());
+//		
+//		mxResponse.setResponse_Message(getMxResponseMessage(awsResponse.output()));
+//		
+//		if (awsResponse.additionalModelResponseFields() != null) {
+//			setMxResponseExtension(awsResponse.additionalModelResponseFields(), mxResponse);
+//		}
+//		
+//		return mxResponse;
+//	}
 	
 	// Extract the role enumeration value from the awsMessage object
 	private ENUM_MessageRole getMessageRole(ConversationRole role) throws java.lang.IllegalStateException {
@@ -1104,7 +1136,7 @@ public class ConverseStream extends UserAction<IMendixObject>
 			break;
 		}
 		case TOOL_USE: {
-			setMessageToolUseContent(toolCallList, awsContent.toolUse());
+			//setMessageToolUseContent(toolCallList, awsContent.toolUse());
 			break;
 		}
 		// reasoning content is ignored for now, will be implemented in the future
@@ -1127,12 +1159,12 @@ public class ConverseStream extends UserAction<IMendixObject>
 	}
 	
 	// Setting tool use content
-	private void setMessageToolUseContent(List<ToolCall> toolCallList, ToolUseBlock awsToolUse) throws JsonProcessingException {
+	private void setMessageToolUseContent(List<ToolCall> toolCallList, software.amazon.awssdk.services.bedrockruntime.model.ContentBlockStart awsContentBlockStart) {
 		ToolCall mxToolCall = new ToolCall(getContext());
 		
-		toolCallSetArguments(mxToolCall, awsToolUse);
-		mxToolCall.setName(awsToolUse.name());
-		mxToolCall.setToolCallId(awsToolUse.toolUseId());
+		//toolCallSetArguments(mxToolCall, awsToolUse);
+		mxToolCall.setName(awsContentBlockStart.toolUse().name());
+		mxToolCall.setToolCallId(awsContentBlockStart.toolUse().toolUseId());
 		
 		toolCallList.add(mxToolCall);
 	}
