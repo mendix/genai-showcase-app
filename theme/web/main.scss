@@ -266,7 +266,7 @@ $label-color-all: #00635A;
 /* --------------------------------------- Tutorial -----------------------------------*/
 
 .tutorial-page {
-  //min-height: 480px;
+  height: 460px;
 }
 
 .tutorial-text {
@@ -301,7 +301,7 @@ $label-color-all: #00635A;
 
 .dots {
   position: absolute;
-  bottom: -20px;
+  bottom: -16px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;

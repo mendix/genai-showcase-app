@@ -31476,6 +31476,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 /* --------------------------------------- Tutorial -----------------------------------*/
+.tutorial-page {
+  height: 460px;
+}
+
 .tutorial-text {
   margin-bottom: 16px;
 }
@@ -31507,7 +31511,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .dots {
   position: absolute;
-  bottom: -20px;
+  bottom: -16px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
