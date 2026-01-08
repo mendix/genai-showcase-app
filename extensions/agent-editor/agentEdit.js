@@ -1,46 +1,46 @@
-import { j as n, p as P, d as L, r as o, D as I, a as A, S as q, T as ie, b as Q, A as re, P as oe, c as le, C as O, F as B } from "./TextInputWithIcon-elAaw22_.js";
+import { j as n, p as q, d as T, r as o, D as I, a as A, S as G, T as ie, b as O, A as re, P as oe, c as le, C as U, F as N } from "./TextInputWithIcon-elAaw22_.js";
 import { T as ce, y as de } from "./TextAreaAutogrow-C3UX_QB_.js";
-import { c as ue } from "./componentLoader-QONLtPwE.js";
-import { c as me, a as he, m as G, g as Z, i as pe, b as ge, d as fe, e as xe, f as ye, h as be, j as we } from "./index-B3zwWrOT.js";
-import { I as U, W as ve } from "./Banner-DNWL7edh.js";
+import { c as ue } from "./componentLoader-Cv8RpErS.js";
+import { c as me, a as he, m as W, g as Z, i as pe, b as ge, d as fe, e as xe, f as ye, h as be, j as we } from "./index-ColVZiJr.js";
+import { I as z, W as ve } from "./Banner-DNWL7edh.js";
 import { m as Ce } from "./modelUtils-BKeUOTig.js";
 const je = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13%202.5H3C2.72386%202.5%202.5%202.72386%202.5%203V13C2.5%2013.2761%202.72386%2013.5%203%2013.5H13C13.2761%2013.5%2013.5%2013.2761%2013.5%2013V3C13.5%202.72386%2013.2761%202.5%2013%202.5Z'%20stroke='%23579BF9'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5V6.5C6.5%205.95%206.95%205.5%207.5%205.5H8.5C9.05%205.5%209.5%205.95%209.5%206.5V8H6.5'%20stroke='%23579BF9'%20stroke-linejoin='round'/%3e%3c/svg%3e", ke = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13%202.5H3C2.72386%202.5%202.5%202.72386%202.5%203V13C2.5%2013.2761%202.72386%2013.5%203%2013.5H13C13.2761%2013.5%2013.5%2013.2761%2013.5%2013V3C13.5%202.72386%2013.2761%202.5%2013%202.5Z'%20stroke='%23146FF4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5V6.5C6.5%205.95%206.95%205.5%207.5%205.5H8.5C9.05%205.5%209.5%205.95%209.5%206.5V8H6.5'%20stroke='%23146FF4'%20stroke-linejoin='round'/%3e%3c/svg%3e";
 var Ae = Object.defineProperty, Se = (e, a) => Ae(e, "name", { value: a, configurable: !0 });
-const Ee = Se((e) => n.jsx(P, { light: ke, dark: je, ...e }), "EntityIcon"), De = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5L6.5%206.5C6.5%205.95%206.95%205.5%207.5%205.5L8.5%205.5C9.05%205.5%209.5%205.95%209.5%206.5V8L6.5%208'%20stroke='%23FBCF55'%20stroke-linejoin='round'/%3e%3cpath%20d='M9.5%202.5L6.5%202.5M11%202.5L13%202.5C13.2761%202.5%2013.5%202.72386%2013.5%203V5M5%202.5L3%202.5C2.72386%202.5%202.5%202.72386%202.5%203L2.5%205M2.5%209.5L2.5%206.5M2.5%2011L2.5%2013C2.5%2013.2761%202.72386%2013.5%203%2013.5H5M13.5%206.5L13.5%209.5M13.5%2011V13C13.5%2013.2761%2013.2761%2013.5%2013%2013.5H11M9.5%2013.5L6.5%2013.5'%20stroke='%23FBCF55'%20stroke-linejoin='round'/%3e%3c/svg%3e", Le = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5L6.5%206.5C6.5%205.95%206.95%205.5%207.5%205.5L8.5%205.5C9.05%205.5%209.5%205.95%209.5%206.5V8L6.5%208'%20stroke='%23C97800'%20stroke-linejoin='round'/%3e%3cpath%20d='M9.5%202.5L6.5%202.5M11%202.5L13%202.5C13.2761%202.5%2013.5%202.72386%2013.5%203V5M5%202.5L3%202.5C2.72386%202.5%202.5%202.72386%202.5%203L2.5%205M2.5%209.5L2.5%206.5M2.5%2011L2.5%2013C2.5%2013.2761%202.72386%2013.5%203%2013.5H5M13.5%206.5L13.5%209.5M13.5%2011V13C13.5%2013.2761%2013.2761%2013.5%2013%2013.5H11M9.5%2013.5L6.5%2013.5'%20stroke='%23C97800'%20stroke-linejoin='round'/%3e%3c/svg%3e";
-var Me = Object.defineProperty, Te = (e, a) => Me(e, "name", { value: a, configurable: !0 });
-const Ve = Te((e) => n.jsx(P, { light: Le, dark: De, ...e }), "EntityNonPersistableIcon"), H = (e, a, r, c) => async (i) => {
+const Ee = Se((e) => n.jsx(q, { light: ke, dark: je, ...e }), "EntityIcon"), Me = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5L6.5%206.5C6.5%205.95%206.95%205.5%207.5%205.5L8.5%205.5C9.05%205.5%209.5%205.95%209.5%206.5V8L6.5%208'%20stroke='%23FBCF55'%20stroke-linejoin='round'/%3e%3cpath%20d='M9.5%202.5L6.5%202.5M11%202.5L13%202.5C13.2761%202.5%2013.5%202.72386%2013.5%203V5M5%202.5L3%202.5C2.72386%202.5%202.5%202.72386%202.5%203L2.5%205M2.5%209.5L2.5%206.5M2.5%2011L2.5%2013C2.5%2013.2761%202.72386%2013.5%203%2013.5H5M13.5%206.5L13.5%209.5M13.5%2011V13C13.5%2013.2761%2013.2761%2013.5%2013%2013.5H11M9.5%2013.5L6.5%2013.5'%20stroke='%23FBCF55'%20stroke-linejoin='round'/%3e%3c/svg%3e", Te = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5L6.5%206.5C6.5%205.95%206.95%205.5%207.5%205.5L8.5%205.5C9.05%205.5%209.5%205.95%209.5%206.5V8L6.5%208'%20stroke='%23C97800'%20stroke-linejoin='round'/%3e%3cpath%20d='M9.5%202.5L6.5%202.5M11%202.5L13%202.5C13.2761%202.5%2013.5%202.72386%2013.5%203V5M5%202.5L3%202.5C2.72386%202.5%202.5%202.72386%202.5%203L2.5%205M2.5%209.5L2.5%206.5M2.5%2011L2.5%2013C2.5%2013.2761%202.72386%2013.5%203%2013.5H5M13.5%206.5L13.5%209.5M13.5%2011V13C13.5%2013.2761%2013.2761%2013.5%2013%2013.5H11M9.5%2013.5L6.5%2013.5'%20stroke='%23C97800'%20stroke-linejoin='round'/%3e%3c/svg%3e";
+var Le = Object.defineProperty, Ve = (e, a) => Le(e, "name", { value: a, configurable: !0 });
+const De = Ve((e) => n.jsx(q, { light: Te, dark: Me, ...e }), "EntityNonPersistableIcon"), B = (e, a, r, l) => async (i) => {
   if (a === "userPrompt" || a === "systemPrompt") {
-    const l = { ...r, [a]: i }, g = await me(e, l), y = { ...l, variables: g };
-    return await S(e, y, c), y;
+    const c = { ...r, [a]: i }, g = await me(e, c), y = { ...c, variables: g };
+    return await S(e, y, l), y;
   } else {
-    const l = { ...r, [a]: i };
-    return await S(e, l, c), l;
+    const c = { ...r, [a]: i };
+    return await S(e, c, l), c;
   }
-}, Be = async (e, a, r) => {
-  const c = await e.ui.elementSelectors.selectEntity({ allowNone: !0 });
+}, Ne = async (e, a, r) => {
+  const l = await e.ui.elementSelectors.selectEntity({ allowNone: !0 });
   let i;
-  if (c.status === "ok" && (i = { ...a, entity: c.selected.module + "." + c.selected.name }), c.status === "none" && (i = { ...a, entity: "" }), i) {
-    const l = await he(e, a.variables, i);
-    i = { ...i, variables: l }, await S(e, i, r);
+  if (l.status === "ok" && (i = { ...a, entity: l.selected.module + "." + l.selected.name }), l.status === "none" && (i = { ...a, entity: "" }), i) {
+    const c = await he(e, a.variables, i);
+    i = { ...i, variables: c }, await S(e, i, r);
   }
   return i;
-}, He = async (e, a, r, c) => {
-  const i = await e.ui.elementSelectors.selectDocument({ allowNone: !0, query: { sdkName: "CustomBlobDocuments$CustomBlobDocument" } });
-  let l;
-  return i.status === "ok" && (l = { ...a, [c]: i.selected.module + "." + i.selected.name }), i.status === "none" && (l = { ...a, [c]: void 0 }), l && await S(e, l, r), l;
-}, N = async (e, a, r) => {
+}, Be = async (e, a, r) => {
+  const l = await e.ui.elementSelectors.selectDocument({ allowNone: !0, query: { elementType: W } });
+  let i;
+  return l.status === "ok" && (i = { ...a, modelQualifiedName: l.selected.module + "." + l.selected.name }), l.status === "none" && (i = { ...a, modelQualifiedName: void 0 }), i && await S(e, i, r), i;
+}, H = async (e, a, r) => {
   switch (e) {
     case "modelQualifiedName":
       if (!r.modelQualifiedName)
         return "Please select a model.";
-      if (!(await a.app.model.customBlobDocuments.getDocumentsOfType(G)).find((f) => f.moduleName + "." + f.name === r.modelQualifiedName))
+      if (!(await a.app.model.customBlobDocuments.getDocumentsOfType(W)).find((f) => f.moduleName + "." + f.name === r.modelQualifiedName))
         return "This document is invalid. Make sure to select a document of type Model.";
       break;
     case "entity":
       if (r.variables.length > 0 && !r.entity)
         return "Please select an entity.";
-      const [l, g] = r.entity.split(".");
-      if (r.entity && (!l || !g))
+      const [c, g] = r.entity.split(".");
+      if (r.entity && (!c || !g))
         return "The selected entity is not valid.";
       if (!await pe(a, r))
         return "Entity no longer exists.";
@@ -53,10 +53,10 @@ const Ve = Te((e) => n.jsx(P, { light: Le, dark: De, ...e }), "EntityNonPersista
       return !0;
   }
   return !0;
-}, Ne = async (e, a) => {
+}, He = async (e, a) => {
   if (!a.modelQualifiedName)
     return;
-  const r = (await e.app.model.customBlobDocuments.getDocumentsOfType(G)).find((c) => c.moduleName + "." + c.name === a.modelQualifiedName);
+  const r = (await e.app.model.customBlobDocuments.getDocumentsOfType(W)).find((l) => l.moduleName + "." + l.name === a.modelQualifiedName);
   if (!r) {
     await e.ui.messageBoxes.show(
       "error",
@@ -67,10 +67,10 @@ const Ve = Te((e) => n.jsx(P, { light: Le, dark: De, ...e }), "EntityNonPersista
   }
   await e.ui.editors.editDocument(r.id);
 }, Fe = async (e, a) => {
-  var c;
+  var l;
   if (!a.entity)
     return;
-  const r = (c = await Z(e, a.entity)) == null ? void 0 : c.getContainer();
+  const r = (l = await Z(e, a.entity)) == null ? void 0 : l.getContainer();
   if (!r) {
     await e.ui.messageBoxes.show(
       "error",
@@ -83,13 +83,13 @@ const Ve = Te((e) => n.jsx(P, { light: Le, dark: De, ...e }), "EntityNonPersista
 }, S = async (e, a, r) => {
   try {
     await e.app.model.customBlobDocuments.updateDocumentContent(r, a);
-  } catch (c) {
+  } catch (l) {
     e.ui.notifications.show({
       title: "Failed to save document",
-      message: c.message
+      message: l.message
     });
   }
-}, Ie = async (e, a, r, c) => {
+}, Ie = async (e, a, r, l) => {
   const i = await e.ui.dialogs.showModal(
     {
       title: "Model settings",
@@ -103,9 +103,9 @@ const Ve = Te((e) => n.jsx(P, { light: Le, dark: De, ...e }), "EntityNonPersista
       }
     }
   );
-  let l;
-  return i && (l = i), l && await S(e, l, c), l;
-}, We = L(ce).withConfig({
+  let c;
+  return i && (c = i), c && await S(e, c, l), c;
+}, We = T(ce).withConfig({
   shouldForwardProp: (e) => !["hasHighlighting"].includes(e)
 })`
   width: 100%;
@@ -125,7 +125,7 @@ const Ve = Te((e) => n.jsx(P, { light: Le, dark: De, ...e }), "EntityNonPersista
     position: relative;
     z-index: 1;
   }
-`, $e = L.div`
+`, Qe = T.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -144,11 +144,11 @@ const Ve = Te((e) => n.jsx(P, { light: Le, dark: De, ...e }), "EntityNonPersista
   overflow: visible;
   z-index: 0;
   transform: translateY(var(--scroll-offset, 0px));
-`, Re = L.div`
+`, Re = T.div`
   position: relative;
   width: 100%;
   overflow: hidden;
-`, Qe = L.div`
+`, $e = T.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -158,17 +158,17 @@ const Ve = Te((e) => n.jsx(P, { light: Le, dark: De, ...e }), "EntityNonPersista
   background-color: #fff;
   z-index: -1;
   border: 1px solid transparent;
-`, z = ({
+`, P = ({
   label: e,
   ariaLabel: a,
   value: r,
-  onChange: c,
+  onChange: l,
   readOnly: i = !1,
-  defaultHeightRows: l,
+  defaultHeightRows: c,
   highlightRules: g,
   validate: y
 }) => {
-  const f = o.useRef(null), v = o.useRef(null), [s, x] = o.useState(0), M = l || 5, C = g && g.length > 0, T = () => {
+  const f = o.useRef(null), v = o.useRef(null), [s, x] = o.useState(0), L = c || 5, C = g && g.length > 0, V = () => {
     if (!C) return null;
     const d = [];
     g.forEach((p, w) => {
@@ -219,16 +219,16 @@ const Ve = Te((e) => n.jsx(P, { light: Le, dark: De, ...e }), "EntityNonPersista
       };
     }
   }, [k, j]), /* @__PURE__ */ n.jsxs(I, { children: [
-    e && /* @__PURE__ */ n.jsx(A, { children: /* @__PURE__ */ n.jsx(q, { children: e }) }),
+    e && /* @__PURE__ */ n.jsx(A, { children: /* @__PURE__ */ n.jsx(G, { children: e }) }),
     /* @__PURE__ */ n.jsx(A, { fullWidth: !0, children: /* @__PURE__ */ n.jsxs(Re, { ref: f, children: [
       C && /* @__PURE__ */ n.jsxs(n.Fragment, { children: [
-        /* @__PURE__ */ n.jsx(Qe, {}),
+        /* @__PURE__ */ n.jsx($e, {}),
         /* @__PURE__ */ n.jsx(
-          $e,
+          Qe,
           {
             ref: v,
             style: { paddingRight: `${2 + s}px` },
-            children: T()
+            children: V()
           }
         )
       ] }),
@@ -238,8 +238,8 @@ const Ve = Te((e) => n.jsx(P, { light: Le, dark: De, ...e }), "EntityNonPersista
           ariaLabel: a,
           value: r,
           readOnly: i,
-          onChange: c,
-          rows: M,
+          onChange: l,
+          rows: L,
           hasHighlighting: C,
           validate: y
         }
@@ -250,9 +250,9 @@ const Ve = Te((e) => n.jsx(P, { light: Le, dark: De, ...e }), "EntityNonPersista
   label: e,
   ariaLabel: a,
   value: r,
-  buttonCaption: c,
+  buttonCaption: l,
   onClick: i,
-  buttonCaptionSecondary: l,
+  buttonCaptionSecondary: c,
   onClickSecondary: g,
   placeholder: y,
   hasMarginTop: f = !1,
@@ -261,7 +261,7 @@ const Ve = Te((e) => n.jsx(P, { light: Le, dark: De, ...e }), "EntityNonPersista
 }) => {
   const x = f ? 8 : 0;
   return /* @__PURE__ */ n.jsxs(I, { marginTop: x, children: [
-    e && /* @__PURE__ */ n.jsx(A, { children: /* @__PURE__ */ n.jsx(q, { children: e }) }),
+    e && /* @__PURE__ */ n.jsx(A, { children: /* @__PURE__ */ n.jsx(G, { children: e }) }),
     /* @__PURE__ */ n.jsx(A, { fullWidth: !0, children: /* @__PURE__ */ n.jsxs(I, { children: [
       /* @__PURE__ */ n.jsx(A, { fullWidth: !0, children: /* @__PURE__ */ n.jsx(
         ie,
@@ -275,17 +275,17 @@ const Ve = Te((e) => n.jsx(P, { light: Le, dark: De, ...e }), "EntityNonPersista
         }
       ) }),
       /* @__PURE__ */ n.jsx(
-        Q,
+        O,
         {
           onPress: i,
-          children: c
+          children: l
         }
       ),
-      l && /* @__PURE__ */ n.jsx(
-        Q,
+      c && /* @__PURE__ */ n.jsx(
+        O,
         {
           onPress: g,
-          children: l
+          children: c
         }
       )
     ] }) })
@@ -298,12 +298,12 @@ const Ve = Te((e) => n.jsx(P, { light: Le, dark: De, ...e }), "EntityNonPersista
   missingAttributes: [],
   unusedAttributes: []
 }, Ue = ge(), ze = ({ studioPro: e, documentId: a }) => {
-  const r = e.ui.messageBoxes, c = e.app.model.customBlobDocuments, [i, l] = o.useState(Oe), [g, y] = o.useState(!1), [f, v] = o.useState(void 0), [s, x] = o.useState(Ue), [M, C] = o.useState(!1), [T, j] = o.useState(!1), [k, d] = o.useState(s.systemPrompt), [h, u] = o.useState(s.userPrompt ?? ""), [p, w] = o.useState(s.description), E = o.useRef(null), b = o.useRef(null), V = o.useRef(null);
+  const r = e.ui.messageBoxes, l = e.app.model.customBlobDocuments, [i, c] = o.useState(Oe), [g, y] = o.useState(!1), [f, v] = o.useState(void 0), [s, x] = o.useState(Ue), [L, C] = o.useState(!1), [V, j] = o.useState(!1), [k, d] = o.useState(s.systemPrompt), [h, u] = o.useState(s.userPrompt ?? ""), [p, w] = o.useState(s.description), E = o.useRef(null), b = o.useRef(null), D = o.useRef(null);
   o.useEffect(() => {
-    c.getDocumentById(a).then(async (t) => {
+    l.getDocumentById(a).then(async (t) => {
       if (t && !("error" in t)) {
-        const m = t.document.contents, D = await $(m);
-        x(m), d(m.systemPrompt), u(m.userPrompt ?? ""), w(m.description), l(D), y(!0);
+        const m = t.document.contents, M = await R(m);
+        x(m), d(m.systemPrompt), u(m.userPrompt ?? ""), w(m.description), c(M), y(!0);
       } else
         throw new Error((t == null ? void 0 : t.error) || "Document not found");
     }).catch((t) => {
@@ -316,36 +316,36 @@ const Ve = Te((e) => n.jsx(P, { light: Le, dark: De, ...e }), "EntityNonPersista
     })();
   }, [e, s.entity]), o.useEffect(() => {
     g && (async () => {
-      const m = await $(s);
-      l(m);
+      const m = await R(s);
+      c(m);
     })();
   }, [e, s]);
-  const W = o.useMemo(
+  const Q = o.useMemo(
     () => fe(s.variables),
     [s.variables]
   ), J = o.useCallback((t) => {
     d(t), E.current && clearTimeout(E.current), E.current = setTimeout(async () => {
-      const m = await H(e, "systemPrompt", s, a)(t);
+      const m = await B(e, "systemPrompt", s, a)(t);
       x(m);
     }, 300);
   }, [e, s, a]), Y = o.useCallback((t) => {
     u(t), b.current && clearTimeout(b.current), b.current = setTimeout(async () => {
-      const m = await H(e, "userPrompt", s, a)(t);
+      const m = await B(e, "userPrompt", s, a)(t);
       x(m);
     }, 300);
   }, [e, s, a]), K = o.useCallback((t) => {
-    w(t), V.current && clearTimeout(V.current), V.current = setTimeout(async () => {
-      const m = await H(e, "description", s, a)(t);
+    w(t), D.current && clearTimeout(D.current), D.current = setTimeout(async () => {
+      const m = await B(e, "description", s, a)(t);
       x(m);
     }, 300);
   }, [e, s, a]), X = o.useCallback(async () => {
-    const t = await Be(e, s, a);
+    const t = await Ne(e, s, a);
     t && x(t);
   }, [e, s, a]), _ = o.useCallback(async () => {
-    const t = await He(e, s, a, "modelQualifiedName");
+    const t = await Be(e, s, a);
     t && x(t);
   }, [e, s, a]), ee = o.useCallback(async () => {
-    await Ne(e, s);
+    await He(e, s);
   }, [e, s]), te = o.useCallback(async () => {
     await Fe(e, s);
   }, [e, s]), ne = o.useCallback(async () => {
@@ -354,19 +354,19 @@ const Ve = Te((e) => n.jsx(P, { light: Le, dark: De, ...e }), "EntityNonPersista
   }, [e, s, a]), se = o.useCallback(async (t, m) => {
     if (!m)
       return;
-    const D = await Z(t, m);
-    if (!D)
+    const M = await Z(t, m);
+    if (!M)
       return;
-    const R = await xe(D, t);
-    if (R !== void 0)
-      return R ? /* @__PURE__ */ n.jsx(Ee, {}) : /* @__PURE__ */ n.jsx(Ve, {});
+    const $ = await xe(M, t);
+    if ($ !== void 0)
+      return $ ? /* @__PURE__ */ n.jsx(Ee, {}) : /* @__PURE__ */ n.jsx(De, {});
   }, [e, s.entity]), ae = o.useMemo(() => {
     let t = "";
     return s.maxTokens !== void 0 && (t += "Max tokens: " + s.maxTokens.toLocaleString(navigator.language)), s.temperature !== void 0 && (t.length > 0 && (t += ", "), t += "Temperature: " + s.temperature.toLocaleString(navigator.language, { minimumFractionDigits: 1, maximumFractionDigits: 2 })), s.topP !== void 0 && (t.length > 0 && (t += ", "), t += "Top P: " + s.topP.toLocaleString(navigator.language, { minimumFractionDigits: 1, maximumFractionDigits: 2 })), t;
-  }, [s.temperature, s.maxTokens, s.topP]), $ = async (t) => ({
-    isValidModel: await N("modelQualifiedName", e, t),
-    isValidEntity: await N("entity", e, t),
-    isValidUserPrompt: await N("userPrompt", e, t),
+  }, [s.temperature, s.maxTokens, s.topP]), R = async (t) => ({
+    isValidModel: await H("modelQualifiedName", e, t),
+    isValidEntity: await H("entity", e, t),
+    isValidUserPrompt: await H("userPrompt", e, t),
     showCreateVariablesInfo: t.variables.length === 0,
     missingAttributes: await be(e, t),
     unusedAttributes: await ye(e, t)
@@ -374,28 +374,28 @@ const Ve = Te((e) => n.jsx(P, { light: Le, dark: De, ...e }), "EntityNonPersista
   return /* @__PURE__ */ n.jsx(re, { studioPro: e, children: /* @__PURE__ */ n.jsxs(oe, { children: [
     !g && /* @__PURE__ */ n.jsx("span", { children: "Loading document content..." }),
     g && /* @__PURE__ */ n.jsxs(le, { children: [
-      /* @__PURE__ */ n.jsxs(O, { children: [
-        /* @__PURE__ */ n.jsx(B, { label: "System prompt", children: /* @__PURE__ */ n.jsx(
-          z,
+      /* @__PURE__ */ n.jsxs(U, { children: [
+        /* @__PURE__ */ n.jsx(N, { label: "System prompt", children: /* @__PURE__ */ n.jsx(
+          P,
           {
             ariaLabel: "System prompt",
             value: k,
             onChange: J,
-            highlightRules: W
+            highlightRules: Q
           }
         ) }),
-        /* @__PURE__ */ n.jsx(B, { label: "User prompt", children: /* @__PURE__ */ n.jsx(
-          z,
+        /* @__PURE__ */ n.jsx(N, { label: "User prompt", children: /* @__PURE__ */ n.jsx(
+          P,
           {
             ariaLabel: "User prompt",
             value: h,
             onChange: Y,
-            highlightRules: W,
+            highlightRules: Q,
             validate: () => i.isValidUserPrompt
           }
         ) })
       ] }),
-      /* @__PURE__ */ n.jsx(O, { children: /* @__PURE__ */ n.jsxs(B, { label: "General", children: [
+      /* @__PURE__ */ n.jsx(U, { children: /* @__PURE__ */ n.jsxs(N, { label: "General", children: [
         /* @__PURE__ */ n.jsx(
           F,
           {
@@ -445,8 +445,8 @@ const Ve = Te((e) => n.jsx(P, { light: Le, dark: De, ...e }), "EntityNonPersista
             onClickSecondary: s.entity ? te : void 0
           }
         ),
-        i.showCreateVariablesInfo && i.unusedAttributes.length === 0 && !T && /* @__PURE__ */ n.jsx(
-          U,
+        i.showCreateVariablesInfo && i.unusedAttributes.length === 0 && !V && /* @__PURE__ */ n.jsx(
+          z,
           {
             onClose: () => j(!0),
             children: "Create variables: Enclose a word or text in double curly brackets. For example, you can write {{Language}} in the system or user prompt."
@@ -456,8 +456,8 @@ const Ve = Te((e) => n.jsx(P, { light: Le, dark: De, ...e }), "EntityNonPersista
           /* @__PURE__ */ n.jsx("span", { children: "The following attributes cannot be found on the selected entity:" }),
           /* @__PURE__ */ n.jsx("ul", { children: i.missingAttributes.map((t) => /* @__PURE__ */ n.jsx("li", { children: t }, t)) })
         ] }),
-        i.unusedAttributes.length > 0 && !M && /* @__PURE__ */ n.jsxs(
-          U,
+        i.unusedAttributes.length > 0 && !L && /* @__PURE__ */ n.jsxs(
+          z,
           {
             onClose: () => C(!0),
             children: [

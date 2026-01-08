@@ -1,64 +1,64 @@
-import { r as o, j as t, A as b, P as w, c as f, C as x, F as C } from "./TextInputWithIcon-elAaw22_.js";
-import { T as D } from "./TextInputLabeled-BSwHRbEr.js";
-import { c as j } from "./componentLoader-QONLtPwE.js";
-function E(n) {
+import { r as c, j as s, A as b, P as w, c as f, C as x, F as C } from "./TextInputWithIcon-elAaw22_.js";
+import { c as D } from "./logger-BM6R1Quw.js";
+import { T as j } from "./TextInputLabeled-BSwHRbEr.js";
+import { c as E } from "./componentLoader-Cv8RpErS.js";
+function v(n) {
   return {
     name: ""
   };
 }
-const v = (n, s, c, a, i) => async (l) => {
-  console.log("knowledgebase change triggered for field ", s);
-  const r = { ...c, [s]: l };
-  a(r), await L(n, r, i);
-}, L = async (n, s, c) => {
-  console.log("Save logic triggered");
+const L = (n, t, r, a, o) => async (l) => {
+  const i = { ...r, [t]: l };
+  a(i), await y(n, i, o);
+}, y = async (n, t, r) => {
+  const a = D(n);
   try {
-    await n.app.model.customBlobDocuments.updateDocumentContent(c, s);
-  } catch (a) {
-    n.ui.notifications.show({
+    await n.app.model.customBlobDocuments.updateDocumentContent(r, t);
+  } catch (o) {
+    a.error("Failed to save knowledgebasedocument:", o), n.ui.notifications.show({
       title: "Failed to save document",
-      message: a.message
+      message: o.message
     });
   }
-}, y = E(), K = ({ studioPro: n, documentId: s }) => {
-  const c = n.ui.messageBoxes, a = n.app.model.customBlobDocuments, [i, l] = o.useState(0), [r, h] = o.useState(!1), [g, m] = o.useState(y);
-  return o.useCallback(
-    (e) => v(n, e, g, m, s),
-    [n, g, m, s]
-  ), o.useEffect(() => {
-    const e = (d) => {
-      const { documents: u } = d;
-      u.some((p) => p.id === s) && l((p) => p + 1);
+}, K = v(), k = ({ studioPro: n, documentId: t }) => {
+  const r = n.ui.messageBoxes, a = n.app.model.customBlobDocuments, [o, l] = c.useState(0), [i, h] = c.useState(!1), [m, d] = c.useState(K);
+  return c.useCallback(
+    (e) => L(n, e, m, d, t),
+    [n, m, d, t]
+  ), c.useEffect(() => {
+    const e = (u) => {
+      const { documents: g } = u;
+      g.some((p) => p.documentId === t) && l((p) => p + 1);
     };
     return a.addEventListener("documentsChanged", e), () => {
       a.removeEventListener("documentsChanged", e);
     };
-  }, []), o.useEffect(() => {
-    a.getDocumentById(s).then(async (e) => {
+  }, []), c.useEffect(() => {
+    a.getDocumentById(t).then(async (e) => {
       if (e && !("error" in e)) {
-        const d = e.document.contents, u = e.document.name;
-        m({ ...d, name: u }), h(!0);
+        const u = e.document.contents, g = e.document.name;
+        d({ ...u, name: g }), h(!0);
       } else
         throw new Error((e == null ? void 0 : e.error) || "Document not found");
     }).catch((e) => {
-      c.show("error", "Error loading document", "Details: " + (e == null ? void 0 : e.message) || e);
+      r.show("error", "Error loading document", "Details: " + (e == null ? void 0 : e.message) || e);
     });
-  }, [i]), /* @__PURE__ */ t.jsx(b, { studioPro: n, children: /* @__PURE__ */ t.jsxs(w, { children: [
-    !r && /* @__PURE__ */ t.jsx("span", { children: "Loading document content..." }),
-    r && /* @__PURE__ */ t.jsx(f, { children: /* @__PURE__ */ t.jsx(x, { children: /* @__PURE__ */ t.jsx(C, { label: "General", children: /* @__PURE__ */ t.jsx(
-      D,
+  }, [o]), /* @__PURE__ */ s.jsx(b, { studioPro: n, children: /* @__PURE__ */ s.jsxs(w, { children: [
+    !i && /* @__PURE__ */ s.jsx("span", { children: "Loading document content..." }),
+    i && /* @__PURE__ */ s.jsx(f, { children: /* @__PURE__ */ s.jsx(x, { children: /* @__PURE__ */ s.jsx(C, { label: "General", children: /* @__PURE__ */ s.jsx(
+      j,
       {
         label: "Name",
         ariaLabel: "Name",
-        value: g.name,
+        value: m.name,
         onChange: () => {
         },
         readOnly: !0
       }
     ) }) }) })
   ] }) });
-}, N = j(K);
+}, T = E(k);
 export {
-  N as component
+  T as component
 };
 //# sourceMappingURL=knowledgebaseEdit.js.map
