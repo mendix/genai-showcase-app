@@ -29009,6 +29009,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border: 1px solid #ced0d3;
   margin: 0 10% 0 0;
   padding: 8px 12px;
+  padding-bottom: 0px;
 }
 .chat-bubble-wrapper--user {
   align-items: flex-end;
