@@ -5,7 +5,6 @@ import com.mendix.m2ee.api.IMxRuntimeRequest;
 import com.mendix.m2ee.api.IMxRuntimeResponse;
 import io.modelcontextprotocol.spec.McpServerSession;
 import io.modelcontextprotocol.spec.McpServerTransportProvider;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import mcpserver.proxies.McpServer;
@@ -67,7 +66,6 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
             
             switch (method) {
                 case "OPTIONS":
-                    // Handle CORS preflight
                     transportHandler.handleHead(request, response, path);
                     break;
                     
@@ -105,33 +103,15 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
         }
     }
     
+    /**
+     * Server-to-client notifications are not supported with Streamable HTTP transport.
+     * Streamable HTTP is request-response based without persistent connections,
+     * so the server cannot push unsolicited messages to clients.
+     * This method is a no-op and returns immediately.
+     */
     @Override
     public Mono<Void> notifyClients(String method, Object params) {
-        McpSessionManager sessionManager = McpSessionManager.getInstance();
-        if (!sessionManager.hasSessions()) {
-            return Mono.empty();
-        }
-        
-        // Track failed notifications for logging
-        java.util.concurrent.atomic.AtomicInteger failureCount = new java.util.concurrent.atomic.AtomicInteger(0);
-        int totalSessions = sessionManager.getNumberOfSessions();
-        
-        return Flux.fromIterable(sessionManager.getAllSessions())
-                .flatMap(session -> session.sendNotification(method, params)
-                        .doOnError(err -> {
-                            failureCount.incrementAndGet();
-                            LOGGER.warn("Failed to send notification '" + method + "' to session " + session.getId() + ": " + err.getMessage());
-                        }))
-                .onErrorResume(err -> Mono.empty())  // Continue on individual errors
-                .then()
-                .doOnTerminate(() -> {
-                    int failures = failureCount.get();
-                    if (failures > 0) {
-                        LOGGER.warn("Notification '" + method + "' failed for " + failures + "/" + totalSessions + " sessions");
-                    } else {
-                        LOGGER.debug("Notification '" + method + "' sent to " + totalSessions + " sessions");
-                    }
-                });
+        return Mono.empty();
     }
     
     @Override

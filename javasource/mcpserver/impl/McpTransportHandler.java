@@ -39,6 +39,7 @@ public class McpTransportHandler {
     
     public static final String UTF_8 = "UTF-8";
     public static final String APPLICATION_JSON = "application/json";
+    public static final String TEXT_EVENT_STREAM = "text/event-stream";
     public static final String SESSION_HEADER = "Mcp-Session-Id";  // Streamable HTTP uses Mcp-Session-Id
     
     /**
@@ -187,9 +188,6 @@ public class McpTransportHandler {
                 }
             }
             
-            // Set the response object for this request
-            sessionTransport.setResponse(httpResponse);
-            
             // Read and process the message
             String bodyString = readRequestBody(httpRequest);
             LOGGER.debug("Received request body: " + bodyString);
@@ -201,59 +199,68 @@ public class McpTransportHandler {
             String messageType = message.getClass().getSimpleName();
             LOGGER.debug("Processing message type: " + messageType);
             
-            // Check if this is a request for an unsupported optional method
-            // Return empty success response immediately so clients can continue
+            // Extract request ID and register this request with its response object
+            Object requestId = null;
             if (message instanceof McpSchema.JSONRPCRequest) {
-                McpSchema.JSONRPCRequest jsonRpcRequest = (McpSchema.JSONRPCRequest) message;
-                String method = jsonRpcRequest.method();
-                
-                if (isUnsupportedOptionalMethod(method)) {
-                    LOGGER.debug("Unsupported optional method: " + method + ", returning empty success response");
-                    McpSchema.JSONRPCResponse emptyResponse = new McpSchema.JSONRPCResponse(
-                        McpSchema.JSONRPC_VERSION,
-                        jsonRpcRequest.id(),
-                        java.util.Collections.emptyMap(),
-                        null
-                    );
-                    sessionTransport.sendMessage(emptyResponse).block();
-                    LOGGER.debug("Message handled successfully");
-                    return;
-                }
+                requestId = ((McpSchema.JSONRPCRequest) message).id();
+                sessionTransport.registerRequest(requestId, httpResponse);
             }
             
-            // Handle supported methods through the SDK
-            LOGGER.debug("Calling session.handle() for message");
             try {
-                session.handle(message)
-                    .timeout(java.time.Duration.ofSeconds(30))
-                    .block();
-            } catch (Exception handleEx) {
-                LOGGER.warn("session.handle() failed or timed out: " + handleEx.getMessage());
-                // If no response was sent and this is a request, send an error
-                if (message instanceof McpSchema.JSONRPCRequest && !sessionTransport.wasMessageSent()) {
+                // Check if this is a request for an unsupported optional method
+                // Return empty success response immediately so clients can continue
+                if (message instanceof McpSchema.JSONRPCRequest) {
                     McpSchema.JSONRPCRequest jsonRpcRequest = (McpSchema.JSONRPCRequest) message;
-                    McpSchema.JSONRPCResponse errorResponse = new McpSchema.JSONRPCResponse(
-                        McpSchema.JSONRPC_VERSION,
-                        jsonRpcRequest.id(),
-                        null,
-                        new McpSchema.JSONRPCResponse.JSONRPCError(-32603, "Internal error: " + handleEx.getMessage(), null)
-                    );
-                    sessionTransport.sendMessage(errorResponse).block();
+                    String method = jsonRpcRequest.method();
+                    
+                    if (isUnsupportedOptionalMethod(method)) {
+                        LOGGER.debug("Unsupported optional method: " + method + ", returning empty success response");
+                        McpSchema.JSONRPCResponse emptyResponse = new McpSchema.JSONRPCResponse(
+                            McpSchema.JSONRPC_VERSION,
+                            jsonRpcRequest.id(),
+                            java.util.Collections.emptyMap(),
+                            null
+                        );
+                        sessionTransport.sendMessage(emptyResponse).block();
+                        LOGGER.debug("Message handled successfully");
+                        return;
+                    }
+                }
+                
+                // Handle supported methods through the SDK
+                LOGGER.debug("Calling session.handle() for message");
+                try {
+                    session.handle(message)
+                        .timeout(java.time.Duration.ofSeconds(30))
+                        .block();
+                } catch (Exception handleEx) {
+                    LOGGER.warn("session.handle() failed or timed out: " + handleEx.getMessage());
+                    // If no response was sent and this is a request, send an error
+                    if (message instanceof McpSchema.JSONRPCRequest && !sessionTransport.wasMessageSent(requestId)) {
+                        McpSchema.JSONRPCRequest jsonRpcRequest = (McpSchema.JSONRPCRequest) message;
+                        McpSchema.JSONRPCResponse errorResponse = new McpSchema.JSONRPCResponse(
+                            McpSchema.JSONRPC_VERSION,
+                            jsonRpcRequest.id(),
+                            null,
+                            new McpSchema.JSONRPCResponse.JSONRPCError(-32603, "Internal error: " + handleEx.getMessage(), null)
+                        );
+                        sessionTransport.sendMessage(errorResponse).block();
+                    }
+                }
+                
+                LOGGER.debug("Message handled successfully for request: " + requestId);
+                
+            } finally {
+                // Unregister request after completion
+                if (requestId != null) {
+                    sessionTransport.unregisterRequest(requestId);
                 }
             }
-            
-            LOGGER.debug("Message handled successfully, messageSent=" + sessionTransport.wasMessageSent());
             
         } catch (Exception e) {
             LOGGER.error("Error processing MCP message: " + e.getMessage(), e);
             if (!httpResponse.isCommitted()) {
                 sendJsonError(httpResponse, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
-            }
-        } finally {
-            // Clear response after request completes but keep session alive
-            StreamableHttpSessionTransport transport = transports.get(sessionId);
-            if (transport != null) {
-                transport.clearResponse();
             }
         }
     }
@@ -438,10 +445,17 @@ public class McpTransportHandler {
         response.setContentType(APPLICATION_JSON);
         response.setCharacterEncoding(UTF_8);
         response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "POST, DELETE, OPTIONS");
-        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Mcp-Session-Id");
-        response.setHeader("Access-Control-Expose-Headers", "Mcp-Session-Id");
+    }
+    
+    /**
+     * Set response headers for SSE (Server-Sent Events) format.
+     * VS Code and some other MCP clients expect SSE format for Streamable HTTP transport.
+     */
+    private void setSSEResponseHeaders(HttpServletResponse response) {
+        response.setContentType(TEXT_EVENT_STREAM);
+        response.setCharacterEncoding(UTF_8);
+        response.setHeader("Cache-Control", "no-cache, no-transform");
+        response.setHeader("Connection", "keep-alive");
     }
     
     protected String getSessionId(HttpServletRequest httpServletRequest, McpServer mcpServer) throws CoreException {
@@ -452,107 +466,131 @@ public class McpTransportHandler {
     /**
      * Implementation of McpServerTransport for Streamable HTTP sessions.
      * Uses synchronous HTTP request/response for bidirectional communication.
+     * Supports concurrent requests by tracking responses per JSON-RPC request ID.
+     * Cleanup is handled by the finally block in handlePost() after each request.
      */
     private class StreamableHttpSessionTransport implements McpServerTransport {
         
         private final String sessionId;
-        private final Object lock = new Object();
-        private volatile HttpServletResponse response;
-        private volatile boolean messageSent = false;
+        // Map of JSON-RPC request ID to pending response info
+        private final Map<Object, PendingRequest> pendingRequests = new java.util.concurrent.ConcurrentHashMap<>();
+        
+        /**
+         * Holds information about a pending request awaiting a response.
+         */
+        private static class PendingRequest {
+            final HttpServletResponse response;
+            volatile boolean messageSent = false;
+            
+            PendingRequest(HttpServletResponse response) {
+                this.response = response;
+            }
+        }
         
         StreamableHttpSessionTransport(String sessionId, HttpServletResponse response) {
             this.sessionId = sessionId;
-            this.response = response;
+            // Initial response is not associated with any request ID yet
         }
         
         /**
-         * Set the response object for this request.
-         * @param newResponse The response object for this request
+         * Register a pending request with its response object.
+         * @param requestId The JSON-RPC request ID
+         * @param response The HTTP response object for this request
          */
-        public void setResponse(HttpServletResponse newResponse) {
-            synchronized (lock) {
-                this.response = newResponse;
-                this.messageSent = false; // Reset flag for new request
+        public void registerRequest(Object requestId, HttpServletResponse response) {
+            if (requestId != null) {
+                pendingRequests.put(requestId, new PendingRequest(response));
+                LOGGER.debug("Registered pending request: " + requestId + " for session: " + sessionId);
             }
         }
         
         /**
-         * Clear the response object after request completes.
+         * Unregister a completed request.
+         * @param requestId The JSON-RPC request ID
          */
-        public void clearResponse() {
-            synchronized (lock) {
-                this.response = null;
-                this.messageSent = false;
+        public void unregisterRequest(Object requestId) {
+            if (requestId != null) {
+                pendingRequests.remove(requestId);
+                LOGGER.debug("Unregistered request: " + requestId + " for session: " + sessionId);
             }
         }
         
         /**
-         * Check if a message was sent for this request.
-         * Used to detect when no response was sent for a request method.
+         * Check if a message was sent for a specific request.
+         * @param requestId The JSON-RPC request ID
          */
-        public boolean wasMessageSent() {
-            synchronized (lock) {
-                return messageSent;
-            }
+        public boolean wasMessageSent(Object requestId) {
+            PendingRequest pending = pendingRequests.get(requestId);
+            return pending != null && pending.messageSent;
         }
         
         @Override
         public Mono<Void> sendMessage(McpSchema.JSONRPCMessage message) {
-            // Make sendMessage idempotent - if already sent, just return
             return Mono.fromRunnable(() -> {
-                synchronized (lock) {
-                    // Drop notifications - Streamable HTTP clients cannot receive server-initiated notifications
-                    if (message instanceof McpSchema.JSONRPCNotification) {
-                        LOGGER.debug("Dropping notification for session: " + sessionId + 
-                                   " - method: " + ((McpSchema.JSONRPCNotification) message).method());
-                        return;
-                    }
-                    
-                    // If already sent for this request, skip
-                    if (messageSent) {
-                        LOGGER.debug("Message already sent for this request, skipping duplicate send for session: " + sessionId);
+                // Drop notifications - Streamable HTTP clients cannot receive server-initiated notifications
+                if (message instanceof McpSchema.JSONRPCNotification) {
+                    LOGGER.debug("Dropping notification for session: " + sessionId + 
+                               " - method: " + ((McpSchema.JSONRPCNotification) message).method());
+                    return;
+                }
+                
+                // Extract the request ID from the response to find the correct pending request
+                Object requestId = null;
+                if (message instanceof McpSchema.JSONRPCResponse) {
+                    requestId = ((McpSchema.JSONRPCResponse) message).id();
+                }
+                
+                if (requestId == null) {
+                    LOGGER.warn("Cannot send message without request ID for session: " + sessionId);
+                    return;
+                }
+                
+                PendingRequest pending = pendingRequests.get(requestId);
+                if (pending == null) {
+                    LOGGER.warn("No pending request found for ID: " + requestId + " in session: " + sessionId);
+                    return;
+                }
+                
+                synchronized (pending) {
+                    // If already sent for this request, skip (idempotent)
+                    if (pending.messageSent) {
+                        LOGGER.debug("Message already sent for request: " + requestId + ", skipping duplicate");
                         return;
                     }
                     
                     String messageType = message.getClass().getSimpleName();
-                    LOGGER.debug("Sending response message for session: " + sessionId + ", type: " + messageType);
-                    sendMessageNow(message);
-                    messageSent = true;
-                    LOGGER.debug("Response sent successfully for session: " + sessionId);
+                    LOGGER.debug("Sending response for request: " + requestId + ", session: " + sessionId + ", type: " + messageType);
+                    sendMessageNow(message, pending.response);
+                    pending.messageSent = true;
+                    LOGGER.debug("Response sent successfully for request: " + requestId);
                 }
             });
         }
         
-        private void sendMessageNow(McpSchema.JSONRPCMessage message) {
-            HttpServletResponse currentResponse;
-            
-            // Get response reference under lock
-            synchronized (lock) {
-                currentResponse = this.response;
-                if (currentResponse == null) {
-                    LOGGER.warn("Cannot send message, response is null for session: " + sessionId);
-                    return;
-                }
+        private void sendMessageNow(McpSchema.JSONRPCMessage message, HttpServletResponse targetResponse) {
+            if (targetResponse == null) {
+                LOGGER.warn("Cannot send message, response is null for session: " + sessionId);
+                return;
             }
             
-            // Send response outside lock to avoid holding lock during I/O
             try {
-                synchronized (lock) {
-                    if (currentResponse.isCommitted()) {
-                        LOGGER.warn("Cannot send message, response already committed for session: " + sessionId);
-                        return;
-                    }
+                if (targetResponse.isCommitted()) {
+                    LOGGER.warn("Cannot send message, response already committed for session: " + sessionId);
+                    return;
                 }
                 
-                currentResponse.setStatus(HttpServletResponse.SC_OK);
-                setStreamableHttpResponseHeaders(currentResponse);
+                targetResponse.setStatus(HttpServletResponse.SC_OK);
+                // Use SSE format for VS Code and other clients that expect text/event-stream
+                setSSEResponseHeaders(targetResponse);
                 
                 String jsonText = MAPPER.writeValueAsString(message);
-                currentResponse.getOutputStream().write(jsonText.getBytes(UTF_8));
-                currentResponse.getOutputStream().flush();
-                currentResponse.flushBuffer();
+                // SSE format: each event is prefixed with "data: " and terminated with double newline
+                String sseEvent = "data: " + jsonText + "\n\n";
+                targetResponse.getOutputStream().write(sseEvent.getBytes(UTF_8));
+                targetResponse.getOutputStream().flush();
+                targetResponse.flushBuffer();
                 
-                LOGGER.debug("Message sent for session: " + sessionId);
+                LOGGER.debug("Message sent (SSE format) for session: " + sessionId);
                 
             } catch (Exception e) {
                 LOGGER.error("Failed to send message for session " + sessionId + ": " + e.getMessage(), e);

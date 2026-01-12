@@ -100,11 +100,10 @@ public class McpSessionManager
 	public ISession getMxRuntimeSession(McpSyncServerExchange exchange) throws Exception {
 		LOGGER.debug("Looking up Mendix session for SDK session: " + exchange.sessionId());
 		
-		// Step 1: Map SDK internal session ID -> MCP session ID
+		// Map SDK internal session ID -> MCP session ID
 		String mcpSessionId = internalToExternalSessionMap.get(exchange.sessionId());
-		LOGGER.debug("MCP session ID: " + mcpSessionId);
 		
-		// Step 2: Map MCP session ID -> Mendix session ID
+		// Map MCP session ID -> Mendix session ID
 		if (mcpSessionId != null) {
 			String mendixSessionId = mcpToMendixSessionMap.get(mcpSessionId);
 			LOGGER.debug("Mendix session ID from mapping: " + mendixSessionId);
@@ -119,8 +118,7 @@ public class McpSessionManager
 	}
 	
 	/**
-	 * Returns a context object for the tool microflow. If no user session can be found, a system session is returned.
-	 * Works in both stateful and stateless modes.
+	 * Returns a context object for the tool or prompt microflow. If no user session can be found, a system session is returned.
 	 * @param exchange 
 	 * @return Context object
 	 * @throws Exception 
