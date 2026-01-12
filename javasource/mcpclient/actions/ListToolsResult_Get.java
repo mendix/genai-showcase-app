@@ -53,7 +53,8 @@ public class ListToolsResult_Get extends UserAction<IMendixObject>
 			requireNonNull(MCPClient,"MCP Client is required.");
 
 			McpSyncClient client = McpClientRegistry.getClient(MCPClient.getMendixObject().getId().toLong());	
-			McpSchema.ListToolsResult listToolsResultMcp = client.listTools();	
+			McpSchema.ListToolsResult listToolsResultMcp = client.listTools();
+			LOGGER.debug("Successfully retrieved list of tools: " + listToolsResultMcp.toString());	
 			ListToolsResult listToolResultMendix = createListToolsResult(listToolsResultMcp);	
 			return listToolResultMendix.getMendixObject();
 		} catch (Exception e) {

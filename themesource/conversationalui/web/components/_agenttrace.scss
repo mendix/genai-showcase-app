@@ -1,0 +1,56 @@
+@import "../../../../theme/web/custom-variables.scss";
+@import "../../../atlas_core/web/_variables.scss";
+
+// --------------------------------------
+// Shared Hover Outline Style
+// --------------------------------------
+.trace-hover {
+  &:hover,
+  &:active,
+  &:focus {
+    border-radius: 2px;
+    outline: 2px solid $brand-primary;
+    outline-offset: 0;
+  }
+}
+
+// --------------------------------------
+// Grid Layout Classes
+// --------------------------------------
+%trace-grid-base {
+  display: grid;
+  gap: 16px;
+  height: 27px;
+  width: 100%;
+}
+
+.agent-trace-grid-axis {
+  @extend %trace-grid-base;
+  grid-template-columns: 310px auto; // change to 334px if chevron is added
+  margin-bottom: 4px;
+}
+
+.agent-trace-grid {
+  @extend %trace-grid-base;
+  @extend .trace-hover;
+  grid-template-columns: 310px auto; // change to 334px if chevron is added
+  margin-bottom: 6px;
+}
+
+
+// --------------------------------------
+// Custom spacing
+// --------------------------------------
+
+.agent-trace-container {
+  padding: $spacing-small;
+
+  .agent-trace-chart-container {
+    padding-top: 0.75px;
+  }
+
+  .agent-trace-icon-container {
+    padding-left: 2px;
+  }
+}
+

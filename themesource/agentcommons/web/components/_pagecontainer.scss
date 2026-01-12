@@ -5,36 +5,61 @@
 //Agents Overview
 
 .agents-page-content-container {
-    min-height: -webkit-fill-available;
-    min-height: -moz-available;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    min-height: 100%;
+    min-width: 100%;
+    height: -webkit-fill-available;   
+    margin: 0 auto;
+    
 
     .agents-container--overview {
-        width: 90%;
-        max-width: 1600px;
-        margin: $spacing-medium + $size-28;
+        width: 91vw;
+        max-width: 1800px;
+        height: 90vh;
         flex-direction: column;
+
+        @media (max-width: 2000px) {
+            max-height: 84vh;
+        }
+
+        @media (max-width: 1400px) {
+            max-height: 80vh;
+        }
+
 
         .td {
             border-bottom: none;
         }
 
-        &.card {
-            overflow: unset;
+        .card {
+            height: 100%;
+            margin-bottom: 0;
             border-radius: $spacing-medium;
             border: 1px solid $gray-primary;
+            box-sizing: border-box;
             padding: $spacing-large;
         }
 
-    }
+       .card-content-scroll {
+            height: 100%;
+            flex: 1 1 0;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            margin-top: 0;
+            padding-bottom:24px;
+        }
 
-    .pageheader-with-buttons {
-        display: flex !important;
-        justify-content: space-between;
-        align-items: flex-start;
+        .pageheader-with-buttons {
+            display: flex !important;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
     }
-
 }
 
 //Version_Details
@@ -186,13 +211,12 @@
     .page-header-content {
         display: flex;
         flex-direction: column; 
-        gap: $spacing-small;
         align-self: stretch;
 
         .pageheader-with-buttons {
             display: flex !important;
             margin-bottom: 0;
-            align-items: center !important;
+            align-items: start;
             justify-items: center;
             justify-content: space-between;
         }

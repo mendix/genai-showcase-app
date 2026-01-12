@@ -1,10 +1,9 @@
 @import "../../../atlas_core/web/_variables.scss";
 @import "../../../datawidgets/web/variables.scss";
-@import '../../../../theme/web/custom-variables';
 
 .filter-gallery {
     .widget-gallery-items {
-        padding: $spacing-medium 0  0;
+        padding: $spacing-small 0  0;
         display: flex;
         flex-wrap: wrap;
         gap: 1rem;
@@ -12,7 +11,8 @@
     }
 
     :where(.widget-gallery-fc-start, .widget-gallery-fc-middle, .widget-gallery-fc-end) {
-        min-height: 0px;
+        min-height: 0;
+        height: auto;
    }
 
     :where(.widget-gallery-footer-controls) {
