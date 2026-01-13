@@ -27,7 +27,6 @@ import com.mendix.systemwideinterfaces.core.UserAction;
 import genaicommons.impl.FunctionImpl;
 import genaicommons.impl.FunctionMappingImpl;
 import genaicommons.impl.MessageImpl;
-import genaicommons.proxies.ArgumentInput;
 import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.Message;
 import genaicommons.proxies.Tool;
@@ -193,16 +192,10 @@ public class Request_Modify_Converse extends UserAction<java.lang.String>
 		ObjectNode propertiesNode = MAPPER.createObjectNode();
 		ArrayNode requiredNode = MAPPER.createArrayNode();
 	        
-		// Add properties (either from microflow or if arguments are present based on those
+		// Add properties (either from microflow or if arguments are present based on those)
 		Tool tool = FunctionImpl.getToolByName(Request, toolNode.get("name").asText() ,getContext());
-		List<ArgumentInput> arguments = tool.getTool_ArgumentInput();
-		if (arguments == null || arguments.isEmpty()) {
-			Map<String, IDataType> parameterList = FunctionMappingImpl.getInputParametersForModel(microflow);
-			parameterList.entrySet().forEach(t -> FunctionImpl.addProperty(propertiesNode, requiredNode, t));
-			
-		}else {
-			FunctionImpl.addPropertiesForTool(tool.getTool_ArgumentInput(), propertiesNode, requiredNode);
-		}
+		Map<String, IDataType> parameterList = FunctionMappingImpl.getInputParametersForModel(microflow);
+		parameterList.entrySet().forEach(t -> FunctionImpl.addProperty(propertiesNode, requiredNode, t));
 	        
         inputSchemaNode.set("properties", propertiesNode);
         inputSchemaNode.set("required", requiredNode);

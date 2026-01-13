@@ -32,7 +32,6 @@ import genaicommons.proxies.Request;
 import genaicommons.proxies.Tool;
 import genaicommons.proxies.ToolCall;
 import genaicommons.proxies.ToolCollection;
-import genaicommons.proxies.ArgumentInput;
 import genaicommons.proxies.ENUM_MessageRole;
 import openaiconnector.impl.MxLogger;
 import openaiconnector.proxies.OpenAIRequest_Extension;
@@ -418,23 +417,17 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 			}
 		}
 		
-		// Fall back to creating parameters from arguments or input parameters
-		List<ArgumentInput> arguments = tool.getTool_ArgumentInput();
+		// Fall back to creating parameters from input parameters
 		Map<String, IDataType> inputParameters = FunctionMappingImpl.getInputParametersForModel(tool.getMicroflow());
 		
-		if(arguments == null && (inputParameters == null || inputParameters.entrySet().isEmpty())) {
+		if(inputParameters == null || inputParameters.entrySet().isEmpty()) {
 			return null;
 		}
 		
 		ObjectNode parametersNode = MAPPER.createObjectNode();
 		ObjectNode propertiesNode = MAPPER.createObjectNode();
 		ArrayNode requiredNode = MAPPER.createArrayNode();
-		if(arguments == null || arguments.isEmpty()) {
-			inputParameters.entrySet().forEach(t -> FunctionImpl.addProperty(propertiesNode, requiredNode, t));
-			
-		} else {
-			FunctionImpl.addPropertiesForTool(arguments, propertiesNode, requiredNode);
-		}
+		inputParameters.entrySet().forEach(t -> FunctionImpl.addProperty(propertiesNode, requiredNode, t));
 		
 		
 		parametersNode.put("type", "object");

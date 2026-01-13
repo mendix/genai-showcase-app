@@ -49,9 +49,7 @@ import genaicommons.impl.FunctionMappingImpl;
 import genaicommons.proxies.ENUM_FileType;
 import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.ENUM_ToolChoice;
-import genaicommons.proxies.EnumValue;
 import genaicommons.proxies.Argument;
-import genaicommons.proxies.ArgumentInput;
 import genaicommons.proxies.Computer;
 import genaicommons.proxies.FileCollection;
 import genaicommons.proxies.FileContent;
@@ -854,9 +852,8 @@ public class Converse extends UserAction<IMendixObject>
 		
 		// Fallback to automatic schema generation
 		// All Tools to be called are function objects
-		List<ArgumentInput> arguments = mxTool.getTool_ArgumentInput();
 		Map<String, IDataType> parameterList = genaicommons.impl.FunctionMappingImpl.getInputParametersForModel(mxTool.getMicroflow());
-		if (arguments == null && (parameterList == null || parameterList.entrySet().isEmpty())) {
+		if (parameterList == null || parameterList.entrySet().isEmpty()) {
 			LOGGER.debug("Function Microflow without input parameter");
 			return createEmptyToolInputSchema();
 		}
@@ -865,12 +862,7 @@ public class Converse extends UserAction<IMendixObject>
 		Document.MapBuilder propertiesBuilder = Document.mapBuilder();
 		Document.ListBuilder requiredBuilder = Document.listBuilder();
 		
-		if(arguments == null || arguments.isEmpty()) {
-			setPropertiesForMicroflowTool(parameterList, propertiesBuilder, requiredBuilder);
-			
-		} else {
-			setPropertiesForToolArguments(arguments, propertiesBuilder, requiredBuilder);
-		}
+		setPropertiesForMicroflowTool(parameterList, propertiesBuilder, requiredBuilder);
 
 		//Build both outside of loop to be added to final json field
 		Document properties = propertiesBuilder.build();
@@ -883,39 +875,6 @@ public class Converse extends UserAction<IMendixObject>
 				.build();
 		
 		return ToolInputSchema.builder().json(json).build();
-	}
-	
-	// If Tool arguments are associated to Tool
-	private void setPropertiesForToolArguments(List<ArgumentInput> arguments, 
-			Document.MapBuilder propertiesBuilder, Document.ListBuilder requiredBuilder) throws CoreException{
-		
-		for(ArgumentInput arg : arguments) {
-			String type = arg.get_Type();
-		    String paramName = arg.getName();
-			MapBuilder inputBuilder = Document.mapBuilder();
-			
-			// Only process type if it's not null or empty
-			if (type != null && !type.trim().isEmpty()) {
-				// For Enum types, expose the possible keys with a listBuilder Document
-			    if(type.equals("enum")) {
-			    	List<EnumValue> enumValues = arg.getArgumentInput_EnumValue();
-			    	if (enumValues != null && !enumValues.isEmpty()) {
-			    		ListBuilder inputDocumentBuilderEnum = Document.listBuilder();
-				    	for(EnumValue enumValue : enumValues) {
-				    		inputDocumentBuilderEnum.addString(enumValue.getKey());
-				    	}
-				    	inputBuilder.putDocument(type, inputDocumentBuilderEnum.build());
-			    	}
-					
-			    } else {
-			    	inputBuilder.putString("type", type);
-			    }
-			}
-		    Document input = inputBuilder.build();
-
-		    propertiesBuilder.putDocument(paramName, input);
-		    requiredBuilder.addString(paramName);
-		}
 	}
 	
 	// If the microflow is the actual tool microflow
