@@ -46,14 +46,12 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 	private final openaiconnector.proxies.RequestMapping RequestMapping;
 	private final java.lang.String Request_Json;
 	private final java.lang.String Architecture;
-	private final java.lang.Boolean IsLegacyModel;
 
 	public RequestMapping_ManipulateJson(
 		IContext context,
 		IMendixObject _requestMapping,
 		java.lang.String _request_Json,
-		java.lang.String _architecture,
-		java.lang.Boolean _isLegacyModel
+		java.lang.String _architecture
 	)
 	{
 		super(context);
@@ -61,7 +59,6 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 		this.RequestMapping = _requestMapping == null ? null : openaiconnector.proxies.RequestMapping.initialize(getContext(), _requestMapping);
 		this.Request_Json = _request_Json;
 		this.Architecture = _architecture;
-		this.IsLegacyModel = _isLegacyModel;
 	}
 
 	@java.lang.Override
@@ -82,7 +79,6 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 			updateMessages(rootNode);
 			setFunctionToolChoice(rootNode);
 			mapFunctionParameters();
-			handleMaxTokensParameter(rootNode);
 
 			return MAPPER.writeValueAsString(rootNode);
 		} catch (Exception e) {
@@ -422,28 +418,6 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 		
 		return parametersNode;
 	}
-	
-	private void handleMaxTokensParameter(JsonNode rootNode) {
-		// If IsLegacyModel is not set (null), follow the legacy flow (do nothing)
-		if (IsLegacyModel == null) {
-			LOGGER.debug("IsLegacyModel parameter is not set. Following legacy flow.");
-			return;
-		}
-		
-		// If IsLegacyModel is true, keep max_tokens as is
-		if (IsLegacyModel) {
-			LOGGER.debug("IsLegacyModel is true. Keeping max_tokens parameter.");
-			return;
-		}
-		
-		// If IsLegacyModel is false, rename max_tokens to max_completion_tokens
-		JsonNode maxTokensNode = rootNode.path("max_tokens");
-		if (maxTokensNode != null && !maxTokensNode.isMissingNode()) {
-			int maxTokensValue = maxTokensNode.asInt();
-			((ObjectNode) rootNode).remove("max_tokens");
-			((ObjectNode) rootNode).put("max_completion_tokens", maxTokensValue);
-			LOGGER.debug("IsLegacyModel is false. Renamed max_tokens to max_completion_tokens.");
-		}
-	}		
+			
 	// END EXTRA CODE
 }
