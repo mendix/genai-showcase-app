@@ -100,27 +100,39 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 	//Recursive response processing until there is no ToolCall available
 	private Response processRequest() throws CoreException {
 		ModelSpan modelSpan = createModelSpan();
-		IMendixObject responseMendixObject = Core.microflowCall(CallModelMicroflow).withParam("DeployedModel", DeployedModel.getMendixObject()).withParam("Request", Request.getMendixObject()).execute(this.getContext());
-		if(responseMendixObject == null) {
-			LOGGER.debug("Microflow " + CallModelMicroflow  + " returned null.");
-			return null;
+		try {
+			IMendixObject responseMendixObject = Core.microflowCall(CallModelMicroflow).withParam("DeployedModel", DeployedModel.getMendixObject()).withParam("Request", Request.getMendixObject()).execute(this.getContext());
+			if(responseMendixObject == null) {
+				LOGGER.debug("Microflow " + CallModelMicroflow  + " returned null.");
+				modelSpan.setEndTime(new Date(System.currentTimeMillis()));
+				modelSpan.setDurationMilliseconds((int) (modelSpan.getEndTime().getTime() -  modelSpan.getStartTime().getTime()));
+				return null;
+			}
+			Response response = genaicommons.proxies.Response.load(getContext(), responseMendixObject.getId());
+			
+			Message assistantMessage = response.getResponse_Message();
+			response.setResponseText(assistantMessage.getContent());
+			updateModelSpan(modelSpan, response);
+			responseUpdateTokenCount(response);
+			
+			boolean toolCallsProcessed = Microflows.response_ProcessToolCalls(getContext(), response, Request, modelSpan);
+			
+			//Recursion if tool calls are available
+			if (toolCallsProcessed) {
+				return processRequest();
+			}
+			
+			responsePostProcessing(response);
+			return response;
 		}
-		Response response = genaicommons.proxies.Response.load(getContext(), responseMendixObject.getId());
-		
-		Message assistantMessage = response.getResponse_Message();
-		response.setResponseText(assistantMessage.getContent());
-		updateModelSpan(modelSpan, response);
-		responseUpdateTokenCount(response);
-		
-		boolean toolCallsProcessed = Microflows.response_ProcessToolCalls(getContext(), response, Request, modelSpan);
-		
-		//Recursion if tool calls are available
-		if (toolCallsProcessed) {
-			return processRequest();
+
+	catch (Exception e) {
+		//Update modelSpan in case of error
+		modelSpan.setEndTime(new Date(System.currentTimeMillis()));
+		modelSpan.setDurationMilliseconds((int) (modelSpan.getEndTime().getTime() -  modelSpan.getStartTime().getTime()));
+		LOGGER.debug("Exception in Java Code, failed to process Request " + e.getMessage());
+		return null;
 		}
-		
-		responsePostProcessing(response);
-		return response;
 	}
 
 	/**

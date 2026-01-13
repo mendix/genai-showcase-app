@@ -33,6 +33,8 @@ import mcpclient.proxies.ArgumentInput;
 
 /**
  * Calls the Tool on the MCP Server which returns a ToolResult. The ToolResult contains the response of the tool which is typically passed to the model.
+ * 
+ * To pass arguments, the input parameter can be filled for the raw JSON input. Alternatively, the ArgumentCollection object can be created using the corresponding actions and passed to the action.
  */
 public class ToolResult_Get extends UserAction<IMendixObject>
 {
@@ -41,27 +43,27 @@ public class ToolResult_Get extends UserAction<IMendixObject>
 	private final IMendixObject __MCPClient;
 	private final mcpclient.proxies.MCPClient MCPClient;
 	private final java.lang.String ToolName;
+	private final java.lang.String Input;
 	/** @deprecated use ArgumentCollection.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __ArgumentCollection;
 	private final mcpclient.proxies.ArgumentCollection ArgumentCollection;
-	private final java.lang.String Input;
 
 	public ToolResult_Get(
 		IContext context,
 		IMendixObject _mCPClient,
 		java.lang.String _toolName,
-		IMendixObject _argumentCollection,
-		java.lang.String _input
+		java.lang.String _input,
+		IMendixObject _argumentCollection
 	)
 	{
 		super(context);
 		this.__MCPClient = _mCPClient;
 		this.MCPClient = _mCPClient == null ? null : mcpclient.proxies.MCPClient.initialize(getContext(), _mCPClient);
 		this.ToolName = _toolName;
+		this.Input = _input;
 		this.__ArgumentCollection = _argumentCollection;
 		this.ArgumentCollection = _argumentCollection == null ? null : mcpclient.proxies.ArgumentCollection.initialize(getContext(), _argumentCollection);
-		this.Input = _input;
 	}
 
 	@java.lang.Override
