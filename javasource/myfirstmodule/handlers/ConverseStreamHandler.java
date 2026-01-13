@@ -45,13 +45,13 @@ public class ConverseStreamHandler extends RequestHandler  {
         
         // Extract user message from JSON
         String jsonRequestBody = jsonRequest.get("request").asText();
-        String deployedModelID = jsonRequest.get("deployedModelID").asText();
+        String deployedModel = jsonRequest.get("deployedModel").asText();
 
         IContext ctx = Core.createSystemContext();
         Credentials creds = awsauthentication.proxies.microflows.Microflows.getCredentials(ctx, true, ENUM_Region.eu_central_1);
 
         List<IMendixObject> results = Core.createXPathQuery("//AmazonBedrockConnector.BedrockDeployedModel[Model=$value]")
-                .setVariable("value", deployedModelID)
+                .setVariable("value", deployedModel)
                 .execute(ctx);
         
         amazonbedrockconnector.proxies.BedrockDeployedModel mxDeployedModel = amazonbedrockconnector.proxies.BedrockDeployedModel.initialize(ctx, results.get(0));

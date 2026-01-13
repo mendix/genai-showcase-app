@@ -17,9 +17,9 @@ import { Big } from "big.js";
  * @param {MxObject} responseCollector
  * @returns {Promise.<void>}
  */
-export async function JS_SubmitStreaming(requestJSON, deployedModelUUID, responseCollector) {
+export async function JS_SubmitStreaming(requestJSON, deployedModel, responseCollector) {
 	// BEGIN USER CODE
-	const response = await fetch("http://localhost:8080/llm-streaming", {
+	const response = await fetch("http://localhost:8080/llm-streaming-converse", {
 		method: "POST",
 		headers: {			
 			"Content-Type": "application/json",
@@ -27,7 +27,7 @@ export async function JS_SubmitStreaming(requestJSON, deployedModelUUID, respons
 		},
 		body: JSON.stringify({
 			request: requestJSON,
-			deployedModelUUID: deployedModelUUID
+			deployedModel: deployedModel
 		})
 	})
 
