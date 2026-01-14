@@ -81,12 +81,6 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 			
 			McpSchema.InitializeResult initResult = client.initialize();
 			LOGGER.debug("Client connected to server using: " + initResult.protocolVersion() + " version.");
-			// Some servers do not enable logging capabilities; avoid failing hard
-			try {
-				client.setLoggingLevel(McpSchema.LoggingLevel.DEBUG);
-			} catch (IllegalStateException unsupported) {
-				LOGGER.info("Server logging capabilities not enabled; skipping setLoggingLevel.");
-			}
 			clientNpe.setConnected(true);
 			McpClientRegistry.putClient(clientNpe.getMendixObject().getId().toLong(), client);
 			return clientNpe.getMendixObject();
