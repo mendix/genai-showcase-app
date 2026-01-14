@@ -27,18 +27,6 @@ public class McpSessionManager
 {
 	private static final MxLogger LOGGER = new mcpserver.impl.MxLogger(McpSessionManager.class);
 	
-	private static McpSessionManager instance;
-	
-	public static synchronized McpSessionManager getInstance()
-	{
-		if(instance == null)
-		{
-			instance = new McpSessionManager();
-		}
-		
-		return instance;
-	}
-	
 	/** Map of active client sessions, keyed by MCP session ID */
     private final Map<String, McpServerSession> sessions;
     
@@ -51,10 +39,11 @@ public class McpSessionManager
     /** Session factory for creating new sessions */
     private McpServerSession.Factory sessionFactory;
     
-	private McpSessionManager()	{
+	public McpSessionManager()	{
 		sessions = new ConcurrentHashMap<>();
 		internalToExternalSessionMap = new ConcurrentHashMap<>();
 		mcpToMendixSessionMap = new ConcurrentHashMap<>();
+		LOGGER.debug("New McpSessionManager created: " + System.identityHashCode(this));
 	}
 	
 	public void setSessionFactory(McpServerSession.Factory sessionFactory) {
@@ -123,9 +112,9 @@ public class McpSessionManager
 	 * @return Context object
 	 * @throws Exception 
 	 */
-	public static IContext getContextFromSession(McpSyncServerExchange exchange) throws Exception {
+	public IContext getContextFromSession(McpSyncServerExchange exchange) throws Exception {
 		try {
-			ISession session = McpSessionManager.getInstance().getMxRuntimeSession(exchange);
+			ISession session = this.getMxRuntimeSession(exchange);
 			if (session != null) {
 				LOGGER.debug("Using user context for session: " + session.getId());
 				return session.createContext();

@@ -18,6 +18,7 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
     private static final MxLogger LOGGER = new MxLogger(McpServerRequestHandler.class);
     
     private final McpServer mcpServer;
+    private final McpSessionManager sessionManager;
     private final McpTransportHandler transportHandler;
     
     /**
@@ -32,7 +33,8 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
             throw new IllegalArgumentException("mcpServer cannot be null");
         }
         this.mcpServer = mcpServer;
-        this.transportHandler = createTransportHandler(mcpServer);
+        this.sessionManager = new McpSessionManager();
+        this.transportHandler = createTransportHandler(mcpServer, sessionManager);
         LOGGER.info("MCP server request handler created for path: " + basePath);
     }
     
@@ -40,10 +42,19 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
      * Creates the transport handler for Streamable HTTP.
      * Uses /mcp endpoint for all MCP operations.
      * @param mcpServer The MCP server configuration
+     * @param sessionManager The session manager instance
      * @return The Streamable HTTP transport handler
      */
-    private McpTransportHandler createTransportHandler(McpServer mcpServer) {
-        return new McpTransportHandler(mcpServer);
+    private McpTransportHandler createTransportHandler(McpServer mcpServer, McpSessionManager sessionManager) {
+        return new McpTransportHandler(mcpServer, sessionManager);
+    }
+    
+    /**
+     * Returns the session manager for this request handler.
+     * @return The session manager instance
+     */
+    public McpSessionManager getSessionManager() {
+        return this.sessionManager;
     }
     
     @Override
@@ -125,7 +136,6 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
         }
         
         // Close all sessions in the session manager
-        McpSessionManager sessionManager = McpSessionManager.getInstance();
         return reactor.core.publisher.Flux.fromIterable(sessionManager.getAllSessions())
                 .flatMap(session -> session.closeGracefully()
                         .timeout(java.time.Duration.ofSeconds(5))

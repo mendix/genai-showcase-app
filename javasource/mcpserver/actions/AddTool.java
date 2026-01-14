@@ -85,6 +85,15 @@ public class AddTool extends UserAction<IMendixObject>
 
 		// Add the tool to the server
 		McpSyncServer server = McpServerRegistry.getServerInstance(this.McpServer.getMendixObject().getId().toLong());
+		
+		// Get the session manager for this server instance
+		Long serverId = this.McpServer.getMendixObject().getId().toLong();
+		McpSessionManager sessionManager = McpServerRegistry.getSessionManager(serverId);
+		
+		if (sessionManager == null) {
+			LOGGER.error("ERROR: SessionManager for Server ID " + serverId + " not found!");
+			throw new Exception("SessionManager for Server ID " + serverId + " not found");
+		}
 
 		McpServerFeatures.SyncToolSpecification tool = new McpServerFeatures.SyncToolSpecification(
 				new McpSchema.Tool(toolNpe.getName(), null, toolNpe.getDescription(), inputSchema, null, null, new HashMap<>()),
@@ -94,7 +103,7 @@ public class AddTool extends UserAction<IMendixObject>
 					LOGGER.trace(threadName + ": Start processing tool call " + Name + ", microflow: " + ExecutingMicroflow);
 					try {
 						// Get user context from session (falls back to system context if no session)
-						IContext contextUser = McpSessionManager.getContextFromSession(exchange);
+						IContext contextUser = sessionManager.getContextFromSession(exchange);
 						Map<String, Object> args = new HashMap<>(arguments);
 
 						manipulateArgsForMicroflowCall(toolNpe, args);

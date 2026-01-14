@@ -18,6 +18,7 @@ import io.modelcontextprotocol.server.McpSyncServer;
 import io.modelcontextprotocol.spec.McpSchema;
 import mcpserver.impl.McpServerRegistry;
 import mcpserver.impl.McpServerRequestHandler;
+import mcpserver.impl.McpSessionManager;
 import mcpserver.impl.MxLogger;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
@@ -89,7 +90,13 @@ public class CreateMCPServer extends UserAction<IMendixObject>
 		// Associate NPE and server object for future update
 		Long serverId = mcpServer.getMendixObject().getId().toLong();
 		McpServerRegistry.putServerInstance(serverId, server);
+		
+		// Store the session manager in the registry
+		McpSessionManager sessionManager = mcpRequestHandler.getSessionManager();
+		McpServerRegistry.putSessionManager(serverId, sessionManager);
+		
 		LOGGER.info("MCP Server created using: " + mcpServer.getProtocolVersion() + " version.");
+		LOGGER.debug("Server and SessionManager registered with ID: " + serverId);
 
 		return mcpServer.getMendixObject();
 		// END USER CODE

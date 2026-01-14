@@ -79,6 +79,7 @@ public class McpTransportHandler {
     }
     
     private final McpServer mcpServer;
+    private final McpSessionManager sessionManager;
     private McpServerSession.Factory sessionFactory;
     private final AtomicBoolean isClosing = new AtomicBoolean(false);
     private final Map<String, StreamableHttpSessionTransport> transports = new java.util.concurrent.ConcurrentHashMap<>();
@@ -87,13 +88,19 @@ public class McpTransportHandler {
      * Creates a new Streamable HTTP transport handler.
      * Streamable HTTP uses a single /mcp endpoint for all POST operations.
      * @param mcpServer The MCP server configuration (must not be null)
-     * @throws IllegalArgumentException if mcpServer is null
+     * @param sessionManager The session manager instance for this MCP server
+     * @throws IllegalArgumentException if mcpServer or sessionManager is null
      */
-    public McpTransportHandler(McpServer mcpServer) {
+    public McpTransportHandler(McpServer mcpServer, McpSessionManager sessionManager) {
         if (mcpServer == null) {
             throw new IllegalArgumentException("mcpServer cannot be null");
         }
+        if (sessionManager == null) {
+            throw new IllegalArgumentException("sessionManager cannot be null");
+        }
         this.mcpServer = mcpServer;
+        this.sessionManager = sessionManager;
+        LOGGER.debug("McpTransportHandler created with SessionManager: " + System.identityHashCode(sessionManager));
     }
     
     public boolean canHandlePath(String path) {
@@ -103,7 +110,7 @@ public class McpTransportHandler {
     public void setSessionFactory(McpServerSession.Factory sessionFactory) {
         this.sessionFactory = sessionFactory;
         // Also register with session manager for session persistence
-        McpSessionManager.getInstance().setSessionFactory(sessionFactory);
+        sessionManager.setSessionFactory(sessionFactory);
     }
     
     public void handleHead(IMxRuntimeRequest request, IMxRuntimeResponse response, String path) throws Exception {
@@ -144,7 +151,6 @@ public class McpTransportHandler {
         // Authenticate and get/create Mendix session (if authentication is configured)
         String mendixSessionId = getSessionId(httpRequest, mcpServer);
         
-        McpSessionManager sessionManager = McpSessionManager.getInstance();
         McpServerSession session;
         StreamableHttpSessionTransport sessionTransport;
         
@@ -286,7 +292,6 @@ public class McpTransportHandler {
         }
         
         // Close the session
-        McpSessionManager sessionManager = McpSessionManager.getInstance();
         McpServerSession session = sessionManager.getSession(sessionId);
         LOGGER.debug("DELETE - Session for id: " + sessionId + " found: " + (session != null));
         
@@ -322,7 +327,6 @@ public class McpTransportHandler {
         LOGGER.debug("Closing transport handler gracefully, " + transports.size() + " active sessions");
         
         // Close all active sessions with a timeout
-        McpSessionManager sessionManager = McpSessionManager.getInstance();
         for (String sessionId : transports.keySet()) {
             try {
                 LOGGER.debug("Closing session during shutdown: " + sessionId);
@@ -460,7 +464,7 @@ public class McpTransportHandler {
     
     protected String getSessionId(HttpServletRequest httpServletRequest, McpServer mcpServer) throws CoreException {
         // Authenticate user and get Mendix session ID (if authentication is configured)
-        return McpSessionManager.getInstance().authenticateAndCreateMendixSession(httpServletRequest, mcpServer);
+        return sessionManager.authenticateAndCreateMendixSession(httpServletRequest, mcpServer);
     }
     
     /**
@@ -607,7 +611,7 @@ public class McpTransportHandler {
             return Mono.fromRunnable(() -> {
                 LOGGER.debug("Gracefully closing transport for session: " + sessionId);
                 transports.remove(sessionId);
-                McpSessionManager.getInstance().closeSession(sessionId);
+                sessionManager.closeSession(sessionId);
             });
         }
         
@@ -615,7 +619,7 @@ public class McpTransportHandler {
         public void close() {
             LOGGER.debug("Closing transport for session: " + sessionId);
             transports.remove(sessionId);
-            McpSessionManager.getInstance().closeSession(sessionId);
+            sessionManager.closeSession(sessionId);
         }
     }
 }

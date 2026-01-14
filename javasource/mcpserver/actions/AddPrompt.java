@@ -89,6 +89,15 @@ public class AddPrompt extends UserAction<IMendixObject>
 
 		// Get McpServer instance
 		McpSyncServer server = McpServerRegistry.getServerInstance(this.McpServer.getMendixObject().getId().toLong());
+		
+		// Get the session manager for this server instance
+		Long serverId = this.McpServer.getMendixObject().getId().toLong();
+		McpSessionManager sessionManager = McpServerRegistry.getSessionManager(serverId);
+		
+		if (sessionManager == null) {
+			LOGGER.error("ERROR: SessionManager for Server ID " + serverId + " not found!");
+			throw new Exception("SessionManager for Server ID " + serverId + " not found");
+		}
 
 		// Create the prompt spec and add to server
 		List<McpSchema.PromptArgument> mcpPromptArguments = Parameters.stream().map(e ->
@@ -110,7 +119,7 @@ public class AddPrompt extends UserAction<IMendixObject>
 
 					try {
 						// Get user context from session (falls back to system context if no session)
-						IContext contextUser = McpSessionManager.getContextFromSession(exchange);
+						IContext contextUser = sessionManager.getContextFromSession(exchange);
 						IMendixObject mxExecResult = Core.microflowCall(Microflow).withParams(args).execute(contextUser);
 						mcpserver.proxies.PromptMessage mxPromptMessage = mcpserver.proxies.PromptMessage.initialize(getContext(), mxExecResult);
 
