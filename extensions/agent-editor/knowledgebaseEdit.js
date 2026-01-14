@@ -1,40 +1,40 @@
-import { r as c, j as s, A as b, P as w, c as f, C as x, F as C } from "./TextInputWithIcon-elAaw22_.js";
+import { r as c, j as s, ap as b, aq as w, ar as f, an as x, ao as C } from "./TextInputWithIcon-BHM6tQnm.js";
 import { c as D } from "./logger-BM6R1Quw.js";
-import { T as j } from "./TextInputLabeled-BSwHRbEr.js";
-import { c as E } from "./componentLoader-Cv8RpErS.js";
+import { T as j } from "./TextInputLabeled-C8A7862R.js";
+import { c as E } from "./componentLoader-CAsiyhiP.js";
 function v(n) {
   return {
     name: ""
   };
 }
-const L = (n, t, r, a, o) => async (l) => {
-  const i = { ...r, [t]: l };
-  a(i), await y(n, i, o);
-}, y = async (n, t, r) => {
-  const a = D(n);
+const L = (n, a, r, t, o) => async (l) => {
+  const i = { ...r, [a]: l };
+  t(i), y(n, i, o);
+}, y = async (n, a, r) => {
+  const t = D(n);
   try {
-    await n.app.model.customBlobDocuments.updateDocumentContent(r, t);
+    await n.app.model.customBlobDocuments.updateDocumentContent(r, a);
   } catch (o) {
-    a.error("Failed to save knowledgebasedocument:", o), n.ui.notifications.show({
+    t.error("Failed to save knowledgebasedocument:", o), n.ui.notifications.show({
       title: "Failed to save document",
       message: o.message
     });
   }
-}, K = v(), k = ({ studioPro: n, documentId: t }) => {
-  const r = n.ui.messageBoxes, a = n.app.model.customBlobDocuments, [o, l] = c.useState(0), [i, h] = c.useState(!1), [m, d] = c.useState(K);
+}, K = v(), k = ({ studioPro: n, documentId: a }) => {
+  const r = n.ui.messageBoxes, t = n.app.model.customBlobDocuments, [o, l] = c.useState(0), [i, h] = c.useState(!1), [m, d] = c.useState(K);
   return c.useCallback(
-    (e) => L(n, e, m, d, t),
-    [n, m, d, t]
+    (e) => L(n, e, m, d, a),
+    [n, m, d, a]
   ), c.useEffect(() => {
     const e = (u) => {
       const { documents: g } = u;
-      g.some((p) => p.documentId === t) && l((p) => p + 1);
+      g.some((p) => p.documentId === a) && l((p) => p + 1);
     };
-    return a.addEventListener("documentsChanged", e), () => {
-      a.removeEventListener("documentsChanged", e);
+    return t.addEventListener("documentsChanged", e), () => {
+      t.removeEventListener("documentsChanged", e);
     };
   }, []), c.useEffect(() => {
-    a.getDocumentById(t).then(async (e) => {
+    t.getDocumentById(a).then(async (e) => {
       if (e && !("error" in e)) {
         const u = e.document.contents, g = e.document.name;
         d({ ...u, name: g }), h(!0);
