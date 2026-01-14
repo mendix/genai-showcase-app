@@ -157,6 +157,25 @@ public class McpSessionManager
 	}
 	
 	/**
+	 * Logs out a Mendix session by its ID.
+	 * Used for cleanup when MCP session creation fails after Mendix session was already created.
+	 * @param mendixSessionId The Mendix session ID to logout
+	 */
+	public void logoutMendixSession(String mendixSessionId) {
+		if (mendixSessionId != null) {
+			try {
+				ISession mxRuntimeSession = getMxRuntimeSessionForSessionId(mendixSessionId);
+				if (mxRuntimeSession != null) {
+					LOGGER.debug("Logging out Mendix session: " + mendixSessionId);
+					Core.logout(mxRuntimeSession);
+				}
+			} catch (Exception e) {
+				LOGGER.warn("Failed to logout Mendix session " + mendixSessionId + ": " + e.getMessage());
+			}
+		}
+	}
+	
+	/**
 	 * Authenticates a user via the configured authentication microflow and returns the Mendix session ID.
 	 * Returns null if authentication fails or no authentication is configured.
 	 */
@@ -176,6 +195,80 @@ public class McpSessionManager
 		
 		LOGGER.debug("Authentication failed, will use system context");
 		return null;
+	}
+	
+	/**
+	 * Authenticates a user via the configured authentication microflow and returns the username.
+	 * Does NOT create a Mendix session - use this for validating credentials only.
+	 * Returns null if authentication fails or no authentication is configured.
+	 */
+	public String authenticateAndGetUsername(HttpServletRequest httpServletRequest, McpServer mcpServer) throws CoreException {
+		String authMicroflow = mcpServer.getAuthenticationMicroflow();
+		if (authMicroflow == null || authMicroflow.isEmpty()) {
+			LOGGER.debug("No authentication microflow configured");
+			return null;
+		}
+		
+		IContext systemContext = Core.createSystemContext();
+		Map<String, Object> microflowArgs = mapInputParametersAuthentication(mcpServer,
+		     createHttpRequestMx(httpServletRequest, systemContext));
+		
+		IMendixObject userIMx = Core.microflowCall(mcpServer.getAuthenticationMicroflow())
+		        .withParams(microflowArgs)
+		        .execute(systemContext);
+		
+		if (userIMx == null) {
+			return null;
+		}
+		
+		User user = User.initialize(systemContext, userIMx);
+		IUser iUser = Core.getUser(systemContext, user.getName());
+		
+		if (!iUser.isActive() || iUser.isBlocked()) {
+			return null;
+		}
+		
+		return user.getName();
+	}
+	
+	/**
+	 * Gets the username associated with a Mendix session ID.
+	 * Returns null if session not found or invalid.
+	 */
+	public String getUsernameForMendixSession(String mendixSessionId) {
+		if (mendixSessionId == null) {
+			return null;
+		}
+		
+		try {
+			ISession session = getMxRuntimeSessionForSessionId(mendixSessionId);
+			if (session != null) {
+				IContext context = session.createContext();
+				IUser user = session.getUser(context);
+				if (user != null) {
+					return user.getName();
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.debug("Could not get username for Mendix session: " + e.getMessage());
+		}
+		return null;
+	}
+	
+	/**
+	 * Gets the Mendix session ID associated with an MCP session.
+	 * Returns null if no Mendix session is associated.
+	 */
+	public String getMendixSessionIdForMcpSession(String mcpSessionId) {
+		return mcpToMendixSessionMap.get(mcpSessionId);
+	}
+	
+	/**
+	 * Checks if authentication is required for the given MCP server.
+	 */
+	public boolean isAuthenticationRequired(McpServer mcpServer) {
+		String authMicroflow = mcpServer.getAuthenticationMicroflow();
+		return authMicroflow != null && !authMicroflow.isEmpty();
 	}
 	
 	/**

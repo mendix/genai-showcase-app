@@ -148,9 +148,6 @@ public class McpTransportHandler {
             LOGGER.debug("No session ID provided, generated new: " + sessionId);
         }
         
-        // Authenticate and get/create Mendix session (if authentication is configured)
-        String mendixSessionId = getSessionId(httpRequest, mcpServer);
-        
         McpServerSession session;
         StreamableHttpSessionTransport sessionTransport;
         
@@ -160,6 +157,9 @@ public class McpTransportHandler {
                 session = sessionManager.getSession(sessionId);
                 
                 if (session == null) {
+                    // New MCP session - authenticate and create Mendix session if authentication is configured
+                    String mendixSessionId = getSessionId(httpRequest, mcpServer);
+                    
                     // Create new session with transport atomically
                     sessionTransport = new StreamableHttpSessionTransport(sessionId, httpResponse);
                     transports.put(sessionId, sessionTransport);
@@ -176,13 +176,46 @@ public class McpTransportHandler {
                         LOGGER.debug("Created new session: " + sessionId);
                     } catch (Exception e) {
                         transports.remove(sessionId);
+                        // Clean up the Mendix session if we created one but failed to create MCP session
+                        if (mendixSessionId != null) {
+                            sessionManager.logoutMendixSession(mendixSessionId);
+                        }
                         LOGGER.error("Failed to create session: " + sessionId, e);
                         sendJsonError(httpResponse, HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
                                      "Failed to create session: " + e.getMessage());
                         return;
                     }
                 } else {
-                    // Get existing transport
+                    // Existing MCP session - validate credentials if authentication is configured
+                    if (sessionManager.isAuthenticationRequired(mcpServer)) {
+                        // Always validate credentials on every request for security
+                        String authenticatedUsername = sessionManager.authenticateAndGetUsername(httpRequest, mcpServer);
+                        
+                        if (authenticatedUsername == null) {
+                            // Authentication failed - reject request
+                            LOGGER.debug("Authentication failed for session: " + sessionId);
+                            sendJsonError(httpResponse, HttpServletResponse.SC_UNAUTHORIZED, 
+                                         "Authentication failed");
+                            return;
+                        }
+                        
+                        // Check if the authenticated user matches the session owner
+                        String existingMendixSessionId = sessionManager.getMendixSessionIdForMcpSession(sessionId);
+                        String sessionOwnerUsername = sessionManager.getUsernameForMendixSession(existingMendixSessionId);
+                        
+                        if (sessionOwnerUsername != null && !sessionOwnerUsername.equals(authenticatedUsername)) {
+                            // Different user's credentials provided for this session - reject with generic error
+                            LOGGER.warn("Session " + sessionId + " belongs to user '" + sessionOwnerUsername + 
+                                       "' but credentials provided are for user '" + authenticatedUsername + "'");
+                            sendJsonError(httpResponse, HttpServletResponse.SC_UNAUTHORIZED, 
+                                         "Authentication failed");
+                            return;
+                        }
+                        
+                        LOGGER.debug("Credentials validated for existing session: " + sessionId + ", user: " + authenticatedUsername);
+                    }
+                    
+                    // Credentials valid (or no auth required) - reuse existing session
                     sessionTransport = transports.get(sessionId);
                     if (sessionTransport == null) {
                         LOGGER.error("Transport not found for session: " + sessionId);
@@ -432,13 +465,15 @@ public class McpTransportHandler {
     }
     
     /**
-     * Helper method to send a JSON error response
+     * Helper method to send a JSON error response.
+     * Only sends the error message, not internal details like stack traces.
      */
     private void sendJsonError(HttpServletResponse response, int statusCode, String message) throws IOException {
         if (!response.isCommitted()) {
             response.setStatus(statusCode);
             setStreamableHttpResponseHeaders(response);
-            String jsonError = MAPPER.writeValueAsString(new McpError(message));
+            // Create a simple JSON error response without exposing internal details
+            String jsonError = "{\"error\":{\"code\":" + statusCode + ",\"message\":\"" + message + "\"}}";
             response.getOutputStream().write(jsonError.getBytes(UTF_8));
             response.getOutputStream().flush();
             response.flushBuffer(); // Commit the response
