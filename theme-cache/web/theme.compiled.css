@@ -30795,6 +30795,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding-right: 4px;
 }
 
+.w500 {
+  width: 500px;
+}
+
 .listview-bullet-points > ul {
   list-style-type: disc;
   margin-bottom: 0px;
