@@ -677,13 +677,13 @@ public class Converse extends UserAction<IMendixObject>
 			builder.input(Document.mapBuilder().build());
 			
 		} else {
-			// Arguments must be build by Document.mapBuilder()
+			// Arguments must be built by Document.mapBuilder()
+			// All arguments need to be added to the same mapBuilder
+			MapBuilder mapBuilder = Document.mapBuilder();
 			for (Argument arg : args) {
-				Document input = Document.mapBuilder()
-					.putString(arg.getKey(), arg.getValue())
-					.build();
-				builder.input(input);
+				mapBuilder.putString(arg.getKey(), arg.getValue());
 			}
+			builder.input(mapBuilder.build());
 		}
 		
 		return ContentBlock.builder().toolUse(builder.build()).build();
