@@ -1,7 +1,19 @@
 @import "../../../atlas_core/web/_variables.scss";
 @import "../../../datawidgets/web/variables.scss";
-@import '../../../../theme/web/custom-variables';
 @import '../traceability-variables.scss';
+
+.convui-pagecontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 100%;
+  height: -webkit-fill-available;
+  width: 95vw;
+  max-width: 1600px;
+  margin: 0 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 
 .traces-page-content-container {
   display: flex;
@@ -13,8 +25,25 @@
   height: -webkit-fill-available;
   margin: 0 auto;
 
+  .traces-breadcrumb {
+    width: 91vw;
+    max-width: 1800px;
+  }
+
   .traces-content {
+    flex-direction: column;
+    width: 91vw;
+    max-width: 1800px;
+    height: 90vh;
+
+    @media (max-width: 2000px) {
+      height: 85vh;
+    }
+
+    @media (max-width: 1400px) {
       flex-direction: column;
+      height: 80vh;
+    }
       width: 91vw;
       max-width: 1800px;
       height: 90vh;

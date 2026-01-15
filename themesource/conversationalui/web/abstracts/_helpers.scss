@@ -1,5 +1,4 @@
 @import "../../../datawidgets/web/variables.scss";
-@import "../../../../theme/web/custom-variables.scss";
 @import "../../../atlas_core/web/_variables.scss";
 
 .hover-trigger {
@@ -54,7 +53,7 @@
   line-clamp: 2;
 }
 
-.text-clamp--1-lines {
+.text-clamp--1-line {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -113,19 +112,6 @@
   justify-content: flex-start;
 }
 
-/* Custom Alert */
-.alert-danger-text {
-  margin-bottom: $spacing-large;
-
-  .alert-circle-filled {
-    width: 14px;
-    margin-right: $spacing-smaller;
-  }
-
-  .alert-text {
-    color: $brand-danger;
-  }
-}
 
 /* Alignment */
 .row-left-aligned {
@@ -138,8 +124,20 @@
   word-break: break-word;
 }
 
+.flex-left {
+  float: left;
+}
+
 .flex-right {
   float: right;
+}
+
+.align-flex-end {
+  align-items: flex-end !important;
+}
+
+.centered-container {
+  justify-content: center ;
 }
 
 .row-text-img {
@@ -183,6 +181,8 @@
   align-items: center;
   justify-content: center; 
 }
+
+
 
 /* Custom Width */
 .width-full {
@@ -266,4 +266,8 @@
 
 .overflow-hidden {
   overflow: hidden !important;
+}
+
+.custom-width {
+  width: 450px;
 }

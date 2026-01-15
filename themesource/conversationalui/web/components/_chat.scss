@@ -1,5 +1,4 @@
 @import "../../../atlas_core/web/_variables.scss";
-@import "../../../../theme/web/custom-variables.scss";
 .chat-loading-wrapper {
     display: flex;
     justify-content: left;
@@ -67,8 +66,152 @@
         height: 100%
     }
 }
+.chat-input-wrapper {
+    position: relative;
+    display: flex !important;
+    align-items: center !important;
+    flex-flow: row !important;
+    justify-content: center !important;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    color: $form-input-color;
+    border: 1px solid $form-input-border-color;
+    border-radius: $form-input-border-radius;
+    padding: $spacing-small;
+
+    .form-group {
+        position: relative;
+        width: 100%;
+        margin-bottom: $spacing-large;
+        padding: 0 !important;
+
+        .form-control {
+            width: 100%;
+            max-height: $chat-input-max-height;
+            padding: 0 0 $spacing-medium 0 !important;
+            overflow: auto;
+            border: none !important;
+            box-shadow: none !important;
+            outline: none !important;
+            background: none !important;
+        }
+    }
+
+    .has-error {
+        &:before {
+            display:none;
+        }
+        .alert {
+            display: none !important;
+        }
+    }  
+    
+    .send-btn-container {
+        //row-right
+        display: flex !important;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        flex-flow: row !important;
+        justify-content: flex-end !important;
+        padding: $spacing-small;
+
+        .send-btn {
+            right: 58px / 2 - $send-btn-size / 2;
+            bottom: 58px / 2 - $send-btn-size / 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration-line: none;
+            border-radius: 8px;
+            width: $send-btn-size;
+            height: $send-btn-size;
+            padding: 0px;
+
+            img {
+                margin: 0;
+                width: unset;
+            }
+
+            .glyphicon {
+                top: 0;
+                font-size: $send-btn-size / 2;
+                left: -2px;
+                margin: 0px;
+            }
+        }
+    }
+}
+
+/* .chat-input-wrapper {
+    position: relative;
+    display: flex !important;
+    flex-direction: column; 
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    color: $form-input-color;
+    border: 1px solid $form-input-border-color;
+    border-radius: $form-input-border-radius;
+    padding: $spacing-small;
 
 
+    .form-group {
+        position: relative;
+        width: 100%;
+        padding-right: 0 !important;
+        
+        .form-control {
+            width: 100%;
+            max-height: $chat-input-max-height;
+            overflow: auto;
+            border: none !important;
+            box-shadow: none !important;
+            padding: 0;
+            margin-right: 0;
+            outline: none !important;
+            background: none !important;
+        }
+    }
+
+      .click-overlay {
+        position: absolute;
+        inset: 0;               // top:0; right:0; bottom:0; left:0;
+        z-index: 1;
+        cursor: text;
+    }
+
+    .has-error {
+        &:before{
+            display:none;
+        }
+        .alert {
+            display: none !important;
+        }
+    }  
+
+    .send-btn-container {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;  
+
+        .send-btn {
+            width: $send-btn-size;
+            height: $send-btn-size;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+
+            img {
+                margin: 0;
+            }
+
+            .glyphicon {
+                font-size: $send-btn-size / 2;
+            }
+        }
+    }
+} */
+
+/* 
 .chat-input-wrapper {
     position: relative;
     //row-center
@@ -106,17 +249,21 @@
         justify-content: flex-end !important;
 
         .send-btn {
-            position: absolute;
             right: 58px / 2 - $send-btn-size / 2;
             bottom: 58px / 2 - $send-btn-size / 2;
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration-line: none;
-            border-radius: 50%;
+            border-radius: 8px;
             width: $send-btn-size;
             height: $send-btn-size;
             padding: 0px;
+
+            img {
+                margin: 0;
+                width: unset;
+            }
 
             .glyphicon {
                 top: 0;
@@ -128,8 +275,84 @@
     }
 }
 
+
+
+.chat-container-border {
+    display: flex;
+    flex: 1;
+    min-width: 50px;
+    height: $form-input-height;
+    padding: $form-input-padding-y $form-input-padding-x;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    color: $form-input-color;
+    border: 1px solid $form-input-border-color;
+    border-radius: $form-input-border-radius;
+    background-color: $form-input-bg;
+    background-image: none;
+    box-shadow: none;
+    font-size: $form-input-font-size;
+    line-height: $form-input-line-height;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    position: relative;
+    display: flex !important;
+    align-items: center !important;
+    flex-flow: row !important;
+
+    .no-border textarea.form-control {
+        border: none !important;
+        box-shadow: none !important;
+        outline: none !important;
+    }
+    .has-error {
+        &:before{
+            display:none;
+        }
+        .alert {
+            display: none !important;
+        }
+    }  
+
+    .send-btn-container {
+        //row-right
+        display: flex !important;
+        align-items: center !important;
+        flex-flow: row !important;
+        justify-content: flex-end !important;
+
+        .send-btn {
+            //position: absolute;
+            right: 58px / 2 - $send-btn-size / 2;
+            bottom: 58px / 2 - $send-btn-size / 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration-line: none;
+            border-radius: 8px;
+            width: $send-btn-size;
+            height: $send-btn-size;
+            padding: 0px;
+
+            img {
+                margin: 0;
+                width: unset;
+            }
+
+            .glyphicon {
+                top: 0;
+                font-size: $send-btn-size / 2;
+                left: -2px;
+                margin: 0px;
+            }
+        }
+    }
+    
+} */
+
+
+
 .chat-bubble-wrapper {
-    margin-top: $spacing-small;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
@@ -138,8 +361,10 @@
     .chat-message-card {
         background: $chat-bubble-assistant-background;
         border-radius: 8px 8px 8px 0;
+        border: 1px solid $border-color-default;
         margin: 0 10% 0 0;
-        padding: $spacing-small;
+        padding: $spacing-small 12px;
+        padding-bottom: 0px;
     }
 
     &--user {

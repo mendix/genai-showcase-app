@@ -1,6 +1,5 @@
 @import "../agent-builder-variables.scss";
 @import "../../../atlas_core/web/_variables.scss";
-@import "../../../../theme/web/custom-variables.scss";
 
 //Agents Overview
 
@@ -117,6 +116,8 @@
     }
 
     .title-alignment {
+        width: 100%;
+        flex-wrap: wrap;
         display: flex;
         justify-content: flex-start; 
         align-items: center; 
@@ -342,23 +343,6 @@
         .mx-text {
             align-self: center;
             margin-bottom: 0;
-        }
-    }
-}
-
-.combobox-model-selection {
-    display: flex;
-    flex-grow: 1;
-
-    .model-selection {
-        display: flex;
-        align-items: center;
-        height: max-content;
-    
-        .mx-image-viewer {
-            height: auto;
-            width: auto;
-            margin-right: $spacing-small;
         }
     }
 }

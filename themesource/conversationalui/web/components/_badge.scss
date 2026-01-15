@@ -1,7 +1,7 @@
-@import "../../../../theme/web/custom-variables.scss";
+@import "../../../atlas_core/web/variables";
 @import "../traceability-variables.scss";
 
-.badge {
+.convui-badge {
     display: inline-block;
     height: 16px;
     padding: 0 4px;
@@ -12,67 +12,19 @@
     font-size: 10px;
     font-weight: 600;
     white-space: nowrap;
-
 }
 
-.blue-badge {
-    @extend .badge;
+.convui-blue-badge {
+    @extend .convui-badge;
     border: 1px solid var(--color-light-blue-5, #47A9FF);
     background: var(--color-light-blue-1, #DCEEFE);
 }
 
-.purple-badge {
-    @extend .badge;
+.convui-purple-badge {
+    @extend .convui-badge;
     border: 1px solid var(--color-light-purple-5, #845EFF);
     background: var(--color-light-purple-1, #E2E0FC);
 }
-
-.circle-badge {
-    display: flex;
-    align-items: center;
-    flex-flow: row;
-    justify-content: flex-start;
-    margin-right: $spacing-smaller;
-
-    .circle {
-        border-radius: 100%;
-        background-color: $brand-primary;
-        width: $spacing-small;
-        height: $spacing-small;
-        margin-right: $spacing-smaller;
-    }
-    .badge-text {
-        text-transform: uppercase;
-        font-weight: $font-weight-semibold;
-        font-size: $font-size-small;
-    }
-    &.circle-badge--success {
-        .circle {
-            background-color: $brand-success;
-        }
-    }
-    &.circle-badge--info {
-        .circle {
-            background-color: $brand-primary;
-        }
-    }
-}
-
-.version--in-use {
-    max-width: fit-content;
-    height: auto;
-    padding-right: $spacing-smaller;
-    border-radius: $border-radius-default;
-    border: 1px solid $in-use;
-    background-color: $in-use-bg;
-
-    .badge-text{
-        font-size: $font-size-small;
-        font-weight: $font-weight-semibold;
-        text-transform: uppercase;
-  }
-}
-
 
 .filter-tag {
     display: flex;
@@ -91,7 +43,7 @@
     }
 
     .filter-text {
-        @extend .text-clamp--1-lines;
+        @extend .text-clamp--1-line;
         font-size: 12px;
     }
 
