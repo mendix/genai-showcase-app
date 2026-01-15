@@ -173,9 +173,13 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 			JsonNode argumentsArray = function.path("arguments");
 			Map<String, String> argumentsMap = new HashMap<>();
 	        for (JsonNode argument : argumentsArray) {
-	            String key = argument.get("key").asText();
-	            String value = argument.get("value").asText();
-	            argumentsMap.put(key, value);
+	            JsonNode keyNode = argument.get("key");
+	            JsonNode valueNode = argument.get("value");
+	            if (keyNode != null && valueNode != null) {
+	                String key = keyNode.asText();
+	                String value = valueNode.asText();
+	                argumentsMap.put(key, value);
+	            }
 	        }
 	        String argumentsString = MAPPER.writeValueAsString(argumentsMap);
 	       ((ObjectNode) function).put("arguments", argumentsString);

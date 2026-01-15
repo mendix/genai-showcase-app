@@ -81,8 +81,8 @@ public class Response_SetToolArguments extends UserAction<java.lang.String>
 				if(!argumentsString.isBlank()) {
 					JsonNode arguments = MAPPER.readTree(argumentsString);
 					
-					// Add the parsed arguments as "input" field to the toolCall node
-					((ObjectNode) toolCall).set("input", arguments);
+					// Add the parsed arguments as "input" field (serialized to JSON string) to the toolCall node
+					((ObjectNode) toolCall).put("input", MAPPER.writeValueAsString(arguments));
 					
 					// Create an array node to hold the key-value pairs
 			        ArrayNode argumentsArray = MAPPER.createArrayNode();
