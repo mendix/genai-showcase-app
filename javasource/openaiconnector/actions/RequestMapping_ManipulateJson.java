@@ -183,6 +183,8 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 	        }
 	        String argumentsString = MAPPER.writeValueAsString(argumentsMap);
 	       ((ObjectNode) function).put("arguments", argumentsString);
+	       // Remove the 'input' field as it's not expected by the API
+	       ((ObjectNode) function).remove("input");
 		}
 	}
 
@@ -400,6 +402,9 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 					((ObjectNode) functionNode).set("parameters", parametersNode);
 					((ObjectNode) toolNode).set("function", functionNode);
 				}
+				
+				// Remove schema field from tool node as it's not needed in the final payload
+				((ObjectNode) toolNode).remove("schema");
 			}
 		}
 		// Update tools within rootNode
