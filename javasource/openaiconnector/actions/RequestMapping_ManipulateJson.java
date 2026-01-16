@@ -397,11 +397,9 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 					parametersNode = createToolParametersNode(functionMatch);
 				}
 				
-				if(parametersNode != null) {
-					JsonNode functionNode = toolNode.path("function");
-					((ObjectNode) functionNode).set("parameters", parametersNode);
-					((ObjectNode) toolNode).set("function", functionNode);
-				}
+				JsonNode functionNode = toolNode.path("function");
+				((ObjectNode) functionNode).set("parameters", parametersNode);
+				((ObjectNode) toolNode).set("function", functionNode);
 				
 				// Remove schema field from tool node as it's not needed in the final payload
 				((ObjectNode) toolNode).remove("schema");
@@ -412,7 +410,7 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 	}
 	
 	private ObjectNode createToolParametersNode(Tool tool) throws CoreException {
-		
+	
 		// Check if tool has a schema field and use it if it's valid JSON
 		String schema = tool.getSchema();
 		if (schema != null && !schema.isEmpty()) {
@@ -429,15 +427,13 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 		// Fall back to creating parameters from input parameters
 		Map<String, IDataType> inputParameters = FunctionMappingImpl.getInputParametersForModel(tool.getMicroflow());
 		
-		if(inputParameters == null || inputParameters.entrySet().isEmpty()) {
-			return null;
-		}
-		
 		ObjectNode parametersNode = MAPPER.createObjectNode();
 		ObjectNode propertiesNode = MAPPER.createObjectNode();
 		ArrayNode requiredNode = MAPPER.createArrayNode();
-		inputParameters.entrySet().forEach(t -> FunctionImpl.addProperty(propertiesNode, requiredNode, t));
 		
+		if(inputParameters != null && !inputParameters.entrySet().isEmpty()) {
+			inputParameters.entrySet().forEach(t -> FunctionImpl.addProperty(propertiesNode, requiredNode, t));
+		}
 		
 		parametersNode.put("type", "object");
 		parametersNode.set("properties", propertiesNode);
