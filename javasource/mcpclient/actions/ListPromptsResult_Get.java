@@ -55,6 +55,7 @@ public class ListPromptsResult_Get extends UserAction<IMendixObject>
 			McpSchema.ListPromptsResult listPromptResultMcp = client.listPrompts();
 
 			ListPromptsResult listPromptResultMendix = createListPromptsResult(listPromptResultMcp);
+			LOGGER.debug("Successfully retrieved list of prompts: " + listPromptResultMcp.toString());
 
 			return listPromptResultMendix.getMendixObject();
 		} catch (Exception e) {

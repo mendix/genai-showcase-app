@@ -1,4 +1,5 @@
-@import "../../../../theme/web/custom-variables.scss";
+@import "../../../atlas_core/web/variables";
+
 .chat-listview-stylingless.mx-listview { //same as listview-stylingless and listview-sm
     ul > li, ol > li {
         cursor: default;
@@ -35,9 +36,9 @@
         }
 
     } ol > li {
-        padding: 0px; //used for ordered lists in markdown viewer
+        padding: 0; //used for ordered lists in markdown viewer
     } ul > li {
-        padding: 8px; //from listview-sm
+        padding: $spacing-smaller; //from listview-sm
     }
 }
 
@@ -91,3 +92,4 @@
 .listview-custom-spacing.mx-listview > ul > li:not(:last-child) {
     margin-bottom: $spacing-smallest;
 }
+

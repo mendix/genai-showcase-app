@@ -10,18 +10,13 @@
 package mcpserver.actions;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.systemwideinterfaces.core.ISession;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import io.modelcontextprotocol.server.McpServerFeatures;
 import io.modelcontextprotocol.server.McpSyncServer;
-import io.modelcontextprotocol.server.McpSyncServerExchange;
 import io.modelcontextprotocol.spec.McpSchema;
 import mcpserver.impl.McpServerRegistry;
 import mcpserver.impl.McpSessionManager;
@@ -29,6 +24,7 @@ import mcpserver.impl.MxLogger;
 import mcpserver.proxies.TextContent;
 import mcpserver.proxies.Tool;
 import static java.util.Objects.requireNonNull;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -38,8 +34,6 @@ import java.util.Map.Entry;
 
 /**
  * Registers a tool with the MCP Server that gets exposed to MCP clients. If the model chooses to call the tool, the selected microflow gets executed.
- * 
- * Currently, the current User is not in scope of the tool microflow.
  */
 public class AddTool extends UserAction<IMendixObject>
 {
@@ -82,32 +76,55 @@ public class AddTool extends UserAction<IMendixObject>
 		mcpserver.proxies.Tool toolNpe = new mcpserver.proxies.Tool(getContext());
 		toolNpe.setName(Name);
 		toolNpe.setDescription(Description);
-		setToolSchema(toolNpe);
+		
+		// Get the JsonSchema for the tool
+		McpSchema.JsonSchema inputSchema = getJsonSchemaForTool();
+		
 		toolNpe.setMicroflowName(ExecutingMicroflow);
 		toolNpe.setTool_McpServer(McpServer);
 
 		// Add the tool to the server
 		McpSyncServer server = McpServerRegistry.getServerInstance(this.McpServer.getMendixObject().getId().toLong());
+		
+		// Get the session manager for this server instance
+		Long serverId = this.McpServer.getMendixObject().getId().toLong();
+		McpSessionManager sessionManager = McpServerRegistry.getSessionManager(serverId);
+		
+		if (sessionManager == null) {
+			LOGGER.error("ERROR: SessionManager for Server ID " + serverId + " not found!");
+			throw new Exception("SessionManager for Server ID " + serverId + " not found");
+		}
 
 		McpServerFeatures.SyncToolSpecification tool = new McpServerFeatures.SyncToolSpecification(
-				new McpSchema.Tool(toolNpe.getName(), toolNpe.getDescription(), toolNpe.getSchema()),
+				new McpSchema.Tool(toolNpe.getName(), null, toolNpe.getDescription(), inputSchema, null, null, new HashMap<>()),
 				(exchange, arguments) -> {
 					String threadName = Thread.currentThread().getName();
 					long start = System.currentTimeMillis();
-					LOGGER.trace(threadName + ": Start processing tool call " + Name + ", MF: " + ExecutingMicroflow);
+					LOGGER.trace(threadName + ": Start processing tool call " + Name + ", microflow: " + ExecutingMicroflow);
 					try {
-						IContext contextUser = McpSessionManager.getContextFromSession(exchange);
+						// Get user context from session (falls back to system context if no session)
+						IContext contextUser = sessionManager.getContextFromSession(exchange);
 						Map<String, Object> args = new HashMap<>(arguments);
 
 						manipulateArgsForMicroflowCall(toolNpe, args);
 						mcpserver.proxies.TextContent mxTextContent = getTextContextFromToolMicroflow(args, contextUser);
 
 						McpSchema.TextContent mcpTextContent = new McpSchema.TextContent(mxTextContent.getContent());
-						return new McpSchema.CallToolResult(List.of(mcpTextContent), false);
+						return new McpSchema.CallToolResult(
+							List.of(mcpTextContent),
+							false
+						);
 						
 					}catch (Exception e) { 
 						LOGGER.error(e, threadName + ": Error occurred during tool call.");
-						return new McpSchema.CallToolResult("Error occured during tool call", true);
+						McpSchema.TextContent errorContent = new McpSchema.TextContent(
+							"Error occurred during tool call: " + e.getMessage()
+						);
+						return new McpSchema.CallToolResult(
+							List.of(errorContent),
+							true,
+							new HashMap<>()
+						);
 						
 					}finally {
 						LOGGER.trace(threadName + ": End processing tool call '" + Name + ". Duration: " + (System.currentTimeMillis() - start) + "ms.");
@@ -133,8 +150,6 @@ public class AddTool extends UserAction<IMendixObject>
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new mcpserver.impl.MxLogger(AddTool.class);
 	
-	private static final ObjectMapper MAPPER = new ObjectMapper();
-	
 	/**
 	 * Convert DateTime input values to correct DataType. Add Tool to args
 	 * @param tool that gets added to the args
@@ -143,18 +158,157 @@ public class AddTool extends UserAction<IMendixObject>
 	private void manipulateArgsForMicroflowCall(Tool tool, Map<String, Object> args) {
 		Map<String, IDataType> parametersAndTypes = getInputParametersPrimitives();
 		
-		
 		for (Entry<String, IDataType> entry : parametersAndTypes.entrySet()) {
 	        String paramName = entry.getKey();
 	        IDataType type = entry.getValue();
-	        // DateTime values need to be converted
-	        if (IDataType.DataTypeEnum.Datetime.equals(type.getType()) && args.containsKey(paramName)) {
-	        	Object originalValue = args.get(paramName);
-	        	Date date = new Date(Long.parseLong(originalValue.toString()));
-	            args.put(paramName, date);
+	        
+	        if (!args.containsKey(paramName)) {
+	        	continue;
+	        }
+	        
+	        Object originalValue = args.get(paramName);
+	        Object convertedValue = convertValueToExpectedType(originalValue, type, paramName);
+	        
+	        if (convertedValue != null) {
+	        	args.put(paramName, convertedValue);
 	        }
 	    }
 		args.put("Tool", tool);
+	}
+	
+	/**
+	 * Converts a value to the expected Mendix data type
+	 * @param value the original value from the LLM
+	 * @param dataType the expected Mendix data type
+	 * @param paramName parameter name for logging purposes
+	 * @return converted value or null if no conversion needed
+	 */
+	private Object convertValueToExpectedType(Object value, IDataType dataType, String paramName) {
+		IDataType.DataTypeEnum type = dataType.getType();
+		
+		if (IDataType.DataTypeEnum.Datetime.equals(type)) {
+			return parseDateTime(value, paramName);
+		} else if (IDataType.DataTypeEnum.Long.equals(type)) {
+			return parseLong(value, paramName);
+		} else if (IDataType.DataTypeEnum.Integer.equals(type)) {
+			return parseInteger(value, paramName);
+		} else if (IDataType.DataTypeEnum.Decimal.equals(type)) {
+			return parseDecimal(value, paramName);
+		} else if (IDataType.DataTypeEnum.Boolean.equals(type)) {
+			return parseBoolean(value, paramName);
+		}
+		
+		return null; // No conversion needed
+	}
+	
+	/**
+	 * Parses a value to a Date, supporting ISO strings (primary) and Unix timestamps (fallback)
+	 * @param value the value to parse
+	 * @param paramName parameter name for logging
+	 * @return parsed Date
+	 */
+	private Date parseDateTime(Object value, String paramName) {
+		String dateString = value.toString();
+		
+		try {
+			// Try parsing as ISO Instant first (e.g., 2025-12-06T10:00:00Z)
+			return Date.from(java.time.Instant.parse(dateString));
+		} catch (java.time.format.DateTimeParseException e) {
+			try {
+				// Try parsing as ISO LocalDate (e.g., 2025-12-06 - converted to start-of-day)
+				return Date.from(java.time.LocalDate.parse(dateString)
+						.atStartOfDay(java.time.ZoneId.systemDefault()).toInstant());
+			} catch (java.time.format.DateTimeParseException e1) {
+				try {
+					// Fallback: Try parsing as Unix timestamp
+					long timestamp = Long.parseLong(dateString);
+					
+					// Detect if timestamp is in seconds or milliseconds
+					// Timestamps in seconds are typically 10 digits (until year 2286)
+					// Timestamps in milliseconds are typically 13 digits
+					if (timestamp < 10000000000L) {
+						// Timestamp is in seconds, convert to milliseconds
+						timestamp = timestamp * 1000;
+					}
+					
+					return new Date(timestamp);
+				} catch (NumberFormatException e2) {
+					LOGGER.error("Failed to parse datetime value for parameter '" + paramName + "': " + dateString);
+					throw e;
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Parses a value to Long if it's not already a Long
+	 * @param value the value to parse
+	 * @param paramName parameter name for logging
+	 * @return parsed Long or null if already a Long
+	 */
+	private Long parseLong(Object value, String paramName) {
+		if (value instanceof Long) {
+			return null; // Already correct type
+		}
+		
+		try {
+			return Long.parseLong(value.toString());
+		} catch (NumberFormatException e) {
+			LOGGER.error("Failed to parse Long value for parameter '" + paramName + "': " + value);
+			throw e;
+		}
+	}
+	
+	/**
+	 * Parses a value to Integer if it's not already an Integer
+	 * @param value the value to parse
+	 * @param paramName parameter name for logging
+	 * @return parsed Integer or null if already an Integer
+	 */
+	private Integer parseInteger(Object value, String paramName) {
+		if (value instanceof Integer) {
+			return null; // Already correct type
+		}
+		
+		try {
+			return Integer.parseInt(value.toString());
+		} catch (NumberFormatException e) {
+			LOGGER.error("Failed to parse Integer value for parameter '" + paramName + "': " + value);
+			throw e;
+		}
+	}
+	
+	/**
+	 * Parses a value to BigDecimal if it's not already a BigDecimal
+	 * @param value the value to parse
+	 * @param paramName parameter name for logging
+	 * @return parsed BigDecimal or null if already a BigDecimal
+	 */
+	private java.math.BigDecimal parseDecimal(Object value, String paramName) {
+		if (value instanceof java.math.BigDecimal) {
+			return null; // Already correct type
+		}
+		
+		try {
+			return new java.math.BigDecimal(value.toString());
+		} catch (NumberFormatException e) {
+			LOGGER.error("Failed to parse Decimal value for parameter '" + paramName + "': " + value);
+			throw e;
+		}
+	}
+	
+	/**
+	 * Parses a value to Boolean if it's not already a Boolean
+	 * @param value the value to parse
+	 * @param paramName parameter name for logging
+	 * @return parsed Boolean or null if already a Boolean
+	 */
+	private Boolean parseBoolean(Object value, String paramName) {
+		if (value instanceof Boolean) {
+			return null; // Already correct type
+		}
+		
+		return Boolean.parseBoolean(value.toString());
 	}
 	
 	
@@ -193,69 +347,143 @@ public class AddTool extends UserAction<IMendixObject>
 		return false;
 	}
 	
-	
 	/**
-	 * sets the Schema definition either passed as argument of the JavaAction or extracted from the tool microflow
-	 * @param tool
+	 * Gets the JsonSchema for the tool, either from the provided Schema string or generated from the microflow
+	 * @return McpSchema.JsonSchema object
 	 * @throws JsonProcessingException
 	 */
-	private void setToolSchema(Tool tool) throws JsonProcessingException {
-		try {
-			if(Schema != null && !Schema.isEmpty()) {
-				tool.setSchema(Schema);
-				
-			} else {
-				tool.setSchema(getSchemaFromMicroflow());
-			}
-		} catch (JsonProcessingException e) {
-			LOGGER.error(e);
+	private McpSchema.JsonSchema getJsonSchemaForTool() throws JsonProcessingException {
+		if(Schema != null && !Schema.isEmpty()) {
+			return parseSchemaStringToJsonSchema(Schema);
+		} else {
+			return getSchemaFromMicroflow();
 		}
 	}
+
+
+	/**
+	 * Parses a JSON schema string into a McpSchema.JsonSchema object
+	 * @param schemaString JSON schema as string
+	 * @return McpSchema.JsonSchema object
+	 * @throws JsonProcessingException
+	 */
+	private McpSchema.JsonSchema parseSchemaStringToJsonSchema(String schemaString) throws JsonProcessingException {
+		// This is a simple parser
+		com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+		com.fasterxml.jackson.databind.JsonNode schemaNode = mapper.readTree(schemaString);
+		
+		// Extract type
+		String type = schemaNode.has("type") ? schemaNode.get("type").asText() : "object";
+		
+		// Extract properties
+		Map<String, Object> properties = new HashMap<>();
+		if (schemaNode.has("properties")) {
+			com.fasterxml.jackson.databind.JsonNode propertiesNode = schemaNode.get("properties");
+			propertiesNode.fields().forEachRemaining(entry -> {
+				properties.put(entry.getKey(), mapper.convertValue(entry.getValue(), Object.class));
+			});
+		}
+		
+		// Extract required fields
+		List<String> required = null;
+		if (schemaNode.has("required")) {
+			com.fasterxml.jackson.databind.JsonNode requiredNode = schemaNode.get("required");
+			required = new ArrayList<>();
+			for (com.fasterxml.jackson.databind.JsonNode item : requiredNode) {
+				required.add(item.asText());
+			}
+		}
+		
+		return new McpSchema.JsonSchema(
+			type,
+			properties,
+			required,
+			null,
+			new HashMap<>(),
+			new HashMap<>()
+		);
+	}
+	
+	/**
+	 * Creates an empty schema for tools with no parameters
+	 * @return Empty McpSchema.JsonSchema
+	 */
+	private McpSchema.JsonSchema createEmptySchema() {
+		return new McpSchema.JsonSchema(
+			"object",
+			new HashMap<>(),
+			null,
+			null,
+			new HashMap<>(),
+			new HashMap<>()
+		);
+	}
+	
 	
 	/**
 	 * Creates a Schema definition for all primitive input parameters of the tool microflow
 	 * @return Schema definition as String
 	 * @throws JsonProcessingException
 	 */
-	private String getSchemaFromMicroflow() throws JsonProcessingException {
-		Map<String, IDataType> inputParameters = getInputParametersPrimitives();	
-		ObjectNode root = MAPPER.createObjectNode();
-        root.put("type", "object");
-        root.put("id", "urn:jsonschema:Operation");
+	private McpSchema.JsonSchema getSchemaFromMicroflow() {
+		Map<String, IDataType> inputParameters = getInputParametersPrimitives();
+		
+		// If no parameters, return empty schema
+		if (inputParameters.isEmpty()) {
+			return createEmptySchema();
+		}
+		
+		Map<String, Object> properties = new HashMap<>();
+		List<String> required = new ArrayList<>();
 
-        ObjectNode propertiesNode = MAPPER.createObjectNode();
-        ArrayNode requiredNode = MAPPER.createArrayNode();
+		for (Map.Entry<String, IDataType> param : inputParameters.entrySet()) {
+			String name = param.getKey();
+			IDataType.DataTypeEnum dataType = param.getValue().getType();
 
-        for (Map.Entry<String, IDataType> param : inputParameters.entrySet()) {  	
-            String name = param.getKey();
-            String type = parameterGetType(param);
-
-            ObjectNode typeNode = MAPPER.createObjectNode();
-            typeNode.put("type", type);
-
-            // Handle enum case to expose possible enum values
-            if ("enum".equals(type)) {
-                Set<String> enumKeySet = param.getValue().getEnumeration().getEnumValues().keySet();
-                ArrayNode enumKeyArrayNode = MAPPER.valueToTree(enumKeySet);
-                typeNode.set("enum", enumKeyArrayNode);
-                typeNode.put("type", "string");
-            }
-            propertiesNode.set(name, typeNode);
-            requiredNode.add(name);
-        }
-        root.set("properties",propertiesNode);
-        root.set("required", requiredNode);
-		return MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(root);
+			Map<String, Object> typeNode = new HashMap<>();
+			
+			// Handle DateTime as string with date format for better LLM compatibility
+			if (IDataType.DataTypeEnum.Datetime.equals(dataType)) {
+				typeNode.put("type", "string");
+				typeNode.put("format", "date-time");
+				typeNode.put("description", "ISO 8601 date-time string (e.g., 2025-12-06T10:00:00Z) or date only (e.g., 2025-12-06)");
+			}
+			// Handle enum case to expose possible enum values
+			else if (dataType.toString().toLowerCase().equals("enumeration")) {
+				Set<String> enumKeySet = param.getValue().getEnumeration().getEnumValues().keySet();
+				typeNode.put("enum", new ArrayList<>(enumKeySet));
+				typeNode.put("type", "string");
+			}
+			// Handle other types
+			else {
+				String type = parameterGetType(param);
+				typeNode.put("type", type);
+			}
+			
+			properties.put(name, typeNode);
+			required.add(name);
+		}
+		
+		return new McpSchema.JsonSchema(
+			"object",
+			properties,
+			required,
+			null,
+			new HashMap<>(),
+			new HashMap<>()
+		);
 	}
-	
+
 	/**
-	 * determines the type of parameter. Long/Decimal/Datetime converted to "number", enumeration to "enum"
+	 * determines the type of parameter. Long/Decimal converted to "number", enumeration to "enum"
 	 * @param inputParameter
 	 */
 	private String parameterGetType(Entry<String, IDataType> inputParameter) {
 		String type = inputParameter.getValue().toString().toLowerCase();
-		if(type.equals("long") || type.equals("decimal") || type.equals("datetime")) {
+		if(type.equals("long") || type.equals("decimal")) {
 			type = "number";
+		} else if (type.equals("integer")) {
+			type = "integer";
 		} else if (type.equals("enumeration")) {
 			type = "enum";
 		}

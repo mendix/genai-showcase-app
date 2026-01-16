@@ -1,4 +1,3 @@
-@import "../../../../theme/web/custom-variables.scss";
 @import "../../../atlas_core/web/_variables.scss";
 .chat-card--full-height {
     height: 100%;
@@ -30,7 +29,7 @@
     background: $bg-color-secondary;
     display: flex;
     padding: $spacing-medium;
-    margin: $spacing-large 0 0;
+    margin: 0;
     align-items: flex-start;
     align-content: flex-start;
     gap: 48px;

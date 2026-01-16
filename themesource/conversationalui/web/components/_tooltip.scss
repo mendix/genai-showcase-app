@@ -1,5 +1,4 @@
 @import "../../../atlas_core/web/_variables.scss";
-@import '../../../../theme/web/custom-variables';
 
 /* tooltip basic styling */
 .convui-tooltip {
@@ -11,12 +10,12 @@
         border-radius: 4px;
         color: $gray-darker;
         font-size: 12px;
-        line-height: 200%;
         align-items: flex-start;
         align-self: stretch;
         justify-content: space-between;
         font-weight: 400;
         max-height: 48vh;
+        line-height: 150% !important;
     }
 
     .mx-link {
@@ -29,7 +28,7 @@
 /* use in combination with .tooltip-col */
 .tooltip-container-version {
     width: 350px;
-    max-height: 350px;
+    max-height: 45vh;
     display: grid;
     grid-template-columns: 30% 69%;
     padding: $spacing-smallest $spacing-small $spacing-smaller $spacing-small;
@@ -56,13 +55,20 @@
 
 /* tooltip adjustment for tools */
 .tooltip-container-tools {
-    padding: 0 $spacing-small $spacing-small $spacing-small;
+    padding: 0 $spacing-small $spacing-smallest $spacing-small;
     width: 300px;
 }
 
 /* tooltip adjustment text only */
 .tooltip-container {
-    max-width: 250px;
+    width: fit-content;
+    display: inline-flex;
+    justify-content: center;
+    padding: $spacing-smallest;
+}
+
+.tooltip-empty {
+    width: 11vw;
     display: inline-flex;
     justify-content: center;
     padding: $spacing-smallest;
@@ -91,7 +97,6 @@
 .tooltip-version-draft {
     @extend .row-text-img;
     gap: 2px;
-    line-height: 150% !important;
     padding-left: $spacing-smallest;
 }
 
@@ -111,7 +116,6 @@
     }
 }
 
-
 .tooltip-info-icon {
     margin: 0;
     padding: 0;
@@ -120,3 +124,4 @@
         width: 16px;
     }
 }
+

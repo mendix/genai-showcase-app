@@ -1,3 +1,5 @@
+@import "../../../atlas_core/web/variables";
+
 .link-container {
     display: flex;
     align-items: center;
@@ -42,4 +44,36 @@
             visibility: visible;
         }
     }
+}
+
+.list {
+  display: grid;
+  height: 48px;
+  padding: $spacing-smaller 0 $spacing-small $spacing-small !important;
+  grid-template-columns: 25px minmax(0, 930px) auto auto;
+  align-items: center;
+  gap: $spacing-small;
+  background-color: white;
+
+  .hover-btn {
+    display: flex;
+    gap: $spacing-small;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.02s ease;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    cursor: pointer;
+    border-radius: 4px;
+    border-color: #E7E7E9;
+    background-color: #E7E7E9;
+
+    .hover-btn {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
 }

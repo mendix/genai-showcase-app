@@ -10,7 +10,6 @@
 package mcpserver.actions;
 
 import static java.util.Objects.requireNonNull;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.UserAction;
@@ -19,6 +18,8 @@ import io.modelcontextprotocol.server.McpSyncServer;
 import io.modelcontextprotocol.spec.McpSchema;
 import mcpserver.impl.McpServerRegistry;
 import mcpserver.impl.McpServerRequestHandler;
+import mcpserver.impl.McpSessionManager;
+import mcpserver.impl.MxLogger;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 /**
@@ -60,19 +61,23 @@ public class CreateMCPServer extends UserAction<IMendixObject>
 		requireNonNull(Version,"Version is required.");
 		requireNonNull(ProtocolVersion,"Protocol version is required.");	
 		
-		// Create McpServer NPE
-		mcpserver.proxies.McpServer mcpServer = new mcpserver.proxies.McpServer(getContext());
-		mcpServer.setName(Name);
-		mcpServer.setVersion(Version);
-		mcpServer.setProtocolVersion(ProtocolVersion);
-		mcpServer.setAuthenticationMicroflow(AuthenticationMicroflow);
+		// Validate path is not reserved
+		if ("mcp".equalsIgnoreCase(Path) || Path.toLowerCase().endsWith("/mcp")) {
+			throw new IllegalArgumentException("Path cannot be 'mcp' or end with '/mcp' as this is reserved.");
+		}
 		
-		// Create request handler and McpServer object
-		McpServerRequestHandler mcpRequestHandler = new McpServerRequestHandler(
-				new ObjectMapper(), mcpServer,  "/" + Path + "/messages", "/" + Path + "/sse");
-		Core.addRequestHandler(Path + "/", mcpRequestHandler);
-
-		McpSyncServer server = McpServer.sync(mcpRequestHandler)
+        // Create McpServer NPE
+        mcpserver.proxies.McpServer mcpServer = new mcpserver.proxies.McpServer(getContext());
+        mcpServer.setName(Name);
+        mcpServer.setVersion(Version);
+        mcpServer.setProtocolVersion(ProtocolVersion);
+        mcpServer.setAuthenticationMicroflow(AuthenticationMicroflow);
+                
+        // Create request handler with Streamable HTTP transport
+        // Uses /mcp endpoint for all MCP operations
+        McpServerRequestHandler mcpRequestHandler = new McpServerRequestHandler(mcpServer, Path);
+        Core.addRequestHandler(Path + "/", mcpRequestHandler);		
+        McpSyncServer server = McpServer.sync(mcpRequestHandler)
 				.serverInfo(Name, Version)
 				.capabilities(
 						McpSchema.ServerCapabilities.builder()
@@ -85,6 +90,13 @@ public class CreateMCPServer extends UserAction<IMendixObject>
 		// Associate NPE and server object for future update
 		Long serverId = mcpServer.getMendixObject().getId().toLong();
 		McpServerRegistry.putServerInstance(serverId, server);
+		
+		// Store the session manager in the registry
+		McpSessionManager sessionManager = mcpRequestHandler.getSessionManager();
+		McpServerRegistry.putSessionManager(serverId, sessionManager);
+		
+		LOGGER.info("MCP Server created using: " + mcpServer.getProtocolVersion() + " version.");
+		LOGGER.debug("Server and SessionManager registered with ID: " + serverId);
 
 		return mcpServer.getMendixObject();
 		// END USER CODE
@@ -101,5 +113,7 @@ public class CreateMCPServer extends UserAction<IMendixObject>
 	}
 
 	// BEGIN EXTRA CODE
+	private static final MxLogger LOGGER = new mcpserver.impl.MxLogger(CreateMCPServer.class);
+
 	// END EXTRA CODE
 }

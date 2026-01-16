@@ -38,8 +38,6 @@ import javax.swing.text.html.parser.ParserDelegator;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.text.StringEscapeUtils;
-import org.owasp.html.PolicyFactory;
-import org.owasp.html.Sanitizers;
 import system.proxies.FileDocument;
 
 public class StringUtils {
@@ -52,16 +50,6 @@ public class StringUtils {
 	// Used in tests as well
 	static final String SPECIAL = stringRange('!', '/');
 	private static final String ALPHANUMERIC = UPPERCASE_ALPHA + LOWERCASE_ALPHA + DIGITS;
-
-	static final Map<String, PolicyFactory> SANITIZER_POLICIES =
-		Map.ofEntries(
-			new SimpleEntry<>(BLOCKS.name(), Sanitizers.BLOCKS),
-			new SimpleEntry<>(FORMATTING.name(), Sanitizers.FORMATTING),
-			new SimpleEntry<>(IMAGES.name(), Sanitizers.IMAGES),
-			new SimpleEntry<>(LINKS.name(), Sanitizers.LINKS),
-			new SimpleEntry<>(STYLES.name(), Sanitizers.STYLES),
-			new SimpleEntry<>(TABLES.name(), Sanitizers.TABLES)
-		);
 
 	public static final String HASH_ALGORITHM = "SHA-256";
 
@@ -482,25 +470,6 @@ public class StringUtils {
 
 	public static String removeEnd(String str, String toRemove) {
 		return org.apache.commons.lang3.StringUtils.removeEnd(str, toRemove);
-	}
-
-	public static String sanitizeHTML(String html, List<SanitizerPolicy> policyParams) {
-		PolicyFactory policyFactory = null;
-
-		for (SanitizerPolicy param : policyParams) {
-			PolicyFactory policyFactoryForParam = SANITIZER_POLICIES.get(param.name());
-			policyFactory = (policyFactory == null) ? policyFactoryForParam : policyFactory.and(policyFactoryForParam);
-		}
-
-		if (policyFactory == null) {
-			throw new IllegalArgumentException("Sanitizer policy not found.");
-		}
-
-		return sanitizeHTML(html, policyFactory);
-	}
-
-	public static String sanitizeHTML(String html, PolicyFactory policyFactory) {
-		return policyFactory.sanitize(html);
 	}
 
 	public static String stringSimplify(String value) {
