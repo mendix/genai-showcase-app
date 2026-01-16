@@ -417,6 +417,7 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 		parametersNode.set("required", requiredNode);
 		
 		return parametersNode;
-	}		
+	}
+			
 	// END EXTRA CODE
 }
