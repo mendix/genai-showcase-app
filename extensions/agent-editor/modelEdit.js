@@ -1,47 +1,47 @@
-import { B, A as S, l as P, m as I, as as G, at as O, au as V, r as u, J as K, a6 as R, O as U, L as W, v as _, ab as D, j as t, p as z, ah as w, av as v, aw as x, ax as $, ay as q, az as E, ao as A, ap as J, aq as X, ar as Q, aA as Y } from "./TextInputWithIcon-BHM6tQnm.js";
-import { c as Z } from "./componentLoader-CAsiyhiP.js";
+import { h as B, g as S, k as M, i as I, ax as G, ay as O, az as K, r as u, K as V, S as R, R as U, T as W, D as _, ag as P, j as t, p as z, af as w, aA as v, aB as x, aC as $, aD as q, aE as E, as as A, au as J, av as X, aw as Q, aF as Y } from "./TextInputWithIcon-mWdTJJox.js";
+import { c as Z } from "./componentLoader-BrAYZVSc.js";
 import { a as ee, b as re, c as te, d as ne } from "./modelUtils-BKeUOTig.js";
 import { c as F } from "./logger-BM6R1Quw.js";
-import { S as ae, N as se, T as oe } from "./TextAreaAutogrow-D57DVpIT.js";
-import { T as ie } from "./TextWithIcon-Bc9lM5Pv.js";
-import { S as le } from "./Banner-XhhlBqtW.js";
-import { T as b } from "./TextInputLabeled-C8A7862R.js";
+import { S as ae, N as se, T as oe } from "./ComboBox-Dy-mCv3q.js";
+import { T as ie } from "./TextWithIcon-Crx2NOSO.js";
+import { S as le } from "./Banner-B6MbUbzd.js";
+import { T as b } from "./TextInputLabeled-Cs7s9ibw.js";
 function ce(r, e) {
   let { elementType: s = "a", onPress: a, onPressStart: o, onPressEnd: i, onClick: n, isDisabled: c, ...l } = r, p = {};
   s !== "a" && (p = {
     role: "link",
     tabIndex: c ? void 0 : 0
   });
-  let { focusableProps: h } = B(r, e), { pressProps: f, isPressed: y } = S({
+  let { focusableProps: h } = B(r, e), { pressProps: m, isPressed: y } = S({
     onPress: a,
     onPressStart: o,
     onPressEnd: i,
     onClick: n,
     isDisabled: c,
     ref: e
-  }), d = P(l, {
+  }), d = M(l, {
     labelable: !0
-  }), m = I(h, f), g = G(), k = O(r);
+  }), f = I(h, m), g = G(), k = O(r);
   return {
     isPressed: y,
     linkProps: I(d, k, {
-      ...m,
+      ...f,
       ...p,
       "aria-disabled": c || void 0,
       "aria-current": r["aria-current"],
       onClick: (T) => {
         var j;
-        (j = f.onClick) === null || j === void 0 || j.call(f, T), V(T, g, r.href, r.routerOptions);
+        (j = m.onClick) === null || j === void 0 || j.call(m, T), K(T, g, r.href, r.routerOptions);
       }
     })
   };
 }
 const de = /* @__PURE__ */ u.createContext(null), ue = /* @__PURE__ */ u.forwardRef(function(e, s) {
-  [e, s] = K(e, s, de);
+  [e, s] = V(e, s, de);
   let a = e.href && !e.isDisabled ? "a" : "span", { linkProps: o, isPressed: i } = ce({
     ...e,
     elementType: a
-  }, s), { hoverProps: n, isHovered: c } = R(e), { focusProps: l, isFocused: p, isFocusVisible: h } = U(), f = W({
+  }, s), { hoverProps: n, isHovered: c } = R(e), { focusProps: l, isFocused: p, isFocusVisible: h } = U(), m = W({
     ...e,
     defaultClassName: "react-aria-Link",
     values: {
@@ -52,20 +52,20 @@ const de = /* @__PURE__ */ u.createContext(null), ue = /* @__PURE__ */ u.forward
       isFocused: p,
       isFocusVisible: h
     }
-  }), y = P(e, {
+  }), y = M(e, {
     global: !0
   });
   return delete y.onClick, /* @__PURE__ */ _.createElement(a, {
     ref: s,
     slot: e.slot || void 0,
-    ...I(y, f, o, n, l),
+    ...I(y, m, o, n, l),
     "data-focused": p || void 0,
     "data-hovered": c || void 0,
     "data-pressed": i || void 0,
     "data-focus-visible": h || void 0,
     "data-current": !!e["aria-current"] || void 0,
     "data-disabled": e.isDisabled || void 0
-  }, f.children);
+  }, m.children);
 }), C = async (r, e, s) => {
   const a = F(r);
   try {
@@ -81,7 +81,7 @@ const de = /* @__PURE__ */ u.createContext(null), ue = /* @__PURE__ */ u.forward
     const i = ee(), n = { ...e, provider: o, providerFields: i };
     s(n), C(r, n, a);
   }
-}, me = D.div`
+}, fe = P.div`
     & [role="combobox"] {
         ${(r) => r.iconurl && `
             background-image: url(${r.iconurl});
@@ -91,7 +91,7 @@ const de = /* @__PURE__ */ u.createContext(null), ue = /* @__PURE__ */ u.forward
             padding-left: 24px;
         `}
     }
-`, fe = ({
+`, me = ({
   ariaLabel: r,
   isDisabled: e = !1,
   label: s,
@@ -101,7 +101,7 @@ const de = /* @__PURE__ */ u.createContext(null), ue = /* @__PURE__ */ u.forward
   validate: n
 }) => {
   const c = a.find((l) => l.key === i);
-  return /* @__PURE__ */ t.jsx(me, { iconurl: c == null ? void 0 : c.icon, children: /* @__PURE__ */ t.jsx(
+  return /* @__PURE__ */ t.jsx(fe, { iconurl: c == null ? void 0 : c.icon, children: /* @__PURE__ */ t.jsx(
     ae,
     {
       "aria-label": r,
@@ -131,7 +131,7 @@ const de = /* @__PURE__ */ u.createContext(null), ue = /* @__PURE__ */ u.forward
 var ye = Object.defineProperty, ke = (r, e) => ye(r, "name", { value: e, configurable: !0 });
 const ge = ke((r) => t.jsx(z, { light: xe, dark: he, ...r }), "ExternalLinkIcon");
 var be = Object.defineProperty, ve = (r, e) => be(r, "name", { value: e, configurable: !0 });
-const M = ve(({ children: r, href: e, ...s }) => t.jsxs(Ce, { href: e, ...s, children: [r ?? e, e && t.jsx(ge, {})] }), "Link"), Ce = D(ue)`
+const D = ve(({ children: r, href: e, ...s }) => t.jsxs(Ce, { href: e, ...s, children: [r ?? e, e && t.jsx(ge, {})] }), "Link"), Ce = P(ue)`
     font-size: ${w.fontSizeMd};
     line-height: ${w.lineHeightMd};
     color: ${({ theme: r }) => r.devTokens.linkLabelTextColor};
@@ -206,7 +206,7 @@ const M = ve(({ children: r, href: e, ...s }) => t.jsxs(Ce, { href: e, ...s, chi
       if (typeof p != "string") {
         const h = H(l, p);
         s(h), C(r, h, a).catch(
-          (f) => o.error("Failed to update model document after API response:", f)
+          (m) => o.error("Failed to update model document after API response:", m)
         );
       } else
         o.warn("MxCloudGenAI resource API unavailable. Could not update model details.");
@@ -272,8 +272,8 @@ const Te = ({
   rows: p = 1,
   validate: h
 }) => {
-  const f = l ? 8 : 0;
-  return /* @__PURE__ */ t.jsxs(v, { marginTop: f, children: [
+  const m = l ? 8 : 0;
+  return /* @__PURE__ */ t.jsxs(v, { marginTop: m, children: [
     r && /* @__PURE__ */ t.jsx(x, { children: /* @__PURE__ */ t.jsx($, { children: r }) }),
     /* @__PURE__ */ t.jsx(x, { fullWidth: !0, children: /* @__PURE__ */ t.jsxs(q, { children: [
       /* @__PURE__ */ t.jsx(x, { fullWidth: !0, children: /* @__PURE__ */ t.jsx(
@@ -297,7 +297,7 @@ const Te = ({
       )
     ] }) })
   ] });
-}, Me = ({
+}, De = ({
   onPress: r,
   buttonCaption: e
 }) => {
@@ -319,7 +319,7 @@ const Te = ({
       children: e
     }
   ) }) });
-}, Pe = ({
+}, Me = ({
   studioPro: r,
   model: e,
   setModel: s,
@@ -329,27 +329,27 @@ const Te = ({
   }, []), l = u.useRef(null);
   u.useEffect(() => {
     if (o) {
-      const m = setTimeout(() => {
+      const f = setTimeout(() => {
         i(!1);
       }, 5e3);
-      return () => clearTimeout(m);
+      return () => clearTimeout(f);
     }
   }, [o]);
-  const p = u.useCallback((m) => {
+  const p = u.useCallback((f) => {
     const g = {
       ...e,
-      providerFields: { ...e.providerFields, keyImportHelper: m }
+      providerFields: { ...e.providerFields, keyImportHelper: f }
     };
     s(g), l.current && clearTimeout(l.current), l.current = setTimeout(() => {
-      const k = Ie(e, m, r, a);
+      const k = Ie(e, f, r, a);
       s(k);
     }, 300);
   }, [r, e, a]), h = u.useCallback(async () => {
     je(r, e, s, a)(), i(!1);
-  }, [r, e, a]), f = u.useCallback(async () => {
+  }, [r, e, a]), m = u.useCallback(async () => {
     i(!1);
-    const m = await Fe(r, e, s, a);
-    i(m);
+    const f = await Fe(r, e, s, a);
+    i(f);
   }, [r, e, a]), y = u.useCallback(() => we(e), [e]), d = u.useCallback(() => {
     i(!1);
   }, []);
@@ -369,7 +369,7 @@ const Te = ({
     ),
     !n.key && /* @__PURE__ */ t.jsxs(v, { children: [
       /* @__PURE__ */ t.jsx(x, { children: /* @__PURE__ */ t.jsx($, {}) }),
-      /* @__PURE__ */ t.jsx(x, { fullWidth: !0, children: /* @__PURE__ */ t.jsx(M, { href: "https://genai.home.mendix.com/p/resources", target: "_blank", children: "Create a key in the portal" }) })
+      /* @__PURE__ */ t.jsx(x, { fullWidth: !0, children: /* @__PURE__ */ t.jsx(D, { href: "https://genai.home.mendix.com/p/resources", target: "_blank", children: "Create a key in the portal" }) })
     ] }),
     n.key && /* @__PURE__ */ t.jsxs(t.Fragment, { children: [
       /* @__PURE__ */ t.jsx(
@@ -425,22 +425,22 @@ const Te = ({
       ),
       /* @__PURE__ */ t.jsxs(v, { children: [
         /* @__PURE__ */ t.jsx(x, { children: /* @__PURE__ */ t.jsx($, {}) }),
-        /* @__PURE__ */ t.jsx(x, { fullWidth: !0, children: /* @__PURE__ */ t.jsx(M, { href: n.deepLinkURL, target: "_blank", children: "View resource in the portal" }) })
+        /* @__PURE__ */ t.jsx(x, { fullWidth: !0, children: /* @__PURE__ */ t.jsx(D, { href: n.deepLinkURL, target: "_blank", children: "View resource in the portal" }) })
       ] }),
       /* @__PURE__ */ t.jsxs(v, { children: [
         /* @__PURE__ */ t.jsx(x, { children: /* @__PURE__ */ t.jsx($, { children: "Connection" }) }),
-        /* @__PURE__ */ t.jsx(x, { children: /* @__PURE__ */ t.jsx(Me, { onPress: f, buttonCaption: "Test" }) })
+        /* @__PURE__ */ t.jsx(x, { children: /* @__PURE__ */ t.jsx(De, { onPress: m, buttonCaption: "Test" }) })
       ] }),
       o && /* @__PURE__ */ t.jsx(le, { onClose: d, children: "Connection successful." })
     ] })
   ] });
-}, De = te(), Ee = ({ studioPro: r, documentId: e }) => {
-  const s = r.ui.messageBoxes, a = r.app.model.customBlobDocuments, [o, i] = u.useState(0), [n, c] = u.useState(!1), [l, p] = u.useState(De), h = [
+}, Pe = te(), Ee = ({ studioPro: r, documentId: e }) => {
+  const s = r.ui.messageBoxes, a = r.app.model.customBlobDocuments, [o, i] = u.useState(0), [n, c] = u.useState(!1), [l, p] = u.useState(Pe), h = [
     { key: "MxCloudGenAI", caption: "Mendix Cloud GenAI", icon: ne }
   ];
   u.useEffect(() => {
-    const d = (m) => {
-      const { documents: g } = m;
+    const d = (f) => {
+      const { documents: g } = f;
       g.some((k) => k.documentId === e) && i((k) => k + 1);
     };
     return a.addEventListener("documentsChanged", d), () => {
@@ -449,15 +449,15 @@ const Te = ({
   }, []), u.useEffect(() => {
     a.getDocumentById(e).then(async (d) => {
       if (d && !("error" in d)) {
-        const m = d.document.contents;
-        !n && m.providerFields && "keyImportHelper" in m.providerFields && (m.providerFields.keyImportHelper = ""), p({ ...m }), c(!0);
+        const f = d.document.contents;
+        !n && f.providerFields && "keyImportHelper" in f.providerFields && (f.providerFields.keyImportHelper = ""), p({ ...f }), c(!0);
       } else
         throw new Error((d == null ? void 0 : d.error) || "Document not found");
     }).catch((d) => {
       s.show("error", "Error loading document", "Details: " + (d == null ? void 0 : d.message) || d);
     });
   }, [o]);
-  const f = u.useCallback(async (d) => {
+  const m = u.useCallback(async (d) => {
     pe(r, l, p, e, d)();
   }, [r, l, p, e]), y = u.useCallback(() => {
     if (!l.provider)
@@ -467,19 +467,19 @@ const Te = ({
     !n && /* @__PURE__ */ t.jsx("span", { children: "Loading document content..." }),
     n && /* @__PURE__ */ t.jsx(Q, { children: /* @__PURE__ */ t.jsxs(Y, { children: [
       /* @__PURE__ */ t.jsx(A, { label: "Common", children: /* @__PURE__ */ t.jsx(
-        fe,
+        me,
         {
           ariaLabel: "Provider",
           isDisabled: !0,
           label: "Provider",
           selectedKey: l.provider,
           options: h,
-          onSelectionChange: f,
+          onSelectionChange: m,
           validate: y
         }
       ) }),
       l.provider === "MxCloudGenAI" && /* @__PURE__ */ t.jsx(
-        Pe,
+        Me,
         {
           studioPro: r,
           model: l,
@@ -489,8 +489,8 @@ const Te = ({
       )
     ] }) })
   ] }) });
-}, Ve = Z(Ee);
+}, Ke = Z(Ee);
 export {
-  Ve as component
+  Ke as component
 };
 //# sourceMappingURL=modelEdit.js.map

@@ -1,3 +1,4 @@
+@import "../../themesource/datawidgets/web/variables.scss";
 @import "../../themesource/atlas_core/web/_variables.scss";
 @import "custom-variables";
 
@@ -8,8 +9,11 @@ $brand-openai: #0078D4;
 
 /* Card Colors */
 $light-grey-2: #F2F2F3;
+$light-grey-5: #C1C3C8;
+$light-grey-6: #9EA2A9;
 $light-grey-7: #6B707B;
 $light-green-10: #C6D92F;
+$turquoise-4: #12C1BE;
 $dark-purple-8: #4701D4;
 $light-purple-7: #8568F8;
 $dark-violet-7: #CD59F7;
@@ -27,10 +31,10 @@ $label-bg-bedrock: #E2E0FC;
 $label-color-bedrock: #2F008C;
 $label-bg-pgvector: #E1FAE1;
 $label-color-pgvector: #076407;
-$label-bg-all: #DEDEDE;
-$label-color-all: #000000;
-
-
+$label-bg-all: #D4EDEE;
+$label-color-all: #00635A;
+//$label-bg-all: #DEDEDE;
+//$label-color-all: #000000;
 
 //Navigation
 .layout-atlas .region-sidebar {
@@ -54,11 +58,6 @@ $label-color-all: #000000;
   padding: 8px 0;
   margin-top: 2px;
   white-space: normal;
-}
-
-//Homepage
-.bg-openai {
-  background-color: $brand-openai;
 }
 
 //Helpers
@@ -210,55 +209,118 @@ $label-color-all: #000000;
     }
 }
 
-/* --------------------------------------- Landing Page Styling -----------------------------------*/
-
-
 .display-none {
   display: none;
 }
 
-.text-break--2-lines {
-    word-break: break-word;
-    overflow-wrap: break-word;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; 
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
+/* --------------------------------------- Landing Page Styling -----------------------------------*/
 .group-tooltip {
-    .widget-tooltip-content {
-        max-width: 500px;
-        text-align: left;
-        margin-bottom: 0;
-        padding: 16px;
-        overflow-y: auto;
-        font-weight: 400;
-        color: black;
-    }
+  .widget-tooltip-content {
+    max-width: 500px;
+    text-align: left;
+    margin-bottom: 0;
+    padding: 16px;
+    overflow-y: auto;
+    font-weight: 400;
+    color: black;
+  }
 }
 
 .landing-page {
-  height:auto;
-  max-width: 153.5rem;
-  padding: 40px;
-  margin: 32px auto 32px auto;
-  gap: 24px;
-  border-radius: 16px;
-  border: 1px solid var(--color-border-default, #E7E7E9);
-  background: var(--color-background-default, #FFF);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  min-width: 100%;
+  height: -webkit-fill-available;
+  margin: 0 auto;
+
+  .landing-page-content {
+    height: 90vh;
+    width: 93.1vw;
+    max-width: 1420px;
+    box-sizing: border-box;
+
+    .card {
+      height: 100%;
+      border: 1px solid #E7E7E9;
+      border-radius: 16px;
+      padding: 24px 32px;
+      overflow: auto;
+
+      /* Grid: defines the columns of the the cards per group */
+      .grid-landing-page {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        justify-content: start;   // prevents stretching
+        gap: 24px;
+        box-sizing: border-box;
+        margin-top: 12px;
+      }
+    }
+  }
 }
 
-/* Grid: defines the columns of the the cards per group */
-.grid-landing-page {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(auto, 327px));
-  gap: 24px;
-  box-sizing: border-box;
-  margin-top: 16px;
-  margin-bottom: 32px;
+
+/* --------------------------------------- Tutorial -----------------------------------*/
+
+.tutorial-page {
+  height: 460px;
 }
+
+.tutorial-text {
+  margin-bottom: $spacing-medium;
+}
+
+.tutorial-primary-btn {
+  width: 65px;
+  margin-left: $spacing-small;
+}
+
+.tutorial-footer {
+  padding: 8px 24px 24px !important;
+}
+
+.tutorial-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.tutorial-slideshow {
+  width: 660px;
+  overflow: hidden;
+  justify-content: center;
+
+  img {
+    height: 320px;
+    width: 650px;
+    padding-top: 12px;
+  }
+}
+
+.dots {
+  position: absolute;
+  bottom: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: $light-grey-5;
+}
+
+.active-dot {
+  @extend .dot;
+  background: $brand-primary;
+}
+
+
 
 /* --------------------------------------- Cards -----------------------------------*/
 
@@ -270,12 +332,14 @@ $label-color-all: #000000;
  */
 
 .card-base {
-  width: 345px;
-  height: 190px;
+  flex: 1 1 calc(25% - 16px);  // 4 per row, responsive
+  width: 100%;
   flex-shrink: 0;
   border-radius: 8px;
   border-top: 1px grey;
   background: white;
+  box-sizing: border-box;
+
   box-shadow:
     0px 1px 1px 0px rgba(0, 0, 0, 0.10),
     0px 2px 1px 0px rgba(0, 0, 0, 0.08),
@@ -293,11 +357,13 @@ $label-color-all: #000000;
 
   .card-inner {
     display: flex;
-    width: 340px;
-    padding: 16px;
-    flex-direction: column;
     align-items: flex-start;
     flex-shrink: 0;
+    padding: 16px;        
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-sizing: border-box;
 }
 
   .card-content {
@@ -308,8 +374,8 @@ $label-color-all: #000000;
 
     .card-icon {
       display: flex;
-      width: 42px;
-      height: 42px;
+      width: 48px;
+      height: 48px;
       padding: 4px;
       justify-content: center;
       align-items: center;
@@ -320,22 +386,59 @@ $label-color-all: #000000;
       background: #F7F7F7;
     }
 
-    .card-title {
-      @extend .text-break--2-lines;
-      height: 52px;
-      margin-bottom: 0
+
+    .container-img-label {
+      display: grid;
+      grid-template-columns: 1fr auto; /* label | icon */
+      align-items: start;
+      margin-bottom: 4px;
+      box-sizing: border-box;
+      overflow: hidden; /* hard safety net */
     }
 
+    .card-title,
     .card-description {
-      @extend .text-break--2-lines;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Title */
+    .card-title {
+      -webkit-line-clamp: 2;
+      margin-bottom: 8px;
+      //font-size: 16px;
+    }
+
+    /* Description */
+    .card-description {
+      -webkit-line-clamp: 2;
       height: 40px;
     }
   }
 }
 
+.card-lightest-grey {
+   @extend .card-base; 
+  border-left-color: $light-grey-5; 
+}
+
+.card-light-grey {
+   @extend .card-base; 
+  border-left-color: $light-grey-6; 
+}
+
 .card-grey         { 
   @extend .card-base; 
   border-left-color: $light-grey-7; 
+}
+
+.card-turquoise      { 
+  @extend .card-base; 
+  border-left-color: $turquoise-4; 
 }
 
 .card-green        { 
@@ -372,16 +475,16 @@ $label-color-all: #000000;
   border-left-color: $light-orange; 
 }
 
+
+
 /* --------------------------------------- Card Labels -----------------------------------*/
 
 .card-label-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 2px;
-  max-width: 260px;
-  margin: 0 auto;
+  gap: 4px;
+  max-width: 290px;
   overflow: hidden; 
-  max-height: calc((50px * 2) + 2px);
 }
 
 .card-label-base {
@@ -395,13 +498,6 @@ $label-color-all: #000000;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
-}
-
-.container-img-label {
-  display: flex;
-  height: 52px;
-  align-items: start;
-  justify-content: space-between; 
 }
 
 .container-label {

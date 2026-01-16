@@ -1,7 +1,7 @@
-import { r as c, j as a, ap as g, aq as v, ar as f, an as x, ao as S } from "./TextInputWithIcon-BHM6tQnm.js";
+import { r as c, j as a, au as g, av as v, aw as f, at as x, as as S } from "./TextInputWithIcon-mWdTJJox.js";
 import { c as D } from "./logger-BM6R1Quw.js";
-import { T as j } from "./TextInputLabeled-C8A7862R.js";
-import { c as E } from "./componentLoader-CAsiyhiP.js";
+import { T as j } from "./TextInputLabeled-Cs7s9ibw.js";
+import { c as E } from "./componentLoader-BrAYZVSc.js";
 function L(n) {
   return {
     name: ""
@@ -9,8 +9,8 @@ function L(n) {
 }
 const b = (n, t, r, s, o) => async (m) => {
   const i = { ...r, [t]: m };
-  s(i), P(n, i, o);
-}, P = async (n, t, r) => {
+  s(i), w(n, i, o);
+}, w = async (n, t, r) => {
   const s = D(n);
   try {
     await n.app.model.customBlobDocuments.updateDocumentContent(r, t);
@@ -20,8 +20,8 @@ const b = (n, t, r, s, o) => async (m) => {
       message: o.message
     });
   }
-}, w = L(), y = ({ studioPro: n, documentId: t }) => {
-  const r = n.ui.messageBoxes, s = n.app.model.customBlobDocuments, [o, m] = c.useState(0), [i, h] = c.useState(!1), [u, d] = c.useState(w);
+}, P = L(), y = ({ studioPro: n, documentId: t }) => {
+  const r = n.ui.messageBoxes, s = n.app.model.customBlobDocuments, [o, m] = c.useState(0), [i, h] = c.useState(!1), [u, d] = c.useState(P);
   return c.useCallback(
     (e) => b(n, e, u, d, t),
     [n, u, d, t]

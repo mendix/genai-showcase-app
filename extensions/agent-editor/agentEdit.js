@@ -1,35 +1,29 @@
-import { j as b, p as ue, $ as ee, r as p, a as wo, b as oe, c as Co, d as Do, e as Ee, f as Ze, g as te, h as Rt, i as Mt, k as ye, l as q, m as j, n as Tt, o as Q, q as ko, s as ae, t as So, u as Eo, v as D, w as $e, x as zo, y as Bo, z as ze, A as Ft, B as Io, C as $t, D as Ao, E as Po, F as Ro, G as Mo, H as To, I as Fo, J as Ae, K as Kt, L as Z, M as Je, N as Ko, O as ne, P as No, Q as Ho, R as Nt, S as xe, T as Ht, U as _e, V as Vo, W as jo, X as Lo, Y as Oo, Z as Pe, _ as Wo, a0 as Uo, a1 as xt, a2 as fe, a3 as qo, a4 as Yo, a5 as Zo, a6 as we, a7 as Vt, a8 as Xo, a9 as wt, aa as Ve, ab as R, ac as ve, ad as Go, ae as Qo, af as Jo, ag as _o, ah as T, ai as Be, aj as en, ak as tn, al as ln, am as jt, an as Ct, ao as ke, ap as on, aq as nn, ar as rn } from "./TextInputWithIcon-BHM6tQnm.js";
-import { c as un } from "./componentLoader-CAsiyhiP.js";
-import { c as an, a as sn, m as et, i as dn, b as cn, h as hn, g as fn, d as pn, e as mn, f as vn, j as je, k as gn, u as bn } from "./index-CCba4LmR.js";
-import { T as Dt, n as yn, a as Le } from "./TextInputWithButton-DK5kVQUu.js";
-import { $ as H, a as _, b as le, c as Se, d as $n, e as Lt, f as Re, g as tt, h as xn, i as Ot, j as se, k as Wt, l as wn, m as Cn, n as Dn, o as Ut, p as kn, q as Sn, r as qt, s as En, t as zn, u as lt, v as Y, w as Bn, x as In, y as Ce, z as pe, A as An, B as Pn, C as Rn, D as it, E as Mn, F as Yt, G as Tn, H as Fn, I as Kn, J as Nn, K as Hn, L as Vn, _ as Xe, M as jn } from "./TextAreaAutogrow-D57DVpIT.js";
-import { I as kt, W as Ln } from "./Banner-XhhlBqtW.js";
-import { T as On } from "./TextWithIcon-Bc9lM5Pv.js";
-import { m as Wn } from "./modelUtils-BKeUOTig.js";
-const Un = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M8%2014.5C11.5899%2014.5%2014.5%2011.5899%2014.5%208C14.5%204.41015%2011.5899%201.5%208%201.5C4.41015%201.5%201.5%204.41015%201.5%208C1.5%2011.5899%204.41015%2014.5%208%2014.5Z'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'%20stroke-linecap='round'/%3e%3cpath%20d='M3.5%2012.75L12.75%203.5'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", qn = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M8%2014.5C11.5899%2014.5%2014.5%2011.5899%2014.5%208C14.5%204.41015%2011.5899%201.5%208%201.5C4.41015%201.5%201.5%204.41015%201.5%208C1.5%2011.5899%204.41015%2014.5%208%2014.5Z'%20stroke='%23535965'%20stroke-miterlimit='10'%20stroke-linecap='round'/%3e%3cpath%20d='M3.5%2012.75L12.75%203.5'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
-var Yn = Object.defineProperty, Zn = (t, e) => Yn(t, "name", { value: e, configurable: !0 });
-const Xn = Zn((t) => b.jsx(ue, { light: qn, dark: Un, ...t }), "AppSelectorNoVersionIcon"), Gn = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M8.85498%204.52502L11.475%207.14502'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M5.145%2013.5H2.5V10.885L10.745%202.63502C10.94%202.44002%2011.255%202.44002%2011.45%202.63502L13.36%204.54502C13.555%204.74002%2013.555%205.05502%2013.36%205.25002L5.145%2013.5Z'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", Qn = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M8.85498%204.52502L11.475%207.14502'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M5.145%2013.5H2.5V10.885L10.745%202.63502C10.94%202.44002%2011.255%202.44002%2011.45%202.63502L13.36%204.54502C13.555%204.74002%2013.555%205.05502%2013.36%205.25002L5.145%2013.5Z'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
-var Jn = Object.defineProperty, _n = (t, e) => Jn(t, "name", { value: e, configurable: !0 });
-const er = _n((t) => b.jsx(ue, { light: Qn, dark: Gn, ...t }), "EditIcon"), tr = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13%202.5H3C2.72386%202.5%202.5%202.72386%202.5%203V13C2.5%2013.2761%202.72386%2013.5%203%2013.5H13C13.2761%2013.5%2013.5%2013.2761%2013.5%2013V3C13.5%202.72386%2013.2761%202.5%2013%202.5Z'%20stroke='%23579BF9'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5V6.5C6.5%205.95%206.95%205.5%207.5%205.5H8.5C9.05%205.5%209.5%205.95%209.5%206.5V8H6.5'%20stroke='%23579BF9'%20stroke-linejoin='round'/%3e%3c/svg%3e", lr = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13%202.5H3C2.72386%202.5%202.5%202.72386%202.5%203V13C2.5%2013.2761%202.72386%2013.5%203%2013.5H13C13.2761%2013.5%2013.5%2013.2761%2013.5%2013V3C13.5%202.72386%2013.2761%202.5%2013%202.5Z'%20stroke='%23146FF4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5V6.5C6.5%205.95%206.95%205.5%207.5%205.5H8.5C9.05%205.5%209.5%205.95%209.5%206.5V8H6.5'%20stroke='%23146FF4'%20stroke-linejoin='round'/%3e%3c/svg%3e";
-var ir = Object.defineProperty, or = (t, e) => ir(t, "name", { value: e, configurable: !0 });
-const nr = or((t) => b.jsx(ue, { light: lr, dark: tr, ...t }), "EntityIcon"), rr = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5L6.5%206.5C6.5%205.95%206.95%205.5%207.5%205.5L8.5%205.5C9.05%205.5%209.5%205.95%209.5%206.5V8L6.5%208'%20stroke='%23FBCF55'%20stroke-linejoin='round'/%3e%3cpath%20d='M9.5%202.5L6.5%202.5M11%202.5L13%202.5C13.2761%202.5%2013.5%202.72386%2013.5%203V5M5%202.5L3%202.5C2.72386%202.5%202.5%202.72386%202.5%203L2.5%205M2.5%209.5L2.5%206.5M2.5%2011L2.5%2013C2.5%2013.2761%202.72386%2013.5%203%2013.5H5M13.5%206.5L13.5%209.5M13.5%2011V13C13.5%2013.2761%2013.2761%2013.5%2013%2013.5H11M9.5%2013.5L6.5%2013.5'%20stroke='%23FBCF55'%20stroke-linejoin='round'/%3e%3c/svg%3e", ur = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5L6.5%206.5C6.5%205.95%206.95%205.5%207.5%205.5L8.5%205.5C9.05%205.5%209.5%205.95%209.5%206.5V8L6.5%208'%20stroke='%23C97800'%20stroke-linejoin='round'/%3e%3cpath%20d='M9.5%202.5L6.5%202.5M11%202.5L13%202.5C13.2761%202.5%2013.5%202.72386%2013.5%203V5M5%202.5L3%202.5C2.72386%202.5%202.5%202.72386%202.5%203L2.5%205M2.5%209.5L2.5%206.5M2.5%2011L2.5%2013C2.5%2013.2761%202.72386%2013.5%203%2013.5H5M13.5%206.5L13.5%209.5M13.5%2011V13C13.5%2013.2761%2013.2761%2013.5%2013%2013.5H11M9.5%2013.5L6.5%2013.5'%20stroke='%23C97800'%20stroke-linejoin='round'/%3e%3c/svg%3e";
-var ar = Object.defineProperty, sr = (t, e) => ar(t, "name", { value: e, configurable: !0 });
-const dr = sr((t) => b.jsx(ue, { light: ur, dark: rr, ...t }), "EntityNonPersistableIcon"), cr = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M12%2014.5H4C3.725%2014.5%203.5%2014.275%203.5%2014V2C3.5%201.725%203.725%201.5%204%201.5H8.5L12.5%205.5V14C12.5%2014.275%2012.275%2014.5%2012%2014.5Z'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%205.5H8.5V1.5'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", hr = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M12%2014.5H4C3.725%2014.5%203.5%2014.275%203.5%2014V2C3.5%201.725%203.725%201.5%204%201.5H8.5L12.5%205.5V14C12.5%2014.275%2012.275%2014.5%2012%2014.5Z'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%205.5H8.5V1.5'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
-var fr = Object.defineProperty, pr = (t, e) => fr(t, "name", { value: e, configurable: !0 });
-const mr = pr((t) => b.jsx(ue, { light: hr, dark: cr, ...t }), "PageIcon");
-function vr(t = {}) {
-  let { locale: e } = ee();
+import { j as y, p as le, $ as J, r as p, a as To, b as ne, c as Fo, d as Ko, e as fe, f as Ze, g as ye, h as Ht, i as K, k as L, l as jt, m as _e, n as Lt, o as Ot, q as Wt, s as No, t as _, u as Ut, v as qt, w as we, x as Yt, y as Z, z as Vo, A as ae, B as Ho, C as jo, D, E as Ce, F as Ie, G as St, H as Lo, I as Oo, J as Wo, K as ke, L as et, M as tt, N as Zt, O as ie, P as Xt, Q as Xe, R as te, S as pe, T as q, U as Uo, V as qo, W as lt, X as Yo, Y as it, Z as De, _ as Gt, a0 as ot, a1 as Zo, a2 as Xo, a3 as Go, a4 as Qo, a5 as Ae, a6 as Jo, a7 as _o, a8 as Et, a9 as en, aa as tn, ab as ln, ac as zt, ad as on, ae as je, af as M, ag as R, ah as Pe, ai as nn, aj as rn, ak as un, al as be, am as an, an as sn, ao as dn, ap as cn, aq as Qt, ar as hn, as as Be, at as Bt, au as fn, av as pn, aw as vn } from "./TextInputWithIcon-mWdTJJox.js";
+import { c as mn } from "./componentLoader-BrAYZVSc.js";
+import { c as gn, a as bn, m as nt, i as yn, b as $n, h as xn, g as wn, d as Cn, e as kn, f as Dn, j as It, k as Sn, u as En } from "./index-CCba4LmR.js";
+import { $ as V, a as Q, b as ee, c as ze, d as zn, e as Jt, f as Me, g as rt, h as Bn, i as _t, j as se, k as el, l as In, m as Pn, n as Rn, o as tl, p as An, q as Mn, r as ll, s as Tn, t as Fn, u as ut, v as U, w as Kn, x as Nn, y as Se, z as ve, A as Vn, B as Hn, C as jn, D as at, E as Ln, F as il, G as On, H as Wn, I as Un, J as qn, K as Yn, L as Zn, _ as Ge, M as Xn } from "./ComboBox-Dy-mCv3q.js";
+import { I as Pt, W as Gn } from "./Banner-B6MbUbzd.js";
+import { n as Qn, T as Rt, a as Le } from "./MicroflowIcon-BNuUMNrL.js";
+import { m as Jn } from "./modelUtils-BKeUOTig.js";
+import { T as _n } from "./TextWithIcon-Crx2NOSO.js";
+const er = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13%202.5H3C2.72386%202.5%202.5%202.72386%202.5%203V13C2.5%2013.2761%202.72386%2013.5%203%2013.5H13C13.2761%2013.5%2013.5%2013.2761%2013.5%2013V3C13.5%202.72386%2013.2761%202.5%2013%202.5Z'%20stroke='%23579BF9'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5V6.5C6.5%205.95%206.95%205.5%207.5%205.5H8.5C9.05%205.5%209.5%205.95%209.5%206.5V8H6.5'%20stroke='%23579BF9'%20stroke-linejoin='round'/%3e%3c/svg%3e", tr = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13%202.5H3C2.72386%202.5%202.5%202.72386%202.5%203V13C2.5%2013.2761%202.72386%2013.5%203%2013.5H13C13.2761%2013.5%2013.5%2013.2761%2013.5%2013V3C13.5%202.72386%2013.2761%202.5%2013%202.5Z'%20stroke='%23146FF4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5V6.5C6.5%205.95%206.95%205.5%207.5%205.5H8.5C9.05%205.5%209.5%205.95%209.5%206.5V8H6.5'%20stroke='%23146FF4'%20stroke-linejoin='round'/%3e%3c/svg%3e";
+var lr = Object.defineProperty, ir = (t, e) => lr(t, "name", { value: e, configurable: !0 });
+const or = ir((t) => y.jsx(le, { light: tr, dark: er, ...t }), "EntityIcon"), nr = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5L6.5%206.5C6.5%205.95%206.95%205.5%207.5%205.5L8.5%205.5C9.05%205.5%209.5%205.95%209.5%206.5V8L6.5%208'%20stroke='%23FBCF55'%20stroke-linejoin='round'/%3e%3cpath%20d='M9.5%202.5L6.5%202.5M11%202.5L13%202.5C13.2761%202.5%2013.5%202.72386%2013.5%203V5M5%202.5L3%202.5C2.72386%202.5%202.5%202.72386%202.5%203L2.5%205M2.5%209.5L2.5%206.5M2.5%2011L2.5%2013C2.5%2013.2761%202.72386%2013.5%203%2013.5H5M13.5%206.5L13.5%209.5M13.5%2011V13C13.5%2013.2761%2013.2761%2013.5%2013%2013.5H11M9.5%2013.5L6.5%2013.5'%20stroke='%23FBCF55'%20stroke-linejoin='round'/%3e%3c/svg%3e", rr = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5L6.5%206.5C6.5%205.95%206.95%205.5%207.5%205.5L8.5%205.5C9.05%205.5%209.5%205.95%209.5%206.5V8L6.5%208'%20stroke='%23C97800'%20stroke-linejoin='round'/%3e%3cpath%20d='M9.5%202.5L6.5%202.5M11%202.5L13%202.5C13.2761%202.5%2013.5%202.72386%2013.5%203V5M5%202.5L3%202.5C2.72386%202.5%202.5%202.72386%202.5%203L2.5%205M2.5%209.5L2.5%206.5M2.5%2011L2.5%2013C2.5%2013.2761%202.72386%2013.5%203%2013.5H5M13.5%206.5L13.5%209.5M13.5%2011V13C13.5%2013.2761%2013.2761%2013.5%2013%2013.5H11M9.5%2013.5L6.5%2013.5'%20stroke='%23C97800'%20stroke-linejoin='round'/%3e%3c/svg%3e";
+var ur = Object.defineProperty, ar = (t, e) => ur(t, "name", { value: e, configurable: !0 });
+const sr = ar((t) => y.jsx(le, { light: rr, dark: nr, ...t }), "EntityNonPersistableIcon");
+function dr(t = {}) {
+  let { locale: e } = J();
   return p.useMemo(() => new Intl.ListFormat(e, t), [
     e,
     t
   ]);
 }
-function gr(t) {
+function cr(t) {
   let { onMoveStart: e, onMove: l, onMoveEnd: i } = t, o = p.useRef({
     didMove: !1,
     lastPosition: null,
     id: null
-  }), { addGlobalListener: n, removeGlobalListener: r } = wo(), a = oe((d, c, h, f) => {
+  }), { addGlobalListener: n, removeGlobalListener: r } = To(), u = ne((d, c, h, f) => {
     h === 0 && f === 0 || (o.current.didMove || (o.current.didMove = !0, e == null || e({
       type: "movestart",
       pointerType: c,
@@ -47,8 +41,8 @@ function gr(t) {
       ctrlKey: d.ctrlKey,
       altKey: d.altKey
     }));
-  }), u = oe((d, c) => {
-    Co(), o.current.didMove && (i == null || i({
+  }), a = ne((d, c) => {
+    Fo(), o.current.didMove && (i == null || i({
       type: "moveend",
       pointerType: c,
       shiftKey: d.shiftKey,
@@ -60,78 +54,78 @@ function gr(t) {
   return {
     moveProps: p.useMemo(() => {
       let d = {}, c = () => {
-        Do(), o.current.didMove = !1;
+        Ko(), o.current.didMove = !1;
       };
       if (typeof PointerEvent > "u" && process.env.NODE_ENV === "test") {
         let f = (g) => {
           if (g.button === 0) {
-            var C, w, $, x;
-            a(g, "mouse", g.pageX - (($ = (C = o.current.lastPosition) === null || C === void 0 ? void 0 : C.pageX) !== null && $ !== void 0 ? $ : 0), g.pageY - ((x = (w = o.current.lastPosition) === null || w === void 0 ? void 0 : w.pageY) !== null && x !== void 0 ? x : 0)), o.current.lastPosition = {
+            var C, $, x, w;
+            u(g, "mouse", g.pageX - ((x = (C = o.current.lastPosition) === null || C === void 0 ? void 0 : C.pageX) !== null && x !== void 0 ? x : 0), g.pageY - ((w = ($ = o.current.lastPosition) === null || $ === void 0 ? void 0 : $.pageY) !== null && w !== void 0 ? w : 0)), o.current.lastPosition = {
               pageX: g.pageX,
               pageY: g.pageY
             };
           }
-        }, m = (g) => {
-          g.button === 0 && (u(g, "mouse"), r(window, "mousemove", f, !1), r(window, "mouseup", m, !1));
+        }, v = (g) => {
+          g.button === 0 && (a(g, "mouse"), r(window, "mousemove", f, !1), r(window, "mouseup", v, !1));
         };
         d.onMouseDown = (g) => {
           g.button === 0 && (c(), g.stopPropagation(), g.preventDefault(), o.current.lastPosition = {
             pageX: g.pageX,
             pageY: g.pageY
-          }, n(window, "mousemove", f, !1), n(window, "mouseup", m, !1));
+          }, n(window, "mousemove", f, !1), n(window, "mouseup", v, !1));
         };
-        let v = (g) => {
+        let m = (g) => {
           let C = [
             ...g.changedTouches
           ].findIndex(({ identifier: E }) => E === o.current.id);
           if (C >= 0) {
-            var w, $;
-            let { pageX: E, pageY: A } = g.changedTouches[C];
-            var x, S;
-            a(g, "touch", E - ((x = (w = o.current.lastPosition) === null || w === void 0 ? void 0 : w.pageX) !== null && x !== void 0 ? x : 0), A - ((S = ($ = o.current.lastPosition) === null || $ === void 0 ? void 0 : $.pageY) !== null && S !== void 0 ? S : 0)), o.current.lastPosition = {
+            var $, x;
+            let { pageX: E, pageY: I } = g.changedTouches[C];
+            var w, S;
+            u(g, "touch", E - ((w = ($ = o.current.lastPosition) === null || $ === void 0 ? void 0 : $.pageX) !== null && w !== void 0 ? w : 0), I - ((S = (x = o.current.lastPosition) === null || x === void 0 ? void 0 : x.pageY) !== null && S !== void 0 ? S : 0)), o.current.lastPosition = {
               pageX: E,
-              pageY: A
+              pageY: I
             };
           }
-        }, y = (g) => {
+        }, b = (g) => {
           [
             ...g.changedTouches
-          ].findIndex(({ identifier: w }) => w === o.current.id) >= 0 && (u(g, "touch"), o.current.id = null, r(window, "touchmove", v), r(window, "touchend", y), r(window, "touchcancel", y));
+          ].findIndex(({ identifier: $ }) => $ === o.current.id) >= 0 && (a(g, "touch"), o.current.id = null, r(window, "touchmove", m), r(window, "touchend", b), r(window, "touchcancel", b));
         };
         d.onTouchStart = (g) => {
           if (g.changedTouches.length === 0 || o.current.id != null) return;
-          let { pageX: C, pageY: w, identifier: $ } = g.changedTouches[0];
+          let { pageX: C, pageY: $, identifier: x } = g.changedTouches[0];
           c(), g.stopPropagation(), g.preventDefault(), o.current.lastPosition = {
             pageX: C,
-            pageY: w
-          }, o.current.id = $, n(window, "touchmove", v, !1), n(window, "touchend", y, !1), n(window, "touchcancel", y, !1);
+            pageY: $
+          }, o.current.id = x, n(window, "touchmove", m, !1), n(window, "touchend", b, !1), n(window, "touchcancel", b, !1);
         };
       } else {
-        let f = (v) => {
-          if (v.pointerId === o.current.id) {
-            var y, g;
-            let $ = v.pointerType || "mouse";
-            var C, w;
-            a(v, $, v.pageX - ((C = (y = o.current.lastPosition) === null || y === void 0 ? void 0 : y.pageX) !== null && C !== void 0 ? C : 0), v.pageY - ((w = (g = o.current.lastPosition) === null || g === void 0 ? void 0 : g.pageY) !== null && w !== void 0 ? w : 0)), o.current.lastPosition = {
-              pageX: v.pageX,
-              pageY: v.pageY
+        let f = (m) => {
+          if (m.pointerId === o.current.id) {
+            var b, g;
+            let x = m.pointerType || "mouse";
+            var C, $;
+            u(m, x, m.pageX - ((C = (b = o.current.lastPosition) === null || b === void 0 ? void 0 : b.pageX) !== null && C !== void 0 ? C : 0), m.pageY - (($ = (g = o.current.lastPosition) === null || g === void 0 ? void 0 : g.pageY) !== null && $ !== void 0 ? $ : 0)), o.current.lastPosition = {
+              pageX: m.pageX,
+              pageY: m.pageY
             };
           }
-        }, m = (v) => {
-          if (v.pointerId === o.current.id) {
-            let y = v.pointerType || "mouse";
-            u(v, y), o.current.id = null, r(window, "pointermove", f, !1), r(window, "pointerup", m, !1), r(window, "pointercancel", m, !1);
+        }, v = (m) => {
+          if (m.pointerId === o.current.id) {
+            let b = m.pointerType || "mouse";
+            a(m, b), o.current.id = null, r(window, "pointermove", f, !1), r(window, "pointerup", v, !1), r(window, "pointercancel", v, !1);
           }
         };
-        d.onPointerDown = (v) => {
-          v.button === 0 && o.current.id == null && (c(), v.stopPropagation(), v.preventDefault(), o.current.lastPosition = {
-            pageX: v.pageX,
-            pageY: v.pageY
-          }, o.current.id = v.pointerId, n(window, "pointermove", f, !1), n(window, "pointerup", m, !1), n(window, "pointercancel", m, !1));
+        d.onPointerDown = (m) => {
+          m.button === 0 && o.current.id == null && (c(), m.stopPropagation(), m.preventDefault(), o.current.lastPosition = {
+            pageX: m.pageX,
+            pageY: m.pageY
+          }, o.current.id = m.pointerId, n(window, "pointermove", f, !1), n(window, "pointerup", v, !1), n(window, "pointercancel", v, !1));
         };
       }
-      let h = (f, m, v) => {
-        c(), a(f, "keyboard", m, v), u(f, "keyboard");
+      let h = (f, v, m) => {
+        c(), u(f, "keyboard", v, m), a(f, "keyboard");
       };
       return d.onKeyDown = (f) => {
         switch (f.key) {
@@ -157,21 +151,21 @@ function gr(t) {
       o,
       n,
       r,
-      a,
-      u
+      u,
+      a
     ])
   };
 }
-function br(t, e) {
+function hr(t, e) {
   let l = e == null ? void 0 : e.isDisabled, [i, o] = p.useState(!1);
-  return Ee(() => {
+  return fe(() => {
     if (t != null && t.current && !l) {
       let n = () => {
         if (t.current) {
-          let a = Ze(t.current, {
+          let u = Ze(t.current, {
             tabbable: !0
           });
-          o(!!a.nextNode());
+          o(!!u.nextNode());
         }
       };
       n();
@@ -190,7 +184,172 @@ function br(t, e) {
     }
   }), l ? !1 : i;
 }
-class Zt {
+function fr(t, e, l) {
+  let { isDisabled: i = !1, isReadOnly: o = !1, value: n, name: r, form: u, children: a, "aria-label": s, "aria-labelledby": d, validationState: c = "valid", isInvalid: h, onPressStart: f, onPressEnd: v, onPressChange: m, onPress: b, onPressUp: g, onClick: C } = t, $ = (T) => {
+    T.stopPropagation(), e.setSelected(T.target.checked);
+  }, x = a != null, w = s != null || d != null;
+  !x && !w && process.env.NODE_ENV !== "production" && console.warn("If you do not provide children, you must specify an aria-label for accessibility");
+  let { pressProps: S, isPressed: E } = ye({
+    onPressStart: f,
+    onPressEnd: v,
+    onPressChange: m,
+    onPress: b,
+    onPressUp: g,
+    onClick: C,
+    isDisabled: i
+  }), { pressProps: I, isPressed: z } = ye({
+    onPressStart: f,
+    onPressEnd: v,
+    onPressChange: m,
+    onPressUp: g,
+    onClick: C,
+    onPress(T) {
+      var H;
+      b == null || b(T), e.toggle(), (H = l.current) === null || H === void 0 || H.focus();
+    },
+    isDisabled: i || o
+  }), { focusableProps: k } = Ht(t, l), P = K(S, k), F = L(t, {
+    labelable: !0
+  });
+  return jt(l, e.defaultSelected, e.setSelected), {
+    labelProps: K(I, {
+      onClick: (T) => T.preventDefault()
+    }),
+    inputProps: K(F, {
+      "aria-invalid": h || c === "invalid" || void 0,
+      "aria-errormessage": t["aria-errormessage"],
+      "aria-controls": t["aria-controls"],
+      "aria-readonly": o || void 0,
+      onChange: $,
+      disabled: i,
+      ...n == null ? {} : {
+        value: n
+      },
+      name: r,
+      form: u,
+      type: "checkbox",
+      ...P
+    }),
+    isSelected: e.isSelected,
+    isPressed: E || z,
+    isDisabled: i,
+    isReadOnly: o,
+    isInvalid: h || c === "invalid"
+  };
+}
+function ol(t, e, l) {
+  let i = _e({
+    ...t,
+    value: e.isSelected
+  }), { isInvalid: o, validationErrors: n, validationDetails: r } = i.displayValidation, { labelProps: u, inputProps: a, isSelected: s, isPressed: d, isDisabled: c, isReadOnly: h } = fr({
+    ...t,
+    isInvalid: o
+  }, e, l);
+  Lt(t, i, l);
+  let { isIndeterminate: f, isRequired: v, validationBehavior: m = "aria" } = t;
+  p.useEffect(() => {
+    l.current && (l.current.indeterminate = !!f);
+  });
+  let { pressProps: b } = ye({
+    isDisabled: c || h,
+    onPress() {
+      let { [Ot]: g } = t, { commitValidation: C } = g || i;
+      C();
+    }
+  });
+  return {
+    labelProps: K(u, b, p.useMemo(() => ({
+      // Prevent label from being focused when mouse down on it.
+      // Note, this does not prevent the input from being focused in the `click` event.
+      onMouseDown: (g) => g.preventDefault()
+    }), [])),
+    inputProps: {
+      ...a,
+      checked: s,
+      "aria-required": v && m === "aria" || void 0,
+      required: v && m === "native"
+    },
+    isSelected: s,
+    isPressed: d,
+    isDisabled: c,
+    isReadOnly: h,
+    isInvalid: o,
+    validationErrors: n,
+    validationDetails: r
+  };
+}
+const pr = /* @__PURE__ */ new WeakMap();
+function nl(t = {}) {
+  let { isReadOnly: e } = t, [l, i] = Wt(t.isSelected, t.defaultSelected || !1, t.onChange), [o] = p.useState(l);
+  function n(a) {
+    e || i(a);
+  }
+  function r() {
+    e || i(!l);
+  }
+  var u;
+  return {
+    isSelected: l,
+    defaultSelected: (u = t.defaultSelected) !== null && u !== void 0 ? u : o,
+    setSelected: n,
+    toggle: r
+  };
+}
+function vr(t, e, l) {
+  const i = nl({
+    isReadOnly: t.isReadOnly || e.isReadOnly,
+    isSelected: e.isSelected(t.value),
+    defaultSelected: e.defaultValue.includes(t.value),
+    onChange(g) {
+      g ? e.addValue(t.value) : e.removeValue(t.value), t.onChange && t.onChange(g);
+    }
+  });
+  let { name: o, form: n, descriptionId: r, errorMessageId: u, validationBehavior: a } = pr.get(e);
+  var s;
+  a = (s = t.validationBehavior) !== null && s !== void 0 ? s : a;
+  let { realtimeValidation: d } = _e({
+    ...t,
+    value: i.isSelected,
+    // Server validation is handled at the group level.
+    name: void 0,
+    validationBehavior: "aria"
+  }), c = p.useRef(No), h = () => {
+    e.setInvalid(t.value, d.isInvalid ? d : c.current);
+  };
+  p.useEffect(h);
+  let f = e.realtimeValidation.isInvalid ? e.realtimeValidation : d, v = a === "native" ? e.displayValidation : f;
+  var m;
+  let b = ol({
+    ...t,
+    isReadOnly: t.isReadOnly || e.isReadOnly,
+    isDisabled: t.isDisabled || e.isDisabled,
+    name: t.name || o,
+    form: t.form || n,
+    isRequired: (m = t.isRequired) !== null && m !== void 0 ? m : e.isRequired,
+    validationBehavior: a,
+    [Ot]: {
+      realtimeValidation: f,
+      displayValidation: v,
+      resetValidation: e.resetValidation,
+      commitValidation: e.commitValidation,
+      updateValidation(g) {
+        c.current = g, h();
+      }
+    }
+  }, i, l);
+  return {
+    ...b,
+    inputProps: {
+      ...b.inputProps,
+      "aria-describedby": [
+        t["aria-describedby"],
+        e.isInvalid ? u : null,
+        r
+      ].filter(Boolean).join(" ") || void 0
+    }
+  };
+}
+class rl {
   isCell(e) {
     return e.type === "cell";
   }
@@ -226,12 +385,12 @@ class Zt {
     let i = this.collection.getItem(e);
     if (!i) return null;
     let o = 0;
-    for (let a of H(i, this.collection)) {
+    for (let u of V(i, this.collection)) {
       var n;
-      if (a.colSpan && a.colSpan + o > l) return (n = a.key) !== null && n !== void 0 ? n : null;
-      a.colSpan && (o = o + a.colSpan - 1);
+      if (u.colSpan && u.colSpan + o > l) return (n = u.key) !== null && n !== void 0 ? n : null;
+      u.colSpan && (o = o + u.colSpan - 1);
       var r;
-      if (o === l) return (r = a.key) !== null && r !== void 0 ? r : null;
+      if (o === l) return (r = u.key) !== null && r !== void 0 ? r : null;
       o++;
     }
     return null;
@@ -269,20 +428,20 @@ class Zt {
     if (!l) return null;
     if (this.isRow(l)) {
       var i, o;
-      let d = H(l, this.collection);
+      let d = V(l, this.collection);
       var n;
-      return (n = this.direction === "rtl" ? (i = _(d)) === null || i === void 0 ? void 0 : i.key : (o = le(d)) === null || o === void 0 ? void 0 : o.key) !== null && n !== void 0 ? n : null;
+      return (n = this.direction === "rtl" ? (i = Q(d)) === null || i === void 0 ? void 0 : i.key : (o = ee(d)) === null || o === void 0 ? void 0 : o.key) !== null && n !== void 0 ? n : null;
     }
     if (this.isCell(l) && l.parentKey != null) {
       let d = this.collection.getItem(l.parentKey);
       if (!d) return null;
-      let c = H(d, this.collection);
+      let c = V(d, this.collection);
       var r;
-      let h = (r = this.direction === "rtl" ? Se(c, l.index - 1) : Se(c, l.index + 1)) !== null && r !== void 0 ? r : null;
-      var a;
-      if (h) return (a = h.key) !== null && a !== void 0 ? a : null;
+      let h = (r = this.direction === "rtl" ? ze(c, l.index - 1) : ze(c, l.index + 1)) !== null && r !== void 0 ? r : null;
       var u;
-      if (this.focusMode === "row") return (u = l.parentKey) !== null && u !== void 0 ? u : null;
+      if (h) return (u = h.key) !== null && u !== void 0 ? u : null;
+      var a;
+      if (this.focusMode === "row") return (a = l.parentKey) !== null && a !== void 0 ? a : null;
       var s;
       return (s = this.direction === "rtl" ? this.getFirstKey(e) : this.getLastKey(e)) !== null && s !== void 0 ? s : null;
     }
@@ -293,20 +452,20 @@ class Zt {
     if (!l) return null;
     if (this.isRow(l)) {
       var i, o;
-      let d = H(l, this.collection);
+      let d = V(l, this.collection);
       var n;
-      return (n = this.direction === "rtl" ? (i = le(d)) === null || i === void 0 ? void 0 : i.key : (o = _(d)) === null || o === void 0 ? void 0 : o.key) !== null && n !== void 0 ? n : null;
+      return (n = this.direction === "rtl" ? (i = ee(d)) === null || i === void 0 ? void 0 : i.key : (o = Q(d)) === null || o === void 0 ? void 0 : o.key) !== null && n !== void 0 ? n : null;
     }
     if (this.isCell(l) && l.parentKey != null) {
       let d = this.collection.getItem(l.parentKey);
       if (!d) return null;
-      let c = H(d, this.collection);
+      let c = V(d, this.collection);
       var r;
-      let h = (r = this.direction === "rtl" ? Se(c, l.index + 1) : Se(c, l.index - 1)) !== null && r !== void 0 ? r : null;
-      var a;
-      if (h) return (a = h.key) !== null && a !== void 0 ? a : null;
+      let h = (r = this.direction === "rtl" ? ze(c, l.index + 1) : ze(c, l.index - 1)) !== null && r !== void 0 ? r : null;
       var u;
-      if (this.focusMode === "row") return (u = l.parentKey) !== null && u !== void 0 ? u : null;
+      if (h) return (u = h.key) !== null && u !== void 0 ? u : null;
+      var a;
+      if (this.focusMode === "row") return (a = l.parentKey) !== null && a !== void 0 ? a : null;
       var s;
       return (s = this.direction === "rtl" ? this.getLastKey(e) : this.getFirstKey(e)) !== null && s !== void 0 ? s : null;
     }
@@ -321,15 +480,15 @@ class Zt {
         let s = this.collection.getItem(o.parentKey);
         if (!s) return null;
         var r;
-        return (r = (n = le(H(s, this.collection))) === null || n === void 0 ? void 0 : n.key) !== null && r !== void 0 ? r : null;
+        return (r = (n = ee(V(s, this.collection))) === null || n === void 0 ? void 0 : n.key) !== null && r !== void 0 ? r : null;
       }
     }
     if (i = this.findNextKey(void 0, (s) => s.type === "item"), i != null && (o && this.isCell(o) && l || this.focusMode === "cell")) {
-      var a;
+      var u;
       let s = this.collection.getItem(i);
       if (!s) return null;
-      var u;
-      i = (u = (a = le(H(s, this.collection))) === null || a === void 0 ? void 0 : a.key) !== null && u !== void 0 ? u : null;
+      var a;
+      i = (a = (u = ee(V(s, this.collection))) === null || u === void 0 ? void 0 : u.key) !== null && a !== void 0 ? a : null;
     }
     return i;
   }
@@ -341,18 +500,18 @@ class Zt {
         var n;
         let s = this.collection.getItem(o.parentKey);
         if (!s) return null;
-        let d = H(s, this.collection);
+        let d = V(s, this.collection);
         var r;
-        return (r = (n = _(d)) === null || n === void 0 ? void 0 : n.key) !== null && r !== void 0 ? r : null;
+        return (r = (n = Q(d)) === null || n === void 0 ? void 0 : n.key) !== null && r !== void 0 ? r : null;
       }
     }
     if (i = this.findPreviousKey(void 0, (s) => s.type === "item"), i != null && (o && this.isCell(o) && l || this.focusMode === "cell")) {
-      var a;
+      var u;
       let s = this.collection.getItem(i);
       if (!s) return null;
-      let d = H(s, this.collection);
-      var u;
-      i = (u = (a = _(d)) === null || a === void 0 ? void 0 : a.key) !== null && u !== void 0 ? u : null;
+      let d = V(s, this.collection);
+      var a;
+      i = (a = (u = Q(d)) === null || u === void 0 ? void 0 : u.key) !== null && a !== void 0 ? a : null;
     }
     return i;
   }
@@ -387,29 +546,29 @@ class Zt {
     if (!n) return null;
     var r;
     n.type === "cell" && (i = (r = n.parentKey) !== null && r !== void 0 ? r : null);
-    let a = !1;
+    let u = !1;
     for (; i != null; ) {
       let d = o.getItem(i);
       if (!d) return null;
       if (d.textValue) {
         let c = d.textValue.slice(0, e.length);
         if (this.collator.compare(c, e) === 0) {
-          var u, s;
-          return this.isRow(d) && this.focusMode === "cell" ? (s = (u = le(H(d, this.collection))) === null || u === void 0 ? void 0 : u.key) !== null && s !== void 0 ? s : null : d.key;
+          var a, s;
+          return this.isRow(d) && this.focusMode === "cell" ? (s = (a = ee(V(d, this.collection))) === null || a === void 0 ? void 0 : a.key) !== null && s !== void 0 ? s : null : d.key;
         }
       }
-      i = this.findNextKey(i, (c) => c.type === "item"), i == null && !a && (i = this.getFirstKey(), a = !0);
+      i = this.findNextKey(i, (c) => c.type === "item"), i == null && !u && (i = this.getFirstKey(), u = !0);
     }
     return null;
   }
   constructor(e) {
     if (this.collection = e.collection, this.disabledKeys = e.disabledKeys, this.disabledBehavior = e.disabledBehavior || "all", this.direction = e.direction, this.collator = e.collator, !e.layout && !e.ref) throw new Error("Either a layout or a ref must be specified.");
-    this.layoutDelegate = e.layoutDelegate || (e.layout ? new yr(e.layout) : new $n(e.ref));
+    this.layoutDelegate = e.layoutDelegate || (e.layout ? new mr(e.layout) : new zn(e.ref));
     var l;
     this.focusMode = (l = e.focusMode) !== null && l !== void 0 ? l : "row";
   }
 }
-class yr {
+class mr {
   getContentSize() {
     return this.layout.getContentSize();
   }
@@ -424,9 +583,9 @@ class yr {
     this.layout = e;
   }
 }
-const ot = /* @__PURE__ */ new WeakMap();
-var Xt = {};
-Xt = {
+const st = /* @__PURE__ */ new WeakMap();
+var ul = {};
+ul = {
   deselectedItem: (t) => `${t.item} غير المحدد`,
   longPressToSelect: "اضغط مطولًا للدخول إلى وضع التحديد.",
   select: "تحديد",
@@ -438,8 +597,8 @@ Xt = {
   })}.`,
   selectedItem: (t) => `${t.item} المحدد`
 };
-var Gt = {};
-Gt = {
+var al = {};
+al = {
   deselectedItem: (t) => `${t.item} не е избран.`,
   longPressToSelect: "Натиснете и задръжте за да влезете в избирателен режим.",
   select: "Изберете",
@@ -451,8 +610,8 @@ Gt = {
   })}.`,
   selectedItem: (t) => `${t.item} избран.`
 };
-var Qt = {};
-Qt = {
+var sl = {};
+sl = {
   deselectedItem: (t) => `Položka ${t.item} není vybrána.`,
   longPressToSelect: "Dlouhým stisknutím přejdete do režimu výběru.",
   select: "Vybrat",
@@ -464,8 +623,8 @@ Qt = {
   })}.`,
   selectedItem: (t) => `Vybrána položka ${t.item}.`
 };
-var Jt = {};
-Jt = {
+var dl = {};
+dl = {
   deselectedItem: (t) => `${t.item} ikke valgt.`,
   longPressToSelect: "Lav et langt tryk for at aktivere valgtilstand.",
   select: "Vælg",
@@ -477,8 +636,8 @@ Jt = {
   })}.`,
   selectedItem: (t) => `${t.item} valgt.`
 };
-var _t = {};
-_t = {
+var cl = {};
+cl = {
   deselectedItem: (t) => `${t.item} nicht ausgewählt.`,
   longPressToSelect: "Gedrückt halten, um Auswahlmodus zu öffnen.",
   select: "Auswählen",
@@ -490,8 +649,8 @@ _t = {
   })}.`,
   selectedItem: (t) => `${t.item} ausgewählt.`
 };
-var el = {};
-el = {
+var hl = {};
+hl = {
   deselectedItem: (t) => `Δεν επιλέχθηκε το στοιχείο ${t.item}.`,
   longPressToSelect: "Πατήστε παρατεταμένα για να μπείτε σε λειτουργία επιλογής.",
   select: "Επιλογή",
@@ -503,8 +662,8 @@ el = {
   })}.`,
   selectedItem: (t) => `Επιλέχθηκε το στοιχείο ${t.item}.`
 };
-var tl = {};
-tl = {
+var fl = {};
+fl = {
   deselectedItem: (t) => `${t.item} not selected.`,
   select: "Select",
   selectedCount: (t, e) => `${e.plural(t.count, {
@@ -516,8 +675,8 @@ tl = {
   selectedItem: (t) => `${t.item} selected.`,
   longPressToSelect: "Long press to enter selection mode."
 };
-var ll = {};
-ll = {
+var pl = {};
+pl = {
   deselectedItem: (t) => `${t.item} no seleccionado.`,
   longPressToSelect: "Mantenga pulsado para abrir el modo de selección.",
   select: "Seleccionar",
@@ -529,8 +688,8 @@ ll = {
   })}.`,
   selectedItem: (t) => `${t.item} seleccionado.`
 };
-var il = {};
-il = {
+var vl = {};
+vl = {
   deselectedItem: (t) => `${t.item} pole valitud.`,
   longPressToSelect: "Valikurežiimi sisenemiseks vajutage pikalt.",
   select: "Vali",
@@ -542,8 +701,8 @@ il = {
   })}.`,
   selectedItem: (t) => `${t.item} valitud.`
 };
-var ol = {};
-ol = {
+var ml = {};
+ml = {
   deselectedItem: (t) => `Kohdetta ${t.item} ei valittu.`,
   longPressToSelect: "Siirry valintatilaan painamalla pitkään.",
   select: "Valitse",
@@ -555,8 +714,8 @@ ol = {
   })}.`,
   selectedItem: (t) => `${t.item} valittu.`
 };
-var nl = {};
-nl = {
+var gl = {};
+gl = {
   deselectedItem: (t) => `${t.item} non sélectionné.`,
   longPressToSelect: "Appuyez de manière prolongée pour passer en mode de sélection.",
   select: "Sélectionner",
@@ -568,8 +727,8 @@ nl = {
   })}.`,
   selectedItem: (t) => `${t.item} sélectionné.`
 };
-var rl = {};
-rl = {
+var bl = {};
+bl = {
   deselectedItem: (t) => `${t.item} לא נבחר.`,
   longPressToSelect: "הקשה ארוכה לכניסה למצב בחירה.",
   select: "בחר",
@@ -581,8 +740,8 @@ rl = {
   })}.`,
   selectedItem: (t) => `${t.item} נבחר.`
 };
-var ul = {};
-ul = {
+var yl = {};
+yl = {
   deselectedItem: (t) => `Stavka ${t.item} nije odabrana.`,
   longPressToSelect: "Dugo pritisnite za ulazak u način odabira.",
   select: "Odaberite",
@@ -594,8 +753,8 @@ ul = {
   })}.`,
   selectedItem: (t) => `Stavka ${t.item} je odabrana.`
 };
-var al = {};
-al = {
+var $l = {};
+$l = {
   deselectedItem: (t) => `${t.item} nincs kijelölve.`,
   longPressToSelect: "Nyomja hosszan a kijelöléshez.",
   select: "Kijelölés",
@@ -607,8 +766,8 @@ al = {
   })}.`,
   selectedItem: (t) => `${t.item} kijelölve.`
 };
-var sl = {};
-sl = {
+var xl = {};
+xl = {
   deselectedItem: (t) => `${t.item} non selezionato.`,
   longPressToSelect: "Premi a lungo per passare alla modalità di selezione.",
   select: "Seleziona",
@@ -620,8 +779,8 @@ sl = {
   })}.`,
   selectedItem: (t) => `${t.item} selezionato.`
 };
-var dl = {};
-dl = {
+var wl = {};
+wl = {
   deselectedItem: (t) => `${t.item} が選択されていません。`,
   longPressToSelect: "長押しして選択モードを開きます。",
   select: "選択",
@@ -633,8 +792,8 @@ dl = {
   })}。`,
   selectedItem: (t) => `${t.item} を選択しました。`
 };
-var cl = {};
-cl = {
+var Cl = {};
+Cl = {
   deselectedItem: (t) => `${t.item}이(가) 선택되지 않았습니다.`,
   longPressToSelect: "선택 모드로 들어가려면 길게 누르십시오.",
   select: "선택",
@@ -646,8 +805,8 @@ cl = {
   })}.`,
   selectedItem: (t) => `${t.item}이(가) 선택되었습니다.`
 };
-var hl = {};
-hl = {
+var kl = {};
+kl = {
   deselectedItem: (t) => `${t.item} nepasirinkta.`,
   longPressToSelect: "Norėdami įjungti pasirinkimo režimą, paspauskite ir palaikykite.",
   select: "Pasirinkti",
@@ -659,8 +818,8 @@ hl = {
   })}.`,
   selectedItem: (t) => `Pasirinkta: ${t.item}.`
 };
-var fl = {};
-fl = {
+var Dl = {};
+Dl = {
   deselectedItem: (t) => `Vienums ${t.item} nav atlasīts.`,
   longPressToSelect: "Ilgi turiet nospiestu. lai ieslēgtu atlases režīmu.",
   select: "Atlasīt",
@@ -672,8 +831,8 @@ fl = {
   })}.`,
   selectedItem: (t) => `Atlasīts vienums ${t.item}.`
 };
-var pl = {};
-pl = {
+var Sl = {};
+Sl = {
   deselectedItem: (t) => `${t.item} er ikke valgt.`,
   longPressToSelect: "Bruk et langt trykk for å gå inn i valgmodus.",
   select: "Velg",
@@ -685,8 +844,8 @@ pl = {
   })}.`,
   selectedItem: (t) => `${t.item} er valgt.`
 };
-var ml = {};
-ml = {
+var El = {};
+El = {
   deselectedItem: (t) => `${t.item} niet geselecteerd.`,
   longPressToSelect: "Druk lang om de selectiemodus te openen.",
   select: "Selecteren",
@@ -698,8 +857,8 @@ ml = {
   })}.`,
   selectedItem: (t) => `${t.item} geselecteerd.`
 };
-var vl = {};
-vl = {
+var zl = {};
+zl = {
   deselectedItem: (t) => `Nie zaznaczono ${t.item}.`,
   longPressToSelect: "Naciśnij i przytrzymaj, aby wejść do trybu wyboru.",
   select: "Zaznacz",
@@ -711,8 +870,8 @@ vl = {
   })}.`,
   selectedItem: (t) => `Zaznaczono ${t.item}.`
 };
-var gl = {};
-gl = {
+var Bl = {};
+Bl = {
   deselectedItem: (t) => `${t.item} não selecionado.`,
   longPressToSelect: "Mantenha pressionado para entrar no modo de seleção.",
   select: "Selecionar",
@@ -724,8 +883,8 @@ gl = {
   })}.`,
   selectedItem: (t) => `${t.item} selecionado.`
 };
-var bl = {};
-bl = {
+var Il = {};
+Il = {
   deselectedItem: (t) => `${t.item} não selecionado.`,
   longPressToSelect: "Prima continuamente para entrar no modo de seleção.",
   select: "Selecionar",
@@ -737,8 +896,8 @@ bl = {
   })}.`,
   selectedItem: (t) => `${t.item} selecionado.`
 };
-var yl = {};
-yl = {
+var Pl = {};
+Pl = {
   deselectedItem: (t) => `${t.item} neselectat.`,
   longPressToSelect: "Apăsați lung pentru a intra în modul de selectare.",
   select: "Selectare",
@@ -750,8 +909,8 @@ yl = {
   })}.`,
   selectedItem: (t) => `${t.item} selectat.`
 };
-var $l = {};
-$l = {
+var Rl = {};
+Rl = {
   deselectedItem: (t) => `${t.item} не выбрано.`,
   longPressToSelect: "Нажмите и удерживайте для входа в режим выбора.",
   select: "Выбрать",
@@ -763,8 +922,8 @@ $l = {
   })}.`,
   selectedItem: (t) => `${t.item} выбрано.`
 };
-var xl = {};
-xl = {
+var Al = {};
+Al = {
   deselectedItem: (t) => `Nevybraté položky: ${t.item}.`,
   longPressToSelect: "Dlhším stlačením prejdite do režimu výberu.",
   select: "Vybrať",
@@ -776,8 +935,8 @@ xl = {
   })}.`,
   selectedItem: (t) => `Vybraté položky: ${t.item}.`
 };
-var wl = {};
-wl = {
+var Ml = {};
+Ml = {
   deselectedItem: (t) => `Element ${t.item} ni izbran.`,
   longPressToSelect: "Za izbirni način pritisnite in dlje časa držite.",
   select: "Izberite",
@@ -789,8 +948,8 @@ wl = {
   })}.`,
   selectedItem: (t) => `Element ${t.item} je izbran.`
 };
-var Cl = {};
-Cl = {
+var Tl = {};
+Tl = {
   deselectedItem: (t) => `${t.item} nije izabrano.`,
   longPressToSelect: "Dugo pritisnite za ulazak u režim biranja.",
   select: "Izaberite",
@@ -802,8 +961,8 @@ Cl = {
   })}.`,
   selectedItem: (t) => `${t.item} je izabrano.`
 };
-var Dl = {};
-Dl = {
+var Fl = {};
+Fl = {
   deselectedItem: (t) => `${t.item} ej markerat.`,
   longPressToSelect: "Tryck länge när du vill öppna väljarläge.",
   select: "Markera",
@@ -815,8 +974,8 @@ Dl = {
   })}.`,
   selectedItem: (t) => `${t.item} markerat.`
 };
-var kl = {};
-kl = {
+var Kl = {};
+Kl = {
   deselectedItem: (t) => `${t.item} seçilmedi.`,
   longPressToSelect: "Seçim moduna girmek için uzun basın.",
   select: "Seç",
@@ -828,8 +987,8 @@ kl = {
   })}.`,
   selectedItem: (t) => `${t.item} seçildi.`
 };
-var Sl = {};
-Sl = {
+var Nl = {};
+Nl = {
   deselectedItem: (t) => `${t.item} не вибрано.`,
   longPressToSelect: "Виконайте довге натиснення, щоб перейти в режим вибору.",
   select: "Вибрати",
@@ -841,8 +1000,8 @@ Sl = {
   })}.`,
   selectedItem: (t) => `${t.item} вибрано.`
 };
-var El = {};
-El = {
+var Vl = {};
+Vl = {
   deselectedItem: (t) => `未选择 ${t.item}。`,
   longPressToSelect: "长按以进入选择模式。",
   select: "选择",
@@ -854,8 +1013,8 @@ El = {
   })}。`,
   selectedItem: (t) => `已选择 ${t.item}。`
 };
-var zl = {};
-zl = {
+var Hl = {};
+Hl = {
   deselectedItem: (t) => `未選取「${t.item}」。`,
   longPressToSelect: "長按以進入選擇模式。",
   select: "選取",
@@ -867,57 +1026,57 @@ zl = {
   })}。`,
   selectedItem: (t) => `已選取「${t.item}」。`
 };
-var Me = {};
-Me = {
-  "ar-AE": Xt,
-  "bg-BG": Gt,
-  "cs-CZ": Qt,
-  "da-DK": Jt,
-  "de-DE": _t,
-  "el-GR": el,
-  "en-US": tl,
-  "es-ES": ll,
-  "et-EE": il,
-  "fi-FI": ol,
-  "fr-FR": nl,
-  "he-IL": rl,
-  "hr-HR": ul,
-  "hu-HU": al,
-  "it-IT": sl,
-  "ja-JP": dl,
-  "ko-KR": cl,
-  "lt-LT": hl,
-  "lv-LV": fl,
-  "nb-NO": pl,
-  "nl-NL": ml,
-  "pl-PL": vl,
-  "pt-BR": gl,
-  "pt-PT": bl,
-  "ro-RO": yl,
-  "ru-RU": $l,
-  "sk-SK": xl,
-  "sl-SI": wl,
-  "sr-SP": Cl,
-  "sv-SE": Dl,
-  "tr-TR": kl,
-  "uk-UA": Sl,
-  "zh-CN": El,
-  "zh-TW": zl
+var Te = {};
+Te = {
+  "ar-AE": ul,
+  "bg-BG": al,
+  "cs-CZ": sl,
+  "da-DK": dl,
+  "de-DE": cl,
+  "el-GR": hl,
+  "en-US": fl,
+  "es-ES": pl,
+  "et-EE": vl,
+  "fi-FI": ml,
+  "fr-FR": gl,
+  "he-IL": bl,
+  "hr-HR": yl,
+  "hu-HU": $l,
+  "it-IT": xl,
+  "ja-JP": wl,
+  "ko-KR": Cl,
+  "lt-LT": kl,
+  "lv-LV": Dl,
+  "nb-NO": Sl,
+  "nl-NL": El,
+  "pl-PL": zl,
+  "pt-BR": Bl,
+  "pt-PT": Il,
+  "ro-RO": Pl,
+  "ru-RU": Rl,
+  "sk-SK": Al,
+  "sl-SI": Ml,
+  "sr-SP": Tl,
+  "sv-SE": Fl,
+  "tr-TR": Kl,
+  "uk-UA": Nl,
+  "zh-CN": Vl,
+  "zh-TW": Hl
 };
-function $r(t) {
+function gr(t) {
   return t && t.__esModule ? t.default : t;
 }
-function xr(t, e) {
-  let { getRowText: l = (a) => {
-    var u, s, d, c;
-    return (c = (u = (s = e.collection).getTextValue) === null || u === void 0 ? void 0 : u.call(s, a)) !== null && c !== void 0 ? c : (d = e.collection.getItem(a)) === null || d === void 0 ? void 0 : d.textValue;
-  } } = t, i = te($r(Me), "@react-aria/grid"), o = e.selectionManager.rawSelection, n = p.useRef(o), r = oe(() => {
-    var a;
+function br(t, e) {
+  let { getRowText: l = (u) => {
+    var a, s, d, c;
+    return (c = (a = (s = e.collection).getTextValue) === null || a === void 0 ? void 0 : a.call(s, u)) !== null && c !== void 0 ? c : (d = e.collection.getItem(u)) === null || d === void 0 ? void 0 : d.textValue;
+  } } = t, i = _(gr(Te), "@react-aria/grid"), o = e.selectionManager.rawSelection, n = p.useRef(o), r = ne(() => {
+    var u;
     if (!e.selectionManager.isFocused || o === n.current) {
       n.current = o;
       return;
     }
-    let u = St(o, n.current), s = St(n.current, o), d = e.selectionManager.selectionBehavior === "replace", c = [];
+    let a = At(o, n.current), s = At(n.current, o), d = e.selectionManager.selectionBehavior === "replace", c = [];
     if (e.selectionManager.selectedKeys.size === 1 && d) {
       let h = e.selectionManager.selectedKeys.keys().next().value;
       if (h != null && e.collection.getItem(h)) {
@@ -926,15 +1085,15 @@ function xr(t, e) {
           item: f
         }));
       }
-    } else if (u.size === 1 && s.size === 0) {
-      let h = u.keys().next().value;
+    } else if (a.size === 1 && s.size === 0) {
+      let h = a.keys().next().value;
       if (h != null) {
         let f = l(h);
         f && c.push(i.format("selectedItem", {
           item: f
         }));
       }
-    } else if (s.size === 1 && u.size === 0) {
+    } else if (s.size === 1 && a.size === 0) {
       let h = s.keys().next().value;
       if (h != null && e.collection.getItem(h)) {
         let f = l(h);
@@ -943,34 +1102,34 @@ function xr(t, e) {
         }));
       }
     }
-    e.selectionManager.selectionMode === "multiple" && (c.length === 0 || o === "all" || o.size > 1 || n.current === "all" || ((a = n.current) === null || a === void 0 ? void 0 : a.size) > 1) && c.push(o === "all" ? i.format("selectedAll") : i.format("selectedCount", {
+    e.selectionManager.selectionMode === "multiple" && (c.length === 0 || o === "all" || o.size > 1 || n.current === "all" || ((u = n.current) === null || u === void 0 ? void 0 : u.size) > 1) && c.push(o === "all" ? i.format("selectedAll") : i.format("selectedCount", {
       count: o.size
-    })), c.length > 0 && Rt(c.join(" ")), n.current = o;
+    })), c.length > 0 && Ut(c.join(" ")), n.current = o;
   });
-  Lt(() => {
+  Jt(() => {
     if (e.selectionManager.isFocused) r();
     else {
-      let a = requestAnimationFrame(r);
-      return () => cancelAnimationFrame(a);
+      let u = requestAnimationFrame(r);
+      return () => cancelAnimationFrame(u);
     }
   }, [
     o,
     e.selectionManager.isFocused
   ]);
 }
-function St(t, e) {
+function At(t, e) {
   let l = /* @__PURE__ */ new Set();
   if (t === "all" || e === "all") return l;
   for (let i of t.keys()) e.has(i) || l.add(i);
   return l;
 }
-function wr(t) {
+function yr(t) {
   return t && t.__esModule ? t.default : t;
 }
-function Cr(t) {
-  let e = te(wr(Me), "@react-aria/grid"), l = Mt(), i = (l === "pointer" || l === "virtual" || l == null) && typeof window < "u" && "ontouchstart" in window, o = p.useMemo(() => {
-    let r = t.selectionManager.selectionMode, a = t.selectionManager.selectionBehavior, u;
-    return i && (u = e.format("longPressToSelect")), a === "replace" && r !== "none" && t.hasItemActions ? u : void 0;
+function $r(t) {
+  let e = _(yr(Te), "@react-aria/grid"), l = qt(), i = (l === "pointer" || l === "virtual" || l == null) && typeof window < "u" && "ontouchstart" in window, o = p.useMemo(() => {
+    let r = t.selectionManager.selectionMode, u = t.selectionManager.selectionBehavior, a;
+    return i && (a = e.format("longPressToSelect")), u === "replace" && r !== "none" && t.hasItemActions ? a : void 0;
   }, [
     t.selectionManager.selectionMode,
     t.selectionManager.selectionBehavior,
@@ -978,41 +1137,41 @@ function Cr(t) {
     e,
     i
   ]);
-  return Re(o);
+  return Me(o);
 }
-function Dr(t, e, l) {
-  let { isVirtualized: i, disallowTypeAhead: o, keyboardDelegate: n, focusMode: r, scrollRef: a, getRowText: u, onRowAction: s, onCellAction: d, escapeKeyBehavior: c = "clearSelection", shouldSelectOnPressUp: h } = t, { selectionManager: f } = e;
+function xr(t, e, l) {
+  let { isVirtualized: i, disallowTypeAhead: o, keyboardDelegate: n, focusMode: r, scrollRef: u, getRowText: a, onRowAction: s, onCellAction: d, escapeKeyBehavior: c = "clearSelection", shouldSelectOnPressUp: h } = t, { selectionManager: f } = e;
   !t["aria-label"] && !t["aria-labelledby"] && console.warn("An aria-label or aria-labelledby prop is required for accessibility.");
-  let m = tt({
+  let v = rt({
     usage: "search",
     sensitivity: "base"
-  }), { direction: v } = ee(), y = e.selectionManager.disabledBehavior, g = p.useMemo(() => n || new Zt({
+  }), { direction: m } = J(), b = e.selectionManager.disabledBehavior, g = p.useMemo(() => n || new rl({
     collection: e.collection,
     disabledKeys: e.disabledKeys,
-    disabledBehavior: y,
+    disabledBehavior: b,
     ref: l,
-    direction: v,
-    collator: m,
+    direction: m,
+    collator: v,
     focusMode: r
   }), [
     n,
     e.collection,
     e.disabledKeys,
-    y,
+    b,
     l,
-    v,
     m,
+    v,
     r
-  ]), { collectionProps: C } = xn({
+  ]), { collectionProps: C } = Bn({
     ref: l,
     selectionManager: f,
     keyboardDelegate: g,
     isVirtualized: i,
-    scrollRef: a,
+    scrollRef: u,
     disallowTypeAhead: o,
     escapeKeyBehavior: c
-  }), w = ye(t.id);
-  ot.set(e, {
+  }), $ = we(t.id);
+  st.set(e, {
     keyboardDelegate: g,
     actions: {
       onRowAction: s,
@@ -1020,17 +1179,17 @@ function Dr(t, e, l) {
     },
     shouldSelectOnPressUp: h
   });
-  let $ = Cr({
+  let x = $r({
     selectionManager: f,
     hasItemActions: !!(s || d)
-  }), x = q(t, {
+  }), w = L(t, {
     labelable: !0
-  }), S = p.useCallback((z) => {
+  }), S = p.useCallback((k) => {
     if (f.isFocused) {
-      z.currentTarget.contains(z.target) || f.setFocused(!1);
+      k.currentTarget.contains(k.target) || f.setFocused(!1);
       return;
     }
-    z.currentTarget.contains(z.target) && f.setFocused(!0);
+    k.currentTarget.contains(k.target) && f.setFocused(!0);
   }, [
     f
   ]), E = p.useMemo(() => ({
@@ -1039,123 +1198,123 @@ function Dr(t, e, l) {
   }), [
     S,
     C.onBlur
-  ]), A = br(l, {
+  ]), I = hr(l, {
     isDisabled: e.collection.size !== 0
-  }), B = j(
-    x,
+  }), z = K(
+    w,
     {
       role: "grid",
-      id: w,
+      id: $,
       "aria-multiselectable": f.selectionMode === "multiple" ? "true" : void 0
     },
     e.isKeyboardNavigationDisabled ? E : C,
     // If collection is empty, make sure the grid is tabbable unless there is a child tabbable element.
     e.collection.size === 0 && {
-      tabIndex: A ? -1 : 0
+      tabIndex: I ? -1 : 0
     } || void 0,
-    $
+    x
   );
-  return i && (B["aria-rowcount"] = e.collection.size, B["aria-colcount"] = e.collection.columnCount), xr({
-    getRowText: u
+  return i && (z["aria-rowcount"] = e.collection.size, z["aria-colcount"] = e.collection.columnCount), br({
+    getRowText: a
   }, e), {
-    gridProps: B
+    gridProps: z
   };
 }
-function kr() {
+function wr() {
   return {
     rowGroupProps: {
       role: "rowgroup"
     }
   };
 }
-function Sr(t, e, l) {
+function Cr(t, e, l) {
   var i, o;
-  let { node: n, isVirtualized: r, shouldSelectOnPressUp: a, onAction: u } = t, { actions: s, shouldSelectOnPressUp: d } = ot.get(e), c = s.onRowAction ? () => {
-    var y;
-    return (y = s.onRowAction) === null || y === void 0 ? void 0 : y.call(s, n.key);
-  } : u, { itemProps: h, ...f } = Ot({
+  let { node: n, isVirtualized: r, shouldSelectOnPressUp: u, onAction: a } = t, { actions: s, shouldSelectOnPressUp: d } = st.get(e), c = s.onRowAction ? () => {
+    var b;
+    return (b = s.onRowAction) === null || b === void 0 ? void 0 : b.call(s, n.key);
+  } : a, { itemProps: h, ...f } = _t({
     selectionManager: e.selectionManager,
     key: n.key,
     ref: l,
     isVirtualized: r,
-    shouldSelectOnPressUp: d || a,
-    onAction: c || !(n == null || (i = n.props) === null || i === void 0) && i.onAction ? Tt(n == null || (o = n.props) === null || o === void 0 ? void 0 : o.onAction, c) : void 0,
+    shouldSelectOnPressUp: d || u,
+    onAction: c || !(n == null || (i = n.props) === null || i === void 0) && i.onAction ? Yt(n == null || (o = n.props) === null || o === void 0 ? void 0 : o.onAction, c) : void 0,
     isDisabled: e.collection.size === 0
-  }), m = e.selectionManager.isSelected(n.key), v = {
+  }), v = e.selectionManager.isSelected(n.key), m = {
     role: "row",
-    "aria-selected": e.selectionManager.selectionMode !== "none" ? m : void 0,
+    "aria-selected": e.selectionManager.selectionMode !== "none" ? v : void 0,
     "aria-disabled": f.isDisabled || void 0,
     ...h
   };
-  return r && (v["aria-rowindex"] = n.index + 1), {
-    rowProps: v,
+  return r && (m["aria-rowindex"] = n.index + 1), {
+    rowProps: m,
     ...f
   };
 }
-function Bl(t, e, l) {
-  let { node: i, isVirtualized: o, focusMode: n = "child", shouldSelectOnPressUp: r, onAction: a } = t, { direction: u } = ee(), { keyboardDelegate: s, actions: { onCellAction: d } } = ot.get(e), c = p.useRef(null), h = () => {
+function jl(t, e, l) {
+  let { node: i, isVirtualized: o, focusMode: n = "child", shouldSelectOnPressUp: r, onAction: u } = t, { direction: a } = J(), { keyboardDelegate: s, actions: { onCellAction: d } } = st.get(e), c = p.useRef(null), h = () => {
     if (l.current) {
-      let w = Ze(l.current);
+      let $ = Ze(l.current);
       if (n === "child") {
         if (l.current.contains(document.activeElement) && l.current !== document.activeElement) return;
-        let $ = e.selectionManager.childFocusStrategy === "last" ? Oe(w) : w.firstChild();
-        if ($) {
-          Q($);
+        let x = e.selectionManager.childFocusStrategy === "last" ? Oe($) : $.firstChild();
+        if (x) {
+          Z(x);
           return;
         }
       }
-      (c.current != null && i.key !== c.current || !l.current.contains(document.activeElement)) && Q(l.current);
+      (c.current != null && i.key !== c.current || !l.current.contains(document.activeElement)) && Z(l.current);
     }
-  }, { itemProps: f, isPressed: m } = Ot({
+  }, { itemProps: f, isPressed: v } = _t({
     selectionManager: e.selectionManager,
     key: i.key,
     ref: l,
     isVirtualized: o,
     focus: h,
     shouldSelectOnPressUp: r,
-    onAction: d ? () => d(i.key) : a,
+    onAction: d ? () => d(i.key) : u,
     isDisabled: e.collection.size === 0
-  }), v = (w) => {
-    if (!w.currentTarget.contains(w.target) || e.isKeyboardNavigationDisabled || !l.current || !document.activeElement) return;
-    let $ = Ze(l.current);
-    switch ($.currentNode = document.activeElement, w.key) {
+  }), m = ($) => {
+    if (!$.currentTarget.contains($.target) || e.isKeyboardNavigationDisabled || !l.current || !document.activeElement) return;
+    let x = Ze(l.current);
+    switch (x.currentNode = document.activeElement, $.key) {
       case "ArrowLeft": {
-        let z = u === "rtl" ? $.nextNode() : $.previousNode();
-        if (n === "child" && z === l.current && (z = null), w.preventDefault(), w.stopPropagation(), z)
-          Q(z), se(z, {
+        let k = a === "rtl" ? x.nextNode() : x.previousNode();
+        if (n === "child" && k === l.current && (k = null), $.preventDefault(), $.stopPropagation(), k)
+          Z(k), se(k, {
             containingElement: ae(l.current)
           });
         else {
-          var x;
-          if (((x = s.getKeyLeftOf) === null || x === void 0 ? void 0 : x.call(s, i.key)) !== i.key) {
+          var w;
+          if (((w = s.getKeyLeftOf) === null || w === void 0 ? void 0 : w.call(s, i.key)) !== i.key) {
             var S;
-            (S = l.current.parentElement) === null || S === void 0 || S.dispatchEvent(new KeyboardEvent(w.nativeEvent.type, w.nativeEvent));
+            (S = l.current.parentElement) === null || S === void 0 || S.dispatchEvent(new KeyboardEvent($.nativeEvent.type, $.nativeEvent));
             break;
           }
-          n === "cell" && u === "rtl" ? (Q(l.current), se(l.current, {
+          n === "cell" && a === "rtl" ? (Z(l.current), se(l.current, {
             containingElement: ae(l.current)
-          })) : ($.currentNode = l.current, z = u === "rtl" ? $.firstChild() : Oe($), z && (Q(z), se(z, {
+          })) : (x.currentNode = l.current, k = a === "rtl" ? x.firstChild() : Oe(x), k && (Z(k), se(k, {
             containingElement: ae(l.current)
           })));
         }
         break;
       }
       case "ArrowRight": {
-        let z = u === "rtl" ? $.previousNode() : $.nextNode();
-        if (n === "child" && z === l.current && (z = null), w.preventDefault(), w.stopPropagation(), z)
-          Q(z), se(z, {
+        let k = a === "rtl" ? x.previousNode() : x.nextNode();
+        if (n === "child" && k === l.current && (k = null), $.preventDefault(), $.stopPropagation(), k)
+          Z(k), se(k, {
             containingElement: ae(l.current)
           });
         else {
           var E;
           if (((E = s.getKeyRightOf) === null || E === void 0 ? void 0 : E.call(s, i.key)) !== i.key) {
-            var A;
-            (A = l.current.parentElement) === null || A === void 0 || A.dispatchEvent(new KeyboardEvent(w.nativeEvent.type, w.nativeEvent));
+            var I;
+            (I = l.current.parentElement) === null || I === void 0 || I.dispatchEvent(new KeyboardEvent($.nativeEvent.type, $.nativeEvent));
             break;
           }
-          n === "cell" && u === "ltr" ? (Q(l.current), se(l.current, {
+          n === "cell" && a === "ltr" ? (Z(l.current), se(l.current, {
             containingElement: ae(l.current)
-          })) : ($.currentNode = l.current, z = u === "rtl" ? Oe($) : $.firstChild(), z && (Q(z), se(z, {
+          })) : (x.currentNode = l.current, k = a === "rtl" ? Oe(x) : x.firstChild(), k && (Z(k), se(k, {
             containingElement: ae(l.current)
           })));
         }
@@ -1163,37 +1322,37 @@ function Bl(t, e, l) {
       }
       case "ArrowUp":
       case "ArrowDown":
-        if (!w.altKey && l.current.contains(w.target)) {
-          var B;
-          w.stopPropagation(), w.preventDefault(), (B = l.current.parentElement) === null || B === void 0 || B.dispatchEvent(new KeyboardEvent(w.nativeEvent.type, w.nativeEvent));
+        if (!$.altKey && l.current.contains($.target)) {
+          var z;
+          $.stopPropagation(), $.preventDefault(), (z = l.current.parentElement) === null || z === void 0 || z.dispatchEvent(new KeyboardEvent($.nativeEvent.type, $.nativeEvent));
         }
         break;
     }
-  }, y = (w) => {
-    if (c.current = i.key, w.target !== l.current) {
-      ko() || e.selectionManager.setFocusedKey(i.key);
+  }, b = ($) => {
+    if (c.current = i.key, $.target !== l.current) {
+      Vo() || e.selectionManager.setFocusedKey(i.key);
       return;
     }
     requestAnimationFrame(() => {
       n === "child" && document.activeElement === l.current && h();
     });
-  }, g = j(f, {
+  }, g = K(f, {
     role: "gridcell",
-    onKeyDownCapture: v,
+    onKeyDownCapture: m,
     "aria-colspan": i.colSpan,
     "aria-colindex": i.colIndex != null ? i.colIndex + 1 : void 0,
     colSpan: o ? void 0 : i.colSpan,
-    onFocus: y
+    onFocus: b
   });
   var C;
-  return o && (g["aria-colindex"] = ((C = i.colIndex) !== null && C !== void 0 ? C : i.index) + 1), r && g.tabIndex != null && g.onPointerDown == null && (g.onPointerDown = (w) => {
-    let $ = w.currentTarget, x = $.getAttribute("tabindex");
-    $.removeAttribute("tabindex"), requestAnimationFrame(() => {
-      x != null && $.setAttribute("tabindex", x);
+  return o && (g["aria-colindex"] = ((C = i.colIndex) !== null && C !== void 0 ? C : i.index) + 1), r && g.tabIndex != null && g.onPointerDown == null && (g.onPointerDown = ($) => {
+    let x = $.currentTarget, w = x.getAttribute("tabindex");
+    x.removeAttribute("tabindex"), requestAnimationFrame(() => {
+      w != null && x.setAttribute("tabindex", w);
     });
   }), {
     gridCellProps: g,
-    isPressed: m
+    isPressed: v
   };
 }
 function Oe(t) {
@@ -1203,105 +1362,105 @@ function Oe(t) {
   while (l);
   return e;
 }
-function Er(t) {
+function kr(t) {
   return t && t.__esModule ? t.default : t;
 }
-function zr(t, e) {
-  let { key: l } = t, i = e.selectionManager, o = ye(), n = !e.selectionManager.canSelectItem(l), r = e.selectionManager.isSelected(l), a = () => i.toggleSelection(l);
-  const u = te(Er(Me), "@react-aria/grid");
+function Dr(t, e) {
+  let { key: l } = t, i = e.selectionManager, o = we(), n = !e.selectionManager.canSelectItem(l), r = e.selectionManager.isSelected(l), u = () => i.toggleSelection(l);
+  const a = _(kr(Te), "@react-aria/grid");
   return {
     checkboxProps: {
       id: o,
-      "aria-label": u.format("select"),
+      "aria-label": a.format("select"),
       isSelected: r,
       isDisabled: n,
-      onChange: a
+      onChange: u
     }
   };
 }
-const nt = /* @__PURE__ */ new WeakMap();
-function Br(t, e, l) {
-  let { keyboardDelegate: i, isDisabled: o, isRequired: n, name: r, form: a, validationBehavior: u = "aria" } = t, s = tt({
+const dt = /* @__PURE__ */ new WeakMap();
+function Sr(t, e, l) {
+  let { keyboardDelegate: i, isDisabled: o, isRequired: n, name: r, form: u, validationBehavior: a = "aria" } = t, s = rt({
     usage: "search",
     sensitivity: "base"
-  }), d = p.useMemo(() => i || new Wt(e.collection, e.disabledKeys, l, s), [
+  }), d = p.useMemo(() => i || new el(e.collection, e.disabledKeys, l, s), [
     i,
     e.collection,
     e.disabledKeys,
     s,
     l
-  ]), { menuTriggerProps: c, menuProps: h } = wn({
+  ]), { menuTriggerProps: c, menuProps: h } = In({
     isDisabled: o,
     type: "listbox"
-  }, e, l), f = (B) => {
+  }, e, l), f = (z) => {
     if (e.selectionManager.selectionMode !== "multiple")
-      switch (B.key) {
+      switch (z.key) {
         case "ArrowLeft": {
-          var z, M;
-          B.preventDefault();
-          let L = e.selectedKey != null ? (z = d.getKeyAbove) === null || z === void 0 ? void 0 : z.call(d, e.selectedKey) : (M = d.getFirstKey) === null || M === void 0 ? void 0 : M.call(d);
-          L && e.setSelectedKey(L);
+          var k, P;
+          z.preventDefault();
+          let H = e.selectedKey != null ? (k = d.getKeyAbove) === null || k === void 0 ? void 0 : k.call(d, e.selectedKey) : (P = d.getFirstKey) === null || P === void 0 ? void 0 : P.call(d);
+          H && e.setSelectedKey(H);
           break;
         }
         case "ArrowRight": {
-          var K, V;
-          B.preventDefault();
-          let L = e.selectedKey != null ? (K = d.getKeyBelow) === null || K === void 0 ? void 0 : K.call(d, e.selectedKey) : (V = d.getFirstKey) === null || V === void 0 ? void 0 : V.call(d);
-          L && e.setSelectedKey(L);
+          var F, T;
+          z.preventDefault();
+          let H = e.selectedKey != null ? (F = d.getKeyBelow) === null || F === void 0 ? void 0 : F.call(d, e.selectedKey) : (T = d.getFirstKey) === null || T === void 0 ? void 0 : T.call(d);
+          H && e.setSelectedKey(H);
           break;
         }
       }
-  }, { typeSelectProps: m } = Cn({
+  }, { typeSelectProps: v } = Pn({
     keyboardDelegate: d,
     selectionManager: e.selectionManager,
-    onTypeSelect(B) {
-      e.setSelectedKey(B);
+    onTypeSelect(z) {
+      e.setSelectedKey(z);
     }
-  }), { isInvalid: v, validationErrors: y, validationDetails: g } = e.displayValidation, { labelProps: C, fieldProps: w, descriptionProps: $, errorMessageProps: x } = So({
+  }), { isInvalid: m, validationErrors: b, validationDetails: g } = e.displayValidation, { labelProps: C, fieldProps: $, descriptionProps: x, errorMessageProps: w } = Ho({
     ...t,
     labelElementType: "span",
-    isInvalid: v,
-    errorMessage: t.errorMessage || y
+    isInvalid: m,
+    errorMessage: t.errorMessage || b
   });
-  m.onKeyDown = m.onKeyDownCapture, delete m.onKeyDownCapture, e.selectionManager.selectionMode === "multiple" && (m = {});
-  let S = q(t, {
+  v.onKeyDown = v.onKeyDownCapture, delete v.onKeyDownCapture, e.selectionManager.selectionMode === "multiple" && (v = {});
+  let S = L(t, {
     labelable: !0
-  }), E = j(m, c, w), A = ye();
-  return nt.set(e, {
+  }), E = K(v, c, $), I = we();
+  return dt.set(e, {
     isDisabled: o,
     isRequired: n,
     name: r,
-    form: a,
-    validationBehavior: u
+    form: u,
+    validationBehavior: a
   }), {
     labelProps: {
       ...C,
       onClick: () => {
         if (!t.isDisabled) {
-          var B;
-          (B = l.current) === null || B === void 0 || B.focus(), Eo("keyboard");
+          var z;
+          (z = l.current) === null || z === void 0 || z.focus(), jo("keyboard");
         }
       }
     },
-    triggerProps: j(S, {
+    triggerProps: K(S, {
       ...E,
       isDisabled: o,
-      onKeyDown: Tt(E.onKeyDown, f, t.onKeyDown),
+      onKeyDown: Yt(E.onKeyDown, f, t.onKeyDown),
       onKeyUp: t.onKeyUp,
       "aria-labelledby": [
-        A,
+        I,
         E["aria-labelledby"],
         E["aria-label"] && !E["aria-labelledby"] ? E.id : null
       ].filter(Boolean).join(" "),
-      onFocus(B) {
-        e.isFocused || (t.onFocus && t.onFocus(B), t.onFocusChange && t.onFocusChange(!0), e.setFocused(!0));
+      onFocus(z) {
+        e.isFocused || (t.onFocus && t.onFocus(z), t.onFocusChange && t.onFocusChange(!0), e.setFocused(!0));
       },
-      onBlur(B) {
-        e.isOpen || (t.onBlur && t.onBlur(B), t.onFocusChange && t.onFocusChange(!1), e.setFocused(!1));
+      onBlur(z) {
+        e.isOpen || (t.onBlur && t.onBlur(z), t.onFocusChange && t.onFocusChange(!1), e.setFocused(!1));
       }
     }),
     valueProps: {
-      id: A
+      id: I
     },
     menuProps: {
       ...h,
@@ -1310,18 +1469,18 @@ function Br(t, e, l) {
       shouldFocusOnHover: !0,
       disallowEmptySelection: !0,
       linkBehavior: "selection",
-      onBlur: (B) => {
-        B.currentTarget.contains(B.relatedTarget) || (t.onBlur && t.onBlur(B), t.onFocusChange && t.onFocusChange(!1), e.setFocused(!1));
+      onBlur: (z) => {
+        z.currentTarget.contains(z.relatedTarget) || (t.onBlur && t.onBlur(z), t.onFocusChange && t.onFocusChange(!1), e.setFocused(!1));
       },
       "aria-labelledby": [
-        w["aria-labelledby"],
-        E["aria-label"] && !w["aria-labelledby"] ? E.id : null
+        $["aria-labelledby"],
+        E["aria-label"] && !$["aria-labelledby"] ? E.id : null
       ].filter(Boolean).join(" ")
     },
-    descriptionProps: $,
-    errorMessageProps: x,
-    isInvalid: v,
-    validationErrors: y,
+    descriptionProps: x,
+    errorMessageProps: w,
+    isInvalid: m,
+    validationErrors: b,
     validationDetails: g,
     hiddenSelectProps: {
       isDisabled: o,
@@ -1329,12 +1488,12 @@ function Br(t, e, l) {
       label: t.label,
       state: e,
       triggerRef: l,
-      form: a
+      form: u
     }
   };
 }
-function Ir(t, e, l) {
-  let i = nt.get(e) || {}, { autoComplete: o, name: n = i.name, form: r = i.form, isDisabled: a = i.isDisabled } = t, { validationBehavior: u, isRequired: s } = i, { visuallyHiddenProps: d } = $e({
+function Er(t, e, l) {
+  let i = dt.get(e) || {}, { autoComplete: o, name: n = i.name, form: r = i.form, isDisabled: u = i.isDisabled } = t, { validationBehavior: a, isRequired: s } = i, { visuallyHiddenProps: d } = Ce({
     style: {
       // Prevent page scrolling.
       position: "fixed",
@@ -1342,15 +1501,15 @@ function Ir(t, e, l) {
       left: 0
     }
   });
-  zo(t.selectRef, e.defaultValue, e.setValue), Bo({
-    validationBehavior: u,
+  jt(t.selectRef, e.defaultValue, e.setValue), Lt({
+    validationBehavior: a,
     focus: () => {
-      var m;
-      return (m = l.current) === null || m === void 0 ? void 0 : m.focus();
+      var v;
+      return (v = l.current) === null || v === void 0 ? void 0 : v.focus();
     }
   }, e, t.selectRef);
-  let c = e.setValue, h = p.useCallback((m) => {
-    m.target.multiple ? c(Array.from(m.target.selectedOptions, (v) => v.value)) : c(m.currentTarget.value);
+  let c = e.setValue, h = p.useCallback((v) => {
+    v.target.multiple ? c(Array.from(v.target.selectedOptions, (m) => m.value)) : c(v.currentTarget.value);
   }, [
     c
   ]);
@@ -1372,9 +1531,9 @@ function Ir(t, e, l) {
     selectProps: {
       tabIndex: -1,
       autoComplete: o,
-      disabled: a,
+      disabled: u,
       multiple: e.selectionManager.selectionMode === "multiple",
-      required: u === "native" && s,
+      required: a === "native" && s,
       name: n,
       form: r,
       value: (f = e.value) !== null && f !== void 0 ? f : "",
@@ -1383,17 +1542,17 @@ function Ir(t, e, l) {
     }
   };
 }
-function Ar(t) {
-  let { state: e, triggerRef: l, label: i, name: o, form: n, isDisabled: r } = t, a = p.useRef(null), u = p.useRef(null), { containerProps: s, selectProps: d } = Ir({
+function zr(t) {
+  let { state: e, triggerRef: l, label: i, name: o, form: n, isDisabled: r } = t, u = p.useRef(null), a = p.useRef(null), { containerProps: s, selectProps: d } = Er({
     ...t,
-    selectRef: e.collection.size <= 300 ? a : u
+    selectRef: e.collection.size <= 300 ? u : a
   }, e, l);
   if (e.collection.size <= 300) return /* @__PURE__ */ D.createElement("div", {
     ...s,
     "data-testid": "hidden-select-container"
   }, /* @__PURE__ */ D.createElement("label", null, i, /* @__PURE__ */ D.createElement("select", {
     ...d,
-    ref: a
+    ref: u
   }, /* @__PURE__ */ D.createElement("option", null), [
     ...e.collection.getKeys()
   ].map((c) => {
@@ -1404,63 +1563,63 @@ function Ar(t) {
     }, h.textValue);
   }))));
   if (o) {
-    let c = nt.get(e) || {}, { validationBehavior: h } = c, f = Array.isArray(e.value) ? e.value : [
+    let c = dt.get(e) || {}, { validationBehavior: h } = c, f = Array.isArray(e.value) ? e.value : [
       e.value
     ];
     f.length === 0 && (f = [
       null
     ]);
-    let m = f.map((v, y) => {
+    let v = f.map((m, b) => {
       let g = {
         type: "hidden",
         autoComplete: d.autoComplete,
         name: o,
         form: n,
         disabled: r,
-        value: v ?? ""
+        value: m ?? ""
       };
       return h === "native" ? /* @__PURE__ */ D.createElement("input", {
-        key: y,
+        key: b,
         ...g,
-        ref: y === 0 ? u : null,
+        ref: b === 0 ? a : null,
         style: {
           display: "none"
         },
         type: "text",
-        required: y === 0 ? d.required : !1,
+        required: b === 0 ? d.required : !1,
         onChange: () => {
         }
       }) : /* @__PURE__ */ D.createElement("input", {
-        key: y,
+        key: b,
         ...g,
-        ref: y === 0 ? u : null
+        ref: b === 0 ? a : null
       });
     });
-    return /* @__PURE__ */ D.createElement(D.Fragment, null, m);
+    return /* @__PURE__ */ D.createElement(D.Fragment, null, v);
   }
   return null;
 }
-const rt = /* @__PURE__ */ new WeakMap();
-function Ge(t) {
+const ct = /* @__PURE__ */ new WeakMap();
+function Qe(t) {
   return typeof t == "string" ? t.replace(/\s*/g, "") : "" + t;
 }
-function Il(t, e) {
-  let l = rt.get(t);
+function Ll(t, e) {
+  let l = ct.get(t);
   if (!l) throw new Error("Unknown grid");
-  return `${l}-${Ge(e)}`;
+  return `${l}-${Qe(e)}`;
 }
-function Al(t, e, l) {
-  let i = rt.get(t);
+function Ol(t, e, l) {
+  let i = ct.get(t);
   if (!i) throw new Error("Unknown grid");
-  return `${i}-${Ge(e)}-${Ge(l)}`;
+  return `${i}-${Qe(e)}-${Qe(l)}`;
 }
-function Pl(t, e) {
+function Wl(t, e) {
   return [
     ...t.collection.rowHeaderColumnKeys
-  ].map((l) => Al(t, e, l)).join(" ");
+  ].map((l) => Ol(t, e, l)).join(" ");
 }
-var Rl = {};
-Rl = {
+var Ul = {};
+Ul = {
   ascending: "تصاعدي",
   ascendingSort: (t) => `ترتيب حسب العمود ${t.columnName} بترتيب تصاعدي`,
   columnSize: (t) => `${t.value} بالبكسل`,
@@ -1471,8 +1630,8 @@ Rl = {
   selectAll: "تحديد الكل",
   sortable: "عمود قابل للترتيب"
 };
-var Ml = {};
-Ml = {
+var ql = {};
+ql = {
   ascending: "възходящ",
   ascendingSort: (t) => `сортирано по колона ${t.columnName} във възходящ ред`,
   columnSize: (t) => `${t.value} пиксела`,
@@ -1483,8 +1642,8 @@ Ml = {
   selectAll: "Изберете всичко",
   sortable: "сортираща колона"
 };
-var Tl = {};
-Tl = {
+var Yl = {};
+Yl = {
   ascending: "vzestupně",
   ascendingSort: (t) => `řazeno vzestupně podle sloupce ${t.columnName}`,
   columnSize: (t) => `${t.value} pixelů`,
@@ -1495,8 +1654,8 @@ Tl = {
   selectAll: "Vybrat vše",
   sortable: "sloupec s možností řazení"
 };
-var Fl = {};
-Fl = {
+var Zl = {};
+Zl = {
   ascending: "stigende",
   ascendingSort: (t) => `sorteret efter kolonne ${t.columnName} i stigende rækkefølge`,
   columnSize: (t) => `${t.value} pixels`,
@@ -1507,8 +1666,8 @@ Fl = {
   selectAll: "Vælg alle",
   sortable: "sorterbar kolonne"
 };
-var Kl = {};
-Kl = {
+var Xl = {};
+Xl = {
   ascending: "aufsteigend",
   ascendingSort: (t) => `sortiert nach Spalte ${t.columnName} in aufsteigender Reihenfolge`,
   columnSize: (t) => `${t.value} Pixel`,
@@ -1519,8 +1678,8 @@ Kl = {
   selectAll: "Alles auswählen",
   sortable: "sortierbare Spalte"
 };
-var Nl = {};
-Nl = {
+var Gl = {};
+Gl = {
   ascending: "αύξουσα",
   ascendingSort: (t) => `διαλογή ανά στήλη ${t.columnName} σε αύξουσα σειρά`,
   columnSize: (t) => `${t.value} pixel`,
@@ -1531,8 +1690,8 @@ Nl = {
   selectAll: "Επιλογή όλων",
   sortable: "Στήλη διαλογής"
 };
-var Hl = {};
-Hl = {
+var Ql = {};
+Ql = {
   select: "Select",
   selectAll: "Select All",
   sortable: "sortable column",
@@ -1543,8 +1702,8 @@ Hl = {
   columnSize: (t) => `${t.value} pixels`,
   resizerDescription: "Press Enter to start resizing"
 };
-var Vl = {};
-Vl = {
+var Jl = {};
+Jl = {
   ascending: "ascendente",
   ascendingSort: (t) => `ordenado por columna ${t.columnName} en sentido ascendente`,
   columnSize: (t) => `${t.value} píxeles`,
@@ -1555,8 +1714,8 @@ Vl = {
   selectAll: "Seleccionar todos",
   sortable: "columna ordenable"
 };
-var jl = {};
-jl = {
+var _l = {};
+_l = {
   ascending: "tõusev järjestus",
   ascendingSort: (t) => `sorditud veeru järgi ${t.columnName} tõusvas järjestuses`,
   columnSize: (t) => `${t.value} pikslit`,
@@ -1567,8 +1726,8 @@ jl = {
   selectAll: "Vali kõik",
   sortable: "sorditav veerg"
 };
-var Ll = {};
-Ll = {
+var ei = {};
+ei = {
   ascending: "nouseva",
   ascendingSort: (t) => `lajiteltu sarakkeen ${t.columnName} mukaan nousevassa järjestyksessä`,
   columnSize: (t) => `${t.value} pikseliä`,
@@ -1579,8 +1738,8 @@ Ll = {
   selectAll: "Valitse kaikki",
   sortable: "lajiteltava sarake"
 };
-var Ol = {};
-Ol = {
+var ti = {};
+ti = {
   ascending: "croissant",
   ascendingSort: (t) => `trié en fonction de la colonne ${t.columnName} par ordre croissant`,
   columnSize: (t) => `${t.value} pixels`,
@@ -1591,8 +1750,8 @@ Ol = {
   selectAll: "Sélectionner tout",
   sortable: "colonne triable"
 };
-var Wl = {};
-Wl = {
+var li = {};
+li = {
   ascending: "עולה",
   ascendingSort: (t) => `מוין לפי עמודה ${t.columnName} בסדר עולה`,
   columnSize: (t) => `${t.value} פיקסלים`,
@@ -1603,8 +1762,8 @@ Wl = {
   selectAll: "בחר הכול",
   sortable: "עמודה שניתן למיין"
 };
-var Ul = {};
-Ul = {
+var ii = {};
+ii = {
   ascending: "rastući",
   ascendingSort: (t) => `razvrstano po stupcima ${t.columnName} rastućem redoslijedom`,
   columnSize: (t) => `${t.value} piksela`,
@@ -1615,8 +1774,8 @@ Ul = {
   selectAll: "Odaberite sve",
   sortable: "stupac koji se može razvrstati"
 };
-var ql = {};
-ql = {
+var oi = {};
+oi = {
   ascending: "növekvő",
   ascendingSort: (t) => `rendezve a(z) ${t.columnName} oszlop szerint, növekvő sorrendben`,
   columnSize: (t) => `${t.value} képpont`,
@@ -1627,8 +1786,8 @@ ql = {
   selectAll: "Összes kijelölése",
   sortable: "rendezendő oszlop"
 };
-var Yl = {};
-Yl = {
+var ni = {};
+ni = {
   ascending: "crescente",
   ascendingSort: (t) => `in ordine crescente in base alla colonna ${t.columnName}`,
   columnSize: (t) => `${t.value} pixel`,
@@ -1639,8 +1798,8 @@ Yl = {
   selectAll: "Seleziona tutto",
   sortable: "colonna ordinabile"
 };
-var Zl = {};
-Zl = {
+var ri = {};
+ri = {
   ascending: "昇順",
   ascendingSort: (t) => `列 ${t.columnName} を昇順で並べ替え`,
   columnSize: (t) => `${t.value} ピクセル`,
@@ -1651,8 +1810,8 @@ Zl = {
   selectAll: "すべて選択",
   sortable: "並べ替え可能な列"
 };
-var Xl = {};
-Xl = {
+var ui = {};
+ui = {
   ascending: "오름차순",
   ascendingSort: (t) => `${t.columnName} 열을 기준으로 오름차순으로 정렬됨`,
   columnSize: (t) => `${t.value} 픽셀`,
@@ -1663,8 +1822,8 @@ Xl = {
   selectAll: "모두 선택",
   sortable: "정렬 가능한 열"
 };
-var Gl = {};
-Gl = {
+var ai = {};
+ai = {
   ascending: "didėjančia tvarka",
   ascendingSort: (t) => `surikiuota pagal stulpelį ${t.columnName} didėjančia tvarka`,
   columnSize: (t) => `${t.value} piks.`,
@@ -1675,8 +1834,8 @@ Gl = {
   selectAll: "Pasirinkti viską",
   sortable: "rikiuojamas stulpelis"
 };
-var Ql = {};
-Ql = {
+var si = {};
+si = {
   ascending: "augošā secībā",
   ascendingSort: (t) => `kārtots pēc kolonnas ${t.columnName} augošā secībā`,
   columnSize: (t) => `${t.value} pikseļi`,
@@ -1687,8 +1846,8 @@ Ql = {
   selectAll: "Atlasīt visu",
   sortable: "kārtojamā kolonna"
 };
-var Jl = {};
-Jl = {
+var di = {};
+di = {
   ascending: "stigende",
   ascendingSort: (t) => `sortert etter kolonne ${t.columnName} i stigende rekkefølge`,
   columnSize: (t) => `${t.value} piksler`,
@@ -1699,8 +1858,8 @@ Jl = {
   selectAll: "Velg alle",
   sortable: "kolonne som kan sorteres"
 };
-var _l = {};
-_l = {
+var ci = {};
+ci = {
   ascending: "oplopend",
   ascendingSort: (t) => `gesorteerd in oplopende volgorde in kolom ${t.columnName}`,
   columnSize: (t) => `${t.value} pixels`,
@@ -1711,8 +1870,8 @@ _l = {
   selectAll: "Alles selecteren",
   sortable: "sorteerbare kolom"
 };
-var ei = {};
-ei = {
+var hi = {};
+hi = {
   ascending: "rosnąco",
   ascendingSort: (t) => `posortowano według kolumny ${t.columnName} w porządku rosnącym`,
   columnSize: (t) => `Liczba pikseli: ${t.value}`,
@@ -1723,8 +1882,8 @@ ei = {
   selectAll: "Zaznacz wszystko",
   sortable: "kolumna z możliwością sortowania"
 };
-var ti = {};
-ti = {
+var fi = {};
+fi = {
   ascending: "crescente",
   ascendingSort: (t) => `classificado pela coluna ${t.columnName} em ordem crescente`,
   columnSize: (t) => `${t.value} pixels`,
@@ -1735,8 +1894,8 @@ ti = {
   selectAll: "Selecionar tudo",
   sortable: "coluna classificável"
 };
-var li = {};
-li = {
+var pi = {};
+pi = {
   ascending: "ascendente",
   ascendingSort: (t) => `Ordenar por coluna ${t.columnName} em ordem ascendente`,
   columnSize: (t) => `${t.value} pixels`,
@@ -1747,8 +1906,8 @@ li = {
   selectAll: "Selecionar tudo",
   sortable: "Coluna ordenável"
 };
-var ii = {};
-ii = {
+var vi = {};
+vi = {
   ascending: "crescătoare",
   ascendingSort: (t) => `sortate după coloana ${t.columnName} în ordine crescătoare`,
   columnSize: (t) => `${t.value} pixeli`,
@@ -1759,8 +1918,8 @@ ii = {
   selectAll: "Selectare totală",
   sortable: "coloană sortabilă"
 };
-var oi = {};
-oi = {
+var mi = {};
+mi = {
   ascending: "возрастание",
   ascendingSort: (t) => `сортировать столбец ${t.columnName} в порядке возрастания`,
   columnSize: (t) => `${t.value} пикс.`,
@@ -1771,8 +1930,8 @@ oi = {
   selectAll: "Выбрать все",
   sortable: "сортируемый столбец"
 };
-var ni = {};
-ni = {
+var gi = {};
+gi = {
   ascending: "vzostupne",
   ascendingSort: (t) => `zoradené zostupne podľa stĺpca ${t.columnName}`,
   columnSize: (t) => `Počet pixelov: ${t.value}`,
@@ -1783,8 +1942,8 @@ ni = {
   selectAll: "Vybrať všetko",
   sortable: "zoraditeľný stĺpec"
 };
-var ri = {};
-ri = {
+var bi = {};
+bi = {
   ascending: "naraščajoče",
   ascendingSort: (t) => `razvrščeno po stolpcu ${t.columnName} v naraščajočem vrstnem redu`,
   columnSize: (t) => `${t.value} slikovnih pik`,
@@ -1795,8 +1954,8 @@ ri = {
   selectAll: "Izberite vse",
   sortable: "razvrstljivi stolpec"
 };
-var ui = {};
-ui = {
+var yi = {};
+yi = {
   ascending: "rastući",
   ascendingSort: (t) => `sortirano po kolonama ${t.columnName} rastućim redosledom`,
   columnSize: (t) => `${t.value} piksela`,
@@ -1807,8 +1966,8 @@ ui = {
   selectAll: "Izaberite sve",
   sortable: "kolona koja se može sortirati"
 };
-var ai = {};
-ai = {
+var $i = {};
+$i = {
   ascending: "stigande",
   ascendingSort: (t) => `sorterat på kolumn ${t.columnName} i stigande ordning`,
   columnSize: (t) => `${t.value} pixlar`,
@@ -1819,8 +1978,8 @@ ai = {
   selectAll: "Markera allt",
   sortable: "sorterbar kolumn"
 };
-var si = {};
-si = {
+var xi = {};
+xi = {
   ascending: "artan sırada",
   ascendingSort: (t) => `${t.columnName} sütuna göre artan düzende sırala`,
   columnSize: (t) => `${t.value} piksel`,
@@ -1831,8 +1990,8 @@ si = {
   selectAll: "Tümünü Seç",
   sortable: "Sıralanabilir sütun"
 };
-var di = {};
-di = {
+var wi = {};
+wi = {
   ascending: "висхідний",
   ascendingSort: (t) => `відсортовано за стовпцем ${t.columnName} у висхідному порядку`,
   columnSize: (t) => `${t.value} пікс.`,
@@ -1843,8 +2002,8 @@ di = {
   selectAll: "Вибрати все",
   sortable: "сортувальний стовпець"
 };
-var ci = {};
-ci = {
+var Ci = {};
+Ci = {
   ascending: "升序",
   ascendingSort: (t) => `按列 ${t.columnName} 升序排序`,
   columnSize: (t) => `${t.value} 像素`,
@@ -1855,8 +2014,8 @@ ci = {
   selectAll: "全选",
   sortable: "可排序的列"
 };
-var hi = {};
-hi = {
+var ki = {};
+ki = {
   ascending: "遞增",
   ascendingSort: (t) => `已依據「${t.columnName}」欄遞增排序`,
   columnSize: (t) => `${t.value} 像素`,
@@ -1867,44 +2026,44 @@ hi = {
   selectAll: "全選",
   sortable: "可排序的欄"
 };
-var De = {};
-De = {
-  "ar-AE": Rl,
-  "bg-BG": Ml,
-  "cs-CZ": Tl,
-  "da-DK": Fl,
-  "de-DE": Kl,
-  "el-GR": Nl,
-  "en-US": Hl,
-  "es-ES": Vl,
-  "et-EE": jl,
-  "fi-FI": Ll,
-  "fr-FR": Ol,
-  "he-IL": Wl,
-  "hr-HR": Ul,
-  "hu-HU": ql,
-  "it-IT": Yl,
-  "ja-JP": Zl,
-  "ko-KR": Xl,
-  "lt-LT": Gl,
-  "lv-LV": Ql,
-  "nb-NO": Jl,
-  "nl-NL": _l,
-  "pl-PL": ei,
-  "pt-BR": ti,
-  "pt-PT": li,
-  "ro-RO": ii,
-  "ru-RU": oi,
-  "sk-SK": ni,
-  "sl-SI": ri,
-  "sr-SP": ui,
-  "sv-SE": ai,
-  "tr-TR": si,
-  "uk-UA": di,
-  "zh-CN": ci,
-  "zh-TW": hi
+var Ee = {};
+Ee = {
+  "ar-AE": Ul,
+  "bg-BG": ql,
+  "cs-CZ": Yl,
+  "da-DK": Zl,
+  "de-DE": Xl,
+  "el-GR": Gl,
+  "en-US": Ql,
+  "es-ES": Jl,
+  "et-EE": _l,
+  "fi-FI": ei,
+  "fr-FR": ti,
+  "he-IL": li,
+  "hr-HR": ii,
+  "hu-HU": oi,
+  "it-IT": ni,
+  "ja-JP": ri,
+  "ko-KR": ui,
+  "lt-LT": ai,
+  "lv-LV": si,
+  "nb-NO": di,
+  "nl-NL": ci,
+  "pl-PL": hi,
+  "pt-BR": fi,
+  "pt-PT": pi,
+  "ro-RO": vi,
+  "ru-RU": mi,
+  "sk-SK": gi,
+  "sl-SI": bi,
+  "sr-SP": yi,
+  "sv-SE": $i,
+  "tr-TR": xi,
+  "uk-UA": wi,
+  "zh-CN": Ci,
+  "zh-TW": ki
 };
-class Pr extends Zt {
+class Br extends rl {
   isCell(e) {
     return e.type === "cell" || e.type === "rowheader" || e.type === "column";
   }
@@ -1912,7 +2071,7 @@ class Pr extends Zt {
     let l = this.collection.getItem(e);
     if (!l) return null;
     if (l.type === "column") {
-      let i = le(H(l, this.collection));
+      let i = ee(V(l, this.collection));
       if (i) return i.key;
       let o = this.getFirstKey();
       return o == null || !this.collection.getItem(o) ? null : super.getKeyForItemInRowByIndex(o, l.index);
@@ -1933,7 +2092,7 @@ class Pr extends Zt {
     let l = this.findNextKey(e.key, (o) => o.type === "column");
     if (l != null) return l;
     let i = this.collection.headerRows[e.level];
-    for (let o of H(i, this.collection))
+    for (let o of V(i, this.collection))
       if (o.type === "column") return o.key;
     return null;
   }
@@ -1941,7 +2100,7 @@ class Pr extends Zt {
     let l = this.findPreviousKey(e.key, (n) => n.type === "column");
     if (l != null) return l;
     let i = this.collection.headerRows[e.level], o = [
-      ...H(i, this.collection)
+      ...V(i, this.collection)
     ];
     for (let n = o.length - 1; n >= 0; n--) {
       let r = o[n];
@@ -1964,43 +2123,43 @@ class Pr extends Zt {
     let n = i.getItem(o);
     var r;
     (n == null ? void 0 : n.type) === "cell" && (o = (r = n.parentKey) !== null && r !== void 0 ? r : null);
-    let a = !1;
+    let u = !1;
     for (; o != null; ) {
-      let u = i.getItem(o);
-      if (!u) return null;
-      if (u.textValue) {
-        let s = u.textValue.slice(0, e.length);
-        if (this.collator.compare(s, e) === 0) return u.key;
+      let a = i.getItem(o);
+      if (!a) return null;
+      if (a.textValue) {
+        let s = a.textValue.slice(0, e.length);
+        if (this.collator.compare(s, e) === 0) return a.key;
       }
-      for (let s of H(u, this.collection)) {
+      for (let s of V(a, this.collection)) {
         let d = i.columns[s.index];
         if (i.rowHeaderColumnKeys.has(d.key) && s.textValue) {
           let c = s.textValue.slice(0, e.length);
           if (this.collator.compare(c, e) === 0) {
             let h = l != null ? i.getItem(l) : n;
-            return (h == null ? void 0 : h.type) === "cell" ? s.key : u.key;
+            return (h == null ? void 0 : h.type) === "cell" ? s.key : a.key;
           }
         }
       }
-      o = this.getKeyBelow(o), o == null && !a && (o = this.getFirstKey(), a = !0);
+      o = this.getKeyBelow(o), o == null && !u && (o = this.getFirstKey(), u = !0);
     }
     return null;
   }
 }
-function Rr(t) {
+function Ir(t) {
   return t && t.__esModule ? t.default : t;
 }
-function Mr(t, e, l) {
-  let { keyboardDelegate: i, isVirtualized: o, layoutDelegate: n, layout: r } = t, a = tt({
+function Pr(t, e, l) {
+  let { keyboardDelegate: i, isVirtualized: o, layoutDelegate: n, layout: r } = t, u = rt({
     usage: "search",
     sensitivity: "base"
-  }), { direction: u } = ee(), s = e.selectionManager.disabledBehavior, d = p.useMemo(() => i || new Pr({
+  }), { direction: a } = J(), s = e.selectionManager.disabledBehavior, d = p.useMemo(() => i || new Br({
     collection: e.collection,
     disabledKeys: e.disabledKeys,
     disabledBehavior: s,
     ref: l,
-    direction: u,
-    collator: a,
+    direction: a,
+    collator: u,
     layoutDelegate: n,
     layout: r
   }), [
@@ -2009,35 +2168,35 @@ function Mr(t, e, l) {
     e.disabledKeys,
     s,
     l,
-    u,
     a,
+    u,
     n,
     r
-  ]), c = ye(t.id);
-  rt.set(e, c);
-  let { gridProps: h } = Dr({
+  ]), c = we(t.id);
+  ct.set(e, c);
+  let { gridProps: h } = xr({
     ...t,
     id: c,
     keyboardDelegate: d
   }, e, l);
-  o && (h["aria-rowcount"] = e.collection.size + e.collection.headerRows.length), ze() && "expandedKeys" in e && (h.role = "treegrid");
-  let { column: f, direction: m } = e.sortDescriptor || {}, v = te(Rr(De), "@react-aria/table"), y = p.useMemo(() => {
-    var C, w;
-    let $ = (w = (C = e.collection.columns.find((x) => x.key === f)) === null || C === void 0 ? void 0 : C.textValue) !== null && w !== void 0 ? w : "";
-    return m && f ? v.format(`${m}Sort`, {
-      columnName: $
+  o && (h["aria-rowcount"] = e.collection.size + e.collection.headerRows.length), Ie() && "expandedKeys" in e && (h.role = "treegrid");
+  let { column: f, direction: v } = e.sortDescriptor || {}, m = _(Ir(Ee), "@react-aria/table"), b = p.useMemo(() => {
+    var C, $;
+    let x = ($ = (C = e.collection.columns.find((w) => w.key === f)) === null || C === void 0 ? void 0 : C.textValue) !== null && $ !== void 0 ? $ : "";
+    return v && f ? m.format(`${v}Sort`, {
+      columnName: x
     }) : void 0;
   }, [
-    m,
+    v,
     f,
     e.collection.columns
-  ]), g = Re(y);
-  return Lt(() => {
-    y && Rt(y, "assertive", 500);
+  ]), g = Me(b);
+  return Jt(() => {
+    b && Ut(b, "assertive", 500);
   }, [
-    y
+    b
   ]), {
-    gridProps: j(h, g, {
+    gridProps: K(h, g, {
       // merge sort description with long press information
       "aria-describedby": [
         g["aria-describedby"],
@@ -2046,25 +2205,25 @@ function Mr(t, e, l) {
     })
   };
 }
-function Tr(t) {
+function Rr(t) {
   return t && t.__esModule ? t.default : t;
 }
-function Fr(t, e, l) {
+function Ar(t, e, l) {
   var i, o;
-  let { node: n } = t, r = n.props.allowsSorting, { gridCellProps: a } = Bl({
+  let { node: n } = t, r = n.props.allowsSorting, { gridCellProps: u } = jl({
     ...t,
     focusMode: "child"
-  }, e, l), u = n.props.isSelectionCell && e.selectionManager.selectionMode === "single", { pressProps: s } = Ft({
-    isDisabled: !r || u,
+  }, e, l), a = n.props.isSelectionCell && e.selectionManager.selectionMode === "single", { pressProps: s } = ye({
+    isDisabled: !r || a,
     onPress() {
       e.sort(n.key);
     },
     ref: l
-  }), { focusableProps: d } = Io({}, l), c, h = ((i = e.sortDescriptor) === null || i === void 0 ? void 0 : i.column) === n.key, f = (o = e.sortDescriptor) === null || o === void 0 ? void 0 : o.direction;
-  n.props.allowsSorting && !$t() && (c = h ? f : "none");
-  let m = te(Tr(De), "@react-aria/table"), v;
-  r && (v = `${m.format("sortable")}`, h && f && $t() && (v = `${v}, ${m.format(f)}`));
-  let y = Re(v), g = e.collection.size === 0;
+  }), { focusableProps: d } = Ht({}, l), c, h = ((i = e.sortDescriptor) === null || i === void 0 ? void 0 : i.column) === n.key, f = (o = e.sortDescriptor) === null || o === void 0 ? void 0 : o.direction;
+  n.props.allowsSorting && !St() && (c = h ? f : "none");
+  let v = _(Rr(Ee), "@react-aria/table"), m;
+  r && (m = `${v.format("sortable")}`, h && f && St() && (m = `${m}, ${v.format(f)}`));
+  let b = Me(m), g = e.collection.size === 0;
   return p.useEffect(() => {
     g && e.selectionManager.focusedKey === n.key && e.selectionManager.setFocusedKey(null);
   }, [
@@ -2073,24 +2232,24 @@ function Fr(t, e, l) {
     n.key
   ]), {
     columnHeaderProps: {
-      ...j(
+      ...K(
         d,
-        a,
+        u,
         s,
-        y,
+        b,
         // If the table is empty, make all column headers untabbable
         g ? {
           tabIndex: -1
         } : null
       ),
       role: "columnheader",
-      id: Il(e, n.key),
+      id: Ll(e, n.key),
       "aria-colspan": n.colSpan && n.colSpan > 1 ? n.colSpan : void 0,
       "aria-sort": c
     }
   };
 }
-const Et = {
+const Mt = {
   expand: {
     ltr: "ArrowRight",
     rtl: "ArrowLeft"
@@ -2100,70 +2259,70 @@ const Et = {
     rtl: "ArrowRight"
   }
 };
-function Kr(t, e, l) {
-  let { node: i, isVirtualized: o } = t, { rowProps: n, ...r } = Sr(t, e, l), { direction: a } = ee();
-  o && !(ze() && "expandedKeys" in e) ? n["aria-rowindex"] = i.index + 1 + e.collection.headerRows.length : delete n["aria-rowindex"];
-  let u = {};
-  if (ze() && "expandedKeys" in e) {
-    let x = e.keyMap.get(i.key);
-    if (x != null) {
-      var s, d, c, h, f, m;
-      let S = ((s = x.props) === null || s === void 0 ? void 0 : s.UNSTABLE_childItems) || ((c = x.props) === null || c === void 0 || (d = c.children) === null || d === void 0 ? void 0 : d.length) > e.userColumnCount;
-      var v, y, g, C;
-      u = {
+function Mr(t, e, l) {
+  let { node: i, isVirtualized: o } = t, { rowProps: n, ...r } = Cr(t, e, l), { direction: u } = J();
+  o && !(Ie() && "expandedKeys" in e) ? n["aria-rowindex"] = i.index + 1 + e.collection.headerRows.length : delete n["aria-rowindex"];
+  let a = {};
+  if (Ie() && "expandedKeys" in e) {
+    let w = e.keyMap.get(i.key);
+    if (w != null) {
+      var s, d, c, h, f, v;
+      let S = ((s = w.props) === null || s === void 0 ? void 0 : s.UNSTABLE_childItems) || ((c = w.props) === null || c === void 0 || (d = c.children) === null || d === void 0 ? void 0 : d.length) > e.userColumnCount;
+      var m, b, g, C;
+      a = {
         onKeyDown: (E) => {
-          (E.key === Et.expand[a] && e.selectionManager.focusedKey === x.key && S && e.expandedKeys !== "all" && !e.expandedKeys.has(x.key) || E.key === Et.collapse[a] && e.selectionManager.focusedKey === x.key && S && (e.expandedKeys === "all" || e.expandedKeys.has(x.key))) && (e.toggleKey(x.key), E.stopPropagation());
+          (E.key === Mt.expand[u] && e.selectionManager.focusedKey === w.key && S && e.expandedKeys !== "all" && !e.expandedKeys.has(w.key) || E.key === Mt.collapse[u] && e.selectionManager.focusedKey === w.key && S && (e.expandedKeys === "all" || e.expandedKeys.has(w.key))) && (e.toggleKey(w.key), E.stopPropagation());
         },
         "aria-expanded": S ? e.expandedKeys === "all" || e.expandedKeys.has(i.key) : void 0,
-        "aria-level": x.level,
-        "aria-posinset": ((v = x.indexOfType) !== null && v !== void 0 ? v : 0) + 1,
-        "aria-setsize": x.level > 1 ? ((g = (h = _((y = (f = e.keyMap.get(x.parentKey)) === null || f === void 0 ? void 0 : f.childNodes) !== null && y !== void 0 ? y : [])) === null || h === void 0 ? void 0 : h.indexOfType) !== null && g !== void 0 ? g : 0) + 1 : ((C = (m = _(e.collection.body.childNodes)) === null || m === void 0 ? void 0 : m.indexOfType) !== null && C !== void 0 ? C : 0) + 1
+        "aria-level": w.level,
+        "aria-posinset": ((m = w.indexOfType) !== null && m !== void 0 ? m : 0) + 1,
+        "aria-setsize": w.level > 1 ? ((g = (h = Q((b = (f = e.keyMap.get(w.parentKey)) === null || f === void 0 ? void 0 : f.childNodes) !== null && b !== void 0 ? b : [])) === null || h === void 0 ? void 0 : h.indexOfType) !== null && g !== void 0 ? g : 0) + 1 : ((C = (v = Q(e.collection.body.childNodes)) === null || v === void 0 ? void 0 : v.indexOfType) !== null && C !== void 0 ? C : 0) + 1
       };
     }
   }
-  let w = Ao(i.props), $ = r.hasAction ? w : {};
+  let $ = Lo(i.props), x = r.hasAction ? $ : {};
   return {
     rowProps: {
-      ...j(n, u, $),
-      "aria-labelledby": Pl(e, i.key)
+      ...K(n, a, x),
+      "aria-labelledby": Wl(e, i.key)
     },
     ...r
   };
 }
-function Nr(t, e, l) {
+function Tr(t, e, l) {
   let { node: i, isVirtualized: o } = t, n = {
     role: "row"
   };
-  return o && !(ze() && "expandedKeys" in e) && (n["aria-rowindex"] = i.index + 1), {
+  return o && !(Ie() && "expandedKeys" in e) && (n["aria-rowindex"] = i.index + 1), {
     rowProps: n
   };
 }
-function Hr(t, e, l) {
+function Fr(t, e, l) {
   var i;
-  let { gridCellProps: o, isPressed: n } = Bl(t, e, l), r = (i = t.node.column) === null || i === void 0 ? void 0 : i.key;
-  return r != null && e.collection.rowHeaderColumnKeys.has(r) && (o.role = "rowheader", o.id = Al(e, t.node.parentKey, r)), {
+  let { gridCellProps: o, isPressed: n } = jl(t, e, l), r = (i = t.node.column) === null || i === void 0 ? void 0 : i.key;
+  return r != null && e.collection.rowHeaderColumnKeys.has(r) && (o.role = "rowheader", o.id = Ol(e, t.node.parentKey, r)), {
     gridCellProps: o,
     isPressed: n
   };
 }
-function Vr(t) {
+function Kr(t) {
   return t && t.__esModule ? t.default : t;
 }
-function jr(t, e) {
+function Nr(t, e) {
   let { key: l } = t;
-  const { checkboxProps: i } = zr(t, e);
+  const { checkboxProps: i } = Dr(t, e);
   return {
     checkboxProps: {
       ...i,
-      "aria-labelledby": `${i.id} ${Pl(e, l)}`
+      "aria-labelledby": `${i.id} ${Wl(e, l)}`
     }
   };
 }
-function Lr(t) {
+function Vr(t) {
   let { isEmpty: e, isSelectAll: l, selectionMode: i } = t.selectionManager;
   return {
     checkboxProps: {
-      "aria-label": te(Vr(De), "@react-aria/table").format(i === "single" ? "select" : "selectAll"),
+      "aria-label": _(Kr(Ee), "@react-aria/table").format(i === "single" ? "select" : "selectAll"),
       isSelected: l,
       isDisabled: i !== "multiple" || t.collection.size === 0 || t.collection.rows.length === 1 && t.collection.rows[0].type === "loader",
       isIndeterminate: !e && !l,
@@ -2171,127 +2330,127 @@ function Lr(t) {
     }
   };
 }
-function Or(t) {
+function Hr(t) {
   return t && t.__esModule ? t.default : t;
 }
-function Wr(t, e, l) {
-  let { column: i, triggerRef: o, isDisabled: n, onResizeStart: r, onResize: a, onResizeEnd: u, "aria-label": s } = t;
-  const d = te(Or(De), "@react-aria/table");
-  let c = ye(), h = e.resizingColumn === i.key, f = p.useRef(h), m = p.useRef(null), v = p.useRef(!1), y = e.tableState.isKeyboardNavigationDisabled, { direction: g } = ee(), { keyboardProps: C } = Po({
-    onKeyDown: (I) => {
-      y ? (I.key === "Escape" || I.key === "Enter" || I.key === " " || I.key === "Tab") && (I.preventDefault(), x(i)) : (I.continuePropagation(), I.key === "Enter" && w(i));
+function jr(t, e, l) {
+  let { column: i, triggerRef: o, isDisabled: n, onResizeStart: r, onResize: u, onResizeEnd: a, "aria-label": s } = t;
+  const d = _(Hr(Ee), "@react-aria/table");
+  let c = we(), h = e.resizingColumn === i.key, f = p.useRef(h), v = p.useRef(null), m = p.useRef(!1), b = e.tableState.isKeyboardNavigationDisabled, { direction: g } = J(), { keyboardProps: C } = Oo({
+    onKeyDown: (B) => {
+      b ? (B.key === "Escape" || B.key === "Enter" || B.key === " " || B.key === "Tab") && (B.preventDefault(), w(i)) : (B.continuePropagation(), B.key === "Enter" && $(i));
     }
-  }), w = oe((I) => {
-    f.current || (m.current = e.updateResizedColumns(I.key, e.getColumnWidth(I.key)), e.startResize(I.key), e.tableState.setKeyboardNavigationDisabled(!0), r == null || r(m.current)), f.current = !0;
-  }), $ = oe((I, F) => {
-    let G = e.updateResizedColumns(I.key, F);
-    a == null || a(G), m.current = G;
-  }), x = oe((I) => {
-    f.current && (m.current == null && (m.current = e.updateResizedColumns(I.key, e.getColumnWidth(I.key))), e.endResize(), e.tableState.setKeyboardNavigationDisabled(!1), u == null || u(m.current), f.current = !1, o != null && o.current && !v.current && Q(o.current)), m.current = null;
+  }), $ = ne((B) => {
+    f.current || (v.current = e.updateResizedColumns(B.key, e.getColumnWidth(B.key)), e.startResize(B.key), e.tableState.setKeyboardNavigationDisabled(!0), r == null || r(v.current)), f.current = !0;
+  }), x = ne((B, N) => {
+    let Y = e.updateResizedColumns(B.key, N);
+    u == null || u(Y), v.current = Y;
+  }), w = ne((B) => {
+    f.current && (v.current == null && (v.current = e.updateResizedColumns(B.key, e.getColumnWidth(B.key))), e.endResize(), e.tableState.setKeyboardNavigationDisabled(!1), a == null || a(v.current), f.current = !1, o != null && o.current && !m.current && Z(o.current)), v.current = null;
   });
-  const S = p.useRef(0), { moveProps: E } = gr({
+  const S = p.useRef(0), { moveProps: E } = cr({
     onMoveStart() {
-      S.current = e.getColumnWidth(i.key), w(i);
+      S.current = e.getColumnWidth(i.key), $(i);
     },
-    onMove(I) {
-      let { deltaX: F, deltaY: G, pointerType: xo } = I;
-      g === "rtl" && (F *= -1), xo === "keyboard" && (G !== 0 && F === 0 && (F = G * -1), F *= 10), F !== 0 && (S.current += F, $(i, S.current));
+    onMove(B) {
+      let { deltaX: N, deltaY: Y, pointerType: Mo } = B;
+      g === "rtl" && (N *= -1), Mo === "keyboard" && (Y !== 0 && N === 0 && (N = Y * -1), N *= 10), N !== 0 && (S.current += N, x(i, S.current));
     },
-    onMoveEnd(I) {
-      let { pointerType: F } = I;
-      S.current = 0, (F === "mouse" || F === "touch" && v.current) && x(i);
+    onMoveEnd(B) {
+      let { pointerType: N } = B;
+      S.current = 0, (N === "mouse" || N === "touch" && m.current) && w(i);
     }
   });
-  let A = p.useCallback((I) => {
-    var F;
-    y && ((F = E.onKeyDown) === null || F === void 0 || F.call(E, I));
+  let I = p.useCallback((B) => {
+    var N;
+    b && ((N = E.onKeyDown) === null || N === void 0 || N.call(E, B));
   }, [
-    y,
+    b,
     E
-  ]), B = Math.floor(e.getColumnMinWidth(i.key)), z = Math.floor(e.getColumnMaxWidth(i.key));
-  z === 1 / 0 && (z = Number.MAX_SAFE_INTEGER);
-  let M = Math.floor(e.getColumnWidth(i.key)), K = Mt();
-  K === "virtual" && typeof window < "u" && "ontouchstart" in window && (K = "touch");
-  let V = (o == null ? void 0 : o.current) == null && (K === "keyboard" || K === "virtual") && !h ? d.format("resizerDescription") : void 0, L = Re(V), k = {
+  ]), z = Math.floor(e.getColumnMinWidth(i.key)), k = Math.floor(e.getColumnMaxWidth(i.key));
+  k === 1 / 0 && (k = Number.MAX_SAFE_INTEGER);
+  let P = Math.floor(e.getColumnWidth(i.key)), F = qt();
+  F === "virtual" && typeof window < "u" && "ontouchstart" in window && (F = "touch");
+  let T = (o == null ? void 0 : o.current) == null && (F === "keyboard" || F === "virtual") && !h ? d.format("resizerDescription") : void 0, H = Me(T), W = {
     "aria-label": s,
     "aria-orientation": "horizontal",
-    "aria-labelledby": `${c} ${Il(e.tableState, i.key)}`,
+    "aria-labelledby": `${c} ${Ll(e.tableState, i.key)}`,
     "aria-valuetext": d.format("columnSize", {
-      value: M
+      value: P
     }),
     type: "range",
-    min: B,
-    max: z,
-    value: M,
-    ...L
+    min: z,
+    max: k,
+    value: P,
+    ...H
   };
-  const N = p.useCallback(() => {
-    l.current && Q(l.current);
+  const ue = p.useCallback(() => {
+    l.current && Z(l.current);
   }, [
     l
   ]);
-  let W = e.resizingColumn, X = p.useRef(null);
+  let G = e.resizingColumn, me = p.useRef(null);
   p.useEffect(() => {
-    if (X.current !== W && W != null && W === i.key) {
-      v.current = document.activeElement === l.current, w(i);
-      let I = setTimeout(() => N(), 0), F = setTimeout(N, 400);
+    if (me.current !== G && G != null && G === i.key) {
+      m.current = document.activeElement === l.current, $(i);
+      let B = setTimeout(() => ue(), 0), N = setTimeout(ue, 400);
       return () => {
-        clearTimeout(I), clearTimeout(F);
+        clearTimeout(B), clearTimeout(N);
       };
     }
-    X.current = W;
+    me.current = G;
   }, [
-    W,
+    G,
     i,
-    N,
+    ue,
     l,
-    w
+    $
   ]);
-  let Ne = (I) => {
-    let F = e.getColumnWidth(i.key), G = parseFloat(I.target.value);
-    G > F ? G = F + 10 : G = F - 10, $(i, G);
-  }, { pressProps: He } = Ft({
+  let Ve = (B) => {
+    let N = e.getColumnWidth(i.key), Y = parseFloat(B.target.value);
+    Y > N ? Y = N + 10 : Y = N - 10, x(i, Y);
+  }, { pressProps: He } = ye({
     preventFocusOnPress: !0,
-    onPressStart: (I) => {
-      if (!(I.ctrlKey || I.altKey || I.metaKey || I.shiftKey || I.pointerType === "keyboard")) {
-        if (I.pointerType === "virtual" && e.resizingColumn != null) {
-          x(i);
+    onPressStart: (B) => {
+      if (!(B.ctrlKey || B.altKey || B.metaKey || B.shiftKey || B.pointerType === "keyboard")) {
+        if (B.pointerType === "virtual" && e.resizingColumn != null) {
+          w(i);
           return;
         }
-        N(), I.pointerType !== "virtual" && w(i);
+        ue(), B.pointerType !== "virtual" && $(i);
       }
     },
-    onPress: (I) => {
-      (I.pointerType === "touch" && v.current || I.pointerType === "mouse") && e.resizingColumn != null && x(i);
+    onPress: (B) => {
+      (B.pointerType === "touch" && m.current || B.pointerType === "mouse") && e.resizingColumn != null && w(i);
     }
-  }), { visuallyHiddenProps: me } = $e();
+  }), { visuallyHiddenProps: ge } = Ce();
   return {
-    resizerProps: j(C, {
+    resizerProps: K(C, {
       ...E,
-      onKeyDown: A
+      onKeyDown: I
     }, He, {
       style: {
         touchAction: "none"
       }
     }),
-    inputProps: j(me, {
+    inputProps: K(ge, {
       id: c,
       onBlur: () => {
-        x(i);
+        w(i);
       },
-      onChange: Ne,
+      onChange: Ve,
       disabled: n
-    }, k),
+    }, W),
     isResizing: h
   };
 }
-function fi() {
-  return kr();
+function Di() {
+  return wr();
 }
-function Ur(t) {
-  let { selectionMode: e = "single" } = t, l = Ro(t), [i, o] = p.useState(null), n = p.useMemo(() => {
-    var $;
-    return t.defaultValue !== void 0 ? t.defaultValue : e === "single" ? ($ = t.defaultSelectedKey) !== null && $ !== void 0 ? $ : null : [];
+function Lr(t) {
+  let { selectionMode: e = "single" } = t, l = Wo(t), [i, o] = p.useState(null), n = p.useMemo(() => {
+    var x;
+    return t.defaultValue !== void 0 ? t.defaultValue : e === "single" ? (x = t.defaultSelectedKey) !== null && x !== void 0 ? x : null : [];
   }, [
     t.defaultValue,
     t.defaultSelectedKey,
@@ -2300,49 +2459,49 @@ function Ur(t) {
     t.value,
     t.selectedKey,
     e
-  ]), [a, u] = Mo(r, n, t.onChange), s = e === "single" && Array.isArray(a) ? a[0] : a, d = ($) => {
+  ]), [u, a] = Wt(r, n, t.onChange), s = e === "single" && Array.isArray(u) ? u[0] : u, d = (x) => {
     if (e === "single") {
-      var x, S;
-      let E = Array.isArray($) ? (S = $[0]) !== null && S !== void 0 ? S : null : $;
-      u(E), E !== s && ((x = t.onSelectionChange) === null || x === void 0 || x.call(t, E));
+      var w, S;
+      let E = Array.isArray(x) ? (S = x[0]) !== null && S !== void 0 ? S : null : x;
+      a(E), E !== s && ((w = t.onSelectionChange) === null || w === void 0 || w.call(t, E));
     } else {
       let E = [];
-      Array.isArray($) ? E = $ : $ != null && (E = [
-        $
-      ]), u(E);
+      Array.isArray(x) ? E = x : x != null && (E = [
+        x
+      ]), a(E);
     }
-  }, c = Dn({
+  }, c = Rn({
     ...t,
     selectionMode: e,
     disallowEmptySelection: e === "single",
     allowDuplicateSelectionEvents: !0,
-    selectedKeys: p.useMemo(() => qr(s), [
+    selectedKeys: p.useMemo(() => Or(s), [
       s
     ]),
-    onSelectionChange: ($) => {
-      if ($ !== "all") {
+    onSelectionChange: (x) => {
+      if (x !== "all") {
         if (e === "single") {
-          var x;
-          let S = (x = $.values().next().value) !== null && x !== void 0 ? x : null;
+          var w;
+          let S = (w = x.values().next().value) !== null && w !== void 0 ? w : null;
           d(S), l.close();
         } else d([
-          ...$
+          ...x
         ]);
-        m.commitValidation();
+        v.commitValidation();
       }
     }
   }), h = c.selectionManager.firstSelectedKey, f = p.useMemo(() => [
     ...c.selectionManager.selectedKeys
-  ].map(($) => c.collection.getItem($)).filter(($) => $ != null), [
+  ].map((x) => c.collection.getItem(x)).filter((x) => x != null), [
     c.selectionManager.selectedKeys,
     c.collection
-  ]), m = To({
+  ]), v = _e({
     ...t,
     value: Array.isArray(s) && s.length === 0 ? null : s
-  }), [v, y] = p.useState(!1), [g] = p.useState(s);
-  var C, w;
+  }), [m, b] = p.useState(!1), [g] = p.useState(s);
+  var C, $;
   return {
-    ...m,
+    ...v,
     ...c,
     ...l,
     value: s,
@@ -2352,33 +2511,33 @@ function Ur(t) {
     setSelectedKey: d,
     selectedItem: (C = f[0]) !== null && C !== void 0 ? C : null,
     selectedItems: f,
-    defaultSelectedKey: (w = t.defaultSelectedKey) !== null && w !== void 0 ? w : t.selectionMode === "single" ? g : null,
+    defaultSelectedKey: ($ = t.defaultSelectedKey) !== null && $ !== void 0 ? $ : t.selectionMode === "single" ? g : null,
     focusStrategy: i,
-    open($ = null) {
-      c.collection.size !== 0 && (o($), l.open());
+    open(x = null) {
+      c.collection.size !== 0 && (o(x), l.open());
     },
-    toggle($ = null) {
-      c.collection.size !== 0 && (o($), l.toggle());
+    toggle(x = null) {
+      c.collection.size !== 0 && (o(x), l.toggle());
     },
-    isFocused: v,
-    setFocused: y
+    isFocused: m,
+    setFocused: b
   };
 }
-function qr(t) {
+function Or(t) {
   if (t !== void 0)
     return t === null ? [] : Array.isArray(t) ? t : [
       t
     ];
 }
-function Yr(t) {
+function Wr(t) {
   return t != null && (!isNaN(t) || String(t).match(/^(\d+)(?=%$)/) !== null);
 }
-function Zr(t) {
+function Ur(t) {
   if (!t || typeof t == "number") return 1;
   let e = t.match(/^(.+)(?=fr$)/);
   return e ? parseFloat(e[0]) : (process.env.NODE_ENV !== "production" && console.warn(`width: ${t} is not a supported format, width should be a number (ex. 150), percentage (ex. '50%') or fr unit (ex. '2fr')`, "defaulting to '1fr'"), 1);
 }
-function ut(t, e) {
+function ht(t, e) {
   if (typeof t == "string") {
     let l = t.match(/^(\d+)(?=%$)/);
     if (!l) throw new Error("Only percentages or numbers are supported for static column widths");
@@ -2386,62 +2545,62 @@ function ut(t, e) {
   }
   return t;
 }
-function pi(t, e) {
-  return t != null ? ut(t, e) : Number.MAX_SAFE_INTEGER;
+function Si(t, e) {
+  return t != null ? ht(t, e) : Number.MAX_SAFE_INTEGER;
 }
-function mi(t, e) {
-  return t != null ? ut(t, e) : 0;
+function Ei(t, e) {
+  return t != null ? ht(t, e) : 0;
 }
-function Xr(t, e, l, i, o) {
-  let n = !1, r = e.map((a, u) => {
+function qr(t, e, l, i, o) {
+  let n = !1, r = e.map((u, a) => {
     var s, d, c, h;
-    let f = l.get(a.key) != null ? (s = l.get(a.key)) !== null && s !== void 0 ? s : "1fr" : (h = (c = (d = a.width) !== null && d !== void 0 ? d : a.defaultWidth) !== null && c !== void 0 ? c : i == null ? void 0 : i(u)) !== null && h !== void 0 ? h : "1fr", m = !1, v = 0, y = 0, g = 0;
-    Yr(f) ? (v = ut(f, t), m = !0) : (y = Zr(f), y <= 0 && (m = !0));
-    var C, w;
-    let $ = mi((w = (C = a.minWidth) !== null && C !== void 0 ? C : o == null ? void 0 : o(u)) !== null && w !== void 0 ? w : 0, t), x = pi(a.maxWidth, t), S = Math.max($, Math.min(v, x));
-    return m ? g = S : v > S && (m = !0, g = S), m || (n = !0), {
-      frozen: m,
-      baseSize: v,
+    let f = l.get(u.key) != null ? (s = l.get(u.key)) !== null && s !== void 0 ? s : "1fr" : (h = (c = (d = u.width) !== null && d !== void 0 ? d : u.defaultWidth) !== null && c !== void 0 ? c : i == null ? void 0 : i(a)) !== null && h !== void 0 ? h : "1fr", v = !1, m = 0, b = 0, g = 0;
+    Wr(f) ? (m = ht(f, t), v = !0) : (b = Ur(f), b <= 0 && (v = !0));
+    var C, $;
+    let x = Ei(($ = (C = u.minWidth) !== null && C !== void 0 ? C : o == null ? void 0 : o(a)) !== null && $ !== void 0 ? $ : 0, t), w = Si(u.maxWidth, t), S = Math.max(x, Math.min(m, w));
+    return v ? g = S : m > S && (v = !0, g = S), v || (n = !0), {
+      frozen: v,
+      baseSize: m,
       hypotheticalMainSize: S,
-      min: $,
-      max: x,
-      flex: y,
+      min: x,
+      max: w,
+      flex: b,
       targetMainSize: g,
       violation: 0
     };
   });
   for (; n; ) {
-    let a = 0, u = 0;
+    let u = 0, a = 0;
     r.forEach((c) => {
-      c.frozen ? a += c.targetMainSize : (a += c.baseSize, u += c.flex);
+      c.frozen ? u += c.targetMainSize : (u += c.baseSize, a += c.flex);
     });
-    let s = t - a;
+    let s = t - u;
     s > 0 && r.forEach((c) => {
       if (!c.frozen) {
-        let h = c.flex / u;
+        let h = c.flex / a;
         c.targetMainSize = c.baseSize + h * s;
       }
     });
     let d = 0;
     r.forEach((c) => {
       if (c.violation = 0, !c.frozen) {
-        let { min: h, max: f, targetMainSize: m } = c;
-        c.targetMainSize = Math.max(h, Math.min(m, f)), c.violation = c.targetMainSize - m, d += c.violation;
+        let { min: h, max: f, targetMainSize: v } = c;
+        c.targetMainSize = Math.max(h, Math.min(v, f)), c.violation = c.targetMainSize - v, d += c.violation;
       }
     }), n = !1, r.forEach((c) => {
       d === 0 || Math.sign(d) === Math.sign(c.violation) ? c.frozen = !0 : c.frozen || (n = !0);
     });
   }
-  return Gr(r);
+  return Yr(r);
 }
-function Gr(t) {
+function Yr(t) {
   let e = 0, l = 0, i = [];
   return t.forEach(function(o) {
     let n = o.targetMainSize, r = Math.round(n + e) - l;
     e += n, l += r, i.push(r);
   }), i;
 }
-class Qr {
+class zi {
   /** Takes an array of columns and splits it into 2 maps of columns with controlled and columns with uncontrolled widths. */
   splitColumnsIntoControlledAndUncontrolled(e) {
     return e.reduce((l, i) => (i.props.width != null ? l[0].set(i.key, i) : l[1].set(i.key, i), l), [
@@ -2462,10 +2621,10 @@ class Qr {
   /** Used to make an initial Map of the uncontrolled widths based on default widths. */
   getInitialUncontrolledWidths(e) {
     return new Map(Array.from(e).map(([l, i]) => {
-      var o, n, r, a;
+      var o, n, r, u;
       return [
         l,
-        (a = (r = i.props.defaultWidth) !== null && r !== void 0 ? r : (o = (n = this).getDefaultWidth) === null || o === void 0 ? void 0 : o.call(n, i)) !== null && a !== void 0 ? a : "1fr"
+        (u = (r = i.props.defaultWidth) !== null && r !== void 0 ? r : (o = (n = this).getDefaultWidth) === null || o === void 0 ? void 0 : o.call(n, i)) !== null && u !== void 0 ? u : "1fr"
       ];
     }));
   }
@@ -2482,21 +2641,21 @@ class Qr {
     return (l = this.columnMaxWidths.get(e)) !== null && l !== void 0 ? l : 0;
   }
   resizeColumnWidth(e, l, i, o) {
-    let n = this.columnWidths, r = !0, a = /* @__PURE__ */ new Map();
-    return o = Math.max(this.getColumnMinWidth(i), Math.min(this.getColumnMaxWidth(i), Math.floor(o))), e.columns.forEach((u) => {
+    let n = this.columnWidths, r = !0, u = /* @__PURE__ */ new Map();
+    return o = Math.max(this.getColumnMinWidth(i), Math.min(this.getColumnMaxWidth(i), Math.floor(o))), e.columns.forEach((a) => {
       var s, d;
-      u.key === i ? (a.set(u.key, o), r = !1) : r ? a.set(u.key, (s = n.get(u.key)) !== null && s !== void 0 ? s : 0) : a.set(u.key, (d = u.props.width) !== null && d !== void 0 ? d : l.get(u.key));
-    }), a;
+      a.key === i ? (u.set(a.key, o), r = !1) : r ? u.set(a.key, (s = n.get(a.key)) !== null && s !== void 0 ? s : 0) : u.set(a.key, (d = a.props.width) !== null && d !== void 0 ? d : l.get(a.key));
+    }), u;
   }
   buildColumnWidths(e, l, i) {
-    return this.columnWidths = /* @__PURE__ */ new Map(), this.columnMinWidths = /* @__PURE__ */ new Map(), this.columnMaxWidths = /* @__PURE__ */ new Map(), Xr(e, l.columns.map((n) => ({
+    return this.columnWidths = /* @__PURE__ */ new Map(), this.columnMinWidths = /* @__PURE__ */ new Map(), this.columnMaxWidths = /* @__PURE__ */ new Map(), qr(e, l.columns.map((n) => ({
       ...n.props,
       key: n.key
     })), i, (n) => this.getDefaultWidth(l.columns[n]), (n) => this.getDefaultMinWidth(l.columns[n])).forEach((n, r) => {
-      let a = l.columns[r].key, u = l.columns[r];
-      this.columnWidths.set(a, n);
+      let u = l.columns[r].key, a = l.columns[r];
+      this.columnWidths.set(u, n);
       var s;
-      this.columnMinWidths.set(a, mi((s = u.props.minWidth) !== null && s !== void 0 ? s : this.getDefaultMinWidth(u), e)), this.columnMaxWidths.set(a, pi(u.props.maxWidth, e));
+      this.columnMinWidths.set(u, Ei((s = a.props.minWidth) !== null && s !== void 0 ? s : this.getDefaultMinWidth(a), e)), this.columnMaxWidths.set(u, Si(a.props.maxWidth, e));
     }), this.columnWidths;
   }
   constructor(e) {
@@ -2507,51 +2666,121 @@ class Qr {
     this.getDefaultMinWidth = (i = e == null ? void 0 : e.getDefaultMinWidth) !== null && i !== void 0 ? i : () => 75;
   }
 }
-function Jr(t) {
-  let { collection: e, focusMode: l } = t, i = t.UNSAFE_selectionState || Ut(t), o = p.useMemo(() => t.disabledKeys ? new Set(t.disabledKeys) : /* @__PURE__ */ new Set(), [
+function Zr(t, e) {
+  let { getDefaultWidth: l, getDefaultMinWidth: i, tableWidth: o = 0 } = t, [n, r] = p.useState(null), u = p.useMemo(() => new zi({
+    getDefaultWidth: l,
+    getDefaultMinWidth: i
+  }), [
+    l,
+    i
+  ]), [a, s] = p.useMemo(() => u.splitColumnsIntoControlledAndUncontrolled(e.collection.columns), [
+    e.collection.columns,
+    u
+  ]), [d, c] = p.useState(() => u.getInitialUncontrolledWidths(s)), [h, f] = p.useState(e.collection.columns);
+  if (e.collection.columns !== h) {
+    if (e.collection.columns.length !== h.length || e.collection.columns.some(($, x) => $.key !== h[x].key)) {
+      let $ = u.getInitialUncontrolledWidths(s);
+      c($);
+    }
+    f(e.collection.columns);
+  }
+  let v = p.useMemo(() => u.recombineColumns(e.collection.columns, d, s, a), [
+    e.collection.columns,
+    d,
+    s,
+    a,
+    u
+  ]), m = p.useCallback(($) => {
+    r($);
+  }, [
+    r
+  ]), b = p.useCallback(($, x) => {
+    let w = u.resizeColumnWidth(e.collection, d, $, x), S = new Map(Array.from(s).map(([E]) => [
+      E,
+      w.get(E)
+    ]));
+    return S.set($, x), c(S), w;
+  }, [
+    s,
+    c,
+    u,
+    e.collection,
+    d
+  ]), g = p.useCallback(() => {
+    r(null);
+  }, [
+    r
+  ]), C = p.useMemo(() => u.buildColumnWidths(o, e.collection, v), [
+    o,
+    e.collection,
+    v,
+    u
+  ]);
+  return p.useMemo(() => ({
+    resizingColumn: n,
+    updateResizedColumns: b,
+    startResize: m,
+    endResize: g,
+    getColumnWidth: ($) => u.getColumnWidth($),
+    getColumnMinWidth: ($) => u.getColumnMinWidth($),
+    getColumnMaxWidth: ($) => u.getColumnMaxWidth($),
+    tableState: e,
+    columnWidths: C
+  }), [
+    u,
+    C,
+    n,
+    b,
+    m,
+    g,
+    e
+  ]);
+}
+function Xr(t) {
+  let { collection: e, focusMode: l } = t, i = t.UNSAFE_selectionState || tl(t), o = p.useMemo(() => t.disabledKeys ? new Set(t.disabledKeys) : /* @__PURE__ */ new Set(), [
     t.disabledKeys
   ]), n = i.setFocusedKey;
-  i.setFocusedKey = (u, s) => {
-    if (l === "cell" && u != null) {
-      let m = e.getItem(u);
-      if ((m == null ? void 0 : m.type) === "item") {
+  i.setFocusedKey = (a, s) => {
+    if (l === "cell" && a != null) {
+      let v = e.getItem(a);
+      if ((v == null ? void 0 : v.type) === "item") {
         var d, c;
-        let v = H(m, e);
+        let m = V(v, e);
         var h, f;
-        s === "last" ? u = (h = (d = _(v)) === null || d === void 0 ? void 0 : d.key) !== null && h !== void 0 ? h : null : u = (f = (c = le(v)) === null || c === void 0 ? void 0 : c.key) !== null && f !== void 0 ? f : null;
+        s === "last" ? a = (h = (d = Q(m)) === null || d === void 0 ? void 0 : d.key) !== null && h !== void 0 ? h : null : a = (f = (c = ee(m)) === null || c === void 0 ? void 0 : c.key) !== null && f !== void 0 ? f : null;
       }
     }
-    n(u, s);
+    n(a, s);
   };
-  let r = p.useMemo(() => new kn(e, i), [
+  let r = p.useMemo(() => new An(e, i), [
     e,
     i
   ]);
-  const a = p.useRef(null);
+  const u = p.useRef(null);
   return p.useEffect(() => {
-    if (i.focusedKey != null && a.current && !e.getItem(i.focusedKey)) {
-      const u = a.current.getItem(i.focusedKey), s = (u == null ? void 0 : u.parentKey) != null && (u.type === "cell" || u.type === "rowheader" || u.type === "column") ? a.current.getItem(u.parentKey) : u;
+    if (i.focusedKey != null && u.current && !e.getItem(i.focusedKey)) {
+      const a = u.current.getItem(i.focusedKey), s = (a == null ? void 0 : a.parentKey) != null && (a.type === "cell" || a.type === "rowheader" || a.type === "column") ? u.current.getItem(a.parentKey) : a;
       if (!s) {
         i.setFocusedKey(null);
         return;
       }
-      const d = a.current.rows, c = e.rows, h = d.length - c.length;
-      let f = Math.min(h > 1 ? Math.max(s.index - h + 1, 0) : s.index, c.length - 1), m = null;
+      const d = u.current.rows, c = e.rows, h = d.length - c.length;
+      let f = Math.min(h > 1 ? Math.max(s.index - h + 1, 0) : s.index, c.length - 1), v = null;
       for (; f >= 0; ) {
         if (!r.isDisabled(c[f].key) && c[f].type !== "headerrow") {
-          m = c[f];
+          v = c[f];
           break;
         }
         f < c.length - 1 ? f++ : (f > s.index && (f = s.index), f--);
       }
-      if (m) {
-        const v = m.hasChildNodes ? [
-          ...H(m, e)
-        ] : [], y = m.hasChildNodes && s !== u && u && u.index < v.length ? v[u.index].key : m.key;
-        i.setFocusedKey(y);
+      if (v) {
+        const m = v.hasChildNodes ? [
+          ...V(v, e)
+        ] : [], b = v.hasChildNodes && s !== a && a && a.index < m.length ? m[a.index].key : v.key;
+        i.setFocusedKey(b);
       } else i.setFocusedKey(null);
     }
-    a.current = e;
+    u.current = e;
   }, [
     e,
     r,
@@ -2564,7 +2793,7 @@ function Jr(t) {
     selectionManager: r
   };
 }
-class _r {
+class Gr {
   *[Symbol.iterator]() {
     yield* [
       ...this.rows
@@ -2620,37 +2849,37 @@ class _r {
     let l = (c) => {
       let h = this.keyMap.get(c.key);
       e.visitNode && (c = e.visitNode(c)), this.keyMap.set(c.key, c);
-      let f = /* @__PURE__ */ new Set(), m = null, v = !1;
+      let f = /* @__PURE__ */ new Set(), v = null, m = !1;
       if (c.type === "item") {
-        var y;
-        for (let x of c.childNodes) if (((y = x.props) === null || y === void 0 ? void 0 : y.colSpan) !== void 0) {
-          v = !0;
+        var b;
+        for (let w of c.childNodes) if (((b = w.props) === null || b === void 0 ? void 0 : b.colSpan) !== void 0) {
+          m = !0;
           break;
         }
       }
-      for (let x of c.childNodes) {
-        if (x.type === "cell" && v) {
+      for (let w of c.childNodes) {
+        if (w.type === "cell" && m) {
           var g, C;
-          x.colspan = (g = x.props) === null || g === void 0 ? void 0 : g.colSpan, x.colSpan = (C = x.props) === null || C === void 0 ? void 0 : C.colSpan;
-          var w, $;
-          x.colIndex = m ? ((w = m.colIndex) !== null && w !== void 0 ? w : m.index) + (($ = m.colSpan) !== null && $ !== void 0 ? $ : 1) : x.index;
+          w.colspan = (g = w.props) === null || g === void 0 ? void 0 : g.colSpan, w.colSpan = (C = w.props) === null || C === void 0 ? void 0 : C.colSpan;
+          var $, x;
+          w.colIndex = v ? (($ = v.colIndex) !== null && $ !== void 0 ? $ : v.index) + ((x = v.colSpan) !== null && x !== void 0 ? x : 1) : w.index;
         }
-        x.type === "cell" && x.parentKey == null && (x.parentKey = c.key), f.add(x.key), m ? (m.nextKey = x.key, x.prevKey = m.key) : x.prevKey = null, l(x), m = x;
+        w.type === "cell" && w.parentKey == null && (w.parentKey = c.key), f.add(w.key), v ? (v.nextKey = w.key, w.prevKey = v.key) : w.prevKey = null, l(w), v = w;
       }
-      if (m && (m.nextKey = null), h)
-        for (let x of h.childNodes) f.has(x.key) || i(x);
+      if (v && (v.nextKey = null), h)
+        for (let w of h.childNodes) f.has(w.key) || i(w);
     }, i = (c) => {
       this.keyMap.delete(c.key);
       for (let h of c.childNodes) this.keyMap.get(h.key) === h && i(h);
     }, o = null;
     for (let [c, h] of e.items.entries()) {
-      var n, r, a, u, s, d;
+      var n, r, u, a, s, d;
       let f = {
         ...h,
         level: (n = h.level) !== null && n !== void 0 ? n : 0,
         key: (r = h.key) !== null && r !== void 0 ? r : "row-" + c,
-        type: (a = h.type) !== null && a !== void 0 ? a : "row",
-        value: (u = h.value) !== null && u !== void 0 ? u : null,
+        type: (u = h.type) !== null && u !== void 0 ? u : "row",
+        value: (a = h.value) !== null && a !== void 0 ? a : null,
         hasChildNodes: !0,
         childNodes: [
           ...h.childNodes
@@ -2664,10 +2893,10 @@ class _r {
     o && (o.nextKey = null);
   }
 }
-const vi = "row-header-column-" + Math.random().toString(36).slice(2);
-let Qe = "row-header-column-" + Math.random().toString(36).slice(2);
-for (; vi === Qe; ) Qe = "row-header-column-" + Math.random().toString(36).slice(2);
-function gi(t, e) {
+const Bi = "row-header-column-" + Math.random().toString(36).slice(2);
+let Je = "row-header-column-" + Math.random().toString(36).slice(2);
+for (; Bi === Je; ) Je = "row-header-column-" + Math.random().toString(36).slice(2);
+function Ii(t, e) {
   if (e.length === 0) return [];
   let l = [], i = /* @__PURE__ */ new Map();
   for (let d of e) {
@@ -2680,11 +2909,11 @@ function gi(t, e) {
       if (i.has(f)) {
         var o, n;
         (n = (o = f).colSpan) !== null && n !== void 0 || (o.colSpan = 0), f.colSpan++, f.colspan = f.colSpan;
-        let { column: m, index: v } = i.get(f);
-        if (v > h.length) break;
-        for (let y = v; y < h.length; y++) m.splice(y, 0, null);
-        for (let y = h.length; y < m.length; y++)
-          m[y] && i.has(m[y]) && (i.get(m[y]).index = y);
+        let { column: v, index: m } = i.get(f);
+        if (m > h.length) break;
+        for (let b = m; b < h.length; b++) v.splice(b, 0, null);
+        for (let b = h.length; b < v.length; b++)
+          v[b] && i.has(v[b]) && (i.get(v[b]).index = b);
       } else
         f.colSpan = 1, f.colspan = 1, h.push(f), i.set(f, {
           column: h,
@@ -2694,22 +2923,22 @@ function gi(t, e) {
     }
     l.push(h), d.index = l.length - 1;
   }
-  let r = Math.max(...l.map((d) => d.length)), a = Array(r).fill(0).map(() => []), u = 0;
+  let r = Math.max(...l.map((d) => d.length)), u = Array(r).fill(0).map(() => []), a = 0;
   for (let d of l) {
     let c = r - 1;
     for (let h of d) {
       if (h) {
-        let f = a[c], m = f.reduce((v, y) => {
+        let f = u[c], v = f.reduce((m, b) => {
           var g;
-          return v + ((g = y.colSpan) !== null && g !== void 0 ? g : 1);
+          return m + ((g = b.colSpan) !== null && g !== void 0 ? g : 1);
         }, 0);
-        if (m < u) {
-          let v = {
+        if (v < a) {
+          let m = {
             type: "placeholder",
             key: "placeholder-" + h.key,
-            colspan: u - m,
-            colSpan: u - m,
-            index: m,
+            colspan: a - v,
+            colSpan: a - v,
+            index: v,
             value: null,
             rendered: null,
             level: c,
@@ -2717,19 +2946,19 @@ function gi(t, e) {
             childNodes: [],
             textValue: ""
           };
-          f.length > 0 && (f[f.length - 1].nextKey = v.key, v.prevKey = f[f.length - 1].key), f.push(v);
+          f.length > 0 && (f[f.length - 1].nextKey = m.key, m.prevKey = f[f.length - 1].key), f.push(m);
         }
-        f.length > 0 && (f[f.length - 1].nextKey = h.key, h.prevKey = f[f.length - 1].key), h.level = c, h.colIndex = u, f.push(h);
+        f.length > 0 && (f[f.length - 1].nextKey = h.key, h.prevKey = f[f.length - 1].key), h.level = c, h.colIndex = a, f.push(h);
       }
       c--;
     }
-    u++;
+    a++;
   }
   let s = 0;
-  for (let d of a) {
+  for (let d of u) {
     let c = d.reduce((h, f) => {
-      var m;
-      return h + ((m = f.colSpan) !== null && m !== void 0 ? m : 1);
+      var v;
+      return h + ((v = f.colSpan) !== null && v !== void 0 ? v : 1);
     }, 0);
     if (c < e.length) {
       let h = {
@@ -2750,7 +2979,7 @@ function gi(t, e) {
     }
     s++;
   }
-  return a.map((d, c) => ({
+  return u.map((d, c) => ({
     type: "headerrow",
     key: "headerrow-" + c,
     index: c,
@@ -2762,7 +2991,7 @@ function gi(t, e) {
     textValue: ""
   }));
 }
-class eu extends _r {
+class Qr extends Gr {
   *[Symbol.iterator]() {
     yield* this.body.childNodes;
   }
@@ -2784,11 +3013,11 @@ class eu extends _r {
   }
   getFirstKey() {
     var e, l;
-    return (l = (e = le(this.body.childNodes)) === null || e === void 0 ? void 0 : e.key) !== null && l !== void 0 ? l : null;
+    return (l = (e = ee(this.body.childNodes)) === null || e === void 0 ? void 0 : e.key) !== null && l !== void 0 ? l : null;
   }
   getLastKey() {
     var e, l;
-    return (l = (e = _(this.body.childNodes)) === null || e === void 0 ? void 0 : e.key) !== null && l !== void 0 ? l : null;
+    return (l = (e = Q(this.body.childNodes)) === null || e === void 0 ? void 0 : e.key) !== null && l !== void 0 ? l : null;
   }
   getItem(e) {
     var l;
@@ -2823,7 +3052,7 @@ class eu extends _r {
     if (i != null && i.showSelectionCheckboxes) {
       let c = {
         type: "column",
-        key: vi,
+        key: Bi,
         value: null,
         textValue: "",
         level: 0,
@@ -2840,7 +3069,7 @@ class eu extends _r {
     if (i != null && i.showDragButtons) {
       let c = {
         type: "column",
-        key: Qe,
+        key: Je,
         value: null,
         textValue: "",
         level: 0,
@@ -2854,42 +3083,42 @@ class eu extends _r {
       };
       r.unshift(c);
     }
-    let a = [], u = /* @__PURE__ */ new Map(), s = (c) => {
+    let u = [], a = /* @__PURE__ */ new Map(), s = (c) => {
       switch (c.type) {
         case "body":
           n = c;
           break;
         case "column":
-          u.set(c.key, c), c.hasChildNodes || (r.push(c), c.props.isRowHeader && o.add(c.key));
+          a.set(c.key, c), c.hasChildNodes || (r.push(c), c.props.isRowHeader && o.add(c.key));
           break;
         case "item":
-          a.push(c);
+          u.push(c);
           return;
       }
       for (let h of c.childNodes) s(h);
     };
     for (let c of e) s(c);
-    let d = gi(u, r);
-    if (d.forEach((c, h) => a.splice(h, 0, c)), super({
+    let d = Ii(a, r);
+    if (d.forEach((c, h) => u.splice(h, 0, c)), super({
       columnCount: r.length,
-      items: a,
+      items: u,
       visitNode: (c) => (c.column = r[c.index], c)
     }), this._size = 0, this.columns = r, this.rowHeaderColumnKeys = o, this.body = n, this.headerRows = d, this._size = [
       ...n.childNodes
     ].length, this.rowHeaderColumnKeys.size === 0) {
       let c = this.columns.find((h) => {
-        var f, m;
-        return !(!((f = h.props) === null || f === void 0) && f.isDragButtonCell) && !(!((m = h.props) === null || m === void 0) && m.isSelectionCell);
+        var f, v;
+        return !(!((f = h.props) === null || f === void 0) && f.isDragButtonCell) && !(!((v = h.props) === null || v === void 0) && v.isSelectionCell);
       });
       c && this.rowHeaderColumnKeys.add(c.key);
     }
   }
 }
-const tu = {
+const Jr = {
   ascending: "descending",
   descending: "ascending"
 };
-function lu(t) {
+function _r(t) {
   let [e, l] = p.useState(!1), { selectionMode: i = "none", showSelectionCheckboxes: o, showDragButtons: n } = t, r = p.useMemo(() => ({
     showSelectionCheckboxes: o && i !== "none",
     showDragButtons: n,
@@ -2900,32 +3129,32 @@ function lu(t) {
     o,
     i,
     n
-  ]), a = Sn(t, p.useCallback((c) => new eu(c, null, r), [
+  ]), u = Mn(t, p.useCallback((c) => new Qr(c, null, r), [
     r
-  ]), r), { disabledKeys: u, selectionManager: s } = Jr({
+  ]), r), { disabledKeys: a, selectionManager: s } = Xr({
     ...t,
-    collection: a,
+    collection: u,
     disabledBehavior: t.disabledBehavior || "selection"
   });
   var d;
   return {
-    collection: a,
-    disabledKeys: u,
+    collection: u,
+    disabledKeys: a,
     selectionManager: s,
     showSelectionCheckboxes: t.showSelectionCheckboxes || !1,
     sortDescriptor: (d = t.sortDescriptor) !== null && d !== void 0 ? d : null,
-    isKeyboardNavigationDisabled: a.size === 0 || e,
+    isKeyboardNavigationDisabled: u.size === 0 || e,
     setKeyboardNavigationDisabled: l,
     sort(c, h) {
-      var f, m;
-      (m = t.onSortChange) === null || m === void 0 || m.call(t, {
+      var f, v;
+      (v = t.onSortChange) === null || v === void 0 || v.call(t, {
         column: c,
-        direction: h ?? (((f = t.sortDescriptor) === null || f === void 0 ? void 0 : f.column) === c ? tu[t.sortDescriptor.direction] : "ascending")
+        direction: h ?? (((f = t.sortDescriptor) === null || f === void 0 ? void 0 : f.column) === c ? Jr[t.sortDescriptor.direction] : "ascending")
       });
     }
   };
 }
-function iu(t, e) {
+function eu(t, e) {
   let l = p.useMemo(() => e ? t.collection.filter(e) : t.collection, [
     t.collection,
     e
@@ -2936,287 +3165,349 @@ function iu(t, e) {
     selectionManager: i
   };
 }
-var bi = {};
-bi = {
+const tu = /* @__PURE__ */ p.createContext(null), lu = /* @__PURE__ */ p.forwardRef(function(e, l) {
+  let { inputRef: i = null, ...o } = e;
+  [e, l] = ke(o, l, et);
+  let { validationBehavior: n } = tt(Zt) || {};
+  var r, u;
+  let a = (u = (r = e.validationBehavior) !== null && r !== void 0 ? r : n) !== null && u !== void 0 ? u : "native", s = p.useContext(tu), d = ie(p.useMemo(() => Xt(i, e.inputRef !== void 0 ? e.inputRef : null), [
+    i,
+    e.inputRef
+  ])), { labelProps: c, inputProps: h, isSelected: f, isDisabled: v, isReadOnly: m, isPressed: b, isInvalid: g } = s ? vr({
+    ...Xe(e),
+    // Value is optional for standalone checkboxes, but required for CheckboxGroup items;
+    // it's passed explicitly here to avoid typescript error (requires ignore).
+    // @ts-ignore
+    value: e.value,
+    // ReactNode type doesn't allow function children.
+    children: typeof e.children == "function" ? !0 : e.children
+  }, s, d) : ol({
+    ...Xe(e),
+    children: typeof e.children == "function" ? !0 : e.children,
+    validationBehavior: a
+  }, nl(e), d), { isFocused: C, isFocusVisible: $, focusProps: x } = te(), w = v || m, { hoverProps: S, isHovered: E } = pe({
+    ...e,
+    isDisabled: w
+  }), I = q({
+    ...e,
+    defaultClassName: "react-aria-Checkbox",
+    values: {
+      isSelected: f,
+      isIndeterminate: e.isIndeterminate || !1,
+      isPressed: b,
+      isHovered: E,
+      isFocused: C,
+      isFocusVisible: $,
+      isDisabled: v,
+      isReadOnly: m,
+      isInvalid: g,
+      isRequired: e.isRequired || !1
+    }
+  }), z = L(e, {
+    global: !0
+  });
+  return delete z.id, delete z.onClick, /* @__PURE__ */ D.createElement("label", {
+    ...K(z, c, S, I),
+    ref: l,
+    slot: e.slot || void 0,
+    "data-selected": f || void 0,
+    "data-indeterminate": e.isIndeterminate || void 0,
+    "data-pressed": b || void 0,
+    "data-hovered": E || void 0,
+    "data-focused": C || void 0,
+    "data-focus-visible": $ || void 0,
+    "data-disabled": v || void 0,
+    "data-readonly": m || void 0,
+    "data-invalid": g || void 0,
+    "data-required": e.isRequired || void 0
+  }, /* @__PURE__ */ D.createElement(Uo, {
+    elementType: "span"
+  }, /* @__PURE__ */ D.createElement("input", {
+    ...K(h, x),
+    ref: d
+  })), I.children);
+});
+var Pi = {};
+Pi = {
   colorSwatchPicker: "تغييرات الألوان",
   dropzoneLabel: "DropZone",
   selectPlaceholder: "حدد عنصرًا",
   tableResizer: "أداة تغيير الحجم"
 };
-var yi = {};
-yi = {
+var Ri = {};
+Ri = {
   colorSwatchPicker: "Цветови мостри",
   dropzoneLabel: "DropZone",
   selectPlaceholder: "Изберете предмет",
   tableResizer: "Преоразмерител"
 };
-var $i = {};
-$i = {
+var Ai = {};
+Ai = {
   colorSwatchPicker: "Vzorky barev",
   dropzoneLabel: "Místo pro přetažení",
   selectPlaceholder: "Vyberte položku",
   tableResizer: "Změna velikosti"
 };
-var xi = {};
-xi = {
+var Mi = {};
+Mi = {
   colorSwatchPicker: "Farveprøver",
   dropzoneLabel: "DropZone",
   selectPlaceholder: "Vælg et element",
   tableResizer: "Størrelsesændring"
 };
-var wi = {};
-wi = {
+var Ti = {};
+Ti = {
   colorSwatchPicker: "Farbfelder",
   dropzoneLabel: "Ablegebereich",
   selectPlaceholder: "Element wählen",
   tableResizer: "Größenanpassung"
 };
-var Ci = {};
-Ci = {
+var Fi = {};
+Fi = {
   colorSwatchPicker: "Χρωματικά δείγματα",
   dropzoneLabel: "DropZone",
   selectPlaceholder: "Επιλέξτε ένα αντικείμενο",
   tableResizer: "Αλλαγή μεγέθους"
 };
-var Di = {};
-Di = {
+var Ki = {};
+Ki = {
   selectPlaceholder: "Select an item",
   tableResizer: "Resizer",
   dropzoneLabel: "DropZone",
   colorSwatchPicker: "Color swatches"
 };
-var ki = {};
-ki = {
+var Ni = {};
+Ni = {
   colorSwatchPicker: "Muestras de colores",
   dropzoneLabel: "DropZone",
   selectPlaceholder: "Seleccionar un artículo",
   tableResizer: "Cambiador de tamaño"
 };
-var Si = {};
-Si = {
+var Vi = {};
+Vi = {
   colorSwatchPicker: "Värvinäidised",
   dropzoneLabel: "DropZone",
   selectPlaceholder: "Valige üksus",
   tableResizer: "Suuruse muutja"
 };
-var Ei = {};
-Ei = {
+var Hi = {};
+Hi = {
   colorSwatchPicker: "Värimallit",
   dropzoneLabel: "DropZone",
   selectPlaceholder: "Valitse kohde",
   tableResizer: "Koon muuttaja"
 };
-var zi = {};
-zi = {
+var ji = {};
+ji = {
   colorSwatchPicker: "Échantillons de couleurs",
   dropzoneLabel: "DropZone",
   selectPlaceholder: "Sélectionner un élément",
   tableResizer: "Redimensionneur"
 };
-var Bi = {};
-Bi = {
+var Li = {};
+Li = {
   colorSwatchPicker: "דוגמיות צבע",
   dropzoneLabel: "DropZone",
   selectPlaceholder: "בחר פריט",
   tableResizer: "שינוי גודל"
 };
-var Ii = {};
-Ii = {
+var Oi = {};
+Oi = {
   colorSwatchPicker: "Uzorci boja",
   dropzoneLabel: "Zona spuštanja",
   selectPlaceholder: "Odaberite stavku",
   tableResizer: "Promjena veličine"
 };
-var Ai = {};
-Ai = {
+var Wi = {};
+Wi = {
   colorSwatchPicker: "Színtárak",
   dropzoneLabel: "DropZone",
   selectPlaceholder: "Válasszon ki egy elemet",
   tableResizer: "Átméretező"
 };
-var Pi = {};
-Pi = {
+var Ui = {};
+Ui = {
   colorSwatchPicker: "Campioni di colore",
   dropzoneLabel: "Zona di rilascio",
   selectPlaceholder: "Seleziona un elemento",
   tableResizer: "Ridimensionamento"
 };
-var Ri = {};
-Ri = {
+var qi = {};
+qi = {
   colorSwatchPicker: "カラースウォッチ",
   dropzoneLabel: "ドロップゾーン",
   selectPlaceholder: "項目を選択",
   tableResizer: "サイズ変更ツール"
 };
-var Mi = {};
-Mi = {
+var Yi = {};
+Yi = {
   colorSwatchPicker: "색상 견본",
   dropzoneLabel: "드롭 영역",
   selectPlaceholder: "항목 선택",
   tableResizer: "크기 조정기"
 };
-var Ti = {};
-Ti = {
+var Zi = {};
+Zi = {
   colorSwatchPicker: "Spalvų pavyzdžiai",
   dropzoneLabel: "„DropZone“",
   selectPlaceholder: "Pasirinkite elementą",
   tableResizer: "Dydžio keitiklis"
 };
-var Fi = {};
-Fi = {
+var Xi = {};
+Xi = {
   colorSwatchPicker: "Krāsu paraugi",
   dropzoneLabel: "DropZone",
   selectPlaceholder: "Izvēlēties vienumu",
   tableResizer: "Izmēra mainītājs"
 };
-var Ki = {};
-Ki = {
+var Gi = {};
+Gi = {
   colorSwatchPicker: "Fargekart",
   dropzoneLabel: "Droppsone",
   selectPlaceholder: "Velg et element",
   tableResizer: "Størrelsesendrer"
 };
-var Ni = {};
-Ni = {
+var Qi = {};
+Qi = {
   colorSwatchPicker: "kleurstalen",
   dropzoneLabel: "DropZone",
   selectPlaceholder: "Selecteer een item",
   tableResizer: "Resizer"
 };
-var Hi = {};
-Hi = {
+var Ji = {};
+Ji = {
   colorSwatchPicker: "Próbki kolorów",
   dropzoneLabel: "Strefa upuszczania",
   selectPlaceholder: "Wybierz element",
   tableResizer: "Zmiana rozmiaru"
 };
-var Vi = {};
-Vi = {
+var _i = {};
+_i = {
   colorSwatchPicker: "Amostras de cores",
   dropzoneLabel: "DropZone",
   selectPlaceholder: "Selecione um item",
   tableResizer: "Redimensionador"
 };
-var ji = {};
-ji = {
+var eo = {};
+eo = {
   colorSwatchPicker: "Amostras de cores",
   dropzoneLabel: "DropZone",
   selectPlaceholder: "Selecione um item",
   tableResizer: "Redimensionador"
 };
-var Li = {};
-Li = {
+var to = {};
+to = {
   colorSwatchPicker: "Specimene de culoare",
   dropzoneLabel: "Zonă de plasare",
   selectPlaceholder: "Selectați un element",
   tableResizer: "Instrument de redimensionare"
 };
-var Oi = {};
-Oi = {
+var lo = {};
+lo = {
   colorSwatchPicker: "Цветовые образцы",
   dropzoneLabel: "DropZone",
   selectPlaceholder: "Выберите элемент",
   tableResizer: "Средство изменения размера"
 };
-var Wi = {};
-Wi = {
+var io = {};
+io = {
   colorSwatchPicker: "Vzorkovníky farieb",
   dropzoneLabel: "DropZone",
   selectPlaceholder: "Vyberte položku",
   tableResizer: "Nástroj na zmenu veľkosti"
 };
-var Ui = {};
-Ui = {
+var oo = {};
+oo = {
   colorSwatchPicker: "Barvne palete",
   dropzoneLabel: "DropZone",
   selectPlaceholder: "Izberite element",
   tableResizer: "Spreminjanje velikosti"
 };
-var qi = {};
-qi = {
+var no = {};
+no = {
   colorSwatchPicker: "Uzorci boje",
   dropzoneLabel: "DropZone",
   selectPlaceholder: "Izaberite stavku",
   tableResizer: "Promena veličine"
 };
-var Yi = {};
-Yi = {
+var ro = {};
+ro = {
   colorSwatchPicker: "Färgrutor",
   dropzoneLabel: "DropZone",
   selectPlaceholder: "Välj en artikel",
   tableResizer: "Storleksändrare"
 };
-var Zi = {};
-Zi = {
+var uo = {};
+uo = {
   colorSwatchPicker: "Renk örnekleri",
   dropzoneLabel: "Bırakma Bölgesi",
   selectPlaceholder: "Bir öğe seçin",
   tableResizer: "Yeniden boyutlandırıcı"
 };
-var Xi = {};
-Xi = {
+var ao = {};
+ao = {
   colorSwatchPicker: "Зразки кольорів",
   dropzoneLabel: "DropZone",
   selectPlaceholder: "Виберіть елемент",
   tableResizer: "Засіб змінення розміру"
 };
-var Gi = {};
-Gi = {
+var so = {};
+so = {
   colorSwatchPicker: "颜色色板",
   dropzoneLabel: "放置区域",
   selectPlaceholder: "选择一个项目",
   tableResizer: "尺寸调整器"
 };
-var Qi = {};
-Qi = {
+var co = {};
+co = {
   colorSwatchPicker: "色票",
   dropzoneLabel: "放置區",
   selectPlaceholder: "選取項目",
   tableResizer: "大小調整器"
 };
-var at = {};
-at = {
-  "ar-AE": bi,
-  "bg-BG": yi,
-  "cs-CZ": $i,
-  "da-DK": xi,
-  "de-DE": wi,
-  "el-GR": Ci,
-  "en-US": Di,
-  "es-ES": ki,
-  "et-EE": Si,
-  "fi-FI": Ei,
-  "fr-FR": zi,
-  "he-IL": Bi,
-  "hr-HR": Ii,
-  "hu-HU": Ai,
-  "it-IT": Pi,
-  "ja-JP": Ri,
-  "ko-KR": Mi,
-  "lt-LT": Ti,
-  "lv-LV": Fi,
-  "nb-NO": Ki,
-  "nl-NL": Ni,
-  "pl-PL": Hi,
-  "pt-BR": Vi,
-  "pt-PT": ji,
-  "ro-RO": Li,
-  "ru-RU": Oi,
-  "sk-SK": Wi,
-  "sl-SI": Ui,
-  "sr-SP": qi,
-  "sv-SE": Yi,
-  "tr-TR": Zi,
-  "uk-UA": Xi,
-  "zh-CN": Gi,
-  "zh-TW": Qi
+var ft = {};
+ft = {
+  "ar-AE": Pi,
+  "bg-BG": Ri,
+  "cs-CZ": Ai,
+  "da-DK": Mi,
+  "de-DE": Ti,
+  "el-GR": Fi,
+  "en-US": Ki,
+  "es-ES": Ni,
+  "et-EE": Vi,
+  "fi-FI": Hi,
+  "fr-FR": ji,
+  "he-IL": Li,
+  "hr-HR": Oi,
+  "hu-HU": Wi,
+  "it-IT": Ui,
+  "ja-JP": qi,
+  "ko-KR": Yi,
+  "lt-LT": Zi,
+  "lv-LV": Xi,
+  "nb-NO": Gi,
+  "nl-NL": Qi,
+  "pl-PL": Ji,
+  "pt-BR": _i,
+  "pt-PT": eo,
+  "ro-RO": to,
+  "ru-RU": lo,
+  "sk-SK": io,
+  "sl-SI": oo,
+  "sr-SP": no,
+  "sv-SE": ro,
+  "tr-TR": uo,
+  "uk-UA": ao,
+  "zh-CN": so,
+  "zh-TW": co
 };
-function ou(t) {
+function iu(t) {
   return t && t.__esModule ? t.default : t;
 }
-const st = /* @__PURE__ */ p.createContext(null), Ji = /* @__PURE__ */ p.createContext(null), nu = /* @__PURE__ */ p.forwardRef(function(e, l) {
-  [e, l] = Ae(e, l, st);
-  let { children: i, isDisabled: o = !1, isInvalid: n = !1, isRequired: r = !1 } = e, a = p.useMemo(() => typeof i == "function" ? i({
+const pt = /* @__PURE__ */ p.createContext(null), ho = /* @__PURE__ */ p.createContext(null), ou = /* @__PURE__ */ p.forwardRef(function(e, l) {
+  [e, l] = ke(e, l, pt);
+  let { children: i, isDisabled: o = !1, isInvalid: n = !1, isRequired: r = !1 } = e, u = p.useMemo(() => typeof i == "function" ? i({
     isOpen: !1,
     isDisabled: o,
     isInvalid: n,
@@ -3230,80 +3521,80 @@ const st = /* @__PURE__ */ p.createContext(null), Ji = /* @__PURE__ */ p.createC
     n,
     r
   ]);
-  return /* @__PURE__ */ D.createElement(qt, {
-    content: a
-  }, (u) => /* @__PURE__ */ D.createElement(uu, {
+  return /* @__PURE__ */ D.createElement(ll, {
+    content: u
+  }, (a) => /* @__PURE__ */ D.createElement(ru, {
     props: e,
-    collection: u,
+    collection: a,
     selectRef: l
   }));
-}), ru = [
-  Ht,
-  _e,
-  Je
+}), nu = [
+  Gt,
+  ot,
+  lt
 ];
-function uu({ props: t, selectRef: e, collection: l }) {
-  let { validationBehavior: i } = Kt(Ko) || {};
+function ru({ props: t, selectRef: e, collection: l }) {
+  let { validationBehavior: i } = tt(Zt) || {};
   var o, n;
-  let r = (n = (o = t.validationBehavior) !== null && o !== void 0 ? o : i) !== null && n !== void 0 ? n : "native", a = Ur({
+  let r = (n = (o = t.validationBehavior) !== null && o !== void 0 ? o : i) !== null && n !== void 0 ? n : "native", u = Lr({
     ...t,
     collection: l,
     children: void 0,
     validationBehavior: r
-  }), { isFocusVisible: u, focusProps: s } = ne({
+  }), { isFocusVisible: a, focusProps: s } = te({
     within: !0
-  }), d = p.useRef(null), [c, h] = No(!t["aria-label"] && !t["aria-labelledby"]), { labelProps: f, triggerProps: m, valueProps: v, menuProps: y, descriptionProps: g, errorMessageProps: C, hiddenSelectProps: w, ...$ } = Br({
-    ...Ho(t),
+  }), d = p.useRef(null), [c, h] = Yo(!t["aria-label"] && !t["aria-labelledby"]), { labelProps: f, triggerProps: v, valueProps: m, menuProps: b, descriptionProps: g, errorMessageProps: C, hiddenSelectProps: $, ...x } = Sr({
+    ...Xe(t),
     label: h,
     validationBehavior: r
-  }, a, d), [x, S] = p.useState(null), E = p.useCallback(() => {
+  }, u, d), [w, S] = p.useState(null), E = p.useCallback(() => {
     d.current && S(d.current.offsetWidth + "px");
   }, [
     d
   ]);
-  Nt({
+  it({
     ref: d,
     onResize: E
   });
-  let A = p.useMemo(() => ({
-    isOpen: a.isOpen,
-    isFocused: a.isFocused,
-    isFocusVisible: u,
+  let I = p.useMemo(() => ({
+    isOpen: u.isOpen,
+    isFocused: u.isFocused,
+    isFocusVisible: a,
     isDisabled: t.isDisabled || !1,
-    isInvalid: $.isInvalid || !1,
+    isInvalid: x.isInvalid || !1,
     isRequired: t.isRequired || !1
   }), [
-    a.isOpen,
-    a.isFocused,
-    u,
+    u.isOpen,
+    u.isFocused,
+    a,
     t.isDisabled,
-    $.isInvalid,
+    x.isInvalid,
     t.isRequired
-  ]), B = Z({
+  ]), z = q({
     ...t,
-    values: A,
+    values: I,
     defaultClassName: "react-aria-Select"
-  }), z = q(t, {
+  }), k = L(t, {
     global: !0
   });
-  delete z.id;
-  let M = p.useRef(null);
-  return /* @__PURE__ */ D.createElement(xe, {
+  delete k.id;
+  let P = p.useRef(null);
+  return /* @__PURE__ */ D.createElement(De, {
     values: [
       [
-        st,
+        pt,
         t
       ],
       [
-        Ji,
-        a
+        ho,
+        u
       ],
       [
-        _i,
-        v
+        fo,
+        m
       ],
       [
-        Ht,
+        Gt,
         {
           ...f,
           ref: c,
@@ -3311,45 +3602,45 @@ function uu({ props: t, selectRef: e, collection: l }) {
         }
       ],
       [
-        _e,
+        ot,
         {
-          ...m,
+          ...v,
           ref: d,
-          isPressed: a.isOpen,
+          isPressed: u.isOpen,
           autoFocus: t.autoFocus
         }
       ],
       [
-        Vo,
-        a
+        Zo,
+        u
       ],
       [
-        jo,
+        Xo,
         {
           trigger: "Select",
           triggerRef: d,
-          scrollRef: M,
+          scrollRef: P,
           placement: "bottom start",
           style: {
-            "--trigger-width": x
+            "--trigger-width": w
           },
-          "aria-labelledby": y["aria-labelledby"],
-          clearContexts: ru
+          "aria-labelledby": b["aria-labelledby"],
+          clearContexts: nu
         }
       ],
       [
-        En,
+        Tn,
         {
-          ...y,
-          ref: M
+          ...b,
+          ref: P
         }
       ],
       [
-        zn,
-        a
+        Fn,
+        u
       ],
       [
-        Je,
+        lt,
         {
           slots: {
             description: g,
@@ -3358,32 +3649,32 @@ function uu({ props: t, selectRef: e, collection: l }) {
         }
       ],
       [
-        Lo,
-        $
+        Go,
+        x
       ]
     ]
   }, /* @__PURE__ */ D.createElement("div", {
-    ...j(z, B, s),
+    ...K(k, z, s),
     ref: e,
     slot: t.slot || void 0,
-    "data-focused": a.isFocused || void 0,
-    "data-focus-visible": u || void 0,
-    "data-open": a.isOpen || void 0,
+    "data-focused": u.isFocused || void 0,
+    "data-focus-visible": a || void 0,
+    "data-open": u.isOpen || void 0,
     "data-disabled": t.isDisabled || void 0,
-    "data-invalid": $.isInvalid || void 0,
+    "data-invalid": x.isInvalid || void 0,
     "data-required": t.isRequired || void 0
-  }, B.children, /* @__PURE__ */ D.createElement(Ar, {
-    ...w,
+  }, z.children, /* @__PURE__ */ D.createElement(zr, {
+    ...$,
     autoComplete: t.autoComplete
   })));
 }
-const _i = /* @__PURE__ */ p.createContext(null), au = /* @__PURE__ */ Fo(function(e, l) {
+const fo = /* @__PURE__ */ p.createContext(null), uu = /* @__PURE__ */ qo(function(e, l) {
   var i;
-  [e, l] = Ae(e, l, _i);
-  let o = p.useContext(Ji), { placeholder: n } = Kt(st), r = o.selectedItems.map((g) => {
+  [e, l] = ke(e, l, fo);
+  let o = p.useContext(ho), { placeholder: n } = tt(pt), r = o.selectedItems.map((g) => {
     var C;
-    let w = (C = g.props) === null || C === void 0 ? void 0 : C.children;
-    return typeof w == "function" && (w = w({
+    let $ = (C = g.props) === null || C === void 0 ? void 0 : C.children;
+    return typeof $ == "function" && ($ = $({
       isHovered: !1,
       isPressed: !1,
       isSelected: !1,
@@ -3392,37 +3683,37 @@ const _i = /* @__PURE__ */ p.createContext(null), au = /* @__PURE__ */ Fo(functi
       isDisabled: !1,
       selectionMode: "single",
       selectionBehavior: "toggle"
-    })), w;
-  }), a = vr(), u = p.useMemo(() => o.selectedItems.map((g) => g == null ? void 0 : g.textValue), [
+    })), $;
+  }), u = dr(), a = p.useMemo(() => o.selectedItems.map((g) => g == null ? void 0 : g.textValue), [
     o.selectedItems
   ]), s = o.selectionManager.selectionMode, d = p.useMemo(() => {
     var g;
-    return s === "single" ? (g = u[0]) !== null && g !== void 0 ? g : "" : a.format(u);
+    return s === "single" ? (g = a[0]) !== null && g !== void 0 ? g : "" : u.format(a);
   }, [
     s,
-    a,
-    u
+    u,
+    a
   ]), c = p.useMemo(() => {
     if (s === "single") return r[0];
-    let g = a.formatToParts(u);
+    let g = u.formatToParts(a);
     if (g.length === 0) return null;
     let C = 0;
-    return g.map((w) => w.type === "element" ? /* @__PURE__ */ D.createElement(p.Fragment, {
+    return g.map(($) => $.type === "element" ? /* @__PURE__ */ D.createElement(p.Fragment, {
       key: C
-    }, r[C++]) : w.value);
+    }, r[C++]) : $.value);
   }, [
     s,
-    a,
     u,
+    a,
     r
-  ]), h = te(ou(at), "react-aria-components");
-  var f, m;
-  let v = Z({
+  ]), h = _(iu(ft), "react-aria-components");
+  var f, v;
+  let m = q({
     ...e,
     defaultChildren: (f = c ?? n) !== null && f !== void 0 ? f : h.format("selectPlaceholder"),
     defaultClassName: "react-aria-SelectValue",
     values: {
-      selectedItem: (m = (i = o.selectedItems[0]) === null || i === void 0 ? void 0 : i.value) !== null && m !== void 0 ? m : null,
+      selectedItem: (v = (i = o.selectedItems[0]) === null || i === void 0 ? void 0 : i.value) !== null && v !== void 0 ? v : null,
       selectedItems: p.useMemo(() => o.selectedItems.map((g) => {
         var C;
         return (C = g.value) !== null && C !== void 0 ? C : null;
@@ -3433,33 +3724,33 @@ const _i = /* @__PURE__ */ p.createContext(null), au = /* @__PURE__ */ Fo(functi
       isPlaceholder: o.selectedItems.length === 0,
       state: o
     }
-  }), y = q(e, {
+  }), b = L(e, {
     global: !0
   });
   return /* @__PURE__ */ D.createElement("span", {
     ref: l,
-    ...y,
-    ...v,
+    ...b,
+    ...m,
     "data-placeholder": o.selectedItems.length === 0 || void 0
-  }, /* @__PURE__ */ D.createElement(Je.Provider, {
+  }, /* @__PURE__ */ D.createElement(lt.Provider, {
     value: void 0
-  }, v.children));
+  }, m.children));
 });
-function su(t) {
+function au(t) {
   return t && t.__esModule ? t.default : t;
 }
-class du extends Uo {
+class su extends _o {
   addNode(e) {
     super.addNode(e), this.columnsDirty || (this.columnsDirty = e.type === "column"), e.type === "tableheader" && (this.head = e), e.type === "tablebody" && (this.body = e);
   }
   commit(e, l, i = !1) {
     this.updateColumns(i), this.rows = [];
     for (let r of this.getChildren(this.body.key)) {
-      let a = r.lastChildKey;
-      if (a != null) {
-        let u = this.getItem(a);
+      let u = r.lastChildKey;
+      if (u != null) {
+        let a = this.getItem(u);
         var o, n;
-        let s = ((o = u.colIndex) !== null && o !== void 0 ? o : u.index) + ((n = u.colSpan) !== null && n !== void 0 ? n : 1);
+        let s = ((o = a.colIndex) !== null && o !== void 0 ? o : a.index) + ((n = a.colSpan) !== null && n !== void 0 ? n : 1);
         if (s !== this.columns.length && !i) throw new Error(`Cell count must match column count. Found ${s} cells and ${this.columns.length} columns.`);
       }
       this.rows.push(r);
@@ -3478,7 +3769,7 @@ class du extends Uo {
       for (let n of this.getChildren(o.key)) i(n);
     };
     for (let o of this.getChildren(this.head.key)) i(o);
-    if (this.headerRows = gi(l, this.columns), this.columnsDirty = !1, this.rowHeaderColumnKeys.size === 0 && this.columns.length > 0 && !e) throw new Error("A table must have at least one Column with the isRowHeader prop set to true");
+    if (this.headerRows = Ii(l, this.columns), this.columnsDirty = !1, this.rowHeaderColumnKeys.size === 0 && this.columns.length > 0 && !e) throw new Error("A table must have at least one Column with the isRowHeader prop set to true");
   }
   get columnCount() {
     return this.columns.length;
@@ -3528,28 +3819,73 @@ class du extends Uo {
     return o.join(" ");
   }
   constructor(...e) {
-    super(...e), this.headerRows = [], this.columns = [], this.rows = [], this.rowHeaderColumnKeys = /* @__PURE__ */ new Set(), this.head = new dt(-1), this.body = new ct(-2), this.columnsDirty = !0;
+    super(...e), this.headerRows = [], this.columns = [], this.rows = [], this.rowHeaderColumnKeys = /* @__PURE__ */ new Set(), this.head = new mt(-1), this.body = new gt(-2), this.columnsDirty = !0;
   }
 }
-const eo = /* @__PURE__ */ p.createContext(null), cu = /* @__PURE__ */ p.createContext(null), J = /* @__PURE__ */ p.createContext(null), Te = /* @__PURE__ */ p.createContext(null), hu = /* @__PURE__ */ p.forwardRef(function(e, l) {
+const vt = /* @__PURE__ */ p.createContext(null), du = /* @__PURE__ */ p.forwardRef(function(e, l) {
+  let i = ie(l), o = p.useRef(null), n = p.useRef(null), [r, u] = p.useState(0);
+  fe(() => {
+    let s = o.current;
+    for (; s && s !== i.current && !on(s); ) s = s.parentElement;
+    n.current = s;
+  }, [
+    i
+  ]), it({
+    ref: n,
+    box: "border-box",
+    onResize() {
+      var s, d;
+      u((d = (s = n.current) === null || s === void 0 ? void 0 : s.clientWidth) !== null && d !== void 0 ? d : 0);
+    }
+  }), fe(() => {
+    var s, d;
+    u((d = (s = n.current) === null || s === void 0 ? void 0 : s.clientWidth) !== null && d !== void 0 ? d : 0);
+  }, []);
+  let a = p.useMemo(() => ({
+    tableRef: o,
+    scrollRef: n,
+    tableWidth: r,
+    useTableColumnResizeState: Zr,
+    onResizeStart: e.onResizeStart,
+    onResize: e.onResize,
+    onResizeEnd: e.onResizeEnd
+  }), [
+    o,
+    r,
+    e.onResizeStart,
+    e.onResize,
+    e.onResizeEnd
+  ]);
+  return /* @__PURE__ */ D.createElement("div", {
+    ...L(e, {
+      global: !0
+    }),
+    ref: i,
+    className: e.className || "react-aria-ResizableTableContainer",
+    style: e.style,
+    onScroll: e.onScroll
+  }, /* @__PURE__ */ D.createElement(vt.Provider, {
+    value: a
+  }, e.children));
+}), cu = /* @__PURE__ */ p.createContext(null), X = /* @__PURE__ */ p.createContext(null), Fe = /* @__PURE__ */ p.createContext(null), hu = /* @__PURE__ */ p.forwardRef(function(e, l) {
   var i;
-  [e, l] = Ae(e, l, cu);
-  let o = Ut(e), { selectionBehavior: n, selectionMode: r, disallowEmptySelection: a } = o, u = !!(!((i = e.dragAndDropHooks) === null || i === void 0) && i.useDraggableCollectionState), s = p.useMemo(() => ({
+  [e, l] = ke(e, l, cu);
+  let o = tl(e), { selectionBehavior: n, selectionMode: r, disallowEmptySelection: u } = o, a = !!(!((i = e.dragAndDropHooks) === null || i === void 0) && i.useDraggableCollectionState), s = p.useMemo(() => ({
     selectionBehavior: r === "none" ? null : n,
     selectionMode: r,
-    disallowEmptySelection: a,
-    allowsDragging: u
+    disallowEmptySelection: u,
+    allowsDragging: a
   }), [
     n,
     r,
-    a,
-    u
+    u,
+    a
   ]), d = /* @__PURE__ */ D.createElement(pu.Provider, {
     value: s
-  }, /* @__PURE__ */ D.createElement(Ce, e));
-  return /* @__PURE__ */ D.createElement(qt, {
+  }, /* @__PURE__ */ D.createElement(Se, e));
+  return /* @__PURE__ */ D.createElement(ll, {
     content: d,
-    createCollection: () => new du()
+    createCollection: () => new su()
   }, (c) => /* @__PURE__ */ D.createElement(fu, {
     props: e,
     forwardedRef: l,
@@ -3558,187 +3894,187 @@ const eo = /* @__PURE__ */ p.createContext(null), cu = /* @__PURE__ */ p.createC
   }));
 });
 function fu({ props: t, forwardedRef: e, selectionState: l, collection: i }) {
-  [t, e] = Ae(t, e, xt);
-  let { shouldUseVirtualFocus: o, disallowTypeAhead: n, filter: r, ...a } = t, u = p.useContext(eo);
-  e = fe(p.useMemo(() => qo(e, u == null ? void 0 : u.tableRef), [
+  [t, e] = ke(t, e, Et);
+  let { shouldUseVirtualFocus: o, disallowTypeAhead: n, filter: r, ...u } = t, a = p.useContext(vt);
+  e = ie(p.useMemo(() => Xt(e, a == null ? void 0 : a.tableRef), [
     e,
-    u == null ? void 0 : u.tableRef
+    a == null ? void 0 : a.tableRef
   ]));
-  let s = lu({
-    ...a,
+  let s = _r({
+    ...u,
     collection: i,
     children: void 0,
     UNSAFE_selectionState: l
-  }), d = iu(s, r), { isVirtualized: c, layoutDelegate: h, dropTargetDelegate: f, CollectionRoot: m } = p.useContext(Y), { dragAndDropHooks: v } = t, { gridProps: y } = Mr({
-    ...a,
+  }), d = eu(s, r), { isVirtualized: c, layoutDelegate: h, dropTargetDelegate: f, CollectionRoot: v } = p.useContext(U), { dragAndDropHooks: m } = t, { gridProps: b } = Pr({
+    ...u,
     layoutDelegate: h,
     isVirtualized: c
-  }, d, e), g = d.selectionManager, C = !!(v != null && v.useDraggableCollectionState), w = !!(v != null && v.useDroppableCollectionState), $ = p.useRef(C), x = p.useRef(w);
+  }, d, e), g = d.selectionManager, C = !!(m != null && m.useDraggableCollectionState), $ = !!(m != null && m.useDroppableCollectionState), x = p.useRef(C), w = p.useRef($);
   p.useEffect(() => {
-    process.env.NODE_ENV !== "production" && ($.current !== C && console.warn("Drag hooks were provided during one render, but not another. This should be avoided as it may produce unexpected behavior."), x.current !== w && console.warn("Drop hooks were provided during one render, but not another. This should be avoided as it may produce unexpected behavior."));
+    process.env.NODE_ENV !== "production" && (x.current !== C && console.warn("Drag hooks were provided during one render, but not another. This should be avoided as it may produce unexpected behavior."), w.current !== $ && console.warn("Drop hooks were provided during one render, but not another. This should be avoided as it may produce unexpected behavior."));
   }, [
     C,
-    w
+    $
   ]);
-  let S, E, A, B = !1, z = null, M = p.useRef(null);
-  if (C && v) {
-    S = v.useDraggableCollectionState({
+  let S, E, I, z = !1, k = null, P = p.useRef(null);
+  if (C && m) {
+    S = m.useDraggableCollectionState({
       collection: d.collection,
       selectionManager: g,
-      preview: v.renderDragPreview ? M : void 0
-    }), v.useDraggableCollection({}, S, e);
-    let I = v.DragPreview;
-    z = v.renderDragPreview ? /* @__PURE__ */ D.createElement(I, {
-      ref: M
-    }, v.renderDragPreview) : null;
+      preview: m.renderDragPreview ? P : void 0
+    }), m.useDraggableCollection({}, S, e);
+    let B = m.DragPreview;
+    k = m.renderDragPreview ? /* @__PURE__ */ D.createElement(B, {
+      ref: P
+    }, m.renderDragPreview) : null;
   }
-  if (w && v) {
-    E = v.useDroppableCollectionState({
+  if ($ && m) {
+    E = m.useDroppableCollectionState({
       collection: d.collection,
       selectionManager: g
     });
-    let I = new Wt({
+    let B = new el({
       collection: d.collection,
       disabledKeys: g.disabledKeys,
       disabledBehavior: g.disabledBehavior,
       ref: e,
       layoutDelegate: h
-    }), F = v.dropTargetDelegate || f || new v.ListDropTargetDelegate(i.rows, e);
-    A = v.useDroppableCollection({
-      keyboardDelegate: I,
-      dropTargetDelegate: F
-    }, E, e), B = E.isDropTarget({
+    }), N = m.dropTargetDelegate || f || new m.ListDropTargetDelegate(i.rows, e);
+    I = m.useDroppableCollection({
+      keyboardDelegate: B,
+      dropTargetDelegate: N
+    }, E, e), z = E.isDropTarget({
       type: "root"
     });
   }
-  let { focusProps: K, isFocused: V, isFocusVisible: L } = ne(), k = Z({
+  let { focusProps: F, isFocused: T, isFocusVisible: H } = te(), W = q({
     className: t.className,
     style: t.style,
     defaultClassName: "react-aria-Table",
     values: {
-      isDropTarget: B,
-      isFocused: V,
-      isFocusVisible: L,
+      isDropTarget: z,
+      isFocused: T,
+      isFocusVisible: H,
       state: d
     }
-  }), N = !!(C && !(S != null && S.isDisabled)), W = k.style, X = null;
-  u && (X = u.useTableColumnResizeState({
-    tableWidth: u.tableWidth
-  }, d), c || (W = {
-    ...W,
+  }), ue = !!(C && !(S != null && S.isDisabled)), G = W.style, me = null;
+  a && (me = a.useTableColumnResizeState({
+    tableWidth: a.tableWidth
+  }, d), c || (G = {
+    ...G,
     tableLayout: "fixed",
     width: "fit-content"
   }));
-  let Ne = O("table"), He = q(t, {
+  let Ve = j("table"), He = L(t, {
     global: !0
   });
-  var me;
-  return /* @__PURE__ */ D.createElement(xe, {
+  var ge;
+  return /* @__PURE__ */ D.createElement(De, {
     values: [
       [
-        J,
+        X,
         d
       ],
       [
-        Te,
-        X
+        Fe,
+        me
       ],
       [
-        pe,
+        ve,
         {
-          dragAndDropHooks: v,
+          dragAndDropHooks: m,
           dragState: S,
           dropState: E
         }
       ],
       [
-        An,
+        Vn,
         {
           render: xu
         }
       ],
       [
-        xt,
+        Et,
         null
       ],
       [
-        Yo,
+        en,
         null
       ]
     ]
-  }, /* @__PURE__ */ D.createElement(Zo, null, /* @__PURE__ */ D.createElement(Ne, {
-    ...j(He, k, y, K, A == null ? void 0 : A.collectionProps),
-    style: W,
+  }, /* @__PURE__ */ D.createElement(tn, null, /* @__PURE__ */ D.createElement(Ve, {
+    ...K(He, W, b, F, I == null ? void 0 : I.collectionProps),
+    style: G,
     ref: e,
     slot: t.slot || void 0,
     onScroll: t.onScroll,
-    "data-allows-dragging": N || void 0,
-    "data-drop-target": B || void 0,
-    "data-focused": V || void 0,
-    "data-focus-visible": L || void 0
-  }, /* @__PURE__ */ D.createElement(Pn, null, /* @__PURE__ */ D.createElement(m, {
+    "data-allows-dragging": ue || void 0,
+    "data-drop-target": z || void 0,
+    "data-focused": T || void 0,
+    "data-focus-visible": H || void 0
+  }, /* @__PURE__ */ D.createElement(Hn, null, /* @__PURE__ */ D.createElement(v, {
     collection: d.collection,
-    scrollRef: (me = u == null ? void 0 : u.scrollRef) !== null && me !== void 0 ? me : e,
-    persistedKeys: Rn(g, v, E)
-  })))), z);
+    scrollRef: (ge = a == null ? void 0 : a.scrollRef) !== null && ge !== void 0 ? ge : e,
+    persistedKeys: jn(g, m, E)
+  })))), k);
 }
-function O(t) {
-  let { isVirtualized: e } = p.useContext(Y);
+function j(t) {
+  let { isVirtualized: e } = p.useContext(U);
   return e ? "div" : t;
 }
 const pu = /* @__PURE__ */ p.createContext(null);
-class dt extends Pe {
+class mt extends Ae {
 }
-dt.type = "tableheader";
-const to = /* @__PURE__ */ it(dt, (t, e) => {
-  let l = p.useContext(J).collection, i = Mn({
+mt.type = "tableheader";
+const po = /* @__PURE__ */ at(mt, (t, e) => {
+  let l = p.useContext(X).collection, i = On({
     items: l.headerRows,
     children: p.useCallback((s) => {
       switch (s.type) {
         case "headerrow":
-          return /* @__PURE__ */ D.createElement(mu, {
+          return /* @__PURE__ */ D.createElement(vu, {
             item: s
           });
         default:
           throw new Error("Unsupported node type in TableHeader: " + s.type);
       }
     }, [])
-  }), o = O("thead"), { rowGroupProps: n } = fi(), { hoverProps: r, isHovered: a } = we({
+  }), o = j("thead"), { rowGroupProps: n } = Di(), { hoverProps: r, isHovered: u } = pe({
     onHoverStart: t.onHoverStart,
     onHoverChange: t.onHoverChange,
     onHoverEnd: t.onHoverEnd
-  }), u = Z({
+  }), a = q({
     className: t.className,
     style: t.style,
     defaultClassName: "react-aria-TableHeader",
     values: {
-      isHovered: a
+      isHovered: u
     }
   });
   return /* @__PURE__ */ D.createElement(o, {
-    ...j(q(t, {
+    ...K(L(t, {
       global: !0
     }), n, r),
-    ...u,
+    ...a,
     ref: e,
-    "data-hovered": a || void 0
+    "data-hovered": u || void 0
   }, i);
-}, (t) => /* @__PURE__ */ D.createElement(Ce, {
+}, (t) => /* @__PURE__ */ D.createElement(Se, {
   dependencies: t.dependencies,
   items: t.columns
 }, t.children));
-function mu({ item: t }) {
-  let e = p.useRef(null), l = p.useContext(J), { isVirtualized: i, CollectionBranch: o } = p.useContext(Y), { rowProps: n } = Nr({
+function vu({ item: t }) {
+  let e = p.useRef(null), l = p.useContext(X), { isVirtualized: i, CollectionBranch: o } = p.useContext(U), { rowProps: n } = Tr({
     node: t,
     isVirtualized: i
-  }, l, e), { checkboxProps: r } = Lr(l), a = O("tr");
-  return /* @__PURE__ */ D.createElement(a, {
+  }, l, e), { checkboxProps: r } = Vr(l), u = j("tr");
+  return /* @__PURE__ */ D.createElement(u, {
     ...n,
     ref: e
-  }, /* @__PURE__ */ D.createElement(xe, {
+  }, /* @__PURE__ */ D.createElement(De, {
     values: [
       [
-        Vt,
+        et,
         {
           slots: {
             selection: r
@@ -3751,32 +4087,32 @@ function mu({ item: t }) {
     parent: t
   })));
 }
-class lo extends Pe {
+class vo extends Ae {
 }
-lo.type = "column";
-const vu = /* @__PURE__ */ lt(lo, (t, e, l) => {
+vo.type = "column";
+const mu = /* @__PURE__ */ ut(vo, (t, e, l) => {
   var i, o;
-  let n = fe(e), r = p.useContext(J), { isVirtualized: a } = p.useContext(Y), { columnHeaderProps: u } = Fr({
+  let n = ie(e), r = p.useContext(X), { isVirtualized: u } = p.useContext(U), { columnHeaderProps: a } = Ar({
     node: l,
-    isVirtualized: a
-  }, r, n), { isFocused: s, isFocusVisible: d, focusProps: c } = ne(), h = p.useContext(Te), f = !1;
+    isVirtualized: u
+  }, r, n), { isFocused: s, isFocusVisible: d, focusProps: c } = te(), h = p.useContext(Fe), f = !1;
   if (h) f = h.resizingColumn === l.key;
   else if (process.env.NODE_ENV !== "production")
-    for (let $ in [
+    for (let x in [
       "width",
       "defaultWidth",
       "minWidth",
       "maxWidth"
-    ]) $ in l.props && console.warn(`The ${$} prop on a <Column> only applies when a <Table> is wrapped in a <ResizableTableContainer>. If you aren't using column resizing, you can set the width of a column with CSS.`);
-  let { hoverProps: m, isHovered: v } = we({
+    ]) x in l.props && console.warn(`The ${x} prop on a <Column> only applies when a <Table> is wrapped in a <ResizableTableContainer>. If you aren't using column resizing, you can set the width of a column with CSS.`);
+  let { hoverProps: v, isHovered: m } = pe({
     isDisabled: !t.allowsSorting
-  }), y = Z({
+  }), b = q({
     ...t,
     id: void 0,
     children: l.rendered,
     defaultClassName: "react-aria-Column",
     values: {
-      isHovered: v,
+      isHovered: m,
       isFocused: s,
       isFocusVisible: d,
       allowsSorting: l.props.allowsSorting,
@@ -3787,153 +4123,153 @@ const vu = /* @__PURE__ */ lt(lo, (t, e, l) => {
           h.startResize(l.key), r.setKeyboardNavigationDisabled(!0);
         else throw new Error("Wrap your <Table> in a <ResizableTableContainer> to enable column resizing");
       },
-      sort: ($) => {
-        r.sort(l.key, $);
+      sort: (x) => {
+        r.sort(l.key, x);
       }
     }
-  }), g = y.style;
+  }), g = b.style;
   h && (g = {
     ...g,
     width: h.getColumnWidth(l.key)
   });
-  let C = O("th"), w = q(t, {
+  let C = j("th"), $ = L(t, {
     global: !0
   });
-  return delete w.id, /* @__PURE__ */ D.createElement(C, {
-    ...j(w, u, c, m),
-    ...y,
+  return delete $.id, /* @__PURE__ */ D.createElement(C, {
+    ...K($, a, c, v),
+    ...b,
     style: g,
     ref: n,
-    "data-hovered": v || void 0,
+    "data-hovered": m || void 0,
     "data-focused": s || void 0,
     "data-focus-visible": d || void 0,
     "data-resizing": f || void 0,
     "data-allows-sorting": l.props.allowsSorting || void 0,
     "data-sort-direction": ((o = r.sortDescriptor) === null || o === void 0 ? void 0 : o.column) === l.key ? r.sortDescriptor.direction : void 0
-  }, /* @__PURE__ */ D.createElement(xe, {
+  }, /* @__PURE__ */ D.createElement(De, {
     values: [
       [
-        io,
+        mo,
         {
           column: l,
           triggerRef: n
         }
       ],
       [
-        Y,
-        Yt
+        U,
+        il
       ]
     ]
-  }, y.children));
-}), io = /* @__PURE__ */ p.createContext(null), gu = /* @__PURE__ */ p.forwardRef(function(e, l) {
-  let i = p.useContext(Te);
+  }, b.children));
+}), mo = /* @__PURE__ */ p.createContext(null), gu = /* @__PURE__ */ p.forwardRef(function(e, l) {
+  let i = p.useContext(Fe);
   if (!i) throw new Error("Wrap your <Table> in a <ResizableTableContainer> to enable column resizing");
-  let o = te(su(at), "react-aria-components"), { onResizeStart: n, onResize: r, onResizeEnd: a } = p.useContext(eo), { column: u, triggerRef: s } = p.useContext(io), d = p.useRef(null), { resizerProps: c, inputProps: h, isResizing: f } = Wr({
-    column: u,
+  let o = _(au(ft), "react-aria-components"), { onResizeStart: n, onResize: r, onResizeEnd: u } = p.useContext(vt), { column: a, triggerRef: s } = p.useContext(mo), d = p.useRef(null), { resizerProps: c, inputProps: h, isResizing: f } = jr({
+    column: a,
     "aria-label": e["aria-label"] || o.format("tableResizer"),
     onResizeStart: n,
     onResize: r,
-    onResizeEnd: a,
+    onResizeEnd: u,
     triggerRef: s
-  }, i, d), { focusProps: m, isFocused: v, isFocusVisible: y } = ne(), { hoverProps: g, isHovered: C } = we(e), w = i.getColumnMinWidth(u.key) >= i.getColumnWidth(u.key), $ = i.getColumnMaxWidth(u.key) <= i.getColumnWidth(u.key), { direction: x } = ee(), S = "both";
-  w ? S = x === "rtl" ? "right" : "left" : $ ? S = x === "rtl" ? "left" : "right" : S = "both";
-  let E = fe(l), [A, B] = p.useState("");
+  }, i, d), { focusProps: v, isFocused: m, isFocusVisible: b } = te(), { hoverProps: g, isHovered: C } = pe(e), $ = i.getColumnMinWidth(a.key) >= i.getColumnWidth(a.key), x = i.getColumnMaxWidth(a.key) <= i.getColumnWidth(a.key), { direction: w } = J(), S = "both";
+  $ ? S = w === "rtl" ? "right" : "left" : x ? S = w === "rtl" ? "left" : "right" : S = "both";
+  let E = ie(l), [I, z] = p.useState("");
   p.useEffect(() => {
     if (!E.current) return;
-    let k = window.getComputedStyle(E.current);
-    B(k.cursor);
+    let W = window.getComputedStyle(E.current);
+    z(W.cursor);
   }, [
     E,
     S
   ]);
-  let z = Z({
+  let k = q({
     ...e,
     defaultClassName: "react-aria-ColumnResizer",
     values: {
-      isFocused: v,
-      isFocusVisible: y,
+      isFocused: m,
+      isFocusVisible: b,
       isResizing: f,
       isHovered: C,
       resizableDirection: S
     }
-  }), [M, K] = p.useState(!1), V = (k) => {
-    k.pointerType === "mouse" && K(!0);
+  }), [P, F] = p.useState(!1), T = (W) => {
+    W.pointerType === "mouse" && F(!0);
   };
-  !f && M && K(!1);
-  let L = q(e, {
+  !f && P && F(!1);
+  let H = L(e, {
     global: !0
   });
   return /* @__PURE__ */ D.createElement("div", {
     ref: E,
     role: "presentation",
-    ...j(L, z, c, {
-      onPointerDown: V
+    ...K(H, k, c, {
+      onPointerDown: T
     }, g),
     "data-hovered": C || void 0,
-    "data-focused": v || void 0,
-    "data-focus-visible": y || void 0,
+    "data-focused": m || void 0,
+    "data-focus-visible": b || void 0,
     "data-resizing": f || void 0,
     "data-resizable-direction": S
-  }, z.children, /* @__PURE__ */ D.createElement("input", {
+  }, k.children, /* @__PURE__ */ D.createElement("input", {
     ref: d,
-    ...j(h, m)
-  }), f && M && /* @__PURE__ */ Xo.createPortal(/* @__PURE__ */ D.createElement("div", {
+    ...K(h, v)
+  }), f && P && /* @__PURE__ */ ln.createPortal(/* @__PURE__ */ D.createElement("div", {
     style: {
       position: "fixed",
       top: 0,
       left: 0,
       bottom: 0,
       right: 0,
-      cursor: A
+      cursor: I
     }
   }), document.body));
 });
-class ct extends Wo {
+class gt extends Jo {
 }
-ct.type = "tablebody";
-const bu = /* @__PURE__ */ it(ct, (t, e) => {
-  let l = p.useContext(J), { isVirtualized: i } = p.useContext(Y), o = l.collection, { CollectionBranch: n } = p.useContext(Y), { dragAndDropHooks: r, dropState: a } = p.useContext(pe), u = !!(r != null && r.useDroppableCollectionState) && !(a != null && a.isDisabled);
+gt.type = "tablebody";
+const bu = /* @__PURE__ */ at(gt, (t, e) => {
+  let l = p.useContext(X), { isVirtualized: i } = p.useContext(U), o = l.collection, { CollectionBranch: n } = p.useContext(U), { dragAndDropHooks: r, dropState: u } = p.useContext(ve), a = !!(r != null && r.useDroppableCollectionState) && !(u != null && u.isDisabled);
   var s;
-  let d = u && !!a && ((s = a.isDropTarget({
+  let d = a && !!u && ((s = u.isDropTarget({
     type: "root"
   })) !== null && s !== void 0 ? s : !1), c = o.size === 0, h = {
     isDropTarget: d,
     isEmpty: c
-  }, f = Z({
+  }, f = q({
     ...t,
     id: void 0,
     children: void 0,
     defaultClassName: "react-aria-TableBody",
     values: h
-  }), m, v = O("tr"), y = O("td"), g = o.columnCount;
+  }), v, m = j("tr"), b = j("td"), g = o.columnCount;
   if (c && t.renderEmptyState && l) {
-    let x = {}, S = {}, E = {};
+    let w = {}, S = {}, E = {};
     i ? (S["aria-colspan"] = g, E = {
       display: "contents"
-    }) : S.colSpan = g, m = /* @__PURE__ */ D.createElement(v, {
+    }) : S.colSpan = g, v = /* @__PURE__ */ D.createElement(m, {
       role: "row",
-      ...x,
+      ...w,
       style: E
-    }, /* @__PURE__ */ D.createElement(y, {
+    }, /* @__PURE__ */ D.createElement(b, {
       role: "rowheader",
       ...S,
       style: E
     }, t.renderEmptyState(h)));
   }
-  let { rowGroupProps: C } = fi(), w = O("tbody"), $ = q(t, {
+  let { rowGroupProps: C } = Di(), $ = j("tbody"), x = L(t, {
     global: !0
   });
-  return /* @__PURE__ */ D.createElement(w, {
-    ...j($, f, C),
+  return /* @__PURE__ */ D.createElement($, {
+    ...K(x, f, C),
     ref: e,
     "data-empty": c || void 0
-  }, u && /* @__PURE__ */ D.createElement(Du, null), /* @__PURE__ */ D.createElement(n, {
+  }, a && /* @__PURE__ */ D.createElement(ku, null), /* @__PURE__ */ D.createElement(n, {
     collection: o,
     parent: o.body,
-    renderDropIndicator: Tn(r, a)
-  }), m);
+    renderDropIndicator: Ln(r, u)
+  }), v);
 });
-class oo extends Pe {
+class go extends Ae {
   filter(e, l, i) {
     let o = e.getChildren(this.key);
     for (let n of o) if (i(n.textValue, n)) {
@@ -3943,40 +4279,40 @@ class oo extends Pe {
     return null;
   }
 }
-oo.type = "item";
-const yu = /* @__PURE__ */ it(oo, (t, e, l) => {
-  let i = fe(e), o = p.useContext(J), { dragAndDropHooks: n, dragState: r, dropState: a } = p.useContext(pe), { isVirtualized: u, CollectionBranch: s } = p.useContext(Y), { rowProps: d, ...c } = Kr({
+go.type = "item";
+const yu = /* @__PURE__ */ at(go, (t, e, l) => {
+  let i = ie(e), o = p.useContext(X), { dragAndDropHooks: n, dragState: r, dropState: u } = p.useContext(ve), { isVirtualized: a, CollectionBranch: s } = p.useContext(U), { rowProps: d, ...c } = Mr({
     node: l,
     shouldSelectOnPressUp: !!r,
-    isVirtualized: u
-  }, o, i), { isFocused: h, isFocusVisible: f, focusProps: m } = ne(), { isFocusVisible: v, focusProps: y } = ne({
+    isVirtualized: a
+  }, o, i), { isFocused: h, isFocusVisible: f, focusProps: v } = te(), { isFocusVisible: m, focusProps: b } = te({
     within: !0
-  }), { hoverProps: g, isHovered: C } = we({
+  }), { hoverProps: g, isHovered: C } = pe({
     isDisabled: !c.allowsSelection && !c.hasAction,
     onHoverStart: t.onHoverStart,
     onHoverChange: t.onHoverChange,
     onHoverEnd: t.onHoverEnd
-  }), { checkboxProps: w } = jr({
+  }), { checkboxProps: $ } = Nr({
     key: l.key
-  }, o), $;
-  r && n && ($ = n.useDraggableItem({
+  }, o), x;
+  r && n && (x = n.useDraggableItem({
     key: l.key,
     hasDragButton: !0
   }, r));
-  let x, S = p.useRef(null), { visuallyHiddenProps: E } = $e();
-  a && n && (x = n.useDropIndicator({
+  let w, S = p.useRef(null), { visuallyHiddenProps: E } = Ce();
+  u && n && (w = n.useDropIndicator({
     target: {
       type: "item",
       key: l.key,
       dropPosition: "on"
     }
-  }, a, S));
-  let A = p.useRef(null);
+  }, u, S));
+  let I = p.useRef(null);
   p.useEffect(() => {
-    r && !A.current && process.env.NODE_ENV !== "production" && console.warn('Draggable items in a Table must contain a <Button slot="drag"> element so that keyboard and screen reader users can drag them.');
+    r && !I.current && process.env.NODE_ENV !== "production" && console.warn('Draggable items in a Table must contain a <Button slot="drag"> element so that keyboard and screen reader users can drag them.');
   }, []);
-  let B = r && r.isDragging(l.key), { children: z, ...M } = t, K = Z({
-    ...M,
+  let z = r && r.isDragging(l.key), { children: k, ...P } = t, F = q({
+    ...P,
     id: void 0,
     defaultClassName: "react-aria-Row",
     values: {
@@ -3986,20 +4322,20 @@ const yu = /* @__PURE__ */ it(oo, (t, e, l) => {
       isFocusVisible: f,
       selectionMode: o.selectionManager.selectionMode,
       selectionBehavior: o.selectionManager.selectionBehavior,
-      isDragging: B,
-      isDropTarget: x == null ? void 0 : x.isDropTarget,
-      isFocusVisibleWithin: v,
+      isDragging: z,
+      isDropTarget: w == null ? void 0 : w.isDropTarget,
+      isFocusVisibleWithin: m,
       id: l.key
     }
-  }), V = O("tr"), L = O("td"), k = q(t, {
+  }), T = j("tr"), H = j("td"), W = L(t, {
     global: !0
   });
-  return delete k.id, delete k.onClick, /* @__PURE__ */ D.createElement(D.Fragment, null, x && !x.isHidden && /* @__PURE__ */ D.createElement(V, {
+  return delete W.id, delete W.onClick, /* @__PURE__ */ D.createElement(D.Fragment, null, w && !w.isHidden && /* @__PURE__ */ D.createElement(T, {
     role: "row",
     style: {
       height: 0
     }
-  }, /* @__PURE__ */ D.createElement(L, {
+  }, /* @__PURE__ */ D.createElement(H, {
     role: "gridcell",
     colSpan: o.collection.columnCount,
     style: {
@@ -4008,10 +4344,10 @@ const yu = /* @__PURE__ */ it(oo, (t, e, l) => {
   }, /* @__PURE__ */ D.createElement("div", {
     role: "button",
     ...E,
-    ...x.dropIndicatorProps,
+    ...w.dropIndicatorProps,
     ref: S
-  }))), /* @__PURE__ */ D.createElement(V, {
-    ...j(k, K, d, m, g, $ == null ? void 0 : $.dragProps, y),
+  }))), /* @__PURE__ */ D.createElement(T, {
+    ...K(W, F, d, v, g, x == null ? void 0 : x.dragProps, b),
     ref: i,
     "data-disabled": c.isDisabled || void 0,
     "data-selected": c.isSelected || void 0,
@@ -4019,29 +4355,29 @@ const yu = /* @__PURE__ */ it(oo, (t, e, l) => {
     "data-focused": c.isFocused || void 0,
     "data-focus-visible": f || void 0,
     "data-pressed": c.isPressed || void 0,
-    "data-dragging": B || void 0,
-    "data-drop-target": (x == null ? void 0 : x.isDropTarget) || void 0,
+    "data-dragging": z || void 0,
+    "data-drop-target": (w == null ? void 0 : w.isDropTarget) || void 0,
     "data-selection-mode": o.selectionManager.selectionMode === "none" ? void 0 : o.selectionManager.selectionMode,
-    "data-focus-visible-within": v || void 0
-  }, /* @__PURE__ */ D.createElement(xe, {
+    "data-focus-visible-within": m || void 0
+  }, /* @__PURE__ */ D.createElement(De, {
     values: [
       [
-        Vt,
+        et,
         {
           slots: {
-            [wt]: {},
-            selection: w
+            [zt]: {},
+            selection: $
           }
         }
       ],
       [
-        _e,
+        ot,
         {
           slots: {
-            [wt]: {},
+            [zt]: {},
             drag: {
-              ...$ == null ? void 0 : $.dragButtonProps,
-              ref: A,
+              ...x == null ? void 0 : x.dragButtonProps,
+              ref: I,
               style: {
                 pointerEvents: "none"
               }
@@ -4050,7 +4386,7 @@ const yu = /* @__PURE__ */ it(oo, (t, e, l) => {
         }
       ],
       [
-        Fn,
+        Wn,
         {
           isSelected: c.isSelected
         }
@@ -4065,70 +4401,70 @@ const yu = /* @__PURE__ */ it(oo, (t, e, l) => {
   let e = [
     t.value
   ].concat(t.dependencies);
-  return /* @__PURE__ */ D.createElement(Ce, {
+  return /* @__PURE__ */ D.createElement(Se, {
     dependencies: e,
     items: t.columns,
     idScope: t.id
   }, t.children);
 });
-class no extends Pe {
+class bo extends Ae {
 }
-no.type = "cell";
-const $u = /* @__PURE__ */ lt(no, (t, e, l) => {
-  let i = fe(e), o = p.useContext(J), { dragState: n } = p.useContext(pe), { isVirtualized: r } = p.useContext(Y);
+bo.type = "cell";
+const $u = /* @__PURE__ */ ut(bo, (t, e, l) => {
+  let i = ie(e), o = p.useContext(X), { dragState: n } = p.useContext(ve), { isVirtualized: r } = p.useContext(U);
   l.column = o.collection.columns[l.index];
-  let { gridCellProps: a, isPressed: u } = Hr({
+  let { gridCellProps: u, isPressed: a } = Fr({
     node: l,
     shouldSelectOnPressUp: !!n,
     isVirtualized: r
-  }, o, i), { isFocused: s, isFocusVisible: d, focusProps: c } = ne(), { hoverProps: h, isHovered: f } = we({}), m = Z({
+  }, o, i), { isFocused: s, isFocusVisible: d, focusProps: c } = te(), { hoverProps: h, isHovered: f } = pe({}), v = q({
     ...t,
     id: void 0,
     defaultClassName: "react-aria-Cell",
     values: {
       isFocused: s,
       isFocusVisible: d,
-      isPressed: u,
+      isPressed: a,
       isHovered: f,
       id: l.key
     }
-  }), v = O("td"), y = q(t, {
+  }), m = j("td"), b = L(t, {
     global: !0
   });
-  return delete y.id, /* @__PURE__ */ D.createElement(v, {
-    ...j(y, m, a, c, h),
+  return delete b.id, /* @__PURE__ */ D.createElement(m, {
+    ...K(b, v, u, c, h),
     ref: i,
     "data-focused": s || void 0,
     "data-focus-visible": d || void 0,
-    "data-pressed": u || void 0
-  }, /* @__PURE__ */ D.createElement(Y.Provider, {
-    value: Yt
-  }, m.children));
+    "data-pressed": a || void 0
+  }, /* @__PURE__ */ D.createElement(U.Provider, {
+    value: il
+  }, v.children));
 });
 function xu(t, e) {
-  e = fe(e);
-  let { dragAndDropHooks: l, dropState: i } = p.useContext(pe), o = p.useRef(null), { dropIndicatorProps: n, isHidden: r, isDropTarget: a } = l.useDropIndicator(t, i, o);
+  e = ie(e);
+  let { dragAndDropHooks: l, dropState: i } = p.useContext(ve), o = p.useRef(null), { dropIndicatorProps: n, isHidden: r, isDropTarget: u } = l.useDropIndicator(t, i, o);
   return r ? null : /* @__PURE__ */ D.createElement(Cu, {
     ...t,
     dropIndicatorProps: n,
-    isDropTarget: a,
+    isDropTarget: u,
     buttonRef: o,
     ref: e
   });
 }
 function wu(t, e) {
-  let { dropIndicatorProps: l, isDropTarget: i, buttonRef: o, ...n } = t, r = p.useContext(J), { visuallyHiddenProps: a } = $e(), u = Z({
+  let { dropIndicatorProps: l, isDropTarget: i, buttonRef: o, ...n } = t, r = p.useContext(X), { visuallyHiddenProps: u } = Ce(), a = q({
     ...n,
     defaultClassName: "react-aria-DropIndicator",
     values: {
       isDropTarget: i
     }
-  }), s = O("tr"), d = O("td");
+  }), s = j("tr"), d = j("td");
   return /* @__PURE__ */ D.createElement(s, {
-    ...q(t, {
+    ...L(t, {
       global: !0
     }),
-    ...u,
+    ...a,
     role: "row",
     ref: e,
     "data-drop-target": i || void 0
@@ -4139,28 +4475,28 @@ function wu(t, e) {
       padding: 0
     }
   }, /* @__PURE__ */ D.createElement("div", {
-    ...a,
+    ...u,
     role: "button",
     ...l,
     ref: o
-  }), u.children));
+  }), a.children));
 }
 const Cu = /* @__PURE__ */ p.forwardRef(wu);
-function Du() {
-  let t = p.useContext(J), { dragAndDropHooks: e, dropState: l } = p.useContext(pe), i = p.useRef(null), { dropIndicatorProps: o } = e.useDropIndicator({
+function ku() {
+  let t = p.useContext(X), { dragAndDropHooks: e, dropState: l } = p.useContext(ve), i = p.useRef(null), { dropIndicatorProps: o } = e.useDropIndicator({
     target: {
       type: "root"
     }
   }, l, i), n = l.isDropTarget({
     type: "root"
-  }), { visuallyHiddenProps: r } = $e(), a = O("tr"), u = O("td");
-  return !n && o["aria-hidden"] ? null : /* @__PURE__ */ D.createElement(a, {
+  }), { visuallyHiddenProps: r } = Ce(), u = j("tr"), a = j("td");
+  return !n && o["aria-hidden"] ? null : /* @__PURE__ */ D.createElement(u, {
     role: "row",
     "aria-hidden": o["aria-hidden"],
     style: {
       height: 0
     }
-  }, /* @__PURE__ */ D.createElement(u, {
+  }, /* @__PURE__ */ D.createElement(a, {
     role: "gridcell",
     colSpan: t.collection.columnCount,
     style: {
@@ -4173,33 +4509,33 @@ function Du() {
     ref: i
   })));
 }
-lt(Oo, function(e, l, i) {
-  let o = p.useContext(J), { isVirtualized: n } = p.useContext(Y), { isLoading: r, onLoadMore: a, scrollOffset: u, ...s } = e, d = o.collection.columns.length, c = p.useRef(null), h = p.useMemo(() => ({
-    onLoadMore: a,
+ut(Qo, function(e, l, i) {
+  let o = p.useContext(X), { isVirtualized: n } = p.useContext(U), { isLoading: r, onLoadMore: u, scrollOffset: a, ...s } = e, d = o.collection.columns.length, c = p.useRef(null), h = p.useMemo(() => ({
+    onLoadMore: u,
     collection: o == null ? void 0 : o.collection,
     sentinelRef: c,
-    scrollOffset: u
+    scrollOffset: a
   }), [
-    a,
     u,
+    a,
     o == null ? void 0 : o.collection
   ]);
-  Bn(h, c);
-  let f = Z({
+  Kn(h, c);
+  let f = q({
     ...s,
     id: void 0,
     children: i.rendered,
     defaultClassName: "react-aria-TableLoadingIndicator",
     values: null
-  }), m = O("tr"), v = O("td"), y = {}, g = {}, C = {};
+  }), v = j("tr"), m = j("td"), b = {}, g = {}, C = {};
   return n ? (g["aria-colspan"] = d, C = {
     display: "contents"
-  }) : g.colSpan = d, /* @__PURE__ */ D.createElement(D.Fragment, null, /* @__PURE__ */ D.createElement(m, {
+  }) : g.colSpan = d, /* @__PURE__ */ D.createElement(D.Fragment, null, /* @__PURE__ */ D.createElement(v, {
     style: {
       height: 0
     },
-    inert: In(!0)
-  }, /* @__PURE__ */ D.createElement(v, {
+    inert: Nn(!0)
+  }, /* @__PURE__ */ D.createElement(m, {
     style: {
       padding: 0,
       border: 0
@@ -4212,20 +4548,20 @@ lt(Oo, function(e, l, i) {
       height: 1,
       width: 1
     }
-  }))), r && f.children && /* @__PURE__ */ D.createElement(m, {
-    ...j(q(e, {
+  }))), r && f.children && /* @__PURE__ */ D.createElement(v, {
+    ...K(L(e, {
       global: !0
-    }), y),
+    }), b),
     ...f,
     role: "row",
     ref: l
-  }, /* @__PURE__ */ D.createElement(v, {
+  }, /* @__PURE__ */ D.createElement(m, {
     role: "rowheader",
     ...g,
     style: C
   }, f.children)));
 });
-class ku {
+class Du {
   /**
   * Returns whether the layout should invalidate in response to
   * visible rectangle changes. By default, it only invalidates
@@ -4264,12 +4600,12 @@ class ku {
     this.virtualizer = null;
   }
 }
-class U {
+class O {
   /**
   * Returns a copy of the LayoutInfo.
   */
   copy() {
-    let e = new U(this.type, this.key, this.rect.copy());
+    let e = new O(this.type, this.key, this.rect.copy());
     return e.estimatedSize = this.estimatedSize, e.opacity = this.opacity, e.transform = this.transform, e.parentKey = this.parentKey, e.content = this.content, e.isSticky = this.isSticky, e.zIndex = this.zIndex, e.allowOverflow = this.allowOverflow, e;
   }
   /**
@@ -4281,12 +4617,12 @@ class U {
     this.type = e, this.key = l, this.parentKey = null, this.content = null, this.rect = i, this.estimatedSize = !1, this.isSticky = !1, this.opacity = 1, this.transform = null, this.zIndex = 0, this.allowOverflow = !1;
   }
 }
-class ie {
+class oe {
   /**
   * Returns a copy of this point.
   */
   copy() {
-    return new ie(this.x, this.y);
+    return new oe(this.x, this.y);
   }
   /**
   * Checks if two points are equal.
@@ -4304,7 +4640,7 @@ class ie {
     this.x = e, this.y = l;
   }
 }
-class P {
+class A {
   /**
   * The maximum x-coordinate in the rectangle.
   */
@@ -4327,25 +4663,25 @@ class P {
   * The top left corner of the rectangle.
   */
   get topLeft() {
-    return new ie(this.x, this.y);
+    return new oe(this.x, this.y);
   }
   /**
   * The top right corner of the rectangle.
   */
   get topRight() {
-    return new ie(this.maxX, this.y);
+    return new oe(this.maxX, this.y);
   }
   /**
   * The bottom left corner of the rectangle.
   */
   get bottomLeft() {
-    return new ie(this.x, this.maxY);
+    return new oe(this.x, this.maxY);
   }
   /**
   * The bottom right corner of the rectangle.
   */
   get bottomRight() {
-    return new ie(this.maxX, this.maxY);
+    return new oe(this.maxX, this.maxY);
   }
   /**
   * Returns whether this rectangle intersects another rectangle.
@@ -4397,22 +4733,22 @@ class P {
   */
   union(e) {
     let l = Math.min(this.x, e.x), i = Math.min(this.y, e.y), o = Math.max(this.maxX, e.maxX) - l, n = Math.max(this.maxY, e.maxY) - i;
-    return new P(l, i, o, n);
+    return new A(l, i, o, n);
   }
   /**
   * Returns the intersection of this Rect with another.
   * If the rectangles do not intersect, an all zero Rect is returned.
   */
   intersection(e) {
-    if (!this.intersects(e)) return new P(0, 0, 0, 0);
+    if (!this.intersects(e)) return new A(0, 0, 0, 0);
     let l = Math.max(this.x, e.x), i = Math.max(this.y, e.y);
-    return new P(l, i, Math.min(this.maxX, e.maxX) - l, Math.min(this.maxY, e.maxY) - i);
+    return new A(l, i, Math.min(this.maxX, e.maxX) - l, Math.min(this.maxY, e.maxY) - i);
   }
   /**
   * Returns a copy of this rectangle.
   */
   copy() {
-    return new P(this.x, this.y, this.width, this.height);
+    return new A(this.x, this.y, this.width, this.height);
   }
   constructor(e = 0, l = 0, i = 0, o = 0) {
     this.x = e, this.y = l, this.width = i, this.height = o;
@@ -4442,7 +4778,7 @@ class re {
   }
 }
 let Su = 0;
-class ro {
+class yo {
   /**
   * Prepares the view for reuse. Called just before the view is removed from the DOM.
   */
@@ -4462,12 +4798,12 @@ class ro {
     this.virtualizer = e, this.key = ++Su, this.viewType = l, this.children = /* @__PURE__ */ new Set(), this.reusableViews = /* @__PURE__ */ new Map(), this.layoutInfo = null, this.content = null, this.rendered = null;
   }
 }
-class Eu extends ro {
+class Eu extends yo {
   constructor(e) {
     super(e, "root");
   }
 }
-class zu extends ro {
+class zu extends yo {
   constructor(e, l, i) {
     super(e, i), this.parent = l;
   }
@@ -4493,10 +4829,10 @@ class Iu {
     return e;
   }
   constructor() {
-    this.startTime = 0, this.velocity = new ie(0, 0), this.visibleRect = new P();
+    this.startTime = 0, this.velocity = new oe(0, 0), this.visibleRect = new A();
   }
 }
-class Au {
+class Pu {
   /** Returns whether the given key, or an ancestor, is persisted. */
   isPersistedKey(e) {
     if (this.persistedKeys.has(e)) return !0;
@@ -4530,7 +4866,7 @@ class Au {
   * Returns the key for the item view currently at the given point.
   */
   keyAtPoint(e) {
-    let l = new P(e.x, e.y, 1, 1), i = l.area === 0 ? [] : this.layout.getVisibleLayoutInfos(l);
+    let l = new A(e.x, e.y, 1, 1), i = l.area === 0 ? [] : this.layout.getVisibleLayoutInfos(l);
     for (let o of i)
       if (o.rect.intersects(l)) return o.key;
     return null;
@@ -4539,15 +4875,15 @@ class Au {
     this.layout.update(e), this.contentSize = this.layout.getContentSize();
     let l = this.visibleRect, i = e.contentChanged ? 0 : l.x, o = e.contentChanged ? 0 : l.y;
     if (i = Math.max(0, Math.min(this.contentSize.width - l.width, i)), o = Math.max(0, Math.min(this.contentSize.height - l.height, o)), i !== l.x || o !== l.y) {
-      let n = new P(i, o, l.width, l.height);
+      let n = new A(i, o, l.width, l.height);
       this.delegate.setVisibleRect(n);
     } else this.updateSubviews();
   }
   getVisibleLayoutInfos() {
     let e = process.env.NODE_ENV === "test" && !process.env.VIRT_ON, l = e && typeof HTMLElement < "u" && Object.getOwnPropertyNames(HTMLElement.prototype).includes("clientWidth"), i = e && typeof HTMLElement < "u" && Object.getOwnPropertyNames(HTMLElement.prototype).includes("clientHeight"), o;
-    e && !(l && i) ? o = new P(0, 0, this.contentSize.width, this.contentSize.height) : o = this._overscanManager.getOverscannedRect();
+    e && !(l && i) ? o = new A(0, 0, this.contentSize.width, this.contentSize.height) : o = this._overscanManager.getOverscannedRect();
     let n = this.layout.getVisibleLayoutInfos(o), r = /* @__PURE__ */ new Map();
-    for (let a of n) r.set(a.key, a);
+    for (let u of n) r.set(u.key, u);
     return r;
   }
   updateSubviews() {
@@ -4576,14 +4912,14 @@ class Au {
   }
   /** Performs layout and updates visible views as needed. */
   render(e) {
-    let l = this, i = !1, o = !1, n = !1, r = !1, a = !1, u = !1;
-    return e.collection !== this.collection && (l.collection = e.collection, i = !0), (e.layout !== this.layout || this.layout.virtualizer !== this) && (this.layout && (this.layout.virtualizer = null), e.layout.virtualizer = this, l.layout = e.layout, i = !0), e.persistedKeys && !Bu(e.persistedKeys, this.persistedKeys) && (l.persistedKeys = e.persistedKeys, u = !0), this.visibleRect.equals(e.visibleRect) || (this._overscanManager.setVisibleRect(e.visibleRect), this.layout.shouldInvalidate(e.visibleRect, this.visibleRect) ? (o = !e.visibleRect.pointEquals(this.visibleRect), n = !e.visibleRect.sizeEquals(this.visibleRect), i = !0) : u = !0, l.visibleRect = e.visibleRect), e.invalidationContext !== this._invalidationContext && (e.invalidationContext && (n || (n = e.invalidationContext.sizeChanged || !1), o || (o = e.invalidationContext.offsetChanged || !1), r || (r = e.invalidationContext.itemSizeChanged || !1), a || (a = e.invalidationContext.layoutOptions != null && this._invalidationContext.layoutOptions != null && e.invalidationContext.layoutOptions !== this._invalidationContext.layoutOptions && this.layout.shouldInvalidateLayoutOptions(e.invalidationContext.layoutOptions, this._invalidationContext.layoutOptions)), i || (i = r || n || o || a)), this._invalidationContext = e.invalidationContext), e.isScrolling !== this._isScrolling && (this._isScrolling = e.isScrolling, e.isScrolling || (u = !0)), i ? this.relayout({
+    let l = this, i = !1, o = !1, n = !1, r = !1, u = !1, a = !1;
+    return e.collection !== this.collection && (l.collection = e.collection, i = !0), (e.layout !== this.layout || this.layout.virtualizer !== this) && (this.layout && (this.layout.virtualizer = null), e.layout.virtualizer = this, l.layout = e.layout, i = !0), e.persistedKeys && !Bu(e.persistedKeys, this.persistedKeys) && (l.persistedKeys = e.persistedKeys, a = !0), this.visibleRect.equals(e.visibleRect) || (this._overscanManager.setVisibleRect(e.visibleRect), this.layout.shouldInvalidate(e.visibleRect, this.visibleRect) ? (o = !e.visibleRect.pointEquals(this.visibleRect), n = !e.visibleRect.sizeEquals(this.visibleRect), i = !0) : a = !0, l.visibleRect = e.visibleRect), e.invalidationContext !== this._invalidationContext && (e.invalidationContext && (n || (n = e.invalidationContext.sizeChanged || !1), o || (o = e.invalidationContext.offsetChanged || !1), r || (r = e.invalidationContext.itemSizeChanged || !1), u || (u = e.invalidationContext.layoutOptions != null && this._invalidationContext.layoutOptions != null && e.invalidationContext.layoutOptions !== this._invalidationContext.layoutOptions && this.layout.shouldInvalidateLayoutOptions(e.invalidationContext.layoutOptions, this._invalidationContext.layoutOptions)), i || (i = r || n || o || u)), this._invalidationContext = e.invalidationContext), e.isScrolling !== this._isScrolling && (this._isScrolling = e.isScrolling, e.isScrolling || (a = !0)), i ? this.relayout({
       offsetChanged: o,
       sizeChanged: n,
       itemSizeChanged: r,
-      layoutOptionsChanged: a,
+      layoutOptionsChanged: u,
       layoutOptions: this._invalidationContext.layoutOptions
-    }) : u && this.updateSubviews(), Array.from(this._rootView.children);
+    }) : a && this.updateSubviews(), Array.from(this._rootView.children);
   }
   getVisibleView(e) {
     return this._visibleViews.get(e);
@@ -4598,26 +4934,26 @@ class Au {
     });
   }
   constructor(e) {
-    this.delegate = e.delegate, this.collection = e.collection, this.layout = e.layout, this.contentSize = new re(), this.visibleRect = new P(), this.persistedKeys = /* @__PURE__ */ new Set(), this._visibleViews = /* @__PURE__ */ new Map(), this._renderedContent = /* @__PURE__ */ new WeakMap(), this._rootView = new Eu(this), this._isScrolling = !1, this._invalidationContext = {}, this._overscanManager = new Iu();
+    this.delegate = e.delegate, this.collection = e.collection, this.layout = e.layout, this.contentSize = new re(), this.visibleRect = new A(), this.persistedKeys = /* @__PURE__ */ new Set(), this._visibleViews = /* @__PURE__ */ new Map(), this._renderedContent = /* @__PURE__ */ new WeakMap(), this._rootView = new Eu(this), this._isScrolling = !1, this._invalidationContext = {}, this._overscanManager = new Iu();
   }
 }
-const Pu = typeof document < "u" ? D.useLayoutEffect : () => {
+const Ru = typeof document < "u" ? D.useLayoutEffect : () => {
 };
-function Ru(t) {
-  let [e, l] = p.useState(new P(0, 0, 0, 0)), [i, o] = p.useState(!1), [n, r] = p.useState({}), a = p.useRef(!1), [u] = p.useState(() => new Au({
+function Au(t) {
+  let [e, l] = p.useState(new A(0, 0, 0, 0)), [i, o] = p.useState(!1), [n, r] = p.useState({}), u = p.useRef(!1), [a] = p.useState(() => new Pu({
     collection: t.collection,
     layout: t.layout,
     delegate: {
-      setVisibleRect(v) {
-        l(v), a.current = !0;
+      setVisibleRect(m) {
+        l(m), u.current = !0;
       },
       // TODO: should changing these invalidate the entire cache?
       renderView: t.renderView,
       invalidate: r
     }
   }));
-  Pu(() => {
-    a.current && (a.current = !1, t.onVisibleRectChange(e));
+  Ru(() => {
+    u.current && (u.current = !1, t.onVisibleRectChange(e));
   });
   let s = p.useMemo(() => t.layoutOptions != null ? {
     ...n,
@@ -4625,7 +4961,7 @@ function Ru(t) {
   } : n, [
     n,
     t.layoutOptions
-  ]), d = u.render({
+  ]), d = a.render({
     layout: t.layout,
     collection: t.collection,
     persistedKeys: t.persistedKeys,
@@ -4633,13 +4969,13 @@ function Ru(t) {
     visibleRect: e,
     invalidationContext: s,
     isScrolling: i
-  }), c = u.contentSize, h = p.useCallback(() => {
+  }), c = a.contentSize, h = p.useCallback(() => {
     o(!0);
   }, []), f = p.useCallback(() => {
     o(!1);
   }, []);
   return p.useMemo(() => ({
-    virtualizer: u,
+    virtualizer: a,
     visibleViews: d,
     setVisibleRect: l,
     contentSize: c,
@@ -4647,7 +4983,7 @@ function Ru(t) {
     startScrolling: h,
     endScrolling: f
   }), [
-    u,
+    a,
     d,
     l,
     c,
@@ -4657,7 +4993,7 @@ function Ru(t) {
   ]);
 }
 const de = 48;
-class Mu extends ku {
+class Mu extends Du {
   // Backward compatibility for subclassing.
   get collection() {
     return this.virtualizer.collection;
@@ -4674,7 +5010,7 @@ class Mu extends ku {
     }
     this.layoutIfNeeded(e);
     let o = [], n = (r) => {
-      for (let a of r) this.isVisible(a, e) && (o.push(a.layoutInfo), a.children && n(a.children));
+      for (let u of r) this.isVisible(u, e) && (o.push(u.layoutInfo), u.children && n(u.children));
     };
     return n(this.rootNodes), o;
   }
@@ -4686,15 +5022,15 @@ class Mu extends ku {
     }
   }
   ensureLayoutInfo(e) {
-    return !this.layoutNodes.has(e) && this.requestedRect.area < this.contentSize.area && this.lastCollection ? (this.requestedRect = new P(0, 0, 1 / 0, 1 / 0), this.rootNodes = this.buildCollection(), this.requestedRect = new P(0, 0, this.contentSize.width, this.contentSize.height), !0) : !1;
+    return !this.layoutNodes.has(e) && this.requestedRect.area < this.contentSize.area && this.lastCollection ? (this.requestedRect = new A(0, 0, 1 / 0, 1 / 0), this.rootNodes = this.buildCollection(), this.requestedRect = new A(0, 0, this.contentSize.width, this.contentSize.height), !0) : !1;
   }
   isVisible(e, l) {
     return e.layoutInfo.rect.intersects(l) || e.layoutInfo.isSticky || e.layoutInfo.type === "header" || e.layoutInfo.type === "loader" || this.virtualizer.isPersistedKey(e.layoutInfo.key);
   }
   shouldInvalidateEverything(e) {
     let l = e.layoutOptions;
-    var i, o, n, r, a;
-    return e.sizeChanged || this.rowHeight !== ((i = l == null ? void 0 : l.rowHeight) !== null && i !== void 0 ? i : this.rowHeight) || this.headingHeight !== ((o = l == null ? void 0 : l.headingHeight) !== null && o !== void 0 ? o : this.headingHeight) || this.loaderHeight !== ((n = l == null ? void 0 : l.loaderHeight) !== null && n !== void 0 ? n : this.loaderHeight) || this.gap !== ((r = l == null ? void 0 : l.gap) !== null && r !== void 0 ? r : this.gap) || this.padding !== ((a = l == null ? void 0 : l.padding) !== null && a !== void 0 ? a : this.padding);
+    var i, o, n, r, u;
+    return e.sizeChanged || this.rowHeight !== ((i = l == null ? void 0 : l.rowHeight) !== null && i !== void 0 ? i : this.rowHeight) || this.headingHeight !== ((o = l == null ? void 0 : l.headingHeight) !== null && o !== void 0 ? o : this.headingHeight) || this.loaderHeight !== ((n = l == null ? void 0 : l.loaderHeight) !== null && n !== void 0 ? n : this.loaderHeight) || this.gap !== ((r = l == null ? void 0 : l.gap) !== null && r !== void 0 ? r : this.gap) || this.padding !== ((u = l == null ? void 0 : l.padding) !== null && u !== void 0 ? u : this.padding);
   }
   shouldInvalidateLayoutOptions(e, l) {
     return e.rowHeight !== l.rowHeight || e.estimatedRowHeight !== l.estimatedRowHeight || e.headingHeight !== l.headingHeight || e.estimatedHeadingHeight !== l.estimatedHeadingHeight || e.loaderHeight !== l.loaderHeight || e.dropIndicatorThickness !== l.dropIndicatorThickness || e.gap !== l.gap || e.padding !== l.padding;
@@ -4709,10 +5045,10 @@ class Mu extends ku {
     this.estimatedRowHeight = (n = i == null ? void 0 : i.estimatedRowHeight) !== null && n !== void 0 ? n : this.estimatedRowHeight;
     var r;
     this.headingHeight = (r = i == null ? void 0 : i.headingHeight) !== null && r !== void 0 ? r : this.headingHeight;
-    var a;
-    this.estimatedHeadingHeight = (a = i == null ? void 0 : i.estimatedHeadingHeight) !== null && a !== void 0 ? a : this.estimatedHeadingHeight;
     var u;
-    this.loaderHeight = (u = i == null ? void 0 : i.loaderHeight) !== null && u !== void 0 ? u : this.loaderHeight;
+    this.estimatedHeadingHeight = (u = i == null ? void 0 : i.estimatedHeadingHeight) !== null && u !== void 0 ? u : this.estimatedHeadingHeight;
+    var a;
+    this.loaderHeight = (a = i == null ? void 0 : i.loaderHeight) !== null && a !== void 0 ? a : this.loaderHeight;
     var s;
     this.dropIndicatorThickness = (s = i == null ? void 0 : i.dropIndicatorThickness) !== null && s !== void 0 ? s : this.dropIndicatorThickness;
     var d;
@@ -4728,8 +5064,8 @@ class Mu extends ku {
     ], o = i.filter((s) => s.type === "loader"), n = [], r = (l == null ? void 0 : l.size) === 0;
     r && (e = 0);
     for (let s of i) {
-      var a, u;
-      let d = ((u = (a = this.rowHeight) !== null && a !== void 0 ? a : this.estimatedRowHeight) !== null && u !== void 0 ? u : de) + this.gap;
+      var u, a;
+      let d = ((a = (u = this.rowHeight) !== null && u !== void 0 ? u : this.estimatedRowHeight) !== null && a !== void 0 ? a : de) + this.gap;
       if (s.type === "item" && e + d < this.requestedRect.y && !this.isValid(s, e)) {
         e += d;
         continue;
@@ -4742,10 +5078,10 @@ class Mu extends ku {
       if ((s.type === "item" || s.type === "loader") && e > this.requestedRect.maxY) {
         let h = i.indexOf(s);
         for (let f of o) {
-          let m = i.indexOf(f);
-          e += (m - h - 1) * d;
-          let v = this.buildChild(f, this.padding, e, null);
-          n.push(v), e = v.layoutInfo.rect.maxY, h = m;
+          let v = i.indexOf(f);
+          e += (v - h - 1) * d;
+          let m = this.buildChild(f, this.padding, e, null);
+          n.push(m), e = m.layoutInfo.rect.maxY, h = v;
         }
         e += (i.length - h - 1) * d;
         break;
@@ -4779,35 +5115,35 @@ class Mu extends ku {
     }
   }
   buildLoader(e, l, i) {
-    let o = new P(l, i, this.padding, 0), n = new U("loader", e.key, o);
+    let o = new A(l, i, this.padding, 0), n = new O("loader", e.key, o);
     o.width = this.virtualizer.contentSize.width - this.padding - l;
-    var r, a, u;
-    return o.height = e.props.isLoading ? (u = (a = (r = this.loaderHeight) !== null && r !== void 0 ? r : this.rowHeight) !== null && a !== void 0 ? a : this.estimatedRowHeight) !== null && u !== void 0 ? u : de : 0, {
+    var r, u, a;
+    return o.height = e.props.isLoading ? (a = (u = (r = this.loaderHeight) !== null && r !== void 0 ? r : this.rowHeight) !== null && u !== void 0 ? u : this.estimatedRowHeight) !== null && a !== void 0 ? a : de : 0, {
       layoutInfo: n,
       validRect: o.intersection(this.requestedRect)
     };
   }
   buildSection(e, l, i) {
-    let o = this.virtualizer.collection, n = this.virtualizer.visibleRect.width - this.padding, r = new P(l, i, n - l, 0), a = new U(e.type, e.key, r), u = i, s = 0, d = [];
-    for (let f of H(e, o)) {
+    let o = this.virtualizer.collection, n = this.virtualizer.visibleRect.width - this.padding, r = new A(l, i, n - l, 0), u = new O(e.type, e.key, r), a = i, s = 0, d = [];
+    for (let f of V(e, o)) {
       var c, h;
-      let m = ((h = (c = this.rowHeight) !== null && c !== void 0 ? c : this.estimatedRowHeight) !== null && h !== void 0 ? h : de) + this.gap;
-      if (i + m < this.requestedRect.y && !this.isValid(e, i)) {
-        i += m, s++;
+      let v = ((h = (c = this.rowHeight) !== null && c !== void 0 ? c : this.estimatedRowHeight) !== null && h !== void 0 ? h : de) + this.gap;
+      if (i + v < this.requestedRect.y && !this.isValid(e, i)) {
+        i += v, s++;
         continue;
       }
-      let v = this.buildChild(f, l, i, a.key);
-      if (i = v.layoutInfo.rect.maxY + this.gap, d.push(v), i > this.requestedRect.maxY) {
+      let m = this.buildChild(f, l, i, u.key);
+      if (i = m.layoutInfo.rect.maxY + this.gap, d.push(m), i > this.requestedRect.maxY) {
         i += ([
-          ...H(e, o)
-        ].length - (d.length + s)) * m;
+          ...V(e, o)
+        ].length - (d.length + s)) * v;
         break;
       }
     }
-    return i -= this.gap, r.height = i - u, {
-      layoutInfo: a,
+    return i -= this.gap, r.height = i - a, {
+      layoutInfo: u,
       children: d,
-      validRect: a.rect.intersection(this.requestedRect),
+      validRect: u.rect.intersection(this.requestedRect),
       node: e
     };
   }
@@ -4822,11 +5158,11 @@ class Mu extends ku {
         n = e.rendered ? this.estimatedHeadingHeight : 0, r = !0;
     }
     n == null && (n = de);
-    let a = new P(l, i, o - l, n), u = new U("header", e.key, a);
-    return u.estimatedSize = r, {
-      layoutInfo: u,
+    let u = new A(l, i, o - l, n), a = new O("header", e.key, u);
+    return a.estimatedSize = r, {
+      layoutInfo: a,
       children: [],
-      validRect: u.rect.intersection(this.requestedRect),
+      validRect: a.rect.intersection(this.requestedRect),
       node: e
     };
   }
@@ -4837,11 +5173,11 @@ class Mu extends ku {
       s ? (n = s.layoutInfo.rect.height, r = o !== s.layoutInfo.rect.width || e !== s.node || s.layoutInfo.estimatedSize) : (n = this.estimatedRowHeight, r = !0);
     }
     n == null && (n = de);
-    let a = new P(l, i, o, n), u = new U(e.type, e.key, a);
-    return u.estimatedSize = r, {
-      layoutInfo: u,
+    let u = new A(l, i, o, n), a = new O(e.type, e.key, u);
+    return a.estimatedSize = r, {
+      layoutInfo: a,
       children: [],
-      validRect: u.rect,
+      validRect: a.rect,
       node: e
     };
   }
@@ -4852,9 +5188,9 @@ class Mu extends ku {
     if (n.estimatedSize = !1, n.rect.height !== l.height) {
       let r = n.copy();
       r.rect.height = l.height, i.layoutInfo = r, this.validRect.height = Math.min(this.validRect.height, n.rect.y - this.validRect.y), this.requestedRect.height += r.rect.height - n.rect.height, this.updateLayoutNode(e, n, r);
-      let a = n.parentKey != null ? o.getItem(n.parentKey) : null;
-      for (; a; )
-        this.updateLayoutNode(a.key, n, r), a = a.parentKey != null ? o.getItem(a.parentKey) : null;
+      let u = n.parentKey != null ? o.getItem(n.parentKey) : null;
+      for (; u; )
+        this.updateLayoutNode(u.key, n, r), u = u.parentKey != null ? o.getItem(u.parentKey) : null;
       return !0;
     }
     return !1;
@@ -4868,20 +5204,20 @@ class Mu extends ku {
   }
   getDropTargetFromPoint(e, l, i) {
     e += this.virtualizer.visibleRect.x, l += this.virtualizer.visibleRect.y;
-    let o = new P(e, Math.max(0, l - this.gap), 1, Math.max(1, this.gap * 2)), n = this.getVisibleLayoutInfos(o), r = null, a = 1 / 0;
+    let o = new A(e, Math.max(0, l - this.gap), 1, Math.max(1, this.gap * 2)), n = this.getVisibleLayoutInfos(o), r = null, u = 1 / 0;
     for (let c of n) {
       if (!c.rect.intersects(o)) continue;
-      let h = Math.abs(c.rect.y - l), f = Math.abs(c.rect.maxY - l), m = Math.min(h, f);
-      m < a && (a = m, r = c.key);
+      let h = Math.abs(c.rect.y - l), f = Math.abs(c.rect.maxY - l), v = Math.min(h, f);
+      v < u && (u = v, r = c.key);
     }
     if (r == null || this.virtualizer.collection.size === 0) return {
       type: "root"
     };
-    let u = this.getLayoutInfo(r);
-    if (!u) return null;
-    let s = u.rect, d = {
+    let a = this.getLayoutInfo(r);
+    if (!a) return null;
+    let s = a.rect, d = {
       type: "item",
-      key: u.key,
+      key: a.key,
       dropPosition: "on"
     };
     return i(d) ? l <= s.y + 10 && i({
@@ -4900,21 +5236,21 @@ class Mu extends ku {
   }
   getDropTargetLayoutInfo(e) {
     let l = this.getLayoutInfo(e.key), i;
-    if (e.dropPosition === "before") i = new P(l.rect.x, Math.max(0, l.rect.y - this.dropIndicatorThickness / 2), l.rect.width, this.dropIndicatorThickness);
+    if (e.dropPosition === "before") i = new A(l.rect.x, Math.max(0, l.rect.y - this.dropIndicatorThickness / 2), l.rect.width, this.dropIndicatorThickness);
     else if (e.dropPosition === "after") {
       let n = this.collection.getItem(e.key);
       if (n) {
         var o;
-        let r = (o = n.level) !== null && o !== void 0 ? o : 0, a = this.collection.getKeyAfter(e.key);
-        for (; a != null; ) {
-          let u = this.collection.getItem(a);
-          if (!u || u.level <= r) break;
-          l = this.getLayoutInfo(a) || l, a = this.collection.getKeyAfter(a);
+        let r = (o = n.level) !== null && o !== void 0 ? o : 0, u = this.collection.getKeyAfter(e.key);
+        for (; u != null; ) {
+          let a = this.collection.getItem(u);
+          if (!a || a.level <= r) break;
+          l = this.getLayoutInfo(u) || l, u = this.collection.getKeyAfter(u);
         }
       }
-      i = new P(l.rect.x, l.rect.maxY - this.dropIndicatorThickness / 2, l.rect.width, this.dropIndicatorThickness);
+      i = new A(l.rect.x, l.rect.maxY - this.dropIndicatorThickness / 2, l.rect.width, this.dropIndicatorThickness);
     } else i = l.rect;
-    return new U("dropIndicator", e.key + ":" + e.dropPosition, i);
+    return new O("dropIndicator", e.key + ":" + e.dropPosition, i);
   }
   /**
   * Creates a new ListLayout with options. See the list of properties below for a description
@@ -4931,10 +5267,10 @@ class Mu extends ku {
     var n;
     this.estimatedHeadingHeight = (n = e.estimatedHeadingHeight) !== null && n !== void 0 ? n : null;
     var r;
-    this.loaderHeight = (r = e.loaderHeight) !== null && r !== void 0 ? r : null, this.dropIndicatorThickness = e.dropIndicatorThickness || 2, this.gap = e.gap || 0, this.padding = e.padding || 0, this.layoutNodes = /* @__PURE__ */ new Map(), this.rootNodes = [], this.lastCollection = null, this.invalidateEverything = !1, this.validRect = new P(), this.requestedRect = new P(), this.contentSize = new re();
+    this.loaderHeight = (r = e.loaderHeight) !== null && r !== void 0 ? r : null, this.dropIndicatorThickness = e.dropIndicatorThickness || 2, this.gap = e.gap || 0, this.padding = e.padding || 0, this.layoutNodes = /* @__PURE__ */ new Map(), this.rootNodes = [], this.lastCollection = null, this.invalidateEverything = !1, this.validRect = new A(), this.requestedRect = new A(), this.contentSize = new re();
   }
 }
-const zt = 48;
+const Tt = 48;
 class Tu extends Mu {
   // Backward compatibility for subclassing.
   get collection() {
@@ -4955,7 +5291,7 @@ class Tu extends Mu {
         break;
       }
     } else if (e.sizeChanged || this.columnsChanged(i, this.lastCollection)) {
-      let o = new Qr({});
+      let o = new zi({});
       this.columnWidths = o.buildColumnWidths(this.virtualizer.visibleRect.width - this.padding * 2, i, /* @__PURE__ */ new Map()), e.sizeChanged = !0;
     }
     super.update(e);
@@ -4977,32 +5313,32 @@ class Tu extends Mu {
   }
   buildTableHeader() {
     var e;
-    let l = this.virtualizer.collection, i = new P(this.padding, this.padding, 0, 0);
+    let l = this.virtualizer.collection, i = new A(this.padding, this.padding, 0, 0);
     var o;
-    let n = new U("header", (o = (e = l.head) === null || e === void 0 ? void 0 : e.key) !== null && o !== void 0 ? o : "header", i);
+    let n = new O("header", (o = (e = l.head) === null || e === void 0 ? void 0 : e.key) !== null && o !== void 0 ? o : "header", i);
     n.isSticky = !0, n.zIndex = 1;
-    let r = this.padding, a = 0, u = [];
+    let r = this.padding, u = 0, a = [];
     for (let s of l.headerRows) {
       let d = this.buildChild(s, this.padding, r, n.key);
-      d.layoutInfo.parentKey = n.key, r = d.layoutInfo.rect.maxY, a = Math.max(a, d.layoutInfo.rect.width), d.index = u.length, u.push(d);
+      d.layoutInfo.parentKey = n.key, r = d.layoutInfo.rect.maxY, u = Math.max(u, d.layoutInfo.rect.width), d.index = a.length, a.push(d);
     }
-    return i.width = a, i.height = r - this.padding, {
+    return i.width = u, i.height = r - this.padding, {
       layoutInfo: n,
-      children: u,
+      children: a,
       validRect: n.rect,
       node: l.head
     };
   }
   buildHeaderRow(e, l, i) {
-    let o = new P(l, i, 0, 0), n = new U("headerrow", e.key, o), r = 0, a = [];
-    for (let u of H(e, this.virtualizer.collection)) {
-      let s = this.buildChild(u, l, i, n.key);
-      s.layoutInfo.parentKey = n.key, l = s.layoutInfo.rect.maxX, r = Math.max(r, s.layoutInfo.rect.height), s.index = a.length, a.push(s);
+    let o = new A(l, i, 0, 0), n = new O("headerrow", e.key, o), r = 0, u = [];
+    for (let a of V(e, this.virtualizer.collection)) {
+      let s = this.buildChild(a, l, i, n.key);
+      s.layoutInfo.parentKey = n.key, l = s.layoutInfo.rect.maxX, r = Math.max(r, s.layoutInfo.rect.height), s.index = u.length, u.push(s);
     }
-    for (let [u, s] of a.entries()) s.layoutInfo.zIndex = a.length - u + 1;
-    return this.setChildHeights(a, r), o.height = r, o.width = l - o.x, {
+    for (let [a, s] of u.entries()) s.layoutInfo.zIndex = u.length - a + 1;
+    return this.setChildHeights(u, r), o.height = r, o.width = l - o.x, {
       layoutInfo: n,
-      children: a,
+      children: u,
       validRect: o,
       node: e
     };
@@ -5016,19 +5352,19 @@ class Tu extends Mu {
     var i;
     let o = (i = e.colSpan) !== null && i !== void 0 ? i : 1;
     var n;
-    let r = (n = e.colIndex) !== null && n !== void 0 ? n : e.index, a = 0;
+    let r = (n = e.colIndex) !== null && n !== void 0 ? n : e.index, u = 0;
     for (let s = r; s < r + o; s++) {
       let d = l.columns[s];
-      var u;
-      (d == null ? void 0 : d.key) != null && (a += (u = this.columnWidths.get(d.key)) !== null && u !== void 0 ? u : 0);
+      var a;
+      (d == null ? void 0 : d.key) != null && (u += (a = this.columnWidths.get(d.key)) !== null && a !== void 0 ? a : 0);
     }
-    return a;
+    return u;
   }
   getEstimatedHeight(e, l, i, o) {
     let n = !1;
     if (i == null) {
       let r = this.layoutNodes.get(e.key);
-      r ? (i = r.layoutInfo.rect.height, n = e !== r.node || l !== r.layoutInfo.rect.width || r.layoutInfo.estimatedSize) : (i = o ?? zt, n = !0);
+      r ? (i = r.layoutInfo.rect.height, n = e !== r.node || l !== r.layoutInfo.rect.width || r.layoutInfo.estimatedSize) : (i = o ?? Tt, n = !0);
     }
     return {
       height: i,
@@ -5037,13 +5373,13 @@ class Tu extends Mu {
   }
   getEstimatedRowHeight() {
     var e, l;
-    return (l = (e = this.rowHeight) !== null && e !== void 0 ? e : this.estimatedRowHeight) !== null && l !== void 0 ? l : zt;
+    return (l = (e = this.rowHeight) !== null && e !== void 0 ? e : this.estimatedRowHeight) !== null && l !== void 0 ? l : Tt;
   }
   buildColumn(e, l, i) {
     let o = this.getRenderedColumnWidth(e);
     var n, r;
-    let { height: a, isEstimated: u } = this.getEstimatedHeight(e, o, (n = this.headingHeight) !== null && n !== void 0 ? n : this.rowHeight, (r = this.estimatedHeadingHeight) !== null && r !== void 0 ? r : this.estimatedRowHeight), s = new P(l, i, o, a), d = new U(e.type, e.key, s);
-    return d.isSticky = this.isStickyColumn(e), d.zIndex = d.isSticky ? 2 : 1, d.estimatedSize = u, {
+    let { height: u, isEstimated: a } = this.getEstimatedHeight(e, o, (n = this.headingHeight) !== null && n !== void 0 ? n : this.rowHeight, (r = this.estimatedHeadingHeight) !== null && r !== void 0 ? r : this.estimatedRowHeight), s = new A(l, i, o, u), d = new O(e.type, e.key, s);
+    return d.isSticky = this.isStickyColumn(e), d.zIndex = d.isSticky ? 2 : 1, d.estimatedSize = a, {
       layoutInfo: d,
       children: [],
       validRect: d.rect,
@@ -5056,26 +5392,26 @@ class Tu extends Mu {
     return !1;
   }
   buildBody(e) {
-    let l = this.virtualizer.collection, i = new P(this.padding, e, 0, 0), o = new U("rowgroup", l.body.key, i), n = e, r = 0, a = 0, u = [], s = this.getEstimatedRowHeight() + this.gap, d = H(l.body, l);
+    let l = this.virtualizer.collection, i = new A(this.padding, e, 0, 0), o = new O("rowgroup", l.body.key, i), n = e, r = 0, u = 0, a = [], s = this.getEstimatedRowHeight() + this.gap, d = V(l.body, l);
     for (let f of d) {
       if (e + s < this.requestedRect.y && !this.isValid(f, e)) {
         e += s, r++;
         continue;
       }
-      let m = this.buildChild(f, this.padding, e, o.key);
-      if (m.layoutInfo.parentKey = o.key, m.index = u.length, e = m.layoutInfo.rect.maxY + this.gap, a = Math.max(a, m.layoutInfo.rect.width), u.push(m), e > this.requestedRect.maxY) {
+      let v = this.buildChild(f, this.padding, e, o.key);
+      if (v.layoutInfo.parentKey = o.key, v.index = a.length, e = v.layoutInfo.rect.maxY + this.gap, u = Math.max(u, v.layoutInfo.rect.width), a.push(v), e > this.requestedRect.maxY) {
         var c;
-        let v = l.size - (u.length + r), y = _(d);
-        if (e += v * s, (y == null ? void 0 : y.type) === "loader" && ((c = u.at(-1)) === null || c === void 0 ? void 0 : c.layoutInfo.type) !== "loader") {
-          let g = this.buildChild(y, this.padding, e, o.key);
-          g.layoutInfo.parentKey = o.key, g.index = l.size, a = Math.max(a, g.layoutInfo.rect.width), u.push(g), e = g.layoutInfo.rect.maxY;
+        let m = l.size - (a.length + r), b = Q(d);
+        if (e += m * s, (b == null ? void 0 : b.type) === "loader" && ((c = a.at(-1)) === null || c === void 0 ? void 0 : c.layoutInfo.type) !== "loader") {
+          let g = this.buildChild(b, this.padding, e, o.key);
+          g.layoutInfo.parentKey = o.key, g.index = l.size, u = Math.max(u, g.layoutInfo.rect.width), a.push(g), e = g.layoutInfo.rect.maxY;
         }
         break;
       }
     }
-    return (l == null ? void 0 : l.size) === 0 ? e = this.virtualizer.visibleRect.maxY : e -= this.gap, i.width = a, i.height = e - n, {
+    return (l == null ? void 0 : l.size) === 0 ? e = this.virtualizer.visibleRect.maxY : e -= this.gap, i.width = u, i.height = e - n, {
       layoutInfo: o,
-      children: u,
+      children: a,
       validRect: o.rect.intersection(this.requestedRect),
       node: l.body
     };
@@ -5099,32 +5435,32 @@ class Tu extends Mu {
   }
   buildRow(e, l, i) {
     var o;
-    let n = this.virtualizer.collection, r = new P(l, i, 0, 0), a = new U("row", e.key, r), u = [], s = 0;
-    for (let c of H(e, n)) if (c.type === "cell")
+    let n = this.virtualizer.collection, r = new A(l, i, 0, 0), u = new O("row", e.key, r), a = [], s = 0;
+    for (let c of V(e, n)) if (c.type === "cell")
       if (l > this.requestedRect.maxX) {
         let h = this.layoutNodes.get(c.key);
         if (h)
           h.layoutInfo.rect.x = l, l += h.layoutInfo.rect.width;
         else break;
       } else {
-        let h = this.buildChild(c, l, i, a.key);
-        l = h.layoutInfo.rect.maxX, s = Math.max(s, h.layoutInfo.rect.height), h.index = u.length, u.push(h);
+        let h = this.buildChild(c, l, i, u.key);
+        l = h.layoutInfo.rect.maxX, s = Math.max(s, h.layoutInfo.rect.height), h.index = a.length, a.push(h);
       }
-    this.setChildHeights(u, s);
+    this.setChildHeights(a, s);
     var d;
     return r.width = this.layoutNodes.get((d = (o = n.head) === null || o === void 0 ? void 0 : o.key) !== null && d !== void 0 ? d : "header").layoutInfo.rect.width, r.height = s, {
-      layoutInfo: a,
-      children: u,
+      layoutInfo: u,
+      children: a,
       validRect: r.intersection(this.requestedRect),
       node: e
     };
   }
   buildCell(e, l, i) {
-    let o = this.getRenderedColumnWidth(e), { height: n, isEstimated: r } = this.getEstimatedHeight(e, o, this.rowHeight, this.estimatedRowHeight), a = new P(l, i, o, n), u = new U(e.type, e.key, a);
-    return u.isSticky = this.isStickyColumn(e), u.zIndex = u.isSticky ? 2 : 1, u.estimatedSize = r, {
-      layoutInfo: u,
+    let o = this.getRenderedColumnWidth(e), { height: n, isEstimated: r } = this.getEstimatedHeight(e, o, this.rowHeight, this.estimatedRowHeight), u = new A(l, i, o, n), a = new O(e.type, e.key, u);
+    return a.isSticky = this.isStickyColumn(e), a.zIndex = a.isSticky ? 2 : 1, a.estimatedSize = r, {
+      layoutInfo: a,
       children: [],
-      validRect: a,
+      validRect: u,
       node: e
     };
   }
@@ -5148,37 +5484,37 @@ class Tu extends Mu {
             e.push(o.layoutInfo), this.addVisibleLayoutInfos(e, o, i);
           break;
         case "rowgroup": {
-          let o = this.binarySearch(l.children, i.topLeft, "y"), n = this.binarySearch(l.children, i.bottomRight, "y"), r = this.persistedIndices.get(l.layoutInfo.key), a = 0;
-          for (; r && a < r.length && r[a] < o; ) {
-            let s = r[a];
-            s < l.children.length && (e.push(l.children[s].layoutInfo), this.addVisibleLayoutInfos(e, l.children[s], i)), a++;
+          let o = this.binarySearch(l.children, i.topLeft, "y"), n = this.binarySearch(l.children, i.bottomRight, "y"), r = this.persistedIndices.get(l.layoutInfo.key), u = 0;
+          for (; r && u < r.length && r[u] < o; ) {
+            let s = r[u];
+            s < l.children.length && (e.push(l.children[s].layoutInfo), this.addVisibleLayoutInfos(e, l.children[s], i)), u++;
           }
           for (let s = o; s <= n; s++) {
-            for (; r && a < r.length && r[a] < s; ) a++;
+            for (; r && u < r.length && r[u] < s; ) u++;
             e.push(l.children[s].layoutInfo), this.addVisibleLayoutInfos(e, l.children[s], i);
           }
-          for (; r && a < r.length; ) {
-            let s = r[a++];
+          for (; r && u < r.length; ) {
+            let s = r[u++];
             s < l.children.length && (e.push(l.children[s].layoutInfo), this.addVisibleLayoutInfos(e, l.children[s], i));
           }
-          let u = l.children.at(-1);
-          (u == null ? void 0 : u.layoutInfo.type) === "loader" && e.push(u.layoutInfo);
+          let a = l.children.at(-1);
+          (a == null ? void 0 : a.layoutInfo.type) === "loader" && e.push(a.layoutInfo);
           break;
         }
         case "headerrow":
         case "row": {
-          let o = this.binarySearch(l.children, i.topLeft, "x"), n = this.binarySearch(l.children, i.topRight, "x"), r = 0, a = this.persistedIndices.get(l.layoutInfo.key) || this.stickyColumnIndices;
-          for (; r < a.length && a[r] < o; ) {
-            let u = a[r];
-            u < l.children.length && e.push(l.children[u].layoutInfo), r++;
+          let o = this.binarySearch(l.children, i.topLeft, "x"), n = this.binarySearch(l.children, i.topRight, "x"), r = 0, u = this.persistedIndices.get(l.layoutInfo.key) || this.stickyColumnIndices;
+          for (; r < u.length && u[r] < o; ) {
+            let a = u[r];
+            a < l.children.length && e.push(l.children[a].layoutInfo), r++;
           }
-          for (let u = o; u <= n; u++) {
-            for (; r < a.length && a[r] < u; ) r++;
-            e.push(l.children[u].layoutInfo);
+          for (let a = o; a <= n; a++) {
+            for (; r < u.length && u[r] < a; ) r++;
+            e.push(l.children[a].layoutInfo);
           }
-          for (; r < a.length; ) {
-            let u = a[r++];
-            u < l.children.length && e.push(l.children[u].layoutInfo);
+          for (; r < u.length; ) {
+            let a = u[r++];
+            a < l.children.length && e.push(l.children[a].layoutInfo);
           }
           break;
         }
@@ -5189,9 +5525,9 @@ class Tu extends Mu {
   binarySearch(e, l, i) {
     let o = 0, n = e.length - 1;
     for (; o <= n; ) {
-      let r = o + n >> 1, a = e[r];
-      if (i === "x" && a.layoutInfo.rect.maxX <= l.x || i === "y" && a.layoutInfo.rect.maxY <= l.y) o = r + 1;
-      else if (i === "x" && a.layoutInfo.rect.x > l.x || i === "y" && a.layoutInfo.rect.y > l.y) n = r - 1;
+      let r = o + n >> 1, u = e[r];
+      if (i === "x" && u.layoutInfo.rect.maxX <= l.x || i === "y" && u.layoutInfo.rect.maxY <= l.y) o = r + 1;
+      else if (i === "x" && u.layoutInfo.rect.x > l.x || i === "y" && u.layoutInfo.rect.y > l.y) n = r - 1;
       else return r;
     }
     return Math.max(0, Math.min(e.length - 1, o));
@@ -5204,12 +5540,12 @@ class Tu extends Mu {
         let n = (e = this.layoutNodes.get(o)) === null || e === void 0 ? void 0 : e.layoutInfo;
         for (; n && n.parentKey; ) {
           var l, i;
-          let r = this.virtualizer.collection.getItem(n.key), a = this.persistedIndices.get(n.parentKey);
-          a || (a = (r == null ? void 0 : r.type) === "cell" || (r == null ? void 0 : r.type) === "column" ? [
+          let r = this.virtualizer.collection.getItem(n.key), u = this.persistedIndices.get(n.parentKey);
+          u || (u = (r == null ? void 0 : r.type) === "cell" || (r == null ? void 0 : r.type) === "column" ? [
             ...this.stickyColumnIndices
-          ] : [], this.persistedIndices.set(n.parentKey, a));
-          let u = (l = this.layoutNodes.get(n.key)) === null || l === void 0 ? void 0 : l.index;
-          u != null && !a.includes(u) && a.push(u), n = (i = this.layoutNodes.get(n.parentKey)) === null || i === void 0 ? void 0 : i.layoutInfo;
+          ] : [], this.persistedIndices.set(n.parentKey, u));
+          let a = (l = this.layoutNodes.get(n.key)) === null || l === void 0 ? void 0 : l.index;
+          a != null && !u.includes(a) && u.push(a), n = (i = this.layoutNodes.get(n.parentKey)) === null || i === void 0 ? void 0 : i.layoutInfo;
         }
       }
       for (let o of this.persistedIndices.values()) o.sort((n, r) => n - r);
@@ -5217,20 +5553,20 @@ class Tu extends Mu {
   }
   getDropTargetFromPoint(e, l, i) {
     e += this.virtualizer.visibleRect.x, l += this.virtualizer.visibleRect.y;
-    let o = new P(e, Math.max(0, l - this.gap), 1, Math.max(1, this.gap * 2)), n = this.getVisibleLayoutInfos(o), r = null, a = 1 / 0;
+    let o = new A(e, Math.max(0, l - this.gap), 1, Math.max(1, this.gap * 2)), n = this.getVisibleLayoutInfos(o), r = null, u = 1 / 0;
     for (let c of n) {
       if (c.type !== "row" || !c.rect.intersects(o)) continue;
-      let h = Math.abs(c.rect.y - l), f = Math.abs(c.rect.maxY - l), m = Math.min(h, f);
-      m < a && (a = m, r = c.key);
+      let h = Math.abs(c.rect.y - l), f = Math.abs(c.rect.maxY - l), v = Math.min(h, f);
+      v < u && (u = v, r = c.key);
     }
     if (r == null || this.virtualizer.collection.size === 0) return {
       type: "root"
     };
-    let u = this.getLayoutInfo(r);
-    if (!u) return null;
-    let s = u.rect, d = {
+    let a = this.getLayoutInfo(r);
+    if (!a) return null;
+    let s = a.rect, d = {
       type: "item",
-      key: u.key,
+      key: a.key,
       dropPosition: "on"
     };
     return i(d) ? l <= s.y + 10 && i({
@@ -5258,7 +5594,7 @@ class Tu extends Mu {
 class Fu extends Tu {
   // Invalidate the layout whenever the column widths change.
   useLayoutOptions() {
-    let e = p.useContext(Te);
+    let e = p.useContext(Fe);
     return p.useMemo(() => ({
       columnWidths: e == null ? void 0 : e.columnWidths
     }), [
@@ -5291,8 +5627,8 @@ function Nu(t, e) {
   }
   return l;
 }
-function Hu(t, e) {
-  let { contentSize: l, onVisibleRectChange: i, innerStyle: o, onScrollStart: n, onScrollEnd: r, scrollDirection: a = "both", ...u } = t, s = p.useRef({
+function Vu(t, e) {
+  let { contentSize: l, onVisibleRectChange: i, innerStyle: o, onScrollStart: n, onScrollEnd: r, scrollDirection: u = "both", ...a } = t, s = p.useRef({
     scrollTop: 0,
     scrollLeft: 0,
     scrollEndTime: 0,
@@ -5300,12 +5636,12 @@ function Hu(t, e) {
     width: 0,
     height: 0,
     isScrolling: !1
-  }).current, { direction: d } = ee(), [c, h] = p.useState(!1), f = p.useCallback((x) => {
-    x.target === x.currentTarget && (t.onScroll && t.onScroll(x), Ve.flushSync(() => {
-      let S = x.currentTarget.scrollTop, E = Nu(x.currentTarget, d);
-      s.scrollTop = Math.max(0, Math.min(S, l.height - s.height)), s.scrollLeft = Math.max(0, Math.min(E, l.width - s.width)), i(new P(s.scrollLeft, s.scrollTop, s.width, s.height)), s.isScrolling || (s.isScrolling = !0, h(!0), window.dispatchEvent(new Event("tk.disconnect-observer")), n && n());
-      let A = Date.now();
-      s.scrollEndTime <= A + 50 && (s.scrollEndTime = A + 300, s.scrollTimeout != null && clearTimeout(s.scrollTimeout), s.scrollTimeout = setTimeout(() => {
+  }).current, { direction: d } = J(), [c, h] = p.useState(!1), f = p.useCallback((w) => {
+    w.target === w.currentTarget && (t.onScroll && t.onScroll(w), je.flushSync(() => {
+      let S = w.currentTarget.scrollTop, E = Nu(w.currentTarget, d);
+      s.scrollTop = Math.max(0, Math.min(S, l.height - s.height)), s.scrollLeft = Math.max(0, Math.min(E, l.width - s.width)), i(new A(s.scrollLeft, s.scrollTop, s.width, s.height)), s.isScrolling || (s.isScrolling = !0, h(!0), window.dispatchEvent(new Event("tk.disconnect-observer")), n && n());
+      let I = Date.now();
+      s.scrollEndTime <= I + 50 && (s.scrollEndTime = I + 300, s.scrollTimeout != null && clearTimeout(s.scrollTimeout), s.scrollTimeout = setTimeout(() => {
         s.isScrolling = !1, h(!1), s.scrollTimeout = null, window.dispatchEvent(new Event("tk.connect-observer")), r && r();
       }, 300));
     }));
@@ -5318,48 +5654,48 @@ function Hu(t, e) {
     n,
     r
   ]);
-  Kn(e, "scroll", f), p.useEffect(() => () => {
+  Un(e, "scroll", f), p.useEffect(() => () => {
     s.scrollTimeout != null && clearTimeout(s.scrollTimeout), s.isScrolling && window.dispatchEvent(new Event("tk.connect-observer"));
   }, []);
-  let m = p.useRef(!1), v = oe((x) => {
+  let v = p.useRef(!1), m = ne((w) => {
     let S = e.current;
-    if (!S || m.current) return;
-    m.current = !0;
-    let E = process.env.NODE_ENV === "test" && !process.env.VIRT_ON, A = Object.getOwnPropertyNames(window.HTMLElement.prototype).includes("clientWidth"), B = Object.getOwnPropertyNames(window.HTMLElement.prototype).includes("clientHeight"), z = S.clientWidth, M = S.clientHeight, K = E && !A ? 1 / 0 : z, V = E && !B ? 1 / 0 : M;
-    (s.width !== K || s.height !== V) && (s.width = K, s.height = V, x(() => {
-      i(new P(s.scrollLeft, s.scrollTop, K, V));
-    }), (!E && z !== S.clientWidth || M !== S.clientHeight) && (s.width = S.clientWidth, s.height = S.clientHeight, x(() => {
-      i(new P(s.scrollLeft, s.scrollTop, s.width, s.height));
-    }))), m.current = !1;
-  }), y = p.useRef(null), [g, C] = p.useState({});
-  Ee(() => {
-    if (!m.current && (y.current == null || !l.equals(y.current)))
+    if (!S || v.current) return;
+    v.current = !0;
+    let E = process.env.NODE_ENV === "test" && !process.env.VIRT_ON, I = Object.getOwnPropertyNames(window.HTMLElement.prototype).includes("clientWidth"), z = Object.getOwnPropertyNames(window.HTMLElement.prototype).includes("clientHeight"), k = S.clientWidth, P = S.clientHeight, F = E && !I ? 1 / 0 : k, T = E && !z ? 1 / 0 : P;
+    (s.width !== F || s.height !== T) && (s.width = F, s.height = T, w(() => {
+      i(new A(s.scrollLeft, s.scrollTop, F, T));
+    }), (!E && k !== S.clientWidth || P !== S.clientHeight) && (s.width = S.clientWidth, s.height = S.clientHeight, w(() => {
+      i(new A(s.scrollLeft, s.scrollTop, s.width, s.height));
+    }))), v.current = !1;
+  }), b = p.useRef(null), [g, C] = p.useState({});
+  fe(() => {
+    if (!v.current && (b.current == null || !l.equals(b.current)))
       if (typeof IS_REACT_ACT_ENVIRONMENT == "boolean" ? IS_REACT_ACT_ENVIRONMENT : typeof jest < "u") {
-        C({}), y.current = l;
+        C({}), b.current = l;
         return;
-      } else queueMicrotask(() => v(Ve.flushSync));
-    y.current = l;
-  }), Ee(() => {
-    v((x) => x());
+      } else queueMicrotask(() => m(je.flushSync));
+    b.current = l;
+  }), fe(() => {
+    m((w) => w());
   }, [
     g
   ]);
-  let w = p.useCallback(() => {
-    v(Ve.flushSync);
+  let $ = p.useCallback(() => {
+    m(je.flushSync);
   }, [
-    v
+    m
   ]);
-  Nt({
+  it({
     ref: e,
     box: "border-box",
-    onResize: w
+    onResize: $
   });
-  let $ = {
+  let x = {
     // Reset padding so that relative positioning works correctly. Padding will be done in JS layout.
     padding: 0,
-    ...u.style
+    ...a.style
   };
-  return a === "horizontal" ? ($.overflowX = "auto", $.overflowY = "hidden") : a === "vertical" || l.width === s.width ? ($.overflowY = "auto", $.overflowX = "hidden") : $.overflow = "auto", o = {
+  return u === "horizontal" ? (x.overflowX = "auto", x.overflowY = "hidden") : u === "vertical" || l.width === s.width ? (x.overflowY = "auto", x.overflowX = "hidden") : x.overflow = "auto", o = {
     width: Number.isFinite(l.width) ? l.width : void 0,
     height: Number.isFinite(l.height) ? l.height : void 0,
     pointerEvents: c ? "none" : "auto",
@@ -5368,8 +5704,8 @@ function Hu(t, e) {
   }, {
     isScrolling: c,
     scrollViewProps: {
-      ...u,
-      style: $
+      ...a,
+      style: x
     },
     contentProps: {
       role: "presentation",
@@ -5377,7 +5713,7 @@ function Hu(t, e) {
     }
   };
 }
-function Vu(t) {
+function Hu(t) {
   let { layoutInfo: e, virtualizer: l, ref: i } = t, o = e == null ? void 0 : e.key, n = p.useCallback(() => {
     if (o != null && i.current) {
       let r = ju(i.current);
@@ -5388,7 +5724,7 @@ function Vu(t) {
     o,
     i
   ]);
-  return Ee(() => {
+  return fe(() => {
     e != null && e.estimatedSize && n();
   }), {
     updateSize: n
@@ -5400,29 +5736,29 @@ function ju(t) {
   let l = new re(t.scrollWidth, t.scrollHeight);
   return t.style.height = e, l;
 }
-function uo(t) {
-  let { style: e, className: l, layoutInfo: i, virtualizer: o, parent: n, children: r } = t, { direction: a } = ee(), u = p.useRef(null);
-  return Vu({
+function $o(t) {
+  let { style: e, className: l, layoutInfo: i, virtualizer: o, parent: n, children: r } = t, { direction: u } = J(), a = p.useRef(null);
+  return Hu({
     layoutInfo: i,
     virtualizer: o,
-    ref: u
+    ref: a
   }), /* @__PURE__ */ D.createElement("div", {
     role: "presentation",
-    ref: u,
+    ref: a,
     className: l,
     style: {
-      ...Lu(i, a, n),
+      ...Lu(i, u, n),
       ...e
     }
   }, r);
 }
-let Bt = /* @__PURE__ */ new WeakMap();
+let Ft = /* @__PURE__ */ new WeakMap();
 function Lu(t, e, l) {
-  let i = e === "rtl" ? "right" : "left", o = Bt.get(t);
+  let i = e === "rtl" ? "right" : "left", o = Ft.get(t);
   if (o && o[i] != null) {
     if (!l) return o;
-    let u = t.rect.y - l.rect.y, s = t.rect.x - l.rect.x;
-    if (o.top === u && o[i] === s) return o;
+    let a = t.rect.y - l.rect.y, s = t.rect.x - l.rect.x;
+    if (o.top === a && o[i] === s) return o;
   }
   let n = {
     // TODO: For layoutInfos that are sticky that have parents with overflow visible, their "top" will be relative to the to the nearest scrolling container
@@ -5434,11 +5770,11 @@ function Lu(t, e, l) {
     width: t.rect.width,
     height: t.rect.height
   };
-  Object.entries(n).forEach(([u, s]) => {
-    Number.isFinite(s) || (n[u] = void 0);
+  Object.entries(n).forEach(([a, s]) => {
+    Number.isFinite(s) || (n[a] = void 0);
   });
   var r;
-  let a = {
+  let u = {
     position: t.isSticky ? "sticky" : "absolute",
     // Sticky elements are positioned in normal document flow. Display inline-block so that they don't push other sticky columns onto the following rows.
     display: t.isSticky ? "inline-block" : void 0,
@@ -5449,9 +5785,9 @@ function Lu(t, e, l) {
     contain: "size layout style",
     ...n
   };
-  return Bt.set(t, a), a;
+  return Ft.set(t, u), u;
 }
-const ao = /* @__PURE__ */ p.createContext(null), so = /* @__PURE__ */ p.createContext(null);
+const xo = /* @__PURE__ */ p.createContext(null), wo = /* @__PURE__ */ p.createContext(null);
 function Ou(t) {
   let { children: e, layout: l, layoutOptions: i } = t, o = p.useMemo(() => typeof l == "function" ? new l() : l, [
     l
@@ -5464,9 +5800,9 @@ function Ou(t) {
   }), [
     o
   ]);
-  return /* @__PURE__ */ D.createElement(Y.Provider, {
+  return /* @__PURE__ */ D.createElement(U.Provider, {
     value: n
-  }, /* @__PURE__ */ D.createElement(so.Provider, {
+  }, /* @__PURE__ */ D.createElement(wo.Provider, {
     value: {
       layout: o,
       layoutOptions: i
@@ -5475,7 +5811,7 @@ function Ou(t) {
 }
 function Wu({ collection: t, persistedKeys: e, scrollRef: l, renderDropIndicator: i }) {
   var o;
-  let { layout: n, layoutOptions: r } = p.useContext(so), a = (o = n.useLayoutOptions) === null || o === void 0 ? void 0 : o.call(n), u = Ru({
+  let { layout: n, layoutOptions: r } = p.useContext(wo), u = (o = n.useLayoutOptions) === null || o === void 0 ? void 0 : o.call(n), a = Au({
     layout: n,
     collection: t,
     renderView: (d, c) => {
@@ -5487,32 +5823,32 @@ function Wu({ collection: t, persistedKeys: e, scrollRef: l, renderDropIndicator
       c && (c.scrollLeft = d.x, c.scrollTop = d.y);
     },
     persistedKeys: e,
-    layoutOptions: p.useMemo(() => r && a ? {
+    layoutOptions: p.useMemo(() => r && u ? {
       ...r,
-      ...a
-    } : r || a, [
+      ...u
+    } : r || u, [
       r,
-      a
+      u
     ])
-  }), { contentProps: s } = Hu({
-    onVisibleRectChange: u.setVisibleRect,
-    contentSize: u.contentSize,
-    onScrollStart: u.startScrolling,
-    onScrollEnd: u.endScrolling
+  }), { contentProps: s } = Vu({
+    onVisibleRectChange: a.setVisibleRect,
+    contentSize: a.contentSize,
+    onScrollStart: a.startScrolling,
+    onScrollEnd: a.endScrolling
   }, l);
-  return /* @__PURE__ */ D.createElement("div", s, /* @__PURE__ */ D.createElement(ao.Provider, {
-    value: u
-  }, co(null, u.visibleViews, i)));
+  return /* @__PURE__ */ D.createElement("div", s, /* @__PURE__ */ D.createElement(xo.Provider, {
+    value: a
+  }, Co(null, a.visibleViews, i)));
 }
 function Uu({ parent: t, renderDropIndicator: e }) {
-  let i = p.useContext(ao).virtualizer.getVisibleView(t.key);
-  return co(i, Array.from(i.children), e);
+  let i = p.useContext(xo).virtualizer.getVisibleView(t.key);
+  return Co(i, Array.from(i.children), e);
 }
-function co(t, e, l) {
+function Co(t, e, l) {
   return e.map((i) => qu(t, i, l));
 }
 function qu(t, e, l) {
-  let i = /* @__PURE__ */ D.createElement(uo, {
+  let i = /* @__PURE__ */ D.createElement($o, {
     key: e.key,
     layoutInfo: e.layoutInfo,
     virtualizer: e.virtualizer,
@@ -5520,17 +5856,17 @@ function qu(t, e, l) {
   }, e.rendered), { collection: o, layout: n } = e.virtualizer, r = e.content;
   return (r == null ? void 0 : r.type) === "item" && l && n.getDropTargetLayoutInfo && (i = /* @__PURE__ */ D.createElement(D.Fragment, {
     key: e.key
-  }, It(t, e, {
+  }, Kt(t, e, {
     type: "item",
     key: e.content.key,
     dropPosition: "before"
-  }, l), i, Nn(o, r, (a) => It(t, e, a, l)))), i;
+  }, l), i, qn(o, r, (u) => Kt(t, e, u, l)))), i;
 }
-function It(t, e, l, i) {
+function Kt(t, e, l, i) {
   let o = i(l);
   if (o) {
     let n = e.virtualizer.layout.getDropTargetLayoutInfo(l);
-    o = /* @__PURE__ */ D.createElement(uo, {
+    o = /* @__PURE__ */ D.createElement($o, {
       layoutInfo: n,
       virtualizer: e.virtualizer,
       parent: t == null ? void 0 : t.layoutInfo
@@ -5538,19 +5874,227 @@ function It(t, e, l, i) {
   }
   return o;
 }
-var Yu = Object.defineProperty, ht = (t, e) => Yu(t, "name", { value: e, configurable: !0 });
-const We = ht(({ icon: t, label: e, isActive: l, onDragStart: i, tooltip: o, ...n }) => {
+const Yu = async (t, e, l, i, o) => {
+  const n = { ...l, [e]: o };
+  return (e === "userPrompt" || e === "systemPrompt") && (n.variables = await gn(t, n)), i(n), n;
+}, Zu = async (t, e, l) => {
+  const i = await t.ui.elementSelectors.selectEntity({ allowNone: !0 });
+  let o;
+  if (i.status === "ok" && (o = { ...e, entity: i.selected.module + "." + i.selected.name }), i.status === "none" && (o = { ...e, entity: "" }), o) {
+    const n = await bn(t, e.variables, o);
+    o = { ...o, variables: n }, l(o);
+  }
+  return o;
+}, Xu = async (t, e, l) => {
+  const i = await t.ui.elementSelectors.selectDocument({ allowNone: !0, query: { elementType: nt } });
+  let o;
+  return i.status === "ok" && (o = { ...e, modelQualifiedName: i.selected.module + "." + i.selected.name }), i.status === "none" && (o = { ...e, modelQualifiedName: void 0 }), o && l(o), o;
+}, We = async (t, e, l) => {
+  switch (t) {
+    case "modelQualifiedName":
+      if (!l.modelQualifiedName)
+        return "Please select a model.";
+      if (!(await e.app.model.customBlobDocuments.getDocumentsOfType(nt)).find((a) => a.moduleName + "." + a.name === l.modelQualifiedName))
+        return "This document is invalid. Make sure to select a document of type Model.";
+      break;
+    case "entity":
+      if (l.variables.length > 0 && !l.entity)
+        return "Please select an entity.";
+      const [n, r] = l.entity.split(".");
+      if (l.entity && (!n || !r))
+        return "The selected entity is not valid.";
+      if (!await yn(e, l))
+        return "Entity no longer exists.";
+      break;
+    case "userPrompt":
+      if (!l.userPrompt)
+        return "Please provide a user prompt.";
+      break;
+    default:
+      return !0;
+  }
+  return !0;
+}, Gu = async (t, e) => {
+  if (!e)
+    return;
+  const l = (await t.app.model.customBlobDocuments.getDocumentsOfType(nt)).find((i) => i.moduleName + "." + i.name === e);
+  if (!l) {
+    t.ui.messageBoxes.show(
+      "error",
+      "Could not find model.",
+      "This model might have been deleted or renamed. Please update the model selection."
+    );
+    return;
+  }
+  t.ui.editors.editDocument(l.id);
+}, Qu = async (t, e, l, i) => {
+  const o = await t.ui.dialogs.showModal(
+    {
+      title: "Model settings",
+      contentSize: { height: 385, width: 600 }
+    },
+    {
+      componentName: e,
+      uiEntrypoint: "modelSettingsEdit",
+      queryParams: {
+        agent: encodeURIComponent(JSON.stringify(l))
+      }
+    }
+  );
+  let n;
+  return o && (n = o), n && i(n), n;
+}, Nt = async (t, e, l, i, o) => {
+  const n = o !== void 0 && l.tools ? l.tools[o] : void 0, r = await t.ui.dialogs.showModal(
+    {
+      title: n ? "Edit tool" : "Add tool",
+      contentSize: { height: 330, width: 600 }
+    },
+    {
+      componentName: e,
+      uiEntrypoint: "toolEdit",
+      queryParams: {
+        tool: n ? encodeURIComponent(JSON.stringify(n)) : ""
+      }
+    }
+  );
+  if (r !== null) {
+    const u = r;
+    let a;
+    o !== void 0 && l.tools ? (a = [...l.tools], a[o] = u) : a = [...l.tools || [], u], a.sort((d, c) => d.name.localeCompare(c.name));
+    const s = { ...l, tools: a };
+    return i(s), s;
+  } else
+    return null;
+}, Ju = async (t, e, l) => {
+  const i = t.tools.filter((n, r) => r !== l), o = { ...t, tools: i };
+  return e(o), o;
+}, _u = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M8%2014.5C11.5899%2014.5%2014.5%2011.5899%2014.5%208C14.5%204.41015%2011.5899%201.5%208%201.5C4.41015%201.5%201.5%204.41015%201.5%208C1.5%2011.5899%204.41015%2014.5%208%2014.5Z'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'%20stroke-linecap='round'/%3e%3cpath%20d='M3.5%2012.75L12.75%203.5'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", ea = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M8%2014.5C11.5899%2014.5%2014.5%2011.5899%2014.5%208C14.5%204.41015%2011.5899%201.5%208%201.5C4.41015%201.5%201.5%204.41015%201.5%208C1.5%2011.5899%204.41015%2014.5%208%2014.5Z'%20stroke='%23535965'%20stroke-miterlimit='10'%20stroke-linecap='round'/%3e%3cpath%20d='M3.5%2012.75L12.75%203.5'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
+var ta = Object.defineProperty, la = (t, e) => ta(t, "name", { value: e, configurable: !0 });
+const ia = la((t) => y.jsx(le, { light: ea, dark: _u, ...t }), "AppSelectorNoVersionIcon"), oa = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M8.85498%204.52502L11.475%207.14502'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M5.145%2013.5H2.5V10.885L10.745%202.63502C10.94%202.44002%2011.255%202.44002%2011.45%202.63502L13.36%204.54502C13.555%204.74002%2013.555%205.05502%2013.36%205.25002L5.145%2013.5Z'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", na = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M8.85498%204.52502L11.475%207.14502'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M5.145%2013.5H2.5V10.885L10.745%202.63502C10.94%202.44002%2011.255%202.44002%2011.45%202.63502L13.36%204.54502C13.555%204.74002%2013.555%205.05502%2013.36%205.25002L5.145%2013.5Z'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
+var ra = Object.defineProperty, ua = (t, e) => ra(t, "name", { value: e, configurable: !0 });
+const aa = ua((t) => y.jsx(le, { light: na, dark: oa, ...t }), "EditIcon"), sa = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M12%2014.5H4C3.725%2014.5%203.5%2014.275%203.5%2014V2C3.5%201.725%203.725%201.5%204%201.5H8.5L12.5%205.5V14C12.5%2014.275%2012.275%2014.5%2012%2014.5Z'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%205.5H8.5V1.5'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", da = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M12%2014.5H4C3.725%2014.5%203.5%2014.275%203.5%2014V2C3.5%201.725%203.725%201.5%204%201.5H8.5L12.5%205.5V14C12.5%2014.275%2012.275%2014.5%2012%2014.5Z'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%205.5H8.5V1.5'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
+var ca = Object.defineProperty, ha = (t, e) => ca(t, "name", { value: e, configurable: !0 });
+const fa = ha((t) => y.jsx(le, { light: da, dark: sa, ...t }), "PageIcon");
+var pa = Object.defineProperty, va = (t, e) => pa(t, "name", { value: e, configurable: !0 });
+const ma = va(() => {
+  const t = document.createElement("div");
+  t.style.position = "absolute", t.style.border = "1px solid black", t.style.visibility = "hidden", t.style.width = "1px", t.style.height = "1px", document.body.appendChild(t);
+  const e = getComputedStyle(t), l = parseFloat(e.borderTopWidth);
+  return document.body.removeChild(t), l;
+}, "getBorderScaleFactor");
+var ga = Object.defineProperty, Ke = (t, e) => ga(t, "name", { value: e, configurable: !0 });
+const ko = p.createContext({ borderScaleFactor: 1, stickyHeader: !1 }), ba = Ke(({ stickyHeader: t = !1, children: e }) => {
+  const l = p.useMemo(() => t ? ma() : 1, [t]);
+  return y.jsx(ko.Provider, { value: { borderScaleFactor: l, stickyHeader: t }, children: e });
+}, "TableProvider"), Do = Ke(() => p.useContext(ko), "useTableContext"), So = p.createContext({}), Eo = Ke(({ id: t, children: e }) => y.jsx(So.Provider, { value: { id: t }, children: e }), "TableRowContextProvider"), zo = Ke(() => p.useContext(So), "useTableRowContext");
+var ya = Object.defineProperty, bt = (t, e) => ya(t, "name", { value: e, configurable: !0 });
+const Bo = p.createContext(void 0), $a = bt(({ selectionType: t = "none", selectionMode: e = "none", defaultSelectedKeys: l = [], selectedKeys: i, onSelectionChange: o, onDoubleClick: n, onContextMenu: r, children: u }) => {
+  const [a, s] = p.useState(l[0]), [d, c] = p.useState(), h = p.useRef(!1), f = p.useCallback((v) => {
+    e !== "single" || v === void 0 || (i !== void 0 ? i[0] !== v && (o == null || o([v])) : v !== a && (s(v), o == null || o([v])));
+  }, [i, a, o, e]);
+  return $e(t) || $e(e) ? y.jsx(y.Fragment, { children: u }) : y.jsx(Bo.Provider, { value: { selectionType: t, selectionMode: e, hasScrolledIntoView: h, defaultSelectedKeys: l, selected: i ? i[0] : a, addSelected: f, hovered: d, setHovered: c, onDoubleClick: n, onContextMenu: r }, children: u });
+}, "TableInteractionProvider"), Ne = bt(() => p.useContext(Bo), "useTableInteractionContext");
+function $e(t) {
+  return t === "none" || t === void 0;
+}
+bt($e, "isNoneOrUndefined");
+const yt = 6;
+var xa = Object.defineProperty, wa = (t, e) => xa(t, "name", { value: e, configurable: !0 });
+const Ue = 16 + 2 * yt + 1, Ca = { loaderHeight: Ue, estimatedRowHeight: Ue, estimatedHeadingHeight: Ue }, ka = wa(({ stickyHeader: t, selectionType: e, selectionMode: l, defaultSelectedKeys: i, onSelectionChange: o, onDoubleClick: n, onContextMenu: r, selectedKeys: u, className: a, virtualizationOptions: s = {}, ...d }) => {
+  const c = { ...d, disallowTypeAhead: !0 }, h = { ...Ca, ...s };
+  let f = y.jsx(Da, { className: a, children: y.jsx(Ou, { layout: Fu, layoutOptions: h, children: y.jsx(Sa, { ...c }) }) });
+  return e && (f = y.jsx($a, { selectionType: e, selectionMode: l, defaultSelectedKeys: i, selectedKeys: u, onSelectionChange: o, onDoubleClick: n, onContextMenu: r, children: f })), y.jsx(ba, { stickyHeader: t, children: f });
+}, "Table"), Da = R.div`
+    background-color: ${({ theme: t }) => t.colorsBackgroundTableLayout};
+    border: solid ${({ theme: t }) => t.colorsBackgroundTableBase} ${M.borderWidthMd};
+    min-height: 100%;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+`, Sa = R(hu)`
+    border-collapse: separate;
+    border-spacing: 0;
+    color: ${({ theme: t }) => t.colorsTextPrimaryDefault};
+    font-size: ${M.fontSizeMd};
+    height: auto;
+    line-height: ${M.lineHeightMd};
+    table-layout: fixed;
+    white-space: nowrap;
+    width: 100%;
+`;
+var Ea = Object.defineProperty, za = (t, e) => Ea(t, "name", { value: e, configurable: !0 });
+const Ba = za(({ ...t }) => y.jsx(bu, { ...t }), "TableBody");
+var Ia = Object.defineProperty, Pa = (t, e) => Ia(t, "name", { value: e, configurable: !0 });
+const Ra = Pa((t) => y.jsxs(Aa, { ...t, children: [y.jsx(Ma, {}), y.jsx(Yn, {})] }), "DropdownButton"), Aa = R(Pe)`
+    color: ${(t) => t.theme.colorsTextPrimaryDefault};
+    background-color: ${(t) => t.theme.colorsBackgroundInputBase};
+
+    border-width: ${M.borderWidthMd};
+    border-style: solid;
+    border-radius: ${M.borderRadiusXs};
+
+    border-color: ${(t) => t.theme.colorsBorderInputDefault};
+
+    &[data-hovered] {
+        border-color: ${(t) => t.theme.colorsBorderInputHover};
+    }
+
+    &[data-pressed],
+    &[data-focused],
+    &[data-selected] {
+        border-color: ${(t) => t.theme.colorsBorderActive};
+    }
+
+    &[data-disabled] {
+        opacity: 0.5;
+    }
+
+    padding: 3px ${M.spacing4};
+    display: flex;
+    align-items: normal;
+    gap: ${M.spacing8};
+    width: 100%;
+`, Ma = R(uu)`
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    // specific overwrite for this value to make sure the default Sass stylesheet isn't being used ("button span" selector)
+    // (& targets the classname for this component specifically in styled-components)
+    // Can be removed once the global Sass stylesheet is removed
+    & {
+        line-height: ${M.lineHeightMd};
+    }
+
+    flex-grow: 1;
+    text-align: left;
+`;
+var Ta = Object.defineProperty, Fa = (t, e) => Ta(t, "name", { value: e, configurable: !0 });
+function Ka({ children: t, items: e, label: l, description: i, ...o }) {
+  const { isInvalid: n, validate: r, validationError: u } = nn({ value: o.selectedKey ?? void 0, isInvalid: o.isInvalid, validate: o.validate });
+  return y.jsx(he, { ...o, isInvalid: n, validate: r, children: y.jsxs(rn, { label: l, description: i, realtimeValidationError: u, children: [y.jsx(Na, {}), y.jsx(un, { children: y.jsx(Zn, { items: e, children: t }) })] }) });
+}
+Fa(Ka, "Dropdown");
+const he = R(ou)``, Na = R(Ra)`
+    // To avoid the button getting the border if it happens to be nested in something bigger with "data-invalid" set on it,
+    // we extend the styling here a bit to directly target it only if inside a data-invalid Dropdown control.
+    ${he}[data-invalid] & {
+        border-color: ${({ theme: t }) => t.colorsAccentDefaultRed};
+    }
+`;
+var Va = Object.defineProperty, $t = (t, e) => Va(t, "name", { value: e, configurable: !0 });
+const qe = $t(({ icon: t, label: e, isActive: l, onDragStart: i, tooltip: o, ...n }) => {
   const r = p.useRef(null);
   p.useEffect(() => {
     if (!r.current || !i) return;
-    const u = r.current;
-    return u.draggable = !0, u.addEventListener("dragstart", i), () => {
-      u.removeEventListener("dragstart", i);
+    const a = r.current;
+    return a.draggable = !0, a.addEventListener("dragstart", i), () => {
+      a.removeEventListener("dragstart", i);
     };
   }, [i]);
-  const a = b.jsxs(Ie, { ...n, $isActive: l, ref: r, children: [t && b.jsx(Zu, { icon: t }), e && b.jsx(Qu, { children: e })] });
-  return o ? b.jsxs(Go, { children: [a, b.jsx(Qo, { placement: "bottom", children: o })] }) : a;
-}, "ToolbarButton"), Zu = ht(({ icon: t }) => typeof t == "string" ? b.jsx(Gu, { src: t, "aria-hidden": !0 }) : t, "ToolbarButtonIcon"), Xu = ht((t) => ve`
+  const u = y.jsxs(Re, { ...n, $isActive: l, ref: r, children: [t && y.jsx(Ha, { icon: t }), e && y.jsx(Oa, { children: e })] });
+  return o ? y.jsxs(an, { children: [u, y.jsx(sn, { placement: "bottom", children: o })] }) : u;
+}, "ToolbarButton"), Ha = $t(({ icon: t }) => typeof t == "string" ? y.jsx(La, { src: t, "aria-hidden": !0 }) : t, "ToolbarButtonIcon"), ja = $t((t) => be`
         height: 20px;
         padding: 1px;
         border: 1px solid ${({ theme: e }) => t ? e.colorsBorderActive : "transparent"};
@@ -5572,176 +6116,153 @@ const We = ht(({ icon: t, label: e, isActive: l, onDragStart: i, tooltip: o, ...
         &:disabled {
             opacity: 0.5;
         }
-    `, "baseToolbarButtonStyle"), Ie = R(_o)`
-    ${({ $isActive: t }) => Xu(t)}
-`, Gu = Jo, Qu = R.span`
+    `, "baseToolbarButtonStyle"), Re = R(cn)`
+    ${({ $isActive: t }) => ja(t)}
+`, La = dn, Oa = R.span`
     font-size: 12px;
     line-height: 16px;
     margin-right: 1px;
-`, Ju = async (t, e, l, i, o) => {
-  const n = { ...l, [e]: o };
-  return (e === "userPrompt" || e === "systemPrompt") && (n.variables = await an(t, n)), i(n), n;
-}, _u = async (t, e, l) => {
-  const i = await t.ui.elementSelectors.selectEntity({ allowNone: !0 });
-  let o;
-  if (i.status === "ok" && (o = { ...e, entity: i.selected.module + "." + i.selected.name }), i.status === "none" && (o = { ...e, entity: "" }), o) {
-    const n = await sn(t, e.variables, o);
-    o = { ...o, variables: n }, l(o);
-  }
-  return o;
-}, ea = async (t, e, l) => {
-  const i = await t.ui.elementSelectors.selectDocument({ allowNone: !0, query: { elementType: et } });
-  let o;
-  return i.status === "ok" && (o = { ...e, modelQualifiedName: i.selected.module + "." + i.selected.name }), i.status === "none" && (o = { ...e, modelQualifiedName: void 0 }), o && l(o), o;
-}, Ue = async (t, e, l) => {
-  switch (t) {
-    case "modelQualifiedName":
-      if (!l.modelQualifiedName)
-        return "Please select a model.";
-      if (!(await e.app.model.customBlobDocuments.getDocumentsOfType(et)).find((u) => u.moduleName + "." + u.name === l.modelQualifiedName))
-        return "This document is invalid. Make sure to select a document of type Model.";
-      break;
-    case "entity":
-      if (l.variables.length > 0 && !l.entity)
-        return "Please select an entity.";
-      const [n, r] = l.entity.split(".");
-      if (l.entity && (!n || !r))
-        return "The selected entity is not valid.";
-      if (!await dn(e, l))
-        return "Entity no longer exists.";
-      break;
-    case "userPrompt":
-      if (!l.userPrompt)
-        return "Please provide a user prompt.";
-      break;
-    default:
-      return !0;
-  }
-  return !0;
-}, ta = async (t, e) => {
-  if (!e)
-    return;
-  const l = (await t.app.model.customBlobDocuments.getDocumentsOfType(et)).find((i) => i.moduleName + "." + i.name === e);
-  if (!l) {
-    t.ui.messageBoxes.show(
-      "error",
-      "Could not find model.",
-      "This model might have been deleted or renamed. Please update the model selection."
-    );
-    return;
-  }
-  t.ui.editors.editDocument(l.id);
-}, la = async (t, e, l, i) => {
-  const o = await t.ui.dialogs.showModal(
-    {
-      title: "Model settings",
-      contentSize: { height: 385, width: 600 }
-    },
-    {
-      componentName: e,
-      uiEntrypoint: "modelSettingsEdit",
-      queryParams: {
-        agent: encodeURIComponent(JSON.stringify(l))
-      }
-    }
-  );
-  let n;
-  return o && (n = o), n && i(n), n;
-}, At = async (t, e, l, i, o) => {
-  const n = o !== void 0 && l.tools ? l.tools[o] : void 0, r = await t.ui.dialogs.showModal(
-    {
-      title: n ? "Edit tool" : "Add tool",
-      contentSize: { height: 330, width: 600 }
-    },
-    {
-      componentName: e,
-      uiEntrypoint: "toolEdit",
-      queryParams: {
-        tool: n ? encodeURIComponent(JSON.stringify(n)) : ""
-      }
-    }
-  );
-  if (r !== null) {
-    const a = r;
-    let u;
-    o !== void 0 && l.tools ? (u = [...l.tools], u[o] = a) : u = [...l.tools || [], a], u.sort((d, c) => d.name.localeCompare(c.name));
-    const s = { ...l, tools: u };
-    return i(s), s;
-  } else
-    return null;
-}, ia = async (t, e, l, i) => {
-  const o = e.tools.filter((r, a) => a !== i), n = { ...e, tools: o };
-  return l(n), n;
-};
-var oa = Object.defineProperty, na = (t, e) => oa(t, "name", { value: e, configurable: !0 });
-const ra = na(() => {
-  const t = document.createElement("div");
-  t.style.position = "absolute", t.style.border = "1px solid black", t.style.visibility = "hidden", t.style.width = "1px", t.style.height = "1px", document.body.appendChild(t);
-  const e = getComputedStyle(t), l = parseFloat(e.borderTopWidth);
-  return document.body.removeChild(t), l;
-}, "getBorderScaleFactor");
-var ua = Object.defineProperty, Fe = (t, e) => ua(t, "name", { value: e, configurable: !0 });
-const ho = p.createContext({ borderScaleFactor: 1, stickyHeader: !1 }), aa = Fe(({ stickyHeader: t = !1, children: e }) => {
-  const l = p.useMemo(() => t ? ra() : 1, [t]);
-  return b.jsx(ho.Provider, { value: { borderScaleFactor: l, stickyHeader: t }, children: e });
-}, "TableProvider"), fo = Fe(() => p.useContext(ho), "useTableContext"), po = p.createContext({}), mo = Fe(({ id: t, children: e }) => b.jsx(po.Provider, { value: { id: t }, children: e }), "TableRowContextProvider"), vo = Fe(() => p.useContext(po), "useTableRowContext");
-var sa = Object.defineProperty, ft = (t, e) => sa(t, "name", { value: e, configurable: !0 });
-const go = p.createContext(void 0), da = ft(({ selectionType: t = "none", selectionMode: e = "none", defaultSelectedKeys: l = [], selectedKeys: i, onSelectionChange: o, onDoubleClick: n, onContextMenu: r, children: a }) => {
-  const [u, s] = p.useState(l[0]), [d, c] = p.useState(), h = p.useRef(!1), f = p.useCallback((m) => {
-    e !== "single" || m === void 0 || (i !== void 0 ? i[0] !== m && (o == null || o([m])) : m !== u && (s(m), o == null || o([m])));
-  }, [i, u, o, e]);
-  return ge(t) || ge(e) ? b.jsx(b.Fragment, { children: a }) : b.jsx(go.Provider, { value: { selectionType: t, selectionMode: e, hasScrolledIntoView: h, defaultSelectedKeys: l, selected: i ? i[0] : u, addSelected: f, hovered: d, setHovered: c, onDoubleClick: n, onContextMenu: r }, children: a });
-}, "TableInteractionProvider"), Ke = ft(() => p.useContext(go), "useTableInteractionContext");
-function ge(t) {
-  return t === "none" || t === void 0;
-}
-ft(ge, "isNoneOrUndefined");
-const pt = 6;
-var ca = Object.defineProperty, ha = (t, e) => ca(t, "name", { value: e, configurable: !0 });
-const qe = 16 + 2 * pt + 1, fa = { loaderHeight: qe, estimatedRowHeight: qe, estimatedHeadingHeight: qe }, pa = ha(({ stickyHeader: t, selectionType: e, selectionMode: l, defaultSelectedKeys: i, onSelectionChange: o, onDoubleClick: n, onContextMenu: r, selectedKeys: a, className: u, virtualizationOptions: s = {}, ...d }) => {
-  const c = { ...d, disallowTypeAhead: !0 }, h = { ...fa, ...s };
-  let f = b.jsx(ma, { className: u, children: b.jsx(Ou, { layout: Fu, layoutOptions: h, children: b.jsx(va, { ...c }) }) });
-  return e && (f = b.jsx(da, { selectionType: e, selectionMode: l, defaultSelectedKeys: i, selectedKeys: a, onSelectionChange: o, onDoubleClick: n, onContextMenu: r, children: f })), b.jsx(aa, { stickyHeader: t, children: f });
-}, "Table"), ma = R.div`
-    background-color: ${({ theme: t }) => t.colorsBackgroundTableLayout};
-    border: solid ${({ theme: t }) => t.colorsBackgroundTableBase} ${T.borderWidthMd};
-    min-height: 100%;
-    height: 100%;
-    width: 100%;
-    overflow: auto;
-`, va = R(hu)`
-    border-collapse: separate;
-    border-spacing: 0;
-    color: ${({ theme: t }) => t.colorsTextPrimaryDefault};
-    font-size: ${T.fontSizeMd};
-    height: auto;
-    line-height: ${T.lineHeightMd};
-    table-layout: fixed;
-    white-space: nowrap;
-    width: 100%;
 `;
-var ga = Object.defineProperty, ba = (t, e) => ga(t, "name", { value: e, configurable: !0 });
-const ya = ba(({ columns: t, children: e, ...l }) => {
-  const { stickyHeader: i } = fo();
-  return b.jsx(i ? $a : to, { ...l, children: b.jsx(Ce, { items: t, children: e }) });
-}, "TableHead"), $a = R(to)`
+var Wa = Object.defineProperty, Ua = (t, e) => Wa(t, "name", { value: e, configurable: !0 });
+const xt = Ua(({ children: t, title: e }) => y.jsx(qa, { title: e, children: t }), "ContentWrapper"), qa = R.div`
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    -webkit-user-select: none; // Safari
+    user-select: none; // Other browsers
+`;
+var Ya = Object.defineProperty, wt = (t, e) => Ya(t, "name", { value: e, configurable: !0 });
+const Io = wt(({ cellType: t, columnId: e }) => {
+  const { id: l } = zo(), { selectionType: i, selectionMode: o } = { ...Ne() }, n = !$e(i) && !$e(o);
+  return t === "cell" && n || t === "header" && n && i === "column" ? y.jsx(Za, { id: i === "column" ? e : l }) : null;
+}, "Selectable"), Za = wt(({ id: t }) => {
+  const { borderScaleFactor: e } = Do(), { selectionType: l, selected: i, hovered: o, addSelected: n, setHovered: r, onDoubleClick: u, onContextMenu: a } = { ...Ne() }, s = p.useCallback(() => {
+    n == null || n(t);
+  }, [n, t]), d = p.useCallback(() => {
+    r == null || r(t);
+  }, [r, t]), c = p.useCallback(() => {
+    r == null || r();
+  }, [r]), h = p.useCallback(() => {
+    u == null || u(t);
+  }, [u, t]), f = p.useCallback(() => {
+    n == null || n(t), a == null || a(t);
+  }, [n, a, t]), v = i !== void 0 && i === t;
+  return y.jsx(l === "row" ? Xa : Ga, { onClick: s, onDoubleClick: h, onMouseOver: d, onMouseLeave: c, onContextMenu: f, $isSelected: v, $isHovered: o !== void 0 && !v && o === t, $borderScaleFactor: e, "data-testid": "Selectable overlay", "aria-hidden": !0 });
+}, "SelectableInner"), Ct = be`
+    position: absolute;
+    inset: 0;
+`;
+function xe(t, e) {
+  return be`
+        &::after {
+            ${Ct}
+            content: "";
+            pointer-events: none;
+
+            --border: solid ${M.borderWidthLg} ${e};
+
+            ${t === "row" ? be`
+                      border-top: var(--border);
+                      border-bottom: var(--border);
+
+                      [role="presentation"]:first-child > :is([role="gridcell"], [role="rowheader"]) & {
+                          border-left: var(--border);
+                      }
+
+                      [role="presentation"]:last-child > :is([role="gridcell"], [role="rowheader"]) & {
+                          border-right: var(--border);
+                      }
+                  ` : be`
+                      border-left: var(--border);
+                      border-right: var(--border);
+
+                      [role="columnheader"] & {
+                          border-top: var(--border);
+                      }
+
+                      [role="rowgroup"] > [role="presentation"]:last-child :is([role="gridcell"], [role="rowheader"]) & {
+                          border-bottom: var(--border);
+                      }
+                  `}
+        }
+    `;
+}
+wt(xe, "highLight");
+const Xa = R.div`
+    ${Ct}
+    right: ${({ $borderScaleFactor: t }) => `calc(-${t} * ${M.borderWidthMd})`};
+
+    [role="presentation"]:last-child > :is([role="gridcell"], [role="rowheader"]) & {
+        right: 0;
+    }
+
+    ${({ $isHovered: t, theme: e }) => t && xe("row", e.colorsBorderPrimary)};
+    ${({ $isSelected: t, theme: e }) => t && xe("row", e.colorsAccentDefaultBlue)};
+`, Ga = R.div`
+    ${Ct}
+    bottom: ${({ $borderScaleFactor: t }) => `calc(-${t} * ${M.borderWidthMd})`};
+
+    tbody > [role="row"]:last-child & {
+        bottom: 0;
+    }
+
+    ${({ $isHovered: t, theme: e }) => t && xe("column", e.colorsBorderPrimary)};
+    ${({ $isSelected: t, theme: e }) => t && xe("column", e.colorsAccentDefaultBlue)};
+`;
+var Qa = Object.defineProperty, Ja = (t, e) => Qa(t, "name", { value: e, configurable: !0 });
+function kt(t) {
+  return t == null || t === "" ? " " : t;
+}
+Ja(kt, "ensureContent");
+var _a = Object.defineProperty, es = (t, e) => _a(t, "name", { value: e, configurable: !0 });
+const Po = es(({ children: t, id: e, columnId: l, title: i, forceEmpty: o, ...n }) => {
+  const { id: r } = zo();
+  return y.jsx(ts, { ...n, children: y.jsx(Eo, { id: r, children: y.jsxs("div", { title: i, children: [y.jsx(xt, { children: o ? void 0 : kt(t) }), y.jsx(Io, { cellType: "cell", columnId: l })] }) }) });
+}, "TableCell");
+R(Po)`
+    text-align: center;
+`;
+const ts = R($u)`
+    background-color: ${({ theme: t }) => t.colorsBackgroundTableCellPrimary};
+    padding: ${yt}px ${M.spacing4};
+    &:has(${Qt}, ${he}, ${Ge}, ${Pe}) {
+        padding: ${M.spacing2} ${M.spacing4};
+    }
+    // XXX: remove this when ToolbarButton has been replaced by a ghost button (with different sizes/paddings per context)
+    &:has(${Re}) {
+        padding: ${M.spacing4};
+    }
+    position: relative;
+
+    border-bottom: solid ${({ theme: t }) => t.colorsBackgroundTableBase} ${M.borderWidthMd};
+    [role="row"] > [role="presentation"]:not(:last-child) & {
+        border-right: solid ${({ theme: t }) => t.colorsBackgroundTableBase} ${M.borderWidthMd};
+    }
+`;
+var ls = Object.defineProperty, is = (t, e) => ls(t, "name", { value: e, configurable: !0 });
+const os = is(({ columns: t, children: e, ...l }) => {
+  const { stickyHeader: i } = Do();
+  return y.jsx(i ? ns : po, { ...l, children: y.jsx(Se, { items: t, children: e }) });
+}, "TableHead"), ns = R(po)`
     position: sticky;
     top: 0;
     z-index: 2; // make sure sticky header is above sticky first column
-`, xa = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13.0499%204H2.94989C2.60489%204%202.38989%204.31%202.55989%204.56L7.58489%2011.79C7.78489%2012.075%208.21989%2012.075%208.41489%2011.79L13.4399%204.56C13.6149%204.31%2013.3949%204%2013.0499%204Z'%20fill='%23A4A4A4'/%3e%3c/svg%3e", wa = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13.0499%204H2.94989C2.60489%204%202.38989%204.31%202.55989%204.56L7.58489%2011.79C7.78489%2012.075%208.21989%2012.075%208.41489%2011.79L13.4399%204.56C13.6149%204.31%2013.3949%204%2013.0499%204Z'%20fill='%23535965'/%3e%3c/svg%3e";
-var Ca = Object.defineProperty, Da = (t, e) => Ca(t, "name", { value: e, configurable: !0 });
-const ka = Da((t) => b.jsx(ue, { light: wa, dark: xa, ...t }), "MoveDownIcon"), Sa = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13.0499%2012H2.94989C2.60489%2012%202.38989%2011.69%202.55989%2011.44L7.58489%204.21497C7.78489%203.92997%208.21989%203.92997%208.41489%204.21497L13.4399%2011.445C13.6149%2011.695%2013.3949%2012.005%2013.0499%2012.005V12Z'%20fill='%23A4A4A4'/%3e%3c/svg%3e", Ea = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13.0499%2012H2.94989C2.60489%2012%202.38989%2011.69%202.55989%2011.44L7.58489%204.21497C7.78489%203.92997%208.21989%203.92997%208.41489%204.21497L13.4399%2011.445C13.6149%2011.695%2013.3949%2012.005%2013.0499%2012.005V12Z'%20fill='%23535965'/%3e%3c/svg%3e";
-var za = Object.defineProperty, Ba = (t, e) => za(t, "name", { value: e, configurable: !0 });
-const Ia = Ba((t) => b.jsx(ue, { light: Ea, dark: Sa, ...t }), "MoveUpIcon");
-var Aa = Object.defineProperty, Pa = (t, e) => Aa(t, "name", { value: e, configurable: !0 });
-const Ra = Pa(({ ...t }) => b.jsx(Ma, { ...t }), "ColumnResizer"), Ma = R(gu)`
+`, rs = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13.0499%204H2.94989C2.60489%204%202.38989%204.31%202.55989%204.56L7.58489%2011.79C7.78489%2012.075%208.21989%2012.075%208.41489%2011.79L13.4399%204.56C13.6149%204.31%2013.3949%204%2013.0499%204Z'%20fill='%23A4A4A4'/%3e%3c/svg%3e", us = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13.0499%204H2.94989C2.60489%204%202.38989%204.31%202.55989%204.56L7.58489%2011.79C7.78489%2012.075%208.21989%2012.075%208.41489%2011.79L13.4399%204.56C13.6149%204.31%2013.3949%204%2013.0499%204Z'%20fill='%23535965'/%3e%3c/svg%3e";
+var as = Object.defineProperty, ss = (t, e) => as(t, "name", { value: e, configurable: !0 });
+const ds = ss((t) => y.jsx(le, { light: us, dark: rs, ...t }), "MoveDownIcon"), cs = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13.0499%2012H2.94989C2.60489%2012%202.38989%2011.69%202.55989%2011.44L7.58489%204.21497C7.78489%203.92997%208.21989%203.92997%208.41489%204.21497L13.4399%2011.445C13.6149%2011.695%2013.3949%2012.005%2013.0499%2012.005V12Z'%20fill='%23A4A4A4'/%3e%3c/svg%3e", hs = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13.0499%2012H2.94989C2.60489%2012%202.38989%2011.69%202.55989%2011.44L7.58489%204.21497C7.78489%203.92997%208.21989%203.92997%208.41489%204.21497L13.4399%2011.445C13.6149%2011.695%2013.3949%2012.005%2013.0499%2012.005V12Z'%20fill='%23535965'/%3e%3c/svg%3e";
+var fs = Object.defineProperty, ps = (t, e) => fs(t, "name", { value: e, configurable: !0 });
+const vs = ps((t) => y.jsx(le, { light: hs, dark: cs, ...t }), "MoveUpIcon");
+var ms = Object.defineProperty, gs = (t, e) => ms(t, "name", { value: e, configurable: !0 });
+const bs = gs(({ ...t }) => y.jsx(ys, { ...t }), "ColumnResizer"), ys = R(gu)`
     z-index: 3; // on top of sticky header and sticky first column
 
     position: absolute;
-    inset: 0 -${T.spacing8} 0 auto;
+    inset: 0 -${M.spacing8} 0 auto;
     // The Virtualizer adds "contain: size layout style" on a role="presentation" div causing the resizer to not be hoverable outside of this header
     // So in reality this spacing is 8px
-    width: ${T.spacing16};
+    width: ${M.spacing16};
 
     [role="row"][aria-rowindex="1"] > [role="presentation"]:last-child [role="columnheader"] & {
         // we make sure the column resizer does not make the Table itself larger, when scrolling to the end of it, for example
@@ -5762,227 +6283,49 @@ const Ra = Pa(({ ...t }) => b.jsx(Ma, { ...t }), "ColumnResizer"), Ma = R(gu)`
         cursor: w-resize;
     }
 `;
-var Ta = Object.defineProperty, Fa = (t, e) => Ta(t, "name", { value: e, configurable: !0 });
-const mt = Fa(({ children: t, title: e }) => b.jsx(Ka, { title: e, children: t }), "ContentWrapper"), Ka = R.div`
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-
-    -webkit-user-select: none; // Safari
-    user-select: none; // Other browsers
-`;
-var Na = Object.defineProperty, vt = (t, e) => Na(t, "name", { value: e, configurable: !0 });
-const bo = vt(({ cellType: t, columnId: e }) => {
-  const { id: l } = vo(), { selectionType: i, selectionMode: o } = { ...Ke() }, n = !ge(i) && !ge(o);
-  return t === "cell" && n || t === "header" && n && i === "column" ? b.jsx(Ha, { id: i === "column" ? e : l }) : null;
-}, "Selectable"), Ha = vt(({ id: t }) => {
-  const { borderScaleFactor: e } = fo(), { selectionType: l, selected: i, hovered: o, addSelected: n, setHovered: r, onDoubleClick: a, onContextMenu: u } = { ...Ke() }, s = p.useCallback(() => {
-    n == null || n(t);
-  }, [n, t]), d = p.useCallback(() => {
-    r == null || r(t);
-  }, [r, t]), c = p.useCallback(() => {
-    r == null || r();
-  }, [r]), h = p.useCallback(() => {
-    a == null || a(t);
-  }, [a, t]), f = p.useCallback(() => {
-    n == null || n(t), u == null || u(t);
-  }, [n, u, t]), m = i !== void 0 && i === t;
-  return b.jsx(l === "row" ? Va : ja, { onClick: s, onDoubleClick: h, onMouseOver: d, onMouseLeave: c, onContextMenu: f, $isSelected: m, $isHovered: o !== void 0 && !m && o === t, $borderScaleFactor: e, "data-testid": "Selectable overlay", "aria-hidden": !0 });
-}, "SelectableInner"), gt = ve`
-    position: absolute;
-    inset: 0;
-`;
-function be(t, e) {
-  return ve`
-        &::after {
-            ${gt}
-            content: "";
-            pointer-events: none;
-
-            --border: solid ${T.borderWidthLg} ${e};
-
-            ${t === "row" ? ve`
-                      border-top: var(--border);
-                      border-bottom: var(--border);
-
-                      [role="presentation"]:first-child > :is([role="gridcell"], [role="rowheader"]) & {
-                          border-left: var(--border);
-                      }
-
-                      [role="presentation"]:last-child > :is([role="gridcell"], [role="rowheader"]) & {
-                          border-right: var(--border);
-                      }
-                  ` : ve`
-                      border-left: var(--border);
-                      border-right: var(--border);
-
-                      [role="columnheader"] & {
-                          border-top: var(--border);
-                      }
-
-                      [role="rowgroup"] > [role="presentation"]:last-child :is([role="gridcell"], [role="rowheader"]) & {
-                          border-bottom: var(--border);
-                      }
-                  `}
-        }
-    `;
-}
-vt(be, "highLight");
-const Va = R.div`
-    ${gt}
-    right: ${({ $borderScaleFactor: t }) => `calc(-${t} * ${T.borderWidthMd})`};
-
-    [role="presentation"]:last-child > :is([role="gridcell"], [role="rowheader"]) & {
-        right: 0;
-    }
-
-    ${({ $isHovered: t, theme: e }) => t && be("row", e.colorsBorderPrimary)};
-    ${({ $isSelected: t, theme: e }) => t && be("row", e.colorsAccentDefaultBlue)};
-`, ja = R.div`
-    ${gt}
-    bottom: ${({ $borderScaleFactor: t }) => `calc(-${t} * ${T.borderWidthMd})`};
-
-    tbody > [role="row"]:last-child & {
-        bottom: 0;
-    }
-
-    ${({ $isHovered: t, theme: e }) => t && be("column", e.colorsBorderPrimary)};
-    ${({ $isSelected: t, theme: e }) => t && be("column", e.colorsAccentDefaultBlue)};
-`;
-var La = Object.defineProperty, Oa = (t, e) => La(t, "name", { value: e, configurable: !0 });
-function bt(t) {
-  return t == null || t === "" ? " " : t;
-}
-Oa(bt, "ensureContent");
-var Wa = Object.defineProperty, Ua = (t, e) => Wa(t, "name", { value: e, configurable: !0 });
-const yo = Ua((t, e, l) => {
+var $s = Object.defineProperty, xs = (t, e) => $s(t, "name", { value: e, configurable: !0 });
+const Ro = xs((t, e, l) => {
   var i;
   return e !== void 0 && (l == null ? void 0 : l.selectionType) === t && (l == null ? void 0 : l.selectionMode) === "single" && ((i = l == null ? void 0 : l.defaultSelectedKeys) == null ? void 0 : i[0]) === e && (l == null ? void 0 : l.hasScrolledIntoView.current) !== !0 ? (o) => {
     o && (o.scrollIntoView({ behavior: "instant", inline: "nearest", block: "nearest" }), l.hasScrolledIntoView.current = !0);
   } : null;
 }, "getScrollIntoViewRef");
-var qa = Object.defineProperty, Ya = (t, e) => qa(t, "name", { value: e, configurable: !0 });
-const Za = Ya(({ children: t, id: e, title: l, resizable: i, ...o }) => {
-  const n = Ke(), r = p.useMemo(() => yo("column", e, n), [e, n]);
-  return b.jsx(Xa, { id: e, ref: r, ...o, children: ({ allowsSorting: a, sortDirection: u }) => b.jsxs(Ga, { title: l, children: [b.jsx(mt, { children: bt(t) }), a && b.jsx(Qa, { "aria-hidden": "true", className: "sort-indicator", children: u === "ascending" ? b.jsx(Ia, {}) : b.jsx(ka, {}) }), b.jsx(bo, { cellType: "header", columnId: e }), i && b.jsx(Ra, {})] }) });
-}, "TableHeader"), Xa = R(vu)`
+var ws = Object.defineProperty, Cs = (t, e) => ws(t, "name", { value: e, configurable: !0 });
+const ks = Cs(({ children: t, id: e, title: l, resizable: i, ...o }) => {
+  const n = Ne(), r = p.useMemo(() => Ro("column", e, n), [e, n]);
+  return y.jsx(Ds, { id: e, ref: r, ...o, children: ({ allowsSorting: u, sortDirection: a }) => y.jsxs(Ss, { title: l, children: [y.jsx(xt, { children: kt(t) }), u && y.jsx(Es, { "aria-hidden": "true", className: "sort-indicator", children: a === "ascending" ? y.jsx(vs, {}) : y.jsx(ds, {}) }), y.jsx(Io, { cellType: "header", columnId: e }), i && y.jsx(bs, {})] }) });
+}, "TableHeader"), Ds = R(mu)`
     background-color: ${({ theme: t }) => t.colorsBackgroundTableHeaderDefault};
     font-weight: 600;
-    padding: ${pt}px ${T.spacing4};
+    padding: ${yt}px ${M.spacing4};
     position: relative; // for Selectable column to be rendered absolute here
     text-align: left;
 
-    border-bottom: solid ${({ theme: t }) => t.colorsBackgroundTableBase} ${T.borderWidthMd};
+    border-bottom: solid ${({ theme: t }) => t.colorsBackgroundTableBase} ${M.borderWidthMd};
     [role="row"] > [role="presentation"]:not(:last-child) & {
-        border-right: solid ${({ theme: t }) => t.colorsBackgroundTableBase} ${T.borderWidthMd};
+        border-right: solid ${({ theme: t }) => t.colorsBackgroundTableBase} ${M.borderWidthMd};
     }
 
     &:not([data-sort-direction]) .sort-indicator {
         visibility: hidden;
     }
-`, Ga = R.div`
+`, Ss = R.div`
     display: flex;
     min-width: 0;
-    gap: ${T.spacing4};
-`, Qa = R.span`
+    gap: ${M.spacing4};
+`, Es = R.span`
     display: flex;
     flex-direction: column;
     justify-content: center;
     flex-shrink: 0;
 `;
-var Ja = Object.defineProperty, _a = (t, e) => Ja(t, "name", { value: e, configurable: !0 });
-const es = _a(({ ...t }) => b.jsx(bu, { ...t }), "TableBody");
-var ts = Object.defineProperty, ls = (t, e) => ts(t, "name", { value: e, configurable: !0 });
-const Pt = ls(({ children: t, id: e, columns: l, ...i }) => {
-  const o = Ke(), n = p.useMemo(() => yo("row", e, o), [e, o]);
-  return b.jsx(yu, { id: e, ref: n, ...i, children: b.jsx(mo, { id: e, children: b.jsx(Ce, { items: l, children: t }) }) });
+var zs = Object.defineProperty, Bs = (t, e) => zs(t, "name", { value: e, configurable: !0 });
+const Vt = Bs(({ children: t, id: e, columns: l, ...i }) => {
+  const o = Ne(), n = p.useMemo(() => Ro("row", e, o), [e, o]);
+  return y.jsx(yu, { id: e, ref: n, ...i, children: y.jsx(Eo, { id: e, children: y.jsx(Se, { items: l, children: t }) }) });
 }, "TableRow");
-var is = Object.defineProperty, os = (t, e) => is(t, "name", { value: e, configurable: !0 });
-const ns = os((t) => b.jsxs(rs, { ...t, children: [b.jsx(us, {}), b.jsx(Hn, {})] }), "DropdownButton"), rs = R(Be)`
-    color: ${(t) => t.theme.colorsTextPrimaryDefault};
-    background-color: ${(t) => t.theme.colorsBackgroundInputBase};
-
-    border-width: ${T.borderWidthMd};
-    border-style: solid;
-    border-radius: ${T.borderRadiusXs};
-
-    border-color: ${(t) => t.theme.colorsBorderInputDefault};
-
-    &[data-hovered] {
-        border-color: ${(t) => t.theme.colorsBorderInputHover};
-    }
-
-    &[data-pressed],
-    &[data-focused],
-    &[data-selected] {
-        border-color: ${(t) => t.theme.colorsBorderActive};
-    }
-
-    &[data-disabled] {
-        opacity: 0.5;
-    }
-
-    padding: 3px ${T.spacing4};
-    display: flex;
-    align-items: normal;
-    gap: ${T.spacing8};
-    width: 100%;
-`, us = R(au)`
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-
-    // specific overwrite for this value to make sure the default Sass stylesheet isn't being used ("button span" selector)
-    // (& targets the classname for this component specifically in styled-components)
-    // Can be removed once the global Sass stylesheet is removed
-    & {
-        line-height: ${T.lineHeightMd};
-    }
-
-    flex-grow: 1;
-    text-align: left;
-`;
-var as = Object.defineProperty, ss = (t, e) => as(t, "name", { value: e, configurable: !0 });
-function ds({ children: t, items: e, label: l, description: i, ...o }) {
-  const { isInvalid: n, validate: r, validationError: a } = en({ value: o.selectedKey ?? void 0, isInvalid: o.isInvalid, validate: o.validate });
-  return b.jsx(he, { ...o, isInvalid: n, validate: r, children: b.jsxs(tn, { label: l, description: i, realtimeValidationError: a, children: [b.jsx(cs, {}), b.jsx(ln, { children: b.jsx(Vn, { items: e, children: t }) })] }) });
-}
-ss(ds, "Dropdown");
-const he = R(nu)``, cs = R(ns)`
-    // To avoid the button getting the border if it happens to be nested in something bigger with "data-invalid" set on it,
-    // we extend the styling here a bit to directly target it only if inside a data-invalid Dropdown control.
-    ${he}[data-invalid] & {
-        border-color: ${({ theme: t }) => t.colorsAccentDefaultRed};
-    }
-`;
-var hs = Object.defineProperty, fs = (t, e) => hs(t, "name", { value: e, configurable: !0 });
-const $o = fs(({ children: t, id: e, columnId: l, title: i, forceEmpty: o, ...n }) => {
-  const { id: r } = vo();
-  return b.jsx(ps, { ...n, children: b.jsx(mo, { id: r, children: b.jsxs("div", { title: i, children: [b.jsx(mt, { children: o ? void 0 : bt(t) }), b.jsx(bo, { cellType: "cell", columnId: l })] }) }) });
-}, "TableCell");
-R($o)`
-    text-align: center;
-`;
-const ps = R($u)`
-    background-color: ${({ theme: t }) => t.colorsBackgroundTableCellPrimary};
-    padding: ${pt}px ${T.spacing4};
-    &:has(${jt}, ${he}, ${Xe}, ${Be}) {
-        padding: ${T.spacing2} ${T.spacing4};
-    }
-    // XXX: remove this when ToolbarButton has been replaced by a ghost button (with different sizes/paddings per context)
-    &:has(${Ie}) {
-        padding: ${T.spacing4};
-    }
-    position: relative;
-
-    border-bottom: solid ${({ theme: t }) => t.colorsBackgroundTableBase} ${T.borderWidthMd};
-    [role="row"] > [role="presentation"]:not(:last-child) & {
-        border-right: solid ${({ theme: t }) => t.colorsBackgroundTableBase} ${T.borderWidthMd};
-    }
-`;
-var ms = Object.defineProperty, vs = (t, e) => ms(t, "name", { value: e, configurable: !0 });
-const gs = vs(({ className: t, children: e, "aria-label": l }) => b.jsx(bs, { role: "toolbar", "aria-label": l, className: t, children: e }), "Toolbar"), bs = R.div`
+var Is = Object.defineProperty, Ps = (t, e) => Is(t, "name", { value: e, configurable: !0 });
+const Rs = Ps(({ className: t, children: e, "aria-label": l }) => y.jsx(As, { role: "toolbar", "aria-label": l, className: t, children: e }), "Toolbar"), As = R.div`
     display: grid;
     grid-template-columns: [left-start] 1fr [left-end center-start] max-content [center-end right-start] 1fr [right-end];
     background-color: ${({ theme: t }) => t.colorsBackgroundDefault};
@@ -6005,23 +6348,23 @@ const gs = vs(({ className: t, children: e, "aria-label": l }) => b.jsx(bs, { ro
     */
     overflow-y: hidden;
 
-    ${jt}, ${he}, ${Xe}, ${Be}, ${Ie} {
+    ${Qt}, ${he}, ${Ge}, ${Pe}, ${Re} {
         line-height: 14px; // no design system value for this. Only 13px, 15px and 16px
-        padding: ${T.spacing2} 1px;
+        padding: ${M.spacing2} 1px;
     }
-    ${Ie}:has(img) {
+    ${Re}:has(img) {
         padding: 1px; // Icons have a height of 16px (vs text having a line-height of 16px), so they need less vertical padding to get to a 20px height button.
     }
-    ${he}, ${Xe} {
+    ${he}, ${Ge} {
         // Dropdown and Combobox are already high enough (20px); they don't need vertical padding
         padding: 0 1px;
     }
-    ${he} ${Be} {
+    ${he} ${Pe} {
         // Since the chevron-down button inside the dropdown is a button, and it has a border (for validation),
         //we need to make the vertical padding smaller (1px vs 2px) to make it fit inside the toolbar
         padding: 1px;
     }
-`, yt = R.div`
+`, Dt = R.div`
     display: flex;
     gap: 8px;
     align-items: center;
@@ -6029,15 +6372,15 @@ const gs = vs(({ className: t, children: e, "aria-label": l }) => b.jsx(bs, { ro
     &:only-child {
         grid-column: left/right; // If no siblings, use entire toolbar.
     }
-`, ys = R(yt)`
+`, Ms = R(Dt)`
     grid-column: left;
     justify-content: start;
 `;
-R(yt)`
+R(Dt)`
     grid-column: center;
     justify-content: center;
 `;
-const $s = R(yt)`
+const Ts = R(Dt)`
     grid-column: right;
     justify-content: end;
 `;
@@ -6053,27 +6396,28 @@ R.div`
         display: none;
     }
 `;
-const xs = R(gs)`
+const Fs = R(Rs)`
     background-color: transparent;
     & button {
         background-color: transparent;
     }
-`, ws = R.div`
+`, Ks = R.div`
     display: flex;
     flex-direction: column;
-`, Cs = R(Za)`
+    overflow-x: auto;
+`, Ns = R(ks)`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-`, Ye = R($o)`
+`, Ye = R(Po)`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-`, Ds = R(pa)`
+`, Vs = R(ka)`
     border-bottom: none;
     height: unset;
     min-height: unset;
-`, ks = ({
+`, Hs = ({
   ariaLabel: t,
   columns: e,
   data: l,
@@ -6081,320 +6425,423 @@ const xs = R(gs)`
   emptyMessage: o = "No data available.",
   toolbarLeft: n,
   toolbarRight: r,
-  selectionType: a,
-  selectionMode: u = "single",
+  selectionType: u,
+  selectionMode: a = "single",
   selectedKeys: s,
-  onSelectionChange: d
+  onDoubleClick: d,
+  onSelectionChange: c
 }) => {
-  var c;
-  return /* @__PURE__ */ b.jsxs(ws, { children: [
-    (n || r) && /* @__PURE__ */ b.jsxs(xs, { "aria-label": `${t} toolbar`, children: [
-      n && /* @__PURE__ */ b.jsx(ys, { children: n }),
-      r && /* @__PURE__ */ b.jsx($s, { children: r })
+  var f;
+  const h = p.useRef(null);
+  return p.useEffect(() => {
+    const v = (m) => {
+      h.current && !h.current.contains(m.target) && (c == null || c([]));
+    };
+    return document.addEventListener("click", v), () => {
+      document.removeEventListener("click", v);
+    };
+  }, [c]), /* @__PURE__ */ y.jsxs(Ks, { ref: h, children: [
+    (n || r) && /* @__PURE__ */ y.jsxs(Fs, { "aria-label": `${t} toolbar`, children: [
+      n && /* @__PURE__ */ y.jsx(Ms, { children: n }),
+      r && /* @__PURE__ */ y.jsx(Ts, { children: r })
     ] }),
-    /* @__PURE__ */ b.jsxs(
-      Ds,
+    /* @__PURE__ */ y.jsxs(
+      Vs,
       {
         "aria-label": t,
         stickyHeader: i,
-        selectionType: a,
-        selectionMode: u,
+        selectionType: u,
+        selectionMode: a,
         selectedKeys: s,
-        onSelectionChange: d,
+        onSelectionChange: c,
+        onDoubleClick: d,
         children: [
-          /* @__PURE__ */ b.jsx(ya, { children: e.map((h) => /* @__PURE__ */ b.jsx(
-            Cs,
+          /* @__PURE__ */ y.jsx(os, { children: e.map((v) => /* @__PURE__ */ y.jsx(
+            Ns,
             {
-              id: h.id,
-              isRowHeader: h.isRowHeader,
-              children: h.caption
+              id: v.id,
+              isRowHeader: v.isRowHeader,
+              resizable: v.resizable,
+              minWidth: v.minWidth,
+              maxWidth: v.maxWidth,
+              defaultWidth: v.defaultWidth,
+              allowsSorting: v.allowsSorting,
+              children: v.caption
             },
-            h.id
+            v.id
           )) }),
-          /* @__PURE__ */ b.jsx(es, { children: l.length === 0 ? /* @__PURE__ */ b.jsxs(Pt, { children: [
-            /* @__PURE__ */ b.jsx(Ye, { columnId: (c = e[0]) == null ? void 0 : c.id, children: o }),
-            e.slice(1).map((h) => /* @__PURE__ */ b.jsx(Ye, { columnId: h.id }, h.id))
-          ] }) : l.map((h, f) => /* @__PURE__ */ b.jsx(
-            Pt,
+          /* @__PURE__ */ y.jsx(Ba, { children: l.length === 0 ? /* @__PURE__ */ y.jsxs(Vt, { children: [
+            /* @__PURE__ */ y.jsx(Ye, { columnId: (f = e[0]) == null ? void 0 : f.id, children: o }),
+            e.slice(1).map((v) => /* @__PURE__ */ y.jsx(Ye, { columnId: v.id }, v.id))
+          ] }) : l.map((v, m) => /* @__PURE__ */ y.jsx(
+            Vt,
             {
-              id: String(f),
-              children: h.map((m, v) => {
-                const y = e[v], g = y != null && y.useContentWrapper ? /* @__PURE__ */ b.jsx(mt, { title: y.contentTitle, children: m }) : m;
-                return /* @__PURE__ */ b.jsx(Ye, { columnId: y.id, children: g }, v);
+              id: String(m),
+              children: v.map((b, g) => {
+                const C = e[g], $ = C != null && C.useContentWrapper ? /* @__PURE__ */ y.jsx(xt, { title: C.contentTitle, children: b }) : b;
+                return /* @__PURE__ */ y.jsx(Ye, { columnId: C.id, children: $ }, g);
               })
             },
-            f
+            m
           )) })
         ]
       }
     )
   ] });
-}, Ss = {
+}, js = "data:image/svg+xml,%3csvg%20width='8'%20height='8'%20viewBox='0%200%208%208'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20clip-path='url(%23clip0_4749_6635)'%3e%3cpath%20d='M7.5%201.5L2.645%206L0.5%204.015'%20stroke='%23252525'%20stroke-width='1.5'%20stroke-miterlimit='10'/%3e%3c/g%3e%3cdefs%3e%3cclipPath%20id='clip0_4749_6635'%3e%3crect%20width='8'%20height='8'%20fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e", Ls = "data:image/svg+xml,%3csvg%20width='8'%20height='8'%20viewBox='0%200%208%208'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20clip-path='url(%23clip0_4747_6634)'%3e%3cpath%20d='M7.5%201.5L2.645%206L0.5%204.015'%20stroke='white'%20stroke-width='1.5'%20stroke-miterlimit='10'/%3e%3c/g%3e%3cdefs%3e%3cclipPath%20id='clip0_4747_6634'%3e%3crect%20width='8'%20height='8'%20fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e";
+var Os = Object.defineProperty, Ws = (t, e) => Os(t, "name", { value: e, configurable: !0 });
+const Us = Ws((t) => y.jsx(le, { light: Ls, dark: js, ...t }), "CheckCheckboxIcon");
+var qs = Object.defineProperty, Ys = (t, e) => qs(t, "name", { value: e, configurable: !0 });
+const Zs = Ys(({ children: t, ...e }) => y.jsx(Gs, { ...e, children: ({ isIndeterminate: l, isSelected: i }) => y.jsxs(y.Fragment, { children: [y.jsxs(Ao, { $isSelected: i, $isIndeterminate: l, children: [l && y.jsx(Xs, {}), i && !l && y.jsx(Us, {})] }), t] }) }), "Checkbox"), Ao = R.div`
+    width: ${M.size12};
+    height: ${M.size12};
+    margin: ${M.spacing2};
+    border-radius: ${M.borderRadiusXs};
+    border: ${M.borderWidthMd} solid
+        ${({ theme: t, $isSelected: e }) => e ? t.colorsBorderSelectorSelected : t.colorsBorderSelectorUnselected};
+    background-color: ${({ theme: t, $isSelected: e, $isIndeterminate: l }) => e && !l ? t.colorsBorderSelectorSelected : "transparent"};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+`, Xs = R.div`
+    width: 6px;
+    height: 6px;
+    border-radius: 1px;
+    background: ${({ theme: t }) => t.colorsBorderSelectorSelected};
+`, Gs = R(lu)`
+    cursor: pointer;
+    display: flex;
+    height: ${M.size16};
+    gap: ${M.spacing4};
+    line-height: ${M.lineHeightMd};
+
+    &[data-disabled] {
+        cursor: default;
+        opacity: 0.5;
+    }
+
+    &[data-hovered],
+    &[data-pressed],
+    &[data-indeterminate] {
+        ${Ao} {
+            border-color: ${({ theme: t }) => t.colorsBorderSelectorSelected};
+        }
+    }
+
+    ${hn}
+
+    // Some keyboardFocusStyle overrides for Checkbox specifically
+    &[data-focus-visible]:after {
+        top: -2px;
+        bottom: -2px;
+        left: -2px;
+        right: -2px;
+    }
+`, Qs = ({
+  agent: t,
+  studioPro: e,
+  componentName: l,
+  updateStudioProDocument: i,
+  onAgentChange: o
+}) => {
+  const [n, r] = p.useState([]), u = p.useCallback(async () => {
+    const h = await Nt(e, l, t, i);
+    h && o(h);
+  }, [e, t]), a = p.useCallback(async () => {
+    const h = Number(n[0]);
+    if (n.length === 0 || !t.tools || h <= -1)
+      return;
+    const f = await Nt(e, l, t, i, h);
+    f && o(f);
+  }, [e, t, n]), s = p.useCallback(async () => {
+    const h = Number(n[0]);
+    if (n.length === 0 || !t.tools || h <= -1)
+      return;
+    const f = await Ju(t, i, h);
+    f && o(f);
+  }, [t, n]), d = p.useCallback(async (h, f) => {
+    if (!t.tools)
+      return;
+    console.log(`Setting tool ${h} enabled state to ${f}`);
+    const v = t.tools.map(
+      (b) => b.name === h ? { ...b, enabled: f } : b
+    ), m = { ...t, tools: v };
+    i(m), o(m);
+  }, [t]), c = R(Zs)`
+        pointer-events: auto;
+        position: relative;
+        z-index: 10;
+    `;
+  return /* @__PURE__ */ y.jsx(Be, { label: "Tools", children: /* @__PURE__ */ y.jsx(du, { children: /* @__PURE__ */ y.jsx(
+    Hs,
+    {
+      ariaLabel: "Tools table",
+      columns: [
+        { id: "enabled", caption: "Active", minWidth: 43, defaultWidth: 43, maxWidth: 43 },
+        { id: "name", caption: "Name", isRowHeader: !0, resizable: !0 },
+        { id: "description", caption: "Description", resizable: !0 },
+        { id: "tool", caption: "Tool", useContentWrapper: !0, resizable: !0 }
+      ],
+      data: t.tools ? t.tools.map((h) => [
+        /* @__PURE__ */ y.jsx(
+          c,
+          {
+            "aria-label": "Enabled",
+            isSelected: h.enabled,
+            onChange: (f) => d(h.name, f)
+          }
+        ),
+        h.name,
+        h.description || "",
+        /* @__PURE__ */ y.jsx(
+          _n,
+          {
+            icon: /* @__PURE__ */ y.jsx(Qn, {}),
+            text: h.microflow || ""
+          }
+        )
+      ]) : [],
+      emptyMessage: "No tools configured.",
+      selectionType: "row",
+      selectionMode: "single",
+      selectedKeys: n,
+      onDoubleClick: a,
+      onSelectionChange: r,
+      toolbarLeft: /* @__PURE__ */ y.jsxs(y.Fragment, { children: [
+        /* @__PURE__ */ y.jsx(
+          qe,
+          {
+            icon: /* @__PURE__ */ y.jsx(fa, {}),
+            label: "New",
+            "aria-label": "Add new tool",
+            tooltip: "Add new tool",
+            onPress: u
+          }
+        ),
+        /* @__PURE__ */ y.jsx(
+          qe,
+          {
+            icon: /* @__PURE__ */ y.jsx(aa, {}),
+            label: "Edit",
+            "aria-label": "Edit selected tool",
+            onPress: a,
+            tooltip: "Edit selected tool",
+            isDisabled: n.length === 0
+          }
+        ),
+        /* @__PURE__ */ y.jsx(
+          qe,
+          {
+            icon: /* @__PURE__ */ y.jsx(ia, {}),
+            label: "Delete",
+            "aria-label": "Delete selected tool",
+            onPress: s,
+            tooltip: "Delete selected tool",
+            isDisabled: n.length === 0
+          }
+        )
+      ] })
+    }
+  ) }) });
+}, Js = {
   isValidModel: !0,
   isValidEntity: !0,
   isValidUserPrompt: !0,
   showCreateVariablesInfo: !1,
   missingAttributes: [],
   unusedAttributes: []
-}, Es = ({ loadedAgent: t, studioPro: e, updateStudioProDocument: l }) => {
-  const [i, o] = p.useState(!1), [n, r] = p.useState(Ss), [a, u] = p.useState(void 0), [s, d] = p.useState(t), [c, h] = p.useState(!1), [f, m] = p.useState(!1), [v, y] = p.useState([]), g = p.useRef(null);
+}, _s = ({ loadedAgent: t, studioPro: e, updateStudioProDocument: l }) => {
+  const [i, o] = p.useState(!1), [n, r] = p.useState(Js), [u, a] = p.useState(void 0), [s, d] = p.useState(t), [c, h] = p.useState(!1), [f, v] = p.useState(!1), m = p.useRef(null);
   p.useEffect(() => {
-    L(t).then((k) => r(k)), K(e, t.entity).then((k) => u(k)), d(t), o(!0);
+    z(t).then((k) => r(k)), E(e, t.entity).then((k) => a(k)), d(t), o(!0);
   }, []), p.useEffect(() => {
     i && (async () => {
-      const N = await K(e, s.entity);
-      u(N);
+      const P = await E(e, s.entity);
+      a(P);
     })();
   }, [e, s.entity]), p.useEffect(() => {
     i && (async () => {
-      const N = await L(s);
-      r(N);
+      const P = await z(s);
+      r(P);
     })();
   }, [e, s]);
-  const C = p.useMemo(
-    () => cn(s.variables),
+  const b = p.useMemo(
+    () => $n(s.variables),
     [s.variables]
-  ), w = p.useCallback((k) => (N) => {
-    const W = { ...s, [k]: N };
-    d(W), g.current && clearTimeout(g.current), g.current = setTimeout(async () => {
-      const X = await Ju(e, k, W, l, N);
-      d(X);
+  ), g = p.useCallback((k) => (P) => {
+    const F = { ...s, [k]: P };
+    d(F), m.current && clearTimeout(m.current), m.current = setTimeout(async () => {
+      const T = await Yu(e, k, F, l, P);
+      d(T);
     }, 300);
+  }, [e, s]), C = p.useCallback(async () => {
+    const k = await Zu(e, s, l);
+    k && d(k);
   }, [e, s]), $ = p.useCallback(async () => {
-    const k = await _u(e, s, l);
+    const k = await Xu(e, s, l);
     k && d(k);
   }, [e, s]), x = p.useCallback(async () => {
-    const k = await ea(e, s, l);
-    k && d(k);
+    s.modelQualifiedName && Gu(e, s.modelQualifiedName);
+  }, [e, s]), w = p.useCallback(async () => {
+    xn(e, s.entity);
   }, [e, s]), S = p.useCallback(async () => {
-    s.modelQualifiedName && ta(e, s.modelQualifiedName);
-  }, [e, s]), E = p.useCallback(async () => {
-    hn(e, s.entity);
-  }, [e, s]), A = p.useCallback(async () => {
-    const k = await At(e, je, s, l);
+    const k = await Qu(e, It, s, l);
     k && d(k);
-  }, [e, s]), B = p.useCallback(async () => {
-    const k = Number(v[0]);
-    if (v.length === 0 || !s.tools || k <= -1)
+  }, [e, s]), E = p.useCallback(async (k, P) => {
+    if (!P)
       return;
-    const N = await At(e, je, s, l, k);
-    N && d(N);
-  }, [e, s, v]), z = p.useCallback(async () => {
-    const k = Number(v[0]);
-    if (v.length === 0 || !s.tools || k <= -1)
+    const F = await wn(k, P);
+    if (!F)
       return;
-    const N = await ia(e, s, l, k);
-    N && d(N);
-  }, [e, s, v]), M = p.useCallback(async () => {
-    const k = await la(e, je, s, l);
-    k && d(k);
-  }, [e, s]), K = p.useCallback(async (k, N) => {
-    if (!N)
-      return;
-    const W = await fn(k, N);
-    if (!W)
-      return;
-    const X = await pn(W, k);
-    if (X !== void 0)
-      return X ? /* @__PURE__ */ b.jsx(nr, {}) : /* @__PURE__ */ b.jsx(dr, {});
-  }, [e, s.entity]), V = p.useMemo(() => {
+    const T = await Cn(F, k);
+    if (T !== void 0)
+      return T ? /* @__PURE__ */ y.jsx(or, {}) : /* @__PURE__ */ y.jsx(sr, {});
+  }, [e, s.entity]), I = p.useMemo(() => {
     let k = "";
     return s.maxTokens !== void 0 && (k += "Max tokens: " + s.maxTokens.toLocaleString(navigator.language)), s.temperature !== void 0 && (k.length > 0 && (k += ", "), k += "Temperature: " + s.temperature.toLocaleString(navigator.language, { minimumFractionDigits: 1, maximumFractionDigits: 2 })), s.topP !== void 0 && (k.length > 0 && (k += ", "), k += "Top P: " + s.topP.toLocaleString(navigator.language, { minimumFractionDigits: 1, maximumFractionDigits: 2 })), k;
-  }, [s.temperature, s.maxTokens, s.topP]), L = async (k) => ({
-    isValidModel: await Ue("modelQualifiedName", e, k),
-    isValidEntity: await Ue("entity", e, k),
-    isValidUserPrompt: await Ue("userPrompt", e, k),
+  }, [s.temperature, s.maxTokens, s.topP]), z = async (k) => ({
+    isValidModel: await We("modelQualifiedName", e, k),
+    isValidEntity: await We("entity", e, k),
+    isValidUserPrompt: await We("userPrompt", e, k),
     showCreateVariablesInfo: k.variables.length === 0,
-    missingAttributes: await vn(e, k),
-    unusedAttributes: await mn(e, k)
+    missingAttributes: await Dn(e, k),
+    unusedAttributes: await kn(e, k)
   });
-  return /* @__PURE__ */ b.jsxs(b.Fragment, { children: [
-    /* @__PURE__ */ b.jsxs(Ct, { children: [
-      /* @__PURE__ */ b.jsx(ke, { label: "System prompt", children: /* @__PURE__ */ b.jsx(
-        Dt,
+  return /* @__PURE__ */ y.jsxs(y.Fragment, { children: [
+    /* @__PURE__ */ y.jsxs(Bt, { children: [
+      /* @__PURE__ */ y.jsx(Be, { label: "System prompt", children: /* @__PURE__ */ y.jsx(
+        Rt,
         {
           ariaLabel: "System prompt",
           value: s.systemPrompt,
-          onChange: w("systemPrompt"),
-          highlightRules: C
+          onChange: g("systemPrompt"),
+          highlightRules: b
         }
       ) }),
-      /* @__PURE__ */ b.jsx(ke, { label: "User prompt", children: /* @__PURE__ */ b.jsx(
-        Dt,
+      /* @__PURE__ */ y.jsx(Be, { label: "User prompt", children: /* @__PURE__ */ y.jsx(
+        Rt,
         {
           ariaLabel: "User prompt",
           value: s.userPrompt || "",
-          onChange: w("userPrompt"),
-          highlightRules: C,
+          onChange: g("userPrompt"),
+          highlightRules: b,
           validate: () => n.isValidUserPrompt
         }
       ) }),
-      /* @__PURE__ */ b.jsx(ke, { label: "Tools", children: /* @__PURE__ */ b.jsx(
-        ks,
+      /* @__PURE__ */ y.jsx(
+        Qs,
         {
-          ariaLabel: "Tools table",
-          columns: [
-            { id: "enabled", caption: "Active" },
-            { id: "name", caption: "Name", isRowHeader: !0 },
-            { id: "description", caption: "Description" },
-            { id: "tool", caption: "Tool", useContentWrapper: !0 }
-          ],
-          data: s.tools ? s.tools.map((k) => [
-            k.enabled ? "Yes" : "No",
-            k.name,
-            k.description || "",
-            /* @__PURE__ */ b.jsx(
-              On,
-              {
-                icon: /* @__PURE__ */ b.jsx(yn, {}),
-                text: k.microflow || ""
-              }
-            )
-          ]) : [],
-          emptyMessage: "No tools configured.",
-          selectionType: "row",
-          selectionMode: "single",
-          selectedKeys: v,
-          onSelectionChange: y,
-          toolbarLeft: /* @__PURE__ */ b.jsxs(b.Fragment, { children: [
-            /* @__PURE__ */ b.jsx(
-              We,
-              {
-                icon: /* @__PURE__ */ b.jsx(mr, {}),
-                label: "New",
-                "aria-label": "Add new tool",
-                tooltip: "Add new tool",
-                onPress: A
-              }
-            ),
-            /* @__PURE__ */ b.jsx(
-              We,
-              {
-                icon: /* @__PURE__ */ b.jsx(er, {}),
-                label: "Edit",
-                "aria-label": "Edit selected tool",
-                onPress: B,
-                tooltip: "Edit selected tool",
-                isDisabled: v.length === 0
-              }
-            ),
-            /* @__PURE__ */ b.jsx(
-              We,
-              {
-                icon: /* @__PURE__ */ b.jsx(Xn, {}),
-                label: "Delete",
-                "aria-label": "Delete selected tool",
-                onPress: z,
-                tooltip: "Delete selected tool",
-                isDisabled: v.length === 0
-              }
-            )
-          ] })
+          agent: s,
+          studioPro: e,
+          componentName: It,
+          updateStudioProDocument: l,
+          onAgentChange: d
         }
-      ) })
+      )
     ] }),
-    /* @__PURE__ */ b.jsx(Ct, { children: /* @__PURE__ */ b.jsxs(ke, { label: "General", children: [
-      /* @__PURE__ */ b.jsx(
+    /* @__PURE__ */ y.jsx(Bt, { children: /* @__PURE__ */ y.jsxs(Be, { label: "General", children: [
+      /* @__PURE__ */ y.jsx(
         Le,
         {
           ariaLabel: "Model",
           label: "Model",
           value: s.modelQualifiedName ? s.modelQualifiedName : "",
-          icon: s.modelQualifiedName ? Wn : void 0,
+          icon: s.modelQualifiedName ? Jn : void 0,
           buttonCaption: "Select...",
-          onClick: x,
+          onClick: $,
           validate: () => n.isValidModel,
           buttonCaptionSecondary: s.modelQualifiedName ? "Show" : void 0,
-          onClickSecondary: s.modelQualifiedName ? S : void 0
+          onClickSecondary: s.modelQualifiedName ? x : void 0
         }
       ),
-      /* @__PURE__ */ b.jsx(
+      /* @__PURE__ */ y.jsx(
         Le,
         {
           ariaLabel: "Settings",
           label: "Model settings",
-          value: V,
+          value: I,
           buttonCaption: "Edit",
-          onClick: M,
+          onClick: S,
           validate: void 0
         }
       ),
-      /* @__PURE__ */ b.jsx(
-        jn,
+      /* @__PURE__ */ y.jsx(
+        Xn,
         {
           label: "Documentation",
           "aria-label": "Documentation",
           value: s.description,
-          onChange: w("description"),
+          onChange: g("description"),
           rows: 3
         }
       ),
-      /* @__PURE__ */ b.jsx(
+      /* @__PURE__ */ y.jsx(
         Le,
         {
           ariaLabel: "Entity",
           label: "Entity",
           value: s.entity,
-          icon: a,
-          onClick: $,
+          icon: u,
+          onClick: C,
           buttonCaption: "Select...",
           validate: () => n.isValidEntity,
           buttonCaptionSecondary: s.entity ? "Show" : void 0,
-          onClickSecondary: s.entity ? E : void 0
+          onClickSecondary: s.entity ? w : void 0
         }
       ),
-      n.showCreateVariablesInfo && n.unusedAttributes.length === 0 && !f && /* @__PURE__ */ b.jsx(
-        kt,
+      n.showCreateVariablesInfo && n.unusedAttributes.length === 0 && !f && /* @__PURE__ */ y.jsx(
+        Pt,
         {
-          onClose: () => m(!0),
+          onClose: () => v(!0),
           children: "Create variables: Enclose a word or text in double curly brackets. For example, you can write {{Language}} in the system or user prompt."
         }
       ),
-      n.missingAttributes.length > 0 && /* @__PURE__ */ b.jsxs(Ln, { children: [
-        /* @__PURE__ */ b.jsx("span", { children: "The following attributes cannot be found on the selected entity:" }),
-        /* @__PURE__ */ b.jsx("ul", { children: n.missingAttributes.map((k) => /* @__PURE__ */ b.jsx("li", { children: k }, k)) })
+      n.missingAttributes.length > 0 && /* @__PURE__ */ y.jsxs(Gn, { children: [
+        /* @__PURE__ */ y.jsx("span", { children: "The following attributes cannot be found on the selected entity:" }),
+        /* @__PURE__ */ y.jsx("ul", { children: n.missingAttributes.map((k) => /* @__PURE__ */ y.jsx("li", { children: k }, k)) })
       ] }),
-      n.unusedAttributes.length > 0 && !c && /* @__PURE__ */ b.jsxs(
-        kt,
+      n.unusedAttributes.length > 0 && !c && /* @__PURE__ */ y.jsxs(
+        Pt,
         {
           onClose: () => h(!0),
           children: [
-            n.showCreateVariablesInfo && /* @__PURE__ */ b.jsxs(b.Fragment, { children: [
-              /* @__PURE__ */ b.jsx("span", { children: "Create variables: Enclose a word or text in double curly brackets. For example, you can write {{Language}} in the system or user prompt." }),
-              /* @__PURE__ */ b.jsx("br", {})
+            n.showCreateVariablesInfo && /* @__PURE__ */ y.jsxs(y.Fragment, { children: [
+              /* @__PURE__ */ y.jsx("span", { children: "Create variables: Enclose a word or text in double curly brackets. For example, you can write {{Language}} in the system or user prompt." }),
+              /* @__PURE__ */ y.jsx("br", {})
             ] }),
-            /* @__PURE__ */ b.jsx("span", { children: "The following attributes are found on the selected entity, but are not used in the prompt:" }),
-            /* @__PURE__ */ b.jsx("ul", { children: n.unusedAttributes.map((k) => /* @__PURE__ */ b.jsx("li", { children: k }, k)) })
+            /* @__PURE__ */ y.jsx("span", { children: "The following attributes are found on the selected entity, but are not used in the prompt:" }),
+            /* @__PURE__ */ y.jsx("ul", { children: n.unusedAttributes.map((k) => /* @__PURE__ */ y.jsx("li", { children: k }, k)) })
           ]
         }
       )
     ] }) })
   ] });
-}, zs = gn(), Bs = ({ studioPro: t, documentId: e }) => {
-  const l = t.ui.messageBoxes, i = t.app.model.customBlobDocuments, [o, n] = p.useState(!1), [r, a] = p.useState(zs);
+}, ed = Sn(), td = ({ studioPro: t, documentId: e }) => {
+  const l = t.ui.messageBoxes, i = t.app.model.customBlobDocuments, [o, n] = p.useState(!1), [r, u] = p.useState(ed);
   return p.useEffect(() => {
-    i.getDocumentById(e).then(async (u) => {
-      if (u && !("error" in u)) {
-        const s = u.document.contents;
-        n(!0), a(s);
+    i.getDocumentById(e).then(async (a) => {
+      if (a && !("error" in a)) {
+        const s = a.document.contents;
+        n(!0), u(s);
       } else
-        throw new Error((u == null ? void 0 : u.error) || "Document not found");
-    }).catch((u) => {
-      l.show("error", "Error loading document", "Details: " + (u == null ? void 0 : u.message) || u), n(!0);
+        throw new Error((a == null ? void 0 : a.error) || "Document not found");
+    }).catch((a) => {
+      l.show("error", "Error loading document", "Details: " + (a == null ? void 0 : a.message) || a), n(!0);
     });
-  }, []), /* @__PURE__ */ b.jsx(on, { studioPro: t, children: /* @__PURE__ */ b.jsxs(nn, { children: [
-    !o && /* @__PURE__ */ b.jsx("span", { children: "Loading document content..." }),
-    o && /* @__PURE__ */ b.jsx(rn, { children: /* @__PURE__ */ b.jsx(
-      Es,
+  }, []), /* @__PURE__ */ y.jsx(fn, { studioPro: t, children: /* @__PURE__ */ y.jsxs(pn, { children: [
+    !o && /* @__PURE__ */ y.jsx("span", { children: "Loading document content..." }),
+    o && /* @__PURE__ */ y.jsx(vn, { children: /* @__PURE__ */ y.jsx(
+      _s,
       {
         loadedAgent: r,
         studioPro: t,
-        updateStudioProDocument: bn(t, e)
+        updateStudioProDocument: En(t, e)
       }
     ) })
   ] }) });
-}, Ns = un(Bs);
+}, dd = mn(td);
 export {
-  Ns as component
+  dd as component
 };
 //# sourceMappingURL=agentEdit.js.map

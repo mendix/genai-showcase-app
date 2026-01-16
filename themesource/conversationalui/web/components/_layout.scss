@@ -1,75 +1,96 @@
 @import "../../../atlas_core/web/_variables.scss";
 @import "../../../datawidgets/web/variables.scss";
-@import "../../../../theme/web/custom-variables";
 
-/* reference for animation */
+/* ============================================================
+   Animations
+   ============================================================ */
+
+/* Reference animation: slide in from right */
 @keyframes scale-in-right {
   0% {
     transform: scaleX(0.5) translateX(100%);
     opacity: 0;
   }
+
   100% {
     transform: scaleX(1) translateX(0);
     opacity: 1;
   }
 }
 
+/* Reference animation: slide out to right */
 @keyframes scale-out-right {
   0% {
     transform: scaleX(1) translateX(0);
     opacity: 1;
   }
+
   100% {
     transform: scaleX(0.5) translateX(100%);
     opacity: 0;
   }
 }
 
-/* Slide-in styling - used in Layout_SlideIn*/
+/* ============================================================
+   Slide-in Layout
+   Used in Layout_SlideIn
+   ============================================================ */
+
 .layout-slidein {
   position: fixed;
   top: 0 !important;
   right: 0;
   bottom: 0;
   left: unset !important;
+
   width: 45vw !important;
   min-width: 400px;
   max-width: 800px;
   height: 100vh !important;
+
   z-index: 999;
   background: #fff;
-  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.10), 0 3px 14px 0 rgba(0, 0, 0, 0.08), 0 5px 5px 0 rgba(0, 0, 0, 0.15);
-  animation: scale-in-right 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) forwards;
+  padding: 24px;
+
   display: flex;
   flex-direction: column;
-  padding: 24px;
+
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.10),
+              0 3px 14px 0 rgba(0, 0, 0, 0.08),
+              0 5px 5px 0 rgba(0, 0, 0, 0.15);
+
+  animation: scale-in-right 0.3s
+    cubic-bezier(0.550, 0.085, 0.680, 0.530)
+    forwards;
 
   .mx-window-content {
     max-height: 100vh !important;
+    padding: $spacing-small;
+
+    display: flex;
+    flex-direction: column;
+
     border: none;
     border-radius: 0;
     background: inherit;
     box-shadow: none;
-    padding: $spacing-small;
-    display: flex;
-    flex-direction: column;
 
+    /* Hide default Mendix window header */
     .mx-window-header {
       display: none;
 
-      h4 {
-        display: none;
-      }
-
+      h4,
       button.close {
         display: none;
       }
     }
 
+    /* Prevent nested dataview scrolling issues */
     .mx-placeholder > .mx-dataview > .mx-dataview-content {
       overflow: hidden;
     }
 
+    /* Sticky header inside slide-in */
     .slidein-header {
       position: sticky;
       top: 0;
@@ -79,19 +100,33 @@
 
     /* Scrollable content area */
     .slidein-body {
+      flex: 1 1 auto;
       box-sizing: border-box;
       background: #fff;
-      flex: 1 1 auto;
-      overflow-y: auto; 
+      overflow-y: auto;
     }
   }
 }
 
-/* define animation of the close button */
+/* ============================================================
+   Close animation
+   ============================================================ */
+
 .slidein-close {
-  animation: scale-out-right 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  animation: scale-out-right 0.3s
+    cubic-bezier(0.550, 0.085, 0.680, 0.530)
+    both;
 }
 
+/* Hide background underlay when slide-in is active */
 .layout-slidein + .mx-underlay {
   display: none !important;
+}
+
+/* ============================================================
+   Page variants
+   ============================================================ */
+
+.agent-popup-midsize {
+  width: 60vw;
 }

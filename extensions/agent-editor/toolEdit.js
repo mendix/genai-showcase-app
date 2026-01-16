@@ -1,9 +1,9 @@
-import { aB as b, j as t, r as s, ap as x, aC as M, ar as V, an as j, ao as u } from "./TextInputWithIcon-BHM6tQnm.js";
+import { aG as b, j as t, r as s, au as x, aH as M, aw as V, at as j, as as p } from "./TextInputWithIcon-mWdTJJox.js";
 import { m as k, c as D } from "./logger-BM6R1Quw.js";
-import { T as v } from "./TextInputLabeled-C8A7862R.js";
-import { S as C, N as S } from "./TextAreaAutogrow-D57DVpIT.js";
-import { a as N, n as E, T as L } from "./TextInputWithButton-DK5kVQUu.js";
-import { D as F } from "./DialogFooter-DRsR1K4D.js";
+import { T as v } from "./TextInputLabeled-Cs7s9ibw.js";
+import { S as C, N as S } from "./ComboBox-Dy-mCv3q.js";
+import { a as N, n as E, T as L } from "./MicroflowIcon-BNuUMNrL.js";
+import { D as F } from "./DialogFooter-_rNdMTCG.js";
 function I(a) {
   return {
     name: a || "",
@@ -53,15 +53,15 @@ const R = async (a, o, i, e) => {
       "This microflow might have been deleted or renamed. Please update the tool microflow selection."
     );
   await a.ui.editors.editDocument(l.$ID);
-}, B = {
+}, O = {
   isValidName: !0,
   isValidDescription: !0,
   isValidMicroflow: !0,
   isValidType: !0
-}, O = [
+}, B = [
   { key: "Microflow", caption: "Microflow tool" }
 ], H = ({ studioPro: a, initialTool: o, onClose: i }) => {
-  const [e, n] = s.useState(o || I()), [l, c] = s.useState(B), d = s.useCallback(() => {
+  const [e, n] = s.useState(o || I()), [l, c] = s.useState(O), d = s.useCallback(() => {
     if (l.isValidName === !0 && l.isValidDescription === !0 && l.isValidMicroflow === !0 && l.isValidType === !0)
       i == null || i(e);
     else
@@ -75,7 +75,7 @@ const R = async (a, o, i, e) => {
     r && n(r);
   }, [a, e]), T = s.useCallback(async () => {
     e.microflow && A(a, e.microflow);
-  }, [a, e.microflow]), p = s.useCallback((r) => (w) => {
+  }, [a, e.microflow]), u = s.useCallback((r) => (w) => {
     n({ ...e, [r]: w });
   }, [e]), g = async (r) => ({
     isValidName: await m("name", r),
@@ -90,7 +90,7 @@ const R = async (a, o, i, e) => {
     })();
   }, [a, e]), /* @__PURE__ */ t.jsx(x, { studioPro: a, children: /* @__PURE__ */ t.jsxs(M, { children: [
     /* @__PURE__ */ t.jsx(V, { children: /* @__PURE__ */ t.jsxs(j, { children: [
-      /* @__PURE__ */ t.jsxs(u, { label: "Common", children: [
+      /* @__PURE__ */ t.jsxs(p, { label: "Common", children: [
         /* @__PURE__ */ t.jsx(
           C,
           {
@@ -100,7 +100,7 @@ const R = async (a, o, i, e) => {
             isDisabled: !0,
             validate: () => l.isValidType,
             onSelectionChange: (r) => n({ ...e, toolType: r }),
-            children: O.map((r) => /* @__PURE__ */ t.jsx(S, { id: r.key, children: r.caption }, r.key))
+            children: B.map((r) => /* @__PURE__ */ t.jsx(S, { id: r.key, children: r.caption }, r.key))
           }
         ),
         e.toolType === "Microflow" && /* @__PURE__ */ t.jsx(t.Fragment, { children: /* @__PURE__ */ t.jsx(
@@ -118,14 +118,14 @@ const R = async (a, o, i, e) => {
           }
         ) })
       ] }),
-      e.toolType && e.toolType === "Microflow" && /* @__PURE__ */ t.jsxs(u, { label: "Naming", children: [
+      e.toolType && e.toolType === "Microflow" && /* @__PURE__ */ t.jsxs(p, { label: "Naming", children: [
         /* @__PURE__ */ t.jsx(
           v,
           {
             label: "Name",
             ariaLabel: "Name",
             value: e.name,
-            onChange: p("name"),
+            onChange: u("name"),
             validate: () => l.isValidName
           }
         ),
@@ -135,7 +135,7 @@ const R = async (a, o, i, e) => {
             label: "Description",
             ariaLabel: "Description",
             value: e.description,
-            onChange: p("description"),
+            onChange: u("description"),
             validate: () => l.isValidDescription
           }
         )
@@ -150,7 +150,7 @@ const R = async (a, o, i, e) => {
       }
     )
   ] }) });
-}, _ = {
+}, U = {
   async loaded(a, o) {
     const i = k(a), e = D(i);
     try {
@@ -179,6 +179,6 @@ const R = async (a, o, i, e) => {
   }
 };
 export {
-  _ as component
+  U as component
 };
 //# sourceMappingURL=toolEdit.js.map

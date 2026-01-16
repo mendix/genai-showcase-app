@@ -1,8 +1,8 @@
-import { r as c, j as s, ap as b, aq as w, ar as f, an as x, ao as C } from "./TextInputWithIcon-BHM6tQnm.js";
+import { r as c, j as s, au as b, av as w, aw as f, at as x, as as C } from "./TextInputWithIcon-mWdTJJox.js";
 import { c as D } from "./logger-BM6R1Quw.js";
-import { T as j } from "./TextInputLabeled-C8A7862R.js";
-import { c as E } from "./componentLoader-CAsiyhiP.js";
-function v(n) {
+import { T as j } from "./TextInputLabeled-Cs7s9ibw.js";
+import { c as v } from "./componentLoader-BrAYZVSc.js";
+function E(n) {
   return {
     name: ""
   };
@@ -20,14 +20,14 @@ const L = (n, a, r, t, o) => async (l) => {
       message: o.message
     });
   }
-}, K = v(), k = ({ studioPro: n, documentId: a }) => {
-  const r = n.ui.messageBoxes, t = n.app.model.customBlobDocuments, [o, l] = c.useState(0), [i, h] = c.useState(!1), [m, d] = c.useState(K);
+}, K = E(), k = ({ studioPro: n, documentId: a }) => {
+  const r = n.ui.messageBoxes, t = n.app.model.customBlobDocuments, [o, l] = c.useState(0), [i, h] = c.useState(!1), [m, u] = c.useState(K);
   return c.useCallback(
-    (e) => L(n, e, m, d, a),
-    [n, m, d, a]
+    (e) => L(n, e, m, u, a),
+    [n, m, u, a]
   ), c.useEffect(() => {
-    const e = (u) => {
-      const { documents: g } = u;
+    const e = (d) => {
+      const { documents: g } = d;
       g.some((p) => p.documentId === a) && l((p) => p + 1);
     };
     return t.addEventListener("documentsChanged", e), () => {
@@ -36,8 +36,8 @@ const L = (n, a, r, t, o) => async (l) => {
   }, []), c.useEffect(() => {
     t.getDocumentById(a).then(async (e) => {
       if (e && !("error" in e)) {
-        const u = e.document.contents, g = e.document.name;
-        d({ ...u, name: g }), h(!0);
+        const d = e.document.contents, g = e.document.name;
+        u({ ...d, name: g }), h(!0);
       } else
         throw new Error((e == null ? void 0 : e.error) || "Document not found");
     }).catch((e) => {
@@ -57,7 +57,7 @@ const L = (n, a, r, t, o) => async (l) => {
       }
     ) }) }) })
   ] }) });
-}, T = E(k);
+}, T = v(k);
 export {
   T as component
 };
