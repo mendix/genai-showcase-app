@@ -21,7 +21,6 @@ import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import genaicommons.impl.MxLogger;
 import genaicommons.proxies.Argument;
-import genaicommons.proxies.ArgumentInput;
 import genaicommons.proxies.KnowledgeBaseSpan;
 import genaicommons.proxies.MCPSpan;
 import genaicommons.proxies.ModelSpan;
@@ -208,7 +207,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 			response = Core.microflowCall(Tool.getMicroflow()).execute(getContext());
 		} else {
 			logMessageTrace = logMessageTrace +  "\n\nInput parameter(s):";
-			logMessageTrace = addLogTracesForArguments(logMessageTrace);
+			logMessageTrace = logMessageTrace + getArgumentsString();
 			logMessageTrace = logMessageTrace + params.toString();
 			response = Core.microflowCall(Tool.getMicroflow()).withParams(params).execute(getContext());
 		}
@@ -223,22 +222,22 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 	}
 	
 	/**
-	 * If there are ArgumentInput objects associated to a Tool, they are likely not part of the input parameters and need to be added individually
-	 */
-	private String addLogTracesForArguments(String logMessageTrace) throws CoreException{
-		List<ArgumentInput> args = Tool.getTool_ArgumentInput();
-		
-		if(args != null && !args.isEmpty()) {
-			logMessageTrace += getArgumentsString();
-		}
-		return logMessageTrace;
-	}
-	
-	/**
 	 * Gets a string of input arguments (passed by the model only)
+	 * First tries to use ToolCall.getInput(), falls back to constructing from ToolCall_Argument
 	 */
 	private String getArgumentsString() throws CoreException {
+		// First try to use the Input field directly if available
+		String input = ToolCall.getInput();
+		if (input != null && !input.trim().isEmpty()) {
+			return "\n\n" + input;
+		}
+		
+		// Fall back to constructing from argument list
 		List<Argument> argumentList = ToolCall.getToolCall_Argument();
+		if (argumentList == null || argumentList.isEmpty()) {
+			return "";
+		}
+		
 		String argumentString = "\n\n" + "{";
 		for (int i = 0; i < argumentList.size(); i++) {
 		    Argument arg = argumentList.get(i);

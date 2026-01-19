@@ -17,7 +17,6 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import mcpclient.impl.MxLogger;
 import mcpclient.proxies.MCP;
 import genaicommons.impl.ToolCollectionImpl;
-import genaicommons.proxies.ArgumentInput;
 import genaicommons.proxies.Tool;
 import genaicommons.proxies.ToolCollection;
 import com.mendix.systemwideinterfaces.core.UserAction;
@@ -106,7 +105,6 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		
 		tool.setMicroflow(Microflow);
 		tool.setMCPServerName(this.MCPServerConfiguration.getName());
-		tool.setTool_ArgumentInput(createArgumentInputList());
 		if (OverwritingToolName != null && !OverwritingToolName.isBlank()) {
 			tool.setName(OverwritingToolName);
 		} else { 
@@ -119,14 +117,11 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		}
 		tool.setOriginalMCPToolName(Tool.getName());
 		tool.setMCP_MCPServerConfiguration(MCPServerConfiguration);
+		tool.setSchema(Tool.getSchema());
 		List<Tool> ToolList = toolCollection.getToolCollection_Tool();
 		ToolList.add(tool);
 		toolCollection.setToolCollection_Tool(ToolList); 
 		return tool;
-	}
-	
-	private List<ArgumentInput> createArgumentInputList(){
-		return mcpclient.proxies.microflows.Microflows.tool_CreateArgumentInputList(getContext(), Tool);
 	}
 	// END EXTRA CODE
 }

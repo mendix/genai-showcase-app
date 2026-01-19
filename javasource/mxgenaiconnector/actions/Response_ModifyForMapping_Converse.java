@@ -65,7 +65,7 @@ public class Response_ModifyForMapping_Converse extends UserAction<java.lang.Str
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 	
 	//Prepare for mapping to GenAI Commons structure
-	private void normalizeMessage(ObjectNode rootNode) {
+	private void normalizeMessage(ObjectNode rootNode) throws Exception {
 	    JsonNode contentArray = rootNode.path("output").path("message").path("content");
 	    if (!contentArray.isArray()) return;
 
@@ -100,12 +100,15 @@ public class Response_ModifyForMapping_Converse extends UserAction<java.lang.Str
 	    }
 	}
 	
-	private void mapToolUse(ObjectNode toolUseNode) {
-	    // Replace "input" with key and value attributes
-	    JsonNode inputNode = toolUseNode.remove("input");
+	private void mapToolUse(ObjectNode toolUseNode) throws Exception {
+	    // Keep "input" as a JSON string and also create key and value attributes
+	    JsonNode inputNode = toolUseNode.get("input");
 	    ArrayNode argumentsArray = MAPPER.createArrayNode();
 
 	    if (inputNode != null && inputNode.isObject()) {
+	        // Serialize input to JSON string for Mendix storage
+	        toolUseNode.put("input", MAPPER.writeValueAsString(inputNode));
+	        
 	        Iterator<Map.Entry<String, JsonNode>> fields = inputNode.fields();
 	        while (fields.hasNext()) {
 	            Map.Entry<String, JsonNode> field = fields.next();

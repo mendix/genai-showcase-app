@@ -32,7 +32,6 @@ import genaicommons.proxies.Request;
 import genaicommons.proxies.Tool;
 import genaicommons.proxies.ToolCall;
 import genaicommons.proxies.ToolCollection;
-import genaicommons.proxies.ArgumentInput;
 import genaicommons.proxies.ENUM_MessageRole;
 import openaiconnector.impl.MxLogger;
 import openaiconnector.proxies.OpenAIRequest_Extension;
@@ -174,12 +173,18 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 			JsonNode argumentsArray = function.path("arguments");
 			Map<String, String> argumentsMap = new HashMap<>();
 	        for (JsonNode argument : argumentsArray) {
-	            String key = argument.get("key").asText();
-	            String value = argument.get("value").asText();
-	            argumentsMap.put(key, value);
+	            JsonNode keyNode = argument.get("key");
+	            JsonNode valueNode = argument.get("value");
+	            if (keyNode != null && valueNode != null) {
+	                String key = keyNode.asText();
+	                String value = valueNode.asText();
+	                argumentsMap.put(key, value);
+	            }
 	        }
 	        String argumentsString = MAPPER.writeValueAsString(argumentsMap);
 	       ((ObjectNode) function).put("arguments", argumentsString);
+	       // Remove the 'input' field as it's not expected by the API
+	       ((ObjectNode) function).remove("input");
 		}
 	}
 
@@ -380,12 +385,24 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 			String toolName = toolNode.path("function").path("name").asText();
 			Tool functionMatch = FunctionImpl.getToolByName(getRequest(RequestMapping), toolName ,getContext());
 			if(functionMatch != null) {
-			ObjectNode parametersNode = createToolParametersNode(functionMatch);
-				if(parametersNode != null) {
-					JsonNode functionNode = toolNode.path("function");
-					((ObjectNode) functionNode).set("parameters", parametersNode);
-					((ObjectNode) toolNode).set("function", functionNode);
+				// Check if toolNode already has an "input" field
+				JsonNode inputNode = toolNode.path("input");
+				ObjectNode parametersNode = null;
+				
+				if (inputNode != null && !inputNode.isMissingNode() && !inputNode.isNull() && inputNode.isObject()) {
+					// Use the existing input as parameters
+					parametersNode = (ObjectNode) inputNode;
+				} else {
+					// Create parameters from function match
+					parametersNode = createToolParametersNode(functionMatch);
 				}
+				
+				JsonNode functionNode = toolNode.path("function");
+				((ObjectNode) functionNode).set("parameters", parametersNode);
+				((ObjectNode) toolNode).set("function", functionNode);
+				
+				// Remove schema field from tool node as it's not needed in the final payload
+				((ObjectNode) toolNode).remove("schema");
 			}
 		}
 		// Update tools within rootNode
@@ -393,24 +410,30 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 	}
 	
 	private ObjectNode createToolParametersNode(Tool tool) throws CoreException {
-		
-		List<ArgumentInput> arguments = tool.getTool_ArgumentInput();
-		Map<String, IDataType> inputParameters = FunctionMappingImpl.getInputParametersForModel(tool.getMicroflow());
-		
-		if(arguments == null && (inputParameters == null || inputParameters.entrySet().isEmpty())) {
-			return null;
+	
+		// Check if tool has a schema field and use it if it's valid JSON
+		String schema = tool.getSchema();
+		if (schema != null && !schema.isEmpty()) {
+			try {
+				JsonNode schemaNode = MAPPER.readTree(schema);
+				if (schemaNode != null && schemaNode.isObject()) {
+					return (ObjectNode) schemaNode;
+				}
+			} catch (Exception e) {
+				LOGGER.warn("Failed to parse schema for tool " + tool.getName() + ": " + e.getMessage());
+			}
 		}
+		
+		// Fall back to creating parameters from input parameters
+		Map<String, IDataType> inputParameters = FunctionMappingImpl.getInputParametersForModel(tool.getMicroflow());
 		
 		ObjectNode parametersNode = MAPPER.createObjectNode();
 		ObjectNode propertiesNode = MAPPER.createObjectNode();
 		ArrayNode requiredNode = MAPPER.createArrayNode();
-		if(arguments == null || arguments.isEmpty()) {
-			inputParameters.entrySet().forEach(t -> FunctionImpl.addProperty(propertiesNode, requiredNode, t));
-			
-		} else {
-			FunctionImpl.addPropertiesForTool(arguments, propertiesNode, requiredNode);
-		}
 		
+		if(inputParameters != null && !inputParameters.entrySet().isEmpty()) {
+			inputParameters.entrySet().forEach(t -> FunctionImpl.addProperty(propertiesNode, requiredNode, t));
+		}
 		
 		parametersNode.put("type", "object");
 		parametersNode.set("properties", propertiesNode);
