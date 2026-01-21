@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
@@ -31,6 +33,8 @@ import mcpclient.proxies.ArgumentInput;
 
 /**
  * Calls the Tool on the MCP Server which returns a ToolResult. The ToolResult contains the response of the tool which is typically passed to the model.
+ * 
+ * To pass arguments, the input parameter can be filled for the raw JSON input. Alternatively, the ArgumentCollection object can be created using the corresponding actions and passed to the action.
  */
 public class ToolResult_Get extends UserAction<IMendixObject>
 {
@@ -39,6 +43,7 @@ public class ToolResult_Get extends UserAction<IMendixObject>
 	private final IMendixObject __MCPClient;
 	private final mcpclient.proxies.MCPClient MCPClient;
 	private final java.lang.String ToolName;
+	private final java.lang.String Input;
 	/** @deprecated use ArgumentCollection.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __ArgumentCollection;
@@ -48,6 +53,7 @@ public class ToolResult_Get extends UserAction<IMendixObject>
 		IContext context,
 		IMendixObject _mCPClient,
 		java.lang.String _toolName,
+		java.lang.String _input,
 		IMendixObject _argumentCollection
 	)
 	{
@@ -55,6 +61,7 @@ public class ToolResult_Get extends UserAction<IMendixObject>
 		this.__MCPClient = _mCPClient;
 		this.MCPClient = _mCPClient == null ? null : mcpclient.proxies.MCPClient.initialize(getContext(), _mCPClient);
 		this.ToolName = _toolName;
+		this.Input = _input;
 		this.__ArgumentCollection = _argumentCollection;
 		this.ArgumentCollection = _argumentCollection == null ? null : mcpclient.proxies.ArgumentCollection.initialize(getContext(), _argumentCollection);
 	}
@@ -69,7 +76,15 @@ public class ToolResult_Get extends UserAction<IMendixObject>
 			
 			McpSyncClient client = McpClientRegistry.getClient(MCPClient.getMendixObject().getId().toLong());
 			
-			Map<String, Object> arguments = getArguments();
+			Map<String, Object> arguments;
+			if (Input != null && !Input.trim().isEmpty()) {
+				// Parse Input as JSON
+				ObjectMapper mapper = new ObjectMapper();
+				arguments = mapper.readValue(Input, new TypeReference<Map<String, Object>>(){});
+			} else {
+				// Fall back to ArgumentCollection
+				arguments = getArguments();
+			}
 			
 			
 			McpSchema.CallToolRequest callToolRequest = new McpSchema.CallToolRequest(ToolName, arguments);

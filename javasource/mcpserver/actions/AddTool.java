@@ -85,6 +85,15 @@ public class AddTool extends UserAction<IMendixObject>
 
 		// Add the tool to the server
 		McpSyncServer server = McpServerRegistry.getServerInstance(this.McpServer.getMendixObject().getId().toLong());
+		
+		// Get the session manager for this server instance
+		Long serverId = this.McpServer.getMendixObject().getId().toLong();
+		McpSessionManager sessionManager = McpServerRegistry.getSessionManager(serverId);
+		
+		if (sessionManager == null) {
+			LOGGER.error("ERROR: SessionManager for Server ID " + serverId + " not found!");
+			throw new Exception("SessionManager for Server ID " + serverId + " not found");
+		}
 
 		McpServerFeatures.SyncToolSpecification tool = new McpServerFeatures.SyncToolSpecification(
 				new McpSchema.Tool(toolNpe.getName(), null, toolNpe.getDescription(), inputSchema, null, null, new HashMap<>()),
@@ -93,7 +102,8 @@ public class AddTool extends UserAction<IMendixObject>
 					long start = System.currentTimeMillis();
 					LOGGER.trace(threadName + ": Start processing tool call " + Name + ", microflow: " + ExecutingMicroflow);
 					try {
-						IContext contextUser = McpSessionManager.getContextFromSession(exchange);
+						// Get user context from session (falls back to system context if no session)
+						IContext contextUser = sessionManager.getContextFromSession(exchange);
 						Map<String, Object> args = new HashMap<>(arguments);
 
 						manipulateArgsForMicroflowCall(toolNpe, args);
@@ -148,18 +158,157 @@ public class AddTool extends UserAction<IMendixObject>
 	private void manipulateArgsForMicroflowCall(Tool tool, Map<String, Object> args) {
 		Map<String, IDataType> parametersAndTypes = getInputParametersPrimitives();
 		
-		
 		for (Entry<String, IDataType> entry : parametersAndTypes.entrySet()) {
 	        String paramName = entry.getKey();
 	        IDataType type = entry.getValue();
-	        // DateTime values need to be converted
-	        if (IDataType.DataTypeEnum.Datetime.equals(type.getType()) && args.containsKey(paramName)) {
-	        	Object originalValue = args.get(paramName);
-	        	Date date = new Date(Long.parseLong(originalValue.toString()));
-	            args.put(paramName, date);
+	        
+	        if (!args.containsKey(paramName)) {
+	        	continue;
+	        }
+	        
+	        Object originalValue = args.get(paramName);
+	        Object convertedValue = convertValueToExpectedType(originalValue, type, paramName);
+	        
+	        if (convertedValue != null) {
+	        	args.put(paramName, convertedValue);
 	        }
 	    }
 		args.put("Tool", tool);
+	}
+	
+	/**
+	 * Converts a value to the expected Mendix data type
+	 * @param value the original value from the LLM
+	 * @param dataType the expected Mendix data type
+	 * @param paramName parameter name for logging purposes
+	 * @return converted value or null if no conversion needed
+	 */
+	private Object convertValueToExpectedType(Object value, IDataType dataType, String paramName) {
+		IDataType.DataTypeEnum type = dataType.getType();
+		
+		if (IDataType.DataTypeEnum.Datetime.equals(type)) {
+			return parseDateTime(value, paramName);
+		} else if (IDataType.DataTypeEnum.Long.equals(type)) {
+			return parseLong(value, paramName);
+		} else if (IDataType.DataTypeEnum.Integer.equals(type)) {
+			return parseInteger(value, paramName);
+		} else if (IDataType.DataTypeEnum.Decimal.equals(type)) {
+			return parseDecimal(value, paramName);
+		} else if (IDataType.DataTypeEnum.Boolean.equals(type)) {
+			return parseBoolean(value, paramName);
+		}
+		
+		return null; // No conversion needed
+	}
+	
+	/**
+	 * Parses a value to a Date, supporting ISO strings (primary) and Unix timestamps (fallback)
+	 * @param value the value to parse
+	 * @param paramName parameter name for logging
+	 * @return parsed Date
+	 */
+	private Date parseDateTime(Object value, String paramName) {
+		String dateString = value.toString();
+		
+		try {
+			// Try parsing as ISO Instant first (e.g., 2025-12-06T10:00:00Z)
+			return Date.from(java.time.Instant.parse(dateString));
+		} catch (java.time.format.DateTimeParseException e) {
+			try {
+				// Try parsing as ISO LocalDate (e.g., 2025-12-06 - converted to start-of-day)
+				return Date.from(java.time.LocalDate.parse(dateString)
+						.atStartOfDay(java.time.ZoneId.systemDefault()).toInstant());
+			} catch (java.time.format.DateTimeParseException e1) {
+				try {
+					// Fallback: Try parsing as Unix timestamp
+					long timestamp = Long.parseLong(dateString);
+					
+					// Detect if timestamp is in seconds or milliseconds
+					// Timestamps in seconds are typically 10 digits (until year 2286)
+					// Timestamps in milliseconds are typically 13 digits
+					if (timestamp < 10000000000L) {
+						// Timestamp is in seconds, convert to milliseconds
+						timestamp = timestamp * 1000;
+					}
+					
+					return new Date(timestamp);
+				} catch (NumberFormatException e2) {
+					LOGGER.error("Failed to parse datetime value for parameter '" + paramName + "': " + dateString);
+					throw e;
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Parses a value to Long if it's not already a Long
+	 * @param value the value to parse
+	 * @param paramName parameter name for logging
+	 * @return parsed Long or null if already a Long
+	 */
+	private Long parseLong(Object value, String paramName) {
+		if (value instanceof Long) {
+			return null; // Already correct type
+		}
+		
+		try {
+			return Long.parseLong(value.toString());
+		} catch (NumberFormatException e) {
+			LOGGER.error("Failed to parse Long value for parameter '" + paramName + "': " + value);
+			throw e;
+		}
+	}
+	
+	/**
+	 * Parses a value to Integer if it's not already an Integer
+	 * @param value the value to parse
+	 * @param paramName parameter name for logging
+	 * @return parsed Integer or null if already an Integer
+	 */
+	private Integer parseInteger(Object value, String paramName) {
+		if (value instanceof Integer) {
+			return null; // Already correct type
+		}
+		
+		try {
+			return Integer.parseInt(value.toString());
+		} catch (NumberFormatException e) {
+			LOGGER.error("Failed to parse Integer value for parameter '" + paramName + "': " + value);
+			throw e;
+		}
+	}
+	
+	/**
+	 * Parses a value to BigDecimal if it's not already a BigDecimal
+	 * @param value the value to parse
+	 * @param paramName parameter name for logging
+	 * @return parsed BigDecimal or null if already a BigDecimal
+	 */
+	private java.math.BigDecimal parseDecimal(Object value, String paramName) {
+		if (value instanceof java.math.BigDecimal) {
+			return null; // Already correct type
+		}
+		
+		try {
+			return new java.math.BigDecimal(value.toString());
+		} catch (NumberFormatException e) {
+			LOGGER.error("Failed to parse Decimal value for parameter '" + paramName + "': " + value);
+			throw e;
+		}
+	}
+	
+	/**
+	 * Parses a value to Boolean if it's not already a Boolean
+	 * @param value the value to parse
+	 * @param paramName parameter name for logging
+	 * @return parsed Boolean or null if already a Boolean
+	 */
+	private Boolean parseBoolean(Object value, String paramName) {
+		if (value instanceof Boolean) {
+			return null; // Already correct type
+		}
+		
+		return Boolean.parseBoolean(value.toString());
 	}
 	
 	
@@ -289,16 +438,26 @@ public class AddTool extends UserAction<IMendixObject>
 
 		for (Map.Entry<String, IDataType> param : inputParameters.entrySet()) {
 			String name = param.getKey();
-			String type = parameterGetType(param);
+			IDataType.DataTypeEnum dataType = param.getValue().getType();
 
 			Map<String, Object> typeNode = new HashMap<>();
-			typeNode.put("type", type);
-
+			
+			// Handle DateTime as string with date format for better LLM compatibility
+			if (IDataType.DataTypeEnum.Datetime.equals(dataType)) {
+				typeNode.put("type", "string");
+				typeNode.put("format", "date-time");
+				typeNode.put("description", "ISO 8601 date-time string (e.g., 2025-12-06T10:00:00Z) or date only (e.g., 2025-12-06)");
+			}
 			// Handle enum case to expose possible enum values
-			if ("enum".equals(type)) {
+			else if (dataType.toString().toLowerCase().equals("enumeration")) {
 				Set<String> enumKeySet = param.getValue().getEnumeration().getEnumValues().keySet();
 				typeNode.put("enum", new ArrayList<>(enumKeySet));
 				typeNode.put("type", "string");
+			}
+			// Handle other types
+			else {
+				String type = parameterGetType(param);
+				typeNode.put("type", type);
 			}
 			
 			properties.put(name, typeNode);
@@ -315,16 +474,16 @@ public class AddTool extends UserAction<IMendixObject>
 		);
 	}
 
-	
-	
 	/**
-	 * determines the type of parameter. Long/Decimal/Datetime converted to "number", enumeration to "enum"
+	 * determines the type of parameter. Long/Decimal converted to "number", enumeration to "enum"
 	 * @param inputParameter
 	 */
 	private String parameterGetType(Entry<String, IDataType> inputParameter) {
 		String type = inputParameter.getValue().toString().toLowerCase();
-		if(type.equals("long") || type.equals("decimal") || type.equals("datetime")) {
+		if(type.equals("long") || type.equals("decimal")) {
 			type = "number";
+		} else if (type.equals("integer")) {
+			type = "integer";
 		} else if (type.equals("enumeration")) {
 			type = "enum";
 		}

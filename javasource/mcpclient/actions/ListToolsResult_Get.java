@@ -109,6 +109,17 @@ public class ListToolsResult_Get extends UserAction<IMendixObject>
 		Tool toolMendix = new Tool(getContext());
 		toolMendix.setName(toolMcp.name());
 		toolMendix.setDescription(toolMcp.description());
+		
+		// Serialize the JsonSchema object to a proper JSON string
+		// Note: Jackson ObjectMapper is already a transitive dependency of the MCP library
+		try {
+			String schemaJson = new com.fasterxml.jackson.databind.ObjectMapper().writeValueAsString(toolMcp.inputSchema());
+			toolMendix.setSchema(schemaJson);
+		} catch (Exception e) {
+			LOGGER.warn("Failed to serialize JSON schema for tool: " + toolMcp.name() + ". Error: " + e.getMessage());
+			// Leave schema empty if serialization fails
+		}
+		
 		toolMendix.setTool_ListToolsResult(listToolResultMendix);
 		
 		JsonSchema inputSchema = toolMcp.inputSchema();

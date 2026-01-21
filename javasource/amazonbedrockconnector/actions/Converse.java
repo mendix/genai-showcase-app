@@ -49,9 +49,7 @@ import genaicommons.impl.FunctionMappingImpl;
 import genaicommons.proxies.ENUM_FileType;
 import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.ENUM_ToolChoice;
-import genaicommons.proxies.EnumValue;
 import genaicommons.proxies.Argument;
-import genaicommons.proxies.ArgumentInput;
 import genaicommons.proxies.Computer;
 import genaicommons.proxies.FileCollection;
 import genaicommons.proxies.FileContent;
@@ -679,13 +677,13 @@ public class Converse extends UserAction<IMendixObject>
 			builder.input(Document.mapBuilder().build());
 			
 		} else {
-			// Arguments must be build by Document.mapBuilder()
+			// Arguments must be built by Document.mapBuilder()
+			// All arguments need to be added to the same mapBuilder
+			MapBuilder mapBuilder = Document.mapBuilder();
 			for (Argument arg : args) {
-				Document input = Document.mapBuilder()
-					.putString(arg.getKey(), arg.getValue())
-					.build();
-				builder.input(input);
+				mapBuilder.putString(arg.getKey(), arg.getValue());
 			}
+			builder.input(mapBuilder.build());
 		}
 		
 		return ContentBlock.builder().toolUse(builder.build()).build();
@@ -807,20 +805,55 @@ public class Converse extends UserAction<IMendixObject>
 	
 	// Mapping Mendix Tool to aws tool
 	private software.amazon.awssdk.services.bedrockruntime.model.Tool getAwsTool(Tool mxTool) throws JsonProcessingException, CoreException{
-		software.amazon.awssdk.services.bedrockruntime.model.ToolSpecification.Builder toolSpecBuilder = ToolSpecification.builder()
+		ToolInputSchema inputSchema = getToolInputSchema(mxTool);
+		
+		software.amazon.awssdk.services.bedrockruntime.model.ToolSpecification toolSpec = ToolSpecification.builder()
 				.name(mxTool.getName())
 				.description(mxTool.getDescription())
-				.inputSchema(getToolInputSchema(mxTool));
-				
-		return software.amazon.awssdk.services.bedrockruntime.model.Tool.builder().toolSpec(toolSpecBuilder.build()).build();
+				.inputSchema(inputSchema)
+				.build();
+		
+		LOGGER.debug("Built ToolSpecification for '" + mxTool.getName() + "': " + toolSpec.toString());
+		
+		return software.amazon.awssdk.services.bedrockruntime.model.Tool.builder().toolSpec(toolSpec).build();
 	}
 	
 	// Getting the Input Schema of a Tool
 	private ToolInputSchema getToolInputSchema(Tool mxTool) throws JsonProcessingException, CoreException {
+		// Check if the tool has a pre-defined JSON schema, otherwise automatic generation
+		String jsonSchemaString = mxTool.getSchema();
+		if (jsonSchemaString != null && !jsonSchemaString.trim().isEmpty()) {
+			// Quick check: valid JSON objects/arrays must start with '{' or '['
+			if (jsonSchemaString.startsWith("{") || jsonSchemaString.startsWith("[")) {
+				try {
+					// First validate it's valid JSON and parse it with Jackson
+					JsonNode jsonNode = MAPPER.readTree(jsonSchemaString);
+					
+					// For tool schemas, we need an object (not array or primitive)
+					if (!jsonNode.isObject()) {
+						LOGGER.warn("Tool schema must be a JSON object, not array or primitive. Tool: " + mxTool.getName());
+						// Fall through to automatic schema generation
+					} else {
+						// Convert JsonNode to AWS Document structure
+						Document json = jsonNodeToDocument(jsonNode);
+						return ToolInputSchema.builder().json(json).build();
+					}
+				} catch (Exception e) {
+					LOGGER.warn("Failed to parse tool JSON schema for tool '" + mxTool.getName() + "', falling back to automatic generation. Error: " + e.getMessage());
+					LOGGER.debug("Invalid schema content: " + jsonSchemaString);
+					// Fall through to automatic schema generation
+				}
+			} else {
+				LOGGER.warn("Schema field for tool '" + mxTool.getName() + "' is not valid JSON (must start with '{' or '['). It appears to be a Java object toString(). Please serialize the schema to JSON before storing it.");
+				LOGGER.debug("Non-JSON schema content: " + jsonSchemaString);
+				// Fall through to automatic schema generation
+			}
+		}
+		
+		// Fallback to automatic schema generation
 		// All Tools to be called are function objects
-		List<ArgumentInput> arguments = mxTool.getTool_ArgumentInput();
 		Map<String, IDataType> parameterList = genaicommons.impl.FunctionMappingImpl.getInputParametersForModel(mxTool.getMicroflow());
-		if (arguments == null && (parameterList == null || parameterList.entrySet().isEmpty())) {
+		if (parameterList == null || parameterList.entrySet().isEmpty()) {
 			LOGGER.debug("Function Microflow without input parameter");
 			return createEmptyToolInputSchema();
 		}
@@ -829,12 +862,7 @@ public class Converse extends UserAction<IMendixObject>
 		Document.MapBuilder propertiesBuilder = Document.mapBuilder();
 		Document.ListBuilder requiredBuilder = Document.listBuilder();
 		
-		if(arguments == null || arguments.isEmpty()) {
-			setPropertiesForMicroflowTool(parameterList, propertiesBuilder, requiredBuilder);
-			
-		} else {
-			setPropertiesForToolArguments(arguments, propertiesBuilder, requiredBuilder);
-		}
+		setPropertiesForMicroflowTool(parameterList, propertiesBuilder, requiredBuilder);
 
 		//Build both outside of loop to be added to final json field
 		Document properties = propertiesBuilder.build();
@@ -847,39 +875,6 @@ public class Converse extends UserAction<IMendixObject>
 				.build();
 		
 		return ToolInputSchema.builder().json(json).build();
-	}
-	
-	// If Tool arguments are associated to Tool
-	private void setPropertiesForToolArguments(List<ArgumentInput> arguments, 
-			Document.MapBuilder propertiesBuilder, Document.ListBuilder requiredBuilder) throws CoreException{
-		
-		for(ArgumentInput arg : arguments) {
-			String type = arg.get_Type();
-		    String paramName = arg.getName();
-			MapBuilder inputBuilder = Document.mapBuilder();
-			
-			// Only process type if it's not null or empty
-			if (type != null && !type.trim().isEmpty()) {
-				// For Enum types, expose the possible keys with a listBuilder Document
-			    if(type.equals("enum")) {
-			    	List<EnumValue> enumValues = arg.getArgumentInput_EnumValue();
-			    	if (enumValues != null && !enumValues.isEmpty()) {
-			    		ListBuilder inputDocumentBuilderEnum = Document.listBuilder();
-				    	for(EnumValue enumValue : enumValues) {
-				    		inputDocumentBuilderEnum.addString(enumValue.getKey());
-				    	}
-				    	inputBuilder.putDocument(type, inputDocumentBuilderEnum.build());
-			    	}
-					
-			    } else {
-			    	inputBuilder.putString("type", type);
-			    }
-			}
-		    Document input = inputBuilder.build();
-
-		    propertiesBuilder.putDocument(paramName, input);
-		    requiredBuilder.addString(paramName);
-		}
 	}
 	
 	// If the microflow is the actual tool microflow
@@ -918,6 +913,73 @@ public class Converse extends UserAction<IMendixObject>
 				.build();
 		
 		return ToolInputSchema.builder().json(json).build();
+	}
+	
+	// Convert Jackson JsonNode to AWS SDK Document
+	// This handles any valid JSON structure including nested objects/arrays
+	private Document jsonNodeToDocument(JsonNode node) {
+		if (node.isObject()) {
+			Document.MapBuilder mapBuilder = Document.mapBuilder();
+			node.fields().forEachRemaining(entry -> {
+				String key = entry.getKey();
+				JsonNode value = entry.getValue();
+				
+				if (value.isTextual()) {
+					mapBuilder.putString(key, value.asText());
+				} else if (value.isIntegralNumber()) {
+					// Preserve integers (important for JSON Schema minimum/maximum)
+					mapBuilder.putNumber(key, value.asLong());
+				} else if (value.isNumber()) {
+					// Floating point numbers
+					mapBuilder.putNumber(key, value.asDouble());
+				} else if (value.isBoolean()) {
+					mapBuilder.putBoolean(key, value.asBoolean());
+				} else if (value.isNull()) {
+					mapBuilder.putNull(key);
+				} else if (value.isArray() || value.isObject()) {
+					mapBuilder.putDocument(key, jsonNodeToDocument(value));
+				} else {
+					// Fallback: convert unknown types to string
+					LOGGER.warn("Unknown JSON node type for key '" + key + "', converting to string: " + value.getNodeType());
+					mapBuilder.putString(key, value.toString());
+				}
+			});
+			return mapBuilder.build();
+		} else if (node.isArray()) {
+			Document.ListBuilder listBuilder = Document.listBuilder();
+			node.elements().forEachRemaining(element -> {
+				if (element.isTextual()) {
+					listBuilder.addString(element.asText());
+				} else if (element.isIntegralNumber()) {
+					listBuilder.addNumber(element.asLong());
+				} else if (element.isNumber()) {
+					listBuilder.addNumber(element.asDouble());
+				} else if (element.isBoolean()) {
+					listBuilder.addBoolean(element.asBoolean());
+				} else if (element.isNull()) {
+					listBuilder.addNull();
+				} else if (element.isArray() || element.isObject()) {
+					listBuilder.addDocument(jsonNodeToDocument(element));
+				} else {
+					// Fallback for unknown types
+					listBuilder.addString(element.toString());
+				}
+			});
+			return listBuilder.build();
+		} else if (node.isTextual()) {
+			return Document.fromString(node.asText());
+		} else if (node.isIntegralNumber()) {
+			return Document.fromNumber(node.asLong());
+		} else if (node.isNumber()) {
+			return Document.fromNumber(node.asDouble());
+		} else if (node.isBoolean()) {
+			return Document.fromBoolean(node.asBoolean());
+		} else if (node.isNull()) {
+			return Document.fromNull();
+		} else {
+			// Fallback for any other type
+			return Document.fromString(node.toString());
+		}
 	}
 	
 	// Check if a tool has already been called to decide whether Tool Choice should be set or not
@@ -1111,12 +1173,20 @@ public class Converse extends UserAction<IMendixObject>
 	
 	private void toolCallSetArguments(ToolCall mxToolCall, ToolUseBlock awsToolUse) {
 		Document awsToolDocument = awsToolUse.input();
+		
+		// Store the entire input as a JSON string in the Input attribute
+		if (awsToolDocument != null) {
+			String inputJson = awsToolDocument.toString();
+			mxToolCall.setInput(inputJson);
+		}
+		
 		if (!awsToolDocument.isMap() || awsToolDocument.asMap().isEmpty()) {
 			LOGGER.debug("Tool without parameter called");
 			return;
 		}
 
-		 List<Argument> argumentList = new ArrayList<>();
+		// Also keep individual arguments for backward compatibility
+		List<Argument> argumentList = new ArrayList<>();
 		
 	    for (Map.Entry<String, Document> entry : awsToolDocument.asMap().entrySet()) {
 	        String key = entry.getKey();
