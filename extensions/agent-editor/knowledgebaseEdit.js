@@ -1,8 +1,8 @@
-import { r as c, j as s, au as b, av as w, aw as f, at as x, as as C } from "./TextInputWithIcon-mWdTJJox.js";
+import { r as c, ae as s, aw as b, ax as w, ay as x, av as f, au as C } from "./TextInputWithIcon-B3kv_B9i.js";
 import { c as D } from "./logger-BM6R1Quw.js";
-import { T as j } from "./TextInputLabeled-Cs7s9ibw.js";
-import { c as v } from "./componentLoader-BrAYZVSc.js";
-function E(n) {
+import { T as v } from "./TextInputLabeled-_7ydO2Vf.js";
+import { c as E } from "./componentLoader-_xi6kKSa.js";
+function j(n) {
   return {
     name: ""
   };
@@ -20,7 +20,7 @@ const L = (n, a, r, t, o) => async (l) => {
       message: o.message
     });
   }
-}, K = E(), k = ({ studioPro: n, documentId: a }) => {
+}, K = j(), k = ({ studioPro: n, documentId: a }) => {
   const r = n.ui.messageBoxes, t = n.app.model.customBlobDocuments, [o, l] = c.useState(0), [i, h] = c.useState(!1), [m, u] = c.useState(K);
   return c.useCallback(
     (e) => L(n, e, m, u, a),
@@ -45,8 +45,8 @@ const L = (n, a, r, t, o) => async (l) => {
     });
   }, [o]), /* @__PURE__ */ s.jsx(b, { studioPro: n, children: /* @__PURE__ */ s.jsxs(w, { children: [
     !i && /* @__PURE__ */ s.jsx("span", { children: "Loading document content..." }),
-    i && /* @__PURE__ */ s.jsx(f, { children: /* @__PURE__ */ s.jsx(x, { children: /* @__PURE__ */ s.jsx(C, { label: "General", children: /* @__PURE__ */ s.jsx(
-      j,
+    i && /* @__PURE__ */ s.jsx(x, { children: /* @__PURE__ */ s.jsx(f, { children: /* @__PURE__ */ s.jsx(C, { label: "General", children: /* @__PURE__ */ s.jsx(
+      v,
       {
         label: "Name",
         ariaLabel: "Name",
@@ -57,7 +57,7 @@ const L = (n, a, r, t, o) => async (l) => {
       }
     ) }) }) })
   ] }) });
-}, T = v(k);
+}, T = E(k);
 export {
   T as component
 };

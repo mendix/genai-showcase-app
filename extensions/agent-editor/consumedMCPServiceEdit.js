@@ -1,7 +1,7 @@
-import { r as c, j as a, au as g, av as v, aw as f, at as x, as as S } from "./TextInputWithIcon-mWdTJJox.js";
+import { r as c, ae as a, aw as g, ax as v, ay as x, av as f, au as S } from "./TextInputWithIcon-B3kv_B9i.js";
 import { c as D } from "./logger-BM6R1Quw.js";
-import { T as j } from "./TextInputLabeled-Cs7s9ibw.js";
-import { c as E } from "./componentLoader-BrAYZVSc.js";
+import { T as E } from "./TextInputLabeled-_7ydO2Vf.js";
+import { c as j } from "./componentLoader-_xi6kKSa.js";
 function L(n) {
   return {
     name: ""
@@ -20,8 +20,8 @@ const b = (n, t, r, s, o) => async (m) => {
       message: o.message
     });
   }
-}, P = L(), y = ({ studioPro: n, documentId: t }) => {
-  const r = n.ui.messageBoxes, s = n.app.model.customBlobDocuments, [o, m] = c.useState(0), [i, h] = c.useState(!1), [u, d] = c.useState(P);
+}, y = L(), P = ({ studioPro: n, documentId: t }) => {
+  const r = n.ui.messageBoxes, s = n.app.model.customBlobDocuments, [o, m] = c.useState(0), [i, h] = c.useState(!1), [u, d] = c.useState(y);
   return c.useCallback(
     (e) => b(n, e, u, d, t),
     [n, u, d, t]
@@ -45,8 +45,8 @@ const b = (n, t, r, s, o) => async (m) => {
     });
   }, [o]), /* @__PURE__ */ a.jsx(g, { studioPro: n, children: /* @__PURE__ */ a.jsxs(v, { children: [
     !i && /* @__PURE__ */ a.jsx("span", { children: "Loading document content..." }),
-    i && /* @__PURE__ */ a.jsx(f, { children: /* @__PURE__ */ a.jsx(x, { children: /* @__PURE__ */ a.jsx(S, { label: "General", children: /* @__PURE__ */ a.jsx(
-      j,
+    i && /* @__PURE__ */ a.jsx(x, { children: /* @__PURE__ */ a.jsx(f, { children: /* @__PURE__ */ a.jsx(S, { label: "General", children: /* @__PURE__ */ a.jsx(
+      E,
       {
         label: "Name",
         ariaLabel: "Name",
@@ -57,7 +57,7 @@ const b = (n, t, r, s, o) => async (m) => {
       }
     ) }) }) })
   ] }) });
-}, V = E(y);
+}, V = j(P);
 export {
   V as component
 };
