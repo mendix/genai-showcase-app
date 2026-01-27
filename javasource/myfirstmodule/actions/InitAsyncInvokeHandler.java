@@ -16,6 +16,7 @@ import awsauthentication.proxies.ENUM_Region;
 import myfirstmodule.handlers.StreamingInvokeModelHandler;
 import myfirstmodule.handlers.ConverseStreamHandler;
 import myfirstmodule.handlers.OpenAIStreamHandler;
+import myfirstmodule.handlers.AzureOpenAIStreamHandler;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -41,9 +42,13 @@ public class InitAsyncInvokeHandler extends UserAction<java.lang.Void>
 	public java.lang.Void executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		Core.addRequestHandler("llm-streaming", new StreamingInvokeModelHandler());
+		
 		Core.addRequestHandler("llm-streaming-converse", new ConverseStreamHandler());
 		Core.addRequestHandler("llm-streaming-openai", new OpenAIStreamHandler());
+		Core.addRequestHandler("llm-streaming-azureopenai", new AzureOpenAIStreamHandler());
+
+		// Legacy test handlers
+		Core.addRequestHandler("llm-streaming", new StreamingInvokeModelHandler());
 		Core.addRequestHandler("llm", new RequestHandler() {
 			@Override
 			protected void processRequest(IMxRuntimeRequest iMxRuntimeRequest, IMxRuntimeResponse resp, String s) throws Exception {
