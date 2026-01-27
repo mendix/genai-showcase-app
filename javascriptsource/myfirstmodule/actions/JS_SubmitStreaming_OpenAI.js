@@ -19,7 +19,7 @@ import { Big } from "big.js";
  */
 export async function JS_SubmitStreaming_OpenAI(requestJSON, responseCollector, deployedModelUUID) {
 	// BEGIN USER CODE
-
+console.log('test');
 	try{
 		console.info('start JS Action');
 		const baseUrl = mx.appUrl;

@@ -14,12 +14,11 @@ import { Big } from "big.js";
 /**
  * @param {string} requestJSON
  * @param {MxObject} responseCollector
- * @param {string} deployedModelUUID - UUID of the OpenAIDeployedModel to use
+ * @param {MxObject} deployedModel - UUID of the OpenAIDeployedModel to use
  * @returns {Promise.<void>}
  */
-export async function JS_SubmitStreaming_AzureOpenAI(requestJSON, responseCollector, deployedModelUUID) {
+export async function JS_SubmitStreaming_AzureOpenAI(requestJSON, responseCollector, deployedModel) {
 	// BEGIN USER CODE
-
 	try{
 		console.info('start JS Action');
 		// Get the base URL from mx.appUrl
@@ -56,7 +55,7 @@ export async function JS_SubmitStreaming_AzureOpenAI(requestJSON, responseCollec
 			},
 			body: JSON.stringify({
 				request: requestJSON,
-				deployedModelUUID: deployedModelUUID
+				deployedModelUUID: deployedModel.get("Model")
 			})
 		})
 

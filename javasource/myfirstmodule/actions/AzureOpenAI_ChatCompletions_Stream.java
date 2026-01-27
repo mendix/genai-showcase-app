@@ -84,6 +84,9 @@ public class AzureOpenAI_ChatCompletions_Stream extends UserAction<java.lang.Voi
 			// Build the chat completion request with streaming enabled
 		ChatCompletionsOptions requestParams = buildChatCompletionRequest();
 			LOGGER.info("Azure OpenAI streaming request initiated successfully");
+
+			// Execute the streaming request
+			executeStreamingRequest(client, requestParams);
 			return null;
 			
 		} catch (Exception e) {
@@ -131,6 +134,17 @@ public class AzureOpenAI_ChatCompletions_Stream extends UserAction<java.lang.Voi
 		// Get the Azure endpoint - typically something like https://<resource>.openai.azure.com/
 		String endpoint = configuration.getEndpoint();
 		requireNonNull(endpoint, "Azure endpoint is required in Configuration");
+		
+		// Remove /openai/deployments/ if present (Azure SDK adds it automatically)
+		if (endpoint.contains("/openai/deployments")) {
+			endpoint = endpoint.replace("/openai/deployments/", "").replace("/openai/deployments", "");
+			LOGGER.debug("Cleaned endpoint by removing /openai/deployments/: " + endpoint);
+		}
+		
+		// Ensure endpoint ends with /
+		if (!endpoint.endsWith("/")) {
+			endpoint = endpoint + "/";
+		}
 		
 		LOGGER.debug("Azure OpenAI client created successfully with endpoint: " + endpoint);
 		
