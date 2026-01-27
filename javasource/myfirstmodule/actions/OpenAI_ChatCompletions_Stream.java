@@ -128,11 +128,22 @@ public class OpenAI_ChatCompletions_Stream extends UserAction<java.lang.Void>
 		String apiKey = encryption.proxies.microflows.Microflows.decrypt(getContext(), encryptedApiKey);
 		requireNonNull(apiKey, "Failed to decrypt API Key");
 		
+		// Get the endpoint from Configuration (optional - for Mistral AI or other OpenAI-compatible APIs)
+		String endpoint = configuration.getEndpoint();
+		
 		LOGGER.debug("OpenAI client created successfully");
 		
-		return OpenAIOkHttpClient.builder()
-			.apiKey(apiKey)
-			.build();
+		// Build the client with optional endpoint
+		OpenAIOkHttpClient.Builder clientBuilder = OpenAIOkHttpClient.builder()
+			.apiKey(apiKey);
+		
+		// Add base URL if endpoint is configured (e.g., for Mistral AI)
+		if (endpoint != null && !endpoint.trim().isEmpty()) {
+			clientBuilder.baseUrl(endpoint);
+			LOGGER.debug("Using custom endpoint: " + endpoint);
+		}
+		
+		return clientBuilder.build();
 	}
 	
 	/**

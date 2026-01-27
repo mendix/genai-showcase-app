@@ -13,7 +13,7 @@ import { Big } from "big.js";
 
 /**
  * @param {string} requestJSON
- * @param {MxObject} deployedModel
+ * @param {string} deployedModel
  * @param {MxObject} responseCollector
  * @returns {Promise.<void>}
  */
