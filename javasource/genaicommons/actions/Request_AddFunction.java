@@ -37,13 +37,15 @@ public class Request_AddFunction extends UserAction<IMendixObject>
 	private final java.lang.String ToolName;
 	private final java.lang.String ToolDescription;
 	private final java.lang.String FunctionMicroflow;
+	private final genaicommons.proxies.ENUM_UserToolPermission UserToolPermission;
 
 	public Request_AddFunction(
 		IContext context,
 		IMendixObject _request,
 		java.lang.String _toolName,
 		java.lang.String _toolDescription,
-		java.lang.String _functionMicroflow
+		java.lang.String _functionMicroflow,
+		java.lang.String _userToolPermission
 	)
 	{
 		super(context);
@@ -52,6 +54,7 @@ public class Request_AddFunction extends UserAction<IMendixObject>
 		this.ToolName = _toolName;
 		this.ToolDescription = _toolDescription;
 		this.FunctionMicroflow = _functionMicroflow;
+		this.UserToolPermission = _userToolPermission == null ? null : genaicommons.proxies.ENUM_UserToolPermission.valueOf(_userToolPermission);
 	}
 
 	@java.lang.Override
@@ -64,7 +67,7 @@ public class Request_AddFunction extends UserAction<IMendixObject>
 			
 			ToolCollection toolCollection = ToolCollectionImpl.getOrCreateToolCollection(getContext(), Request);
 			
-			return FunctionImpl.createFunction(getContext(), FunctionMicroflow, ToolName, ToolDescription, toolCollection).getMendixObject();
+			return FunctionImpl.createFunction(getContext(), FunctionMicroflow, ToolName, ToolDescription, toolCollection, UserToolPermission).getMendixObject();
 
 		} catch (Exception e) {
 			LOGGER.error(e);

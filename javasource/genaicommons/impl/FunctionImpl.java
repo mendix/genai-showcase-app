@@ -50,7 +50,7 @@ public class FunctionImpl {
 	 * @return
 	 * @throws CoreException
 	 */
-	public static Function createFunction(IContext context, String functionMicroflow, String functionName, String functionDescription, ToolCollection toolCollection) throws CoreException {
+	public static Function createFunction(IContext context, String functionMicroflow, String functionName, String functionDescription, ToolCollection toolCollection, genaicommons.proxies.ENUM_UserToolPermission userToolPermission) throws CoreException {
 		Function function = new Function(context);
 		function.setMicroflow(functionMicroflow);
 		function.setName(functionName);	
@@ -58,6 +58,11 @@ public class FunctionImpl {
 		List<Tool> ToolList = toolCollection.getToolCollection_Tool();
 		ToolList.add(function);
 		toolCollection.setToolCollection_Tool(ToolList); 
+		if(userToolPermission != null) {
+			function.setUserToolPermission(userToolPermission);
+		}else {
+			function.setUserToolPermission(genaicommons.proxies.ENUM_UserToolPermission.Hidden);
+		}
 		return function;
 	}
 	

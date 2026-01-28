@@ -74,7 +74,7 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 			requireNonNull(Request, "Request is required.");
 			requireNonNull(MCPServerConfiguration, "MCPServerConfiguration is required for tool with name " + Tool.getName());
 			requireNonNull(Tool, "Tool is required for MCPServerConfiguration with name " + MCPServerConfiguration.getName());
-			requireNonNull(Microflow, "Microflow is required  for tool with name " + Tool.getName());
+			requireNonNull(Microflow, "Microflow is required for tool with name " + Tool.getName());
 			
 			ToolCollection toolCollection = ToolCollectionImpl.getOrCreateToolCollection(getContext(), Request);
 			
