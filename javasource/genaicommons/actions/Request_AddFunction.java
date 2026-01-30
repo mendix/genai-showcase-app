@@ -66,7 +66,6 @@ public class Request_AddFunction extends UserAction<IMendixObject>
 			FunctionImpl.validateFunctionInput(FunctionMicroflow, ToolName);
 			
 			ToolCollection toolCollection = ToolCollectionImpl.getOrCreateToolCollection(getContext(), Request);
-			
 			return FunctionImpl.createFunction(getContext(), FunctionMicroflow, ToolName, ToolDescription, toolCollection, UserToolPermission).getMendixObject();
 
 		} catch (Exception e) {

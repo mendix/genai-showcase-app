@@ -170,21 +170,18 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 	private void setToolCallArguments(JsonNode toolCallsArray) throws Exception {
 		for (JsonNode toolCall : toolCallsArray) {
 			JsonNode function = toolCall.path("function");
-			JsonNode argumentsArray = function.path("arguments");
-			Map<String, String> argumentsMap = new HashMap<>();
-	        for (JsonNode argument : argumentsArray) {
-	            JsonNode keyNode = argument.get("key");
-	            JsonNode valueNode = argument.get("value");
-	            if (keyNode != null && valueNode != null) {
-	                String key = keyNode.asText();
-	                String value = valueNode.asText();
-	                argumentsMap.put(key, value);
-	            }
-	        }
-	        String argumentsString = MAPPER.writeValueAsString(argumentsMap);
-	       ((ObjectNode) function).put("arguments", argumentsString);
-	       // Remove the 'input' field as it's not expected by the API
-	       ((ObjectNode) function).remove("input");
+			// Use the 'input' field as the arguments (it's already a JSON string)
+			JsonNode inputNode = function.path("input");
+			if (inputNode != null && !inputNode.isMissingNode()) {
+				String argumentsString = inputNode.asText();
+				((ObjectNode) function).put("arguments", argumentsString);
+			}
+			// Remove the 'input' field as it's not expected by the API
+			((ObjectNode) function).remove("input");
+			// Remove the 'arguments' array if it exists (not needed anymore)
+			if (function.has("arguments") && function.path("arguments").isArray()) {
+				((ObjectNode) function).remove("arguments");
+			}
 		}
 	}
 

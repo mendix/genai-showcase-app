@@ -10,10 +10,14 @@
 package genaicommons.actions;
 
 import static java.util.Objects.requireNonNull;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
@@ -100,6 +104,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new genaicommons.impl.MxLogger(Tool_ExecuteMicroflow.class);
+	private static final ObjectMapper MAPPER = new ObjectMapper();
 	
 	private long startTime;
 	
@@ -127,12 +132,18 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		//Iterate over input params
 		Map<String, IDataType> parametersAndTypes = Core.getInputParameters(Tool.getMicroflow());
 		
+		// Get argument list, fall back to parsing Input JSON if empty
+		List<Argument> argumentList = ToolCall.getToolCall_Argument();
+		if (argumentList == null || argumentList.isEmpty()) {
+			argumentList = parseArgumentsFromInput();
+		}
+		
 		for(Map.Entry<String, IDataType> entry : parametersAndTypes.entrySet()) {
 			IDataType value = entry.getValue();
 			String key = entry.getKey();
 			//find Argument.Value in ArgumentList
-			List<Argument> argumentList = ToolCall.getToolCall_Argument();
-			String argumentValue = argumentList.stream()
+			final List<Argument> finalArgumentList = argumentList;
+			String argumentValue = finalArgumentList.stream()
 				    .filter(arg -> key.equals(arg.getKey()))
 				    .map(Argument::getValue)
 				    .findFirst()
@@ -219,6 +230,43 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		
 		getCreateToolSpan(executionTime, response);
 		return response;
+	}
+	
+	/**
+	 * Parses the Input JSON field from ToolCall and converts it to a list of Argument objects.
+	 * This is used as a fallback when ToolCall_Argument association is empty.
+	 */
+	private List<Argument> parseArgumentsFromInput() {
+		List<Argument> arguments = new ArrayList<>();
+		String input = ToolCall.getInput();
+		
+		if (input == null || input.trim().isEmpty()) {
+			return arguments;
+		}
+		
+		try {
+			JsonNode inputNode = MAPPER.readTree(input);
+			if (inputNode != null && inputNode.isObject()) {
+				Iterator<Map.Entry<String, JsonNode>> fields = inputNode.fields();
+				while (fields.hasNext()) {
+					Map.Entry<String, JsonNode> field = fields.next();
+					Argument arg = new Argument(getContext());
+					arg.setKey(field.getKey());
+					// Convert value to string - handle different JSON types
+					JsonNode valueNode = field.getValue();
+					if (valueNode.isTextual()) {
+						arg.setValue(valueNode.asText());
+					} else {
+						arg.setValue(valueNode.toString());
+					}
+					arguments.add(arg);
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.warn("Failed to parse Input JSON for ToolCall: " + e.getMessage());
+		}
+		
+		return arguments;
 	}
 	
 	/**

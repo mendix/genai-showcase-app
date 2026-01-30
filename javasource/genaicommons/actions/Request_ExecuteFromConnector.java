@@ -106,40 +106,49 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 			Message assistantMessage = null;
 			
 			// Check if we're resuming from an approval flow (user approved/declined tool calls)
+			// In this case, there's an AssistantMessage with ToolCalls that have Approved/Declined status
 			Message existingAssistantMessage = getLastAssistantMessageWithToolCalls();
 			if (existingAssistantMessage != null && hasDecidedToolCalls(existingAssistantMessage)) {
-				// Resume: use existing assistant message, no new Response needed
-				assistantMessage = existingAssistantMessage;
-			} else {
-				// Normal flow: call the model
-				IMendixObject responseMendixObject = Core.microflowCall(CallModelMicroflow).withParam("DeployedModel", DeployedModel.getMendixObject()).withParam("Request", Request.getMendixObject()).execute(this.getContext());
-				if(responseMendixObject == null) {
-					LOGGER.debug("Microflow " + CallModelMicroflow  + " returned null.");
-					updateModelSpanOnError(modelSpan);
-					return null;
+				// Resume: process the decided tool calls, then call model with results
+				boolean toolCallsProcessed = Microflows.message_ProcessToolCalls_IfAvailable(getContext(), existingAssistantMessage, Request, modelSpan);
+				
+				// Check if there are still PENDING tool calls (partial approval scenario)
+				if (hasPendingToolCalls(existingAssistantMessage)) {
+					return null; // Wait for more decisions
 				}
-				response = genaicommons.proxies.Response.load(getContext(), responseMendixObject.getId());
-				assistantMessage = response.getResponse_Message();
-				response.setResponseText(assistantMessage.getContent());
-				updateModelSpan(modelSpan, response);
-				responseUpdateTokenCount(response);
+				
+				if (toolCallsProcessed) {
+					// Tool calls were processed, now call model with results
+					return processRequest();
+				}
+				// Nothing processed, something went wrong
+				return null;
 			}
+			
+			// Normal flow: call the model
+			debugLogRequestMessages("Before calling model");
+			IMendixObject responseMendixObject = Core.microflowCall(CallModelMicroflow).withParam("DeployedModel", DeployedModel.getMendixObject()).withParam("Request", Request.getMendixObject()).execute(this.getContext());
+			if(responseMendixObject == null) {
+				LOGGER.debug("Microflow " + CallModelMicroflow  + " returned null.");
+				updateModelSpanOnError(modelSpan);
+				return null;
+			}
+			response = genaicommons.proxies.Response.load(getContext(), responseMendixObject.getId());
+			assistantMessage = response.getResponse_Message();
+			response.setResponseText(assistantMessage.getContent());
+			updateModelSpan(modelSpan, response);
+			responseUpdateTokenCount(response);
 			
 			// Process tool calls: 
 			// - Auto-hidden: execute, status = ExecutedHidden
 			// - Auto-visible: execute, status = Executed
-			// - Approved (by user): execute, status = Executed
-			// - Needs approval: status = Pending
+			// - Needs approval: status = Pending (Tool messages created but not executed)
 			boolean toolCallsProcessed = Microflows.message_ProcessToolCalls_IfAvailable(getContext(), assistantMessage, Request, modelSpan);
 			
 			// Check if there are PENDING tool calls needing user approval
 			if (hasPendingToolCalls(assistantMessage)) {
 				// Early return for approval
-				// response is non-null on first call (UI persists message/toolcalls)
-				// response is null on resume (UI already has the info)
-				if (response != null) {
-					responsePostProcessing(response);
-				}
+				responsePostProcessing(response);
 				return response;
 			}
 			
@@ -147,9 +156,7 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 			if (hasExecutedVisibleToolCalls(assistantMessage)) {
 				// Early return for UI update - tool was executed but user should see the result
 				// UI will resume after showing the tool call results
-				if (response != null) {
-					responsePostProcessing(response);
-				}
+				responsePostProcessing(response);
 				return response;
 			}
 			
@@ -159,9 +166,7 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 			}
 			
 			// Final response - no more tool calls
-			if (response != null) {
-				responsePostProcessing(response);
-			}
+			responsePostProcessing(response);
 			return response;
 		}
 
@@ -253,7 +258,7 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 	
 	/**
 	 * Gets the last assistant message from the Request that contains tool calls.
-	 * Used to check if there are approved tool calls waiting to be executed.
+	 * Used to check if there are decided tool calls waiting to be processed.
 	 * @return the last assistant message with tool calls, or null if none exists
 	 * @throws CoreException if retrieval fails
 	 */
@@ -333,6 +338,65 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 		}
 		return toolCalls.stream()
 			.anyMatch(tc -> tc.getStatus() == genaicommons.proxies.ENUM_ToolCallStatus.Executed);
+	}
+	
+	/**
+	 * Debug helper to log all messages currently in the Request.
+	 */
+	private void debugLogRequestMessages(String context) throws CoreException {
+		java.util.List<Message> messages = Request.getRequest_Message();
+		LOGGER.info("=== " + context + " === Request has " + (messages != null ? messages.size() : 0) + " messages:");
+		if (messages != null) {
+			for (int i = 0; i < messages.size(); i++) {
+				Message msg = messages.get(i);
+				String role = msg.getRole() != null ? msg.getRole().toString() : "null";
+				String content = msg.getContent();
+				String preview = content != null ? content.substring(0, Math.min(50, content.length())) : "null";
+				
+				// Check for tool calls on assistant messages
+				String toolCallInfo = "";
+				if (msg.getRole() == genaicommons.proxies.ENUM_MessageRole.assistant) {
+					java.util.List<genaicommons.proxies.ToolCall> toolCalls = msg.getMessage_ToolCall();
+					if (toolCalls != null && !toolCalls.isEmpty()) {
+						toolCallInfo = " [" + toolCalls.size() + " tool calls:";
+						for (genaicommons.proxies.ToolCall tc : toolCalls) {
+							toolCallInfo += " {id=" + tc.getToolCallId() + ", name=" + tc.getName() + ", args=" + tc.getInput() + "}";
+						}
+						toolCallInfo += "]";
+					}
+				}
+				
+				// Check for tool call ID on tool messages
+				String toolCallId = "";
+				if (msg.getRole() == genaicommons.proxies.ENUM_MessageRole.tool) {
+					String tcId = msg.getToolCallId();
+					if (tcId != null && !tcId.isEmpty()) {
+						toolCallId = " [responds to: " + tcId + "]";
+					}
+				}
+				
+				LOGGER.info("  [" + i + "] " + role + toolCallInfo + toolCallId + ": " + preview);
+			}
+		}
+	}
+	
+	/**
+	 * Removes an empty assistant message from the Request.
+	 * This is needed because connectors fail when an empty assistant message is present.
+	 * The Tool messages (with results) are kept - only the empty assistant message is removed.
+	 * @param assistantMessage the assistant message to remove
+	 * @throws CoreException if removal fails
+	 */
+	private void removeEmptyAssistantMessage(Message assistantMessage) throws CoreException {
+		if (assistantMessage == null) {
+			return;
+		}
+		// Only remove if content is empty/null
+		String content = assistantMessage.getContent();
+		if (content == null || content.isBlank()) {
+			Core.delete(getContext(), assistantMessage.getMendixObject());
+			LOGGER.debug("Removed empty assistant message from Request before calling model.");
+		}
 	}
 	
 	private void validate() {
