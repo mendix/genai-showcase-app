@@ -1,10 +1,10 @@
 import { $ as ee, r as f, a as qn, b as ue, c as Yn, d as Zn, e as me, f as Ze, g as xe, h as Ut, i as V, j as U, k as qt, l as lt, m as Yt, n as Zt, o as Xt, p as Xn, q as te, s as Gt, t as Qt, u as ke, v as Jt, w as Q, x as Gn, y as ce, z as Qn, A as Jn, B as k, C as De, D as Ae, E as It, F as _n, G as eo, H as to, I as Se, J as it, K as nt, L as _t, M as oe, N as el, O as Xe, P as ne, Q as ge, R as X, S as lo, T as io, U as ot, V as no, W as rt, X as Ee, Y as tl, Z as ut, _ as oo, a0 as ro, a1 as uo, a2 as ao, a3 as Fe, a4 as so, a5 as co, a6 as Pt, a7 as ho, a8 as fo, a9 as po, aa as Rt, ab as vo, ac as Le, ad as P, ae as y, af as mo, ag as le, ah as T, ai as Me, aj as go, ak as bo, al as yo, am as $e, an as $o, ao as xo, ap as wo, aq as Co, ar as ll, as as ko, at as Do, au as Re, av as At, aw as So, ax as Eo, ay as zo } from "./TextInputWithIcon-B3kv_B9i.js";
 import { c as Bo } from "./componentLoader-_xi6kKSa.js";
-import { c as Io, a as Po, m as at, i as Ro, b as Ao, h as Mo, g as To, d as Fo, e as Ko, f as Vo, j as Mt, k as No, u as Ho } from "./index-CCba4LmR.js";
+import { c as Io, a as Po, m as at, i as Ro, b as Ao, h as Mo, g as To, d as Fo, e as Ko, f as Vo, j as Mt, k as No, u as Ho } from "./index-CEV-T5Iu.js";
 import { $ as L, a as _, b as ie, c as Pe, d as jo, e as il, f as Ke, g as st, h as Lo, i as nl, j as he, k as ol, l as Oo, m as Wo, n as Uo, o as rl, p as qo, q as Yo, r as ul, s as Zo, t as Xo, u as dt, v as Z, w as Go, x as Qo, y as ze, z as be, A as Jo, B as _o, C as er, D as ct, E as tr, F as al, G as lr, H as ir, I as nr, J as or, K as rr, L as ur, _ as Ge, M as ar } from "./ComboBox-DOXi1OXZ.js";
-import { n as sr, T as Tt, a as Oe, g as dr } from "./MicroflowIcon-B4IwsC9b.js";
-import { I as Ft, W as cr } from "./Banner-CTNaNVaj.js";
-import { m as hr } from "./modelUtils-BKeUOTig.js";
+import { I as Tt, W as sr } from "./Banner-BEBXNJk6.js";
+import { n as dr, T as Ft, a as Oe, h as cr } from "./toolHandlers-CcJAHPUV.js";
+import { m as hr } from "./modelUtils-BauxefJK.js";
 import { I as Kt, T as fr } from "./TextWithIcon-P8z9vjya.js";
 function pr(t = {}) {
   let { locale: e } = ee();
@@ -6519,11 +6519,11 @@ const pd = P(ld)`
     width: round(calc(100% - 1px), 2px);
     border-collapse: collapse;
 `, Wt = P.div`
-    display: contents;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;   
     ${(t) => t.$opacity !== void 0 && `
-        & > * {
-            opacity: ${t.$opacity};
-        }
+    opacity: ${t.$opacity};
     `}
 `, yd = ({
   ariaLabel: t,
@@ -6550,12 +6550,12 @@ const pd = P(ld)`
     return document.addEventListener("click", g), () => {
       document.removeEventListener("click", g);
     };
-  }, [d]), /* @__PURE__ */ y.jsxs(vd, { ref: b, children: [
+  }, [d]), /* @__PURE__ */ y.jsxs(vd, { children: [
     (n || o) && /* @__PURE__ */ y.jsxs(pd, { "aria-label": `${t} toolbar`, children: [
       n && /* @__PURE__ */ y.jsx(nd, { children: n }),
       o && /* @__PURE__ */ y.jsx(od, { children: o })
     ] }),
-    /* @__PURE__ */ y.jsxs(
+    /* @__PURE__ */ y.jsx("div", { ref: b, children: /* @__PURE__ */ y.jsxs(
       bd,
       {
         "aria-label": t,
@@ -6586,12 +6586,15 @@ const pd = P(ld)`
             const C = p ? p(g, m) : String(m), $ = v == null ? void 0 : v(m);
             return /* @__PURE__ */ y.jsx(jn, { id: C, children: g.map((x, w) => {
               const D = e[w];
-              return D ? /* @__PURE__ */ y.jsx(tt, { columnId: D.id, $align: D.alignContents, children: x ? /* @__PURE__ */ y.jsx(Wt, { $opacity: $, children: x }) : /* @__PURE__ */ y.jsx(Wt, { $opacity: $, children: " " }) }, w) : null;
+              if (!D)
+                return null;
+              const S = D.isControl ? 1 : $;
+              return /* @__PURE__ */ y.jsx(tt, { columnId: D.id, $align: D.alignContents, children: x ? /* @__PURE__ */ y.jsx(Wt, { $opacity: S, children: x }) : /* @__PURE__ */ y.jsx(Wt, { $opacity: S, children: " " }) }, w);
             }) }, C);
           }) })
         ]
       }
-    )
+    ) })
   ] });
 };
 function $d(t) {
@@ -6678,21 +6681,19 @@ const zd = Ed(({ children: t, ...e }) => y.jsx(Id, { ...e, children: ({ isIndete
     tool: g.microflow || ""
   })) : [], [t.tools]), { items: a, sortProps: d } = $d(s), c = f.useCallback((g) => {
     const m = o.get(g);
-    return m === "invalid" ? /* @__PURE__ */ y.jsx(Kt, { icon: /* @__PURE__ */ y.jsx(Do, { title: "Microflow not found" }) }) : m === "syncing" ? /* @__PURE__ */ y.jsx(Kt, { icon: /* @__PURE__ */ y.jsx(Ka, { title: "Validating..." }) }) : null;
+    return m === "invalid" ? /* @__PURE__ */ y.jsx(Kt, { icon: /* @__PURE__ */ y.jsx(Do, { title: "Microflow invalid" }) }) : m === "syncing" ? /* @__PURE__ */ y.jsx(Kt, { icon: /* @__PURE__ */ y.jsx(Ka, { title: "Validating..." }) }) : null;
   }, [o]), h = f.useCallback(async () => {
     const g = await Ot(e, l, t, i);
     g && n(g);
   }, [e, l, t, i, n]), p = f.useCallback(async () => {
-    const g = r[0];
     if (r.length === 0 || !t.tools)
       return;
-    const m = await Ot(e, l, t, i, g);
+    const g = r[0], m = await Ot(e, l, t, i, g);
     m && n(m);
   }, [e, l, t, i, n, r]), v = f.useCallback(async () => {
-    const g = r[0];
     if (r.length === 0 || !t.tools)
       return;
-    const m = await ga(t, i, g);
+    const g = r[0], m = await ga(t, i, g);
     m && n(m);
   }, [t, i, n, r]), b = f.useCallback(async (g, m) => {
     if (!t.tools)
@@ -6708,7 +6709,7 @@ const zd = Ed(({ children: t, ...e }) => y.jsx(Id, { ...e, children: ({ isIndete
       ariaLabel: "Tools table",
       columns: [
         { id: "validation", minWidth: 24, defaultWidth: 24, maxWidth: 24 },
-        { id: "enabled", caption: "Active", minWidth: 63, defaultWidth: 63, maxWidth: 63, allowsSorting: !0, alignContents: "center" },
+        { id: "enabled", caption: "Active", isControl: !0, minWidth: 63, defaultWidth: 63, maxWidth: 63, allowsSorting: !0, alignContents: "center" },
         { id: "name", caption: "Name", isRowHeader: !0, resizable: !0, allowsSorting: !0 },
         { id: "description", caption: "Description", resizable: !0, allowsSorting: !0 },
         { id: "tool", caption: "Tool", resizable: !0, allowsSorting: !0 }
@@ -6728,7 +6729,7 @@ const zd = Ed(({ children: t, ...e }) => y.jsx(Id, { ...e, children: ({ isIndete
         /* @__PURE__ */ y.jsx(
           fr,
           {
-            icon: /* @__PURE__ */ y.jsx(sr, {}),
+            icon: /* @__PURE__ */ y.jsx(dr, {}),
             text: g.tool
           }
         )
@@ -6809,10 +6810,10 @@ const zd = Ed(({ children: t, ...e }) => y.jsx(Id, { ...e, children: ({ isIndete
         const F = await Promise.all(
           a.tools.map(async (H) => {
             if (H.microflow) {
-              const q = await dr(e, H.microflow);
+              const q = await cr("microflow", H, e, a);
               return {
                 id: H.id,
-                state: q ? "valid" : "invalid"
+                state: q === !0 ? "valid" : "invalid"
               };
             }
             return { id: H.id, state: "valid" };
@@ -6841,7 +6842,7 @@ const zd = Ed(({ children: t, ...e }) => y.jsx(Id, { ...e, children: ({ isIndete
         }), O;
       }), C.current = A;
     }
-  }, [a.tools]), f.useEffect(() => {
+  }, [a.tools, i]), f.useEffect(() => {
     i && (async () => {
       const A = await N(a);
       r(A);
@@ -6892,7 +6893,7 @@ const zd = Ed(({ children: t, ...e }) => y.jsx(Id, { ...e, children: ({ isIndete
   return /* @__PURE__ */ y.jsxs(y.Fragment, { children: [
     /* @__PURE__ */ y.jsxs(At, { children: [
       /* @__PURE__ */ y.jsx(Re, { label: "System prompt", children: /* @__PURE__ */ y.jsx(
-        Tt,
+        Ft,
         {
           ariaLabel: "System prompt",
           value: a.systemPrompt,
@@ -6901,7 +6902,7 @@ const zd = Ed(({ children: t, ...e }) => y.jsx(Id, { ...e, children: ({ isIndete
         }
       ) }),
       /* @__PURE__ */ y.jsx(Re, { label: "User prompt", children: /* @__PURE__ */ y.jsx(
-        Tt,
+        Ft,
         {
           ariaLabel: "User prompt",
           value: a.userPrompt || "",
@@ -6973,18 +6974,18 @@ const zd = Ed(({ children: t, ...e }) => y.jsx(Id, { ...e, children: ({ isIndete
         }
       ),
       o.showCreateVariablesInfo && o.unusedAttributes.length === 0 && !p && /* @__PURE__ */ y.jsx(
-        Ft,
+        Tt,
         {
           onClose: () => v(!0),
           children: "Create variables: Enclose a word or text in double curly brackets. For example, you can write {{Language}} in the system or user prompt."
         }
       ),
-      o.missingAttributes.length > 0 && /* @__PURE__ */ y.jsxs(cr, { children: [
+      o.missingAttributes.length > 0 && /* @__PURE__ */ y.jsxs(sr, { children: [
         /* @__PURE__ */ y.jsx("span", { children: "The following attributes cannot be found on the selected entity:" }),
         /* @__PURE__ */ y.jsx("ul", { children: o.missingAttributes.map((E) => /* @__PURE__ */ y.jsx("li", { children: E }, E)) })
       ] }),
       o.unusedAttributes.length > 0 && !c && /* @__PURE__ */ y.jsxs(
-        Ft,
+        Tt,
         {
           onClose: () => h(!0),
           children: [

@@ -1,103 +1,109 @@
-import { aI as q, ae as t, r as o, aw as D, aJ as F, ay as N, av as H, au as y } from "./TextInputWithIcon-B3kv_B9i.js";
-import { m as O, c as B } from "./logger-BM6R1Quw.js";
-import { D as J } from "./DialogFooter-CyukU0xe.js";
-import { T } from "./TextInputLabeled-_7ydO2Vf.js";
-import { I as Y } from "./Banner-CTNaNVaj.js";
-const $ = ({ studioPro: d, agent: a, onClose: r }) => {
-  var v, k, P;
-  const [e, s] = o.useState(a), [l, u] = o.useState(((v = a.maxTokens) == null ? void 0 : v.toString()) ?? ""), [i, m] = o.useState(((k = a.temperature) == null ? void 0 : k.toString()) ?? ""), [p, S] = o.useState(((P = a.topP) == null ? void 0 : P.toString()) ?? ""), c = o.useCallback(() => l !== "" && e.maxTokens === void 0 ? "Please enter a valid number." : e.maxTokens !== void 0 && e.maxTokens < 1 ? "Max tokens must be greater than 0 (or empty)." : !0, [e.maxTokens, l]), h = o.useCallback(() => i !== "" && e.temperature === void 0 ? "Please enter a valid number." : e.temperature !== void 0 && e.temperature < 0 ? "Temperature must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.temperature, i]), g = o.useCallback(() => p !== "" && e.topP === void 0 ? "Please enter a valid number." : e.topP !== void 0 && e.topP < 0 ? "TopP must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.topP, p]), b = o.useCallback((w, L, x) => (n) => {
-    const R = x ? /^-?\d+$/ : /^-?\d*\.?\d*$/, j = x ? ["-"] : ["-", "."];
-    if (n !== "" && !j.includes(n) && !R.test(n))
+import { r as o, ae as r, aJ as R, ay as q, av as D, au as I, aI as F, aw as N } from "./TextInputWithIcon-B3kv_B9i.js";
+import { m as H, c as O } from "./logger-BM6R1Quw.js";
+import { I as A } from "./Banner-BEBXNJk6.js";
+import { D as B } from "./DialogFooter-CyukU0xe.js";
+import { T as f } from "./TextInputLabeled-_7ydO2Vf.js";
+const J = ({ initialAgent: a, onClose: t }) => {
+  var T, v, k;
+  const [e, d] = o.useState(a), [n, u] = o.useState(((T = a.maxTokens) == null ? void 0 : T.toString()) ?? ""), [i, m] = o.useState(((v = a.temperature) == null ? void 0 : v.toString()) ?? ""), [l, S] = o.useState(((k = a.topP) == null ? void 0 : k.toString()) ?? ""), p = o.useCallback(() => n !== "" && e.maxTokens === void 0 ? "Please enter a valid number." : e.maxTokens !== void 0 && e.maxTokens < 1 ? "Max tokens must be greater than 0 (or empty)." : !0, [e.maxTokens, n]), c = o.useCallback(() => i !== "" && e.temperature === void 0 ? "Please enter a valid number." : e.temperature !== void 0 && e.temperature < 0 ? "Temperature must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.temperature, i]), h = o.useCallback(() => l !== "" && e.topP === void 0 ? "Please enter a valid number." : e.topP !== void 0 && e.topP < 0 ? "TopP must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.topP, l]), g = o.useCallback((P, M, x) => (s) => {
+    const L = x ? /^-?\d+$/ : /^-?\d*\.?\d*$/, w = x ? ["-"] : ["-", "."];
+    if (s !== "" && !w.includes(s) && !L.test(s))
       return;
-    if (L(n), n === "" || j.includes(n)) {
-      s((f) => ({ ...f, [w]: void 0 }));
+    if (M(s), s === "" || w.includes(s)) {
+      d((b) => ({ ...b, [P]: void 0 }));
       return;
     }
-    const I = x ? parseInt(n, 10) : parseFloat(n);
-    s((f) => ({ ...f, [w]: isNaN(I) ? void 0 : I }));
-  }, []), E = o.useCallback(() => {
-    if (c() === !0 && h() === !0 && g() === !0)
-      r == null || r(e);
+    const j = x ? parseInt(s, 10) : parseFloat(s);
+    d((b) => ({ ...b, [P]: isNaN(j) ? void 0 : j }));
+  }, []), y = o.useCallback(() => {
+    if (p() === !0 && c() === !0 && h() === !0)
+      t == null || t(e);
     else
       return;
-  }, [r, e, c, h, g]), C = o.useCallback(() => {
-    r == null || r(null);
-  }, [r]), M = o.useCallback(() => {
+  }, [t, e, p, c, h]), E = o.useCallback(() => {
+    t == null || t(null);
+  }, [t]), C = o.useCallback(() => {
     window.open("https://docs.mendix.com/appstore/modules/genai/genai-for-mx/commons/#request", "_blank");
   }, []);
-  return /* @__PURE__ */ t.jsx(D, { studioPro: d, children: /* @__PURE__ */ t.jsxs(F, { children: [
-    /* @__PURE__ */ t.jsx(N, { children: /* @__PURE__ */ t.jsxs(H, { children: [
-      /* @__PURE__ */ t.jsx(y, { label: "Tokens", children: /* @__PURE__ */ t.jsx(
-        T,
+  return /* @__PURE__ */ r.jsxs(R, { children: [
+    /* @__PURE__ */ r.jsx(q, { children: /* @__PURE__ */ r.jsxs(D, { children: [
+      /* @__PURE__ */ r.jsx(I, { label: "Tokens", children: /* @__PURE__ */ r.jsx(
+        f,
         {
           label: "Max tokens",
           ariaLabel: "Max tokens",
-          value: l,
+          value: n,
           description: "The maximum number of tokens per request.",
-          onChange: b("maxTokens", u, !0),
-          validate: c
+          onChange: g("maxTokens", u, !0),
+          validate: p
         }
       ) }),
-      /* @__PURE__ */ t.jsxs(y, { label: "Randomness", children: [
-        /* @__PURE__ */ t.jsx(Y, { children: "It is recommended to steer either the temperature or TopP, but not both. Review the documentation of the model provider for more information about the allowed ranges." }),
-        /* @__PURE__ */ t.jsx(
-          T,
+      /* @__PURE__ */ r.jsxs(I, { label: "Randomness", children: [
+        /* @__PURE__ */ r.jsx(A, { children: "It is recommended to steer either the temperature or TopP, but not both. Review the documentation of the model provider for more information about the allowed ranges." }),
+        /* @__PURE__ */ r.jsx(
+          f,
           {
             label: "Temperature",
             ariaLabel: "Temperature",
             value: i,
             description: "Temperature controls the randomness of the model response. Low values generate a more predictable output, while higher values allow creativity and diversity.",
-            onChange: b("temperature", m, !1),
-            validate: h
+            onChange: g("temperature", m, !1),
+            validate: c
           }
         ),
-        /* @__PURE__ */ t.jsx(
-          T,
+        /* @__PURE__ */ r.jsx(
+          f,
           {
             label: "TopP",
             ariaLabel: "TopP",
-            value: p,
+            value: l,
             description: "TopP is an alternative to temperature for controlling the randomness of the model response. TopP defines a probability threshold so that only words with probabilities greater than or equal to the threshold will be included in the response.",
-            onChange: b("topP", S, !1),
-            validate: g
+            onChange: g("topP", S, !1),
+            validate: h
           }
         )
       ] })
     ] }) }),
-    /* @__PURE__ */ t.jsx(
-      J,
+    /* @__PURE__ */ r.jsx(
+      B,
       {
-        onOk: E,
-        onCancel: C,
+        onOk: y,
+        onCancel: E,
         showHelp: !0,
-        onHelp: M
+        onHelp: C
       }
     )
-  ] }) });
-}, z = {
-  async loaded(d, a) {
-    const r = O(d), e = B(r);
-    if (!a.agent)
+  ] });
+}, Y = ({ studioPro: a, agent: t, onClose: e }) => /* @__PURE__ */ r.jsx(N, { studioPro: a, children: /* @__PURE__ */ r.jsx(
+  J,
+  {
+    initialAgent: t,
+    onClose: e
+  }
+) }), z = {
+  async loaded(a, t) {
+    const e = H(a), d = O(e);
+    if (!t.agent)
       throw new Error("Agent needs to be provided to open the Model Settings dialog.");
     try {
-      const s = JSON.parse(decodeURIComponent(a.agent)), l = document.getElementById("root");
-      if (!l)
+      const n = JSON.parse(decodeURIComponent(t.agent)), u = document.getElementById("root");
+      if (!u)
         throw new Error("Failed to find the root element.");
-      const u = q.createRoot(l), i = (m) => {
-        r.ui.dialogs.closeWithResult(a.dialogId, m);
+      const i = F.createRoot(u), m = (l) => {
+        e.ui.dialogs.closeWithResult(t.dialogId, l);
       };
-      u.render(
-        /* @__PURE__ */ t.jsx(o.StrictMode, { children: /* @__PURE__ */ t.jsx(
-          $,
+      i.render(
+        /* @__PURE__ */ r.jsx(o.StrictMode, { children: /* @__PURE__ */ r.jsx(
+          Y,
           {
-            studioPro: r,
-            agent: s,
-            onClose: i
+            studioPro: e,
+            agent: n,
+            onClose: m
           }
         ) })
       );
-    } catch (s) {
-      throw e.error("Error editing model settings:", s), new Error("Error editing model settings:", s);
+    } catch (n) {
+      throw d.error("Error editing model settings:", n), new Error("Error editing model settings:", n);
     }
   }
 };
