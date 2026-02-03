@@ -11,6 +11,7 @@ build_extension:
   script:
     - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.rnd.mendix.com/innovation-incubation/agent-editor.git temp_repo
     - cd temp_repo
+    - cd .\agent-editor\   
     - npm ci
     - npm run build
     - cd ..
