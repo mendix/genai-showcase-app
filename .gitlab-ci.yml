@@ -30,8 +30,8 @@ mx_check:
   image: nexus-docker-group.rnd.mendix.com/mxbuild:11.7.0
   script:
     - mx check "GenAI Showcase App.mpr" || EXIT_CODE=$?
-    - echo "Exit code: $EXIT_CODE"
-    - if [ "$EXIT_CODE" -eq 1 ]; then echo "Build failed: Project contains errors"; exit 1; fi
+    - echo "Exit code $EXIT_CODE"
+    - if [ "$EXIT_CODE" -eq 1 ]; then echo "Build failed - Project contains errors"; exit 1; fi
     - echo "Check completed (warnings/deprecations may exist but no errors)"
 
 create_module_package:
