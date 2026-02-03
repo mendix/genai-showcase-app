@@ -31,7 +31,11 @@ mx_check:
   script:
     - mx check "GenAI Showcase App.mpr" || EXIT_CODE=$?
     - echo "Exit code $EXIT_CODE"
-    - if [ "$EXIT_CODE" -eq 1 ]; then echo "Build failed - Project contains errors"; exit 1; fi
+    - |
+      if [ "$EXIT_CODE" -ne 0 ]; then
+        echo "Build failed: Project contains errors"
+        exit 1
+      fi
     - echo "Check completed (warnings/deprecations may exist but no errors)"
 
 create_module_package:
@@ -40,7 +44,7 @@ create_module_package:
   image: nexus-docker-group.rnd.mendix.com/mxbuild:11.7.0
   script:
     - mkdir -p output
-    - mx create-module-package --module-name=$MODULE_NAME --output-dir=output "GenAI Showcase App.mpr"
+    - mx create-module-package -e "(resources|userlib|widgets)/*" -d output "GenAI Showcase App.mpr" $MODULE_NAME
     - ls -la output/
   artifacts:
     paths:
@@ -56,7 +60,7 @@ create_addon_package:
     - echo "Setting module version..."
     - mx set-module-version "GenAI Showcase App.mpr" $ADDON_NAME $RELEASE_VERSION
     - echo "Creating solution package..."
-    - mx create-module-package -d output "GenAI Showcase App.mpr" $ADDON_NAME
+    - mx create-module-package -e "(resources|userlib|widgets)/*" -d output "GenAI Showcase App.mpr" $ADDON_NAME
     - ls -la output/
   artifacts:
     paths:
