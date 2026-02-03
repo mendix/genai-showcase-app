@@ -34,15 +34,10 @@ public class ConverseFunctionCalling{
 		if(isToolMessage(toolMessageRoot)) {
 			//Add new User Message that will contain the ToolResult
 			
-			//Get the assistant message right before the tool messages
+			//Get the assistant message right before the tool messages and populate it with the original json from the response
 			ObjectNode assistantTextMessage = (ObjectNode) messageList.get(i-1);
-			if(assistantTextMessage != null && !hasToolUseContent(assistantTextMessage)) {
-				//Only try to populate from RequestExtension if the message doesn't already have toolUse content
-				RequestExtension requestExtension = getRequestExtension(context, request, toolMessageRoot);
-				if(requestExtension != null) {
-					setAssistantToolUse(assistantTextMessage, requestExtension);
-				}
-				//If no RequestExtension and no toolUse content, the assistant message should already be properly formatted
+			if(assistantTextMessage != null) {
+				setAssistantToolUse(assistantTextMessage, getRequestExtension(context,request,toolMessageRoot));
 			}
 					
 			//Add Content of toolResult to Content for all subsequent tool messages
@@ -96,19 +91,6 @@ public class ConverseFunctionCalling{
 	//The "tool" role is only applicable for tool results that haven't been mapped yet to Converse nodes. 
 	private static boolean isToolMessage(JsonNode messageNode) {
 		return (!(messageNode.path("role").isNull()) && messageNode.path("role").asText().equals(ENUM_MessageRole.tool.toString()));
-	}
-	
-	//Check if the assistant message already contains toolUse content blocks
-	private static boolean hasToolUseContent(JsonNode messageNode) {
-		JsonNode contentNode = messageNode.path("content");
-		if(contentNode.isArray()) {
-			for(JsonNode content : contentNode) {
-				if(!content.path("toolUse").isMissingNode()) {
-					return true;
-				}
-			}
-		}
-		return false;
 	}
 	
 	//The exact Response from Converse needs to be added as an assistant message. This is stored in the requestExtension right after a call.
