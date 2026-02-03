@@ -32,11 +32,7 @@ mx_check:
     - mx check "GenAI Showcase App.mpr" | tee check_output.txt
     - ERROR_COUNT=$(grep -oP 'The app contains: \K\d+' check_output.txt)
     - echo "Error count: $ERROR_COUNT"
-    - |
-      if [ "$ERROR_COUNT" -ne 0 ]; then
-        echo "Build failed: Project contains $ERROR_COUNT error(s)"
-        exit 1
-      fi
+    - if [ "$ERROR_COUNT" -ne 0 ]; then echo "Build failed: Project contains $ERROR_COUNT error(s)"; exit 1; fi
     - echo "Success: Project has no errors"
 
 create_module_package:
