@@ -4,10 +4,9 @@ variables:
 stages:
   - build
 
-image: node:22
-
 build_extension:
   stage: build
+  image: nexus-docker-group.rnd.mendix.com/node:22
   script:
     - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.rnd.mendix.com/innovation-incubation/agent-editor.git temp_repo
     - cd temp_repo/agent-editor
@@ -15,14 +14,16 @@ build_extension:
     - npm run build
     - cd ../..
     - rm -rf extensions/agent-editor/*
-    - echo "Contents before copying:"
-    - ls -la extensions/agent-editor/
     - cp -r temp_repo/agent-editor/dist/agents-studio-pro/* extensions/agent-editor/
-    - echo "Contents after copying:"
-    - ls -la extensions/agent-editor/
     - rm -rf temp_repo
   artifacts:
     paths:
       - extensions/agent-editor/  # Adjust based on your build output directory
     expire_in: 1 hour
 
+build_package:
+  stage: build
+  image: nexus-docker-group.rnd.mendix.com/mxbuild:latest
+  script:
+    - mx check
+    - mx build
