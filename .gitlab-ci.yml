@@ -26,5 +26,4 @@ build_package:
   #needs: [build_extension]
   image: nexus-docker-group.rnd.mendix.com/mxbuild:11.7.0
   script:
-    - mx check
-    - mx build
+    - mx check "GenAI Showcase App.mpr"
