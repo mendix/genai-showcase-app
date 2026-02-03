@@ -10,11 +10,10 @@ build_extension:
   stage: build
   script:
     - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.rnd.mendix.com/innovation-incubation/agent-editor.git temp_repo
-    - cd temp_repo
-    - cd .\agent-editor\   
+    - cd temp_repo/agent-editor
     - npm ci
     - npm run build
-    - cd ..
+    - cd ../..
     - rm -rf temp_repo
   artifacts:
     paths:
