@@ -18,12 +18,13 @@ build_extension:
     - rm -rf temp_repo
   artifacts:
     paths:
-      - extensions/agent-editor/  # Adjust based on your build output directory
+      - extensions/agent-editor/
     expire_in: 1 hour
 
 build_package:
   stage: build
-  image: nexus-docker-group.rnd.mendix.com/mxbuild:latest
+  #needs: [build_extension]
+  image: nexus-docker-group.rnd.mendix.com/mxbuild:11.7.0
   script:
     - mx check
     - mx build
