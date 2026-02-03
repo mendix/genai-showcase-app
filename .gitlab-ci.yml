@@ -7,6 +7,7 @@ stages:
   - prepare
   - test
   - build
+  - validate
   - package
 
 clone_extension:
@@ -46,7 +47,7 @@ build_extension:
     expire_in: 1 hour
 
 mx_check:
-  stage: build
+  stage: validate
   needs: [build_extension]
   image: nexus-docker-group.rnd.mendix.com/mxbuild:11.7.0
   script:
@@ -70,7 +71,7 @@ create_module_package:
   artifacts:
     paths:
       - output/$MODULE_NAME.mpk
-    expire_in: 1 day
+    expire_in: 1 hour
 
 create_addon_package:
   stage: package
@@ -86,9 +87,9 @@ create_addon_package:
   artifacts:
     paths:
       - output/$ADDON_NAME.mxmodule
-    expire_in: 1 day
+    expire_in: 1 hour
 
-package_with_toolkit:
+package_for_release:
   stage: package
   needs: [create_module_package, create_addon_package]
   image: alpine:latest
@@ -112,8 +113,13 @@ package_with_toolkit:
     - mv $MODULE_NAME.zip $MODULE_NAME.mpk
     - rm -rf temp $ADDON_NAME.mxmodule
     - mv $MODULE_NAME.mpk ${MODULE_NAME}_${RELEASE_VERSION}.mpk
-    - ls -la
+    - echo "Final package is available in artifacts as ${MODULE_NAME}_${RELEASE_VERSION}.mpk"
   artifacts:
     paths:
       - output/${MODULE_NAME}_${RELEASE_VERSION}.mpk
     expire_in: 1 week
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - temp_repo/agent-editor/node_modules/
