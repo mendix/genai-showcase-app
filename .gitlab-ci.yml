@@ -2,6 +2,8 @@ variables:
   RELEASE_VERSION: "1.0.0"
   MODULE_NAME: "AgentEditorCommons"
   ADDON_NAME: "AgentEditor"
+  MPR_FILE: "GenAI Showcase App.mpr"
+  MXBUILD_VERSION: "11.7.0"
 
 stages:
   - prepare
@@ -49,9 +51,9 @@ build_extension:
 mx_check:
   stage: validate
   needs: [build_extension]
-  image: nexus-docker-group.rnd.mendix.com/mxbuild:11.7.0
+  image: nexus-docker-group.rnd.mendix.com/mxbuild:${MXBUILD_VERSION}
   script:
-    - mx check "GenAI Showcase App.mpr" && EXIT_CODE=0 || EXIT_CODE=$?
+    - mx check "$MPR_FILE" && EXIT_CODE=0 || EXIT_CODE=$?
     - echo "Exit code $EXIT_CODE"
     - |
       if [ "$EXIT_CODE" -eq 1 ]; then
@@ -63,10 +65,10 @@ mx_check:
 create_module_package:
   stage: package
   needs: [build_extension, mx_check]
-  image: nexus-docker-group.rnd.mendix.com/mxbuild:11.7.0
+  image: nexus-docker-group.rnd.mendix.com/mxbuild:${MXBUILD_VERSION}
   script:
     - mkdir -p output
-    - mx create-module-package -e "(resources|userlib|widgets)/*" -d output "GenAI Showcase App.mpr" $MODULE_NAME
+    - mx create-module-package -e "(resources|userlib|widgets)/*" -d output "$MPR_FILE" $MODULE_NAME
     - ls -la output/
   artifacts:
     paths:
@@ -76,13 +78,13 @@ create_module_package:
 create_addon_package:
   stage: package
   needs: [build_extension, mx_check]
-  image: nexus-docker-group.rnd.mendix.com/mxbuild:11.7.0
+  image: nexus-docker-group.rnd.mendix.com/mxbuild:${MXBUILD_VERSION}
   script:
     - mkdir -p output
     - echo "Setting module version..."
-    - mx set-module-version "GenAI Showcase App.mpr" $ADDON_NAME $RELEASE_VERSION
+    - mx set-module-version "$MPR_FILE" $ADDON_NAME $RELEASE_VERSION
     - echo "Creating solution package..."
-    - mx create-module-package -e "(resources|userlib|widgets)/*" -d output "GenAI Showcase App.mpr" $ADDON_NAME
+    - mx create-module-package -e "(resources|userlib|widgets)/*" -d output "$MPR_FILE" $ADDON_NAME
     - ls -la output/
   artifacts:
     paths:
