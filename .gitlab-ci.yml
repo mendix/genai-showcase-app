@@ -1,14 +1,17 @@
 variables:
   RELEASE_VERSION: "1.0.0"
+  MODULE_NAME: "AgentEditorCommons"
+  ADDON_NAME: "AgentEditor"
 
 stages:
   - build
+  - package
 
 build_extension:
   stage: build
   image: nexus-docker-group.rnd.mendix.com/node:22
   script:
-    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.rnd.mendix.com/innovation-incubation/agent-editor.git temp_repo
+    - git clone --depth=1 https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.rnd.mendix.com/innovation-incubation/agent-editor.git temp_repo
     - cd temp_repo/agent-editor
     - npm ci
     - npm run build
@@ -21,9 +24,76 @@ build_extension:
       - extensions/agent-editor/
     expire_in: 1 hour
 
-build_package:
+mx_check:
   stage: build
-  #needs: [build_extension]
+  needs: [build_extension]
   image: nexus-docker-group.rnd.mendix.com/mxbuild:11.7.0
   script:
-    - mx check "GenAI Showcase App.mpr"
+    - mx check "GenAI Showcase App.mpr" | tee check_output.txt
+    - ERROR_COUNT=$(grep -oP 'The app contains: \K\d+' check_output.txt)
+    - echo "Error count: $ERROR_COUNT"
+    - |
+      if [ "$ERROR_COUNT" -ne 0 ]; then
+        echo "Build failed: Project contains $ERROR_COUNT error(s)"
+        exit 1
+      fi
+    - echo "Success: Project has no errors"
+
+create_module_package:
+  stage: package
+  needs: [build_extension, mx_check]
+  image: nexus-docker-group.rnd.mendix.com/mxbuild:11.7.0
+  script:
+    - mkdir -p output
+    - mx create-module-package --module-name=$MODULE_NAME --output-dir=output "GenAI Showcase App.mpr"
+    - ls -la output/
+  artifacts:
+    paths:
+      - output/$MODULE_NAME.mpk
+    expire_in: 1 day
+
+create_addon_package:
+  stage: package
+  needs: [build_extension, mx_check]
+  image: nexus-docker-group.rnd.mendix.com/mxbuild:11.7.0
+  script:
+    - mkdir -p output
+    - echo "Setting module version..."
+    - mx set-module-version "GenAI Showcase App.mpr" $ADDON_NAME $RELEASE_VERSION
+    - echo "Creating solution package..."
+    - mx create-module-package -d output "GenAI Showcase App.mpr" $ADDON_NAME
+    - ls -la output/
+  artifacts:
+    paths:
+      - output/$ADDON_NAME.mxmodule
+    expire_in: 1 day
+
+package_with_toolkit:
+  stage: package
+  needs: [create_module_package, create_addon_package]
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache p7zip bash
+  script:
+    - cd output
+    - echo "Unpacking mpk..."
+    - mv $MODULE_NAME.mpk $MODULE_NAME.zip
+    - unzip -q $MODULE_NAME.zip -d temp
+    - echo "Adding add-on to package.xml..."
+    - |
+      sed -i "/<\/files>/i\    <file path=\"modules/$ADDON_NAME\" />" temp/package.xml
+    - echo "Adding add-on module to package..."
+    - mkdir -p temp/modules
+    - cp $ADDON_NAME.mxmodule temp/modules/
+    - echo "Repacking mpk..."
+    - cd temp
+    - 7z a -tzip ../$MODULE_NAME.zip * -mx0
+    - cd ..
+    - mv $MODULE_NAME.zip $MODULE_NAME.mpk
+    - rm -rf temp $ADDON_NAME.mxmodule
+    - mv $MODULE_NAME.mpk ${MODULE_NAME}_${RELEASE_VERSION}.mpk
+    - ls -la
+  artifacts:
+    paths:
+      - output/${MODULE_NAME}_${RELEASE_VERSION}.mpk
+    expire_in: 1 week
