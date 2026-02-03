@@ -34,6 +34,7 @@ build_extension:
   image: nexus-docker-group.rnd.mendix.com/node:22
   script:
     - cd temp_repo/agent-editor
+    - npm ci
     - npm run build
     - cd ../..
     - rm -rf extensions/agent-editor/*
