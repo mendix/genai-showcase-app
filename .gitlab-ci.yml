@@ -1,21 +1,18 @@
 variables:
   RELEASE_VERSION: "1.0.0"
-  REPO_URL: https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.rnd.mendix.com/innovation-incubation/agent-editor.git  # Update with your repository path
 
 stages:
-  -prepare
-  -build
-  -test
-  -deploy
+  - build
 
 image: node:22
 
 build_extension:
   stage: build
   script:
-    - git clone $REPO_URL temp_repo
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.rnd.mendix.com/innovation-incubation/agent-editor.git temp_repo
     - cd temp_repo
     - npm ci
+    - npm run build
     - cd ..
     - rm -rf temp_repo
   artifacts:
