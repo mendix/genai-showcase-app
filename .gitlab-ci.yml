@@ -3,7 +3,7 @@ variables:
   MODULE_NAME: "AgentEditorCommons"
   ADDON_NAME: "AgentEditor"
   MPR_FILE: "GenAI Showcase App.mpr"
-  MXBUILD_VERSION: "11.7.0"
+  INITIAL_MX_VERSION: "11.7.0"
 
 stages:
   - prepare
@@ -21,6 +21,18 @@ clone_extension:
   artifacts:
     paths:
       - temp_repo/
+    expire_in: 1 hour
+
+get_mx_version:
+  stage: prepare
+  image: nexus-docker-group.rnd.mendix.com/mxbuild:${INITIAL_MX_VERSION}
+  script:
+    - MX_VERSION=$(mx show-version "$MPR_FILE")
+    - echo "MX_VERSION=$MX_VERSION" >> variables.env
+    - echo "Mendix version is $MX_VERSION"
+  artifacts:
+    reports:
+      dotenv: variables.env
     expire_in: 1 hour
 
 test_extension:
@@ -51,8 +63,8 @@ build_extension:
 
 mx_check:
   stage: validate
-  needs: [build_extension]
-  image: nexus-docker-group.rnd.mendix.com/mxbuild:${MXBUILD_VERSION}
+  needs: [build_extension, get_mx_version]
+  image: nexus-docker-group.rnd.mendix.com/mxbuild:${MX_VERSION}
   script:
     - mx check "$MPR_FILE" && EXIT_CODE=0 || EXIT_CODE=$?
     - echo "Exit code $EXIT_CODE"
@@ -65,8 +77,8 @@ mx_check:
 
 create_module_package:
   stage: package
-  needs: [build_extension, mx_check]
-  image: nexus-docker-group.rnd.mendix.com/mxbuild:${MXBUILD_VERSION}
+  needs: [build_extension, mx_check, get_mx_version]
+  image: nexus-docker-group.rnd.mendix.com/mxbuild:${MX_VERSION}
   script:
     - mkdir -p output
     - mx create-module-package -e "(resources|userlib|widgets)/*" -d output "$MPR_FILE" $MODULE_NAME
@@ -78,8 +90,8 @@ create_module_package:
 
 create_addon_package:
   stage: package
-  needs: [build_extension, mx_check]
-  image: nexus-docker-group.rnd.mendix.com/mxbuild:${MXBUILD_VERSION}
+  needs: [build_extension, mx_check, get_mx_version]
+  image: nexus-docker-group.rnd.mendix.com/mxbuild:${MX_VERSION}
   script:
     - mkdir -p output
     - echo "Setting module version..."
