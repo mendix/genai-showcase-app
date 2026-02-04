@@ -6,7 +6,7 @@ variables:
 
 workflow:
   rules:
-    - if: '$CI_COMMIT_TAG =~ /_\d+\.\d+\.\d+$/'
+    - if: '$CI_COMMIT_TAG =~ /-\d+\.\d+\.\d+$/'
 
 stages:
   - prepare
@@ -20,7 +20,7 @@ extract_release_version:
   image: alpine:latest
   script:
     - |
-      if [[ "$CI_COMMIT_TAG" =~ _([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+      if [[ "$CI_COMMIT_TAG" =~ -([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
         VERSION="${BASH_REMATCH[1]}"
         echo "RELEASE_VERSION=$VERSION" >> version.env
         echo "Extracted release version: $VERSION"
