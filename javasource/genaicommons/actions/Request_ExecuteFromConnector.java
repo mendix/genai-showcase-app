@@ -96,6 +96,7 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 	private int requestTokens = 0;
 	private int responseTokens = 0;
 	private long startTime;
+	private ModelSpan currentModelSpan;
 	
 	/**
 	 * Main processing loop with tool call support.
@@ -111,7 +112,7 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 	 */
 	private Response processRequest() throws CoreException {
 		LOGGER.debug(">>> processRequest() called");
-		ModelSpan modelSpan = createModelSpan();
+		currentModelSpan = null;
 		try {
 			Response response = null;
 			Message assistantMessage = null;
@@ -146,7 +147,7 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 			if (hasDecided) {
 				LOGGER.debug("=== RESUME PATH 1: Executing approved/declined tools ===");
 				debugLogToolCallStatuses(existingAssistantMessage, "Before processing");
-				Microflows.message_ProcessToolCalls_IfAvailable(getContext(), existingAssistantMessage, Request, modelSpan);
+				//Microflows.message_ProcessToolCalls_IfAvailable(getContext(), existingAssistantMessage, Request, currentModelSpan);
 				debugLogToolCallStatuses(existingAssistantMessage, "After processing");
 				debugLogRequestMessages("After tool execution");
 				
@@ -183,26 +184,26 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 			if (toolResultsReady && allExecuted) {
 				LOGGER.debug("=== RESUME PATH 2: Tool results ready, calling model ===");
 				debugLogRequestMessages("Before calling model (with tool results)");
-				response = callModel(modelSpan);
+				response = callModel(currentModelSpan);
 				if (response == null) return null;
 				
 				assistantMessage = response.getResponse_Message();
 				LOGGER.debug("Model returned, assistantMessage content: " + (assistantMessage.getContent() != null ? assistantMessage.getContent().substring(0, Math.min(100, assistantMessage.getContent().length())) : "null"));
-				return handleToolCallsIfPresent(response, assistantMessage, modelSpan);
+				return handleToolCallsIfPresent(response, assistantMessage, currentModelSpan);
 			}
 			
 			// === INITIAL PATH: First model call ===
 			LOGGER.debug("=== INITIAL PATH: First model call ===");
 			debugLogRequestMessages("Before calling model (initial)");
-			response = callModel(modelSpan);
+			response = callModel(currentModelSpan);
 			if (response == null) return null;
 			
 			assistantMessage = response.getResponse_Message();
 			LOGGER.debug("Model returned, assistantMessage content: " + (assistantMessage.getContent() != null ? assistantMessage.getContent().substring(0, Math.min(100, assistantMessage.getContent().length())) : "null"));
-			return handleToolCallsIfPresent(response, assistantMessage, modelSpan);
+			return handleToolCallsIfPresent(response, assistantMessage, currentModelSpan);
 		}
 		catch (Exception e) {
-			updateModelSpanOnError(modelSpan);
+			updateModelSpanOnError(currentModelSpan);
 			LOGGER.debug("Exception in Java Code, failed to process Request " + e.getMessage());
 			return null;
 		}
@@ -227,6 +228,10 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 		}
 		
 		Response response = genaicommons.proxies.Response.load(getContext(), responseMendixObject.getId());
+		// Create span only after model successfully returned a response
+		if (currentModelSpan == null) {
+			currentModelSpan = createModelSpan();
+		}
 		Message assistantMessage = response.getResponse_Message();
 		
 		LOGGER.debug("Model response received. AssistantMessage: content='" + 
@@ -237,7 +242,7 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 		debugLogRequestMessages("Request state after model returned (before processing)");
 		
 		response.setResponseText(assistantMessage.getContent());
-		updateModelSpan(modelSpan, response);
+		updateModelSpan(currentModelSpan, response);
 		responseUpdateTokenCount(response);
 		return response;
 	}
@@ -264,7 +269,7 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 		// Process tool calls (execute or mark pending based on approval settings)
 		LOGGER.debug("Processing tool calls via microflow...");
 		debugLogToolCallStatuses(assistantMessage, "Before microflow");
-		Microflows.message_ProcessToolCalls_IfAvailable(getContext(), assistantMessage, Request, modelSpan);
+		//Microflows.message_ProcessToolCalls_IfAvailable(getContext(), assistantMessage, Request, currentModelSpan);
 		debugLogToolCallStatuses(assistantMessage, "After microflow");
 		
 		// If all tools are hidden, return to UI to persist tool history
@@ -296,6 +301,9 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 	 */
 	private void responsePostProcessing(Response response) throws CoreException {
 		response.setDurationMilliseconds((int) Math.ceil(System.currentTimeMillis() - startTime));
+		LOGGER.debug("Response duration set to " + response.getDurationMilliseconds() + " ms");
+		Trace trace = Request.getRequest_Trace();
+		long durationMs = Math.max(0, System.currentTimeMillis() - startTime);
 		if(response.get_ID() == null || response.get_ID().isBlank()) {
 			if(Request.get_ID() != null && !Request.get_ID().isBlank()) {
 				response.set_ID(Request.get_ID());
@@ -304,17 +312,42 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 				response.set_ID(UUID.randomUUID().toString());
 			}
 		}
+		boolean isFinalResponse = isFinalAssistantResponse(response);
 		
-		Trace trace = Request.getRequest_Trace();
-		
+		LOGGER.debug("responsePostProcessing: trace=" + (trace != null) + ", isFinalResponse=" + isFinalResponse +
+					", storeUsage=" + genaicommons.proxies.constants.Constants.getStoreUsageMetrics());
 		//trace == null if the constant was empty
 		if (trace != null || genaicommons.proxies.constants.Constants.getStoreUsageMetrics()) {
-			Usage usage = Microflows.usage_Create_TextAndFiles(getContext(), response, DeployedModel);
-
-			if(trace != null) {
-				trace.setTrace_Usage(usage);
+			// Ensure usage exists and is linked to trace
+			Usage usage = getOrCreateUsage(response, trace);
+			if (usage != null) {
+				usage.setDurationMilliseconds((int) Math.ceil(durationMs));
+				// Aggregate tokens into usage
+				int req = response.getRequestTokens() != null ? response.getRequestTokens() : 0;
+				int resp = response.getResponseTokens() != null ? response.getResponseTokens() : 0;
+				int total = response.getTotalTokens() != null ? response.getTotalTokens() : 0;
+				int currentReq = usage.getInputTokens() != null ? usage.getInputTokens() : 0;
+				int currentResp = usage.getOutputTokens() != null ? usage.getOutputTokens() : 0;
+				int currentTotal = usage.getTotalTokens() != null ? usage.getTotalTokens() : 0;
+				usage.setInputTokens(currentReq + req);
+				usage.setOutputTokens(currentResp + resp);
+				usage.setTotalTokens(currentTotal + total);
+				response.setRequestTokens(usage.getInputTokens());
+				response.setResponseTokens(usage.getOutputTokens());
+				response.setTotalTokens(usage.getTotalTokens());
+			}
+			// Final response: update trace output/system prompt
+			if (isFinalResponse && trace != null) {
+				LOGGER.debug("Updating Trace with final response info. Duration: " + durationMs + " ms, tokens: req=" + response.getRequestTokens() + 
+				             ", resp=" + response.getResponseTokens() + ", total=" + response.getTotalTokens());
 				trace.setOutput(response.getResponseText());
 				trace.setSystemPrompt(Request.getSystemPrompt());
+				trace.setEndTime(new Date(System.currentTimeMillis()));
+			}
+			// Always postprocess/commit trace updates when trace is available
+			if (trace != null) {
+				String conversationId = getConversationId(response);
+				//Microflows.trace_PostProcess_Commit(getContext(), trace, conversationId, DeployedModel);
 			}
 		}
 	}
@@ -327,34 +360,82 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 			modelSpan.setInputTokens(response.getRequestTokens());
 			modelSpan.setOutputTokens(response.getResponseTokens());
 			modelSpan.setOutput(response.getResponseText());
-			modelSpan.setEndTime(new Date(System.currentTimeMillis()));
-			modelSpan.setDurationMilliseconds((int) (modelSpan.getEndTime().getTime() -  modelSpan.getStartTime().getTime()));
+			// Only close the span on final assistant response
+			if (isFinalAssistantResponse(response)) {
+				modelSpan.setEndTime(new Date(System.currentTimeMillis()));
+				modelSpan.setDurationMilliseconds((int) (modelSpan.getEndTime().getTime() -  modelSpan.getStartTime().getTime()));
+			}
 		}
 	}
 	
 	//Creates ModelSpan with known startTime
 	private ModelSpan createModelSpan() throws CoreException {
 		Trace trace = Request.getRequest_Trace();
-		if(trace != null) {
-			ModelSpan modelSpan = new ModelSpan(getContext());
-			modelSpan.setInput(Microflows.trace_GetModelSpanInput(getContext(),trace)); 
-			modelSpan.setSpanId(UUID.randomUUID().toString());
-			modelSpan.setSpan_Trace(trace);
-			modelSpan.setIsError(true);
-			modelSpan.set_DeploymentIdentifier(DeployedModel.getArchitecture() + ' ' + DeployedModel.getDisplayName());
-			modelSpan.setStartTime(new Date(System.currentTimeMillis()));
-			return modelSpan;
-			
-		} else {
+		if (trace == null) {
 			return null;
 		}
+		// Create a new span per LLM call
+		ModelSpan modelSpan = new ModelSpan(getContext());
+		modelSpan.setInput(Microflows.trace_GetModelSpanInput(getContext(),trace)); 
+		modelSpan.setSpanId(UUID.randomUUID().toString());
+		modelSpan.setSpan_Trace(trace);
+		modelSpan.setIsError(true);
+		modelSpan.set_DeploymentIdentifier(DeployedModel.getArchitecture() + ' ' + DeployedModel.getDisplayName());
+		modelSpan.setStartTime(new Date(System.currentTimeMillis()));
+		return modelSpan;
+	}
+	
+	/**
+	 * Final response means assistant message without tool calls.
+	 */
+	private boolean isFinalAssistantResponse(Response response) throws CoreException {
+		if (response == null) {
+			return false;
+		}
+		Message msg = response.getResponse_Message();
+		if (msg == null) {
+			return false;
+		}
+		java.util.List<genaicommons.proxies.ToolCall> toolCalls = msg.getMessage_ToolCall();
+		boolean isFinal = toolCalls == null || toolCalls.isEmpty();
+		LOGGER.debug("isFinalAssistantResponse: " + isFinal + " (toolCalls=" + (toolCalls != null ? toolCalls.size() : 0) + ")");
+		return isFinal;
+	}
+	
+	private String getConversationId(Response response) throws CoreException {
+		String requestId = Request.get_ID();
+		if (requestId != null && !requestId.trim().isEmpty()) {
+			return requestId.trim();
+		}
+		String responseId = response != null ? response.get_ID() : null;
+		return responseId != null ? responseId : "";
+	}
+	
+	/**
+	 * Returns existing Usage linked to Trace, or creates it once.
+	 */
+	private Usage getOrCreateUsage(Response response, Trace trace) throws CoreException {
+		if (trace == null && !genaicommons.proxies.constants.Constants.getStoreUsageMetrics()) {
+			return null;
+		}
+		Usage usage = trace != null ? trace.getTrace_Usage() : null;
+		if (usage == null) {
+			usage = Microflows.usage_Create_TextAndFiles(getContext(), response, DeployedModel, null);
+			if (trace != null) {
+				trace.setTrace_Usage(usage);
+			}
+		}
+		return usage;
 	}
 	
 	private void responseUpdateTokenCount(Response response) {
-		requestTokens += response.getRequestTokens() != null ? response.getRequestTokens() : 0;
-		responseTokens += response.getResponseTokens() != null ? response.getResponseTokens() : 0;
-		totalTokens += response.getTotalTokens() != null ? response.getTotalTokens() : 0;
-		
+		int req = response.getRequestTokens() != null ? response.getRequestTokens() : 0;
+		int resp = response.getResponseTokens() != null ? response.getResponseTokens() : 0;
+		int total = response.getTotalTokens() != null ? response.getTotalTokens() : 0;
+		// Fallback per-call counters (usage aggregation happens in responsePostProcessing)
+		requestTokens += req;
+		responseTokens += resp;
+		totalTokens += total;
 		response.setRequestTokens(requestTokens);
 		response.setResponseTokens(responseTokens);
 		response.setTotalTokens(totalTokens);
