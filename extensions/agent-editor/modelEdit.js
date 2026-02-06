@@ -1,4 +1,4 @@
-import { h as B, g as G, j as E, i as I, az as S, aA as O, aB as V, r as u, I as K, Q as R, P as U, R as W, B as _, ad as w, ae as n, ag as z, ah as j, aC as v, aD as y, aE as C, aF as q, aG as M, au as A, aw as J, ax as X, ay as Q, aH as Y } from "./TextInputWithIcon-B3kv_B9i.js";
+import { h as B, g as G, j as E, i as I, az as S, aA as O, aB as V, r as u, I as K, Q as R, P as U, R as W, B as _, ad as w, ae as n, ag as z, ah as j, aC as v, aD as m, aE as C, aF as q, aG as M, au as A, aw as J, ax as X, ay as Q, aH as Y } from "./TextInputWithIcon-B3kv_B9i.js";
 import { c as Z } from "./componentLoader-_xi6kKSa.js";
 import { a as ee, b as re, c as ne, d as te, u as T } from "./modelUtils-BauxefJK.js";
 import { S as se, N as ae, T as oe } from "./ComboBox-DOXi1OXZ.js";
@@ -12,7 +12,7 @@ function ce(r, e) {
     role: "link",
     tabIndex: o ? void 0 : 0
   });
-  let { focusableProps: x } = B(r, e), { pressProps: h, isPressed: m } = G({
+  let { focusableProps: x } = B(r, e), { pressProps: h, isPressed: y } = G({
     onPress: t,
     onPressStart: c,
     onPressEnd: i,
@@ -23,7 +23,7 @@ function ce(r, e) {
     labelable: !0
   }), f = I(x, h), g = S(), k = O(r);
   return {
-    isPressed: m,
+    isPressed: y,
     linkProps: I(d, k, {
       ...f,
       ...p,
@@ -52,13 +52,13 @@ const de = /* @__PURE__ */ u.createContext(null), ue = /* @__PURE__ */ u.forward
       isFocused: p,
       isFocusVisible: x
     }
-  }), m = E(e, {
+  }), y = E(e, {
     global: !0
   });
-  return delete m.onClick, /* @__PURE__ */ _.createElement(t, {
+  return delete y.onClick, /* @__PURE__ */ _.createElement(t, {
     ref: a,
     slot: e.slot || void 0,
-    ...I(m, h, c, s, l),
+    ...I(y, h, c, s, l),
     "data-focused": p || void 0,
     "data-hovered": o || void 0,
     "data-pressed": i || void 0,
@@ -117,9 +117,9 @@ const de = /* @__PURE__ */ u.createContext(null), ue = /* @__PURE__ */ u.forward
       ))
     }
   ) });
-}, xe = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13.5%202.5L7.5%208.5'%20stroke='%23579BF9'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9%202.5H13.5V7'%20stroke='%23579BF9'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%209V13C12.5%2013.275%2012.275%2013.5%2012%2013.5H3C2.725%2013.5%202.5%2013.275%202.5%2013V4C2.5%203.725%202.725%203.5%203%203.5H7'%20stroke='%23579BF9'%20stroke-miterlimit='10'/%3e%3c/svg%3e", ye = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13.5%202.5L7.5%208.5'%20stroke='%23146FF4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9%202.5H13.5V7'%20stroke='%23146FF4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%209V13C12.5%2013.275%2012.275%2013.5%2012%2013.5H3C2.725%2013.5%202.5%2013.275%202.5%2013V4C2.5%203.725%202.725%203.5%203%203.5H7'%20stroke='%23146FF4'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
-var me = Object.defineProperty, ke = (r, e) => me(r, "name", { value: e, configurable: !0 });
-const ge = ke((r) => n.jsx(z, { light: ye, dark: xe, ...r }), "ExternalLinkIcon");
+}, xe = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13.5%202.5L7.5%208.5'%20stroke='%23579BF9'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9%202.5H13.5V7'%20stroke='%23579BF9'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%209V13C12.5%2013.275%2012.275%2013.5%2012%2013.5H3C2.725%2013.5%202.5%2013.275%202.5%2013V4C2.5%203.725%202.725%203.5%203%203.5H7'%20stroke='%23579BF9'%20stroke-miterlimit='10'/%3e%3c/svg%3e", me = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13.5%202.5L7.5%208.5'%20stroke='%23146FF4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9%202.5H13.5V7'%20stroke='%23146FF4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%209V13C12.5%2013.275%2012.275%2013.5%2012%2013.5H3C2.725%2013.5%202.5%2013.275%202.5%2013V4C2.5%203.725%202.725%203.5%203%203.5H7'%20stroke='%23146FF4'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
+var ye = Object.defineProperty, ke = (r, e) => ye(r, "name", { value: e, configurable: !0 });
+const ge = ke((r) => n.jsx(z, { light: me, dark: xe, ...r }), "ExternalLinkIcon");
 var be = Object.defineProperty, ve = (r, e) => be(r, "name", { value: e, configurable: !0 });
 const F = ve(({ children: r, href: e, ...a }) => n.jsxs(Ce, { href: e, ...a, children: [r ?? e, e && n.jsx(ge, {})] }), "Link"), Ce = w(ue)`
     font-size: ${j.fontSizeMd};
@@ -231,7 +231,7 @@ async function Pe(r, e, a, t) {
     description: "Testing connection",
     action: async () => {
       const o = await $e(r, e)();
-      return typeof o == "string" ? o : ((o.displayName !== e.displayName || o.name !== e.name) && (a(o), t(e)), !0);
+      return typeof o == "string" ? o : ((o.displayName !== e.displayName || o.name !== e.name) && (a(o), t(o)), !0);
     }
   }], i = await r.ui.dialogs.showProgressDialog("Testing connection", c);
   switch (i.result) {
@@ -266,9 +266,9 @@ const Te = w(M)`
 }) => {
   const h = l ? 8 : 0;
   return /* @__PURE__ */ n.jsxs(v, { marginTop: h, children: [
-    r && /* @__PURE__ */ n.jsx(y, { children: /* @__PURE__ */ n.jsx(C, { children: r }) }),
-    /* @__PURE__ */ n.jsx(y, { fullWidth: !0, children: /* @__PURE__ */ n.jsxs(q, { children: [
-      /* @__PURE__ */ n.jsx(y, { fullWidth: !0, children: /* @__PURE__ */ n.jsx(
+    r && /* @__PURE__ */ n.jsx(m, { children: /* @__PURE__ */ n.jsx(C, { children: r }) }),
+    /* @__PURE__ */ n.jsx(m, { fullWidth: !0, children: /* @__PURE__ */ n.jsxs(q, { children: [
+      /* @__PURE__ */ n.jsx(m, { fullWidth: !0, children: /* @__PURE__ */ n.jsx(
         oe,
         {
           ariaLabel: e,
@@ -303,7 +303,7 @@ const Te = w(M)`
       }
     }
   };
-  return /* @__PURE__ */ n.jsx(v, { children: /* @__PURE__ */ n.jsx(y, { children: /* @__PURE__ */ n.jsx(
+  return /* @__PURE__ */ n.jsx(v, { children: /* @__PURE__ */ n.jsx(m, { children: /* @__PURE__ */ n.jsx(
     M,
     {
       onPress: c,
@@ -342,7 +342,7 @@ const Te = w(M)`
     i(!1);
     const f = await Pe(r, e, a, t);
     i(f);
-  }, [r, e, t]), m = u.useCallback(() => Ie(e), [e]), d = u.useCallback(() => {
+  }, [r, e, t]), y = u.useCallback(() => Ie(e), [e]), d = u.useCallback(() => {
     i(!1);
   }, []);
   return /* @__PURE__ */ n.jsxs(A, { label: "Resource", children: [
@@ -355,13 +355,13 @@ const Te = w(M)`
         onChange: p,
         buttonCaption: "Import",
         onClick: x,
-        validate: m,
+        validate: y,
         description: s.key ? void 0 : "Please enter your key from the portal."
       }
     ),
     !s.key && /* @__PURE__ */ n.jsxs(v, { children: [
-      /* @__PURE__ */ n.jsx(y, { children: /* @__PURE__ */ n.jsx(C, {}) }),
-      /* @__PURE__ */ n.jsx(y, { fullWidth: !0, children: /* @__PURE__ */ n.jsx(F, { href: "https://genai.home.mendix.com/p/resources", target: "_blank", children: "Create a key in the portal" }) })
+      /* @__PURE__ */ n.jsx(m, { children: /* @__PURE__ */ n.jsx(C, {}) }),
+      /* @__PURE__ */ n.jsx(m, { fullWidth: !0, children: /* @__PURE__ */ n.jsx(F, { href: "https://genai.home.mendix.com/p/resources", target: "_blank", children: "Create a key in the portal" }) })
     ] }),
     s.key && /* @__PURE__ */ n.jsxs(n.Fragment, { children: [
       /* @__PURE__ */ n.jsx(
@@ -416,12 +416,12 @@ const Te = w(M)`
         }
       ),
       /* @__PURE__ */ n.jsxs(v, { children: [
-        /* @__PURE__ */ n.jsx(y, { children: /* @__PURE__ */ n.jsx(C, {}) }),
-        /* @__PURE__ */ n.jsx(y, { fullWidth: !0, children: /* @__PURE__ */ n.jsx(F, { href: s.deepLinkURL, target: "_blank", children: "View resource in the portal" }) })
+        /* @__PURE__ */ n.jsx(m, { children: /* @__PURE__ */ n.jsx(C, {}) }),
+        /* @__PURE__ */ n.jsx(m, { fullWidth: !0, children: /* @__PURE__ */ n.jsx(F, { href: s.deepLinkURL, target: "_blank", children: "View resource in the portal" }) })
       ] }),
       /* @__PURE__ */ n.jsxs(v, { children: [
-        /* @__PURE__ */ n.jsx(y, { children: /* @__PURE__ */ n.jsx(C, { children: "Connection" }) }),
-        /* @__PURE__ */ n.jsx(y, { children: /* @__PURE__ */ n.jsx(Ee, { onPress: h, buttonCaption: "Test" }) })
+        /* @__PURE__ */ n.jsx(m, { children: /* @__PURE__ */ n.jsx(C, { children: "Connection" }) }),
+        /* @__PURE__ */ n.jsx(m, { children: /* @__PURE__ */ n.jsx(Ee, { onPress: h, buttonCaption: "Test" }) })
       ] }),
       c && /* @__PURE__ */ n.jsx(le, { onClose: d, children: "Connection successful." })
     ] })
@@ -451,7 +451,7 @@ const Te = w(M)`
   }, [c]);
   const h = u.useCallback(async (d) => {
     pe(l, p, T(r, e), d)();
-  }, [r, l, p, e]), m = u.useCallback(() => {
+  }, [r, l, p, e]), y = u.useCallback(() => {
     if (!l.provider)
       return "Model provider is required.";
   }, [l.provider]);
@@ -467,7 +467,7 @@ const Te = w(M)`
           selectedKey: l.provider,
           options: x,
           onSelectionChange: h,
-          validate: m
+          validate: y
         }
       ) }),
       l.provider === "MxCloudGenAI" && /* @__PURE__ */ n.jsx(

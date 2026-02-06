@@ -6005,9 +6005,14 @@ const ca = da((t) => y.jsx(le, { light: aa, dark: ua, ...t }), "EntityNonPersist
     return i(a), a;
   } else
     return null;
-}, ga = async (t, e, l) => {
-  const i = t.tools.filter((o) => o.id !== l), n = { ...t, tools: i };
-  return e(n), n;
+}, ga = async (t, e, l, i) => {
+  if (await t.ui.messageBoxes.ask({
+    type: "confirmation",
+    question: "Are you sure you want to delete this tool?"
+  }) === !1)
+    return;
+  const o = e.tools.filter((u) => u.id !== i), r = { ...e, tools: o };
+  return l(r), r;
 }, ba = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M8%2014.5C11.5899%2014.5%2014.5%2011.5899%2014.5%208C14.5%204.41015%2011.5899%201.5%208%201.5C4.41015%201.5%201.5%204.41015%201.5%208C1.5%2011.5899%204.41015%2014.5%208%2014.5Z'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'%20stroke-linecap='round'/%3e%3cpath%20d='M3.5%2012.75L12.75%203.5'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", ya = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M8%2014.5C11.5899%2014.5%2014.5%2011.5899%2014.5%208C14.5%204.41015%2011.5899%201.5%208%201.5C4.41015%201.5%201.5%204.41015%201.5%208C1.5%2011.5899%204.41015%2014.5%208%2014.5Z'%20stroke='%23535965'%20stroke-miterlimit='10'%20stroke-linecap='round'/%3e%3cpath%20d='M3.5%2012.75L12.75%203.5'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
 var $a = Object.defineProperty, xa = (t, e) => $a(t, "name", { value: e, configurable: !0 });
 const wa = xa((t) => y.jsx(le, { light: ya, dark: ba, ...t }), "AppSelectorNoVersionIcon"), Ca = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M8.85498%204.52502L11.475%207.14502'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M5.145%2013.5H2.5V10.885L10.745%202.63502C10.94%202.44002%2011.255%202.44002%2011.45%202.63502L13.36%204.54502C13.555%204.74002%2013.555%205.05502%2013.36%205.25002L5.145%2013.5Z'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", ka = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M8.85498%204.52502L11.475%207.14502'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M5.145%2013.5H2.5V10.885L10.745%202.63502C10.94%202.44002%2011.255%202.44002%2011.45%202.63502L13.36%204.54502C13.555%204.74002%2013.555%205.05502%2013.36%205.25002L5.145%2013.5Z'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
@@ -6693,7 +6698,7 @@ const zd = Ed(({ children: t, ...e }) => y.jsx(Id, { ...e, children: ({ isIndete
   }, [e, l, t, i, n, r]), v = f.useCallback(async () => {
     if (r.length === 0 || !t.tools)
       return;
-    const g = r[0], m = await ga(t, i, g);
+    const g = r[0], m = await ga(e, t, i, g);
     m && n(m);
   }, [t, i, n, r]), b = f.useCallback(async (g, m) => {
     if (!t.tools)
