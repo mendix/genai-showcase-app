@@ -104,6 +104,7 @@ create_module_package:
   image: nexus-docker-group.rnd.mendix.com/mxbuild:${MX_VERSION}
   script:
     - mkdir -p output
+    - echo "Creating module package..."
     - mx create-module-package -e "(resources|userlib|widgets)/*" -d output "$MPR_FILE" $MODULE_NAME
     - ls -la output/
   artifacts:
@@ -139,8 +140,7 @@ package_for_release:
     - mv $MODULE_NAME.mpk $MODULE_NAME.zip
     - unzip -q $MODULE_NAME.zip -d temp
     - echo "Adding add-on to package.xml..."
-    - |
-      sed -i "/<\/files>/i\    <file path=\"modules/$ADDON_NAME\" />" temp/package.xml
+    - sed -i "/<\/files>/i\    <file path=\"modules/$ADDON_NAME\" />" temp/package.xml
     - echo "Adding add-on module to package..."
     - mkdir -p temp/modules
     - cp $ADDON_NAME.mxmodule temp/modules/
