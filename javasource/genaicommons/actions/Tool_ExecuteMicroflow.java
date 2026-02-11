@@ -24,7 +24,6 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import genaicommons.impl.MxLogger;
-import genaicommons.proxies.Argument;
 import genaicommons.proxies.KnowledgeBaseSpan;
 import genaicommons.proxies.MCPSpan;
 import genaicommons.proxies.ModelSpan;
@@ -121,22 +120,14 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		//Iterate over input params
 		Map<String, IDataType> parametersAndTypes = Core.getInputParameters(Tool.getMicroflow());
 		
-		// Get argument list, fall back to parsing Input JSON if empty
-		List<Argument> argumentList = ToolCall.getToolCall_Argument();
-		if (argumentList == null || argumentList.isEmpty()) {
-			argumentList = parseArgumentsFromInput();
-		}
+		// Parse the Input JSON field to get the input map
+		Map<String, String> inputMap = parseInputMap();
 		
 		for(Map.Entry<String, IDataType> entry : parametersAndTypes.entrySet()) {
 			IDataType value = entry.getValue();
 			String key = entry.getKey();
-			//find Argument.Value in ArgumentList
-			final List<Argument> finalArgumentList = argumentList;
-			String argumentValue = finalArgumentList.stream()
-				    .filter(arg -> key.equals(arg.getKey()))
-				    .map(Argument::getValue)
-				    .findFirst()
-				    .orElse(null);
+			//find value in input map
+			String argumentValue = inputMap.get(key);
 			
 			//If there is no argumentValue, it is either a Mendix Object or nothing was passed
 			if (argumentValue == null && isMetaObjectSubClass(value,genaicommons.proxies.Tool.getType())){
@@ -206,9 +197,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 			logMessageTrace = logMessageTrace + "\nwithout input parameters ";
 			response = Core.microflowCall(Tool.getMicroflow()).execute(getContext());
 		} else {
-			logMessageTrace = logMessageTrace +  "\n\nInput parameter(s):";
-			logMessageTrace = logMessageTrace + getArgumentsString();
-			logMessageTrace = logMessageTrace + params.toString();
+			logMessageTrace = logMessageTrace +  "\n\nInput parameter(s): " + params.toString();
 			response = Core.microflowCall(Tool.getMicroflow()).withParams(params).execute(getContext());
 		}
 		
@@ -220,15 +209,14 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 	}
 	
 	/**
-	 * Parses the Input JSON field from ToolCall and converts it to a list of Argument objects.
-	 * This is used as a fallback when ToolCall_Argument association is empty.
+	 * Parses the Input JSON field from ToolCall and converts it to a map of key-value pairs.
 	 */
-	private List<Argument> parseArgumentsFromInput() {
-		List<Argument> arguments = new ArrayList<>();
+	private Map<String, String> parseInputMap() {
+		Map<String, String> inputMap = new java.util.HashMap<>();
 		String input = ToolCall.getInput();
 		
 		if (input == null || input.trim().isEmpty()) {
-			return arguments;
+			return inputMap;
 		}
 		
 		try {
@@ -237,52 +225,20 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 				Iterator<Map.Entry<String, JsonNode>> fields = inputNode.fields();
 				while (fields.hasNext()) {
 					Map.Entry<String, JsonNode> field = fields.next();
-					Argument arg = new Argument(getContext());
-					arg.setKey(field.getKey());
 					// Convert value to string - handle different JSON types
 					JsonNode valueNode = field.getValue();
 					if (valueNode.isTextual()) {
-						arg.setValue(valueNode.asText());
+						inputMap.put(field.getKey(), valueNode.asText());
 					} else {
-						arg.setValue(valueNode.toString());
+						inputMap.put(field.getKey(), valueNode.toString());
 					}
-					arguments.add(arg);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.warn("Failed to parse Input JSON for ToolCall: " + e.getMessage());
 		}
 		
-		return arguments;
-	}
-	
-	/**
-	 * Gets a string of input arguments (passed by the model only)
-	 * First tries to use ToolCall.getInput(), falls back to constructing from ToolCall_Argument
-	 */
-	private String getArgumentsString() throws CoreException {
-		// First try to use the Input field directly if available
-		String input = ToolCall.getInput();
-		if (input != null && !input.trim().isEmpty()) {
-			return "\n\n" + input;
-		}
-		
-		// Fall back to constructing from argument list
-		List<Argument> argumentList = ToolCall.getToolCall_Argument();
-		if (argumentList == null || argumentList.isEmpty()) {
-			return "";
-		}
-		
-		String argumentString = "\n\n" + "{";
-		for (int i = 0; i < argumentList.size(); i++) {
-		    Argument arg = argumentList.get(i);
-		    argumentString += arg.getKey() + "=" + arg.getValue();
-		    if (i < argumentList.size() - 1) {
-		        argumentString += ", ";
-		    }
-		}
-		argumentString += "}";
-		return argumentString;
+		return inputMap;
 	}
 	// END EXTRA CODE
 }
