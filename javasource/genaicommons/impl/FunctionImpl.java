@@ -17,7 +17,6 @@ import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IDataType;
 
-import genaicommons.proxies.Function;
 import genaicommons.proxies.Request;
 import genaicommons.proxies.Tool;
 import genaicommons.proxies.ToolCollection;
@@ -38,34 +37,7 @@ public class FunctionImpl {
 		requireNonNull(functionMicroflow, "Function Microflow is required.");
 		requireNonNull(toolName, "Tool Name is required.");
 		validateFunctionMicroflow(functionMicroflow);
-	}
-	
-	/**
-	 * Creates a function object, adds it to a toolcollection
-	 * @param context
-	 * @param functionMicroflow
-	 * @param functionName
-	 * @param functionDescription
-	 * @param toolCollection
-	 * @return
-	 * @throws CoreException
-	 */
-	public static Function createFunction(IContext context, String functionMicroflow, String functionName, String functionDescription, ToolCollection toolCollection, genaicommons.proxies.ENUM_UserToolPermission userToolPermission) throws CoreException {
-		Function function = new Function(context);
-		function.setMicroflow(functionMicroflow);
-		function.setName(functionName);	
-		function.setDescription(functionDescription); //Optional parameter
-		List<Tool> ToolList = toolCollection.getToolCollection_Tool();
-		ToolList.add(function);
-		toolCollection.setToolCollection_Tool(ToolList); 
-		if(userToolPermission != null) {
-			function.setUserToolPermission(userToolPermission);
-		}else {
-			function.setUserToolPermission(genaicommons.proxies.ENUM_UserToolPermission.Hidden);
-		}
-		return function;
-	}
-	
+	}	
 
 	private static void validateFunctionMicroflow(String functionMicroflow) throws Exception {
 		Set<String> microflowNames = Core.getMicroflowNames();
@@ -103,7 +75,7 @@ public class FunctionImpl {
 			!Core.getMetaObject(objectType).isSubClassOf(Tool.getType()))
 			) 
 		{
-		    		throw new IllegalArgumentException("Function Microflow " + functionMicroflow + " can only have primitive and/or a Request and/or Tool object as input parameters.");				
+			throw new IllegalArgumentException("Function Microflow " + functionMicroflow + " can only have primitive and/or a Request and/or Tool object as input parameters.");				
 		}
 	}
 	

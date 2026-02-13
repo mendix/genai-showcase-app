@@ -65,7 +65,8 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 	public IMendixObject executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		try {
+		return null;
+		/*try {
 			validate();
 			startTime = System.currentTimeMillis();
 			Response response = processRequest();
@@ -76,7 +77,7 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 			}
 		} catch (Exception e) {
 			throw e;
-		}
+		}*/
 		// END USER CODE
 	}
 
@@ -91,6 +92,7 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 	}
 
 	// BEGIN EXTRA CODE
+	
 	private static final MxLogger LOGGER = new genaicommons.impl.MxLogger(Request_ExecuteFromConnector.class);
 	private int totalTokens = 0;
 	private int requestTokens = 0;
@@ -584,9 +586,7 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 		if (toolCalls == null || toolCalls.isEmpty()) {
 			return false;
 		}
-		return toolCalls.stream()
-			.allMatch(tc -> tc.getStatus() == genaicommons.proxies.ENUM_ToolCallStatus.Executed 
-			            || tc.getStatus() == genaicommons.proxies.ENUM_ToolCallStatus.ExecutedHidden);
+		return true;
 	}
 	
 	/**
@@ -706,14 +706,5 @@ public class Request_ExecuteFromConnector extends UserAction<IMendixObject>
 		}
 	}
 	
-	private void validate() {
-		requireNonNull(Request, "Request is required.");
-		
-		if (CallModelMicroflow == null || CallModelMicroflow.isBlank()) {
-			throw new IllegalArgumentException("CallModelMicroflow is required.");
-		}
-		
-		DeployedModelImpl.validate(DeployedModel, ENUM_ModelModality.Text);
-	}
 	// END EXTRA CODE
 }

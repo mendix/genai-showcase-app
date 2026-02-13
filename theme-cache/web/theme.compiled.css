@@ -29155,6 +29155,34 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: unset;
 }
 
+.tool-message {
+  border-radius: 4px;
+  border: 1px solid;
+  border-color: #E7E7E9;
+}
+.tool-message .tool-title {
+  font-weight: 600;
+  background-color: #E7E7E9;
+  padding: 8px;
+  display: block;
+}
+.tool-message .tool-details {
+  padding: 8px;
+}
+.tool-message .reject-button {
+  background-color: transparent;
+  color: #0a1325;
+  border: none;
+}
+.tool-message .reject-button:hover {
+  background-color: #e7e7e9;
+}
+
+.tool-status-image {
+  width: 16px;
+  margin-right: 4px;
+}
+
 .responsive-image.mx-image-viewer {
   max-width: 14px;
   max-height: 14px;
