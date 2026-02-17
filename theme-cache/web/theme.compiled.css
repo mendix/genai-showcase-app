@@ -29180,7 +29180,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .tool-status-image {
   width: 16px;
-  margin-right: 4px;
+  margin: 4px;
 }
 
 .responsive-image.mx-image-viewer {
