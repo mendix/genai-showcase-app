@@ -19,7 +19,7 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import agenteditorcommons.impl.MxLogger;
 import agenteditorcommons.proxies.AgentModelDocument;
-import agenteditorcommons.proxies.ModelModelDocument;
+import agenteditorcommons.proxies.ModelDocument;
 
 /**
  * Imports all defined documents (such as agents and models) to the app's database so that they can be viewed at runtime and integrate with Agent Commons, Token Monitor, Observability etc.
@@ -39,6 +39,7 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 		LOGGER.info("Starting import.");
 
 		importModels();
+		importConsumedMCPServices();
 		importAgents();
 
 		LOGGER.info("Finished import.");
@@ -66,7 +67,7 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 				.getCustomDocumentsOfType("agenteditor.model");
 		LOGGER.info(modelDocuments.size() + " model document(s) found in the Mendix Model.");
 		
-		java.util.List<ModelModelDocument> modelModelDocuments = new ArrayList<>();
+		java.util.List<ModelDocument> modelModelDocuments = new ArrayList<>();
 		for (CustomBlobDocumentInfo model : modelDocuments) {
 			modelModelDocuments.add(getModelModelDocument(model));
 		}
@@ -75,6 +76,23 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 				modelModelDocuments);
 		if (!isSuccess) {
 			throw new IllegalArgumentException("Creating/Updating the Mendix Cloud Deployed Models failed due to bad input.");
+		}
+	}
+	
+	private void importConsumedMCPServices() throws JsonProcessingException {
+		java.util.List<CustomBlobDocumentInfo> consumedMCPServiceDocuments = Core.extensibility()
+				.getCustomDocumentsOfType("agenteditor.consumedMCPService");
+		LOGGER.info(consumedMCPServiceDocuments.size() + " consumedMCPService document(s) found in the Mendix Model.");
+		
+		java.util.List<ModelDocument> consumedMCPServiceModelDocuments = new ArrayList<>();
+		for (CustomBlobDocumentInfo consumedMCPService : consumedMCPServiceDocuments) {
+			consumedMCPServiceModelDocuments.add(getConsumedMCPServiceModelDocument(consumedMCPService));
+		}
+		
+		boolean isSuccess = true; //agenteditorcommons.proxies.microflows.Microflows.consumedMCPService_CreateUpdate_List(getContext(),
+				//consumedMCPServiceModelDocuments);
+		if (!isSuccess) {
+			throw new IllegalArgumentException("Creating/Updating the consumed MCP services failed due to bad input.");
 		}
 	}
 
@@ -137,7 +155,7 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 		return documentID;
 	}
 
-	private ModelModelDocument getModelModelDocument(CustomBlobDocumentInfo modelDocument) throws JsonProcessingException {
+	private ModelDocument getModelModelDocument(CustomBlobDocumentInfo modelDocument) throws JsonProcessingException {
 		String qualifiedName = modelDocument.qualifiedDocumentName();
 		LOGGER.debug("Importing model with qualified name '" + qualifiedName + "'.");
 
@@ -146,12 +164,27 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 		String documentID = modelDocument.documentID().toString();
 		LOGGER.debug(qualifiedName + " - documentID: " + documentID);
 		
-		ModelModelDocument modelModelDocument = new ModelModelDocument(getContext());
+		ModelDocument modelModelDocument = new ModelDocument(getContext());
 		modelModelDocument.setDocumentID(getContext(), documentID);
 		modelModelDocument.setContent(getContext(), modelDocumentContent);
 		modelModelDocument.setQualifiedName(getContext(), qualifiedName);
 		return modelModelDocument;
+	}
+	
+	private ModelDocument getConsumedMCPServiceModelDocument(CustomBlobDocumentInfo modelDocument) throws JsonProcessingException {
+		String qualifiedName = modelDocument.qualifiedDocumentName();
+		LOGGER.debug("Importing model with qualified name '" + qualifiedName + "'.");
+
+		String modelDocumentContent = modelDocument.content();
+
+		String documentID = modelDocument.documentID().toString();
+		LOGGER.debug(qualifiedName + " - documentID: " + documentID);
 		
+		ModelDocument consumedMCPServiceModelDocument = new ModelDocument(getContext());
+		consumedMCPServiceModelDocument.setDocumentID(getContext(), documentID);
+		consumedMCPServiceModelDocument.setContent(getContext(), modelDocumentContent);
+		consumedMCPServiceModelDocument.setQualifiedName(getContext(), qualifiedName);
+		return consumedMCPServiceModelDocument;
 	}
 
 	// END EXTRA CODE
