@@ -29155,6 +29155,34 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: unset;
 }
 
+.tool-message {
+  border-radius: 4px;
+  border: 1px solid;
+  border-color: #E7E7E9;
+}
+.tool-message .tool-title {
+  font-weight: 600;
+  background-color: #E7E7E9;
+  padding: 8px;
+  display: block;
+}
+.tool-message .tool-details {
+  padding: 8px;
+}
+.tool-message .reject-button {
+  background-color: transparent;
+  color: #0a1325;
+  border: none;
+}
+.tool-message .reject-button:hover {
+  background-color: #e7e7e9;
+}
+
+.tool-status-image {
+  width: 16px;
+  margin-right: 4px;
+}
+
 .responsive-image.mx-image-viewer {
   max-width: 14px;
   max-height: 14px;
@@ -31273,6 +31301,61 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .argument-listview > ul > li:last-child {
   border-bottom: none;
+}
+
+.mcpclient-badge, .mcpclient-badge--primary, .mcpclient-badge--default {
+  display: inline-flex;
+  height: 20px;
+  padding: 4px;
+  gap: 4px;
+  align-items: center;
+  border-radius: 4px;
+  font-size: 12px;
+  font-style: normal;
+}
+.mcpclient-badge .agent-tooltip div, .mcpclient-badge--primary .agent-tooltip div, .mcpclient-badge--default .agent-tooltip div,
+.mcpclient-badge .agent-tooltip .mx-link,
+.mcpclient-badge--primary .agent-tooltip .mx-link,
+.mcpclient-badge--default .agent-tooltip .mx-link {
+  line-height: 1;
+}
+
+.mcpclient-badge--default {
+  background: #fafafb;
+  border: 1px solid #a2a2a3;
+}
+
+.mcpclient-badge--primary {
+  background: #d4dbfa;
+  border: 1px solid #1b34a0;
+}
+
+.mcp-tooltip .widget-tooltip-content {
+  position: relative;
+  z-index: 1000;
+  text-align: unset;
+  word-break: break-word;
+  background-color: white;
+  border-radius: 4px;
+  color: black;
+}
+.mcp-tooltip .mx-link {
+  font-weight: normal;
+  line-height: 1.7857142863;
+}
+
+.w306 {
+  width: 306px;
+}
+
+.text-line-clamp--1 {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .listview-horizontal.mx-listview > ul {

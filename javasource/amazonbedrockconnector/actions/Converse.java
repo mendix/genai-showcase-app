@@ -49,7 +49,6 @@ import genaicommons.impl.FunctionMappingImpl;
 import genaicommons.proxies.ENUM_FileType;
 import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.ENUM_ToolChoice;
-import genaicommons.proxies.Argument;
 import genaicommons.proxies.Computer;
 import genaicommons.proxies.FileCollection;
 import genaicommons.proxies.FileContent;
@@ -370,14 +369,32 @@ public class Converse extends UserAction<IMendixObject>
 				continue;
 			}
 			
-			Message awsMsg = getAwsMessage(mxMsg, mxMessages, i);
-			awsMessages.add(awsMsg);
+			// Handle multiple consecutive tool result messages by combining them
+			if (isToolResultMessage(mxMsg)) {
+				List<ContentBlock> toolResultContents = new ArrayList<>();
+				toolResultContents.add(getToolResultContent(mxMsg));
+				
+				// Collect all subsequent tool result messages
+				while ((i+1) < mxMessages.size() && isToolResultMessage(mxMessages.get(i+1))) {
+					i++;
+					toolResultContents.add(getToolResultContent(mxMessages.get(i)));
+				}
+				
+				Message awsMsg = Message.builder()
+						.role(getAwsMessageRole(mxMsg))
+						.content(toolResultContents)
+						.build();
+				awsMessages.add(awsMsg);
+			} else {
+				Message awsMsg = getAwsMessage(mxMsg, mxMessages, i);
+				awsMessages.add(awsMsg);
+			}
 		}
 		
 		return awsMessages;
 	}
 	
-	// Sorting the Mendix Messages by Created-Date to ensure they are mapped in the correct order
+	// Use the existing association order to keep tool-use/tool-result sequencing intact
 	private List<genaicommons.proxies.Message> getMxMessagesSorted(Request commonRequest) throws CoreException {
 		return Core.retrieveByPath(getContext(), commonRequest.getMendixObject(), Request.MemberNames.Request_Message.toString())
 				.stream().map(mxObj -> genaicommons.proxies.Message.initialize(getContext(), mxObj))
@@ -401,33 +418,14 @@ public class Converse extends UserAction<IMendixObject>
 		return skip;
 	}
 	
-	// Method to map a Mx Message to the correct type of aws message
+// Method to map a Mx Message to the correct type of aws message
 	private Message getAwsMessage(genaicommons.proxies.Message mxMsg, List<genaicommons.proxies.Message> mxMessages, int i) throws CoreException, MalformedURLException, URISyntaxException, IOException {
 		software.amazon.awssdk.services.bedrockruntime.model.Message.Builder msgBuilder = Message.builder()
 				.role(getAwsMessageRole(mxMsg));
 		
 		List<ContentBlock> contentBlockList = new ArrayList<>();
 		
-		// Case 1: After a Function Call, a Tool Result message is being sent	
-		if (isToolResultMessage(mxMsg)) {
-					LOGGER.debug("Tool Result Message found");
-					ContentBlock toolResultContent = getToolResultContent(mxMsg);
-					contentBlockList.add(toolResultContent);
-					
-					// Bedrock expects all subsequent tool results as part of a single message
-					// Looking for subsequent tool results and adding them to this message until a different message type is found
-					while ((i+1) < mxMessages.size()) {
-						genaicommons.proxies.Message next = mxMessages.get(i+1);
-						if (!isToolResultMessage(next)) {
-							break;
-						}
-						ContentBlock nextToolResultContent = getToolResultContent(next);
-						contentBlockList.add(nextToolResultContent);
-						i++;
-					}
-		}
-		
-		// Case 2: Message has a FileCollection with FileContent(s). Note: Computer Use Tool messages can also contain a file collection
+		// Message has a FileCollection with FileContent(s). Note: Computer Use Tool messages can also contain a file collection
 		if (hasFiles(mxMsg)) {
 			LOGGER.debug("Message with Files found");
 			
@@ -482,7 +480,7 @@ public class Converse extends UserAction<IMendixObject>
 		
 		
 			
-		// Case 3: A Message requesting the use of tool (function call)
+		// A Message requesting the use of tool (function call)
 		} else if (hasToolUse(mxMsg)) {
 			LOGGER.debug("Tool Use message found");
 			// If content is present, this contains the reasoning process
@@ -498,7 +496,7 @@ public class Converse extends UserAction<IMendixObject>
 				contentBlockList.add(toolUseContent);
 			}
 			
-		// Case 4: Normal text message
+		// Normal text message
 		} else {
 			LOGGER.debug("Standard Text message found");
 			ContentBlock textContent = getTextContent(mxMsg.getContent());
@@ -671,21 +669,8 @@ public class Converse extends UserAction<IMendixObject>
 		Builder builder = ToolUseBlock.builder()
 				.name(mxToolCall.getName())
 				.toolUseId(mxToolCall.getToolCallId());
-		java.util.List<genaicommons.proxies.Argument> args = mxToolCall.getToolCall_Argument();
 		
-		if (args.isEmpty()) {
-			builder.input(Document.mapBuilder().build());
-			
-		} else {
-			// Arguments must be built by Document.mapBuilder()
-			// All arguments need to be added to the same mapBuilder
-			MapBuilder mapBuilder = Document.mapBuilder();
-			for (Argument arg : args) {
-				mapBuilder.putString(arg.getKey(), arg.getValue());
-			}
-			builder.input(mapBuilder.build());
-		}
-		
+		builder.input(Document.mapBuilder().build());		
 		return ContentBlock.builder().toolUse(builder.build()).build();
 	}
 	
@@ -1163,45 +1148,17 @@ public class Converse extends UserAction<IMendixObject>
 	// Setting tool use content
 	private void setMessageToolUseContent(List<ToolCall> toolCallList, ToolUseBlock awsToolUse) throws JsonProcessingException {
 		ToolCall mxToolCall = new ToolCall(getContext());
-		
-		toolCallSetArguments(mxToolCall, awsToolUse);
-		mxToolCall.setName(awsToolUse.name());
-		mxToolCall.setToolCallId(awsToolUse.toolUseId());
-		
-		toolCallList.add(mxToolCall);
-	}
-	
-	private void toolCallSetArguments(ToolCall mxToolCall, ToolUseBlock awsToolUse) {
+
 		Document awsToolDocument = awsToolUse.input();
-		
-		// Store the entire input as a JSON string in the Input attribute
 		if (awsToolDocument != null) {
 			String inputJson = awsToolDocument.toString();
 			mxToolCall.setInput(inputJson);
 		}
-		
-		if (!awsToolDocument.isMap() || awsToolDocument.asMap().isEmpty()) {
-			LOGGER.debug("Tool without parameter called");
-			return;
-		}
 
-		// Also keep individual arguments for backward compatibility
-		List<Argument> argumentList = new ArrayList<>();
+		mxToolCall.setName(awsToolUse.name());
+		mxToolCall.setToolCallId(awsToolUse.toolUseId());
 		
-	    for (Map.Entry<String, Document> entry : awsToolDocument.asMap().entrySet()) {
-	        String key = entry.getKey();
-	        String value;
-	        if (entry.getValue().isString()) {
-	            value = entry.getValue().asString();
-	        } else {
-	            value = entry.getValue().toString();
-	        }
-	        genaicommons.proxies.Argument mxArgument = new genaicommons.proxies.Argument(getContext());
-	        mxArgument.setKey(key);
-	        mxArgument.setValue(value);
-	        argumentList.add(mxArgument);
-	    }
-	    mxToolCall.setToolCall_Argument(argumentList);
+		toolCallList.add(mxToolCall);
 	}
 	
 	private void setMxResponseExtension(Document awsDoc, ChatCompletionsResponse mxResponse) {

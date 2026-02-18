@@ -2,19 +2,14 @@
 
 package mxgenaiconnector.impl;
 
-import java.util.List;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.systemwideinterfaces.core.IMendixObject;
-import mxgenaiconnector.proxies.RequestExtension;
 import genaicommons.proxies.ENUM_MessageRole;
 
 import genaicommons.proxies.Request;
@@ -30,6 +25,10 @@ public class ConverseFunctionCalling{
 	//All Messages of type Tool need to be mapped to a ToolResult ContentBlock as role "user"
 	public static void mapToolResult(ArrayNode messageList, int i,IContext context, Request request) throws JsonMappingException, JsonProcessingException, CoreException {
 		JsonNode toolMessageRoot = messageList.get(i);
+		if (toolMessageRoot != null && toolMessageRoot.isObject()) {
+			// Map any toolCalls on this message into Converse toolUse blocks
+			setAssistantToolUse((ObjectNode) toolMessageRoot);
+		}
 		
 		if(isToolMessage(toolMessageRoot)) {
 			//Add new User Message that will contain the ToolResult
@@ -37,7 +36,7 @@ public class ConverseFunctionCalling{
 			//Get the assistant message right before the tool messages and populate it with the original json from the response
 			ObjectNode assistantTextMessage = (ObjectNode) messageList.get(i-1);
 			if(assistantTextMessage != null) {
-				setAssistantToolUse(assistantTextMessage, getRequestExtension(context,request,toolMessageRoot));
+				setAssistantToolUse(assistantTextMessage);
 			}
 					
 			//Add Content of toolResult to Content for all subsequent tool messages
@@ -93,34 +92,69 @@ public class ConverseFunctionCalling{
 		return (!(messageNode.path("role").isNull()) && messageNode.path("role").asText().equals(ENUM_MessageRole.tool.toString()));
 	}
 	
-	//The exact Response from Converse needs to be added as an assistant message. This is stored in the requestExtension right after a call.
-	private static void setAssistantToolUse(ObjectNode messageNode,RequestExtension requestExtension) throws JsonMappingException, JsonProcessingException {
-		ObjectNode toolUseMessageRoot = (ObjectNode) MAPPER.readTree(requestExtension.getToolUseContent());
-		JsonNode contentNode = toolUseMessageRoot.path("output").path("message").path("content");
-		messageNode.set("content", contentNode);
-	}
-	
-	
-	//Contains information from previous responses that are added to the Request
-	private static RequestExtension getRequestExtension(IContext context, Request request, JsonNode toolMessage) throws CoreException, JsonMappingException, JsonProcessingException {
-		List<IMendixObject> requestExtensionList = Core.retrieveByPath(context, request.getMendixObject(), 
-				RequestExtension.MemberNames.RequestExtension_Request.toString());
+	//Map toolCalls on a message into Converse toolUse blocks inside the message content.
+	private static void setAssistantToolUse(ObjectNode messageNode) throws JsonMappingException, JsonProcessingException {
+		if (messageNode == null) {
+			return;
+		}
+		JsonNode toolCallsNode = messageNode.path("toolCalls");
+		if (!toolCallsNode.isArray() || toolCallsNode.isEmpty()) {
+			return;
+		}
+		ArrayNode contentArray = messageNode.has("content") && messageNode.get("content").isArray()
+				? (ArrayNode) messageNode.get("content")
+				: MAPPER.createArrayNode();
 		
-		String toolCallId = toolMessage.path("toolCallId").toString();
-		//Iterate over all RequestExtension objects and return the object that contains the toolUseId from the current toolMessage
-		for (IMendixObject requestExtensionMxObject : requestExtensionList) {
-			RequestExtension requestExtension = RequestExtension.initialize(context,requestExtensionMxObject);
-			JsonNode rootNode = MAPPER.readTree(requestExtension.getToolUseContent());
-			ArrayNode contentList = (ArrayNode) rootNode.path("output").path("message").path("content");
-			//There can be multiple "toolUseBlocks" inside of the content array.
-			for(JsonNode content : contentList) {
-				if(toolCallId.equals(content.path("toolUse").path("toolUseId").toString())) {
-					return requestExtension;
+		for (JsonNode toolCall : toolCallsNode) {
+			ObjectNode toolUseNode = MAPPER.createObjectNode();
+			String toolUseId = toolCall.has("toolUseId") ? toolCall.path("toolUseId").asText() : "";
+			if (toolUseId.isBlank()) {
+				toolUseId = toolCall.has("toolCallId") ? toolCall.path("toolCallId").asText() : "";
+			}
+			if (toolUseId.isBlank()) {
+				toolUseId = messageNode.has("toolCallId") ? messageNode.path("toolCallId").asText() : "";
+			}
+			if (!toolUseId.isBlank()) {
+				toolUseNode.put("toolUseId", toolUseId);
+			}
+			if (toolCall.has("name")) {
+				toolUseNode.put("name", toolCall.path("name").asText());
+			}
+			JsonNode inputNode = toolCall.get("input");
+			if (inputNode != null && !inputNode.isNull()) {
+				JsonNode inputToUse = inputNode;
+				if (inputNode.isTextual()) {
+					String inputText = inputNode.asText();
+					try {
+						inputToUse = MAPPER.readTree(inputText);
+					} catch (Exception e) {
+						ObjectNode wrappedInput = MAPPER.createObjectNode();
+						wrappedInput.put("value", inputText);
+						inputToUse = wrappedInput;
+					}
+				}
+				toolUseNode.set("input", inputToUse);
+			}
+			ObjectNode toolUseWrapper = MAPPER.createObjectNode();
+			toolUseWrapper.set("toolUse", toolUseNode);
+			contentArray.add(toolUseWrapper);
+		}
+		removeEmptyTextBlocks(contentArray);
+		messageNode.set("content", contentArray);
+		messageNode.remove("toolCalls");
+		messageNode.remove("toolCallId");
+	}
+
+	private static void removeEmptyTextBlocks(ArrayNode contentArray) {
+		for (int i = 0; i < contentArray.size(); i++) {
+			JsonNode contentNode = contentArray.get(i);
+			if (contentNode != null && contentNode.has("text")) {
+				JsonNode textNode = contentNode.get("text");
+				if (textNode != null && textNode.isTextual() && textNode.asText().isBlank()) {
+					contentArray.remove(i);
+					i--;
 				}
 			}
 		}
-		return null;
 	}
-	
-	
 }
