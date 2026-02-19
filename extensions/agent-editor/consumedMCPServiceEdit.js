@@ -12444,7 +12444,7 @@ const Bg = Gg((e) => de.jsx(Mc, { light: Jg, dark: Kg, ...e }), "ConstantIcon"),
             description: s.isValidEndpoint === !0 ? "Selected constant value: " + p : void 0
           }
         ),
-        u && /* @__PURE__ */ de.jsx(eu, { onClose: Le, children: "Limitation: Currently, only the default value of the constant is considered. Runtime configurations are not supported." }),
+        u && /* @__PURE__ */ de.jsx(eu, { onClose: Le, children: "Limitation: Currently, only the default value of the constant can be considered for exploring tools in this editor. This does not apply for the running app. If configured in a running app, the constant value from the environment configuration will be used." }),
         /* @__PURE__ */ de.jsx(
           Yc,
           {
@@ -12459,8 +12459,8 @@ const Bg = Gg((e) => de.jsx(Mc, { light: Jg, dark: Kg, ...e }), "ConstantIcon"),
         /* @__PURE__ */ de.jsx(
           os,
           {
-            ariaLabel: "Authentication microflow",
-            label: "Authentication microflow",
+            ariaLabel: "Credentials microflow",
+            label: "Credentials microflow",
             value: n.authenticationMicroflow ? n.authenticationMicroflow : "",
             icon: n.authenticationMicroflow ? /* @__PURE__ */ de.jsx(Bc, {}) : void 0,
             description: "Optional: Select a microflow that generates credentials that can be used to authenticate to the MCP server. The microflow needs to return a list of System.HttpHeader objects. Input parameters are not allowed.",
@@ -12494,12 +12494,12 @@ const Bg = Gg((e) => de.jsx(Mc, { light: Jg, dark: Kg, ...e }), "ConstantIcon"),
         i && /* @__PURE__ */ de.jsx(tu, { onClose: ie, children: "Connection successful." })
       ] })
     ] }),
-    /* @__PURE__ */ de.jsx(Uc, { children: /* @__PURE__ */ de.jsxs(In, { label: "Available tools", children: [
+    /* @__PURE__ */ de.jsx(Uc, { children: /* @__PURE__ */ de.jsxs(In, { label: "MCP explorer", children: [
       /* @__PURE__ */ de.jsx(
         ss,
         {
           label: "Tools",
-          buttonCaption: "View",
+          buttonCaption: "List tools",
           onPress: D,
           disabled: C
         }
