@@ -1,5 +1,4 @@
-@import "../../../datawidgets/web/variables.scss";
-@import "../../../atlas_core/web/_variables.scss";
+@use '../../../../theme/web/custom-variables' as *;
 
 .hover-trigger {
   .show-on-hover {
@@ -181,8 +180,6 @@
   align-items: center;
   justify-content: center; 
 }
-
-
 
 /* Custom Width */
 .width-full {

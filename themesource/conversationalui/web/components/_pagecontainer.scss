@@ -1,6 +1,4 @@
-@import "../../../atlas_core/web/_variables.scss";
-@import "../../../datawidgets/web/variables.scss";
-@import '../traceability-variables.scss';
+@use '../../../../theme/web/custom-variables' as *;
 
 .convui-pagecontainer {
   display: flex;

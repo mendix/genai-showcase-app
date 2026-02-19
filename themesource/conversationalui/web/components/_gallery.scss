@@ -1,5 +1,4 @@
-@import "../../../atlas_core/web/_variables.scss";
-@import "../../../datawidgets/web/variables.scss";
+@use '../../../../theme/web/custom-variables' as *;
 
 .filter-gallery {
     .widget-gallery-items {

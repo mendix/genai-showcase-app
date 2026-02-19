@@ -1,3 +1,5 @@
+@use '../../../../theme/web/custom-variables' as *;
+
 .popupmenu--display-flex {
     &.popupmenu {
         display: flex;
@@ -56,8 +58,6 @@
         background-color: $bg-color;
     }
 }
-
-
 
 .custom-widget-combobox-menu {
     .widget-combobox-menu {

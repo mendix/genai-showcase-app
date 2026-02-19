@@ -1,5 +1,5 @@
-@import '../../../theme/web/custom-variables';
-@import "chat-variables";
-@import "token-monitor-variables";
-@import "./abstracts/all";
-@import "./components/all";
+@use '../../../theme/web/custom-variables' as *;
+@use 'chat-variables' as *;
+@use 'token-monitor-variables' as *;
+@use './abstracts/all' as *;
+@use './components/all' as *;
