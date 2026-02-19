@@ -29183,6 +29183,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin: 4px;
 }
 
+.popup-no-header .modal-content .modal-header {
+  border: none;
+}
+.popup-no-header .modal-content .modal-header .close {
+  display: none;
+}
+
 .responsive-image.mx-image-viewer {
   max-width: 14px;
   max-height: 14px;

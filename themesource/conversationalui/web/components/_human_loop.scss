@@ -37,3 +37,11 @@
     }
 
 
+.popup-no-header .modal-content .modal-header{
+      border: none;
+      .close{
+        display:none;
+    }
+}
+
+
