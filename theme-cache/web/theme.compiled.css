@@ -31330,7 +31330,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border: 1px solid #1b34a0;
 }
 
-.mcp-tooltip .widget-tooltip-content {
+.mcpclient-tooltip .widget-tooltip-content {
   position: relative;
   z-index: 1000;
   text-align: unset;
@@ -31339,7 +31339,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border-radius: 4px;
   color: black;
 }
-.mcp-tooltip .mx-link {
+.mcpclient-tooltip .mx-link {
   font-weight: normal;
   line-height: 1.7857142863;
 }
