@@ -31358,6 +31358,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
   text-overflow: ellipsis;
 }
 
+.text-clamp--2-lines {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+}
+
 .listview-horizontal.mx-listview > ul {
   display: inline-block;
   margin-bottom: 0;
