@@ -22,3 +22,72 @@
         }   
     }
 }
+
+.mcpclient-badge {
+  display: inline-flex;
+  height: 20px;
+  padding: 4px;
+  gap: 4px;
+  align-items: center;
+  border-radius: 4px;
+  font-size: 12px;
+  font-style: normal;
+  .agent-tooltip {
+    div,
+    .mx-link {
+      line-height: 1;
+    }
+  }
+}
+
+.mcpclient-badge--default {
+  @extend .mcpclient-badge;
+  background: $color-default-lighter;
+  border: 1px solid $color-default-dark;
+}
+
+.mcpclient-badge--primary {
+  @extend .mcpclient-badge;
+  background: $color-primary-lighter;
+  border: 1px solid $color-primary-dark;
+}
+
+.mcpclient-tooltip {
+    .widget-tooltip-content {
+        position: relative;
+        z-index: 1000;
+        text-align: unset;
+        word-break: break-word;
+        background-color: white;
+        border-radius: 4px;
+        color: black;
+    }
+
+    .mx-link {
+        font-weight: normal;
+        line-height: $line-height-base * 1.25;
+    }
+}
+
+.w306{
+  width: 306px;
+}
+
+.text-line-clamp--1 {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-clamp--2-lines {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
+}

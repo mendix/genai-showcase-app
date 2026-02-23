@@ -50,7 +50,7 @@ public class ConsumedMCPService_CreateMCPClient extends UserAction<IMendixObject
 			mcpClientConfig.setMCPEndpoint(ConsumedMCPService.getMCPEndpoint());
 			mcpClientConfig.setName(ConsumedMCPService.getName());
 			mcpClientConfig.setProtocolVersion(ConsumedMCPService.getProtocolVersion());
-			mcpClientConfig.setVersion(ConsumedMCPService.getVersion());
+			mcpClientConfig.setVersion(ConsumedMCPService.getVersion() != null ? ConsumedMCPService.getVersion() : "");
 			mcpClientConfig.setConnectionTimeOutInSeconds(ConsumedMCPService.getConnectionTimeOutInSeconds());
 	
 		

@@ -43,6 +43,9 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 	private final java.lang.String Microflow;
 	private final java.lang.String OverwritingToolName;
 	private final java.lang.String OverwritingToolDescription;
+	private final genaicommons.proxies.ENUM_UserToolPermission UserToolPermission;
+	private final java.lang.String OverwritingEndUserTitle;
+	private final java.lang.String EndUserDescription;
 
 	public Request_AddMCPTool(
 		IContext context,
@@ -51,7 +54,10 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		IMendixObject _tool,
 		java.lang.String _microflow,
 		java.lang.String _overwritingToolName,
-		java.lang.String _overwritingToolDescription
+		java.lang.String _overwritingToolDescription,
+		java.lang.String _userToolPermission,
+		java.lang.String _overwritingEndUserTitle,
+		java.lang.String _endUserDescription
 	)
 	{
 		super(context);
@@ -64,6 +70,9 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		this.Microflow = _microflow;
 		this.OverwritingToolName = _overwritingToolName;
 		this.OverwritingToolDescription = _overwritingToolDescription;
+		this.UserToolPermission = _userToolPermission == null ? null : genaicommons.proxies.ENUM_UserToolPermission.valueOf(_userToolPermission);
+		this.OverwritingEndUserTitle = _overwritingEndUserTitle;
+		this.EndUserDescription = _endUserDescription;
 	}
 
 	@java.lang.Override
@@ -118,6 +127,9 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		tool.setOriginalMCPToolName(Tool.getName());
 		tool.setMCP_ConsumedMCPService(ConsumedMCPService);
 		tool.setSchema(Tool.getSchema());
+		tool.setEndUserDescription(EndUserDescription);
+		tool.setEndUserTitle(OverwritingEndUserTitle);
+		tool.setUserToolPermission(UserToolPermission);
 		List<Tool> ToolList = toolCollection.getToolCollection_Tool();
 		ToolList.add(tool);
 		toolCollection.setToolCollection_Tool(ToolList); 

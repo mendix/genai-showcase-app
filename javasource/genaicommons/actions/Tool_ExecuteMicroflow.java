@@ -10,12 +10,9 @@
 package genaicommons.actions;
 
 import static java.util.Objects.requireNonNull;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mendix.core.Core;
@@ -24,12 +21,6 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import genaicommons.impl.MxLogger;
-import genaicommons.proxies.KnowledgeBaseSpan;
-import genaicommons.proxies.MCPSpan;
-import genaicommons.proxies.ModelSpan;
-import genaicommons.proxies.ToolSpan;
-import genaicommons.proxies.Trace;
-import genaicommons.proxies.microflows.Microflows;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import com.mendix.systemwideinterfaces.core.meta.IMetaObject;
 
