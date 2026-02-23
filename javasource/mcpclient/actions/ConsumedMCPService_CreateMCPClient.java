@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import mcpclient.proxies.MCPClientConfig;
-import mcpclient.impl.MxLogger;
 import system.proxies.HttpHeader;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
@@ -22,23 +21,23 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
- * Create an MCP Client from an MCP Server Configuration.
+ * Create an MCP Client from a Consumed MCP Service object.
  */
-public class MCPServerConfiguration_CreateMCPClient extends UserAction<IMendixObject>
+public class ConsumedMCPService_CreateMCPClient extends UserAction<IMendixObject>
 {
-	/** @deprecated use MCPServerConfiguration.getMendixObject() instead. */
+	/** @deprecated use ConsumedMCPService.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
-	private final IMendixObject __MCPServerConfiguration;
-	private final mcpclient.proxies.MCPServerConfiguration MCPServerConfiguration;
+	private final IMendixObject __ConsumedMCPService;
+	private final mcpclient.proxies.ConsumedMCPService ConsumedMCPService;
 
-	public MCPServerConfiguration_CreateMCPClient(
+	public ConsumedMCPService_CreateMCPClient(
 		IContext context,
-		IMendixObject _mCPServerConfiguration
+		IMendixObject _consumedMCPService
 	)
 	{
 		super(context);
-		this.__MCPServerConfiguration = _mCPServerConfiguration;
-		this.MCPServerConfiguration = _mCPServerConfiguration == null ? null : mcpclient.proxies.MCPServerConfiguration.initialize(getContext(), _mCPServerConfiguration);
+		this.__ConsumedMCPService = _consumedMCPService;
+		this.ConsumedMCPService = _consumedMCPService == null ? null : mcpclient.proxies.ConsumedMCPService.initialize(getContext(), _consumedMCPService);
 	}
 
 	@java.lang.Override
@@ -46,17 +45,17 @@ public class MCPServerConfiguration_CreateMCPClient extends UserAction<IMendixOb
 	{
 		// BEGIN USER CODE
 		try {
-			requireNonNull(MCPServerConfiguration, "MCPServerConfiguration is required.");
+			requireNonNull(ConsumedMCPService, "ConsumedMCPService is required.");
 			MCPClientConfig mcpClientConfig = new MCPClientConfig(getContext());
-			mcpClientConfig.setMCPEndpoint(MCPServerConfiguration.getMCPEndpoint());
-			mcpClientConfig.setName(MCPServerConfiguration.getName());
-			mcpClientConfig.setProtocolVersion(MCPServerConfiguration.getProtocolVersion());
-			mcpClientConfig.setVersion(MCPServerConfiguration.getVersion());
-			mcpClientConfig.setConnectionTimeOutInSeconds(MCPServerConfiguration.getConnectionTimeOutInSeconds());
+			mcpClientConfig.setMCPEndpoint(ConsumedMCPService.getMCPEndpoint());
+			mcpClientConfig.setName(ConsumedMCPService.getName());
+			mcpClientConfig.setProtocolVersion(ConsumedMCPService.getProtocolVersion());
+			mcpClientConfig.setVersion(ConsumedMCPService.getVersion() != null ? ConsumedMCPService.getVersion() : "");
+			mcpClientConfig.setConnectionTimeOutInSeconds(ConsumedMCPService.getConnectionTimeOutInSeconds());
 	
 		
-			if(MCPServerConfiguration.getGetCredentialsMicroflow() != null && !MCPServerConfiguration.getGetCredentialsMicroflow().isBlank()) {
-				List<IMendixObject> mendixObjectHeaders = Core.microflowCall(MCPServerConfiguration.getGetCredentialsMicroflow()).execute(getContext());
+			if(ConsumedMCPService.getGetCredentialsMicroflow() != null && !ConsumedMCPService.getGetCredentialsMicroflow().isBlank()) {
+				List<IMendixObject> mendixObjectHeaders = Core.microflowCall(ConsumedMCPService.getGetCredentialsMicroflow()).execute(getContext());
 				
 				List<HttpHeader> httpheaderList = mendixObjectHeaders != null ?
 		                mendixObjectHeaders.stream()
@@ -83,10 +82,9 @@ public class MCPServerConfiguration_CreateMCPClient extends UserAction<IMendixOb
 	@java.lang.Override
 	public java.lang.String toString()
 	{
-		return "MCPServerConfiguration_CreateMCPClient";
+		return "ConsumedMCPService_CreateMCPClient";
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new mcpclient.impl.MxLogger(MCPServerConfiguration_CreateMCPClient.class);
 	// END EXTRA CODE
 }
