@@ -7,8 +7,10 @@
 // Other code you write will be lost the next time you deploy the project.
 // Special characters, e.g., é, ö, à, etc. are supported in comments.
 
-package agentcommons.actions;
+package genaicommons.actions;
 
+import java.util.Map;
+import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
@@ -34,7 +36,9 @@ public class ConsumedKnowledgeBase_GetCollectionOptions extends UserAction<java.
 	public java.util.List<IMendixObject> executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		throw new com.mendix.systemwideinterfaces.MendixRuntimeException("Java action was not implemented");
+		Map<String, Object> params = new java.util.HashMap<>();
+		params.put("ConsumedKnowledgeBase", ConsumedKnowledgeBase);
+		return	Core.microflowCall(ConsumedKnowledgeBase.getGetCollectionsMicroflow()).withParams(params).execute(getContext());
 		// END USER CODE
 	}
 
