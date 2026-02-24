@@ -9,6 +9,7 @@
 
 package genaicommons.actions;
 
+import static java.util.Objects.requireNonNull;
 import java.util.Map;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
@@ -36,6 +37,8 @@ public class ConsumedKnowledgeBase_GetCollectionOptions extends UserAction<java.
 	public java.util.List<IMendixObject> executeAction() throws Exception
 	{
 		// BEGIN USER CODE
+		requireNonNull(ConsumedKnowledgeBase, "ConsumedKnowledgeBse is required.");
+		requireNonNull(ConsumedKnowledgeBase.getGetCollectionsMicroflow(), "ConsumedKnowledgeBase has no GetCollections microflow.");
 		Map<String, Object> params = new java.util.HashMap<>();
 		params.put("ConsumedKnowledgeBase", ConsumedKnowledgeBase);
 		return	Core.microflowCall(ConsumedKnowledgeBase.getGetCollectionsMicroflow()).withParams(params).execute(getContext());
