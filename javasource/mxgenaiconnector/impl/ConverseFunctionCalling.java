@@ -148,6 +148,13 @@ public class ConverseFunctionCalling{
 	private static void removeEmptyTextBlocks(ArrayNode contentArray) {
 		for (int i = 0; i < contentArray.size(); i++) {
 			JsonNode contentNode = contentArray.get(i);
+			// Remove empty objects
+			if (contentNode != null && contentNode.isObject() && contentNode.isEmpty()) {
+				contentArray.remove(i);
+				i--;
+				continue;
+			}
+			// Remove blocks with empty text
 			if (contentNode != null && contentNode.has("text")) {
 				JsonNode textNode = contentNode.get("text");
 				if (textNode != null && textNode.isTextual() && textNode.asText().isBlank()) {

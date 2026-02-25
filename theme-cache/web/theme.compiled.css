@@ -29180,7 +29180,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .tool-status-image {
   width: 16px;
-  margin-right: 4px;
+  margin: 4px;
+}
+
+.popup-no-header .modal-content .modal-header {
+  border: none;
+}
+.popup-no-header .modal-content .modal-header .close {
+  display: none;
 }
 
 .responsive-image.mx-image-viewer {
@@ -30731,7 +30738,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-bottom: 4px;
   text-align: left;
   text-overflow: ellipsis;
-  color: #24276c;
+  color: #0a1326;
   font-size: 14px;
   font-weight: 600;
 }
@@ -30825,6 +30832,42 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .w500 {
   width: 500px;
+}
+
+.mcp-tool {
+  margin: 0;
+  color: #a9acb3;
+  padding-bottom: 16px;
+  word-break: break-word;
+}
+.mcp-tool.mcp-tool-edited {
+  border-left: 3px solid;
+  border-color: #264ae5;
+  color: #9BB7F4;
+}
+.mcp-tool.active {
+  font-weight: bold;
+  border-left: 3px solid;
+  border-color: #264ae5;
+  color: #264ae5;
+}
+.mcp-tool .status-icon {
+  width: 16px;
+  margin-right: 8px;
+  margin-left: 4px;
+}
+
+.mcp-tool-import .tool-name {
+  width: 60%;
+}
+.mcp-tool-import .tool-name .mx-checkbox {
+  margin-bottom: 0;
+}
+.mcp-tool-import .tool-name .mx-checkbox .control-label {
+  font-weight: normal;
+}
+.mcp-tool-import .tool-access-approval {
+  width: 40%;
 }
 
 .listview-bullet-points > ul {
@@ -30945,7 +30988,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: 100%;
   margin-bottom: 0;
   border-radius: 16px;
-  border: 1px solid #ced0d3;
+  border: 1px solid #e7e7e9;
   box-sizing: border-box;
   padding: 24px;
 }
@@ -30995,7 +31038,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .agent-page-container .card {
   width: 100%;
   border-radius: 16px;
-  border: 1px solid #ced0d3;
+  border: 1px solid #e7e7e9;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -31172,7 +31215,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-right: 0;
 }
 .agent-page-container .panel-header .icon-area .close-icon {
-  border-left: 2px solid #ced0d3;
+  border-left: 2px solid #e7e7e9;
   padding-left: 8px;
   margin-right: 8px;
   margin-left: 8px;

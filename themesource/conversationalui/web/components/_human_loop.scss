@@ -33,7 +33,15 @@
 
 .tool-status-image{
         width: $spacing-medium;
-        margin-right: $spacing-smaller;
+        margin: $spacing-smaller;
     }
+
+
+.popup-no-header .modal-content .modal-header{
+      border: none;
+      .close{
+        display:none;
+    }
+}
 
 
