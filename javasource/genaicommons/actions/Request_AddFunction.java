@@ -41,9 +41,9 @@ public class Request_AddFunction extends UserAction<IMendixObject>
 	private final java.lang.String ToolName;
 	private final java.lang.String ToolDescription;
 	private final java.lang.String FunctionMicroflow;
-	private final genaicommons.proxies.ENUM_UserToolPermission UserToolPermission;
-	private final java.lang.String EndUserTitle;
-	private final java.lang.String EndUserDescription;
+	private final genaicommons.proxies.ENUM_UserAccessApproval UserAccessApproval;
+	private final java.lang.String DisplayTitle;
+	private final java.lang.String DisplayDescription;
 
 	public Request_AddFunction(
 		IContext context,
@@ -51,9 +51,9 @@ public class Request_AddFunction extends UserAction<IMendixObject>
 		java.lang.String _toolName,
 		java.lang.String _toolDescription,
 		java.lang.String _functionMicroflow,
-		java.lang.String _userToolPermission,
-		java.lang.String _endUserTitle,
-		java.lang.String _endUserDescription
+		java.lang.String _userAccessApproval,
+		java.lang.String _displayTitle,
+		java.lang.String _displayDescription
 	)
 	{
 		super(context);
@@ -62,9 +62,9 @@ public class Request_AddFunction extends UserAction<IMendixObject>
 		this.ToolName = _toolName;
 		this.ToolDescription = _toolDescription;
 		this.FunctionMicroflow = _functionMicroflow;
-		this.UserToolPermission = _userToolPermission == null ? null : genaicommons.proxies.ENUM_UserToolPermission.valueOf(_userToolPermission);
-		this.EndUserTitle = _endUserTitle;
-		this.EndUserDescription = _endUserDescription;
+		this.UserAccessApproval = _userAccessApproval == null ? null : genaicommons.proxies.ENUM_UserAccessApproval.valueOf(_userAccessApproval);
+		this.DisplayTitle = _displayTitle;
+		this.DisplayDescription = _displayDescription;
 	}
 
 	@java.lang.Override
@@ -115,12 +115,12 @@ public class Request_AddFunction extends UserAction<IMendixObject>
 
 		//Optional parameters
 		function.setDescription(ToolDescription); 
-		function.setEndUserTitle(EndUserTitle);
-		function.setEndUserDescription(EndUserDescription);
-		if(UserToolPermission != null) {
-			function.setUserToolPermission(UserToolPermission);
+		function.setDisplayTitle(DisplayTitle);
+		function.setDisplayDescription(DisplayDescription);
+		if(UserAccessApproval != null) {
+			function.setUserAccessApproval(UserAccessApproval);
 		}else {
-			function.setUserToolPermission(genaicommons.proxies.ENUM_UserToolPermission.Hidden);
+			function.setUserAccessApproval(genaicommons.proxies.ENUM_UserAccessApproval.HiddenForUser);
 		}
 
 		List<Tool> ToolList = toolCollection.getToolCollection_Tool();
