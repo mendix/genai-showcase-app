@@ -29041,7 +29041,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: none;
 }
 .chat-container-disabled .chat-input-wrapper {
-  padding-top: 100%;
+  margin-top: 100%;
 }
 .chat-container-disabled .chat-input-wrapper .form-group .form-control {
   background-color: #f8f8f8;
