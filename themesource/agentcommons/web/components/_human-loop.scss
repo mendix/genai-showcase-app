@@ -33,16 +33,21 @@ $color-edited: #9BB7F4;
 .mcp-tool-import{
     .tool-name{
         width: 60%;
-        .mx-checkbox {
-            margin-bottom: 0;
+        .mx-checkbox{
+            margin-bottom: auto;
             .control-label {
                 font-weight: normal;
             }
-            //margin-left: $spacing-small;
         }
     }
 
     .tool-access-approval{
         width: 40%;
+        margin-top:auto;
+        margin-bottom:auto;
+
+        .form-group {
+            margin-bottom: 0;
+        }
     }
 }

@@ -30717,10 +30717,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .list {
   display: grid;
   height: 48px;
-  padding: 4px 0 8px 8px !important;
   grid-template-columns: 25px minmax(0, 930px) auto auto;
   align-items: center;
-  gap: 8px;
   background-color: white;
 }
 .list .hover-btn {
@@ -30884,13 +30882,18 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 60%;
 }
 .mcp-tool-import .tool-name .mx-checkbox {
-  margin-bottom: 0;
+  margin-bottom: auto;
 }
 .mcp-tool-import .tool-name .mx-checkbox .control-label {
   font-weight: normal;
 }
 .mcp-tool-import .tool-access-approval {
   width: 40%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.mcp-tool-import .tool-access-approval .form-group {
+  margin-bottom: 0;
 }
 
 .listview-bullet-points > ul {
