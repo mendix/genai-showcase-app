@@ -49,10 +49,8 @@
 .list {
   display: grid;
   height: 48px;
-  padding: $spacing-smaller 0 $spacing-small $spacing-small !important;
   grid-template-columns: 25px minmax(0, 930px) auto auto;
   align-items: center;
-  gap: $spacing-small;
   background-color: white;
 
   .hover-btn {

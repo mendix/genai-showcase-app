@@ -1,33 +1,36 @@
-import { r as o, ae as r, aJ as R, ay as q, av as D, au as I, aI as F, aw as N } from "./TextInputWithIcon-B3kv_B9i.js";
-import { m as H, c as O } from "./logger-BM6R1Quw.js";
-import { I as A } from "./Banner-BEBXNJk6.js";
-import { D as B } from "./DialogFooter-CyukU0xe.js";
-import { T as f } from "./TextInputLabeled-_7ydO2Vf.js";
-const J = ({ initialAgent: a, onClose: t }) => {
-  var T, v, k;
-  const [e, d] = o.useState(a), [n, u] = o.useState(((T = a.maxTokens) == null ? void 0 : T.toString()) ?? ""), [i, m] = o.useState(((v = a.temperature) == null ? void 0 : v.toString()) ?? ""), [l, S] = o.useState(((k = a.topP) == null ? void 0 : k.toString()) ?? ""), p = o.useCallback(() => n !== "" && e.maxTokens === void 0 ? "Please enter a valid number." : e.maxTokens !== void 0 && e.maxTokens < 1 ? "Max tokens must be greater than 0 (or empty)." : !0, [e.maxTokens, n]), c = o.useCallback(() => i !== "" && e.temperature === void 0 ? "Please enter a valid number." : e.temperature !== void 0 && e.temperature < 0 ? "Temperature must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.temperature, i]), h = o.useCallback(() => l !== "" && e.topP === void 0 ? "Please enter a valid number." : e.topP !== void 0 && e.topP < 0 ? "TopP must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.topP, l]), g = o.useCallback((P, M, x) => (s) => {
-    const L = x ? /^-?\d+$/ : /^-?\d*\.?\d*$/, w = x ? ["-"] : ["-", "."];
-    if (s !== "" && !w.includes(s) && !L.test(s))
-      return;
-    if (M(s), s === "" || w.includes(s)) {
-      d((b) => ({ ...b, [P]: void 0 }));
-      return;
-    }
-    const j = x ? parseInt(s, 10) : parseFloat(s);
-    d((b) => ({ ...b, [P]: isNaN(j) ? void 0 : j }));
-  }, []), y = o.useCallback(() => {
+import { r as o, w as r, aM as R, E as q, C as D, G as E, aK as N, D as B } from "./TextInputWithIcon-Bxcjz2pl.js";
+import { t as F, c as H } from "./logger-CC_FxqwC.js";
+import { I as O } from "./Banner-DNPItzP7.js";
+import { D as A } from "./DialogFooter-BWIHywC0.js";
+import { T as f } from "./TextInputLabeled-Cr8pg4pf.js";
+const G = ({ initialAgent: a, onClose: t }) => {
+  var T, k, v;
+  const [e, d] = o.useState(a), [n, u] = o.useState(((T = a.maxTokens) == null ? void 0 : T.toString()) ?? ""), [i, m] = o.useState(((k = a.temperature) == null ? void 0 : k.toString()) ?? ""), [l, S] = o.useState(((v = a.topP) == null ? void 0 : v.toString()) ?? ""), p = o.useCallback(() => n !== "" && e.maxTokens === void 0 ? "Please enter a valid number." : e.maxTokens !== void 0 && e.maxTokens < 1 ? "Max tokens must be greater than 0 (or empty)." : !0, [e.maxTokens, n]), c = o.useCallback(() => i !== "" && e.temperature === void 0 ? "Please enter a valid number." : e.temperature !== void 0 && e.temperature < 0 ? "Temperature must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.temperature, i]), h = o.useCallback(() => l !== "" && e.topP === void 0 ? "Please enter a valid number." : e.topP !== void 0 && e.topP < 0 ? "TopP must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.topP, l]), g = o.useCallback(
+    (P, M, x) => (s) => {
+      const L = x ? /^-?\d+$/ : /^-?\d*\.?\d*$/, w = x ? ["-"] : ["-", "."];
+      if (s !== "" && !w.includes(s) && !L.test(s))
+        return;
+      if (M(s), s === "" || w.includes(s)) {
+        d((b) => ({ ...b, [P]: void 0 }));
+        return;
+      }
+      const j = x ? parseInt(s, 10) : parseFloat(s);
+      d((b) => ({ ...b, [P]: isNaN(j) ? void 0 : j }));
+    },
+    []
+  ), I = o.useCallback(() => {
     if (p() === !0 && c() === !0 && h() === !0)
       t == null || t(e);
     else
       return;
-  }, [t, e, p, c, h]), E = o.useCallback(() => {
+  }, [t, e, p, c, h]), y = o.useCallback(() => {
     t == null || t(null);
   }, [t]), C = o.useCallback(() => {
     window.open("https://docs.mendix.com/appstore/modules/genai/genai-for-mx/commons/#request", "_blank");
   }, []);
   return /* @__PURE__ */ r.jsxs(R, { children: [
     /* @__PURE__ */ r.jsx(q, { children: /* @__PURE__ */ r.jsxs(D, { children: [
-      /* @__PURE__ */ r.jsx(I, { label: "Tokens", children: /* @__PURE__ */ r.jsx(
+      /* @__PURE__ */ r.jsx(E, { label: "Tokens", children: /* @__PURE__ */ r.jsx(
         f,
         {
           label: "Max tokens",
@@ -38,8 +41,8 @@ const J = ({ initialAgent: a, onClose: t }) => {
           validate: p
         }
       ) }),
-      /* @__PURE__ */ r.jsxs(I, { label: "Randomness", children: [
-        /* @__PURE__ */ r.jsx(A, { children: "It is recommended to steer either the temperature or TopP, but not both. Review the documentation of the model provider for more information about the allowed ranges." }),
+      /* @__PURE__ */ r.jsxs(E, { label: "Randomness", children: [
+        /* @__PURE__ */ r.jsx(O, { children: "It is recommended to steer either the temperature or TopP, but not both. Review the documentation of the model provider for more information about the allowed ranges." }),
         /* @__PURE__ */ r.jsx(
           f,
           {
@@ -64,43 +67,22 @@ const J = ({ initialAgent: a, onClose: t }) => {
         )
       ] })
     ] }) }),
-    /* @__PURE__ */ r.jsx(
-      B,
-      {
-        onOk: y,
-        onCancel: E,
-        showHelp: !0,
-        onHelp: C
-      }
-    )
+    /* @__PURE__ */ r.jsx(A, { onOk: I, onCancel: y, showHelp: !0, onHelp: C })
   ] });
-}, Y = ({ studioPro: a, agent: t, onClose: e }) => /* @__PURE__ */ r.jsx(N, { studioPro: a, children: /* @__PURE__ */ r.jsx(
-  J,
-  {
-    initialAgent: t,
-    onClose: e
-  }
-) }), z = {
+}, Y = ({ studioPro: a, agent: t, onClose: e }) => /* @__PURE__ */ r.jsx(B, { studioPro: a, children: /* @__PURE__ */ r.jsx(G, { initialAgent: t, onClose: e }) }), W = {
   async loaded(a, t) {
-    const e = H(a), d = O(e);
+    const e = F(a), d = H(e);
     if (!t.agent)
       throw new Error("Agent needs to be provided to open the Model Settings dialog.");
     try {
       const n = JSON.parse(decodeURIComponent(t.agent)), u = document.getElementById("root");
       if (!u)
         throw new Error("Failed to find the root element.");
-      const i = F.createRoot(u), m = (l) => {
+      const i = N.createRoot(u), m = (l) => {
         e.ui.dialogs.closeWithResult(t.dialogId, l);
       };
       i.render(
-        /* @__PURE__ */ r.jsx(o.StrictMode, { children: /* @__PURE__ */ r.jsx(
-          Y,
-          {
-            studioPro: e,
-            agent: n,
-            onClose: m
-          }
-        ) })
+        /* @__PURE__ */ r.jsx(o.StrictMode, { children: /* @__PURE__ */ r.jsx(Y, { studioPro: e, agent: n, onClose: m }) })
       );
     } catch (n) {
       throw d.error("Error editing model settings:", n), new Error("Error editing model settings:", n);
@@ -108,6 +90,6 @@ const J = ({ initialAgent: a, onClose: t }) => {
   }
 };
 export {
-  z as component
+  W as component
 };
 //# sourceMappingURL=modelSettingsEdit.js.map
