@@ -48,16 +48,10 @@ public class Request_ChatCompletions_WithHistory extends UserAction<IMendixObjec
 	public IMendixObject executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		try {
-			validate();
-			return Core.microflowCall(DeployedModel.getMicroflow())
-					.withParams(mapInputParameters())
-					.execute(this.getContext());
-
-		} catch (Exception e) {
-			LOGGER.error(e);
-			return null;
-		}
+		validate();
+		return Core.microflowCall(DeployedModel.getMicroflow())
+				.withParams(mapInputParameters())
+				.execute(this.getContext());
 		// END USER CODE
 	}
 
