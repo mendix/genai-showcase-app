@@ -28447,7 +28447,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   font-weight: 600;
 }
 
-.convui-badge, .convui-purple-badge, .convui-blue-badge {
+.convui-badge, .convui-purple-badge, .convui-gray-badge, .convui-green-badge, .convui-red-badge, .convui-blue-badge {
   display: inline-block;
   height: 16px;
   padding: 0 4px;
@@ -28463,6 +28463,30 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .convui-blue-badge {
   border: 1px solid var(--color-light-blue-5, #47A9FF);
   background: var(--color-light-blue-1, #DCEEFE);
+}
+
+.convui-red-badge {
+  border: 1px solid var(--color-light-red-5, #FB4A4C);
+  background: var(--color-light-red-1, #FFE5E9);
+  height: 24px;
+  padding: 4px;
+  text-transform: uppercase;
+}
+
+.convui-green-badge {
+  border: 1px solid var(--color-light-green-5, #4FD84F);
+  background: var(--color-light-green-1, #E1FAE1);
+  height: 24px;
+  padding: 4px;
+  text-transform: uppercase;
+}
+
+.convui-gray-badge {
+  border: 1px solid var(--color-light-gray-5, #C1C3C8);
+  background: var(--color-light-gray-1, #F7F7F7);
+  height: 24px;
+  padding: 4px;
+  text-transform: uppercase;
 }
 
 .convui-purple-badge {
@@ -29041,7 +29065,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: none;
 }
 .chat-container-disabled .chat-input-wrapper {
-  padding-top: 100%;
+  margin-top: 100%;
 }
 .chat-container-disabled .chat-input-wrapper .form-group .form-control {
   background-color: #f8f8f8;
@@ -29433,7 +29457,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .layout-slidein .mx-window-content {
   max-height: 100vh !important;
-  padding: 8px;
   display: flex;
   flex-direction: column;
   border: none;
@@ -30694,10 +30717,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .list {
   display: grid;
   height: 48px;
-  padding: 4px 0 8px 8px !important;
   grid-template-columns: 25px minmax(0, 930px) auto auto;
   align-items: center;
-  gap: 8px;
   background-color: white;
 }
 .list .hover-btn {
@@ -30861,13 +30882,18 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 60%;
 }
 .mcp-tool-import .tool-name .mx-checkbox {
-  margin-bottom: 0;
+  margin-bottom: auto;
 }
 .mcp-tool-import .tool-name .mx-checkbox .control-label {
   font-weight: normal;
 }
 .mcp-tool-import .tool-access-approval {
   width: 40%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.mcp-tool-import .tool-access-approval .form-group {
+  margin-bottom: 0;
 }
 
 .listview-bullet-points > ul {

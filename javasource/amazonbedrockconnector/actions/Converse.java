@@ -144,7 +144,7 @@ public class Converse extends UserAction<IMendixObject>
 			
 		} catch (Exception e) {
 			LOGGER.error(e);
-			return null;
+			throw e;
 		}
 		
 		// END USER CODE
