@@ -40,7 +40,7 @@ public class ConsumedKnowledgeBase_GetDeployedKnowledgeBase extends UserAction<I
 	public IMendixObject executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		requireNonNull(ConsumedKnowledgeBase, "ConsumedKnowledgeBse is required.");
+		requireNonNull(ConsumedKnowledgeBase, "ConsumedKnowledgeBase is required.");
 		requireNonNull(ConsumedKnowledgeBase.getGetDeployedKnowledgeBaseMicroflow(), "ConsumedKnowledgeBase has no GetDeployedKnowledgeBase microflow.");
 		Map<String, Object> params = new java.util.HashMap<>();
 		params.put("CollectionIdentifier", CollectionIdentifier);
