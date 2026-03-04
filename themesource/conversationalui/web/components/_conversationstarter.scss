@@ -1,4 +1,4 @@
-@import '../../../../theme/web/custom-variables';
+@use '../../../../theme/web/custom-variables' as *;
 
 //Cards for ConversationStarters
 .conversationstarter.card {

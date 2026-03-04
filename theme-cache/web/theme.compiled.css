@@ -28265,7 +28265,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: center;
 }
 
-.row-text-img, .tooltip-icon-text, .tooltip-row-text-icon, .tooltip-version-draft, .tooltip-header {
+.row-text-img, .tooltip-header, .tooltip-version-draft, .tooltip-row-text-icon, .tooltip-icon-text {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -30348,13 +30348,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .model-badge--default {
-  background: #fafafb;
-  border: 1px solid #a2a2a3;
+  background: var(--color-default-lighter, #fafafb);
+  border: 1px solid var(--color-default-dark, #a2a2a3);
 }
 
 .model-badge--primary {
-  background: #d4dbfa;
-  border: 1px solid #1b34a0;
+  background: var(--color-primary-lighter, #d4dbfa);
+  border: 1px solid var(--color-primary-dark, #1b34a0);
 }
 
 .datagrid--no-scroll .widget-datagrid-content {
@@ -30363,8 +30363,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .datagrid--fixed-row-height .table .td {
-  height: 58px;
-  padding: 8px;
+  height: calc(3 * var(--font-size-default, 14px) + 2 * var(--spacing-small, 8px));
+  padding: var(--spacing-small, 8px);
   border-bottom: none;
 }
 .datagrid--fixed-row-height .table .td .empty-placeholder {
@@ -30373,7 +30373,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .datagrid--fixed-row-height .table .th {
-  padding: 8px;
+  padding: var(--spacing-small, 8px);
 }
 
 .datagrid--fixed-row-height .table-header {
@@ -30381,8 +30381,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .text-heading-4 {
-  font-weight: bold;
-  font-size: 18px;
+  font-weight: var(--font-weight-bold, bold);
+  font-size: var(--font-size-h4, 18px);
 }
 
 .visibility-none {
@@ -30419,7 +30419,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .info-icon {
-  margin: 0 0 0 4px;
+  margin: 0 0 0 var(--spacing-smaller, 4px);
   padding: 0;
 }
 .info-icon img {
@@ -31623,7 +31623,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .card-base .card-content .card-description, .card-orange .card-content .card-description, .card-yellow .card-content .card-description, .card-violet .card-content .card-description, .card-lightpurple .card-content .card-description, .card-darkpurple .card-content .card-description, .card-blue .card-content .card-description, .card-green .card-content .card-description, .card-turquoise .card-content .card-description, .card-grey .card-content .card-description, .card-light-grey .card-content .card-description, .card-lightest-grey .card-content .card-description {
   -webkit-line-clamp: 2;
-  height: 40px;
 }
 
 .card-lightest-grey {

@@ -1,5 +1,5 @@
-@import "../../themesource/datawidgets/web/variables.scss";
-@import "../../themesource/atlas_core/web/_variables.scss";
+// @import "../../themesource/datawidgets/web/variables.scss";
+// @import "../../themesource/atlas_core/web/_variables.scss";
 @import "custom-variables";
 
 $brand-mistral: #EC7211; 
@@ -33,8 +33,6 @@ $label-bg-pgvector: #E1FAE1;
 $label-color-pgvector: #076407;
 $label-bg-all: #D4EDEE;
 $label-color-all: #00635A;
-//$label-bg-all: #DEDEDE;
-//$label-color-all: #000000;
 
 //Navigation
 .layout-atlas .region-sidebar {
@@ -410,13 +408,11 @@ $label-color-all: #00635A;
     .card-title {
       -webkit-line-clamp: 2;
       margin-bottom: 8px;
-      //font-size: 16px;
     }
 
     /* Description */
     .card-description {
       -webkit-line-clamp: 2;
-      height: 40px;
     }
   }
 }
