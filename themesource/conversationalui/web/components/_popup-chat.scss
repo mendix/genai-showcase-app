@@ -1,3 +1,6 @@
+@use '../../../../theme/web/custom-variables' as *;
+@use '../chat-variables' as *;
+
 //this file contains styling for a pop-up chatbox
 
 .btn-chat-popup {

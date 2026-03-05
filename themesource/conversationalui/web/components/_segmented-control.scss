@@ -1,4 +1,6 @@
-.segmented-control{
+@use '../../../../theme/web/custom-variables' as *;
+
+.segmented-control {
     height: fit-content;
     border: 1px solid $border-color-default;
     border-radius: $btn-border-radius;

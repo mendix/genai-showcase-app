@@ -1,4 +1,6 @@
-@import "../../../atlas_core/web/_variables.scss";
+@use '../../../../theme/web/custom-variables' as *;
+@use '../chat-variables' as *;
+
 .chat-loading-wrapper {
     display: flex;
     justify-content: left;
