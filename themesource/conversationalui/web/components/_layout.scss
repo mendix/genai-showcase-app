@@ -128,3 +128,10 @@
 .agent-popup-midsize {
   width: 60vw;
 }
+
+.popup-no-header .modal-content .modal-header{
+      border: none;
+      .close{
+        display:none;
+    }
+}

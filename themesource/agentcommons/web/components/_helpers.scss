@@ -1,4 +1,5 @@
-@import "../../../atlas_core/web/variables";
+@use '../../../../theme/web/custom-variables' as *;
+@use '../agent-builder-variables.scss' as *;
 
 .custom-control-label {
   display: block;
