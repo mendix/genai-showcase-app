@@ -32,10 +32,10 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __Request;
 	private final genaicommons.proxies.Request Request;
-	/** @deprecated use MCPServerConfiguration.getMendixObject() instead. */
+	/** @deprecated use ConsumedMCPService.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
-	private final IMendixObject __MCPServerConfiguration;
-	private final mcpclient.proxies.MCPServerConfiguration MCPServerConfiguration;
+	private final IMendixObject __ConsumedMCPService;
+	private final mcpclient.proxies.ConsumedMCPService ConsumedMCPService;
 	/** @deprecated use Tool.getMendixObject() instead. */
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __Tool;
@@ -43,27 +43,36 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 	private final java.lang.String Microflow;
 	private final java.lang.String OverwritingToolName;
 	private final java.lang.String OverwritingToolDescription;
+	private final genaicommons.proxies.ENUM_UserAccessApproval UserAccessApproval;
+	private final java.lang.String OverwritingDisplayTitle;
+	private final java.lang.String DisplayDescription;
 
 	public Request_AddMCPTool(
 		IContext context,
 		IMendixObject _request,
-		IMendixObject _mCPServerConfiguration,
+		IMendixObject _consumedMCPService,
 		IMendixObject _tool,
 		java.lang.String _microflow,
 		java.lang.String _overwritingToolName,
-		java.lang.String _overwritingToolDescription
+		java.lang.String _overwritingToolDescription,
+		java.lang.String _userAccessApproval,
+		java.lang.String _overwritingDisplayTitle,
+		java.lang.String _displayDescription
 	)
 	{
 		super(context);
 		this.__Request = _request;
 		this.Request = _request == null ? null : genaicommons.proxies.Request.initialize(getContext(), _request);
-		this.__MCPServerConfiguration = _mCPServerConfiguration;
-		this.MCPServerConfiguration = _mCPServerConfiguration == null ? null : mcpclient.proxies.MCPServerConfiguration.initialize(getContext(), _mCPServerConfiguration);
+		this.__ConsumedMCPService = _consumedMCPService;
+		this.ConsumedMCPService = _consumedMCPService == null ? null : mcpclient.proxies.ConsumedMCPService.initialize(getContext(), _consumedMCPService);
 		this.__Tool = _tool;
 		this.Tool = _tool == null ? null : mcpclient.proxies.Tool.initialize(getContext(), _tool);
 		this.Microflow = _microflow;
 		this.OverwritingToolName = _overwritingToolName;
 		this.OverwritingToolDescription = _overwritingToolDescription;
+		this.UserAccessApproval = _userAccessApproval == null ? null : genaicommons.proxies.ENUM_UserAccessApproval.valueOf(_userAccessApproval);
+		this.OverwritingDisplayTitle = _overwritingDisplayTitle;
+		this.DisplayDescription = _displayDescription;
 	}
 
 	@java.lang.Override
@@ -72,9 +81,9 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		// BEGIN USER CODE
 		try{
 			requireNonNull(Request, "Request is required.");
-			requireNonNull(MCPServerConfiguration, "MCPServerConfiguration is required for tool with name " + Tool.getName());
-			requireNonNull(Tool, "Tool is required for MCPServerConfiguration with name " + MCPServerConfiguration.getName());
-			requireNonNull(Microflow, "Microflow is required  for tool with name " + Tool.getName());
+			requireNonNull(ConsumedMCPService, "ConsumedMCPService is required for tool with name " + Tool.getName());
+			requireNonNull(Tool, "Tool is required for ConsumedMCPService with name " + ConsumedMCPService.getName());
+			requireNonNull(Microflow, "Microflow is required for tool with name " + Tool.getName());
 			
 			ToolCollection toolCollection = ToolCollectionImpl.getOrCreateToolCollection(getContext(), Request);
 			
@@ -104,7 +113,7 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		MCP tool = new MCP(getContext());
 		
 		tool.setMicroflow(Microflow);
-		tool.setMCPServerName(this.MCPServerConfiguration.getName());
+		tool.setMCPServerName(this.ConsumedMCPService.getName());
 		if (OverwritingToolName != null && !OverwritingToolName.isBlank()) {
 			tool.setName(OverwritingToolName);
 		} else { 
@@ -116,8 +125,11 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 			tool.setDescription(Tool.getDescription()); 
 		}
 		tool.setOriginalMCPToolName(Tool.getName());
-		tool.setMCP_MCPServerConfiguration(MCPServerConfiguration);
+		tool.setMCP_ConsumedMCPService(ConsumedMCPService);
 		tool.setSchema(Tool.getSchema());
+		tool.setDisplayDescription(DisplayDescription);
+		tool.setDisplayTitle(OverwritingDisplayTitle);
+		tool.setUserAccessApproval(UserAccessApproval);
 		List<Tool> ToolList = toolCollection.getToolCollection_Tool();
 		ToolList.add(tool);
 		toolCollection.setToolCollection_Tool(ToolList); 

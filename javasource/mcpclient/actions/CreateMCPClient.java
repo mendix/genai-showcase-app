@@ -57,7 +57,6 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 			requireNonNull(ClientConfig, "MCP Client Config is required.");
 			requireNonNull(ClientConfig.getMCPEndpoint(), "MCP Endpoint is required.");
 			requireNonNull(ClientConfig.getName(), "MCP Name is required.");
-			requireNonNull(ClientConfig.getVersion(), "Version is required.");
 			requireNonNull(ClientConfig.getProtocolVersion(), "Protocol version is required.");	
 			
 			//Client NPE creation

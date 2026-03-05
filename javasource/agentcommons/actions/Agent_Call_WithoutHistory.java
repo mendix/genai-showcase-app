@@ -18,8 +18,11 @@ import agentcommons.impl.AgentImpl;
 import agentcommons.impl.MxLogger;
 import agentcommons.proxies.ENUM_Agent_UsageType;
 import agentcommons.proxies.PromptToUse;
+import java.util.ArrayList;
+import java.util.List;
 import genaicommons.proxies.DeployedModel;
 import genaicommons.proxies.ENUM_MessageRole;
+import genaicommons.proxies.Message;
 import genaicommons.proxies.Request;
 import genaicommons.proxies.Response;
 
@@ -79,8 +82,12 @@ public class Agent_Call_WithoutHistory extends UserAction<IMendixObject>
 					return null;
 			PromptToUse promptToUse = PromptToUse.initialize(getContext(), promptObject);
 			Request request = genaicommons.proxies.microflows.Microflows.request_GetCreate(getContext(), OptionalRequest);
+			
+			// Add user message and ensure it comes first in the message list
+			addUserMessageFirst(getContext(), request, OptionalFileCollection, promptToUse.getUserPrompt());
 			agentcommons.proxies.microflows.Microflows.request_AddAgentCapabilities(getContext(), request, promptToUse);
-			genaicommons.proxies.microflows.Microflows.request_AddMessage(getContext(), request, ENUM_MessageRole.user, OptionalFileCollection, promptToUse.getUserPrompt());
+			
+			
 			Response response = genaicommons.proxies.microflows.Microflows.chatCompletions_WithHistory(getContext(), request, deployedModel);
 			return response == null ? null : response.getMendixObject();
 			
@@ -103,5 +110,26 @@ public class Agent_Call_WithoutHistory extends UserAction<IMendixObject>
 
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new MxLogger(Agent_Call_WithoutHistory.class);
+	
+	/**
+	 * Adds a user message to the request and ensures it is placed first in the message list.
+	 * This handles cases where assistant or tool messages were added before calling this action.
+	 */
+	private static void addUserMessageFirst(IContext context, Request request, genaicommons.proxies.FileCollection fileCollection, String userPrompt) throws Exception {
+		// Retrieve existing messages before adding the user message
+		List<Message> existingMessages = request.getRequest_Message();
+		
+		// Add the user message (returns the created message)
+		Message userMessage = genaicommons.proxies.microflows.Microflows.request_AddMessage(context, request, ENUM_MessageRole.user, fileCollection, userPrompt);
+		
+		// Create reordered list: user message first, then existing messages
+		List<Message> reorderedMessages = new ArrayList<>();
+		reorderedMessages.add(userMessage);
+		reorderedMessages.addAll(existingMessages);
+		
+		// Set the reordered messages on the request
+		request.setRequest_Message(reorderedMessages);
+	}
+	
 	// END EXTRA CODE
 }

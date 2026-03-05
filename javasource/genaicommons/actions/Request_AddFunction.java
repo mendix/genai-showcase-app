@@ -10,12 +10,16 @@
 package genaicommons.actions;
 
 import static java.util.Objects.requireNonNull;
+import java.util.List;
+import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import genaicommons.impl.FunctionImpl;
 import genaicommons.impl.MxLogger;
 import genaicommons.impl.ToolCollectionImpl;
+import genaicommons.proxies.Function;
 import genaicommons.proxies.ToolCollection;
+import genaicommons.proxies.Tool;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
@@ -37,13 +41,19 @@ public class Request_AddFunction extends UserAction<IMendixObject>
 	private final java.lang.String ToolName;
 	private final java.lang.String ToolDescription;
 	private final java.lang.String FunctionMicroflow;
+	private final genaicommons.proxies.ENUM_UserAccessApproval UserAccessApproval;
+	private final java.lang.String DisplayTitle;
+	private final java.lang.String DisplayDescription;
 
 	public Request_AddFunction(
 		IContext context,
 		IMendixObject _request,
 		java.lang.String _toolName,
 		java.lang.String _toolDescription,
-		java.lang.String _functionMicroflow
+		java.lang.String _functionMicroflow,
+		java.lang.String _userAccessApproval,
+		java.lang.String _displayTitle,
+		java.lang.String _displayDescription
 	)
 	{
 		super(context);
@@ -52,6 +62,9 @@ public class Request_AddFunction extends UserAction<IMendixObject>
 		this.ToolName = _toolName;
 		this.ToolDescription = _toolDescription;
 		this.FunctionMicroflow = _functionMicroflow;
+		this.UserAccessApproval = _userAccessApproval == null ? null : genaicommons.proxies.ENUM_UserAccessApproval.valueOf(_userAccessApproval);
+		this.DisplayTitle = _displayTitle;
+		this.DisplayDescription = _displayDescription;
 	}
 
 	@java.lang.Override
@@ -62,9 +75,7 @@ public class Request_AddFunction extends UserAction<IMendixObject>
 			requireNonNull(Request, "Request is required.");
 			FunctionImpl.validateFunctionInput(FunctionMicroflow, ToolName);
 			
-			ToolCollection toolCollection = ToolCollectionImpl.getOrCreateToolCollection(getContext(), Request);
-			
-			return FunctionImpl.createFunction(getContext(), FunctionMicroflow, ToolName, ToolDescription, toolCollection).getMendixObject();
+			return createFunction().getMendixObject();
 
 		} catch (Exception e) {
 			LOGGER.error(e);
@@ -85,5 +96,38 @@ public class Request_AddFunction extends UserAction<IMendixObject>
 
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new genaicommons.impl.MxLogger(Request_AddFunction.class);
+
+	/**
+	 * Creates a function object, adds it to a toolcollection
+	 * @param context
+	 * @param functionMicroflow
+	 * @param functionName
+	 * @param functionDescription
+	 * @param toolCollection
+	 * @return
+	 * @throws CoreException
+	 */
+	private Function createFunction() throws CoreException {
+		ToolCollection toolCollection = ToolCollectionImpl.getOrCreateToolCollection(getContext(), Request);
+		Function function = new Function(getContext());
+		function.setMicroflow(FunctionMicroflow);
+		function.setName(ToolName);	
+
+		//Optional parameters
+		function.setDescription(ToolDescription); 
+		function.setDisplayTitle(DisplayTitle);
+		function.setDisplayDescription(DisplayDescription);
+		if(UserAccessApproval != null) {
+			function.setUserAccessApproval(UserAccessApproval);
+		}else {
+			function.setUserAccessApproval(genaicommons.proxies.ENUM_UserAccessApproval.HiddenForUser);
+		}
+
+		List<Tool> ToolList = toolCollection.getToolCollection_Tool();
+		ToolList.add(function);
+		toolCollection.setToolCollection_Tool(ToolList); 
+
+		return function;
+	}
 	// END EXTRA CODE
 }
