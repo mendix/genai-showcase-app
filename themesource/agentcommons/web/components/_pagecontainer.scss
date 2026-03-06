@@ -1,5 +1,5 @@
-@import "../agent-builder-variables.scss";
-@import "../../../atlas_core/web/_variables.scss";
+@use '../../../../theme/web/custom-variables' as *;
+@use '../agent-builder-variables.scss' as *;
 
 //Agents Overview
 

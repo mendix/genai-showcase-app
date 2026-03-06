@@ -1,3 +1,5 @@
+@use '../../../../theme/web/custom-variables' as *;
+
 .responsive-image {
     &.mx-image-viewer {
     max-width: $font-size-default;

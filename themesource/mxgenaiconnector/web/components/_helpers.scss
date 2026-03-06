@@ -1,8 +1,8 @@
-@import "../../../../theme/web/custom-variables.scss";
+@use '../../../../theme/web/custom-variables' as *;
 
 .text-heading-4 {
-    font-weight: $font-weight-bold;
-    font-size: $font-size-h4;
+    font-weight: var(--font-weight-bold, $font-weight-bold);
+    font-size: var(--font-size-h4, $font-size-h4);
 }
 
 .visibility-none {

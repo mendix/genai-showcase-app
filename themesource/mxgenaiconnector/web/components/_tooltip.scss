@@ -1,3 +1,5 @@
+@use '../../../../theme/web/custom-variables' as *;
+
 .info-tooltip {
     .widget-tooltip-content {
         position: relative;
@@ -23,7 +25,7 @@
 }
 
 .info-icon {
-    margin: 0 0 0 $spacing-smaller;
+    margin: 0 0 0 var(--spacing-smaller, $spacing-smaller);
     padding: 0;
     img {
         height: 16px;

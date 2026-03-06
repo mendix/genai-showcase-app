@@ -28265,7 +28265,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: center;
 }
 
-.row-text-img, .tooltip-icon-text, .tooltip-row-text-icon, .tooltip-version-draft, .tooltip-header {
+.row-text-img, .tooltip-header, .tooltip-version-draft, .tooltip-row-text-icon, .tooltip-icon-text {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -28815,212 +28815,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin: 0px;
 }
 
-/* .chat-input-wrapper {
-    position: relative;
-    display: flex !important;
-    flex-direction: column; 
-    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-    color: $form-input-color;
-    border: 1px solid $form-input-border-color;
-    border-radius: $form-input-border-radius;
-    padding: $spacing-small;
-
-
-    .form-group {
-        position: relative;
-        width: 100%;
-        padding-right: 0 !important;
-
-        .form-control {
-            width: 100%;
-            max-height: $chat-input-max-height;
-            overflow: auto;
-            border: none !important;
-            box-shadow: none !important;
-            padding: 0;
-            margin-right: 0;
-            outline: none !important;
-            background: none !important;
-        }
-    }
-
-      .click-overlay {
-        position: absolute;
-        inset: 0;               // top:0; right:0; bottom:0; left:0;
-        z-index: 1;
-        cursor: text;
-    }
-
-    .has-error {
-        &:before{
-            display:none;
-        }
-        .alert {
-            display: none !important;
-        }
-    }  
-
-    .send-btn-container {
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;  
-
-        .send-btn {
-            width: $send-btn-size;
-            height: $send-btn-size;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-
-            img {
-                margin: 0;
-            }
-
-            .glyphicon {
-                font-size: $send-btn-size / 2;
-            }
-        }
-    }
-} */
-/* 
-.chat-input-wrapper {
-    position: relative;
-    //row-center
-    display: flex !important;
-    align-items: center !important;
-    flex-flow: row !important;
-    justify-content: center !important;
-
-    .form-group {
-        width: 100%;
-        padding-left: 0px !important;
-        padding-right: 0px !important;
-
-        .form-control {
-            padding-right: $send-btn-size + 36px;
-            max-height: $chat-input-max-height;
-            overflow: auto;
-        }
-    }
-
-    .has-error {
-        &:before{
-            display:none;
-        }
-        .alert {
-            display: none !important;
-        }
-    }  
-
-    .send-btn-container {
-        //row-right
-        display: flex !important;
-        align-items: center !important;
-        flex-flow: row !important;
-        justify-content: flex-end !important;
-
-        .send-btn {
-            right: 58px / 2 - $send-btn-size / 2;
-            bottom: 58px / 2 - $send-btn-size / 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration-line: none;
-            border-radius: 8px;
-            width: $send-btn-size;
-            height: $send-btn-size;
-            padding: 0px;
-
-            img {
-                margin: 0;
-                width: unset;
-            }
-
-            .glyphicon {
-                top: 0;
-                font-size: $send-btn-size / 2;
-                left: -2px;
-                margin: 0px;
-            }
-        }
-    }
-}
-
-
-
-.chat-container-border {
-    display: flex;
-    flex: 1;
-    min-width: 50px;
-    height: $form-input-height;
-    padding: $form-input-padding-y $form-input-padding-x;
-    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-    color: $form-input-color;
-    border: 1px solid $form-input-border-color;
-    border-radius: $form-input-border-radius;
-    background-color: $form-input-bg;
-    background-image: none;
-    box-shadow: none;
-    font-size: $form-input-font-size;
-    line-height: $form-input-line-height;
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    position: relative;
-    display: flex !important;
-    align-items: center !important;
-    flex-flow: row !important;
-
-    .no-border textarea.form-control {
-        border: none !important;
-        box-shadow: none !important;
-        outline: none !important;
-    }
-    .has-error {
-        &:before{
-            display:none;
-        }
-        .alert {
-            display: none !important;
-        }
-    }  
-
-    .send-btn-container {
-        //row-right
-        display: flex !important;
-        align-items: center !important;
-        flex-flow: row !important;
-        justify-content: flex-end !important;
-
-        .send-btn {
-            //position: absolute;
-            right: 58px / 2 - $send-btn-size / 2;
-            bottom: 58px / 2 - $send-btn-size / 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration-line: none;
-            border-radius: 8px;
-            width: $send-btn-size;
-            height: $send-btn-size;
-            padding: 0px;
-
-            img {
-                margin: 0;
-                width: unset;
-            }
-
-            .glyphicon {
-                top: 0;
-                font-size: $send-btn-size / 2;
-                left: -2px;
-                margin: 0px;
-            }
-        }
-    }
-
-} */
 .chat-bubble-wrapper {
   display: flex;
   align-items: flex-start;
@@ -29077,6 +28871,34 @@ input[type=checkbox].three-state-checkbox + .control-label {
   cursor: not-allowed;
   pointer-events: none;
   opacity: 0.65;
+}
+
+.tool-message {
+  border-radius: 4px;
+  border: 1px solid;
+  border-color: #E7E7E9;
+}
+.tool-message .tool-title {
+  font-weight: 600;
+  background-color: #E7E7E9;
+  padding: 8px;
+  display: block;
+}
+.tool-message .tool-details {
+  padding: 8px;
+}
+.tool-message .reject-button {
+  background-color: transparent;
+  color: #0a1325;
+  border: none;
+}
+.tool-message .reject-button:hover {
+  background-color: #e7e7e9;
+}
+
+.tool-status-image {
+  width: 16px;
+  margin: 4px;
 }
 
 .chart-input.widget-chart .fills .js-fill,
@@ -29177,41 +28999,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .filter-gallery :where(.widget-gallery-footer-controls) {
   display: unset;
-}
-
-.tool-message {
-  border-radius: 4px;
-  border: 1px solid;
-  border-color: #E7E7E9;
-}
-.tool-message .tool-title {
-  font-weight: 600;
-  background-color: #E7E7E9;
-  padding: 8px;
-  display: block;
-}
-.tool-message .tool-details {
-  padding: 8px;
-}
-.tool-message .reject-button {
-  background-color: transparent;
-  color: #0a1325;
-  border: none;
-}
-.tool-message .reject-button:hover {
-  background-color: #e7e7e9;
-}
-
-.tool-status-image {
-  width: 16px;
-  margin: 4px;
-}
-
-.popup-no-header .modal-content .modal-header {
-  border: none;
-}
-.popup-no-header .modal-content .modal-header .close {
-  display: none;
 }
 
 .responsive-image.mx-image-viewer {
@@ -29508,6 +29295,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
    ============================================================ */
 .agent-popup-midsize {
   width: 60vw;
+}
+
+.popup-no-header .modal-content .modal-header {
+  border: none;
+}
+.popup-no-header .modal-content .modal-header .close {
+  display: none;
 }
 
 .chat-listview-stylingless.mx-listview ul > li, .chat-listview-stylingless.mx-listview ol > li {
@@ -30406,13 +30200,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .model-badge--default {
-  background: #fafafb;
-  border: 1px solid #a2a2a3;
+  background: var(--color-default-lighter, #fafafb);
+  border: 1px solid var(--color-default-dark, #a2a2a3);
 }
 
 .model-badge--primary {
-  background: #d4dbfa;
-  border: 1px solid #1b34a0;
+  background: var(--color-primary-lighter, #d4dbfa);
+  border: 1px solid var(--color-primary-dark, #1b34a0);
 }
 
 .datagrid--no-scroll .widget-datagrid-content {
@@ -30421,8 +30215,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .datagrid--fixed-row-height .table .td {
-  height: 58px;
-  padding: 8px;
+  height: calc(3 * var(--font-size-default, 14px) + 2 * var(--spacing-small, 8px));
+  padding: var(--spacing-small, 8px);
   border-bottom: none;
 }
 .datagrid--fixed-row-height .table .td .empty-placeholder {
@@ -30431,7 +30225,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .datagrid--fixed-row-height .table .th {
-  padding: 8px;
+  padding: var(--spacing-small, 8px);
 }
 
 .datagrid--fixed-row-height .table-header {
@@ -30439,8 +30233,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .text-heading-4 {
-  font-weight: bold;
-  font-size: 18px;
+  font-weight: var(--font-weight-bold, bold);
+  font-size: var(--font-size-h4, 18px);
 }
 
 .visibility-none {
@@ -30477,7 +30271,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .info-icon {
-  margin: 0 0 0 4px;
+  margin: 0 0 0 var(--spacing-smaller, 4px);
   padding: 0;
 }
 .info-icon img {
@@ -30517,7 +30311,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: auto;
   padding-left: 4px;
   padding-right: 4px;
-  border-radius: 5px;
+  border-radius: 4px;
   border: 1px solid #4FD84F;
   background-color: #E1FAE1;
 }
@@ -30552,16 +30346,16 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .agent-badge--default {
   background: #fafafb;
-  border: 1px solid #909294;
+  border: 1px solid #a2a2a3;
 }
 
 .agent-badge--primary {
-  background: #e9edfc;
+  background: #d4dbfa;
   border: 1px solid #1b34a0;
 }
 
 .btn.mx-button.btn-without-border, .btn.mx-button.btn-without-border-red {
-  color: #6c717e;
+  color: #0a1325;
   border: 1px solid transparent;
 }
 .btn.mx-button.btn-without-border.mx-link, .btn.mx-button.mx-link.btn-without-border-red {
@@ -30573,18 +30367,18 @@ input[type=checkbox].three-state-checkbox + .control-label {
   cursor: default;
 }
 .btn.mx-button.btn-without-border:hover, .btn.mx-button.btn-without-border-red:hover {
-  background-color: #ced0d3;
-  border: 1px solid #ced0d3;
+  background-color: #e7e7e9;
+  border: 1px solid #e7e7e9;
 }
 .btn.mx-button.btn-without-border:hover, .btn.mx-button.btn-without-border-red:hover, .btn.mx-button.btn-without-border:active, .btn.mx-button.btn-without-border-red:active, .btn.mx-button.btn-without-border:focus, .btn.mx-button.btn-without-border-red:focus {
-  color: #6c717e;
+  color: #0a1325;
 }
 .btn.mx-button.btn-without-border-red {
   color: #D31E23;
 }
 .btn.mx-button.btn-without-border-red:hover {
-  background-color: #fceced;
-  border: 1px solid #fceced;
+  background-color: #f9d9dc;
+  border: 1px solid #f9d9dc;
 }
 .btn.mx-button.btn-without-border-red:hover, .btn.mx-button.btn-without-border-red:active, .btn.mx-button.btn-without-border-red:focus {
   color: #D31E23;
@@ -30683,7 +30477,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   align-items: center;
   justify-content: space-between;
   height: 1.428571429;
-  border-radius: 5px;
+  border-radius: 4px;
   transition: all 0.2s ease-in-out;
 }
 .link-container .btn-wrapper {
@@ -30701,7 +30495,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   transition: all 0.2s ease-in-out;
   border: none;
   background-color: transparent;
-  color: #6c717e;
+  color: #0a1325;
   padding: 0 0;
   height: 12px;
   display: flex;
@@ -30759,7 +30553,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-bottom: 4px;
   text-align: left;
   text-overflow: ellipsis;
-  color: #0a1326;
+  color: #0a1325;
   font-size: 14px;
   font-weight: 600;
 }
@@ -30855,47 +30649,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 500px;
 }
 
-.mcp-tool {
-  margin: 0;
-  color: #a9acb3;
-  padding-bottom: 16px;
-  word-break: break-word;
-}
-.mcp-tool.mcp-tool-edited {
-  border-left: 3px solid;
-  border-color: #264ae5;
-  color: #9BB7F4;
-}
-.mcp-tool.active {
-  font-weight: bold;
-  border-left: 3px solid;
-  border-color: #264ae5;
-  color: #264ae5;
-}
-.mcp-tool .status-icon {
-  width: 16px;
-  margin-right: 8px;
-  margin-left: 4px;
-}
-
-.mcp-tool-import .tool-name {
-  width: 60%;
-}
-.mcp-tool-import .tool-name .mx-checkbox {
-  margin-bottom: auto;
-}
-.mcp-tool-import .tool-name .mx-checkbox .control-label {
-  font-weight: normal;
-}
-.mcp-tool-import .tool-access-approval {
-  width: 40%;
-  margin-top: auto;
-  margin-bottom: auto;
-}
-.mcp-tool-import .tool-access-approval .form-group {
-  margin-bottom: 0;
-}
-
 .listview-bullet-points > ul {
   list-style-type: disc;
   margin-bottom: 0px;
@@ -30979,6 +30732,47 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .testcase-table .delete-icon {
   min-width: 5%;
   color: #e33f4e;
+}
+
+.mcp-tool {
+  margin: 0;
+  color: #a9acb3;
+  padding-bottom: 16px;
+  word-break: break-word;
+}
+.mcp-tool.mcp-tool-edited {
+  border-left: 3px solid;
+  border-color: #264ae5;
+  color: #9BB7F4;
+}
+.mcp-tool.active {
+  font-weight: bold;
+  border-left: 3px solid;
+  border-color: #264ae5;
+  color: #264ae5;
+}
+.mcp-tool .status-icon {
+  width: 16px;
+  margin-right: 8px;
+  margin-left: 4px;
+}
+
+.mcp-tool-import .tool-name {
+  width: 60%;
+}
+.mcp-tool-import .tool-name .mx-checkbox {
+  margin-bottom: auto;
+}
+.mcp-tool-import .tool-name .mx-checkbox .control-label {
+  font-weight: normal;
+}
+.mcp-tool-import .tool-access-approval {
+  width: 40%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.mcp-tool-import .tool-access-approval .form-group {
+  margin-bottom: 0;
 }
 
 .agents-page-content-container {
@@ -31784,7 +31578,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .card-base .card-content .card-description, .card-orange .card-content .card-description, .card-yellow .card-content .card-description, .card-violet .card-content .card-description, .card-lightpurple .card-content .card-description, .card-darkpurple .card-content .card-description, .card-blue .card-content .card-description, .card-green .card-content .card-description, .card-turquoise .card-content .card-description, .card-grey .card-content .card-description, .card-light-grey .card-content .card-description, .card-lightest-grey .card-content .card-description {
   -webkit-line-clamp: 2;
-  height: 40px;
 }
 
 .card-lightest-grey {

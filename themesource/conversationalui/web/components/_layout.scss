@@ -1,5 +1,4 @@
-@import "../../../atlas_core/web/_variables.scss";
-@import "../../../datawidgets/web/variables.scss";
+@use '../../../../theme/web/custom-variables' as *;
 
 /* ============================================================
    Animations
@@ -128,4 +127,11 @@
 
 .agent-popup-midsize {
   width: 60vw;
+}
+
+.popup-no-header .modal-content .modal-header{
+      border: none;
+      .close{
+        display:none;
+    }
 }

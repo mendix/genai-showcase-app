@@ -1,5 +1,5 @@
-@import "../../../atlas_core/web/variables";
-
+@use '../../../../theme/web/custom-variables' as *;
+@use '../agent-builder-variables.scss' as *;
 //fix for datagrid scrollbar caused by popupmenu
 .datagrid--no-scroll {
     .widget-datagrid-content {

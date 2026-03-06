@@ -1,4 +1,4 @@
-@import "../../../atlas_core/web/variables";
+@use '../../../../theme/web/custom-variables' as *;
 
 /* Custom Alert */
 .alert-danger-text {

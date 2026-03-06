@@ -1,5 +1,6 @@
-@import "../../../atlas_core/web/variables";
-@import "../traceability-variables.scss";
+@use '../../../../theme/web/custom-variables' as *;
+@use '../traceability-variables' as *;
+@use '../abstracts/helpers' as *;
 
 .convui-badge {
     display: inline-block;

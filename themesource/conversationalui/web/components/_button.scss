@@ -1,5 +1,4 @@
-@import "../../../atlas_core/web/variables";
-
+@use '../../../../theme/web/custom-variables' as *;
 
 .btn.mx-button {
     &.btn-border-primary { 

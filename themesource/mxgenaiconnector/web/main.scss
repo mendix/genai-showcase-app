@@ -1,4 +1,4 @@
-@import 'components/badge';
-@import 'components/grid';
-@import 'components/helpers';
-@import 'components/tooltip';
+@forward 'components/badge';
+@forward 'components/grid';
+@forward 'components/helpers';
+@forward 'components/tooltip';
