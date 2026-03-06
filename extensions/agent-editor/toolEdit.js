@@ -1,222 +1,224 @@
-import { w as t, G as T, r as f, aM as V, E, C as k, aK as q, D as I } from "./TextInputWithIcon-Bxcjz2pl.js";
-import { t as L, c as O } from "./logger-CC_FxqwC.js";
-import { D as P } from "./DialogFooter-BWIHywC0.js";
-import { T as R, c as B, h as p, a as K, b as A } from "./toolHandlers-CQqEp1kf.js";
-import { T as b, n as F, h as _ } from "./genAICommonsEntities-Dtcj_rDj.js";
-import { l as g } from "./index-DMt7dhDX.js";
-import { T as G } from "./TextInputLabeled-Cr8pg4pf.js";
-import { S as H, N as J } from "./ComboBox-D4VTIJ8V.js";
-import { m as U } from "./consumedMCPServiceUtils-BaykyGe_.js";
-const W = [
-  { key: "Microflow", caption: "Microflow tool" },
-  { key: "MCP", caption: "MCP tool" }
-], j = ({ selectedKey: o, validationInfo: a, onToolTypeChange: i }) => /* @__PURE__ */ t.jsx(
+import { w as a, G as C, r as h, W as E, E as k, C as q, U as I, D as L } from "./Icon-CvuNKlFz.js";
+import { t as O, c as P } from "./logger-CC_FxqwC.js";
+import { D as R } from "./DialogFooter-nKSiefLD.js";
+import { T as B, c as A, h as f, a as F, b as K } from "./toolHandlers-CDGYc1xE.js";
+import { T as j, n as U, h as W } from "./genAICommonsEntities-BRtbnIm-.js";
+import { T as d, b as _, p as b } from "./index-CldaZZNg.js";
+import { T as G } from "./TextInputLabeled-DcVXDdJd.js";
+import { S as H, I as J } from "./ComboBox-82u21EpD.js";
+const $ = [
+  { key: d.Microflow, caption: "Microflow tool" },
+  { key: d.MCP, caption: "MCP tool" }
+], v = ({ selectedKey: o, validationInfo: n, onToolTypeChange: i }) => /* @__PURE__ */ a.jsx(
   H,
   {
     "aria-label": "Tool type",
     label: "Tool type",
     selectedKey: o,
-    validate: () => a.isValidType,
+    validate: () => n.isValidType,
     onSelectionChange: i,
-    children: W.map((l) => /* @__PURE__ */ t.jsx(J, { id: l.key, children: l.caption }, l.key))
+    children: $.map((l) => /* @__PURE__ */ a.jsx(J, { id: l.key, children: l.caption }, l.key))
   }
-), $ = ({
+), z = ({
   tool: o,
-  validationInfo: a,
+  validationInfo: n,
   onFieldChange: i,
   onSelectDocument: l,
   onShowDocument: e,
-  onToolTypeChange: r
-}) => /* @__PURE__ */ t.jsxs(t.Fragment, { children: [
-  /* @__PURE__ */ t.jsxs(T, { label: "Common", children: [
-    /* @__PURE__ */ t.jsx(
-      j,
+  onToolTypeChange: m
+}) => /* @__PURE__ */ a.jsxs(a.Fragment, { children: [
+  /* @__PURE__ */ a.jsxs(C, { label: "Common", children: [
+    /* @__PURE__ */ a.jsx(
+      v,
       {
         selectedKey: o.toolType,
-        validationInfo: a,
-        onToolTypeChange: r
+        validationInfo: n,
+        onToolTypeChange: m
       }
     ),
-    /* @__PURE__ */ t.jsx(
-      b,
+    /* @__PURE__ */ a.jsx(
+      j,
       {
         ariaLabel: "Microflow",
         label: "Microflow",
         value: o.document.qualifiedName,
-        icon: o.document.qualifiedName ? /* @__PURE__ */ t.jsx(F, {}) : void 0,
+        icon: o.document.qualifiedName ? /* @__PURE__ */ a.jsx(U, {}) : void 0,
         onClick: l,
         buttonCaption: "Select...",
         buttonCaptionSecondary: o.document.qualifiedName ? "Show" : void 0,
         onClickSecondary: o.document.qualifiedName ? e : void 0,
-        validate: () => a.isValidDocument
+        validate: () => n.isValidDocument
       }
     )
   ] }),
-  /* @__PURE__ */ t.jsxs(T, { label: "Naming", children: [
-    /* @__PURE__ */ t.jsx(
+  /* @__PURE__ */ a.jsxs(C, { label: "Naming", children: [
+    /* @__PURE__ */ a.jsx(
       G,
       {
         label: "Name",
         ariaLabel: "Name",
         value: o.name,
-        onChange: (d) => i("name", d),
-        validate: () => a.isValidName
+        onChange: (r) => i("name", r),
+        validate: () => n.isValidName
       }
     ),
-    /* @__PURE__ */ t.jsx(
-      R,
+    /* @__PURE__ */ a.jsx(
+      B,
       {
         label: "Description",
         ariaLabel: "Description",
         value: o.description,
-        onChange: (d) => i("description", d),
-        validate: () => a.isValidDescription
+        onChange: (r) => i("description", r),
+        validate: () => n.isValidDescription
       }
     )
   ] })
-] }), z = ({
+] }), Q = ({
   tool: o,
-  validationInfo: a,
+  validationInfo: n,
   onSelectDocument: i,
   onShowDocument: l,
   onToolTypeChange: e
-}) => /* @__PURE__ */ t.jsxs(T, { label: "Common", children: [
-  /* @__PURE__ */ t.jsx(
-    j,
+}) => /* @__PURE__ */ a.jsxs(C, { label: "Common", children: [
+  /* @__PURE__ */ a.jsx(
+    v,
     {
       selectedKey: o.toolType,
-      validationInfo: a,
+      validationInfo: n,
       onToolTypeChange: e
     }
   ),
-  o.toolType === "MCP" && /* @__PURE__ */ t.jsx(
-    b,
+  o.toolType === d.MCP && /* @__PURE__ */ a.jsx(
+    j,
     {
       ariaLabel: "Consumed MCP service",
       label: "Consumed MCP service",
       value: o.document.qualifiedName,
-      icon: o.document.qualifiedName ? U : void 0,
+      icon: o.document.qualifiedName ? _ : void 0,
       buttonCaption: "Select...",
       onClick: i,
-      validate: () => a.isValidDocument,
+      validate: () => n.isValidDocument,
       buttonCaptionSecondary: o.document.qualifiedName ? "Show" : void 0,
       onClickSecondary: o.document.qualifiedName ? l : void 0
     }
   )
-] }), Q = {
+] }), X = {
   isValidName: !0,
   isValidDescription: !0,
   isValidDocument: !0,
   isValidType: !0
-}, X = {
+}, Y = {
   name: "isValidName",
   description: "isValidDescription",
   toolType: "isValidType",
   document: "isValidDocument"
-}, Y = ({ initialTool: o, studioPro: a, agent: i, onClose: l }) => {
-  const [e, r] = f.useState(o || B()), [d, m] = f.useState(Q), u = f.useCallback(
-    async (n) => ({
-      isValidName: await p("name", n, i, a),
-      isValidDescription: await p("description", n, i, a),
-      isValidDocument: await p("document", n, i, a),
-      isValidType: await p("toolType", n, i, a)
+}, Z = ({ initialTool: o, studioPro: n, agent: i, onClose: l }) => {
+  const [e, m] = h.useState(o || A()), [r, p] = h.useState(X), u = h.useCallback(
+    async (t) => ({
+      isValidName: await f("name", t, i, n),
+      isValidDescription: await f("description", t, i, n),
+      isValidDocument: await f("document", t, i, n),
+      isValidType: await f("toolType", t, i, n)
     }),
-    [a, i]
+    [n, i]
   );
-  f.useEffect(() => {
-    o && o.name && u(o).then((n) => {
-      m(n);
+  h.useEffect(() => {
+    o && o.name && u(o).then((t) => {
+      p(t);
     });
   }, [o, u]);
-  const h = async () => {
-    const n = await u(e);
-    if (m(n), !Object.values(n).some((c) => c !== !0)) {
-      const c = e.toolType === "MCP" ? { ...e, name: "", description: "" } : e;
+  const T = async () => {
+    const t = await u(e);
+    if (p(t), !Object.values(t).some((c) => c !== !0)) {
+      const c = e.toolType === d.MCP ? { ...e, name: "", description: "" } : e;
       l(c);
     }
-  }, v = () => {
-    l(null);
   }, D = () => {
-    e.toolType === "Microflow" ? window.open(
+    l(null);
+  }, S = () => {
+    e.toolType === d.Microflow ? window.open(
       "https://docs.mendix.com/appstore/modules/genai/genai-for-mx/agent-commons/#adding-microflows-as-tools",
-      "_blank"
-    ) : e.toolType === "MCP" ? window.open(
+      "_blank",
+      "noopener,noreferrer"
+    ) : e.toolType === d.MCP ? window.open(
       "https://docs.mendix.com/appstore/modules/genai/genai-for-mx/agent-commons/#adding-tools-from-mcp-servers",
-      "_blank"
+      "_blank",
+      "noopener,noreferrer"
     ) : window.open(
       "https://docs.mendix.com/appstore/modules/genai/genai-for-mx/agent-commons/#adding-tools",
-      "_blank"
+      "_blank",
+      "noopener,noreferrer"
     );
-  }, y = async (n, s) => {
-    const c = X[n];
-    if (c && d[c] !== !0) {
-      const S = await p(n, s, i, a);
-      m((N) => ({ ...N, [c]: S }));
+  }, y = async (t, s) => {
+    const c = Y[t];
+    if (c && r[c] !== !0) {
+      const N = await f(t, s, i, n);
+      p((V) => ({ ...V, [c]: N }));
     }
-  }, M = (n, s) => {
-    const c = { ...e, [n]: s };
-    r(c), y(n, c);
-  }, C = async () => {
-    const n = await A(
-      a,
-      e.toolType === "MCP" ? g : "Microflows$Microflow"
+  }, M = (t, s) => {
+    const c = { ...e, [t]: s };
+    m(c), y(t, c);
+  }, x = async () => {
+    const t = await K(
+      n,
+      e.toolType === d.MCP ? b : "Microflows$Microflow"
     );
-    if (n) {
-      const s = { ...e, document: n };
-      r(s), y("document", s);
+    if (t) {
+      const s = { ...e, document: t };
+      m(s), y("document", s);
     }
-  }, x = () => {
-    var n, s, c;
-    e.toolType === "Microflow" && ((n = e.document) != null && n.qualifiedName) ? _(a, e.document.qualifiedName) : e.toolType === "MCP" && ((s = e.document) != null && s.qualifiedName) && ((c = e.document) != null && c.documentId) && K(a, e.document, g);
-  }, w = (n) => {
+  }, w = () => {
+    var t, s, c;
+    e.toolType === d.Microflow && ((t = e.document) != null && t.qualifiedName) ? W(n, e.document.qualifiedName) : e.toolType === d.MCP && ((s = e.document) != null && s.qualifiedName) && ((c = e.document) != null && c.documentId) && F(n, e.document, b);
+  }, g = (t) => {
     const s = {
       ...e,
-      toolType: n,
+      toolType: t,
       document: {
         documentId: "",
         qualifiedName: ""
       }
     };
-    r(s), y("toolType", s);
+    m(s), y("toolType", s);
   };
-  return /* @__PURE__ */ t.jsxs(V, { children: [
-    /* @__PURE__ */ t.jsx(E, { children: /* @__PURE__ */ t.jsx(k, { children: e.toolType === "Microflow" ? /* @__PURE__ */ t.jsx(
-      $,
-      {
-        tool: e,
-        validationInfo: d,
-        onFieldChange: M,
-        onSelectDocument: C,
-        onShowDocument: x,
-        onToolTypeChange: w
-      }
-    ) : /* @__PURE__ */ t.jsx(
+  return /* @__PURE__ */ a.jsxs(E, { children: [
+    /* @__PURE__ */ a.jsx(k, { children: /* @__PURE__ */ a.jsx(q, { children: e.toolType === d.Microflow ? /* @__PURE__ */ a.jsx(
       z,
       {
         tool: e,
-        validationInfo: d,
-        onSelectDocument: C,
-        onShowDocument: x,
-        onToolTypeChange: w
+        validationInfo: r,
+        onFieldChange: M,
+        onSelectDocument: x,
+        onShowDocument: w,
+        onToolTypeChange: g
+      }
+    ) : /* @__PURE__ */ a.jsx(
+      Q,
+      {
+        tool: e,
+        validationInfo: r,
+        onSelectDocument: x,
+        onShowDocument: w,
+        onToolTypeChange: g
       }
     ) }) }),
-    /* @__PURE__ */ t.jsx(P, { onOk: h, onCancel: v, onHelp: D })
+    /* @__PURE__ */ a.jsx(R, { onOk: T, onCancel: D, onHelp: S })
   ] });
-}, Z = ({ studioPro: o, initialTool: a, agent: i, onClose: l }) => /* @__PURE__ */ t.jsx(I, { studioPro: o, children: /* @__PURE__ */ t.jsx(Y, { initialTool: a, studioPro: o, agent: i, onClose: l }) }), de = {
-  async loaded(o, a) {
-    const i = L(o), l = O(i);
+}, ee = ({ studioPro: o, initialTool: n, agent: i, onClose: l }) => /* @__PURE__ */ a.jsx(L, { studioPro: o, children: /* @__PURE__ */ a.jsx(Z, { initialTool: n, studioPro: o, agent: i, onClose: l }) }), re = {
+  async loaded(o, n) {
+    const i = O(o), l = P(i);
     try {
       const e = document.getElementById("root");
       if (!e)
         throw new Error("Failed to find the root element");
-      const r = q.createRoot(e);
-      let d;
-      a.tool && (d = JSON.parse(decodeURIComponent(a.tool)));
-      const m = JSON.parse(decodeURIComponent(a.agent)), u = (h) => {
-        i.ui.dialogs.closeWithResult(a.dialogId, h);
+      const m = I.createRoot(e);
+      let r;
+      n.tool && (r = JSON.parse(decodeURIComponent(n.tool)));
+      const p = JSON.parse(decodeURIComponent(n.agent)), u = (T) => {
+        i.ui.dialogs.closeWithResult(n.dialogId, T);
       };
-      r.render(
-        /* @__PURE__ */ t.jsx(f.StrictMode, { children: /* @__PURE__ */ t.jsx(Z, { studioPro: i, initialTool: d, agent: m, onClose: u }) })
+      m.render(
+        /* @__PURE__ */ a.jsx(h.StrictMode, { children: /* @__PURE__ */ a.jsx(ee, { studioPro: i, initialTool: r, agent: p, onClose: u }) })
       );
     } catch (e) {
       throw l.error("Error editing agent tool:", e), new Error("Error editing agent tool:", e);
@@ -224,6 +226,6 @@ const W = [
   }
 };
 export {
-  de as component
+  re as component
 };
 //# sourceMappingURL=toolEdit.js.map

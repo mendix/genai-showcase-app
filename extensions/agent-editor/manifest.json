@@ -1,15 +1,16 @@
 {
-  "mendixComponent": {
-    "entryPoints": {
-      "main": "main.js",
-      "ui": {
-        "agentEdit": "agentEdit.js",
-        "modelEdit": "modelEdit.js",
-        "toolEdit": "toolEdit.js",
-        "consumedMCPServiceEdit": "consumedMCPServiceEdit.js",
-        "knowledgebaseEdit": "knowledgebaseEdit.js",
-        "modelSettingsEdit": "modelSettingsEdit.js"
-      }
+    "mendixComponent": {
+        "entryPoints": {
+            "main": "main.js",
+            "ui": {
+                "agentEdit": "agentEdit.js",
+                "modelEdit": "modelEdit.js",
+                "toolEdit": "toolEdit.js",
+                "consumedMCPServiceEdit": "consumedMCPServiceEdit.js",
+                "knowledgebaseEdit": "knowledgebaseEdit.js",
+                "modelSettingsEdit": "modelSettingsEdit.js",
+                "mcpAuthenticationHeadersEdit": "mcpAuthenticationHeadersEdit.js"
+            }
+        }
     }
-  }
 }

@@ -1,11 +1,11 @@
-import { a as H, $ as B, c as T, b as $, F as G, H as S, I as O, r as h, j as K, s as V, q as R, t as U, u as W, w as n, x as _, y as E, J as I, K as k, S as P, L as q, T as J, G as M, D as z, P as X, E as Q, M as Y } from "./TextInputWithIcon-Bxcjz2pl.js";
-import { c as Z, C as ee } from "./CenteredLoadingSpinner-GhVhA5yR.js";
-import { c as re, a as te, b as ne, d as se, u as j } from "./modelUtils-CXZ28X2L.js";
-import { B as ae, C as oe } from "./ButtonWithLabel-DZihO6Yp.js";
+import { a as H, $ as B, c as T, b as $, F as G, H as S, I as O, r as h, j as K, s as V, q as R, t as U, u as W, w as n, x as _, y as E, J as I, K as k, S as w, L as q, T as J, G as M, D as z, P as X, E as Q, M as Y } from "./Icon-CvuNKlFz.js";
+import { c as Z, C as ee } from "./CenteredLoadingSpinner-DNWfddeI.js";
+import { c as re, a as te, b as ne, d as se, u as j } from "./modelUtils-BBnwiyO9.js";
+import { B as ae, C as oe } from "./ButtonWithLabel-c4xM3xr-.js";
 import { r as C, c as A } from "./logger-CC_FxqwC.js";
-import { S as ie } from "./Banner-DNPItzP7.js";
-import { T as le } from "./TextAreaAutogrow-uWcxhEjx.js";
-import { T as v } from "./TextInputLabeled-Cr8pg4pf.js";
+import { S as ie } from "./Banner-DqxPN7xb.js";
+import { T as le } from "./TextAreaAutogrow-CiInhCbj.js";
+import { T as v } from "./TextInputLabeled-DcVXDdJd.js";
 function de(r, e) {
   let { elementType: s = "a", onPress: a, onPressStart: l, onPressEnd: i, onClick: t, isDisabled: o, ...d } = r, u = {};
   s !== "a" && (u = {
@@ -29,9 +29,9 @@ function de(r, e) {
       ...u,
       "aria-disabled": o || void 0,
       "aria-current": r["aria-current"],
-      onClick: (w) => {
+      onClick: (P) => {
         var b;
-        (b = f.onClick) === null || b === void 0 || b.call(f, w), O(w, g, r.href, r.routerOptions);
+        (b = f.onClick) === null || b === void 0 || b.call(f, P), O(P, g, r.href, r.routerOptions);
       }
     })
   };
@@ -157,7 +157,7 @@ const F = ge(({ children: r, href: e, ...s }) => n.jsxs(ve, { href: e, ...s, chi
   } catch (i) {
     l.error("Error during MxCloud GenAI key import:", i);
     const t = "Failed to import MxCloud GenAI model key.", o = "Error during MxCloud GenAI key import: " + i;
-    r.ui.messageBoxes.show("error", t, o);
+    await r.ui.messageBoxes.show("error", t, o);
   }
 }, $e = (r) => {
   const e = r.providerFields;
@@ -176,7 +176,7 @@ function Ie(r, e, s) {
   };
   return s(a), a;
 }
-async function Pe(r, e, s, a) {
+async function we(r, e, s, a) {
   var t;
   const l = [
     {
@@ -196,11 +196,11 @@ async function Pe(r, e, s, a) {
     case "Failure": {
       const o = "No connection.", d = `Make sure you are connected to the internet and check if your key still exists in the Mendix GenAI portal and try again.
 ` + (((t = i.failedStep) == null ? void 0 : t.error) ?? "");
-      return r.ui.messageBoxes.show("error", o, d), !1;
+      return await r.ui.messageBoxes.show("error", o, d), !1;
     }
   }
 }
-const we = E(J)`
+const Pe = E(J)`
     height: 25px;
 `, je = ({
   label: r,
@@ -218,7 +218,7 @@ const we = E(J)`
 }) => {
   const y = d ? 8 : 0;
   return /* @__PURE__ */ n.jsxs(I, { marginTop: y, children: [
-    r && /* @__PURE__ */ n.jsx(k, { children: /* @__PURE__ */ n.jsx(P, { children: r }) }),
+    r && /* @__PURE__ */ n.jsx(k, { children: /* @__PURE__ */ n.jsx(w, { children: r }) }),
     /* @__PURE__ */ n.jsx(k, { fullWidth: !0, children: /* @__PURE__ */ n.jsxs(q, { children: [
       /* @__PURE__ */ n.jsx(k, { fullWidth: !0, children: /* @__PURE__ */ n.jsx(
         le,
@@ -232,7 +232,7 @@ const we = E(J)`
           validate: m
         }
       ) }),
-      /* @__PURE__ */ n.jsx(we, { onPress: i, isDisabled: f, children: l })
+      /* @__PURE__ */ n.jsx(Pe, { onPress: i, isDisabled: f, children: l })
     ] }) })
   ] });
 }, Fe = ({ studioPro: r, model: e, setModel: s, updateStudioProDocument: a }) => {
@@ -259,7 +259,7 @@ const we = E(J)`
     Ce(r, e, s, a)(), i(!1);
   }, f = async () => {
     i(!1);
-    const p = await Pe(r, e, s, a);
+    const p = await we(r, e, s, a);
     i(p);
   }, y = () => $e(e), c = () => {
     i(!1);
@@ -280,7 +280,7 @@ const we = E(J)`
       }
     ),
     !t.key && /* @__PURE__ */ n.jsxs(I, { children: [
-      /* @__PURE__ */ n.jsx(k, { children: /* @__PURE__ */ n.jsx(P, {}) }),
+      /* @__PURE__ */ n.jsx(k, { children: /* @__PURE__ */ n.jsx(w, {}) }),
       /* @__PURE__ */ n.jsx(k, { fullWidth: !0, children: /* @__PURE__ */ n.jsx(F, { href: "https://genai.home.mendix.com/p/resources", target: "_blank", children: "Create a key in the portal" }) })
     ] }),
     t.key && /* @__PURE__ */ n.jsxs(n.Fragment, { children: [
@@ -336,7 +336,7 @@ const we = E(J)`
         }
       ),
       /* @__PURE__ */ n.jsxs(I, { children: [
-        /* @__PURE__ */ n.jsx(k, { children: /* @__PURE__ */ n.jsx(P, {}) }),
+        /* @__PURE__ */ n.jsx(k, { children: /* @__PURE__ */ n.jsx(w, {}) }),
         /* @__PURE__ */ n.jsx(k, { fullWidth: !0, children: /* @__PURE__ */ n.jsx(F, { href: t.deepLinkURL, target: "_blank", children: "View resource in the portal" }) })
       ] }),
       /* @__PURE__ */ n.jsx(ae, { label: "Connection", buttonCaption: "Test", onPress: f }),
@@ -362,8 +362,8 @@ const we = E(J)`
         !t && p.providerFields && "keyImportHelper" in p.providerFields && (p.providerFields.keyImportHelper = ""), u({ ...p }), o(!0);
       } else
         throw new Error((c == null ? void 0 : c.error) || "Document not found");
-    }).catch((c) => {
-      s.show("error", "Error loading document", "Details: " + (c == null ? void 0 : c.message) || c);
+    }).catch(async (c) => {
+      await s.show("error", "Error loading document", "Details: " + (c == null ? void 0 : c.message) || c);
     });
   }, [l]);
   const f = async (c) => {
