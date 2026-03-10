@@ -157,7 +157,7 @@ public class ConverseStream extends UserAction<IMendixObject>
 			var responseStreamHandler = ConverseStreamResponseHandler.builder()
 	                .subscriber(ConverseStreamResponseHandler.Visitor.builder()
 	                        .onContentBlockDelta(chunk -> {
-	                            String responseText = chunk.delta().text();
+	                            String responseText = chunk.delta().text() + chunk.delta().reasoningContent().text();
 	                            currentMessage.add(responseText);
 	                            if (responseText != null && !responseText.isBlank()) {
 	                            	Core.microflowCall(CallbackMicroflow)
@@ -257,6 +257,8 @@ public class ConverseStream extends UserAction<IMendixObject>
 			builder.additionalModelResponseFieldPaths(getAdditionalResponseFields());
 		}
 		
+		builder.additionalModelRequestFields(getAdditionalRequestParams_ayca());
+		
 		return builder.build();
 	}
 	
@@ -301,6 +303,22 @@ public class ConverseStream extends UserAction<IMendixObject>
 		return abstractParams.size() > 0;
 	}
 	
+	// Getting additional request params dependent on type
+		private Document getAdditionalRequestParams_ayca() throws CoreException {
+			
+			Document thinkingDocument = Document.mapBuilder()
+	                .putString("type", "enabled")
+	                .putNumber("budget_tokens", 2000) // Use putNumber for numeric values
+	                .build();
+
+	        // Create the main "reasoning_config" Document
+	        Document reasoningConfigDocument = Document.mapBuilder()
+	                .putDocument("thinking", thinkingDocument) // Embed the thinking Document
+	                .build();
+	        
+	        return reasoningConfigDocument;
+			
+		}
 	// Getting additional request params dependent on type
 	private Document getAdditionalRequestParams() throws CoreException {
 		LOGGER.debug("Getting additional request parameters");

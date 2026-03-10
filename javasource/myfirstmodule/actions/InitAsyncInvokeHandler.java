@@ -15,6 +15,7 @@ import awsauthentication.proxies.Credentials;
 import awsauthentication.proxies.ENUM_Region;
 import myfirstmodule.handlers.StreamingInvokeModelHandler;
 import myfirstmodule.handlers.ConverseStreamHandler;
+import myfirstmodule.handlers.MendixCloudStreamHandler;
 import myfirstmodule.handlers.OpenAIStreamHandler;
 import myfirstmodule.handlers.AzureOpenAIStreamHandler;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -46,6 +47,7 @@ public class InitAsyncInvokeHandler extends UserAction<java.lang.Void>
 		Core.addRequestHandler("llm-streaming-converse", new ConverseStreamHandler());
 		Core.addRequestHandler("llm-streaming-openai", new OpenAIStreamHandler());
 		Core.addRequestHandler("llm-streaming-azureopenai", new AzureOpenAIStreamHandler());
+		Core.addRequestHandler("llm-streaming-mendixcloud", new MendixCloudStreamHandler());
 
 		// Legacy test handlers
 		Core.addRequestHandler("llm-streaming", new StreamingInvokeModelHandler());
