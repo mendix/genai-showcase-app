@@ -128,6 +128,11 @@ public class MendixCloud_ChatCompletions_Stream extends UserAction<java.lang.Voi
 	        }
 	        
 	        eventSource.cancel();
+	        
+	        
+	        
+	        // Connection must be closed before returning response! FEEDBACK!
+	        
 	        LOGGER.info("EventSource cancelled");
 	        return null;
 		        

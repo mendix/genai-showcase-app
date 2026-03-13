@@ -62,9 +62,9 @@ public class MendixCloudStreamHandler extends RequestHandler {
                 genaicommons.proxies.Request mxRequest = myfirstmodule.proxies.microflows.Microflows.request_GetFromJson(ctx, requestJSON);
                 LOGGER.debug("MendixCloudStreamHandler: Successfully parsed request from JSON");
                 
-                // Set up async context with timeout
-                AsyncContext asyncCtx = req.getHttpServletRequest().startAsync();
-                asyncCtx.setTimeout(15 * 60 * 1000); // 15 minutes
+                // Set up async context with timeout -> not async anymore
+                //AsyncContext asyncCtx = req.getHttpServletRequest().startAsync();
+                //asyncCtx.setTimeout(15 * 60 * 1000); // 15 minutes
 
                 // Configure response for Server-Sent Events
                 resp.setContentType("text/event-stream");
@@ -78,17 +78,25 @@ public class MendixCloudStreamHandler extends RequestHandler {
                 LOGGER.debug("MendixCloudStreamHandler: Streaming connection established with RequestID: " + requestId);
 
                 // Prepare parameters for microflow execution
-                Map<String, Object> params = new HashMap<String, Object>();
-                params.put("Request", mxRequest);
-                params.put("MxCloudDeployedModel", mxDeployedModel);
-                params.put("RequestID", requestId);
+                //Map<String, Object> params = new HashMap<String, Object>();
+                //params.put("Request", mxRequest);
+                //params.put("MxCloudDeployedModel", mxDeployedModel);
+                //params.put("RequestID", requestId);
                 
                 // Execute OpenAI streaming microflow asynchronously
                 LOGGER.info("MendixCloudStreamHandler: Starting async execution of MendixCloud_ChatCompletions_Stream microflow");
-                Core.executeAsync(ctx, "MyFirstModule.MendixCloud_ChatCompletions_Stream", true, params);
-
-                // Keep connection alive
-                Thread.sleep(15 * 60 * 1000);
+                
+                // keep track of async call so that the connection can be closed after it is completed. FEEDBACK!
+                // "MyFirstModule.MendixCloud_ChatCompletions_Stream"
+                //var futureObject = Core.executeAsync(ctx, mxDeployedModel.getMicroflow(), true, params);
+                //Call with execute and not async
+                //Core.microflowCall(ctx, mxDeployedModel.getMicroflow(), true, params);
+                Core.microflowCall("MyFirstModule.MendixCloud_ChatCompletions_Stream")
+                .withParam("Request", mxRequest)
+                .withParam("MxCloudDeployedModel", mxDeployedModel)
+                .withParam("RequestID", requestId)
+                .execute(ctx);
+               
                 } catch(Exception e){
                     LOGGER.error("Failed to parse JSON input: " + e.getMessage());
             }

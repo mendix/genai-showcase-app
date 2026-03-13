@@ -19,34 +19,8 @@ import { Big } from "big.js";
  */
 export async function JS_SubmitStreaming_Advanced(requestJSON, deployedModel, responseCollector) {
 	// BEGIN USER CODE
-		// Get the base URL from mx.appUrl
-		const baseUrl = mx.appUrl;
-		console.info('Mx App URL', baseUrl);
 
-		// Get the architecture from the deployedModel
-		const architecture = deployedModel.get("Architecture");
-		console.info('Deployed Model Architecture', architecture);
-
-		let endpoint = "";
-
-		// Construct the endpoint based on the architecture
-		switch (architecture) {
-			case "Amazon Bedrock":
-				endpoint = `${baseUrl}llm-streaming-converse`;
-				break;
-			case "OpenAI":
-				endpoint = `${baseUrl}llm-streaming-openai`;
-				break;
-			case "Azure OpenAI":
-				endpoint = `${baseUrl}llm-streaming-azureopenai`;
-				break;
-			// You might want to add a default case or handle other architectures here
-			default:
-				console.warn(`Unknown architecture: ${architecture}. Falling back to a default or throwing an error.`);
-				throw new Error(`Unsupported model architecture: ${architecture}`);
-		}
-
-	const response = await fetch(endpoint, {
+	const response = await fetch("http://localhost:8080/llm-streaming-converse", {
 		method: "POST",
 		headers: {			
 			"Content-Type": "application/json",
@@ -54,7 +28,7 @@ export async function JS_SubmitStreaming_Advanced(requestJSON, deployedModel, re
 		},
 		body: JSON.stringify({
 			request: requestJSON,
-			deployedModel: deployedModel.get("Model")
+			deployedModel: deployedModel
 		})
 	})
 
