@@ -669,8 +669,19 @@ public class Converse extends UserAction<IMendixObject>
 		Builder builder = ToolUseBlock.builder()
 				.name(mxToolCall.getName())
 				.toolUseId(mxToolCall.getToolCallId());
-		
-		builder.input(Document.mapBuilder().build());		
+
+		String toolInput = mxToolCall.getInput();
+		if (toolInput != null && !toolInput.isBlank()) {
+			try {
+				builder.input(jsonNodeToDocument(MAPPER.readTree(toolInput)));
+			} catch (Exception e) {
+				LOGGER.warn("Invalid tool input JSON for tool call '" + mxToolCall.getToolCallId() + "'. Falling back to empty input. Error: " + e.getMessage());
+				builder.input(Document.mapBuilder().build());
+			}
+		} else {
+			builder.input(Document.mapBuilder().build());
+		}
+
 		return ContentBlock.builder().toolUse(builder.build()).build();
 	}
 	
