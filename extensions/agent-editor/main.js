@@ -1,8 +1,8 @@
-import "./logger-CtgTiWhk.js";
-import { q as n, j as t, p as c, m as a } from "./index-TCgliIVb.js";
-import "./modelUtils-7Z-cTcSf.js";
+import "./DesignSystemTokens-CB_9gr2a.js";
+import { y as p, k as t, v as c, m as a } from "./index-Chq3mA2y.js";
+import "./modelUtils-Bx_f070p.js";
 export {
-  n as component,
+  p as component,
   t as componentName,
   c as consumedMCPServiceDocumentTypeId,
   a as modelDocumentTypeId
