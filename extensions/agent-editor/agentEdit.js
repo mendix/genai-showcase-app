@@ -1,14 +1,13 @@
-import { $ as Z, a as ue, b as D, c as ne, d as me, e as le, f as fe, r as m, g as oe, h as he, i as ve, j as ge, k as pe, l as be, m as xe, n as we, o as ye, p as J, q as Ce, s as $e, t as ke, u as q, v as Se, w as s, x as L, y as N, z as Ve, A as je, G as O, B as Me, C as X, D as Pe, P as Ee, E as Ie } from "./Icon-k-qLBgpy.js";
-import { c as Ae, C as Le } from "./CenteredLoadingSpinner-DArldmmT.js";
-import { i as Te, m as z, c as Be, a as De, T as Y, b as Re, d as He, g as Oe, e as Ne, f as Fe, h as _e, j as ee, k as qe, l as Ue, u as We } from "./index-TCgliIVb.js";
-import { y as Qe } from "./TextArea-CeZ9epd1.js";
-import { g as Ze, T as te, h as ze } from "./toolHandlers-aoiTTTDb.js";
-import { I as ie, W as Ge } from "./Banner-CnWuzx8M.js";
-import { n as Ke, T as U } from "./genAICommonsEntities-CrtcTnt0.js";
-import { m as Je } from "./modelUtils-7Z-cTcSf.js";
-import { u as Xe, T as Ye, D as W } from "./Table-xnNx8TaP.js";
-import { I as ae, T as et } from "./TextWithIcon-BTC4ByiA.js";
-import { r as P } from "./logger-CtgTiWhk.js";
+import { $ as Z, a as ue, b as D, c as ne, d as me, e as le, f as fe, r as m, g as oe, h as he, i as ve, j as ge, k as pe, l as be, m as xe, n as we, o as ye, p as J, q as Ce, s as $e, t as ke, u as q, v as Se, w as s, x as L, y as N, z as Ve, A as je, G as O, B as Me, C as X, D as Pe, P as Ee, E as Ie } from "./Icon-DL4Zg1xv.js";
+import { I as Y, T as Ae, c as Le, C as Te } from "./TextWithIcon-CXVpI2JS.js";
+import { i as Be, m as z, c as De, a as Re, T as ee, b as He, d as Oe, g as Ne, e as Fe, f as _e, h as qe, j as te, k as Ue, l as We, u as Qe } from "./index-D8_Nxwtj.js";
+import { n as Ze, y as ze } from "./genAICommonsEntities-B71R1rm7.js";
+import { g as Ge, T as ie, h as Ke } from "./toolHandlers-VPekX-eY.js";
+import { I as ae, W as Je } from "./Banner-Dsp9MSVG.js";
+import { T as U } from "./TextInputWithButton-E-wZEDvQ.js";
+import { m as Xe } from "./modelUtils-IL_KjN2R.js";
+import { u as Ye, T as et, D as W } from "./Table-BdZeaadb.js";
+import { r as P } from "./DesignSystemTokens-CB_9gr2a.js";
 function tt(e, t, i) {
   let { isDisabled: n = !1, isReadOnly: l = !1, value: d, name: u, form: h, children: f, "aria-label": a, "aria-labelledby": v, validationState: b = "valid", isInvalid: C, onPressStart: w, onPressEnd: y, onPressChange: p, onPress: r, onPressUp: c, onClick: g } = e, k = (M) => {
     M.stopPropagation(), t.setSelected(M.target.checked);
@@ -241,12 +240,12 @@ const ct = dt((e) => s.jsx(L, { light: ot, dark: lt, ...e }), "EntityIcon"), ut 
 var ft = Object.defineProperty, ht = (e, t) => ft(e, "name", { value: t, configurable: !0 });
 const vt = ht((e) => s.jsx(L, { light: mt, dark: ut, ...e }), "EntityNonPersistableIcon"), gt = async (e, t, i, n, l, d) => {
   const u = { ...n, [i]: d };
-  return (i === "userPrompt" || i === "systemPrompt") && (u.variables = await Be(e, t, u)), l(u), u;
+  return (i === "userPrompt" || i === "systemPrompt") && (u.variables = await De(e, t, u)), l(u), u;
 }, pt = async (e, t, i) => {
   const n = await e.ui.elementSelectors.selectEntity({ allowNone: !0 });
   let l;
   if (n.status === "ok" && (l = { ...t, entity: n.selected.module + "." + n.selected.name }), n.status === "none" && (l = { ...t, entity: "" }), l) {
-    const d = await De(e, t.variables, l);
+    const d = await Re(e, t.variables, l);
     l = { ...l, variables: d }, i(l);
   }
   return l;
@@ -265,7 +264,7 @@ const vt = ht((e) => s.jsx(L, { light: mt, dark: ut, ...e }), "EntityNonPersista
     case "modelQualifiedName": {
       if (!i.modelQualifiedName)
         return "Please select a model.";
-      if (!await Ze(
+      if (!await Ge(
         t,
         i.modelQualifiedName,
         z
@@ -279,7 +278,7 @@ const vt = ht((e) => s.jsx(L, { light: mt, dark: ut, ...e }), "EntityNonPersista
       const [n, l] = i.entity.split(".");
       if (i.entity && (!n || !l))
         return "The selected entity is not valid.";
-      if (!await Te(t, i))
+      if (!await Be(t, i))
         return "Entity no longer exists.";
       break;
     }
@@ -420,14 +419,14 @@ const Gt = zt(({ children: e, ...t }) => s.jsx(Jt, { ...t, children: ({ isIndete
   const [u, h] = m.useState([]), f = m.useMemo(() => e.tools ? e.tools.map((r, c) => ({
     id: r.id ?? String(c),
     enabled: r.enabled,
-    name: r.toolType === Y.Microflow ? r.name : r.document.qualifiedName.split(".")[1],
+    name: r.toolType === ee.Microflow ? r.name : r.document.qualifiedName.split(".")[1],
     description: r.description || "",
     tooltype: r.toolType,
     tool: r.document.qualifiedName || ""
-  })) : [], [e.tools]), { items: a, sortProps: v } = Xe(f), b = m.useCallback(
+  })) : [], [e.tools]), { items: a, sortProps: v } = Ye(f), b = m.useCallback(
     (r) => {
       const c = d.get(r);
-      return c === "invalid" ? /* @__PURE__ */ s.jsx(ae, { icon: /* @__PURE__ */ s.jsx(je, { title: "Tool invalid" }) }) : c === "syncing" ? /* @__PURE__ */ s.jsx(ae, { icon: /* @__PURE__ */ s.jsx(Ft, { title: "Validating..." }) }) : null;
+      return c === "invalid" ? /* @__PURE__ */ s.jsx(Y, { icon: /* @__PURE__ */ s.jsx(je, { title: "Tool invalid" }) }) : c === "syncing" ? /* @__PURE__ */ s.jsx(Y, { icon: /* @__PURE__ */ s.jsx(Ft, { title: "Validating..." }) }) : null;
     },
     [d]
   ), C = m.useCallback(async () => {
@@ -462,7 +461,7 @@ const Gt = zt(({ children: e, ...t }) => s.jsx(Jt, { ...t, children: ({ isIndete
     [e.tools, n, l]
   );
   return /* @__PURE__ */ s.jsx(O, { label: "Tools", children: /* @__PURE__ */ s.jsx(
-    Ye,
+    et,
     {
       ariaLabel: "Tools table",
       columns: [
@@ -494,9 +493,9 @@ const Gt = zt(({ children: e, ...t }) => s.jsx(Jt, { ...t, children: ({ isIndete
         r.name,
         r.description,
         /* @__PURE__ */ s.jsx(
-          et,
+          Ae,
           {
-            icon: r.tooltype === Y.Microflow ? /* @__PURE__ */ s.jsx(Ke, {}) : Re,
+            icon: r.tooltype === ee.Microflow ? /* @__PURE__ */ s.jsx(Ze, {}) : He,
             text: r.tool
           }
         )
@@ -578,7 +577,7 @@ const Gt = zt(({ children: e, ...t }) => s.jsx(Jt, { ...t, children: ({ isIndete
         }), r(x);
         const $ = await Promise.all(
           a.tools.map(async (j) => {
-            const A = await ze("document", j, a, t);
+            const A = await Ke("document", j, a, t);
             return {
               id: j.id,
               state: A === !0 ? "valid" : "invalid"
@@ -614,7 +613,7 @@ const Gt = zt(({ children: e, ...t }) => s.jsx(Jt, { ...t, children: ({ isIndete
       u(x);
     })();
   }, [t, a]);
-  const S = m.useMemo(() => He(a.variables), [a.variables]), E = (o) => (x) => {
+  const S = m.useMemo(() => Oe(a.variables), [a.variables]), E = (o) => (x) => {
     const $ = { ...a, [o]: x };
     v($), g.current && clearTimeout(g.current), g.current = setTimeout(async () => {
       const V = await gt(
@@ -636,17 +635,17 @@ const Gt = zt(({ children: e, ...t }) => s.jsx(Jt, { ...t, children: ({ isIndete
   }, B = async () => {
     a.modelQualifiedName && xt(t, a.modelQualifiedName);
   }, I = async () => {
-    qe(t, a.entity);
+    Ue(t, a.entity);
   }, F = async () => {
-    const o = await wt(t, ee, a, i);
+    const o = await wt(t, te, a, i);
     o && v(o);
   }, H = async (o, x) => {
     if (!x)
       return;
-    const $ = await Oe(o, x);
+    const $ = await Ne(o, x);
     if (!$)
       return;
-    const V = await Ne($, o);
+    const V = await Fe($, o);
     if (V !== void 0)
       return V ? /* @__PURE__ */ s.jsx(ct, {}) : /* @__PURE__ */ s.jsx(vt, {});
   }, _ = m.useMemo(() => {
@@ -660,13 +659,13 @@ const Gt = zt(({ children: e, ...t }) => s.jsx(Jt, { ...t, children: ({ isIndete
     isValidEntity: await Q("entity", t, o),
     isValidUserPrompt: await Q("userPrompt", t, o),
     showCreateVariablesInfo: o.variables.length === 0,
-    missingAttributes: await _e(t, o),
-    unusedAttributes: await Fe(t, o)
+    missingAttributes: await qe(t, o),
+    unusedAttributes: await _e(t, o)
   });
   return /* @__PURE__ */ s.jsxs(s.Fragment, { children: [
     /* @__PURE__ */ s.jsxs(X, { children: [
       /* @__PURE__ */ s.jsx(O, { label: "System prompt", children: /* @__PURE__ */ s.jsx(
-        te,
+        ie,
         {
           ariaLabel: "System prompt",
           value: a.systemPrompt,
@@ -675,7 +674,7 @@ const Gt = zt(({ children: e, ...t }) => s.jsx(Jt, { ...t, children: ({ isIndete
         }
       ) }),
       /* @__PURE__ */ s.jsx(O, { label: "User prompt", children: /* @__PURE__ */ s.jsx(
-        te,
+        ie,
         {
           ariaLabel: "User prompt",
           value: a.userPrompt || "",
@@ -689,7 +688,7 @@ const Gt = zt(({ children: e, ...t }) => s.jsx(Jt, { ...t, children: ({ isIndete
         {
           agent: a,
           studioPro: t,
-          componentName: ee,
+          componentName: te,
           updateStudioProDocument: i,
           onAgentChange: v,
           toolValidations: p
@@ -703,7 +702,7 @@ const Gt = zt(({ children: e, ...t }) => s.jsx(Jt, { ...t, children: ({ isIndete
           ariaLabel: "Model",
           label: "Model",
           value: a.modelQualifiedName ? a.modelQualifiedName : "",
-          icon: a.modelQualifiedName ? Je : void 0,
+          icon: a.modelQualifiedName ? Xe : void 0,
           buttonCaption: "Select...",
           onClick: T,
           validate: () => d.isValidModel,
@@ -723,7 +722,7 @@ const Gt = zt(({ children: e, ...t }) => s.jsx(Jt, { ...t, children: ({ isIndete
         }
       ),
       /* @__PURE__ */ s.jsx(
-        Qe,
+        ze,
         {
           label: "Documentation",
           "aria-label": "Documentation",
@@ -746,12 +745,12 @@ const Gt = zt(({ children: e, ...t }) => s.jsx(Jt, { ...t, children: ({ isIndete
           onClickSecondary: a.entity ? I : void 0
         }
       ),
-      d.showCreateVariablesInfo && d.unusedAttributes.length === 0 && !w && /* @__PURE__ */ s.jsx(ie, { onClose: () => y(!0), children: "Create variables: Enclose a word or text in double curly brackets. For example, you can write {{Language}} in the system or user prompt." }),
-      d.missingAttributes.length > 0 && /* @__PURE__ */ s.jsxs(Ge, { children: [
+      d.showCreateVariablesInfo && d.unusedAttributes.length === 0 && !w && /* @__PURE__ */ s.jsx(ae, { onClose: () => y(!0), children: "Create variables: Enclose a word or text in double curly brackets. For example, you can write {{Language}} in the system or user prompt." }),
+      d.missingAttributes.length > 0 && /* @__PURE__ */ s.jsxs(Je, { children: [
         /* @__PURE__ */ s.jsx("span", { children: "The following attributes cannot be found on the selected entity:" }),
         /* @__PURE__ */ s.jsx("ul", { children: d.missingAttributes.map((o) => /* @__PURE__ */ s.jsx("li", { children: o }, o)) })
       ] }),
-      d.unusedAttributes.length > 0 && !b && /* @__PURE__ */ s.jsxs(ie, { onClose: () => C(!0), children: [
+      d.unusedAttributes.length > 0 && !b && /* @__PURE__ */ s.jsxs(ae, { onClose: () => C(!0), children: [
         d.showCreateVariablesInfo && /* @__PURE__ */ s.jsxs(s.Fragment, { children: [
           /* @__PURE__ */ s.jsx("span", { children: "Create variables: Enclose a word or text in double curly brackets. For example, you can write {{Language}} in the system or user prompt." }),
           /* @__PURE__ */ s.jsx("br", {})
@@ -761,7 +760,7 @@ const Gt = zt(({ children: e, ...t }) => s.jsx(Jt, { ...t, children: ({ isIndete
       ] })
     ] }) })
   ] });
-}, ii = Ue(), ai = ({ studioPro: e, documentId: t }) => {
+}, ii = We(), ai = ({ studioPro: e, documentId: t }) => {
   const i = e.ui.messageBoxes, n = e.app.model.customBlobDocuments, [l, d] = m.useState(!1), [u, h] = m.useState(ii);
   return m.useEffect(() => {
     n.getDocumentById(t).then(async (f) => {
@@ -774,18 +773,18 @@ const Gt = zt(({ children: e, ...t }) => s.jsx(Jt, { ...t, children: ({ isIndete
       await i.show("error", "Error loading document", "Details: " + (f == null ? void 0 : f.message) || f), d(!0);
     });
   }, []), /* @__PURE__ */ s.jsx(Pe, { studioPro: e, children: /* @__PURE__ */ s.jsxs(Ee, { children: [
-    !l && /* @__PURE__ */ s.jsx(Le, {}),
+    !l && /* @__PURE__ */ s.jsx(Te, {}),
     l && /* @__PURE__ */ s.jsx(Ie, { children: /* @__PURE__ */ s.jsx(
       ti,
       {
         loadedAgent: u,
         studioPro: e,
-        updateStudioProDocument: We(e, t)
+        updateStudioProDocument: Qe(e, t)
       }
     ) })
   ] }) });
-}, vi = Ae(ai);
+}, hi = Le(ai);
 export {
-  vi as component
+  hi as component
 };
 //# sourceMappingURL=agentEdit.js.map

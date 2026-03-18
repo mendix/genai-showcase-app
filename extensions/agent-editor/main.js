@@ -1,10 +1,11 @@
-import "./logger-CtgTiWhk.js";
-import { q as n, j as t, p as c, m as a } from "./index-TCgliIVb.js";
-import "./modelUtils-7Z-cTcSf.js";
+import "./DesignSystemTokens-CB_9gr2a.js";
+import { r as p, j as t, p as a, q as c, m as s } from "./index-D8_Nxwtj.js";
+import "./modelUtils-IL_KjN2R.js";
 export {
-  n as component,
+  p as component,
   t as componentName,
-  c as consumedMCPServiceDocumentTypeId,
-  a as modelDocumentTypeId
+  a as consumedMCPServiceDocumentTypeId,
+  c as knowledgeBaseDocumentTypeId,
+  s as modelDocumentTypeId
 };
 //# sourceMappingURL=main.js.map
