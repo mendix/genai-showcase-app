@@ -191,11 +191,15 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 			logMessageTrace = logMessageTrace +  "\n\nInput parameter(s): " + params.toString();
 			response = Core.microflowCall(Tool.getMicroflow()).withParams(params).execute(getContext());
 		}
-		
+
 		long executionTime = System.currentTimeMillis() - startTime;
 		String duration = "\n\nDuration:\n" + executionTime + "ms";
 		LOGGER.info(logMessageInfo + duration);
 		LOGGER.trace(logMessageTrace+ "\n\nReturn value:\n" + response + duration);
+
+		if (response == null || response.trim().isEmpty()) {
+			throw new CoreException("Tool microflow returned an empty response.");
+		}
 		return response;
 	}
 	
