@@ -1,13 +1,13 @@
-import { w as e, x as w, y as v, r as x, V as k, E as A, C as f, G as j, a1 as u, a2 as C, Q as M, D as b } from "./Icon-DL4Zg1xv.js";
+import { w as e, x as w, y as v, r as x, V as k, E as A, C as f, G as j, a1 as u, a2 as C, R as M, D as b } from "./Icon-DjcrVRZV.js";
 import { s as H, c as P } from "./DesignSystemTokens-CB_9gr2a.js";
-import { T as V, D as E } from "./Table-BdZeaadb.js";
-import { I as y } from "./Banner-Dsp9MSVG.js";
-import { D as B } from "./DialogFooter-D2shZ6-5.js";
+import { T as V, D as E } from "./Table-CAHeG_cf.js";
+import { I as y } from "./Banner-vrS186Bj.js";
+import { D as B } from "./DialogFooter-bqjtnEQI.js";
 const D = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2%208H14'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M8%2014V2'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", T = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2%208H14'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M8%2014V2'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
 var $ = Object.defineProperty, I = (t, r) => $(t, "name", { value: r, configurable: !0 });
-const S = I((t) => e.jsx(w, { light: T, dark: D, ...t }), "AddIcon"), O = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M6.5%207V13'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.5%207V13'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M2%203.5H14'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M6%201.5H10'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%203.5V14C12.5%2014.275%2012.275%2014.5%2012%2014.5H4C3.725%2014.5%203.5%2014.275%203.5%2014V3.5'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", R = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M6.5%207V13'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.5%207V13'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M2%203.5H14'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M6%201.5H10'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%203.5V14C12.5%2014.275%2012.275%2014.5%2012%2014.5H4C3.725%2014.5%203.5%2014.275%203.5%2014V3.5'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
+const R = I((t) => e.jsx(w, { light: T, dark: D, ...t }), "AddIcon"), S = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M6.5%207V13'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.5%207V13'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M2%203.5H14'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M6%201.5H10'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%203.5V14C12.5%2014.275%2012.275%2014.5%2012%2014.5H4C3.725%2014.5%203.5%2014.275%203.5%2014V3.5'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", O = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M6.5%207V13'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.5%207V13'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M2%203.5H14'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M6%201.5H10'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%203.5V14C12.5%2014.275%2012.275%2014.5%2012%2014.5H4C3.725%2014.5%203.5%2014.275%203.5%2014V3.5'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
 var W = Object.defineProperty, K = (t, r) => W(t, "name", { value: r, configurable: !0 });
-const L = K((t) => e.jsx(w, { light: R, dark: O, ...t }), "DeleteIcon"), z = v.span`
+const L = K((t) => e.jsx(w, { light: O, dark: S, ...t }), "DeleteIcon"), z = v.span`
     font-weight: bold;
 `, F = (t) => {
   const [r, a] = x.useState(t.headers), c = () => {
@@ -64,7 +64,7 @@ const L = K((t) => e.jsx(w, { light: R, dark: O, ...t }), "DeleteIcon"), z = v.s
           toolbarLeft: /* @__PURE__ */ e.jsx(
             E,
             {
-              icon: /* @__PURE__ */ e.jsx(S, {}),
+              icon: /* @__PURE__ */ e.jsx(R, {}),
               label: "Add header",
               "aria-label": "Add header",
               tooltip: "Add a new header",
@@ -76,7 +76,7 @@ const L = K((t) => e.jsx(w, { light: R, dark: O, ...t }), "DeleteIcon"), z = v.s
     ] }) }) }),
     /* @__PURE__ */ e.jsx(B, { onOk: m, showHelp: !1, onCancel: p })
   ] });
-}, G = ({ studioPro: t, headers: r, onClose: a }) => /* @__PURE__ */ e.jsx(b, { studioPro: t, children: /* @__PURE__ */ e.jsx(F, { headers: r, onClose: a }) }), q = {
+}, G = ({ studioPro: t, headers: r, onClose: a }) => /* @__PURE__ */ e.jsx(b, { studioPro: t, children: /* @__PURE__ */ e.jsx(F, { headers: r, onClose: a }) }), Q = {
   async loaded(t, r) {
     const a = H(t), c = P(a);
     if (!r.headers)
@@ -99,6 +99,6 @@ const L = K((t) => e.jsx(w, { light: R, dark: O, ...t }), "DeleteIcon"), z = v.s
   }
 };
 export {
-  q as component
+  Q as component
 };
 //# sourceMappingURL=mcpAuthenticationHeadersEdit.js.map

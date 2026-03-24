@@ -1,14 +1,14 @@
-import { r as o, w as r, V as R, E as q, C as D, G as E, Q as N, D as B } from "./Icon-DL4Zg1xv.js";
+import { r as o, w as r, V as L, E as q, C as D, G as E, R as N, D as B } from "./Icon-DjcrVRZV.js";
 import { s as F, c as H } from "./DesignSystemTokens-CB_9gr2a.js";
-import { I as O } from "./Banner-Dsp9MSVG.js";
-import { D as A } from "./DialogFooter-D2shZ6-5.js";
-import { T as f } from "./TextInputLabeled-gjLdhU4s.js";
+import { I as O } from "./Banner-vrS186Bj.js";
+import { D as A } from "./DialogFooter-bqjtnEQI.js";
+import { T as f } from "./TextInputLabeled-D01D1g1m.js";
 const G = ({ initialAgent: a, onClose: t }) => {
   var T, k, v;
   const [e, d] = o.useState(a), [n, u] = o.useState(((T = a.maxTokens) == null ? void 0 : T.toString()) ?? ""), [i, m] = o.useState(((k = a.temperature) == null ? void 0 : k.toString()) ?? ""), [l, S] = o.useState(((v = a.topP) == null ? void 0 : v.toString()) ?? ""), p = o.useCallback(() => n !== "" && e.maxTokens === void 0 ? "Please enter a valid number." : e.maxTokens !== void 0 && e.maxTokens < 1 ? "Max tokens must be greater than 0 (or empty)." : !0, [e.maxTokens, n]), c = o.useCallback(() => i !== "" && e.temperature === void 0 ? "Please enter a valid number." : e.temperature !== void 0 && e.temperature < 0 ? "Temperature must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.temperature, i]), h = o.useCallback(() => l !== "" && e.topP === void 0 ? "Please enter a valid number." : e.topP !== void 0 && e.topP < 0 ? "TopP must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.topP, l]), g = o.useCallback(
     (P, M, x) => (s) => {
-      const L = x ? /^-?\d+$/ : /^-?\d*\.?\d*$/, w = x ? ["-"] : ["-", "."];
-      if (s !== "" && !w.includes(s) && !L.test(s))
+      const R = x ? /^-?\d+$/ : /^-?\d*\.?\d*$/, w = x ? ["-"] : ["-", "."];
+      if (s !== "" && !w.includes(s) && !R.test(s))
         return;
       if (M(s), s === "" || w.includes(s)) {
         d((b) => ({ ...b, [P]: void 0 }));
@@ -28,7 +28,7 @@ const G = ({ initialAgent: a, onClose: t }) => {
   }, [t]), C = o.useCallback(() => {
     window.open("https://docs.mendix.com/appstore/modules/genai/genai-for-mx/commons/#request", "_blank");
   }, []);
-  return /* @__PURE__ */ r.jsxs(R, { children: [
+  return /* @__PURE__ */ r.jsxs(L, { children: [
     /* @__PURE__ */ r.jsx(q, { children: /* @__PURE__ */ r.jsxs(D, { children: [
       /* @__PURE__ */ r.jsx(E, { label: "Tokens", children: /* @__PURE__ */ r.jsx(
         f,
@@ -69,7 +69,7 @@ const G = ({ initialAgent: a, onClose: t }) => {
     ] }) }),
     /* @__PURE__ */ r.jsx(A, { onOk: I, onCancel: y, showHelp: !0, onHelp: C })
   ] });
-}, V = ({ studioPro: a, agent: t, onClose: e }) => /* @__PURE__ */ r.jsx(B, { studioPro: a, children: /* @__PURE__ */ r.jsx(G, { initialAgent: t, onClose: e }) }), W = {
+}, V = ({ studioPro: a, agent: t, onClose: e }) => /* @__PURE__ */ r.jsx(B, { studioPro: a, children: /* @__PURE__ */ r.jsx(G, { initialAgent: t, onClose: e }) }), _ = {
   async loaded(a, t) {
     const e = F(a), d = H(e);
     if (!t.agent)
@@ -90,6 +90,6 @@ const G = ({ initialAgent: a, onClose: t }) => {
   }
 };
 export {
-  W as component
+  _ as component
 };
 //# sourceMappingURL=modelSettingsEdit.js.map
