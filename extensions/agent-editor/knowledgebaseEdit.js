@@ -1,7 +1,7 @@
-import { r as c, w as s, D as w, P as b, E as x, C, G as f } from "./Icon-DjcrVRZV.js";
-import { c as D } from "./DesignSystemTokens-CB_9gr2a.js";
-import { T as E } from "./TextInputLabeled-D01D1g1m.js";
-import { c as j, C as L } from "./CenteredLoadingSpinner-C-2fDE-r.js";
+import { r as c, w as s, N as w, P as b, O as x, K as f, G as C } from "./Icon-B83cP35T.js";
+import { c as D } from "./userPreferences-BV8i5uIO.js";
+import { T as E } from "./TextInputLabeled-C5AghoA0.js";
+import { c as j, C as L } from "./componentLoader-DnsDjMf3.js";
 function v(n) {
   return {
     name: ""
@@ -9,8 +9,8 @@ function v(n) {
 }
 const y = (n, a, r, t, o) => async (l) => {
   const i = { ...r, [a]: l };
-  t(i), B(n, i, o);
-}, B = async (n, a, r) => {
+  t(i), K(n, i, o);
+}, K = async (n, a, r) => {
   const t = D(n);
   try {
     await n.app.model.customBlobDocuments.updateDocumentContent(r, a);
@@ -20,8 +20,8 @@ const y = (n, a, r, t, o) => async (l) => {
       message: o.message
     });
   }
-}, K = v(), k = ({ studioPro: n, documentId: a }) => {
-  const r = n.ui.messageBoxes, t = n.app.model.customBlobDocuments, [o, l] = c.useState(0), [i, h] = c.useState(!1), [m, u] = c.useState(K);
+}, B = v(), k = ({ studioPro: n, documentId: a }) => {
+  const r = n.ui.messageBoxes, t = n.app.model.customBlobDocuments, [o, l] = c.useState(0), [i, h] = c.useState(!1), [m, u] = c.useState(B);
   return c.useCallback(
     (e) => y(n, e, m, u, a),
     [n, m, u, a]
@@ -45,7 +45,7 @@ const y = (n, a, r, t, o) => async (l) => {
     });
   }, [o]), /* @__PURE__ */ s.jsx(w, { studioPro: n, children: /* @__PURE__ */ s.jsxs(b, { children: [
     !i && /* @__PURE__ */ s.jsx(L, {}),
-    i && /* @__PURE__ */ s.jsx(x, { children: /* @__PURE__ */ s.jsx(C, { children: /* @__PURE__ */ s.jsx(f, { label: "General", children: /* @__PURE__ */ s.jsx(
+    i && /* @__PURE__ */ s.jsx(x, { children: /* @__PURE__ */ s.jsx(f, { children: /* @__PURE__ */ s.jsx(C, { label: "General", children: /* @__PURE__ */ s.jsx(
       E,
       {
         label: "Name",
