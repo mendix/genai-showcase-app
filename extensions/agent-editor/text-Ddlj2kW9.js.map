@@ -1,0 +1,1 @@
+{"version":3,"file":"text-Ddlj2kW9.js","sources":["../../../../Extensibility/agent-editor/agent-editor/src/ui/components/elements/text.tsx"],"sourcesContent":["import styled from \"styled-components\";\r\n\r\nexport const BoldText = styled.div`\r\n    font-weight: 600;\r\n`;\r\n"],"names":["BoldText","styled"],"mappings":";AAEO,MAAMA,IAAWC,EAAO;AAAA;AAAA;"}

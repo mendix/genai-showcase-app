@@ -1,36 +1,39 @@
-import { r as o, w as r, V as L, E as q, C as D, G as E, R as N, D as B } from "./Icon-DjcrVRZV.js";
+import { r as o, w as r, V as R, E as q, C as D, G as I, Q as N, D as B } from "./Icon-CjmU6z_u.js";
 import { s as F, c as H } from "./DesignSystemTokens-CB_9gr2a.js";
-import { I as O } from "./Banner-vrS186Bj.js";
-import { D as A } from "./DialogFooter-bqjtnEQI.js";
-import { T as f } from "./TextInputLabeled-D01D1g1m.js";
-const G = ({ initialAgent: a, onClose: t }) => {
-  var T, k, v;
-  const [e, d] = o.useState(a), [n, u] = o.useState(((T = a.maxTokens) == null ? void 0 : T.toString()) ?? ""), [i, m] = o.useState(((k = a.temperature) == null ? void 0 : k.toString()) ?? ""), [l, S] = o.useState(((v = a.topP) == null ? void 0 : v.toString()) ?? ""), p = o.useCallback(() => n !== "" && e.maxTokens === void 0 ? "Please enter a valid number." : e.maxTokens !== void 0 && e.maxTokens < 1 ? "Max tokens must be greater than 0 (or empty)." : !0, [e.maxTokens, n]), c = o.useCallback(() => i !== "" && e.temperature === void 0 ? "Please enter a valid number." : e.temperature !== void 0 && e.temperature < 0 ? "Temperature must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.temperature, i]), h = o.useCallback(() => l !== "" && e.topP === void 0 ? "Please enter a valid number." : e.topP !== void 0 && e.topP < 0 ? "TopP must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.topP, l]), g = o.useCallback(
-    (P, M, x) => (s) => {
-      const R = x ? /^-?\d+$/ : /^-?\d*\.?\d*$/, w = x ? ["-"] : ["-", "."];
-      if (s !== "" && !w.includes(s) && !R.test(s))
+import { u as O } from "./useDialogShortcuts-Cpfu51-V.js";
+import { I as A } from "./Banner-WZkJyUUP.js";
+import { D as G } from "./DialogFooter-BjE_ANaE.js";
+import { T as f } from "./TextInputLabeled-DzKYuJqW.js";
+const V = ({ initialAgent: a, onClose: t }) => {
+  var v, P, w;
+  const [e, d] = o.useState(a), [n, u] = o.useState(((v = a.maxTokens) == null ? void 0 : v.toString()) ?? ""), [i, m] = o.useState(((P = a.temperature) == null ? void 0 : P.toString()) ?? ""), [l, y] = o.useState(((w = a.topP) == null ? void 0 : w.toString()) ?? ""), p = o.useCallback(() => n !== "" && e.maxTokens === void 0 ? "Please enter a valid number." : e.maxTokens !== void 0 && e.maxTokens < 1 ? "Max tokens must be greater than 0 (or empty)." : !0, [e.maxTokens, n]), c = o.useCallback(() => i !== "" && e.temperature === void 0 ? "Please enter a valid number." : e.temperature !== void 0 && e.temperature < 0 ? "Temperature must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.temperature, i]), h = o.useCallback(() => l !== "" && e.topP === void 0 ? "Please enter a valid number." : e.topP !== void 0 && e.topP < 0 ? "TopP must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.topP, l]), g = o.useCallback(
+    (j, M, x) => (s) => {
+      const L = x ? /^-?\d+$/ : /^-?\d*\.?\d*$/, S = x ? ["-"] : ["-", "."];
+      if (s !== "" && !S.includes(s) && !L.test(s))
         return;
-      if (M(s), s === "" || w.includes(s)) {
-        d((b) => ({ ...b, [P]: void 0 }));
+      if (M(s), s === "" || S.includes(s)) {
+        d((b) => ({ ...b, [j]: void 0 }));
         return;
       }
-      const j = x ? parseInt(s, 10) : parseFloat(s);
-      d((b) => ({ ...b, [P]: isNaN(j) ? void 0 : j }));
+      const E = x ? parseInt(s, 10) : parseFloat(s);
+      d((b) => ({ ...b, [j]: isNaN(E) ? void 0 : E }));
     },
     []
-  ), I = o.useCallback(() => {
+  ), T = o.useCallback(() => {
     if (p() === !0 && c() === !0 && h() === !0)
       t == null || t(e);
     else
       return;
-  }, [t, e, p, c, h]), y = o.useCallback(() => {
+  }, [t, e, p, c, h]), k = o.useCallback(() => {
     t == null || t(null);
-  }, [t]), C = o.useCallback(() => {
+  }, [t]);
+  O(k, T);
+  const C = o.useCallback(() => {
     window.open("https://docs.mendix.com/appstore/modules/genai/genai-for-mx/commons/#request", "_blank");
   }, []);
-  return /* @__PURE__ */ r.jsxs(L, { children: [
+  return /* @__PURE__ */ r.jsxs(R, { children: [
     /* @__PURE__ */ r.jsx(q, { children: /* @__PURE__ */ r.jsxs(D, { children: [
-      /* @__PURE__ */ r.jsx(E, { label: "Tokens", children: /* @__PURE__ */ r.jsx(
+      /* @__PURE__ */ r.jsx(I, { label: "Tokens", children: /* @__PURE__ */ r.jsx(
         f,
         {
           label: "Max tokens",
@@ -41,8 +44,8 @@ const G = ({ initialAgent: a, onClose: t }) => {
           validate: p
         }
       ) }),
-      /* @__PURE__ */ r.jsxs(E, { label: "Randomness", children: [
-        /* @__PURE__ */ r.jsx(O, { children: "It is recommended to steer either the temperature or TopP, but not both. Review the documentation of the model provider for more information about the allowed ranges." }),
+      /* @__PURE__ */ r.jsxs(I, { label: "Randomness", children: [
+        /* @__PURE__ */ r.jsx(A, { children: "It is recommended to steer either the temperature or TopP, but not both. Review the documentation of the model provider for more information about the allowed ranges." }),
         /* @__PURE__ */ r.jsx(
           f,
           {
@@ -61,15 +64,15 @@ const G = ({ initialAgent: a, onClose: t }) => {
             ariaLabel: "TopP",
             value: l,
             description: "TopP is an alternative to temperature for controlling the randomness of the model response. TopP defines a probability threshold so that only words with probabilities greater than or equal to the threshold will be included in the response.",
-            onChange: g("topP", S, !1),
+            onChange: g("topP", y, !1),
             validate: h
           }
         )
       ] })
     ] }) }),
-    /* @__PURE__ */ r.jsx(A, { onOk: I, onCancel: y, showHelp: !0, onHelp: C })
+    /* @__PURE__ */ r.jsx(G, { onOk: T, onCancel: k, showHelp: !0, onHelp: C })
   ] });
-}, V = ({ studioPro: a, agent: t, onClose: e }) => /* @__PURE__ */ r.jsx(B, { studioPro: a, children: /* @__PURE__ */ r.jsx(G, { initialAgent: t, onClose: e }) }), _ = {
+}, Y = ({ studioPro: a, agent: t, onClose: e }) => /* @__PURE__ */ r.jsx(B, { studioPro: a, children: /* @__PURE__ */ r.jsx(V, { initialAgent: t, onClose: e }) }), z = {
   async loaded(a, t) {
     const e = F(a), d = H(e);
     if (!t.agent)
@@ -82,7 +85,7 @@ const G = ({ initialAgent: a, onClose: t }) => {
         e.ui.dialogs.closeWithResult(t.dialogId, l);
       };
       i.render(
-        /* @__PURE__ */ r.jsx(o.StrictMode, { children: /* @__PURE__ */ r.jsx(V, { studioPro: e, agent: n, onClose: m }) })
+        /* @__PURE__ */ r.jsx(o.StrictMode, { children: /* @__PURE__ */ r.jsx(Y, { studioPro: e, agent: n, onClose: m }) })
       );
     } catch (n) {
       throw d.error("Error editing model settings:", n), new Error("Error editing model settings:", n);
@@ -90,6 +93,6 @@ const G = ({ initialAgent: a, onClose: t }) => {
   }
 };
 export {
-  _ as component
+  z as component
 };
 //# sourceMappingURL=modelSettingsEdit.js.map

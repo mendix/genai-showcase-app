@@ -1,36 +1,37 @@
-import { w as e, x as w, y as v, r as x, V as k, E as A, C as f, G as j, a1 as u, a2 as C, R as M, D as b } from "./Icon-DjcrVRZV.js";
+import { w as e, x as w, y as v, r as x, V as k, E as A, C as f, G as j, a1 as u, a2 as C, Q as M, D as b } from "./Icon-CjmU6z_u.js";
 import { s as H, c as P } from "./DesignSystemTokens-CB_9gr2a.js";
-import { T as V, D as E } from "./Table-CAHeG_cf.js";
-import { I as y } from "./Banner-vrS186Bj.js";
-import { D as B } from "./DialogFooter-bqjtnEQI.js";
-const D = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2%208H14'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M8%2014V2'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", T = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2%208H14'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M8%2014V2'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
+import { u as V } from "./useDialogShortcuts-Cpfu51-V.js";
+import { T as E, D as y } from "./Table-DUwCpH49.js";
+import { I as D } from "./Banner-WZkJyUUP.js";
+import { D as B } from "./DialogFooter-BjE_ANaE.js";
+const S = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2%208H14'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M8%2014V2'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", T = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2%208H14'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M8%2014V2'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
 var $ = Object.defineProperty, I = (t, r) => $(t, "name", { value: r, configurable: !0 });
-const R = I((t) => e.jsx(w, { light: T, dark: D, ...t }), "AddIcon"), S = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M6.5%207V13'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.5%207V13'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M2%203.5H14'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M6%201.5H10'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%203.5V14C12.5%2014.275%2012.275%2014.5%2012%2014.5H4C3.725%2014.5%203.5%2014.275%203.5%2014V3.5'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", O = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M6.5%207V13'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.5%207V13'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M2%203.5H14'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M6%201.5H10'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%203.5V14C12.5%2014.275%2012.275%2014.5%2012%2014.5H4C3.725%2014.5%203.5%2014.275%203.5%2014V3.5'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
-var W = Object.defineProperty, K = (t, r) => W(t, "name", { value: r, configurable: !0 });
-const L = K((t) => e.jsx(w, { light: O, dark: S, ...t }), "DeleteIcon"), z = v.span`
+const O = I((t) => e.jsx(w, { light: T, dark: S, ...t }), "AddIcon"), R = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M6.5%207V13'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.5%207V13'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M2%203.5H14'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M6%201.5H10'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%203.5V14C12.5%2014.275%2012.275%2014.5%2012%2014.5H4C3.725%2014.5%203.5%2014.275%203.5%2014V3.5'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", W = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M6.5%207V13'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.5%207V13'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M2%203.5H14'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M6%201.5H10'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%203.5V14C12.5%2014.275%2012.275%2014.5%2012%2014.5H4C3.725%2014.5%203.5%2014.275%203.5%2014V3.5'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
+var K = Object.defineProperty, L = (t, r) => K(t, "name", { value: r, configurable: !0 });
+const z = L((t) => e.jsx(w, { light: W, dark: R, ...t }), "DeleteIcon"), F = v.span`
     font-weight: bold;
-`, F = (t) => {
-  const [r, a] = x.useState(t.headers), c = () => {
+`, G = (t) => {
+  const [r, a] = x.useState(t.headers), m = () => {
     a((s) => [...s, ["", ""]]);
   }, n = (s, o) => {
     a((i) => i.map((l, g) => g === s ? [o, l[1]] : l));
   }, d = (s, o) => {
     a((i) => i.map((l, g) => g === s ? [l[0], o] : l));
-  }, h = (s) => {
+  }, p = (s) => {
     a((o) => o.filter((i, l) => l !== s));
-  }, m = () => {
+  }, c = () => {
     t.onClose(r);
-  }, p = () => {
+  }, h = () => {
     t.onClose(null);
   };
-  return /* @__PURE__ */ e.jsxs(k, { children: [
+  return V(h, c), /* @__PURE__ */ e.jsxs(k, { children: [
     /* @__PURE__ */ e.jsx(A, { children: /* @__PURE__ */ e.jsx(f, { children: /* @__PURE__ */ e.jsxs(j, { label: "Authentication Headers", children: [
-      /* @__PURE__ */ e.jsxs(y, { children: [
-        /* @__PURE__ */ e.jsx(z, { children: "The headers below are not stored." }),
+      /* @__PURE__ */ e.jsxs(D, { children: [
+        /* @__PURE__ */ e.jsx(F, { children: "The headers below are not stored." }),
         /* @__PURE__ */ e.jsx("div", { children: "The headers are only used to explore tools from Studio Pro. To authenticate with MCP servers at runtime, please provide a credentials microflow." })
       ] }),
       /* @__PURE__ */ e.jsx(
-        V,
+        E,
         {
           ariaLabel: "Authentication headers table",
           columns: [
@@ -59,26 +60,26 @@ const L = K((t) => e.jsx(w, { light: O, dark: S, ...t }), "DeleteIcon"), z = v.s
               },
               `value-${o}`
             ),
-            /* @__PURE__ */ e.jsx(C, { icon: /* @__PURE__ */ e.jsx(L, {}), onPress: () => h(o) })
+            /* @__PURE__ */ e.jsx(C, { icon: /* @__PURE__ */ e.jsx(z, {}), onPress: () => p(o) })
           ]),
           toolbarLeft: /* @__PURE__ */ e.jsx(
-            E,
+            y,
             {
-              icon: /* @__PURE__ */ e.jsx(R, {}),
+              icon: /* @__PURE__ */ e.jsx(O, {}),
               label: "Add header",
               "aria-label": "Add header",
               tooltip: "Add a new header",
-              onPress: c
+              onPress: m
             }
           )
         }
       )
     ] }) }) }),
-    /* @__PURE__ */ e.jsx(B, { onOk: m, showHelp: !1, onCancel: p })
+    /* @__PURE__ */ e.jsx(B, { onOk: c, showHelp: !1, onCancel: h })
   ] });
-}, G = ({ studioPro: t, headers: r, onClose: a }) => /* @__PURE__ */ e.jsx(b, { studioPro: t, children: /* @__PURE__ */ e.jsx(F, { headers: r, onClose: a }) }), Q = {
+}, J = ({ studioPro: t, headers: r, onClose: a }) => /* @__PURE__ */ e.jsx(b, { studioPro: t, children: /* @__PURE__ */ e.jsx(G, { headers: r, onClose: a }) }), Y = {
   async loaded(t, r) {
-    const a = H(t), c = P(a);
+    const a = H(t), m = P(a);
     if (!r.headers)
       throw new Error(
         "Authentication headers need to be provided to open the MCP authentication headers dialog."
@@ -87,18 +88,18 @@ const L = K((t) => e.jsx(w, { light: O, dark: S, ...t }), "DeleteIcon"), z = v.s
       const n = JSON.parse(decodeURIComponent(r.headers)), d = document.getElementById("root");
       if (!d)
         throw new Error("Failed to find the root element.");
-      const h = M.createRoot(d), m = (p) => {
-        a.ui.dialogs.closeWithResult(r.dialogId, p);
+      const p = M.createRoot(d), c = (h) => {
+        a.ui.dialogs.closeWithResult(r.dialogId, h);
       };
-      h.render(
-        /* @__PURE__ */ e.jsx(x.StrictMode, { children: /* @__PURE__ */ e.jsx(G, { studioPro: a, headers: n, onClose: m }) })
+      p.render(
+        /* @__PURE__ */ e.jsx(x.StrictMode, { children: /* @__PURE__ */ e.jsx(J, { studioPro: a, headers: n, onClose: c }) })
       );
     } catch (n) {
-      throw c.error("Error editing MCP authentication headers:", n), new Error("Error editing MCP authentication headers:", n);
+      throw m.error("Error editing MCP authentication headers:", n), new Error("Error editing MCP authentication headers:", n);
     }
   }
 };
 export {
-  Q as component
+  Y as component
 };
 //# sourceMappingURL=mcpAuthenticationHeadersEdit.js.map
