@@ -19,7 +19,10 @@ import { Big } from "big.js";
  */
 export async function JS_SubmitStreaming(requestJSON, deployedModel, responseCollector) {
 	// BEGIN USER CODE
-	const response = await fetch("http://localhost:8080/llm-streaming-converse", {
+	const baseUrl = mx.appUrl;
+	console.info('Mx App URL',baseUrl);
+	const endpoint = `${baseUrl}llm-streaming-converse`;
+	const response = await fetch(endpoint, {
 		method: "POST",
 		headers: {			
 			"Content-Type": "application/json",

@@ -157,11 +157,11 @@ public class ConverseStream extends UserAction<IMendixObject>
 			var responseStreamHandler = ConverseStreamResponseHandler.builder()
 	                .subscriber(ConverseStreamResponseHandler.Visitor.builder()
 	                        .onContentBlockDelta(chunk -> {
-	                            String responseText = chunk.delta().text() + chunk.delta().reasoningContent().text();
+	                            String responseText = chunk.delta().text();
 	                            currentMessage.add(responseText);
 	                            if (responseText != null && !responseText.isBlank()) {
 	                            	Core.microflowCall(CallbackMicroflow)
-									.withParam("RequestId", RequestID)
+									.withParam("RequestId", this.RequestID)
 									.withParam("Content", responseText).execute(getContext());
 	                            }
 	                        })
