@@ -1,12 +1,12 @@
-import { r as c, w as a, V as L, E as K, C as O, G as V, Q as A, D as B } from "./Icon-CjmU6z_u.js";
-import { s as q, c as F } from "./DesignSystemTokens-CB_9gr2a.js";
-import { n as G } from "./MicroflowIcon-RtiK_mVp.js";
-import { D as H } from "./DialogFooter-BjE_ANaE.js";
-import { d as C, T as J, a as U, b as W } from "./toolHandlers-Dh0W5--3.js";
-import { T as y } from "./TextInputLabeled-DzKYuJqW.js";
-import { T as $ } from "./TextInputWithButton-7i5j2n40.js";
-import { r as Q } from "./index-98pkSbGS.js";
-import { h as u } from "./knowledgebaseToolHandlers-BJy5VnO6.js";
+import { r as c, w as a, V as L, E as K, C as O, G as C, Q as A, D as B } from "./Icon-DlQJfq7F.js";
+import { s as q, c as F } from "./DesignSystemTokens-BZrmEyPo.js";
+import { n as G } from "./MicroflowIcon-kvKEq0tY.js";
+import { D as H } from "./DialogFooter-DACb7c2t.js";
+import { T as J, a as U } from "./toolHandlers-D5r8oDlK.js";
+import { T as y } from "./TextInputLabeled-CEPunJWI.js";
+import { T as W } from "./TextInputWithButton-DdFsQTz_.js";
+import { x as V, v as $, y as Q } from "./index-DO-n49Lf.js";
+import { h as u } from "./knowledgebaseToolHandlers-BGK4DWaD.js";
 const _ = {
   isValidName: !0,
   isValidDescription: !0,
@@ -18,7 +18,6 @@ const _ = {
 }, z = {
   name: "isValidName",
   description: "isValidDescription",
-  toolType: "isValidType",
   document: "isValidDocument",
   collectionIdentifier: "isValidCollectionIdentifier",
   maxResults: "isValidMaxResults",
@@ -30,10 +29,10 @@ const _ = {
   onClose: p
 }) => {
   var N, R;
-  const [i, h] = c.useState(n || C()), [l, x] = c.useState(_), [S, f] = c.useState(
-    ((N = (n || C()).maxResults) == null ? void 0 : N.toString()) ?? ""
+  const [i, h] = c.useState(n || V()), [l, x] = c.useState(_), [S, b] = c.useState(
+    ((N = (n || V()).maxResults) == null ? void 0 : N.toString()) ?? ""
   ), [j, I] = c.useState(
-    ((R = (n || C()).minSimilarity) == null ? void 0 : R.toString()) ?? ""
+    ((R = (n || V()).minSimilarity) == null ? void 0 : R.toString()) ?? ""
   ), w = c.useCallback(
     async (e) => ({
       isValidName: await u("name", e, o, t),
@@ -67,7 +66,7 @@ const _ = {
     [t, o]
   );
   c.useEffect(() => {
-    n && (f(n.maxResults !== void 0 ? n.maxResults.toString() : ""), I(n.minSimilarity !== void 0 ? n.minSimilarity.toString() : ""), w(n).then((e) => {
+    n && (b(n.maxResults !== void 0 ? n.maxResults.toString() : ""), I(n.minSimilarity !== void 0 ? n.minSimilarity.toString() : ""), w(n).then((e) => {
       x(e);
     }));
   }, [n, w]);
@@ -85,12 +84,12 @@ const _ = {
       const s = String(r);
       if (!/^\d*$/.test(s))
         return;
-      f(s);
-      const m = s === "" ? void 0 : Number.parseInt(s, 10), b = {
+      b(s);
+      const m = s === "" ? void 0 : Number.parseInt(s, 10), f = {
         ...i,
         maxResults: Number.isNaN(m) ? void 0 : m
       };
-      h(b), v(e, b);
+      h(f), v(e, f);
       return;
     }
     if (e === "minSimilarity") {
@@ -98,23 +97,23 @@ const _ = {
       if (!/^\d*\.?\d*$/.test(s))
         return;
       I(s);
-      const m = s === "" || s === "." ? void 0 : Number.parseFloat(s), b = {
+      const m = s === "" || s === "." ? void 0 : Number.parseFloat(s), f = {
         ...i,
         minSimilarity: Number.isNaN(m) ? void 0 : m
       };
-      h(b), v(e, b);
+      h(f), v(e, f);
       return;
     }
     const d = { ...i, [e]: r };
     h(d), v(e, d);
   }, D = async () => {
-    const e = await W(t, Q);
+    const e = await U(t, Q);
     if (e) {
       const r = { ...i, document: e };
       h(r), v("document", r);
     }
   }, M = () => {
-    U(t, i.document);
+    $(t, i.document);
   }, E = async () => {
     const e = await w(i);
     console.log(e), x(e), Object.values(e).some((d) => d !== !0) || p(i);
@@ -129,9 +128,9 @@ const _ = {
   };
   return /* @__PURE__ */ a.jsxs(L, { children: [
     /* @__PURE__ */ a.jsx(K, { children: /* @__PURE__ */ a.jsxs(O, { children: [
-      /* @__PURE__ */ a.jsxs(V, { label: "General", children: [
+      /* @__PURE__ */ a.jsxs(C, { label: "General", children: [
         /* @__PURE__ */ a.jsx(
-          $,
+          W,
           {
             ariaLabel: "Knowledge base",
             label: "Knowledge base",
@@ -155,7 +154,7 @@ const _ = {
           }
         )
       ] }),
-      /* @__PURE__ */ a.jsxs(V, { label: "Naming", children: [
+      /* @__PURE__ */ a.jsxs(C, { label: "Naming", children: [
         /* @__PURE__ */ a.jsx(
           y,
           {
@@ -177,7 +176,7 @@ const _ = {
           }
         )
       ] }),
-      /* @__PURE__ */ a.jsxs(V, { label: "Retrieval settings", children: [
+      /* @__PURE__ */ a.jsxs(C, { label: "Retrieval settings", children: [
         /* @__PURE__ */ a.jsx(
           y,
           {
@@ -214,8 +213,8 @@ const _ = {
       const h = A.createRoot(i);
       let l;
       t.tool && (l = JSON.parse(decodeURIComponent(t.tool)));
-      const x = JSON.parse(decodeURIComponent(t.agent)), S = (f) => {
-        o.ui.dialogs.closeWithResult(t.dialogId, f);
+      const x = JSON.parse(decodeURIComponent(t.agent)), S = (b) => {
+        o.ui.dialogs.closeWithResult(t.dialogId, b);
       };
       h.render(
         /* @__PURE__ */ a.jsx(c.StrictMode, { children: /* @__PURE__ */ a.jsx(Y, { studioPro: o, initialTool: l, agent: x, onClose: S }) })

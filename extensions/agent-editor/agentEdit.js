@@ -1,38 +1,38 @@
-import { $ as Q, a as Ve, b as H, c as ce, d as je, e as ue, f as Me, r as f, g as fe, h as Ee, i as Ie, j as Ae, k as Le, l as Pe, m as Be, n as Re, o as De, p as se, q as He, s as Oe, t as qe, u as Z, v as Fe, w as s, x as B, y as _, z as Ne, A as me, G as N, B as _e, C as ae, D as Ke, P as Ue, E as We } from "./Icon-CjmU6z_u.js";
-import { I as K, T as he, c as ze, C as Ze } from "./TextWithIcon-D6dQcKBr.js";
-import { i as Je, c as Ge, m as Xe, a as Qe, k as Ye, T as ne, b as et, d as tt, g as it, e as st, f as at, h as nt, j as J, l as lt, n as ot, u as dt } from "./index-98pkSbGS.js";
-import { n as rt, y as ct } from "./MicroflowIcon-RtiK_mVp.js";
-import { g as ge, T as le, h as ut } from "./toolHandlers-Dh0W5--3.js";
-import { m as ft } from "./modelUtils-Rqk_kWfx.js";
-import { I as oe, W as mt } from "./Banner-WZkJyUUP.js";
-import { T as G } from "./TextInputWithButton-7i5j2n40.js";
-import { h as ht } from "./knowledgebaseToolHandlers-BJy5VnO6.js";
-import { r as A } from "./DesignSystemTokens-CB_9gr2a.js";
-import { u as be, T as ve, D as O } from "./Table-DUwCpH49.js";
-function gt(e, t, a) {
-  let { isDisabled: n = !1, isReadOnly: l = !1, value: c, name: r, form: h, children: m, "aria-label": i, "aria-labelledby": g, validationState: x = "valid", isInvalid: k, onPressStart: C, onPressEnd: $, onPressChange: y, onPress: o, onPressUp: d, onClick: b } = e, j = (I) => {
+import { $ as Q, a as Ve, b as H, c as ce, d as je, e as ue, f as Me, r as f, g as fe, h as Ee, i as Ie, j as Ae, k as Le, l as Pe, m as Be, n as Re, o as De, p as se, q as He, s as Oe, t as qe, u as Z, v as Fe, w as s, x as B, y as _, z as Ne, A as me, G as N, B as _e, C as ae, D as Ke, P as Ue, E as We } from "./Icon-DlQJfq7F.js";
+import { I as K, T as he, c as ze, C as Ze } from "./TextWithIcon-sxhIisHZ.js";
+import { i as Je, g as be, c as Ge, m as Xe, a as Qe, k as Ye, T as ne, b as et, d as tt, e as it, f as st, h as at, j as nt, l as J, n as ot, o as lt, u as dt } from "./index-DO-n49Lf.js";
+import { n as rt, y as ct } from "./MicroflowIcon-kvKEq0tY.js";
+import { m as ut } from "./modelUtils-whA8-BBg.js";
+import { I as oe, W as ft } from "./Banner-BKPTdROG.js";
+import { T as le, h as mt } from "./toolHandlers-D5r8oDlK.js";
+import { T as G } from "./TextInputWithButton-DdFsQTz_.js";
+import { h as ht } from "./knowledgebaseToolHandlers-BGK4DWaD.js";
+import { r as A } from "./DesignSystemTokens-BZrmEyPo.js";
+import { u as ge, T as ve, D as O } from "./Table-CfPTytSG.js";
+function bt(e, t, a) {
+  let { isDisabled: n = !1, isReadOnly: o = !1, value: c, name: r, form: h, children: m, "aria-label": i, "aria-labelledby": b, validationState: x = "valid", isInvalid: k, onPressStart: C, onPressEnd: $, onPressChange: y, onPress: l, onPressUp: d, onClick: g } = e, j = (I) => {
     I.stopPropagation(), t.setSelected(I.target.checked);
-  }, S = m != null, M = i != null || g != null;
+  }, S = m != null, M = i != null || b != null;
   !S && !M && process.env.NODE_ENV !== "production" && console.warn("If you do not provide children, you must specify an aria-label for accessibility");
   let { pressProps: R, isPressed: L } = Q({
     onPressStart: C,
     onPressEnd: $,
     onPressChange: y,
-    onPress: o,
+    onPress: l,
     onPressUp: d,
-    onClick: b,
+    onClick: g,
     isDisabled: n
   }), { pressProps: E, isPressed: P } = Q({
     onPressStart: C,
     onPressEnd: $,
     onPressChange: y,
     onPressUp: d,
-    onClick: b,
+    onClick: g,
     onPress(I) {
       var D;
-      o == null || o(I), t.toggle(), (D = a.current) === null || D === void 0 || D.focus();
+      l == null || l(I), t.toggle(), (D = a.current) === null || D === void 0 || D.focus();
     },
-    isDisabled: n || l
+    isDisabled: n || o
   }), { focusableProps: U } = Ve(e, a), W = H(R, U), z = ce(e, {
     labelable: !0
   });
@@ -44,7 +44,7 @@ function gt(e, t, a) {
       "aria-invalid": k || x === "invalid" || void 0,
       "aria-errormessage": e["aria-errormessage"],
       "aria-controls": e["aria-controls"],
-      "aria-readonly": l || void 0,
+      "aria-readonly": o || void 0,
       onChange: j,
       disabled: n,
       ...c == null ? {} : {
@@ -58,7 +58,7 @@ function gt(e, t, a) {
     isSelected: t.isSelected,
     isPressed: L || P,
     isDisabled: n,
-    isReadOnly: l,
+    isReadOnly: o,
     isInvalid: k || x === "invalid"
   };
 }
@@ -66,24 +66,24 @@ function pe(e, t, a) {
   let n = ue({
     ...e,
     value: t.isSelected
-  }), { isInvalid: l, validationErrors: c, validationDetails: r } = n.displayValidation, { labelProps: h, inputProps: m, isSelected: i, isPressed: g, isDisabled: x, isReadOnly: k } = gt({
+  }), { isInvalid: o, validationErrors: c, validationDetails: r } = n.displayValidation, { labelProps: h, inputProps: m, isSelected: i, isPressed: b, isDisabled: x, isReadOnly: k } = bt({
     ...e,
-    isInvalid: l
+    isInvalid: o
   }, t, a);
   Me(e, n, a);
   let { isIndeterminate: C, isRequired: $, validationBehavior: y = "aria" } = e;
   f.useEffect(() => {
     a.current && (a.current.indeterminate = !!C);
   });
-  let { pressProps: o } = Q({
+  let { pressProps: l } = Q({
     isDisabled: x || k,
     onPress() {
-      let { [fe]: d } = e, { commitValidation: b } = d || n;
-      b();
+      let { [fe]: d } = e, { commitValidation: g } = d || n;
+      g();
     }
   });
   return {
-    labelProps: H(h, o, f.useMemo(() => ({
+    labelProps: H(h, l, f.useMemo(() => ({
       // Prevent label from being focused when mouse down on it.
       // Note, this does not prevent the input from being focused in the `click` event.
       onMouseDown: (d) => d.preventDefault()
@@ -95,17 +95,17 @@ function pe(e, t, a) {
       required: $ && y === "native"
     },
     isSelected: i,
-    isPressed: g,
+    isPressed: b,
     isDisabled: x,
     isReadOnly: k,
-    isInvalid: l,
+    isInvalid: o,
     validationErrors: c,
     validationDetails: r
   };
 }
-const bt = /* @__PURE__ */ new WeakMap();
+const gt = /* @__PURE__ */ new WeakMap();
 function we(e = {}) {
-  let { isReadOnly: t } = e, [a, n] = Ee(e.isSelected, e.defaultSelected || !1, e.onChange), [l] = f.useState(a);
+  let { isReadOnly: t } = e, [a, n] = Ee(e.isSelected, e.defaultSelected || !1, e.onChange), [o] = f.useState(a);
   function c(m) {
     t || n(m);
   }
@@ -115,7 +115,7 @@ function we(e = {}) {
   var h;
   return {
     isSelected: a,
-    defaultSelected: (h = e.defaultSelected) !== null && h !== void 0 ? h : l,
+    defaultSelected: (h = e.defaultSelected) !== null && h !== void 0 ? h : o,
     setSelected: c,
     toggle: r
   };
@@ -129,26 +129,26 @@ function vt(e, t, a) {
       d ? t.addValue(e.value) : t.removeValue(e.value), e.onChange && e.onChange(d);
     }
   });
-  let { name: l, form: c, descriptionId: r, errorMessageId: h, validationBehavior: m } = bt.get(t);
+  let { name: o, form: c, descriptionId: r, errorMessageId: h, validationBehavior: m } = gt.get(t);
   var i;
   m = (i = e.validationBehavior) !== null && i !== void 0 ? i : m;
-  let { realtimeValidation: g } = ue({
+  let { realtimeValidation: b } = ue({
     ...e,
     value: n.isSelected,
     // Server validation is handled at the group level.
     name: void 0,
     validationBehavior: "aria"
   }), x = f.useRef(Ie), k = () => {
-    t.setInvalid(e.value, g.isInvalid ? g : x.current);
+    t.setInvalid(e.value, b.isInvalid ? b : x.current);
   };
   f.useEffect(k);
-  let C = t.realtimeValidation.isInvalid ? t.realtimeValidation : g, $ = m === "native" ? t.displayValidation : C;
+  let C = t.realtimeValidation.isInvalid ? t.realtimeValidation : b, $ = m === "native" ? t.displayValidation : C;
   var y;
-  let o = pe({
+  let l = pe({
     ...e,
     isReadOnly: e.isReadOnly || t.isReadOnly,
     isDisabled: e.isDisabled || t.isDisabled,
-    name: e.name || l,
+    name: e.name || o,
     form: e.form || c,
     isRequired: (y = e.isRequired) !== null && y !== void 0 ? y : t.isRequired,
     validationBehavior: m,
@@ -163,9 +163,9 @@ function vt(e, t, a) {
     }
   }, n, a);
   return {
-    ...o,
+    ...l,
     inputProps: {
-      ...o.inputProps,
+      ...l.inputProps,
       "aria-describedby": [
         e["aria-describedby"],
         t.isInvalid ? h : null,
@@ -175,14 +175,14 @@ function vt(e, t, a) {
   };
 }
 const pt = /* @__PURE__ */ f.createContext(null), wt = /* @__PURE__ */ f.forwardRef(function(t, a) {
-  let { inputRef: n = null, ...l } = t;
-  [t, a] = Ae(l, a, Le);
+  let { inputRef: n = null, ...o } = t;
+  [t, a] = Ae(o, a, Le);
   let { validationBehavior: c } = Pe(Be) || {};
   var r, h;
-  let m = (h = (r = t.validationBehavior) !== null && r !== void 0 ? r : c) !== null && h !== void 0 ? h : "native", i = f.useContext(pt), g = Re(f.useMemo(() => De(n, t.inputRef !== void 0 ? t.inputRef : null), [
+  let m = (h = (r = t.validationBehavior) !== null && r !== void 0 ? r : c) !== null && h !== void 0 ? h : "native", i = f.useContext(pt), b = Re(f.useMemo(() => De(n, t.inputRef !== void 0 ? t.inputRef : null), [
     n,
     t.inputRef
-  ])), { labelProps: x, inputProps: k, isSelected: C, isDisabled: $, isReadOnly: y, isPressed: o, isInvalid: d } = i ? vt({
+  ])), { labelProps: x, inputProps: k, isSelected: C, isDisabled: $, isReadOnly: y, isPressed: l, isInvalid: d } = i ? vt({
     ...se(t),
     // Value is optional for standalone checkboxes, but required for CheckboxGroup items;
     // it's passed explicitly here to avoid typescript error (requires ignore).
@@ -190,11 +190,11 @@ const pt = /* @__PURE__ */ f.createContext(null), wt = /* @__PURE__ */ f.forward
     value: t.value,
     // ReactNode type doesn't allow function children.
     children: typeof t.children == "function" ? !0 : t.children
-  }, i, g) : pe({
+  }, i, b) : pe({
     ...se(t),
     children: typeof t.children == "function" ? !0 : t.children,
     validationBehavior: m
-  }, we(t), g), { isFocused: b, isFocusVisible: j, focusProps: S } = He(), M = $ || y, { hoverProps: R, isHovered: L } = Oe({
+  }, we(t), b), { isFocused: g, isFocusVisible: j, focusProps: S } = He(), M = $ || y, { hoverProps: R, isHovered: L } = Oe({
     ...t,
     isDisabled: M
   }), E = qe({
@@ -203,9 +203,9 @@ const pt = /* @__PURE__ */ f.createContext(null), wt = /* @__PURE__ */ f.forward
     values: {
       isSelected: C,
       isIndeterminate: t.isIndeterminate || !1,
-      isPressed: o,
+      isPressed: l,
       isHovered: L,
-      isFocused: b,
+      isFocused: g,
       isFocusVisible: j,
       isDisabled: $,
       isReadOnly: y,
@@ -221,9 +221,9 @@ const pt = /* @__PURE__ */ f.createContext(null), wt = /* @__PURE__ */ f.forward
     slot: t.slot || void 0,
     "data-selected": C || void 0,
     "data-indeterminate": t.isIndeterminate || void 0,
-    "data-pressed": o || void 0,
+    "data-pressed": l || void 0,
     "data-hovered": L || void 0,
-    "data-focused": b || void 0,
+    "data-focused": g || void 0,
     "data-focus-visible": j || void 0,
     "data-disabled": $ || void 0,
     "data-readonly": y || void 0,
@@ -233,48 +233,48 @@ const pt = /* @__PURE__ */ f.createContext(null), wt = /* @__PURE__ */ f.forward
     elementType: "span"
   }, /* @__PURE__ */ Z.createElement("input", {
     ...H(k, S),
-    ref: g
+    ref: b
   })), E.children);
 }), xt = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13%202.5H3C2.72386%202.5%202.5%202.72386%202.5%203V13C2.5%2013.2761%202.72386%2013.5%203%2013.5H13C13.2761%2013.5%2013.5%2013.2761%2013.5%2013V3C13.5%202.72386%2013.2761%202.5%2013%202.5Z'%20stroke='%23579BF9'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5V6.5C6.5%205.95%206.95%205.5%207.5%205.5H8.5C9.05%205.5%209.5%205.95%209.5%206.5V8H6.5'%20stroke='%23579BF9'%20stroke-linejoin='round'/%3e%3c/svg%3e", yt = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13%202.5H3C2.72386%202.5%202.5%202.72386%202.5%203V13C2.5%2013.2761%202.72386%2013.5%203%2013.5H13C13.2761%2013.5%2013.5%2013.2761%2013.5%2013V3C13.5%202.72386%2013.2761%202.5%2013%202.5Z'%20stroke='%23146FF4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5V6.5C6.5%205.95%206.95%205.5%207.5%205.5H8.5C9.05%205.5%209.5%205.95%209.5%206.5V8H6.5'%20stroke='%23146FF4'%20stroke-linejoin='round'/%3e%3c/svg%3e";
 var kt = Object.defineProperty, Ct = (e, t) => kt(e, "name", { value: t, configurable: !0 });
 const $t = Ct((e) => s.jsx(B, { light: yt, dark: xt, ...e }), "EntityIcon"), Tt = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5L6.5%206.5C6.5%205.95%206.95%205.5%207.5%205.5L8.5%205.5C9.05%205.5%209.5%205.95%209.5%206.5V8L6.5%208'%20stroke='%23FBCF55'%20stroke-linejoin='round'/%3e%3cpath%20d='M9.5%202.5L6.5%202.5M11%202.5L13%202.5C13.2761%202.5%2013.5%202.72386%2013.5%203V5M5%202.5L3%202.5C2.72386%202.5%202.5%202.72386%202.5%203L2.5%205M2.5%209.5L2.5%206.5M2.5%2011L2.5%2013C2.5%2013.2761%202.72386%2013.5%203%2013.5H5M13.5%206.5L13.5%209.5M13.5%2011V13C13.5%2013.2761%2013.2761%2013.5%2013%2013.5H11M9.5%2013.5L6.5%2013.5'%20stroke='%23FBCF55'%20stroke-linejoin='round'/%3e%3c/svg%3e", St = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M9.75%2010.5H7.5C6.95%2010.5%206.5%2010.05%206.5%209.5L6.5%206.5C6.5%205.95%206.95%205.5%207.5%205.5L8.5%205.5C9.05%205.5%209.5%205.95%209.5%206.5V8L6.5%208'%20stroke='%23C97800'%20stroke-linejoin='round'/%3e%3cpath%20d='M9.5%202.5L6.5%202.5M11%202.5L13%202.5C13.2761%202.5%2013.5%202.72386%2013.5%203V5M5%202.5L3%202.5C2.72386%202.5%202.5%202.72386%202.5%203L2.5%205M2.5%209.5L2.5%206.5M2.5%2011L2.5%2013C2.5%2013.2761%202.72386%2013.5%203%2013.5H5M13.5%206.5L13.5%209.5M13.5%2011V13C13.5%2013.2761%2013.2761%2013.5%2013%2013.5H11M9.5%2013.5L6.5%2013.5'%20stroke='%23C97800'%20stroke-linejoin='round'/%3e%3c/svg%3e";
 var Vt = Object.defineProperty, jt = (e, t) => Vt(e, "name", { value: t, configurable: !0 });
-const Mt = jt((e) => s.jsx(B, { light: St, dark: Tt, ...e }), "EntityNonPersistableIcon"), Et = async (e, t, a, n, l, c) => {
+const Mt = jt((e) => s.jsx(B, { light: St, dark: Tt, ...e }), "EntityNonPersistableIcon"), Et = async (e, t, a, n, o, c) => {
   const r = { ...n, [a]: c };
-  return (a === "userPrompt" || a === "systemPrompt") && (r.variables = await Ge(e, t, r)), l(r), r;
+  return (a === "userPrompt" || a === "systemPrompt") && (r.variables = await Ge(e, t, r)), o(r), r;
 }, It = async (e, t, a) => {
   const n = await e.ui.elementSelectors.selectEntity({ allowNone: !0 });
-  let l;
-  if (n.status === "ok" && (l = {
+  let o;
+  if (n.status === "ok" && (o = {
     ...t,
     entity: {
       documentId: n.selected.id,
       qualifiedName: n.selected.module + "." + n.selected.name
     }
-  }), n.status === "none" && (l = { ...t, entity: void 0 }), l) {
-    const c = await Qe(e, t.variables, l);
-    l = { ...l, variables: c }, a(l);
+  }), n.status === "none" && (o = { ...t, entity: void 0 }), o) {
+    const c = await Qe(e, t.variables, o);
+    o = { ...o, variables: c }, a(o);
   }
-  return l;
+  return o;
 }, At = async (e, t, a) => {
   const n = await e.ui.elementSelectors.selectDocument({
     allowNone: !0,
     query: { elementType: Xe }
   });
-  let l;
-  return n.status === "ok" && (l = {
+  let o;
+  return n.status === "ok" && (o = {
     ...t,
     model: {
       documentId: n.selected.id,
       qualifiedName: n.selected.module + "." + n.selected.name
     }
-  }), n.status === "none" && (l = { ...t, model: void 0 }), l && a(l), l;
+  }), n.status === "none" && (o = { ...t, model: void 0 }), o && a(o), o;
 }, X = async (e, t, a) => {
   switch (e) {
     case "model": {
       if (!a.model)
         return "Please select a model.";
-      const n = await ge(t, a.model.documentId);
+      const n = await be(t, a.model.documentId);
       if (!n)
         return "This document is invalid. Make sure to select a document of type Model.";
       if (n.excluded)
@@ -287,8 +287,8 @@ const Mt = jt((e) => s.jsx(B, { light: St, dark: Tt, ...e }), "EntityNonPersista
           return "Please select an entity.";
         break;
       }
-      const [n, l] = a.entity.qualifiedName.split(".");
-      if (!n || !l)
+      const [n, o] = a.entity.qualifiedName.split(".");
+      if (!n || !o)
         return "The selected entity is not valid.";
       if (!await Je(t, a))
         return "Entity no longer exists.";
@@ -305,11 +305,11 @@ const Mt = jt((e) => s.jsx(B, { light: St, dark: Tt, ...e }), "EntityNonPersista
 }, Lt = async (e, t) => {
   if (!t.documentId)
     return;
-  if (!await ge(e, t.documentId))
+  if (!await be(e, t.documentId))
     return await e.ui.messageBoxes.show("error", "Could not find model.", "This model might have been deleted or renamed. Please update the model selection.");
   e.ui.editors.editDocument(t.documentId);
 }, Pt = async (e, t, a, n) => {
-  const l = await e.ui.dialogs.showModal(
+  const o = await e.ui.dialogs.showModal(
     {
       title: "Model settings",
       contentSize: { height: 400, width: 600 }
@@ -323,9 +323,9 @@ const Mt = jt((e) => s.jsx(B, { light: St, dark: Tt, ...e }), "EntityNonPersista
     }
   );
   let c;
-  return l && (c = l), c && n(c), c;
-}, de = async (e, t, a, n, l) => {
-  const c = l && a.tools ? a.tools.find((h) => h.id === l) : void 0, r = await e.ui.dialogs.showModal(
+  return o && (c = o), c && n(c), c;
+}, de = async (e, t, a, n, o) => {
+  const c = o && a.tools ? a.tools.find((h) => h.id === o) : void 0, r = await e.ui.dialogs.showModal(
     {
       title: c ? "Edit tool" : "Add tool",
       contentSize: { height: 330, width: 600 }
@@ -342,7 +342,7 @@ const Mt = jt((e) => s.jsx(B, { light: St, dark: Tt, ...e }), "EntityNonPersista
   if (r !== null) {
     const h = r;
     let m;
-    l && a.tools ? m = a.tools.map((g) => g.id === l ? h : g) : m = [...a.tools || [], h], m.sort((g, x) => g.name.localeCompare(x.name));
+    o && a.tools ? m = a.tools.map((b) => b.id === o ? h : b) : m = [...a.tools || [], h], m.sort((b, x) => b.name.localeCompare(x.name));
     const i = { ...a, tools: m };
     return n(i), i;
   } else
@@ -355,8 +355,8 @@ const Mt = jt((e) => s.jsx(B, { light: St, dark: Tt, ...e }), "EntityNonPersista
     return;
   const c = t.tools.filter((h) => h.id !== n), r = { ...t, tools: c };
   return a(r), r;
-}, re = async (e, t, a, n, l) => {
-  const c = a.knowledgebaseTools || [], r = l ? c.find((m) => m.id === l) : void 0, h = await e.ui.dialogs.showModal(
+}, re = async (e, t, a, n, o) => {
+  const c = a.knowledgebaseTools || [], r = o ? c.find((m) => m.id === o) : void 0, h = await e.ui.dialogs.showModal(
     {
       title: r ? "Edit knowledge base" : "Add knowledge base",
       contentSize: { height: 505, width: 600 }
@@ -373,9 +373,9 @@ const Mt = jt((e) => s.jsx(B, { light: St, dark: Tt, ...e }), "EntityNonPersista
   if (h !== null) {
     const m = h;
     let i;
-    l ? i = c.map((x) => x.id === l ? m : x) : i = [...c, m], i.sort((x, k) => x.name.localeCompare(k.name));
-    const g = { ...a, knowledgebaseTools: i };
-    return n(g), g;
+    o ? i = c.map((x) => x.id === o ? m : x) : i = [...c, m], i.sort((x, k) => x.name.localeCompare(k.name));
+    const b = { ...a, knowledgebaseTools: i };
+    return n(b), b;
   }
   return null;
 }, Rt = async (e, t, a, n) => {
@@ -398,7 +398,7 @@ const Ce = Qt((e) => s.jsx(B, { light: Gt, dark: Jt, ...e }), "SyncIcon"), Yt = 
 var ti = Object.defineProperty, ii = (e, t) => ti(e, "name", { value: t, configurable: !0 });
 const si = ii((e) => s.jsx(B, { light: ei, dark: Yt, ...e }), "CheckCheckboxIcon");
 var ai = Object.defineProperty, ni = (e, t) => ai(e, "name", { value: t, configurable: !0 });
-const $e = ni(({ children: e, ...t }) => s.jsx(oi, { ...t, children: ({ isIndeterminate: a, isSelected: n }) => s.jsxs(s.Fragment, { children: [s.jsxs(Te, { $isSelected: n, $isIndeterminate: a, children: [a && s.jsx(li, {}), n && !a && s.jsx(si, {})] }), e] }) }), "Checkbox"), Te = _.div`
+const $e = ni(({ children: e, ...t }) => s.jsx(li, { ...t, children: ({ isIndeterminate: a, isSelected: n }) => s.jsxs(s.Fragment, { children: [s.jsxs(Te, { $isSelected: n, $isIndeterminate: a, children: [a && s.jsx(oi, {}), n && !a && s.jsx(si, {})] }), e] }) }), "Checkbox"), Te = _.div`
     width: ${A.size12};
     height: ${A.size12};
     margin: ${A.spacing2};
@@ -410,12 +410,12 @@ const $e = ni(({ children: e, ...t }) => s.jsx(oi, { ...t, children: ({ isIndete
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-`, li = _.div`
+`, oi = _.div`
     width: 6px;
     height: 6px;
     border-radius: 1px;
     background: ${({ theme: e }) => e.colorsBorderSelectorSelected};
-`, oi = _(wt)`
+`, li = _(wt)`
     cursor: pointer;
     display: flex;
     height: ${A.size16};
@@ -453,64 +453,64 @@ const $e = ni(({ children: e, ...t }) => s.jsx(oi, { ...t, children: ({ isIndete
   studioPro: t,
   componentName: a,
   updateStudioProDocument: n,
-  onAgentChange: l,
+  onAgentChange: o,
   knowledgebaseToolValidations: c
 }) => {
-  const [r, h] = f.useState([]), m = f.useMemo(() => (e.knowledgebaseTools || []).map((d, b) => ({
-    id: d.id ?? String(b),
+  const [r, h] = f.useState([]), m = f.useMemo(() => (e.knowledgebaseTools || []).map((d, g) => ({
+    id: d.id ?? String(g),
     enabled: d.enabled,
     name: d.name,
     description: d.description || "",
     tool: d.document.qualifiedName || ""
-  })), [e.knowledgebaseTools]), { items: i, sortProps: g } = be(m), x = f.useCallback(
-    (o) => {
-      const d = c.get(o);
+  })), [e.knowledgebaseTools]), { items: i, sortProps: b } = ge(m), x = f.useCallback(
+    (l) => {
+      const d = c.get(l);
       return d === "invalid" ? /* @__PURE__ */ s.jsx(K, { icon: /* @__PURE__ */ s.jsx(me, { title: "Tool invalid" }) }) : d === "syncing" ? /* @__PURE__ */ s.jsx(K, { icon: /* @__PURE__ */ s.jsx(Ce, { title: "Validating..." }) }) : null;
     },
     [c]
   ), k = f.useCallback(async () => {
-    const o = await re(
+    const l = await re(
       t,
       a,
       e,
       n
     );
-    o && l(o);
-  }, [t, a, e, n, l]), C = f.useCallback(async () => {
-    const o = e.knowledgebaseTools || [];
-    if (r.length === 0 || o.length === 0)
+    l && o(l);
+  }, [t, a, e, n, o]), C = f.useCallback(async () => {
+    const l = e.knowledgebaseTools || [];
+    if (r.length === 0 || l.length === 0)
       return;
-    const d = r[0], b = await re(
+    const d = r[0], g = await re(
       t,
       a,
       e,
       n,
       d
     );
-    b && l(b);
-  }, [t, a, e, n, l, r]), $ = f.useCallback(async () => {
-    const o = e.knowledgebaseTools || [];
-    if (r.length === 0 || o.length === 0)
+    g && o(g);
+  }, [t, a, e, n, o, r]), $ = f.useCallback(async () => {
+    const l = e.knowledgebaseTools || [];
+    if (r.length === 0 || l.length === 0)
       return;
-    const d = r[0], b = await Rt(
+    const d = r[0], g = await Rt(
       t,
       e,
       n,
       d
     );
-    b && l(b);
-  }, [e, n, l, r]), y = f.useCallback(
-    async (o, d) => {
-      const b = e.knowledgebaseTools || [];
-      if (b.length === 0)
+    g && o(g);
+  }, [e, n, o, r]), y = f.useCallback(
+    async (l, d) => {
+      const g = e.knowledgebaseTools || [];
+      if (g.length === 0)
         return;
-      const j = b.map(
-        (M) => (M.id ?? "") === o ? { ...M, enabled: d } : M
+      const j = g.map(
+        (M) => (M.id ?? "") === l ? { ...M, enabled: d } : M
       ), S = { ...e, knowledgebaseTools: j };
-      n(S), l(S);
+      n(S), o(S);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [e.knowledgebaseTools, n, l]
+    [e.knowledgebaseTools, n, o]
   );
   return /* @__PURE__ */ s.jsx(N, { label: "Knowledge bases", children: /* @__PURE__ */ s.jsx(
     ve,
@@ -532,34 +532,34 @@ const $e = ni(({ children: e, ...t }) => s.jsx(oi, { ...t, children: ({ isIndete
         { id: "description", caption: "Description", resizable: !0, allowsSorting: !0 },
         { id: "knowledgebase", caption: "Knowledge base", resizable: !0, allowsSorting: !0 }
       ],
-      data: i.map((o) => [
-        x(o.id),
+      data: i.map((l) => [
+        x(l.id),
         /* @__PURE__ */ s.jsx(
           di,
           {
             "aria-label": "Enabled",
-            isSelected: o.enabled,
-            onChange: (d) => y(o.id, d)
+            isSelected: l.enabled,
+            onChange: (d) => y(l.id, d)
           }
         ),
-        o.name,
-        o.description,
-        /* @__PURE__ */ s.jsx(he, { icon: Ye, text: o.tool })
+        l.name,
+        l.description,
+        /* @__PURE__ */ s.jsx(he, { icon: Ye, text: l.tool })
       ]),
-      rowKey: (o, d) => {
-        var b;
-        return ((b = i[d]) == null ? void 0 : b.id) ?? String(d);
+      rowKey: (l, d) => {
+        var g;
+        return ((g = i[d]) == null ? void 0 : g.id) ?? String(d);
       },
-      rowOpacity: (o) => {
+      rowOpacity: (l) => {
         var d;
-        return (d = i[o]) != null && d.enabled ? 1 : 0.5;
+        return (d = i[l]) != null && d.enabled ? 1 : 0.5;
       },
       selectionType: "row",
       selectionMode: "single",
       selectedKeys: r,
       onDoubleClick: C,
       onSelectionChange: h,
-      ...g,
+      ...b,
       toolbarLeft: /* @__PURE__ */ s.jsxs(s.Fragment, { children: [
         /* @__PURE__ */ s.jsx(
           O,
@@ -605,52 +605,52 @@ const $e = ni(({ children: e, ...t }) => s.jsx(oi, { ...t, children: ({ isIndete
   studioPro: t,
   componentName: a,
   updateStudioProDocument: n,
-  onAgentChange: l,
+  onAgentChange: o,
   toolValidations: c
 }) => {
-  const [r, h] = f.useState([]), m = f.useMemo(() => e.tools ? e.tools.map((o, d) => ({
-    id: o.id ?? String(d),
-    enabled: o.enabled,
-    name: o.toolType === ne.Microflow ? o.name : o.document.qualifiedName.split(".")[1],
-    description: o.description || "",
-    tooltype: o.toolType,
-    tool: o.document.qualifiedName || ""
-  })) : [], [e.tools]), { items: i, sortProps: g } = be(m), x = f.useCallback(
-    (o) => {
-      const d = c.get(o);
+  const [r, h] = f.useState([]), m = f.useMemo(() => e.tools ? e.tools.map((l, d) => ({
+    id: l.id ?? String(d),
+    enabled: l.enabled,
+    name: l.toolType === ne.Microflow ? l.name : l.document.qualifiedName.split(".")[1],
+    description: l.description || "",
+    tooltype: l.toolType,
+    tool: l.document.qualifiedName || ""
+  })) : [], [e.tools]), { items: i, sortProps: b } = ge(m), x = f.useCallback(
+    (l) => {
+      const d = c.get(l);
       return d === "invalid" ? /* @__PURE__ */ s.jsx(K, { icon: /* @__PURE__ */ s.jsx(me, { title: "Tool invalid" }) }) : d === "syncing" ? /* @__PURE__ */ s.jsx(K, { icon: /* @__PURE__ */ s.jsx(Ce, { title: "Validating..." }) }) : null;
     },
     [c]
   ), k = f.useCallback(async () => {
-    const o = await de(t, a, e, n);
-    o && l(o);
-  }, [t, a, e, n, l]), C = f.useCallback(async () => {
+    const l = await de(t, a, e, n);
+    l && o(l);
+  }, [t, a, e, n, o]), C = f.useCallback(async () => {
     if (r.length === 0 || !e.tools)
       return;
-    const o = r[0], d = await de(
+    const l = r[0], d = await de(
       t,
       a,
       e,
       n,
-      o
+      l
     );
-    d && l(d);
-  }, [t, a, e, n, l, r]), $ = f.useCallback(async () => {
+    d && o(d);
+  }, [t, a, e, n, o, r]), $ = f.useCallback(async () => {
     if (r.length === 0 || !e.tools)
       return;
-    const o = r[0], d = await Bt(t, e, n, o);
-    d && l(d);
-  }, [e, n, l, r]), y = f.useCallback(
-    async (o, d) => {
+    const l = r[0], d = await Bt(t, e, n, l);
+    d && o(d);
+  }, [e, n, o, r]), y = f.useCallback(
+    async (l, d) => {
       if (!e.tools)
         return;
-      const b = e.tools.map(
-        (S) => (S.id ?? "") === o ? { ...S, enabled: d } : S
-      ), j = { ...e, tools: b };
-      n(j), l(j);
+      const g = e.tools.map(
+        (S) => (S.id ?? "") === l ? { ...S, enabled: d } : S
+      ), j = { ...e, tools: g };
+      n(j), o(j);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [e.tools, n, l]
+    [e.tools, n, o]
   );
   return /* @__PURE__ */ s.jsx(N, { label: "Tools", children: /* @__PURE__ */ s.jsx(
     ve,
@@ -672,40 +672,40 @@ const $e = ni(({ children: e, ...t }) => s.jsx(oi, { ...t, children: ({ isIndete
         { id: "description", caption: "Description", resizable: !0, allowsSorting: !0 },
         { id: "tool", caption: "Tool", resizable: !0, allowsSorting: !0 }
       ],
-      data: i.map((o) => [
-        x(o.id),
+      data: i.map((l) => [
+        x(l.id),
         /* @__PURE__ */ s.jsx(
           ci,
           {
             "aria-label": "Enabled",
-            isSelected: o.enabled,
-            onChange: (d) => y(o.id, d)
+            isSelected: l.enabled,
+            onChange: (d) => y(l.id, d)
           }
         ),
-        o.name,
-        o.description,
+        l.name,
+        l.description,
         /* @__PURE__ */ s.jsx(
           he,
           {
-            icon: o.tooltype === ne.Microflow ? /* @__PURE__ */ s.jsx(rt, {}) : et,
-            text: o.tool
+            icon: l.tooltype === ne.Microflow ? /* @__PURE__ */ s.jsx(rt, {}) : et,
+            text: l.tool
           }
         )
       ]),
-      rowKey: (o, d) => {
-        var b;
-        return ((b = i[d]) == null ? void 0 : b.id) ?? String(d);
+      rowKey: (l, d) => {
+        var g;
+        return ((g = i[d]) == null ? void 0 : g.id) ?? String(d);
       },
-      rowOpacity: (o) => {
+      rowOpacity: (l) => {
         var d;
-        return (d = i[o]) != null && d.enabled ? 1 : 0.5;
+        return (d = i[l]) != null && d.enabled ? 1 : 0.5;
       },
       selectionType: "row",
       selectionMode: "single",
       selectedKeys: r,
       onDoubleClick: C,
       onSelectionChange: h,
-      ...g,
+      ...b,
       toolbarLeft: /* @__PURE__ */ s.jsxs(s.Fragment, { children: [
         /* @__PURE__ */ s.jsx(
           O,
@@ -751,12 +751,12 @@ const $e = ni(({ children: e, ...t }) => s.jsx(oi, { ...t, children: ({ isIndete
   unusedAttributes: []
 }, mi = ({ loadedAgent: e, studioPro: t, updateStudioProDocument: a }) => {
   var ee, te, ie;
-  const [n, l] = f.useState(!1), [c, r] = f.useState(fi), [h, m] = f.useState(void 0), [i, g] = f.useState(e), [x, k] = f.useState(!1), [C, $] = f.useState(!1), [y, o] = f.useState(/* @__PURE__ */ new Map()), [d, b] = f.useState(
+  const [n, o] = f.useState(!1), [c, r] = f.useState(fi), [h, m] = f.useState(void 0), [i, b] = f.useState(e), [x, k] = f.useState(!1), [C, $] = f.useState(!1), [y, l] = f.useState(/* @__PURE__ */ new Map()), [d, g] = f.useState(
     /* @__PURE__ */ new Map()
   ), j = _e(), S = f.useRef(null);
   f.useEffect(() => {
     var u;
-    Y(e).then((w) => r(w)), D(t, (u = e.entity) == null ? void 0 : u.qualifiedName).then((w) => m(w)), g(e), l(!0);
+    Y(e).then((w) => r(w)), D(t, (u = e.entity) == null ? void 0 : u.qualifiedName).then((w) => m(w)), b(e), o(!0);
   }, []), f.useEffect(() => () => {
     S.current && clearTimeout(S.current);
   }, []), f.useEffect(() => {
@@ -772,10 +772,10 @@ const $e = ni(({ children: e, ...t }) => s.jsx(oi, { ...t, children: ({ isIndete
         const v = /* @__PURE__ */ new Map();
         i.tools.forEach((p) => {
           v.set(p.id, "syncing");
-        }), o(v), w.push(
+        }), l(v), w.push(
           Promise.all(
             i.tools.map(async (p) => {
-              const V = await ut("document", p, i, t);
+              const V = await mt("document", p, i, t);
               return {
                 id: p.id,
                 state: V === !0 ? "valid" : "invalid"
@@ -783,7 +783,7 @@ const $e = ni(({ children: e, ...t }) => s.jsx(oi, { ...t, children: ({ isIndete
             })
           ).then((p) => {
             const V = new Map(p.map((T) => [T.id, T.state]));
-            o(V);
+            l(V);
           })
         );
       }
@@ -791,7 +791,7 @@ const $e = ni(({ children: e, ...t }) => s.jsx(oi, { ...t, children: ({ isIndete
         const v = /* @__PURE__ */ new Map();
         i.knowledgebaseTools.forEach((p) => {
           v.set(p.id, "syncing");
-        }), b(v), w.push(
+        }), g(v), w.push(
           Promise.all(
             i.knowledgebaseTools.map(async (p) => {
               const V = await ht(
@@ -807,7 +807,7 @@ const $e = ni(({ children: e, ...t }) => s.jsx(oi, { ...t, children: ({ isIndete
             })
           ).then((p) => {
             const V = new Map(p.map((T) => [T.id, T.state]));
-            b(V);
+            g(V);
           })
         );
       }
@@ -820,7 +820,7 @@ const $e = ni(({ children: e, ...t }) => s.jsx(oi, { ...t, children: ({ isIndete
       const u = M.current, w = /* @__PURE__ */ new Map();
       i.tools.forEach((v) => {
         w.set(v.id, v.document.qualifiedName);
-      }), o((v) => {
+      }), l((v) => {
         var V;
         const p = new Map(v);
         return (V = i.tools) == null || V.forEach((T) => {
@@ -838,7 +838,7 @@ const $e = ni(({ children: e, ...t }) => s.jsx(oi, { ...t, children: ({ isIndete
       const u = R.current, w = /* @__PURE__ */ new Map();
       i.knowledgebaseTools.forEach((v) => {
         w.set(v.id, v.document.qualifiedName);
-      }), b((v) => {
+      }), g((v) => {
         var V;
         const p = new Map(v);
         return (V = i.knowledgebaseTools) == null || V.forEach((T) => {
@@ -859,7 +859,7 @@ const $e = ni(({ children: e, ...t }) => s.jsx(oi, { ...t, children: ({ isIndete
   }, [t, i]);
   const L = f.useMemo(() => tt(i.variables), [i.variables]), E = (u) => (w) => {
     const v = { ...i, [u]: w };
-    g(v), S.current && clearTimeout(S.current), S.current = setTimeout(async () => {
+    b(v), S.current && clearTimeout(S.current), S.current = setTimeout(async () => {
       const p = await Et(
         t,
         j,
@@ -868,21 +868,21 @@ const $e = ni(({ children: e, ...t }) => s.jsx(oi, { ...t, children: ({ isIndete
         a,
         w
       );
-      g(p);
+      b(p);
     }, 300);
   }, P = async () => {
     const u = await It(t, i, a);
-    u && g(u);
+    u && b(u);
   }, U = async () => {
     const u = await At(t, i, a);
-    u && g(u);
+    u && b(u);
   }, W = async () => {
     i.model && Lt(t, i.model);
   }, z = async () => {
-    i.entity && lt(t, i.entity.qualifiedName);
+    i.entity && ot(t, i.entity.qualifiedName);
   }, I = async () => {
     const u = await Pt(t, J, i, a);
-    u && g(u);
+    u && b(u);
   }, D = async (u, w) => {
     if (!w)
       return;
@@ -934,7 +934,7 @@ const $e = ni(({ children: e, ...t }) => s.jsx(oi, { ...t, children: ({ isIndete
           studioPro: t,
           componentName: J,
           updateStudioProDocument: a,
-          onAgentChange: g,
+          onAgentChange: b,
           toolValidations: y
         }
       ),
@@ -945,7 +945,7 @@ const $e = ni(({ children: e, ...t }) => s.jsx(oi, { ...t, children: ({ isIndete
           studioPro: t,
           componentName: J,
           updateStudioProDocument: a,
-          onAgentChange: g,
+          onAgentChange: b,
           knowledgebaseToolValidations: d
         }
       )
@@ -957,7 +957,7 @@ const $e = ni(({ children: e, ...t }) => s.jsx(oi, { ...t, children: ({ isIndete
           ariaLabel: "Model",
           label: "Model",
           value: ((te = i.model) == null ? void 0 : te.qualifiedName) || "",
-          icon: i.model ? ft : void 0,
+          icon: i.model ? ut : void 0,
           buttonCaption: "Select...",
           onClick: U,
           validate: () => c.isValidModel,
@@ -1001,7 +1001,7 @@ const $e = ni(({ children: e, ...t }) => s.jsx(oi, { ...t, children: ({ isIndete
         }
       ),
       c.showCreateVariablesInfo && c.unusedAttributes.length === 0 && !C && /* @__PURE__ */ s.jsx(oe, { onClose: () => $(!0), children: "Create variables: Enclose a word or text in double curly brackets. For example, you can write {{Language}} in the system or user prompt." }),
-      c.missingAttributes.length > 0 && /* @__PURE__ */ s.jsxs(mt, { children: [
+      c.missingAttributes.length > 0 && /* @__PURE__ */ s.jsxs(ft, { children: [
         /* @__PURE__ */ s.jsx("span", { children: "The following attributes cannot be found on the selected entity:" }),
         /* @__PURE__ */ s.jsx("ul", { children: c.missingAttributes.map((u) => /* @__PURE__ */ s.jsx("li", { children: u }, u)) })
       ] }),
@@ -1015,8 +1015,8 @@ const $e = ni(({ children: e, ...t }) => s.jsx(oi, { ...t, children: ({ isIndete
       ] })
     ] }) })
   ] });
-}, hi = ot(), gi = ({ studioPro: e, documentId: t }) => {
-  const a = e.ui.messageBoxes, n = e.app.model.customBlobDocuments, [l, c] = f.useState(!1), [r, h] = f.useState(hi);
+}, hi = lt(), bi = ({ studioPro: e, documentId: t }) => {
+  const a = e.ui.messageBoxes, n = e.app.model.customBlobDocuments, [o, c] = f.useState(!1), [r, h] = f.useState(hi);
   return f.useEffect(() => {
     n.getDocumentById(t).then(async (m) => {
       if (m && !("error" in m)) {
@@ -1028,8 +1028,8 @@ const $e = ni(({ children: e, ...t }) => s.jsx(oi, { ...t, children: ({ isIndete
       await a.show("error", "Error loading document", "Details: " + (m == null ? void 0 : m.message) || m), c(!0);
     });
   }, []), /* @__PURE__ */ s.jsx(Ke, { studioPro: e, children: /* @__PURE__ */ s.jsxs(Ue, { children: [
-    !l && /* @__PURE__ */ s.jsx(Ze, {}),
-    l && /* @__PURE__ */ s.jsx(We, { children: /* @__PURE__ */ s.jsx(
+    !o && /* @__PURE__ */ s.jsx(Ze, {}),
+    o && /* @__PURE__ */ s.jsx(We, { children: /* @__PURE__ */ s.jsx(
       mi,
       {
         loadedAgent: r,
@@ -1038,7 +1038,7 @@ const $e = ni(({ children: e, ...t }) => s.jsx(oi, { ...t, children: ({ isIndete
       }
     ) })
   ] }) });
-}, Vi = ze(gi);
+}, Vi = ze(bi);
 export {
   Vi as component
 };

@@ -1,11 +1,12 @@
-import "./DesignSystemTokens-CB_9gr2a.js";
-import { s as p, j as s, q as t, r as a, m as c } from "./index-98pkSbGS.js";
-import "./modelUtils-Rqk_kWfx.js";
+import "./DesignSystemTokens-BZrmEyPo.js";
+import { B as t, l as a, w as c, y as s, m as d } from "./index-DO-n49Lf.js";
+import "./modelUtils-whA8-BBg.js";
+import "./knowledgebaseUtils-DFj6m72n.js";
 export {
-  p as component,
-  s as componentName,
-  t as consumedMCPServiceDocumentTypeId,
-  a as knowledgeBaseDocumentTypeId,
-  c as modelDocumentTypeId
+  t as component,
+  a as componentName,
+  c as consumedMCPServiceDocumentTypeId,
+  s as knowledgeBaseDocumentTypeId,
+  d as modelDocumentTypeId
 };
 //# sourceMappingURL=main.js.map
