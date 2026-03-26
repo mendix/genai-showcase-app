@@ -28413,7 +28413,36 @@ input[type=checkbox].three-state-checkbox + .control-label {
   fill: #0a1325;
 }
 .accordion-chat-sources .widget-accordion-group .widget-accordion-group-content-wrapper .widget-accordion-group-content {
-  padding-left: 0;
+  padding: 0;
+}
+
+.accordion-tool-calls .widget-accordion-group {
+  background: transparent;
+  border-bottom: none;
+}
+.accordion-tool-calls .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button {
+  display: inline-flex;
+  background: transparent;
+  padding: 4px;
+  width: 100%;
+}
+.accordion-tool-calls .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button .mx-image-viewer {
+  width: auto;
+}
+.accordion-tool-calls .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button[aria-expanded=false] .widget-accordion-group-header-button-icon {
+  transform: rotate(0.75turn);
+  transition: 200ms linear 50ms;
+}
+.accordion-tool-calls .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button[aria-expanded=true] .widget-accordion-group-header-button-icon {
+  transform: rotate(1turn);
+}
+.accordion-tool-calls .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button .widget-accordion-group-header-button-icon {
+  align-self: left;
+  display: inline-flex;
+  fill: #0a1325;
+}
+.accordion-tool-calls .widget-accordion-group .widget-accordion-group-content-wrapper .widget-accordion-group-content {
+  padding-left: 28px;
   padding-right: 0;
   padding-bottom: 0;
 }
@@ -28645,6 +28674,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   text-decoration-thickness: 1px;
 }
 
+.btn-small {
+  padding: 8px;
+}
+
 .chat-card--full-height {
   height: 100%;
 }
@@ -28758,7 +28791,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   color: #0a1325;
   border: 1px solid #e7e7e9;
-  border-radius: 4px;
+  border-radius: 8px;
   padding: 8px;
 }
 .chat-input-wrapper .form-group {
@@ -28874,15 +28907,19 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .tool-message {
-  border-radius: 4px;
+  border-radius: 8px;
   border: 1px solid;
   border-color: #E7E7E9;
+  overflow: hidden;
 }
 .tool-message .tool-title {
   font-weight: 600;
-  background-color: #E7E7E9;
+  background-color: #f7f7f7;
   padding: 8px;
   display: block;
+}
+.tool-message .tool-title .mx-image-viewer {
+  width: auto;
 }
 .tool-message .tool-details {
   padding: 8px;
@@ -30186,6 +30223,86 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .agent-trace-container .agent-trace-icon-container {
   padding-left: 2px;
+}
+
+.widget-markdown {
+  margin-top: 16px;
+}
+.widget-markdown hr {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+.widget-markdown h1, .widget-markdown h2, .widget-markdown h3, .widget-markdown h4, .widget-markdown h5, .widget-markdown h6 {
+  font-size: 16px;
+  font-weight: 600;
+}
+.widget-markdown ul {
+  justify-content: flex-start;
+  list-style: none;
+  padding: 0;
+}
+.widget-markdown ul > li {
+  padding: 0;
+}
+.widget-markdown li p {
+  margin-bottom: 0px;
+}
+.widget-markdown ol {
+  padding-left: 18px;
+  justify-content: flex-start;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid #e5e7eb;
+  /* light gray background */
+  border-top: 3px solid #3b82f6;
+  /* accent color */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.typing::after {
+  content: ".";
+  animation: dots 1.5s steps(3, end) infinite;
+}
+
+@keyframes dots {
+  0% {
+    content: ".";
+  }
+  33% {
+    content: "..";
+  }
+  66% {
+    content: "...";
+  }
+  100% {
+    content: ".";
+  }
+}
+.user-approved .mx-icon-user {
+  color: green;
+}
+
+.user-declined .mx-icon-user {
+  color: red;
+}
+
+.icon-badge {
+  background-color: #DCEEFE;
+  color: #146FF4;
+  padding: 8px;
+  border-radius: 8px;
 }
 
 .model-badge, .model-badge--primary, .model-badge--default {

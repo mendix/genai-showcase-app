@@ -4,13 +4,11 @@
     .widget-accordion-group{
         background: transparent;
         border-bottom: none;
-
         .widget-accordion-group-header {
             .widget-accordion-group-header-button {
                 display: inline-flex;
                 background: transparent;
                 padding: 0;
-
                 &.widget-accordion-group-header-button-clickable {
                     &:hover,
                     &:focus,
@@ -19,7 +17,6 @@
                         background: transparent;
                     }
                 }
-
                 .widget-accordion-group-header-button-icon {
                     align-self: left;
                     display: inline-flex;
@@ -27,10 +24,51 @@
                 }
             }      
         }
-
         .widget-accordion-group-content-wrapper {
             .widget-accordion-group-content {
-                padding-left: 0;
+                padding: 0; 
+            }
+        }
+    }
+}
+
+////////////////////////////////////////////////////////////////////
+///// Accordion styling for accordions used inside a message bubble 
+////////////////////////////////////////////////////////////////////
+.accordion-tool-calls {
+    .widget-accordion-group{
+        background: transparent;
+        border-bottom: none;
+        .widget-accordion-group-header {
+            .widget-accordion-group-header-button {
+                display: inline-flex;
+                background: transparent;
+                padding: $spacing-smaller;
+                width: 100%;
+                .mx-image-viewer {
+                    width: auto;
+                }
+                &[aria-expanded="false"] {
+                    .widget-accordion-group-header-button-icon {
+                        transform: rotate(0.75turn);
+                        transition: 200ms linear 50ms
+                    }
+                }
+                &[aria-expanded="true"] {
+                    .widget-accordion-group-header-button-icon {
+                        transform: rotate(1.0turn);
+                    }
+                }
+                .widget-accordion-group-header-button-icon {
+                    align-self: left;
+                    display: inline-flex;
+                    fill: $font-color-default;
+                }
+            }      
+        }
+        .widget-accordion-group-content-wrapper {
+            .widget-accordion-group-content {
+                padding-left: 28px;
                 padding-right: 0;
                 padding-bottom: 0;
             }

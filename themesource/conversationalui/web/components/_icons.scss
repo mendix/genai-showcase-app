@@ -1,0 +1,20 @@
+@use '../../../../theme/web/custom-variables' as *;
+
+.user-approved {
+    .mx-icon-user {
+        color: green;
+    }
+}
+
+.user-declined {
+    .mx-icon-user {
+        color: red;
+    }
+}
+
+.icon-badge {
+    background-color: #DCEEFE;
+    color: #146FF4;
+    padding: 8px;//$spacing-smaller;
+    border-radius: 8px;//$spacing-smaller;
+}

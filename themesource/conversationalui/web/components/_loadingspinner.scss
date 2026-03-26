@@ -1,0 +1,29 @@
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid #e5e7eb;      /* light gray background */
+  border-top: 3px solid #3b82f6;  /* accent color */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.typing::after {
+    content: '.';
+    animation: dots 1.5s steps(3, end) infinite;
+}
+
+@keyframes dots {
+    0%   { content: '.'; }
+    33%  { content: '..'; }
+    66%  { content: '...'; }
+    100% { content: '.'; }
+}
