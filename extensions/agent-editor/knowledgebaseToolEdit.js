@@ -1,13 +1,13 @@
 import { r as c, w as a, V as L, E as K, C as O, G as C, Q as A, D as B } from "./Icon-DlQJfq7F.js";
 import { s as q, c as F } from "./DesignSystemTokens-BZrmEyPo.js";
 import { n as G } from "./MicroflowIcon-kvKEq0tY.js";
-import { D as H } from "./DialogFooter-DACb7c2t.js";
-import { T as J, a as U } from "./toolHandlers-D5r8oDlK.js";
+import { u as H, D as J } from "./DialogFooter-BHOCIJ8t.js";
+import { T as U, a as W } from "./toolHandlers-CxX3QrIs.js";
 import { T as y } from "./TextInputLabeled-CEPunJWI.js";
-import { T as W } from "./TextInputWithButton-DdFsQTz_.js";
-import { x as V, v as $, y as Q } from "./index-DO-n49Lf.js";
-import { h as u } from "./knowledgebaseToolHandlers-BGK4DWaD.js";
-const _ = {
+import { T as $ } from "./TextInputWithButton-DdFsQTz_.js";
+import { x as V, v as Q, y as _ } from "./index-DEchU29s.js";
+import { h as u } from "./knowledgebaseToolHandlers-DgOq9kvy.js";
+const z = {
   isValidName: !0,
   isValidDescription: !0,
   isValidDocument: !0,
@@ -15,55 +15,55 @@ const _ = {
   isValidCollectionIdentifier: !0,
   isValidMaxResults: !0,
   isValidMinSimilarity: !0
-}, z = {
+}, X = {
   name: "isValidName",
   description: "isValidDescription",
   document: "isValidDocument",
   collectionIdentifier: "isValidCollectionIdentifier",
   maxResults: "isValidMaxResults",
   minSimilarity: "isValidMinSimilarity"
-}, X = ({
+}, Y = ({
   initialTool: n,
-  studioPro: t,
+  studioPro: i,
   agent: o,
   onClose: p
 }) => {
-  var N, R;
-  const [i, h] = c.useState(n || V()), [l, x] = c.useState(_), [S, b] = c.useState(
-    ((N = (n || V()).maxResults) == null ? void 0 : N.toString()) ?? ""
-  ), [j, I] = c.useState(
-    ((R = (n || V()).minSimilarity) == null ? void 0 : R.toString()) ?? ""
+  var j, D;
+  const [t, h] = c.useState(n || V()), [l, x] = c.useState(z), [S, b] = c.useState(
+    ((j = (n || V()).maxResults) == null ? void 0 : j.toString()) ?? ""
+  ), [M, I] = c.useState(
+    ((D = (n || V()).minSimilarity) == null ? void 0 : D.toString()) ?? ""
   ), w = c.useCallback(
     async (e) => ({
-      isValidName: await u("name", e, o, t),
+      isValidName: await u("name", e, o, i),
       isValidDescription: await u(
         "description",
         e,
         o,
-        t
+        i
       ),
-      isValidDocument: await u("document", e, o, t),
+      isValidDocument: await u("document", e, o, i),
       isValidType: !0,
       isValidCollectionIdentifier: await u(
         "collectionIdentifier",
         e,
         o,
-        t
+        i
       ),
       isValidMaxResults: await u(
         "maxResults",
         e,
         o,
-        t
+        i
       ),
       isValidMinSimilarity: await u(
         "minSimilarity",
         e,
         o,
-        t
+        i
       )
     }),
-    [t, o]
+    [i, o]
   );
   c.useEffect(() => {
     n && (b(n.maxResults !== void 0 ? n.maxResults.toString() : ""), I(n.minSimilarity !== void 0 ? n.minSimilarity.toString() : ""), w(n).then((e) => {
@@ -72,13 +72,13 @@ const _ = {
   }, [n, w]);
   const v = c.useCallback(
     async (e, r) => {
-      const d = z[e];
+      const d = X[e];
       if (d && l[d] !== !0) {
-        const s = await u(e, r, o, t);
+        const s = await u(e, r, o, i);
         x((m) => ({ ...m, [d]: s }));
       }
     },
-    [l, o, t]
+    [l, o, i]
   ), g = (e, r) => {
     if (e === "maxResults") {
       const s = String(r);
@@ -86,7 +86,7 @@ const _ = {
         return;
       b(s);
       const m = s === "" ? void 0 : Number.parseInt(s, 10), f = {
-        ...i,
+        ...t,
         maxResults: Number.isNaN(m) ? void 0 : m
       };
       h(f), v(e, f);
@@ -98,28 +98,30 @@ const _ = {
         return;
       I(s);
       const m = s === "" || s === "." ? void 0 : Number.parseFloat(s), f = {
-        ...i,
+        ...t,
         minSimilarity: Number.isNaN(m) ? void 0 : m
       };
       h(f), v(e, f);
       return;
     }
-    const d = { ...i, [e]: r };
+    const d = { ...t, [e]: r };
     h(d), v(e, d);
-  }, D = async () => {
-    const e = await U(t, Q);
+  }, E = async () => {
+    const e = await W(i, _);
     if (e) {
-      const r = { ...i, document: e };
+      const r = { ...t, document: e };
       h(r), v("document", r);
     }
-  }, M = () => {
-    $(t, i.document);
-  }, E = async () => {
-    const e = await w(i);
-    console.log(e), x(e), Object.values(e).some((d) => d !== !0) || p(i);
   }, k = () => {
+    Q(i, t.document);
+  }, N = async () => {
+    const e = await w(t);
+    console.log(e), x(e), Object.values(e).some((d) => d !== !0) || p(t);
+  }, R = () => {
     p(null);
-  }, T = () => {
+  };
+  H(R, N);
+  const T = () => {
     window.open(
       "https://docs.mendix.com/appstore/modules/genai/genai-for-mx/agent-commons/#adding-tools",
       "_blank",
@@ -130,17 +132,17 @@ const _ = {
     /* @__PURE__ */ a.jsx(K, { children: /* @__PURE__ */ a.jsxs(O, { children: [
       /* @__PURE__ */ a.jsxs(C, { label: "General", children: [
         /* @__PURE__ */ a.jsx(
-          W,
+          $,
           {
             ariaLabel: "Knowledge base",
             label: "Knowledge base",
-            value: i.document.qualifiedName,
-            icon: i.document.qualifiedName ? /* @__PURE__ */ a.jsx(G, {}) : void 0,
+            value: t.document.qualifiedName,
+            icon: t.document.qualifiedName ? /* @__PURE__ */ a.jsx(G, {}) : void 0,
             buttonCaption: "Select...",
-            onClick: D,
+            onClick: E,
             validate: () => l.isValidDocument,
-            buttonCaptionSecondary: i.document.qualifiedName ? "Show" : void 0,
-            onClickSecondary: i.document.qualifiedName ? M : void 0
+            buttonCaptionSecondary: t.document.qualifiedName ? "Show" : void 0,
+            onClickSecondary: t.document.qualifiedName ? k : void 0
           }
         ),
         /* @__PURE__ */ a.jsx(
@@ -148,7 +150,7 @@ const _ = {
           {
             label: "Collection",
             ariaLabel: "Collection identifier",
-            value: i.collectionIdentifier,
+            value: t.collectionIdentifier,
             onChange: (e) => g("collectionIdentifier", e),
             validate: () => l.isValidCollectionIdentifier
           }
@@ -160,17 +162,17 @@ const _ = {
           {
             label: "Name",
             ariaLabel: "Name",
-            value: i.name,
+            value: t.name,
             onChange: (e) => g("name", e),
             validate: () => l.isValidName
           }
         ),
         /* @__PURE__ */ a.jsx(
-          J,
+          U,
           {
             label: "Description",
             ariaLabel: "Description",
-            value: i.description,
+            value: t.description,
             onChange: (e) => g("description", e),
             validate: () => l.isValidDescription
           }
@@ -193,7 +195,7 @@ const _ = {
           {
             label: "Min similarity",
             ariaLabel: "Min similarity",
-            value: j,
+            value: M,
             onChange: (e) => g("minSimilarity", e),
             validate: () => l.isValidMinSimilarity,
             description: "This is the cosine-similarity cut-off for retrievals; allowed values lie between 0 and 1. It can be used to only retrieve data chunks of high relevance. A high value (e.g. 0.8) is stricter than a low value (e.g. 0.2)."
@@ -201,30 +203,30 @@ const _ = {
         )
       ] })
     ] }) }),
-    /* @__PURE__ */ a.jsx(H, { onOk: E, onCancel: k, onHelp: T })
+    /* @__PURE__ */ a.jsx(J, { onOk: N, onCancel: R, onHelp: T })
   ] });
-}, Y = ({ studioPro: n, initialTool: t, agent: o, onClose: p }) => /* @__PURE__ */ a.jsx(B, { studioPro: n, children: /* @__PURE__ */ a.jsx(X, { initialTool: t, studioPro: n, agent: o, onClose: p }) }), le = {
-  async loaded(n, t) {
+}, Z = ({ studioPro: n, initialTool: i, agent: o, onClose: p }) => /* @__PURE__ */ a.jsx(B, { studioPro: n, children: /* @__PURE__ */ a.jsx(Y, { initialTool: i, studioPro: n, agent: o, onClose: p }) }), re = {
+  async loaded(n, i) {
     const o = q(n), p = F(o);
     try {
-      const i = document.getElementById("root");
-      if (!i)
+      const t = document.getElementById("root");
+      if (!t)
         throw new Error("Failed to find the root element");
-      const h = A.createRoot(i);
+      const h = A.createRoot(t);
       let l;
-      t.tool && (l = JSON.parse(decodeURIComponent(t.tool)));
-      const x = JSON.parse(decodeURIComponent(t.agent)), S = (b) => {
-        o.ui.dialogs.closeWithResult(t.dialogId, b);
+      i.tool && (l = JSON.parse(decodeURIComponent(i.tool)));
+      const x = JSON.parse(decodeURIComponent(i.agent)), S = (b) => {
+        o.ui.dialogs.closeWithResult(i.dialogId, b);
       };
       h.render(
-        /* @__PURE__ */ a.jsx(c.StrictMode, { children: /* @__PURE__ */ a.jsx(Y, { studioPro: o, initialTool: l, agent: x, onClose: S }) })
+        /* @__PURE__ */ a.jsx(c.StrictMode, { children: /* @__PURE__ */ a.jsx(Z, { studioPro: o, initialTool: l, agent: x, onClose: S }) })
       );
-    } catch (i) {
-      throw p.error("Error editing agent knowledge base tool:", i), new Error("Error editing agent knowledge base tool:", i);
+    } catch (t) {
+      throw p.error("Error editing agent knowledge base tool:", t), new Error("Error editing agent knowledge base tool:", t);
     }
   }
 };
 export {
-  le as component
+  re as component
 };
 //# sourceMappingURL=knowledgebaseToolEdit.js.map

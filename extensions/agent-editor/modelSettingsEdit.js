@@ -1,8 +1,7 @@
 import { r as o, w as r, V as R, E as q, C as D, G as I, Q as N, D as B } from "./Icon-DlQJfq7F.js";
 import { s as F, c as H } from "./DesignSystemTokens-BZrmEyPo.js";
-import { u as O } from "./useDialogShortcuts-DLpeBjRn.js";
-import { I as A } from "./Banner-BKPTdROG.js";
-import { D as G } from "./DialogFooter-DACb7c2t.js";
+import { u as O, D as A } from "./DialogFooter-BHOCIJ8t.js";
+import { I as G } from "./Banner-BKPTdROG.js";
 import { T as f } from "./TextInputLabeled-CEPunJWI.js";
 const V = ({ initialAgent: a, onClose: t }) => {
   var v, P, w;
@@ -45,7 +44,7 @@ const V = ({ initialAgent: a, onClose: t }) => {
         }
       ) }),
       /* @__PURE__ */ r.jsxs(I, { label: "Randomness", children: [
-        /* @__PURE__ */ r.jsx(A, { children: "It is recommended to steer either the temperature or TopP, but not both. Review the documentation of the model provider for more information about the allowed ranges." }),
+        /* @__PURE__ */ r.jsx(G, { children: "It is recommended to steer either the temperature or TopP, but not both. Review the documentation of the model provider for more information about the allowed ranges." }),
         /* @__PURE__ */ r.jsx(
           f,
           {
@@ -70,9 +69,9 @@ const V = ({ initialAgent: a, onClose: t }) => {
         )
       ] })
     ] }) }),
-    /* @__PURE__ */ r.jsx(G, { onOk: T, onCancel: k, showHelp: !0, onHelp: C })
+    /* @__PURE__ */ r.jsx(A, { onOk: T, onCancel: k, showHelp: !0, onHelp: C })
   ] });
-}, Y = ({ studioPro: a, agent: t, onClose: e }) => /* @__PURE__ */ r.jsx(B, { studioPro: a, children: /* @__PURE__ */ r.jsx(V, { initialAgent: t, onClose: e }) }), z = {
+}, Y = ({ studioPro: a, agent: t, onClose: e }) => /* @__PURE__ */ r.jsx(B, { studioPro: a, children: /* @__PURE__ */ r.jsx(V, { initialAgent: t, onClose: e }) }), _ = {
   async loaded(a, t) {
     const e = F(a), d = H(e);
     if (!t.agent)
@@ -93,6 +92,6 @@ const V = ({ initialAgent: a, onClose: t }) => {
   }
 };
 export {
-  z as component
+  _ as component
 };
 //# sourceMappingURL=modelSettingsEdit.js.map
