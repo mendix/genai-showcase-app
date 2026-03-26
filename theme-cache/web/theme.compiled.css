@@ -30298,9 +30298,16 @@ input[type=checkbox].three-state-checkbox + .control-label {
   color: red;
 }
 
-.icon-badge {
+.icon-badge-primary {
   background-color: #DCEEFE;
   color: #146FF4;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.icon-badge-secondary {
+  background-color: #F7E0FF;
+  color: #AB19DB;
   padding: 8px;
   border-radius: 8px;
 }
