@@ -1,9 +1,9 @@
 import { y as q, r as y, w as e, G as k, F as K, H as w, S as D, D as U, P, E as _, I as $ } from "./Icon-DlQJfq7F.js";
 import { T as z, c as H, C as J } from "./TextWithIcon-sxhIisHZ.js";
 import { c as Q, a as B, b as X, u as N } from "./knowledgebaseUtils-DFj6m72n.js";
-import { g as Y, b as Z, h as ee, e as te } from "./modelUtils-6luAKxly.js";
-import { i as ne, B as se, a as oe, v as F, C as ae, b as re } from "./text-YmW2ZWBy.js";
-import { a as ie, b as le, c as ce, g as de, y as A } from "./mxCloudGenAIUtils-CcZASLc2.js";
+import { g as Y, f as Z, h as ee, e as te } from "./modelUtils-B5ix1w9q.js";
+import { i as ne, B as se, a as oe, v as F, C as ae, b as re } from "./text-DTX5J9MZ.js";
+import { a as ie, b as le, c as ce, g as de, y as A } from "./mxCloudGenAIUtils-iBbCTKa9.js";
 import { c as G } from "./DesignSystemTokens-BZrmEyPo.js";
 import { W as ue, S as me } from "./Banner-BKPTdROG.js";
 import { T as pe } from "./Table-CfPTytSG.js";
@@ -60,7 +60,7 @@ const he = (t, n, s, l) => async () => {
     await t.ui.messageBoxes.show("error", m, a), s(p), d(p), l(h.NotImported);
   }
 };
-async function xe(t, n) {
+async function fe(t, n) {
   const s = await t.ui.elementSelectors.selectDocument({
     allowNone: !0,
     query: { elementType: "Constants$Constant" }
@@ -79,7 +79,7 @@ async function xe(t, n) {
   if (s.status === "none")
     return { ...n, providerFields: { ...n.providerFields, key: "" } };
 }
-async function fe(t, n) {
+async function xe(t, n) {
   var u;
   let s = [];
   const l = [
@@ -121,18 +121,18 @@ const h = {
   const [d, u] = y.useState(!1), [o, m] = y.useState(), [a, p] = y.useState(!1), [v, I] = y.useState([]), [b, c] = y.useState(null), r = n.providerFields, j = async () => {
     const i = a;
     p(!1), T(t, n, s, l);
-    const x = await fe(t, n);
-    if (x === void 0) {
+    const f = await xe(t, n);
+    if (f === void 0) {
       i && p(!0);
       return;
     }
-    I(x), p(!0), c(/* @__PURE__ */ new Date());
-  }, f = () => {
+    I(f), p(!0), c(/* @__PURE__ */ new Date());
+  }, x = () => {
     u(!1);
   }, R = async () => {
     r.key && ee(t, r.key);
   }, V = async (i) => {
-    const x = i.providerFields, L = await F(t, x.key);
+    const f = i.providerFields, L = await F(t, f.key);
     if (m(L), u(!1), !L)
       ve(
         t,
@@ -146,7 +146,7 @@ const h = {
       s(E), l(E);
     }
   }, O = async () => {
-    const i = await xe(t, n);
+    const i = await fe(t, n);
     i && (s(i), l(i), await V(i));
   };
   y.useEffect(() => {
@@ -158,8 +158,8 @@ const h = {
     }
   }, [d]), y.useEffect(() => {
     (async () => {
-      const x = await F(t, r.key);
-      m(x);
+      const f = await F(t, r.key);
+      m(f);
     })();
   }, []);
   const M = (i) => i === h.Required ? "Knowledge base key is required" : i === h.NotFound ? "Selected constant not found. It might have been deleted or renamed. Please update the constant selection." : i === h.InvalidType ? "Selected constant must be of type string." : i === h.Excluded ? "Selected constant is excluded from the project and cannot be used." : !0, W = o === h.EmptyValue || o === h.PrivateValue || o === h.NotImported;
@@ -204,7 +204,7 @@ const h = {
             label: "Embeddings model",
             ariaLabel: "Embeddings model name",
             value: r.modelDisplayName,
-            icon: r.modelDisplayName && r.modelDisplayName.toLocaleLowerCase().includes("anthropic") ? Z : void 0,
+            icon: r.modelDisplayName && r.modelDisplayName.toLocaleLowerCase().includes("cohere") ? Z : void 0,
             onChange: C,
             readOnly: !0
           }
@@ -270,7 +270,7 @@ const h = {
           }
         )
       ] }),
-      d && /* @__PURE__ */ e.jsx(me, { onClose: f, children: "Connection successful." })
+      d && /* @__PURE__ */ e.jsx(me, { onClose: x, children: "Connection successful." })
     ] })
   ] });
 }, be = X(), we = ({ studioPro: t, documentId: n }) => {
@@ -280,7 +280,7 @@ const h = {
   y.useEffect(() => {
     const c = (r) => {
       const { documents: j } = r;
-      j.some((f) => f.documentId === n) && u((f) => f + 1);
+      j.some((x) => x.documentId === n) && u((x) => x + 1);
     };
     return l.addEventListener("documentsChanged", c), () => {
       l.removeEventListener("documentsChanged", c);

@@ -2,11 +2,11 @@ import { r as c, w as a, V as L, E as K, C as O, G as C, Q as A, D as B } from "
 import { s as q, c as F } from "./DesignSystemTokens-BZrmEyPo.js";
 import { n as G } from "./MicroflowIcon-kvKEq0tY.js";
 import { u as H, D as J } from "./DialogFooter-BHOCIJ8t.js";
-import { T as U, a as W } from "./toolHandlers-CxX3QrIs.js";
+import { T as U, a as W } from "./toolHandlers-ls5yaN_E.js";
 import { T as y } from "./TextInputLabeled-CEPunJWI.js";
 import { T as $ } from "./TextInputWithButton-DdFsQTz_.js";
-import { x as V, v as Q, y as _ } from "./index-DEchU29s.js";
-import { h as u } from "./knowledgebaseToolHandlers-DgOq9kvy.js";
+import { x as V, v as Q, y as _ } from "./index-5iDpKHlL.js";
+import { h as u } from "./knowledgebaseToolHandlers-G91jkmqJ.js";
 const z = {
   isValidName: !0,
   isValidDescription: !0,
