@@ -44,7 +44,7 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 			return true;
 		} catch (Exception e) {
 			LOGGER.error(e);
-			return null;
+			return false;
 		}
 		// END USER CODE
 	}
