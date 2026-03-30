@@ -1,7 +1,7 @@
-import { w as e, x as w, y as v, r as x, V as k, E as A, C as f, G as j, a1 as u, a2 as C, Q as M, D as b } from "./Icon-DlQJfq7F.js";
+import { w as e, x as w, y as v, r as x, V as k, E as A, C, G as f, a1 as u, a2 as j, Q as M, D as b } from "./Icon-DlQJfq7F.js";
 import { s as H, c as P } from "./DesignSystemTokens-BZrmEyPo.js";
 import { u as V, D as E } from "./DialogFooter-BHOCIJ8t.js";
-import { T as y, D } from "./Table-CfPTytSG.js";
+import { T as y, D } from "./Table-8NxjvFfk.js";
 import { I as B } from "./Banner-BKPTdROG.js";
 const S = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2%208H14'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M8%2014V2'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", T = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2%208H14'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M8%2014V2'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
 var $ = Object.defineProperty, I = (t, r) => $(t, "name", { value: r, configurable: !0 });
@@ -24,7 +24,7 @@ const z = L((t) => e.jsx(w, { light: W, dark: R, ...t }), "DeleteIcon"), F = v.s
     t.onClose(null);
   };
   return V(h, c), /* @__PURE__ */ e.jsxs(k, { children: [
-    /* @__PURE__ */ e.jsx(A, { children: /* @__PURE__ */ e.jsx(f, { children: /* @__PURE__ */ e.jsxs(j, { label: "Authentication Headers", children: [
+    /* @__PURE__ */ e.jsx(A, { children: /* @__PURE__ */ e.jsx(C, { children: /* @__PURE__ */ e.jsxs(f, { label: "Authentication Headers", children: [
       /* @__PURE__ */ e.jsxs(B, { children: [
         /* @__PURE__ */ e.jsx(F, { children: "The headers below are not stored." }),
         /* @__PURE__ */ e.jsx("div", { children: "The headers are only used to explore tools from Studio Pro. To authenticate with MCP servers at runtime, please provide a credentials microflow." })
@@ -39,27 +39,33 @@ const z = L((t) => e.jsx(w, { light: W, dark: R, ...t }), "DeleteIcon"), F = v.s
             { id: "delete", caption: "", minWidth: 32, defaultWidth: 32, maxWidth: 32 }
           ],
           data: r.map((s, o) => [
-            /* @__PURE__ */ e.jsx(
-              u,
-              {
-                "aria-label": `Header key ${o + 1}`,
-                value: s[0],
-                onChange: (i) => n(o, i),
-                placeholder: "Key"
-              },
-              `key-${o}`
-            ),
-            /* @__PURE__ */ e.jsx(
-              u,
-              {
-                "aria-label": `Header value ${o + 1}`,
-                value: s[1],
-                onChange: (i) => d(o, i),
-                placeholder: "Value"
-              },
-              `value-${o}`
-            ),
-            /* @__PURE__ */ e.jsx(C, { icon: /* @__PURE__ */ e.jsx(z, {}), onPress: () => p(o) })
+            {
+              cellContent: /* @__PURE__ */ e.jsx(
+                u,
+                {
+                  "aria-label": `Header key ${o + 1}`,
+                  value: s[0],
+                  onChange: (i) => n(o, i),
+                  placeholder: "Key"
+                },
+                `key-${o}`
+              )
+            },
+            {
+              cellContent: /* @__PURE__ */ e.jsx(
+                u,
+                {
+                  "aria-label": `Header value ${o + 1}`,
+                  value: s[1],
+                  onChange: (i) => d(o, i),
+                  placeholder: "Value"
+                },
+                `value-${o}`
+              )
+            },
+            {
+              cellContent: /* @__PURE__ */ e.jsx(j, { icon: /* @__PURE__ */ e.jsx(z, {}), onPress: () => p(o) })
+            }
           ]),
           toolbarLeft: /* @__PURE__ */ e.jsx(
             D,
