@@ -9,7 +9,8 @@
                 "consumedMCPServiceEdit": "consumedMCPServiceEdit.js",
                 "knowledgebaseEdit": "knowledgebaseEdit.js",
                 "modelSettingsEdit": "modelSettingsEdit.js",
-                "mcpAuthenticationHeadersEdit": "mcpAuthenticationHeadersEdit.js"
+                "mcpAuthenticationHeadersEdit": "mcpAuthenticationHeadersEdit.js",
+                "knowledgebaseToolEdit": "knowledgebaseToolEdit.js"
             }
         }
     }
