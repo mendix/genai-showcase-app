@@ -10,15 +10,11 @@
 package agenteditorcommons.actions;
 
 import java.util.ArrayList;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mendix.core.Core;
 import com.mendix.extensibility.CustomBlobDocumentInfo;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import agenteditorcommons.impl.MxLogger;
-import agenteditorcommons.proxies.AgentModelDocument;
 import agenteditorcommons.proxies.ModelDocument;
 
 /**
@@ -42,7 +38,7 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 			importModelDocumentsOfType("agenteditor.model");
 			importModelDocumentsOfType("agenteditor.consumedMCPService");
 			importModelDocumentsOfType("agenteditor.knowledgebase");
-			importAgents();
+			importModelDocumentsOfType("agenteditor.agent");
 
 			LOGGER.info("Finished import.");
 			return true;
@@ -66,9 +62,8 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new MxLogger(AgentEditor_ImportFromStudioPro.class);
 
-	private static final ObjectMapper objectMapper = new ObjectMapper();
 
-	private void importModelDocumentsOfType(String documentTypeID) throws JsonProcessingException {
+	private void importModelDocumentsOfType(String documentTypeID) {
 		java.util.List<CustomBlobDocumentInfo> customBlobDocumentList = Core.extensibility()
 				.getCustomDocumentsOfType(documentTypeID);
 		String documentFriendlyName = documentTypeID.substring(documentTypeID.lastIndexOf('.') + 1);
@@ -84,19 +79,23 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 
 		switch (documentTypeID) {
 		case "agenteditor.model":
-			isSuccess = agenteditorcommons.proxies.microflows.Microflows.deployedModel_CreateUpdate_List(getContext(),
-					modelDocuments);
+			isSuccess = agenteditorcommons.proxies.microflows.Microflows
+				.deployedModel_CreateUpdate_List(getContext(), modelDocuments);
 			break;
 
 		case "agenteditor.consumedMCPService":
 			isSuccess = agenteditorcommons.proxies.microflows.Microflows
-					.consumedMCPService_CreateUpdate_List(getContext(), modelDocuments);
+				.consumedMCPService_CreateUpdate_List(getContext(), modelDocuments);
 			break;
-
+			
 		case "agenteditor.knowledgebase":
 			isSuccess = agenteditorcommons.proxies.microflows.Microflows
 					.knowledgeBase_CreateUpdate_List(getContext(), modelDocuments);
 			break;
+			
+		case "agenteditor.agent":
+			isSuccess = agenteditorcommons.proxies.microflows.Microflows
+				.agent_CreateUpdate_List(getContext(), modelDocuments);
 		}
 
 		if (!isSuccess) {
@@ -105,66 +104,8 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 		}
 	}
 
-	private void importAgents() throws JsonProcessingException {
-		java.util.List<CustomBlobDocumentInfo> agentDocuments = Core.extensibility()
-				.getCustomDocumentsOfType("agenteditor.agent");
-		LOGGER.info(agentDocuments.size() + " agent document(s) found in the Mendix Model");
 
-		java.util.List<AgentModelDocument> agentModelDocuments = new ArrayList<>();
-		for (CustomBlobDocumentInfo agent : agentDocuments) {
-			agentModelDocuments.add(getAgentModelDocument(agent));
-		}
-
-		boolean isSuccess = agenteditorcommons.proxies.microflows.Microflows.agent_CreateUpdate_List(getContext(),
-				agentModelDocuments);
-		if (!isSuccess) {
-			throw new IllegalArgumentException("Creating/Updating the Agents failed due to bad input.");
-		}
-	}
-
-	private AgentModelDocument getAgentModelDocument(CustomBlobDocumentInfo agentDocument)
-			throws JsonProcessingException {
-
-		String qualifiedName = agentDocument.qualifiedDocumentName();
-		LOGGER.debug("Importing Agent with qualified name: '" + qualifiedName + "'.");
-
-		String agentDocumentContent = agentDocument.content();
-
-		String documentID = agentDocument.documentID().toString();
-		LOGGER.debug(qualifiedName + " - documentID: " + documentID);
-
-		JsonNode rootNode = objectMapper.readTree(agentDocumentContent);
-
-		String modelQualifiedName = rootNode.has("modelQualifiedName") ? rootNode.get("modelQualifiedName").asText()
-				: null;
-		LOGGER.debug(qualifiedName + " - model: " + modelQualifiedName);
-
-		String modelModelDocumentUUID = modelQualifiedName != null ? getModelModelDocumentUUID(modelQualifiedName)
-				: null;
-		LOGGER.debug(qualifiedName + " - model UUID: " + modelModelDocumentUUID);
-
-		AgentModelDocument agentModelDocument = new AgentModelDocument(getContext());
-		agentModelDocument.setDocumentID(getContext(), documentID);
-		agentModelDocument.setContent(getContext(), agentDocumentContent);
-		agentModelDocument.setModelDocumentID(getContext(), modelModelDocumentUUID);
-		agentModelDocument.setQualifiedName(getContext(), qualifiedName);
-		return agentModelDocument;
-
-	}
-
-	private String getModelModelDocumentUUID(String modelQualifiedName) throws JsonProcessingException {
-		CustomBlobDocumentInfo modelDocument = Core.extensibility().getCustomDocumentByFullName(modelQualifiedName);
-		if (modelDocument == null)
-			return null;
-
-		String documentID = modelDocument.documentID().toString();
-		LOGGER.debug("Model for qualifiedName '" + modelQualifiedName + "' has documentID '" + documentID + "'.");
-
-		return documentID;
-	}
-
-	private ModelDocument getModelDocument(CustomBlobDocumentInfo customBlobDocumentInfo)
-			throws JsonProcessingException {
+	private ModelDocument getModelDocument(CustomBlobDocumentInfo customBlobDocumentInfo) {
 		String qualifiedName = customBlobDocumentInfo.qualifiedDocumentName();
 		LOGGER.debug("Importing model with qualified name '" + qualifiedName + "'.");
 
