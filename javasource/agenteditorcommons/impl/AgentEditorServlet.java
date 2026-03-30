@@ -27,7 +27,6 @@ import com.mendix.systemwideinterfaces.core.IMendixIdentifier;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 import agentcommons.actions.Agent_Call_WithoutHistory;
-import agenteditorcommons.impl.MxLogger;
 
 /**
  * A development servlet registered at /dev/agentEditor that handles agent test requests.
