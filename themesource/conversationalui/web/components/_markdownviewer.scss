@@ -1,12 +1,14 @@
+@use '../../../../theme/web/custom-variables' as *;
+
 .widget-markdown {
-    margin-top: 16px;
+    margin-top: $spacing-medium;
     hr {
-        margin-top: 4px;
-        margin-bottom: 4px;
+        margin: $spacing-small 0;
     }
     h1, h2, h3, h4, h5, h6 {
         font-size: 16px;
         font-weight: 600;
+        margin: $spacing-small 0;
     }
     ul {
         justify-content: flex-start;

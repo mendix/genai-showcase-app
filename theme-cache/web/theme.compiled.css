@@ -30229,12 +30229,12 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-top: 16px;
 }
 .widget-markdown hr {
-  margin-top: 4px;
-  margin-bottom: 4px;
+  margin: 8px 0;
 }
 .widget-markdown h1, .widget-markdown h2, .widget-markdown h3, .widget-markdown h4, .widget-markdown h5, .widget-markdown h6 {
   font-size: 16px;
   font-weight: 600;
+  margin: 8px 0;
 }
 .widget-markdown ul {
   justify-content: flex-start;
@@ -31817,6 +31817,26 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .multi-label-position {
   justify-content: flex-end;
+}
+
+.agent-model-selection .name {
+  width: 30%;
+}
+.agent-model-selection .icon {
+  width: 10%;
+  margin-left: 4px;
+}
+.agent-model-selection .model {
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 60%;
+}
+.agent-model-selection .model .form-group {
+  margin-bottom: 0;
+}
+.agent-model-selection .navigation {
+  width: 20%;
+  margin-left: 4px;
 }
 
 /*# sourceMappingURL=theme.compiled.css.map */
