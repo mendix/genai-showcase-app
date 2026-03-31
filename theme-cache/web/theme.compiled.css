@@ -31819,4 +31819,24 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: flex-end;
 }
 
+.agent-model-selection .name {
+  width: 30%;
+}
+.agent-model-selection .icon {
+  width: 10%;
+  margin-left: 4px;
+}
+.agent-model-selection .model {
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 60%;
+}
+.agent-model-selection .model .form-group {
+  margin-bottom: 0;
+}
+.agent-model-selection .navigation {
+  width: 20%;
+  margin-left: 4px;
+}
+
 /*# sourceMappingURL=theme.compiled.css.map */
