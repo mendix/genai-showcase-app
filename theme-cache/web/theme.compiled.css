@@ -30225,21 +30225,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding-left: 2px;
 }
 
-.widget-markdown {
-  margin-top: 16px;
-}
 .widget-markdown hr {
   margin: 8px 0;
 }
 .widget-markdown h1, .widget-markdown h2, .widget-markdown h3, .widget-markdown h4, .widget-markdown h5, .widget-markdown h6 {
-  font-size: 16px;
-  font-weight: 600;
   margin: 8px 0;
 }
 .widget-markdown ul {
   justify-content: flex-start;
-  list-style: none;
-  padding: 0;
+  padding-left: 18px;
 }
 .widget-markdown ul > li {
   padding: 0;
