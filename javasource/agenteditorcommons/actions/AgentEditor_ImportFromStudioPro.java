@@ -38,6 +38,7 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 
 			importModelDocumentsOfType("agenteditor.model");
 			importModelDocumentsOfType("agenteditor.consumedMCPService");
+			importModelDocumentsOfType("agenteditor.knowledgebase");
 			importModelDocumentsOfType("agenteditor.agent");
 			registerServlet();
 
@@ -45,7 +46,7 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 			return true;
 		} catch (Exception e) {
 			LOGGER.error(e);
-			return null;
+			return false;
 		}
 		// END USER CODE
 	}
@@ -96,6 +97,11 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 		case "agenteditor.consumedMCPService":
 			isSuccess = agenteditorcommons.proxies.microflows.Microflows
 				.consumedMCPService_CreateUpdate_List(getContext(), modelDocuments);
+			break;
+			
+		case "agenteditor.knowledgebase":
+			isSuccess = agenteditorcommons.proxies.microflows.Microflows
+					.knowledgeBase_CreateUpdate_List(getContext(), modelDocuments);
 			break;
 			
 		case "agenteditor.agent":
