@@ -1,11 +1,13 @@
 import "./userPreferences-BV8i5uIO.js";
-import { G as p, H as t, p as a, B as c, m as s } from "./index-foeQU_BV.js";
-import "./modelUtils-DbaOd0FB.js";
+import { J as p, K as a, q as c, E as s, G as d, m as r } from "./index-DsStz3tj.js";
+import "./modelUtils-B4UuvvXG.js";
+import "./knowledgebaseUtils-D7XcxLdS.js";
 export {
   p as agentDocumentTypeId,
-  t as component,
-  a as componentName,
-  c as consumedMCPServiceDocumentTypeId,
-  s as modelDocumentTypeId
+  a as component,
+  c as componentName,
+  s as consumedMCPServiceDocumentTypeId,
+  d as knowledgeBaseDocumentTypeId,
+  r as modelDocumentTypeId
 };
 //# sourceMappingURL=main.js.map

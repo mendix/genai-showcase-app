@@ -1,320 +1,287 @@
-import { r as p, w as a, G as L, D as T, C as w, Q as A, N as V, P as R, O as U, R as W } from "./Icon-B4HLWuEl.js";
-import { c as q, C as $ } from "./componentLoader-Cm3EOwGz.js";
-import { c as P, g as B, a as G, b as _, h as J, d as X, e as H, u as M } from "./modelUtils-DbaOd0FB.js";
-import { i as Q, B as z, v as S, C as Y, a as Z } from "./ButtonWithLabel-nMb1wq7r.js";
-import { y as D } from "./Link-DWBff6VF.js";
-import { c as b } from "./userPreferences-BV8i5uIO.js";
-import { W as ee, S as te } from "./Banner-BV6cAcTN.js";
-import { T as C } from "./TextInputLabeled-C3EIPSRL.js";
-import { T as ne } from "./TextInputWithButton-DOgzsqom.js";
-import { B as ae } from "./TextWithIcon-BAbfKU6H.js";
-const oe = (e, t, o, r) => async () => {
-  if (!(e.provider === r && "key" in e.providerFields) && r === "MxCloudGenAI") {
-    const u = P(), i = { ...e, provider: r, providerFields: u };
-    t(i), o(i);
+import { r as y, w as n, G as L, D as N, H as I, Q as M, N as B, P as G, O as F, R } from "./Icon-fHsyUm8I.js";
+import { B as K, c as O, C as V } from "./TextWithIcon-VpEcElJR.js";
+import { c as W, g as q, a as D, b as U, h as _, d as P, e as X, u as S } from "./modelUtils-B4UuvvXG.js";
+import { i as $, B as H, v as A, C as Q, a as z } from "./ButtonWithLabel-Bn6Si8ff.js";
+import { y as T } from "./Link-6Dwxyd2F.js";
+import { c as J } from "./userPreferences-BV8i5uIO.js";
+import { d as Y, i as Z, u as ee, e as ne } from "./mxCloudGenAIUtils-BR9rBZ4n.js";
+import { W as te, S as ae } from "./Banner-CrOSEmJM.js";
+import { T as g } from "./TextInputLabeled-ByXuMGQx.js";
+import { T as se } from "./TextInputWithButton-Ck7o_ZdS.js";
+const oe = (t, a, s, c) => async () => {
+  if (!(t.provider === c && "key" in t.providerFields) && c === "MxCloudGenAI") {
+    const u = W(), l = { ...t, provider: c, providerFields: u };
+    a(l), s(l);
   }
-}, F = (e, t) => {
-  const o = b(e);
+}, re = async (t, a, s, c, u) => {
+  const l = J(t);
   try {
-    const r = atob(t);
-    return JSON.parse(r);
-  } catch (r) {
-    throw o.error("Error decoding and parsing key", r), new Error("The key could not be parsed, make sure it is valid.");
-  }
-}, O = async (e, t) => {
-  const o = b(e);
-  try {
-    const r = t.providerFields;
-    if (!r.key)
-      throw new Error("Model key is not configured.");
-    const u = await B(e, r.key);
-    if (!u)
-      throw new Error(
-        `Constant ${r.key.qualifiedName} does not have an accessible runtime value or default value.`
-      );
-    const i = F(e, u), c = await e.network.httpProxy.getProxyUrl(`${i.resourceBaseUrl}`), s = await fetch(c, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "*/*",
-        "x-api-key": i.accessToken
-      },
-      credentials: "omit"
-    });
-    if (s.status !== 200)
-      throw new Error(`HTTP ${s.status}: ${s.statusText}`);
-    return await s.json();
-  } catch (r) {
-    return o.error("Error invoking MxCloud GenAI resource API:", r), r instanceof Error ? r.message : "";
-  }
-}, K = (e, t) => ({
-  ...e,
-  name: (t == null ? void 0 : t.model) || e.name,
-  displayName: t && (t.modelName || t.model) || e.displayName
-}), re = (e, t) => async () => {
-  const o = await O(e, t);
-  return typeof o == "string" ? o : K(t, o);
-}, se = async (e, t, o, r, u) => {
-  const i = b(e);
-  try {
-    const c = t.providerFields, s = await B(e, c.key);
-    if (!s)
+    const d = a.providerFields, r = await q(t, d.key);
+    if (!r)
       throw new Error("No key value found. Please make sure the key constant is correctly configured.");
-    const n = F(e, s);
-    if (n.type !== "TEXT_GENERATION")
+    const e = Y(t, r);
+    if (e.type !== "TEXT_GENERATION")
       throw new Error(
-        `Unsupported key type: ${n.type}. Only Text Generation keys are currently supported.`
+        `Unsupported key type: ${e.type}. Only Text Generation keys are currently supported.`
       );
-    const y = {
-      key: c.key,
-      keyId: n.keyId || "",
-      keyName: n.keyName || "",
-      resourceName: n.name || "",
-      environment: n.environment || "",
-      deepLinkURL: n.deepLinkUrl || ""
+    const p = {
+      key: d.key,
+      keyId: e.keyId || "",
+      keyName: e.keyName || "",
+      resourceName: e.name || "",
+      environment: e.environment || "",
+      deepLinkURL: e.deepLinkUrl || ""
     }, m = {
-      ...t,
-      name: n.model || "",
-      displayName: n.model || "",
-      type: n.type === "TEXT_GENERATION" ? "Text generation" : n.type === "EMBEDDINGS_GENERATION" ? "Embeddings" : "",
+      ...a,
+      name: e.model || "",
+      displayName: e.model || "",
+      type: e.type === "TEXT_GENERATION" ? "Text generation" : e.type === "EMBEDDINGS_GENERATION" ? "Embeddings" : "",
       providerFields: {
-        ...y
+        ...p
       }
     };
-    o(m), u(m);
-    const f = await O(e, m);
+    s(m), u(m);
+    const f = await Z(t, m);
     if (typeof f != "string") {
-      const v = K(m, f);
-      o(v), u(v).catch(
-        (l) => i.error("Failed to update model document after API response:", l)
+      const v = ee(m, f);
+      s(v), u(v).catch(
+        (o) => l.error("Failed to update model document after API response:", o)
       );
     } else
-      i.warn("MxCloudGenAI resource API unavailable. Could not update model details.");
-  } catch (c) {
-    i.error("Error during MxCloud GenAI key import:", c);
-    const s = "Failed to import MxCloud GenAI model key.", n = String(c), y = G(t);
-    await e.ui.messageBoxes.show("error", s, n), o(y), u(y), r(h.NotImported);
+      l.warn("MxCloudGenAI resource API unavailable. Could not update model details.");
+  } catch (d) {
+    l.error("Error during MxCloud GenAI key import:", d);
+    const r = "Failed to import MxCloud GenAI model key.", e = String(d), p = D(a);
+    await t.ui.messageBoxes.show("error", r, e), s(p), u(p), c(h.NotImported);
   }
 };
-async function ie(e, t) {
-  const o = await e.ui.elementSelectors.selectDocument({
+async function ie(t, a) {
+  const s = await t.ui.elementSelectors.selectDocument({
     allowNone: !0,
     query: { elementType: "Constants$Constant" }
   });
-  if (o.status === "ok")
+  if (s.status === "ok")
     return {
-      ...t,
+      ...a,
       providerFields: {
-        ...t.providerFields,
+        ...a.providerFields,
         key: {
-          documentId: o.selected.id,
-          qualifiedName: o.selected.module + "." + o.selected.name
+          documentId: s.selected.id,
+          qualifiedName: s.selected.module + "." + s.selected.name
         }
       }
     };
-  if (o.status === "none")
-    return { ...t, providerFields: { ...t.providerFields, key: void 0 } };
+  if (s.status === "none")
+    return { ...a, providerFields: { ...a.providerFields, key: void 0 } };
 }
-async function le(e, t, o, r) {
-  var c;
+async function le(t, a, s, c) {
+  var d;
   const u = [
     {
       title: "Testing connection",
       description: "Testing connection",
       action: async () => {
-        const s = await re(e, t)();
-        return typeof s == "string" ? s : ((s.displayName !== t.displayName || s.name !== t.name) && (o(s), r(s)), !0);
+        const r = await ne(t, a)();
+        return typeof r == "string" ? r : ((r.displayName !== a.displayName || r.name !== a.name) && (s(r), c(r)), !0);
       }
     }
-  ], i = await e.ui.dialogs.showProgressDialog("Testing connection", u);
-  switch (i.result) {
+  ], l = await t.ui.dialogs.showProgressDialog("Testing connection", u);
+  switch (l.result) {
     case "Success":
       return !0;
     case "UserCancelled":
       return !1;
     case "Failure": {
-      const s = "No connection. Make sure you are connected to the internet and check that a valid key is set as value for the selected constant.", n = ((c = i.failedStep) == null ? void 0 : c.error) ?? "";
-      return await e.ui.messageBoxes.show("error", s, n), !1;
+      const r = "No connection. Make sure you are connected to the internet and check that a valid key is set as value for the selected constant.", e = ((d = l.failedStep) == null ? void 0 : d.error) ?? "";
+      return await t.ui.messageBoxes.show("error", r, e), !1;
     }
   }
 }
 const h = {
-  ...Y,
+  ...Q,
   NotImported: "NotImported"
 }, k = () => {
-}, ce = ({ studioPro: e, model: t, setModel: o, updateStudioProDocument: r }) => {
+}, ce = ({ studioPro: t, model: a, setModel: s, updateStudioProDocument: c }) => {
   var x;
-  const [u, i] = p.useState(!1), [c, s] = p.useState(), n = t.providerFields, y = async () => {
-    i(!1);
-    const d = await le(e, t, o, r);
-    i(d);
+  const [u, l] = y.useState(!1), [d, r] = y.useState(), e = a.providerFields, p = async () => {
+    l(!1);
+    const i = await le(t, a, s, c);
+    l(i);
   }, m = () => {
-    i(!1);
+    l(!1);
   }, f = async () => {
-    n.key && J(e, n.key);
-  }, v = async (d) => {
-    const E = d.providerFields, N = await S(e, E.key);
-    if (s(N), i(!1), !N)
-      se(e, d, o, s, r);
+    e.key && _(t, e.key);
+  }, v = async (i) => {
+    const b = i.providerFields, j = await A(t, b.key);
+    if (r(j), l(!1), !j)
+      re(t, i, s, r, c);
     else {
-      const j = G(d);
-      o(j), r(j);
+      const E = D(i);
+      s(E), c(E);
     }
-  }, l = async () => {
-    const d = await ie(e, t);
-    d && (o(d), r(d), await v(d));
+  }, o = async () => {
+    const i = await ie(t, a);
+    i && (s(i), c(i), await v(i));
   };
-  p.useEffect(() => {
+  y.useEffect(() => {
     if (u) {
-      const d = setTimeout(() => {
-        i(!1);
+      const i = setTimeout(() => {
+        l(!1);
       }, 5e3);
-      return () => clearTimeout(d);
+      return () => clearTimeout(i);
     }
-  }, [u]), p.useEffect(() => {
+  }, [u]), y.useEffect(() => {
     (async () => {
-      const E = await S(e, n.key);
-      s(E);
+      const b = await A(t, e.key);
+      r(b);
     })();
   }, []);
-  const g = (d) => d === h.Required ? "Model key is required" : d === h.NotFound ? "Selected constant not found. It might have been deleted or renamed. Please update the constant selection." : d === h.InvalidType ? "Selected constant must be of type string." : d === h.Excluded ? "Selected constant is excluded from the project and cannot be used." : !0, I = c === h.EmptyValue || c === h.PrivateValue || c === h.NotImported;
-  return /* @__PURE__ */ a.jsxs(L, { label: "Resource", children: [
-    /* @__PURE__ */ a.jsx(
-      ne,
+  const C = (i) => i === h.Required ? "Model key is required" : i === h.NotFound ? "Selected constant not found. It might have been deleted or renamed. Please update the constant selection." : i === h.InvalidType ? "Selected constant must be of type string." : i === h.Excluded ? "Selected constant is excluded from the project and cannot be used." : !0, w = d === h.EmptyValue || d === h.PrivateValue || d === h.NotImported;
+  return /* @__PURE__ */ n.jsxs(L, { label: "Resource", children: [
+    /* @__PURE__ */ n.jsx(
+      se,
       {
         label: "Model key",
         ariaLabel: "Model key",
-        value: ((x = n.key) == null ? void 0 : x.qualifiedName) ?? "",
-        icon: n.key ? /* @__PURE__ */ a.jsx(Q, {}) : void 0,
+        value: ((x = e.key) == null ? void 0 : x.qualifiedName) ?? "",
+        icon: e.key ? /* @__PURE__ */ n.jsx($, {}) : void 0,
         buttonCaption: "Select...",
-        onClick: l,
-        onClickSecondary: n.key ? f : void 0,
-        validate: () => g(c),
-        buttonCaptionSecondary: n.key ? "Show" : void 0
+        onClick: o,
+        onClickSecondary: e.key ? f : void 0,
+        validate: () => C(d),
+        buttonCaptionSecondary: e.key ? "Show" : void 0
       }
     ),
-    !n.key && /* @__PURE__ */ a.jsxs(T, { children: [
-      /* @__PURE__ */ a.jsx(w, { children: /* @__PURE__ */ a.jsx(A, {}) }),
-      /* @__PURE__ */ a.jsx(w, { fullWidth: !0, children: /* @__PURE__ */ a.jsx(D, { href: "https://genai.home.mendix.com/p/resources", target: "_blank", children: "Create a key in the portal" }) })
+    !e.key && /* @__PURE__ */ n.jsxs(N, { children: [
+      /* @__PURE__ */ n.jsx(I, { children: /* @__PURE__ */ n.jsx(M, {}) }),
+      /* @__PURE__ */ n.jsx(I, { fullWidth: !0, children: /* @__PURE__ */ n.jsx(
+        T,
+        {
+          href: "https://genai.home.mendix.com/p/resources",
+          target: "_blank",
+          rel: "noreferrer,noopener",
+          children: "Create a key in the portal"
+        }
+      ) })
     ] }),
-    I && /* @__PURE__ */ a.jsxs(ee, { children: [
-      /* @__PURE__ */ a.jsx(ae, { children: "Invalid constant value" }),
-      /* @__PURE__ */ a.jsx("div", { children: "In order to test your Model locally please set a valid value for the key constant." })
+    w && /* @__PURE__ */ n.jsxs(te, { children: [
+      /* @__PURE__ */ n.jsx(K, { children: "Invalid constant value" }),
+      /* @__PURE__ */ n.jsx("div", { children: "In order to test your Model locally please set a valid value for the key constant." })
     ] }),
-    n.keyId && /* @__PURE__ */ a.jsxs(a.Fragment, { children: [
-      /* @__PURE__ */ a.jsx(
-        C,
+    e.keyId && /* @__PURE__ */ n.jsxs(n.Fragment, { children: [
+      /* @__PURE__ */ n.jsx(
+        g,
         {
           label: "Resource",
           ariaLabel: "Resource name",
-          value: n.resourceName,
+          value: e.resourceName,
           onChange: k,
           readOnly: !0
         }
       ),
-      /* @__PURE__ */ a.jsx(
-        C,
+      /* @__PURE__ */ n.jsx(
+        g,
         {
           label: "Key",
           ariaLabel: "Key name",
-          value: n.keyName,
+          value: e.keyName,
           onChange: k,
           readOnly: !0
         }
       ),
-      /* @__PURE__ */ a.jsx(
-        C,
+      /* @__PURE__ */ n.jsx(
+        g,
         {
           label: "Model",
           ariaLabel: "Model name",
-          value: t.displayName,
-          icon: t.displayName && t.displayName.toLocaleLowerCase().includes("anthropic") ? _ : void 0,
+          value: a.displayName,
+          icon: a.displayName && a.displayName.toLocaleLowerCase().includes("anthropic") ? U : void 0,
           onChange: k,
           readOnly: !0
         }
       ),
-      /* @__PURE__ */ a.jsx(
-        C,
+      /* @__PURE__ */ n.jsx(
+        g,
         {
           label: "Model ID",
           ariaLabel: "Model ID",
-          value: t.name,
+          value: a.name,
           onChange: k,
           readOnly: !0
         }
       ),
-      /* @__PURE__ */ a.jsx(
-        C,
+      /* @__PURE__ */ n.jsx(
+        g,
         {
           label: "Environment",
           ariaLabel: "Environment",
-          value: n.environment,
+          value: e.environment,
           onChange: k,
           readOnly: !0
         }
       ),
-      /* @__PURE__ */ a.jsxs(T, { children: [
-        /* @__PURE__ */ a.jsx(w, { children: /* @__PURE__ */ a.jsx(A, {}) }),
-        /* @__PURE__ */ a.jsx(w, { fullWidth: !0, children: /* @__PURE__ */ a.jsx(D, { href: n.deepLinkURL, target: "_blank", children: "View resource in the portal" }) })
+      /* @__PURE__ */ n.jsxs(N, { children: [
+        /* @__PURE__ */ n.jsx(I, { children: /* @__PURE__ */ n.jsx(M, {}) }),
+        /* @__PURE__ */ n.jsx(I, { fullWidth: !0, children: /* @__PURE__ */ n.jsx(T, { href: e.deepLinkURL, target: "_blank", rel: "noreferrer,noopener", children: "View resource in the portal" }) })
       ] }),
-      /* @__PURE__ */ a.jsx(z, { label: "Connection", buttonCaption: "Test", onPress: y }),
-      u && /* @__PURE__ */ a.jsx(te, { onClose: m, children: "Connection successful." })
+      /* @__PURE__ */ n.jsx(H, { label: "Connection", buttonCaption: "Test", onPress: p }),
+      u && /* @__PURE__ */ n.jsx(ae, { onClose: m, children: "Connection successful." })
     ] })
   ] });
-}, de = X(), ue = ({ studioPro: e, documentId: t }) => {
-  const o = e.ui.messageBoxes, r = e.app.model.customBlobDocuments, [u, i] = p.useState(0), [c, s] = p.useState(!1), [n, y] = p.useState(de), m = [
-    { key: "MxCloudGenAI", caption: "Mendix Cloud GenAI", icon: H }
+}, de = P(), ue = ({ studioPro: t, documentId: a }) => {
+  const s = t.ui.messageBoxes, c = t.app.model.customBlobDocuments, [u, l] = y.useState(0), [d, r] = y.useState(!1), [e, p] = y.useState(de), m = [
+    { key: "MxCloudGenAI", caption: "Mendix Cloud GenAI", icon: X }
   ];
-  p.useEffect(() => {
-    const l = (g) => {
-      const { documents: I } = g;
-      I.some((x) => x.documentId === t) && i((x) => x + 1);
+  y.useEffect(() => {
+    const o = (C) => {
+      const { documents: w } = C;
+      w.some((x) => x.documentId === a) && l((x) => x + 1);
     };
-    return r.addEventListener("documentsChanged", l), () => {
-      r.removeEventListener("documentsChanged", l);
+    return c.addEventListener("documentsChanged", o), () => {
+      c.removeEventListener("documentsChanged", o);
     };
-  }, []), p.useEffect(() => {
-    r.getDocumentById(t).then(async (l) => {
-      if (l && !("error" in l)) {
-        const g = l.document.contents;
-        y({ ...g }), s(!0);
+  }, []), y.useEffect(() => {
+    c.getDocumentById(a).then(async (o) => {
+      if (o && !("error" in o)) {
+        const C = o.document.contents;
+        p({ ...C }), r(!0);
       } else
-        throw new Error((l == null ? void 0 : l.error) || "Document not found");
-    }).catch(async (l) => {
-      await o.show("error", "Error loading document", "Details: " + (l == null ? void 0 : l.message) || l);
+        throw new Error((o == null ? void 0 : o.error) || "Document not found");
+    }).catch(async (o) => {
+      await s.show("error", "Error loading document", "Details: " + (o == null ? void 0 : o.message) || o);
     });
   }, [u]);
-  const f = async (l) => {
-    oe(n, y, M(e, t), l)();
-  }, v = () => n.provider ? !0 : "Model provider is required.";
-  return /* @__PURE__ */ a.jsx(V, { studioPro: e, children: /* @__PURE__ */ a.jsxs(R, { children: [
-    !c && /* @__PURE__ */ a.jsx($, {}),
-    c && /* @__PURE__ */ a.jsx(U, { children: /* @__PURE__ */ a.jsxs(W, { children: [
-      /* @__PURE__ */ a.jsx(L, { label: "Common", children: /* @__PURE__ */ a.jsx(
-        Z,
+  const f = async (o) => {
+    oe(e, p, S(t, a), o)();
+  }, v = () => e.provider ? !0 : "Model provider is required.";
+  return /* @__PURE__ */ n.jsx(B, { studioPro: t, children: /* @__PURE__ */ n.jsxs(G, { children: [
+    !d && /* @__PURE__ */ n.jsx(V, {}),
+    d && /* @__PURE__ */ n.jsx(F, { children: /* @__PURE__ */ n.jsxs(R, { children: [
+      /* @__PURE__ */ n.jsx(L, { label: "Common", children: /* @__PURE__ */ n.jsx(
+        z,
         {
           ariaLabel: "Provider",
           isDisabled: !0,
           label: "Provider",
-          selectedKey: n.provider,
+          selectedKey: e.provider,
           options: m,
           onSelectionChange: f,
           validate: v
         }
       ) }),
-      n.provider === "MxCloudGenAI" && /* @__PURE__ */ a.jsx(
+      e.provider === "MxCloudGenAI" && /* @__PURE__ */ n.jsx(
         ce,
         {
-          studioPro: e,
-          model: n,
-          setModel: y,
-          updateStudioProDocument: M(e, t)
+          studioPro: t,
+          model: e,
+          setModel: p,
+          updateStudioProDocument: S(t, a)
         }
       )
     ] }) })
   ] }) });
-}, we = q(ue);
+}, Ie = O(ue);
 export {
-  we as component
+  Ie as component
 };
 //# sourceMappingURL=modelEdit.js.map

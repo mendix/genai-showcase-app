@@ -1,4 +1,3 @@
-
 package agenteditorcommons.impl;
 
 import static java.util.Objects.requireNonNull;
@@ -29,6 +28,11 @@ import agentcommons.proxies.Agent;
 
 import genaicommons.proxies.Request;
 import genaicommons.proxies.Response;
+import genaicommons.proxies.Span;
+import genaicommons.proxies.ToolSpan;
+import genaicommons.proxies.KnowledgeBaseSpan;
+import genaicommons.proxies.MCPSpan;
+import genaicommons.proxies.Trace;
 
 /**
  * A development servlet registered at /dev/preview_agent_test that handles agent test requests.
@@ -45,9 +49,6 @@ public class AgentEditorServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final MxLogger LOGGER = new MxLogger(AgentEditorServlet.class);
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-    private static final String ENTITY_MODEL_SPAN = "GenAICommons.ModelSpan";
-    private static final String ENTITY_KNOWLEDGE_BASE_SPAN = "GenAICommons.KnowledgeBaseSpan";
-    private static final String ENTITY_MCP_SPAN = "GenAICommons.MCPSpan";
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -70,8 +71,8 @@ public class AgentEditorServlet extends HttpServlet {
 
             LOGGER.debug("Agent " + agentCustomDocument.qualifiedDocumentName() + " call completed successfully.");
 
-            Map<String, Object> responseMap = buildResponseMap(context, response.getMendixObject());
-            responseMap.put("tools", getToolSpans(context, request.getMendixObject()));
+            Map<String, Object> responseMap = buildResponseMap(context, response);
+            responseMap.put("tools", getToolSpans(context, request));
             resp.setStatus(HttpServletResponse.SC_OK);
             out.write(OBJECT_MAPPER.writeValueAsString(responseMap));
 
@@ -131,18 +132,20 @@ public class AgentEditorServlet extends HttpServlet {
         IMendixObject responseMxObject = Core.userActionCall("AgentCommons." + Agent_Call_WithoutHistory.class.getSimpleName())
                 .withParams(agent.getMendixObject(), optionalContextObject, request.getMendixObject(), null)
                 .execute(context);
+        if(responseMxObject == null) {
+            throw new IllegalStateException("Agent " + agent.get_QualifiedName() + " call did not return a response object.");
+        }
         return Response.initialize(context, responseMxObject);
     }
 
-    private Map<String, Object> buildResponseMap(IContext context, IMendixObject response) {
+    private Map<String, Object> buildResponseMap(IContext context, Response response) {
         Map<String, Object> responseMap = new HashMap<>();
-        String responseText = (String) response.getValue(context, "ResponseText");
-        responseMap.put("responseText", responseText != null ? responseText : "");
-        responseMap.put("requestTokens", response.getValue(context, "RequestTokens"));
-        responseMap.put("responseTokens", response.getValue(context, "ResponseTokens"));
-        responseMap.put("totalTokens", response.getValue(context, "TotalTokens"));
-        responseMap.put("durationMilliseconds", response.getValue(context, "DurationMilliseconds"));
-        responseMap.put("stopReason", response.getValue(context, "StopReason"));
+        responseMap.put("responseText", nullToEmpty(response.getResponseText()));
+        responseMap.put("requestTokens", response.getRequestTokens());
+        responseMap.put("responseTokens", response.getResponseTokens());
+        responseMap.put("totalTokens", response.getTotalTokens());
+        responseMap.put("durationMilliseconds", response.getDurationMilliseconds());
+        responseMap.put("stopReason", nullToEmpty(response.getStopReason()));
         responseMap.put("receivedAt", Instant.now().toEpochMilli());
         return responseMap;
     }
@@ -151,54 +154,55 @@ public class AgentEditorServlet extends HttpServlet {
      * Retrieves the Trace associated with the Request, navigates to Spans,
      * and returns a list of tool span data: { toolName, durationMilliseconds }.
      */
-    private List<Map<String, Object>> getToolSpans(IContext context, IMendixObject request) {
+    private List<Map<String, Object>> getToolSpans(IContext context, Request request) {
         List<Map<String, Object>> toolSpans = new ArrayList<>();
         try {
-            List<IMendixObject> traces = Core.retrieveByPath(context, request, "GenAICommons.Request_Trace");
-            if (traces.isEmpty()) {
+            Trace trace = request.getRequest_Trace();
+            if (trace == null) {
                 return toolSpans;
             }
 
-            IMendixObject trace = traces.get(0);
+            List<IMendixObject> spanObjects = Core.retrieveByPath(context, trace.getMendixObject(), "GenAICommons.Span_Trace");
 
-            List<IMendixObject> spans = Core.retrieveByPath(context, trace, "GenAICommons.Span_Trace");
-
-            for (IMendixObject span : spans) {
-                String spanType = span.getType();
+            for (IMendixObject spanObject : spanObjects) {
+                Span span = Span.initialize(context, spanObject);
+                
                 // Skip ModelSpan — only include ToolSpan and its subtypes (KnowledgeBaseSpan, MCPSpan)
-                if (ENTITY_MODEL_SPAN.equals(spanType)) {
+                if (!(span instanceof ToolSpan)) {
                     continue;
                 }
 
-                Map<String, Object> toolSpan = new HashMap<>();
-                String displayName = (String) span.getValue(context, "DisplayName");
-                toolSpan.put("displayName", displayName != null ? displayName : "");
-                String displayDescription = (String) span.getValue(context, "DisplayDescription");
-                toolSpan.put("displayDescription", displayDescription != null ? displayDescription : "");
-                String toolName = (String) span.getValue(context, "ToolName");
-                toolSpan.put("toolName", toolName != null ? toolName : "");
-                String toolDescription = (String) span.getValue(context, "ToolDescription");
-                toolSpan.put("toolDescription", toolDescription != null ? toolDescription : "");
-                toolSpan.put("durationMilliseconds", span.getValue(context, "DurationMilliseconds"));
+                ToolSpan toolSpan = (ToolSpan) span;
+                
+                Map<String, Object> toolSpanData = new HashMap<>();
+                toolSpanData.put("displayName", nullToEmpty(toolSpan.getDisplayName(context)));
+                toolSpanData.put("displayDescription", nullToEmpty(toolSpan.getDisplayDescription(context)));
+                toolSpanData.put("toolName", nullToEmpty(toolSpan.getToolName(context)));
+                toolSpanData.put("toolDescription", nullToEmpty(toolSpan.getToolDescription(context)));
+                toolSpanData.put("durationMilliseconds", toolSpan.getDurationMilliseconds(context));
 
-                if (ENTITY_KNOWLEDGE_BASE_SPAN.equals(spanType)) {
-                    String kbDisplayName = (String) span.getValue(context, "KBDisplayName");
-                    toolSpan.put("kbDisplayName", kbDisplayName != null ? kbDisplayName : "");
-                } else if (ENTITY_MCP_SPAN.equals(spanType)) {
-                    String serverName = (String) span.getValue(context, "ServerName");
-                    toolSpan.put("serverName", serverName != null ? serverName : "");
+                if (span instanceof KnowledgeBaseSpan) {
+                    KnowledgeBaseSpan kbSpan = (KnowledgeBaseSpan) span;
+                    toolSpanData.put("kbDisplayName", nullToEmpty(kbSpan.getKBDisplayName(context)));
+                } else if (span instanceof MCPSpan) {
+                    MCPSpan mcpSpan = (MCPSpan) span;
+                    toolSpanData.put("serverName", nullToEmpty(mcpSpan.getServerName(context)));
                 }
 
-                toolSpans.add(toolSpan);
+                toolSpans.add(toolSpanData);
             }
         } catch (Exception e) {
-            LOGGER.error("Error retrieving tool spans: " + e);
+            LOGGER.error("Error retrieving tool spans: ", e);
         }
         return toolSpans;
     }
 
+    private static String nullToEmpty(String value) {
+        return value != null ? value : "";
+    }
+
     private void writeErrorResponse(HttpServletResponse resp, Exception e) throws IOException {
-        LOGGER.error("Test action failed. " + e);
+        LOGGER.error("Test action failed. ", e);
         resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 
         try (PrintWriter out = resp.getWriter()) {
