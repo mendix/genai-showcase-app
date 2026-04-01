@@ -9,12 +9,12 @@
 
 package mcpserver.actions;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
+import io.modelcontextprotocol.json.McpJsonDefaults;
 import io.modelcontextprotocol.server.McpServerFeatures;
 import io.modelcontextprotocol.server.McpSyncServer;
 import io.modelcontextprotocol.spec.McpSchema;
@@ -27,6 +27,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -97,34 +98,33 @@ public class AddTool extends UserAction<IMendixObject>
 
 		McpServerFeatures.SyncToolSpecification tool = new McpServerFeatures.SyncToolSpecification(
 				new McpSchema.Tool(toolNpe.getName(), null, toolNpe.getDescription(), inputSchema, null, null, new HashMap<>()),
-				(exchange, arguments) -> {
+				(exchange, request) -> {
 					String threadName = Thread.currentThread().getName();
 					long start = System.currentTimeMillis();
 					LOGGER.trace(threadName + ": Start processing tool call " + Name + ", microflow: " + ExecutingMicroflow);
 					try {
 						// Get user context from session (falls back to system context if no session)
 						IContext contextUser = sessionManager.getContextFromSession(exchange);
-						Map<String, Object> args = new HashMap<>(arguments);
+						Map<String, Object> args = new HashMap<>(request.arguments());
 
 						manipulateArgsForMicroflowCall(toolNpe, args);
 						mcpserver.proxies.TextContent mxTextContent = getTextContextFromToolMicroflow(args, contextUser);
 
 						McpSchema.TextContent mcpTextContent = new McpSchema.TextContent(mxTextContent.getContent());
-						return new McpSchema.CallToolResult(
-							List.of(mcpTextContent),
-							false
-						);
+						return McpSchema.CallToolResult.builder()
+							.content(List.of(mcpTextContent))
+							.isError(false)
+							.build();
 						
 					}catch (Exception e) { 
 						LOGGER.error(e, threadName + ": Error occurred during tool call.");
 						McpSchema.TextContent errorContent = new McpSchema.TextContent(
 							"Error occurred during tool call: " + e.getMessage()
 						);
-						return new McpSchema.CallToolResult(
-							List.of(errorContent),
-							true,
-							new HashMap<>()
-						);
+						return McpSchema.CallToolResult.builder()
+							.content(List.of(errorContent))
+							.isError(true)
+							.build();
 						
 					}finally {
 						LOGGER.trace(threadName + ": End processing tool call '" + Name + ". Duration: " + (System.currentTimeMillis() - start) + "ms.");
@@ -350,9 +350,9 @@ public class AddTool extends UserAction<IMendixObject>
 	/**
 	 * Gets the JsonSchema for the tool, either from the provided Schema string or generated from the microflow
 	 * @return McpSchema.JsonSchema object
-	 * @throws JsonProcessingException
+	 * @throws IOException
 	 */
-	private McpSchema.JsonSchema getJsonSchemaForTool() throws JsonProcessingException {
+	private McpSchema.JsonSchema getJsonSchemaForTool() throws IOException {
 		if(Schema != null && !Schema.isEmpty()) {
 			return parseSchemaStringToJsonSchema(Schema);
 		} else {
@@ -365,43 +365,10 @@ public class AddTool extends UserAction<IMendixObject>
 	 * Parses a JSON schema string into a McpSchema.JsonSchema object
 	 * @param schemaString JSON schema as string
 	 * @return McpSchema.JsonSchema object
-	 * @throws JsonProcessingException
+	 * @throws IOException
 	 */
-	private McpSchema.JsonSchema parseSchemaStringToJsonSchema(String schemaString) throws JsonProcessingException {
-		// This is a simple parser
-		com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
-		com.fasterxml.jackson.databind.JsonNode schemaNode = mapper.readTree(schemaString);
-		
-		// Extract type
-		String type = schemaNode.has("type") ? schemaNode.get("type").asText() : "object";
-		
-		// Extract properties
-		Map<String, Object> properties = new HashMap<>();
-		if (schemaNode.has("properties")) {
-			com.fasterxml.jackson.databind.JsonNode propertiesNode = schemaNode.get("properties");
-			propertiesNode.fields().forEachRemaining(entry -> {
-				properties.put(entry.getKey(), mapper.convertValue(entry.getValue(), Object.class));
-			});
-		}
-		
-		// Extract required fields
-		List<String> required = null;
-		if (schemaNode.has("required")) {
-			com.fasterxml.jackson.databind.JsonNode requiredNode = schemaNode.get("required");
-			required = new ArrayList<>();
-			for (com.fasterxml.jackson.databind.JsonNode item : requiredNode) {
-				required.add(item.asText());
-			}
-		}
-		
-		return new McpSchema.JsonSchema(
-			type,
-			properties,
-			required,
-			null,
-			new HashMap<>(),
-			new HashMap<>()
-		);
+	private McpSchema.JsonSchema parseSchemaStringToJsonSchema(String schemaString) throws IOException {
+		return McpJsonDefaults.getMapper().readValue(schemaString, McpSchema.JsonSchema.class);
 	}
 	
 	/**
@@ -423,7 +390,6 @@ public class AddTool extends UserAction<IMendixObject>
 	/**
 	 * Creates a Schema definition for all primitive input parameters of the tool microflow
 	 * @return Schema definition as String
-	 * @throws JsonProcessingException
 	 */
 	private McpSchema.JsonSchema getSchemaFromMicroflow() {
 		Map<String, IDataType> inputParameters = getInputParametersPrimitives();

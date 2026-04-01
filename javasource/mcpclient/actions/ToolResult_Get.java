@@ -15,13 +15,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import io.modelcontextprotocol.client.McpSyncClient;
+import io.modelcontextprotocol.json.McpJsonDefaults;
+import io.modelcontextprotocol.json.TypeRef;
 import io.modelcontextprotocol.spec.McpSchema;
 import io.modelcontextprotocol.spec.McpSchema.CallToolResult;
 import io.modelcontextprotocol.spec.McpSchema.Content;
@@ -79,8 +79,7 @@ public class ToolResult_Get extends UserAction<IMendixObject>
 			Map<String, Object> arguments;
 			if (Input != null && !Input.trim().isEmpty()) {
 				// Parse Input as JSON
-				ObjectMapper mapper = new ObjectMapper();
-				arguments = mapper.readValue(Input, new TypeReference<Map<String, Object>>(){});
+				arguments = McpJsonDefaults.getMapper().readValue(Input, new TypeRef<Map<String, Object>>() {});
 			} else {
 				// Fall back to ArgumentCollection
 				arguments = getArguments();
