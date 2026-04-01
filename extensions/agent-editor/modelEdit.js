@@ -1,22 +1,22 @@
-import { r as y, w as n, G as L, F as N, H as I, S, D as F, P as G, E as B, I as R } from "./Icon-DlQJfq7F.js";
-import { c as K, C as O } from "./TextWithIcon-sxhIisHZ.js";
-import { c as V, g as W, a as D, b as q, h as U, d as _, e as P, u as M } from "./modelUtils-BmVykd1T.js";
-import { i as X, B as $, a as H, v as A, C as z, b as J } from "./text-B69f6L3w.js";
-import { y as T } from "./Link-DxInpxg1.js";
-import { c as Q } from "./DesignSystemTokens-BZrmEyPo.js";
-import { d as Y, i as Z, u as ee, e as ne } from "./mxCloudGenAIUtils-dXfIggxC.js";
-import { W as te, S as ae } from "./Banner-BKPTdROG.js";
-import { T as g } from "./TextInputLabeled-CEPunJWI.js";
-import { T as se } from "./TextInputWithButton-DdFsQTz_.js";
+import { r as y, w as n, G as L, D as N, H as I, Q as M, N as B, P as G, O as F, R } from "./Icon-fHsyUm8I.js";
+import { B as K, c as O, C as V } from "./TextWithIcon-VpEcElJR.js";
+import { c as W, g as q, a as D, b as U, h as _, d as P, e as X, u as S } from "./modelUtils-B4UuvvXG.js";
+import { i as $, B as H, v as A, C as Q, a as z } from "./ButtonWithLabel-Bn6Si8ff.js";
+import { y as T } from "./Link-6Dwxyd2F.js";
+import { c as J } from "./userPreferences-BV8i5uIO.js";
+import { d as Y, i as Z, u as ee, e as ne } from "./mxCloudGenAIUtils-BR9rBZ4n.js";
+import { W as te, S as ae } from "./Banner-CrOSEmJM.js";
+import { T as g } from "./TextInputLabeled-ByXuMGQx.js";
+import { T as se } from "./TextInputWithButton-Ck7o_ZdS.js";
 const oe = (t, a, s, c) => async () => {
   if (!(t.provider === c && "key" in t.providerFields) && c === "MxCloudGenAI") {
-    const u = V(), l = { ...t, provider: c, providerFields: u };
+    const u = W(), l = { ...t, provider: c, providerFields: u };
     a(l), s(l);
   }
 }, re = async (t, a, s, c, u) => {
-  const l = Q(t);
+  const l = J(t);
   try {
-    const d = a.providerFields, r = await W(t, d.key);
+    const d = a.providerFields, r = await q(t, d.key);
     if (!r)
       throw new Error("No key value found. Please make sure the key constant is correctly configured.");
     const e = Y(t, r);
@@ -98,7 +98,7 @@ async function le(t, a, s, c) {
   }
 }
 const h = {
-  ...z,
+  ...Q,
   NotImported: "NotImported"
 }, k = () => {
 }, ce = ({ studioPro: t, model: a, setModel: s, updateStudioProDocument: c }) => {
@@ -110,14 +110,14 @@ const h = {
   }, m = () => {
     l(!1);
   }, f = async () => {
-    e.key && U(t, e.key);
+    e.key && _(t, e.key);
   }, v = async (i) => {
-    const b = i.providerFields, E = await A(t, b.key);
-    if (r(E), l(!1), !E)
+    const b = i.providerFields, j = await A(t, b.key);
+    if (r(j), l(!1), !j)
       re(t, i, s, r, c);
     else {
-      const j = D(i);
-      s(j), c(j);
+      const E = D(i);
+      s(E), c(E);
     }
   }, o = async () => {
     const i = await ie(t, a);
@@ -144,7 +144,7 @@ const h = {
         label: "Model key",
         ariaLabel: "Model key",
         value: ((x = e.key) == null ? void 0 : x.qualifiedName) ?? "",
-        icon: e.key ? /* @__PURE__ */ n.jsx(X, {}) : void 0,
+        icon: e.key ? /* @__PURE__ */ n.jsx($, {}) : void 0,
         buttonCaption: "Select...",
         onClick: o,
         onClickSecondary: e.key ? f : void 0,
@@ -153,11 +153,19 @@ const h = {
       }
     ),
     !e.key && /* @__PURE__ */ n.jsxs(N, { children: [
-      /* @__PURE__ */ n.jsx(I, { children: /* @__PURE__ */ n.jsx(S, {}) }),
-      /* @__PURE__ */ n.jsx(I, { fullWidth: !0, children: /* @__PURE__ */ n.jsx(T, { href: "https://genai.home.mendix.com/p/resources", target: "_blank", children: "Create a key in the portal" }) })
+      /* @__PURE__ */ n.jsx(I, { children: /* @__PURE__ */ n.jsx(M, {}) }),
+      /* @__PURE__ */ n.jsx(I, { fullWidth: !0, children: /* @__PURE__ */ n.jsx(
+        T,
+        {
+          href: "https://genai.home.mendix.com/p/resources",
+          target: "_blank",
+          rel: "noreferrer,noopener",
+          children: "Create a key in the portal"
+        }
+      ) })
     ] }),
     w && /* @__PURE__ */ n.jsxs(te, { children: [
-      /* @__PURE__ */ n.jsx($, { children: "Invalid constant value" }),
+      /* @__PURE__ */ n.jsx(K, { children: "Invalid constant value" }),
       /* @__PURE__ */ n.jsx("div", { children: "In order to test your Model locally please set a valid value for the key constant." })
     ] }),
     e.keyId && /* @__PURE__ */ n.jsxs(n.Fragment, { children: [
@@ -187,7 +195,7 @@ const h = {
           label: "Model",
           ariaLabel: "Model name",
           value: a.displayName,
-          icon: a.displayName && a.displayName.toLocaleLowerCase().includes("anthropic") ? q : void 0,
+          icon: a.displayName && a.displayName.toLocaleLowerCase().includes("anthropic") ? U : void 0,
           onChange: k,
           readOnly: !0
         }
@@ -213,16 +221,16 @@ const h = {
         }
       ),
       /* @__PURE__ */ n.jsxs(N, { children: [
-        /* @__PURE__ */ n.jsx(I, { children: /* @__PURE__ */ n.jsx(S, {}) }),
-        /* @__PURE__ */ n.jsx(I, { fullWidth: !0, children: /* @__PURE__ */ n.jsx(T, { href: e.deepLinkURL, target: "_blank", children: "View resource in the portal" }) })
+        /* @__PURE__ */ n.jsx(I, { children: /* @__PURE__ */ n.jsx(M, {}) }),
+        /* @__PURE__ */ n.jsx(I, { fullWidth: !0, children: /* @__PURE__ */ n.jsx(T, { href: e.deepLinkURL, target: "_blank", rel: "noreferrer,noopener", children: "View resource in the portal" }) })
       ] }),
       /* @__PURE__ */ n.jsx(H, { label: "Connection", buttonCaption: "Test", onPress: p }),
       u && /* @__PURE__ */ n.jsx(ae, { onClose: m, children: "Connection successful." })
     ] })
   ] });
-}, de = _(), ue = ({ studioPro: t, documentId: a }) => {
+}, de = P(), ue = ({ studioPro: t, documentId: a }) => {
   const s = t.ui.messageBoxes, c = t.app.model.customBlobDocuments, [u, l] = y.useState(0), [d, r] = y.useState(!1), [e, p] = y.useState(de), m = [
-    { key: "MxCloudGenAI", caption: "Mendix Cloud GenAI", icon: P }
+    { key: "MxCloudGenAI", caption: "Mendix Cloud GenAI", icon: X }
   ];
   y.useEffect(() => {
     const o = (C) => {
@@ -244,13 +252,13 @@ const h = {
     });
   }, [u]);
   const f = async (o) => {
-    oe(e, p, M(t, a), o)();
+    oe(e, p, S(t, a), o)();
   }, v = () => e.provider ? !0 : "Model provider is required.";
-  return /* @__PURE__ */ n.jsx(F, { studioPro: t, children: /* @__PURE__ */ n.jsxs(G, { children: [
-    !d && /* @__PURE__ */ n.jsx(O, {}),
-    d && /* @__PURE__ */ n.jsx(B, { children: /* @__PURE__ */ n.jsxs(R, { children: [
+  return /* @__PURE__ */ n.jsx(B, { studioPro: t, children: /* @__PURE__ */ n.jsxs(G, { children: [
+    !d && /* @__PURE__ */ n.jsx(V, {}),
+    d && /* @__PURE__ */ n.jsx(F, { children: /* @__PURE__ */ n.jsxs(R, { children: [
       /* @__PURE__ */ n.jsx(L, { label: "Common", children: /* @__PURE__ */ n.jsx(
-        J,
+        z,
         {
           ariaLabel: "Provider",
           isDisabled: !0,
@@ -267,12 +275,12 @@ const h = {
           studioPro: t,
           model: e,
           setModel: p,
-          updateStudioProDocument: M(t, a)
+          updateStudioProDocument: S(t, a)
         }
       )
     ] }) })
   ] }) });
-}, Ie = K(ue);
+}, Ie = O(ue);
 export {
   Ie as component
 };
