@@ -1,3 +1,4 @@
+
 package agenteditorcommons.impl;
 
 import static java.util.Objects.requireNonNull;
@@ -10,8 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServlet;
@@ -23,18 +22,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mendix.core.Core;
 import com.mendix.extensibility.CustomBlobDocumentInfo;
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.systemwideinterfaces.core.IMendixIdentifier;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 import agentcommons.actions.Agent_Call_WithoutHistory;
+import agentcommons.proxies.Agent;
+
+import genaicommons.proxies.Request;
+import genaicommons.proxies.Response;
 
 /**
- * A development servlet registered at /dev/agentEditor that handles agent test requests.
+ * A development servlet registered at /dev/preview_agent_test that handles agent test requests.
  *
  * Register it at app startup with:
- *   Core.addDevelopmentServlet("agentEditor", new AgentEditorServlet());
+ *   Core.addDevelopmentServlet("preview_agent_test", new AgentEditorServlet()
  *
- * POST /dev/agentEditor
+ * POST /dev/preview_agent_test
  * Body: { "DocumentId": "<uuid>", "Variables": { "key": "value", ... } }
  * Response: JSON with the agent response or an error message.
  */
@@ -43,10 +45,6 @@ public class AgentEditorServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final MxLogger LOGGER = new MxLogger(AgentEditorServlet.class);
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-    private static final Pattern VARIABLE_PATTERN = Pattern.compile("\\{\\{([^}\\s{]+)\\}\\}");
-
-    private static final String ENTITY_REQUEST = "GenAICommons.Request";
-    private static final String ENTITY_MESSAGE = "GenAICommons.Message";
     private static final String ENTITY_MODEL_SPAN = "GenAICommons.ModelSpan";
     private static final String ENTITY_KNOWLEDGE_BASE_SPAN = "GenAICommons.KnowledgeBaseSpan";
     private static final String ENTITY_MCP_SPAN = "GenAICommons.MCPSpan";
@@ -58,34 +56,22 @@ public class AgentEditorServlet extends HttpServlet {
 
         try (PrintWriter out = resp.getWriter()) {
             JsonNode requestJson = parseRequestBody(req);
-
-            CustomBlobDocumentInfo agentCustomDocument = findAgentDocument(requestJson);
-
-            String agentContent = agentCustomDocument.content();
-            if (agentContent == null || agentContent.isEmpty()) {
-                throw new IllegalStateException(
-                        "Agent " + agentCustomDocument.qualifiedDocumentName() + " content is empty");
-            }
-
-            JsonNode agentJson = OBJECT_MAPPER.readTree(agentContent);
-
-            Map<String, String> variables = parseVariables(requestJson);
-            String systemPrompt = replaceVariables(getTextOrEmpty(agentJson, "systemPrompt"), variables);
-            String userPrompt = replaceVariables(getTextOrEmpty(agentJson, "userPrompt"), variables);
-
+            CustomBlobDocumentInfo agentCustomDocument = findAgentDocument(requestJson);       
             IContext context = Core.createSystemContext();
-            IMendixObject agentMendixObject = findAgentObject(context, agentCustomDocument);
-            IMendixObject request = buildRequest(context, systemPrompt, userPrompt);
-            IMendixObject response = callAgent(context, agentMendixObject, request);
+            Agent agent = findAgentObject(context, agentCustomDocument);
+            Request request = new Request(context);
+            Map<String, String> variables = parseVariables(requestJson);
+            IMendixObject contextObject = createContextObject(variables, agent, context);
+            Response response = callAgent(context, agent, request, contextObject);
 
             if (response == null) {
-                throw new IllegalStateException("Agent " + agentCustomDocument.qualifiedDocumentName() + " call returned no response");
+                throw new IllegalStateException("Agent " + agentCustomDocument.qualifiedDocumentName() + " call returned no response.");
             }
 
-            LOGGER.debug("Agent " + agentCustomDocument.qualifiedDocumentName() + " call completed successfully");
+            LOGGER.debug("Agent " + agentCustomDocument.qualifiedDocumentName() + " call completed successfully.");
 
-            Map<String, Object> responseMap = buildResponseMap(context, response);
-            responseMap.put("tools", getToolSpans(context, request));
+            Map<String, Object> responseMap = buildResponseMap(context, response.getMendixObject());
+            responseMap.put("tools", getToolSpans(context, request.getMendixObject()));
             resp.setStatus(HttpServletResponse.SC_OK);
             out.write(OBJECT_MAPPER.writeValueAsString(responseMap));
 
@@ -126,7 +112,7 @@ public class AgentEditorServlet extends HttpServlet {
         }
     }
 
-    private IMendixObject findAgentObject(IContext context, CustomBlobDocumentInfo agentCustomDocument) {
+    private Agent findAgentObject(IContext context, CustomBlobDocumentInfo agentCustomDocument) {
         List<IMendixObject> results = Core.createXPathQuery("//AgentCommons.Agent[ModelDocumentID=$documentID]")
                 .setVariable("documentID", agentCustomDocument.documentID().toString())
                 .setAmount(1)
@@ -137,29 +123,15 @@ public class AgentEditorServlet extends HttpServlet {
                     "Agent " + agentCustomDocument.qualifiedDocumentName()
                             + " object does not exist in the database. Make sure the agent has been imported first.");
         }
-
-        return results.get(0);
+        
+        return Agent.initialize(context, results.get(0));
     }
 
-    private IMendixObject buildRequest(IContext context, String systemPrompt, String userPrompt) {
-        IMendixObject request = Core.instantiate(context, ENTITY_REQUEST);
-        request.setValue(context, "SystemPrompt", systemPrompt);
-
-        IMendixObject userMessage = Core.instantiate(context, ENTITY_MESSAGE);
-        userMessage.setValue(context, "Role", "user");
-        userMessage.setValue(context, "Content", userPrompt);
-
-        List<IMendixIdentifier> messageIds = new ArrayList<>();
-        messageIds.add(userMessage.getId());
-        request.setValue(context, "GenAICommons.Request_Message", messageIds);
-
-        return request;
-    }
-
-    private IMendixObject callAgent(IContext context, IMendixObject agentMendixObject, IMendixObject request) {
-        return Core.userActionCall("AgentCommons." + Agent_Call_WithoutHistory.class.getSimpleName())
-                .withParams(agentMendixObject, null, request, null)
+    private Response callAgent(IContext context, Agent agent, Request request, IMendixObject optionalContextObject) {
+        IMendixObject responseMxObject = Core.userActionCall("AgentCommons." + Agent_Call_WithoutHistory.class.getSimpleName())
+                .withParams(agent.getMendixObject(), optionalContextObject, request.getMendixObject(), null)
                 .execute(context);
+        return Response.initialize(context, responseMxObject);
     }
 
     private Map<String, Object> buildResponseMap(IContext context, IMendixObject response) {
@@ -220,13 +192,13 @@ public class AgentEditorServlet extends HttpServlet {
                 toolSpans.add(toolSpan);
             }
         } catch (Exception e) {
-            LOGGER.error("Error retrieving tool spans: " + e.getMessage());
+            LOGGER.error("Error retrieving tool spans: " + e);
         }
         return toolSpans;
     }
 
     private void writeErrorResponse(HttpServletResponse resp, Exception e) throws IOException {
-        LOGGER.error("Test action failed. " + e.getMessage());
+        LOGGER.error("Test action failed. " + e);
         resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 
         try (PrintWriter out = resp.getWriter()) {
@@ -239,24 +211,17 @@ public class AgentEditorServlet extends HttpServlet {
         JsonNode field = node.get(fieldName);
         return (field != null && !field.isNull()) ? field.asText() : null;
     }
-
-    private static String getTextOrEmpty(JsonNode node, String fieldName) {
-        JsonNode field = node.get(fieldName);
-        return (field != null && !field.isNull()) ? field.asText() : "";
-    }
-
-    private static String replaceVariables(String template, Map<String, String> variables) {
-        if (template == null || template.isEmpty() || variables.isEmpty()) {
-            return template;
+    
+    private static IMendixObject createContextObject(Map<String, String> variables, Agent agent, IContext context) {
+        String contextEntity = agent.getEntity();
+        
+        if(contextEntity == null || contextEntity.isBlank()) {
+            return null;
         }
-        Matcher matcher = VARIABLE_PATTERN.matcher(template);
-        StringBuilder result = new StringBuilder();
-        while (matcher.find()) {
-            String variableName = matcher.group(1);
-            String replacement = variables.getOrDefault(variableName, matcher.group(0));
-            matcher.appendReplacement(result, Matcher.quoteReplacement(replacement));
-        }
-        matcher.appendTail(result);
-        return result.toString();
+        
+        IMendixObject contextObject = Core.instantiate(context, contextEntity);
+        
+        variables.forEach((k, v) -> contextObject.setValue(context, k, v));
+        return contextObject;
     }
 }

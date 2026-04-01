@@ -1,8 +1,8 @@
-import { r as o, w as r, a0 as R, O as q, K as N, G as I, _ as D, N as O } from "./Icon-B83cP35T.js";
+import { r as o, w as r, a0 as R, O as q, K as N, G as I, _ as D, N as O } from "./Icon-B4HLWuEl.js";
 import { s as B, c as F } from "./userPreferences-BV8i5uIO.js";
-import { u as H, D as A } from "./DialogFooter-BAo_stis.js";
-import { I as G } from "./Banner-D-UDHPHw.js";
-import { T as f } from "./TextInputLabeled-C5AghoA0.js";
+import { u as H, D as A } from "./DialogFooter-B6gj6CaX.js";
+import { I as G } from "./Banner-BV6cAcTN.js";
+import { T as f } from "./TextInputLabeled-C3EIPSRL.js";
 const Y = ({ initialAgent: a, onClose: t }) => {
   var v, P, w;
   const [e, d] = o.useState(a), [n, u] = o.useState(((v = a.maxTokens) == null ? void 0 : v.toString()) ?? ""), [i, m] = o.useState(((P = a.temperature) == null ? void 0 : P.toString()) ?? ""), [l, y] = o.useState(((w = a.topP) == null ? void 0 : w.toString()) ?? ""), p = o.useCallback(() => n !== "" && e.maxTokens === void 0 ? "Please enter a valid number." : e.maxTokens !== void 0 && e.maxTokens < 1 ? "Max tokens must be greater than 0 (or empty)." : !0, [e.maxTokens, n]), c = o.useCallback(() => i !== "" && e.temperature === void 0 ? "Please enter a valid number." : e.temperature !== void 0 && e.temperature < 0 ? "Temperature must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.temperature, i]), h = o.useCallback(() => l !== "" && e.topP === void 0 ? "Please enter a valid number." : e.topP !== void 0 && e.topP < 0 ? "TopP must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.topP, l]), g = o.useCallback(
