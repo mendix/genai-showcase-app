@@ -1,0 +1,26 @@
+@use '../../../../theme/web/custom-variables' as *;
+
+.widget-markdown {
+    hr {
+        margin: $spacing-small 0;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        margin: $spacing-small 0;
+    }
+    ul {
+        justify-content: flex-start;
+        padding-left: 18px;
+        > li {
+            padding: 0;
+        }
+    }
+    li {
+        p {
+            margin-bottom: 0px;
+        }
+    }
+    ol {
+        padding-left: 18px;
+        justify-content: flex-start;
+    }
+}

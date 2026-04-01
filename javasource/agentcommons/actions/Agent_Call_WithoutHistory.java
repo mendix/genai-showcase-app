@@ -18,7 +18,6 @@ import agentcommons.impl.AgentImpl;
 import agentcommons.impl.MxLogger;
 import agentcommons.proxies.ENUM_Agent_UsageType;
 import agentcommons.proxies.PromptToUse;
-import java.util.ArrayList;
 import java.util.List;
 import genaicommons.proxies.DeployedModel;
 import genaicommons.proxies.ENUM_MessageRole;
@@ -83,8 +82,8 @@ public class Agent_Call_WithoutHistory extends UserAction<IMendixObject>
 			PromptToUse promptToUse = PromptToUse.initialize(getContext(), promptObject);
 			Request request = genaicommons.proxies.microflows.Microflows.request_GetCreate(getContext(), OptionalRequest);
 			
-			// Add user message and ensure it comes first in the message list
-			addUserMessageFirst(getContext(), request, OptionalFileCollection, promptToUse.getUserPrompt());
+			// Ensure exactly one user message and update/create it without reordering assumptions.
+			normalizeSingleUserMessage(getContext(), request, OptionalFileCollection, promptToUse.getUserPrompt());
 			agentcommons.proxies.microflows.Microflows.request_AddAgentCapabilities(getContext(), request, promptToUse);
 			
 			
@@ -112,23 +111,58 @@ public class Agent_Call_WithoutHistory extends UserAction<IMendixObject>
 	private static final MxLogger LOGGER = new MxLogger(Agent_Call_WithoutHistory.class);
 	
 	/**
-	 * Adds a user message to the request and ensures it is placed first in the message list.
-	 * This handles cases where assistant or tool messages were added before calling this action.
+	 * Ensures the request has exactly one user message.
+	 *
+	 * Rules:
+	 * - If no messages exist, create one user message.
+	 * - If one user message exists, update its content and file collection.
+	 * - If non-user messages exist before any user message, fail fast because order cannot be fixed reliably.
+	 * - If multiple user messages exist, fail fast.
 	 */
-	private static void addUserMessageFirst(IContext context, Request request, genaicommons.proxies.FileCollection fileCollection, String userPrompt) throws Exception {
-		// Retrieve existing messages before adding the user message
+	private static void normalizeSingleUserMessage(
+		IContext context,
+		Request request,
+		genaicommons.proxies.FileCollection fileCollection,
+		String userPrompt
+	) throws Exception {
 		List<Message> existingMessages = request.getRequest_Message();
-		
-		// Add the user message (returns the created message)
-		Message userMessage = genaicommons.proxies.microflows.Microflows.request_AddMessage(context, request, ENUM_MessageRole.user, fileCollection, userPrompt);
-		
-		// Create reordered list: user message first, then existing messages
-		List<Message> reorderedMessages = new ArrayList<>();
-		reorderedMessages.add(userMessage);
-		reorderedMessages.addAll(existingMessages);
-		
-		// Set the reordered messages on the request
-		request.setRequest_Message(reorderedMessages);
+		int userMessageCount = 0;
+		Message firstUserMessage = null;
+
+		for (Message message : existingMessages) {
+			if (message.getRole() == ENUM_MessageRole.user) {
+				if (firstUserMessage == null) {
+					firstUserMessage = message;
+				}
+				userMessageCount++;
+			}
+		}
+
+		if (userMessageCount == 0) {
+			if (!existingMessages.isEmpty()) {
+				throw new IllegalStateException(
+					"Request contains assistant/tool messages but no user message. " +
+					"Create the user message first and then append assistant/tool messages."
+				);
+			}
+
+			genaicommons.proxies.microflows.Microflows.request_AddMessage(
+				context,
+				request,
+				ENUM_MessageRole.user,
+				fileCollection,
+				userPrompt
+			);
+			return;
+		}
+
+		if (userMessageCount > 1) {
+			throw new IllegalStateException("Request contains multiple user messages. Exactly one user message is allowed.");
+		}
+
+		// Update the existing user message in place to keep creation order deterministic.
+		firstUserMessage.setContent(userPrompt);
+		firstUserMessage.setMessage_FileCollection(fileCollection);
 	}
 	
 	// END EXTRA CODE
