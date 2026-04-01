@@ -14,6 +14,7 @@ import com.mendix.core.Core;
 import com.mendix.extensibility.CustomBlobDocumentInfo;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.UserAction;
+import agenteditorcommons.impl.AgentEditorServlet;
 import agenteditorcommons.impl.MxLogger;
 import agenteditorcommons.proxies.ModelDocument;
 
@@ -38,6 +39,7 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 			importModelDocumentsOfType("agenteditor.model");
 			importModelDocumentsOfType("agenteditor.consumedMCPService");
 			importModelDocumentsOfType("agenteditor.agent");
+			registerServlet();
 
 			LOGGER.info("Finished import.");
 			return true;
@@ -60,6 +62,15 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new MxLogger(AgentEditor_ImportFromStudioPro.class);
+	private static boolean servletRegistered = false;
+
+	private void registerServlet() {
+		if (!servletRegistered) {
+			Core.addDevelopmentServlet("preview_agent_test", new AgentEditorServlet());
+			servletRegistered = true;
+			LOGGER.debug("AgentEditor development servlet registered at /dev/preview_agent_test");
+		}
+	}
 
 
 	private void importModelDocumentsOfType(String documentTypeID) {

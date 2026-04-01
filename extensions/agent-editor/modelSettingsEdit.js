@@ -1,9 +1,9 @@
-import { r as o, w as r, V as R, E as q, C as D, G as I, Q as N, D as B } from "./Icon-DlQJfq7F.js";
-import { s as F, c as H } from "./DesignSystemTokens-BZrmEyPo.js";
-import { u as O, D as A } from "./DialogFooter-BHOCIJ8t.js";
-import { I as G } from "./Banner-BKPTdROG.js";
-import { T as f } from "./TextInputLabeled-CEPunJWI.js";
-const V = ({ initialAgent: a, onClose: t }) => {
+import { r as o, w as r, a0 as R, O as q, K as N, G as I, _ as D, N as O } from "./Icon-fHsyUm8I.js";
+import { s as B, c as F } from "./userPreferences-BV8i5uIO.js";
+import { u as H, D as A } from "./DialogFooter-Cy7F0mpT.js";
+import { I as G } from "./Banner-CrOSEmJM.js";
+import { T as f } from "./TextInputLabeled-ByXuMGQx.js";
+const Y = ({ initialAgent: a, onClose: t }) => {
   var v, P, w;
   const [e, d] = o.useState(a), [n, u] = o.useState(((v = a.maxTokens) == null ? void 0 : v.toString()) ?? ""), [i, m] = o.useState(((P = a.temperature) == null ? void 0 : P.toString()) ?? ""), [l, y] = o.useState(((w = a.topP) == null ? void 0 : w.toString()) ?? ""), p = o.useCallback(() => n !== "" && e.maxTokens === void 0 ? "Please enter a valid number." : e.maxTokens !== void 0 && e.maxTokens < 1 ? "Max tokens must be greater than 0 (or empty)." : !0, [e.maxTokens, n]), c = o.useCallback(() => i !== "" && e.temperature === void 0 ? "Please enter a valid number." : e.temperature !== void 0 && e.temperature < 0 ? "Temperature must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.temperature, i]), h = o.useCallback(() => l !== "" && e.topP === void 0 ? "Please enter a valid number." : e.topP !== void 0 && e.topP < 0 ? "TopP must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.topP, l]), g = o.useCallback(
     (j, M, x) => (s) => {
@@ -26,12 +26,12 @@ const V = ({ initialAgent: a, onClose: t }) => {
   }, [t, e, p, c, h]), k = o.useCallback(() => {
     t == null || t(null);
   }, [t]);
-  O(k, T);
+  H(k, T);
   const C = o.useCallback(() => {
     window.open("https://docs.mendix.com/appstore/modules/genai/genai-for-mx/commons/#request", "_blank");
   }, []);
   return /* @__PURE__ */ r.jsxs(R, { children: [
-    /* @__PURE__ */ r.jsx(q, { children: /* @__PURE__ */ r.jsxs(D, { children: [
+    /* @__PURE__ */ r.jsx(q, { children: /* @__PURE__ */ r.jsxs(N, { children: [
       /* @__PURE__ */ r.jsx(I, { label: "Tokens", children: /* @__PURE__ */ r.jsx(
         f,
         {
@@ -71,20 +71,20 @@ const V = ({ initialAgent: a, onClose: t }) => {
     ] }) }),
     /* @__PURE__ */ r.jsx(A, { onOk: T, onCancel: k, showHelp: !0, onHelp: C })
   ] });
-}, Y = ({ studioPro: a, agent: t, onClose: e }) => /* @__PURE__ */ r.jsx(B, { studioPro: a, children: /* @__PURE__ */ r.jsx(V, { initialAgent: t, onClose: e }) }), _ = {
+}, _ = ({ studioPro: a, agent: t, onClose: e }) => /* @__PURE__ */ r.jsx(O, { studioPro: a, children: /* @__PURE__ */ r.jsx(Y, { initialAgent: t, onClose: e }) }), W = {
   async loaded(a, t) {
-    const e = F(a), d = H(e);
+    const e = B(a), d = F(e);
     if (!t.agent)
       throw new Error("Agent needs to be provided to open the Model Settings dialog.");
     try {
       const n = JSON.parse(decodeURIComponent(t.agent)), u = document.getElementById("root");
       if (!u)
         throw new Error("Failed to find the root element.");
-      const i = N.createRoot(u), m = (l) => {
+      const i = D.createRoot(u), m = (l) => {
         e.ui.dialogs.closeWithResult(t.dialogId, l);
       };
       i.render(
-        /* @__PURE__ */ r.jsx(o.StrictMode, { children: /* @__PURE__ */ r.jsx(Y, { studioPro: e, agent: n, onClose: m }) })
+        /* @__PURE__ */ r.jsx(o.StrictMode, { children: /* @__PURE__ */ r.jsx(_, { studioPro: e, agent: n, onClose: m }) })
       );
     } catch (n) {
       throw d.error("Error editing model settings:", n), new Error("Error editing model settings:", n);
@@ -92,6 +92,6 @@ const V = ({ initialAgent: a, onClose: t }) => {
   }
 };
 export {
-  _ as component
+  W as component
 };
 //# sourceMappingURL=modelSettingsEdit.js.map
