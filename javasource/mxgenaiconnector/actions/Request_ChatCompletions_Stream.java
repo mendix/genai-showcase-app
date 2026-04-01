@@ -17,7 +17,6 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.ENUM_MessageType;
-import genaicommons.proxies.Message;
 import mxgenaiconnector.impl.MxLogger;
 import okhttp3.*;
 import okhttp3.sse.*;
@@ -84,13 +83,12 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	        EventSourceListener listener = new EventSourceListener() {
 	            @Override
 	            public void onOpen(EventSource eventSource, Response response) {
-	            	LOGGER.info("SSE Connection opened");
-	            	LOGGER.info("Response Status: " + response.code());
+	            	LOGGER.debug("SSE Connection opened");
+	            	LOGGER.debug("Response Status: " + response.code());
 	            }
 	            
 	            @Override
 	            public void onEvent(EventSource eventSource, String id, String type, String data) {
-	            	LOGGER.info("Event Type: " + type);
 	            	try {
 		            	JsonNode rootNode = mapper.readTree(data);
 		            	switch (type) {
@@ -135,22 +133,22 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		                    break;
 		            }
 	            	} catch (Exception e) {
-        	            LOGGER.debug("Error parsing JSON: " + e.getMessage());
+        	            LOGGER.error("Error parsing JSON: " + e.getMessage());
         	        }
 	                
 	            }
 	            
 	            @Override
 	            public void onClosed(EventSource eventSource) {
-	            	LOGGER.info("SSE Connection closed");
+	            	LOGGER.debug("SSE Connection closed");
 	            	latch.countDown(); // Signal completion
 	            }
 	            
 	            @Override
 	            public void onFailure(EventSource eventSource, Throwable t, Response response) {
-	            	LOGGER.info("SSE Connection failed: " + t.getMessage());
+	            	LOGGER.error("SSE Connection failed: " + t.getMessage());
 	                if (response != null) {
-	                	LOGGER.info("Response Status: " + response.code());
+	                	LOGGER.debug("Response Status: " + response.code());
 	                }
 	                latch.countDown(); // Signal completion
 	            }
@@ -169,11 +167,12 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	        
 	        // Connection must be closed before returning response! FEEDBACK!
 	        
-	        LOGGER.info("EventSource cancelled");
-	        
+	        LOGGER.info("EventSource cancelled"); 
 	        
 	        mxResponse.getResponse_Message().setContent(mxResponse.getResponseText());
 	        mxResponse.getResponse_Message().setMessage_ToolCall(mxToolCallList);
+	        
+	        
 	        return mxResponse.getMendixObject();
 		        
 		} catch (Exception e) {
@@ -210,9 +209,6 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		else {
 			mxResponse.setResponseText(currentText + chunkText);
 		}
-		
-		LOGGER.info(mxResponse.getResponseText());
-		
 	}
 	
 	private void organizeResponse() {
