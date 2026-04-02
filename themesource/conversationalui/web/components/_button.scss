@@ -1,7 +1,47 @@
 @use '../../../../theme/web/custom-variables' as *;
 
+//
+// Button Extensions for ConversationalUI
+// Extends atlas_core button classes with custom variants
+// Uses atlas_core naming conventions for compatibility
+//
+// CONSOLIDATED FROM:
+// - themesource/conversationalui/web/components/_button.scss
+// - themesource/agentcommons/web/components/_button.scss
+//
+
+// ============================================================================
+// Size Modifiers (Atlas Core Alignment)
+// ============================================================================
+
+//.btn.mx-button {
+    // Atlas core standard: .btn-sm
+    // Replaces: .btn-small (both conversationalui and agentcommons)
+    .btn-sm {
+        //height: $size-small;
+        //background-color: red;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 4px;
+
+        img {
+            height: 22px;
+            width: 22px;
+            margin: 1px;
+        }
+    }
+
+
+// ============================================================================
+// Color & Style Variants
+// ============================================================================
+
 .btn.mx-button {
-    &.btn-border-primary { 
+    // Primary bordered button
+    // Refactored from: .btn-border-primary
+    // Now uses atlas_core pattern: .btn-primary.btn-bordered
+    &.btn-primary.btn-bordered {
         color: $brand-primary;
         border: 1px solid $brand-primary;
         background-color: transparent;
@@ -21,10 +61,16 @@
         }
     }
 
-    &.btn-text-default { 
+    // Text-style buttons (link-like but with hover background)
+    // Consolidated from: .btn-text-default, .btn-without-border
+    &.btn-text {
         color: $font-color-default;
         border: 1px solid transparent;
         background-color: transparent;
+
+        &.mx-link {
+            text-decoration: none;
+        }
 
         &.disabled {
             background-color: transparent;
@@ -40,12 +86,38 @@
             border: 1px solid transparent;
         }
 
-        &.btn-small {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        // Danger variant
+        // Consolidated from: .btn-text-danger, .btn-without-border-red
+        &.btn-text-danger {
+            color: $brand-danger;
+
+            &:hover,
+            &:active,
+            &:focus {
+                color: $brand-danger;
+                background-color: $btn-default-bg-hover;
+                border: 1px solid $btn-default-bg-hover;
+            }
         }
-        
+    }
+
+    // Icon-only button (minimal styling)
+    // From conversationalui - kept as-is
+    &.btn-icon-only {
+        all: unset;
+        padding-top: $spacing-smallest;
+
+        img {
+            height: 16px;
+            width: 16px;
+        }
+    }
+
+    // Custom icon button with sizing
+    // Renamed from agentcommons .btn-icon to avoid atlas_core conflict
+    &.btn-icon-custom {
+        display: flex;
+
         img {
             height: 22px;
             width: 22px;
@@ -53,37 +125,58 @@
         }
     }
 
-    &.btn-text-danger { 
-        color: $brand-danger;
-        border: 1px solid transparent;
+    // No hover utility
+    // From agentcommons - kept as-is
+    &.btn-no-hover.mx-link:hover {
         background-color: transparent;
-
-        &.disabled {
-            background-color: transparent;
-            border: none;
-            cursor: default;
-        }
-
-        &:hover,
-        &:active,
-        &:focus {
-            color: $brand-danger;
-            background-color: $btn-default-bg-hover;
-            border: 1px solid $btn-default-bg-hover;
-        }
-    }
-
-    &.btn-icon-only {
-        all: unset;
-        padding-top: $spacing-smallest;
-        img {
-            height: 16px;
-            width: 16px;
-        }
-
-        
+        border: 1px solid transparent;
+        cursor: default;
     }
 }
+
+// ============================================================================
+// Test-specific Buttons (Agent Commons)
+// ============================================================================
+
+.btn.mx-button {
+    &.btn-test-single {
+        img {
+            height: 20px;
+            width: 20px;
+            margin-right: 0;
+        }
+    }
+
+    &.btn-test {
+        @extend .btn-test-single;
+        border-radius: 4px 0 0 4px;
+    }
+
+    &.btn-test-all {
+        @extend .btn-test-single;
+        border-radius: 0 4px 4px 0;
+        border-left: 1px solid white;
+        padding: 0.6em;
+
+        &:active,
+        &:focus,
+        &:hover {
+            border-left: 1px solid white;
+        }
+    }
+
+    &.custom-img {
+        img {
+            height: 22px;
+            width: 22px;
+            margin-right: 0;
+        }
+    }
+}
+
+// ============================================================================
+// Link Styling
+// ============================================================================
 
 .mx-link {
     &.link-bold {
@@ -91,10 +184,59 @@
         line-height: 150%;
         cursor: pointer;
         text-decoration: underline;
-        text-decoration-thickness: 1px; 
+        text-decoration-thickness: 1px;
     }
 }
 
-.btn-small {
-    padding: 8px;
+// ============================================================================
+// Switch Component (Agent Commons)
+// ============================================================================
+
+.switch {
+    .widget-switch .widget-switch-btn-wrapper {
+        width: 30px;
+        height: 15px;
+        border-radius: 10px;
+        background-color: #fff;
+        border: 1px solid #dfdfdf;
+        position: relative;
+        transition: border 0.4s, box-shadow 0.4s, transform 0.4s, background-color 1.2s;
+        cursor: pointer;
+        display: inline-block;
+        -webkit-background-clip: content-box;
+        background-clip: content-box;
+        box-sizing: content-box;
+    }
+
+    .widget-switch .widget-switch-btn-wrapper .widget-switch-btn {
+        width: 15px;
+        height: 15px;
+        background: #fff;
+        border-radius: 100%;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: background-color 0.4s, left 0.2s;
+    }
+
+    .widget-switch .widget-switch-btn-wrapper.checked {
+        background-color: #2F3646 !important;
+        border-color: #2F3646 !important;
+        box-shadow: inset 0 0 0 16px #2F3646;
+    }
+
+    .widget-switch .widget-switch-btn-wrapper.checked .widget-switch-btn {
+        left: 15px;
+    }
+
+    .widget-switch .widget-switch-btn-wrapper .widget-switch-btn:active {
+        border-radius: 45%;
+        width: 70%;
+    }
+
+    .widget-switch .widget-switch-btn-wrapper.disabled {
+        opacity: 0.5;
+        cursor: default;
+    }
 }

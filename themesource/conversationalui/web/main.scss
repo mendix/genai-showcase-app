@@ -3,3 +3,83 @@
 @use 'token-monitor-variables' as *;
 @use './abstracts/all' as *;
 @use './components/all' as *;
+
+
+.btn-sm {
+    font-size: 14px;
+    padding: 8px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    border: 0px;
+    img {
+        margin: 0;
+        width: 18px;
+        height: 18px;
+    }
+}
+
+
+/// Combobox fix
+.widget-combobox-selected-items {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+}
+
+.widget-combobox-input-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: white;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 2.75rem;
+    position: relative;
+}
+
+.widget-combobox-placeholder-custom {
+    width: 100%;
+}
+
+.widget-combobox-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.widget-combobox-caption-custom {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.item-selection {
+    display: flex;
+    .item-selection-content {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        min-width: 0;
+        .item-title {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
+    .item-selection-status {
+        display: inline-flex;
+        align-items: center;
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+}
