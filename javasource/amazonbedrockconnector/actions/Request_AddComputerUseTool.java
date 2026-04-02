@@ -21,6 +21,7 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import amazonbedrockconnector.impl.MxLogger;
 import genaicommons.impl.ToolCollectionImpl;
 import genaicommons.proxies.Computer;
+import genaicommons.proxies.ENUM_InternalToolType;
 import genaicommons.proxies.Tool;
 import genaicommons.proxies.ToolCollection;
 import com.mendix.systemwideinterfaces.core.UserAction;
@@ -101,6 +102,7 @@ public class Request_AddComputerUseTool extends UserAction<IMendixObject>
 		Computer computer = new Computer(context);
 		computer.setMicroflow(computerUseMicroflow);
 		computer.setName(toolName);	
+		computer.setInternalToolType(ENUM_InternalToolType.Computer);
 		List<Tool> ToolList = toolCollection.getToolCollection_Tool();
 		ToolList.add(computer);
 		toolCollection.setToolCollection_Tool(ToolList); 

@@ -17,6 +17,7 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import mcpclient.impl.MxLogger;
 import mcpclient.proxies.MCP;
 import genaicommons.impl.ToolCollectionImpl;
+import genaicommons.proxies.ENUM_InternalToolType;
 import genaicommons.proxies.Tool;
 import genaicommons.proxies.ToolCollection;
 import com.mendix.systemwideinterfaces.core.UserAction;
@@ -113,6 +114,7 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		MCP tool = new MCP(getContext());
 		
 		tool.setMicroflow(Microflow);
+		tool.setInternalToolType(ENUM_InternalToolType.MCP);
 		tool.setMCPServerName(this.ConsumedMCPService.getName());
 		if (OverwritingToolName != null && !OverwritingToolName.isBlank()) {
 			tool.setName(OverwritingToolName);
