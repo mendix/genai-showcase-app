@@ -1,4 +1,59 @@
 {
   "schemaVersion": "1.0",
-  "widgets": []
+  "widgets": [
+    {
+      "sha-256": "141f42fc8e31bde445f4b2f65fa2864ebe278d0c031d702b6e8e846ffeb0216a",
+      "name": "Accordion",
+      "version": "2.3.1",
+      "appStoreVersionGuid": "6e0f1d73-b0c5-473b-bdf0-9e9f8847b38c"
+    },
+    {
+      "sha-256": "82f919bd1ff2ac92166090cdec0c18e32a066559a642ce5af11e2d03be090d06",
+      "name": "Combobox",
+      "version": "1.6.1",
+      "appStoreVersionGuid": "176660e2-3618-49ed-9c6d-d3a1dcb78732"
+    },
+    {
+      "sha-256": "692ff1b934a2d25861783379a4b01b934a7dafc63aa002274a5ce0308a05e20d",
+      "name": "Events",
+      "version": "1.0.1",
+      "appStoreVersionGuid": "306b70ac-8acd-41c8-a493-91b93f667111"
+    },
+    {
+      "sha-256": "68344f56b25d45f9b8db15ea5f1de6fa74323c0011df11e3f27cec10ab5226d2",
+      "name": "Image",
+      "version": "1.4.3",
+      "appStoreVersionGuid": "1321ab1b-0826-4ebc-b041-bc5053b3d3f0"
+    },
+    {
+      "sha-256": "66ae0702c1681c153236c4a2e81dd34b6d73bd499089dc0bb1dfe40f604d5a2f",
+      "name": "Markdown",
+      "version": "1.0.0",
+      "appStoreVersionGuid": "0baa0b14-1af5-402d-aa3d-cd152a22096b"
+    },
+    {
+      "sha-256": "86aa21c48245abaeaee1c8572194ad5c4c0709891b6cb1cee0143b25c3ff2e8f",
+      "name": "PopupMenu",
+      "version": "3.6.1",
+      "appStoreVersionGuid": "c7cd8fea-996d-4f65-81c9-d1a0c0f1afde"
+    },
+    {
+      "sha-256": "457703d14ccd2d2ae4d081150c9b50bccbddafa3ece3ae934b1a67b772267978",
+      "name": "Tooltip",
+      "version": "1.4.2",
+      "appStoreVersionGuid": "53ec950f-c353-41fa-829d-5b59aa42cb69"
+    },
+    {
+      "sha-256": "82a342fbb65a4cc9d88e832645757294c38c46159372bd5243878e526b1f6edb",
+      "name": "RangeSlider",
+      "version": "2.1.4",
+      "appStoreVersionGuid": "499e03d0-a911-4042-970e-5b442a00c31d"
+    },
+    {
+      "sha-256": "fa74071c5951281726a453f4156a891d76e1b760f6bb0f962e548c6b1c752596",
+      "name": "Slider",
+      "version": "2.1.4",
+      "appStoreVersionGuid": "f8848375-edfe-4177-87ef-d33cd188b099"
+    }
+  ]
 }
