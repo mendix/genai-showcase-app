@@ -85,10 +85,11 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 			McpClientRegistry.putClient(clientNpe.getMendixObject().getId().toLong(), client);
 			return clientNpe.getMendixObject();
 		} catch (Exception e) {
-			LOGGER.error(e, "Failed to create MCP client for configuration with name: ", ClientConfig != null ? ClientConfig.getName(): null);
+			String msg = "Failed to create MCP client. name=" + ClientConfig.getName() + ", endpoint=" + ClientConfig.getMCPEndpoint() + ", protocol=" + ClientConfig.getProtocolVersion();
 			if (e.getCause() != null) {
-			    LOGGER.error("Root cause:", e.getCause());
+				msg += ", cause=" + e.getCause().getMessage();
 			}
+			LOGGER.error(e, msg);
 			throw e;
 		}
 		// END USER CODE
@@ -117,7 +118,7 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 	private McpClientTransport createTransport() throws CoreException {
 		HttpRequest.Builder customRequestBuilder = getCustomRequestBuilder();
 		String protocolVersion = ClientConfig.getProtocolVersion().toString();
-		URI endpointUri = getValidatedEndpointUri();
+		URI endpointUri = getConfiguredEndpointUri();
 		String baseUrl = getBaseUrl(endpointUri);
 		String endpointPath = getEndpointPath(endpointUri);
 		
@@ -143,23 +144,22 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 	}
 
 	/**
-	 * Parses and validates the configured MCP endpoint URL.
+	 * Parses the configured MCP endpoint URL.
+	 *
+	 * Intentionally keeps validation minimal to avoid rejecting real-world endpoints
+	 * accepted by upstream HTTP stacks.
 	 */
-	private URI getValidatedEndpointUri() {
+	private URI getConfiguredEndpointUri() {
 		String configuredEndpoint = requireNonNull(ClientConfig.getMCPEndpoint(), "MCP Endpoint is required.").trim();
-		URI endpointUri;
+		if (configuredEndpoint.isEmpty()) {
+			throw new IllegalArgumentException("MCP Endpoint is required.");
+		}
 
 		try {
-			endpointUri = URI.create(configuredEndpoint);
+			return URI.create(configuredEndpoint);
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("MCP Endpoint must be a valid absolute URL: " + configuredEndpoint, e);
 		}
-
-		if (endpointUri.getScheme() == null || endpointUri.getHost() == null) {
-			throw new IllegalArgumentException("MCP Endpoint must be a valid absolute URL with scheme and host: " + configuredEndpoint);
-		}
-
-		return endpointUri;
 	}
 
 	/**
@@ -174,7 +174,9 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 	 */
 	private String getEndpointPath(URI endpointUri) {
 		String rawPath = endpointUri.getRawPath();
-		return (rawPath == null || rawPath.isEmpty()) ? "/" : rawPath;
+		String path = (rawPath == null || rawPath.isEmpty()) ? "/" : rawPath;
+		String rawQuery = endpointUri.getRawQuery();
+		return (rawQuery == null || rawQuery.isEmpty()) ? path : path + "?" + rawQuery;
 	}
 	
 	/**
