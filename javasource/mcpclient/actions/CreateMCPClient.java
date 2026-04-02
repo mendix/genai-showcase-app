@@ -58,7 +58,8 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 			requireNonNull(ClientConfig, "MCP Client Config is required.");
 			requireNonNull(ClientConfig.getMCPEndpoint(), "MCP Endpoint is required.");
 			requireNonNull(ClientConfig.getName(), "MCP Name is required.");
-			requireNonNull(ClientConfig.getProtocolVersion(), "Protocol version is required.");	
+			requireNonNull(ClientConfig.getProtocolVersion(), "Protocol version is required.");
+			validateEndpointForJavaHttpClient(getConfiguredEndpointUri());
 			
 			//Client NPE creation
 			MCPClient clientNpe = new MCPClient(getContext());
@@ -177,6 +178,52 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 		String path = (rawPath == null || rawPath.isEmpty()) ? "/" : rawPath;
 		String rawQuery = endpointUri.getRawQuery();
 		return (rawQuery == null || rawQuery.isEmpty()) ? path : path + "?" + rawQuery;
+	}
+
+	/**
+	 * Validates endpoint host compatibility with Java HttpClient.
+	 * Java HttpClient can reject hostnames with underscores even if other clients accept them.
+	 */
+	private void validateEndpointForJavaHttpClient(URI endpointUri) {
+		if (!endpointUri.isAbsolute()) {
+			throw new IllegalArgumentException("MCP Endpoint must be an absolute URL (including scheme): " + endpointUri);
+		}
+
+		String scheme = endpointUri.getScheme();
+		if (scheme == null || !(scheme.equalsIgnoreCase("http") || scheme.equalsIgnoreCase("https"))) {
+			throw new IllegalArgumentException("MCP Endpoint must use http or https scheme: " + endpointUri);
+		}
+
+		String rawAuthority = endpointUri.getRawAuthority();
+		if (rawAuthority == null || rawAuthority.isEmpty()) {
+			throw new IllegalArgumentException("MCP Endpoint must include a hostname: " + endpointUri);
+		}
+
+		String authorityWithoutUserInfo = rawAuthority;
+		int atIdx = authorityWithoutUserInfo.lastIndexOf('@');
+		if (atIdx >= 0 && atIdx + 1 < authorityWithoutUserInfo.length()) {
+			authorityWithoutUserInfo = authorityWithoutUserInfo.substring(atIdx + 1);
+		}
+
+		String hostCandidate = authorityWithoutUserInfo;
+		if (hostCandidate.startsWith("[")) {
+			int bracketEnd = hostCandidate.indexOf(']');
+			if (bracketEnd > 0) {
+				hostCandidate = hostCandidate.substring(1, bracketEnd);
+			}
+		} else {
+			int colonIdx = hostCandidate.indexOf(':');
+			if (colonIdx > 0) {
+				hostCandidate = hostCandidate.substring(0, colonIdx);
+			}
+		}
+
+		if (hostCandidate.contains("_")) {
+			throw new IllegalArgumentException(
+				"MCP Endpoint host contains '_' which Java HttpClient rejects: " + hostCandidate
+				+ ". Use a DNS alias/CNAME without underscores (or another compatible host) for MCP client connections."
+			);
+		}
 	}
 	
 	/**
