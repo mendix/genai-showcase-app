@@ -163,12 +163,15 @@ public class Request_ExportToJSON extends UserAction<java.lang.String>
     }
 	
 	private static String addToolChoice(genaicommons.proxies.Tool mxTool_ToolChoice, genaicommons.proxies.Tool mxTool, String toolJson) throws Exception {
+		
+		ObjectNode toolNode = (ObjectNode) MAPPER.readTree(toolJson);
 		if (mxTool_ToolChoice != null && mxTool.getName() == mxTool_ToolChoice.getName()) {
-			ObjectNode toolNode = (ObjectNode) MAPPER.readTree(toolJson);
-	        toolNode.put("ToolChoice", true);
+	        toolNode.put("isToolChoice", true);
 	        return MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(toolNode);
 		} else {
-			return toolJson;
+			 toolNode.put("isToolChoice", false);
+		        return MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(toolNode);
+
 		}
 		
 	}
@@ -178,7 +181,6 @@ public class Request_ExportToJSON extends UserAction<java.lang.String>
 		genaicommons.proxies.KnowledgeBaseRetrieval mxKnowledgeBaseRetrieval = (genaicommons.proxies.KnowledgeBaseRetrieval) mxTool;
 		ObjectNode toolNode = (ObjectNode) MAPPER.readTree(toolJson);
         toolNode.put("DeployedKnowledgeBaseName", mxKnowledgeBaseRetrieval.getKnowledgeBaseRetrieval_DeployedKnowledgeBase().getName());
-        LOGGER.info("AYCAA DEPLYEDKB: " + mxKnowledgeBaseRetrieval.getKnowledgeBaseRetrieval_DeployedKnowledgeBase().getName());
         return MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(toolNode);
 
 	}
