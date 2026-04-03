@@ -28614,64 +28614,78 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin: 1px;
 }
 
-.btn.mx-button.btn-primary.btn-bordered {
+.btn.btn-primary.btn-bordered,
+.mx-button.btn-primary.btn-bordered {
   color: #264ae5;
   border: 1px solid #264ae5;
   background-color: transparent;
 }
-.btn.mx-button.btn-primary.btn-bordered.disabled {
+.btn.btn-primary.btn-bordered.disabled,
+.mx-button.btn-primary.btn-bordered.disabled {
   background-color: transparent;
   border: 1px solid #264ae5;
   cursor: default;
 }
-.btn.mx-button.btn-primary.btn-bordered:hover, .btn.mx-button.btn-primary.btn-bordered:active, .btn.mx-button.btn-primary.btn-bordered:focus {
+.btn.btn-primary.btn-bordered:hover, .btn.btn-primary.btn-bordered:active, .btn.btn-primary.btn-bordered:focus,
+.mx-button.btn-primary.btn-bordered:hover,
+.mx-button.btn-primary.btn-bordered:active,
+.mx-button.btn-primary.btn-bordered:focus {
   color: #fff;
   background-color: #264ae5;
   border: 1px solid #264ae5;
 }
-.btn.mx-button.btn-text {
+.btn.btn-text,
+.mx-button.btn-text {
   color: #0a1325;
   border: 1px solid transparent;
   background-color: transparent;
 }
-.btn.mx-button.btn-text.mx-link {
+.btn.btn-text.mx-link,
+.mx-button.btn-text.mx-link {
   text-decoration: none;
 }
-.btn.mx-button.btn-text.disabled {
+.btn.btn-text.disabled,
+.mx-button.btn-text.disabled {
   background-color: transparent;
   border: 1px solid transparent;
   cursor: default;
 }
-.btn.mx-button.btn-text:hover, .btn.mx-button.btn-text:active, .btn.mx-button.btn-text:focus {
+.btn.btn-text:hover, .btn.btn-text:active, .btn.btn-text:focus,
+.mx-button.btn-text:hover,
+.mx-button.btn-text:active,
+.mx-button.btn-text:focus {
   color: #0a1325;
   background-color: #e7e7e9;
   border: 1px solid transparent;
 }
-.btn.mx-button.btn-text.btn-text-danger {
+.btn.btn-text.btn-text-danger,
+.mx-button.btn-text.btn-text-danger {
   color: #e33f4e;
 }
-.btn.mx-button.btn-text.btn-text-danger:hover, .btn.mx-button.btn-text.btn-text-danger:active, .btn.mx-button.btn-text.btn-text-danger:focus {
+.btn.btn-text.btn-text-danger:hover, .btn.btn-text.btn-text-danger:active, .btn.btn-text.btn-text-danger:focus,
+.mx-button.btn-text.btn-text-danger:hover,
+.mx-button.btn-text.btn-text-danger:active,
+.mx-button.btn-text.btn-text-danger:focus {
   color: #e33f4e;
   background-color: #e7e7e9;
   border: 1px solid #e7e7e9;
 }
-.btn.mx-button.btn-icon-only {
-  all: unset;
-  padding-top: 2px;
+.btn.btn-icon-only,
+.mx-button.btn-icon-only {
+  border: 0px;
 }
-.btn.mx-button.btn-icon-only img {
-  height: 16px;
-  width: 16px;
-}
-.btn.mx-button.btn-icon-custom {
+.btn.btn-icon-custom,
+.mx-button.btn-icon-custom {
   display: flex;
 }
-.btn.mx-button.btn-icon-custom img {
+.btn.btn-icon-custom img,
+.mx-button.btn-icon-custom img {
   height: 22px;
   width: 22px;
   margin: 1px;
 }
-.btn.mx-button.btn-no-hover.mx-link:hover {
+.btn.btn-no-hover.mx-link:hover,
+.mx-button.btn-no-hover.mx-link:hover {
   background-color: transparent;
   border: 1px solid transparent;
   cursor: default;
@@ -28692,11 +28706,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .btn.mx-button.btn-test-all:active, .btn.mx-button.btn-test-all:focus, .btn.mx-button.btn-test-all:hover {
   border-left: 1px solid white;
-}
-.btn.mx-button.custom-img img {
-  height: 22px;
-  width: 22px;
-  margin-right: 0;
 }
 
 .mx-link.link-bold {
@@ -31088,7 +31097,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-bottom: 8px;
   z-index: 10;
 }
-.agent-page-container .page-navigation .clickable-hover:hover, .agent-page-container .page-navigation .clickable-hover:active, .agent-page-container .page-navigation .clickable-hover:focus {
+.agent-page-container .page-navigation .clickable-hover:hover {
+  text-shadow: 0 0 0.4px currentColor, 0 0 0.4px currentColor;
+}
+.agent-page-container .page-navigation .clickable-hover:active, .agent-page-container .page-navigation .clickable-hover:focus {
   font-weight: 600;
   line-height: 150%;
   cursor: pointer;

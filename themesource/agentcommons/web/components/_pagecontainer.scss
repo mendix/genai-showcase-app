@@ -238,7 +238,9 @@
         z-index: 10;  
 
         .clickable-hover {
-            &:hover,
+            &:hover {
+                  text-shadow: 0 0 0.4px currentColor, 0 0 0.4px currentColor;
+            }
             &:active,
             &:focus {
                 font-weight: 600;
