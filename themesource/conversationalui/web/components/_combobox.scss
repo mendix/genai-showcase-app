@@ -1,0 +1,121 @@
+@use '../../../../theme/web/custom-variables' as *;
+
+.combobox-filter-height {
+    .widget-combobox-input-container {
+        align-items: center;
+        justify-content: center;
+        height: 47.5px !important;
+        border-color: $border-color-default;
+    }
+}
+
+
+.combobox-selection {
+    display: flex;
+    flex-grow: 1;
+
+    .item-selection {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        height: max-content;  
+        overflow: hidden; 
+
+        .mx-image {
+            height: $font-size-large;
+            margin-right: $spacing-small;
+            margin-left: auto;
+            float: right;
+        }
+
+        .item-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-width: 0;      
+        }
+    }
+
+    .widget-combobox {
+        min-height: 20px;
+    }
+}
+
+.combobox-selection-height-small {
+    .widget-combobox-input-container {
+        align-items: center;
+        justify-content: center;
+        height: 32px !important;
+        
+    }
+}
+
+.combobox-model-selection {
+    display: flex;
+    flex-grow: 1;
+
+    .model-selection {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        height: max-content;  
+        overflow: hidden; 
+	 
+        .mx-image-viewer {
+            margin-right: $spacing-small;
+            flex-shrink: 0;
+            height: auto;
+            width: auto;
+        }
+
+        .combobox-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-width: 0;      
+        }
+    }
+}
+
+.widget-combobox .widget-combobox-input-container {
+    flex-grow: 0;
+    transition: box-shadow .15s ease 0s;
+}
+
+.combobox-border-danger{
+  .widget-combobox{
+    border: 1px solid $brand-danger;
+  }
+  margin-bottom: $spacing-smaller !important;
+}
+
+
+///// Additions for the combobox fix.
+
+.widget-combobox-item-selected {
+    background-color: $color-default-light;
+}
+
+.item-selection {
+    display: flex;
+    overflow: hidden;
+}
+
+.item-selection-content {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+}
+
+
+.item-text { 
+    flex-shrink: 0; // prevents the version number from wrapping
+}
+
+.item-title {
+    text-overflow: ellipsis;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}

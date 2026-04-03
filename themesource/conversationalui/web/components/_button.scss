@@ -17,13 +17,12 @@
 //.btn.mx-button {
     // Atlas core standard: .btn-sm
     // Replaces: .btn-small (both conversationalui and agentcommons)
+
     .btn-sm {
-        //height: $size-small;
-        //background-color: red;
+        padding: 8px;
+        max-height: 32px;
         display: flex;
         align-items: center;
-        justify-content: center;
-        padding: 0 4px;
 
         img {
             height: 22px;
@@ -32,6 +31,10 @@
         }
     }
 
+    // .btn-small {
+    //     @extend .btn-sm;
+    //     background-color: red;
+    // }
 
 // ============================================================================
 // Color & Style Variants
