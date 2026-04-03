@@ -106,6 +106,7 @@
     flex: 1;
     min-width: 0;
     width: 100%;
+    overflow: hidden;
 }
 
 
@@ -117,5 +118,5 @@
     text-overflow: ellipsis;
     min-width: 0;
     overflow: hidden;
-    white-space: nowrap;
+    flex-shrink: 0;
 }
