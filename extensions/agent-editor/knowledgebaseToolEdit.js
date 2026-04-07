@@ -1,13 +1,13 @@
-import { r as c, w as a, a0 as O, O as A, K as F, G as C, _ as q, N as G } from "./Icon-fHsyUm8I.js";
-import { s as H, c as J } from "./userPreferences-BV8i5uIO.js";
-import { S as U, I as W } from "./ComboBox-BoIVB1SV.js";
-import { u as _, D as $ } from "./DialogFooter-Cy7F0mpT.js";
-import { T as z, a as Q } from "./toolHandlers-BpyTxTMZ.js";
-import { T as y } from "./TextInputLabeled-ByXuMGQx.js";
-import { T as X } from "./TextInputWithButton-Ck7o_ZdS.js";
-import { F as V, g as Y, k as Z, B as P, G as ee } from "./index-DsStz3tj.js";
-import { g as te } from "./mxCloudGenAIUtils-BR9rBZ4n.js";
-import { h as p } from "./knowledgebaseToolHandlers-C4Go8quH.js";
+import { r as c, w as a, a0 as O, O as A, K as q, G as C, _ as F, N as G } from "./Icon-DQcqUu4m.js";
+import { a as H, c as J } from "./userPreferences-CMksV11G.js";
+import { S as U, I as W } from "./ComboBox-BPEc6pgM.js";
+import { u as _, D as $ } from "./DialogFooter-BrOao3Ik.js";
+import { T as z, a as Q } from "./toolHandlers-BQQBCfpP.js";
+import { T as y } from "./TextInputLabeled-Bjq8zKEk.js";
+import { T as X } from "./TextInputWithButton-D4GcKXWs.js";
+import { D as V, g as Y, k as Z, A as P, E as ee } from "./index-Bb8SCixE.js";
+import { g as te } from "./mxCloudGenAIUtils-Cp3Qh8hO.js";
+import { h as p } from "./knowledgebaseToolHandlers-DUK6QQ2z.js";
 const ie = {
   isValidName: !0,
   isValidDescription: !0,
@@ -120,13 +120,13 @@ const ie = {
     }
     const d = { ...t, [e]: n };
     g(d), S(e, d);
-  }, B = async () => {
+  }, K = async () => {
     const e = await Q(i, ee);
     if (e) {
       const n = { ...t, document: e };
       g(n), S("document", n);
     }
-  }, K = () => {
+  }, B = () => {
     P(i, t.document);
   }, R = async () => {
     const e = await w(t);
@@ -143,7 +143,7 @@ const ie = {
     );
   };
   return /* @__PURE__ */ a.jsxs(O, { children: [
-    /* @__PURE__ */ a.jsx(A, { children: /* @__PURE__ */ a.jsxs(F, { children: [
+    /* @__PURE__ */ a.jsx(A, { children: /* @__PURE__ */ a.jsxs(q, { children: [
       /* @__PURE__ */ a.jsxs(C, { label: "General", children: [
         /* @__PURE__ */ a.jsx(
           X,
@@ -153,10 +153,10 @@ const ie = {
             value: t.document.qualifiedName,
             icon: t.document.qualifiedName ? Z : void 0,
             buttonCaption: "Select...",
-            onClick: B,
+            onClick: K,
             validate: () => r.isValidDocument,
             buttonCaptionSecondary: t.document.qualifiedName ? "Show" : void 0,
-            onClickSecondary: t.document.qualifiedName ? K : void 0
+            onClickSecondary: t.document.qualifiedName ? B : void 0
           }
         ),
         /* @__PURE__ */ a.jsx(
@@ -234,7 +234,7 @@ const ie = {
       const t = document.getElementById("root");
       if (!t)
         throw new Error("Failed to find the root element");
-      const g = q.createRoot(t);
+      const g = F.createRoot(t);
       let r;
       i.tool && (r = JSON.parse(decodeURIComponent(i.tool)));
       const x = JSON.parse(decodeURIComponent(i.agent)), v = (m) => {
