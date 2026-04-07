@@ -31071,22 +31071,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
     margin-bottom: 0;
   }
 }
-.agent-page-container .page-header-content {
-  display: flex;
-  flex-direction: column;
-  align-self: stretch;
-}
-.agent-page-container .page-header-content .pageheader-with-buttons {
-  display: flex !important;
-  margin-bottom: 0;
-  align-items: start;
-  justify-items: center;
-  justify-content: space-between;
-}
-.agent-page-container .page-header-content .page-header-menu {
-  display: flex !important;
-  align-items: end !important;
-}
 .agent-page-container .page-navigation {
   position: sticky;
   display: flex !important;
