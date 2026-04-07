@@ -1,12 +1,12 @@
-import { w as t, G as C, r as h, a0 as N, O as E, K as k, _ as q, N as I } from "./Icon-fHsyUm8I.js";
-import { s as O, c as B } from "./userPreferences-BV8i5uIO.js";
-import { u as L, D as P } from "./DialogFooter-Cy7F0mpT.js";
-import { T as R, h as f, a as K } from "./toolHandlers-BpyTxTMZ.js";
-import { T as d, h as A, z as F, w as _, B as G, E as H } from "./index-DsStz3tj.js";
-import { T as j } from "./TextInputWithButton-Ck7o_ZdS.js";
-import { S as J, I as U } from "./ComboBox-BoIVB1SV.js";
-import { n as W } from "./MicroflowIcon-CZXKWVwd.js";
-import { T as z } from "./TextInputLabeled-ByXuMGQx.js";
+import { w as t, G as C, r as h, a0 as N, O as E, K as k, _ as q, N as I } from "./Icon-DQcqUu4m.js";
+import { a as O, c as B } from "./userPreferences-CMksV11G.js";
+import { u as L, D as P } from "./DialogFooter-BrOao3Ik.js";
+import { T as R, h as f, a as A } from "./toolHandlers-DgbFQs38.js";
+import { f as d, h as K, z as F, w as _, A as G, B as H } from "./index-BXG0OQfl.js";
+import { T as j } from "./TextInputWithButton-D4GcKXWs.js";
+import { S as J, I as U } from "./ComboBox-BPEc6pgM.js";
+import { n as W } from "./MicroflowIcon-C3S0Aw_R.js";
+import { T as z } from "./TextInputLabeled-Bjq8zKEk.js";
 const $ = [
   { key: d.Microflow, caption: "Microflow tool" },
   { key: d.MCP, caption: "MCP tool" }
@@ -41,7 +41,7 @@ const $ = [
       ariaLabel: "Consumed MCP service",
       label: "Consumed MCP service",
       value: o.document.qualifiedName,
-      icon: o.document.qualifiedName ? A : void 0,
+      icon: o.document.qualifiedName ? K : void 0,
       buttonCaption: "Select...",
       onClick: i,
       validate: () => n.isValidDocument,
@@ -162,7 +162,7 @@ const $ = [
     const r = { ...e, [a]: c };
     m(r), y(a, r);
   }, x = async () => {
-    const a = await K(
+    const a = await A(
       n,
       e.toolType === d.MCP ? H : "Microflows$Microflow"
     );
@@ -231,4 +231,3 @@ const $ = [
 export {
   me as component
 };
-//# sourceMappingURL=toolEdit.js.map
