@@ -1,12 +1,8 @@
 @use '../../../../theme/web/custom-variables' as *;
 @use '../agent-builder-variables.scss' as *;
-//fix for datagrid scrollbar caused by popupmenu
-.datagrid--no-scroll {
-    .widget-datagrid-content {
-        overflow-y: visible;
-        overflow-x: visible;
-    }
-}
+
+
+
 
 .datagrid--fixed-row-height .table .td {
     height: 3 * $font-size-default + 2 * $spacing-small;

@@ -30650,11 +30650,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   pointer-events: auto;
 }
 
-.datagrid--no-scroll .widget-datagrid-content {
-  overflow-y: visible;
-  overflow-x: visible;
-}
-
 .datagrid--fixed-row-height .table .td {
   height: 58px;
   padding: 8px;
