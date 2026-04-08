@@ -1,5 +1,5 @@
 @use '../../../../theme/web/custom-variables' as *;
-@use '../agent-builder-variables.scss' as *;
+@use '../../../agentcommons/web/agent-builder-variables.scss' as *;
 
 //fix for datagrid scrollbar caused by popupmenu
 .datagrid--no-scroll {

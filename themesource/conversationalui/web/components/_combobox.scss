@@ -117,11 +117,10 @@
 }
 
 .item-title {
-    overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
-    flex: 0 1 auto;
     min-width: 0;
+    overflow: hidden;
+    flex-shrink: 0;
 }
 
 
