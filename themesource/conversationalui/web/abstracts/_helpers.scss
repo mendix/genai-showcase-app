@@ -1,4 +1,6 @@
 @use '../../../../theme/web/custom-variables' as *;
+//@use '../../web/'
+
 
 .hover-trigger {
   .show-on-hover {
@@ -298,7 +300,7 @@
 
 /* Custom Spacing */
 .spacing-inner-top-28 {
-  padding-top: $size-28;
+  padding-top: 28px;
 }
 
 .padding-right-4 {
