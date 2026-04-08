@@ -1,14 +1,4 @@
-@use '../../../../theme/web/custom-variables' as *;
-@use '../agent-builder-variables.scss' as *;
+// Datagrid styles consolidated into conversationalui
+// This file forwards to the consolidated datagrid styles
 
-
-
-
-.datagrid--fixed-row-height .table .td {
-    height: 3 * $font-size-default + 2 * $spacing-small;
-    padding: $spacing-small; 
-}
-
-.datagrid--fixed-row-height .table .th {
-    padding: $spacing-small; 
-}
+@forward '../../../conversationalui/web/components/datagrid';
