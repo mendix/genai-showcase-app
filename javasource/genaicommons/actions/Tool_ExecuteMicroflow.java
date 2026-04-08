@@ -182,14 +182,15 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 	
 	private String executeAndLogToolMicroflow(Map<String, Object> params) throws CoreException {
 		String response;
+		IContext executionContext = getExecutionContext();
 		String logMessageInfo = "Finished toolcall " + ToolCall.getName() + " with Id " + ToolCall.getToolCallId() + " using microflow " + Tool.getMicroflow() + " with " + getContext();
 		String logMessageTrace = logMessageInfo;
 		if(params == null || params.isEmpty()) {
 			logMessageTrace = logMessageTrace + "\nwithout input parameters ";
-			response = Core.microflowCall(Tool.getMicroflow()).execute(getContext());
+			response = Core.microflowCall(Tool.getMicroflow()).execute(executionContext);
 		} else {
 			logMessageTrace = logMessageTrace +  "\n\nInput parameter(s): " + params.toString();
-			response = Core.microflowCall(Tool.getMicroflow()).withParams(params).execute(getContext());
+			response = Core.microflowCall(Tool.getMicroflow()).withParams(params).execute(executionContext);
 		}
 
 		long executionTime = System.currentTimeMillis() - startTime;
@@ -201,6 +202,19 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 			throw new CoreException("Tool microflow returned an empty response.");
 		}
 		return response;
+	}
+
+	/**
+	 * Returns a context for tool microflow execution.
+	 * Uses a context created from the current session to apply entity access when available.
+	 * Falls back to the original action context when no session exists.
+	 */
+	private IContext getExecutionContext() {
+		IContext currentContext = getContext();
+		if (currentContext != null && currentContext.getSession() != null) {
+			return currentContext.getSession().createContext();
+		}
+		return currentContext;
 	}
 	
 	/**
