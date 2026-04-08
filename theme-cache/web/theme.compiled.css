@@ -30381,7 +30381,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .widget-combobox .widget-combobox-input-container {
-  flex-grow: 0;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
   transition: box-shadow 0.15s ease 0s;
 }
 
@@ -30414,10 +30416,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .item-title {
-  text-overflow: ellipsis;
-  min-width: 0;
   overflow: hidden;
-  flex-shrink: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 0 1 auto;
+  min-width: 0;
 }
 
 .model-badge, .model-badge--primary, .model-badge--default {

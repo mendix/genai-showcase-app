@@ -78,7 +78,9 @@
 }
 
 .widget-combobox .widget-combobox-input-container {
-    flex-grow: 0;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
     transition: box-shadow .15s ease 0s;
 }
 
@@ -115,8 +117,13 @@
 }
 
 .item-title {
-    text-overflow: ellipsis;
-    min-width: 0;
     overflow: hidden;
-    flex-shrink: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 0 1 auto;
+    min-width: 0;
 }
+
+
+
+
