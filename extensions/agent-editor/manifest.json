@@ -12,6 +12,7 @@
                 "mcpAuthenticationHeadersEdit": "mcpAuthenticationHeadersEdit.js",
                 "knowledgebaseToolEdit": "knowledgebaseToolEdit.js"
             }
-        }
+        },
+        "supportsHeadless": true
     }
 }

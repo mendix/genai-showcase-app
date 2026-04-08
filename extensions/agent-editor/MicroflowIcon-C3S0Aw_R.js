@@ -5,4 +5,3 @@ const g = m((t) => i.jsx(r, { light: s, dark: o, ...t }), "MicroflowIcon");
 export {
   g as n
 };
-//# sourceMappingURL=MicroflowIcon-C3S0Aw_R.js.map

@@ -1,13 +1,14 @@
-import { w as e, x as w, y as v, r as x, a0 as k, O as A, K as f, G as C, a3 as u, F as j, _ as M, N as b } from "./Icon-DQcqUu4m.js";
-import { a as H, c as P } from "./userPreferences-CMksV11G.js";
-import { u as V, D as E } from "./DialogFooter-BrOao3Ik.js";
-import { T as y, D as B } from "./Table-Bjm3LHGN.js";
-import { I as D } from "./Banner-DqKAGJJD.js";
-const S = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2%208H14'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M8%2014V2'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", T = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2%208H14'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M8%2014V2'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
-var $ = Object.defineProperty, I = (t, r) => $(t, "name", { value: r, configurable: !0 });
-const O = I((t) => e.jsx(w, { light: T, dark: S, ...t }), "AddIcon"), R = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M6.5%207V13'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.5%207V13'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M2%203.5H14'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M6%201.5H10'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%203.5V14C12.5%2014.275%2012.275%2014.5%2012%2014.5H4C3.725%2014.5%203.5%2014.275%203.5%2014V3.5'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", K = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M6.5%207V13'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.5%207V13'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M2%203.5H14'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M6%201.5H10'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%203.5V14C12.5%2014.275%2012.275%2014.5%2012%2014.5H4C3.725%2014.5%203.5%2014.275%203.5%2014V3.5'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
-var W = Object.defineProperty, F = (t, r) => W(t, "name", { value: r, configurable: !0 });
-const L = F((t) => e.jsx(w, { light: K, dark: R, ...t }), "DeleteIcon"), z = v.span`
+import { x as e, y as w, A as v, r as x, a2 as k, R as A, N as f, G as C, a5 as u, I as j, a1 as M, P as b } from "./Icon-Bb5knnP8.js";
+import { r as H } from "./index-CfghFsoU.js";
+import { createStudioProLogger as P } from "./logger-Bof2Evv1.js";
+import { u as V, D as E } from "./DialogFooter-CsVkF8jQ.js";
+import { T as y, D as B } from "./Table-B2MEs44R.js";
+import { I as D } from "./Banner-DsVgoRin.js";
+const I = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2%208H14'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M8%2014V2'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", S = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2%208H14'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M8%2014V2'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
+var T = Object.defineProperty, $ = (t, r) => T(t, "name", { value: r, configurable: !0 });
+const R = $((t) => e.jsx(w, { light: S, dark: I, ...t }), "AddIcon"), O = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M6.5%207V13'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.5%207V13'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M2%203.5H14'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M6%201.5H10'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%203.5V14C12.5%2014.275%2012.275%2014.5%2012%2014.5H4C3.725%2014.5%203.5%2014.275%203.5%2014V3.5'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", W = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M6.5%207V13'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.5%207V13'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M2%203.5H14'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M6%201.5H10'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%203.5V14C12.5%2014.275%2012.275%2014.5%2012%2014.5H4C3.725%2014.5%203.5%2014.275%203.5%2014V3.5'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
+var K = Object.defineProperty, L = (t, r) => K(t, "name", { value: r, configurable: !0 });
+const z = L((t) => e.jsx(w, { light: W, dark: O, ...t }), "DeleteIcon"), F = v.span`
     font-weight: bold;
 `, G = (t) => {
   const [r, a] = x.useState(t.headers), m = () => {
@@ -26,7 +27,7 @@ const L = F((t) => e.jsx(w, { light: K, dark: R, ...t }), "DeleteIcon"), z = v.s
   return V(h, c), /* @__PURE__ */ e.jsxs(k, { children: [
     /* @__PURE__ */ e.jsx(A, { children: /* @__PURE__ */ e.jsx(f, { children: /* @__PURE__ */ e.jsxs(C, { label: "Authentication Headers", children: [
       /* @__PURE__ */ e.jsxs(D, { children: [
-        /* @__PURE__ */ e.jsx(z, { children: "The headers below are not stored." }),
+        /* @__PURE__ */ e.jsx(F, { children: "The headers below are not stored." }),
         /* @__PURE__ */ e.jsx("div", { children: "The headers are only used to explore tools from Studio Pro. To authenticate with MCP servers at runtime, please provide a credentials microflow." })
       ] }),
       /* @__PURE__ */ e.jsx(
@@ -64,13 +65,13 @@ const L = F((t) => e.jsx(w, { light: K, dark: R, ...t }), "DeleteIcon"), z = v.s
               )
             },
             {
-              cellContent: /* @__PURE__ */ e.jsx(j, { icon: /* @__PURE__ */ e.jsx(L, {}), onPress: () => p(o) })
+              cellContent: /* @__PURE__ */ e.jsx(j, { icon: /* @__PURE__ */ e.jsx(z, {}), onPress: () => p(o) })
             }
           ]),
           toolbarLeft: /* @__PURE__ */ e.jsx(
             B,
             {
-              icon: /* @__PURE__ */ e.jsx(O, {}),
+              icon: /* @__PURE__ */ e.jsx(R, {}),
               label: "Add header",
               "aria-label": "Add header",
               tooltip: "Add a new header",
@@ -82,7 +83,7 @@ const L = F((t) => e.jsx(w, { light: K, dark: R, ...t }), "DeleteIcon"), z = v.s
     ] }) }) }),
     /* @__PURE__ */ e.jsx(E, { onOk: c, showHelp: !1, onCancel: h })
   ] });
-}, N = ({ studioPro: t, headers: r, onClose: a }) => /* @__PURE__ */ e.jsx(b, { studioPro: t, children: /* @__PURE__ */ e.jsx(G, { headers: r, onClose: a }) }), X = {
+}, N = ({ studioPro: t, headers: r, onClose: a }) => /* @__PURE__ */ e.jsx(b, { studioPro: t, children: /* @__PURE__ */ e.jsx(G, { headers: r, onClose: a }) }), Y = {
   async loaded(t, r) {
     const a = H(t), m = P(a);
     if (!r.headers)
@@ -105,6 +106,5 @@ const L = F((t) => e.jsx(w, { light: K, dark: R, ...t }), "DeleteIcon"), z = v.s
   }
 };
 export {
-  X as component
+  Y as component
 };
-//# sourceMappingURL=mcpAuthenticationHeadersEdit.js.map

@@ -1,13 +1,14 @@
-import { r as c, w as a, a0 as O, O as A, K as q, G as C, _ as F, N as G } from "./Icon-DQcqUu4m.js";
-import { a as H, c as J } from "./userPreferences-CMksV11G.js";
-import { S as U, I as W } from "./ComboBox-BPEc6pgM.js";
-import { u as _, D as $ } from "./DialogFooter-BrOao3Ik.js";
-import { T as z, a as Q } from "./toolHandlers-BQQBCfpP.js";
-import { T as y } from "./TextInputLabeled-Bjq8zKEk.js";
-import { T as X } from "./TextInputWithButton-D4GcKXWs.js";
-import { D as V, g as Y, k as Z, A as P, E as ee } from "./index-Bb8SCixE.js";
-import { g as te } from "./mxCloudGenAIUtils-Cp3Qh8hO.js";
-import { h as p } from "./knowledgebaseToolHandlers-DUK6QQ2z.js";
+import { r as c, x as a, a2 as O, R as A, N as q, G as w, a1 as F, P as G } from "./Icon-Bb5knnP8.js";
+import { r as H } from "./index-CfghFsoU.js";
+import { createStudioProLogger as J } from "./logger-Bof2Evv1.js";
+import { S as U, I as W } from "./ComboBox-BS5KkYOa.js";
+import { u as $, D as _ } from "./DialogFooter-CsVkF8jQ.js";
+import { T as z, a as Q } from "./toolHandlers-Dp_pAEMJ.js";
+import { T as y } from "./TextInputLabeled-BLG8tCoP.js";
+import { T as X } from "./TextInputWithButton-CMS27jFj.js";
+import { L as V, c as Y, k as Z, J as P, N as ee } from "./index-DePCaYQI.js";
+import { g as te } from "./mxCloudGenAIUtils-D3p-BcS-.js";
+import { h as p } from "./knowledgebaseToolHandlers-DDPq3VsU.js";
 const ie = {
   isValidName: !0,
   isValidDescription: !0,
@@ -30,11 +31,11 @@ const ie = {
   onClose: h
 }) => {
   var D, E;
-  const [t, g] = c.useState(o || V()), [r, x] = c.useState(ie), [v, m] = c.useState([]), [M, I] = c.useState(
+  const [t, f] = c.useState(o || V()), [r, x] = c.useState(ie), [v, m] = c.useState([]), [M, I] = c.useState(
     ((D = (o || V()).maxResults) == null ? void 0 : D.toString()) ?? ""
   ), [k, N] = c.useState(
     ((E = (o || V()).minSimilarity) == null ? void 0 : E.toString()) ?? ""
-  ), w = c.useCallback(
+  ), C = c.useCallback(
     async (e) => ({
       isValidName: await p("name", e, s, i),
       isValidDescription: await p(
@@ -78,10 +79,10 @@ const ie = {
       m(!e || typeof e == "string" ? [] : e);
     }).catch(() => m([])) : m([]);
   }, [t.document, i]), c.useEffect(() => {
-    o && (I(o.maxResults !== void 0 ? o.maxResults.toString() : ""), N(o.minSimilarity !== void 0 ? o.minSimilarity.toString() : ""), w(o).then((e) => {
+    o && (I(o.maxResults !== void 0 ? o.maxResults.toString() : ""), N(o.minSimilarity !== void 0 ? o.minSimilarity.toString() : ""), C(o).then((e) => {
       x(e);
     }));
-  }, [o, w]);
+  }, [o, C]);
   const S = c.useCallback(
     async (e, n) => {
       const d = ae[e];
@@ -92,8 +93,8 @@ const ie = {
     },
     [r, s, i]
   ), T = (e, n) => {
-    n && f(e, (n == null ? void 0 : n.toString()) ?? "");
-  }, f = (e, n) => {
+    n && g(e, (n == null ? void 0 : n.toString()) ?? "");
+  }, g = (e, n) => {
     if (e === "maxResults") {
       const l = String(n);
       if (!/^\d*$/.test(l))
@@ -103,7 +104,7 @@ const ie = {
         ...t,
         maxResults: Number.isNaN(u) ? void 0 : u
       };
-      g(b), S(e, b);
+      f(b), S(e, b);
       return;
     }
     if (e === "minSimilarity") {
@@ -115,27 +116,27 @@ const ie = {
         ...t,
         minSimilarity: Number.isNaN(u) ? void 0 : u
       };
-      g(b), S(e, b);
+      f(b), S(e, b);
       return;
     }
     const d = { ...t, [e]: n };
-    g(d), S(e, d);
-  }, K = async () => {
+    f(d), S(e, d);
+  }, L = async () => {
     const e = await Q(i, ee);
     if (e) {
       const n = { ...t, document: e };
-      g(n), S("document", n);
+      f(n), S("document", n);
     }
   }, B = () => {
     P(i, t.document);
   }, R = async () => {
-    const e = await w(t);
+    const e = await C(t);
     x(e), Object.values(e).some((d) => d !== !0) || h(t);
   }, j = () => {
     h(null);
   };
-  _(j, R);
-  const L = () => {
+  $(j, R);
+  const K = () => {
     window.open(
       "https://docs.mendix.com/appstore/modules/genai/genai-for-mx/agent-commons/#adding-tools",
       "_blank",
@@ -144,7 +145,7 @@ const ie = {
   };
   return /* @__PURE__ */ a.jsxs(O, { children: [
     /* @__PURE__ */ a.jsx(A, { children: /* @__PURE__ */ a.jsxs(q, { children: [
-      /* @__PURE__ */ a.jsxs(C, { label: "General", children: [
+      /* @__PURE__ */ a.jsxs(w, { label: "General", children: [
         /* @__PURE__ */ a.jsx(
           X,
           {
@@ -153,7 +154,7 @@ const ie = {
             value: t.document.qualifiedName,
             icon: t.document.qualifiedName ? Z : void 0,
             buttonCaption: "Select...",
-            onClick: K,
+            onClick: L,
             validate: () => r.isValidDocument,
             buttonCaptionSecondary: t.document.qualifiedName ? "Show" : void 0,
             onClickSecondary: t.document.qualifiedName ? B : void 0
@@ -169,7 +170,7 @@ const ie = {
             description: "Here you can select an existing collection or reference a new collection.",
             validate: () => r.isValidCollectionIdentifier,
             allowsCustomValue: !0,
-            onInputChange: (e) => f("collectionIdentifier", e),
+            onInputChange: (e) => g("collectionIdentifier", e),
             allowsEmptyCollection: !0,
             onSelectionChange: (e) => {
               T("collectionIdentifier", e);
@@ -178,14 +179,14 @@ const ie = {
           }
         )
       ] }),
-      /* @__PURE__ */ a.jsxs(C, { label: "Naming", children: [
+      /* @__PURE__ */ a.jsxs(w, { label: "Naming", children: [
         /* @__PURE__ */ a.jsx(
           y,
           {
             label: "Name",
             ariaLabel: "Name",
             value: t.name,
-            onChange: (e) => f("name", e),
+            onChange: (e) => g("name", e),
             validate: () => r.isValidName
           }
         ),
@@ -195,19 +196,19 @@ const ie = {
             label: "Description",
             ariaLabel: "Description",
             value: t.description,
-            onChange: (e) => f("description", e),
+            onChange: (e) => g("description", e),
             validate: () => r.isValidDescription
           }
         )
       ] }),
-      /* @__PURE__ */ a.jsxs(C, { label: "Retrieval settings", children: [
+      /* @__PURE__ */ a.jsxs(w, { label: "Retrieval settings", children: [
         /* @__PURE__ */ a.jsx(
           y,
           {
             label: "Max results",
             ariaLabel: "Max number of results",
             value: M,
-            onChange: (e) => f("maxResults", e),
+            onChange: (e) => g("maxResults", e),
             validate: () => r.isValidMaxResults,
             description: "This is the highest number of data chunks that can be returned in a single retrieve. If left empty, many records could be retrieved, so it's recommended to set this number (to e.g. 5), or set the minimum similarity in the next field, or to set both."
           }
@@ -218,29 +219,29 @@ const ie = {
             label: "Min similarity",
             ariaLabel: "Min similarity",
             value: k,
-            onChange: (e) => f("minSimilarity", e),
+            onChange: (e) => g("minSimilarity", e),
             validate: () => r.isValidMinSimilarity,
             description: "This is the cosine-similarity cut-off for retrievals; allowed values lie between 0 and 1. It can be used to only retrieve data chunks of high relevance. A high value (e.g. 0.8) is stricter than a low value (e.g. 0.2)."
           }
         )
       ] })
     ] }) }),
-    /* @__PURE__ */ a.jsx($, { onOk: R, onCancel: j, onHelp: L })
+    /* @__PURE__ */ a.jsx(_, { onOk: R, onCancel: j, onHelp: K })
   ] });
-}, oe = ({ studioPro: o, initialTool: i, agent: s, onClose: h }) => /* @__PURE__ */ a.jsx(G, { studioPro: o, children: /* @__PURE__ */ a.jsx(ne, { initialTool: i, studioPro: o, agent: s, onClose: h }) }), fe = {
+}, oe = ({ studioPro: o, initialTool: i, agent: s, onClose: h }) => /* @__PURE__ */ a.jsx(G, { studioPro: o, children: /* @__PURE__ */ a.jsx(ne, { initialTool: i, studioPro: o, agent: s, onClose: h }) }), xe = {
   async loaded(o, i) {
     const s = H(o), h = J(s);
     try {
       const t = document.getElementById("root");
       if (!t)
         throw new Error("Failed to find the root element");
-      const g = F.createRoot(t);
+      const f = F.createRoot(t);
       let r;
       i.tool && (r = JSON.parse(decodeURIComponent(i.tool)));
       const x = JSON.parse(decodeURIComponent(i.agent)), v = (m) => {
         s.ui.dialogs.closeWithResult(i.dialogId, m);
       };
-      g.render(
+      f.render(
         /* @__PURE__ */ a.jsx(c.StrictMode, { children: /* @__PURE__ */ a.jsx(oe, { studioPro: s, initialTool: r, agent: x, onClose: v }) })
       );
     } catch (t) {
@@ -249,6 +250,5 @@ const ie = {
   }
 };
 export {
-  fe as component
+  xe as component
 };
-//# sourceMappingURL=knowledgebaseToolEdit.js.map

@@ -1,14 +1,15 @@
-import { r as o, w as r, a0 as R, O as q, K as N, G as I, _ as D, N as O } from "./Icon-DQcqUu4m.js";
-import { a as B, c as F } from "./userPreferences-CMksV11G.js";
-import { u as H, D as A } from "./DialogFooter-BrOao3Ik.js";
-import { I as G } from "./Banner-DqKAGJJD.js";
-import { T as f } from "./TextInputLabeled-Bjq8zKEk.js";
+import { r as o, x as r, a2 as L, R as q, N, G as I, a1 as D, P as B } from "./Icon-Bb5knnP8.js";
+import { r as F } from "./index-CfghFsoU.js";
+import { createStudioProLogger as H } from "./logger-Bof2Evv1.js";
+import { u as O, D as A } from "./DialogFooter-CsVkF8jQ.js";
+import { I as G } from "./Banner-DsVgoRin.js";
+import { T as f } from "./TextInputLabeled-BLG8tCoP.js";
 const Y = ({ initialAgent: a, onClose: t }) => {
   var v, P, w;
   const [e, d] = o.useState(a), [n, u] = o.useState(((v = a.maxTokens) == null ? void 0 : v.toString()) ?? ""), [i, m] = o.useState(((P = a.temperature) == null ? void 0 : P.toString()) ?? ""), [l, y] = o.useState(((w = a.topP) == null ? void 0 : w.toString()) ?? ""), p = o.useCallback(() => n !== "" && e.maxTokens === void 0 ? "Please enter a valid number." : e.maxTokens !== void 0 && e.maxTokens < 1 ? "Max tokens must be greater than 0 (or empty)." : !0, [e.maxTokens, n]), c = o.useCallback(() => i !== "" && e.temperature === void 0 ? "Please enter a valid number." : e.temperature !== void 0 && e.temperature < 0 ? "Temperature must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.temperature, i]), h = o.useCallback(() => l !== "" && e.topP === void 0 ? "Please enter a valid number." : e.topP !== void 0 && e.topP < 0 ? "TopP must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.topP, l]), g = o.useCallback(
     (j, M, x) => (s) => {
-      const L = x ? /^-?\d+$/ : /^-?\d*\.?\d*$/, S = x ? ["-"] : ["-", "."];
-      if (s !== "" && !S.includes(s) && !L.test(s))
+      const R = x ? /^-?\d+$/ : /^-?\d*\.?\d*$/, S = x ? ["-"] : ["-", "."];
+      if (s !== "" && !S.includes(s) && !R.test(s))
         return;
       if (M(s), s === "" || S.includes(s)) {
         d((b) => ({ ...b, [j]: void 0 }));
@@ -26,11 +27,11 @@ const Y = ({ initialAgent: a, onClose: t }) => {
   }, [t, e, p, c, h]), k = o.useCallback(() => {
     t == null || t(null);
   }, [t]);
-  H(k, T);
+  O(k, T);
   const C = o.useCallback(() => {
     window.open("https://docs.mendix.com/appstore/modules/genai/genai-for-mx/commons/#request", "_blank");
   }, []);
-  return /* @__PURE__ */ r.jsxs(R, { children: [
+  return /* @__PURE__ */ r.jsxs(L, { children: [
     /* @__PURE__ */ r.jsx(q, { children: /* @__PURE__ */ r.jsxs(N, { children: [
       /* @__PURE__ */ r.jsx(I, { label: "Tokens", children: /* @__PURE__ */ r.jsx(
         f,
@@ -71,9 +72,9 @@ const Y = ({ initialAgent: a, onClose: t }) => {
     ] }) }),
     /* @__PURE__ */ r.jsx(A, { onOk: T, onCancel: k, showHelp: !0, onHelp: C })
   ] });
-}, _ = ({ studioPro: a, agent: t, onClose: e }) => /* @__PURE__ */ r.jsx(O, { studioPro: a, children: /* @__PURE__ */ r.jsx(Y, { initialAgent: t, onClose: e }) }), W = {
+}, $ = ({ studioPro: a, agent: t, onClose: e }) => /* @__PURE__ */ r.jsx(B, { studioPro: a, children: /* @__PURE__ */ r.jsx(Y, { initialAgent: t, onClose: e }) }), K = {
   async loaded(a, t) {
-    const e = B(a), d = F(e);
+    const e = F(a), d = H(e);
     if (!t.agent)
       throw new Error("Agent needs to be provided to open the Model Settings dialog.");
     try {
@@ -84,7 +85,7 @@ const Y = ({ initialAgent: a, onClose: t }) => {
         e.ui.dialogs.closeWithResult(t.dialogId, l);
       };
       i.render(
-        /* @__PURE__ */ r.jsx(o.StrictMode, { children: /* @__PURE__ */ r.jsx(_, { studioPro: e, agent: n, onClose: m }) })
+        /* @__PURE__ */ r.jsx(o.StrictMode, { children: /* @__PURE__ */ r.jsx($, { studioPro: e, agent: n, onClose: m }) })
       );
     } catch (n) {
       throw d.error("Error editing model settings:", n), new Error("Error editing model settings:", n);
@@ -92,6 +93,5 @@ const Y = ({ initialAgent: a, onClose: t }) => {
   }
 };
 export {
-  W as component
+  K as component
 };
-//# sourceMappingURL=modelSettingsEdit.js.map
