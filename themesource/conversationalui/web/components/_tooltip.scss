@@ -2,9 +2,10 @@
 @use '../abstracts/helpers' as *;
 
 /* tooltip basic styling */
-.convui-tooltip {
+.agent-tooltip {
     .widget-tooltip-content {
         position: relative;
+        z-index: 1000;
         text-align: unset;
         word-break: break-word;
         background-color: white;
@@ -22,6 +23,20 @@
     .mx-link {
         font-weight: normal;
         line-height: $line-height-base * 1.25;
+    }
+}
+
+.agent-tooltip-w330 {
+    .widget-tooltip-content {
+        width: 330px;
+        padding: 8px 15px 0px 15px;
+    }
+}
+
+.agent-tooltip-w280 {
+    .widget-tooltip-content {
+        width: 280px;
+        padding: 8px 15px 0px 15px;
     }
 }
 

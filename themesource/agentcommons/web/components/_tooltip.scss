@@ -1,48 +1,6 @@
 @use '../../../../theme/web/custom-variables' as *;
 @use '../agent-builder-variables.scss' as *;
 
-.hide-tooltip {
-    .widget-tooltip-arrow-top {
-        display: none;
-    }
-
-    .widget-tooltip-content {
-        display: none;
-    }
-}
-
-.agent-tooltip {
-    .widget-tooltip-content {
-        position: relative;
-        z-index: 1000;
-        text-align: unset;
-        word-break: break-word;
-        background-color: white;
-        border-radius: 4px;
-        color: black;
-    }
-
-    .mx-link {
-        font-weight: normal;
-        line-height: $line-height-base * 1.25;
-    }
-}
-
-.agent-tooltip-w330 {
-    .widget-tooltip-content {
-        width: 330px;
-        padding: 8px 15px 0px 15px;
-    }
-}
-
-.agent-tooltip-w280 {
-    .widget-tooltip-content {
-        width: 280px;
-        padding: 8px 15px 0px 15px;
-    }
-}
-
-
 // Output List Tooltip
 .output-tooltip {
     .widget-tooltip-content {
@@ -80,17 +38,5 @@
     ul {
         padding: 0;
         margin: 0;
-    }
-}
-
-.tooltip-container {
-    .form-group {
-        flex: 1
-    }
-
-    .widget-tooltip {
-        margin-bottom: $form-group-margin-bottom;
-        align-self: flex-end;
-        padding-bottom: calc($form-input-padding-y + 1px);
     }
 }

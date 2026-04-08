@@ -30090,8 +30090,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 /* tooltip basic styling */
-.convui-tooltip .widget-tooltip-content {
+.agent-tooltip .widget-tooltip-content {
   position: relative;
+  z-index: 1000;
   text-align: unset;
   word-break: break-word;
   background-color: white;
@@ -30105,9 +30106,19 @@ input[type=checkbox].three-state-checkbox + .control-label {
   max-height: 48vh;
   line-height: 150% !important;
 }
-.convui-tooltip .mx-link {
+.agent-tooltip .mx-link {
   font-weight: normal;
   line-height: 1.7857142863;
+}
+
+.agent-tooltip-w330 .widget-tooltip-content {
+  width: 330px;
+  padding: 8px 15px 0px 15px;
+}
+
+.agent-tooltip-w280 .widget-tooltip-content {
+  width: 280px;
+  padding: 8px 15px 0px 15px;
 }
 
 /* tooltip adjustment for version */
@@ -31168,80 +31179,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .margin-right-45 {
   margin-right: 45px;
-}
-
-.hide-tooltip .widget-tooltip-arrow-top {
-  display: none;
-}
-.hide-tooltip .widget-tooltip-content {
-  display: none;
-}
-
-.agent-tooltip .widget-tooltip-content {
-  position: relative;
-  z-index: 1000;
-  text-align: unset;
-  word-break: break-word;
-  background-color: white;
-  border-radius: 4px;
-  color: black;
-}
-.agent-tooltip .mx-link {
-  font-weight: normal;
-  line-height: 1.7857142863;
-}
-
-.agent-tooltip-w330 .widget-tooltip-content {
-  width: 330px;
-  padding: 8px 15px 0px 15px;
-}
-
-.agent-tooltip-w280 .widget-tooltip-content {
-  width: 280px;
-  padding: 8px 15px 0px 15px;
-}
-
-.output-tooltip .widget-tooltip-content {
-  width: 330px;
-  max-height: 230px;
-  text-align: left;
-  margin-bottom: 0;
-  padding: 16px;
-  padding-bottom: 0;
-  overflow-y: auto;
-}
-
-.output-tooltip-grid {
-  display: grid;
-  grid-template-columns: 40% 60%;
-  grid-template-rows: auto;
-  gap: 8px;
-  padding: 0;
-  margin: 0;
-}
-
-.output-tooltip-with-icon {
-  grid-template-columns: 10% 80%;
-  gap: 2px;
-  padding: 0;
-  margin: 0;
-}
-.output-tooltip-with-icon .tooltip-icon {
-  padding-bottom: 2px;
-}
-
-.custom-tooltip-listview ul {
-  padding: 0;
-  margin: 0;
-}
-
-.tooltip-container .form-group {
-  flex: 1;
-}
-.tooltip-container .widget-tooltip {
-  margin-bottom: 16px;
-  align-self: flex-end;
-  padding-bottom: 9px;
 }
 
 .icon-info-wrapper {
