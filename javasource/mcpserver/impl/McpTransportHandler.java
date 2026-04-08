@@ -1,5 +1,6 @@
 package mcpserver.impl;
 
+import io.modelcontextprotocol.json.McpJsonDefaults;
 import io.modelcontextprotocol.json.McpJsonMapper;
 import io.modelcontextprotocol.json.TypeRef;
 import com.mendix.core.CoreException;
@@ -14,11 +15,6 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import reactor.core.publisher.Mono;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import io.modelcontextprotocol.spec.*;
 import mcpserver.proxies.McpServer;
 
@@ -31,52 +27,12 @@ import mcpserver.proxies.McpServer;
 public class McpTransportHandler {
     
     private static final MxLogger LOGGER = new MxLogger(McpTransportHandler.class);
-    // Custom ObjectMapper configured to ignore unknown properties for forward compatibility
-    // Required until SDK PR #725 is merged
-    private static final ObjectMapper LENIENT_MAPPER = createLenientMapper();
-    // Keep default mapper for serialization operations
-    private static final McpJsonMapper MAPPER = McpJsonMapper.getDefault();
+    private static final McpJsonMapper MAPPER = McpJsonDefaults.getMapper();
     
     public static final String UTF_8 = "UTF-8";
     public static final String APPLICATION_JSON = "application/json";
     public static final String TEXT_EVENT_STREAM = "text/event-stream";
     public static final String SESSION_HEADER = "Mcp-Session-Id";  // Streamable HTTP uses Mcp-Session-Id
-    
-    /**
-     * Mix-in interface to override Jackson annotations and ignore unknown properties.
-     * This is used to make SDK classes forward-compatible with newer protocol versions.
-     * Once PR #725 is merged into the SDK, this workaround can be removed.
-     * @see <a href="https://github.com/modelcontextprotocol/java-sdk/pull/725">SDK PR #725</a>
-     */
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    private interface IgnoreUnknownPropertiesMixin {}
-    
-    /**
-     * Creates an ObjectMapper that ignores unknown properties.
-     * This ensures forward compatibility when clients use newer protocol versions
-     * with capabilities/fields that this server version doesn't recognize.
-     * 
-     * This is a workaround for SDK issue #724 where the Elicitation and Sampling
-     * classes don't ignore unknown properties, causing deserialization to fail when
-     * clients (like VS Code) use protocol version 2025-11-25.
-     */
-    private static ObjectMapper createLenientMapper() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        // Disable failing on unknown properties - critical for forward compatibility
-        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-        objectMapper.disable(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES);
-        
-        // Add mix-in annotations to override SDK class annotations
-        // These two classes are the ones fixed in SDK PR #725
-        objectMapper.addMixIn(McpSchema.ClientCapabilities.Sampling.class, IgnoreUnknownPropertiesMixin.class);
-        objectMapper.addMixIn(McpSchema.ClientCapabilities.Elicitation.class, IgnoreUnknownPropertiesMixin.class);
-        // Also add for parent classes to ensure mix-ins propagate
-        objectMapper.addMixIn(McpSchema.ClientCapabilities.class, IgnoreUnknownPropertiesMixin.class);
-        objectMapper.addMixIn(McpSchema.InitializeRequest.class, IgnoreUnknownPropertiesMixin.class);
-        objectMapper.addMixIn(McpSchema.JSONRPCRequest.class, IgnoreUnknownPropertiesMixin.class);
-        
-        return objectMapper;
-    }
     
     private final McpServer mcpServer;
     private final McpSessionManager sessionManager;
@@ -231,7 +187,7 @@ public class McpTransportHandler {
             String bodyString = readRequestBody(httpRequest);
             LOGGER.debug("Received request body: " + bodyString);
             
-            // Deserialize using lenient mapper to handle unknown fields in newer protocol versions
+            // Deserialize using the SDK default mapper.
             McpSchema.JSONRPCMessage message = deserializeJsonRpcMessage(bodyString);
             
             // Log message type
@@ -395,44 +351,10 @@ public class McpTransportHandler {
     }
     
     /**
-     * Deserialize JSON-RPC message using lenient ObjectMapper.
-     * This custom implementation handles unknown properties in newer protocol versions
-     * by stripping out fields that the SDK doesn't recognize.
+     * Deserialize a JSON-RPC message using the SDK default mapper.
      */
     private McpSchema.JSONRPCMessage deserializeJsonRpcMessage(String json) throws IOException {
         try {
-            // Parse JSON into a mutable tree
-            JsonNode rootNode = LENIENT_MAPPER.readTree(json);
-            
-            // Strip unknown fields from capabilities if this is an initialize request
-            if (rootNode.has("method") && "initialize".equals(rootNode.get("method").asText())) {
-                JsonNode paramsNode = rootNode.get("params");
-                if (paramsNode != null && paramsNode.has("capabilities")) {
-                    JsonNode capabilitiesNode = paramsNode.get("capabilities");
-                    if (capabilitiesNode.isObject()) {
-                        // Remove unknown fields from elicitation
-                        JsonNode elicitationNode = capabilitiesNode.get("elicitation");
-                        if (elicitationNode != null && elicitationNode.isObject()) {
-                            ((com.fasterxml.jackson.databind.node.ObjectNode) elicitationNode).remove("form");
-                            ((com.fasterxml.jackson.databind.node.ObjectNode) elicitationNode).remove("url");
-                        }
-                        
-                        // Remove unknown fields from sampling
-                        JsonNode samplingNode = capabilitiesNode.get("sampling");
-                        if (samplingNode != null && samplingNode.isObject()) {
-                            ((com.fasterxml.jackson.databind.node.ObjectNode) samplingNode).remove("tools");
-                        }
-                        
-                        // Remove entire tasks capability (not supported yet)
-                        ((com.fasterxml.jackson.databind.node.ObjectNode) capabilitiesNode).remove("tasks");
-                    }
-                }
-                
-                // Convert cleaned tree back to JSON string
-                json = LENIENT_MAPPER.writeValueAsString(rootNode);
-            }
-            
-            // Now deserialize with the default SDK mapper
             return McpSchema.deserializeJsonRpcMessage(MAPPER, json);
             
         } catch (Exception e) {

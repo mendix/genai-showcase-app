@@ -142,7 +142,12 @@ public class PromptResult_Get extends UserAction<IMendixObject>
 	 * @param promptMessageMendix
 	 */
 	private void createAudiences(TextContent textContent, PromptMessage promptMessageMendix){
-		List<Role> audienceListMcp = textContent.audience();
+		McpSchema.Annotations annotations = textContent.annotations();
+		if (annotations == null) {
+			return;
+		}
+
+		List<Role> audienceListMcp = annotations.audience();
 		if(audienceListMcp == null || audienceListMcp.isEmpty()) {
 			return;
 		}
