@@ -29444,6 +29444,91 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: none;
 }
 
+.listview-bullet-points > ul {
+  list-style-type: disc;
+  margin-bottom: 0px;
+}
+.listview-bullet-points > ul > li {
+  list-style-position: outside;
+}
+
+.listview-empty-text.mx-listview > ul > li.mx-listview-empty {
+  text-align: left;
+}
+.listview-empty-text.mx-listview > ul > li.mx-listview-empty > label {
+  display: none;
+}
+
+.listview-empty-text--tools > ul > li.mx-listview-empty::before {
+  content: "Provide your agent with access to app functionality by adding microflows as tools.";
+}
+
+.listview-empty-text--KB > ul > li.mx-listview-empty::before {
+  content: "Ground your agent in your company data by adding knowledge bases.";
+}
+
+.listview-empty-text--mcp-tools > ul > li.mx-listview-empty::before {
+  content: "No tools found for this MCP server configuration.";
+}
+
+.agent-table-header {
+  margin-top: 16px;
+  width: 100%;
+  border-bottom: 1px solid #E7E7E9;
+}
+
+.output-grid-container {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 20% auto 9% 9% 10%;
+  gap: 10px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+.output-grid-item {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 0;
+}
+
+.output-grid-icon {
+  margin-top: 3.5px;
+}
+
+.output-align-header {
+  margin-right: 1%;
+}
+@supports (-moz-appearance: none) {
+  .output-align-header {
+    margin-right: 16px;
+  }
+}
+
+.version-table {
+  display: grid;
+  grid-template-columns: 9% auto 10% 18% 18% 18% 2%;
+}
+.version-table .version-grid-item {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 0;
+}
+.version-table .delete-icon {
+  color: #e33f4e;
+}
+
+.testcase-table {
+  display: flex;
+}
+.testcase-table .text-testcase {
+  min-width: 95%;
+}
+.testcase-table .delete-icon {
+  min-width: 5%;
+  color: #e33f4e;
+}
+
 .chat-listview-stylingless.mx-listview ul > li, .chat-listview-stylingless.mx-listview ol > li {
   cursor: default;
   border: none;
@@ -30757,91 +30842,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .list:hover .hover-btn, .list:focus .hover-btn, .list:active .hover-btn {
   opacity: 1;
   pointer-events: auto;
-}
-
-.listview-bullet-points > ul {
-  list-style-type: disc;
-  margin-bottom: 0px;
-}
-.listview-bullet-points > ul > li {
-  list-style-position: outside;
-}
-
-.listview-empty-text.mx-listview > ul > li.mx-listview-empty {
-  text-align: left;
-}
-.listview-empty-text.mx-listview > ul > li.mx-listview-empty > label {
-  display: none;
-}
-
-.listview-empty-text--tools > ul > li.mx-listview-empty::before {
-  content: "Provide your agent with access to app functionality by adding microflows as tools.";
-}
-
-.listview-empty-text--KB > ul > li.mx-listview-empty::before {
-  content: "Ground your agent in your company data by adding knowledge bases.";
-}
-
-.listview-empty-text--mcp-tools > ul > li.mx-listview-empty::before {
-  content: "No tools found for this MCP server configuration.";
-}
-
-.agent-table-header {
-  margin-top: 16px;
-  width: 100%;
-  border-bottom: 1px solid #E7E7E9;
-}
-
-.output-grid-container {
-  display: grid;
-  width: 100%;
-  grid-template-columns: 20% auto 9% 9% 10%;
-  gap: 10px;
-  margin-top: 8px;
-  margin-bottom: 16px;
-}
-
-.output-grid-item {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 0;
-}
-
-.output-grid-icon {
-  margin-top: 3.5px;
-}
-
-.output-align-header {
-  margin-right: 1%;
-}
-@supports (-moz-appearance: none) {
-  .output-align-header {
-    margin-right: 16px;
-  }
-}
-
-.version-table {
-  display: grid;
-  grid-template-columns: 9% auto 10% 18% 18% 18% 2%;
-}
-.version-table .version-grid-item {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 0;
-}
-.version-table .delete-icon {
-  color: #e33f4e;
-}
-
-.testcase-table {
-  display: flex;
-}
-.testcase-table .text-testcase {
-  min-width: 95%;
-}
-.testcase-table .delete-icon {
-  min-width: 5%;
-  color: #e33f4e;
 }
 
 .mcp-tool {
