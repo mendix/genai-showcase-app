@@ -25,6 +25,7 @@
 /* Text */
 .text-break-word {
   word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .text-clamp {
@@ -186,13 +187,26 @@
   width: 100%;
 }
 
-/* Custom Width */
-.height-full {
-  height: 100%;
+.width-flex-full {
+  display: flex;
+  flex-grow: 1;
+}
+
+.width--40-percent {
+  width: 40%;
 }
 
 .w306 {
-  width: 25.5rem;;
+  width: 25.5rem;
+}
+
+.w500 {
+  width: 500px;
+}
+
+/* Custom Height */
+.height-full {
+  height: 100%;
 }
 
 .unset-img-width { 
@@ -257,6 +271,14 @@
   overflow: unset;
 }
 
+.overflow-visible {
+  overflow: visible !important;
+}
+
+.overflow-auto {
+  overflow: auto !important;
+}
+
 .overflow-y-auto {
   overflow-y: auto !important;
 }
@@ -267,4 +289,88 @@
 
 .custom-width {
   width: 450px;
+}
+
+/* Display */
+.display--inline {
+  display: inline;
+}
+
+/* Custom Spacing */
+.spacing-inner-top-28 {
+  padding-top: $size-28;
+}
+
+.padding-right-4 {
+  padding-right: 4px;
+}
+
+/* Image Utilities */
+.mx-image-width-unset {
+  .mx-image-viewer {
+    width: unset;
+  }
+}
+
+
+/* Module-specific styles for AgentCommons */
+
+.custom-control-label {
+  display: block;
+  overflow: hidden;
+  margin-bottom: $spacing-smaller;
+  text-align: left;
+  text-overflow: ellipsis;
+  color: $font-color-header;
+  font-size: $form-label-size;
+  font-weight: $form-label-weight;
+}
+
+.input-label-width {
+  width: 11vw;
+}
+
+.input-label-grid {
+  display: grid;
+  grid-template-columns: 150px auto 50px;
+}
+
+.test-variable-width {
+  width: 180px;
+  margin-right: $spacing-small;
+  padding-top: $spacing-small;
+}
+
+.info-icon {
+  margin: 0 0 0 $spacing-smaller;
+  padding: 0;
+  img {
+    height: 16px;
+    width: 16px;
+  }
+}
+
+.icon-info-wrapper {
+  display: flex;
+  align-items: center;
+
+  img {
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+}
+
+.scroll-to-multiple-output {
+  //only needed to use in JS-Action for scrolling to element
+}
+
+.scroll-to-single-output {
+  //only needed to use in JS-Action for scrolling to element
+}
+
+//used to hide a combobox but validation message can still be shown
+.combobox-hidden-with-validation {
+  .widget-combobox .widget-combobox-input-container {
+    display: none !important;
+  }
 }
