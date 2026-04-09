@@ -13,6 +13,9 @@
                 "knowledgebaseToolEdit": "knowledgebaseToolEdit.js"
             }
         },
+        "permissions": {
+            "runtime-configuration-private": true
+        },
         "supportsHeadless": true
     }
 }

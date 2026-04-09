@@ -1,6 +1,6 @@
-import { y as v, r as c, w as o, D as $, H as j, Q as z, I as W } from "./Icon-fHsyUm8I.js";
-import { T as x, H as q, I as D } from "./index-DsStz3tj.js";
-const M = v.div`
+import { A as v, r as c, x as o, F as $, J as j, U as z, K as W } from "./Icon-Bb5knnP8.js";
+import { e as m, O as q, Q as M } from "./index-BsnBB1AC.js";
+const P = v.div`
     position: absolute;
     top: 0;
     left: 0;
@@ -19,11 +19,11 @@ const M = v.div`
     overflow: visible;
     z-index: 0;
     transform: translateY(var(--scroll-offset, 0px));
-`, P = v.div`
+`, R = v.div`
     position: relative;
     width: 100%;
     overflow: hidden;
-`, R = v.div`
+`, D = v.div`
     position: absolute;
     top: 0;
     left: 0;
@@ -32,7 +32,7 @@ const M = v.div`
     width: 100%;
     z-index: -1;
     border: 1px solid transparent;
-`, F = ({
+`, I = ({
   label: l,
   ariaLabel: e,
   value: t,
@@ -43,7 +43,7 @@ const M = v.div`
   highlightRules: y,
   validate: k
 }) => {
-  const m = c.useRef(null), T = c.useRef(null), [S, A] = c.useState(0), C = i || 5, b = y && y.length > 0, E = () => {
+  const x = c.useRef(null), T = c.useRef(null), [S, A] = c.useState(0), C = i || 5, b = y && y.length > 0, E = () => {
     if (!b) return null;
     const r = [];
     y.forEach((a, d) => {
@@ -68,14 +68,14 @@ const M = v.div`
     }), n < t.length && s.push(/* @__PURE__ */ o.jsx("span", { children: t.slice(n) }, `text-${n}-end`)), s;
   }, w = c.useCallback(() => {
     var s;
-    const r = (s = m.current) == null ? void 0 : s.querySelector("textarea");
+    const r = (s = x.current) == null ? void 0 : s.querySelector("textarea");
     if (r) {
       const n = r.offsetWidth - r.clientWidth;
       A(n);
     }
   }, []), g = c.useCallback(() => {
     var s;
-    const r = (s = m.current) == null ? void 0 : s.querySelector("textarea");
+    const r = (s = x.current) == null ? void 0 : s.querySelector("textarea");
     if (r && T.current) {
       const n = r.scrollTop;
       T.current.style.setProperty("--scroll-offset", `-${n}px`);
@@ -83,7 +83,7 @@ const M = v.div`
   }, []);
   return c.useEffect(() => {
     var s;
-    const r = (s = m.current) == null ? void 0 : s.querySelector("textarea");
+    const r = (s = x.current) == null ? void 0 : s.querySelector("textarea");
     if (r) {
       w();
       const n = new ResizeObserver(w);
@@ -93,10 +93,10 @@ const M = v.div`
     }
   }, [g, w]), /* @__PURE__ */ o.jsxs($, { children: [
     l && /* @__PURE__ */ o.jsx(j, { children: /* @__PURE__ */ o.jsx(z, { children: l }) }),
-    /* @__PURE__ */ o.jsx(j, { fullWidth: !0, children: /* @__PURE__ */ o.jsxs(P, { ref: m, children: [
+    /* @__PURE__ */ o.jsx(j, { fullWidth: !0, children: /* @__PURE__ */ o.jsxs(R, { ref: x, children: [
       b && /* @__PURE__ */ o.jsxs(o.Fragment, { children: [
-        /* @__PURE__ */ o.jsx(R, {}),
-        /* @__PURE__ */ o.jsx(M, { ref: T, style: { paddingRight: `${2 + S}px` }, children: E() })
+        /* @__PURE__ */ o.jsx(D, {}),
+        /* @__PURE__ */ o.jsx(P, { ref: T, style: { paddingRight: `${2 + S}px` }, children: E() })
       ] }),
       /* @__PURE__ */ o.jsx(
         W,
@@ -113,11 +113,11 @@ const M = v.div`
       )
     ] }) })
   ] });
-}, N = async (l, e, t, u) => {
+}, K = async (l, e, t, u) => {
   const p = t.tools, h = t.knowledgebaseTools;
   switch (l) {
     case "name":
-      if (!e.toolType || e.toolType === x.MCP)
+      if (!e.toolType || e.toolType === m.MCP)
         break;
       if (!e.name || e.name.trim() === "")
         return "Tool name cannot be empty.";
@@ -131,7 +131,7 @@ const M = v.div`
         return "This name is already used for a Knowledge base for this agent, please choose a different name.";
       break;
     case "description": {
-      if (!e.toolType || e.toolType === x.MCP)
+      if (!e.toolType || e.toolType === m.MCP)
         break;
       if (!e.description || e.description.trim() === "")
         return "Tool description cannot be empty.";
@@ -145,17 +145,17 @@ const M = v.div`
       break;
     }
     case "document": {
-      if (e.toolType === x.Microflow)
+      if (e.toolType === m.Microflow)
         return await q(e, u);
-      if (e.toolType === x.MCP)
-        return await D(e, u, t);
+      if (e.toolType === m.MCP)
+        return await M(e, u, t);
       break;
     }
     default:
       return !0;
   }
   return !0;
-}, O = async (l, e) => {
+}, N = async (l, e) => {
   const t = await l.ui.elementSelectors.selectDocument({
     allowNone: !0,
     query: { elementType: e }
@@ -172,8 +172,7 @@ const M = v.div`
     };
 };
 export {
-  F as T,
-  O as a,
-  N as h
+  I as T,
+  N as a,
+  K as h
 };
-//# sourceMappingURL=toolHandlers-BpyTxTMZ.js.map
