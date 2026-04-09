@@ -11,6 +11,9 @@ package conversationalui.actions;
 
 import genaicommons.impl.MxLogger;
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.Future;
+import conversationalui.impl.*;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mendix.core.Core;
@@ -33,7 +36,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	{
 		// BEGIN USER CODE
 		
-		Core.addRequestHandler("llm", new RequestHandler() {
+		Core.addRequestHandler("llm-streaming", new RequestHandler() {
 			@Override
 			protected void processRequest(IMxRuntimeRequest req, IMxRuntimeResponse resp, String s) throws Exception {
 				
@@ -45,28 +48,84 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	            	JsonNode jsonRequest = objectMapper.readTree(jsonInput);
 	                // Extract fields from JSON
 	                String requestJSON = jsonRequest.get("request").asText();
-	                String deployedModel = jsonRequest.get("deployedModel").asText();
+	                String deployedModelId = jsonRequest.get("deployedModelId").asText();
+	                String chatContextGUID = jsonRequest.get("chatContextGUID").asText();
 	                
 	                // Create system context
 	                IContext ctx = Core.createSystemContext();
 	                
 	                // Retrieve deployed model from database using Model
-	                List<IMendixObject> results = Core.createXPathQuery("//GenAICommons.DeployedModel[Model=$value]")
-	                        .setVariable("value", deployedModel)
+	                List<IMendixObject> resultsDeployedModel = Core.createXPathQuery("//GenAICommons.DeployedModel[Model=$value]")
+	                        .setVariable("value", deployedModelId)
 	                        .execute(ctx);
 	                
-	                if (results.isEmpty()) {
-	                    LOGGER.error("Deployed model not found for: " + deployedModel);
+	                if (resultsDeployedModel.isEmpty()) {
+	                    LOGGER.error("Deployed model not found for: " + deployedModelId);
 	                    resp.getHttpServletResponse().setStatus(404);
-	                    // NOTE: not sure about this write to output stream part
-	                    resp.getOutputStream().write("Deployed model not found".getBytes());
 	                    return;
 	                }
 	                
-	                genaicommons.proxies.DeployedModel mxDeployedModel = genaicommons.proxies.DeployedModel.initialize(ctx, results.get(0));
-	                LOGGER.info("Successfully retrieved deployed model: " + mxDeployedModel.getModel());
+	                genaicommons.proxies.DeployedModel mxDeployedModel = genaicommons.proxies.DeployedModel.initialize(ctx, resultsDeployedModel.get(0));
+	                //LOGGER.info("Successfully retrieved deployed model: " + mxDeployedModel.getModel());
 	                
-	                // Construct GenAICommons.Request object from JSON!!!!
+	                // Retrieve chat context from database using id
+	                List<IMendixObject> resultsChatContext = Core.createXPathQuery("//ConversationalUI.ChatContext[id=$value]")
+	                        .setVariable("value", chatContextGUID)
+	                        .execute(ctx);
+	                
+	                if (resultsChatContext.isEmpty()) {
+	                    LOGGER.error("Chat context not found for: " + chatContextGUID);
+	                    resp.getHttpServletResponse().setStatus(404);
+	                    return;
+	                }
+	                
+	                conversationalui.proxies.ChatContext mxChatContext = conversationalui.proxies.ChatContext.initialize(ctx, resultsChatContext.get(0));
+	                //LOGGER.info("Successfully retrieved Chat Context " + mxChatContext);
+	                
+	                
+	                // Construct GenAICommons.Request object from JSON
+	                genaicommons.proxies.Request mxRequest = conversationalui.proxies.microflows.Microflows.request_ImportFromJSON(getContext(), requestJSON);
+
+	                LOGGER.info("Successfully created Request " + mxRequest);
+	                
+	                // Configure response for Server-Sent Events
+	                resp.setContentType("text/event-stream");
+	                resp.getHttpServletResponse().setStatus(200);
+
+	                // Generate unique request ID for streaming
+	                String connectionId = UUID.randomUUID().toString();
+	                ResponseConnectionController.getInstance().addStreamingResponseWriter(connectionId,
+	                        new ResponseConnectionController.StreamingResponseWriter(resp.getOutputStream()));
+	                
+	                mxRequest.setStreamingResponseWriterId(connectionId);
+	                
+	                switch (mxDeployedModel.getArchitecture()) {
+	                
+					case "Mendix Cloud":
+						LOGGER.info("here i am with request");
+						
+						genaicommons.proxies.Response mxResponse = genaicommons.proxies.microflows.Microflows.chatCompletions_WithHistory(getContext(), mxRequest, mxDeployedModel);
+
+						//genaicommons.proxies.Response mxResponse = Core.userActionCall("GenAICommons.Request_ChatCompletions_WithHistory")
+						//.withParams(mxRequest, mxDeployedModel)
+						//.execute(ctx);
+						
+						LOGGER.info("here i am and response: " + mxResponse);
+						
+						conversationalui.proxies.microflows.Microflows.chatContext_UpdateAssistantResponse(getContext(), mxChatContext, null , mxResponse);
+
+						LOGGER.info("Post processing!");
+						//Core.microflowCall("ConversationalUI.ChatContext_UpdateAssistantResponse")
+						//		.withParam("Response", mxResponse)
+						//		.withParam("ChatContext", mxChatContext)
+						//		.withParam("MessageStatus", null)
+						//		.execute(ctx);
+						
+						break;
+
+					default:
+						break;
+					}
 	            	
 	            } catch (Exception e) {
 	            	

@@ -101,12 +101,15 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		                    break;
 
 		                case "CONTENT_BLOCK_DELTA":
-		                	if (rootNode.path("contentBlockIndex").asInt() > 0) {
+		                	if (rootNode.path("contentBlockIndex").asInt() == toolContentBlockIndex) {
 		                		updateToolCall(rootNode);
 		                	} else {
 			                    String chunkText = rootNode.path("delta").path("text").asText();
 			                    collectStreamingText(chunkText);
 			                    if (StreamingResponseWriterId != null) {
+			                    	LOGGER.info("Call Callback microflow.");
+
+			                    	LOGGER.info(chunkText);
 			                        Core.microflowCall(CallbackMicroflow)
 			                            .withParam("RequestId", StreamingResponseWriterId)
 			                            .withParam("Content", chunkText)
@@ -115,7 +118,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		                	}
 		                    break;
 		                case "CONTENT_BLOCK_STOP":
-		                	if (rootNode.path("contentBlockIndex").asInt() > 0) {
+		                	if (rootNode.path("contentBlockIndex").asInt() == toolContentBlockIndex) {
 		                		finishToolCall(rootNode);
 		                	}
 		                    break;
@@ -172,7 +175,6 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	        mxResponse.getResponse_Message().setContent(mxResponse.getResponseText());
 	        mxResponse.getResponse_Message().setMessage_ToolCall(mxToolCallList);
 	        
-	        
 	        return mxResponse.getMendixObject();
 		        
 		} catch (Exception e) {
@@ -200,6 +202,8 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	genaicommons.proxies.Response mxResponse =  new genaicommons.proxies.Response(getContext());
 	List<genaicommons.proxies.ToolCall> mxToolCallList = new ArrayList<genaicommons.proxies.ToolCall>();
 	
+	Integer toolContentBlockIndex = 10000;
+	
 	private void collectStreamingText(String chunkText) {
 		
 		String currentText = mxResponse.getResponseText();
@@ -225,11 +229,15 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		mxToolCall.setName(rootNode.path("start").path("toolUse").path("name").asText());
 		mxToolCall.setToolCallId(rootNode.path("start").path("toolUse").path("toolUseId").asText());
 		mxToolCallList.add(mxToolCall);
+		
+		toolContentBlockIndex = rootNode.path("contentBlockIndex").asInt();
 	}
 	
 	private void updateToolCall(JsonNode rootNode) {
 		
-		genaicommons.proxies.ToolCall mxToolCall = mxToolCallList.get(rootNode.path("contentBlockIndex").asInt()-1);
+		genaicommons.proxies.ToolCall mxToolCall = mxToolCallList.get(toolContentBlockIndex);
+		if (mxToolCall == null) {mxToolCall = mxToolCallList.get(toolContentBlockIndex-1);}
+		
 		String currentText = mxToolCall.getInput();
 		String chunkText = rootNode.path("delta").path("toolUse").path("input").asText();
 		if (currentText == null) {
@@ -243,9 +251,11 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	
 	private void finishToolCall(JsonNode rootNode) {
 		
-		genaicommons.proxies.ToolCall mxToolCall = mxToolCallList.get(rootNode.path("contentBlockIndex").asInt()-1);
-		
+		genaicommons.proxies.ToolCall mxToolCall = mxToolCallList.get(toolContentBlockIndex);
+		if (mxToolCall == null) {mxToolCall = mxToolCallList.get(toolContentBlockIndex-1);}
+	
 		if (mxToolCall.getInput() == null || mxToolCall.getInput().isBlank()) {
+			LOGGER.info("HERE");
 			mxToolCall.setInput("{}");
 		}
 		

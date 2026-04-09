@@ -102,6 +102,7 @@ public class Request_ExportToJSON extends UserAction<java.lang.String>
 			return requestJSON;
 			
 		} catch (Exception e) {
+			LOGGER.error(e);
 			return null;
 		}
 		

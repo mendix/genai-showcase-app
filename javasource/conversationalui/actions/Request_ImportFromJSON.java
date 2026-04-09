@@ -91,7 +91,7 @@ public class Request_ImportFromJSON extends UserAction<IMendixObject>
 				mxToolCollection.setToolCollection_Tool(mxToolList);
 				mxRequest.setRequest_ToolCollection(mxToolCollection);
 			}
-			
+			LOGGER.debug("Request created.");
 			return mxRequest.getMendixObject();
 			
 		} catch (Exception e) {
