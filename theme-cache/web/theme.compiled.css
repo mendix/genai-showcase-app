@@ -30844,47 +30844,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   pointer-events: auto;
 }
 
-.mcp-tool {
-  margin: 0;
-  color: #a9acb3;
-  padding-bottom: 16px;
-  word-break: break-word;
-}
-.mcp-tool.mcp-tool-edited {
-  border-left: 3px solid;
-  border-color: #264ae5;
-  color: #9BB7F4;
-}
-.mcp-tool.active {
-  font-weight: bold;
-  border-left: 3px solid;
-  border-color: #264ae5;
-  color: #264ae5;
-}
-.mcp-tool .status-icon {
-  width: 16px;
-  margin-right: 8px;
-  margin-left: 4px;
-}
-
-.mcp-tool-import .tool-name {
-  width: 60%;
-}
-.mcp-tool-import .tool-name .mx-checkbox {
-  margin-bottom: auto;
-}
-.mcp-tool-import .tool-name .mx-checkbox .control-label {
-  font-weight: normal;
-}
-.mcp-tool-import .tool-access-approval {
-  width: 40%;
-  margin-top: auto;
-  margin-bottom: auto;
-}
-.mcp-tool-import .tool-access-approval .form-group {
-  margin-bottom: 0;
-}
-
 .agents-page-content-container {
   display: flex;
   flex-direction: column;
