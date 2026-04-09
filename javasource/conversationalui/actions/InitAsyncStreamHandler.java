@@ -9,10 +9,9 @@
 
 package conversationalui.actions;
 
-import genaicommons.impl.MxLogger;
+import conversationalui.impl.MxLogger;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.Future;
 import conversationalui.impl.*;
 import conversationalui.proxies.ENUM_MessageStatus;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -92,38 +91,29 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	                // Configure response for Server-Sent Events
 	                resp.setContentType("text/event-stream");
 	                resp.getHttpServletResponse().setStatus(200);
+	                
+	                LOGGER.info("Configure response for Server-Sent Event");
 
 	                // Generate unique request ID for streaming
 	                String connectionId = UUID.randomUUID().toString();
 	                ResponseConnectionController.getInstance().addStreamingResponseWriter(connectionId,
 	                        new ResponseConnectionController.StreamingResponseWriter(resp.getOutputStream()));
 	                
+	                LOGGER.info("Generate unique request ID for streaming");
+	                
 	                mxRequest.setStreamingResponseWriterId(connectionId);
-	                
-	                switch (mxDeployedModel.getArchitecture()) {
-	                
-					case "Mendix Cloud":
-						LOGGER.info("here i am with request");
 						
-						genaicommons.proxies.Response mxResponse = genaicommons.proxies.microflows.Microflows.chatCompletions_WithHistory(getContext(), mxRequest, mxDeployedModel);
-						
-						conversationalui.proxies.microflows.Microflows.chatContext_UpdateAssistantResponse(getContext(), mxChatContext, ENUM_MessageStatus.Success , mxResponse);
+					genaicommons.proxies.Response mxResponse = genaicommons.proxies.microflows.Microflows.chatCompletions_WithHistory(getContext(), mxRequest, mxDeployedModel);
+					LOGGER.debug("Chat with history completed.");
+					
+					conversationalui.proxies.microflows.Microflows.chatContext_UpdateAssistantResponse(getContext(), mxChatContext, ENUM_MessageStatus.Success , mxResponse);
+					LOGGER.debug("Post processing completed!");
+					
+					ResponseConnectionController.getInstance().removeStreamingResponseWriter(connectionId);
 
-						LOGGER.info("Post processing!");
-						//Core.microflowCall("ConversationalUI.ChatContext_UpdateAssistantResponse")
-						//		.withParam("Response", mxResponse)
-						//		.withParam("ChatContext", mxChatContext)
-						//		.withParam("MessageStatus", null)
-						//		.execute(ctx);
-						
-						break;
-
-					default:
-						break;
-					}
 	            	
 	            } catch (Exception e) {
-	            	
+	            	LOGGER.error(e);
 	            }
 				
 			}

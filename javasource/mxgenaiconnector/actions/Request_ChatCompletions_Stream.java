@@ -108,9 +108,6 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 			                    String chunkText = rootNode.path("delta").path("text").asText();
 			                    collectStreamingText(chunkText);
 			                    if (StreamingResponseWriterId != null) {
-			                    	LOGGER.info("Call Callback microflow.");
-
-			                    	LOGGER.info(chunkText);
 			                        Core.microflowCall(CallbackMicroflow)
 			                            .withParam("RequestId", StreamingResponseWriterId)
 			                            .withParam("Content", chunkText)
@@ -214,14 +211,6 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		else {
 			mxResponse.setResponseText(currentText + chunkText);
 		}
-	}
-	
-	private void organizeResponse() {
-		
-		genaicommons.proxies.Message mxMessage = new genaicommons.proxies.Message(getContext());
-		mxMessage.setRole(ENUM_MessageRole.assistant);
-		mxMessage.setMessageType(ENUM_MessageType.Text);
-		mxResponse.setResponse_Message(mxMessage);
 	}
 	
 	private void createToolCall(JsonNode rootNode) {
