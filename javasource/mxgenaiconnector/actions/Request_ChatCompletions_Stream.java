@@ -17,6 +17,7 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.ENUM_MessageType;
+import genaicommons.impl.StreamingImpl;
 import mxgenaiconnector.impl.MxLogger;
 import okhttp3.*;
 import okhttp3.sse.*;
@@ -60,7 +61,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		requireNonNull(this.CallbackMicroflow, "A callback microflow name is required");
 		try {
 			
-			organizeResponse();
+			genaicommons.impl.StreamingImpl.createResponseMessage(getContext(),mxResponse);
 			
 			CountDownLatch latch = new CountDownLatch(1);
 			
@@ -235,8 +236,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	
 	private void updateToolCall(JsonNode rootNode) {
 		
-		genaicommons.proxies.ToolCall mxToolCall = mxToolCallList.get(toolContentBlockIndex);
-		if (mxToolCall == null) {mxToolCall = mxToolCallList.get(toolContentBlockIndex-1);}
+		genaicommons.proxies.ToolCall mxToolCall = mxToolCallList.get(mxToolCallList.size()-1);
 		
 		String currentText = mxToolCall.getInput();
 		String chunkText = rootNode.path("delta").path("toolUse").path("input").asText();
@@ -251,8 +251,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	
 	private void finishToolCall(JsonNode rootNode) {
 		
-		genaicommons.proxies.ToolCall mxToolCall = mxToolCallList.get(toolContentBlockIndex);
-		if (mxToolCall == null) {mxToolCall = mxToolCallList.get(toolContentBlockIndex-1);}
+		genaicommons.proxies.ToolCall mxToolCall = mxToolCallList.get(mxToolCallList.size()-1);
 	
 		if (mxToolCall.getInput() == null || mxToolCall.getInput().isBlank()) {
 			LOGGER.info("HERE");

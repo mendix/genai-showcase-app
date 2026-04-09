@@ -106,12 +106,6 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 						LOGGER.info("here i am with request");
 						
 						genaicommons.proxies.Response mxResponse = genaicommons.proxies.microflows.Microflows.chatCompletions_WithHistory(getContext(), mxRequest, mxDeployedModel);
-
-						//genaicommons.proxies.Response mxResponse = Core.userActionCall("GenAICommons.Request_ChatCompletions_WithHistory")
-						//.withParams(mxRequest, mxDeployedModel)
-						//.execute(ctx);
-						
-						LOGGER.info("here i am and response: " + mxResponse);
 						
 						conversationalui.proxies.microflows.Microflows.chatContext_UpdateAssistantResponse(getContext(), mxChatContext, ENUM_MessageStatus.Success , mxResponse);
 
