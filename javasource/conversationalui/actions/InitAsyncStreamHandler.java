@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.Future;
 import conversationalui.impl.*;
+import conversationalui.proxies.ENUM_MessageStatus;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mendix.core.Core;
@@ -112,7 +113,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 						
 						LOGGER.info("here i am and response: " + mxResponse);
 						
-						conversationalui.proxies.microflows.Microflows.chatContext_UpdateAssistantResponse(getContext(), mxChatContext, null , mxResponse);
+						conversationalui.proxies.microflows.Microflows.chatContext_UpdateAssistantResponse(getContext(), mxChatContext, ENUM_MessageStatus.Success , mxResponse);
 
 						LOGGER.info("Post processing!");
 						//Core.microflowCall("ConversationalUI.ChatContext_UpdateAssistantResponse")

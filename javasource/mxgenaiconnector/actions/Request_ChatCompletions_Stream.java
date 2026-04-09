@@ -258,6 +258,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 			LOGGER.info("HERE");
 			mxToolCall.setInput("{}");
 		}
+		LOGGER.debug("Toolcall added to response.");
 		
 	}
 	private void setResponseMetadata(JsonNode rootNode) {

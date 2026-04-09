@@ -73,8 +73,8 @@ export async function JS_SubmitStreaming(requestJSON, deployedModelId, responseC
 				console.log('Data:', decodedData);
 				// Here you would update your UI or application state
 				
-				const currentText = responseCollector.get("Text")
-				responseCollector.set("Text", currentText + decodedData)
+				const currentText = responseCollector.get("Content")
+				responseCollector.set("Content", currentText + decodedData)
 			} catch (e) {
 				console.warn('Could not parse SSE data as JSON:', data, e);
 				// Handle non-JSON data if expected
