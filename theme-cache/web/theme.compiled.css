@@ -31011,12 +31011,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 100%;
 }
 
-.item-selection {
+.item-selection,
+.model-selection {
   display: flex;
   align-items: center;
 }
-.item-selection .mx-image-viewer {
+.item-selection .mx-image-viewer,
+.model-selection .mx-image-viewer {
   width: fit-content;
+  margin-right: 8px;
 }
 
 .item-selection-content {
