@@ -30883,9 +30883,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding-left: 2px;
 }
 
-.widget-markdown {
-  margin-top: 16px;
-}
 .widget-markdown hr {
   margin-top: 4px;
   margin-bottom: 4px;
