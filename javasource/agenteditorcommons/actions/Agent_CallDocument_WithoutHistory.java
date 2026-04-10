@@ -72,9 +72,11 @@ public class Agent_CallDocument_WithoutHistory extends UserAction<IMendixObject>
 			}			
 			
 			IMendixObject agentIMendixObject = results.get(0);
+			IMendixObject requestIMendixObject = OptionalRequest == null ? null : OptionalRequest.getMendixObject();
+			IMendixObject fileCollectionIMendixObject = OptionalFileCollection == null ? null : OptionalFileCollection.getMendixObject();
 			
 			return Core.userActionCall("AgentCommons." + Agent_Call_WithoutHistory.class.getSimpleName())
-					.withParams(agentIMendixObject, OptionalContextObject, OptionalRequest, OptionalFileCollection)
+					.withParams(agentIMendixObject, OptionalContextObject, requestIMendixObject, fileCollectionIMendixObject)
 					.execute(getContext());
 			
 		} catch (Exception e) {
