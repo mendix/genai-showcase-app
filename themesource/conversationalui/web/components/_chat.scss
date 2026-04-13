@@ -152,6 +152,8 @@
         margin: 0 10% 0 0;
         padding: $spacing-small 12px;
         padding-bottom: 0px;
+        color: #0A1324B2;
+        font-weight: 600;
     }
 
     &--user {
@@ -213,12 +215,14 @@
     border: 1px solid;
     border-color: $chat-border-color;
     overflow: hidden;
+    color: #0A1324B2;
     
     .tool-title{
-        font-weight: $font-weight-semibold;
         background-color: $chat-bg-light;
         padding: $spacing-small;
         display: block;
+        color: #0A1324B2;
+        font-weight: 600 ;
         .mx-image-viewer {
             width: auto;
         }
@@ -226,6 +230,12 @@
 
     .tool-details{
         padding: $spacing-small;
+        p {
+            font-weight: 400;
+        }
+         .mx-image-viewer {
+            width: auto;
+        }
     }
 
     .reject-button{
