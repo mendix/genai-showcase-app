@@ -1,14 +1,14 @@
-import { r as c, x as a, a2 as O, R as A, N as q, G as w, a1 as F, P as G } from "./Icon-Bb5knnP8.js";
+import { r as c, x as a, a2 as A, R as O, N as q, G as C, a1 as F, P as G } from "./Icon-Bb5knnP8.js";
 import { r as H } from "./index-CfghFsoU.js";
 import { createStudioProLogger as J } from "./logger-Bof2Evv1.js";
 import { S as U, I as W } from "./ComboBox-BS5KkYOa.js";
 import { u as $, D as _ } from "./DialogFooter-CsVkF8jQ.js";
-import { T as z, a as Q } from "./toolHandlers-CR21pGNz.js";
+import { T as z, a as Q } from "./toolHandlers-DjteeFHk.js";
 import { T as y } from "./TextInputLabeled-BLG8tCoP.js";
 import { T as X } from "./TextInputWithButton-CMS27jFj.js";
-import { L as V, c as Y, k as Z, J as P, N as ee } from "./index-BsnBB1AC.js";
-import { g as te } from "./mxCloudGenAIUtils-CU-rNwA1.js";
-import { h as p } from "./knowledgebaseToolHandlers-Brs8qBc8.js";
+import { L as V, c as Y, k as Z, J as P, N as ee } from "./index-DkFXQr22.js";
+import { g as te } from "./mxCloudGenAIUtils-5h1ptJ_Q.js";
+import { h as p } from "./knowledgebaseToolHandlers-DnMmshvx.js";
 const ie = {
   isValidName: !0,
   isValidDescription: !0,
@@ -30,12 +30,12 @@ const ie = {
   agent: s,
   onClose: h
 }) => {
-  var D, E;
-  const [t, f] = c.useState(o || V()), [r, x] = c.useState(ie), [v, m] = c.useState([]), [M, I] = c.useState(
+  var D, M;
+  const [t, f] = c.useState(o || V()), [r, x] = c.useState(ie), [v, m] = c.useState([]), [E, I] = c.useState(
     ((D = (o || V()).maxResults) == null ? void 0 : D.toString()) ?? ""
   ), [k, N] = c.useState(
-    ((E = (o || V()).minSimilarity) == null ? void 0 : E.toString()) ?? ""
-  ), C = c.useCallback(
+    ((M = (o || V()).minSimilarity) == null ? void 0 : M.toString()) ?? ""
+  ), w = c.useCallback(
     async (e) => ({
       isValidName: await p("name", e, s, i),
       isValidDescription: await p(
@@ -79,10 +79,10 @@ const ie = {
       m(!e || typeof e == "string" ? [] : e);
     }).catch(() => m([])) : m([]);
   }, [t.document, i]), c.useEffect(() => {
-    o && (I(o.maxResults !== void 0 ? o.maxResults.toString() : ""), N(o.minSimilarity !== void 0 ? o.minSimilarity.toString() : ""), C(o).then((e) => {
+    o && (I(o.maxResults !== void 0 ? o.maxResults.toString() : ""), N(o.minSimilarity !== void 0 ? o.minSimilarity.toString() : ""), w(o).then((e) => {
       x(e);
     }));
-  }, [o, C]);
+  }, [o, w]);
   const S = c.useCallback(
     async (e, n) => {
       const d = ae[e];
@@ -130,7 +130,7 @@ const ie = {
   }, B = () => {
     P(i, t.document);
   }, R = async () => {
-    const e = await C(t);
+    const e = await w(t);
     x(e), Object.values(e).some((d) => d !== !0) || h(t);
   }, j = () => {
     h(null);
@@ -138,14 +138,14 @@ const ie = {
   $(j, R);
   const K = () => {
     window.open(
-      "https://docs.mendix.com/appstore/modules/genai/genai-for-mx/agent-commons/#adding-tools",
+      "https://docs.mendix.com/appstore/modules/genai/mx-cloud-genai/MxGenAI-connector/#about-knowledge-bases",
       "_blank",
       "noopener,noreferrer"
     );
   };
-  return /* @__PURE__ */ a.jsxs(O, { children: [
-    /* @__PURE__ */ a.jsx(A, { children: /* @__PURE__ */ a.jsxs(q, { children: [
-      /* @__PURE__ */ a.jsxs(w, { label: "General", children: [
+  return /* @__PURE__ */ a.jsxs(A, { children: [
+    /* @__PURE__ */ a.jsx(O, { children: /* @__PURE__ */ a.jsxs(q, { children: [
+      /* @__PURE__ */ a.jsxs(C, { label: "General", children: [
         /* @__PURE__ */ a.jsx(
           X,
           {
@@ -179,7 +179,7 @@ const ie = {
           }
         )
       ] }),
-      /* @__PURE__ */ a.jsxs(w, { label: "Naming", children: [
+      /* @__PURE__ */ a.jsxs(C, { label: "Naming", children: [
         /* @__PURE__ */ a.jsx(
           y,
           {
@@ -201,13 +201,13 @@ const ie = {
           }
         )
       ] }),
-      /* @__PURE__ */ a.jsxs(w, { label: "Retrieval settings", children: [
+      /* @__PURE__ */ a.jsxs(C, { label: "Retrieval settings", children: [
         /* @__PURE__ */ a.jsx(
           y,
           {
             label: "Max results",
             ariaLabel: "Max number of results",
-            value: M,
+            value: E,
             onChange: (e) => g("maxResults", e),
             validate: () => r.isValidMaxResults,
             description: "This is the highest number of data chunks that can be returned in a single retrieve. If left empty, many records could be retrieved, so it's recommended to set this number (to e.g. 5), or set the minimum similarity in the next field, or to set both."
