@@ -30259,7 +30259,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin: 8px 0;
 }
 .widget-markdown p {
-  color: rgba(10, 19, 36, 0.6980392157);
   font-weight: 400;
 }
 .widget-markdown strong {
