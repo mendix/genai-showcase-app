@@ -34,11 +34,15 @@ public class ResponseConnectionController {
             this.outputStream = outputStream;
         }
 
-        public void write(byte[] data) throws IOException {
-            outputStream.write("data: ".getBytes());
-            outputStream.write(Base64.getEncoder().encode(data));
-            outputStream.write("\n\n".getBytes());
-            outputStream.flush();
+        public void write(byte[] data, boolean deleteContent) throws IOException {
+        	if (deleteContent) {
+        		 outputStream.write(("deleteContent: " + deleteContent).getBytes());
+        	} else {
+	            outputStream.write("data: ".getBytes());
+	            outputStream.write(Base64.getEncoder().encode(data));
+        	}
+	            outputStream.write("\n\n".getBytes());
+	            outputStream.flush();
         }
     }
 

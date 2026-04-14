@@ -40,7 +40,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 			@Override
 			protected void processRequest(IMxRuntimeRequest req, IMxRuntimeResponse resp, String s) throws Exception {
 				
-				LOGGER.info("InitAsyncStreamHandler: Request handler started");
+				LOGGER.info("Request handler started");
 	            // Parse JSON request body
 	            String jsonInput = new String(req.getInputStream().readAllBytes());
 	            ObjectMapper objectMapper = new ObjectMapper();
@@ -80,37 +80,46 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	                }
 	                
 	                conversationalui.proxies.ChatContext mxChatContext = conversationalui.proxies.ChatContext.initialize(ctx, resultsChatContext.get(0));
-	                //LOGGER.info("Successfully retrieved Chat Context " + mxChatContext);
-	                
 	                
 	                // Construct GenAICommons.Request object from JSON
 	                genaicommons.proxies.Request mxRequest = conversationalui.proxies.microflows.Microflows.request_ImportFromJSON(getContext(), requestJSON);
+	                if (mxRequest == null) {
+	                    LOGGER.error("Request could not be created with import mapping.");
+	                    resp.getHttpServletResponse().setStatus(404);
+	                    return;
+	                }
 
-	                LOGGER.info("Successfully created Request " + mxRequest);
+	                LOGGER.debug("Successfully created Request " + mxRequest);
 	                
 	                // Configure response for Server-Sent Events
 	                resp.setContentType("text/event-stream");
 	                resp.getHttpServletResponse().setStatus(200);
 	                
-	                LOGGER.info("Configure response for Server-Sent Event");
+	                LOGGER.debug("Configure response for Server-Sent Event");
 
 	                // Generate unique request ID for streaming
 	                String connectionId = UUID.randomUUID().toString();
 	                ResponseConnectionController.getInstance().addStreamingResponseWriter(connectionId,
 	                        new ResponseConnectionController.StreamingResponseWriter(resp.getOutputStream()));
 	                
-	                LOGGER.info("Generate unique request ID for streaming");
+	                LOGGER.debug("Generate unique request ID for streaming");
 	                
 	                mxRequest.setStreamingResponseWriterId(connectionId);
 						
 					genaicommons.proxies.Response mxResponse = genaicommons.proxies.microflows.Microflows.chatCompletions_WithHistory(getContext(), mxRequest, mxDeployedModel);
+					
+					if (mxResponse == null) {
+	                    LOGGER.error("There was an issue with Chat Completions.");
+	                    resp.getHttpServletResponse().setStatus(404);
+	                    ResponseConnectionController.getInstance().removeStreamingResponseWriter(connectionId);
+	                    return;
+	                }
+					
 					LOGGER.debug("Chat with history completed.");
 					
 					conversationalui.proxies.microflows.Microflows.chatContext_UpdateAssistantResponse(getContext(), mxChatContext, ENUM_MessageStatus.Success , mxResponse);
-					LOGGER.debug("Post processing completed!");
 					
 					ResponseConnectionController.getInstance().removeStreamingResponseWriter(connectionId);
-
 	            	
 	            } catch (Exception e) {
 	            	LOGGER.error(e);

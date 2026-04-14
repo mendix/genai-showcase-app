@@ -54,6 +54,7 @@ export async function JS_SubmitStreaming(requestJSON, deployedModelId, responseC
 		let id = null;
 		let event = 'message'; // Default event type
 		let data = '';
+		let flag = false;
 
 		for (const line of lines) {
 			if (line.startsWith('id:')) {
@@ -63,18 +64,24 @@ export async function JS_SubmitStreaming(requestJSON, deployedModelId, responseC
 			} else if (line.startsWith('data:')) {
 				// Accumulate data lines, they can be multi-line
 				data += line.substring(5).trim();
+			} else if (line.startsWith('deleteContent:')) {
+				const value = line.substring(14).trim();
+				flag = value === 'true';
 			}
 			// You might also handle 'retry:' fields if your server sends them
 		}
 
+		if (flag) {
+				responseCollector.set("Content", "");
+		}
 		if (data) {
 			try {
 				const decodedData = atob(data);
-				console.log('Data:', decodedData);
+				//console.log('Data:', decodedData);
 				// Here you would update your UI or application state
-				
 				const currentText = responseCollector.get("Content")
 				responseCollector.set("Content", currentText + decodedData)
+				
 			} catch (e) {
 				console.warn('Could not parse SSE data as JSON:', data, e);
 				// Handle non-JSON data if expected

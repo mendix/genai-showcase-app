@@ -33,14 +33,12 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __MxCloudDeployedModel;
 	private final mxgenaiconnector.proxies.MxCloudDeployedModel MxCloudDeployedModel;
-	private final java.lang.String CallbackMicroflow;
 	private final java.lang.String StreamingResponseWriterId;
 
 	public Request_ChatCompletions_Stream(
 		IContext context,
 		java.lang.String _requestBodyJSON,
 		IMendixObject _mxCloudDeployedModel,
-		java.lang.String _callbackMicroflow,
 		java.lang.String _streamingResponseWriterId
 	)
 	{
@@ -48,7 +46,6 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		this.RequestBodyJSON = _requestBodyJSON;
 		this.__MxCloudDeployedModel = _mxCloudDeployedModel;
 		this.MxCloudDeployedModel = _mxCloudDeployedModel == null ? null : mxgenaiconnector.proxies.MxCloudDeployedModel.initialize(getContext(), _mxCloudDeployedModel);
-		this.CallbackMicroflow = _callbackMicroflow;
 		this.StreamingResponseWriterId = _streamingResponseWriterId;
 	}
 
@@ -58,7 +55,6 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		// BEGIN USER CODE
 		requireNonNull(this.RequestBodyJSON, "A Request object is required");
 		requireNonNull(this.MxCloudDeployedModel, "A DeployedModel object is required");
-		requireNonNull(this.CallbackMicroflow, "A callback microflow name is required");
 		try {
 			
 			genaicommons.impl.StreamingImpl.createResponseMessage(getContext(),mxResponse);
@@ -108,10 +104,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 			                    String chunkText = rootNode.path("delta").path("text").asText();
 			                    collectStreamingText(chunkText);
 			                    if (StreamingResponseWriterId != null) {
-			                        Core.microflowCall(CallbackMicroflow)
-			                            .withParam("RequestId", StreamingResponseWriterId)
-			                            .withParam("Content", chunkText)
-			            				.execute(getContext());
+			                    	conversationalui.proxies.microflows.Microflows.streamCallback(getContext(), chunkText, StreamingResponseWriterId, false);
 			                    }
 		                	}
 		                    break;
@@ -122,7 +115,12 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		                    break;
 
 		                case "MESSAGE_STOP":
-		                    mxResponse.setStopReason(rootNode.path("stopReason").asText());
+		                	String stopReason = rootNode.path("stopReason").asText();
+		                	LOGGER.debug("Stop reason: " + stopReason);
+		                    mxResponse.setStopReason(stopReason);
+		                    if (stopReason.contains("tool_use")) {
+		                    	conversationalui.proxies.microflows.Microflows.streamCallback(getContext(), "", StreamingResponseWriterId, true);
+		                    }
 		                    break;
 
 		                case "METADATA":
