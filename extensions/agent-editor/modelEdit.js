@@ -1,16 +1,16 @@
-import { r as y, x as t, G as N, F as M, J as w, U as D, P as O, Q as V, R as K, V as q } from "./Icon-Bb5knnP8.js";
-import { u as U, B as W, c as P, C as _ } from "./TextWithIcon-ldexQTj6.js";
-import { createStudioProLogger as A } from "./logger-Bof2Evv1.js";
-import { o as L, p as B, q as X, r as $, s as J, t as Q } from "./index-DkFXQr22.js";
-import { C as u, i as z, B as H, v as Y, a as Z } from "./ButtonWithLabel-BTsToYxh.js";
-import { y as T } from "./Link-B-mEjjKJ.js";
+import { r as y, I as t, O as A, R as M, V as w, a6 as D, a3 as O, a4 as V, a5 as K, a7 as q } from "./Icon-Y0B9OBpL.js";
+import { u as W, B as U, c as P, C as _ } from "./TextWithIcon-MuzTGl80.js";
+import { createStudioProLogger as F } from "./logger-Bof2Evv1.js";
+import { o as L, p as B, q as X, r as $, s as z, t as H } from "./index-YObaGbux.js";
+import { C as u, i as J, B as Q, v as Y, a as Z } from "./ButtonWithLabel-Cuh9lA1K.js";
+import { y as T } from "./Link-D_ME2n3j.js";
 import { i as ee } from "./objectUtils-ChZ8y4UX.js";
-import { d as ne, i as te, u as se, e as ae } from "./mxCloudGenAIUtils-5h1ptJ_Q.js";
-import { W as oe, S as re } from "./Banner-DsVgoRin.js";
-import { T as k } from "./TextInputLabeled-BLG8tCoP.js";
-import { T as ie } from "./TextInputWithButton-CMS27jFj.js";
-const F = (e, n) => async (i) => {
-  const l = A(e);
+import { d as ne, i as te, u as se, e as ae } from "./mxCloudGenAIUtils-BRWIF1km.js";
+import { W as oe, S as re } from "./Banner-R-XjJFkn.js";
+import { T as k } from "./TextInputLabeled-CzK2z559.js";
+import { T as ie } from "./TextInputWithButton-BxBwrlKn.js";
+const N = (e, n) => async (i) => {
+  const l = F(e);
   try {
     await e.app.model.customBlobDocuments.updateDocumentContent(n, i);
   } catch (c) {
@@ -37,7 +37,7 @@ const F = (e, n) => async (i) => {
   }
 }, ce = async (e, n, i, l, c) => {
   var m, x;
-  const d = A(e);
+  const d = F(e);
   let a, v = !1, o = !1;
   try {
     const p = n.providerFields, h = await X(e, p.key);
@@ -122,7 +122,7 @@ const I = () => {
   }, x = () => {
     d(!1);
   }, p = async () => {
-    o.key && J(e, o.key);
+    o.key && z(e, o.key);
   }, h = async (r) => {
     const R = r.providerFields, E = await Y(e, R.key);
     if (v(E), d(!1), !E)
@@ -137,7 +137,7 @@ const I = () => {
   }, f = (r) => {
     (o.key && r.includes(o.key.documentId) || r.includes("projectSettings")) && h(n);
   };
-  U({
+  W({
     studioPro: e,
     dependentIds: [(j = o.key) == null ? void 0 : j.documentId].filter((r) => !!r),
     watchProjectSettings: !0,
@@ -153,14 +153,14 @@ const I = () => {
     h(n);
   }, []);
   const C = (r) => r === u.Required ? "Model key is required" : r === u.NotFound ? "Selected constant not found. It might have been deleted or renamed. Please update the constant selection." : r === u.InvalidType ? "Selected constant must be of type string." : r === u.Excluded ? "Selected constant is excluded from the project and cannot be used." : !0, g = a === u.EmptyValue || a === u.InvalidContent || a === u.PrivateValue;
-  return /* @__PURE__ */ t.jsxs(N, { label: "Resource", children: [
+  return /* @__PURE__ */ t.jsxs(A, { label: "Resource", children: [
     /* @__PURE__ */ t.jsx(
       ie,
       {
         label: "Model key",
         ariaLabel: "Model key",
         value: ((b = o.key) == null ? void 0 : b.qualifiedName) ?? "",
-        icon: o.key ? /* @__PURE__ */ t.jsx(z, {}) : void 0,
+        icon: o.key ? /* @__PURE__ */ t.jsx(J, {}) : void 0,
         buttonCaption: "Select...",
         onClick: s,
         onClickSecondary: o.key ? p : void 0,
@@ -181,7 +181,7 @@ const I = () => {
       ) })
     ] }),
     g && /* @__PURE__ */ t.jsxs(oe, { children: [
-      /* @__PURE__ */ t.jsx(W, { children: a === u.PrivateValue ? "Missing permissions" : "Invalid constant value" }),
+      /* @__PURE__ */ t.jsx(U, { children: a === u.PrivateValue ? "Missing permissions" : "Invalid constant value" }),
       /* @__PURE__ */ t.jsx("div", { children: a === u.PrivateValue ? "Private constants require additional permissions for local use. Grant access via View > Extensions and reopen the current tab." : "In order to test your Model locally, please set a valid value for the key constant." })
     ] }),
     o.keyId && /* @__PURE__ */ t.jsxs(t.Fragment, { children: [
@@ -240,13 +240,13 @@ const I = () => {
         /* @__PURE__ */ t.jsx(w, { children: /* @__PURE__ */ t.jsx(D, {}) }),
         /* @__PURE__ */ t.jsx(w, { fullWidth: !0, children: /* @__PURE__ */ t.jsx(T, { href: o.deepLinkURL, target: "_blank", rel: "noreferrer,noopener", children: "View resource in the portal" }) })
       ] }),
-      /* @__PURE__ */ t.jsx(H, { label: "Connection", buttonCaption: "Test", onPress: m }),
+      /* @__PURE__ */ t.jsx(Q, { label: "Connection", buttonCaption: "Test", onPress: m }),
       c && /* @__PURE__ */ t.jsx(re, { onClose: x, children: "Connection successful." })
     ] })
   ] });
 }, ye = B(), me = ({ studioPro: e, documentId: n }) => {
   const i = e.ui.messageBoxes, l = e.app.model.customBlobDocuments, [c, d] = y.useState(0), [a, v] = y.useState(!1), [o, m] = y.useState(ye), x = [
-    { key: "MxCloudGenAI", caption: "Mendix Cloud GenAI", icon: Q }
+    { key: "MxCloudGenAI", caption: "Mendix Cloud GenAI", icon: H }
   ];
   y.useEffect(() => {
     const s = (f) => {
@@ -268,12 +268,12 @@ const I = () => {
     });
   }, [c]);
   const p = async (s) => {
-    le(o, m, F(e, n), s)();
+    le(o, m, N(e, n), s)();
   }, h = () => o.provider ? !0 : "Model provider is required.";
   return /* @__PURE__ */ t.jsx(O, { studioPro: e, children: /* @__PURE__ */ t.jsxs(V, { children: [
     !a && /* @__PURE__ */ t.jsx(_, {}),
     a && /* @__PURE__ */ t.jsx(K, { children: /* @__PURE__ */ t.jsxs(q, { children: [
-      /* @__PURE__ */ t.jsx(N, { label: "Common", children: /* @__PURE__ */ t.jsx(
+      /* @__PURE__ */ t.jsx(A, { label: "Common", children: /* @__PURE__ */ t.jsx(
         Z,
         {
           ariaLabel: "Provider",
@@ -291,7 +291,7 @@ const I = () => {
           studioPro: e,
           model: o,
           setModel: m,
-          updateStudioProDocument: F(e, n)
+          updateStudioProDocument: N(e, n)
         }
       )
     ] }) })

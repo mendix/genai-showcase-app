@@ -1,14 +1,14 @@
-import { r as c, x as a, a2 as A, R as O, N as q, G as C, a1 as F, P as G } from "./Icon-Bb5knnP8.js";
+import { r as c, I as a, af as O, a5 as A, a1 as q, O as C, ae as F, a3 as G } from "./Icon-Y0B9OBpL.js";
 import { r as H } from "./index-CfghFsoU.js";
 import { createStudioProLogger as J } from "./logger-Bof2Evv1.js";
-import { S as U, I as W } from "./ComboBox-BS5KkYOa.js";
-import { u as $, D as _ } from "./DialogFooter-CsVkF8jQ.js";
-import { T as z, a as Q } from "./toolHandlers-DjteeFHk.js";
-import { T as y } from "./TextInputLabeled-BLG8tCoP.js";
-import { T as X } from "./TextInputWithButton-CMS27jFj.js";
-import { L as V, c as Y, k as Z, J as P, N as ee } from "./index-DkFXQr22.js";
-import { g as te } from "./mxCloudGenAIUtils-5h1ptJ_Q.js";
-import { h as p } from "./knowledgebaseToolHandlers-DnMmshvx.js";
+import { S as U, I as W } from "./ComboBox-CjX_jlRw.js";
+import { u as $, D as _ } from "./DialogFooter-l4IYrGaY.js";
+import { T as z, a as Q } from "./toolHandlers-CyoTDOk1.js";
+import { T as y } from "./TextInputLabeled-CzK2z559.js";
+import { T as X } from "./TextInputWithButton-BxBwrlKn.js";
+import { L as V, c as Y, k as Z, J as P, N as ee } from "./index-YObaGbux.js";
+import { g as te } from "./mxCloudGenAIUtils-BRWIF1km.js";
+import { h as p } from "./knowledgebaseToolHandlers-Dao-XtKI.js";
 const ie = {
   isValidName: !0,
   isValidDescription: !0,
@@ -143,8 +143,8 @@ const ie = {
       "noopener,noreferrer"
     );
   };
-  return /* @__PURE__ */ a.jsxs(A, { children: [
-    /* @__PURE__ */ a.jsx(O, { children: /* @__PURE__ */ a.jsxs(q, { children: [
+  return /* @__PURE__ */ a.jsxs(O, { children: [
+    /* @__PURE__ */ a.jsx(A, { children: /* @__PURE__ */ a.jsxs(q, { children: [
       /* @__PURE__ */ a.jsxs(C, { label: "General", children: [
         /* @__PURE__ */ a.jsx(
           X,
