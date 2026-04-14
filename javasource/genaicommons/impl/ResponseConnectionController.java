@@ -1,4 +1,4 @@
-package conversationalui.impl;
+package genaicommons.impl;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -35,14 +35,23 @@ public class ResponseConnectionController {
         }
 
         public void write(byte[] data, boolean deleteContent) throws IOException {
-        	if (deleteContent) {
-        		 outputStream.write(("deleteContent: " + deleteContent).getBytes());
-        	} else {
-	            outputStream.write("data: ".getBytes());
-	            outputStream.write(Base64.getEncoder().encode(data));
-        	}
-	            outputStream.write("\n\n".getBytes());
-	            outputStream.flush();
+ 
+	        outputStream.write("data: ".getBytes());
+            outputStream.write(Base64.getEncoder().encode(data));
+            outputStream.write("\n\n".getBytes());
+            outputStream.flush();
+        }
+        
+        public void clearContent() throws IOException {
+        	outputStream.write(("deleteContent: true").getBytes());
+        	outputStream.write("\n\n".getBytes());
+            outputStream.flush();
+        }
+        
+        public void throwError() throws IOException {
+        	outputStream.write(("throwError: true").getBytes());
+        	outputStream.write("\n\n".getBytes());
+            outputStream.flush();
         }
     }
 

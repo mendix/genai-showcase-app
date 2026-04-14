@@ -13,12 +13,12 @@ import { Big } from "big.js";
 
 /**
  * @param {string} requestJSON
- * @param {string} deployedModelId
  * @param {MxObject} responseCollector
+ * @param {string} deployedModelId
  * @param {string} chatContextGUID
- * @returns {Promise.<void>}
+ * @returns {Promise.<boolean>}
  */
-export async function JS_SubmitStreaming(requestJSON, deployedModelId, responseCollector, chatContextGUID) {
+export async function JS_SubmitStreaming(requestJSON, responseCollector, deployedModelId, chatContextGUID) {
 	// BEGIN USER CODE
 	const baseUrl = mx.appUrl;
 	const endpoint = `${baseUrl}llm-streaming`;
@@ -55,6 +55,7 @@ export async function JS_SubmitStreaming(requestJSON, deployedModelId, responseC
 		let event = 'message'; // Default event type
 		let data = '';
 		let flag = false;
+		let throwError = false;
 
 		for (const line of lines) {
 			if (line.startsWith('id:')) {
@@ -67,10 +68,16 @@ export async function JS_SubmitStreaming(requestJSON, deployedModelId, responseC
 			} else if (line.startsWith('deleteContent:')) {
 				const value = line.substring(14).trim();
 				flag = value === 'true';
+			} else if (line.startsWith('throwError:')) {
+				const value = line.substring(11).trim();
+				throwError = value === 'true';
 			}
 			// You might also handle 'retry:' fields if your server sends them
 		}
 
+		if (throwError) {
+				throw new Error();
+		}
 		if (flag) {
 				responseCollector.set("Content", "");
 		}
@@ -90,25 +97,30 @@ export async function JS_SubmitStreaming(requestJSON, deployedModelId, responseC
 		}
 	};
 
-	while (true) {
-		const { done, value } = await reader.read();
+	try {
+		while (true) {
+			const { done, value } = await reader.read();
 
-		if (done) {
-			console.log('Stream finished.');
-			break;
+			if (done) {
+				console.log('Stream finished.');
+				break;
+			}
+
+			// Decode the chunk and add to buffer
+			buffer += decoder.decode(value, { stream: true });
+
+			// Process complete SSE messages from the buffer
+			// SSE messages are terminated by two newline characters (\n\n)
+			let messageEndIndex;
+			while ((messageEndIndex = buffer.indexOf('\n\n')) !== -1) {
+				const message = buffer.substring(0, messageEndIndex);
+				processSseMessage(message);
+				buffer = buffer.substring(messageEndIndex + 2); // Remove processed message and its delimiters
+			}
 		}
-
-		// Decode the chunk and add to buffer
-		buffer += decoder.decode(value, { stream: true });
-
-		// Process complete SSE messages from the buffer
-		// SSE messages are terminated by two newline characters (\n\n)
-		let messageEndIndex;
-		while ((messageEndIndex = buffer.indexOf('\n\n')) !== -1) {
-			const message = buffer.substring(0, messageEndIndex);
-			processSseMessage(message);
-			buffer = buffer.substring(messageEndIndex + 2); // Remove processed message and its delimiters
-		}
+		return true;
+	} catch (error) {
+		return false;
 	}
 
 	// END USER CODE

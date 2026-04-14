@@ -7,11 +7,10 @@
 // Other code you write will be lost the next time you deploy the project.
 // Special characters, e.g., é, ö, à, etc. are supported in comments.
 
-package conversationalui.actions;
+package genaicommons.actions;
 
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.UserAction;
-import conversationalui.impl.ResponseConnectionController;
 
 public class WriteToResponseStream extends UserAction<java.lang.Void>
 {
@@ -36,7 +35,7 @@ public class WriteToResponseStream extends UserAction<java.lang.Void>
 	public java.lang.Void executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		ResponseConnectionController.getInstance().getStreamingResponseWriter(RequestId).write(Content.getBytes(), DeleteContent);
+		genaicommons.impl.ResponseConnectionController.getInstance().getStreamingResponseWriter(RequestId).write(Content.getBytes(), DeleteContent);
 		return null;
 		// END USER CODE
 	}

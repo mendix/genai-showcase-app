@@ -12,8 +12,8 @@ package conversationalui.actions;
 import conversationalui.impl.MxLogger;
 import java.util.List;
 import java.util.UUID;
-import conversationalui.impl.*;
 import conversationalui.proxies.ENUM_MessageStatus;
+import genaicommons.impl.ResponseConnectionController;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mendix.core.Core;
@@ -62,11 +62,12 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	                if (resultsDeployedModel.isEmpty()) {
 	                    LOGGER.error("Deployed model not found for: " + deployedModelId);
 	                    resp.getHttpServletResponse().setStatus(404);
+	                    genaicommons.impl.StreamingImpl.throwError(ctx,resp.getOutputStream());
 	                    return;
 	                }
 	                
 	                genaicommons.proxies.DeployedModel mxDeployedModel = genaicommons.proxies.DeployedModel.initialize(ctx, resultsDeployedModel.get(0));
-	                //LOGGER.info("Successfully retrieved deployed model: " + mxDeployedModel.getModel());
+	                LOGGER.info("Successfully retrieved deployed model: " + mxDeployedModel.getModel());
 	                
 	                // Retrieve chat context from database using id
 	                List<IMendixObject> resultsChatContext = Core.createXPathQuery("//ConversationalUI.ChatContext[id=$value]")
@@ -76,6 +77,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	                if (resultsChatContext.isEmpty()) {
 	                    LOGGER.error("Chat context not found for: " + chatContextGUID);
 	                    resp.getHttpServletResponse().setStatus(404);
+	                    genaicommons.impl.StreamingImpl.throwError(getContext(),resp.getOutputStream());
 	                    return;
 	                }
 	                
@@ -86,6 +88,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	                if (mxRequest == null) {
 	                    LOGGER.error("Request could not be created with import mapping.");
 	                    resp.getHttpServletResponse().setStatus(404);
+	                    genaicommons.impl.StreamingImpl.throwError(getContext(),resp.getOutputStream());
 	                    return;
 	                }
 
@@ -111,6 +114,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 					if (mxResponse == null) {
 	                    LOGGER.error("There was an issue with Chat Completions.");
 	                    resp.getHttpServletResponse().setStatus(404);
+	                    genaicommons.impl.StreamingImpl.throwError(getContext(),resp.getOutputStream());
 	                    ResponseConnectionController.getInstance().removeStreamingResponseWriter(connectionId);
 	                    return;
 	                }
@@ -123,6 +127,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	            	
 	            } catch (Exception e) {
 	            	LOGGER.error(e);
+	            	genaicommons.impl.StreamingImpl.throwError(getContext(),resp.getOutputStream());
 	            }
 				
 			}

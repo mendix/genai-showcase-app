@@ -11,17 +11,14 @@ package mxgenaiconnector.actions;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
-import genaicommons.proxies.ENUM_MessageRole;
-import genaicommons.proxies.ENUM_MessageType;
-import genaicommons.impl.StreamingImpl;
 import mxgenaiconnector.impl.MxLogger;
 import okhttp3.*;
 import okhttp3.sse.*;
 import static java.util.Objects.requireNonNull;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -104,7 +101,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 			                    String chunkText = rootNode.path("delta").path("text").asText();
 			                    collectStreamingText(chunkText);
 			                    if (StreamingResponseWriterId != null) {
-			                    	conversationalui.proxies.microflows.Microflows.streamCallback(getContext(), chunkText, StreamingResponseWriterId, false);
+			                    	genaicommons.impl.StreamingImpl.pushChunkToUI(getContext(), StreamingResponseWriterId, chunkText);
 			                    }
 		                	}
 		                    break;
@@ -118,8 +115,8 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		                	String stopReason = rootNode.path("stopReason").asText();
 		                	LOGGER.debug("Stop reason: " + stopReason);
 		                    mxResponse.setStopReason(stopReason);
-		                    if (stopReason.contains("tool_use")) {
-		                    	conversationalui.proxies.microflows.Microflows.streamCallback(getContext(), "", StreamingResponseWriterId, true);
+		                    if (StreamingResponseWriterId != null && stopReason.contains("tool_use")) {
+		                    	genaicommons.impl.StreamingImpl.clearContentInUI(getContext(), StreamingResponseWriterId);
 		                    }
 		                    break;
 
@@ -145,11 +142,16 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	            
 	            @Override
 	            public void onFailure(EventSource eventSource, Throwable t, Response response) {
-	            	LOGGER.error("SSE Connection failed: " + t.getMessage());
+	            	LOGGER.error("SSE Connection failed: " + t.getCause());
 	                if (response != null) {
 	                	LOGGER.debug("Response Status: " + response.code());
 	                }
-	                latch.countDown(); // Signal completion
+	                try {
+	                	LOGGER.error("AYCAA");
+						genaicommons.impl.StreamingImpl.throwError(StreamingResponseWriterId);
+					} catch (IOException e) {
+						LOGGER.error("Could not throw error.");
+					}
 	            }
 	        };
 	        
@@ -160,13 +162,10 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	        	latch.await(); // Wait indefinitely until stream completes
 	        } catch (InterruptedException e) {
 	            Thread.currentThread().interrupt();
+	            genaicommons.impl.StreamingImpl.throwError(StreamingResponseWriterId);
 	        }
 	        
 	        eventSource.cancel();
-	        
-	        // Connection must be closed before returning response! FEEDBACK!
-	        
-	        LOGGER.info("EventSource cancelled"); 
 	        
 	        mxResponse.getResponse_Message().setContent(mxResponse.getResponseText());
 	        mxResponse.getResponse_Message().setMessage_ToolCall(mxToolCallList);
@@ -174,7 +173,9 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	        return mxResponse.getMendixObject();
 		        
 		} catch (Exception e) {
+			
 			LOGGER.error(e);
+			genaicommons.impl.StreamingImpl.throwError(StreamingResponseWriterId);
 			return null;
 		}
 		// END USER CODE
@@ -197,6 +198,8 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	
 	genaicommons.proxies.Response mxResponse =  new genaicommons.proxies.Response(getContext());
 	List<genaicommons.proxies.ToolCall> mxToolCallList = new ArrayList<genaicommons.proxies.ToolCall>();
+	
+	Boolean noFailure = true;
 	
 	Integer toolContentBlockIndex = 10000;
 	
