@@ -29233,6 +29233,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border-color: #ced0d3;
 }
 
+.widget-combobox-item-selected {
+  background-color: #f5f6f6;
+}
+
 .layoutgrid--full-height {
   height: 100%;
 }
