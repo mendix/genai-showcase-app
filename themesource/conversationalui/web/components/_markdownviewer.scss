@@ -1,16 +1,26 @@
 @use '../../../../theme/web/custom-variables' as *;
 
 .widget-markdown {
+    color: #0A1324B2;
+    font-weight: 400;
+
     hr {
         margin: $spacing-small 0;
     }
     p {
+        color: #0A1324B2;
         font-weight: 400;
-        color: #0A1324B2
     }
+
+    strong {
+        color: #0A1324D9;
+        font-weight: 600;
+    }
+
     h1, h2, h3, h4, h5, h6 {
         margin: $spacing-small 0;
-                color: #0A1324D9;
+        font-weight: 600;
+        color: #0A1324D9;
 
     }
     ul {

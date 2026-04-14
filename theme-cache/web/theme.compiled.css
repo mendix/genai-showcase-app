@@ -28862,8 +28862,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin: 0 10% 0 0;
   padding: 8px 12px;
   padding-bottom: 0px;
-  color: rgba(10, 19, 36, 0.6980392157);
-  font-weight: 600;
 }
 .chat-bubble-wrapper--user {
   align-items: flex-end;
@@ -28872,6 +28870,19 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background: #f8f8f8;
   border-radius: 8px 8px 0 8px;
   margin: 0 0 0 10%;
+}
+
+.message--user {
+  color: rgba(10, 19, 36, 0.6980392157);
+  font-weight: 400;
+}
+.message--user h1, .message--user h2, .message--user h3, .message--user h4, .message--user h5, .message--user h6 {
+  color: rgba(10, 19, 36, 0.8509803922);
+  font-weight: 600;
+}
+.message--user strong {
+  color: rgba(10, 19, 36, 0.8509803922);
+  font-weight: 400;
 }
 
 .chat-history-sidebar {
@@ -30240,15 +30251,24 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding-left: 2px;
 }
 
+.widget-markdown {
+  color: rgba(10, 19, 36, 0.6980392157);
+  font-weight: 400;
+}
 .widget-markdown hr {
   margin: 8px 0;
 }
 .widget-markdown p {
-  font-weight: 400;
   color: rgba(10, 19, 36, 0.6980392157);
+  font-weight: 400;
+}
+.widget-markdown strong {
+  color: rgba(10, 19, 36, 0.8509803922);
+  font-weight: 600;
 }
 .widget-markdown h1, .widget-markdown h2, .widget-markdown h3, .widget-markdown h4, .widget-markdown h5, .widget-markdown h6 {
   margin: 8px 0;
+  font-weight: 600;
   color: rgba(10, 19, 36, 0.8509803922);
 }
 .widget-markdown ul {

@@ -152,8 +152,7 @@
         margin: 0 10% 0 0;
         padding: $spacing-small 12px;
         padding-bottom: 0px;
-        color: #0A1324B2;
-        font-weight: 600;
+
     }
 
     &--user {
@@ -164,6 +163,22 @@
             border-radius: 8px 8px 0 8px;
             margin: 0 0 0 10%;
         }
+    }
+}
+
+.message--user {
+    color: #0A1324B2;
+    font-weight: 400;
+
+    h1,h2,h3,h4,h5,h6 {
+        color: #0A1324D9;
+        font-weight: 600;
+
+    }
+    strong {
+        color: #0A1324D9;
+        font-weight: 400;
+
     }
 }
 
