@@ -50,7 +50,8 @@ export async function JS_SubmitStreaming(requestJSON, responseCollector, deploye
 		//
 		// (empty line indicates end of message)
 
-		const lines = message.split('\n').filter(line => line.trim() !== '');
+		// const lines = message.split('\n').filter(line => line.trim() !== '');
+		const lines = message.replace(/\r\n/g, "\n").split("\n").filter(line => line.trim() !== "");
 		let id = null;
 		let event = 'message'; // Default event type
 		let data = '';
@@ -83,8 +84,9 @@ export async function JS_SubmitStreaming(requestJSON, responseCollector, deploye
 		}
 		if (data) {
 			try {
-				const decodedData = atob(data);
-				//console.log('Data:', decodedData);
+				const binary = atob(data);
+				const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
+				const decodedData = new TextDecoder("utf-8").decode(bytes);
 				// Here you would update your UI or application state
 				const currentText = responseCollector.get("Content")
 				responseCollector.set("Content", currentText + decodedData)
@@ -108,6 +110,7 @@ export async function JS_SubmitStreaming(requestJSON, responseCollector, deploye
 
 			// Decode the chunk and add to buffer
 			buffer += decoder.decode(value, { stream: true });
+			buffer = buffer.replace(/\r\n/g, "\n");
 
 			// Process complete SSE messages from the buffer
 			// SSE messages are terminated by two newline characters (\n\n)
@@ -115,7 +118,7 @@ export async function JS_SubmitStreaming(requestJSON, responseCollector, deploye
 			while ((messageEndIndex = buffer.indexOf('\n\n')) !== -1) {
 				const message = buffer.substring(0, messageEndIndex);
 				processSseMessage(message);
-				buffer = buffer.substring(messageEndIndex + 2); // Remove processed message and its delimiters
+				buffer = buffer.substring(messageEndIndex + 2); 
 			}
 		}
 		return true;
