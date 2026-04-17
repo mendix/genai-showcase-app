@@ -35,6 +35,11 @@
     position: relative;
 }
 
+
+.widget-combobox-item-selected {
+    background-color: #d1d5db;
+}
+
 .widget-combobox-placeholder-custom {
     width: 100%;
 }
@@ -43,6 +48,7 @@
     display: flex;
     align-items: center;
     width: 100%;
+    overflow: hidden;
 }
 
 .item-selection,
@@ -76,3 +82,4 @@
         text-overflow: ellipsis;
     }
 }
+

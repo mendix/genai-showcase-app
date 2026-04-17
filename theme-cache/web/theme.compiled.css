@@ -30139,6 +30139,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-bottom: 8px;
   z-index: 10;
 }
+.agent-page-container .page-navigation span {
+  font-size: 12px;
+}
 .agent-page-container .page-navigation .clickable-hover:hover {
   text-shadow: 0 0 0.4px currentColor, 0 0 0.4px currentColor;
 }
@@ -31001,6 +31004,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   position: relative;
 }
 
+.widget-combobox-item-selected {
+  background-color: #d1d5db;
+}
+
 .widget-combobox-placeholder-custom {
   width: 100%;
 }
@@ -31009,6 +31016,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
   align-items: center;
   width: 100%;
+  overflow: hidden;
 }
 
 .item-selection,
