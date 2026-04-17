@@ -53,8 +53,17 @@
 
     .messages-container {
         flex: 1 1 0;
+        padding: 0 $spacing-large;
         overflow-y: auto;
         overflow-x: hidden;
+        .mx-listview {
+            ul > li {
+                padding: 0 ;
+             }
+        }
+    }
+    .chat-input-container {
+        padding: 0px 16px;
     }
 
     &--center {
@@ -146,12 +155,19 @@
     justify-content: center;
 
     .chat-message-card {
+        width: 100%;
         background: $chat-bubble-assistant-background;
         border-radius: 8px 8px 8px 0;
         border: 1px solid $border-color-default;
-        margin: 0 10% 0 0;
-        padding: $spacing-small 12px;
+        margin: 0;
+        padding: 0;
         padding-bottom: 0px;
+        .widget-markdown {
+            margin-top: $spacing-medium;
+        }
+    }
+    &--assistant {
+        margin-top: $spacing-small;
     }
 
     &--user {
@@ -161,6 +177,7 @@
             background: $chat-bubble-user-background;
             border-radius: 8px 8px 0 8px;
             margin: 0 0 0 10%;
+            width: auto;
         }
     }
 }
@@ -210,14 +227,15 @@
 
 .tool-message {
     border-radius: $spacing-small; 
-    border: 1px solid;
-    border-color: $chat-border-color;
+    border: 0px solid;
     overflow: hidden;
+    padding: $spacing-medium;
+    background-color: $chat-bg-light;
+    color: rgba($font-color-header, 0.7);
+    font-weight: $font-weight-normal;
     
-    .tool-title{
+    .tool-title {
         font-weight: $font-weight-semibold;
-        background-color: $chat-bg-light;
-        padding: $spacing-small;
         display: block;
         .mx-image-viewer {
             width: auto;
@@ -225,7 +243,10 @@
     }
 
     .tool-details{
-        padding: $spacing-small;
+        padding-top: $spacing-small;
+        a.mx-link {
+            color: $font-color-default;
+        }
     }
 
     .reject-button{
@@ -239,6 +260,6 @@
 }
 
 .tool-status-image{
-        width: $spacing-medium;
-        margin: $spacing-smaller;
+    width: $spacing-medium;
+    margin: $spacing-smaller;
 }

@@ -401,19 +401,20 @@
         padding-left: unset;
         padding-right: unset;
 
-        .chat-container {
-            padding-left: $spacing-medium;
-            padding-right: $spacing-medium;
-        }
-
         .chat-bubble-wrapper {
             .chat-message-card {
                 background: $bg-color-secondary;
                 border-radius: 8px;
-                border: 1px solid $border-color-default;
+                border: 0px solid $border-color-default;
+                .mx-listview {
+                    ul > li {
+                        padding: $spacing-smaller 0;
+                    }
+                }
             }
 
             &--user .chat-message-card {
+                padding: $spacing-small $spacing-medium;
                 background: $gray-lighter;
                 border: 1px solid $gray-lighter;
             }

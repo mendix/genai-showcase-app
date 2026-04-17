@@ -28506,6 +28506,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 0;
 }
 
+.accordion-tool-calls {
+  width: 100%;
+}
 .accordion-tool-calls .widget-accordion-group {
   background: transparent;
   border-bottom: none;
@@ -28515,6 +28518,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background: transparent;
   padding: 4px;
   width: 100%;
+}
+.accordion-tool-calls .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button .tool-title {
+  font-weight: normal;
+  color: #0a1325;
 }
 .accordion-tool-calls .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button .mx-image-viewer {
   width: auto;
@@ -28532,9 +28539,16 @@ input[type=checkbox].three-state-checkbox + .control-label {
   fill: #0a1325;
 }
 .accordion-tool-calls .widget-accordion-group .widget-accordion-group-content-wrapper .widget-accordion-group-content {
-  padding-left: 28px;
-  padding-right: 0;
-  padding-bottom: 0;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 4px;
+  color: normal;
+  opacity: 60%;
+}
+.accordion-tool-calls .widget-accordion-group .widget-accordion-group-content-wrapper .widget-accordion-group-content .card {
+  padding: 8px 16px;
+  margin-bottom: 0;
+  border-radius: 2px;
 }
 
 /* Custom Alert */
@@ -29054,8 +29068,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .chat-container .messages-container {
   flex: 1 1 0;
+  padding: 0 24px;
   overflow-y: auto;
   overflow-x: hidden;
+}
+.chat-container .messages-container .mx-listview ul > li {
+  padding: 0;
+}
+.chat-container .chat-input-container {
+  padding: 0px 16px;
 }
 .chat-container--center {
   max-width: 900px;
@@ -29136,12 +29157,19 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: center;
 }
 .chat-bubble-wrapper .chat-message-card {
+  width: 100%;
   background: #fff;
   border-radius: 8px 8px 8px 0;
   border: 1px solid #ced0d3;
-  margin: 0 10% 0 0;
-  padding: 8px 12px;
+  margin: 0;
+  padding: 0;
   padding-bottom: 0px;
+}
+.chat-bubble-wrapper .chat-message-card .widget-markdown {
+  margin-top: 16px;
+}
+.chat-bubble-wrapper--assistant {
+  margin-top: 8px;
 }
 .chat-bubble-wrapper--user {
   align-items: flex-end;
@@ -29150,6 +29178,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background: #f8f8f8;
   border-radius: 8px 8px 0 8px;
   margin: 0 0 0 10%;
+  width: auto;
 }
 
 .chat-history-sidebar {
@@ -29189,21 +29218,25 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .tool-message {
   border-radius: 8px;
-  border: 1px solid;
-  border-color: #E7E7E9;
+  border: 0px solid;
   overflow: hidden;
+  padding: 16px;
+  background-color: #f7f7f7;
+  color: rgba(10, 19, 37, 0.7);
+  font-weight: normal;
 }
 .tool-message .tool-title {
   font-weight: 600;
-  background-color: #f7f7f7;
-  padding: 8px;
   display: block;
 }
 .tool-message .tool-title .mx-image-viewer {
   width: auto;
 }
 .tool-message .tool-details {
-  padding: 8px;
+  padding-top: 8px;
+}
+.tool-message .tool-details a.mx-link {
+  color: #0a1325;
 }
 .tool-message .reject-button {
   background-color: transparent;
@@ -30108,16 +30141,16 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding-left: unset;
   padding-right: unset;
 }
-.agent-page-container .chat-container-agent .chat-container {
-  padding-left: 16px;
-  padding-right: 16px;
-}
 .agent-page-container .chat-container-agent .chat-bubble-wrapper .chat-message-card {
   background: #fff;
   border-radius: 8px;
-  border: 1px solid #ced0d3;
+  border: 0px solid #ced0d3;
+}
+.agent-page-container .chat-container-agent .chat-bubble-wrapper .chat-message-card .mx-listview ul > li {
+  padding: 4px 0;
 }
 .agent-page-container .chat-container-agent .chat-bubble-wrapper--user .chat-message-card {
+  padding: 8px 16px;
   background: #f8f8f8;
   border: 1px solid #f8f8f8;
 }
@@ -30886,21 +30919,28 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding-left: 2px;
 }
 
+.widget-markdown {
+  color: rgba(10, 19, 37, 0.85);
+  font-weight: 400;
+}
 .widget-markdown hr {
-  margin-top: 4px;
-  margin-bottom: 4px;
+  margin: 8px 0;
+}
+.widget-markdown strong {
+  font-weight: bold;
 }
 .widget-markdown h1, .widget-markdown h2, .widget-markdown h3, .widget-markdown h4, .widget-markdown h5, .widget-markdown h6 {
-  font-size: 16px;
+  margin: 8px 0;
   font-weight: 600;
+  color: rgba(10, 19, 36, 0.8509803922);
 }
 .widget-markdown ul {
   justify-content: flex-start;
-  list-style: none;
-  padding: 0;
+  padding-left: 18px;
 }
 .widget-markdown ul > li {
   padding: 0;
+  font-weight: normal;
 }
 .widget-markdown li p {
   margin-bottom: 0px;
@@ -30908,6 +30948,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .widget-markdown ol {
   padding-left: 18px;
   justify-content: flex-start;
+  color: rgba(10, 19, 36, 0.6980392157);
+}
+.widget-markdown table tr th, .widget-markdown table tr td {
+  color: rgba(10, 19, 36, 0.6980392157);
 }
 
 .spinner {

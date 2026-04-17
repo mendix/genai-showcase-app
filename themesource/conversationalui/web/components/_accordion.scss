@@ -36,6 +36,7 @@
 ///// Accordion styling for accordions used inside a message bubble 
 ////////////////////////////////////////////////////////////////////
 .accordion-tool-calls {
+    width: 100%;
     .widget-accordion-group{
         background: transparent;
         border-bottom: none;
@@ -45,6 +46,10 @@
                 background: transparent;
                 padding: $spacing-smaller;
                 width: 100%;
+                .tool-title {
+                    font-weight: $font-weight-normal;
+                    color: $font-color-header;
+                }
                 .mx-image-viewer {
                     width: auto;
                 }
@@ -68,9 +73,16 @@
         }
         .widget-accordion-group-content-wrapper {
             .widget-accordion-group-content {
-                padding-left: 28px;
-                padding-right: 0;
-                padding-bottom: 0;
+                padding-left: 0px;
+                padding-right: 0px;
+                padding-bottom: $spacing-smaller;
+                color: $font-weight-normal;
+                opacity: 60%;
+                .card {
+                    padding: 8px 16px;
+                    margin-bottom: 0;
+                    border-radius: $spacing-smallest;
+                }
             }
         }
     }
