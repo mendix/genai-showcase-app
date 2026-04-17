@@ -16,26 +16,23 @@ public class WriteToResponseStream extends UserAction<java.lang.Void>
 {
 	private final java.lang.String RequestId;
 	private final java.lang.String Content;
-	private final java.lang.Boolean DeleteContent;
 
 	public WriteToResponseStream(
 		IContext context,
 		java.lang.String _requestId,
-		java.lang.String _content,
-		java.lang.Boolean _deleteContent
+		java.lang.String _content
 	)
 	{
 		super(context);
 		this.RequestId = _requestId;
 		this.Content = _content;
-		this.DeleteContent = _deleteContent;
 	}
 
 	@java.lang.Override
 	public java.lang.Void executeAction() throws Exception
 	{
 		// BEGIN USER CODE
-		genaicommons.impl.ResponseConnectionController.getInstance().getStreamingResponseWriter(RequestId).write(Content.getBytes(), DeleteContent);
+		genaicommons.impl.ResponseConnectionController.getInstance().getStreamingResponseWriter(RequestId).write(Content.getBytes());
 		return null;
 		// END USER CODE
 	}

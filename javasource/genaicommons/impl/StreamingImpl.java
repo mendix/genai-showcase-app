@@ -22,7 +22,7 @@ public class StreamingImpl {
 	public static void pushChunkToUI(IContext ctx, String streamingResponseWriterId, String chunkText) {
 		
 		if (streamingResponseWriterId != null) {
-			genaicommons.proxies.microflows.Microflows.streamCallback(ctx, chunkText, streamingResponseWriterId, false);
+			genaicommons.proxies.microflows.Microflows.streamCallback(ctx, chunkText, streamingResponseWriterId);
 		}
 	}
 	

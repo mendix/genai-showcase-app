@@ -53,6 +53,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		requireNonNull(this.RequestBodyJSON, "A Request object is required");
 		requireNonNull(this.MxCloudDeployedModel, "A DeployedModel object is required");
 		try {
+			LOGGER.debug("Starting Request_ChatCompletions_Stream.");
 			
 			genaicommons.impl.StreamingImpl.createResponseMessage(getContext(),mxResponse);
 			
@@ -64,7 +65,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	        
 	        MediaType JSON = MediaType.get("application/json; charset=utf-8");
 	        RequestBody requestBody = RequestBody.create(this.RequestBodyJSON, JSON);
-	        var accessKey = encryption.proxies.microflows.Microflows.decrypt(getContext(),this.MxCloudDeployedModel.getMxCloudDeployedModel_Configuration().getAccessToken());
+	        String accessKey = encryption.proxies.microflows.Microflows.decrypt(getContext(),this.MxCloudDeployedModel.getMxCloudDeployedModel_Configuration().getAccessToken());
 	        
 	        Request mxCloudrequest = new Request.Builder()
 	            .url(this.MxCloudDeployedModel.getMxCloudDeployedModel_Configuration().getResourceBaseUrl() + "/converse-stream")
@@ -77,8 +78,9 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	        EventSourceListener listener = new EventSourceListener() {
 	            @Override
 	            public void onOpen(EventSource eventSource, Response response) {
-	            	LOGGER.debug("SSE Connection opened");
-	            	LOGGER.debug("Response Status: " + response.code());
+	            	
+	            	LOGGER.debug("SSE Connection opened. HTTP " + response.code());
+	       
 	            }
 	            
 	            @Override
@@ -87,7 +89,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		            	JsonNode rootNode = mapper.readTree(data);
 		            	switch (type) {
 		                case "MESSAGE_START":
-		                    // AYCA -> DO WE NEED THIS PART OR IS IT ALWAYS ASSISTANT
+		                    // DO WE NEED THIS PART OR IS IT ALWAYS ASSISTANT?
 		                    break;
 		                    
 		                case "CONTENT_BLOCK_START":
@@ -142,16 +144,14 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	            
 	            @Override
 	            public void onFailure(EventSource eventSource, Throwable t, Response response) {
-	            	LOGGER.error("SSE Connection failed: " + t.getCause());
-	                if (response != null) {
-	                	LOGGER.debug("Response Status: " + response.code());
-	                }
-	                try {
-	                	LOGGER.error("AYCAA");
-						genaicommons.impl.StreamingImpl.throwError(StreamingResponseWriterId);
-					} catch (IOException e) {
-						LOGGER.error("Could not throw error.");
-					}
+                	isError = true;
+                	if (response != null) {
+                        LOGGER.error("SSE HTTP failure: " + response.code() + " - " + response.message());
+                    }
+                	if (t != null) {
+                        LOGGER.error("SSE transport failure: ", t);
+                    }
+                    latch.countDown();
 	            }
 	        };
 	        
@@ -162,10 +162,14 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	        	latch.await(); // Wait indefinitely until stream completes
 	        } catch (InterruptedException e) {
 	            Thread.currentThread().interrupt();
-	            genaicommons.impl.StreamingImpl.throwError(StreamingResponseWriterId);
+	            isError = true;
 	        }
 	        
 	        eventSource.cancel();
+	        
+	        if (isError) {
+	        	return null;
+	        }
 	        
 	        mxResponse.getResponse_Message().setContent(mxResponse.getResponseText());
 	        mxResponse.getResponse_Message().setMessage_ToolCall(mxToolCallList);
@@ -173,9 +177,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	        return mxResponse.getMendixObject();
 		        
 		} catch (Exception e) {
-			
 			LOGGER.error(e);
-			genaicommons.impl.StreamingImpl.throwError(StreamingResponseWriterId);
 			return null;
 		}
 		// END USER CODE
@@ -196,10 +198,10 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	
 	private static final ObjectMapper mapper = new ObjectMapper();
 	
+	Boolean isError = false;
+	
 	genaicommons.proxies.Response mxResponse =  new genaicommons.proxies.Response(getContext());
 	List<genaicommons.proxies.ToolCall> mxToolCallList = new ArrayList<genaicommons.proxies.ToolCall>();
-	
-	Boolean noFailure = true;
 	
 	Integer toolContentBlockIndex = 10000;
 	
@@ -244,7 +246,6 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		genaicommons.proxies.ToolCall mxToolCall = mxToolCallList.get(mxToolCallList.size()-1);
 	
 		if (mxToolCall.getInput() == null || mxToolCall.getInput().isBlank()) {
-			LOGGER.info("HERE");
 			mxToolCall.setInput("{}");
 		}
 		LOGGER.debug("Toolcall added to response.");

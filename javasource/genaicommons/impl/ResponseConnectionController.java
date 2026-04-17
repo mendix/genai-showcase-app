@@ -34,7 +34,7 @@ public class ResponseConnectionController {
             this.outputStream = outputStream;
         }
 
-        public void write(byte[] data, boolean deleteContent) throws IOException {
+        public void write(byte[] data) throws IOException {
  
 	        outputStream.write("data: ".getBytes());
             outputStream.write(Base64.getEncoder().encode(data));
