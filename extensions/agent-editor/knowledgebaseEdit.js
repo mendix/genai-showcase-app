@@ -1,14 +1,14 @@
-import { A as W, r as v, x as n, G as j, F as E, J as I, U as F, P, Q as U, R as M, V as z } from "./Icon-Bb5knnP8.js";
-import { u as _, B as $, c as H, C as J } from "./TextWithIcon-ldexQTj6.js";
+import { A as q, r as v, x as n, G as j, F as E, J as I, U as F, P, Q as U, R as M, V as _ } from "./Icon-Bb5knnP8.js";
+import { u as $, B as z, c as H, C as J } from "./TextWithIcon-KVcSlj1C.js";
 import { createStudioProLogger as k } from "./logger-Bof2Evv1.js";
-import { x as N, y as G, q as Q, z as X, s as Y, t as Z } from "./index-DkFXQr22.js";
-import { C as y, i as ee, B as ne, v as te, a as se } from "./ButtonWithLabel-BTsToYxh.js";
+import { w as N, x as G, p as Q, y as X, r as Y, s as Z } from "./index-DNPEn852.js";
+import { C as y, i as ee, B as ne, v as te, a as se } from "./ButtonWithLabel-DPhWHgQx.js";
 import { y as A } from "./Link-B-mEjjKJ.js";
 import { i as oe } from "./objectUtils-ChZ8y4UX.js";
-import { d as ae, a as re, b as ie, g as le } from "./mxCloudGenAIUtils-5h1ptJ_Q.js";
+import { d as ae, a as re, b as ie, g as le } from "./mxCloudGenAIUtils-CoL5Cjj-.js";
 import { W as ce } from "./Banner-DsVgoRin.js";
 import { T as de } from "./Table-B2MEs44R.js";
-import { T as b } from "./TextInputLabeled-BLG8tCoP.js";
+import { T as w } from "./TextInputLabeled-BLG8tCoP.js";
 import { T as ue } from "./TextInputWithButton-CMS27jFj.js";
 const B = (e, t) => async (r) => {
   const c = k(e);
@@ -131,8 +131,8 @@ async function he(e, t) {
     }
   }
 }
-const w = () => {
-}, fe = W.div`
+const b = () => {
+}, fe = q.div`
     color: ${({ theme: e }) => e.colorsTextSecondaryDefault};
     font-size: 10px;
 `, ge = ({
@@ -153,7 +153,7 @@ const w = () => {
   }, x = async () => {
     a.key && Y(e, a.key);
   }, f = async (i) => {
-    const q = i.providerFields, K = await te(e, q.key);
+    const W = i.providerFields, K = await te(e, W.key);
     if (d(K), !K)
       ye(
         e,
@@ -172,7 +172,7 @@ const w = () => {
   }, V = (i) => {
     (a.key && i.includes(a.key.documentId) || i.includes("projectSettings")) && f(t);
   };
-  _({
+  $({
     studioPro: e,
     dependentIds: [(S = a.key) == null ? void 0 : S.documentId].filter((i) => !!i),
     watchProjectSettings: !0,
@@ -198,7 +198,7 @@ const w = () => {
         }
       ),
       O && /* @__PURE__ */ n.jsxs(ce, { children: [
-        /* @__PURE__ */ n.jsx($, { children: l === y.PrivateValue ? "Missing permissions" : "Invalid constant value" }),
+        /* @__PURE__ */ n.jsx(z, { children: l === y.PrivateValue ? "Missing permissions" : "Invalid constant value" }),
         /* @__PURE__ */ n.jsx("div", { children: l === y.PrivateValue ? "Private constants require additional permissions for local use. Grant access via View > Extensions and reopen the current tab." : "In order to use your Knowledge base locally, please set a valid value for the key constant." })
       ] }),
       !a.key && /* @__PURE__ */ n.jsxs(E, { children: [
@@ -215,53 +215,53 @@ const w = () => {
       ] }),
       a.keyId && /* @__PURE__ */ n.jsxs(n.Fragment, { children: [
         /* @__PURE__ */ n.jsx(
-          b,
+          w,
           {
             label: "Resource",
             ariaLabel: "Resource name",
             value: t.name,
-            onChange: w,
+            onChange: b,
             readOnly: !0
           }
         ),
         /* @__PURE__ */ n.jsx(
-          b,
+          w,
           {
             label: "Embeddings model",
             ariaLabel: "Embeddings model name",
             value: a.modelDisplayName,
             icon: a.modelDisplayName && a.modelDisplayName.toLocaleLowerCase().includes("cohere") ? X : void 0,
-            onChange: w,
+            onChange: b,
             readOnly: !0
           }
         ),
         /* @__PURE__ */ n.jsx(
-          b,
+          w,
           {
             label: "Embeddings model ID",
             ariaLabel: "Embeddings model ID",
             value: a.modelName,
-            onChange: w,
+            onChange: b,
             readOnly: !0
           }
         ),
         /* @__PURE__ */ n.jsx(
-          b,
+          w,
           {
             label: "Key",
             ariaLabel: "Key name",
             value: a.keyName,
-            onChange: w,
+            onChange: b,
             readOnly: !0
           }
         ),
         /* @__PURE__ */ n.jsx(
-          b,
+          w,
           {
             label: "Environment",
             ariaLabel: "Environment",
             value: a.environment,
-            onChange: w,
+            onChange: b,
             readOnly: !0
           }
         ),
@@ -334,7 +334,7 @@ const w = () => {
   }, a = () => m.provider ? !0 : "Knowledge base provider is required.";
   return /* @__PURE__ */ n.jsx(P, { studioPro: e, children: /* @__PURE__ */ n.jsxs(U, { children: [
     !o && /* @__PURE__ */ n.jsx(J, {}),
-    o && /* @__PURE__ */ n.jsx(M, { children: /* @__PURE__ */ n.jsxs(z, { children: [
+    o && /* @__PURE__ */ n.jsx(M, { children: /* @__PURE__ */ n.jsxs(_, { children: [
       /* @__PURE__ */ n.jsx(j, { label: "Common", children: /* @__PURE__ */ n.jsx(
         se,
         {
