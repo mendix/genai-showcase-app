@@ -70,6 +70,16 @@
     }
 }
 
+.text-area-resizing {
+    textarea {
+        field-sizing: content;
+        min-height: 1lh;
+        max-height: 5lh;
+        overflow-y: auto;
+        resize: none;
+    }
+}
+
 
 .input-container {
     border-bottom: 1px solid $light-border-color;
