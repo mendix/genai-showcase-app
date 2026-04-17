@@ -144,14 +144,30 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	            
 	            @Override
 	            public void onFailure(EventSource eventSource, Throwable t, Response response) {
-                	isError = true;
-                	if (response != null) {
-                        LOGGER.error("SSE HTTP failure: " + response.code() + " - " + response.message());
-                    }
-                	if (t != null) {
-                        LOGGER.error("SSE transport failure: ", t);
-                    }
-                    latch.countDown();
+            	    try {
+		            	if (t != null) {
+		            		if (t instanceof Exception) {
+		            	        failureException = (Exception) t;
+		            	    } else {
+		            	        failureException = new Exception("Streaming failure", t);
+		            	    }
+		            		LOGGER.error("SSE transport failure: ", t);
+		            	} else if (response != null) {
+		            		String responseBody = null;
+		                    if (response.body() != null) {
+		                        responseBody = response.body().string();
+		                    }
+		            		LOGGER.error("SSE HTTP failure: " + response.code() + " - " + response.message() + " - " + responseBody);
+		            	    failureException = new IOException("HTTP " + response.code() + ": " + response.message() + " - " + responseBody);
+		            	} else {
+		            		LOGGER.error("Unknown SSE failure");
+		            	    failureException = new RuntimeException("Unknown SSE failure");
+		            	}
+            	    } catch (Exception e) {
+            	        failureException = e;
+            	    } finally {
+            	        latch.countDown();
+            	    }
 	            }
 	        };
 	        
@@ -162,13 +178,14 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	        	latch.await(); // Wait indefinitely until stream completes
 	        } catch (InterruptedException e) {
 	            Thread.currentThread().interrupt();
-	            isError = true;
+	            eventSource.cancel();
+	            throw e;
 	        }
 	        
 	        eventSource.cancel();
 	        
-	        if (isError) {
-	        	return null;
+	        if (failureException !=  null) {
+	        	throw failureException;
 	        }
 	        
 	        mxResponse.getResponse_Message().setContent(mxResponse.getResponseText());
@@ -178,7 +195,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		        
 		} catch (Exception e) {
 			LOGGER.error(e);
-			return null;
+			throw e;
 		}
 		// END USER CODE
 	}
@@ -198,7 +215,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	
 	private static final ObjectMapper mapper = new ObjectMapper();
 	
-	Boolean isError = false;
+	Exception failureException = null;
 	
 	genaicommons.proxies.Response mxResponse =  new genaicommons.proxies.Response(getContext());
 	List<genaicommons.proxies.ToolCall> mxToolCallList = new ArrayList<genaicommons.proxies.ToolCall>();

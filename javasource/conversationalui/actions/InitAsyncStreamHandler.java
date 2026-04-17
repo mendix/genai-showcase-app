@@ -112,7 +112,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 					genaicommons.proxies.Response mxResponse = genaicommons.proxies.microflows.Microflows.chatCompletions_WithHistory(getContext(), mxRequest, mxDeployedModel);
 					
 					if (mxResponse == null) {
-	                    LOGGER.error("There was an issue with Chat Completions.");
+	                    LOGGER.error("There was an issue when calling the Chat Completions API, no response was returned.");
 	                    resp.getHttpServletResponse().setStatus(404);
 	                    genaicommons.impl.StreamingImpl.throwError(getContext(),resp.getOutputStream());
 	                    ResponseConnectionController.getInstance().removeStreamingResponseWriter(connectionId);
