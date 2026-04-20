@@ -53,7 +53,7 @@
 
     .messages-container {
         flex: 1 1 0;
-        padding: 0 $spacing-large;
+        padding: 0 $spacing-medium;
         overflow-y: auto;
         overflow-x: hidden;
         .mx-listview {
@@ -178,6 +178,7 @@
             border-radius: 8px 8px 0 8px;
             margin: 0 0 0 10%;
             width: auto;
+            padding: $spacing-small;
         }
     }
 }
