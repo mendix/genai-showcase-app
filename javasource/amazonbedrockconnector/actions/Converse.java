@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
+import java.util.LinkedHashMap;
 import java.util.stream.Collectors;
 import org.apache.commons.io.IOUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -652,8 +653,15 @@ public class Converse extends UserAction<IMendixObject>
 	
 	// Content Block with tool result
 	private ContentBlock getToolResultContent(genaicommons.proxies.Message mxMsg) {
+		Document.MapBuilder toolResultJsonBuilder = Document.mapBuilder();
+		if (mxMsg.getContent() == null) {
+			toolResultJsonBuilder.putNull("result");
+		} else {
+			toolResultJsonBuilder.putString("result", mxMsg.getContent());
+		}
+
 		software.amazon.awssdk.services.bedrockruntime.model.ToolResultContentBlock.Builder toolResultContentBuilder = ToolResultContentBlock.builder()
-				.text(mxMsg.getContent());
+				.json(toolResultJsonBuilder.build());
 		
 		
 		software.amazon.awssdk.services.bedrockruntime.model.ToolResultBlock.Builder toolResultBuilder = ToolResultBlock.builder()
@@ -977,6 +985,47 @@ public class Converse extends UserAction<IMendixObject>
 			return Document.fromString(node.toString());
 		}
 	}
+
+	private String documentToJson(Document document) throws JsonProcessingException {
+		return MAPPER.writeValueAsString(documentToJavaValue(document));
+	}
+
+	private Object documentToJavaValue(Document document) {
+		if (document == null || document.isNull()) {
+			return null;
+		}
+
+		if (document.isMap()) {
+			Map<String, Object> values = new LinkedHashMap<>();
+			for (Entry<String, Document> entry : document.asMap().entrySet()) {
+				values.put(entry.getKey(), documentToJavaValue(entry.getValue()));
+			}
+			return values;
+		}
+
+		if (document.isList()) {
+			List<Object> values = new ArrayList<>();
+			for (Document item : document.asList()) {
+				values.add(documentToJavaValue(item));
+			}
+			return values;
+		}
+
+		if (document.isBoolean()) {
+			return document.asBoolean();
+		}
+
+		if (document.isString()) {
+			return document.asString();
+		}
+
+		if (document.isNumber()) {
+			return document.asNumber().bigDecimalValue();
+		}
+
+		LOGGER.warn("Unsupported AWS Document type encountered during tool input serialization. Falling back to string value.");
+		return document.toString();
+	}
 	
 	// Check if a tool has already been called to decide whether Tool Choice should be set or not
 	private boolean isToolRecall(Tool toolChoiceTool, Request commonRequest) throws CoreException {
@@ -1162,7 +1211,7 @@ public class Converse extends UserAction<IMendixObject>
 
 		Document awsToolDocument = awsToolUse.input();
 		if (awsToolDocument != null) {
-			String inputJson = awsToolDocument.toString();
+			String inputJson = documentToJson(awsToolDocument);
 			mxToolCall.setInput(inputJson);
 		}
 

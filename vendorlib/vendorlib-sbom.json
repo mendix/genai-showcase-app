@@ -73,120 +73,6 @@
     },
     {
       "type" : "library",
-      "bom-ref" : "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.21?type=jar",
-      "group" : "com.fasterxml.jackson.core",
-      "name" : "jackson-annotations",
-      "version" : "2.21",
-      "description" : "Core annotations used for value types, used by Jackson data binding package.",
-      "hashes" : [
-        {
-          "alg" : "MD5",
-          "content" : "e0d0c3e7300954f73e43c67d933aaea4"
-        },
-        {
-          "alg" : "SHA-1",
-          "content" : "b1bc1868bf02dc0bd6c7836257a036a331005309"
-        },
-        {
-          "alg" : "SHA-256",
-          "content" : "53ca085f4a150f703f49e1aabd935bd03b43e1ea3d55d135438292af22cef56b"
-        },
-        {
-          "alg" : "SHA-512",
-          "content" : "d832a99867acc2d5afb2596da760c50e6a6b54c1bbc8e6c4186f267a16e1d55c7a916ef8b034ad6b277c41e3342b91dcdc2e3dcea8bdccfe89e7c147894591be"
-        },
-        {
-          "alg" : "SHA-384",
-          "content" : "30b15d68f8da6f6c26aa9f6c95d09152b6c1a8092cd976cf600d63d1751509a73865f937e0ad97d8d55bf20f6a749b44"
-        },
-        {
-          "alg" : "SHA3-384",
-          "content" : "5205b51f6ed689cf31b58b98a61ca9e17a439c15d669dcb408ec4d430e77ac9ac57d39d5ca1f9973e8d184f6dd57ec4f"
-        },
-        {
-          "alg" : "SHA3-256",
-          "content" : "d6782d188a72b2bb96e4b595343e783012b3f98c30f7b9950244c21739334509"
-        },
-        {
-          "alg" : "SHA3-512",
-          "content" : "b648f1e9ffe818227d53fbde409e61858ac22d3f78705eaf08065587ed512c9b33b0f5e2222356bfb33fb2973bb5a3184e31d2a7099f8fc8d2fd23eb4612a4bf"
-        }
-      ],
-      "licenses" : [
-        {
-          "license" : {
-            "id" : "Apache-2.0"
-          }
-        }
-      ],
-      "purl" : "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.21?type=jar",
-      "modified" : false,
-      "externalReferences" : [
-        {
-          "type" : "vcs",
-          "url" : "https://github.com/FasterXML/jackson-annotations"
-        }
-      ]
-    },
-    {
-      "type" : "library",
-      "bom-ref" : "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.1?type=jar",
-      "group" : "com.fasterxml.jackson.core",
-      "name" : "jackson-databind",
-      "version" : "2.21.1",
-      "description" : "General data-binding functionality for Jackson: works on core streaming API",
-      "hashes" : [
-        {
-          "alg" : "MD5",
-          "content" : "35fe6cc9ff7990e67f86a92092aa0569"
-        },
-        {
-          "alg" : "SHA-1",
-          "content" : "5615fb77652bfd386d87b95a1d663e1c0e38b372"
-        },
-        {
-          "alg" : "SHA-256",
-          "content" : "b011eb5202d9ec889e27f1dcbdf6c63f06a76e7a16c0a1b30c6048d556c9a28e"
-        },
-        {
-          "alg" : "SHA-512",
-          "content" : "837a94e20474d0ad3630663c0112e982914e5cfa3bbf397b8c31d00b68d7fc8e4514458b75dd39cf74edda7e33339504fa845864476786e94812bd36a5a428ee"
-        },
-        {
-          "alg" : "SHA-384",
-          "content" : "42101498ef71f5b506c2b445217722949c57f634bc7cd5ca4a7d112faa8edb98b9ff1cce06a23d65389315da0e79cc31"
-        },
-        {
-          "alg" : "SHA3-384",
-          "content" : "0ca6e7f95c5600ff88712faec79a9f45438908abfdbb9367ceef7e3ccf37256212db617509fc68efae0d919418210777"
-        },
-        {
-          "alg" : "SHA3-256",
-          "content" : "fb7b4d84416fc38f1b90b3e4dcd4ad6ffe484e4092530ac459d18b48a146479d"
-        },
-        {
-          "alg" : "SHA3-512",
-          "content" : "17eb42ce90e339d66509adbb429296eafd283c72229c81deec2ca78e9e941c692b4ace7595f0fe5c5eb54b5bac93c7b3ab146be992ba9d974d2e388a2a964543"
-        }
-      ],
-      "licenses" : [
-        {
-          "license" : {
-            "id" : "Apache-2.0"
-          }
-        }
-      ],
-      "purl" : "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.1?type=jar",
-      "modified" : false,
-      "externalReferences" : [
-        {
-          "type" : "vcs",
-          "url" : "https://github.com/FasterXML/jackson-databind"
-        }
-      ]
-    },
-    {
-      "type" : "library",
       "bom-ref" : "pkg:maven/io.netty/netty-resolver@4.1.132.Final?type=jar",
       "group" : "io.netty",
       "name" : "netty-resolver",
@@ -406,57 +292,6 @@
     },
     {
       "type" : "library",
-      "bom-ref" : "pkg:maven/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml@2.21.1?type=jar",
-      "group" : "com.fasterxml.jackson.dataformat",
-      "name" : "jackson-dataformat-yaml",
-      "version" : "2.21.1",
-      "description" : "Support for reading and writing YAML-encoded data via Jackson abstractions.",
-      "hashes" : [
-        {
-          "alg" : "MD5",
-          "content" : "f0a647f76bb70da49b12f9d862cc6d77"
-        },
-        {
-          "alg" : "SHA-1",
-          "content" : "334d9c06a7b63ae67b72b5926dd10fb35cff0c0d"
-        },
-        {
-          "alg" : "SHA-256",
-          "content" : "5c94fa55d4b93bd4ea9ac6f2cf4928ff50822d1c43e521e715d3abf23031a06d"
-        },
-        {
-          "alg" : "SHA-512",
-          "content" : "a4af873838cab58bdef7d953c4f081fae1d6354b05f8b1937ab62b30f61be73e576c998b01e712c1fa42fd7c3de951e302aa807b2d7f5fe362c3e3603410e1d9"
-        },
-        {
-          "alg" : "SHA-384",
-          "content" : "d7c90fb256fa1343abbc1733159d3791d9a085f6f7fc8eec2229d6f426a8aa1e657ead861ac5ee332d023a7a4faa8187"
-        },
-        {
-          "alg" : "SHA3-384",
-          "content" : "9e8eefd219caeb51edc21445309135a83d704750b279a81a84684698b566a62c0dded617523c5641b5756f811cb0d3bf"
-        },
-        {
-          "alg" : "SHA3-256",
-          "content" : "88d37442964c61d66bab334530de53e7a89889c6206d2258bcecfe55563f63ba"
-        },
-        {
-          "alg" : "SHA3-512",
-          "content" : "7ea2d5f81f786681482cd6cb5198b4e59eb86500f86e2aa9061d23850b447ac08f513f3f44938621cb726cde3b17e2d30c9fbd28c613d875ecd14502c1b51a8c"
-        }
-      ],
-      "licenses" : [
-        {
-          "license" : {
-            "id" : "Apache-2.0"
-          }
-        }
-      ],
-      "purl" : "pkg:maven/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml@2.21.1?type=jar",
-      "modified" : false
-    },
-    {
-      "type" : "library",
       "bom-ref" : "pkg:maven/io.netty/netty-common@4.1.132.Final?type=jar",
       "group" : "io.netty",
       "name" : "netty-common",
@@ -666,43 +501,43 @@
     },
     {
       "type" : "library",
-      "bom-ref" : "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.21.1?type=jar",
-      "group" : "com.fasterxml.jackson.core",
-      "name" : "jackson-core",
-      "version" : "2.21.1",
-      "description" : "Core Jackson processing abstractions (aka Streaming API), implementation for JSON",
+      "bom-ref" : "pkg:maven/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml@2.20.1?type=jar",
+      "group" : "com.fasterxml.jackson.dataformat",
+      "name" : "jackson-dataformat-yaml",
+      "version" : "2.20.1",
+      "description" : "Support for reading and writing YAML-encoded data via Jackson abstractions.",
       "hashes" : [
         {
           "alg" : "MD5",
-          "content" : "a526a530a07fd25140dee4695e686051"
+          "content" : "66dc3c5f31150557109b14182ed7ed8a"
         },
         {
           "alg" : "SHA-1",
-          "content" : "47b013fc85dbb819f3ba51e95a5560d0f1c4121c"
+          "content" : "e6da043059c9ec631a3429ded461d5d92f240c3f"
         },
         {
           "alg" : "SHA-256",
-          "content" : "1edd5f2e49dca5f8e4519957c24b7b3050bd1c7ee883920da33cff031ff1f7c0"
+          "content" : "030f1d91f7df278e86e1ba3e129fb520871ac16ce53017c735f708823be970db"
         },
         {
           "alg" : "SHA-512",
-          "content" : "f4b153a0a7c974620dec3fcfe4a4869c2632ab97f73c2662041af7d0eb0c42ad462bfee8cdcab5542842175b96197df1d910a8841067654f6e763b370c18ccfa"
+          "content" : "7141257127b072ae9d4bdd08de027f3f6cdb14b7667190f88b058f60d42e1d0556c3a2c3be0beb27397dc386f65be137dd280f9e53632922047b091c10b01bbc"
         },
         {
           "alg" : "SHA-384",
-          "content" : "22047a20191a34eba9c83e3b6d5df5b74b160eea9c5279e3d32d7688e2dcdd791083db1d661ebb7aaf872fe603460f30"
+          "content" : "38a69dced20a6b256db3b638759fcc34ccfa6431be6db754efc1c5eb8c159d3c69dcae3a540711f032cce2a655c866f9"
         },
         {
           "alg" : "SHA3-384",
-          "content" : "44632cb6d9783d4dd883081507ff220c19bd620041791e8f1e63671aa57400d2bc03af732a9a12728b5918e4e7a415e2"
+          "content" : "e97172e20190cfeccc97aa74419f0f851f9f4062dee569fd2be579d96dae1cd0800f92d3a9223073b684005b9b01d263"
         },
         {
           "alg" : "SHA3-256",
-          "content" : "a39b1a208b640982042b4ad6f7606a7b6ea537d23034fafd7d3330252e85c178"
+          "content" : "18a4a4adf0f20ce8c3ddc07e5ecf530320d6aa4581db6fc869d67e24c4950d7c"
         },
         {
           "alg" : "SHA3-512",
-          "content" : "a712ad471cd591149a8d9e8d2ad1795915d1098332d521c32be26e76ea9b18eb84d22d3dd1dd3f008bfb223b89d7a6c33cd621385933735f67d758cb191be9ca"
+          "content" : "0cbdf60922d17c7cf925f704ca487a452092da1d860b63925739dd030febd1efd77d176490dcfab9fe50ddaf0a3786131d5709606c4383cf29ea38b784021ee1"
         }
       ],
       "licenses" : [
@@ -712,14 +547,8 @@
           }
         }
       ],
-      "purl" : "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.21.1?type=jar",
-      "modified" : false,
-      "externalReferences" : [
-        {
-          "type" : "vcs",
-          "url" : "https://github.com/FasterXML/jackson-core"
-        }
-      ]
+      "purl" : "pkg:maven/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml@2.20.1?type=jar",
+      "modified" : false
     },
     {
       "type" : "library",
@@ -1408,6 +1237,132 @@
       ],
       "purl" : "pkg:maven/io.netty/netty-codec-http2@4.1.132.Final?type=jar",
       "modified" : false
+    },
+    {
+      "type" : "library",
+      "bom-ref" : "pkg:maven/io.modelcontextprotocol.sdk/mcp-core@1.1.1?type=jar",
+      "publisher" : "Anthropic",
+      "group" : "io.modelcontextprotocol.sdk",
+      "name" : "mcp-core",
+      "version" : "1.1.1",
+      "description" : "Core classes of the Java SDK implementation of the Model Context Protocol, enabling seamless integration with language models and AI tools",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "fa6fac2b198fc352e78bf2176c9dd240"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "54c35d90ed5e32dc55f06332f16e1c3132ce5127"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "1ab3270c17acfa4713b82874077595813d7ccb030585a96e8d9a8f4b97647f4f"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "28ecf394d0282f30c528f99fe19fbb3a3d18fc76d22a483b4528bb1a4771f56d46154ccb95b301a710a445a8197051bf48c96d22e41066dd518c172dd60ba17b"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "e792c875656764eb1328bb95c2b5d5b8b82527c935bb969c5c912509065ce40c5d5e900b086bc1d9709f304e6e3fd8eb"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "f5f433e8cd2094e59bd3505eaa3b54373a559ae4b6b6a5d84115d3c3e894849ff05c461dbd495e1e7884f979f895bcd0"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "8362c06dd8c37753bbd6792ae0e707578d6f780ac18d5727d2cef244a7da6cdd"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "ad5a7744e2f8aa869c477aeca54c6692d450f8c43a25bf6830710e007858261303c2fe568767baa67ea80becdcf5e1946fe8a243fefd881e80b3761e1fcfd137"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "MIT",
+            "url" : "https://opensource.org/license/mit/"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/io.modelcontextprotocol.sdk/mcp-core@1.1.1?type=jar",
+      "modified" : false,
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://www.anthropic.com"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/modelcontextprotocol/java-sdk"
+        }
+      ]
+    },
+    {
+      "type" : "library",
+      "bom-ref" : "pkg:maven/io.modelcontextprotocol.sdk/mcp-json-jackson2@1.1.1?type=jar",
+      "publisher" : "Anthropic",
+      "group" : "io.modelcontextprotocol.sdk",
+      "name" : "mcp-json-jackson2",
+      "version" : "1.1.1",
+      "description" : "Java MCP SDK JSON implementation based on Jackson 2",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "6e4d0f448c3a28b52d0126dccc2eef9e"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "acde5e9655a5ffb86752ff77492d61b21952faec"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "384cb06dbb51f14fc4cb0b1db1df3e44d35f40d8ce16b09c97101d62b93cbda5"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "3149c12a5c138f1a1033749a3a2884faa42ccdd397dcacd793e9e2c98485006ef3c90101e965f765c809442c3334e7e6030a713c9f7428b5d0142f70148b7d4f"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "7712267608cd9fd9c7bc2324b2407aac3d6fada96c3456ceb07b9bc4d7a45ac3d28ce93c718ba2215bd8bc9adeef1021"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "c7c60ecf0d0c3f2054dd3c4c37c1dcfe6603bb9caefbf56bb848027b18cee53feffddd8501ba8ec9ba17ce8437afe4ad"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "369ae1a0f32cf2744ce7a82c745338585a37a33838ffd3d1d292607245c041de"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "861f63ca13585006c44e270acfd9f7e74151a3dc9aec14a656adb9ffc80b195ca8654d1ed91d31caa45eeb28b9016393001f6f131251e1f05a20eeb1f6e89184"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "MIT",
+            "url" : "https://opensource.org/license/mit/"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/io.modelcontextprotocol.sdk/mcp-json-jackson2@1.1.1?type=jar",
+      "modified" : false,
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://www.anthropic.com"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/modelcontextprotocol/java-sdk"
+        }
+      ]
     },
     {
       "type" : "library",
@@ -2172,67 +2127,6 @@
     },
     {
       "type" : "library",
-      "bom-ref" : "pkg:maven/org.yaml/snakeyaml@2.5?type=jar",
-      "group" : "org.yaml",
-      "name" : "snakeyaml",
-      "version" : "2.5",
-      "description" : "YAML 1.1 parser and emitter for Java",
-      "hashes" : [
-        {
-          "alg" : "MD5",
-          "content" : "8d3b7581db5c7620db55183f33a4f2ad"
-        },
-        {
-          "alg" : "SHA-1",
-          "content" : "2d53ddec134280cb384c1e35d094e5f71c1f2316"
-        },
-        {
-          "alg" : "SHA-256",
-          "content" : "e6682acf1ace77508ef13649cbf4f8d09d2cf5457bdb61d25ffb6ac0233d78dd"
-        },
-        {
-          "alg" : "SHA-512",
-          "content" : "a69bea3ae0ed31b12d9fa23bf1cd3fb71bae88e231d9657f0291e3000ae17a1df50709e072134f9155158f488eba67a3f8daf879462499f07b07d9239e78933e"
-        },
-        {
-          "alg" : "SHA-384",
-          "content" : "2fa12e4330d6da0a693a13588c8cdeff562c1bd1dc32e043d402ca1fc72d87a30dcc7bb31f9b582df3fe018eb6c6a3bb"
-        },
-        {
-          "alg" : "SHA3-384",
-          "content" : "8c5037c75bb2f464829ba38126a4773c88951705effc2b14289f3bbdef05bb598f10e4d9603dcd1b58efd7cb68d996a2"
-        },
-        {
-          "alg" : "SHA3-256",
-          "content" : "3aa9329b0eab5185331e526a011c74b45b4c4a506214e6c3ec2d2038c51cc261"
-        },
-        {
-          "alg" : "SHA3-512",
-          "content" : "f80ff702aee20a5150a11818985d659fffb1d5238e331aca2048524649e0270e5bca0186ce7caf04ecf85fd95c95c6b9d8ed1f362ed399fef624eb94b70dc6de"
-        }
-      ],
-      "licenses" : [
-        {
-          "license" : {
-            "id" : "Apache-2.0"
-          }
-        }
-      ],
-      "purl" : "pkg:maven/org.yaml/snakeyaml@2.5?type=jar",
-      "modified" : false,
-      "externalReferences" : [
-        {
-          "type" : "issue-tracker",
-          "url" : "https://bitbucket.org/snakeyaml/snakeyaml/issues"
-        },
-        {
-          "type" : "vcs",
-          "url" : "https://bitbucket.org/snakeyaml/snakeyaml/src"
-        }
-      ]
-    },
-    {
-      "type" : "library",
       "bom-ref" : "pkg:maven/com.networknt/json-schema-validator@2.0.0?type=jar",
       "group" : "com.networknt",
       "name" : "json-schema-validator",
@@ -2398,6 +2292,67 @@
     },
     {
       "type" : "library",
+      "bom-ref" : "pkg:maven/org.yaml/snakeyaml@2.4?type=jar",
+      "group" : "org.yaml",
+      "name" : "snakeyaml",
+      "version" : "2.4",
+      "description" : "YAML 1.1 parser and emitter for Java",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "29410ee3a987e3bff7b847933c591972"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "e0666b825b796f85521f02360e77f4c92c5a7a07"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "ef779af5d29a9dde8cc70ce0341f5c6f7735e23edff9685ceaa9d35359b7bb7f"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "1573717e2c47868515cbed5265a6f77ebec23a0b5c6376ac18b9f5c2335beb65d4c68d2073d50143d59a60141980be8db1e493a85d7c78106cdb94a52e8361d2"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "d53aa94bc612897f76bb456d0aca4a5edf029fdda00f628a6953072033236877b4138206a2ff23bd802217f667531211"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "deb4d1b236697d6bc9b2b05c65c8f741e7c1d7c9984d1900cc68c3bac5fa24d6443682d91f8b91818953f029228a06fd"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "90b378b7280540ec9f57d60ec9154be01a73e80cecb13580338a8f3dd1098216"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "c6927f9b923f055336a44c4025251e2f8c8eec52c816506874ada97999ccae0b435c8014f219ea310065862f822be09e4d22bf88a967b5ac76a149a74b123965"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/org.yaml/snakeyaml@2.4?type=jar",
+      "modified" : false,
+      "externalReferences" : [
+        {
+          "type" : "issue-tracker",
+          "url" : "https://bitbucket.org/snakeyaml/snakeyaml/issues"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://bitbucket.org/snakeyaml/snakeyaml/src"
+        }
+      ]
+    },
+    {
+      "type" : "library",
       "bom-ref" : "pkg:maven/com.ethlo.time/itu@1.14.0?type=jar",
       "group" : "com.ethlo.time",
       "name" : "itu",
@@ -2459,64 +2414,58 @@
     },
     {
       "type" : "library",
-      "bom-ref" : "pkg:maven/io.modelcontextprotocol.sdk/mcp-json-jackson2@0.16.0?type=jar",
-      "publisher" : "Anthropic",
-      "group" : "io.modelcontextprotocol.sdk",
-      "name" : "mcp-json-jackson2",
-      "version" : "0.16.0",
-      "description" : "Java MCP SDK JSON implementation based on Jackson",
+      "bom-ref" : "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.20?type=jar",
+      "group" : "com.fasterxml.jackson.core",
+      "name" : "jackson-annotations",
+      "version" : "2.20",
+      "description" : "Core annotations used for value types, used by Jackson data binding package.",
       "hashes" : [
         {
           "alg" : "MD5",
-          "content" : "c1f21ae8e30fbdf1e77d024ff2c24394"
+          "content" : "b901def3c20752817f27130e4b8d6640"
         },
         {
           "alg" : "SHA-1",
-          "content" : "ce9e10cc624f8226631b7c183e7e12a82234c26d"
+          "content" : "6a5e7291ea3f2b590a7ce400adb7b3aea4d7e12c"
         },
         {
           "alg" : "SHA-256",
-          "content" : "a3d06eb8f2c61b7d5f94680a13a8a90f504d4602cd3c4b11db2c76b2f7f13205"
+          "content" : "959a2ffb2d591436f51f183c6a521fc89347912f711bf0cae008cdf045d95319"
         },
         {
           "alg" : "SHA-512",
-          "content" : "e95e9f601a2c6659f1b519663edcbe42f6103d4217bb5523eb58fb0bd4b5a9edb1810491eef24a65cfac99824977b17833dd9e7de890e2bf0d663c2b41a7bbea"
+          "content" : "8926d89bfe7f427c7793f6af619249540f23f82eae055dd03d4cb163ff603a43dd6a3ebe43528d00789aed3df0dd2f10e08552fdec53e2691849b9769f57f0c9"
         },
         {
           "alg" : "SHA-384",
-          "content" : "62aeeb5990604a05022100987759e4c91f99ff77aaeabb35647f96324aa42b2f7e845d6a3f8cc0d1499a7a8b9af32caf"
+          "content" : "40ee4c1438a5a190624dff9deca83377f7e60690b4535359b2a79924f736bff7c8d077e5b01c6c8972735dc152f2ccf4"
         },
         {
           "alg" : "SHA3-384",
-          "content" : "ee3456d4eb1d250280cb8c6b280f9a56cdd282cd38477766db555bdb26412716d9571a8d089aa30b2257a2ac5d832176"
+          "content" : "0fc0f697d03692b63c2b11fcabac51c630278ed6df15420975263ea4ad19418b3b71b7889497ed20a150035f9bcba79d"
         },
         {
           "alg" : "SHA3-256",
-          "content" : "2f2f32327156594d62ee93b7362e0808b64c9e187e5af88ecc9d63b07406a6c8"
+          "content" : "6bf49e384735969af020f758b255ceed26af92d4cf456f6e7b83e8de53289f93"
         },
         {
           "alg" : "SHA3-512",
-          "content" : "e6c592d8a792921ddd90928da3cdf12cb727ee70ce3a7288b3332aa5d917447d07fb3f3cde6fbf084b582f4b391735fbdc54b1c2a56a53ae5eb51e485173df9c"
+          "content" : "3372f6c456a7f6a33ebc3ecc65daaf36288be2a14b1f2cb9fcd7387c07acab1c69ae803a366e5d12adf4934970ffd2e34017917c5f16a6d563bc94810f228ab3"
         }
       ],
       "licenses" : [
         {
           "license" : {
-            "id" : "MIT",
-            "url" : "https://opensource.org/license/mit/"
+            "id" : "Apache-2.0"
           }
         }
       ],
-      "purl" : "pkg:maven/io.modelcontextprotocol.sdk/mcp-json-jackson2@0.16.0?type=jar",
+      "purl" : "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.20?type=jar",
       "modified" : false,
       "externalReferences" : [
         {
-          "type" : "website",
-          "url" : "https://www.anthropic.com"
-        },
-        {
           "type" : "vcs",
-          "url" : "https://github.com/modelcontextprotocol/java-sdk"
+          "url" : "https://github.com/FasterXML/jackson-annotations"
         }
       ]
     },
@@ -2799,6 +2748,126 @@
       ],
       "purl" : "pkg:maven/software.amazon.awssdk/arns@2.42.37?type=jar",
       "modified" : false
+    },
+    {
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.20.1?type=jar",
+      "group" : "com.fasterxml.jackson.core",
+      "name" : "jackson-databind",
+      "version" : "2.20.1",
+      "description" : "General data-binding functionality for Jackson: works on core streaming API",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "49d7b7226df5ed4a036e48997a03d066"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "9586a7fe0e1775de0e54237fa6a2c8455c93ac06"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "34bbeb4526fff4f8565b12106bf85a6afcbae858966d489b54214ac46b2e26e8"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "16906e9c2f1962649eb21de148f362fedf2ce903c7ca0e6d68a01d43dbe8402b70cc537c104f36bc40a2bed6601162e7c21663735582e25bff7e27852be1405d"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "0591935cdfed1d65fa4a2820133ba129384f71921228ffe093f343d3ebf0b699762810d9208641726111015f0e35753b"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "855ccd449944e7884f8088c8c5b224e6e2f63bcd3123502618b4f5ded025e5978143af8c5d31215276932bc3bb089472"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "53732171c9f2bdeaa40017a34683a00ac11e8a8c1bcefaed07eb91e629e20376"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "05017efae94bc3c83131aaaa7911f20e7c367502cd2cd05c6cedabc877b55724bcde2521ba1da15bf1c1c3ccb1a235124b39b2d4860142f2b89d4df197cf5c83"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.20.1?type=jar",
+      "modified" : false,
+      "externalReferences" : [
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/FasterXML/jackson-databind"
+        }
+      ]
+    },
+    {
+      "type" : "library",
+      "bom-ref" : "pkg:maven/io.modelcontextprotocol.sdk/mcp@1.1.1?type=jar",
+      "publisher" : "Anthropic",
+      "group" : "io.modelcontextprotocol.sdk",
+      "name" : "mcp",
+      "version" : "1.1.1",
+      "description" : "Java SDK implementation of the Model Context Protocol, enabling seamless integration with language models and AI tools",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "b413323fabe13daf89a0e37ed94c2f6f"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "c65244206997cab651ff75afb71c663d39a79349"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "ad4b127b30f28c08df6f8eb93207093ddea6ef797492b2a83655ce71ebd8d919"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "c14b24343956364f00ab2550a7264d1be27e80503c805a6a0dec946b9bf5d230214ad7d6f01b80c59109f3f80e9eb44919a305caa5fe72a6039f4dd8b523cc85"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "e4faa4cb63a820b395d4f82bc5e8be44538af6d55869f7be639c09c96b28cd34eb9add325848b6aa33c195919b62c866"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "3665e09547822ea809bec1c0e9b4a8e14d23a3ecc4958abd925a82d46c04fa5beef39a743e86b8cceae890b59751b99f"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "33a0efbe003632afa73be6a1f24fc2179e599786d0fc7dc9280ffa9ee7fa276e"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "65580be114fb9da691e4ddb31def042c735ea08cd9bead3c3cb20ad69502a588b27977c8038dfebc3d3782547670419d778b449e9cc4482a42f70c97c3b1d675"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "MIT",
+            "url" : "https://opensource.org/license/mit/"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/io.modelcontextprotocol.sdk/mcp@1.1.1?type=jar",
+      "modified" : false,
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://www.anthropic.com"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/modelcontextprotocol/java-sdk"
+        }
+      ]
     },
     {
       "type" : "library",
@@ -3321,69 +3390,6 @@
       ],
       "purl" : "pkg:maven/software.amazon.awssdk/json-utils@2.42.37?type=jar",
       "modified" : false
-    },
-    {
-      "type" : "library",
-      "bom-ref" : "pkg:maven/io.modelcontextprotocol.sdk/mcp-json@0.16.0?type=jar",
-      "publisher" : "Anthropic",
-      "group" : "io.modelcontextprotocol.sdk",
-      "name" : "mcp-json",
-      "version" : "0.16.0",
-      "description" : "Java MCP SDK JSON Support API",
-      "hashes" : [
-        {
-          "alg" : "MD5",
-          "content" : "52cacb745dceb30260d290dfe33960ed"
-        },
-        {
-          "alg" : "SHA-1",
-          "content" : "0a9dae1616f48d1863c49cee4d936bff6306de5e"
-        },
-        {
-          "alg" : "SHA-256",
-          "content" : "d3a8903d8e9be84158217d54e6c28fbe36a2c61d65d4f4d031da24dce355bc2f"
-        },
-        {
-          "alg" : "SHA-512",
-          "content" : "87df1a05ed2316f18d5ce48dbfe0477aa3a0c029e874147e46fd25be401530334d778001638aab6e7301896a61347faf105c09f78d8bd8e4504bd76405b36940"
-        },
-        {
-          "alg" : "SHA-384",
-          "content" : "3aa2d0b55d09d5164cacc05675fdd5816da792a9083c4576df2feac3012957e3f8029fc8cc2d1f341ed11016160f8b40"
-        },
-        {
-          "alg" : "SHA3-384",
-          "content" : "5fb63a3a3107d0ec7c4d161132662b9df895087a74cb5f693303b337ca261ecf39270449134c07193ec5723f31ded86a"
-        },
-        {
-          "alg" : "SHA3-256",
-          "content" : "da0a42ec6306c053352b4872af2accd5fddd9a590fe2c166360b31ee26dc301e"
-        },
-        {
-          "alg" : "SHA3-512",
-          "content" : "d50cfe69e1adaca1a1315edb573ce9b86bee7583ea63e35c9f89cc001b68bbaba94e886a8a58edcf65cc98c5acf03a782b633eb2d4efdeca54b2e5574273a56b"
-        }
-      ],
-      "licenses" : [
-        {
-          "license" : {
-            "id" : "MIT",
-            "url" : "https://opensource.org/license/mit/"
-          }
-        }
-      ],
-      "purl" : "pkg:maven/io.modelcontextprotocol.sdk/mcp-json@0.16.0?type=jar",
-      "modified" : false,
-      "externalReferences" : [
-        {
-          "type" : "website",
-          "url" : "https://www.anthropic.com"
-        },
-        {
-          "type" : "vcs",
-          "url" : "https://github.com/modelcontextprotocol/java-sdk"
-        }
-      ]
     },
     {
       "type" : "library",
@@ -4503,69 +4509,6 @@
     },
     {
       "type" : "library",
-      "bom-ref" : "pkg:maven/io.modelcontextprotocol.sdk/mcp@0.16.0?type=jar",
-      "publisher" : "Anthropic",
-      "group" : "io.modelcontextprotocol.sdk",
-      "name" : "mcp",
-      "version" : "0.16.0",
-      "description" : "Java SDK implementation of the Model Context Protocol, enabling seamless integration with language models and AI tools",
-      "hashes" : [
-        {
-          "alg" : "MD5",
-          "content" : "c8d9017a3eb1a5fc0bf6fd74e57c0451"
-        },
-        {
-          "alg" : "SHA-1",
-          "content" : "1efccde9e68f1f2bed5f8309c1225658fba9849a"
-        },
-        {
-          "alg" : "SHA-256",
-          "content" : "bb7ac40bfe769f95d718cf5831cbdb1e048cb95418270b27d0b1c7633a4feb72"
-        },
-        {
-          "alg" : "SHA-512",
-          "content" : "7f54e3cb882566d14c7a10c40535a9a4276726e47f21f0753239552ccaff37ea4e2fe3980969682bbd115b0321708e524b3622581a54aa8dcfea9992620d4405"
-        },
-        {
-          "alg" : "SHA-384",
-          "content" : "30acf660062cc580905601d5e5722a442592b68a1df5c23694f2ce9da501ea0257d3c6263530bc65bfdb9ceb81139eee"
-        },
-        {
-          "alg" : "SHA3-384",
-          "content" : "7038350f6f0aaae626d880452101bcae7224dd6b7d71fb55d3d8b98094064ac91a794a5b39490fcdb49e6a2743619808"
-        },
-        {
-          "alg" : "SHA3-256",
-          "content" : "ef8c2c9e32e7e7d7eb0b00ef11fd7ed08a40f9f85adf5a7c82b97ab99af6b0c9"
-        },
-        {
-          "alg" : "SHA3-512",
-          "content" : "3a96199a1df1587113006e58928c6da4377d2cc1dc659a8cf8bb008452a7f502cf73e95923bcd30d5e7468b7467802fc58af5b69db1e4fd5ead430587b190738"
-        }
-      ],
-      "licenses" : [
-        {
-          "license" : {
-            "id" : "MIT",
-            "url" : "https://opensource.org/license/mit/"
-          }
-        }
-      ],
-      "purl" : "pkg:maven/io.modelcontextprotocol.sdk/mcp@0.16.0?type=jar",
-      "modified" : false,
-      "externalReferences" : [
-        {
-          "type" : "website",
-          "url" : "https://www.anthropic.com"
-        },
-        {
-          "type" : "vcs",
-          "url" : "https://github.com/modelcontextprotocol/java-sdk"
-        }
-      ]
-    },
-    {
-      "type" : "library",
       "bom-ref" : "pkg:maven/software.amazon.awssdk/utils-lite@2.42.37?type=jar",
       "group" : "software.amazon.awssdk",
       "name" : "utils-lite",
@@ -4665,69 +4608,6 @@
       ],
       "purl" : "pkg:maven/software.amazon.awssdk/http-auth-aws@2.42.37?type=jar",
       "modified" : false
-    },
-    {
-      "type" : "library",
-      "bom-ref" : "pkg:maven/io.modelcontextprotocol.sdk/mcp-core@0.16.0?type=jar",
-      "publisher" : "Anthropic",
-      "group" : "io.modelcontextprotocol.sdk",
-      "name" : "mcp-core",
-      "version" : "0.16.0",
-      "description" : "Core classes of the Java SDK implementation of the Model Context Protocol, enabling seamless integration with language models and AI tools",
-      "hashes" : [
-        {
-          "alg" : "MD5",
-          "content" : "f2f80e863e174d52c973590ed9d7bed9"
-        },
-        {
-          "alg" : "SHA-1",
-          "content" : "cc103e762da4bc8866cb608778a8c7961afa4d36"
-        },
-        {
-          "alg" : "SHA-256",
-          "content" : "56312d1a7b98b7e3e5be78e07911fa2506427fbee6fbead4a1e794dad12b392e"
-        },
-        {
-          "alg" : "SHA-512",
-          "content" : "a36cb73b92f9239f044a6aa23e610aca7d6672dce3201f47dfe34d3042bbf3c9fa5651aaf8d5eb59221015df815736e3055c2db02f3bd9bb8457e43937c564c7"
-        },
-        {
-          "alg" : "SHA-384",
-          "content" : "6dbeae2fbabcdcc5b0df05a33fd0d2274a4929dbf977f15d2cde59f83ab69d2dad5ef6c569d7567283733c07e907fa32"
-        },
-        {
-          "alg" : "SHA3-384",
-          "content" : "e91fa6ab706fc0f890c2a9cc2ccc0c088a562d6a17d0ea9e0f30c51694ac885d747dcce822581852dad0c91a654d20aa"
-        },
-        {
-          "alg" : "SHA3-256",
-          "content" : "2491c89afdb13b984f7f6913453807061be69f6581065019d6210ea2bcfa4594"
-        },
-        {
-          "alg" : "SHA3-512",
-          "content" : "dae858b5563a7b49869c5320d2df449688c49d09887eadbfc549940dbf99fb071e836b148622e591ff8cf1ca054441f74e49c57b00f04dff2ab35bbe408c1d3f"
-        }
-      ],
-      "licenses" : [
-        {
-          "license" : {
-            "id" : "MIT",
-            "url" : "https://opensource.org/license/mit/"
-          }
-        }
-      ],
-      "purl" : "pkg:maven/io.modelcontextprotocol.sdk/mcp-core@0.16.0?type=jar",
-      "modified" : false,
-      "externalReferences" : [
-        {
-          "type" : "website",
-          "url" : "https://www.anthropic.com"
-        },
-        {
-          "type" : "vcs",
-          "url" : "https://github.com/modelcontextprotocol/java-sdk"
-        }
-      ]
     },
     {
       "type" : "library",
@@ -5144,6 +5024,63 @@
       ],
       "purl" : "pkg:maven/software.amazon.awssdk/utils@2.42.37?type=jar",
       "modified" : false
+    },
+    {
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.20.1?type=jar",
+      "group" : "com.fasterxml.jackson.core",
+      "name" : "jackson-core",
+      "version" : "2.20.1",
+      "description" : "Core Jackson processing abstractions (aka Streaming API), implementation for JSON",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "889b2c417b61c9f4f460b06957147234"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "5734323adfece72111769b0ae38a6cf803e3d178"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "ffab4d957daa2796cf24cb66d0b78a7090f1bcbe17c3a4578f09affaaf137089"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "0463e1c2e1d8e8cfa4954dfce491583f0ec9ec1de6e6f342d1e5f0c63dcfb959673552a279ec4e6b6cc69e6ac2de6d42dd512149ceb76620b5d780db7325e6a7"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "a279b2d57d019a05f65762ce670ce23e02466b11276d8c0687f3bb5ed40a8a1854bfe6dd2dc157d0f5695186f7d9a65a"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "06b9f33e030a99fa95d171118ab668bee42e32b35b85e05750f8514128dbadc94026afde16dbadc0ff786027b09712a4"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "3e83a1a349d8ba3a4e76ee983f04b259a85263dda5090f55aae5535109c4b6c0"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "87b3a61a71a625adfc6b9b402079c26b223e19535ca5af07e4130932d479f9c22e90696911050d8ab8a09a6209651fe2f25f54d7d9a1493b6dab6f8acb76203d"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.20.1?type=jar",
+      "modified" : false,
+      "externalReferences" : [
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/FasterXML/jackson-core"
+        }
+      ]
     }
   ],
   "dependencies" : [
@@ -5152,26 +5089,26 @@
       "dependsOn" : [ ]
     },
     {
-      "ref" : "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.21?type=jar",
+      "ref" : "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.20?type=jar",
       "dependsOn" : [ ]
     },
     {
-      "ref" : "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.21.1?type=jar",
+      "ref" : "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.20.1?type=jar",
       "dependsOn" : [ ]
     },
     {
-      "ref" : "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.1?type=jar",
+      "ref" : "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.20.1?type=jar",
       "dependsOn" : [
-        "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.21.1?type=jar",
-        "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.21?type=jar"
+        "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.20.1?type=jar",
+        "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.20?type=jar"
       ]
     },
     {
-      "ref" : "pkg:maven/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml@2.21.1?type=jar",
+      "ref" : "pkg:maven/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml@2.20.1?type=jar",
       "dependsOn" : [
-        "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.1?type=jar",
-        "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.21.1?type=jar",
-        "pkg:maven/org.yaml/snakeyaml@2.5?type=jar"
+        "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.20.1?type=jar",
+        "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.20.1?type=jar",
+        "pkg:maven/org.yaml/snakeyaml@2.4?type=jar"
       ]
     },
     {
@@ -5207,8 +5144,6 @@
     {
       "ref" : "pkg:maven/com.mendix/temp@1.0.0?type=jar",
       "dependsOn" : [
-        "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.21?type=jar",
-        "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.21.1?type=jar",
         "pkg:maven/com.google.guava/guava@33.4.7-jre?type=jar",
         "pkg:maven/com.ibm.db2.jcc/db2jcc@db2jcc4?type=jar",
         "pkg:maven/com.oracle.database.ha/ons@21.5.0.0?type=jar",
@@ -5221,7 +5156,8 @@
         "pkg:maven/com.sap.cloud.db.jdbc/ngdbc@2.19.15?type=jar",
         "pkg:maven/com.zaxxer/HikariCP@5.0.1?type=jar",
         "pkg:maven/commons-io/commons-io@2.17.0?type=jar",
-        "pkg:maven/io.modelcontextprotocol.sdk/mcp@0.16.0?type=jar",
+        "pkg:maven/io.modelcontextprotocol.sdk/mcp-json-jackson2@1.1.1?type=jar",
+        "pkg:maven/io.modelcontextprotocol.sdk/mcp@1.1.1?type=jar",
         "pkg:maven/org.apache.commons/commons-lang3@3.18.0?type=jar",
         "pkg:maven/org.apache.commons/commons-text@1.10.0?type=jar",
         "pkg:maven/org.apache.pdfbox/pdfbox@2.0.30?type=jar",
@@ -5244,16 +5180,18 @@
         "pkg:maven/software.amazon.awssdk/s3@2.42.37?type=jar",
         "pkg:maven/software.amazon.awssdk/url-connection-client@2.42.37?type=jar",
         "pkg:maven/software.amazon.awssdk.crt/aws-crt@0.45.1?type=jar",
+        "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.20.1?type=jar",
         "pkg:maven/commons-codec/commons-codec@1.17.1?type=jar",
-        "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.1?type=jar",
+        "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.20?type=jar",
+        "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.20.1?type=jar",
         "pkg:maven/org.slf4j/slf4j-api@2.0.17?type=jar"
       ]
     },
     {
       "ref" : "pkg:maven/com.networknt/json-schema-validator@2.0.0?type=jar",
       "dependsOn" : [
-        "pkg:maven/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml@2.21.1?type=jar",
-        "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.1?type=jar",
+        "pkg:maven/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml@2.20.1?type=jar",
+        "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.20.1?type=jar",
         "pkg:maven/org.slf4j/slf4j-api@2.0.17?type=jar",
         "pkg:maven/com.ethlo.time/itu@1.14.0?type=jar"
       ]
@@ -5309,31 +5247,25 @@
       "dependsOn" : [ ]
     },
     {
-      "ref" : "pkg:maven/io.modelcontextprotocol.sdk/mcp-core@0.16.0?type=jar",
+      "ref" : "pkg:maven/io.modelcontextprotocol.sdk/mcp-core@1.1.1?type=jar",
       "dependsOn" : [
-        "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.21?type=jar",
+        "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.20?type=jar",
         "pkg:maven/org.slf4j/slf4j-api@2.0.17?type=jar",
-        "pkg:maven/io.modelcontextprotocol.sdk/mcp-json@0.16.0?type=jar",
         "pkg:maven/io.projectreactor/reactor-core@3.7.0?type=jar"
       ]
     },
     {
-      "ref" : "pkg:maven/io.modelcontextprotocol.sdk/mcp-json-jackson2@0.16.0?type=jar",
+      "ref" : "pkg:maven/io.modelcontextprotocol.sdk/mcp-json-jackson2@1.1.1?type=jar",
       "dependsOn" : [
         "pkg:maven/com.networknt/json-schema-validator@2.0.0?type=jar",
-        "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.1?type=jar",
-        "pkg:maven/io.modelcontextprotocol.sdk/mcp-json@0.16.0?type=jar"
+        "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.20.1?type=jar",
+        "pkg:maven/io.modelcontextprotocol.sdk/mcp-core@1.1.1?type=jar"
       ]
     },
     {
-      "ref" : "pkg:maven/io.modelcontextprotocol.sdk/mcp-json@0.16.0?type=jar",
-      "dependsOn" : [ ]
-    },
-    {
-      "ref" : "pkg:maven/io.modelcontextprotocol.sdk/mcp@0.16.0?type=jar",
+      "ref" : "pkg:maven/io.modelcontextprotocol.sdk/mcp@1.1.1?type=jar",
       "dependsOn" : [
-        "pkg:maven/io.modelcontextprotocol.sdk/mcp-json-jackson2@0.16.0?type=jar",
-        "pkg:maven/io.modelcontextprotocol.sdk/mcp-core@0.16.0?type=jar"
+        "pkg:maven/io.modelcontextprotocol.sdk/mcp-core@1.1.1?type=jar"
       ]
     },
     {
@@ -5508,7 +5440,7 @@
       "dependsOn" : [ ]
     },
     {
-      "ref" : "pkg:maven/org.yaml/snakeyaml@2.5?type=jar",
+      "ref" : "pkg:maven/org.yaml/snakeyaml@2.4?type=jar",
       "dependsOn" : [ ]
     },
     {

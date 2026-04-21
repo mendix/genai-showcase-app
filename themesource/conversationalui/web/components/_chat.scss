@@ -162,10 +162,7 @@
         margin: 0;
         padding: 0;
         padding-bottom: 0px;
-        .widget-markdown {
-            margin-top: $spacing-medium;
-        }
-    }
+
     &--assistant {
         margin-top: $spacing-small;
     }
@@ -180,6 +177,22 @@
             width: auto;
             padding: $spacing-small;
         }
+    }
+}
+
+.message--user {
+    color: #0A1324B2;
+    font-weight: 400;
+
+    h1,h2,h3,h4,h5,h6 {
+        color: #0A1324D9;
+        font-weight: 600;
+
+    }
+    strong {
+        color: #0A1324D9;
+        font-weight: 400;
+
     }
 }
 
@@ -237,7 +250,11 @@
     
     .tool-title {
         font-weight: $font-weight-semibold;
+        color: #0A1324B2;
+        padding: $spacing-small;
         display: block;
+        color: #0A1324B2;
+        font-weight: 600 ;
         .mx-image-viewer {
             width: auto;
         }
@@ -247,6 +264,12 @@
         padding-top: $spacing-small;
         a.mx-link {
             color: $font-color-default;
+            padding: $spacing-small;
+        p {
+            font-weight: 400;
+        }
+         .mx-image-viewer {
+            width: auto;
         }
     }
 
@@ -256,11 +279,8 @@
         border: none;
         &:hover {
             background-color: $btn-default-bg-hover;
-        }
-    }    
+            }
+        }    
+    }
 }
-
-.tool-status-image{
-    width: $spacing-medium;
-    margin: $spacing-smaller;
 }

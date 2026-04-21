@@ -16,6 +16,7 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import io.modelcontextprotocol.client.McpSyncClient;
+import io.modelcontextprotocol.json.McpJsonDefaults;
 import io.modelcontextprotocol.spec.McpSchema;
 import io.modelcontextprotocol.spec.McpSchema.JsonSchema;
 import mcpclient.impl.McpClientRegistry;
@@ -111,9 +112,8 @@ public class ListToolsResult_Get extends UserAction<IMendixObject>
 		toolMendix.setDescription(toolMcp.description());
 		
 		// Serialize the JsonSchema object to a proper JSON string
-		// Note: Jackson ObjectMapper is already a transitive dependency of the MCP library
 		try {
-			String schemaJson = new com.fasterxml.jackson.databind.ObjectMapper().writeValueAsString(toolMcp.inputSchema());
+			String schemaJson = McpJsonDefaults.getMapper().writeValueAsString(toolMcp.inputSchema());
 			toolMendix.setSchema(schemaJson);
 		} catch (Exception e) {
 			LOGGER.warn("Failed to serialize JSON schema for tool: " + toolMcp.name() + ". Error: " + e.getMessage());

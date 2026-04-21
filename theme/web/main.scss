@@ -550,3 +550,29 @@ $label-color-all: #00635A;
 .multi-label-position {
   justify-content: flex-end;
 }
+
+
+.agent-model-selection{
+  .name{
+    width: 30%
+  }
+  .icon{
+    width: 10%;
+    margin-left: 4px;
+  }
+
+  .model{
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 60%;
+
+    .form-group {
+        margin-bottom: 0;
+    }
+  }
+  .navigation{
+    width: 20%;
+    margin-left: 4px;
+  }
+}
+

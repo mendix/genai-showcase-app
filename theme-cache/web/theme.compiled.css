@@ -2989,7 +2989,7 @@
 .btn-without-border.mx-link {
   text-decoration: none;
   border: 1px solid transparent;
-  color: #0a1325;
+  color: #0a1324;
 }
 .btn-without-border.mx-link.disabled {
   background-color: transparent !important;
@@ -3028,7 +3028,7 @@
   margin-bottom: 4px;
   text-align: left;
   text-overflow: ellipsis;
-  color: #0a1325;
+  color: #0a1324;
   font-size: 14px;
   font-weight: 600;
   display: block;
@@ -3245,7 +3245,7 @@
   /*== Step 2: UI Customization */
   /* Default Font Size & Color */
   --font-size-default: 14px;
-  --font-color-default: #0a1325;
+  --font-color-default: #0a1324;
   /* Global Border Color */
   --border-color-default: #ced0d3;
   --border-radius-default: 4px;
@@ -3383,8 +3383,8 @@
   --form-input-bg-focus: #fff;
   --form-input-bg-hover: #e7e7e9;
   --form-input-bg-disabled: #f8f8f8;
-  --form-input-color: #0a1325;
-  --form-input-focus-color: #0a1325;
+  --form-input-color: #0a1324;
+  --form-input-focus-color: #0a1324;
   --form-input-disabled-color: #9da1a8;
   --form-input-placeholder-color: #6c717c;
   --form-input-border-color: #e7e7e9;
@@ -3493,7 +3493,7 @@
   /* Background Footer Color */
   --grid-footer-bg: #e7e7e9;
   /* Text Color */
-  --grid-selected-color: #0a1325;
+  --grid-selected-color: #0a1324;
   /* Paging Colors */
   --grid-paging-bg: transparent;
   --grid-paging-bg-hover: transparent;
@@ -3505,8 +3505,8 @@
   /*## Default variables for Tab Container Widget (used in components/tabcontainer) */
   /* Text Color */
   --tabs-color: #6c717e;
-  --tabs-color-active: #0a1325;
-  --tabs-lined-color-active: #0a1325;
+  --tabs-color-active: #0a1324;
+  --tabs-lined-color-active: #0a1324;
   --tabs-lined-border-width: 3px;
   /* Border Color */
   --tabs-border-color: #ced0d3;
@@ -3523,7 +3523,7 @@
   /* Border Color */
   --modal-header-border-color: #ced0d3;
   /* Text Color */
-  --modal-header-color: #0a1325;
+  --modal-header-color: #0a1324;
   /*== Dataview */
   /*## Default variables for Dataview Widget (used in components/dataview) */
   /* Controls */
@@ -3531,7 +3531,7 @@
   --dataview-controls-border-color: #ced0d3;
   /* Empty Message */
   --dataview-emptymessage-bg: #f8f8f8;
-  --dataview-emptymessage-color: #0a1325;
+  --dataview-emptymessage-color: #0a1324;
   /*== Alerts */
   /*## Default Bootstrap alerts, not a widget in the Modeler (used in components/alerts) */
   /* Background Color */
@@ -3563,7 +3563,7 @@
   /*Wizard step states */
   --wizard-default-bg: #fff;
   --wizard-default-color: #fff;
-  --wizard-default-step-color: #0a1325;
+  --wizard-default-step-color: #0a1324;
   --wizard-default-border-color: #ced0d3;
   --wizard-active-bg: #d4dbfa;
   --wizard-active-color: #1b34a0;
@@ -3588,7 +3588,7 @@
   --label-warning-border-color: #eca51c;
   --label-danger-border-color: #e33f4e;
   /* Text Color */
-  --label-default-color: #0a1325;
+  --label-default-color: #0a1324;
   --label-primary-color: #fff;
   --label-success-color: #fff;
   --label-warning-color: #fff;
@@ -3603,16 +3603,16 @@
   --groupbox-danger-bg: #e33f4e;
   --groupbox-white-bg: #fff;
   /* Text Color */
-  --groupbox-default-color: #0a1325;
+  --groupbox-default-color: #0a1324;
   --groupbox-primary-color: #fff;
   --groupbox-success-color: #fff;
   --groupbox-warning-color: #fff;
   --groupbox-danger-color: #fff;
-  --groupbox-white-color: #0a1325;
+  --groupbox-white-color: #0a1324;
   /*== Callout (groupbox) Colors */
   /*## Extended variables for Groupbox Widget (used in components/groupbox) */
   /* Text and Border Color */
-  --callout-default-color: #0a1325;
+  --callout-default-color: #0a1324;
   --callout-primary-color: #264ae5;
   --callout-success-color: #3cb33d;
   --callout-warning-color: #eca51c;
@@ -3759,7 +3759,7 @@
   /*== Form */
   /*## Used in components/inputs */
   /* Form Label */
-  --form-label-color: #0a1325;
+  --form-label-color: #0a1324;
   /*== Buttons */
   /*## Define background-color, border-color and text. Used in components/buttons */
   /* Button Background Color */
@@ -17285,7 +17285,7 @@ html {
 
 body {
   min-height: 100%;
-  color: #0a1325;
+  color: #0a1324;
   background-color: #f8f8f8;
   font-family: "Open Sans", sans-serif;
   font-size: 14px;
@@ -17557,7 +17557,7 @@ body {
   height: auto;
   padding: 8px 8px;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-  color: #0a1325;
+  color: #0a1324;
   border: 1px solid #e7e7e9;
   border-radius: 4px;
   background-color: #fff;
@@ -17690,7 +17690,7 @@ textarea.form-control {
   overflow: hidden;
   margin-bottom: 4px;
   text-overflow: ellipsis;
-  color: #0a1325;
+  color: #0a1324;
   font-size: 14px;
   font-weight: 600;
 }
@@ -18036,7 +18036,7 @@ badge widget
 ========================================================================== */
 .label-secondary,
 .label-default {
-  color: #0a1325;
+  color: #0a1324;
   background-color: #e7e7e9;
 }
 
@@ -18825,7 +18825,7 @@ input[type=checkbox] + .control-label {
   text-overflow: ellipsis;
 }
 .mx-datagrid table tbody tr.selected td, .mx-datagrid table tbody tr.selected:hover td {
-  color: #0a1325;
+  color: #0a1324;
   background-color: #f0f1f2 !important;
 }
 .mx-datagrid table tfoot > tr > th {
@@ -18952,7 +18952,7 @@ input[type=checkbox] + .control-label {
   margin-left: 0;
 }
 .mx-dataview .mx-dataview-message {
-  color: #0a1325;
+  color: #0a1324;
   background: #f8f8f8;
 }
 
@@ -19027,7 +19027,7 @@ input[type=checkbox] + .control-label {
   text-align: center;
 }
 .mx-calendar td {
-  color: #0a1325;
+  color: #0a1324;
 }
 .mx-calendar td:hover {
   cursor: pointer;
@@ -19037,7 +19037,7 @@ input[type=checkbox] + .control-label {
 }
 .mx-calendar .mx-calendar-day-month-next,
 .mx-calendar .mx-calendar-day-month-previous {
-  color: #4774cd;
+  color: #4775cc;
 }
 .mx-calendar .mx-calendar-day-selected,
 .mx-calendar .mx-calendar-day-selected:hover {
@@ -19204,7 +19204,7 @@ body[dir=rtl] .mx-header-right {
 }
 .mx-groupbox > .mx-groupbox-header {
   margin: 0;
-  color: #0a1325;
+  color: #0a1324;
   border-width: 1px 1px 0 1px;
   border-style: solid;
   border-color: #e7e7e9;
@@ -19257,7 +19257,7 @@ body[dir=rtl] .mx-header-right {
 ========================================================================== */
 .groupbox-secondary > .mx-groupbox-header,
 .groupbox-default > .mx-groupbox-header {
-  color: #0a1325;
+  color: #0a1324;
   border-color: #e7e7e9;
   background: #e7e7e9;
 }
@@ -19375,7 +19375,7 @@ body[dir=rtl] .mx-header-right {
 }
 
 .groupbox-white > .mx-groupbox-header {
-  color: #0a1325;
+  color: #0a1324;
   border-color: #fff;
   background: #fff;
 }
@@ -19822,7 +19822,7 @@ img.img-scale-down,
 }
 .modal-dialog .modal-content .modal-header h4 {
   margin: 0;
-  color: #0a1325;
+  color: #0a1324;
   font-size: 16px;
   font-weight: bold;
 }
@@ -19830,7 +19830,7 @@ img.img-scale-down,
   margin-top: -3px;
   opacity: 1;
   /* For IE8 and earlier */
-  color: #0a1325;
+  color: #0a1324;
   text-shadow: none;
 }
 .modal-dialog .modal-content .modal-header .close:focus-visible {
@@ -20541,7 +20541,7 @@ ul.popupmenu-menu {
 
 .popupmenu-basic-item {
   padding: 12px 16px;
-  color: #0a1325;
+  color: #0a1324;
   font-size: 14px;
 }
 .popupmenu-basic-item:hover, .popupmenu-basic-item:focus, .popupmenu-basic-item:active {
@@ -21058,7 +21058,7 @@ input[type=radio] + label {
   background-color: #dbdddf;
 }
 .mx-tabcontainer .mx-tabcontainer-tabs > li.active > a, .mx-tabcontainer .mx-tabcontainer-tabs > li.active > a:hover, .mx-tabcontainer .mx-tabcontainer-tabs > li.active > a:focus {
-  color: #0a1325;
+  color: #0a1324;
   border: 1px solid #ced0d3;
   border-bottom-color: #fff;
   background-color: transparent;
@@ -21161,7 +21161,7 @@ input[type=radio] + label {
   background: transparent;
 }
 .tab-lined.mx-tabcontainer > .mx-tabcontainer-tabs li.active > a, .tab-lined.mx-tabcontainer > .mx-tabcontainer-tabs li.active > a:hover, .tab-lined.mx-tabcontainer > .mx-tabcontainer-tabs li.active > a:focus {
-  color: #0a1325;
+  color: #0a1324;
   border: 0;
   border-bottom: 3px solid #264ae5;
   background-color: transparent;
@@ -21286,7 +21286,7 @@ table.mx-table > tbody > tr > th {
   padding: 8px 8px 8px 8px;
 }
 table.mx-table > tbody > tr > th s * {
-  color: #0a1325;
+  color: #0a1324;
   font-weight: bold;
   font-weight: 600;
 }
@@ -21771,7 +21771,7 @@ h6,
 .text-secondary:hover,
 .text-default,
 .text-default:hover {
-  color: #0a1325 !important;
+  color: #0a1324 !important;
 }
 
 .text-primary,
@@ -22979,7 +22979,7 @@ h6,
   margin-right: 16px;
   padding: 4px 8px;
   transition: all 0.2s ease-in-out;
-  color: #0a1325;
+  color: #0a1324;
   border-radius: 4px;
 }
 .widget-pagination .pagination ul li:last-child {
@@ -23009,11 +23009,11 @@ h6,
    Default Mendix progress widget.
 ========================================================================== */
 .mx-progress {
-  color: #0a1325;
+  color: #0a1324;
   background: #fff;
 }
 .mx-progress .mx-progress-message {
-  color: #0a1325;
+  color: #0a1324;
 }
 .mx-progress .mx-progress-indicator {
   position: relative;
@@ -23158,7 +23158,7 @@ h6,
 }
 
 .widget-progress-bar-text-contrast .progress-bar {
-  color: #0a1325;
+  color: #0a1324;
 }
 
 .widget-progress-bar-negative {
@@ -25425,7 +25425,7 @@ html div.dj_ios .widget-switch.auto .widget-switch-btn-wrapper.checked.widget-sw
   margin: 0;
 }
 .breadcrumb-item:last-child {
-  color: #0a1325;
+  color: #0a1324;
 }
 .breadcrumb-item:last-child a {
   text-decoration: none;
@@ -25778,7 +25778,7 @@ html div.dj_ios .widget-switch.auto .widget-switch-btn-wrapper.checked.widget-sw
   align-items: center;
   width: 64px;
   height: 64px;
-  color: #0a1325;
+  color: #0a1324;
   font-size: 24px;
   border-radius: 50%;
   background-color: #fff;
@@ -25790,7 +25790,7 @@ html div.dj_ios .widget-switch.auto .widget-switch-btn-wrapper.checked.widget-sw
   white-space: nowrap;
   text-decoration: none;
   text-overflow: ellipsis;
-  color: #0a1325;
+  color: #0a1324;
 }
 
 .wizard-circle .wizard-step {
@@ -28494,13 +28494,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 0;
 }
 .accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button.widget-accordion-group-header-button-clickable:hover, .accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button.widget-accordion-group-header-button-clickable:focus, .accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button.widget-accordion-group-header-button-clickable:active {
-  color: #0a1325;
+  color: #0a1324;
   background: transparent;
 }
 .accordion-chat-sources .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button .widget-accordion-group-header-button-icon {
   align-self: left;
   display: inline-flex;
-  fill: #0a1325;
+  fill: #0a1324;
 }
 .accordion-chat-sources .widget-accordion-group .widget-accordion-group-content-wrapper .widget-accordion-group-content {
   padding: 0;
@@ -28536,13 +28536,14 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .accordion-tool-calls .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button .widget-accordion-group-header-button-icon {
   align-self: left;
   display: inline-flex;
-  fill: #0a1325;
+  fill: #0a1324;
 }
 .accordion-tool-calls .widget-accordion-group .widget-accordion-group-content-wrapper .widget-accordion-group-content {
   padding-left: 0px;
   padding-right: 0px;
   padding-bottom: 4px;
   color: normal;
+  font-weight: 400;
   opacity: 60%;
 }
 .accordion-tool-calls .widget-accordion-group .widget-accordion-group-content-wrapper .widget-accordion-group-content .card {
@@ -28768,7 +28769,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   transition: all 0.2s ease-in-out;
   border: none;
   background-color: transparent;
-  color: #0a1325;
+  color: #0a1324;
   padding: 0;
   height: 12px;
   display: flex;
@@ -28815,7 +28816,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .btn.btn-text,
 .mx-button.btn-text {
-  color: #0a1325;
+  color: #0a1324;
   border: 1px solid transparent;
   background-color: transparent;
 }
@@ -28833,7 +28834,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .mx-button.btn-text:hover,
 .mx-button.btn-text:active,
 .mx-button.btn-text:focus {
-  color: #0a1325;
+  color: #0a1324;
   background-color: #e7e7e9;
   border: 1px solid transparent;
 }
@@ -28918,7 +28919,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   transition: all 0.2s ease-in-out;
   border: none;
   background-color: transparent;
-  color: #0a1325;
+  color: #0a1324;
   padding: 0 0;
   height: 12px;
   display: flex;
@@ -29018,7 +29019,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .chat-loading-wrapper .loading-dot {
   border-radius: 100%;
-  background-color: #0a1325;
+  background-color: #0a1324;
   width: 4.6666666667px;
   height: 4.6666666667px;
 }
@@ -29091,7 +29092,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-flow: row !important;
   justify-content: center !important;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-  color: #0a1325;
+  color: #0a1324;
   border: 1px solid #e7e7e9;
   border-radius: 8px;
   padding: 8px;
@@ -29165,59 +29166,63 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 0;
   padding-bottom: 0px;
 }
-.chat-bubble-wrapper .chat-message-card .widget-markdown {
-  margin-top: 16px;
-}
-.chat-bubble-wrapper--assistant {
+.chat-bubble-wrapper .chat-message-card--assistant {
   margin-top: 8px;
 }
-.chat-bubble-wrapper--user {
+.chat-bubble-wrapper .chat-message-card--user {
   align-items: flex-end;
 }
-.chat-bubble-wrapper--user .chat-message-card {
+.chat-bubble-wrapper .chat-message-card--user .chat-message-card {
   background: #f8f8f8;
   border-radius: 8px 8px 0 8px;
   margin: 0 0 0 10%;
   width: auto;
   padding: 8px;
 }
-
-.chat-history-sidebar {
+.chat-bubble-wrapper .message--user {
+  color: rgba(10, 19, 36, 0.6980392157);
+  font-weight: 400;
+}
+.chat-bubble-wrapper .message--user h1, .chat-bubble-wrapper .message--user h2, .chat-bubble-wrapper .message--user h3, .chat-bubble-wrapper .message--user h4, .chat-bubble-wrapper .message--user h5, .chat-bubble-wrapper .message--user h6 {
+  color: rgba(10, 19, 36, 0.8509803922);
+  font-weight: 600;
+}
+.chat-bubble-wrapper .message--user strong {
+  color: rgba(10, 19, 36, 0.8509803922);
+  font-weight: 400;
+}
+.chat-bubble-wrapper .chat-history-sidebar {
   overflow-y: auto;
 }
-
-.chat-history-active {
+.chat-bubble-wrapper .chat-history-active {
   border-left: 3px solid #264ae5;
   font-weight: bold;
 }
-
-.user-input-instructions {
+.chat-bubble-wrapper .user-input-instructions {
   font-style: italic;
 }
-
-.chat-container-disabled .panel-content {
+.chat-bubble-wrapper .chat-container-disabled .panel-content {
   flex-direction: column;
   overflow: hidden;
 }
-.chat-container-disabled .messages-container {
+.chat-bubble-wrapper .chat-container-disabled .messages-container {
   display: none;
 }
-.chat-container-disabled .chat-input-wrapper {
+.chat-bubble-wrapper .chat-container-disabled .chat-input-wrapper {
   margin-top: 100%;
 }
-.chat-container-disabled .chat-input-wrapper .form-group .form-control {
+.chat-bubble-wrapper .chat-container-disabled .chat-input-wrapper .form-group .form-control {
   background-color: #f8f8f8;
   opacity: 1;
   cursor: not-allowed;
   pointer-events: none;
 }
-.chat-container-disabled .send-btn-container .send-btn {
+.chat-bubble-wrapper .chat-container-disabled .send-btn-container .send-btn {
   cursor: not-allowed;
   pointer-events: none;
   opacity: 0.65;
 }
-
-.tool-message {
+.chat-bubble-wrapper .tool-message {
   border-radius: 8px;
   border: 0px solid;
   overflow: hidden;
@@ -29226,31 +29231,37 @@ input[type=checkbox].three-state-checkbox + .control-label {
   color: rgba(10, 19, 37, 0.7);
   font-weight: normal;
 }
-.tool-message .tool-title {
+.chat-bubble-wrapper .tool-message .tool-title {
   font-weight: 600;
+  color: rgba(10, 19, 36, 0.6980392157);
+  padding: 8px;
   display: block;
+  color: rgba(10, 19, 36, 0.6980392157);
+  font-weight: 600;
 }
-.tool-message .tool-title .mx-image-viewer {
+.chat-bubble-wrapper .tool-message .tool-title .mx-image-viewer {
   width: auto;
 }
-.tool-message .tool-details {
+.chat-bubble-wrapper .tool-message .tool-details {
   padding-top: 8px;
 }
-.tool-message .tool-details a.mx-link {
-  color: #0a1325;
+.chat-bubble-wrapper .tool-message .tool-details a.mx-link {
+  color: #0a1324;
+  padding: 8px;
 }
-.tool-message .reject-button {
+.chat-bubble-wrapper .tool-message .tool-details a.mx-link p {
+  font-weight: 400;
+}
+.chat-bubble-wrapper .tool-message .tool-details a.mx-link .mx-image-viewer {
+  width: auto;
+}
+.chat-bubble-wrapper .tool-message .tool-details .reject-button {
   background-color: transparent;
-  color: #0a1325;
+  color: #0a1324;
   border: none;
 }
-.tool-message .reject-button:hover {
+.chat-bubble-wrapper .tool-message .tool-details .reject-button:hover {
   background-color: #e7e7e9;
-}
-
-.tool-status-image {
-  width: 16px;
-  margin: 4px;
 }
 
 .chart-input.widget-chart .fills .js-fill,
@@ -29424,19 +29435,80 @@ input[type=checkbox].three-state-checkbox + .control-label {
   line-height: 1;
 }
 
-.text-area-resizing textarea {
-  field-sizing: content;
-  min-height: 1lh;
-  max-height: 5lh;
-  overflow-y: auto;
-  resize: none;
-}
-
 .input-container {
   border-bottom: 1px solid color-mix(in srgb, 50% #e7e7e9, #fff);
   display: flex;
   justify-content: space-between;
   align-items: start;
+}
+
+.combobox-selection {
+  display: flex;
+  flex-grow: 1;
+}
+.combobox-selection .item-selection {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  height: max-content;
+  overflow: hidden;
+}
+.combobox-selection .item-selection .mx-image {
+  height: 18px;
+  margin-right: 8px;
+  margin-left: auto;
+  float: right;
+}
+.combobox-selection .item-selection .item-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.combobox-selection .widget-combobox {
+  min-height: 20px;
+}
+
+.combobox-selection-height-small .widget-combobox-input-container {
+  align-items: center;
+  justify-content: center;
+  height: 32px !important;
+}
+
+.combobox-model-selection {
+  display: flex;
+  flex-grow: 1;
+}
+.combobox-model-selection .model-selection {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  height: max-content;
+  overflow: hidden;
+}
+.combobox-model-selection .model-selection .mx-image-viewer {
+  margin-right: 8px;
+  flex-shrink: 0;
+  height: auto;
+  width: auto;
+}
+.combobox-model-selection .model-selection .combobox-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.widget-combobox .widget-combobox-input-container {
+  flex-grow: 0;
+  transition: box-shadow 0.15s ease 0s;
+}
+
+.combobox-border-danger {
+  margin-bottom: 4px !important;
+}
+.combobox-border-danger .widget-combobox {
+  border: 1px solid #e33f4e;
 }
 
 .texbox-loading-wrapper {
@@ -29476,6 +29548,17 @@ input[type=checkbox].three-state-checkbox + .control-label {
   100% {
     transform: scale(1);
   }
+}
+
+.combobox-filter-height .widget-combobox-input-container {
+  align-items: center;
+  justify-content: center;
+  height: 47.5px !important;
+  border-color: #ced0d3;
+}
+
+.widget-combobox-item-selected {
+  background-color: #f5f6f6;
 }
 
 .layoutgrid--full-height {
@@ -29936,7 +30019,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   transition: all 0.2s ease-in-out;
   border: none;
   background-color: transparent;
-  color: #0a1325;
+  color: #0a1324;
   height: 32px;
   visibility: hidden;
   cursor: pointer;
@@ -30360,7 +30443,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .popupmenu-custom-item-container .mx-link {
   display: block;
   padding: 4px;
-  color: #0a1325;
+  color: #0a1324;
   text-decoration: none;
   border: 1px solid transparent;
 }
@@ -30935,8 +31018,12 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .widget-markdown hr {
   margin: 8px 0;
 }
+.widget-markdown p {
+  font-weight: 400;
+}
 .widget-markdown strong {
-  font-weight: bold;
+  color: rgba(10, 19, 36, 0.8509803922);
+  font-weight: 600;
 }
 .widget-markdown h1, .widget-markdown h2, .widget-markdown h3, .widget-markdown h4, .widget-markdown h5, .widget-markdown h6 {
   margin: 8px 0;
@@ -30966,6 +31053,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .spinner {
   width: 20px;
   height: 20px;
+  aspect-ratio: 1/1;
+  flex-shrink: 0;
   border: 3px solid #e5e7eb;
   /* light gray background */
   border-top: 3px solid #3b82f6;
@@ -31414,7 +31503,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   transition: all 0.2s ease-in-out;
   border: none;
   background-color: transparent;
-  color: #0a1325;
+  color: #0a1324;
   height: 44px;
 }
 .container-clickable .btn.btn-hover {
@@ -31766,6 +31855,26 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .multi-label-position {
   justify-content: flex-end;
+}
+
+.agent-model-selection .name {
+  width: 30%;
+}
+.agent-model-selection .icon {
+  width: 10%;
+  margin-left: 4px;
+}
+.agent-model-selection .model {
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 60%;
+}
+.agent-model-selection .model .form-group {
+  margin-bottom: 0;
+}
+.agent-model-selection .navigation {
+  width: 20%;
+  margin-left: 4px;
 }
 
 /*# sourceMappingURL=theme.compiled.css.map */
