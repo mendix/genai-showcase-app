@@ -22,6 +22,7 @@ import com.mendix.m2ee.api.IMxRuntimeRequest;
 import com.mendix.m2ee.api.IMxRuntimeResponse;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.ISession;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
 public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
@@ -51,8 +52,10 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	                String deployedModelId = jsonRequest.get("deployedModelId").asText();
 	                String chatContextGUID = jsonRequest.get("chatContextGUID").asText();
 	                
-	                // Create system context
-	                IContext ctx = Core.createSystemContext();
+	                // Create user context
+	                String sessionId = req.getCookie("XASSESSIONID");
+	                ISession session = Core.getSessionById(UUID.fromString(sessionId));
+	                IContext ctx = session.createContext();
 	                
 	                // Retrieve deployed model from database using Model
 	                List<IMendixObject> resultsDeployedModel = Core.createXPathQuery("//GenAICommons.DeployedModel[Model=$value]")
@@ -77,18 +80,18 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	                if (resultsChatContext.isEmpty()) {
 	                    LOGGER.error("Chat context not found for: " + chatContextGUID);
 	                    resp.getHttpServletResponse().setStatus(404);
-	                    genaicommons.impl.StreamingImpl.throwError(getContext(),resp.getOutputStream());
+	                    genaicommons.impl.StreamingImpl.throwError(ctx,resp.getOutputStream());
 	                    return;
 	                }
 	                
 	                conversationalui.proxies.ChatContext mxChatContext = conversationalui.proxies.ChatContext.initialize(ctx, resultsChatContext.get(0));
-	                
+
 	                // Construct GenAICommons.Request object from JSON
-	                genaicommons.proxies.Request mxRequest = conversationalui.proxies.microflows.Microflows.request_ImportFromJSON(getContext(), requestJSON);
+	                genaicommons.proxies.Request mxRequest = conversationalui.proxies.microflows.Microflows.request_ImportFromJSON(ctx, requestJSON);
 	                if (mxRequest == null) {
 	                    LOGGER.error("Request could not be created with import mapping.");
 	                    resp.getHttpServletResponse().setStatus(404);
-	                    genaicommons.impl.StreamingImpl.throwError(getContext(),resp.getOutputStream());
+	                    genaicommons.impl.StreamingImpl.throwError(ctx,resp.getOutputStream());
 	                    return;
 	                }
 
@@ -109,19 +112,19 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	                
 	                mxRequest.setStreamingResponseWriterId(connectionId);
 						
-					genaicommons.proxies.Response mxResponse = genaicommons.proxies.microflows.Microflows.chatCompletions_WithHistory(getContext(), mxRequest, mxDeployedModel);
+					genaicommons.proxies.Response mxResponse = genaicommons.proxies.microflows.Microflows.chatCompletions_WithHistory(ctx, mxRequest, mxDeployedModel);
 					
 					if (mxResponse == null) {
 	                    LOGGER.error("There was an issue with Chat Completions.");
 	                    resp.getHttpServletResponse().setStatus(404);
-	                    genaicommons.impl.StreamingImpl.throwError(getContext(),resp.getOutputStream());
+	                    genaicommons.impl.StreamingImpl.throwError(ctx,resp.getOutputStream());
 	                    ResponseConnectionController.getInstance().removeStreamingResponseWriter(connectionId);
 	                    return;
 	                }
 					
 					LOGGER.debug("Chat with history completed.");
 					
-					conversationalui.proxies.microflows.Microflows.chatContext_UpdateAssistantResponse(getContext(), mxChatContext, ENUM_MessageStatus.Success , mxResponse);
+					conversationalui.proxies.microflows.Microflows.chatContext_UpdateAssistantResponse(ctx, mxChatContext, ENUM_MessageStatus.Success , mxResponse);
 					
 					ResponseConnectionController.getInstance().removeStreamingResponseWriter(connectionId);
 	            	
