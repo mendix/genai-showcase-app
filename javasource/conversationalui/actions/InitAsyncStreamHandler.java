@@ -48,29 +48,12 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	            try {
 	            	JsonNode jsonRequest = objectMapper.readTree(jsonInput);
 	                // Extract fields from JSON
-	                String requestJSON = jsonRequest.get("request").asText();
-	                String deployedModelId = jsonRequest.get("deployedModelId").asText();
 	                String chatContextGUID = jsonRequest.get("chatContextGUID").asText();
 	                
 	                // Create user context
 	                String sessionId = req.getCookie("XASSESSIONID");
 	                ISession session = Core.getSessionById(UUID.fromString(sessionId));
 	                IContext ctx = session.createContext();
-	                
-	                // Retrieve deployed model from database using Model
-	                List<IMendixObject> resultsDeployedModel = Core.createXPathQuery("//GenAICommons.DeployedModel[Model=$value]")
-	                        .setVariable("value", deployedModelId)
-	                        .execute(ctx);
-	                
-	                if (resultsDeployedModel.isEmpty()) {
-	                    LOGGER.error("Deployed model not found for: " + deployedModelId);
-	                    resp.getHttpServletResponse().setStatus(404);
-	                    genaicommons.impl.StreamingImpl.throwError(ctx,resp.getOutputStream());
-	                    return;
-	                }
-	                
-	                genaicommons.proxies.DeployedModel mxDeployedModel = genaicommons.proxies.DeployedModel.initialize(ctx, resultsDeployedModel.get(0));
-	                LOGGER.info("Successfully retrieved deployed model: " + mxDeployedModel.getModel());
 	                
 	                // Retrieve chat context from database using id
 	                List<IMendixObject> resultsChatContext = Core.createXPathQuery("//ConversationalUI.ChatContext[id=$value]")
@@ -85,9 +68,31 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	                }
 	                
 	                conversationalui.proxies.ChatContext mxChatContext = conversationalui.proxies.ChatContext.initialize(ctx, resultsChatContext.get(0));
+	                
+	                agentcommons.proxies.Version mxVersion;
+	                
+	                if (mxChatContext.getChatContext_Version() == null) {
+	                	mxVersion = mxChatContext.getChatContext_Agent().getAgent_Version_InUse();
+	                			
+	                } else {
+	                	mxVersion = mxChatContext.getChatContext_Version();
+	                }
+	                
+	                if (mxVersion.getVersion_DeployedModel() == null) {
+	                    LOGGER.error("Deployed Model could not be found.");
+	                    resp.getHttpServletResponse().setStatus(404);
+	                    genaicommons.impl.StreamingImpl.throwError(ctx,resp.getOutputStream());
+	                    return;
+	                }
 
 	                // Construct GenAICommons.Request object from JSON
-	                genaicommons.proxies.Request mxRequest = conversationalui.proxies.microflows.Microflows.request_ImportFromJSON(ctx, requestJSON);
+	                // genaicommons.proxies.Request mxRequest = agentcommons.proxies.microflows.Microflows.chatContext_GetRequest(ctx,mxChatContext);
+	                IMendixObject mxRequestObject = Core.microflowCall(mxVersion.getStreamingPreProcess())
+							.withParam("ChatContext", mxChatContext)
+							.execute(ctx);
+	                
+	                genaicommons.proxies.Request mxRequest = genaicommons.proxies.Request.initialize(ctx, mxRequestObject);
+	                
 	                if (mxRequest == null) {
 	                    LOGGER.error("Request could not be created with import mapping.");
 	                    resp.getHttpServletResponse().setStatus(404);
@@ -112,7 +117,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	                
 	                mxRequest.setStreamingResponseWriterId(connectionId);
 						
-					genaicommons.proxies.Response mxResponse = genaicommons.proxies.microflows.Microflows.chatCompletions_WithHistory(ctx, mxRequest, mxDeployedModel);
+					genaicommons.proxies.Response mxResponse = genaicommons.proxies.microflows.Microflows.chatCompletions_WithHistory(ctx, mxRequest, mxVersion.getVersion_DeployedModel());
 					
 					if (mxResponse == null) {
 	                    LOGGER.error("There was an issue when calling the Chat Completions API, no response was returned.");
@@ -124,7 +129,11 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 					
 					LOGGER.debug("Chat with history completed.");
 					
-					conversationalui.proxies.microflows.Microflows.chatContext_UpdateAssistantResponse(ctx, mxChatContext, ENUM_MessageStatus.Success , mxResponse);
+					//conversationalui.proxies.microflows.Microflows.chatContext_UpdateAssistantResponse(ctx, mxChatContext, ENUM_MessageStatus.Success , mxResponse);
+					Core.microflowCall(mxVersion.getStreamingPostProcess())
+							.withParam("Response", mxResponse)
+							.withParam("ChatContext", mxChatContext)
+							.execute(ctx);
 					
 					ResponseConnectionController.getInstance().removeStreamingResponseWriter(connectionId);
 	            	

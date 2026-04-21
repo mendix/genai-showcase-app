@@ -12,13 +12,11 @@ import { Big } from "big.js";
 // END EXTRA CODE
 
 /**
- * @param {string} requestJSON
  * @param {MxObject} responseCollector
- * @param {string} deployedModelId
  * @param {string} chatContextGUID
  * @returns {Promise.<boolean>}
  */
-export async function JS_SubmitStreaming(requestJSON, responseCollector, deployedModelId, chatContextGUID) {
+export async function JS_SubmitStreaming(responseCollector, chatContextGUID) {
 	// BEGIN USER CODE
 	const baseUrl = mx.appUrl;
 	const endpoint = `${baseUrl}llm-streaming`;
@@ -29,8 +27,6 @@ export async function JS_SubmitStreaming(requestJSON, responseCollector, deploye
 			"Accept": "text/event-stream"
 		},
 		body: JSON.stringify({
-			request: requestJSON,
-			deployedModelId: deployedModelId,
 			chatContextGUID: chatContextGUID
 		})
 	})
