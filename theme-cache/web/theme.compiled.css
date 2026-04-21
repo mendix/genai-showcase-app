@@ -31105,6 +31105,29 @@ input[type=checkbox].three-state-checkbox + .control-label {
   text-overflow: ellipsis;
 }
 
+.anchor-el {
+  overflow-anchor: auto;
+  height: 1px;
+  flex-shrink: 0;
+}
+
+.messages-container {
+  overflow-y: auto;
+  overflow-anchor: none;
+  /* opt out on the container */
+}
+
+.message--assistant .anchor-el {
+  overflow-anchor: auto;
+  /* anchor inside the LLM bubble only */
+  height: 1px;
+}
+
+.message--user .anchor-el {
+  overflow-anchor: none;
+  /* explicitly off for user messages */
+}
+
 .model-badge, .model-badge--primary, .model-badge--default {
   display: inline-flex;
   height: 20px;
