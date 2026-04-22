@@ -47,10 +47,11 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	            ObjectMapper objectMapper = new ObjectMapper();
 	            try {
 	            	JsonNode jsonRequest = objectMapper.readTree(jsonInput);
+	            	
 	                // Extract fields from JSON
 	                String chatContextGUID = jsonRequest.get("chatContextGUID").asText();
 	                
-	                // Create user context
+	                // Create user context from session
 	                String sessionId = req.getCookie("XASSESSIONID");
 	                ISession session = Core.getSessionById(UUID.fromString(sessionId));
 	                IContext ctx = session.createContext();
@@ -85,8 +86,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	                    return;
 	                }
 
-	                // Construct GenAICommons.Request object from JSON
-	                // genaicommons.proxies.Request mxRequest = agentcommons.proxies.microflows.Microflows.chatContext_GetRequest(ctx,mxChatContext);
+	                // Construct request from ChatContex by using PreProcessing microflow
 	                IMendixObject mxRequestObject = Core.microflowCall(mxVersion.getStreamingPreProcess())
 							.withParam("ChatContext", mxChatContext)
 							.execute(ctx);
@@ -94,7 +94,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	                genaicommons.proxies.Request mxRequest = genaicommons.proxies.Request.initialize(ctx, mxRequestObject);
 	                
 	                if (mxRequest == null) {
-	                    LOGGER.error("Request could not be created with import mapping.");
+	                    LOGGER.error("Request could not be created from ChatContext by running the PreProcessing microflow.");
 	                    resp.getHttpServletResponse().setStatus(404);
 	                    genaicommons.impl.StreamingImpl.throwError(ctx,resp.getOutputStream());
 	                    return;
@@ -129,7 +129,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 					
 					LOGGER.debug("Chat with history completed.");
 					
-					//conversationalui.proxies.microflows.Microflows.chatContext_UpdateAssistantResponse(ctx, mxChatContext, ENUM_MessageStatus.Success , mxResponse);
+					// run Post Processing microflow with ChatContext and Reponse
 					Core.microflowCall(mxVersion.getStreamingPostProcess())
 							.withParam("Response", mxResponse)
 							.withParam("ChatContext", mxChatContext)

@@ -102,7 +102,6 @@ public class Request_AddComputerUseTool extends UserAction<IMendixObject>
 		Computer computer = new Computer(context);
 		computer.setMicroflow(computerUseMicroflow);
 		computer.setName(toolName);	
-		computer.setInternalToolType(ENUM_InternalToolType.Computer);
 		List<Tool> ToolList = toolCollection.getToolCollection_Tool();
 		ToolList.add(computer);
 		toolCollection.setToolCollection_Tool(ToolList); 

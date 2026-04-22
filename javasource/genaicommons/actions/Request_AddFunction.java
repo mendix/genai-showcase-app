@@ -113,7 +113,6 @@ public class Request_AddFunction extends UserAction<IMendixObject>
 		Function function = new Function(getContext());
 		function.setMicroflow(FunctionMicroflow);
 		function.setName(ToolName);
-		function.setInternalToolType(ENUM_InternalToolType.Function);
 
 		//Optional parameters
 		function.setDescription(ToolDescription); 

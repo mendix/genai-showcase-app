@@ -114,7 +114,6 @@ public class Request_AddMCPTool extends UserAction<IMendixObject>
 		MCP tool = new MCP(getContext());
 		
 		tool.setMicroflow(Microflow);
-		tool.setInternalToolType(ENUM_InternalToolType.MCP);
 		tool.setMCPServerName(this.ConsumedMCPService.getName());
 		if (OverwritingToolName != null && !OverwritingToolName.isBlank()) {
 			tool.setName(OverwritingToolName);
