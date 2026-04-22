@@ -28508,6 +28508,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .accordion-tool-calls {
   width: 100%;
+  margin-bottom: 8px;
 }
 .accordion-tool-calls .widget-accordion-group {
   background: transparent;
@@ -28549,7 +28550,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .accordion-tool-calls .widget-accordion-group .widget-accordion-group-content-wrapper .widget-accordion-group-content .card {
   padding: 8px 16px;
   margin-bottom: 0;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
 /* Custom Alert */
@@ -29226,15 +29227,16 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border-radius: 8px;
   border: 0px solid;
   overflow: hidden;
-  padding: 16px;
+  padding: 12px 16px;
   background-color: #f7f7f7;
   color: rgba(10, 19, 37, 0.7);
   font-weight: normal;
+  margin-bottom: 8px;
 }
 .chat-bubble-wrapper .tool-message .tool-title {
   font-weight: 600;
   color: rgba(10, 19, 36, 0.6980392157);
-  padding: 8px;
+  padding: 0;
   display: block;
   color: rgba(10, 19, 36, 0.6980392157);
   font-weight: 600;
@@ -29244,6 +29246,18 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .chat-bubble-wrapper .tool-message .tool-details {
   padding-top: 8px;
+}
+.chat-bubble-wrapper .tool-message .tool-details .btn-small {
+  height: 32px;
+  padding: 5px 8px;
+}
+.chat-bubble-wrapper .tool-message .tool-details .btn-default {
+  border: 0;
+  background-color: transparent;
+  color: #0a1324;
+}
+.chat-bubble-wrapper .tool-message .tool-details .btn-default:hover {
+  background-color: #a9acb3;
 }
 .chat-bubble-wrapper .tool-message .tool-details a.mx-link {
   color: #0a1324;
@@ -30245,6 +30259,8 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 8px 16px;
   background: #f8f8f8;
   border: 1px solid #f8f8f8;
+  margin: 0 0 0 10%;
+  width: auto;
 }
 @media (max-height: 800px) {
   .agent-page-container .page-container-side {
@@ -31194,27 +31210,24 @@ input[type=checkbox].three-state-checkbox + .control-label {
   text-overflow: ellipsis;
 }
 
-.anchor-el {
-  overflow-anchor: auto;
-  height: 1px;
-  flex-shrink: 0;
-}
-
-.messages-container {
+.text-area-resizing {
+  field-sizing: content;
+  min-height: 1lh;
+  max-height: 5lh;
   overflow-y: auto;
-  overflow-anchor: none;
-  /* opt out on the container */
+  resize: none;
 }
-
-.message--assistant .anchor-el {
-  overflow-anchor: auto;
-  /* anchor inside the LLM bubble only */
-  height: 1px;
+@supports not (field-sizing: content) {
+  .text-area-resizing {
+    min-height: 1.5em;
+    max-height: 7.5em;
+    overflow-y: auto;
+    resize: vertical;
+  }
 }
-
-.message--user .anchor-el {
-  overflow-anchor: none;
-  /* explicitly off for user messages */
+.text-area-resizing textarea {
+  overflow-y: auto;
+  resize: unset;
 }
 
 .model-badge, .model-badge--primary, .model-badge--default {

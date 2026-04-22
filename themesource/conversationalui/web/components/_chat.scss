@@ -112,7 +112,6 @@
     }  
     
     .send-btn-container {
-        //row-right
         display: flex !important;
         position: absolute;
         bottom: 0;
@@ -243,15 +242,15 @@
     border-radius: $spacing-small; 
     border: 0px solid;
     overflow: hidden;
-    padding: $spacing-medium;
+    padding: 12px $spacing-medium;
     background-color: $chat-bg-light;
     color: rgba($font-color-header, 0.7);
     font-weight: $font-weight-normal;
-    
+    margin-bottom: $spacing-small;
     .tool-title {
         font-weight: $font-weight-semibold;
         color: #0A1324B2;
-        padding: $spacing-small;
+        padding: 0;
         display: block;
         color: #0A1324B2;
         font-weight: 600 ;
@@ -262,6 +261,19 @@
 
     .tool-details{
         padding-top: $spacing-small;
+
+        .btn-small {
+            height: $spacing-larger;
+            padding: 5px 8px;
+        }
+        .btn-default {
+            border: 0;
+            background-color: transparent;
+            color: $font-color-default;
+            &:hover {
+                background-color: $gray-light;
+            } 
+        }
         a.mx-link {
             color: $font-color-default;
             padding: $spacing-small;

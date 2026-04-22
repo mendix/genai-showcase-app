@@ -4,23 +4,3 @@
 @use './abstracts/all' as *;
 @use './components/all' as *;
 
-.anchor-el {
-  overflow-anchor: auto;
-  height: 1px;
-  flex-shrink: 0;
-}
-
-
-.messages-container {
-  overflow-y: auto;
-  overflow-anchor: none;  /* opt out on the container */
-}
-
-.message--assistant .anchor-el {
-  overflow-anchor: auto;  /* anchor inside the LLM bubble only */
-  height: 1px;
-}
-
-.message--user .anchor-el {
-  overflow-anchor: none;  /* explicitly off for user messages */
-}

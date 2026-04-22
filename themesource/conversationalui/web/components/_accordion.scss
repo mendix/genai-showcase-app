@@ -37,6 +37,7 @@
 ////////////////////////////////////////////////////////////////////
 .accordion-tool-calls {
     width: 100%;
+    margin-bottom: $spacing-small;
     .widget-accordion-group{
         background: transparent;
         border-bottom: none;
@@ -83,7 +84,7 @@
                 .card {
                     padding: 8px 16px;
                     margin-bottom: 0;
-                    border-radius: $spacing-smallest;
+                    border-radius: $spacing-smaller;
                 }
             }
         }
