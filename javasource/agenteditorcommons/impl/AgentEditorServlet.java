@@ -23,9 +23,10 @@ import com.mendix.extensibility.CustomBlobDocumentInfo;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
+import agentcommons.actions.Agent_Call_WithHistory;
 import agentcommons.actions.Agent_Call_WithoutHistory;
 import agentcommons.proxies.Agent;
-
+import agentcommons.proxies.ENUM_Agent_UsageType;
 import genaicommons.proxies.Request;
 import genaicommons.proxies.Response;
 import genaicommons.proxies.Span;
@@ -57,10 +58,11 @@ public class AgentEditorServlet extends HttpServlet {
 
         try (PrintWriter out = resp.getWriter()) {
             JsonNode requestJson = parseRequestBody(req);
+            LOGGER.info(requestJson.toString());
             CustomBlobDocumentInfo agentCustomDocument = findAgentDocument(requestJson);       
             IContext context = Core.createSystemContext();
             Agent agent = findAgentObject(context, agentCustomDocument);
-            Request request = new Request(context);
+            Request request = createRequest(context, requestJson);
             Map<String, String> variables = parseVariables(requestJson);
             IMendixObject contextObject = createContextObject(variables, agent, context);
             Response response = callAgent(context, agent, request, contextObject);
@@ -129,9 +131,17 @@ public class AgentEditorServlet extends HttpServlet {
     }
 
     private Response callAgent(IContext context, Agent agent, Request request, IMendixObject optionalContextObject) {
-        IMendixObject responseMxObject = Core.userActionCall("AgentCommons." + Agent_Call_WithoutHistory.class.getSimpleName())
+    	IMendixObject responseMxObject = Core.instantiate(context, "GenAICommons.Response");
+    	if(agent.getUsageType() == ENUM_Agent_UsageType.Conversational) {
+    		responseMxObject  = Core.userActionCall("AgentCommons." + Agent_Call_WithHistory.class.getSimpleName())
+					.withParams(agent.getMendixObject(), request.getMendixObject() , optionalContextObject)
+					.execute(context);
+        } else {
+        	responseMxObject = Core.userActionCall("AgentCommons." + Agent_Call_WithoutHistory.class.getSimpleName())
                 .withParams(agent.getMendixObject(), optionalContextObject, request.getMendixObject(), null)
                 .execute(context);
+        }
+    	
         if(responseMxObject == null) {
             throw new IllegalStateException("Agent " + agent.get_QualifiedName() + " call did not return a response object.");
         }
@@ -227,5 +237,10 @@ public class AgentEditorServlet extends HttpServlet {
         
         variables.forEach((k, v) -> contextObject.setValue(context, k, v));
         return contextObject;
+    }
+    
+    private static Request createRequest(IContext context, JsonNode requestJson) {
+    	Request request = new Request(context);
+    	return request;
     }
 }

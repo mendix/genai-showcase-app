@@ -1,9 +1,9 @@
-import { I as e, J as w, L as x, r as v, af as k, a5 as A, a1 as f, O as C, ai as u, T as j, ae as M, a3 as b } from "./Icon-Y0B9OBpL.js";
+import { I as e, J as w, L as x, r as v, ag as k, a6 as A, a2 as f, O as j, aj as u, T as C, af as M, a4 as b } from "./Icon-BL-ju1Kw.js";
 import { r as H } from "./index-CfghFsoU.js";
 import { createStudioProLogger as P } from "./logger-Bof2Evv1.js";
-import { u as V, D as E } from "./DialogFooter-l4IYrGaY.js";
-import { T as y, D as B } from "./Table-HvwQoqjo.js";
-import { I as D } from "./Banner-R-XjJFkn.js";
+import { u as V, D as E } from "./DialogFooter-CF2qRB1s.js";
+import { T as y, D as B } from "./Table-DU5FBYXs.js";
+import { I as D } from "./Banner-BR20NG1M.js";
 const T = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2%208H14'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M8%2014V2'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", I = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2%208H14'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M8%2014V2'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
 var S = Object.defineProperty, $ = (t, r) => S(t, "name", { value: r, configurable: !0 });
 const O = $((t) => e.jsx(w, { light: I, dark: T, ...t }), "AddIcon"), R = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M6.5%207V13'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.5%207V13'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M2%203.5H14'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M6%201.5H10'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%203.5V14C12.5%2014.275%2012.275%2014.5%2012%2014.5H4C3.725%2014.5%203.5%2014.275%203.5%2014V3.5'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", L = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M6.5%207V13'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.5%207V13'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M2%203.5H14'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M6%201.5H10'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%203.5V14C12.5%2014.275%2012.275%2014.5%2012%2014.5H4C3.725%2014.5%203.5%2014.275%203.5%2014V3.5'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
@@ -25,7 +25,7 @@ const z = K((t) => e.jsx(w, { light: L, dark: R, ...t }), "DeleteIcon"), F = x.s
     t.onClose(null);
   };
   return V(h, c), /* @__PURE__ */ e.jsxs(k, { children: [
-    /* @__PURE__ */ e.jsx(A, { children: /* @__PURE__ */ e.jsx(f, { children: /* @__PURE__ */ e.jsxs(C, { label: "Authentication Headers", children: [
+    /* @__PURE__ */ e.jsx(A, { children: /* @__PURE__ */ e.jsx(f, { children: /* @__PURE__ */ e.jsxs(j, { label: "Authentication Headers", children: [
       /* @__PURE__ */ e.jsxs(D, { children: [
         /* @__PURE__ */ e.jsx(F, { children: "The headers below are not stored." }),
         /* @__PURE__ */ e.jsx("div", { children: "The headers are only used to explore tools from Studio Pro. To authenticate with MCP servers at runtime, please provide a credentials microflow." })
@@ -65,7 +65,7 @@ const z = K((t) => e.jsx(w, { light: L, dark: R, ...t }), "DeleteIcon"), F = x.s
               )
             },
             {
-              cellContent: /* @__PURE__ */ e.jsx(j, { icon: /* @__PURE__ */ e.jsx(z, {}), onPress: () => p(o) })
+              cellContent: /* @__PURE__ */ e.jsx(C, { icon: /* @__PURE__ */ e.jsx(z, {}), onPress: () => p(o) })
             }
           ]),
           toolbarLeft: /* @__PURE__ */ e.jsx(
