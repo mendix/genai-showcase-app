@@ -87,6 +87,18 @@ export async function JS_SubmitStreaming(responseCollector, chatContextGUID) {
 				const currentText = responseCollector.get("Content")
 				responseCollector.set("Content", currentText + decodedData)
 				
+  				// Auto-scroll if at bottom (batched with requestAnimationFrame for smoothness)
+  				if (!window.scrollPending) {
+      				window.scrollPending = true;
+      				requestAnimationFrame(() => {
+          				const container = document.querySelector('.messages-container');
+          					if (container && !container.classList.contains('not-at-bottom')) {
+              						container.scrollTop = container.scrollHeight; // Instant, no 'smooth'
+          						}
+		          			window.scrollPending = false;
+      					});
+  				}  
+				
 			} catch (e) {
 				console.warn('Could not parse SSE data as JSON:', data, e);
 				// Handle non-JSON data if expected

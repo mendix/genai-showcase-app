@@ -28678,6 +28678,52 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 8px;
 }
 
+.scroll-btn-wrapper {
+  padding: 8px;
+  border: 1px solid #24276c;
+  background-color: #fff;
+  border: 1px solid #0a1325;
+  position: fixed;
+  bottom: 190px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 8px;
+  opacity: 0;
+}
+.scroll-btn-wrapper:hover {
+  background-color: #f8f8f8;
+}
+.scroll-btn-wrapper:active {
+  background-color: #a9acb3;
+}
+.scroll-btn-wrapper .spinner {
+  width: 18px;
+  height: 18px;
+  margin-left: 8px;
+}
+.scroll-btn-wrapper .scroll-to-bottom-btn {
+  background: transparent;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 100;
+  padding: 0;
+  border: 0;
+  font-size: 20px;
+  color: #0a1325;
+  display: flex;
+  align-items: center;
+}
+.scroll-btn-wrapper .scroll-to-bottom-btn .icon-lined {
+  background-color: #264ae5;
+}
+
+.messages-container.not-at-bottom .scroll-btn-wrapper {
+  opacity: 1;
+}
+.messages-container.not-at-bottom .scroll-btn-wrapper .scroll-to-bottom-btn {
+  pointer-events: auto;
+}
+
 .chat-card--full-height {
   height: 100%;
 }
