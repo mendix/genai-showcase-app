@@ -101,7 +101,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		                		updateToolCall(rootNode);
 		                	} else {
 			                    String chunkText = rootNode.path("delta").path("text").asText();
-			                    collectStreamingText(chunkText);
+			                    genaicommons.impl.StreamingImpl.updateResponseText(mxResponse, chunkText);
 			                    if (StreamingResponseWriterId != null) {
 			                    	genaicommons.impl.StreamingImpl.pushChunkToUI(getContext(), StreamingResponseWriterId, chunkText);
 			                    }
@@ -221,17 +221,6 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	List<genaicommons.proxies.ToolCall> mxToolCallList = new ArrayList<genaicommons.proxies.ToolCall>();
 	
 	Integer toolContentBlockIndex = 10000;
-	
-	private void collectStreamingText(String chunkText) {
-		
-		String currentText = mxResponse.getResponseText();
-		if (currentText == null) {
-			mxResponse.setResponseText(chunkText);
-		}
-		else {
-			mxResponse.setResponseText(currentText + chunkText);
-		}
-	}
 	
 	private void createToolCall(JsonNode rootNode) {
 		

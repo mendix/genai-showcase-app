@@ -19,6 +19,17 @@ public class StreamingImpl {
 		mxResponse.setResponse_Message(mxMessage);
 	}
 	
+	public static void updateResponseText(genaicommons.proxies.Response mxResponse, String chunkText) {
+		
+		String currentText = mxResponse.getResponseText();
+		if (currentText == null) {
+			mxResponse.setResponseText(chunkText);
+		}
+		else {
+			mxResponse.setResponseText(currentText + chunkText);
+		}
+	}
+	
 	public static void pushChunkToUI(IContext ctx, String streamingResponseWriterId, String chunkText) {
 		
 		if (streamingResponseWriterId != null) {
