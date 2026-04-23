@@ -28684,7 +28684,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background-color: #fff;
   border: 1px solid #0a1325;
   position: fixed;
-  bottom: 190px;
+  bottom: 186px;
   display: inline-flex;
   align-items: center;
   border-radius: 8px;
@@ -28809,6 +28809,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   max-width: 153.5rem;
   justify-content: center;
   margin: auto;
+}
+.chat-page--fullheight-centered .chat-container > .messages-container .scroll-btn-wrapper {
+  bottom: 186px;
 }
 
 .chat-container {
@@ -29722,6 +29725,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .layout-chat-popup.mx-window .modal-body .mx-placeholder {
   height: 100%;
 }
+.layout-chat-popup.mx-window .modal-body .chat-container > .messages-container .scroll-btn-wrapper {
+  bottom: calc(150px + 5vh);
+}
 
 .popupmenu--display-flex.popupmenu {
   display: flex;
@@ -29831,6 +29837,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .layout-chat-sidebar .mx-window-content .mx-window-body .mx-placeholder {
   height: 100%;
+}
+.layout-chat-sidebar .mx-window-content .mx-window-body .chat-container > .messages-container .scroll-btn-wrapper {
+  bottom: 150px;
 }
 
 /* ==========================================================================

@@ -43,6 +43,11 @@
     max-width: 153.5rem;
     justify-content: center;
     margin: auto;
+    .chat-container > .messages-container {
+        .scroll-btn-wrapper {
+            bottom: calc(170px + 16px);
+        }
+    }
 }
 
 .chat-container {

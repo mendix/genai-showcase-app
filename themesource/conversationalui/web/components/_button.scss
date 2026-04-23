@@ -110,7 +110,7 @@
         background-color: $bg-color-secondary;
         border: 1px solid $gray-darker;
         position: fixed;
-        bottom: 190px;
+        bottom: calc(170px + $spacing-medium);
         display: inline-flex;
         align-items: center;
         border-radius: $spacing-small;
