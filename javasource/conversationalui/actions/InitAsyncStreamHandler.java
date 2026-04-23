@@ -69,13 +69,23 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	                
 	                conversationalui.proxies.ChatContext mxChatContext = conversationalui.proxies.ChatContext.initialize(ctx, resultsChatContext.get(0));
 	                
-	                agentcommons.proxies.Version mxVersion;
+	                agentcommons.proxies.Version mxVersion = new agentcommons.proxies.Version(getContext());
 	                
-	                if (mxChatContext.getChatContext_Version() == null) {
+	                if (mxChatContext.getChatContext_Version() == null && mxChatContext.getChatContext_Agent().getAgent_Version_InUse() == null) {
+	                	mxVersion = null;
+	                }
+	                else if (mxChatContext.getChatContext_Version() == null) {
 	                	mxVersion = mxChatContext.getChatContext_Agent().getAgent_Version_InUse();
 	                			
 	                } else {
 	                	mxVersion = mxChatContext.getChatContext_Version();
+	                }
+	                
+	                if (mxVersion == null) {
+	                    LOGGER.error("Version could not be found.");
+	                    resp.getHttpServletResponse().setStatus(404);
+	                    genaicommons.impl.StreamingImpl.throwError(ctx,resp.getOutputStream());
+	                    return;
 	                }
 	                
 	                if (mxVersion.getVersion_DeployedModel() == null) {

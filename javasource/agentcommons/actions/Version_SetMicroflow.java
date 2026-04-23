@@ -10,7 +10,10 @@
 package agentcommons.actions;
 
 import static java.util.Objects.requireNonNull;
+import java.util.HashMap;
+import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
+import com.mendix.systemwideinterfaces.core.IDataType;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import agentcommons.impl.MxLogger;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
@@ -45,6 +48,13 @@ public class Version_SetMicroflow extends UserAction<java.lang.Void>
 		try {
 			requireNonNull(Microflow, "Microflow is required.");
 			
+			validate();
+			
+			if (this.isPreprocessing) {
+				this.Version.setStreamingPreProcess(this.Microflow);
+			} else {
+				this.Version.setStreamingPostProcess(this.Microflow);
+			}
 			
 			return null;
 		} catch (Exception e) {
@@ -66,5 +76,34 @@ public class Version_SetMicroflow extends UserAction<java.lang.Void>
 
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new MxLogger(Version_SetMicroflow.class);
+	
+	private void validate() {
+		 if (this.isPreprocessing) {
+			 
+			java.util.Map<String, IDataType> inputParameters = new HashMap<>();
+			inputParameters.put("ChatContext", Core.createDataType("ConversationalUI.ChatContext"));
+			
+			if (!Core.getInputParameters(this.Microflow).equals(inputParameters)) {
+				throw new IllegalArgumentException("Microflow selected as preprocessing microflow for streaming must have one input variable of type ConversationalUI.ChatContext.");
+				}
+			if (!Core.getReturnType(this.Microflow).getType().equals(IDataType.DataTypeEnum.Object) || !Core.getReturnType(this.Microflow).getObjectType().equals("GenAICommons.Request")) {
+				throw new IllegalArgumentException("Microflow selected as preprocessing microflow for streaming must have one return variable of type GenAICommons.Request.");
+			}
+		 } else {
+		 
+		 java.util.Map<String, IDataType> inputParameters = new HashMap<>();
+			inputParameters.put("Response", Core.createDataType("GenAICommons.Response"));
+			inputParameters.put("ChatContext", Core.createDataType("ConversationalUI.ChatContext"));
+			
+			if (!Core.getInputParameters(this.Microflow).equals(inputParameters)) {
+				throw new IllegalArgumentException("Microflow selected as preprocessing microflow for streaming must have two input variables with them being of type ConversationalUI.ChatContext and GenAICommons.Response.");
+				}
+			
+			if (!Core.getReturnType(this.Microflow).getType().equals(IDataType.DataTypeEnum.Nothing)) {
+				throw new IllegalArgumentException("Microflow selected as postprocessing microflow for streaming must have no return value.");
+			}
+		 }
+		
+	}
 	// END EXTRA CODE
 }
