@@ -68,8 +68,8 @@ public class Module_GetMicroflowList_PreProcessing extends UserAction<java.util.
 						return microflowName.startsWith(Module.getModuleName());
 					}
 				})
-				.filter(microflow -> Core.getReturnType(microflow).getType().equals(IDataType.DataTypeEnum.Object))
 				.filter(microflow -> Core.getInputParameters(microflow).equals(inputParameters))
+				.filter(microflow -> Core.getReturnType(microflow).getType().equals(IDataType.DataTypeEnum.Object))
 				.filter(microflow -> Core.getReturnType(microflow).getObjectType().equals("GenAICommons.Request"))
 				.sorted()
 				.map(microflowName -> createMicroflow(microflowName))

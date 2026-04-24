@@ -75,10 +75,12 @@ public class ChatContext_Create_ForAgent extends UserAction<IMendixObject>
 		    
 		    PromptToUse promptToUse = PromptToUse.initialize(getContext(), returnValue);
 		    
-		    conversationalui.proxies.ChatContext mxChatContext = Core.userActionCall("ConversationalUI." + conversationalui.actions.ChatContext_Create_SetActionMicroflow.class.getSimpleName())
+		    IMendixObject returnValue_ChatContext = Core.userActionCall("ConversationalUI." + conversationalui.actions.ChatContext_Create_SetActionMicroflow.class.getSimpleName())
 		    		.withParams(deployedModel.getMendixObject(), ActionMicroflow, promptToUse.getSystemPrompt(), Agent.getTitle())
 		    		.execute(getContext());
-		    mxChatContext.setChatContext_Agent(getContext(), Agent);
+		    
+		    conversationalui.proxies.ChatContext mxChatContext = conversationalui.proxies.ChatContext.initialize(getContext(), returnValue_ChatContext);
+		    mxChatContext.setChatContext_Agent(Agent);
 		    
 		    return mxChatContext.getMendixObject();
 
