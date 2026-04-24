@@ -59,7 +59,7 @@ public class ChatContext_Create_ForAgentDocument extends UserAction<IMendixObjec
 			IMendixObject agentIMendixObject = AgentDocumentUtils.getAgentObjectFromDocument(Agent, getContext());
 		    
 		    return Core.userActionCall("AgentCommons." + ChatContext_Create_ForAgent.class.getSimpleName())
-		    		.withParams(agentIMendixObject, ActionMicroflow, ContextObject, OverwritingDeployedModel.getMendixObject())
+		    		.withParams(agentIMendixObject, ActionMicroflow, ContextObject, OverwritingDeployedModel != null ? OverwritingDeployedModel.getMendixObject() : null)
 		    		.execute(getContext());
 
 		} catch (Exception e) {
