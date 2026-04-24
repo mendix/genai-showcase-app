@@ -31,8 +31,10 @@ import genaicommons.proxies.Request;
 import genaicommons.proxies.Response;
 import genaicommons.proxies.Span;
 import genaicommons.proxies.ToolSpan;
+import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.KnowledgeBaseSpan;
 import genaicommons.proxies.MCPSpan;
+import genaicommons.proxies.Message;
 import genaicommons.proxies.Trace;
 
 /**
@@ -58,7 +60,6 @@ public class AgentEditorServlet extends HttpServlet {
 
         try (PrintWriter out = resp.getWriter()) {
             JsonNode requestJson = parseRequestBody(req);
-            LOGGER.info(requestJson.toString());
             CustomBlobDocumentInfo agentCustomDocument = findAgentDocument(requestJson);       
             IContext context = Core.createSystemContext();
             Agent agent = findAgentObject(context, agentCustomDocument);
@@ -239,8 +240,42 @@ public class AgentEditorServlet extends HttpServlet {
         return contextObject;
     }
     
-    private static Request createRequest(IContext context, JsonNode requestJson) {
-    	Request request = new Request(context);
-    	return request;
+    private static Request createRequest(IContext context, JsonNode requestJson) throws IOException {
+        Request request = new Request(context);
+        JsonNode messagesNode = requestJson.get("messages");
+        
+        if (messagesNode != null && !messagesNode.isNull()) {
+            // Parse the messages string into a JsonNode array
+            JsonNode messagesArray;
+            if (messagesNode.isTextual()) {
+                // If it's a string, parse it
+                messagesArray = OBJECT_MAPPER.readTree(messagesNode.asText());
+            } else {
+                // If it's already a JSON array node
+                messagesArray = messagesNode;
+            }
+            List<Message> messageList = new ArrayList<Message>();
+            // Loop over each message in the array
+            if (messagesArray.isArray()) {
+      
+                for (JsonNode messageNode : messagesArray) {
+                    Message message = new Message(context);
+                    
+                    // Extract fields from the JSON
+                    String type = getTextOrNull(messageNode, "type");
+                    String text = getTextOrNull(messageNode, "text");
+                    
+                    // Set the message properties
+                    ENUM_MessageRole role = "user".equals(type) ? ENUM_MessageRole.user : ENUM_MessageRole.assistant; // Map "type" to "role"
+                    message.setRole(role); 
+                    message.setContent(text);  // "text" maps to content
+                    messageList.add(message);
+                    LOGGER.debug("Created message: role=" + type + ", content=" + text);
+                }
+            }
+            request.setRequest_Message(messageList);
+        }
+        
+        return request;
     }
 }

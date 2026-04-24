@@ -1,13 +1,13 @@
-import { I as t, O as C, r as h, ag as N, a6 as E, a2 as k, af as I, a4 as q } from "./Icon-BL-ju1Kw.js";
+import { I as t, O as C, r as h, ag as N, a6 as E, a2 as k, af as I, a4 as q } from "./Icon-DMu3278C.js";
 import { r as O } from "./index-CfghFsoU.js";
 import { createStudioProLogger as L } from "./logger-Bof2Evv1.js";
-import { u as P, D as R } from "./DialogFooter-CF2qRB1s.js";
-import { T as B, h as f, a as K } from "./toolHandlers-DZ_d2dnE.js";
+import { u as P, D as R } from "./DialogFooter-COjrWbXN.js";
+import { T as B, h as f, a as K } from "./toolHandlers-3RRB71-Z.js";
 import { e as d, f as A, I as F, v as J, J as _, K as H } from "./index-YObaGbux.js";
-import { T as v } from "./TextInputWithButton-rtLJh6Gm.js";
-import { S as U, I as W } from "./ComboBox-DwPuWiWO.js";
-import { n as G } from "./MicroflowIcon-BrRRUbJv.js";
-import { T as $ } from "./TextInputLabeled-CniLl5v6.js";
+import { T as v } from "./TextInputWithButton-BDeCrCh9.js";
+import { S as U, I as W } from "./ComboBox-BfwSOBFk.js";
+import { n as G } from "./MicroflowIcon-DrYfg-0b.js";
+import { T as $ } from "./TextInputLabeled-DBL3Xt2E.js";
 const z = [
   { key: d.Microflow, caption: "Microflow tool" },
   { key: d.MCP, caption: "MCP tool" }
@@ -232,3 +232,4 @@ const z = [
 export {
   pe as component
 };
+//# sourceMappingURL=toolEdit.js.map

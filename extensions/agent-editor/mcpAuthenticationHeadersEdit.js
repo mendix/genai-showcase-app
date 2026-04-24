@@ -1,9 +1,9 @@
-import { I as e, J as w, L as x, r as v, ag as k, a6 as A, a2 as f, O as j, aj as u, T as C, af as M, a4 as b } from "./Icon-BL-ju1Kw.js";
+import { I as e, J as w, L as x, r as v, ag as k, a6 as A, a2 as f, O as j, aj as u, T as C, af as M, a4 as b } from "./Icon-DMu3278C.js";
 import { r as H } from "./index-CfghFsoU.js";
 import { createStudioProLogger as P } from "./logger-Bof2Evv1.js";
-import { u as V, D as E } from "./DialogFooter-CF2qRB1s.js";
-import { T as y, D as B } from "./Table-DU5FBYXs.js";
-import { I as D } from "./Banner-BR20NG1M.js";
+import { u as V, D as E } from "./DialogFooter-COjrWbXN.js";
+import { T as y, D as B } from "./Table-lnKG6U_B.js";
+import { I as D } from "./Banner-Dxu8bG4H.js";
 const T = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2%208H14'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M8%2014V2'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", I = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2%208H14'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M8%2014V2'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
 var S = Object.defineProperty, $ = (t, r) => S(t, "name", { value: r, configurable: !0 });
 const O = $((t) => e.jsx(w, { light: I, dark: T, ...t }), "AddIcon"), R = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M6.5%207V13'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.5%207V13'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M2%203.5H14'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M6%201.5H10'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%203.5V14C12.5%2014.275%2012.275%2014.5%2012%2014.5H4C3.725%2014.5%203.5%2014.275%203.5%2014V3.5'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3c/svg%3e", L = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M6.5%207V13'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M9.5%207V13'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M2%203.5H14'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M6%201.5H10'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M12.5%203.5V14C12.5%2014.275%2012.275%2014.5%2012%2014.5H4C3.725%2014.5%203.5%2014.275%203.5%2014V3.5'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
@@ -108,3 +108,4 @@ const z = K((t) => e.jsx(w, { light: L, dark: R, ...t }), "DeleteIcon"), F = x.s
 export {
   Y as component
 };
+//# sourceMappingURL=mcpAuthenticationHeadersEdit.js.map

@@ -1,15 +1,15 @@
-import { L as W, r as v, I as n, O as j, R as E, V as I, a7 as F, a4 as P, a5 as M, a6 as U, a8 as z } from "./Icon-BL-ju1Kw.js";
-import { u as _, B as $, c as H, C as J } from "./TextWithIcon-CscNPnWD.js";
+import { L as q, r as v, I as n, O as j, R as E, W as I, a7 as F, a4 as P, a5 as M, a6 as U, a8 as z } from "./Icon-DMu3278C.js";
+import { u as _, B as $, c as H, C as J } from "./TextWithIcon-DpacnK2w.js";
 import { createStudioProLogger as k } from "./logger-Bof2Evv1.js";
 import { x as N, y as G, q as Q, z as X, s as Y, t as Z } from "./index-YObaGbux.js";
-import { C as y, i as ee, B as ne, v as te, a as se } from "./ButtonWithLabel-7_XxCrMU.js";
-import { y as A } from "./Link-Q0LFjAlq.js";
+import { C as y, i as ee, B as ne, v as te, a as se } from "./ButtonWithLabel-BOPXLTPZ.js";
+import { y as A } from "./Link-DlgH44DF.js";
 import { i as ae } from "./objectUtils-ChZ8y4UX.js";
 import { d as oe, a as re, b as ie, g as le } from "./mxCloudGenAIUtils-BRWIF1km.js";
-import { W as ce } from "./Banner-BR20NG1M.js";
-import { T as de } from "./Table-DU5FBYXs.js";
-import { T as b } from "./TextInputLabeled-CniLl5v6.js";
-import { T as ue } from "./TextInputWithButton-rtLJh6Gm.js";
+import { W as ce } from "./Banner-Dxu8bG4H.js";
+import { T as de } from "./Table-lnKG6U_B.js";
+import { T as b } from "./TextInputLabeled-DBL3Xt2E.js";
+import { T as ue } from "./TextInputWithButton-BDeCrCh9.js";
 const B = (e, t) => async (r) => {
   const c = k(e);
   try {
@@ -132,7 +132,7 @@ async function he(e, t) {
   }
 }
 const w = () => {
-}, fe = W.div`
+}, fe = q.div`
     color: ${({ theme: e }) => e.colorsTextSecondaryDefault};
     font-size: 10px;
 `, ge = ({
@@ -153,7 +153,7 @@ const w = () => {
   }, x = async () => {
     o.key && Y(e, o.key);
   }, f = async (i) => {
-    const q = i.providerFields, K = await te(e, q.key);
+    const W = i.providerFields, K = await te(e, W.key);
     if (d(K), !K)
       ye(
         e,
@@ -362,3 +362,4 @@ const w = () => {
 export {
   Be as component
 };
+//# sourceMappingURL=knowledgebaseEdit.js.map

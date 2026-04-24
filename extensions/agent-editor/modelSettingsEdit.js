@@ -1,9 +1,9 @@
-import { r as o, I as r, ag as R, a6 as q, a2 as D, O as E, af as N, a4 as O } from "./Icon-BL-ju1Kw.js";
+import { r as o, I as r, ag as R, a6 as q, a2 as D, O as E, af as N, a4 as O } from "./Icon-DMu3278C.js";
 import { r as B } from "./index-CfghFsoU.js";
 import { createStudioProLogger as F } from "./logger-Bof2Evv1.js";
-import { u as H, D as A } from "./DialogFooter-CF2qRB1s.js";
-import { I as Y } from "./Banner-BR20NG1M.js";
-import { T as f } from "./TextInputLabeled-CniLl5v6.js";
+import { u as H, D as A } from "./DialogFooter-COjrWbXN.js";
+import { I as Y } from "./Banner-Dxu8bG4H.js";
+import { T as f } from "./TextInputLabeled-DBL3Xt2E.js";
 const $ = ({ initialAgent: a, onClose: t }) => {
   var v, P, w;
   const [e, d] = o.useState(a), [n, u] = o.useState(((v = a.maxTokens) == null ? void 0 : v.toString()) ?? ""), [i, m] = o.useState(((P = a.temperature) == null ? void 0 : P.toString()) ?? ""), [l, y] = o.useState(((w = a.topP) == null ? void 0 : w.toString()) ?? ""), p = o.useCallback(() => n !== "" && e.maxTokens === void 0 ? "Please enter a valid number." : e.maxTokens !== void 0 && e.maxTokens < 1 ? "Max tokens must be greater than 0 (or empty)." : !0, [e.maxTokens, n]), c = o.useCallback(() => i !== "" && e.temperature === void 0 ? "Please enter a valid number." : e.temperature !== void 0 && e.temperature < 0 ? "Temperature must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.temperature, i]), h = o.useCallback(() => l !== "" && e.topP === void 0 ? "Please enter a valid number." : e.topP !== void 0 && e.topP < 0 ? "TopP must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.topP, l]), g = o.useCallback(
@@ -95,3 +95,4 @@ const $ = ({ initialAgent: a, onClose: t }) => {
 export {
   K as component
 };
+//# sourceMappingURL=modelSettingsEdit.js.map
