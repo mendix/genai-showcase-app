@@ -1,6 +1,8 @@
 .spinner {
   width: 20px;
   height: 20px;
+  aspect-ratio: 1/1;
+  flex-shrink: 0;
   border: 3px solid #e5e7eb;      /* light gray background */
   border-top: 3px solid #3b82f6;  /* accent color */
   border-radius: 50%;
