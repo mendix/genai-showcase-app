@@ -28394,6 +28394,20 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 450px;
 }
 
+.modal-dialog .modal-content .modal-header {
+  padding: 16px 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: row-reverse;
+}
+.modal-dialog .modal-content .modal-header h4 {
+  font-size: 24px;
+}
+.modal-dialog .mx-dataview-controls {
+  padding: 16px 24px;
+}
+
 .accordion-chat-sources .widget-accordion-group {
   background: transparent;
   border-bottom: none;
@@ -30406,6 +30420,22 @@ input[type=checkbox].three-state-checkbox + .control-label {
   color: #AB19DB;
   padding: 8px;
   border-radius: 8px;
+}
+
+.item-selection,
+.model-selection {
+  display: flex;
+  align-items: center;
+}
+.item-selection .mx-image-viewer,
+.model-selection .mx-image-viewer {
+  width: fit-content;
+  margin-right: 8px;
+}
+.item-selection .mx-image-viewer img,
+.model-selection .mx-image-viewer img {
+  width: 16px;
+  height: 16px;
 }
 
 .model-badge, .model-badge--primary, .model-badge--default {

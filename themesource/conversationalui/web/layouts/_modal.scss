@@ -1,0 +1,19 @@
+@use '../../../../theme/web/custom-variables' as *;
+
+    .modal-dialog {
+        .modal-content {
+            .modal-header {
+                padding: $spacing-medium $spacing-large;
+                display: inline-flex;
+                align-items: center;
+                justify-content: space-between;
+  flex-flow: row-reverse;
+                h4 {
+                    font-size: 24px;
+                }
+            }
+        }
+        .mx-dataview-controls {
+            padding: $spacing-medium $spacing-large;
+        }
+    }
