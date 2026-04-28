@@ -30414,6 +30414,22 @@ input[type=checkbox].three-state-checkbox + .control-label {
   -webkit-box-orient: vertical;
 }
 
+.img-display--24 {
+  width: 24px;
+  height: 24px;
+}
+.img-display--24 .img {
+  width: 24px;
+  height: 24px;
+}
+
+.popupmenu-custom-item-container-mxgenai {
+  padding: 8px;
+  margin-top: none;
+  margin-bottom: none;
+  align-items: right !important;
+}
+
 .info-tooltip .widget-tooltip-content {
   position: relative;
   z-index: 1000;
@@ -30442,6 +30458,31 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .info-icon img {
   height: 16px;
   width: 16px;
+}
+
+.mxgenai-listview-horizontal.mx-listview > ul {
+  display: contents;
+  margin-bottom: none;
+}
+.mxgenai-listview-horizontal.mx-listview > ul > li {
+  display: inline-block;
+  padding: 4px;
+}
+.mxgenai-listview-horizontal.mx-listview > ul > li .mx-dataview-content > button {
+  display: -webkit-box;
+  word-break: break-word;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+  text-wrap: wrap;
+  padding: 5px 10px;
+  line-height: 2;
+}
+.mxgenai-listview-horizontal.mx-listview > ul > li:hover {
+  background-color: transparent;
 }
 
 .badge-with-circle {
