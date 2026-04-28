@@ -157,6 +157,7 @@
         margin: 0 10% 0 0;
         padding: $spacing-small 12px;
         padding-bottom: 0px;
+
     }
 
     &--user {
@@ -167,6 +168,22 @@
             border-radius: 8px 8px 0 8px;
             margin: 0 0 0 10%;
         }
+    }
+}
+
+.message--user {
+    color: #0A1324B2;
+    font-weight: 400;
+
+    h1,h2,h3,h4,h5,h6 {
+        color: #0A1324D9;
+        font-weight: 600;
+
+    }
+    strong {
+        color: #0A1324D9;
+        font-weight: 400;
+
     }
 }
 
@@ -218,12 +235,14 @@
     border: 1px solid;
     border-color: $chat-border-color;
     overflow: hidden;
+    color: #0A1324B2;
     
     .tool-title{
-        font-weight: $font-weight-semibold;
         background-color: $chat-bg-light;
         padding: $spacing-small;
         display: block;
+        color: #0A1324B2;
+        font-weight: 600 ;
         .mx-image-viewer {
             width: auto;
         }
@@ -231,6 +250,12 @@
 
     .tool-details{
         padding: $spacing-small;
+        p {
+            font-weight: 400;
+        }
+         .mx-image-viewer {
+            width: auto;
+        }
     }
 
     .reject-button{

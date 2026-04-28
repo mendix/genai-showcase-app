@@ -54,8 +54,8 @@ public class Module_GetList_PreProcessing extends UserAction<java.util.List<IMen
 			
 			Core.getMicroflowNames().stream()
 				.filter(microflowName -> !microflowName.isBlank() && microflowName.contains("."))
-				.filter(microflow -> Core.getReturnType(microflow).getType().equals(IDataType.DataTypeEnum.Object))
 				.filter(microflow -> Core.getInputParameters(microflow).equals(inputParameters))
+				.filter(microflow -> Core.getReturnType(microflow).getType().equals(IDataType.DataTypeEnum.Object))
 				.filter(microflow -> Core.getReturnType(microflow).getObjectType().equals("GenAICommons.Request"))
 				.sorted()
 				.forEach(microflowName -> getCreateModule(microflowName.substring(0, microflowName.indexOf('.'))));
