@@ -36,6 +36,9 @@
     flex-wrap: wrap;
     padding: $spacing-larger;
     box-sizing: border-box;
+    .chat-container {
+        padding: $spacing-small 0px;
+    }
 }
 
 .chat-page--fullheight-centered {
@@ -64,6 +67,16 @@
     }
     .chat-input-container {
         padding: 0px 16px;
+        .chat-listview-stylingless {
+            ul > li {
+                padding: 0;
+                .btn-sm {
+                    margin-right: $spacing-smaller;
+                    max-height: unset;
+                    padding: $spacing-smallest $spacing-small;
+                }
+            }
+        }
     }
 
     &--center {
@@ -159,8 +172,8 @@
         border-radius: 8px 8px 8px 0;
         border: 1px solid $border-color-default;
         margin: 0;
-        padding: 0;
-        padding-bottom: 0px;
+        padding: $spacing-small;
+        //padding-bottom: 0px;
 
     &--assistant {
         margin-top: $spacing-small;

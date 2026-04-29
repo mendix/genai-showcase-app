@@ -53,7 +53,7 @@
     .modal-body {
         height: calc(100% - 50px);
         overflow: hidden;
-        padding: $spacing-medium;
+        padding: $spacing-small 0px;
         .mx-placeholder {
             height: 100%;
         }

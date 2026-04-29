@@ -38,6 +38,7 @@
 .accordion-tool-calls {
     width: 100%;
     margin-bottom: $spacing-small;
+    padding-top: $spacing-smaller;
     .widget-accordion-group{
         background: transparent;
         border-bottom: none;
@@ -78,8 +79,7 @@
                 padding-right: 0px;
                 padding-bottom: $spacing-smaller;
                 color: $font-weight-normal;
-                                font-weight: 400;
-
+                font-weight: 400;
                 opacity: 60%;
                 .card {
                     padding: 8px 16px;
