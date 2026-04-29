@@ -28508,8 +28508,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .accordion-tool-calls {
   width: 100%;
-  margin-bottom: 8px;
-  padding-top: 4px;
 }
 .accordion-tool-calls .widget-accordion-group {
   background: transparent;
@@ -29056,9 +29054,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 32px;
   box-sizing: border-box;
 }
-.chat-page--fullheight .chat-container, .chat-page--fullheight-centered .chat-container {
-  padding: 8px 0px;
-}
 
 .chat-page--fullheight-centered {
   max-width: 153.5rem;
@@ -29074,15 +29069,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .chat-container .messages-container {
   flex: 1 1 0;
-  padding: 0 16px;
   overflow-y: auto;
   overflow-x: hidden;
 }
 .chat-container .messages-container .mx-listview ul > li {
   padding: 0;
-}
-.chat-container .chat-input-container {
-  padding: 0px 16px;
 }
 .chat-container .chat-input-container .chat-listview-stylingless ul > li {
   padding: 0;
@@ -29171,70 +29162,75 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: center;
 }
 .chat-bubble-wrapper .chat-message-card {
-  width: 100%;
   background: #fff;
-  border-radius: 8px 8px 8px 0;
+  border-radius: 8px;
   border: 1px solid #ced0d3;
-  margin: 0;
+  margin: 0 10% 0 0;
   padding: 8px;
+  padding-bottom: 0px;
 }
-.chat-bubble-wrapper .chat-message-card--assistant {
+.chat-bubble-wrapper--assistant {
   margin-top: 8px;
 }
-.chat-bubble-wrapper .chat-message-card--user {
+.chat-bubble-wrapper--user {
   align-items: flex-end;
 }
-.chat-bubble-wrapper .chat-message-card--user .chat-message-card {
+.chat-bubble-wrapper--user .chat-message-card {
   background: #f8f8f8;
-  border-radius: 8px 8px 0 8px;
+  border: 1px solid #ced0d3;
+  border-radius: 8px;
   margin: 0 0 0 10%;
-  width: auto;
-  padding: 8px;
 }
-.chat-bubble-wrapper .message--user {
+
+.message--user {
   color: rgba(10, 19, 36, 0.6980392157);
   font-weight: 400;
 }
-.chat-bubble-wrapper .message--user h1, .chat-bubble-wrapper .message--user h2, .chat-bubble-wrapper .message--user h3, .chat-bubble-wrapper .message--user h4, .chat-bubble-wrapper .message--user h5, .chat-bubble-wrapper .message--user h6 {
+.message--user h1, .message--user h2, .message--user h3, .message--user h4, .message--user h5, .message--user h6 {
   color: rgba(10, 19, 36, 0.8509803922);
   font-weight: 600;
 }
-.chat-bubble-wrapper .message--user strong {
+.message--user strong {
   color: rgba(10, 19, 36, 0.8509803922);
   font-weight: 400;
 }
-.chat-bubble-wrapper .chat-history-sidebar {
+
+.chat-history-sidebar {
   overflow-y: auto;
 }
-.chat-bubble-wrapper .chat-history-active {
+
+.chat-history-active {
   border-left: 3px solid #264ae5;
   font-weight: bold;
 }
-.chat-bubble-wrapper .user-input-instructions {
+
+.user-input-instructions {
   font-style: italic;
 }
-.chat-bubble-wrapper .chat-container-disabled .panel-content {
+
+.chat-container-disabled .panel-content {
   flex-direction: column;
   overflow: hidden;
 }
-.chat-bubble-wrapper .chat-container-disabled .messages-container {
+.chat-container-disabled .messages-container {
   display: none;
 }
-.chat-bubble-wrapper .chat-container-disabled .chat-input-wrapper {
+.chat-container-disabled .chat-input-wrapper {
   margin-top: 100%;
 }
-.chat-bubble-wrapper .chat-container-disabled .chat-input-wrapper .form-group .form-control {
+.chat-container-disabled .chat-input-wrapper .form-group .form-control {
   background-color: #f8f8f8;
   opacity: 1;
   cursor: not-allowed;
   pointer-events: none;
 }
-.chat-bubble-wrapper .chat-container-disabled .send-btn-container .send-btn {
+.chat-container-disabled .send-btn-container .send-btn {
   cursor: not-allowed;
   pointer-events: none;
   opacity: 0.65;
 }
-.chat-bubble-wrapper .tool-message {
+
+.tool-message {
   border-radius: 8px;
   border: 0px solid;
   overflow: hidden;
@@ -29244,7 +29240,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   font-weight: normal;
   margin-bottom: 8px;
 }
-.chat-bubble-wrapper .tool-message .tool-title {
+.tool-message .tool-title {
   font-weight: 600;
   color: rgba(10, 19, 36, 0.6980392157);
   padding: 0;
@@ -29252,40 +29248,40 @@ input[type=checkbox].three-state-checkbox + .control-label {
   color: rgba(10, 19, 36, 0.6980392157);
   font-weight: 600;
 }
-.chat-bubble-wrapper .tool-message .tool-title .mx-image-viewer {
+.tool-message .tool-title .mx-image-viewer {
   width: auto;
 }
-.chat-bubble-wrapper .tool-message .tool-details {
+.tool-message .tool-details {
   padding-top: 8px;
 }
-.chat-bubble-wrapper .tool-message .tool-details .btn-small {
+.tool-message .tool-details .btn-small {
   height: 32px;
   padding: 5px 8px;
 }
-.chat-bubble-wrapper .tool-message .tool-details .btn-default {
+.tool-message .tool-details .btn-default {
   border: 0;
   background-color: transparent;
   color: #0a1324;
 }
-.chat-bubble-wrapper .tool-message .tool-details .btn-default:hover {
+.tool-message .tool-details .btn-default:hover {
   background-color: #a9acb3;
 }
-.chat-bubble-wrapper .tool-message .tool-details a.mx-link {
+.tool-message .tool-details a.mx-link {
   color: #0a1324;
   padding: 8px;
 }
-.chat-bubble-wrapper .tool-message .tool-details a.mx-link p {
+.tool-message .tool-details a.mx-link p {
   font-weight: 400;
 }
-.chat-bubble-wrapper .tool-message .tool-details a.mx-link .mx-image-viewer {
+.tool-message .tool-details a.mx-link .mx-image-viewer {
   width: auto;
 }
-.chat-bubble-wrapper .tool-message .tool-details .reject-button {
+.tool-message .tool-details .reject-button {
   background-color: transparent;
   color: #0a1324;
   border: none;
 }
-.chat-bubble-wrapper .tool-message .tool-details .reject-button:hover {
+.tool-message .tool-details .reject-button:hover {
   background-color: #e7e7e9;
 }
 
@@ -30379,6 +30375,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  padding: 0 16px;
 }
 .agent-page-container .card-content {
   overflow-x: hidden;
@@ -30449,7 +30446,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .layout-chat-popup.mx-window .modal-body {
   height: calc(100% - 50px);
   overflow: hidden;
-  padding: 8px 0px;
+  padding: 16px;
 }
 .layout-chat-popup.mx-window .modal-body .mx-placeholder {
   height: 100%;
@@ -30558,7 +30555,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .layout-chat-sidebar .mx-window-content .mx-window-body {
   overflow: hidden;
-  padding: 8px 0px;
+  padding: 16px;
   height: calc(100% - 50px);
 }
 .layout-chat-sidebar .mx-window-content .mx-window-body .mx-placeholder {

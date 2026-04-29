@@ -36,9 +36,6 @@
     flex-wrap: wrap;
     padding: $spacing-larger;
     box-sizing: border-box;
-    .chat-container {
-        padding: $spacing-small 0px;
-    }
 }
 
 .chat-page--fullheight-centered {
@@ -56,7 +53,6 @@
 
     .messages-container {
         flex: 1 1 0;
-        padding: 0 $spacing-medium;
         overflow-y: auto;
         overflow-x: hidden;
         .mx-listview {
@@ -66,7 +62,6 @@
         }
     }
     .chat-input-container {
-        padding: 0px 16px;
         .chat-listview-stylingless {
             ul > li {
                 padding: 0;
@@ -165,29 +160,25 @@
     align-items: flex-start;
     flex-direction: column;
     justify-content: center;
-
     .chat-message-card {
-        width: 100%;
         background: $chat-bubble-assistant-background;
-        border-radius: 8px 8px 8px 0;
+        border-radius: 8px;
         border: 1px solid $border-color-default;
-        margin: 0;
+        margin: 0 10% 0 0;
         padding: $spacing-small;
-        //padding-bottom: 0px;
-
+        padding-bottom: 0px;
+    }     
     &--assistant {
         margin-top: $spacing-small;
     }
 
     &--user {
         align-items: flex-end;
-
         .chat-message-card {
             background: $chat-bubble-user-background;
-            border-radius: 8px 8px 0 8px;
+            border: 1px solid #ced0d3;
+            border-radius: 8px;
             margin: 0 0 0 10%;
-            width: auto;
-            padding: $spacing-small;
         }
     }
 }
@@ -307,5 +298,4 @@
             }
         }    
     }
-}
 }
