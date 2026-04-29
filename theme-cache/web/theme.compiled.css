@@ -29183,11 +29183,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .message--user {
-  color: rgba(10, 19, 36, 0.6980392157);
+  color: #0A1325;
   font-weight: 400;
 }
 .message--user h1, .message--user h2, .message--user h3, .message--user h4, .message--user h5, .message--user h6 {
-  color: rgba(10, 19, 36, 0.8509803922);
+  color: #0A1325;
   font-weight: 600;
 }
 .message--user strong {
