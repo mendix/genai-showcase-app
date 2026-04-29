@@ -29774,6 +29774,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   display: flex;
   justify-content: flex-start;
   margin-bottom: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  min-width: 0;
+  padding-right: 4px;
 }
 .version-table .delete-icon {
   color: #e33f4e;
@@ -29903,6 +29907,12 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin: 0 auto;
   overflow-y: auto;
   overflow-x: hidden;
+}
+.convui-pagecontainer .card .chat-container {
+  padding: 0px;
+}
+.convui-pagecontainer .card .chat-container .chat-input-container {
+  padding: 0;
 }
 
 .traces-page-content-container {

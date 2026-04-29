@@ -90,6 +90,10 @@
         display: flex;
         justify-content: flex-start;
         margin-bottom: 0;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        min-width: 0;
+        padding-right: 4px;
     }
     .delete-icon {
         color: $brand-danger;

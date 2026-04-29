@@ -12,6 +12,14 @@
   margin: 0 auto;
   overflow-y: auto;
   overflow-x: hidden;
+  .card {
+      .chat-container {
+        padding: 0px;
+        .chat-input-container {
+            padding: 0;
+        }
+      }
+  }
 }
 
 .traces-page-content-container {
