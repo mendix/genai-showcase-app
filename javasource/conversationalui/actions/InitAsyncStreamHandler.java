@@ -67,7 +67,13 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	                String chatContextGUID = jsonRequest.get("chatContextGUID").asText();
 	                
 	                // Create user context from session
-	                String sessionId = req.getCookie("XASSESSIONID");
+	                String sessionId;
+	                String host = req.getHeader("Host");
+	                if (host.contains("localhost")) {
+	                	sessionId = req.getCookie("XASSESSIONID");
+	                } else {
+	                	sessionId = req.getCookie("__Host-XASSESSIONID");
+	                }
 	                ISession session = Core.getSessionById(UUID.fromString(sessionId));
 	                IContext ctx = session.createContext();
 	                
