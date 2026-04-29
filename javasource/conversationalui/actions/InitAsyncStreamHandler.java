@@ -42,7 +42,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 			@Override
 			protected void processRequest(IMxRuntimeRequest req, IMxRuntimeResponse resp, String s) throws Exception {
 				
-				LOGGER.info("Request handler started.");
+				LOGGER.debug("Request handler started.");
 				
                 // Configure response for Server-Sent Events
                 resp.setContentType("text/event-stream");
@@ -168,9 +168,8 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 							agentcommons.proxies.microflows.Microflows.chatContext_ProcessResponse_DefaultPostProcessing(ctx, mxChatContext, mxResponse);
 						}
 					}
-					
-					
 					ResponseConnectionController.getInstance().removeStreamingResponseWriter(streamingResponseWriterId);
+					LOGGER.debug("Request handler ended.");
 	            	
 	            } catch (Exception e) {
 	            	LOGGER.error(e);
