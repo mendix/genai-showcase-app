@@ -191,6 +191,7 @@ public class AgentEditorServlet extends HttpServlet {
                 toolSpanData.put("toolName", nullToEmpty(toolSpan.getToolName(context)));
                 toolSpanData.put("toolDescription", nullToEmpty(toolSpan.getToolDescription(context)));
                 toolSpanData.put("durationMilliseconds", toolSpan.getDurationMilliseconds(context));
+                toolSpanData.put("spanId", toolSpan.getSpanId(context));
 
                 if (span instanceof KnowledgeBaseSpan) {
                     KnowledgeBaseSpan kbSpan = (KnowledgeBaseSpan) span;
