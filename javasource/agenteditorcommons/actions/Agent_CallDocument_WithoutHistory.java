@@ -9,13 +9,11 @@
 
 package agenteditorcommons.actions;
 
-import static java.util.Objects.requireNonNull;
-import java.util.List;
 import com.mendix.core.Core;
-import com.mendix.extensibility.CustomBlobDocumentInfo;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
+import agenteditorcommons.impl.AgentDocumentUtils;
 import agenteditorcommons.impl.MxLogger;
 import agentcommons.actions.Agent_Call_WithoutHistory;
 
@@ -59,19 +57,7 @@ public class Agent_CallDocument_WithoutHistory extends UserAction<IMendixObject>
 	{
 		// BEGIN USER CODE
 		try {
-			CustomBlobDocumentInfo agentDocument = Core.extensibility().getCustomDocumentByFullName(Agent);
-			requireNonNull(agentDocument, "Agent document not found.");
-			
-			List<IMendixObject> results = Core.createXPathQuery("//AgentCommons.Agent[ModelDocumentID=$documentID]")
-		            .setVariable("documentID", agentDocument.documentID().toString())
-		            .setAmount(1)
-		            .execute(getContext());
-			
-			if (results.isEmpty() || results.get(0) == null) {
-			    throw new NullPointerException("Agent object with name " + Agent + " does not exist.");
-			}			
-			
-			IMendixObject agentIMendixObject = results.get(0);
+			IMendixObject agentIMendixObject = AgentDocumentUtils.getAgentObjectFromDocument(Agent, getContext());
 			IMendixObject requestIMendixObject = OptionalRequest == null ? null : OptionalRequest.getMendixObject();
 			IMendixObject fileCollectionIMendixObject = OptionalFileCollection == null ? null : OptionalFileCollection.getMendixObject();
 			

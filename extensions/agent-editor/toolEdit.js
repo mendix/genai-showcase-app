@@ -1,26 +1,26 @@
-import { x as n, G as x, r as y, a2 as N, R as E, N as k, a1 as I, P as q } from "./Icon-Bb5knnP8.js";
+import { H as n, P as x, r as y, ag as N, a6 as E, a2 as k, af as I, a4 as q } from "./Icon-UiLWY9J1.js";
 import { r as P } from "./index-CfghFsoU.js";
 import { createStudioProLogger as B } from "./logger-Bof2Evv1.js";
-import { h as L, a as R } from "./customBlobDocumentUtils-Dwvjb_jQ.js";
-import { u as O, D as A } from "./DialogFooter-CsVkF8jQ.js";
-import { T as F, h, a as K } from "./toolHandlers-5ai_iAr-.js";
-import { d, e as H, H as _, u as G, I as W } from "./index-DNPEn852.js";
-import { T as D } from "./TextInputWithButton-CMS27jFj.js";
-import { S as $, I as z } from "./ComboBox-BS5KkYOa.js";
-import { n as J } from "./MicroflowIcon-CiDB04gt.js";
-import { T as Q } from "./TextInputLabeled-BLG8tCoP.js";
+import { h as L, a as O } from "./customBlobDocumentUtils-Dwvjb_jQ.js";
+import { u as R, D as A } from "./DialogFooter-CMEdDiSN.js";
+import { T as F, h, a as K } from "./toolHandlers-CdSVG36-.js";
+import { d, e as H, I as _, v as W, J as G } from "./index-CcjggGcx.js";
+import { T as v } from "./TextInputWithButton-DEzJuJjn.js";
+import { S as J, I as $ } from "./ComboBox-B1qf7wz3.js";
+import { n as z } from "./MicroflowIcon-UqycS1--.js";
+import { T as Q } from "./TextInputLabeled-BOV58C6a.js";
 const U = [
   { key: d.Microflow, caption: "Microflow tool" },
   { key: d.MCP, caption: "MCP tool" }
-], j = ({ selectedKey: o, validationInfo: t, onToolTypeChange: i }) => /* @__PURE__ */ n.jsx(
-  $,
+], D = ({ selectedKey: o, validationInfo: t, onToolTypeChange: i }) => /* @__PURE__ */ n.jsx(
+  J,
   {
     "aria-label": "Tool type",
     label: "Tool type",
     selectedKey: o,
     validate: () => t.isValidType,
     onSelectionChange: i,
-    children: U.map((l) => /* @__PURE__ */ n.jsx(z, { id: l.key, children: l.caption }, l.key))
+    children: U.map((l) => /* @__PURE__ */ n.jsx($, { id: l.key, children: l.caption }, l.key))
   }
 ), X = ({
   tool: o,
@@ -30,7 +30,7 @@ const U = [
   onToolTypeChange: e
 }) => /* @__PURE__ */ n.jsxs(x, { label: "Common", children: [
   /* @__PURE__ */ n.jsx(
-    j,
+    D,
     {
       selectedKey: o.toolType,
       validationInfo: t,
@@ -38,7 +38,7 @@ const U = [
     }
   ),
   o.toolType === d.MCP && /* @__PURE__ */ n.jsx(
-    D,
+    v,
     {
       ariaLabel: "Consumed MCP service",
       label: "Consumed MCP service",
@@ -61,7 +61,7 @@ const U = [
 }) => /* @__PURE__ */ n.jsxs(n.Fragment, { children: [
   /* @__PURE__ */ n.jsxs(x, { label: "Common", children: [
     /* @__PURE__ */ n.jsx(
-      j,
+      D,
       {
         selectedKey: o.toolType,
         validationInfo: t,
@@ -69,12 +69,12 @@ const U = [
       }
     ),
     /* @__PURE__ */ n.jsx(
-      D,
+      v,
       {
         ariaLabel: "Microflow",
         label: "Microflow",
         value: o.document.qualifiedName,
-        icon: o.document.qualifiedName ? /* @__PURE__ */ n.jsx(J, {}) : void 0,
+        icon: o.document.qualifiedName ? /* @__PURE__ */ n.jsx(z, {}) : void 0,
         onClick: l,
         buttonCaption: "Select...",
         buttonCaptionSecondary: o.document.qualifiedName ? "Show" : void 0,
@@ -139,8 +139,8 @@ const U = [
   }, C = () => {
     l(null);
   };
-  O(C, p);
-  const v = () => {
+  R(C, p);
+  const j = () => {
     e.toolType === d.Microflow ? window.open(
       "https://docs.mendix.com/appstore/modules/genai/genai-for-mx/agent-commons/#adding-microflows-as-tools",
       "_blank",
@@ -166,7 +166,7 @@ const U = [
   }, w = async () => {
     const a = await K(
       t,
-      e.toolType === d.MCP ? W : "Microflows$Microflow"
+      e.toolType === d.MCP ? G : "Microflows$Microflow"
     );
     if (a) {
       const c = { ...e, document: a };
@@ -174,7 +174,7 @@ const U = [
     }
   }, g = () => {
     var a;
-    (a = e.document) != null && a.documentId && (e.toolType === d.Microflow && e.document.documentId ? G(t, e.document) : e.toolType === d.MCP && e.document.documentId && L(t, e.document));
+    (a = e.document) != null && a.documentId && (e.toolType === d.Microflow && e.document.documentId ? W(t, e.document) : e.toolType === d.MCP && e.document.documentId && L(t, e.document));
   }, b = (a) => {
     const c = {
       ...e,
@@ -207,7 +207,7 @@ const U = [
         onToolTypeChange: b
       }
     ) }) }),
-    /* @__PURE__ */ n.jsx(A, { onOk: p, onCancel: C, onHelp: v })
+    /* @__PURE__ */ n.jsx(A, { onOk: p, onCancel: C, onHelp: j })
   ] });
 }, te = ({ studioPro: o, initialTool: t, agent: i, onClose: l }) => /* @__PURE__ */ n.jsx(q, { studioPro: o, children: /* @__PURE__ */ n.jsx(oe, { initialTool: t, studioPro: o, agent: i, onClose: l }) }), fe = {
   async loaded(o, t) {
@@ -216,7 +216,7 @@ const U = [
       const e = document.getElementById("root");
       if (!e)
         throw new Error("Failed to find the root element");
-      const m = I.createRoot(e), s = await R(i, t.agentDocumentId);
+      const m = I.createRoot(e), s = await O(i, t.agentDocumentId);
       let u;
       t.toolId && (u = s.tools.find((p) => p.id === t.toolId));
       const f = (p) => {

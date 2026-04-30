@@ -1,14 +1,14 @@
-import { r as c, x as a, a2 as A, R as q, N as F, G as C, a1 as G, P as O } from "./Icon-Bb5knnP8.js";
-import { r as H } from "./index-CfghFsoU.js";
+import { r as c, H as a, ag as A, a6 as q, a2 as F, P as C, af as H, a4 as O } from "./Icon-UiLWY9J1.js";
+import { r as G } from "./index-CfghFsoU.js";
 import { createStudioProLogger as W } from "./logger-Bof2Evv1.js";
-import { g as $, h as J, a as _ } from "./customBlobDocumentUtils-Dwvjb_jQ.js";
-import { S as z, I as Q } from "./ComboBox-BS5KkYOa.js";
-import { u as U, D as X } from "./DialogFooter-CsVkF8jQ.js";
-import { T as Y, a as Z } from "./toolHandlers-5ai_iAr-.js";
-import { T as I } from "./TextInputLabeled-BLG8tCoP.js";
-import { T as P } from "./TextInputWithButton-CMS27jFj.js";
-import { J as V, k as ee, K as te } from "./index-DNPEn852.js";
-import { g as ie } from "./mxCloudGenAIUtils-CoL5Cjj-.js";
+import { g as $, h as _, a as z } from "./customBlobDocumentUtils-Dwvjb_jQ.js";
+import { S as J, I as Q } from "./ComboBox-B1qf7wz3.js";
+import { u as U, D as X } from "./DialogFooter-CMEdDiSN.js";
+import { T as Y, a as Z } from "./toolHandlers-CdSVG36-.js";
+import { T as I } from "./TextInputLabeled-BOV58C6a.js";
+import { T as P } from "./TextInputWithButton-DEzJuJjn.js";
+import { K as V, k as ee, L as te } from "./index-CcjggGcx.js";
+import { g as ie } from "./mxCloudGenAIUtils-jbsl4kfx.js";
 import { h } from "./knowledgebaseToolHandlers-CvlCV-OF.js";
 const ae = {
   isValidName: !0,
@@ -32,9 +32,9 @@ const ae = {
   onClose: p
 }) => {
   var M, E;
-  const [t, g] = c.useState(s || V()), [r, f] = c.useState(ae), [S, d] = c.useState([]), [v, N] = c.useState(
+  const [t, g] = c.useState(s || V()), [r, f] = c.useState(ae), [S, d] = c.useState([]), [v, j] = c.useState(
     ((M = (s || V()).maxResults) == null ? void 0 : M.toString()) ?? ""
-  ), [k, R] = c.useState(
+  ), [k, D] = c.useState(
     ((E = (s || V()).minSimilarity) == null ? void 0 : E.toString()) ?? ""
   ), y = c.useCallback(
     async (e) => ({
@@ -80,7 +80,7 @@ const ae = {
       d(!e || typeof e == "string" ? [] : e);
     }).catch(() => d([])) : d([]);
   }, [t.document, i]), c.useEffect(() => {
-    s && (N(s.maxResults !== void 0 ? s.maxResults.toString() : ""), R(s.minSimilarity !== void 0 ? s.minSimilarity.toString() : ""), y(s).then((e) => {
+    s && (j(s.maxResults !== void 0 ? s.maxResults.toString() : ""), D(s.minSimilarity !== void 0 ? s.minSimilarity.toString() : ""), y(s).then((e) => {
       f(e);
     }));
   }, [s, y]);
@@ -100,7 +100,7 @@ const ae = {
       const l = String(o);
       if (!/^\d*$/.test(l))
         return;
-      N(l);
+      j(l);
       const u = l === "" ? void 0 : Number.parseInt(l, 10), b = {
         ...t,
         maxResults: Number.isNaN(u) ? void 0 : u
@@ -112,7 +112,7 @@ const ae = {
       const l = String(o);
       if (!/^\d*\.?\d*$/.test(l))
         return;
-      R(l);
+      D(l);
       const u = l === "" || l === "." ? void 0 : Number.parseFloat(l), b = {
         ...t,
         minSimilarity: Number.isNaN(u) ? void 0 : u
@@ -129,14 +129,14 @@ const ae = {
       g(o), w("document", o);
     }
   }, K = () => {
-    J(i, t.document);
-  }, j = async () => {
+    _(i, t.document);
+  }, N = async () => {
     const e = await y(t);
     f(e), Object.values(e).some((m) => m !== !0) || p(t);
-  }, D = () => {
+  }, R = () => {
     p(null);
   };
-  U(D, j);
+  U(R, N);
   const L = () => {
     window.open(
       "https://docs.mendix.com/appstore/modules/genai/mx-cloud-genai/MxGenAI-connector/#about-knowledge-bases",
@@ -162,7 +162,7 @@ const ae = {
           }
         ),
         /* @__PURE__ */ a.jsx(
-          z,
+          J,
           {
             "aria-label": "Collection identifier",
             label: "Collection",
@@ -227,16 +227,16 @@ const ae = {
         )
       ] })
     ] }) }),
-    /* @__PURE__ */ a.jsx(X, { onOk: j, onCancel: D, onHelp: L })
+    /* @__PURE__ */ a.jsx(X, { onOk: N, onCancel: R, onHelp: L })
   ] });
 }, se = ({ studioPro: s, initialTool: i, agent: n, onClose: p }) => /* @__PURE__ */ a.jsx(O, { studioPro: s, children: /* @__PURE__ */ a.jsx(oe, { initialTool: i, studioPro: s, agent: n, onClose: p }) }), we = {
   async loaded(s, i) {
-    const n = H(s), p = W(n);
+    const n = G(s), p = W(n);
     try {
       const t = document.getElementById("root");
       if (!t)
         throw new Error("Failed to find the root element");
-      const g = G.createRoot(t), r = await _(n, i.agentDocumentId);
+      const g = H.createRoot(t), r = await z(n, i.agentDocumentId);
       let f;
       i.toolId && (f = (r.knowledgebaseTools || []).find((v) => v.id === i.toolId));
       const S = (d) => {

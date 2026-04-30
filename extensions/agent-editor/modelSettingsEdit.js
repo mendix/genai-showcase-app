@@ -1,11 +1,11 @@
-import { r as o, x as r, a2 as L, R, N as q, G as y, a1 as B, P as N } from "./Icon-Bb5knnP8.js";
+import { r as o, H as r, ag as L, a6 as q, a2 as R, P as y, af as B, a4 as H } from "./Icon-UiLWY9J1.js";
 import { r as A } from "./index-CfghFsoU.js";
 import { createStudioProLogger as F } from "./logger-Bof2Evv1.js";
-import { a as H } from "./customBlobDocumentUtils-Dwvjb_jQ.js";
-import { u as G, D as O } from "./DialogFooter-CsVkF8jQ.js";
-import { I as Y } from "./Banner-DsVgoRin.js";
-import { T as f } from "./TextInputLabeled-BLG8tCoP.js";
-const $ = ({ initialAgent: a, onClose: t }) => {
+import { a as N } from "./customBlobDocumentUtils-Dwvjb_jQ.js";
+import { u as O, D as Y } from "./DialogFooter-CMEdDiSN.js";
+import { I as $ } from "./Banner-87Geup2v.js";
+import { T as f } from "./TextInputLabeled-BOV58C6a.js";
+const G = ({ initialAgent: a, onClose: t }) => {
   var v, P, w;
   const [e, u] = o.useState(a), [n, d] = o.useState(((v = a.maxTokens) == null ? void 0 : v.toString()) ?? ""), [i, m] = o.useState(((P = a.temperature) == null ? void 0 : P.toString()) ?? ""), [l, E] = o.useState(((w = a.topP) == null ? void 0 : w.toString()) ?? ""), p = o.useCallback(() => n !== "" && e.maxTokens === void 0 ? "Please enter a valid number." : e.maxTokens !== void 0 && e.maxTokens < 1 ? "Max tokens must be greater than 0 (or empty)." : !0, [e.maxTokens, n]), c = o.useCallback(() => i !== "" && e.temperature === void 0 ? "Please enter a valid number." : e.temperature !== void 0 && e.temperature < 0 ? "Temperature must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.temperature, i]), h = o.useCallback(() => l !== "" && e.topP === void 0 ? "Please enter a valid number." : e.topP !== void 0 && e.topP < 0 ? "TopP must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.topP, l]), g = o.useCallback(
     (j, D, x) => (s) => {
@@ -28,12 +28,12 @@ const $ = ({ initialAgent: a, onClose: t }) => {
   }, [t, e, p, c, h]), k = o.useCallback(() => {
     t == null || t(null);
   }, [t]);
-  G(k, T);
+  O(k, T);
   const C = o.useCallback(() => {
     window.open("https://docs.mendix.com/appstore/modules/genai/genai-for-mx/commons/#request", "_blank");
   }, []);
   return /* @__PURE__ */ r.jsxs(L, { children: [
-    /* @__PURE__ */ r.jsx(R, { children: /* @__PURE__ */ r.jsxs(q, { children: [
+    /* @__PURE__ */ r.jsx(q, { children: /* @__PURE__ */ r.jsxs(R, { children: [
       /* @__PURE__ */ r.jsx(y, { label: "Tokens", children: /* @__PURE__ */ r.jsx(
         f,
         {
@@ -46,7 +46,7 @@ const $ = ({ initialAgent: a, onClose: t }) => {
         }
       ) }),
       /* @__PURE__ */ r.jsxs(y, { label: "Randomness", children: [
-        /* @__PURE__ */ r.jsx(Y, { children: "It is recommended to steer either the temperature or TopP, but not both. Review the documentation of the model provider for more information about the allowed ranges." }),
+        /* @__PURE__ */ r.jsx($, { children: "It is recommended to steer either the temperature or TopP, but not both. Review the documentation of the model provider for more information about the allowed ranges." }),
         /* @__PURE__ */ r.jsx(
           f,
           {
@@ -71,15 +71,15 @@ const $ = ({ initialAgent: a, onClose: t }) => {
         )
       ] })
     ] }) }),
-    /* @__PURE__ */ r.jsx(O, { onOk: T, onCancel: k, showHelp: !0, onHelp: C })
+    /* @__PURE__ */ r.jsx(Y, { onOk: T, onCancel: k, showHelp: !0, onHelp: C })
   ] });
-}, V = ({ studioPro: a, agent: t, onClose: e }) => /* @__PURE__ */ r.jsx(N, { studioPro: a, children: /* @__PURE__ */ r.jsx($, { initialAgent: t, onClose: e }) }), X = {
+}, V = ({ studioPro: a, agent: t, onClose: e }) => /* @__PURE__ */ r.jsx(H, { studioPro: a, children: /* @__PURE__ */ r.jsx(G, { initialAgent: t, onClose: e }) }), X = {
   async loaded(a, t) {
     const e = A(a), u = F(e);
     if (!t.agentDocumentId)
       throw new Error("Agent document ID needs to be provided to open the Model Settings dialog.");
     try {
-      const n = await H(e, t.agentDocumentId), d = document.getElementById("root");
+      const n = await N(e, t.agentDocumentId), d = document.getElementById("root");
       if (!d)
         throw new Error("Failed to find the root element.");
       const i = B.createRoot(d), m = (l) => {
