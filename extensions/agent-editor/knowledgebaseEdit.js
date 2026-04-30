@@ -1,15 +1,15 @@
-import { L as q, r as v, I as n, O as j, R as E, W as I, a7 as F, a4 as P, a5 as M, a6 as U, a8 as z } from "./Icon-DMu3278C.js";
-import { u as _, B as $, c as H, C as J } from "./TextWithIcon-DpacnK2w.js";
+import { L as q, r as v, H as n, P as j, V as E, Y as I, a7 as F, a4 as P, a5 as M, a6 as U, a8 as z } from "./Icon-UiLWY9J1.js";
+import { u as _, B as $, c as H, C as Y } from "./TextWithIcon-DQRgkfUK.js";
 import { createStudioProLogger as k } from "./logger-Bof2Evv1.js";
-import { x as N, y as G, q as Q, z as X, s as Y, t as Z } from "./index-YObaGbux.js";
-import { C as y, i as ee, B as ne, v as te, a as se } from "./ButtonWithLabel-BOPXLTPZ.js";
-import { y as A } from "./Link-DlgH44DF.js";
+import { x as N, y as G, p as J, z as Q, r as X, s as Z } from "./index-CcjggGcx.js";
+import { C as y, i as ee, B as ne, v as te, a as se } from "./ButtonWithLabel-DB7bx4T0.js";
+import { y as A } from "./Link-DFGqRVqk.js";
 import { i as ae } from "./objectUtils-ChZ8y4UX.js";
-import { d as oe, a as re, b as ie, g as le } from "./mxCloudGenAIUtils-BRWIF1km.js";
-import { W as ce } from "./Banner-Dxu8bG4H.js";
-import { T as de } from "./Table-lnKG6U_B.js";
-import { T as b } from "./TextInputLabeled-DBL3Xt2E.js";
-import { T as ue } from "./TextInputWithButton-BDeCrCh9.js";
+import { d as oe, a as re, b as ie, g as le } from "./mxCloudGenAIUtils-jbsl4kfx.js";
+import { W as ce } from "./Banner-87Geup2v.js";
+import { T as de } from "./Table-BliMwPgJ.js";
+import { T as b } from "./TextInputLabeled-BOV58C6a.js";
+import { T as ue } from "./TextInputWithButton-DEzJuJjn.js";
 const B = (e, t) => async (r) => {
   const c = k(e);
   try {
@@ -50,7 +50,7 @@ const B = (e, t) => async (r) => {
   const d = k(e);
   let a, h = !1, m = !1;
   try {
-    const u = t.providerFields, o = await Q(e, u.key);
+    const u = t.providerFields, o = await J(e, u.key);
     if (!o)
       throw new Error("No key value found. Please make sure the key constant is correctly configured.");
     const s = oe(e, o);
@@ -151,7 +151,7 @@ const w = () => {
     }
     p(i), h(!0), u(/* @__PURE__ */ new Date());
   }, x = async () => {
-    o.key && Y(e, o.key);
+    o.key && X(e, o.key);
   }, f = async (i) => {
     const W = i.providerFields, K = await te(e, W.key);
     if (d(K), !K)
@@ -230,7 +230,7 @@ const w = () => {
             label: "Embeddings model",
             ariaLabel: "Embeddings model name",
             value: o.modelDisplayName,
-            icon: o.modelDisplayName && o.modelDisplayName.toLocaleLowerCase().includes("cohere") ? X : void 0,
+            icon: o.modelDisplayName && o.modelDisplayName.toLocaleLowerCase().includes("cohere") ? Q : void 0,
             onChange: w,
             readOnly: !0
           }
@@ -333,7 +333,7 @@ const w = () => {
     )();
   }, o = () => m.provider ? !0 : "Knowledge base provider is required.";
   return /* @__PURE__ */ n.jsx(P, { studioPro: e, children: /* @__PURE__ */ n.jsxs(M, { children: [
-    !a && /* @__PURE__ */ n.jsx(J, {}),
+    !a && /* @__PURE__ */ n.jsx(Y, {}),
     a && /* @__PURE__ */ n.jsx(U, { children: /* @__PURE__ */ n.jsxs(z, { children: [
       /* @__PURE__ */ n.jsx(j, { label: "Common", children: /* @__PURE__ */ n.jsx(
         se,
@@ -362,4 +362,3 @@ const w = () => {
 export {
   Be as component
 };
-//# sourceMappingURL=knowledgebaseEdit.js.map

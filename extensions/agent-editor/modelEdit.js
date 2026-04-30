@@ -1,14 +1,14 @@
-import { r as y, I as t, O as A, R as M, W as w, a7 as D, a4 as O, a5 as V, a6 as K, a8 as q } from "./Icon-DMu3278C.js";
-import { u as W, B as U, c as P, C as _ } from "./TextWithIcon-DpacnK2w.js";
+import { r as y, H as t, P as A, V as M, Y as w, a7 as D, a4 as O, a5 as V, a6 as K, a8 as q } from "./Icon-UiLWY9J1.js";
+import { u as W, B as P, c as U, C as _ } from "./TextWithIcon-DQRgkfUK.js";
 import { createStudioProLogger as F } from "./logger-Bof2Evv1.js";
-import { o as L, p as B, q as X, r as $, s as z, t as H } from "./index-YObaGbux.js";
-import { C as u, i as J, B as Q, v as Y, a as Z } from "./ButtonWithLabel-BOPXLTPZ.js";
-import { y as T } from "./Link-DlgH44DF.js";
+import { n as L, o as B, p as X, q as $, r as H, s as Y } from "./index-CcjggGcx.js";
+import { C as u, i as z, B as J, v as Q, a as Z } from "./ButtonWithLabel-DB7bx4T0.js";
+import { y as T } from "./Link-DFGqRVqk.js";
 import { i as ee } from "./objectUtils-ChZ8y4UX.js";
-import { d as ne, i as te, u as se, e as ae } from "./mxCloudGenAIUtils-BRWIF1km.js";
-import { W as oe, S as re } from "./Banner-Dxu8bG4H.js";
-import { T as k } from "./TextInputLabeled-DBL3Xt2E.js";
-import { T as ie } from "./TextInputWithButton-BDeCrCh9.js";
+import { d as ne, i as te, u as se, e as ae } from "./mxCloudGenAIUtils-jbsl4kfx.js";
+import { W as oe, S as re } from "./Banner-87Geup2v.js";
+import { T as k } from "./TextInputLabeled-BOV58C6a.js";
+import { T as ie } from "./TextInputWithButton-DEzJuJjn.js";
 const N = (e, n) => async (i) => {
   const l = F(e);
   try {
@@ -122,9 +122,9 @@ const I = () => {
   }, x = () => {
     d(!1);
   }, p = async () => {
-    o.key && z(e, o.key);
+    o.key && H(e, o.key);
   }, h = async (r) => {
-    const R = r.providerFields, E = await Y(e, R.key);
+    const R = r.providerFields, E = await Q(e, R.key);
     if (v(E), d(!1), !E)
       ce(e, r, v, i, l);
     else {
@@ -160,7 +160,7 @@ const I = () => {
         label: "Model key",
         ariaLabel: "Model key",
         value: ((b = o.key) == null ? void 0 : b.qualifiedName) ?? "",
-        icon: o.key ? /* @__PURE__ */ t.jsx(J, {}) : void 0,
+        icon: o.key ? /* @__PURE__ */ t.jsx(z, {}) : void 0,
         buttonCaption: "Select...",
         onClick: s,
         onClickSecondary: o.key ? p : void 0,
@@ -181,7 +181,7 @@ const I = () => {
       ) })
     ] }),
     g && /* @__PURE__ */ t.jsxs(oe, { children: [
-      /* @__PURE__ */ t.jsx(U, { children: a === u.PrivateValue ? "Missing permissions" : "Invalid constant value" }),
+      /* @__PURE__ */ t.jsx(P, { children: a === u.PrivateValue ? "Missing permissions" : "Invalid constant value" }),
       /* @__PURE__ */ t.jsx("div", { children: a === u.PrivateValue ? "Private constants require additional permissions for local use. Grant access via View > Extensions and reopen the current tab." : "In order to test your Model locally, please set a valid value for the key constant." })
     ] }),
     o.keyId && /* @__PURE__ */ t.jsxs(t.Fragment, { children: [
@@ -240,13 +240,13 @@ const I = () => {
         /* @__PURE__ */ t.jsx(w, { children: /* @__PURE__ */ t.jsx(D, {}) }),
         /* @__PURE__ */ t.jsx(w, { fullWidth: !0, children: /* @__PURE__ */ t.jsx(T, { href: o.deepLinkURL, target: "_blank", rel: "noreferrer,noopener", children: "View resource in the portal" }) })
       ] }),
-      /* @__PURE__ */ t.jsx(Q, { label: "Connection", buttonCaption: "Test", onPress: m }),
+      /* @__PURE__ */ t.jsx(J, { label: "Connection", buttonCaption: "Test", onPress: m }),
       c && /* @__PURE__ */ t.jsx(re, { onClose: x, children: "Connection successful." })
     ] })
   ] });
 }, ye = B(), me = ({ studioPro: e, documentId: n }) => {
   const i = e.ui.messageBoxes, l = e.app.model.customBlobDocuments, [c, d] = y.useState(0), [a, v] = y.useState(!1), [o, m] = y.useState(ye), x = [
-    { key: "MxCloudGenAI", caption: "Mendix Cloud GenAI", icon: H }
+    { key: "MxCloudGenAI", caption: "Mendix Cloud GenAI", icon: Y }
   ];
   y.useEffect(() => {
     const s = (f) => {
@@ -296,8 +296,7 @@ const I = () => {
       )
     ] }) })
   ] }) });
-}, Ee = P(me);
+}, Ee = U(me);
 export {
   Ee as component
 };
-//# sourceMappingURL=modelEdit.js.map
