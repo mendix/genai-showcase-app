@@ -31058,16 +31058,16 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .widget-markdown p {
   font-weight: 400;
-  color: #0a1325;
+  color: rgba(10, 19, 37, 0.85);
 }
 .widget-markdown strong {
-  color: rgba(10, 19, 36, 0.8509803922);
+  color: rgba(10, 19, 37, 0.85);
   font-weight: 600;
 }
 .widget-markdown h1, .widget-markdown h2, .widget-markdown h3, .widget-markdown h4, .widget-markdown h5, .widget-markdown h6 {
   margin: 8px 0;
   font-weight: 600;
-  color: rgba(10, 19, 36, 0.8509803922);
+  color: rgba(10, 19, 37, 0.85);
 }
 .widget-markdown ul {
   justify-content: flex-start;
@@ -31083,10 +31083,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .widget-markdown ol {
   padding-left: 18px;
   justify-content: flex-start;
-  color: rgba(10, 19, 36, 0.6980392157);
+  color: rgba(10, 19, 37, 0.85);
 }
 .widget-markdown table tr th, .widget-markdown table tr td {
-  color: rgba(10, 19, 36, 0.6980392157);
+  color: rgba(10, 19, 37, 0.85);
 }
 
 .spinner {
