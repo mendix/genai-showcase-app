@@ -31,6 +31,12 @@ export async function JS_SubmitChatForStreaming(responseCollector, chatContextGU
 		})
 	})
 
+	// Check if the response status is 404
+	if (response.status == 404) {
+		console.error(`The URL '${endpoint}' could not be found (HTTP 404). This might indicate that the microflow 'ConversationalUI.EnableStreaming' was not added to the after startup microflow. Please ensure that the 'ConversationalUI.EnableStreaming' microflow is executed before any streaming related action.`);
+		return false;
+	}
+
 	const reader = response.body.getReader();
 	const decoder = new TextDecoder('utf-8');
 	let buffer = ''; // Buffer to accumulate incomplete SSE messages
@@ -46,12 +52,11 @@ export async function JS_SubmitChatForStreaming(responseCollector, chatContextGU
 		//
 		// (empty line indicates end of message)
 
-		// const lines = message.split('\n').filter(line => line.trim() !== '');
 		const lines = message.replace(/\r\n/g, "\n").split("\n").filter(line => line.trim() !== "");
 		let id = null;
 		let event = 'message'; // Default event type
 		let data = '';
-		let flag = false;
+		let deleteContent = false;
 		let throwError = false;
 
 		for (const line of lines) {
@@ -64,7 +69,7 @@ export async function JS_SubmitChatForStreaming(responseCollector, chatContextGU
 				data += line.substring(5).trim();
 			} else if (line.startsWith('deleteContent:')) {
 				const value = line.substring(14).trim();
-				flag = value === 'true';
+				deleteContent = value === 'true';
 			} else if (line.startsWith('throwError:')) {
 				const value = line.substring(11).trim();
 				throwError = value === 'true';
@@ -75,7 +80,7 @@ export async function JS_SubmitChatForStreaming(responseCollector, chatContextGU
 		if (throwError) {
 				throw new Error();
 		}
-		if (flag) {
+		if (deleteContent) {
 				responseCollector.set("Content", "");
 		}
 		if (data) {

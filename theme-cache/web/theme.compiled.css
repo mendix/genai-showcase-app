@@ -28394,6 +28394,21 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 450px;
 }
 
+.advanced-model-settings .modal-content .modal-header {
+  padding: 16px 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: row-reverse;
+}
+.advanced-model-settings .modal-content .modal-header h4 {
+  font-size: 24px;
+  font-weight: 600;
+}
+.advanced-model-settings .mx-dataview-controls {
+  padding: 16px 24px;
+}
+
 .accordion-chat-sources .widget-accordion-group {
   background: transparent;
   border-bottom: none;
@@ -28919,6 +28934,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background: #f8f8f8;
   border-radius: 8px 8px 0 8px;
   margin: 0 0 0 10%;
+}
+.chat-bubble-wrapper--assistant .form-group {
+  margin-bottom: 0;
 }
 
 .message--user {
@@ -30315,6 +30333,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .widget-markdown p {
   font-weight: 400;
+  margin: 0;
 }
 .widget-markdown strong {
   color: rgba(10, 19, 36, 0.8509803922);
@@ -30406,6 +30425,22 @@ input[type=checkbox].three-state-checkbox + .control-label {
   color: #AB19DB;
   padding: 8px;
   border-radius: 8px;
+}
+
+.item-selection,
+.model-selection {
+  display: flex;
+  align-items: center;
+}
+.item-selection .mx-image-viewer,
+.model-selection .mx-image-viewer {
+  width: fit-content;
+  margin-right: 8px;
+}
+.item-selection .mx-image-viewer img,
+.model-selection .mx-image-viewer img {
+  width: 16px;
+  height: 16px;
 }
 
 .model-badge, .model-badge--primary, .model-badge--default {
@@ -31918,14 +31953,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .agent-model-selection .name {
   width: 30%;
 }
-.agent-model-selection .icon {
-  width: 10%;
-  margin-left: 4px;
-}
 .agent-model-selection .model {
   margin-top: auto;
   margin-bottom: auto;
-  width: 60%;
+  width: 70%;
 }
 .agent-model-selection .model .form-group {
   margin-bottom: 0;

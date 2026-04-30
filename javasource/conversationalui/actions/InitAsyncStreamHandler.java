@@ -45,7 +45,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 			@Override
 			protected void processRequest(IMxRuntimeRequest req, IMxRuntimeResponse resp, String s) throws Exception {
 				
-				LOGGER.info("Request handler started.");
+				LOGGER.debug("Request handler started.");
 				
                 // Configure response for Server-Sent Events
                 resp.setContentType("text/event-stream");
@@ -70,7 +70,13 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	                String chatContextGUID = jsonRequest.get("chatContextGUID").asText();
 	                
 	                // Create user context from session
-	                String sessionId = req.getCookie("XASSESSIONID");
+	                String sessionId;
+	                String host = req.getHeader("Host");
+	                if (host.contains("localhost")) {
+	                	sessionId = req.getCookie("XASSESSIONID");
+	                } else {
+	                	sessionId = req.getCookie("__Host-XASSESSIONID");
+	                }
 	                ISession session = Core.getSessionById(UUID.fromString(sessionId));
 	                IContext ctx = session.createContext();
 	                
@@ -171,9 +177,8 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 							conversationalui.proxies.microflows.Microflows.chatContext_Response_DefaultPostProcessing(ctx, mxChatContext, mxResponse);
 						}
 					}
-					
-					
 					ResponseConnectionController.getInstance().removeStreamingResponseWriter(streamingResponseWriterId);
+					LOGGER.debug("Request handler ended.");
 	            	
 	            } catch (Exception e) {
 	            	LOGGER.error(e);
