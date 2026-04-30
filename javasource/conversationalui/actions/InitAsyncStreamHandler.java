@@ -26,6 +26,9 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.ISession;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
+/**
+ * Initializes the request handler that acts as the entry point for the streaming request from the UI and opens the SSE connection for the response stream. 
+ */
 public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 {
 	public InitAsyncStreamHandler(IContext context)
@@ -121,7 +124,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	                // Construct request from ChatContex by using PreProcessing microflow
 	                genaicommons.proxies.Request mxRequest = null;
 	                if (isAgentBuilderTest) {
-	                	mxRequest = agentcommons.proxies.microflows.Microflows.chatContext_CreateRequest_DefaultPreProcessing(ctx, mxChatContext);
+	                	mxRequest = conversationalui.proxies.microflows.Microflows.chatContext_Request_DefaultPreProcessingForAgent(ctx, mxChatContext);
 	                	if (mxChatContext.getChatContext_TestCase() != null) {
 	                		agentcommons.proxies.microflows.Microflows.request_AddTestCase(ctx, mxRequest, mxVersion, mxChatContext.getChatContext_TestCase());
 	                	}
@@ -133,7 +136,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 			                
 			                mxRequest = genaicommons.proxies.Request.initialize(ctx, mxRequestObject);
 	                	} else {
-	                		mxRequest = agentcommons.proxies.microflows.Microflows.chatContext_CreateRequest_DefaultPreProcessing(ctx, mxChatContext);
+	                		mxRequest = conversationalui.proxies.microflows.Microflows.chatContext_Request_DefaultPreProcessingForAgent(ctx, mxChatContext);
 	                	}
 	                }
 	                
@@ -157,7 +160,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 					
 					// run Post Processing microflow with ChatContext and Response
 					if (isAgentBuilderTest) {
-						agentcommons.proxies.microflows.Microflows.chatContext_ProcessResponse_DefaultPostProcessing(ctx, mxChatContext, mxResponse);
+						conversationalui.proxies.microflows.Microflows.chatContext_Response_DefaultPostProcessing(ctx, mxChatContext, mxResponse);
 					} else {
 						if (mxVersion.getPostProcessingMicroflow() != null && !mxVersion.getPostProcessingMicroflow().isBlank()) { 
 							Core.microflowCall(mxVersion.getPostProcessingMicroflow())
@@ -165,7 +168,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 									.withParam("ChatContext", mxChatContext)
 									.execute(ctx);
 						} else {
-							agentcommons.proxies.microflows.Microflows.chatContext_ProcessResponse_DefaultPostProcessing(ctx, mxChatContext, mxResponse);
+							conversationalui.proxies.microflows.Microflows.chatContext_Response_DefaultPostProcessing(ctx, mxChatContext, mxResponse);
 						}
 					}
 					
