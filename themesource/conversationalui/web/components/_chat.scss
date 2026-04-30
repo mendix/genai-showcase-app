@@ -169,6 +169,11 @@
             margin: 0 0 0 10%;
         }
     }
+    &--assistant {
+        .form-group {
+            margin-bottom: 0;
+        }
+    }
 }
 
 .message--user {
