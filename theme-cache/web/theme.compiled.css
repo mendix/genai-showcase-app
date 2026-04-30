@@ -28394,18 +28394,18 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 450px;
 }
 
-.modal-dialog .modal-content .modal-header {
+.advanced-model-settings .modal-content .modal-header {
   padding: 16px 24px;
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
   flex-flow: row-reverse;
 }
-.modal-dialog .modal-content .modal-header h4 {
+.advanced-model-settings .modal-content .modal-header h4 {
   font-size: 24px;
   font-weight: 600;
 }
-.modal-dialog .mx-dataview-controls {
+.advanced-model-settings .mx-dataview-controls {
   padding: 16px 24px;
 }
 
@@ -28934,6 +28934,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   background: #f8f8f8;
   border-radius: 8px 8px 0 8px;
   margin: 0 0 0 10%;
+}
+.chat-bubble-wrapper--assistant .form-group {
+  margin-bottom: 0;
 }
 
 .message--user {
@@ -30330,6 +30333,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .widget-markdown p {
   font-weight: 400;
+  margin: 0;
 }
 .widget-markdown strong {
   color: rgba(10, 19, 36, 0.8509803922);
