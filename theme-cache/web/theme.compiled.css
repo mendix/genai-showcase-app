@@ -28403,6 +28403,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .modal-dialog .modal-content .modal-header h4 {
   font-size: 24px;
+  font-weight: 600;
 }
 .modal-dialog .mx-dataview-controls {
   padding: 16px 24px;
