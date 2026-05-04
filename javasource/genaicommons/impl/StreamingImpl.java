@@ -37,14 +37,6 @@ public class StreamingImpl {
 		}
 	}
 	
-	public static void clearContentInUI(IContext ctx, String streamingResponseWriterId) throws IOException {
-
-		if (streamingResponseWriterId != null) {
-			genaicommons.impl.ResponseConnectionController.getInstance().getStreamingResponseWriter(streamingResponseWriterId).clearContent();
-		}
-		
-	}
-	
 	public static void throwError(IContext ctx, OutputStream outputStream) throws IOException {
 		
 		if (outputStream != null) {

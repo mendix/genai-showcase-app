@@ -117,9 +117,6 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		                	String stopReason = rootNode.path("stopReason").asText();
 		                	LOGGER.debug("Stop reason: " + stopReason);
 		                    mxResponse.setStopReason(stopReason);
-		                    if (StreamingResponseWriterId != null && stopReason.contains("tool_use")) {
-		                    	genaicommons.impl.StreamingImpl.clearContentInUI(getContext(), StreamingResponseWriterId);
-		                    }
 		                    break;
 
 		                case "METADATA":
@@ -151,16 +148,15 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		            	    } else {
 		            	        failureException = new Exception("Streaming failure", t);
 		            	    }
-		            		LOGGER.error("SSE transport failure: ", t);
 		            	} else if (response != null) {
 		            		String responseBody = null;
 		                    if (response.body() != null) {
 		                        responseBody = response.body().string();
 		                    }
-		            		LOGGER.error("SSE HTTP failure: " + response.code() + " - " + response.message() + " - " + responseBody);
+		            		//LOGGER.error("SSE HTTP failure: " + response.code() + " - " + response.message() + " - " + responseBody);
 		            	    failureException = new IOException("HTTP " + response.code() + ": " + response.message() + " - " + responseBody);
 		            	} else {
-		            		LOGGER.error("Unknown SSE failure");
+		            		//LOGGER.error("Unknown SSE failure");
 		            	    failureException = new RuntimeException("Unknown SSE failure");
 		            	}
             	    } catch (Exception e) {

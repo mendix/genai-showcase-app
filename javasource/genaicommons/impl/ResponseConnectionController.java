@@ -42,12 +42,6 @@ public class ResponseConnectionController {
             outputStream.flush();
         }
         
-        public void clearContent() throws IOException {
-        	outputStream.write(("deleteContent: true").getBytes());
-        	outputStream.write("\n\n".getBytes());
-            outputStream.flush();
-        }
-        
         public void throwError() throws IOException {
         	outputStream.write(("throwError: true").getBytes());
         	outputStream.write("\n\n".getBytes());
