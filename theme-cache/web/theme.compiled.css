@@ -30346,7 +30346,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .widget-markdown ul {
   justify-content: flex-start;
-  padding-left: 18px;
 }
 .widget-markdown ul > li {
   padding: 0;
@@ -30357,7 +30356,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-bottom: 0px;
 }
 .widget-markdown ol {
-  padding-left: 18px;
   justify-content: flex-start;
   color: rgba(10, 19, 36, 0.6980392157);
 }
