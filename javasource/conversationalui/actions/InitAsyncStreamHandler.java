@@ -159,7 +159,10 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 					
 					if (mxResponse == null) {
 	                    resp.getHttpServletResponse().setStatus(500);
-	                    throw new NullPointerException("There was an issue when calling the Chat Completions API, no response was returned.");
+	                    LOGGER.debug("There was an issue when calling the Chat Completions API, no response was returned.");
+		            	genaicommons.impl.StreamingImpl.throwError(getContext(),resp.getOutputStream());
+	                    ResponseConnectionController.getInstance().removeStreamingResponseWriter(streamingResponseWriterId);
+	                    return;
 	                }
 					
 					LOGGER.debug("Chat with history completed.");
