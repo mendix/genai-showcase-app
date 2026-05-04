@@ -7,6 +7,7 @@
 // Other code you write will be lost the next time you deploy the project.
 import "mx-global";
 import { Big } from "big.js";
+import { JS_ScrollToBottomImmediate } from './JS_ScrollToBottomImmediate';
 
 // BEGIN EXTRA CODE
 // END EXTRA CODE
