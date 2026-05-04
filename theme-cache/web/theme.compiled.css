@@ -30292,6 +30292,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   }
 }
 .agent-page-container .page-navigation {
+  font-size: 12px;
   position: sticky;
   display: flex !important;
   align-items: center !important;
@@ -31050,7 +31051,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .widget-markdown {
-  color: rgba(10, 19, 37, 0.85);
+  color: #0a1325;
   font-weight: 400;
 }
 .widget-markdown hr {
@@ -31058,20 +31059,19 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .widget-markdown p {
   font-weight: 400;
-  color: rgba(10, 19, 37, 0.85);
+  color: #0a1325;
 }
 .widget-markdown strong {
-  color: rgba(10, 19, 37, 0.85);
+  color: #0a1325;
   font-weight: 600;
 }
 .widget-markdown h1, .widget-markdown h2, .widget-markdown h3, .widget-markdown h4, .widget-markdown h5, .widget-markdown h6 {
   margin: 8px 0;
   font-weight: 600;
-  color: rgba(10, 19, 37, 0.85);
+  color: #0a1325;
 }
 .widget-markdown ul {
   justify-content: flex-start;
-  padding-left: 18px;
 }
 .widget-markdown ul > li {
   padding: 0;
@@ -31081,12 +31081,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-bottom: 0px;
 }
 .widget-markdown ol {
-  padding-left: 18px;
   justify-content: flex-start;
-  color: rgba(10, 19, 37, 0.85);
+  color: #0a1325;
 }
 .widget-markdown table tr th, .widget-markdown table tr td {
-  color: rgba(10, 19, 37, 0.85);
+  color: #0a1325;
 }
 
 .spinner {
