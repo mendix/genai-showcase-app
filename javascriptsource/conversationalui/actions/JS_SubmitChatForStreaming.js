@@ -57,6 +57,7 @@ export async function JS_SubmitChatForStreaming(responseCollector, chatContextGU
 		let id = null;
 		let event = 'message'; // Default event type
 		let data = '';
+		let deleteContent = false;
 		let throwError = false;
 
 		for (const line of lines) {
@@ -67,6 +68,9 @@ export async function JS_SubmitChatForStreaming(responseCollector, chatContextGU
 			} else if (line.startsWith('data:')) {
 				// Accumulate data lines, they can be multi-line
 				data += line.substring(5).trim();
+			} else if (line.startsWith('deleteContent:')) {
+				const value = line.substring(14).trim();
+				deleteContent = value === 'true';
 			} else if (line.startsWith('throwError:')) {
 				const value = line.substring(11).trim();
 				throwError = value === 'true';
@@ -76,6 +80,9 @@ export async function JS_SubmitChatForStreaming(responseCollector, chatContextGU
 
 		if (throwError) {
 				throw new Error();
+		}
+		if (deleteContent) {
+				responseCollector.set("Content", "");
 		}
 		if (data) {
 			try {
