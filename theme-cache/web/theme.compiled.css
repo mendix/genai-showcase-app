@@ -29892,6 +29892,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   pointer-events: auto;
 }
 
+.disabled.list {
+  cursor: unset;
+}
+
 .convui-pagecontainer {
   display: flex;
   flex-direction: column;
