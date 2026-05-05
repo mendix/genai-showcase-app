@@ -221,7 +221,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 			.forEach(microflowFound -> microflowExists = true);
 		
 		if (!microflowExists) {
-			throw new IllegalArgumentException("The microflow set as the PostProcessingMicroflow in Version, could not be found.\nCurrently set microflow: " + microflow);
+			throw new IllegalArgumentException("The microflow set as the PreProcessingMicroflow in Version, could not be found.\nCurrently set microflow: " + microflow);
 		}
 		
 		microflowHasCorrectInputParams = false;
@@ -294,7 +294,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 					errorMessage += "The microflow set as the PostProcessingMicroflow in Version does not have the correct input parameters. It must have a ConversationalUI.ChatContext object and a GenAICommons.Response object as input parameters.\n";
 				}
 				if (!microflowHasCorrectOutputParam) {
-					errorMessage += "The microflow set as the PreProcessingMicroflow in Version does not have the correct output parameter. It must not have any output parameter.\n";
+					errorMessage += "The microflow set as the PostProcessingMicroflow in Version does not have the correct output parameter. It must not have any output parameter.\n";
 				}
 				throw new IllegalArgumentException(errorMessage);
 			}

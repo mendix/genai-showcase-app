@@ -188,7 +188,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	        return mxResponse.getMendixObject();
 		        
 		} catch (Exception e) {
-			LOGGER.error(e);
+			LOGGER.error("Something went wrong for model: " + this.MxCloudDeployedModel.getDisplayName() + "\n" + e);
 			throw e;
 		}
 		// END USER CODE

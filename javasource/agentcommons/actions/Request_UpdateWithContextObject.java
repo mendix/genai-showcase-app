@@ -10,14 +10,10 @@
 package agentcommons.actions;
 
 import static java.util.Objects.requireNonNull;
-import java.util.List;
 import com.mendix.core.Core;
-import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import agentcommons.impl.MxLogger;
-import agentcommons.proxies.Agent;
 import agentcommons.proxies.PromptToUse;
-import agentcommons.proxies.Version;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
@@ -90,81 +86,8 @@ public class Request_UpdateWithContextObject extends UserAction<java.lang.Void>
 	}
 
 	// BEGIN EXTRA CODE
-	private static final MxLogger LOGGER = new MxLogger(PromptToUse_GetAndReplace.class);
+	private static final MxLogger LOGGER = new MxLogger(Request_UpdateWithContextObject.class);
 
-	private void applyVariables(PromptToUse promptToUse, Version versionInUse, IMendixObject variablesObject)
-			throws CoreException {
-		
-		// Get Prompt
-		Agent agent = versionInUse.getVersion_Agent(getContext());
-
-		requireNonNull(agent, "Cannot replace variables for the Version, as it has no Agent linked");
-
-		// Check if Entity name is not empty)
-		if (agent.getEntity() == null || agent.getEntity().isBlank()) {
-			throw new IllegalArgumentException(
-					"Cannot replace variables: no Variables Entity is configured for this Agent.");
-		}
-
-		// Check if entity matches the passed object's entity
-		if (!variablesObject.getMetaObject().getName().equals(agent.getEntity()) && !variablesObject.getMetaObject().isSubClassOf(agent.getEntity())) {
-			throw new IllegalArgumentException(
-					"Cannot replace variables for the passed Context Object because it does not match the Context Entity (or a specialization of it) that was configured for this Agent."
-							+ " Passed object's entity: " + ContextObject.getMetaObject().getName() + ", expected: "
-							+ agent.getEntity());
-		}
-
-		// Get all variables associated to the Prompt and replace placeholders with
-		// values from attributes.
-		List<IMendixObject> variableList = Core.retrieveByPath(getContext(), agent.getMendixObject(),
-				"AgentCommons.Variable_Agent");
-
-		// Replacement of variables if they are found in the passed object
-
-		for (IMendixObject variable : variableList) {
-			applyVariable(promptToUse, variablesObject, variable);
-
-		}
-	}
-
-	private void applyVariable(PromptToUse promptToUse, IMendixObject variablesObject, IMendixObject variable) {
-
-		String variableKey = agentcommons.proxies.Variable.initialize(getContext(), variable).getKey(getContext());
-		// Check variable key is not empty
-		if (variableKey == null || variableKey.isBlank()) {
-			LOGGER.warn("Skipping variable with empty Key attribute");
-			return;
-		}
-		// Check variable is attribute of passed object
-		if (!variablesObject.hasMember(variableKey)) {
-			LOGGER.warn(
-					"Cannot replace variable {{" + variableKey + "}} because it is not found in the passed object.");
-			replaceVariable(promptToUse, variableKey, "");
-			return;
-		}
-		// Check value is not empty
-		if (variablesObject.getValue(getContext(), variableKey) == null) {
-			LOGGER.warn("Cannot replace variable {{" + variableKey + "}} because it is empty in the passed object.");
-			replaceVariable(promptToUse, variableKey, "");
-			return;
-		}
-		// Apply variable
-		replaceVariable(promptToUse, variableKey, variablesObject.getValue(getContext(), variableKey).toString());
-	}
-
-	private void replaceVariable(PromptToUse promptToUse, String variableKey, String value) {
-		agentcommons.proxies.microflows.Microflows.promptToUse_ApplyVariable(getContext(), promptToUse, variableKey,
-				value);
-	}
-
-	private PromptToUse createPromptToUse(Version versionInUse) {
-		PromptToUse promptToUse = new PromptToUse(getContext());
-
-		promptToUse.setPromptToUse_Version(versionInUse);
-		promptToUse.setSystemPrompt(versionInUse.getSystemPrompt());
-		promptToUse.setUserPrompt(versionInUse.getUserPrompt());
-
-		return promptToUse;
-	}
+	
 	// END EXTRA CODE
 }
