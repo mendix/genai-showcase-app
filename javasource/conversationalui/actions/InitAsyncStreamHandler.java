@@ -10,6 +10,7 @@
 package conversationalui.actions;
 
 import conversationalui.impl.MxLogger;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -207,42 +208,27 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 
 	// BEGIN EXTRA CODE
 	 private static final MxLogger LOGGER = new MxLogger(InitAsyncStreamHandler.class);
-	 
-	 private static Boolean microflowExists = false;
-	 private static Boolean microflowHasCorrectInputParams = false;
-	 private static Boolean microflowHasCorrectOutputParam = false;
-	 
+
 	 private static void validate_preprocessing_microflow(String microflow) {
 		 
-		microflowExists = false;
+		List<String> microflowNameList = new ArrayList<>();
 		 
 		Core.getMicroflowNames().stream()
 			.filter(microflowName -> microflowName.contentEquals(microflow))
-			.forEach(microflowFound -> microflowExists = true);
+			.forEach(microflowName -> microflowNameList.add(microflowName));
 		
-		if (!microflowExists) {
+		if (microflowNameList.isEmpty()) {
 			throw new IllegalArgumentException("The microflow set as the PreProcessingMicroflow in Version, could not be found.\nCurrently set microflow: " + microflow);
 		}
-		
-		microflowHasCorrectInputParams = false;
 		
 		java.util.Map<String, IDataType> inputParameters = new HashMap<>();
 		inputParameters.put("ChatContext", Core.createDataType("ConversationalUI.ChatContext"));
 		
-		Core.getMicroflowNames().stream()
-			.filter(microflowName -> microflowName.contentEquals(microflow))
-			.filter(microflowFound -> Core.getInputParameters(microflow).equals(inputParameters))
-			.forEach(microflowFound -> microflowHasCorrectInputParams = true);
+		Boolean microflowHasCorrectInputParams = Core.getInputParameters(microflowNameList.getFirst()).equals(inputParameters);
 		
-		microflowHasCorrectOutputParam = false;
+		Boolean microflowHasCorrectOutputParam = Core.getReturnType(microflowNameList.getFirst()).getType().equals(IDataType.DataTypeEnum.Object) && Core.getReturnType(microflow).getObjectType().equals("GenAICommons.Request");
 		
-		Core.getMicroflowNames().stream()
-		.filter(microflowName -> microflowName.contentEquals(microflow))
-		.filter(microflowFound -> Core.getReturnType(microflow).getType().equals(IDataType.DataTypeEnum.Object))
-		.filter(microflowFound -> Core.getReturnType(microflow).getObjectType().equals("GenAICommons.Request"))
-		.forEach(microflowFound -> microflowHasCorrectOutputParam = true);
-		
-		if (microflowExists && microflowHasCorrectInputParams && microflowHasCorrectOutputParam) {
+		if (microflowHasCorrectInputParams && microflowHasCorrectOutputParam) {
 			return;
 		} else {
 			String errorMessage = "";
@@ -258,35 +244,25 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	 
 	 private static void validate_postprocessing_microflow(String microflow) {
 		 
-			microflowExists = false;
+		 List<String> microflowNameList = new ArrayList<>();
 			 
-			Core.getMicroflowNames().stream()
+		 	Core.getMicroflowNames().stream()
 				.filter(microflowName -> microflowName.contentEquals(microflow))
-				.forEach(microflowFound -> microflowExists = true);
+				.forEach(microflowName -> microflowNameList.add(microflowName));
 			
-			if (!microflowExists) {
+			if (microflowNameList.isEmpty()) {
 				throw new IllegalArgumentException("The microflow set as the PostProcessingMicroflow in Version, could not be found.\nCurrently set microflow: " + microflow);
 			}
-			
-			microflowHasCorrectInputParams = false;
 			
 			java.util.Map<String, IDataType> inputParameters = new HashMap<>();
 			inputParameters.put("Response", Core.createDataType("GenAICommons.Response"));
 			inputParameters.put("ChatContext", Core.createDataType("ConversationalUI.ChatContext"));
 			
-			Core.getMicroflowNames().stream()
-				.filter(microflowName -> microflowName.contentEquals(microflow))
-				.filter(microflowFound -> Core.getInputParameters(microflow).equals(inputParameters))
-				.forEach(microflowFound -> microflowHasCorrectInputParams = true);
+			Boolean microflowHasCorrectInputParams = Core.getInputParameters(microflowNameList.getFirst()).equals(inputParameters);
 			
-			microflowHasCorrectOutputParam = false;
+			Boolean microflowHasCorrectOutputParam = Core.getReturnType(microflowNameList.getFirst()).getType().equals(IDataType.DataTypeEnum.Nothing);
 			
-			Core.getMicroflowNames().stream()
-			.filter(microflowName -> microflowName.contentEquals(microflow))
-			.filter(microflowFound -> Core.getReturnType(microflow).getType().equals(IDataType.DataTypeEnum.Nothing))
-			.forEach(microflowFound -> microflowHasCorrectOutputParam = true);
-			
-			if (microflowExists && microflowHasCorrectInputParams && microflowHasCorrectOutputParam) {
+			if (microflowHasCorrectInputParams && microflowHasCorrectOutputParam) {
 				return;
 			} else {
 				String errorMessage = "";
