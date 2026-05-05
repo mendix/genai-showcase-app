@@ -28696,7 +28696,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .scroll-btn-wrapper {
   padding: 8px;
-  border: 1px solid #24276c;
   background-color: #fff;
   border: 1px solid #0a1325;
   position: fixed;

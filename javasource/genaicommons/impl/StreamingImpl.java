@@ -30,10 +30,10 @@ public class StreamingImpl {
 		}
 	}
 	
-	public static void pushChunkToUI(IContext ctx, String streamingResponseWriterId, String chunkText) {
+	public static void pushChunkToUI(IContext ctx, String streamingResponseWriterId, String chunkText) throws IOException {
 		
 		if (streamingResponseWriterId != null) {
-			genaicommons.proxies.microflows.Microflows.streamCallback(ctx, chunkText, streamingResponseWriterId);
+			genaicommons.impl.ResponseConnectionController.getInstance().getStreamingResponseWriter(streamingResponseWriterId).write(chunkText.getBytes());
 		}
 	}
 	
