@@ -93,20 +93,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	                
 	                conversationalui.proxies.ChatContext mxChatContext = conversationalui.proxies.ChatContext.initialize(ctx, resultsChatContext.get(0));
 	                
-	                boolean isAgentBuilderTest = false;
-	                
-	                agentcommons.proxies.Version mxVersion = new agentcommons.proxies.Version(getContext());
-	                
-	                if (mxChatContext.getChatContext_Version() == null && mxChatContext.getChatContext_Agent().getAgent_Version_InUse() == null) {
-	                	mxVersion = null;
-	                }
-	                else if (mxChatContext.getChatContext_Version() != null) {
-	                	isAgentBuilderTest = true;
-	                	mxVersion = mxChatContext.getChatContext_Version();
-	                			
-	                } else {
-	                	mxVersion = mxChatContext.getChatContext_Agent().getAgent_Version_InUse();
-	                }
+	                agentcommons.proxies.Version mxVersion = conversationalui.proxies.microflows.Microflows.chatContext_GetVersion(getContext(), mxChatContext);
 	                
 	                if (mxVersion == null) {
 	                    resp.getHttpServletResponse().setStatus(400);
@@ -117,6 +104,8 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	                    resp.getHttpServletResponse().setStatus(400);
 	                    throw new NullPointerException("Deployed Model could not be found.");
 	                }
+	                
+	                boolean isAgentBuilderTest = agentcommons.proxies.microflows.Microflows.chatContext_IsAgentEditor(ctx, mxChatContext);
 
 	                // First validate pre- and postprocessing microflows
 	                if (!isAgentBuilderTest) {
@@ -131,10 +120,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	                // Construct request from ChatContex by using PreProcessing microflow
 	                genaicommons.proxies.Request mxRequest = null;
 	                if (isAgentBuilderTest) {
-	                	mxRequest = conversationalui.proxies.microflows.Microflows.chatContext_Request_DefaultPreProcessingForAgent(ctx, mxChatContext);
-	                	if (mxChatContext.getChatContext_TestCase() != null) {
-	                		agentcommons.proxies.microflows.Microflows.request_AddTestCase(ctx, mxRequest, mxVersion, mxChatContext.getChatContext_TestCase());
-	                	}
+	                	mxRequest = agentcommons.proxies.microflows.Microflows.chatContext_PreProcessing_AgentBuilder(ctx, mxChatContext);
 	                } else {
 	                	if (mxVersion.getPreProcessingMicroflow() != null && !mxVersion.getPreProcessingMicroflow().isBlank()) {
 	                		IMendixObject mxRequestObject = Core.microflowCall(mxVersion.getPreProcessingMicroflow())
