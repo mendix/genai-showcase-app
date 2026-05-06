@@ -1,0 +1,85 @@
+@use '../../../../theme/web/custom-variables' as *;
+
+.combobox-filter-height {
+    .widget-combobox-input-container {
+        align-items: center;
+        justify-content: center;
+        height: 47.5px !important;
+        border-color: $border-color-default;
+    }
+}
+
+.combobox-selection {
+    width: 100%;
+}
+.widget-combobox {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+}
+
+.widget-combobox-input-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #d1d5db;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.widget-combobox-selected-items,
+.widget-combobox-custom-content {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+}
+
+
+.widget-combobox-item-selected {
+    background-color: #d1d5db;
+}
+
+.widget-combobox-placeholder-custom {
+    width: 100%;
+}
+
+.widget-combobox-caption-custom {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+}
+
+.item-selection,
+.model-selection {
+    display: flex;
+    align-items: center;
+    .mx-image-viewer {
+        width: fit-content;
+        margin-right: 8px;
+    }
+}
+
+.item-selection-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 0;
+    .item-text {
+        font-weight: 700;
+        flex-shrink: 0;
+        white-space: nowrap;
+        min-width: 2.5rem;
+        text-align: center;
+    }
+    .item-title {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+
