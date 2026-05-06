@@ -51,14 +51,12 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
                 // Configure response for Server-Sent Events
                 resp.setContentType("text/event-stream");
                 resp.getHttpServletResponse().setStatus(200);
-                
                 LOGGER.debug("Configure response for Server-Sent Event");
 
                 // Generate unique request ID for streaming
                 String streamingResponseWriterId = UUID.randomUUID().toString();
                 ResponseConnectionController.getInstance().addStreamingResponseWriter(streamingResponseWriterId,
                         new ResponseConnectionController.StreamingResponseWriter(resp.getOutputStream()));
-                
                 LOGGER.debug("Generated unique request ID for streaming");
                 
 	            // Parse JSON request body
@@ -71,28 +69,12 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	                String chatContextGUID = jsonRequest.get("chatContextGUID").asText();
 	                
 	                // Create user context from session
-	                String sessionId;
-	                String host = req.getHeader("Host");
-	                if (host.contains("localhost")) {
-	                	sessionId = req.getCookie("XASSESSIONID");
-	                } else {
-	                	sessionId = req.getCookie("__Host-XASSESSIONID");
-	                }
-	                ISession session = Core.getSessionById(UUID.fromString(sessionId));
-	                IContext ctx = session.createContext();
+	                IContext ctx = create_userContext_from_session(req);
 	                
-	                // Retrieve chat context from database using id
-	                List<IMendixObject> resultsChatContext = Core.createXPathQuery("//ConversationalUI.ChatContext[id=$value]")
-	                        .setVariable("value", chatContextGUID)
-	                        .execute(ctx);
-	                
-	                if (resultsChatContext.isEmpty()) {
-	                    resp.getHttpServletResponse().setStatus(400);
-	                    throw new NullPointerException("Chat context not found for: " + chatContextGUID);
-	                }
-	                
-	                conversationalui.proxies.ChatContext mxChatContext = conversationalui.proxies.ChatContext.initialize(ctx, resultsChatContext.get(0));
-	                
+	                // Retrieve chat context from database using guid
+	                conversationalui.proxies.ChatContext mxChatContext = get_chatContext(ctx, chatContextGUID, resp);
+	                 
+	                // Retrieve version from chat context
 	                agentcommons.proxies.Version mxVersion = conversationalui.proxies.microflows.Microflows.chatContext_GetVersion(getContext(), mxChatContext);
 	                
 	                if (mxVersion == null) {
@@ -108,30 +90,10 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	                boolean isAgentBuilderTest = agentcommons.proxies.microflows.Microflows.chatContext_IsAgentEditor(ctx, mxChatContext);
 
 	                // First validate pre- and postprocessing microflows
-	                if (!isAgentBuilderTest) {
-	                	if (mxVersion.getPreProcessingMicroflow() != null && !mxVersion.getPreProcessingMicroflow().isBlank()) {
-	                		validate_preprocessing_microflow(mxVersion.getPreProcessingMicroflow());
-	            		}
-	                	if (mxVersion.getPostProcessingMicroflow() != null && !mxVersion.getPostProcessingMicroflow().isBlank()) {
-	                		validate_postprocessing_microflow(mxVersion.getPostProcessingMicroflow());
-		                }
-            		}
+	                validate_microflows(isAgentBuilderTest, mxVersion);
 	                
-	                // Construct request from ChatContex by using PreProcessing microflow
-	                genaicommons.proxies.Request mxRequest = null;
-	                if (isAgentBuilderTest) {
-	                	mxRequest = agentcommons.proxies.microflows.Microflows.chatContext_PreProcessing_AgentBuilder(ctx, mxChatContext);
-	                } else {
-	                	if (mxVersion.getPreProcessingMicroflow() != null && !mxVersion.getPreProcessingMicroflow().isBlank()) {
-	                		IMendixObject mxRequestObject = Core.microflowCall(mxVersion.getPreProcessingMicroflow())
-									.withParam("ChatContext", mxChatContext)
-									.execute(ctx);
-			                
-			                mxRequest = genaicommons.proxies.Request.initialize(ctx, mxRequestObject);
-	                	} else {
-	                		mxRequest = conversationalui.proxies.microflows.Microflows.chatContext_DefaultPreProcessing_Agent(ctx, mxChatContext);
-	                	}
-	                }
+	                // Construct request from ChatContex by using preprocessing microflow
+	                genaicommons.proxies.Request mxRequest = create_request(ctx, isAgentBuilderTest, mxChatContext, mxVersion);
 	                
 	                if (mxRequest == null) {
 	                    resp.getHttpServletResponse().setStatus(400);
@@ -140,8 +102,10 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 
 	                LOGGER.debug("Successfully created Request " + mxRequest);
 	                
+	                // Set StreamingResponseWriterId to request to stream to UI
 	                mxRequest.setStreamingResponseWriterId(streamingResponseWriterId);
 						
+	                // Call LLM to stream response
 					genaicommons.proxies.Response mxResponse = genaicommons.proxies.microflows.Microflows.chatCompletions_WithHistory(ctx, mxRequest, mxVersion.getVersion_DeployedModel());
 					
 					if (mxResponse == null) {
@@ -154,21 +118,12 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 					
 					LOGGER.debug("Chat with history completed.");
 					
-					// run Post Processing microflow with ChatContext and Response
-					if (isAgentBuilderTest) {
-						conversationalui.proxies.microflows.Microflows.chatContext_DefaultPostProcessing(ctx, mxChatContext, mxResponse);
-					} else {
-						if (mxVersion.getPostProcessingMicroflow() != null && !mxVersion.getPostProcessingMicroflow().isBlank()) { 
-							Core.microflowCall(mxVersion.getPostProcessingMicroflow())
-									.withParam("Response", mxResponse)
-									.withParam("ChatContext", mxChatContext)
-									.execute(ctx);
-						} else {
-							conversationalui.proxies.microflows.Microflows.chatContext_DefaultPostProcessing(ctx, mxChatContext, mxResponse);
-						}
-					}
+					// Run postprocessing microflow with ChatContext and Response
+					run_postprocessing_microflow(ctx, isAgentBuilderTest, mxChatContext, mxVersion, mxResponse);
+					
+					// Remove ResponseConnectionController instance
 					ResponseConnectionController.getInstance().removeStreamingResponseWriter(streamingResponseWriterId);
-					LOGGER.debug("Request handler ended.");
+					LOGGER.debug("Request handler closed.");
 	            	
 	            } catch (Exception e) {
 	            	LOGGER.error(e);
@@ -194,7 +149,50 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 
 	// BEGIN EXTRA CODE
 	 private static final MxLogger LOGGER = new MxLogger(InitAsyncStreamHandler.class);
+	 
+	 private static IContext create_userContext_from_session(IMxRuntimeRequest req) {
+		 
+		 String sessionId;
+         String host = req.getHeader("Host");
+         if (host.contains("localhost")) {
+         	sessionId = req.getCookie("XASSESSIONID");
+         } else {
+         	sessionId = req.getCookie("__Host-XASSESSIONID");
+         }
+         ISession session = Core.getSessionById(UUID.fromString(sessionId));
+         IContext ctx = session.createContext();
+         
+         return ctx;
+	 }
+	 
+	 private static conversationalui.proxies.ChatContext get_chatContext(IContext ctx, String chatContextGUID, IMxRuntimeResponse resp) {
+		 
+		 List<IMendixObject> resultsChatContext = Core.createXPathQuery("//ConversationalUI.ChatContext[id=$value]")
+                 .setVariable("value", chatContextGUID)
+                 .execute(ctx);
+         
+         if (resultsChatContext.isEmpty()) {
+             resp.getHttpServletResponse().setStatus(400);
+             throw new NullPointerException("Chat context not found for: " + chatContextGUID);
+         }
+         
+         conversationalui.proxies.ChatContext mxChatContext = conversationalui.proxies.ChatContext.initialize(ctx, resultsChatContext.get(0));
+		 
+		 return mxChatContext;
+	 }
 
+	 private static void validate_microflows(boolean isAgentBuilderTest, agentcommons.proxies.Version mxVersion) {
+		 
+		 if (!isAgentBuilderTest) {
+         	if (mxVersion.getPreProcessingMicroflow() != null && !mxVersion.getPreProcessingMicroflow().isBlank()) {
+         		validate_preprocessing_microflow(mxVersion.getPreProcessingMicroflow());
+     		}
+         	if (mxVersion.getPostProcessingMicroflow() != null && !mxVersion.getPostProcessingMicroflow().isBlank()) {
+         		validate_postprocessing_microflow(mxVersion.getPostProcessingMicroflow());
+             }
+ 		}	 
+	 
+	 }
 	 private static void validate_preprocessing_microflow(String microflow) {
 		 
 		List<String> microflowNameList = new ArrayList<>();
@@ -260,7 +258,43 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 				}
 				throw new IllegalArgumentException(errorMessage);
 			}
-		 }
+	 }
+	 
+	 private static genaicommons.proxies.Request create_request(IContext ctx, boolean isAgentBuilderTest, conversationalui.proxies.ChatContext mxChatContext, agentcommons.proxies.Version mxVersion) {
+		 
+		 genaicommons.proxies.Request mxRequest = null;
+         if (isAgentBuilderTest) {
+         	mxRequest = agentcommons.proxies.microflows.Microflows.chatContext_PreProcessing_AgentBuilder(ctx, mxChatContext);
+         } else {
+         	if (mxVersion.getPreProcessingMicroflow() != null && !mxVersion.getPreProcessingMicroflow().isBlank()) {
+         		IMendixObject mxRequestObject = Core.microflowCall(mxVersion.getPreProcessingMicroflow())
+							.withParam("ChatContext", mxChatContext)
+							.execute(ctx);
+	                
+	                mxRequest = genaicommons.proxies.Request.initialize(ctx, mxRequestObject);
+         	} else {
+         		mxRequest = conversationalui.proxies.microflows.Microflows.chatContext_DefaultPreProcessing_Agent(ctx, mxChatContext);
+         	}
+         }
+         return mxRequest;
+	 }
+	 
+	 private static void run_postprocessing_microflow(IContext ctx, boolean isAgentBuilderTest, conversationalui.proxies.ChatContext mxChatContext, agentcommons.proxies.Version mxVersion, genaicommons.proxies.Response mxResponse) {
+		 
+		 if (isAgentBuilderTest) {
+				conversationalui.proxies.microflows.Microflows.chatContext_DefaultPostProcessing(ctx, mxChatContext, mxResponse);
+			} else {
+				if (mxVersion.getPostProcessingMicroflow() != null && !mxVersion.getPostProcessingMicroflow().isBlank()) { 
+					Core.microflowCall(mxVersion.getPostProcessingMicroflow())
+							.withParam("Response", mxResponse)
+							.withParam("ChatContext", mxChatContext)
+							.execute(ctx);
+				} else {
+					conversationalui.proxies.microflows.Microflows.chatContext_DefaultPostProcessing(ctx, mxChatContext, mxResponse);
+				}
+		}
+		 
+	 }
 	 
 	// END EXTRA CODE
 }
