@@ -129,7 +129,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 			                
 			                mxRequest = genaicommons.proxies.Request.initialize(ctx, mxRequestObject);
 	                	} else {
-	                		mxRequest = conversationalui.proxies.microflows.Microflows.chatContext_Request_DefaultPreProcessingForAgent(ctx, mxChatContext);
+	                		mxRequest = conversationalui.proxies.microflows.Microflows.chatContext_DefaultPreProcessing_Agent(ctx, mxChatContext);
 	                	}
 	                }
 	                
@@ -156,7 +156,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 					
 					// run Post Processing microflow with ChatContext and Response
 					if (isAgentBuilderTest) {
-						conversationalui.proxies.microflows.Microflows.chatContext_Response_DefaultPostProcessing(ctx, mxChatContext, mxResponse);
+						conversationalui.proxies.microflows.Microflows.chatContext_DefaultPostProcessing(ctx, mxChatContext, mxResponse);
 					} else {
 						if (mxVersion.getPostProcessingMicroflow() != null && !mxVersion.getPostProcessingMicroflow().isBlank()) { 
 							Core.microflowCall(mxVersion.getPostProcessingMicroflow())
@@ -164,7 +164,7 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 									.withParam("ChatContext", mxChatContext)
 									.execute(ctx);
 						} else {
-							conversationalui.proxies.microflows.Microflows.chatContext_Response_DefaultPostProcessing(ctx, mxChatContext, mxResponse);
+							conversationalui.proxies.microflows.Microflows.chatContext_DefaultPostProcessing(ctx, mxChatContext, mxResponse);
 						}
 					}
 					ResponseConnectionController.getInstance().removeStreamingResponseWriter(streamingResponseWriterId);
