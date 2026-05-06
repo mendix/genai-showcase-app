@@ -52,7 +52,7 @@ public class Module_GetList extends UserAction<java.util.List<IMendixObject>>
 				.filter(microflowName -> !microflowName.isBlank() && microflowName.contains("."))
 				.filter(microflow -> Core.getReturnType(microflow).getType().equals(IDataType.DataTypeEnum.String))
 				.sorted()
-				.forEach(microflowName -> getCreateModule(microflowName.substring(0, microflowName.indexOf('.'))));
+				.forEach(microflowName -> agentcommons.impl.MicroflowSelectionImpl.getCreateModuleAddToList(getContext(), microflowName.substring(0, microflowName.indexOf('.')), uniqueModuleList));
 			
 			MicroflowSelection.setMicroflowSelection_Module(uniqueModuleList);
 			
@@ -79,19 +79,5 @@ public class Module_GetList extends UserAction<java.util.List<IMendixObject>>
 	
 	private List<Module> uniqueModuleList = new ArrayList<Module>();
 
-	private void getCreateModule(String moduleName) {
-		Module moduleInList = uniqueModuleList.stream()
-				.filter(o -> o.getModuleName().equals(moduleName))
-				.findFirst()
-				.orElse(null);
-		
-		if(moduleInList != null) {
-			return;
-		}
-		
-		Module module = new Module(getContext());
-		module.setModuleName(moduleName);
-		uniqueModuleList.add(module);
-	}
 	// END EXTRA CODE
 }

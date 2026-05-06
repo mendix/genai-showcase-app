@@ -70,7 +70,7 @@ public class Module_GetMicroflowList_PostProcessing extends UserAction<java.util
 				.filter(microflow -> Core.getInputParameters(microflow).equals(inputParameters))
 				.filter(microflow -> Core.getReturnType(microflow).getType().equals(IDataType.DataTypeEnum.Nothing))
 				.sorted()
-				.map(microflowName -> createMicroflow(microflowName))
+				.map(microflowName -> agentcommons.impl.MicroflowSelectionImpl.createMicroflow(getContext(), microflowName))
 				.toList();
 			
 			MicroflowSelection.setMicroflowSelection_Microflow(microflowList);
@@ -96,11 +96,5 @@ public class Module_GetMicroflowList_PostProcessing extends UserAction<java.util
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new MxLogger(Module_GetMicroflowList.class);
 	
-	private Microflow createMicroflow(String fullName) {
-		Microflow microflow = new Microflow(getContext());
-		microflow.setFullName(fullName);
-		microflow.setMicroflowName(fullName.substring(fullName.indexOf('.') + 1));
-		return microflow;
-	}
 	// END EXTRA CODE
 }

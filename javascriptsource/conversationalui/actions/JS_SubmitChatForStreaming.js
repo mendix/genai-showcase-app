@@ -12,11 +12,11 @@ import { Big } from "big.js";
 // END EXTRA CODE
 
 /**
- * @param {MxObject} responseCollector
+ * @param {MxObject} streamMessage
  * @param {string} chatContextGUID
  * @returns {Promise.<boolean>}
  */
-export async function JS_SubmitChatForStreaming(responseCollector, chatContextGUID) {
+export async function JS_SubmitChatForStreaming(streamMessage, chatContextGUID) {
 	// BEGIN USER CODE
 	const baseUrl = mx.appUrl;
 	const endpoint = `${baseUrl}llm-streaming`;
@@ -56,6 +56,7 @@ export async function JS_SubmitChatForStreaming(responseCollector, chatContextGU
 		let id = null;
 		let event = 'message'; // Default event type
 		let data = '';
+		let deleteContent = false;
 		let throwError = false;
 
 		for (const line of lines) {
@@ -66,6 +67,9 @@ export async function JS_SubmitChatForStreaming(responseCollector, chatContextGU
 			} else if (line.startsWith('data:')) {
 				// Accumulate data lines, they can be multi-line
 				data += line.substring(5).trim();
+			} else if (line.startsWith('deleteContent:')) {
+				const value = line.substring(14).trim();
+				deleteContent = value === 'true';
 			} else if (line.startsWith('throwError:')) {
 				const value = line.substring(11).trim();
 				throwError = value === 'true';
@@ -76,14 +80,17 @@ export async function JS_SubmitChatForStreaming(responseCollector, chatContextGU
 		if (throwError) {
 				throw new Error();
 		}
+		if (deleteContent) {
+				streamMessage.set("Content", "");
+		}
 		if (data) {
 			try {
 				const binary = atob(data);
 				const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
 				const decodedData = new TextDecoder("utf-8").decode(bytes);
 				// Here you would update your UI or application state
-				const currentText = responseCollector.get("Content")
-				responseCollector.set("Content", currentText + decodedData)
+				const currentText = streamMessage.get("Content")
+				streamMessage.set("Content", currentText + decodedData)
 				
   				// Auto-scroll if at bottom (batched with requestAnimationFrame for smoothness)
   				if (!window.scrollPending) {

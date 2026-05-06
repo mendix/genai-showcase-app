@@ -58,7 +58,7 @@ public class Module_GetList_PreProcessing extends UserAction<java.util.List<IMen
 				.filter(microflow -> Core.getReturnType(microflow).getType().equals(IDataType.DataTypeEnum.Object))
 				.filter(microflow -> Core.getReturnType(microflow).getObjectType().equals("GenAICommons.Request"))
 				.sorted()
-				.forEach(microflowName -> getCreateModule(microflowName.substring(0, microflowName.indexOf('.'))));
+				.forEach(microflowName -> agentcommons.impl.MicroflowSelectionImpl.getCreateModuleAddToList(getContext(), microflowName.substring(0, microflowName.indexOf('.')), uniqueModuleList));
 			
 			MicroflowSelection.setMicroflowSelection_Module(uniqueModuleList);
 			
@@ -85,19 +85,5 @@ public class Module_GetList_PreProcessing extends UserAction<java.util.List<IMen
 	
 	private List<Module> uniqueModuleList = new ArrayList<Module>();
 
-	private void getCreateModule(String moduleName) {
-		Module moduleInList = uniqueModuleList.stream()
-				.filter(o -> o.getModuleName().equals(moduleName))
-				.findFirst()
-				.orElse(null);
-		
-		if(moduleInList != null) {
-			return;
-		}
-		
-		Module module = new Module(getContext());
-		module.setModuleName(moduleName);
-		uniqueModuleList.add(module);
-	}
 	// END EXTRA CODE
 }
