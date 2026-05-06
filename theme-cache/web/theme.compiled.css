@@ -30288,6 +30288,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .tooltip-info-icon img {
   height: 16px;
   width: 16px;
+  margin: 0;
 }
 
 .trace-hover:hover, .agent-trace-grid:hover, .trace-hover:active, .agent-trace-grid:active, .trace-hover:focus, .agent-trace-grid:focus {
