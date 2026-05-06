@@ -89,7 +89,6 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		            	JsonNode rootNode = mapper.readTree(data);
 		            	switch (type) {
 		                case "MESSAGE_START":
-		                    // DO WE NEED THIS PART OR IS IT ALWAYS ASSISTANT?
 		                    break;
 		                    
 		                case "CONTENT_BLOCK_START":
@@ -124,7 +123,6 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		                    break;
 
 		                default:
-		                    // Handle unknown types if necessary
 		                    break;
 		            }
 	            	} catch (Exception e) {
@@ -190,7 +188,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	        return mxResponse.getMendixObject();
 		        
 		} catch (Exception e) {
-			LOGGER.error(e);
+			LOGGER.error("Something went wrong for model: " + this.MxCloudDeployedModel.getDisplayName() + "\n" + e);
 			throw e;
 		}
 		// END USER CODE
