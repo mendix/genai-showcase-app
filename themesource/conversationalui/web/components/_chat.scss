@@ -60,6 +60,23 @@
         flex: 1 1 0;
         overflow-y: auto;
         overflow-x: hidden;
+        .mx-listview {
+            ul > li {
+                padding: 0 ;
+             }
+        }
+    }
+    .chat-input-container {
+        .chat-listview-stylingless {
+            ul > li {
+                padding: 0;
+                .btn-sm {
+                    margin-right: $spacing-smaller;
+                    max-height: unset;
+                    padding: $spacing-smallest $spacing-small;
+                }
+            }
+        }
     }
 
     &--center {
@@ -108,7 +125,6 @@
     }  
     
     .send-btn-container {
-        //row-right
         display: flex !important;
         position: absolute;
         bottom: 0;
@@ -149,23 +165,24 @@
     align-items: flex-start;
     flex-direction: column;
     justify-content: center;
-
     .chat-message-card {
         background: $chat-bubble-assistant-background;
-        border-radius: 8px 8px 8px 0;
+        border-radius: 8px;
         border: 1px solid $border-color-default;
         margin: 0 10% 0 0;
-        padding: $spacing-small 12px;
+        padding: $spacing-small;
         padding-bottom: 0px;
-
+    }     
+    &--assistant {
+        margin-top: $spacing-small;
     }
 
     &--user {
         align-items: flex-end;
-
         .chat-message-card {
             background: $chat-bubble-user-background;
-            border-radius: 8px 8px 0 8px;
+            border: 1px solid #ced0d3;
+            border-radius: 8px;
             margin: 0 0 0 10%;
         }
     }
@@ -177,11 +194,11 @@
 }
 
 .message--user {
-    color: #0A1324B2;
+    color: #0A1325;
     font-weight: 400;
 
     h1,h2,h3,h4,h5,h6 {
-        color: #0A1324D9;
+        color: #0A1325;
         font-weight: 600;
 
     }
@@ -237,14 +254,17 @@
 
 .tool-message {
     border-radius: $spacing-small; 
-    border: 1px solid;
-    border-color: $chat-border-color;
+    border: 0px solid;
     overflow: hidden;
-    color: #0A1324B2;
-    
-    .tool-title{
-        background-color: $chat-bg-light;
-        padding: $spacing-small;
+    padding: 12px $spacing-medium;
+    background-color: $chat-bg-light;
+    color: rgba($font-color-header, 0.7);
+    font-weight: $font-weight-normal;
+    margin-bottom: $spacing-small;
+    .tool-title {
+        font-weight: $font-weight-semibold;
+        color: #0A1324B2;
+        padding: 0;
         display: block;
         color: #0A1324B2;
         font-weight: 600 ;
@@ -254,7 +274,23 @@
     }
 
     .tool-details{
-        padding: $spacing-small;
+        padding-top: $spacing-small;
+
+        .btn-small {
+            height: $spacing-larger;
+            padding: 5px 8px;
+        }
+        .btn-default {
+            border: 0;
+            background-color: transparent;
+            color: $font-color-default;
+            &:hover {
+                background-color: $gray-light;
+            } 
+        }
+        a.mx-link {
+            color: $font-color-default;
+            padding: $spacing-small;
         p {
             font-weight: 400;
         }
@@ -269,11 +305,7 @@
         border: none;
         &:hover {
             background-color: $btn-default-bg-hover;
-        }
-    }    
-}
-
-.tool-status-image{
-        width: $spacing-medium;
-        margin: $spacing-smaller;
+            }
+        }    
+    }
 }
