@@ -65,7 +65,7 @@ public class Module_GetMicroflowList extends UserAction<java.util.List<IMendixOb
 				})
 				.filter(microflow -> Core.getReturnType(microflow).getType().equals(IDataType.DataTypeEnum.String))
 				.sorted()
-				.map(microflowName -> createMicroflow(microflowName))
+				.map(microflowName -> agentcommons.impl.MicroflowSelectionImpl.createMicroflow(getContext(), microflowName))
 				.toList();
 			
 			MicroflowSelection.setMicroflowSelection_Microflow(microflowList);
@@ -91,11 +91,5 @@ public class Module_GetMicroflowList extends UserAction<java.util.List<IMendixOb
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new MxLogger(Module_GetMicroflowList.class);
 	
-	private Microflow createMicroflow(String fullName) {
-		Microflow microflow = new Microflow(getContext());
-		microflow.setFullName(fullName);
-		microflow.setMicroflowName(fullName.substring(fullName.indexOf('.') + 1));
-		return microflow;
-	}
 	// END EXTRA CODE
 }
