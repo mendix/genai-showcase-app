@@ -24,10 +24,15 @@
         }
         .mx-window-body {
             overflow: hidden;
-            padding: $spacing-medium ;
+            padding: $spacing-medium;
             height: calc(100% - 50px);
             .mx-placeholder {
                 height: 100%;
+            }
+            .chat-container > .messages-container {
+                .scroll-btn-wrapper {
+                    bottom: calc(134px + 16px);
+                }
             }
         }
     }
