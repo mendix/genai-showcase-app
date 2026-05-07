@@ -10,7 +10,7 @@
 }
 
 .datagrid--fixed-row-height .table .td {
-    height: 3 * $font-size-default + 2 * $spacing-small;
+    height: calc(3 * $font-size-default + 2 * $spacing-small);
     padding: $spacing-small; 
 }
 
