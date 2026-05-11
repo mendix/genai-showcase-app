@@ -10,6 +10,7 @@
 package conversationalui.actions;
 
 import conversationalui.impl.MxLogger;
+import conversationalui.impl.ProviderConfigImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -87,40 +88,34 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
 	                    throw new NullPointerException("Deployed Model could not be found.");
 	                }
 	                
-	                boolean isAgentBuilderTest = agentcommons.proxies.microflows.Microflows.chatContext_IsAgentEditor(ctx, mxChatContext);
-
-	                // First validate pre- and postprocessing microflows
-	                validate_microflows(isAgentBuilderTest, mxVersion);
-	                
-	                // Construct request from ChatContex by using preprocessing microflow
-	                genaicommons.proxies.Request mxRequest = create_request(ctx, isAgentBuilderTest, mxChatContext, mxVersion);
-	                
-	                if (mxRequest == null) {
-	                    resp.getHttpServletResponse().setStatus(400);
-	                    throw new NullPointerException("Request could not be created from ChatContext by running the PreProcessing microflow.");
-	                }
-
-	                LOGGER.debug("Successfully created Request " + mxRequest);
-	                
 	                // Set StreamingResponseWriterId to request to stream to UI
-	                mxRequest.setStreamingResponseWriterId(streamingResponseWriterId);
-						
-	                // Call LLM to stream response
-					genaicommons.proxies.Response mxResponse = genaicommons.proxies.microflows.Microflows.chatCompletions_WithHistory(ctx, mxRequest, mxVersion.getVersion_DeployedModel());
-					
-					if (mxResponse == null) {
+	                mxChatContext.setStreamingResponseWriterId(streamingResponseWriterId);
+	                
+	                boolean isAgentBuilderTest = agentcommons.proxies.microflows.Microflows.chatContext_IsAgentEditor(ctx, mxChatContext);
+	                Boolean isSuccess = true;
+	                
+	                if (isAgentBuilderTest) {
+	                	
+	                	isSuccess = agentcommons.proxies.microflows.Microflows.chatContext_Streaming_ActionMicroflow_AgentBuilder(ctx, mxChatContext);
+	                	
+	                } else {
+	                	
+		                conversationalui.proxies.ProviderConfig mxProviderConfig = mxChatContext.getChatContext_ProviderConfig_Active();
+		                
+		                ProviderConfigImpl.validateActionMicroflow(mxProviderConfig.getActionMicroflow());
+		    			String chatContextParameterString = Core.getInputParameters(mxProviderConfig.getActionMicroflow()).keySet().iterator().next();
+		    			
+		    			isSuccess = Core.microflowCall(mxProviderConfig.getActionMicroflow()).withParam(chatContextParameterString, mxChatContext).execute(ctx);
+	    			}
+	                
+	    			if (!isSuccess) {
 	                    resp.getHttpServletResponse().setStatus(500);
-	                    LOGGER.debug("There was an issue when calling the Chat Completions API, no response was returned.");
+	                    LOGGER.debug("There was a problem while running the ActionMicroflow.");
 		            	genaicommons.impl.StreamingImpl.throwError(getContext(),resp.getOutputStream());
 	                    ResponseConnectionController.getInstance().removeStreamingResponseWriter(streamingResponseWriterId);
 	                    return;
 	                }
-					
-					LOGGER.debug("Chat with history completed.");
-					
-					// Run postprocessing microflow with ChatContext and Response
-					run_postprocessing_microflow(ctx, isAgentBuilderTest, mxChatContext, mxVersion, mxResponse);
-					
+	    			
 					// Remove ResponseConnectionController instance
 					ResponseConnectionController.getInstance().removeStreamingResponseWriter(streamingResponseWriterId);
 					LOGGER.debug("Request handler closed.");
@@ -179,121 +174,6 @@ public class InitAsyncStreamHandler extends UserAction<java.lang.Void>
          conversationalui.proxies.ChatContext mxChatContext = conversationalui.proxies.ChatContext.initialize(ctx, resultsChatContext.get(0));
 		 
 		 return mxChatContext;
-	 }
-
-	 private static void validate_microflows(boolean isAgentBuilderTest, agentcommons.proxies.Version mxVersion) {
-		 
-		 if (!isAgentBuilderTest) {
-         	if (mxVersion.getPreProcessingMicroflow() != null && !mxVersion.getPreProcessingMicroflow().isBlank()) {
-         		validate_preprocessing_microflow(mxVersion.getPreProcessingMicroflow());
-     		}
-         	if (mxVersion.getPostProcessingMicroflow() != null && !mxVersion.getPostProcessingMicroflow().isBlank()) {
-         		validate_postprocessing_microflow(mxVersion.getPostProcessingMicroflow());
-             }
- 		}	 
-	 
-	 }
-	 private static void validate_preprocessing_microflow(String microflow) {
-		 
-		List<String> microflowNameList = new ArrayList<>();
-		 
-		Core.getMicroflowNames().stream()
-			.filter(microflowName -> microflowName.contentEquals(microflow))
-			.forEach(microflowName -> microflowNameList.add(microflowName));
-		
-		if (microflowNameList.isEmpty()) {
-			throw new IllegalArgumentException("The microflow set as the PreProcessingMicroflow in Version, could not be found.\nCurrently set microflow: " + microflow);
-		}
-		
-		java.util.Map<String, IDataType> inputParameters = new HashMap<>();
-		inputParameters.put("ChatContext", Core.createDataType("ConversationalUI.ChatContext"));
-		
-		Boolean microflowHasCorrectInputParams = Core.getInputParameters(microflowNameList.getFirst()).equals(inputParameters);
-		
-		Boolean microflowHasCorrectOutputParam = Core.getReturnType(microflowNameList.getFirst()).getType().equals(IDataType.DataTypeEnum.Object) && Core.getReturnType(microflow).getObjectType().equals("GenAICommons.Request");
-		
-		if (microflowHasCorrectInputParams && microflowHasCorrectOutputParam) {
-			return;
-		} else {
-			String errorMessage = "";
-			if (!microflowHasCorrectInputParams) {
-				errorMessage += "The microflow set as the PreProcessingMicroflow in Version does not have the correct input parameters. It must have a ConversationalUI.ChatContext object as an input parameter.\n";
-			}
-			if (!microflowHasCorrectOutputParam) {
-				errorMessage += "The microflow set as the PreProcessingMicroflow in Version does not have the correct output parameter. It must have a GenAICommons.Request object as the output parameter.\n";
-			}
-			throw new IllegalArgumentException(errorMessage);
-		}
-	 }
-	 
-	 private static void validate_postprocessing_microflow(String microflow) {
-		 
-		 List<String> microflowNameList = new ArrayList<>();
-			 
-		 	Core.getMicroflowNames().stream()
-				.filter(microflowName -> microflowName.contentEquals(microflow))
-				.forEach(microflowName -> microflowNameList.add(microflowName));
-			
-			if (microflowNameList.isEmpty()) {
-				throw new IllegalArgumentException("The microflow set as the PostProcessingMicroflow in Version, could not be found.\nCurrently set microflow: " + microflow);
-			}
-			
-			java.util.Map<String, IDataType> inputParameters = new HashMap<>();
-			inputParameters.put("Response", Core.createDataType("GenAICommons.Response"));
-			inputParameters.put("ChatContext", Core.createDataType("ConversationalUI.ChatContext"));
-			
-			Boolean microflowHasCorrectInputParams = Core.getInputParameters(microflowNameList.getFirst()).equals(inputParameters);
-			
-			Boolean microflowHasCorrectOutputParam = Core.getReturnType(microflowNameList.getFirst()).getType().equals(IDataType.DataTypeEnum.Nothing);
-			
-			if (microflowHasCorrectInputParams && microflowHasCorrectOutputParam) {
-				return;
-			} else {
-				String errorMessage = "";
-				if (!microflowHasCorrectInputParams) {
-					errorMessage += "The microflow set as the PostProcessingMicroflow in Version does not have the correct input parameters. It must have a ConversationalUI.ChatContext object and a GenAICommons.Response object as input parameters.\n";
-				}
-				if (!microflowHasCorrectOutputParam) {
-					errorMessage += "The microflow set as the PostProcessingMicroflow in Version does not have the correct output parameter. It must not have any output parameter.\n";
-				}
-				throw new IllegalArgumentException(errorMessage);
-			}
-	 }
-	 
-	 private static genaicommons.proxies.Request create_request(IContext ctx, boolean isAgentBuilderTest, conversationalui.proxies.ChatContext mxChatContext, agentcommons.proxies.Version mxVersion) {
-		 
-		 genaicommons.proxies.Request mxRequest = null;
-         if (isAgentBuilderTest) {
-         	mxRequest = agentcommons.proxies.microflows.Microflows.chatContext_PreProcessing_AgentBuilder(ctx, mxChatContext);
-         } else {
-         	if (mxVersion.getPreProcessingMicroflow() != null && !mxVersion.getPreProcessingMicroflow().isBlank()) {
-         		IMendixObject mxRequestObject = Core.microflowCall(mxVersion.getPreProcessingMicroflow())
-							.withParam("ChatContext", mxChatContext)
-							.execute(ctx);
-	                
-	                mxRequest = genaicommons.proxies.Request.initialize(ctx, mxRequestObject);
-         	} else {
-         		mxRequest = conversationalui.proxies.microflows.Microflows.chatContext_DefaultPreProcessing_Agent(ctx, mxChatContext);
-         	}
-         }
-         return mxRequest;
-	 }
-	 
-	 private static void run_postprocessing_microflow(IContext ctx, boolean isAgentBuilderTest, conversationalui.proxies.ChatContext mxChatContext, agentcommons.proxies.Version mxVersion, genaicommons.proxies.Response mxResponse) {
-		 
-		 if (isAgentBuilderTest) {
-				conversationalui.proxies.microflows.Microflows.chatContext_DefaultPostProcessing(ctx, mxChatContext, mxResponse);
-			} else {
-				if (mxVersion.getPostProcessingMicroflow() != null && !mxVersion.getPostProcessingMicroflow().isBlank()) { 
-					Core.microflowCall(mxVersion.getPostProcessingMicroflow())
-							.withParam("Response", mxResponse)
-							.withParam("ChatContext", mxChatContext)
-							.execute(ctx);
-				} else {
-					conversationalui.proxies.microflows.Microflows.chatContext_DefaultPostProcessing(ctx, mxChatContext, mxResponse);
-				}
-		}
-		 
 	 }
 	 
 	// END EXTRA CODE
