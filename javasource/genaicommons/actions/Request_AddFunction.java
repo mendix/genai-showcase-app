@@ -17,7 +17,6 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import genaicommons.impl.FunctionImpl;
 import genaicommons.impl.MxLogger;
 import genaicommons.impl.ToolCollectionImpl;
-import genaicommons.proxies.ENUM_InternalToolType;
 import genaicommons.proxies.Function;
 import genaicommons.proxies.ToolCollection;
 import genaicommons.proxies.Tool;
@@ -112,7 +111,7 @@ public class Request_AddFunction extends UserAction<IMendixObject>
 		ToolCollection toolCollection = ToolCollectionImpl.getOrCreateToolCollection(getContext(), Request);
 		Function function = new Function(getContext());
 		function.setMicroflow(FunctionMicroflow);
-		function.setName(ToolName);
+		function.setName(ToolName);	
 
 		//Optional parameters
 		function.setDescription(ToolDescription); 

@@ -37,6 +37,8 @@
 ////////////////////////////////////////////////////////////////////
 .accordion-tool-calls {
     width: 100%;
+    //margin-bottom: $spacing-small;
+    //padding-top: $spacing-smaller;
     .widget-accordion-group{
         background: transparent;
         border-bottom: none;
@@ -83,7 +85,6 @@
                     padding: 8px 16px;
                     margin-bottom: 0;
                     border-radius: $spacing-smaller;
-                    border: 1px solid $gray-primary;
                 }
             }
         }

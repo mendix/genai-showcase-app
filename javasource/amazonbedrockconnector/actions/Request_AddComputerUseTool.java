@@ -21,7 +21,6 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import amazonbedrockconnector.impl.MxLogger;
 import genaicommons.impl.ToolCollectionImpl;
 import genaicommons.proxies.Computer;
-import genaicommons.proxies.ENUM_InternalToolType;
 import genaicommons.proxies.Tool;
 import genaicommons.proxies.ToolCollection;
 import com.mendix.systemwideinterfaces.core.UserAction;

@@ -556,11 +556,15 @@ $label-color-all: #00635A;
   .name{
     width: 30%
   }
+  .icon{
+    width: 10%;
+    margin-left: 4px;
+  }
 
   .model{
     margin-top: auto;
     margin-bottom: auto;
-    width: 70%;
+    width: 60%;
 
     .form-group {
         margin-bottom: 0;

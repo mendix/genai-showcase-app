@@ -17,7 +17,6 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import mcpclient.impl.MxLogger;
 import mcpclient.proxies.MCP;
 import genaicommons.impl.ToolCollectionImpl;
-import genaicommons.proxies.ENUM_InternalToolType;
 import genaicommons.proxies.Tool;
 import genaicommons.proxies.ToolCollection;
 import com.mendix.systemwideinterfaces.core.UserAction;
