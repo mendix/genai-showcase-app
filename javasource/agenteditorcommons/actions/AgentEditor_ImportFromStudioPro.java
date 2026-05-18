@@ -9,14 +9,13 @@
 
 package agenteditorcommons.actions;
 
-import java.util.ArrayList;
 import com.mendix.core.Core;
-import com.mendix.extensibility.CustomBlobDocumentInfo;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.UserAction;
-import agenteditorcommons.impl.AgentEditorServlet;
+import agenteditorcommons.impl.AgentDocumentUtils;
+import agenteditorcommons.impl.AgentEditorTestServlet;
+import agenteditorcommons.impl.AgentEditorSyncServlet;
 import agenteditorcommons.impl.MxLogger;
-import agenteditorcommons.proxies.ModelDocument;
 
 /**
  * Imports all defined documents (such as agents and models) to the app's database so that they can be viewed at runtime and integrate with Agent Commons, Token Monitor, Observability etc.
@@ -34,15 +33,15 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 	{
 		// BEGIN USER CODE
 		try {
-			LOGGER.info("Starting import.");
+			LOGGER.info("Starting AgentEditor_ASU.");
 
-			importModelDocumentsOfType("agenteditor.model");
-			importModelDocumentsOfType("agenteditor.consumedMCPService");
-			importModelDocumentsOfType("agenteditor.knowledgebase");
-			importModelDocumentsOfType("agenteditor.agent");
+			AgentDocumentUtils.importModelDocumentsOfType("agenteditor.model", getContext());
+			AgentDocumentUtils.importModelDocumentsOfType("agenteditor.consumedMCPService", getContext());
+			AgentDocumentUtils.importModelDocumentsOfType("agenteditor.knowledgebase", getContext());
+			AgentDocumentUtils.importModelDocumentsOfType("agenteditor.agent", getContext());
 			registerServlet();
 
-			LOGGER.info("Finished import.");
+			LOGGER.info("Finished AgentEditor_ASU.");
 			return true;
 		} catch (Exception e) {
 			LOGGER.error(e);
@@ -67,70 +66,13 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 
 	private void registerServlet() {
 		if (!servletRegistered) {
-			Core.addDevelopmentServlet("preview_agent_test", new AgentEditorServlet());
+			Core.addDevelopmentServlet("preview_agent_test", new AgentEditorTestServlet());
+			Core.addDevelopmentServlet("preview_agent_sync", new AgentEditorSyncServlet());
 			servletRegistered = true;
-			LOGGER.debug("AgentEditor development servlet registered at /dev/preview_agent_test");
+			LOGGER.debug("AgentEditor development servlets registered.");
 		}
 	}
 
-
-	private void importModelDocumentsOfType(String documentTypeID) {
-		java.util.List<CustomBlobDocumentInfo> customBlobDocumentList = Core.extensibility()
-				.getCustomDocumentsOfType(documentTypeID);
-		String documentFriendlyName = documentTypeID.substring(documentTypeID.lastIndexOf('.') + 1);
-		LOGGER.info(customBlobDocumentList.size() + " " + documentFriendlyName
-				+ "s document(s) found in the Mendix Model.");
-
-		java.util.List<ModelDocument> modelDocuments = new ArrayList<>();
-		for (CustomBlobDocumentInfo customBlobDocument : customBlobDocumentList) {
-			modelDocuments.add(getModelDocument(customBlobDocument));
-		}
-
-		boolean isSuccess = false;
-
-		switch (documentTypeID) {
-		case "agenteditor.model":
-			isSuccess = agenteditorcommons.proxies.microflows.Microflows
-				.deployedModel_CreateUpdate_List(getContext(), modelDocuments);
-			break;
-
-		case "agenteditor.consumedMCPService":
-			isSuccess = agenteditorcommons.proxies.microflows.Microflows
-				.consumedMCPService_CreateUpdate_List(getContext(), modelDocuments);
-			break;
-			
-		case "agenteditor.knowledgebase":
-			isSuccess = agenteditorcommons.proxies.microflows.Microflows
-					.knowledgeBase_CreateUpdate_List(getContext(), modelDocuments);
-			break;
-			
-		case "agenteditor.agent":
-			isSuccess = agenteditorcommons.proxies.microflows.Microflows
-				.agent_CreateUpdate_List(getContext(), modelDocuments);
-		}
-
-		if (!isSuccess) {
-			throw new IllegalArgumentException(
-					"Creating/Updating " + documentFriendlyName + " documents failed due to bad input.");
-		}
-	}
-
-
-	private ModelDocument getModelDocument(CustomBlobDocumentInfo customBlobDocumentInfo) {
-		String qualifiedName = customBlobDocumentInfo.qualifiedDocumentName();
-		LOGGER.debug("Importing model with qualified name '" + qualifiedName + "'.");
-
-		String modelDocumentContent = customBlobDocumentInfo.content();
-
-		String documentID = customBlobDocumentInfo.documentID().toString();
-		LOGGER.debug(qualifiedName + " - documentID: " + documentID);
-
-		ModelDocument modelDocument = new ModelDocument(getContext());
-		modelDocument.setDocumentID(getContext(), documentID);
-		modelDocument.setContent(getContext(), modelDocumentContent);
-		modelDocument.setQualifiedName(getContext(), qualifiedName);
-		return modelDocument;
-	}
 
 	// END EXTRA CODE
 }
