@@ -32,4 +32,9 @@
     margin-top: none;
     margin-bottom: none;
     align-items: right !important;
+    a {
+        &:focus {
+            color: #264ae5;
+        }
+    }
 }

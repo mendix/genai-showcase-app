@@ -30429,6 +30429,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin-bottom: none;
   align-items: right !important;
 }
+.popupmenu-custom-item-container-mxgenai a:focus {
+  color: #264ae5;
+}
 
 .info-tooltip .widget-tooltip-content {
   position: relative;
