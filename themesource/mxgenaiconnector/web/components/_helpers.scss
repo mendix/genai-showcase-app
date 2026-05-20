@@ -16,3 +16,25 @@
     line-clamp: 1;
     -webkit-box-orient: vertical;
 }
+
+.img-display--24{
+    width: 24px;
+    height: 24px;
+    .img{
+        width: 24px;
+        height: 24px;
+    }
+}
+
+
+.popupmenu-custom-item-container-mxgenai {
+    padding: $spacing-small;
+    margin-top: none;
+    margin-bottom: none;
+    align-items: right !important;
+    a {
+        &:focus {
+            color: #264ae5;
+        }
+    }
+}
