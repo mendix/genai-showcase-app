@@ -31243,7 +31243,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  max-width: 25vw;
 }
 
 .text-area-resizing {
@@ -31327,11 +31326,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   -webkit-box-orient: vertical;
 }
 
-.img-display--24 {
-  width: 24px;
-  height: 24px;
-}
-.img-display--24 .img {
+.img-display--24 img {
   width: 24px;
   height: 24px;
 }
