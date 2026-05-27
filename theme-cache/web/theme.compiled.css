@@ -29901,6 +29901,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
   cursor: unset;
 }
 
+.listview-stylingless > ul {
+  margin-bottom: 0;
+}
+
 .convui-pagecontainer {
   display: flex;
   flex-direction: column;
