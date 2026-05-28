@@ -2,6 +2,88 @@
 @use '../traceability-variables' as *;
 @use '../abstracts/helpers' as *;
 
+
+.badge-with-circle {
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+    justify-content: flex-start;
+    margin-left: $spacing-medium;
+    .circle {
+        border-radius: 100%;
+        background-color: $brand-primary;
+        width: $spacing-small;
+        height: $spacing-small;
+        margin-left: $spacing-smaller;
+        margin-right: $spacing-smaller;
+    }
+    .badge-text {
+        text-transform: uppercase;
+        font-weight: $font-weight-semibold;
+        font-size: $font-size-small;
+    }
+    &.badge-with-circle--success {
+        .circle {
+            background-color: $brand-success;
+        }
+    }
+    &.badge-with-circle--info {
+        .circle {
+            background-color: $brand-primary;
+        }
+    }
+}
+
+.badge--in-use {
+    max-width: fit-content;
+    height: auto;
+    padding-left: $spacing-smaller;
+    padding-right: $spacing-smaller;
+    border-radius: $border-radius-default;
+    border: 1px solid $border-color-in-use;
+    background-color: $background-color-in-use;
+    .badge-text{
+        font-size: $font-size-small;
+        font-weight: $font-weight-semibold;
+        text-transform: uppercase;
+  }
+}
+
+.agent-badge {
+  display: inline-flex;
+  height: 20px;
+  padding: 4px;
+  gap: 4px;
+  align-items: center;
+  border-radius: 4px;
+  font-size: 12px;
+  font-style: normal;
+  .agent-tooltip {
+    div,
+    .mx-link {
+      line-height: 1;
+    }
+  }
+}
+
+.agent-badge--purple {
+  @extend .agent-badge;
+  background: $agent-purple-light;
+  border: 1px solid $agent-purple;
+}
+
+.agent-badge--default {
+  @extend .agent-badge;
+  background: $color-default-lighter;
+  border: 1px solid $color-default-dark;
+}
+
+.agent-badge--primary {
+  @extend .agent-badge;
+  background: $color-primary-lighter;
+  border: 1px solid $color-primary-dark;
+}
+
 .convui-badge {
     display: inline-block;
     height: 16px;

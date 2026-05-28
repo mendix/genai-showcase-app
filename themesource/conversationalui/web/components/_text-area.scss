@@ -1,0 +1,22 @@
+@use '../../../../theme/web/custom-variables' as *;
+
+.text-area-resizing {
+    // Modern browsers
+    field-sizing: content;
+    min-height: 1lh;
+    max-height: 5lh;
+    overflow-y: auto;
+    resize: none;
+
+    // Fallback for older browsers
+    @supports not (field-sizing: content) {
+        min-height: calc(1.5em * 1);   // 1 line  (adjust 1.5 to match your line-height)
+        max-height: calc(1.5em * 5);   // 5 lines
+        overflow-y: auto;
+        resize: vertical;              // let user resize manually as fallback
+    }
+    textarea {
+        overflow-y: auto;
+        resize: unset;
+    }
+}
