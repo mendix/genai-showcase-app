@@ -28347,7 +28347,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-shrink: 0;
 }
 
-.img--22-22 {
+.img--22-22 img {
   width: 22px;
   height: 22px;
   max-width: 22px;
@@ -28550,6 +28550,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 8px 16px;
   margin-bottom: 0;
   border-radius: 4px;
+  border: 1px solid #e7e7e9;
 }
 
 /* Custom Alert */
@@ -29353,6 +29354,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .datagrid--no-scroll .widget-datagrid-content {
   overflow-y: visible;
   overflow-x: visible;
+}
+.datagrid--no-scroll .widget-datagrid-content .td .td-custom-content .mx-image-viewer {
+  width: auto;
 }
 
 .datagrid--fixed-row-height .table .td {
@@ -31188,6 +31192,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border: 1px solid #d1d5db;
   cursor: pointer;
   transition: all 0.2s ease;
+  padding: 4px 8px;
 }
 
 .widget-combobox-selected-items,
