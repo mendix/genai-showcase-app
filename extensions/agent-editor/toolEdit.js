@@ -1,14 +1,14 @@
-import { H as n, P as x, r as y, ag as N, a6 as E, a2 as k, af as I, a4 as q } from "./Icon-UiLWY9J1.js";
-import { r as P } from "./index-CfghFsoU.js";
-import { createStudioProLogger as B } from "./logger-Bof2Evv1.js";
-import { h as L, a as O } from "./customBlobDocumentUtils-Dwvjb_jQ.js";
-import { u as R, D as A } from "./DialogFooter-CMEdDiSN.js";
-import { T as F, h, a as K } from "./toolHandlers-CdSVG36-.js";
-import { d, e as H, I as _, v as W, J as G } from "./index-CcjggGcx.js";
-import { T as v } from "./TextInputWithButton-DEzJuJjn.js";
-import { S as J, I as $ } from "./ComboBox-B1qf7wz3.js";
-import { n as z } from "./MicroflowIcon-UqycS1--.js";
-import { T as Q } from "./TextInputLabeled-BOV58C6a.js";
+import { R as n, a1 as x, r as y, ap as N, af as E, ag as k, ao as I, ah as q } from "./formelements-DgWWXRMR.js";
+import { c as B } from "./index-CE9RqUwp.js";
+import { createStudioProLogger as L } from "./logger-Bof2Evv1.js";
+import { h as P, a as R } from "./customBlobDocumentUtils-Dwvjb_jQ.js";
+import { u as O, D as A } from "./DialogFooter-CX5uFK7U.js";
+import { T as F, h, a as K } from "./toolHandlers-BJFLRaa9.js";
+import { d, e as _, I as H, u as W, J as G } from "./index-Dv4g4_-n.js";
+import { T as v } from "./TextInputWithButton-H-kPhdc5.js";
+import { _ as J, I as $ } from "./ComboBox-tmgYuUfm.js";
+import { n as z } from "./MicroflowIcon-D9CNADwL.js";
+import { T as Q } from "./TextInputLabeled-DcUYd1Xh.js";
 const U = [
   { key: d.Microflow, caption: "Microflow tool" },
   { key: d.MCP, caption: "MCP tool" }
@@ -17,9 +17,9 @@ const U = [
   {
     "aria-label": "Tool type",
     label: "Tool type",
-    selectedKey: o,
+    value: o,
     validate: () => t.isValidType,
-    onSelectionChange: i,
+    onChange: i,
     children: U.map((l) => /* @__PURE__ */ n.jsx($, { id: l.key, children: l.caption }, l.key))
   }
 ), X = ({
@@ -43,7 +43,7 @@ const U = [
       ariaLabel: "Consumed MCP service",
       label: "Consumed MCP service",
       value: o.document.qualifiedName,
-      icon: o.document.qualifiedName ? H : void 0,
+      icon: o.document.qualifiedName ? _ : void 0,
       buttonCaption: "Select...",
       onClick: i,
       validate: () => t.isValidDocument,
@@ -116,7 +116,7 @@ const U = [
   toolType: "isValidType",
   document: "isValidDocument"
 }, oe = ({ initialTool: o, studioPro: t, agent: i, onClose: l }) => {
-  const [e, m] = y.useState(o || _()), [s, u] = y.useState(Z), f = y.useCallback(
+  const [e, m] = y.useState(o || H()), [s, u] = y.useState(Z), f = y.useCallback(
     async (a) => ({
       isValidName: await h("name", a, i, t),
       isValidDescription: await h("description", a, i, t),
@@ -139,7 +139,7 @@ const U = [
   }, C = () => {
     l(null);
   };
-  R(C, p);
+  O(C, p);
   const j = () => {
     e.toolType === d.Microflow ? window.open(
       "https://docs.mendix.com/appstore/modules/genai/genai-for-mx/agent-commons/#adding-microflows-as-tools",
@@ -166,6 +166,7 @@ const U = [
   }, w = async () => {
     const a = await K(
       t,
+      e.document.documentId,
       e.toolType === d.MCP ? G : "Microflows$Microflow"
     );
     if (a) {
@@ -174,7 +175,7 @@ const U = [
     }
   }, g = () => {
     var a;
-    (a = e.document) != null && a.documentId && (e.toolType === d.Microflow && e.document.documentId ? W(t, e.document) : e.toolType === d.MCP && e.document.documentId && L(t, e.document));
+    (a = e.document) != null && a.documentId && (e.toolType === d.Microflow && e.document.documentId ? W(t, e.document) : e.toolType === d.MCP && e.document.documentId && P(t, e.document));
   }, b = (a) => {
     const c = {
       ...e,
@@ -211,12 +212,12 @@ const U = [
   ] });
 }, te = ({ studioPro: o, initialTool: t, agent: i, onClose: l }) => /* @__PURE__ */ n.jsx(q, { studioPro: o, children: /* @__PURE__ */ n.jsx(oe, { initialTool: t, studioPro: o, agent: i, onClose: l }) }), fe = {
   async loaded(o, t) {
-    const i = P(o), l = B(i);
+    const i = B(o), l = L(i);
     try {
       const e = document.getElementById("root");
       if (!e)
         throw new Error("Failed to find the root element");
-      const m = I.createRoot(e), s = await O(i, t.agentDocumentId);
+      const m = I.createRoot(e), s = await R(i, t.agentDocumentId);
       let u;
       t.toolId && (u = s.tools.find((p) => p.id === t.toolId));
       const f = (p) => {
