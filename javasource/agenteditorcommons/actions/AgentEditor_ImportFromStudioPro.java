@@ -34,11 +34,9 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 		// BEGIN USER CODE
 		try {
 			LOGGER.info("Starting AgentEditor_ASU.");
-
-			AgentDocumentUtils.importModelDocumentsOfType("agenteditor.model", getContext());
-			AgentDocumentUtils.importModelDocumentsOfType("agenteditor.consumedMCPService", getContext());
-			AgentDocumentUtils.importModelDocumentsOfType("agenteditor.knowledgebase", getContext());
-			AgentDocumentUtils.importModelDocumentsOfType("agenteditor.agent", getContext());
+			
+			AgentDocumentUtils.importAllModelDocuments(getContext());
+			
 			registerServlet();
 
 			LOGGER.info("Finished AgentEditor_ASU.");

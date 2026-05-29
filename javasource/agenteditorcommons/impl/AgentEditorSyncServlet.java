@@ -35,10 +35,7 @@ public class AgentEditorSyncServlet extends HttpServlet {
         try {
             IContext context = Core.createSystemContext();
 
-            AgentDocumentUtils.importModelDocumentsOfType("agenteditor.model", context);
-            AgentDocumentUtils.importModelDocumentsOfType("agenteditor.consumedMCPService", context);
-            AgentDocumentUtils.importModelDocumentsOfType("agenteditor.knowledgebase", context);
-            AgentDocumentUtils.importModelDocumentsOfType("agenteditor.agent", context);
+            AgentDocumentUtils.importAllModelDocuments(context);
 
             LOGGER.debug("Sync completed successfully.");
             resp.setStatus(HttpServletResponse.SC_OK);

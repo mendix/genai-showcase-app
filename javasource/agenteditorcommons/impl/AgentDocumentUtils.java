@@ -96,4 +96,12 @@ public class AgentDocumentUtils {
 		
 		return results.get(0);
 	}
+
+	public static void importAllModelDocuments(IContext context) {
+		AgentDocumentUtils.importModelDocumentsOfType("agenteditor.model", context);
+		AgentDocumentUtils.importModelDocumentsOfType("agenteditor.consumedMCPService", context);
+		AgentDocumentUtils.importModelDocumentsOfType("agenteditor.knowledgebase", context);
+		AgentDocumentUtils.importModelDocumentsOfType("agenteditor.agent", context);
+		
+	}
 }
