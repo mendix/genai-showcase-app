@@ -1,10 +1,10 @@
-import { r as o, H as r, ag as L, a6 as q, a2 as R, P as y, af as B, a4 as H } from "./Icon-UiLWY9J1.js";
-import { r as A } from "./index-CfghFsoU.js";
-import { createStudioProLogger as F } from "./logger-Bof2Evv1.js";
+import { r as o, R as r, ap as L, af as R, ag as q, a1 as y, ao as B, ah as A } from "./formelements-DgWWXRMR.js";
+import { c as F } from "./index-CE9RqUwp.js";
+import { createStudioProLogger as H } from "./logger-Bof2Evv1.js";
 import { a as N } from "./customBlobDocumentUtils-Dwvjb_jQ.js";
-import { u as O, D as Y } from "./DialogFooter-CMEdDiSN.js";
-import { I as $ } from "./Banner-87Geup2v.js";
-import { T as f } from "./TextInputLabeled-BOV58C6a.js";
+import { u as O, D as Y } from "./DialogFooter-CX5uFK7U.js";
+import { I as $ } from "./Banner-Tj4hO43W.js";
+import { T as f } from "./TextInputLabeled-DcUYd1Xh.js";
 const G = ({ initialAgent: a, onClose: t }) => {
   var v, P, w;
   const [e, u] = o.useState(a), [n, d] = o.useState(((v = a.maxTokens) == null ? void 0 : v.toString()) ?? ""), [i, m] = o.useState(((P = a.temperature) == null ? void 0 : P.toString()) ?? ""), [l, E] = o.useState(((w = a.topP) == null ? void 0 : w.toString()) ?? ""), p = o.useCallback(() => n !== "" && e.maxTokens === void 0 ? "Please enter a valid number." : e.maxTokens !== void 0 && e.maxTokens < 1 ? "Max tokens must be greater than 0 (or empty)." : !0, [e.maxTokens, n]), c = o.useCallback(() => i !== "" && e.temperature === void 0 ? "Please enter a valid number." : e.temperature !== void 0 && e.temperature < 0 ? "Temperature must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.temperature, i]), h = o.useCallback(() => l !== "" && e.topP === void 0 ? "Please enter a valid number." : e.topP !== void 0 && e.topP < 0 ? "TopP must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.topP, l]), g = o.useCallback(
@@ -33,7 +33,7 @@ const G = ({ initialAgent: a, onClose: t }) => {
     window.open("https://docs.mendix.com/appstore/modules/genai/genai-for-mx/commons/#request", "_blank");
   }, []);
   return /* @__PURE__ */ r.jsxs(L, { children: [
-    /* @__PURE__ */ r.jsx(q, { children: /* @__PURE__ */ r.jsxs(R, { children: [
+    /* @__PURE__ */ r.jsx(R, { children: /* @__PURE__ */ r.jsxs(q, { children: [
       /* @__PURE__ */ r.jsx(y, { label: "Tokens", children: /* @__PURE__ */ r.jsx(
         f,
         {
@@ -73,9 +73,9 @@ const G = ({ initialAgent: a, onClose: t }) => {
     ] }) }),
     /* @__PURE__ */ r.jsx(Y, { onOk: T, onCancel: k, showHelp: !0, onHelp: C })
   ] });
-}, V = ({ studioPro: a, agent: t, onClose: e }) => /* @__PURE__ */ r.jsx(H, { studioPro: a, children: /* @__PURE__ */ r.jsx(G, { initialAgent: t, onClose: e }) }), X = {
+}, V = ({ studioPro: a, agent: t, onClose: e }) => /* @__PURE__ */ r.jsx(A, { studioPro: a, children: /* @__PURE__ */ r.jsx(G, { initialAgent: t, onClose: e }) }), X = {
   async loaded(a, t) {
-    const e = A(a), u = F(e);
+    const e = F(a), u = H(e);
     if (!t.agentDocumentId)
       throw new Error("Agent document ID needs to be provided to open the Model Settings dialog.");
     try {
