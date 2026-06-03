@@ -1,10 +1,10 @@
 import { r as h, R as n, a1 as I, a4 as D, a9 as k, ai as F, ah as P, ae as M, af as U, aj as _ } from "./formelements-DgWWXRMR.js";
-import { u as $, B as z, a as H, c as J, C as Q } from "./TextWithIcon-QGENPuMT.js";
+import { u as z, B as $, a as H, c as J, C as Q } from "./TextWithIcon-BsB7aLN_.js";
 import { createStudioProLogger as A } from "./logger-Bof2Evv1.js";
-import { w as R, x as G, p as X, y as Y, q as Z, r as ee } from "./index-Dv4g4_-n.js";
-import { C as f, i as te, B as ne, v as se, a as ae } from "./ButtonWithLabel-DmOV4DcZ.js";
-import { W as oe, y as B } from "./Banner-B2HXR2np.js";
-import { d as re, a as ie, u as le, g as ce } from "./mxCloudGenAIUtils-WCRmTA6x.js";
+import { y as R, z as G, q as X, B as Y, r as Z, t as ee } from "./index-Cosn4mN0.js";
+import { C as f, i as te, B as ne, v as se, a as ae } from "./ButtonWithLabel-CwHlV4OE.js";
+import { W as oe, y as B } from "./Banner-Tj4hO43W.js";
+import { d as re, a as ie, u as le, g as ce } from "./mxCloudGenAIUtils-BhrK-gu0.js";
 import { T as de } from "./Table-CJG1u8pf.js";
 import { T as j } from "./TextInputLabeled-DcUYd1Xh.js";
 import { T as ue } from "./TextInputWithButton-H-kPhdc5.js";
@@ -176,7 +176,7 @@ const w = () => {
   }, O = (c) => {
     (l.key && c.includes(l.key.documentId) || c.includes("projectSettings")) && v(t);
   };
-  $({
+  z({
     studioPro: e,
     dependentIds: [(S = l.key) == null ? void 0 : S.documentId].filter((c) => !!c),
     watchProjectSettings: !0,
@@ -202,7 +202,7 @@ const w = () => {
         }
       ),
       q && /* @__PURE__ */ n.jsxs(oe, { children: [
-        /* @__PURE__ */ n.jsx(z, { children: r === f.PrivateValue ? "Missing permissions" : "Invalid constant value" }),
+        /* @__PURE__ */ n.jsx($, { children: r === f.PrivateValue ? "Missing permissions" : "Invalid constant value" }),
         /* @__PURE__ */ n.jsx("div", { children: r === f.PrivateValue ? "Private constants require additional permissions for local use. Grant access via View > Extensions and reopen the current tab." : "In order to use your Knowledge base locally, please set a valid value for the key constant." })
       ] }),
       !l.key && /* @__PURE__ */ n.jsxs(D, { children: [

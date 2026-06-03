@@ -47,10 +47,10 @@ import genaicommons.proxies.Trace;
  * Body: { "DocumentId": "<uuid>", "Variables": { "key": "value", ... } }
  * Response: JSON with the agent response or an error message.
  */
-public class AgentEditorServlet extends HttpServlet {
+public class AgentEditorTestServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private static final MxLogger LOGGER = new MxLogger(AgentEditorServlet.class);
+    private static final MxLogger LOGGER = new MxLogger(AgentEditorTestServlet.class);
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @Override

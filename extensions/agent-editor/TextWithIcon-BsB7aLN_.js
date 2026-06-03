@@ -1,6 +1,6 @@
 import { T as o, R as t, an as j, ao as y, r as c, a5 as v } from "./formelements-DgWWXRMR.js";
 import { c as E } from "./index-CE9RqUwp.js";
-import { G as T, H as w } from "./index-Dv4g4_-n.js";
+import { I as T, J as w } from "./index-Cosn4mN0.js";
 var C = Object.defineProperty, h = (e, n) => C(e, "name", { value: n, configurable: !0 });
 h(() => t.jsx(x, { style: "small" }), "LoadingSpinnerInline");
 const x = h(({ style: e = "large", centered: n = !1, ...a }) => {
@@ -80,7 +80,7 @@ const k = ({
   }, [e.app.projectChanges]);
 }, A = o.div`
     font-weight: 600;
-`, G = o.div`
+`, P = o.div`
     font-size: 10px;
     color: ${({ theme: e }) => e.colorsTextSecondaryDefault};
 `, D = o.div`
@@ -95,7 +95,7 @@ const k = ({
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-`, P = ({ icon: e, text: n }) => /* @__PURE__ */ t.jsxs(L, { children: [
+`, W = ({ icon: e, text: n }) => /* @__PURE__ */ t.jsxs(L, { children: [
   e && /* @__PURE__ */ t.jsx(b, { icon: e }),
   /* @__PURE__ */ t.jsx(M, { children: n })
 ] });
@@ -103,8 +103,8 @@ export {
   A as B,
   $ as C,
   b as I,
-  P as T,
-  G as a,
+  W as T,
+  P as a,
   B as c,
   k as u
 };

@@ -1,5 +1,5 @@
 import { T as v, r as d, R as a, a4 as $, a9 as j, ai as z, ac as R } from "./formelements-DgWWXRMR.js";
-import { d as x, N as W, O as q } from "./index-Dv4g4_-n.js";
+import { e as x, Q as W, S as q } from "./index-Cosn4mN0.js";
 const M = v.div`
     position: absolute;
     top: 0;
@@ -32,7 +32,7 @@ const M = v.div`
     width: 100%;
     z-index: -1;
     border: 1px solid transparent;
-`, O = ({
+`, N = ({
   label: c,
   ariaLabel: e,
   value: o,
@@ -41,9 +41,9 @@ const M = v.div`
   readOnly: h = !1,
   defaultHeightRows: l,
   highlightRules: y,
-  validate: k
+  validate: S
 }) => {
-  const m = d.useRef(null), T = d.useRef(null), [S, A] = d.useState(0), E = l || 5, b = y && y.length > 0, C = () => {
+  const m = d.useRef(null), T = d.useRef(null), [k, A] = d.useState(0), E = l || 5, b = y && y.length > 0, C = () => {
     if (!b) return null;
     const t = [];
     y.forEach((s, f) => {
@@ -96,7 +96,7 @@ const M = v.div`
     /* @__PURE__ */ a.jsx(j, { fullWidth: !0, children: /* @__PURE__ */ a.jsxs(P, { ref: m, children: [
       b && /* @__PURE__ */ a.jsxs(a.Fragment, { children: [
         /* @__PURE__ */ a.jsx(D, {}),
-        /* @__PURE__ */ a.jsx(M, { ref: T, style: { paddingRight: `${2 + S}px` }, children: C() })
+        /* @__PURE__ */ a.jsx(M, { ref: T, style: { paddingRight: `${2 + k}px` }, children: C() })
       ] }),
       /* @__PURE__ */ a.jsx(
         R,
@@ -108,12 +108,12 @@ const M = v.div`
           onChange: i,
           rows: E,
           hasHighlighting: b,
-          validate: k
+          validate: S
         }
       )
     ] }) })
   ] });
-}, F = async (c, e, o, i) => {
+}, O = async (c, e, o, i) => {
   const p = o.tools, h = o.knowledgebaseTools;
   switch (c) {
     case "name":
@@ -173,7 +173,7 @@ const M = v.div`
     };
 };
 export {
-  O as T,
+  N as T,
   H as a,
-  F as h
+  O as h
 };

@@ -1,14 +1,14 @@
-import { r as c, R as a, ap as A, af as q, ag as F, a1 as C, ao as O, ah as G } from "./formelements-DgWWXRMR.js";
+import { r as c, R as a, ap as A, af as O, ag as q, a1 as C, ao as F, ah as G } from "./formelements-DgWWXRMR.js";
 import { c as H } from "./index-CE9RqUwp.js";
 import { createStudioProLogger as W } from "./logger-Bof2Evv1.js";
 import { g as _, h as $, a as z } from "./customBlobDocumentUtils-Dwvjb_jQ.js";
 import { _ as J, I as Q } from "./ComboBox-tmgYuUfm.js";
 import { u as U, D as X } from "./DialogFooter-CX5uFK7U.js";
-import { T as Y, a as Z } from "./toolHandlers-BJFLRaa9.js";
+import { T as Y, a as Z } from "./toolHandlers-Cs_LMdFH.js";
 import { T as I } from "./TextInputLabeled-DcUYd1Xh.js";
 import { T as P } from "./TextInputWithButton-H-kPhdc5.js";
-import { K as V, k as ee, L as te } from "./index-Dv4g4_-n.js";
-import { g as ie } from "./mxCloudGenAIUtils-WCRmTA6x.js";
+import { N as V, k as ee, O as te } from "./index-Cosn4mN0.js";
+import { g as ie } from "./mxCloudGenAIUtils-BhrK-gu0.js";
 import { h } from "./knowledgebaseToolHandlers-CvlCV-OF.js";
 const ae = {
   isValidName: !0,
@@ -32,9 +32,9 @@ const ae = {
   onClose: p
 }) => {
   var M, E;
-  const [t, g] = c.useState(s || V()), [r, f] = c.useState(ae), [v, d] = c.useState([]), [S, R] = c.useState(
+  const [t, g] = c.useState(s || V()), [r, f] = c.useState(ae), [v, d] = c.useState([]), [S, N] = c.useState(
     ((M = (s || V()).maxResults) == null ? void 0 : M.toString()) ?? ""
-  ), [k, j] = c.useState(
+  ), [k, R] = c.useState(
     ((E = (s || V()).minSimilarity) == null ? void 0 : E.toString()) ?? ""
   ), y = c.useCallback(
     async (e) => ({
@@ -80,7 +80,7 @@ const ae = {
       d(!e || typeof e == "string" ? [] : e);
     }).catch(() => d([])) : d([]);
   }, [t.document, i]), c.useEffect(() => {
-    s && (R(s.maxResults !== void 0 ? s.maxResults.toString() : ""), j(s.minSimilarity !== void 0 ? s.minSimilarity.toString() : ""), y(s).then((e) => {
+    s && (N(s.maxResults !== void 0 ? s.maxResults.toString() : ""), R(s.minSimilarity !== void 0 ? s.minSimilarity.toString() : ""), y(s).then((e) => {
       f(e);
     }));
   }, [s, y]);
@@ -100,7 +100,7 @@ const ae = {
       const l = String(o);
       if (!/^\d*$/.test(l))
         return;
-      R(l);
+      N(l);
       const u = l === "" ? void 0 : Number.parseInt(l, 10), b = {
         ...t,
         maxResults: Number.isNaN(u) ? void 0 : u
@@ -112,7 +112,7 @@ const ae = {
       const l = String(o);
       if (!/^\d*\.?\d*$/.test(l))
         return;
-      j(l);
+      R(l);
       const u = l === "" || l === "." ? void 0 : Number.parseFloat(l), b = {
         ...t,
         minSimilarity: Number.isNaN(u) ? void 0 : u
@@ -130,13 +130,13 @@ const ae = {
     }
   }, L = () => {
     $(i, t.document);
-  }, D = async () => {
+  }, j = async () => {
     const e = await y(t);
     f(e), Object.values(e).some((m) => m !== !0) || p(t);
-  }, N = () => {
+  }, D = () => {
     p(null);
   };
-  U(N, D);
+  U(D, j);
   const K = () => {
     window.open(
       "https://docs.mendix.com/appstore/modules/genai/mx-cloud-genai/MxGenAI-connector/#about-knowledge-bases",
@@ -145,7 +145,7 @@ const ae = {
     );
   };
   return /* @__PURE__ */ a.jsxs(A, { children: [
-    /* @__PURE__ */ a.jsx(q, { children: /* @__PURE__ */ a.jsxs(F, { children: [
+    /* @__PURE__ */ a.jsx(O, { children: /* @__PURE__ */ a.jsxs(q, { children: [
       /* @__PURE__ */ a.jsxs(C, { label: "General", children: [
         /* @__PURE__ */ a.jsx(
           P,
@@ -227,7 +227,7 @@ const ae = {
         )
       ] })
     ] }) }),
-    /* @__PURE__ */ a.jsx(X, { onOk: D, onCancel: N, onHelp: K })
+    /* @__PURE__ */ a.jsx(X, { onOk: j, onCancel: D, onHelp: K })
   ] });
 }, se = ({ studioPro: s, initialTool: i, agent: n, onClose: p }) => /* @__PURE__ */ a.jsx(G, { studioPro: s, children: /* @__PURE__ */ a.jsx(oe, { initialTool: i, studioPro: s, agent: n, onClose: p }) }), we = {
   async loaded(s, i) {
@@ -236,7 +236,7 @@ const ae = {
       const t = document.getElementById("root");
       if (!t)
         throw new Error("Failed to find the root element");
-      const g = O.createRoot(t), r = await z(n, i.agentDocumentId);
+      const g = F.createRoot(t), r = await z(n, i.agentDocumentId);
       let f;
       i.toolId && (f = (r.knowledgebaseTools || []).find((S) => S.id === i.toolId));
       const v = (d) => {

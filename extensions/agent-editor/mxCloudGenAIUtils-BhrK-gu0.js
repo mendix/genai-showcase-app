@@ -1,5 +1,5 @@
 import { createStudioProLogger as i } from "./logger-Bof2Evv1.js";
-import { p as d } from "./index-Dv4g4_-n.js";
+import { q as d } from "./index-Cosn4mN0.js";
 const y = (t, r) => {
   const a = i(t);
   try {
@@ -8,7 +8,7 @@ const y = (t, r) => {
   } catch (e) {
     throw a.error("Error decoding and parsing key", e), new Error("The key could not be parsed, make sure it is valid.");
   }
-}, p = async (t, r) => {
+}, g = async (t, r) => {
   const a = i(t);
   try {
     const e = r.providerFields;
@@ -34,7 +34,7 @@ const y = (t, r) => {
   } catch (e) {
     return a.error("Error invoking MxCloud GenAI resource API:", e), e instanceof Error ? e.message : "";
   }
-}, g = async (t, r) => {
+}, p = async (t, r) => {
   const a = i(t);
   try {
     const e = r.providerFields, n = await d(t, e.key);
@@ -95,9 +95,9 @@ const y = (t, r) => {
   }
 };
 export {
-  g as a,
+  p as a,
   y as d,
   x as g,
-  p as i,
+  g as i,
   h as u
 };
