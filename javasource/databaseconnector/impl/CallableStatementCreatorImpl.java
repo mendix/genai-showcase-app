@@ -20,11 +20,15 @@ public class CallableStatementCreatorImpl implements CallableStatementCreator {
 	public StatementWrapper create(final Statement statement, final Connection connection) throws SQLException, DatabaseConnectorException {
 		final IContext context = statement.getContext();
 		final CallableStatement cStatement = connection.prepareCall(statement.getContent());
-
+		//Sorting is required to ensure that parameters are processed in the order of parameter modes: IN, INOUT, and OUT.
+		//This is particularly important for databases like Oracle, where refcursors in CallableStatements depend on this order.
 		List<SqlParameter> parameters = Core
 				.retrieveByPath(context, statement.getMendixObject(),
 						Statement.MemberNames.Statement_Parameter.toString())
-				.stream().map(p -> SqlParameter.initialize(context, p)).collect(Collectors.toList());
+				.stream()
+				.map(p -> SqlParameter.initialize(context, p))
+				.sorted((p1, p2) -> p1.getParameterMode().compareTo(p2.getParameterMode()))
+				.collect(Collectors.toList());
 
 		for (SqlParameter p : parameters) {
 			p.prepareCall(cStatement);

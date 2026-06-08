@@ -238,6 +238,7 @@ public abstract class SqlParameter implements Comparable<SqlParameter> {
 			objectType = ParameterString.getType();
 			break;
 		case java.sql.Types.DATE:
+		case java.sql.Types.TIMESTAMP:
 			objectType = ParameterDatetime.getType();
 			break;
 		case java.sql.Types.ARRAY:
