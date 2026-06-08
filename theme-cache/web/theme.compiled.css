@@ -31227,6 +31227,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: fit-content;
   margin-right: 8px;
 }
+.item-selection .mx-image-viewer img,
+.model-selection .mx-image-viewer img {
+  min-width: 24px;
+  min-height: 24px;
+}
 
 .item-selection-content {
   display: flex;
