@@ -24,6 +24,7 @@ import mcpclient.impl.McpClientRegistry;
 import mcpclient.impl.MxLogger;
 import mcpclient.proxies.MCPClient;
 import system.proxies.HttpHeader;
+import java.net.URI;
 import java.net.http.HttpRequest;
 import java.time.Duration;
 import java.util.List;
@@ -57,7 +58,8 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 			requireNonNull(ClientConfig, "MCP Client Config is required.");
 			requireNonNull(ClientConfig.getMCPEndpoint(), "MCP Endpoint is required.");
 			requireNonNull(ClientConfig.getName(), "MCP Name is required.");
-			requireNonNull(ClientConfig.getProtocolVersion(), "Protocol version is required.");	
+			requireNonNull(ClientConfig.getProtocolVersion(), "Protocol version is required.");
+			validateEndpointForJavaHttpClient(getConfiguredEndpointUri());
 			
 			//Client NPE creation
 			MCPClient clientNpe = new MCPClient(getContext());
@@ -79,15 +81,16 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 					.build();
 			
 			McpSchema.InitializeResult initResult = client.initialize();
-			LOGGER.debug("Client connected to server using: " + initResult.protocolVersion() + " version.");
+			LOGGER.debug("Client connected. configuredProtocol=" + ClientConfig.getProtocolVersion().toString() + ", negotiatedProtocol=" + initResult.protocolVersion() + ", endpoint=" + ClientConfig.getMCPEndpoint() + ", clientName=" + ClientConfig.getName());
 			clientNpe.setConnected(true);
 			McpClientRegistry.putClient(clientNpe.getMendixObject().getId().toLong(), client);
 			return clientNpe.getMendixObject();
 		} catch (Exception e) {
-			LOGGER.error(e, "Failed to create MCP client for configuration with name: ", ClientConfig != null ? ClientConfig.getName(): null);
+			String msg = "Failed to create MCP client. name=" + ClientConfig.getName() + ", endpoint=" + ClientConfig.getMCPEndpoint() + ", protocol=" + ClientConfig.getProtocolVersion();
 			if (e.getCause() != null) {
-			    LOGGER.error("Root cause:", e.getCause());
+				msg += ", cause=" + e.getCause().getMessage();
 			}
+			LOGGER.error(e, msg);
 			throw e;
 		}
 		// END USER CODE
@@ -116,28 +119,24 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 	private McpClientTransport createTransport() throws CoreException {
 		HttpRequest.Builder customRequestBuilder = getCustomRequestBuilder();
 		String protocolVersion = ClientConfig.getProtocolVersion().toString();
-		String endpoint;
+		URI endpointUri = getConfiguredEndpointUri();
+		String baseUrl = getBaseUrl(endpointUri);
+		String endpointPath = getEndpointPath(endpointUri);
 		
 		if (protocolVersion.equals("v2024_11_05")) {
 			// Use SSE transport for v2024-11-05
-			String base = getBaseEndpoint();
-			endpoint = getSseEndpoint();
-			LOGGER.debug("Transport=SSE, protocol=" + protocolVersion + ", base=" + base + ", endpoint=" + endpoint);
+			LOGGER.debug("Transport=SSE, protocol=" + protocolVersion + ", configuredEndpoint=" + endpointUri + ", base=" + baseUrl + ", endpointPath=" + endpointPath);
 			return HttpClientSseClientTransport
-					.builder(base)
-					.sseEndpoint(endpoint)
+					.builder(baseUrl)
+					.sseEndpoint(endpointPath)
 					.requestBuilder(customRequestBuilder)
 					.build();
 		} else if (protocolVersion.equals("v2025_03_26")) {
 			// Use Streamable HTTP transport for v2025-03-26
-			String baseUrl = getBaseEndpoint();
-			// Add /mcp suffix only if not already present (idempotent)
-			String fullUrl = baseUrl.toLowerCase().endsWith("/mcp") ? baseUrl : baseUrl + "/mcp";
-			endpoint = java.net.URI.create(fullUrl).getRawPath();
-			LOGGER.debug("Transport=HTTP, protocol=" + protocolVersion + ", fullUrl=" + fullUrl + ", endpoint=" + endpoint);
+			LOGGER.debug("Transport=HTTP, protocol=" + protocolVersion + ", configuredEndpoint=" + endpointUri + ", base=" + baseUrl + ", endpointPath=" + endpointPath);
 			return HttpClientStreamableHttpTransport
 					.builder(baseUrl)
-					.endpoint(endpoint)
+					.endpoint(endpointPath)
 					.requestBuilder(customRequestBuilder)
 					.build();
 		} else {
@@ -146,31 +145,85 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 	}
 
 	/**
-	 * Normalizes the endpoint by removing trailing slashes only.
-	 * Does NOT strip /mcp or /sse from the path to avoid breaking legitimate URLs.
+	 * Parses the configured MCP endpoint URL.
+	 *
+	 * Intentionally keeps validation minimal to avoid rejecting real-world endpoints
+	 * accepted by upstream HTTP stacks.
 	 */
-	private String getBaseEndpoint() {
-	    String baseUrl = ClientConfig.getMCPEndpoint();
-	    
-	    // Remove trailing slash only
-	    while (baseUrl.endsWith("/")) {
-	        baseUrl = baseUrl.substring(0, baseUrl.length() - 1);
-			LOGGER.info("Removed trailing slash from provided base endpoint before connecting to MCP Server.");
-	    }
-	    
-	    return baseUrl;
+	private URI getConfiguredEndpointUri() {
+		String configuredEndpoint = requireNonNull(ClientConfig.getMCPEndpoint(), "MCP Endpoint is required.").trim();
+		if (configuredEndpoint.isEmpty()) {
+			throw new IllegalArgumentException("MCP Endpoint is required.");
+		}
+
+		try {
+			return URI.create(configuredEndpoint);
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException("MCP Endpoint must be a valid absolute URL: " + configuredEndpoint, e);
+		}
 	}
 
 	/**
-	 * Returns the SSE endpoint, adding /sse suffix only if not already present.
-	 * This ensures idempotent behavior.
+	 * Returns URL base in the form scheme://authority.
 	 */
-	private String getSseEndpoint() {
-	    String base = getBaseEndpoint();
-	    if (base.toLowerCase().endsWith("/sse")) {
-	        return base; // Already has /sse, don't duplicate
-	    }
-	    return base + "/sse";
+	private String getBaseUrl(URI endpointUri) {
+		return endpointUri.getScheme() + "://" + endpointUri.getRawAuthority();
+	}
+
+	/**
+	 * Returns the path component from endpoint URL and defaults to "/" when absent.
+	 */
+	private String getEndpointPath(URI endpointUri) {
+		String rawPath = endpointUri.getRawPath();
+		String path = (rawPath == null || rawPath.isEmpty()) ? "/" : rawPath;
+		String rawQuery = endpointUri.getRawQuery();
+		return (rawQuery == null || rawQuery.isEmpty()) ? path : path + "?" + rawQuery;
+	}
+
+	/**
+	 * Validates endpoint host compatibility with Java HttpClient.
+	 * Java HttpClient can reject hostnames with underscores even if other clients accept them.
+	 */
+	private void validateEndpointForJavaHttpClient(URI endpointUri) {
+		if (!endpointUri.isAbsolute()) {
+			throw new IllegalArgumentException("MCP Endpoint must be an absolute URL (including scheme): " + endpointUri);
+		}
+
+		String scheme = endpointUri.getScheme();
+		if (scheme == null || !(scheme.equalsIgnoreCase("http") || scheme.equalsIgnoreCase("https"))) {
+			throw new IllegalArgumentException("MCP Endpoint must use http or https scheme: " + endpointUri);
+		}
+
+		String rawAuthority = endpointUri.getRawAuthority();
+		if (rawAuthority == null || rawAuthority.isEmpty()) {
+			throw new IllegalArgumentException("MCP Endpoint must include a hostname: " + endpointUri);
+		}
+
+		String authorityWithoutUserInfo = rawAuthority;
+		int atIdx = authorityWithoutUserInfo.lastIndexOf('@');
+		if (atIdx >= 0 && atIdx + 1 < authorityWithoutUserInfo.length()) {
+			authorityWithoutUserInfo = authorityWithoutUserInfo.substring(atIdx + 1);
+		}
+
+		String hostCandidate = authorityWithoutUserInfo;
+		if (hostCandidate.startsWith("[")) {
+			int bracketEnd = hostCandidate.indexOf(']');
+			if (bracketEnd > 0) {
+				hostCandidate = hostCandidate.substring(1, bracketEnd);
+			}
+		} else {
+			int colonIdx = hostCandidate.indexOf(':');
+			if (colonIdx > 0) {
+				hostCandidate = hostCandidate.substring(0, colonIdx);
+			}
+		}
+
+		if (hostCandidate.contains("_")) {
+			throw new IllegalArgumentException(
+				"MCP Endpoint host contains '_' which Java HttpClient rejects: " + hostCandidate
+				+ ". Use a DNS alias/CNAME without underscores (or another compatible host) for MCP client connections."
+			);
+		}
 	}
 	
 	/**

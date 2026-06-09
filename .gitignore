@@ -18,8 +18,8 @@
 .DS_Store
 /.svn/
 /mprcontents/mprjournal*
-/agenteditor
+/agenteditor/
 theme-cache/web/theme.compiled.css
 theme-cache/web/theme.compiled.css.map
-modules/javasource/*/proxies/*
-modules/javasource/system/*
+/modules/javasource/*/proxies/*
+/modules/javasource/system/*
