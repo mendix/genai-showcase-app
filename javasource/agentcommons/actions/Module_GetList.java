@@ -56,7 +56,7 @@ public class Module_GetList extends UserAction<java.util.List<IMendixObject>>
 			
 			MicroflowSelection.setMicroflowSelection_Module(uniqueModuleList);
 			
-			return uniqueModuleList.stream().map(e -> e.getMendixObject()).toList();
+			return uniqueModuleList.stream().map(e -> e.getMendixObject()).collect(java.util.stream.Collectors.toList());
 		} catch (Exception e) {
 		    LOGGER.error(e);
 		    return null;

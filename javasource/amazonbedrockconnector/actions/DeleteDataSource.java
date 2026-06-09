@@ -16,7 +16,6 @@ import amazonbedrockconnector.impl.AmazonBedrockClient;
 import amazonbedrockconnector.impl.MxDataSource;
 import amazonbedrockconnector.impl.MxLogger;
 import amazonbedrockconnector.proxies.DeleteDataSourceResponse;
-import amazonbedrockconnector.proxies.ENUM_DataSourceStatus;
 import software.amazon.awssdk.services.bedrockagent.BedrockAgentClient;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;

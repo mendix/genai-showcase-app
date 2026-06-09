@@ -2,6 +2,7 @@ package mxgenaiconnector.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Base64;
 
@@ -80,7 +81,7 @@ public class ConverseVisionDocument{
 	}
 	
 	//Set bytes of SourceNode based on ContentType
-	private static void setSourceBytes(ObjectNode sourceNode, JsonNode fileContent) throws IOException{
+	private static void setSourceBytes(ObjectNode sourceNode, JsonNode fileContent) throws IOException, URISyntaxException{
 		String bytes = "";
 		if (fileContent.path("contentType") != null && fileContent.path("contentType").asText().equals(ENUM_ContentType.Base64.toString())) {
 			bytes = fileContent.path("fileContent").asText();
@@ -92,8 +93,8 @@ public class ConverseVisionDocument{
 	}
 	
 	//Convert URI to base64 bytes
-	private static String getImageBytesFromURI(String uriInput) throws IOException {
-		URL url = new URL(uriInput); 
+	private static String getImageBytesFromURI(String uriInput) throws IOException, URISyntaxException {
+		URL url = new java.net.URI(uriInput).toURL();
 		try (InputStream is = url.openStream ()) {
 		  return Base64.getEncoder().encodeToString(IOUtils.toByteArray(is));
 		}

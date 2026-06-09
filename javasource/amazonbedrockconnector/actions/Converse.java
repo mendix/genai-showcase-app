@@ -29,7 +29,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
@@ -615,7 +614,7 @@ public class Converse extends UserAction<IMendixObject>
 	// Handling an image that is only present as a URL
 	// Getting the bytes and the format
 	private ContentBlock getImageContentURI(FileContent mxImage) throws URISyntaxException, MalformedURLException, IOException {
-		URL url = new URL(mxImage.getFileContent());
+		URL url = new java.net.URI(mxImage.getFileContent()).toURL();
 		
 		try (InputStream is = url.openStream ()) {
 		  
