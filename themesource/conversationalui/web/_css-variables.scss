@@ -1,0 +1,42 @@
+﻿@use '../../../theme/web/custom-variables' as *;
+
+// Import existing SASS variables
+@import 'chat-variables';
+@import 'traceability-variables';
+@import 'token-monitor-variables';
+
+:root {
+  // Chat variables
+  --chat-width: #{$chat-width};
+  --send-btn-size: #{$send-btn-size};
+  --chat-input-max-height: #{$chat-input-max-height};
+  --chat-header-color: #{$chat-header-color};
+  --pop-up-chat-bottom-position: #{$pop-up-chat-bottom-position};
+  --pop-up-chat-right-position: #{$pop-up-chat-right-position};
+  --pop-up-chat-width: #{$pop-up-chat-width};
+  --pop-up-chat-height: #{$pop-up-chat-height};
+  --chat-bubble-user-background: #{$chat-bubble-user-background};
+  --chat-bubble-assistant-background: #{$chat-bubble-assistant-background};
+  --chat-bubble-margin: #{$chat-bubble-margin};
+  --chat-border-color: #{$chat-border-color};
+  --chat-bg-light: #{$chat-bg-light};
+
+  // Traceability variables
+  --size-24: #{$size-24};
+  --size-28: #{$size-28};
+  --size-small: #{$size-small};
+  --page-custom-height: #{$page-custom-height};
+  --in-use-bg: #{$in-use-bg};
+  --in-use: #{$in-use};
+  --background-color-in-use: #{$background-color-in-use};
+  --border-color-in-use: #{$border-color-in-use};
+  --agent-purple: #{$agent-purple};
+  --agent-purple-light: #{$agent-purple-light};
+  --table-border-separator-color: #{$table-border-separator-color};
+  --new-danger: #{$new-danger};
+
+  // Token monitor variables
+  --light-border-color: #{$light-border-color};
+  --input-graph-line-color: #{$input-graph-line-color};
+  --output-graph-line-color: #{$output-graph-line-color};
+}

@@ -363,7 +363,7 @@
         flex: 1 1 0;
         width: 60%;
         max-width: 945px;
-        max-height: $page-custom-height;
+        max-height: var(--page-custom-height);
         display: flex;
         flex-direction: column;
         margin-bottom: 0;
@@ -402,7 +402,7 @@
         display: flex;
         flex-direction: column;
         height: 100%;
-        border-left: 1px solid $table-border-separator-color;
+        border-left: 1px solid var(--table-border-separator-color);
         padding-top: $spacing-medium;
         margin-bottom: unset;   
         padding-left: unset;
@@ -503,7 +503,7 @@
 
         display: flex;
         flex-direction: row;
-        border-bottom: 1px solid $table-border-separator-color;
+        border-bottom: 1px solid var(--table-border-separator-color);
         padding-right: $spacing-small;
         height: fit-content;
 
@@ -521,8 +521,8 @@
 
             .new-chat-icon {
                 img {
-                    height: $size-24;
-                    width: $size-24;
+                    height: var(--size-24);
+                    width: var(--size-24);
                     margin-right: 0;
                 }
             }
@@ -535,8 +535,8 @@
                 height: fit-content;
 
                 img {
-                    height: $size-24;
-                    width: $size-24;
+                    height: var(--size-24);
+                    width: var(--size-24);
                     margin-right: 0;
                 }
             }

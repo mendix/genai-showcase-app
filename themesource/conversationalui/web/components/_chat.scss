@@ -7,9 +7,9 @@
     padding: $spacing-small;
     .loading-dot {
         border-radius: 100%;
-        background-color: $font-color-default;
-        width: $font-size-default / 3;
-        height: $font-size-default / 3;
+        background-color: var(--font-color-default);
+        width: calc($font-size-default / 3);
+        height: calc($font-size-default / 3);
         &:nth-child(1) {
             animation: preloader 0.9s ease-in-out alternate infinite;
         }
@@ -75,7 +75,7 @@
     }
 
     &--center {
-        max-width: $chat-width;
+        max-width: var(--chat-width);
         margin: 0 auto;
         height: 100%
     }
@@ -100,7 +100,7 @@
 
         .form-control {
             width: 100%;
-            max-height: $chat-input-max-height;
+            max-height: --chat-input-max-height;
             padding: 0 0 $spacing-medium 0 !important;
             overflow: auto;
             border: none !important;
@@ -129,15 +129,15 @@
         padding: $spacing-small;
 
         .send-btn {
-            right: 58px / 2 - $send-btn-size / 2;
-            bottom: 58px / 2 - $send-btn-size / 2;
+            right: calc(58px / 2 - var(--send-btn-size) / 2);
+            bottom: calc(58px / 2 - var(--send-btn-size) / 2);
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration-line: none;
             border-radius: 8px;
-            width: $send-btn-size;
-            height: $send-btn-size;
+            width: var(--send-btn-size);
+            height: var(--send-btn-size);
             padding: 0px;
 
             img {
@@ -147,7 +147,7 @@
 
             .glyphicon {
                 top: 0;
-                font-size: $send-btn-size / 2;
+                font-size: calc(var(--send-btn-size) / 2);
                 left: -2px;
                 margin: 0px;
             }
@@ -161,7 +161,7 @@
     flex-direction: column;
     justify-content: center;
     .chat-message-card {
-        background: $chat-bubble-assistant-background;
+        background: var(--chat-bubble-assistant-background);
         border-radius: 8px;
         border: 1px solid $border-color-default;
         margin: 0 10% 0 0;
@@ -175,7 +175,7 @@
     &--user {
         align-items: flex-end;
         .chat-message-card {
-            background: $chat-bubble-user-background;
+            background: var(--chat-bubble-user-background);
             border: 1px solid #ced0d3;
             border-radius: 8px;
             margin: 0 0 0 10%;
@@ -247,7 +247,7 @@
     border: 0px solid;
     overflow: hidden;
     padding: 12px $spacing-medium;
-    background-color: $chat-bg-light;
+    background-color: var(--chat-bg-light);
     color: rgba($font-color-header, 0.7);
     font-weight: $font-weight-normal;
     margin-bottom: $spacing-small;

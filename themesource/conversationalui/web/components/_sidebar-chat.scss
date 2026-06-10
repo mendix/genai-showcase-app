@@ -7,7 +7,7 @@
     bottom: 0 !important;
     left: unset !important;
     height: unset !important;
-    width: $pop-up-chat-width;
+    width: var(--pop-up-chat-width);
     .mx-window-content {
         border-radius: 0;
         border: none;

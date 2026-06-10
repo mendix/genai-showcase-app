@@ -40,8 +40,8 @@
     padding-left: $spacing-smaller;
     padding-right: $spacing-smaller;
     border-radius: $border-radius-default;
-    border: 1px solid $border-color-in-use;
-    background-color: $background-color-in-use;
+    border: 1px solid var(--border-color-in-use);
+    background-color: var(--background-color-in-use);
     .badge-text{
         font-size: $font-size-small;
         font-weight: $font-weight-semibold;
@@ -68,8 +68,8 @@
 
 .agent-badge--purple {
   @extend .agent-badge;
-  background: $agent-purple-light;
-  border: 1px solid $agent-purple;
+  background: var(--agent-purple-light);
+  border: 1px solid var(--agent-purple);
 }
 
 .agent-badge--default {
