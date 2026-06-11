@@ -35,7 +35,7 @@ public class McpServerRequestHandler extends RequestHandler implements McpServer
         this.mcpServer = mcpServer;
         this.sessionManager = new McpSessionManager();
         this.transportHandler = createTransportHandler(mcpServer, sessionManager);
-        LOGGER.info("MCP server request handler created for path: " + basePath);
+        LOGGER.debug("MCP server request handler created for path: " + basePath);
     }
     
     /**
