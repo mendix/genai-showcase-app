@@ -39,3 +39,8 @@
     flex-wrap: wrap;
 }
 
+.card-sm {
+    border: 1px solid var(--border-color-default);
+    padding: $spacing-medium;
+    border-radius: 8px;
+}
