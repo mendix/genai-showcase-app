@@ -8,7 +8,7 @@
   &:active,
   &:focus {
     border-radius: 2px;
-    outline: 2px solid $brand-primary;
+    outline: 2px solid var(--brand-primary);
     outline-offset: 0;
   }
 }
@@ -42,7 +42,7 @@
 // --------------------------------------
 
 .agent-trace-container {
-  padding: $spacing-small;
+  padding: var(--spacing-small);
 
   .agent-trace-chart-container {
     padding-top: 0.75px;

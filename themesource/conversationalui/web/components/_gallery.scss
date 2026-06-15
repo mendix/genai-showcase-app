@@ -2,7 +2,7 @@
 
 .filter-gallery {
     .widget-gallery-items {
-        padding: $spacing-small 0  0;
+        padding: var(--spacing-small) 0  0;
         display: flex;
         flex-wrap: wrap;
         gap: 1rem;

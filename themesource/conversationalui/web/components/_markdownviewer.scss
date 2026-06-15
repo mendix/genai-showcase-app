@@ -1,35 +1,35 @@
 @use '../../../../theme/web/custom-variables' as *;
 
 .widget-markdown {
-    color: $font-color-header;
+    color: var(--font-color-header);
     font-weight: 400;
 
     hr {
-        margin: $spacing-small 0;
+        margin: var(--spacing-small) 0;
     }
 
     p {
         font-weight: 400;
-        color: $font-color-header;
+        color: var(--font-color-header);
 
     }
 
     strong {
-        color: $font-color-header;
+        color: var(--font-color-header);
         font-weight: 600;
     }
 
     h1, h2, h3, h4, h5, h6 {
-        margin: $spacing-small 0;
+        margin: var(--spacing-small) 0;
         font-weight: 600;
-        color: $font-color-header;
+        color: var(--font-color-header);
     }
 
     ul {
         justify-content: flex-start;
         > li {
             padding: 0;
-            font-weight: $font-weight-normal;
+            font-weight: var(--font-weight-normal);
         }
     }
     li {
@@ -39,12 +39,12 @@
     }
     ol {
         justify-content: flex-start;
-        color: $font-color-header;
+        color: var(--font-color-header);
     }
     table {
         tr {
             th, td {
-        color: $font-color-header;
+        color: var(--font-color-header);
             }
         }
     }

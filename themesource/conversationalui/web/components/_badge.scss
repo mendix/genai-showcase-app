@@ -8,28 +8,28 @@
     align-items: center;
     flex-flow: row;
     justify-content: flex-start;
-    margin-left: $spacing-medium;
+    margin-left: var(--spacing-medium);
     .circle {
         border-radius: 100%;
-        background-color: $brand-primary;
-        width: $spacing-small;
-        height: $spacing-small;
-        margin-left: $spacing-smaller;
-        margin-right: $spacing-smaller;
+        background-color: var(--brand-primary);
+        width: var(--spacing-small);
+        height: var(--spacing-small);
+        margin-left: var(--spacing-smaller);
+        margin-right: var(--spacing-smaller);
     }
     .badge-text {
         text-transform: uppercase;
-        font-weight: $font-weight-semibold;
-        font-size: $font-size-small;
+        font-weight: var(--font-weight-semibold);
+        font-size: var(--font-size-small);
     }
     &.badge-with-circle--success {
         .circle {
-            background-color: $brand-success;
+            background-color: var(--brand-success);
         }
     }
     &.badge-with-circle--info {
         .circle {
-            background-color: $brand-primary;
+            background-color: var(--brand-primary);
         }
     }
 }
@@ -37,14 +37,14 @@
 .badge--in-use {
     max-width: fit-content;
     height: auto;
-    padding-left: $spacing-smaller;
-    padding-right: $spacing-smaller;
-    border-radius: $border-radius-default;
+    padding-left: var(--spacing-smaller);
+    padding-right: var(--spacing-smaller);
+    border-radius: var(--border-radius-default);
     border: 1px solid var(--border-color-in-use);
     background-color: var(--background-color-in-use);
     .badge-text{
-        font-size: $font-size-small;
-        font-weight: $font-weight-semibold;
+        font-size: var(--font-size-small);
+        font-weight: var(--font-weight-semibold);
         text-transform: uppercase;
   }
 }
@@ -74,14 +74,14 @@
 
 .agent-badge--default {
   @extend .agent-badge;
-  background: $color-default-lighter;
-  border: 1px solid $color-default-dark;
+  background: var(--color-default-lighter);
+  border: 1px solid var(--color-default-dark);
 }
 
 .agent-badge--primary {
   @extend .agent-badge;
-  background: $color-primary-lighter;
-  border: 1px solid $color-primary-dark;
+  background: var(--color-primary-lighter);
+  border: 1px solid var(--color-primary-dark);
 }
 
 .convui-badge {
@@ -108,7 +108,7 @@
     border: 1px solid var(--color-light-red-5, #FB4A4C);
     background: var(--color-light-red-1, #FFE5E9);
     height: 24px;
-    padding: $spacing-smaller;
+    padding: var(--spacing-smaller);
     text-transform: uppercase;
 }
 
@@ -117,7 +117,7 @@
     border: 1px solid var(--color-light-green-5, #4FD84F);
     background: var(--color-light-green-1, #E1FAE1);
     height: 24px;
-    padding: $spacing-smaller;
+    padding: var(--spacing-smaller);
     text-transform: uppercase;
 }
 
@@ -126,7 +126,7 @@
     border: 1px solid var(--color-light-gray-5, #C1C3C8);
     background: var(--color-light-gray-1, #F7F7F7);
     height: 24px;
-    padding: $spacing-smaller;
+    padding: var(--spacing-smaller);
     text-transform: uppercase;
 }
 
@@ -141,14 +141,14 @@
     width: fit-content;
     align-items: flex-start;
     align-self: stretch;
-    padding: $spacing-smaller $spacing-small;
+    padding: var(--spacing-smaller) var(--spacing-small);
     border-radius: 1000px;
-    background: $gray-primary;
+    background: var(--gray-primary);
 
     .filter-item {
         display: flex;
         align-items: center;
-        gap: $spacing-smaller;    
+        gap: var(--spacing-smaller);    
         overflow: hidden;
     }
 

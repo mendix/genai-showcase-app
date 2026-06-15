@@ -4,12 +4,12 @@
 .chat-loading-wrapper {
     display: flex;
     justify-content: left;
-    padding: $spacing-small;
+    padding: var(--spacing-small);
     .loading-dot {
         border-radius: 100%;
         background-color: var(--font-color-default);
-        width: calc($font-size-default / 3);
-        height: calc($font-size-default / 3);
+        width: calc(var(--font-size-default) / 3);
+        height: calc(var(--font-size-default) / 3);
         &:nth-child(1) {
             animation: preloader 0.9s ease-in-out alternate infinite;
         }
@@ -34,7 +34,7 @@
     display: flex;
     flex: 1 1 0;
     flex-wrap: wrap;
-    padding: $spacing-larger;
+    padding: var(--spacing-larger);
     box-sizing: border-box;
 }
 
@@ -66,9 +66,9 @@
             ul > li {
                 padding: 0;
                 .btn-sm {
-                    margin-right: $spacing-smaller;
+                    margin-right: var(--spacing-smaller);
                     max-height: unset;
-                    padding: $spacing-smallest $spacing-small;
+                    padding: var(--spacing-smallest) var(--spacing-small);
                 }
             }
         }
@@ -87,21 +87,21 @@
     flex-flow: row !important;
     justify-content: center !important;
     transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-    color: $form-input-color;
-    border: 1px solid $form-input-border-color;
-    border-radius: $spacing-small;
-    padding: $spacing-small;
+    color: var(--form-input-color);
+    border: 1px solid var(--form-input-border-color);
+    border-radius: var(--spacing-small);
+    padding: var(--spacing-small);
 
     .form-group {
         position: relative;
         width: 100%;
-        margin-bottom: $spacing-large;
+        margin-bottom: var(--spacing-large);
         padding: 0 !important;
 
         .form-control {
             width: 100%;
-            max-height: --chat-input-max-height;
-            padding: 0 0 $spacing-medium 0 !important;
+            max-height: var(--chat-input-max-height);
+            padding: 0 0 var(--spacing-medium) 0 !important;
             overflow: auto;
             border: none !important;
             box-shadow: none !important;
@@ -126,7 +126,7 @@
         right: 0;
         flex-flow: row !important;
         justify-content: flex-end !important;
-        padding: $spacing-small;
+        padding: var(--spacing-small);
 
         .send-btn {
             right: calc(58px / 2 - var(--send-btn-size) / 2);
@@ -163,13 +163,13 @@
     .chat-message-card {
         background: var(--chat-bubble-assistant-background);
         border-radius: 8px;
-        border: 1px solid $border-color-default;
+        border: 1px solid var(--border-color-default);
         margin: 0 10% 0 0;
-        padding: $spacing-small;
+        padding: var(--spacing-small);
         padding-bottom: 0px;
     }     
     &--assistant {
-        margin-top: $spacing-small;
+        margin-top: var(--spacing-small);
     }
 
     &--user {
@@ -204,7 +204,7 @@
 }
 
 .chat-history-active {
-    border-left: 3px solid $brand-primary;
+    border-left: 3px solid var(--brand-primary);
     font-weight: bold;
 }
 
@@ -224,7 +224,7 @@
         margin-top: 100%;
         .form-group{
             .form-control{
-                background-color: $form-input-bg-disabled;
+                background-color: var(--form-input-bg-disabled);
                 opacity: 1;
                 cursor: not-allowed;
                 pointer-events: none;
@@ -243,16 +243,17 @@
 
 
 .tool-message {
-    border-radius: $spacing-small; 
+    border-radius: var(--spacing-small); 
     border: 0px solid;
     overflow: hidden;
-    padding: 12px $spacing-medium;
+    padding: 12px var(--spacing-medium);
     background-color: var(--chat-bg-light);
-    color: rgba($font-color-header, 0.7);
-    font-weight: $font-weight-normal;
-    margin-bottom: $spacing-small;
+    color: var(--font-color-header);
+    opacity: 0.7;
+    font-weight: var(--font-weight-normal);
+    margin-bottom: var(--spacing-small);
     .tool-title {
-        font-weight: $font-weight-semibold;
+        font-weight: var(--font-weight-semibold);
         color: #0A1324B2;
         padding: 0;
         display: block;
@@ -264,23 +265,23 @@
     }
 
     .tool-details{
-        padding-top: $spacing-small;
+        padding-top: var(--spacing-small);
 
         .btn-small {
-            height: $spacing-larger;
+            height: var(--spacing-larger);
             padding: 5px 8px;
         }
         .btn-default {
             border: 0;
             background-color: transparent;
-            color: $font-color-default;
+            color: var(--font-color-default);
             &:hover {
-                background-color: $gray-light;
+                background-color: var(--gray-light);
             } 
         }
         a.mx-link {
-            color: $font-color-default;
-            padding: $spacing-small;
+            color: var(--font-color-default);
+            padding: var(--spacing-small);
         p {
             font-weight: 400;
         }
@@ -291,10 +292,10 @@
 
     .reject-button{
         background-color: transparent;
-        color: $font-color-default;
+        color: var(--font-color-default);
         border: none;
         &:hover {
-            background-color: $btn-default-bg-hover;
+            background-color: var(--btn-default-bg-hover);
             }
         }    
     }

@@ -2,15 +2,15 @@
 
 /* Custom Alert */
 .alert-danger-text {
-  margin-bottom: $spacing-large;
+  margin-bottom: var(--spacing-large);
 
   .alert-circle-filled {
     width: 14px;
-    margin-right: $spacing-smaller;
+    margin-right: var(--spacing-smaller);
   }
 
   .alert-text {
-    color: $brand-danger;
+    color: var(--brand-danger);
   }
 }
 

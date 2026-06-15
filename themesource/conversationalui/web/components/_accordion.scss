@@ -13,14 +13,14 @@
                     &:hover,
                     &:focus,
                     &:active {
-                        color: $font-color-default;
+                        color: var(--font-color-default);
                         background: transparent;
                     }
                 }
                 .widget-accordion-group-header-button-icon {
                     align-self: left;
                     display: inline-flex;
-                    fill: $font-color-default;
+                    fill: var(--font-color-default);
                 }
             }      
         }
@@ -37,8 +37,6 @@
 ////////////////////////////////////////////////////////////////////
 .accordion-tool-calls {
     width: 100%;
-    //margin-bottom: $spacing-small;
-    //padding-top: $spacing-smaller;
     .widget-accordion-group{
         background: transparent;
         border-bottom: none;
@@ -46,11 +44,11 @@
             .widget-accordion-group-header-button {
                 display: inline-flex;
                 background: transparent;
-                padding: $spacing-smaller;
+                padding: var(--spacing-smaller);
                 width: 100%;
                 .tool-title {
-                    font-weight: $font-weight-normal;
-                    color: $font-color-header;
+                    font-weight: var(--font-weight-normal);
+                    color: var(--font-color-header);
                 }
                 .mx-image-viewer {
                     width: auto;
@@ -69,7 +67,7 @@
                 .widget-accordion-group-header-button-icon {
                     align-self: left;
                     display: inline-flex;
-                    fill: $font-color-default;
+                    fill: var(--font-color-default);
                 }
             }      
         }
@@ -77,14 +75,14 @@
             .widget-accordion-group-content {
                 padding-left: 0px;
                 padding-right: 0px;
-                padding-bottom: $spacing-smaller;
-                color: $font-weight-normal;
+                padding-bottom: var(--spacing-smaller);
+                color: var(--font-weight-normal);
                 font-weight: 400;
                 opacity: 60%;
                 .card {
                     padding: 8px 16px;
                     margin-bottom: 0;
-                    border-radius: $spacing-smaller;
+                    border-radius: var(--spacing-smaller);
                 }
             }
         }

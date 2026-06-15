@@ -22,6 +22,6 @@
 .icon-badge-secondary {
     background-color: #F7E0FF;
     color: #AB19DB;
-    padding: $spacing-small;
-    border-radius: $spacing-small;
+    padding: var(--spacing-small);
+    border-radius: var(--spacing-small);
 }

@@ -42,29 +42,29 @@
     // Refactored from: .btn-border-primary
     // Now uses atlas_core pattern: .btn-primary.btn-bordered
     &.btn-primary.btn-bordered {
-        color: $brand-primary;
-        border: 1px solid $brand-primary;
+        color: var(--brand-primary);
+        border: 1px solid var(--brand-primary);
         background-color: transparent;
 
         &.disabled {
             background-color: transparent;
-            border: 1px solid $brand-primary;
+            border: 1px solid var(--brand-primary);
             cursor: default;
         }
 
         &:hover,
         &:active,
         &:focus {
-            color: $btn-primary-color;
-            background-color: $brand-primary;
-            border: 1px solid $brand-primary;
+            color: var(--btn-primary-color);
+            background-color: var(--brand-primary);
+            border: 1px solid var(--brand-primary);
         }
     }
 
     // Text-style buttons (link-like but with hover background)
     // Consolidated from: .btn-text-default, .btn-without-border
     &.btn-text {
-        color: $font-color-default;
+        color: var(--font-color-default);
         border: 1px solid transparent;
         background-color: transparent;
 
@@ -81,22 +81,22 @@
         &:hover,
         &:active,
         &:focus {
-            color: $font-color-default;
-            background-color: $btn-default-bg-hover;
+            color: var(--font-color-default);
+            background-color: var(--btn-default-bg-hover);
             border: 1px solid transparent;
         }
 
         // Danger variant
         // Consolidated from: .btn-text-danger, .btn-without-border-red
         &.btn-text-danger {
-            color: $brand-danger;
+            color: var(--brand-danger);
 
             &:hover,
             &:active,
             &:focus {
-                color: $brand-danger;
-                background-color: $btn-default-bg-hover;
-                border: 1px solid $btn-default-bg-hover;
+                color: var(--brand-danger);
+                background-color: var(--btn-default-bg-hover);
+                border: 1px solid var(--btn-default-bg-hover);
             }
         }
     }
@@ -179,30 +179,30 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: $line-height-base;
-    border-radius: $btn-border-radius;
+    height: var(--line-height-base);
+    border-radius: var(--btn-border-radius);
 
     .btn-wrapper {
-        margin-left: $spacing-small;
+        margin-left: var(--spacing-small);
         min-width: 8em;
         display: flex;
         align-items: center;
-        padding: $spacing-smaller 0;
+        padding: var(--spacing-smaller) 0;
         
     }
 
     .mx-text {
         margin: 0;
-        line-height: $line-height-base;
+        line-height: var(--line-height-base);
     }
 
     .mx-button.btn {
         transition: all 0.2s ease-in-out;
         border: none;
         background-color: transparent;
-        color: $font-color-default;
+        color: var(--font-color-default);
         padding: 0 0;
-        height: $font-size-small;
+        height: var(--font-size-small);
         display: flex;
         align-items: center;
 

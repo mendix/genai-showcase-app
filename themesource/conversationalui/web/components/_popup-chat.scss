@@ -46,14 +46,14 @@
         color: transparent;
         &::after {
             content: "-";
-            color: $header-text-color;
+            color: var(--header-text-color);
         }
         
     }
     .modal-body {
         height: calc(100% - 50px);
         overflow: hidden;
-        padding: $spacing-medium;
+        padding: var(--spacing-medium);
         .mx-placeholder {
             height: 100%;
         }

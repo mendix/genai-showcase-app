@@ -7,8 +7,8 @@
     justify-content: flex-start;
     width: 91vw;
     max-width: 1800px;
-    margin-top: $spacing-small;
-    margin-bottom: $spacing-smaller;
+    margin-top: var(--spacing-small);
+    margin-bottom: var(--spacing-smaller);
     z-index: 10;
 }
 
@@ -28,30 +28,30 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: $line-height-base;
-    border-radius: $btn-border-radius;
+    height: var(--line-height-base);
+    border-radius: var(--btn-border-radius);
     transition: all 0.2s ease-in-out;
 
     .btn-wrapper {
         min-width: 8em;
         display: flex;
         align-items: center;
-        padding: $spacing-smaller 0;
-        margin-left: $spacing-small;
+        padding: var(--spacing-smaller) 0;
+        margin-left: var(--spacing-small);
     }
 
     .convui-breadcrumb-text {
         margin: 0;
-        line-height: $line-height-base;
+        line-height: var(--line-height-base);
     }
 
     .mx-button.btn {
         transition: all 0.2s ease-in-out;
         border: none;
         background-color: transparent;
-        color: $font-color-default;
+        color: var(--font-color-default);
         padding: 0;
-        height: $font-size-small;
+        height: var(--font-size-small);
         display: flex;
         align-items: center;
 

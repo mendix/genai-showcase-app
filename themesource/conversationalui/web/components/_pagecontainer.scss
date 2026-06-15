@@ -64,8 +64,8 @@
       }
 
     .card {
-      border-radius: $spacing-medium;
-      border: 1px solid $gray-primary !important;
+      border-radius: var(--spacing-medium);
+      border: 1px solid var(--gray-primary) !important;
       overflow: visible;          
       display: flex;
       flex-direction: column;
@@ -73,7 +73,7 @@
       height: 100%;      
       box-sizing: border-box;
       margin-bottom: 0;
-      padding: $spacing-large;
+      padding: var(--spacing-large);
       padding-bottom: 0;
 
       * {
@@ -90,13 +90,13 @@
       overflow-x: auto;
       display: flex;
       flex-direction: column;
-      margin-bottom: $spacing-medium;
+      margin-bottom: var(--spacing-medium);
       margin-top: 0;
     }
 
     .card-header {
       flex-direction: row;
-      margin-bottom: $spacing-small;
+      margin-bottom: var(--spacing-small);
     }
   }
 }
@@ -122,10 +122,10 @@
   display: flex;
   align-items: flex-start;
   align-content: flex-start;
-  gap: $spacing-medium $spacing-larger;
+  gap: var(--spacing-medium) var(--spacing-larger);
   align-self: stretch;
   flex-wrap: wrap;
-  padding: $spacing-medium 0;
+  padding: var(--spacing-medium) 0;
 } 
 
 .text-container-clickable {
@@ -133,12 +133,12 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 0 12px 12px !important;
-  border-radius: $border-radius-default;
-  border: 1px solid $gray-primary;
+  border-radius: var(--border-radius-default);
+  border: 1px solid var(--gray-primary);
   transition: all 0.3s ease-in-out;
   cursor: pointer;
-  margin-top: $spacing-smaller;
-  margin-bottom: $spacing-medium;
+  margin-top: var(--spacing-smaller);
+  margin-bottom: var(--spacing-medium);
   
   p {
     margin-bottom: 0;
@@ -154,12 +154,12 @@
     word-break: break-word;
     overflow-wrap: anywhere;
     white-space: normal;
-    margin-bottom: $spacing-medium;
+    margin-bottom: var(--spacing-medium);
   }
 
   .btn-wrapper {
     min-width: 3em;
-    margin-left: $spacing-small;
+    margin-left: var(--spacing-small);
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -169,7 +169,7 @@
     transition: all 0.2s ease-in-out;
     border: none;
     background-color: transparent;
-    color: $font-color-default;
+    color: var(--font-color-default);
     height: 32px;
     visibility: hidden;
     cursor: pointer;
@@ -180,7 +180,7 @@
   }
 
   &:hover {
-    background-color: $btn-default-bg-hover;
+    background-color: var(--btn-default-bg-hover);
 
     .btn {
       visibility: visible;
@@ -200,11 +200,11 @@
   align-items: center;
   justify-content: space-between;
   height: 44px;
-  padding: 0 $spacing-small !important;
-  border-radius: $border-radius-default;
-  border: 1px solid $gray-primary;
-  margin: $spacing-smaller 0;
-  background-color: $gray-lighter;
+  padding: 0 var(--spacing-small) !important;
+  border-radius: var(--border-radius-default);
+  border: 1px solid var(--gray-primary);
+  margin: var(--spacing-smaller) 0;
+  background-color: var(--gray-lighter);
 }
 
 
@@ -213,8 +213,8 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  padding: $spacing-large;
-  padding-top: $spacing-small;
+  padding: var(--spacing-large);
+  padding-top: var(--spacing-small);
   align-self: stretch;
   margin: 0;
   text-align: left;
@@ -265,10 +265,10 @@
         .card {
             height: 100%;
             margin-bottom: 0;
-            border-radius: $spacing-medium;
-            border: 1px solid $gray-primary;
+            border-radius: var(--spacing-medium);
+            border: 1px solid var(--gray-primary);
             box-sizing: border-box;
-            padding: $spacing-large;
+            padding: var(--spacing-large);
         }
 
        .card-content-scroll {
@@ -301,8 +301,8 @@
     flex-wrap: wrap;
     justify-content: center;
     margin: auto;
-    gap: $spacing-large;
-    padding: $spacing-medium $spacing-larger $spacing-medium $spacing-larger;
+    gap: var(--spacing-large);
+    padding: var(--spacing-medium) var(--spacing-large)r var(--spacing-medium) var(--spacing-large)r;
     overflow: hidden;
     box-sizing: border-box;
 
@@ -315,14 +315,14 @@
     .agent-page-container::after {
         content: '';
         display: block;
-        height: $spacing-larger;
+        height: var(--spacing-larger);
         flex-shrink: 0;
     }
 
     .card {
         width: 100%;
-        border-radius: $spacing-medium;
-        border: 1px solid $gray-primary;
+        border-radius: var(--spacing-medium);
+        border: 1px solid var(--gray-primary);
         overflow: hidden;            
         display: flex;
         flex-direction: column;
@@ -340,8 +340,8 @@
         align-items: flex-start;
         align-self: stretch;
         border-bottom: 1px solid #E7E7E9;
-        margin-top: $spacing-medium;
-        margin-bottom: $spacing-medium;
+        margin-top: var(--spacing-medium);
+        margin-bottom: var(--spacing-medium);
     }
 
     .title-alignment {
@@ -391,10 +391,10 @@
         z-index: 100;
         width: 30%;
         max-width: 472px;
-        max-height: $page-custom-height;
+        max-height: var(--page-custom-height);
         display: flex;
         flex-direction: column;
-        padding-top: $size-28;
+        padding-top: var(--size-28);
     }
 
     .chat-container-agent {
@@ -403,19 +403,19 @@
         flex-direction: column;
         height: 100%;
         border-left: 1px solid var(--table-border-separator-color);
-        padding-top: $spacing-medium;
+        padding-top: var(--spacing-medium);
         margin-bottom: unset;   
         padding-left: unset;
         padding-right: unset;
 
         .chat-bubble-wrapper {
             .chat-message-card {
-                background: $bg-color-secondary;
+                background: var(--bg-color-secondary);
                 border-radius: 8px;
-                border: 0px solid $border-color-default;
+                border: 0px solid var(--border-color-default);
                 .mx-listview {
                     ul > li {
-                        padding: $spacing-smaller 0;
+                        padding: var(--spacing-smaller) 0;
                     }
                 }
             }
@@ -423,9 +423,9 @@
             &--user {
                 align-items: end;
                 .chat-message-card {
-                    padding: $spacing-small $spacing-medium;
-                    background: $gray-lighter;
-                    border: 1px solid $gray-lighter;
+                    padding: var(--spacing-small) var(--spacing-medium);
+                    background: var(--gray-lighter);
+                    border: 1px solid var(--gray-lighter);
                     margin: 0 0 0 10%;
                     width: auto;
                 }
@@ -452,7 +452,7 @@
         flex-flow: row !important;
         justify-content: flex-start !important;
         margin-top: 0;
-        margin-bottom: $spacing-small;
+        margin-bottom: var(--spacing-small);
         z-index: 10;
         span {
             font-size: 12px;
@@ -504,18 +504,18 @@
         display: flex;
         flex-direction: row;
         border-bottom: 1px solid var(--table-border-separator-color);
-        padding-right: $spacing-small;
+        padding-right: var(--spacing-small);
         height: fit-content;
 
         .header-text {
             flex-direction: column;
-            margin-left: $spacing-medium;
-            padding-right: $spacing-small;
-            padding-bottom: $spacing-small;
+            margin-left: var(--spacing-medium);
+            padding-right: var(--spacing-small);
+            padding-bottom: var(--spacing-small);
         }
 
         .icon-area {
-            margin-top: $spacing-small;
+            margin-top: var(--spacing-small);
             margin-left: auto;
             max-width: 75px;
 
@@ -528,10 +528,10 @@
             }
 
             .close-icon {
-                border-left: 2px solid $gray-primary;
-                padding-left: $spacing-small;
-                margin-right: $spacing-small;
-                margin-left: $spacing-small;
+                border-left: 2px solid var(--gray-primary);
+                padding-left: var(--spacing-small);
+                margin-right: var(--spacing-small);
+                margin-left: var(--spacing-small);
                 height: fit-content;
 
                 img {
@@ -548,7 +548,7 @@
         overflow-y: auto;
         display: flex;
         flex-direction: column;
-        padding: 0 $spacing-medium;
+        padding: 0 var(--spacing-medium);
     }
 
     .card-content {
