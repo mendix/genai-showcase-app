@@ -451,7 +451,7 @@
         align-items: center !important;
         flex-flow: row !important;
         justify-content: flex-start !important;
-        margin-top: 0;
+        margin-top: var(--spacing-small);
         margin-bottom: var(--spacing-small);
         z-index: 10;
         span {
