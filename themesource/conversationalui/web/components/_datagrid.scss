@@ -1,11 +1,19 @@
 @use '../../../../theme/web/custom-variables' as *;
 @use '../traceability-variables.scss';
 
-//fix for datagrid scrollbar caused by popupmenu
+//Prevents scrollbars when a datagrid has a popupmenu inside.
+//Also fixes alignment for image viewers.
 .datagrid--no-scroll {
     .widget-datagrid-content {
         overflow-y: visible;
         overflow-x: visible;
+        .td {
+            .td-custom-content {
+                .mx-image-viewer {
+                    width: auto;
+                }
+            }
+        }
     }
 }
 
