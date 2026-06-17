@@ -923,7 +923,7 @@ public class Converse extends UserAction<IMendixObject>
 	private Document jsonNodeToDocument(JsonNode node) {
 		if (node.isObject()) {
 			Document.MapBuilder mapBuilder = Document.mapBuilder();
-			node.fields().forEachRemaining(entry -> {
+			node.properties().forEach(entry -> {
 				String key = entry.getKey();
 				JsonNode value = entry.getValue();
 				
