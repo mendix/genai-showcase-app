@@ -3,22 +3,31 @@
 
 /* tooltip basic styling */
 .agent-tooltip {
+    .widget-tooltip-trigger {
+        .info-icon {
+            img {
+                margin: 0;
+            }
+        }
+    }
     .widget-tooltip-content {
-        position: relative;
         z-index: 1000;
-        text-align: unset;
-        word-break: break-word;
         background-color: white;
-        border-radius: 4px;
         color: var(--gray-darker);
-        font-size: 12px;
-        align-items: flex-start;
         align-self: stretch;
-        justify-content: space-between;
-        font-weight: 400;
+        padding: 16px;
+        word-break: break-word;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: normal;
         max-height: 48vh;
         line-height: 150% !important;
         text-align: left;
+        .mx-layoutgrid {
+            &:before, &:after{
+                display: none;
+            } 
+        }
         .widget-tooltip-arrow-left {
             left: -4px;
         }
@@ -32,7 +41,7 @@
 .agent-tooltip-w330 {
     .widget-tooltip-content {
         width: 330px;
-        padding: 8px 15px 0px 15px;
+        //padding: 8px 15px 0px 15px;
     }
 }
 
