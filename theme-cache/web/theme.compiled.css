@@ -28347,7 +28347,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   flex-shrink: 0;
 }
 
-.img--22-22 {
+.img--22-22 img {
   width: 22px;
   height: 22px;
   max-width: 22px;
@@ -28550,6 +28550,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 8px 16px;
   margin-bottom: 0;
   border-radius: 4px;
+  border: 1px solid #e7e7e9;
 }
 
 /* Custom Alert */
@@ -29354,6 +29355,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   overflow-y: visible;
   overflow-x: visible;
 }
+.datagrid--no-scroll .widget-datagrid-content .td .td-custom-content .mx-image-viewer {
+  width: auto;
+}
 
 .datagrid--fixed-row-height .table .td {
   height: 58px;
@@ -29485,6 +29489,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 0;
+}
+.combobox-selection .item-selection .item-title {
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .combobox-selection .widget-combobox {
   min-height: 20px;
@@ -29894,6 +29903,10 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .disabled.list {
   cursor: unset;
+}
+
+.listview-stylingless > ul {
+  margin-bottom: 0;
 }
 
 .convui-pagecontainer {
@@ -31179,6 +31192,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border: 1px solid #d1d5db;
   cursor: pointer;
   transition: all 0.2s ease;
+  padding: 4px 8px;
 }
 
 .widget-combobox-selected-items,
@@ -31212,6 +31226,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .model-selection .mx-image-viewer {
   width: fit-content;
   margin-right: 8px;
+}
+.item-selection .mx-image-viewer img,
+.model-selection .mx-image-viewer img {
+  min-width: 24px;
+  min-height: 24px;
 }
 
 .item-selection-content {
@@ -31317,6 +31336,21 @@ input[type=checkbox].three-state-checkbox + .control-label {
   -webkit-box-orient: vertical;
 }
 
+.img-display--24 img {
+  width: 24px;
+  height: 24px;
+}
+
+.popupmenu-custom-item-container-mxgenai {
+  padding: 8px;
+  margin-top: none;
+  margin-bottom: none;
+  align-items: right !important;
+}
+.popupmenu-custom-item-container-mxgenai a:focus {
+  color: #264ae5;
+}
+
 .info-tooltip .widget-tooltip-content {
   position: relative;
   z-index: 1000;
@@ -31345,6 +31379,31 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .info-icon img {
   height: 16px;
   width: 16px;
+}
+
+.mxgenai-listview-horizontal.mx-listview > ul {
+  display: contents;
+  margin-bottom: none;
+}
+.mxgenai-listview-horizontal.mx-listview > ul > li {
+  display: inline-block;
+  padding: 4px;
+}
+.mxgenai-listview-horizontal.mx-listview > ul > li .mx-dataview-content > button {
+  display: -webkit-box;
+  word-break: break-word;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+  text-wrap: wrap;
+  padding: 5px 10px;
+  line-height: 2;
+}
+.mxgenai-listview-horizontal.mx-listview > ul > li:hover {
+  background-color: transparent;
 }
 
 .icon-info-wrapper {

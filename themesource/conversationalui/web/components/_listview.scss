@@ -242,3 +242,9 @@
 .disabled.list {
     cursor: unset;
 }
+
+.listview-stylingless {
+    &> ul {
+        margin-bottom: 0;
+    }
+}
