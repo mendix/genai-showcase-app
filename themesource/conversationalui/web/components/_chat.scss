@@ -170,6 +170,10 @@
     }     
     &--assistant {
         margin-top: var(--spacing-small);
+        width: 100%;
+        div {
+            width: inherit;
+        }
     }
 
     &--user {
