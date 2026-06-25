@@ -16,6 +16,9 @@
     position: relative;
     width: 100%;
     max-width: 100%;
+    .widget-combobox-input-container-disabled {
+        border: 0;
+    }
 }
 
 .widget-combobox-input-container {
@@ -26,6 +29,7 @@
     border: 1px solid #d1d5db;
     cursor: pointer;
     transition: all 0.2s ease;
+
 }
 
 .widget-combobox-selected-items,
