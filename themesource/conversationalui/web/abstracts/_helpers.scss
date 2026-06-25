@@ -329,7 +329,7 @@
 }
 
 .input-label-width {
-  min-width: 11vw;
+  min-width: clamp(150px, 5vw, 7vw);
 }
 
 .input-label-grid {
