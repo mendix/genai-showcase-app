@@ -31246,7 +31246,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border: 1px solid #d1d5db;
   cursor: pointer;
   transition: all 0.2s ease;
-  padding: 4px 8px;
 }
 
 .widget-combobox-selected-items,
