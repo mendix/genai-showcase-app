@@ -1,16 +1,16 @@
-import { r as c, R as a, ap as A, af as O, ag as q, a1 as C, ao as F, ah as G } from "./formelements-DgWWXRMR.js";
-import { c as H } from "./index-CE9RqUwp.js";
-import { createStudioProLogger as W } from "./logger-Bof2Evv1.js";
-import { g as _, h as $, a as z } from "./customBlobDocumentUtils-Dwvjb_jQ.js";
-import { _ as J, I as Q } from "./ComboBox-tmgYuUfm.js";
-import { u as U, D as X } from "./DialogFooter-CX5uFK7U.js";
-import { T as Y, a as Z } from "./toolHandlers-Cs_LMdFH.js";
-import { T as I } from "./TextInputLabeled-DcUYd1Xh.js";
-import { T as P } from "./TextInputWithButton-H-kPhdc5.js";
-import { N as V, k as ee, O as te } from "./index-Cosn4mN0.js";
-import { g as ie } from "./mxCloudGenAIUtils-BhrK-gu0.js";
-import { h } from "./knowledgebaseToolHandlers-CvlCV-OF.js";
-const ae = {
+import { r as c, R as a, ap as L, af as K, ag as A, a1 as C, ao as O, ah as q } from "./formelements-xoDBPsLY.js";
+import { c as F } from "./index-BFTG2KyR.js";
+import { createStudioProLogger as G } from "./logger-gMbuSAUF.js";
+import { g as H, h as W, a as _ } from "./customBlobDocumentUtils-DRHCWWx0.js";
+import { _ as $, I as z } from "./ComboBox-CdZpypF8.js";
+import { u as J, D as Q } from "./DialogFooter-CPT3q8ld.js";
+import { T as U, a as X } from "./toolHandlers-CWI74-BB.js";
+import { T as I } from "./TextInputLabeled-BZ-d3CSA.js";
+import { T as Y } from "./TextInputWithButton-CJr1wTWV.js";
+import { N as V, k as Z, O as P } from "./index-CZgjY607.js";
+import { g as ee } from "./mxCloudGenAIUtils-klha5VC-.js";
+import { h } from "./knowledgebaseToolHandlers-o9yeUkRo.js";
+const te = {
   isValidName: !0,
   isValidDescription: !0,
   isValidDocument: !0,
@@ -18,25 +18,24 @@ const ae = {
   isValidCollectionIdentifier: !0,
   isValidMaxResults: !0,
   isValidMinSimilarity: !0
-}, ne = {
+}, ie = {
   name: "isValidName",
   description: "isValidDescription",
   document: "isValidDocument",
   collectionIdentifier: "isValidCollectionIdentifier",
   maxResults: "isValidMaxResults",
   minSimilarity: "isValidMinSimilarity"
-}, oe = ({
-  initialTool: s,
+}, ae = ({
+  initialTool: o,
   studioPro: i,
   agent: n,
   onClose: p
 }) => {
-  var M, E;
-  const [t, g] = c.useState(s || V()), [r, f] = c.useState(ae), [v, d] = c.useState([]), [S, N] = c.useState(
-    ((M = (s || V()).maxResults) == null ? void 0 : M.toString()) ?? ""
+  const [t, g] = c.useState(o || V()), [r, f] = c.useState(te), [y, d] = c.useState([]), [v, N] = c.useState(
+    (o || V()).maxResults?.toString() ?? ""
   ), [k, R] = c.useState(
-    ((E = (s || V()).minSimilarity) == null ? void 0 : E.toString()) ?? ""
-  ), y = c.useCallback(
+    (o || V()).minSimilarity?.toString() ?? ""
+  ), S = c.useCallback(
     async (e) => ({
       isValidName: await h("name", e, n, i),
       isValidDescription: await h(
@@ -69,35 +68,35 @@ const ae = {
     [i, n]
   );
   c.useEffect(() => {
-    t.document ? _(i, t.document).then((e) => {
+    t.document ? H(i, t.document).then((e) => {
       if (!e || e.excluded) {
         d([]);
         return;
       }
-      const o = e.contents;
-      return ie(i, o)();
+      const s = e.contents;
+      return ee(i, s)();
     }).then((e) => {
       d(!e || typeof e == "string" ? [] : e);
     }).catch(() => d([])) : d([]);
   }, [t.document, i]), c.useEffect(() => {
-    s && (N(s.maxResults !== void 0 ? s.maxResults.toString() : ""), R(s.minSimilarity !== void 0 ? s.minSimilarity.toString() : ""), y(s).then((e) => {
+    o && (N(o.maxResults !== void 0 ? o.maxResults.toString() : ""), R(o.minSimilarity !== void 0 ? o.minSimilarity.toString() : ""), S(o).then((e) => {
       f(e);
     }));
-  }, [s, y]);
+  }, [o, S]);
   const w = c.useCallback(
-    async (e, o) => {
-      const m = ne[e];
+    async (e, s) => {
+      const m = ie[e];
       if (m && r[m] !== !0) {
-        const l = await h(e, o, n, i);
+        const l = await h(e, s, n, i);
         f((u) => ({ ...u, [m]: l }));
       }
     },
     [r, n, i]
-  ), T = (e, o) => {
-    o && x(e, (o == null ? void 0 : o.toString()) ?? "");
-  }, x = (e, o) => {
+  ), M = (e, s) => {
+    s && x(e, s?.toString() ?? "");
+  }, x = (e, s) => {
     if (e === "maxResults") {
-      const l = String(o);
+      const l = String(s);
       if (!/^\d*$/.test(l))
         return;
       N(l);
@@ -109,7 +108,7 @@ const ae = {
       return;
     }
     if (e === "minSimilarity") {
-      const l = String(o);
+      const l = String(s);
       if (!/^\d*\.?\d*$/.test(l))
         return;
       R(l);
@@ -120,49 +119,49 @@ const ae = {
       g(b), w(e, b);
       return;
     }
-    const m = { ...t, [e]: o };
+    const m = { ...t, [e]: s };
     g(m), w(e, m);
-  }, B = async () => {
-    const e = await Z(i, t.document.documentId, te);
+  }, E = async () => {
+    const e = await X(i, t.document.documentId, P);
     if (e) {
-      const o = { ...t, document: e };
-      g(o), w("document", o);
+      const s = { ...t, document: e };
+      g(s), w("document", s);
     }
-  }, L = () => {
-    $(i, t.document);
+  }, T = () => {
+    W(i, t.document);
   }, j = async () => {
-    const e = await y(t);
+    const e = await S(t);
     f(e), Object.values(e).some((m) => m !== !0) || p(t);
   }, D = () => {
     p(null);
   };
-  U(D, j);
-  const K = () => {
+  J(D, j);
+  const B = () => {
     window.open(
       "https://docs.mendix.com/appstore/modules/genai/mx-cloud-genai/MxGenAI-connector/#about-knowledge-bases",
       "_blank",
       "noopener,noreferrer"
     );
   };
-  return /* @__PURE__ */ a.jsxs(A, { children: [
-    /* @__PURE__ */ a.jsx(O, { children: /* @__PURE__ */ a.jsxs(q, { children: [
+  return /* @__PURE__ */ a.jsxs(L, { children: [
+    /* @__PURE__ */ a.jsx(K, { children: /* @__PURE__ */ a.jsxs(A, { children: [
       /* @__PURE__ */ a.jsxs(C, { label: "General", children: [
         /* @__PURE__ */ a.jsx(
-          P,
+          Y,
           {
             ariaLabel: "Knowledge base",
             label: "Knowledge base",
             value: t.document.qualifiedName,
-            icon: t.document.qualifiedName ? ee : void 0,
+            icon: t.document.qualifiedName ? Z : void 0,
             buttonCaption: "Select...",
-            onClick: B,
+            onClick: E,
             validate: () => r.isValidDocument,
             buttonCaptionSecondary: t.document.qualifiedName ? "Show" : void 0,
-            onClickSecondary: t.document.qualifiedName ? L : void 0
+            onClickSecondary: t.document.qualifiedName ? T : void 0
           }
         ),
         /* @__PURE__ */ a.jsx(
-          J,
+          $,
           {
             "aria-label": "Collection identifier",
             label: "Collection",
@@ -174,9 +173,9 @@ const ae = {
             onInputChange: (e) => x("collectionIdentifier", e),
             allowsEmptyCollection: !0,
             onChange: (e) => {
-              T("collectionIdentifier", e);
+              M("collectionIdentifier", e);
             },
-            children: v.map((e) => /* @__PURE__ */ a.jsx(Q, { id: e.name, children: e.name }, e.name))
+            children: y.map((e) => /* @__PURE__ */ a.jsx(z, { id: e.name, children: e.name }, e.name))
           }
         )
       ] }),
@@ -192,7 +191,7 @@ const ae = {
           }
         ),
         /* @__PURE__ */ a.jsx(
-          Y,
+          U,
           {
             label: "Description",
             ariaLabel: "Description",
@@ -208,7 +207,7 @@ const ae = {
           {
             label: "Max results",
             ariaLabel: "Max number of results",
-            value: S,
+            value: v,
             onChange: (e) => x("maxResults", e),
             validate: () => r.isValidMaxResults,
             description: "This is the highest number of data chunks that can be returned in a single retrieve. If left empty, many records could be retrieved, so it's recommended to set this number (to e.g. 5), or set the minimum similarity in the next field, or to set both."
@@ -227,23 +226,23 @@ const ae = {
         )
       ] })
     ] }) }),
-    /* @__PURE__ */ a.jsx(X, { onOk: j, onCancel: D, onHelp: K })
+    /* @__PURE__ */ a.jsx(Q, { onOk: j, onCancel: D, onHelp: B })
   ] });
-}, se = ({ studioPro: s, initialTool: i, agent: n, onClose: p }) => /* @__PURE__ */ a.jsx(G, { studioPro: s, children: /* @__PURE__ */ a.jsx(oe, { initialTool: i, studioPro: s, agent: n, onClose: p }) }), we = {
-  async loaded(s, i) {
-    const n = H(s), p = W(n);
+}, ne = ({ studioPro: o, initialTool: i, agent: n, onClose: p }) => /* @__PURE__ */ a.jsx(q, { studioPro: o, children: /* @__PURE__ */ a.jsx(ae, { initialTool: i, studioPro: o, agent: n, onClose: p }) }), xe = {
+  async loaded(o, i) {
+    const n = F(o), p = G(n);
     try {
       const t = document.getElementById("root");
       if (!t)
         throw new Error("Failed to find the root element");
-      const g = F.createRoot(t), r = await z(n, i.agentDocumentId);
+      const g = O.createRoot(t), r = await _(n, i.agentDocumentId);
       let f;
-      i.toolId && (f = (r.knowledgebaseTools || []).find((S) => S.id === i.toolId));
-      const v = (d) => {
+      i.toolId && (f = (r.knowledgebaseTools || []).find((v) => v.id === i.toolId));
+      const y = (d) => {
         n.ui.dialogs.closeWithResult(i.dialogId, d);
       };
       g.render(
-        /* @__PURE__ */ a.jsx(c.StrictMode, { children: /* @__PURE__ */ a.jsx(se, { studioPro: n, initialTool: f, agent: r, onClose: v }) })
+        /* @__PURE__ */ a.jsx(c.StrictMode, { children: /* @__PURE__ */ a.jsx(ne, { studioPro: n, initialTool: f, agent: r, onClose: y }) })
       );
     } catch (t) {
       throw p.error("Error editing agent knowledge base tool:", t), new Error("Error editing agent knowledge base tool:", t);
@@ -251,5 +250,5 @@ const ae = {
   }
 };
 export {
-  we as component
+  xe as component
 };
