@@ -1,9 +1,9 @@
-import { a7 as Iu, T as pd, r as De, R as pe, ak as md, ag as Ra, a1 as Jo, al as _d, am as yd, ah as gd, ae as vd, af as $d } from "./formelements-DgWWXRMR.js";
-import { u as wd, B as bd, T as Sd, c as Ed, C as kd } from "./TextWithIcon-D9gq9fS9.js";
+import { a7 as Iu, r as De, R as pe, ak as pd, ag as Ra, a1 as Jo, al as md, am as _d, ah as yd, ae as gd, af as vd } from "./formelements-DgWWXRMR.js";
+import { u as $d, B as wd, a as bd, T as Sd, c as Ed, C as kd } from "./TextWithIcon-BsB7aLN_.js";
 import { createStudioProLogger as Cu } from "./logger-Bof2Evv1.js";
-import { r as Pd, v as Td, C as Rd, D as Od, w as Id, f as Cd, t as Nd, x as jd, l as qd, y as zd } from "./index-ClN9e0Gp.js";
+import { q as Pd, u as Td, C as Rd, D as Od, v as Id, f as Cd, r as Nd, w as jd, l as qd, x as zd } from "./index-Cosn4mN0.js";
 import { m as Md } from "./useDebounceCallback-CQtp7E8l.js";
-import { v as Ad, C as rt, i as Dd, a as Ud, B as Vd } from "./ButtonWithLabel-DqyUFLpr.js";
+import { v as Ad, C as rt, i as Dd, a as Ud, B as Vd } from "./ButtonWithLabel-CwHlV4OE.js";
 import { T as Oa } from "./TextInputLabeled-DcUYd1Xh.js";
 import { T as Go } from "./TextInputWithButton-H-kPhdc5.js";
 import { n as Ld } from "./MicroflowIcon-D9CNADwL.js";
@@ -16360,10 +16360,7 @@ const jw = async (e, t, r, n) => {
     key: e,
     caption: e
   })
-), Lw = pd.div`
-    color: ${({ theme: e }) => e.colorsTextSecondaryDefault};
-    font-size: 10px;
-`, Fw = ({
+), Lw = ({
   loadedConsumedMCPService: e,
   studioPro: t,
   updateStudioProDocument: r
@@ -16417,7 +16414,7 @@ const jw = async (e, t, r, n) => {
   const S = (f) => {
     (n.endpoint && f.includes(n.endpoint.documentId) || f.includes("projectSettings")) && m("endpoint", n);
   };
-  wd({
+  $d({
     studioPro: t,
     dependentIds: [(q = n.endpoint) == null ? void 0 : q.documentId].filter((f) => !!f),
     watchProjectSettings: !0,
@@ -16468,7 +16465,7 @@ const jw = async (e, t, r, n) => {
     const f = await Aw(t, qd, b);
     f && h(f);
   }, _e = (f) => f.filter(([E]) => E.trim() !== ""), we = (f) => _e(f).map((E) => E[0]).join(", "), ee = Object.values(s).some((f) => f !== !0), qe = s.isValidEndpoint === rt.PrivateValue || s.isValidEndpoint === rt.EmptyValue, A = () => s.isValidEndpoint === !0 || s.isValidEndpoint === rt.PrivateValue || s.isValidEndpoint === rt.EmptyValue ? !0 : s.isValidEndpoint;
-  return /* @__PURE__ */ pe.jsxs(md, { children: [
+  return /* @__PURE__ */ pe.jsxs(pd, { children: [
     /* @__PURE__ */ pe.jsxs(Ra, { children: [
       /* @__PURE__ */ pe.jsxs(Jo, { label: "General", children: [
         /* @__PURE__ */ pe.jsx(
@@ -16482,7 +16479,7 @@ const jw = async (e, t, r, n) => {
           }
         ),
         /* @__PURE__ */ pe.jsx(
-          _d,
+          md,
           {
             label: "Documentation",
             "aria-label": "Documentation",
@@ -16508,7 +16505,7 @@ const jw = async (e, t, r, n) => {
           }
         ),
         qe && /* @__PURE__ */ pe.jsxs(Fd, { children: [
-          /* @__PURE__ */ pe.jsx(bd, { children: s.isValidEndpoint === rt.PrivateValue ? "Missing permissions" : "Invalid constant value" }),
+          /* @__PURE__ */ pe.jsx(wd, { children: s.isValidEndpoint === rt.PrivateValue ? "Missing permissions" : "Invalid constant value" }),
           /* @__PURE__ */ pe.jsx("div", { children: s.isValidEndpoint === rt.PrivateValue ? "Private constants require additional permissions for local use. Grant access via View > Extensions and reopen the current tab." : "In order to test your Consumed MCP Service locally, please set a valid value for the endpoint constant." })
         ] }),
         /* @__PURE__ */ pe.jsx(
@@ -16550,7 +16547,7 @@ const jw = async (e, t, r, n) => {
         )
       ] })
     ] }),
-    /* @__PURE__ */ pe.jsx(yd, { children: /* @__PURE__ */ pe.jsxs(Jo, { label: "MCP Tools Playground", children: [
+    /* @__PURE__ */ pe.jsx(_d, { children: /* @__PURE__ */ pe.jsxs(Jo, { label: "MCP Tools Playground", children: [
       /* @__PURE__ */ pe.jsx(Ra, { children: /* @__PURE__ */ pe.jsx(
         Go,
         {
@@ -16573,7 +16570,7 @@ const jw = async (e, t, r, n) => {
         }
       ),
       d && /* @__PURE__ */ pe.jsxs(pe.Fragment, { children: [
-        g && /* @__PURE__ */ pe.jsxs(Lw, { children: [
+        g && /* @__PURE__ */ pe.jsxs(bd, { children: [
           "Last updated: ",
           g.toLocaleString()
         ] }),
@@ -16603,8 +16600,8 @@ const jw = async (e, t, r, n) => {
       ] })
     ] }) })
   ] });
-}, Zw = zd(), Hw = ({ studioPro: e, documentId: t }) => {
-  const r = e.ui.messageBoxes, n = e.app.model.customBlobDocuments, [o, s] = De.useState(0), [a, i] = De.useState(!1), [c, d] = De.useState(Zw);
+}, Fw = zd(), Zw = ({ studioPro: e, documentId: t }) => {
+  const r = e.ui.messageBoxes, n = e.app.model.customBlobDocuments, [o, s] = De.useState(0), [a, i] = De.useState(!1), [c, d] = De.useState(Fw);
   return De.useEffect(() => {
     const l = (g) => {
       const { documents: $ } = g;
@@ -16623,10 +16620,10 @@ const jw = async (e, t, r, n) => {
     }).catch(async (l) => {
       await r.show("error", "Error loading document", "Details: " + (l == null ? void 0 : l.message) || l), i(!0);
     });
-  }, [o]), /* @__PURE__ */ pe.jsx(gd, { studioPro: e, children: /* @__PURE__ */ pe.jsxs(vd, { children: [
+  }, [o]), /* @__PURE__ */ pe.jsx(yd, { studioPro: e, children: /* @__PURE__ */ pe.jsxs(gd, { children: [
     !a && /* @__PURE__ */ pe.jsx(kd, {}),
-    a && /* @__PURE__ */ pe.jsx($d, { children: /* @__PURE__ */ pe.jsx(
-      Fw,
+    a && /* @__PURE__ */ pe.jsx(vd, { children: /* @__PURE__ */ pe.jsx(
+      Lw,
       {
         loadedConsumedMCPService: c,
         studioPro: e,
@@ -16634,7 +16631,7 @@ const jw = async (e, t, r, n) => {
       }
     ) })
   ] }) });
-}, r0 = Ed(Hw);
+}, t0 = Ed(Zw);
 export {
-  r0 as component
+  t0 as component
 };
