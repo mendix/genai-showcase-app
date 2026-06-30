@@ -145,37 +145,6 @@ A folder within the Agent Editor Commons module containing template agents, exam
 
 Contains internal implementation logic for the Agent Editor Commons module. Logic in private folders must NEVER be used, called, or referenced from your own modules. This logic is for internal module use only and may change without notice.
 
-## Module Usage Guidelines
-
-### What You CAN Do
-
-- **Reuse logic from the USE_ME folder**: Copy patterns, reference examples, and use template agents from the USE_ME folder
-- **Call the documented toolbox actions**: Use "Call Agent without History" and "Call Agent with History" actions in your microflows
-- **Use the documented domain model entities**: Work with `Response`, `Request`, and other GenAI Commons entities
-- **Create Agent documents**: Define your own agents using the Agent Editor extension
-
-### What You CANNOT Do
-
-- **Modify Agent Editor Commons logic**: Do NOT change any microflows, pages, or logic within the Agent Editor Commons module
-- **Use private folder logic**: Do NOT call or reference any microflows, entities, or logic from private folders
-- **Extend the module directly**: Do NOT add custom logic to the Agent Editor Commons module
-
-### Extension Pattern
-
-If you need to extend or customize Agent Editor functionality:
-
-1. Create a separate module in your app (e.g., `MyCustomAgents`)
-2. Import or reference only the documented toolbox actions and domain model from Agent Editor Commons
-3. Implement your custom logic in your own module
-4. Use agents and microflows from the USE_ME folder as templates, but implement them in your module
-
-This separation ensures:
-
-- Your customizations survive module updates
-- Module upgrades don't break your custom logic
-- Clear separation between platform code and application code
-- Compliance with Mendix module development best practices
-
 ## Common Acronyms
 
 - **LLM**: Large Language Model

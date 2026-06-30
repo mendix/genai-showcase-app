@@ -1,6 +1,6 @@
 ---
 name: agenteditor
-description: Guide for using Mendix AgentEditor extension and the AgentEditorCommons module to create, configure, and deploy GenAI agents in Studio Pro. Use when working with Agent, Model, Knowledge Base, or Consumed MCP Service documents and integrating agents into app logic.
+description: Guide for all tasks related to GenAI agents in Studio Pro, including creating, configuring, deploying, troubleshooting, and integrating agents. Use whenever a request mentions agents, AI agents, assistants, models, knowledge bases, MCP services, agent workflows, or agent integration.
 ---
 
 # Agent Editor Workflow Guide
@@ -142,7 +142,34 @@ After installing Agent Editor from Marketplace:
 
 **CRITICAL: Agent Editor Commons is Read-Only**
 
-Never modify logic in Agent Editor Commons module. Only use USE_ME folder templates and documented toolbox actions. For custom logic, create a separate module.
+### What You CAN Do
+
+- **Reuse logic from the USE_ME folder**: Copy patterns, reference examples, and use template agents from the USE_ME folder
+- **Call the documented toolbox actions**: Use "Call Agent without History" and "Call Agent with History" actions in your microflows
+- **Use the documented domain model entities**: Work with `Response`, `Request`, and other GenAI Commons entities
+- **Create Agent documents**: Define your own agents using the Agent Editor extension
+
+### What You CANNOT Do
+
+- **Modify Agent Editor Commons logic**: Do NOT change any microflows, pages, or logic within the Agent Editor Commons module
+- **Use private folder logic**: Do NOT call or reference any microflows, entities, or logic from private folders
+- **Extend the module directly**: Do NOT add custom logic to the Agent Editor Commons module
+
+### Extension Pattern
+
+If you need to extend or customize Agent Editor functionality:
+
+1. Create a separate module in your app (e.g., `MyCustomAgents`)
+2. Import or reference only the documented toolbox actions and domain model from Agent Editor Commons
+3. Implement your custom logic in your own module
+4. Use agents and microflows from the USE_ME folder as templates, but implement them in your module
+
+This separation ensures:
+
+- Your customizations survive module updates
+- Module upgrades don't break your custom logic
+- Clear separation between platform code and application code
+- Compliance with Mendix module development best practices
 
 ## Limitations
 
