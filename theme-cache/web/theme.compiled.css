@@ -29221,15 +29221,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .message--user {
-  color: #0A1325;
+  color: var(--font-color-default);
   font-weight: 400;
 }
 .message--user h1, .message--user h2, .message--user h3, .message--user h4, .message--user h5, .message--user h6 {
-  color: #0A1325;
+  color: var(--font-color-default);
   font-weight: 600;
 }
 .message--user strong {
-  color: rgba(10, 19, 36, 0.8509803922);
+  color: var(--font-color-default);
   font-weight: 400;
 }
 
@@ -29274,16 +29274,15 @@ input[type=checkbox].three-state-checkbox + .control-label {
   overflow: hidden;
   padding: 12px var(--spacing-medium);
   background-color: var(--chat-bg-light);
-  color: var(--font-color-header);
+  color: var(--font-color-default);
   font-weight: var(--font-weight-normal);
   margin-bottom: var(--spacing-small);
 }
 .tool-message .tool-title {
   font-weight: var(--font-weight-semibold);
-  color: rgba(10, 19, 36, 0.6980392157);
+  color: var(--font-color-default);
   padding: 0;
   display: block;
-  color: rgba(10, 19, 36, 0.6980392157);
   font-weight: 600;
 }
 .tool-message .tool-title .mx-image-viewer {
@@ -31119,7 +31118,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .widget-markdown {
-  color: var(--font-color-header);
   font-weight: 400;
 }
 .widget-markdown hr {
@@ -31127,16 +31125,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .widget-markdown p {
   font-weight: 400;
-  color: var(--font-color-header);
 }
 .widget-markdown strong {
-  color: var(--font-color-header);
   font-weight: 600;
 }
 .widget-markdown h1, .widget-markdown h2, .widget-markdown h3, .widget-markdown h4, .widget-markdown h5, .widget-markdown h6 {
   margin: var(--spacing-small) 0;
   font-weight: 600;
-  color: var(--font-color-header);
 }
 .widget-markdown ul {
   justify-content: flex-start;
@@ -31150,12 +31145,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .widget-markdown ol {
   justify-content: flex-start;
-  color: var(--font-color-header);
 }
-.widget-markdown table tr th, .widget-markdown table tr td {
-  color: var(--font-color-header);
-}
-
 .spinner {
   width: 20px;
   height: 20px;
