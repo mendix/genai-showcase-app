@@ -1,14 +1,22 @@
-import { a7 as Iu, r as De, R as pe, ak as pd, ag as Ra, a1 as Jo, al as md, am as _d, ah as yd, ae as gd, af as vd } from "./formelements-xoDBPsLY.js";
-import { u as $d, B as wd, a as bd, T as Sd, c as Ed, C as kd } from "./TextWithIcon-BnQ_W6GL.js";
+import { j as pe } from "./jsx-runtime-CWOFuNcx.js";
+import { a3 as Iu, r as De, ab as pd, a8 as Ra, ac as md, a9 as _d, a6 as yd, a7 as gd } from "./PageContainers-BvK5usmz.js";
+import { C as vd } from "./CenteredLoadingSpinner-DRQ0Sbi_.js";
+import { u as $d, B as wd, C as bd, T as Sd, c as Ed } from "./TextWithIcon-DT9zjsRe.js";
 import { createStudioProLogger as Cu } from "./logger-gMbuSAUF.js";
-import { q as Pd, u as Td, C as Rd, D as Od, v as Id, f as Cd, r as Nd, w as jd, l as qd, x as zd } from "./index-CZgjY607.js";
-import { m as Md } from "./useDebounceCallback-CfCoxYX8.js";
-import { v as Ad, C as rt, i as Dd, a as Ud, B as Vd } from "./ButtonWithLabel-DL3guaBz.js";
-import { T as Oa } from "./TextInputLabeled-BZ-d3CSA.js";
-import { T as Go } from "./TextInputWithButton-CJr1wTWV.js";
-import { n as Ld } from "./MicroflowIcon-DD6720Hr.js";
-import { W as Fd } from "./Banner-DMJvEk30.js";
-import { T as Zd } from "./Table-B8T3E1v3.js";
+import { M as kd, d as Pd } from "./documentInitUtils-Bwe4f_Cu.js";
+import { m as Td } from "./useDebounceCallback-B5Rd1Qvb.js";
+import { v as Rd, C as rt, i as Od, a as Id, B as Cd } from "./ButtonWithLabel-DyybWRom.js";
+import { C as Nd } from "./formelements-Daexkze0.js";
+import { T as Oa } from "./TextInputLabeled-C0PQPpUV.js";
+import { T as Jo } from "./TextInputWithButton-CkuCCNYk.js";
+import { g as jd, C as qd, h as zd } from "./toolUtils-3GFu_U6Y.js";
+import { g as Md, h as Ad } from "./constantUtils-D0RXxXWn.js";
+import { n as Dd } from "./MicroflowIcon-DiztpTHi.js";
+import { D as Ud, e as Vd } from "./index-DclzxLgl.js";
+import { m as Ld } from "./toolIcons-B55yYne7.js";
+import { W as Fd } from "./Banner-DAKvWnIG.js";
+import { G as Go } from "./GroupBox-Bv1UqUKB.js";
+import { T as Zd } from "./Table-bHKZTZKr.js";
 const Hd = (e, t) => async (r) => {
   const n = Cu(e);
   try {
@@ -16106,7 +16114,7 @@ async function Nw(e, t, r) {
   }
 }
 const jw = async (e, t, r, n) => {
-  const o = Cu(e), s = await Pd(e, t.endpoint);
+  const o = Cu(e), s = await Md(e, t.endpoint);
   if (!s) {
     o.error(
       `MCP endpoint constant ${t.endpoint?.qualifiedName} does not have an accessible runtime value or default value.`
@@ -16145,7 +16153,7 @@ const jw = async (e, t, r, n) => {
 }, yr = async (e, t, r) => {
   switch (e) {
     case "endpoint": {
-      const n = await Ad(r, t.endpoint);
+      const n = await Rd(r, t.endpoint);
       if (n === rt.Required)
         return "Endpoint is required.";
       if (n === rt.NotFound)
@@ -16172,7 +16180,7 @@ const jw = async (e, t, r, n) => {
       break;
     case "authenticationMicroflow": {
       if (t.authenticationMicroflow) {
-        const n = await Td(
+        const n = await jd(
           r,
           t.authenticationMicroflow
         );
@@ -16185,7 +16193,7 @@ const jw = async (e, t, r, n) => {
         );
         if (s && s.length > 0)
           return "Authentication microflow cannot have input parameters.";
-        if (n.microflowReturnType.$Type !== "DataTypes$ListType" || n.microflowReturnType.entity !== Rd.HttpHeader)
+        if (n.microflowReturnType.$Type !== "DataTypes$ListType" || n.microflowReturnType.entity !== qd.HttpHeader)
           return "Authentication microflow must return a list of System.HttpHeader objects.";
       }
       break;
@@ -16261,7 +16269,7 @@ const jw = async (e, t, r, n) => {
   protocolVersion: "isValidProtocolVersion",
   connectionTimeoutSeconds: "isValidConnectionTimeout",
   authenticationMicroflow: "isValidAuthenticationMicroflow"
-}, Vw = Id.map(
+}, Vw = kd.map(
   (e) => ({
     key: e,
     caption: e
@@ -16330,11 +16338,11 @@ const jw = async (e, t, r, n) => {
       await r(P), await f(N, P);
     },
     [r, f]
-  ), g = Md(m, Od), k = async () => {
+  ), g = Td(m, Ud), k = async () => {
     const P = await qw(t, n);
     P && (o(P), r(P), f("endpoint", P), c([]), l(!1));
   }, I = async () => {
-    n.endpoint && Nd(t, n.endpoint);
+    n.endpoint && Ad(t, n.endpoint);
   }, z = (P) => async (N) => {
     o((O) => {
       const p = ws(O, P, N);
@@ -16357,7 +16365,7 @@ const jw = async (e, t, r, n) => {
     const P = await Mw(t, n);
     P && (o(P), r(P), f("authenticationMicroflow", P));
   }, Z = async () => {
-    n.authenticationMicroflow && jd(t, n.authenticationMicroflow);
+    n.authenticationMicroflow && zd(t, n.authenticationMicroflow);
   }, x = async () => {
     l(!1);
     const P = await zw(t, n, _e(w));
@@ -16367,12 +16375,12 @@ const jw = async (e, t, r, n) => {
     }
     c(P), l(!0), v(/* @__PURE__ */ new Date());
   }, te = async () => {
-    const P = await Aw(t, qd, w);
+    const P = await Aw(t, Vd, w);
     P && h(P);
   }, _e = (P) => P.filter(([N]) => N.trim() !== ""), we = (P) => _e(P).map((N) => N[0]).join(", "), ee = Object.values(s).some((P) => P !== !0), qe = s.isValidEndpoint === rt.PrivateValue || s.isValidEndpoint === rt.EmptyValue, M = () => s.isValidEndpoint === !0 || s.isValidEndpoint === rt.PrivateValue || s.isValidEndpoint === rt.EmptyValue ? !0 : s.isValidEndpoint;
   return /* @__PURE__ */ pe.jsxs(pd, { children: [
     /* @__PURE__ */ pe.jsxs(Ra, { children: [
-      /* @__PURE__ */ pe.jsxs(Jo, { label: "General", children: [
+      /* @__PURE__ */ pe.jsxs(Go, { label: "General", children: [
         /* @__PURE__ */ pe.jsx(
           Oa,
           {
@@ -16384,7 +16392,7 @@ const jw = async (e, t, r, n) => {
           }
         ),
         /* @__PURE__ */ pe.jsx(
-          md,
+          Nd,
           {
             label: "Documentation",
             "aria-label": "Documentation",
@@ -16394,14 +16402,14 @@ const jw = async (e, t, r, n) => {
           }
         )
       ] }),
-      /* @__PURE__ */ pe.jsxs(Jo, { label: "Configuration", children: [
+      /* @__PURE__ */ pe.jsxs(Go, { label: "Configuration", children: [
         /* @__PURE__ */ pe.jsx(
-          Go,
+          Jo,
           {
             ariaLabel: "Endpoint",
             label: "Endpoint",
             value: n.endpoint?.qualifiedName ?? "",
-            icon: n.endpoint ? /* @__PURE__ */ pe.jsx(Dd, {}) : void 0,
+            icon: n.endpoint ? /* @__PURE__ */ pe.jsx(Od, {}) : void 0,
             buttonCaption: "Select...",
             onClick: k,
             validate: () => M(),
@@ -16414,12 +16422,12 @@ const jw = async (e, t, r, n) => {
           /* @__PURE__ */ pe.jsx("div", { children: s.isValidEndpoint === rt.PrivateValue ? "Private constants require additional permissions for local use. Grant access via View > Extensions and reopen the current tab." : "In order to test your Consumed MCP Service locally, please set a valid value for the endpoint constant." })
         ] }),
         /* @__PURE__ */ pe.jsx(
-          Go,
+          Jo,
           {
             ariaLabel: "Credentials microflow",
             label: "Credentials microflow",
             value: n.authenticationMicroflow ? n.authenticationMicroflow.qualifiedName : "",
-            icon: n.authenticationMicroflow ? /* @__PURE__ */ pe.jsx(Ld, {}) : void 0,
+            icon: n.authenticationMicroflow ? /* @__PURE__ */ pe.jsx(Dd, {}) : void 0,
             description: "Optional: Select a microflow that generates credentials that will be used to authenticate to the MCP server. The microflow needs to return a list of System.HttpHeader objects. Input parameters are not allowed.",
             onClick: L,
             buttonCaption: "Select...",
@@ -16429,7 +16437,7 @@ const jw = async (e, t, r, n) => {
           }
         ),
         /* @__PURE__ */ pe.jsx(
-          Ud,
+          Id,
           {
             ariaLabel: "Protocol version",
             label: "Protocol version",
@@ -16452,9 +16460,9 @@ const jw = async (e, t, r, n) => {
         )
       ] })
     ] }),
-    /* @__PURE__ */ pe.jsx(_d, { children: /* @__PURE__ */ pe.jsxs(Jo, { label: "MCP Tools Playground", children: [
+    /* @__PURE__ */ pe.jsx(md, { children: /* @__PURE__ */ pe.jsxs(Go, { label: "MCP Tools Playground", children: [
       /* @__PURE__ */ pe.jsx(Ra, { children: /* @__PURE__ */ pe.jsx(
-        Go,
+        Jo,
         {
           ariaLabel: "MCP Authentication headers",
           label: "Authentication headers",
@@ -16466,7 +16474,7 @@ const jw = async (e, t, r, n) => {
         }
       ) }),
       /* @__PURE__ */ pe.jsx(
-        Vd,
+        Cd,
         {
           label: "Tools",
           buttonCaption: "List tools",
@@ -16495,7 +16503,7 @@ const jw = async (e, t, r, n) => {
             ],
             data: i.map((P) => [
               {
-                cellContent: /* @__PURE__ */ pe.jsx(Sd, { icon: Cd, text: P.name }, P.name),
+                cellContent: /* @__PURE__ */ pe.jsx(Sd, { icon: Ld, text: P.name }, P.name),
                 tooltipText: P.name
               },
               { cellContent: P.description, tooltipText: P.description }
@@ -16505,7 +16513,7 @@ const jw = async (e, t, r, n) => {
       ] })
     ] }) })
   ] });
-}, Fw = zd(), Zw = ({ studioPro: e, documentId: t }) => {
+}, Fw = Pd(), Zw = ({ studioPro: e, documentId: t }) => {
   const r = e.ui.messageBoxes, n = e.app.model.customBlobDocuments, [o, s] = De.useState(0), [a, i] = De.useState(!1), [c, d] = De.useState(Fw);
   return De.useEffect(() => {
     const l = ($) => {
@@ -16525,9 +16533,9 @@ const jw = async (e, t, r, n) => {
     }).catch(async (l) => {
       await r.show("error", "Error loading document", "Details: " + l?.message || l), i(!0);
     });
-  }, [o]), /* @__PURE__ */ pe.jsx(yd, { studioPro: e, children: /* @__PURE__ */ pe.jsxs(gd, { children: [
-    !a && /* @__PURE__ */ pe.jsx(kd, {}),
-    a && /* @__PURE__ */ pe.jsx(vd, { children: /* @__PURE__ */ pe.jsx(
+  }, [o]), /* @__PURE__ */ pe.jsx(_d, { studioPro: e, children: /* @__PURE__ */ pe.jsxs(yd, { children: [
+    !a && /* @__PURE__ */ pe.jsx(vd, {}),
+    a && /* @__PURE__ */ pe.jsx(gd, { children: /* @__PURE__ */ pe.jsx(
       Lw,
       {
         loadedConsumedMCPService: c,
@@ -16536,7 +16544,7 @@ const jw = async (e, t, r, n) => {
       }
     ) })
   ] }) });
-}, t0 = Ed(Zw);
+}, u0 = Ed(Zw);
 export {
-  t0 as component
+  u0 as component
 };
