@@ -54,6 +54,12 @@
       "name": "Slider",
       "version": "2.1.4",
       "appStoreVersionGuid": "f8848375-edfe-4177-87ef-d33cd188b099"
+    },
+    {
+      "sha-256": "42244f9e7e9f96b3c31914c812cc19b55f4680e5364fb46d49db8b41045efd8e",
+      "name": "Slider",
+      "version": "3.0.3",
+      "appStoreVersionGuid": "b227dcb6-daca-4775-867c-88a41b3abc06"
     }
   ]
 }
