@@ -5,8 +5,8 @@
 
 .btn-chat-popup {
     position: fixed;
-    right: $pop-up-chat-right-position;
-    bottom: $pop-up-chat-bottom-position;
+    right: var(--pop-up-chat-right-position);
+    bottom: var(--pop-up-chat-bottom-position);
     z-index: 10;
     width: 60px;
     height: 60px;
@@ -24,36 +24,36 @@
 
 .layout-chat-popup.mx-window {
     position: fixed;
-    right: $pop-up-chat-right-position !important;
-    bottom: $pop-up-chat-bottom-position !important;
+    right: var(--pop-up-chat-right-position) !important;
+    bottom: var(--pop-up-chat-bottom-position)!important;
     left: unset !important;
     top: unset !important;
-    width: $pop-up-chat-width !important;
-    height: $pop-up-chat-height !important;
+    width: var(--pop-up-chat-width) !important;
+    height: Var(--pop-up-chat-height) !important;
     z-index: 100;
 
     .mx-resizer-n, .mx-resizer-s, .mx-resizer-e, .mx-resizer-w, .mx-resizer-nw, .mx-resizer-ne, .mx-resizer-sw, .mx-resizer-se{
         cursor: auto;
     }
     .mx-window-header {
-        background: $chat-header-color;
+        background: var(--chat-header-color);
         cursor: auto;
         h4 {
-            color: $header-text-color;
+            color: var(--chat-header-color);
         }
     }
     .mx-window-header button.close {
         color: transparent;
         &::after {
             content: "-";
-            color: $header-text-color;
+            color: var(--header-text-color);
         }
         
     }
     .modal-body {
         height: calc(100% - 50px);
         overflow: hidden;
-        padding: $spacing-medium;
+        padding: var(--spacing-medium);
         .mx-placeholder {
             height: 100%;
         }

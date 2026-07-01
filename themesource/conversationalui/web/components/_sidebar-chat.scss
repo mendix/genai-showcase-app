@@ -7,24 +7,24 @@
     bottom: 0 !important;
     left: unset !important;
     height: unset !important;
-    width: $pop-up-chat-width;
+    width: var(--pop-up-chat-width);
     .mx-window-content {
         border-radius: 0;
         border: none;
         .mx-window-header {
-            background: $chat-header-color !important;
+            background: var(--chat-header-color) !important;
             cursor: auto;
             border: none;
             h4 {
-                color: $header-text-color;
+                color: var(--header-text-color);
             }
             .close {
-                color: $header-text-color;
+                color: var(--header-text-color);
             }
         }
         .mx-window-body {
             overflow: hidden;
-            padding: $spacing-medium ;
+            padding: var(--spacing-medium) ;
             height: calc(100% - 50px);
             .mx-placeholder {
                 height: 100%;

@@ -101,7 +101,7 @@ public class AddPrompt extends UserAction<IMendixObject>
 
 		// Create the prompt spec and add to server
 		List<McpSchema.PromptArgument> mcpPromptArguments = Parameters.stream().map(e ->
-				new McpSchema.PromptArgument(e.getName(), e.getDescription(), e.getRequired())).toList();
+				new McpSchema.PromptArgument(e.getName(), e.getDescription(), e.getRequired())).collect(java.util.stream.Collectors.toList());
 
 		McpServerFeatures.SyncPromptSpecification syncPromptSpecification = new McpServerFeatures.SyncPromptSpecification(
 				new McpSchema.Prompt(Name, Description, mcpPromptArguments),

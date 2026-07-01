@@ -7,7 +7,7 @@
         .fills,
         .legendfill {
             .js-fill {
-                fill: mix($graph-line-color, white, 60%) !important;
+                fill: color-mix(in srgb, $graph-line-color 60%, white) !important;
             }
         }
 
@@ -21,9 +21,9 @@
 }
 
 .chart-input {
-    @include chart($input-graph-line-color);
+    @include chart(var(--input-graph-line-color));
 }
 
 .chart-output {
-    @include chart($output-graph-line-color);
+    @include chart(var(--output-graph-line-color));
 }

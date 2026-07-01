@@ -2,19 +2,19 @@
 
 //Cards for ConversationStarters
 .conversationstarter.card {
-    margin-bottom: $spacing-small;
-    padding: $spacing-small;
-    border: 1px solid $brand-default;
+    margin-bottom: var(--spacing-small);
+    padding: var(--spacing-small);
+    border: 1px solid var(--brand-default);
     position: relative;
 
     &:hover {
-        background-color: $grid-bg-hover
+        background-color: var(--grid-bg-hover)
     }
 
     .mx-link {
-        color: $brand-primary;
-        margin-bottom: $spacing-small;
-        margin-top: $spacing-small;
+        color: var(--brand-primary);
+        margin-bottom: var(--spacing-small);
+        margin-top: var(--spacing-small);
     }
 
     display: flex;

@@ -44,6 +44,16 @@ $sides: (
 .spacing-inner-none {
   padding: 0;
 }
+.spacing-outer-left-xxs {
+  margin-left: var(--spacing-smallest);
+}
+.spacing-outer-left-xs {
+  margin-left: var(--spacing-smaller);
+}
+.spacing-outer-right-xxs {
+  margin-right: var(--spacing-smallest);
+}
+
 
 /* Remove padding per side */
 @each $side, $sideValue in $sides {

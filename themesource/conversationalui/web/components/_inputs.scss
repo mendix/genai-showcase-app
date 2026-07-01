@@ -72,7 +72,7 @@
 
 
 .input-container {
-    border-bottom: 1px solid $light-border-color;
+    border-bottom: 1px solid var(--light-border-color);
     display: flex;
     justify-content: space-between;
     align-items: start;
@@ -90,8 +90,8 @@
         overflow: hidden; 
 
         .mx-image {
-            height: $font-size-large;
-            margin-right: $spacing-small;
+            height: var(--font-size-large);
+            margin-right: var(--spacing-small);
             margin-left: auto;
             float: right;
         }
@@ -135,7 +135,7 @@
         overflow: hidden; 
 	 
         .mx-image-viewer {
-            margin-right: $spacing-small;
+            margin-right: var(--spacing-small);
             flex-shrink: 0;
             height: auto;
             width: auto;
@@ -157,9 +157,9 @@
 
 .combobox-border-danger{
   .widget-combobox{
-    border: 1px solid $brand-danger;
+    border: 1px solid var(--brand-danger);
   }
-  margin-bottom: $spacing-smaller !important;
+  margin-bottom: var(--spacing-smaller) !important;
 }
 
 .texbox-loading-wrapper {
@@ -175,9 +175,9 @@
 
         .loading-dot {
             border-radius: 100%;
-            background-color: $brand-primary;
-            width: $font-size-default / 3;
-            height: $font-size-default / 3;
+            background-color: var(--brand-primary);
+            width: calc(var(--font-size-default) / 3);
+            height: calc(var(--font-size-default) / 3);
 
             &:nth-child(1) {
                 animation: preloader 0.9s ease-in-out alternate infinite;
@@ -214,7 +214,7 @@
         align-items: center;
         justify-content: center;
         height: 47.5px !important;
-        border-color: $border-color-default;
+        border-color: var(--border-color-default);
     }
 }
 

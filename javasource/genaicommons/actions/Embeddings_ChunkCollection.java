@@ -18,7 +18,6 @@ import genaicommons.impl.DeployedModelImpl;
 import genaicommons.impl.MxLogger;
 import genaicommons.proxies.ENUM_ModelModality;
 import genaicommons.proxies.EmbeddingsResponse;
-import genaicommons.proxies.Response;
 import genaicommons.proxies.microflows.Microflows;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;

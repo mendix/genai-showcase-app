@@ -1,0 +1,21 @@
+.modal-dialog {
+    .modal-content {
+        .modal-header {
+            .close {
+                margin-top: 0px;
+                &:focus-visible {
+                    border-radius: 4px;
+                }
+            }
+        }
+        .modal-body {
+                background-color: var(--modal-body-bg);
+        }
+    }
+}
+
+.mx-window {
+    .mx-dataview-controls {
+    padding: 16px 24px;
+}
+}

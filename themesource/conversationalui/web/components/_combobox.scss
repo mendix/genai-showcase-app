@@ -5,7 +5,7 @@
         align-items: center;
         justify-content: center;
         height: 47.5px !important;
-        border-color: $border-color-default;
+        border-color: var(--border-color-default);
     }
 }
 
@@ -16,6 +16,10 @@
     position: relative;
     width: 100%;
     max-width: 100%;
+    .widget-combobox-input-container-disabled {
+        border: 1;
+	border-color: var(--gray-primary)
+    }
 }
 
 .widget-combobox-input-container {
@@ -26,7 +30,6 @@
     border: 1px solid #d1d5db;
     cursor: pointer;
     transition: all 0.2s ease;
-    padding: 4px 8px;
 }
 
 .widget-combobox-selected-items,

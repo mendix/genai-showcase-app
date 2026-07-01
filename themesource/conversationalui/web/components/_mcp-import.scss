@@ -2,31 +2,33 @@
 @import '../../../../theme/web/custom-variables';
 
 
-$color-edited: #9BB7F4;
+:root {
+    --color-edited: #9BB7F4;
+}
 
 .mcp-tool{
     margin: 0;
-    color: $gray-light;
-    padding-bottom: $spacing-medium;
+    color: var(--gray-light);
+    padding-bottom: var(--spacing-medium);
     word-break: break-word;
 
     &.mcp-tool-edited {
         border-left: 3px solid;
-        border-color: $brand-primary;
-        color: $color-edited; 
+        border-color: var(--brand-primary);
+        color: var(--color-edited); 
     }
 
     &.active {
-        font-weight: $font-weight-bold;
+        font-weight: var(--font-weight-bold);
         border-left: 3px solid;
-        border-color: $brand-primary;
-        color: $brand-primary; 
+        border-color: var(--brand-primary);
+        color: var(--brand-primary); 
     }
 
     .status-icon {
-        width: $spacing-medium;
-        margin-right: $spacing-small;
-        margin-left: $spacing-smaller;
+        width: var(--spacing-medium);
+        margin-right: var(--spacing-small);
+        margin-left: var(--spacing-smaller);
     }
 }
 

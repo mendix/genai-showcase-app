@@ -66,11 +66,11 @@ public class Module_GetMicroflowList extends UserAction<java.util.List<IMendixOb
 				.filter(microflow -> Core.getReturnType(microflow).getType().equals(IDataType.DataTypeEnum.String))
 				.sorted()
 				.map(microflowName -> createMicroflow(microflowName))
-				.toList();
+				.collect(java.util.stream.Collectors.toList());
 			
 			MicroflowSelection.setMicroflowSelection_Microflow(microflowList);
 			
-			return microflowList.stream().map(e -> e.getMendixObject()).toList();
+			return microflowList.stream().map(e -> e.getMendixObject()).collect(java.util.stream.Collectors.toList());
 		} catch (Exception e) {
 		    LOGGER.error(e);
 		    return null;

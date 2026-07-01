@@ -1,5 +1,6 @@
 @use '../../../theme/web/custom-variables' as *;
 @use 'chat-variables' as *;
 @use 'token-monitor-variables' as *;
+@use './css-variables';
 @use './abstracts/all' as *;
 @use './components/all' as *;

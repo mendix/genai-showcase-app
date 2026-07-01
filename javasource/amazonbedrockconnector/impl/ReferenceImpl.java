@@ -94,7 +94,7 @@ public class ReferenceImpl {
 	public static String getURIForURL(String urlString) {
 		try {
 			// Create a URL object from the string
-			URL url = new URL(urlString);
+			URL url = new URI(urlString).toURL();
 			// Convert the URL to a URI
 			URI uri = url.toURI();
 			String uristr = uri.toString();

@@ -72,7 +72,7 @@ public class CreateMCPServer extends UserAction<IMendixObject>
         mcpServer.setVersion(Version);
         mcpServer.setProtocolVersion(ProtocolVersion);
         mcpServer.setAuthenticationMicroflow(AuthenticationMicroflow);
-                
+        mcpServer.setEndpoint(getContext().getRuntimeRequest().get().getRootUrl() + Path + "/mcp");
         // Create request handler with Streamable HTTP transport
         // Uses /mcp endpoint for all MCP operations
         McpServerRequestHandler mcpRequestHandler = new McpServerRequestHandler(mcpServer, Path);
@@ -95,7 +95,7 @@ public class CreateMCPServer extends UserAction<IMendixObject>
 		McpSessionManager sessionManager = mcpRequestHandler.getSessionManager();
 		McpServerRegistry.putSessionManager(serverId, sessionManager);
 		
-		LOGGER.info("MCP Server created using: " + mcpServer.getProtocolVersion() + " version.");
+		LOGGER.info("MCP Server created with name: '" + mcpServer.getName() + "', endpoint: '" + mcpServer.getEndpoint() + "', and version: '" + mcpServer.getProtocolVersion() + "'.");
 		LOGGER.debug("Server and SessionManager registered with ID: " + serverId);
 
 		return mcpServer.getMendixObject();

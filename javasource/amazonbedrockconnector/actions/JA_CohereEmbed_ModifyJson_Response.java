@@ -85,7 +85,7 @@ public class JA_CohereEmbed_ModifyJson_Response extends UserAction<java.lang.Str
             } else if (embeddingsNode.isObject()) {
                 // Handle case where embeddings is an object with nested arrays
                 ObjectNode embeddingsObject = (ObjectNode) embeddingsNode;
-                embeddingsObject.fields().forEachRemaining(entry -> {
+                embeddingsObject.properties().forEach(entry -> {
                     ArrayNode inputEmbeddingsArray = (ArrayNode) entry.getValue();
                     for (JsonNode embeddingArray : inputEmbeddingsArray) {
                         try {

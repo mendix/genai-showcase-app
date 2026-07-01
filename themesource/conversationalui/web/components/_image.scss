@@ -1,8 +1,12 @@
 @use '../../../../theme/web/custom-variables' as *;
 
+.mx-image-viewer {
+    width: auto;
+}
+
 .responsive-image {
     &.mx-image-viewer {
-    max-width: $font-size-default;
-    max-height: $font-size-default;
+    max-width: var(--font-size-default);
+    max-height: var(--font-size-default);
     }
 }

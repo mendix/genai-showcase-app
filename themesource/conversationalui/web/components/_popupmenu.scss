@@ -17,26 +17,26 @@
 }
 
 .popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item {
-    background-color: $bg-color-secondary;
+    background-color: var(--bg-color-secondary);
     &:hover,
     &:focus,
     &:active {
         cursor: pointer;
-        border-color: $bg-color;
-        background-color: $bg-color;
+        border-color: var(--bg-color);
+        background-color: var(--bg-color);
     }
 }
 
 .popupmenu-custom-item-container {
-    padding: $spacing-small;
+    padding: var(--spacing-small);
     margin-top: none;
     margin-bottom: none;
     align-items: right !important;
 
     .mx-link {
         display: block;
-        padding: $spacing-smaller;
-        color: $font-color-default;
+        padding: var(--spacing-smaller);
+        color: var(--font-color-default);
         text-decoration: none;
         border: 1px solid transparent;
 
@@ -47,15 +47,15 @@
 }
 
 .dropdown-hover {
-    background-color: $bg-color-secondary;
+    background-color: var(--bg-color)-secondary;
     padding: 10px;
 
     &:hover,
     &:focus,
     &:active {
         cursor: pointer;
-        border-color: $bg-color;
-        background-color: $bg-color;
+        border-color: var(--bg-color);
+        background-color: var(--bg-color);
     }
 }
 

@@ -217,9 +217,7 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		try {
 			JsonNode inputNode = MAPPER.readTree(input);
 			if (inputNode != null && inputNode.isObject()) {
-				Iterator<Map.Entry<String, JsonNode>> fields = inputNode.fields();
-				while (fields.hasNext()) {
-					Map.Entry<String, JsonNode> field = fields.next();
+				for (Map.Entry<String, JsonNode> field : inputNode.properties()) {
 					// Convert value to string - handle different JSON types
 					JsonNode valueNode = field.getValue();
 					if (valueNode.isTextual()) {

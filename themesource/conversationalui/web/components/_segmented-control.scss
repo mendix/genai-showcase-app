@@ -2,11 +2,11 @@
 
 .segmented-control {
     height: fit-content;
-    border: 1px solid $border-color-default;
-    border-radius: $btn-border-radius;
-    padding: $spacing-smaller;
+    border: 1px solid var(--border-color-default);
+    border-radius: var(--btn-border-radius);
+    padding: var(--spacing-smaller);
     width: fit-content;
-    background-color: $gray-lighter;
+    background-color: var(--gray-lighter);
     .btn.btn-default{
         border: 1px solid transparent;
         background: transparent;
@@ -16,7 +16,7 @@
         }
     
         &:hover {
-            background-color: $btn-default-bg-hover;
+            background-color: var(--btn-default-bg-hover);
         }
     }
     
