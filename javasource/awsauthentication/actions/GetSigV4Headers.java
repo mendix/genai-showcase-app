@@ -257,10 +257,9 @@ public class GetSigV4Headers extends UserAction<IMendixObject>
 	}
 	
 	private String getCanonicalRequest(Map<String, String> headers, String canonicalQueryString, String signedHeaders) {
-		
 		String canonicalRequest = String.format("%s\n%s\n%s\n%s\n%s\n%s",
 				SigV4Builder.getHTTPMethod().toString(),
-				SigV4Builder.getPath(),
+				getCanonicalPath(SigV4Builder.getPath()),
 				canonicalQueryString,
 				getCanonicalizedHeaderString(headers),
 				signedHeaders,
@@ -271,6 +270,18 @@ public class GetSigV4Headers extends UserAction<IMendixObject>
 		LOGGER.trace("------------------------------------");
 		
 		return canonicalRequest;
+	}
+	
+	private String getCanonicalPath(String path) {
+		if ("/".equals(path)){
+			return "/";
+		}
+		else if (path == null || path.isBlank()){
+			return "";
+		}
+		else {
+			return urlEncode(path, true);
+		}
 	}
 	
 	private String getStringToSign(Map<String, String> headers, String canonicalQueryString, String signedHeaders, String amzDate, String credentialScope) {
@@ -318,8 +329,7 @@ public class GetSigV4Headers extends UserAction<IMendixObject>
 		else {
 			url = String.format("https://%s.%s.%s.%s",SigV4Builder.getURIPrefix(), getSubdomain(), awsRegionString, getEndpointURL());
 		}
-		
-		if (SigV4Builder.getPath() != null && !SigV4Builder.getPath().equals("/") && !SigV4Builder.getPath().isBlank()) {
+		if (SigV4Builder.getPath() != null && !SigV4Builder.getPath().isBlank()) {
 			url += SigV4Builder.getPath();
 		}
 		if (canonicalQueryString != null && !canonicalQueryString.isBlank()) {
@@ -475,5 +485,6 @@ public class GetSigV4Headers extends UserAction<IMendixObject>
 		}
 		return encoded;
 	}
+	
 	// END EXTRA CODE
 }

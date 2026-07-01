@@ -44,10 +44,7 @@ import software.amazon.awssdk.regions.Region;
 public class AWSAsyncBuilderConfigurator<BuilderT extends AwsAsyncClientBuilder<BuilderT,ClientT> & AwsClientBuilder<BuilderT,ClientT>, ClientT>{
 	@SuppressWarnings("unused")
 	private static final MxLogger LOGGER = new MxLogger(AWSAsyncBuilderConfigurator.class);
-	
-	//TODO Replace X.Y.Z below with correct version nr and delete this line in rc-branch
-	private static final String AWS_HEADER_VALUE = "Mendix-Authentication-4.1.1";
-	
+		
 	private AbstractRequest abstractRequest;
 	private ENUM_Region region;
 	private Credentials credentials;
@@ -102,15 +99,7 @@ public class AWSAsyncBuilderConfigurator<BuilderT extends AwsAsyncClientBuilder<
 	}
 			
 	public AWSAsyncBuilderConfigurator<BuilderT,ClientT> setAwsHeaderValue(final String awsHeaderValue) {
-		
-		if (this.credentials instanceof TemporaryCredentials) {
-			this.awsHeaderValue = awsHeaderValue + "; " + AWS_HEADER_VALUE + "; Temporary Credentials";
-		}
-		else
-		{
-			this.awsHeaderValue = awsHeaderValue + "; " + AWS_HEADER_VALUE + "; Static Credentials";
-		}
-		
+		this.awsHeaderValue = awsHeaderValue;
 		LOGGER.trace("awsHeaderValue set to:", this.awsHeaderValue);
 		return this;
 	}
@@ -152,7 +141,7 @@ public class AWSAsyncBuilderConfigurator<BuilderT extends AwsAsyncClientBuilder<
 	}
 	
 	private void setAbstractRequestToClientBuilder() throws CoreException, URISyntaxException, UnknownHostException {			
-		ClientOverrideConfiguration clientOverrideConfiguration = AbstractRequestHelper.getClientOverrideConfiguration(abstractRequest, awsHeaderValue);
+		ClientOverrideConfiguration clientOverrideConfiguration = AbstractRequestHelper.getClientOverrideConfiguration(abstractRequest, credentials, awsHeaderValue);
 		if (clientOverrideConfiguration!= null) {
 			builder.overrideConfiguration(clientOverrideConfiguration);
 			LOGGER.debug("client config overriden");

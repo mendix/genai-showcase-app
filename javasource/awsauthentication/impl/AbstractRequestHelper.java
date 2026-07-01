@@ -13,16 +13,20 @@ import awsauthentication.proxies.AbstractRequest;
 import awsauthentication.proxies.AbstractRetryPolicy;
 import awsauthentication.proxies.ApacheHttpConfig;
 import awsauthentication.proxies.BasicClientConfig;
+import awsauthentication.proxies.Credentials;
 import awsauthentication.proxies.ENUM_Boolean;
 import awsauthentication.proxies.NoRetryPolicy;
 import awsauthentication.proxies.NumberRetryPolicy;
 import awsauthentication.proxies.SdkClientConfig;
+import awsauthentication.proxies.TemporaryCredentials;
 import awsauthentication.proxies.UrlHttpConfig;
 import software.amazon.awssdk.core.client.config.ClientOverrideConfiguration;
 import software.amazon.awssdk.core.retry.RetryPolicy;
 import software.amazon.awssdk.http.SdkHttpClient;
 import software.amazon.awssdk.http.apache.ApacheHttpClient;
 import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
+
+import static software.amazon.awssdk.core.client.config.SdkAdvancedClientOption.USER_AGENT_PREFIX;
 
 public class AbstractRequestHelper {
 	@SuppressWarnings("unused")
@@ -50,21 +54,29 @@ public class AbstractRequestHelper {
 	 * @return a ClientOverrideConfiguration with all values set based on the AbstractRequest
 	 * @throws CoreException
 	 */
-	public static ClientOverrideConfiguration getClientOverrideConfiguration(final AbstractRequest abstractRequest) throws CoreException {
-		return getClientOverrideConfiguration(abstractRequest, HEADER_VALUE);
+	public static ClientOverrideConfiguration getClientOverrideConfigurationx(final AbstractRequest abstractRequest, final Credentials credentials) throws CoreException {
+		return getClientOverrideConfiguration(abstractRequest, credentials, COMMUNITY_HEADER_VALUE);
 	}	
 	
-	public static ClientOverrideConfiguration getClientOverrideConfiguration(final AbstractRequest abstractRequest, final String awsHeaderValue) throws CoreException {
+	public static ClientOverrideConfiguration getClientOverrideConfiguration(final AbstractRequest abstractRequest, final Credentials credentials, final String awsHeaderValue) throws CoreException {
 		ClientOverrideConfiguration.Builder clientOverrideConfigBuilder = ClientOverrideConfiguration.builder();
 		
-		if (awsHeaderValue != null && !awsHeaderValue.isBlank()) {
-			clientOverrideConfigBuilder.putHeader(USER_AGENT, awsHeaderValue);
-			LOGGER.trace("header on client set:", awsHeaderValue);
+		String userAgentString;
+		if (awsHeaderValue == null || awsHeaderValue.isBlank()) {
+			userAgentString = COMMUNITY_HEADER_VALUE;
 		} 
-		else { 
-			clientOverrideConfigBuilder.putHeader(USER_AGENT, HEADER_VALUE);
-			LOGGER.trace("header on client set:", HEADER_VALUE);
+		else {
+			userAgentString = awsHeaderValue;
 		}
+		if (credentials instanceof TemporaryCredentials) {
+			userAgentString = userAgentString + "; " + AUTH_VERSION + "; Temporary Credentials;";
+		}
+		else
+		{
+			userAgentString = userAgentString + "; " + AUTH_VERSION + "; Static Credentials;";
+		}
+		LOGGER.trace("header on client set:", userAgentString);
+		clientOverrideConfigBuilder.putAdvancedOption(USER_AGENT_PREFIX, AWS_PRM + " - " + userAgentString);
 		
 		// check if both the request and the basicClientConfig are not null to prevent nullpointer exceptions. 
 		if (abstractRequest == null ) {
@@ -75,8 +87,7 @@ public class AbstractRequestHelper {
 		}
 		
 		BasicClientConfig basicClientConfig = abstractRequest.getAbstractRequest_BasicClientConfig();
-		setClientOverrideValues(clientOverrideConfigBuilder, basicClientConfig);
-		
+		setClientOverrideValues(clientOverrideConfigBuilder, basicClientConfig);		
 		
 		return clientOverrideConfigBuilder.build();
 	}
@@ -267,7 +278,10 @@ public class AbstractRequestHelper {
 		}
 		
 	}
-	private static final String HEADER_VALUE = "Mendix-Community-Supported-Connector";
-	private static final String USER_AGENT = "User-Agent";
+	//TODO Replace x.y.z below with correct version nr and delete this line in rc-branch
+	private static final String AUTH_VERSION = "Mendix-Authentication-4.1.4";
+
+	private static final String COMMUNITY_HEADER_VALUE = "Mendix-Community-Supported-Connector";
+	private static final String AWS_PRM = "APN_1.1/pc_4s31zx4aq7agcftizepa3j7rx$";
 
 }

@@ -11,21 +11,31 @@ package amazons3connector.actions;
 
 import static java.util.Objects.requireNonNull;
 import java.util.Date;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
+import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 import amazons3connector.impl.AmazonS3Client;
 import amazons3connector.impl.MxLogger;
+import amazons3connector.proxies.ENUM_AWS_CommitmentPolicy;
 import amazons3connector.proxies.ENUM_StorageClass;
 import amazons3connector.proxies.GetObjectMetaData;
 import amazons3connector.proxies.GetObjectResponse;
 import amazons3connector.proxies.GetS3ObjectUsage;
-import software.amazon.awssdk.services.s3.S3Client;
+import awsauthentication.proxies.Credentials;
+import awsauthentication.proxies.ENUM_Region;
 import software.amazon.awssdk.core.ResponseInputStream;
-import com.mendix.systemwideinterfaces.core.IMendixObject;
+import software.amazon.awssdk.core.async.AsyncResponseTransformer;
+import software.amazon.awssdk.services.s3.S3AsyncClient;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest.Builder;
 import software.amazon.awssdk.services.s3.model.StorageClass;
-import com.mendix.systemwideinterfaces.core.UserAction;
+import software.amazon.encryption.s3.S3AsyncEncryptionClient;
 
 public class GetObject extends UserAction<IMendixObject>
 {
@@ -42,13 +52,18 @@ public class GetObject extends UserAction<IMendixObject>
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __TargetFile;
 	private final system.proxies.FileDocument TargetFile;
+	/** @deprecated use ClientsideEncryptionConfig.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __ClientsideEncryptionConfig;
+	private final amazons3connector.proxies.ClientsideEncryptionConfig ClientsideEncryptionConfig;
 
 	public GetObject(
 		IContext context,
 		IMendixObject _credentials,
 		java.lang.String _region,
 		IMendixObject _getObjectRequest,
-		IMendixObject _targetFile
+		IMendixObject _targetFile,
+		IMendixObject _clientsideEncryptionConfig
 	)
 	{
 		super(context);
@@ -59,6 +74,8 @@ public class GetObject extends UserAction<IMendixObject>
 		this.GetObjectRequest = _getObjectRequest == null ? null : amazons3connector.proxies.GetObjectRequest.initialize(getContext(), _getObjectRequest);
 		this.__TargetFile = _targetFile;
 		this.TargetFile = _targetFile == null ? null : system.proxies.FileDocument.initialize(getContext(), _targetFile);
+		this.__ClientsideEncryptionConfig = _clientsideEncryptionConfig;
+		this.ClientsideEncryptionConfig = _clientsideEncryptionConfig == null ? null : amazons3connector.proxies.ClientsideEncryptionConfig.initialize(getContext(), _clientsideEncryptionConfig);
 	}
 
 	@java.lang.Override
@@ -75,24 +92,59 @@ public class GetObject extends UserAction<IMendixObject>
 			validateRequest();
 			
 			// Building the AWS GetObjectRequest
-			software.amazon.awssdk.services.s3.model.GetObjectRequest awsRequest = createAWSRequest();
+			GetObjectRequest awsRequest = createAWSRequest();
 		
 			// Logging of the request building		
 			LOGGER.debug("AWS request:", awsRequest);
-			
-			// Client creation		
-			S3Client client = AmazonS3Client.getS3Client(Credentials, Region, GetObjectRequest);
-			ResponseInputStream<software.amazon.awssdk.services.s3.model.GetObjectResponse> awsResponseStream = client.getObject(awsRequest);
-			// Logging of the AWS response
-			LOGGER.debug("AWS response:", awsResponseStream);
-			
-			// Creating and committing TargetFile
-			createMxSystemFileObject(awsResponseStream, TargetFile);
-	
-			//Mapping response to Mx objects
-			amazons3connector.proxies.GetObjectResponse MxResponse = mapResponseToMxObject(awsResponseStream);
-			LOGGER.debug("MxResponse:", MxResponse);
-			return MxResponse.getMendixObject();			
+			// Check if ClientsideEncryptionConfig exists or not
+			if (ClientsideEncryptionConfig == null) {
+				// Client creation		
+				S3Client client = AmazonS3Client.getS3Client(Credentials, Region, GetObjectRequest);
+				ResponseInputStream<software.amazon.awssdk.services.s3.model.GetObjectResponse> awsResponseStream = client.getObject(awsRequest);
+				// Logging of the AWS response
+				LOGGER.debug("AWS response:", awsResponseStream);
+				
+				// Creating and committing TargetFile
+				createMxSystemFileObject(awsResponseStream, TargetFile);
+		
+				//Mapping response to Mx objects
+				amazons3connector.proxies.GetObjectResponse MxResponse = mapResponseToMxObject(awsResponseStream);
+				LOGGER.debug("MxResponse:", MxResponse);
+				return MxResponse.getMendixObject();	
+			} else {	
+				// ---- Read Mendix parameters ----
+				String kmsKeyId = ClientsideEncryptionConfig.getKmsKey();
+				ENUM_Region kmsRegion = ClientsideEncryptionConfig.getKmsRegion();
+				Credentials kmsCredentials = ClientsideEncryptionConfig.getClientsideEncryptionConfig_Credentials();
+				ENUM_AWS_CommitmentPolicy mxPolicy = ClientsideEncryptionConfig.getCommitmentPolicy();
+
+				// ---- Validation ----
+				requireNonNull(kmsKeyId, "KMS keyId is required");
+				requireNonNull(kmsCredentials, "KMS credentials are required");
+				requireNonNull(kmsRegion, "KMS region is required");
+				requireNonNull(mxPolicy, "Commitment policy is required");
+
+				// Client creation		
+				S3AsyncClient client = AmazonS3Client.getS3AsyncClient(Credentials, Region, GetObjectRequest);
+
+				ExecutorService executor = Executors.newFixedThreadPool(2);
+
+				S3AsyncEncryptionClient encryptedClient = AmazonS3Client.createEncryptedClient(kmsCredentials, kmsRegion, kmsKeyId, client, mxPolicy, GetObjectRequest);
+
+				CompletableFuture<ResponseInputStream<software.amazon.awssdk.services.s3.model.GetObjectResponse>> future =
+					encryptedClient.getObject(
+						awsRequest,
+						AsyncResponseTransformer.toBlockingInputStream()
+					);
+
+				ResponseInputStream<software.amazon.awssdk.services.s3.model.GetObjectResponse> decryptedStream = future.join();
+
+				createMxSystemFileObject(decryptedStream, TargetFile);
+
+				GetObjectResponse mxResponse = mapResponseToMxObject(decryptedStream);
+
+				return mxResponse.getMendixObject();
+			}	
 		}
 		catch (Exception e) {
 			LOGGER.error(e.getMessage());
@@ -174,31 +226,14 @@ public class GetObject extends UserAction<IMendixObject>
 	}
 
 	private ENUM_StorageClass getStorageClassEnumValue(StorageClass storageClass) {
-		switch (storageClass) {
-		case DEEP_ARCHIVE:
-			return ENUM_StorageClass.DEEP_ARCHIVE;
-		case GLACIER:
-			return ENUM_StorageClass.GLACIER;
-		case GLACIER_IR:
-			return ENUM_StorageClass.GLACIER_IR;
-		case INTELLIGENT_TIERING:
-			return ENUM_StorageClass.INTELLIGENT_TIERING;
-		case ONEZONE_IA:
-			return ENUM_StorageClass.ONEZONE_IA;
-		case OUTPOSTS:
-			return ENUM_StorageClass.OUTPOSTS;
-		case REDUCED_REDUNDANCY:
-			return ENUM_StorageClass.REDUCED_REDUNDANCY;
-		case SNOW:
-			return ENUM_StorageClass.SNOW;
-		case STANDARD:
-			return ENUM_StorageClass.STANDARD;
-		case STANDARD_IA:
-			return ENUM_StorageClass.STANDARD_IA;
-		default:
-			LOGGER.debug("A storage class unknown to the SDK has been returned.");
+		try {
+			return ENUM_StorageClass.valueOf(storageClass.name());
+		}
+		catch (IllegalArgumentException e) {
+			LOGGER.warn("ENUM_StorageClass value not found for value ", storageClass.name(), ", returning value ", ENUM_StorageClass.UNKNOWN_TO_SDK_VERSION.name());
 			return ENUM_StorageClass.UNKNOWN_TO_SDK_VERSION;
 		}
 	}
+
 	// END EXTRA CODE
 }

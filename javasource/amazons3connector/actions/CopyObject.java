@@ -11,18 +11,18 @@ package amazons3connector.actions;
 
 import static java.util.Objects.requireNonNull;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 import amazons3connector.impl.AmazonS3Client;
 import amazons3connector.impl.MxLogger;
 import amazons3connector.proxies.S3RequestMetaData;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.CopyObjectRequest.Builder;
-import java.util.List;
-import java.util.Map;
-import com.mendix.systemwideinterfaces.core.UserAction;
 
 public class CopyObject extends UserAction<java.lang.Boolean>
 {
