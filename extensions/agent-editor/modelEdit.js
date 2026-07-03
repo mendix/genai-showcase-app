@@ -1,180 +1,420 @@
 import { j as e } from "./jsx-runtime-CWOFuNcx.js";
-import { r as h, a9 as T, a6 as B, a7 as N, aa as R } from "./PageContainers-BvK5usmz.js";
-import { u as V, B as K, C as W, c as q } from "./TextWithIcon-DT9zjsRe.js";
-import { c as F, g as O, u as S } from "./modelUtils-CCQmrDg1.js";
-import { a as H, b as U } from "./documentInitUtils-Bwe4f_Cu.js";
-import { a as P } from "./modelIcons-tHNcUPkT.js";
-import { C as Z } from "./CenteredLoadingSpinner-DRQ0Sbi_.js";
-import { C as y, i as _, B as z, v as $, a as X } from "./ButtonWithLabel-DyybWRom.js";
-import { G as J } from "./GroupBox-Bv1UqUKB.js";
-import { y as E } from "./Link-Bxad9cv4.js";
-import { createStudioProLogger as Q } from "./logger-gMbuSAUF.js";
-import { g as Y, h as ee } from "./constantUtils-D0RXxXWn.js";
-import { d as te } from "./mxCloudGenAIUtils-U7THU9De.js";
-import { W as ne } from "./Banner-DAKvWnIG.js";
-import { T as oe } from "./Table-bHKZTZKr.js";
-import { T as w } from "./TextInputLabeled-C0PQPpUV.js";
-import { T as se } from "./TextInputWithButton-CkuCCNYk.js";
-import { D as M, a as C, d as D } from "./formelements-Daexkze0.js";
-const re = (t, o, i, s) => async () => {
-  if (!(t.provider === s && "key" in t.providerFields) && s === "MxCloudGenAI") {
-    const a = H(), l = { ...t, provider: s, providerFields: a };
-    o(l), i(l);
+import { r as h, a9 as Q, a6 as Y, a7 as ee, aa as te } from "./PageContainers-BvK5usmz.js";
+import { u as H, B as V, C as P, c as ne } from "./TextWithIcon-DT9zjsRe.js";
+import { g as W, c as O, u as F } from "./modelUtils-CVjEFoDU.js";
+import { a as oe, b as se, d as re } from "./documentInitUtils-CLdpbIQ7.js";
+import { a as K } from "./modelIcons-tHNcUPkT.js";
+import { C as ae } from "./CenteredLoadingSpinner-DRQ0Sbi_.js";
+import { i as N, C as c, B as $, v as G, a as ie } from "./ButtonWithLabel-DyybWRom.js";
+import { G as le } from "./GroupBox-Bv1UqUKB.js";
+import { y as R } from "./Link-Bxad9cv4.js";
+import { W as T } from "./Banner-DAKvWnIG.js";
+import { T as U } from "./Table-bHKZTZKr.js";
+import { T as q } from "./TextInputWithButton-CkuCCNYk.js";
+import { D as I, a as M, d as B } from "./formelements-Daexkze0.js";
+import { h as z, g as de } from "./constantUtils-D0RXxXWn.js";
+import { createStudioProLogger as ce } from "./logger-gMbuSAUF.js";
+import { d as ue } from "./mxCloudGenAIUtils-U7THU9De.js";
+import { T as A } from "./TextInputLabeled-C0PQPpUV.js";
+const pe = (t, n, a, o) => async () => {
+  if (!(t.provider === o && "key" in t.providerFields)) {
+    if (o === "MxCloudGenAI") {
+      const s = oe(), l = {
+        ...t,
+        provider: o,
+        importMicroflow: "AgentEditorCommons.MxCloudDeployedModel_CreateUpdateFromModel",
+        providerFields: s
+      };
+      n(l), a(l);
+    }
+    if (o === "Azure") {
+      const s = se(), l = {
+        ...t,
+        provider: o,
+        importMicroflow: "OpenAIConnector.AzureDeployedModel_CreateUpdateFromModel",
+        providerFields: s
+      };
+      n(l), a(l);
+    }
+    if (!o) {
+      const s = {
+        ...t,
+        provider: void 0,
+        importMicroflow: "",
+        providerFields: {}
+      };
+      n(s), a(s);
+    }
   }
-}, ae = async (t, o, i, s, a) => {
-  const l = Q(t);
-  let c;
-  try {
-    const p = o.providerFields, m = await Y(t, p.key);
-    if (!m)
-      throw new Error("No key value found. Please make sure the key constant is correctly configured.");
-    const d = te(t, m);
-    if (d.type !== "TEXT_GENERATION")
-      throw new Error(
-        `Unsupported key type: ${d.type}. Only Text Generation keys are currently supported.`
-      );
-    const r = {
-      key: p.key,
-      keyId: d.keyId || "",
-      keyName: d.keyName || "",
-      resourceName: d.name || "",
-      environment: d.environment || "",
-      deepLinkURL: d.deepLinkUrl || ""
-    };
-    if (p?.keyId === r.keyId)
-      return;
-    c = {
-      ...o,
-      providerFields: {
-        ...r
-      }
-    }, s(c), a(c);
-  } catch (p) {
-    l.error("Error during MxCloud GenAI key import:", p), i(y.InvalidContent), c = F(o), s(c), a(c);
-  }
-}, ie = async (t, o) => {
-  let i = [];
-  const s = [
+}, me = async (t, n) => {
+  let a = [];
+  const o = [
     {
       title: "Getting available model versions",
       description: "Getting available model versions",
       action: async () => {
-        const l = await O(t, o);
-        return typeof l == "string" ? l : (i = l, !0);
+        const l = await W(t, n);
+        return typeof l == "string" ? l : (a = l, !0);
       }
     }
-  ], a = await t.ui.dialogs.showProgressDialog("Model versions", s);
-  switch (a.result) {
+  ], s = await t.ui.dialogs.showProgressDialog("Model versions", o);
+  switch (s.result) {
     case "Success":
-      return i;
+      return a;
     case "UserCancelled":
       return;
     case "Failure": {
-      const l = "No connection. Make sure you are connected to the internet and check that a valid key is set as value for the selected constant.", c = a.failedStep?.error ?? "";
-      await t.ui.messageBoxes.show("error", l, c);
+      const l = `No connection. Make sure you are connected to the internet and check that a valid key and endpoint have been set as value for the selected constants. 
+The project endpoint must be of format https://resource-name.services.ai.azure.com/api/projects/project-name`, u = s.failedStep?.error ?? "";
+      await t.ui.messageBoxes.show("error", l, u);
       return;
     }
   }
 };
-async function le(t, o) {
-  const i = o.providerFields, s = await t.ui.elementSelectors.selectDocument({
+async function ve(t, n) {
+  const a = n.providerFields, o = await t.ui.elementSelectors.selectDocument({
     allowNone: !0,
     query: { elementType: "Constants$Constant" },
-    selectedElementId: i?.key?.documentId
+    selectedElementId: a?.key?.documentId
   });
-  if (s.status === "ok")
+  if (o.status === "ok")
     return {
-      ...o,
+      ...n,
       providerFields: {
-        ...o.providerFields,
+        ...n.providerFields,
         key: {
-          documentId: s.selected.id,
-          qualifiedName: s.selected.module + "." + s.selected.name
+          documentId: o.selected.id,
+          qualifiedName: o.selected.module + "." + o.selected.name
         }
       }
     };
-  if (s.status === "none")
-    return { ...o, providerFields: { ...o.providerFields, key: void 0 } };
+  if (o.status === "none")
+    return { ...n, providerFields: { ...n.providerFields, key: void 0 } };
 }
-const de = ({
+async function ye(t, n) {
+  const a = n.providerFields, o = await t.ui.elementSelectors.selectDocument({
+    allowNone: !0,
+    query: { elementType: "Constants$Constant" },
+    selectedElementId: a?.endpoint?.documentId
+  });
+  if (o.status === "ok")
+    return {
+      ...n,
+      providerFields: {
+        ...n.providerFields,
+        endpoint: {
+          documentId: o.selected.id,
+          qualifiedName: o.selected.module + "." + o.selected.name
+        }
+      }
+    };
+  if (o.status === "none")
+    return { ...n, providerFields: { ...n.providerFields, endpoint: void 0 } };
+}
+const Z = ({
   width: t = "1em",
-  height: o = "1em",
-  fill: i = "currentColor",
-  className: s,
-  style: a
+  height: n = "1em",
+  fill: a = "currentColor",
+  className: o,
+  style: s
 }) => /* @__PURE__ */ e.jsxs(
   "svg",
   {
     width: t,
-    height: o,
+    height: n,
     viewBox: "0 0 16 16",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
-    className: s,
-    style: a,
+    className: o,
+    style: s,
     children: [
-      /* @__PURE__ */ e.jsx("path", { d: "M9.06641 3.18945L12.899 12.8024L15.0007 12.8024L11.1681 3.18945L9.06641 3.18945Z", fill: i }),
+      /* @__PURE__ */ e.jsx("path", { d: "M9.06641 3.18945L12.899 12.8024L15.0007 12.8024L11.1681 3.18945L9.06641 3.18945Z", fill: a }),
       /* @__PURE__ */ e.jsx(
         "path",
         {
           d: "M4.61938 8.99843L5.93076 5.62017L7.24216 8.99843H4.61938ZM4.83198 3.18945L1 12.8024H3.14261L3.92632 10.7837H7.93534L8.71891 12.8024H10.8615L7.02954 3.18945L4.83198 3.18945Z",
-          fill: i
+          fill: a
         }
       )
     ]
   }
-), I = () => {
-}, ce = ({ studioPro: t, model: o, setModel: i, updateStudioProDocument: s }) => {
-  const [a, l] = h.useState(), [c, p] = h.useState(null), [m, d] = h.useState(null), r = o.providerFields, k = async () => {
-    r.key && ee(t, r.key);
-  }, v = async (n) => {
-    const g = n.providerFields, L = await $(t, g.key);
-    if (l(L), p(null), d(null), !L)
-      ae(t, n, l, i, s);
-    else {
-      const b = F(n);
-      i(b), s(b);
-    }
-  }, u = async () => {
-    const n = await le(t, o);
-    n && (i(n), s(n), await v(n));
-  }, x = async () => {
-    const n = await ie(t, o);
-    n ? (p(n), d(/* @__PURE__ */ new Date())) : (d(null), p(null));
-  }, j = (n) => {
-    (r.key && n.includes(r.key.documentId) || n.includes("projectSettings")) && v(o);
+), he = ({
+  width: t = "1em",
+  height: n = "1em",
+  fill: a = "currentColor",
+  className: o,
+  style: s
+}) => /* @__PURE__ */ e.jsxs(
+  "svg",
+  {
+    width: t,
+    height: n,
+    viewBox: "0 0 16 16",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg",
+    className: o,
+    style: s,
+    children: [
+      /* @__PURE__ */ e.jsx("path", { d: "M9.06641 3.18945L12.899 12.8024L15.0007 12.8024L11.1681 3.18945L9.06641 3.18945Z", fill: a }),
+      /* @__PURE__ */ e.jsx(
+        "path",
+        {
+          d: "M4.61938 8.99843L5.93076 5.62017L7.24216 8.99843H4.61938ZM4.83198 3.18945L1 12.8024H3.14261L3.92632 10.7837H7.93534L8.71891 12.8024H10.8615L7.02954 3.18945L4.83198 3.18945Z",
+          fill: a
+        }
+      )
+    ]
+  }
+), xe = ({ studioPro: t, model: n, setModel: a, updateStudioProDocument: o }) => {
+  const [s, l] = h.useState(), [u, x] = h.useState(), [v, m] = h.useState(null), [p, g] = h.useState(null), d = n.providerFields, y = async () => {
+    d.key && z(t, d.key);
+  }, C = async () => {
+    d.endpoint && z(t, d.endpoint);
+  }, f = async (r) => {
+    const j = r.providerFields, X = await G(t, j.key);
+    l(X);
+    const J = await G(t, j.endpoint);
+    x(J), m(null), g(null);
+  }, k = async () => {
+    const r = await ye(t, n);
+    r && (a(r), o(r), f(r));
+  }, L = async () => {
+    const r = await ve(t, n);
+    r && (a(r), o(r), f(r));
+  }, E = async () => {
+    const r = await me(t, n);
+    r ? (m(r), g(/* @__PURE__ */ new Date())) : (g(null), m(null));
+  }, i = (r) => {
+    (d.key && r.includes(d.key.documentId) || r.includes("projectSettings")) && f(n);
   };
-  V({
+  H({
     studioPro: t,
-    dependentIds: [r.key?.documentId].filter((n) => !!n),
+    dependentIds: [d.key?.documentId].filter((r) => !!r),
     watchProjectSettings: !0,
-    onDependentDocumentsChanged: j
+    onDependentDocumentsChanged: i
   }), h.useEffect(() => {
-    v(o);
+    f(n);
   }, []);
-  const f = (n) => n === y.Required ? "Model key is required" : n === y.NotFound ? "Selected constant not found. It might have been deleted or renamed. Please update the constant selection." : n === y.InvalidType ? "Selected constant must be of type string." : n === y.Excluded ? "Selected constant is excluded from the project and cannot be used." : !0, A = (n) => {
-    let g = null;
-    return new RegExp(/anthropic/i).test(n.id) && (g = /* @__PURE__ */ e.jsx(de, {})), g;
-  }, G = a === y.EmptyValue || a === y.InvalidContent || a === y.PrivateValue;
+  const w = (r) => r === c.Required ? "Model key is required" : r === c.NotFound ? "Selected constant not found. It might have been deleted or renamed. Please update the constant selection." : r === c.InvalidType ? "Selected constant must be of type string." : r === c.Excluded ? "Selected constant is excluded from the project and cannot be used." : !0, b = (r) => {
+    let j = null;
+    return new RegExp(/openai/i).test(r.modelPublisher) && (j = /* @__PURE__ */ e.jsx(he, { width: "1.3em", height: "1.3em" })), new RegExp(/anthropic/i).test(r.modelPublisher) && (j = /* @__PURE__ */ e.jsx(Z, { width: "1.3em", height: "1.3em" })), j;
+  }, S = s === c.EmptyValue || s === c.InvalidContent || s === c.PrivateValue, _ = u === c.EmptyValue || u === c.InvalidContent || u === c.PrivateValue;
   return /* @__PURE__ */ e.jsxs(e.Fragment, { children: [
     /* @__PURE__ */ e.jsx(
-      se,
+      q,
+      {
+        label: "Project endpoint",
+        ariaLabel: "Project endpoint",
+        value: d.endpoint?.qualifiedName ?? "",
+        icon: d.endpoint ? /* @__PURE__ */ e.jsx(N, {}) : void 0,
+        buttonCaption: "Select...",
+        onClick: k,
+        onClickSecondary: d.endpoint ? C : void 0,
+        validate: () => w(u),
+        buttonCaptionSecondary: d.endpoint ? "Show" : void 0
+      }
+    ),
+    _ && /* @__PURE__ */ e.jsxs(T, { children: [
+      /* @__PURE__ */ e.jsx(V, { children: u === c.PrivateValue ? "Missing permissions" : "Invalid constant value" }),
+      /* @__PURE__ */ e.jsx("div", { children: u === c.PrivateValue ? "Private constants require additional permissions for local use. Grant access via View > Extensions and reopen the current tab." : "In order to test your Model locally, please set a valid value for the endpoint constant. E.g. https://resource-name.services.ai.azure.com/api/projects/project-name" })
+    ] }),
+    /* @__PURE__ */ e.jsx(
+      q,
+      {
+        label: "API key",
+        ariaLabel: "API key",
+        value: d.key?.qualifiedName ?? "",
+        icon: d.key ? /* @__PURE__ */ e.jsx(N, {}) : void 0,
+        buttonCaption: "Select...",
+        onClick: L,
+        onClickSecondary: d.key ? y : void 0,
+        validate: () => w(s),
+        buttonCaptionSecondary: d.key ? "Show" : void 0
+      }
+    ),
+    S && /* @__PURE__ */ e.jsxs(T, { children: [
+      /* @__PURE__ */ e.jsx(V, { children: s === c.PrivateValue ? "Missing permissions" : "Invalid constant value" }),
+      /* @__PURE__ */ e.jsx("div", { children: s === c.PrivateValue ? "Private constants require additional permissions for local use. Grant access via View > Extensions and reopen the current tab." : "In order to test your Model locally, please set a valid value for the key constant." })
+    ] }),
+    (!d.endpoint || !d.key) && /* @__PURE__ */ e.jsxs(I, { children: [
+      /* @__PURE__ */ e.jsx(M, { children: /* @__PURE__ */ e.jsx(B, {}) }),
+      /* @__PURE__ */ e.jsx(M, { fullWidth: !0, children: /* @__PURE__ */ e.jsx(
+        R,
+        {
+          href: "https://docs.mendix.com/agents/reference-guide/external-connectors/openai/#azure-resource-name",
+          target: "_blank",
+          rel: "noreferrer,noopener",
+          children: "How to get the project endpoint and API key"
+        }
+      ) })
+    ] }),
+    d.endpoint && d.key && /* @__PURE__ */ e.jsxs(e.Fragment, { children: [
+      /* @__PURE__ */ e.jsx($, { label: "Model versions", buttonCaption: "List models", onPress: E }),
+      p && /* @__PURE__ */ e.jsxs(P, { children: [
+        "Last updated: ",
+        p.toLocaleString()
+      ] }),
+      v && /* @__PURE__ */ e.jsx(
+        U,
+        {
+          ariaLabel: "Model versions table",
+          columns: [
+            {
+              id: "name",
+              caption: "Deployment",
+              allowsResizing: !0,
+              isRowHeader: !0
+            },
+            {
+              id: "model",
+              caption: "Model",
+              allowsResizing: !0
+            }
+          ],
+          data: v.map((r) => [
+            {
+              cellContent: /* @__PURE__ */ e.jsxs(I, { alignItems: "center", children: [
+                b(r),
+                /* @__PURE__ */ e.jsx("div", { children: r.name })
+              ] }),
+              tooltipText: r.name
+            },
+            {
+              cellContent: `${r.modelName} (${r.modelPublisher})`,
+              tooltipText: `${r.modelName} (${r.modelPublisher})`
+            }
+          ])
+        }
+      )
+    ] })
+  ] });
+}, fe = async (t, n, a, o, s) => {
+  const l = ce(t);
+  let u;
+  try {
+    const x = n.providerFields, v = await de(t, x.key);
+    if (!v)
+      throw new Error("No key value found. Please make sure the key constant is correctly configured.");
+    const m = ue(t, v);
+    if (m.type !== "TEXT_GENERATION")
+      throw new Error(
+        `Unsupported key type: ${m.type}. Only Text Generation keys are currently supported.`
+      );
+    const p = {
+      key: x.key,
+      keyId: m.keyId || "",
+      keyName: m.keyName || "",
+      resourceName: m.name || "",
+      environment: m.environment || "",
+      deepLinkURL: m.deepLinkUrl || ""
+    };
+    if (x?.keyId === p.keyId)
+      return;
+    u = {
+      ...n,
+      providerFields: {
+        ...p
+      }
+    }, o(u), s(u);
+  } catch (x) {
+    l.error("Error during MxCloud GenAI key import:", x), a(c.InvalidContent), u = O(n), o(u), s(u);
+  }
+}, ge = async (t, n) => {
+  let a = [];
+  const o = [
+    {
+      title: "Getting available model versions",
+      description: "Getting available model versions",
+      action: async () => {
+        const l = await W(t, n);
+        return typeof l == "string" ? l : (a = l, !0);
+      }
+    }
+  ], s = await t.ui.dialogs.showProgressDialog("Model versions", o);
+  switch (s.result) {
+    case "Success":
+      return a;
+    case "UserCancelled":
+      return;
+    case "Failure": {
+      const l = "No connection. Make sure you are connected to the internet and check that a valid key is set as value for the selected constant.", u = s.failedStep?.error ?? "";
+      await t.ui.messageBoxes.show("error", l, u);
+      return;
+    }
+  }
+};
+async function Ce(t, n) {
+  const a = n.providerFields, o = await t.ui.elementSelectors.selectDocument({
+    allowNone: !0,
+    query: { elementType: "Constants$Constant" },
+    selectedElementId: a?.key?.documentId
+  });
+  if (o.status === "ok")
+    return {
+      ...n,
+      providerFields: {
+        ...n.providerFields,
+        key: {
+          documentId: o.selected.id,
+          qualifiedName: o.selected.module + "." + o.selected.name
+        }
+      }
+    };
+  if (o.status === "none")
+    return { ...n, providerFields: { ...n.providerFields, key: void 0 } };
+}
+const D = () => {
+}, ke = ({ studioPro: t, model: n, setModel: a, updateStudioProDocument: o }) => {
+  const [s, l] = h.useState(), [u, x] = h.useState(null), [v, m] = h.useState(null), p = n.providerFields, g = async () => {
+    p.key && z(t, p.key);
+  }, d = async (i) => {
+    const w = i.providerFields, b = await G(t, w.key);
+    if (l(b), x(null), m(null), !b)
+      fe(t, i, l, a, o);
+    else {
+      const S = O(i);
+      a(S), o(S);
+    }
+  }, y = async () => {
+    const i = await Ce(t, n);
+    i && (a(i), o(i), await d(i));
+  }, C = async () => {
+    const i = await ge(t, n);
+    i ? (x(i), m(/* @__PURE__ */ new Date())) : (m(null), x(null));
+  }, f = (i) => {
+    (p.key && i.includes(p.key.documentId) || i.includes("projectSettings")) && d(n);
+  };
+  H({
+    studioPro: t,
+    dependentIds: [p.key?.documentId].filter((i) => !!i),
+    watchProjectSettings: !0,
+    onDependentDocumentsChanged: f
+  }), h.useEffect(() => {
+    d(n);
+  }, []);
+  const k = (i) => i === c.Required ? "Model key is required" : i === c.NotFound ? "Selected constant not found. It might have been deleted or renamed. Please update the constant selection." : i === c.InvalidType ? "Selected constant must be of type string." : i === c.Excluded ? "Selected constant is excluded from the project and cannot be used." : !0, L = (i) => {
+    let w = null;
+    return new RegExp(/anthropic/i).test(i.id) && (w = /* @__PURE__ */ e.jsx(Z, { width: "1.3em", height: "1.3em" })), w;
+  }, E = s === c.EmptyValue || s === c.InvalidContent || s === c.PrivateValue;
+  return /* @__PURE__ */ e.jsxs(e.Fragment, { children: [
+    /* @__PURE__ */ e.jsx(
+      q,
       {
         label: "Model key",
         ariaLabel: "Model key",
-        value: r.key?.qualifiedName ?? "",
-        icon: r.key ? /* @__PURE__ */ e.jsx(_, {}) : void 0,
+        value: p.key?.qualifiedName ?? "",
+        icon: p.key ? /* @__PURE__ */ e.jsx(N, {}) : void 0,
         buttonCaption: "Select...",
-        onClick: u,
-        onClickSecondary: r.key ? k : void 0,
-        validate: () => f(a),
-        buttonCaptionSecondary: r.key ? "Show" : void 0
+        onClick: y,
+        onClickSecondary: p.key ? g : void 0,
+        validate: () => k(s),
+        buttonCaptionSecondary: p.key ? "Show" : void 0
       }
     ),
-    !r.key && /* @__PURE__ */ e.jsxs(M, { children: [
-      /* @__PURE__ */ e.jsx(C, { children: /* @__PURE__ */ e.jsx(D, {}) }),
-      /* @__PURE__ */ e.jsx(C, { fullWidth: !0, children: /* @__PURE__ */ e.jsx(
-        E,
+    !p.key && /* @__PURE__ */ e.jsxs(I, { children: [
+      /* @__PURE__ */ e.jsx(M, { children: /* @__PURE__ */ e.jsx(B, {}) }),
+      /* @__PURE__ */ e.jsx(M, { fullWidth: !0, children: /* @__PURE__ */ e.jsx(
+        R,
         {
           href: "https://genai.home.mendix.com/p/resources",
           target: "_blank",
@@ -183,52 +423,52 @@ const de = ({
         }
       ) })
     ] }),
-    G && /* @__PURE__ */ e.jsxs(ne, { children: [
-      /* @__PURE__ */ e.jsx(K, { children: a === y.PrivateValue ? "Missing permissions" : "Invalid constant value" }),
-      /* @__PURE__ */ e.jsx("div", { children: a === y.PrivateValue ? "Private constants require additional permissions for local use. Grant access via View > Extensions and reopen the current tab." : "In order to test your Model locally, please set a valid value for the key constant." })
+    E && /* @__PURE__ */ e.jsxs(T, { children: [
+      /* @__PURE__ */ e.jsx(V, { children: s === c.PrivateValue ? "Missing permissions" : "Invalid constant value" }),
+      /* @__PURE__ */ e.jsx("div", { children: s === c.PrivateValue ? "Private constants require additional permissions for local use. Grant access via View > Extensions and reopen the current tab." : "In order to test your Model locally, please set a valid value for the key constant." })
     ] }),
-    r.keyId && /* @__PURE__ */ e.jsxs(e.Fragment, { children: [
+    p.keyId && /* @__PURE__ */ e.jsxs(e.Fragment, { children: [
       /* @__PURE__ */ e.jsx(
-        w,
+        A,
         {
           label: "Resource",
           ariaLabel: "Resource name",
-          value: r.resourceName,
-          onChange: I,
+          value: p.resourceName,
+          onChange: D,
           readOnly: !0
         }
       ),
       /* @__PURE__ */ e.jsx(
-        w,
+        A,
         {
           label: "Key name",
           ariaLabel: "Key name",
-          value: r.keyName,
-          onChange: I,
+          value: p.keyName,
+          onChange: D,
           readOnly: !0
         }
       ),
       /* @__PURE__ */ e.jsx(
-        w,
+        A,
         {
           label: "Environment",
           ariaLabel: "Environment",
-          value: r.environment,
-          onChange: I,
+          value: p.environment,
+          onChange: D,
           readOnly: !0
         }
       ),
-      /* @__PURE__ */ e.jsxs(M, { children: [
-        /* @__PURE__ */ e.jsx(C, { children: /* @__PURE__ */ e.jsx(D, {}) }),
-        /* @__PURE__ */ e.jsx(C, { fullWidth: !0, children: /* @__PURE__ */ e.jsx(E, { href: r.deepLinkURL, target: "_blank", rel: "noreferrer,noopener", children: "View resource in the portal" }) })
+      /* @__PURE__ */ e.jsxs(I, { children: [
+        /* @__PURE__ */ e.jsx(M, { children: /* @__PURE__ */ e.jsx(B, {}) }),
+        /* @__PURE__ */ e.jsx(M, { fullWidth: !0, children: /* @__PURE__ */ e.jsx(R, { href: p.deepLinkURL, target: "_blank", rel: "noreferrer,noopener", children: "View resource in the portal" }) })
       ] }),
-      /* @__PURE__ */ e.jsx(z, { label: "Model versions", buttonCaption: "List models", onPress: x }),
-      m && /* @__PURE__ */ e.jsxs(W, { children: [
+      /* @__PURE__ */ e.jsx($, { label: "Model versions", buttonCaption: "List models", onPress: C }),
+      v && /* @__PURE__ */ e.jsxs(P, { children: [
         "Last updated: ",
-        m.toLocaleString()
+        v.toLocaleString()
       ] }),
-      c && /* @__PURE__ */ e.jsx(
-        oe,
+      u && /* @__PURE__ */ e.jsx(
+        U,
         {
           ariaLabel: "Model versions table",
           columns: [
@@ -244,76 +484,85 @@ const de = ({
               allowsResizing: !0
             }
           ],
-          data: c.map((n) => [
+          data: u.map((i) => [
             {
-              cellContent: /* @__PURE__ */ e.jsxs(M, { alignItems: "center", children: [
-                A(n),
-                /* @__PURE__ */ e.jsx("div", { children: n.name })
+              cellContent: /* @__PURE__ */ e.jsxs(I, { alignItems: "center", children: [
+                L(i),
+                /* @__PURE__ */ e.jsx("div", { children: i.name })
               ] }),
-              tooltipText: n.name
+              tooltipText: i.name
             },
             {
-              cellContent: n.id,
-              tooltipText: n.id
+              cellContent: i.id,
+              tooltipText: i.id
             }
           ])
         }
       )
     ] })
   ] });
-}, ue = U(), pe = ({ studioPro: t, documentId: o }) => {
-  const i = t.ui.messageBoxes, s = t.app.model.customBlobDocuments, [a, l] = h.useState(0), [c, p] = h.useState(!1), [m, d] = h.useState(ue), r = [
-    { key: "MxCloudGenAI", caption: "Mendix Cloud GenAI", icon: P }
+}, we = re(), je = ({ studioPro: t, documentId: n }) => {
+  const a = t.ui.messageBoxes, o = t.app.model.customBlobDocuments, [s, l] = h.useState(0), [u, x] = h.useState(!1), [v, m] = h.useState(we), p = [
+    { key: "MxCloudGenAI", caption: "Mendix Cloud GenAI", icon: K },
+    { key: "Azure", caption: "Azure AI", icon: K }
   ];
   h.useEffect(() => {
-    const u = (x) => {
-      const { documents: j } = x;
-      j.some((f) => f.documentId === o) && l((f) => f + 1);
+    const y = (C) => {
+      const { documents: f } = C;
+      f.some((k) => k.documentId === n) && l((k) => k + 1);
     };
-    return s.addEventListener("documentsChanged", u), () => {
-      s.removeEventListener("documentsChanged", u);
+    return o.addEventListener("documentsChanged", y), () => {
+      o.removeEventListener("documentsChanged", y);
     };
   }, []), h.useEffect(() => {
-    s.getDocumentById(o).then(async (u) => {
-      if (u && !("error" in u)) {
-        const x = u.document.contents;
-        d({ ...x }), p(!0);
+    o.getDocumentById(n).then(async (y) => {
+      if (y && !("error" in y)) {
+        const C = y.document.contents;
+        m({ ...C }), x(!0);
       } else
-        throw new Error(u?.error || "Document not found");
-    }).catch(async (u) => {
-      await i.show("error", "Error loading document", "Details: " + u?.message || u);
+        throw new Error(y?.error || "Document not found");
+    }).catch(async (y) => {
+      await a.show("error", "Error loading document", "Details: " + y?.message || y);
     });
-  }, [a]);
-  const k = async (u) => {
-    re(m, d, S(t, o), u)();
-  }, v = () => m.provider ? !0 : "Model provider is required.";
-  return /* @__PURE__ */ e.jsx(T, { studioPro: t, children: /* @__PURE__ */ e.jsxs(B, { children: [
-    !c && /* @__PURE__ */ e.jsx(Z, {}),
-    c && /* @__PURE__ */ e.jsx(N, { children: /* @__PURE__ */ e.jsx(R, { children: /* @__PURE__ */ e.jsxs(J, { label: "Configuration", children: [
+  }, [s]);
+  const g = async (y) => {
+    pe(v, m, F(t, n), y)();
+  }, d = () => v.provider ? !0 : "Model provider is required.";
+  return /* @__PURE__ */ e.jsx(Q, { studioPro: t, children: /* @__PURE__ */ e.jsxs(Y, { children: [
+    !u && /* @__PURE__ */ e.jsx(ae, {}),
+    u && /* @__PURE__ */ e.jsx(ee, { children: /* @__PURE__ */ e.jsx(te, { children: /* @__PURE__ */ e.jsxs(le, { label: "Configuration", children: [
       /* @__PURE__ */ e.jsx(
-        X,
+        ie,
         {
           ariaLabel: "Provider",
-          isDisabled: !0,
           label: "Provider",
-          selectedKey: m.provider,
-          options: r,
-          onSelectionChange: k,
-          validate: v
+          selectedKey: v.provider ?? null,
+          options: p,
+          onSelectionChange: g,
+          validate: d
         }
       ),
-      m.provider === "MxCloudGenAI" && /* @__PURE__ */ e.jsx(
-        ce,
+      v.provider === "MxCloudGenAI" && /* @__PURE__ */ e.jsx(
+        ke,
         {
           studioPro: t,
-          model: m,
-          setModel: d,
-          updateStudioProDocument: S(t, o)
+          model: v,
+          setModel: m,
+          updateStudioProDocument: F(t, n)
+        }
+      ),
+      v.provider === "Azure" && /* @__PURE__ */ e.jsx(
+        xe,
+        {
+          studioPro: t,
+          model: v,
+          setModel: m,
+          updateStudioProDocument: F(t, n)
         }
       )
     ] }) }) })
   ] }) });
-}, Fe = q(pe);
+}, He = ne(je);
 export {
-  Fe as component
+  He as component
 };

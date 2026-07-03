@@ -6,7 +6,7 @@ import { u as A, D as F } from "./DialogFooter-CmNUeYU0.js";
 import { T as K, h, a as G } from "./toolHandlers-B8Y1dAHV.js";
 import { o as x } from "./genericUtils-GaF65l2f.js";
 import { a as d, c as H, h as W } from "./toolUtils-3GFu_U6Y.js";
-import { g as U } from "./documentInitUtils-Bwe4f_Cu.js";
+import { h as U } from "./documentInitUtils-CLdpbIQ7.js";
 import { G as C } from "./GroupBox-Bv1UqUKB.js";
 import { T as D } from "./TextInputWithButton-CkuCCNYk.js";
 import { _, I as $ } from "./ComboBox-DPKa68oX.js";

@@ -10,7 +10,7 @@ import { T as I } from "./TextInputLabeled-C0PQPpUV.js";
 import { T as Y } from "./TextInputWithButton-CkuCCNYk.js";
 import { o as Z } from "./genericUtils-GaF65l2f.js";
 import { k as P } from "./knowledgebaseIcons-B7aB_ZnQ.js";
-import { k as ee } from "./documentInitUtils-Bwe4f_Cu.js";
+import { k as ee } from "./documentInitUtils-CLdpbIQ7.js";
 import { g as te } from "./mxCloudGenAIUtils-U7THU9De.js";
 import { b as V } from "./toolUtils-3GFu_U6Y.js";
 import { h as p } from "./knowledgebaseToolHandlers-o9yeUkRo.js";

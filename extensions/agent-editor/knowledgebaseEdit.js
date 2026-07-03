@@ -2,7 +2,7 @@ import { j as n } from "./jsx-runtime-CWOFuNcx.js";
 import { r as f, a9 as M, a6 as W, a7 as q, aa as P } from "./PageContainers-BvK5usmz.js";
 import { u as U, B as _, C as $, c as z } from "./TextWithIcon-DT9zjsRe.js";
 import { createStudioProLogger as A } from "./logger-gMbuSAUF.js";
-import { e as B, f as G } from "./documentInitUtils-Bwe4f_Cu.js";
+import { f as B, g as G } from "./documentInitUtils-CLdpbIQ7.js";
 import { c as H, a as J } from "./modelIcons-tHNcUPkT.js";
 import { C as Q } from "./CenteredLoadingSpinner-DRQ0Sbi_.js";
 import { C as y, i as X, B as Y, v as Z, a as ee } from "./ButtonWithLabel-DyybWRom.js";
