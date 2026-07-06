@@ -4,7 +4,7 @@
 
 This Mendix project is no longer managed through GitHub, and no new releases will be published in this repository.
 
-For the latest versions and future releases, please refer to the **Mendix Marketplace**.
+For the latest versions and future releases, please refer to the [**Mendix Marketplace**](https://marketplace.mendix.com/link/component/220475).
 
 ------------------------------
 
