@@ -2952,18 +2952,6 @@
   content: "\ea6d";
 }
 
-.listview-horizontal.mx-listview > ul {
-  display: inline-block;
-  margin-bottom: 0;
-}
-.listview-horizontal.mx-listview > ul > li {
-  display: inline-block;
-}
-
-.listview-hide-on-empty.mx-listview > ul > li.mx-listview-empty {
-  display: none;
-}
-
 .popupmenu--display-flex.popupmenu {
   display: flex;
 }
@@ -31381,6 +31369,102 @@ input[type=checkbox].three-state-checkbox + .control-label {
   padding: 16px 24px;
 }
 
+.listview-horizontal.mx-listview > ul {
+  display: inline-block;
+  margin-bottom: 0;
+}
+.listview-horizontal.mx-listview > ul > li {
+  display: inline-block;
+}
+
+.listview-hide-on-empty.mx-listview > ul > li.mx-listview-empty {
+  display: none;
+}
+
+.icon-info-wrapper {
+  display: flex;
+  align-items: center;
+}
+.icon-info-wrapper img {
+  margin-right: 0;
+  margin-bottom: 0;
+}
+
+.argument-listview > ul {
+  margin-bottom: 0;
+}
+.argument-listview > ul > li {
+  padding: 8px;
+  border-top: none;
+}
+.argument-listview > ul > li:last-child {
+  border-bottom: none;
+}
+
+.mcpclient-badge, .mcpclient-badge--primary, .mcpclient-badge--default {
+  display: inline-flex;
+  height: 20px;
+  padding: 4px;
+  gap: 4px;
+  align-items: center;
+  border-radius: 4px;
+  font-size: 12px;
+  font-style: normal;
+}
+.mcpclient-badge .agent-tooltip div, .mcpclient-badge--primary .agent-tooltip div, .mcpclient-badge--default .agent-tooltip div,
+.mcpclient-badge .agent-tooltip .mx-link,
+.mcpclient-badge--primary .agent-tooltip .mx-link,
+.mcpclient-badge--default .agent-tooltip .mx-link {
+  line-height: 1;
+}
+
+.mcpclient-badge--default {
+  background: #fafafb;
+  border: 1px solid #a2a2a3;
+}
+
+.mcpclient-badge--primary {
+  background: #d4dbfa;
+  border: 1px solid #1b34a0;
+}
+
+.mcpclient-tooltip .widget-tooltip-content {
+  position: relative;
+  z-index: 1000;
+  text-align: unset;
+  word-break: break-word;
+  background-color: white;
+  border-radius: 4px;
+  color: black;
+}
+.mcpclient-tooltip .mx-link {
+  font-weight: normal;
+  line-height: 1.7857142863;
+}
+
+.w306 {
+  width: 306px;
+}
+
+.text-line-clamp--1 {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-clamp--2-lines {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+}
+
 .model-badge, .model-badge--primary, .model-badge--default {
   display: inline-flex;
   height: 20px;
@@ -31510,90 +31594,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .mxgenai-listview-horizontal.mx-listview > ul > li:hover {
   background-color: transparent;
-}
-
-.icon-info-wrapper {
-  display: flex;
-  align-items: center;
-}
-.icon-info-wrapper img {
-  margin-right: 0;
-  margin-bottom: 0;
-}
-
-.argument-listview > ul {
-  margin-bottom: 0;
-}
-.argument-listview > ul > li {
-  padding: 8px;
-  border-top: none;
-}
-.argument-listview > ul > li:last-child {
-  border-bottom: none;
-}
-
-.mcpclient-badge, .mcpclient-badge--primary, .mcpclient-badge--default {
-  display: inline-flex;
-  height: 20px;
-  padding: 4px;
-  gap: 4px;
-  align-items: center;
-  border-radius: 4px;
-  font-size: 12px;
-  font-style: normal;
-}
-.mcpclient-badge .agent-tooltip div, .mcpclient-badge--primary .agent-tooltip div, .mcpclient-badge--default .agent-tooltip div,
-.mcpclient-badge .agent-tooltip .mx-link,
-.mcpclient-badge--primary .agent-tooltip .mx-link,
-.mcpclient-badge--default .agent-tooltip .mx-link {
-  line-height: 1;
-}
-
-.mcpclient-badge--default {
-  background: #fafafb;
-  border: 1px solid #a2a2a3;
-}
-
-.mcpclient-badge--primary {
-  background: #d4dbfa;
-  border: 1px solid #1b34a0;
-}
-
-.mcpclient-tooltip .widget-tooltip-content {
-  position: relative;
-  z-index: 1000;
-  text-align: unset;
-  word-break: break-word;
-  background-color: white;
-  border-radius: 4px;
-  color: black;
-}
-.mcpclient-tooltip .mx-link {
-  font-weight: normal;
-  line-height: 1.7857142863;
-}
-
-.w306 {
-  width: 306px;
-}
-
-.text-line-clamp--1 {
-  word-break: break-word;
-  overflow-wrap: break-word;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.text-clamp--2-lines {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  line-clamp: 2;
 }
 
 .listview-horizontal.mx-listview > ul {
