@@ -155,24 +155,31 @@ public class AddTool extends UserAction<IMendixObject>
 	 * @param args args that get manipulated
 	 */
 	private void manipulateArgsForMicroflowCall(Tool tool, Map<String, Object> args) {
+		Map<String, IDataType> allParameters = Core.getInputParameters(ExecutingMicroflow);
 		Map<String, IDataType> parametersAndTypes = getInputParametersPrimitives();
-		
+
 		for (Entry<String, IDataType> entry : parametersAndTypes.entrySet()) {
 	        String paramName = entry.getKey();
 	        IDataType type = entry.getValue();
-	        
+
 	        if (!args.containsKey(paramName)) {
 	        	continue;
 	        }
-	        
+
 	        Object originalValue = args.get(paramName);
 	        Object convertedValue = convertValueToExpectedType(originalValue, type, paramName);
-	        
+
 	        if (convertedValue != null) {
 	        	args.put(paramName, convertedValue);
 	        }
 	    }
-		args.put("Tool", tool);
+
+		// Only inject the Tool object if the microflow has an object-type parameter named "Tool".
+		// Prevents collision when a business microflow has a primitive parameter also named "Tool".
+		IDataType toolParamType = allParameters.get("Tool");
+		if (toolParamType != null && toolParamType.getObjectType() != null) {
+			args.put("Tool", tool.getMendixObject());
+		}
 	}
 	
 	/**
