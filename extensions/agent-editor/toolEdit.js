@@ -1,18 +1,18 @@
 import { j as a, d as E } from "./jsx-runtime-CWOFuNcx.js";
-import { r as y, ae as I, a7 as k, a8 as q, ad as B, a9 as L } from "./PageContainers-BvK5usmz.js";
+import { r as y, ae as I, a7 as k, a8 as q, ad as B, a9 as L } from "./PageContainers-B4e_cfEm.js";
 import { createStudioProLogger as P } from "./logger-gMbuSAUF.js";
 import { h as O, a as R } from "./customBlobDocumentUtils-DRHCWWx0.js";
-import { u as A, D as F } from "./DialogFooter-CmNUeYU0.js";
-import { T as K, h, a as G } from "./toolHandlers-B8Y1dAHV.js";
+import { u as A, D as F } from "./DialogFooter-BFLCI8Ot.js";
+import { T as K, h, a as G } from "./toolHandlers-D3rXV8o9.js";
 import { o as x } from "./genericUtils-GaF65l2f.js";
 import { a as d, c as H, h as W } from "./toolUtils-3GFu_U6Y.js";
 import { h as U } from "./documentInitUtils-CLdpbIQ7.js";
-import { G as C } from "./GroupBox-Bv1UqUKB.js";
-import { T as D } from "./TextInputWithButton-CkuCCNYk.js";
-import { _, I as $ } from "./ComboBox-DPKa68oX.js";
+import { G as C } from "./GroupBox-DjvYs9o_.js";
+import { T as D } from "./TextInputWithButton-G6t_g6R6.js";
+import { _, I as $ } from "./ComboBox-DThPMj5r.js";
 import { m as z } from "./toolIcons-B55yYne7.js";
-import { n as J } from "./MicroflowIcon-DiztpTHi.js";
-import { T as Q } from "./TextInputLabeled-C0PQPpUV.js";
+import { n as J } from "./MicroflowIcon-CMEah_iz.js";
+import { T as Q } from "./TextInputLabeled-Cugqs2Ms.js";
 const X = [
   { key: d.Microflow, caption: "Microflow tool" },
   { key: d.MCP, caption: "MCP tool" }
