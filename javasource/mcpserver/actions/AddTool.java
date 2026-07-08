@@ -79,7 +79,7 @@ public class AddTool extends UserAction<IMendixObject>
 		toolNpe.setDescription(Description);
 		
 		// Get the JsonSchema for the tool
-		McpSchema.JsonSchema inputSchema = getJsonSchemaForTool();
+		Map<String, Object> inputSchema = getJsonSchemaForTool();
 		
 		toolNpe.setMicroflowName(ExecutingMicroflow);
 		toolNpe.setTool_McpServer(McpServer);
@@ -97,7 +97,7 @@ public class AddTool extends UserAction<IMendixObject>
 		}
 
 		McpServerFeatures.SyncToolSpecification tool = new McpServerFeatures.SyncToolSpecification(
-				new McpSchema.Tool(toolNpe.getName(), null, toolNpe.getDescription(), inputSchema, null, null, new HashMap<>()),
+				McpSchema.Tool.builder(toolNpe.getName(), inputSchema).description(toolNpe.getDescription()).build(),
 				(exchange, request) -> {
 					String threadName = Thread.currentThread().getName();
 					long start = System.currentTimeMillis();
@@ -110,17 +110,16 @@ public class AddTool extends UserAction<IMendixObject>
 						manipulateArgsForMicroflowCall(toolNpe, args);
 						mcpserver.proxies.TextContent mxTextContent = getTextContextFromToolMicroflow(args, contextUser);
 
-						McpSchema.TextContent mcpTextContent = new McpSchema.TextContent(mxTextContent.getContent());
+						McpSchema.TextContent mcpTextContent = McpSchema.TextContent.builder(mxTextContent.getContent()).build();
 						return McpSchema.CallToolResult.builder()
 							.content(List.of(mcpTextContent))
 							.isError(false)
 							.build();
-						
-					}catch (Exception e) { 
+
+					}catch (Exception e) {
 						LOGGER.error(e, threadName + ": Error occurred during tool call.");
-						McpSchema.TextContent errorContent = new McpSchema.TextContent(
-							"Error occurred during tool call: " + e.getMessage()
-						);
+						McpSchema.TextContent errorContent = McpSchema.TextContent.builder(
+							"Error occurred during tool call: " + e.getMessage()).build();
 						return McpSchema.CallToolResult.builder()
 							.content(List.of(errorContent))
 							.isError(true)
@@ -348,57 +347,53 @@ public class AddTool extends UserAction<IMendixObject>
 	}
 	
 	/**
-	 * Gets the JsonSchema for the tool, either from the provided Schema string or generated from the microflow
-	 * @return McpSchema.JsonSchema object
+	 * Gets the JSON schema map for the tool, either from the provided Schema string or generated from the microflow
+	 * @return schema as Map
 	 * @throws IOException
 	 */
-	private McpSchema.JsonSchema getJsonSchemaForTool() throws IOException {
+	private Map<String, Object> getJsonSchemaForTool() throws IOException {
 		if(Schema != null && !Schema.isEmpty()) {
-			return parseSchemaStringToJsonSchema(Schema);
+			return parseSchemaStringToMap(Schema);
 		} else {
 			return getSchemaFromMicroflow();
 		}
 	}
 
-
 	/**
-	 * Parses a JSON schema string into a McpSchema.JsonSchema object
+	 * Parses a JSON schema string into a Map
 	 * @param schemaString JSON schema as string
-	 * @return McpSchema.JsonSchema object
+	 * @return schema as Map
 	 * @throws IOException
 	 */
-	private McpSchema.JsonSchema parseSchemaStringToJsonSchema(String schemaString) throws IOException {
-		return McpJsonDefaults.getMapper().readValue(schemaString, McpSchema.JsonSchema.class);
+	@SuppressWarnings("unchecked")
+	private Map<String, Object> parseSchemaStringToMap(String schemaString) throws IOException {
+		return McpJsonDefaults.getMapper().readValue(schemaString, Map.class);
 	}
-	
+
 	/**
-	 * Creates an empty schema for tools with no parameters
-	 * @return Empty McpSchema.JsonSchema
+	 * Creates an empty schema map for tools with no parameters
+	 * @return empty schema Map
 	 */
-	private McpSchema.JsonSchema createEmptySchema() {
-		return new McpSchema.JsonSchema(
-			"object",
-			new HashMap<>(),
-			null,
-			null,
-			new HashMap<>(),
-			new HashMap<>()
-		);
+	private Map<String, Object> createEmptySchema() {
+		Map<String, Object> schema = new HashMap<>();
+		schema.put("type", "object");
+		schema.put("properties", new HashMap<>());
+		return schema;
 	}
-	
-	
+
+
 	/**
 	 * Creates a Schema definition for all primitive input parameters of the tool microflow
-	 * @return Schema definition as String
+	 * @return schema as Map
 	 */
-	private McpSchema.JsonSchema getSchemaFromMicroflow() {
+	private Map<String, Object> getSchemaFromMicroflow() {
 		Map<String, IDataType> inputParameters = getInputParametersPrimitives();
-		
+
 		// If no parameters, return empty schema
 		if (inputParameters.isEmpty()) {
 			return createEmptySchema();
 		}
-		
+
 		Map<String, Object> properties = new HashMap<>();
 		List<String> required = new ArrayList<>();
 
@@ -407,7 +402,7 @@ public class AddTool extends UserAction<IMendixObject>
 			IDataType.DataTypeEnum dataType = param.getValue().getType();
 
 			Map<String, Object> typeNode = new HashMap<>();
-			
+
 			// Handle DateTime as string with date format for better LLM compatibility
 			if (IDataType.DataTypeEnum.Datetime.equals(dataType)) {
 				typeNode.put("type", "string");
@@ -423,21 +418,29 @@ public class AddTool extends UserAction<IMendixObject>
 			// Handle other types
 			else {
 				String type = parameterGetType(param);
-				typeNode.put("type", type);
+				if (type.equals("number") || type.equals("integer")) {
+					// Accept both numeric and string representations — LLMs sometimes
+					// send numbers as JSON strings. Our coercion in manipulateArgsForMicroflowCall
+					// converts strings to the correct Mendix type before microflow execution.
+					Map<String, Object> asNumber = new HashMap<>();
+					asNumber.put("type", type);
+					Map<String, Object> asString = new HashMap<>();
+					asString.put("type", "string");
+					typeNode.put("anyOf", List.of(asNumber, asString));
+				} else {
+					typeNode.put("type", type);
+				}
 			}
-			
+
 			properties.put(name, typeNode);
 			required.add(name);
 		}
-		
-		return new McpSchema.JsonSchema(
-			"object",
-			properties,
-			required,
-			null,
-			new HashMap<>(),
-			new HashMap<>()
-		);
+
+		Map<String, Object> schema = new HashMap<>();
+		schema.put("type", "object");
+		schema.put("properties", properties);
+		schema.put("required", required);
+		return schema;
 	}
 
 	/**
