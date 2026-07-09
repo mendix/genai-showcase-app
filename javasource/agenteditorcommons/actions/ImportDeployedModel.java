@@ -48,13 +48,20 @@ public class ImportDeployedModel extends UserAction<java.util.List<IMendixObject
 	{
 		// BEGIN USER CODE
 		try {
-			requireNonNull(DeployedModelFromModel.getImportMicroflow(getContext()), "No Import Microflow was specified for Model document " + QualifiedName + ". The document could not be imported.");
+			requireNonNull(DeployedModelFromModel.getProvider(getContext()),
+					"No Provider was specified for Model document " + QualifiedName
+							+ ". The document could not be imported.");
+			String importMicroflow = getImportMicroflow(DeployedModelFromModel.getProvider(getContext()));
+			requireNonNull(importMicroflow, "Model provider is not one of the allowed types for Model document " + QualifiedName 
+							+ "The document could not be imported.");
 			Map<String, Object> parametersAndValues = new java.util.HashMap<>();
-			parametersAndValues.put("QualifiedName",  QualifiedName);
-			parametersAndValues.put("DocumentID",  DocumentID);
-			parametersAndValues.put("DocumentContent",  DocumentContent);
-			return Core.microflowCall(DeployedModelFromModel.getImportMicroflow()).withParams(parametersAndValues).execute(this.getContext());
-		
+			parametersAndValues.put("QualifiedName", QualifiedName);
+			parametersAndValues.put("DocumentID", DocumentID);
+			parametersAndValues.put("DocumentContent", DocumentContent);
+
+			return Core.microflowCall(importMicroflow).withParams(parametersAndValues)
+					.execute(this.getContext());
+
 		} catch (Exception e) {
 			LOGGER.error(e);
 			return null;
@@ -74,5 +81,16 @@ public class ImportDeployedModel extends UserAction<java.util.List<IMendixObject
 
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new MxLogger(ImportDeployedModel.class);
+	
+	private String getImportMicroflow(String provider) {
+		switch (provider) {
+		case "MxCloudGenAI":
+			return "MxGenAIConnector.MxCloudDeployedModel_CreateUpdateFromModel";
+		case "Azure":
+			return "OpenAIConnector.AzureDeployedModel_CreateUpdateFromModel";
+		default:
+			return null;
+		}
+	}
 	// END EXTRA CODE
 }
