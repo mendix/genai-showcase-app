@@ -31,12 +31,35 @@ public class FunctionMappingImpl {
 		return inputParametersModified;
 	}
 	
-	// Get all messages where ToolCallId is set. These messages indicate that a tool has been called
+	// Get tool messages belonging to the current agent loop only (i.e. since the last user message)
 	public static List<Message> getToolCallMessages(Request request, IContext context) {
-		return Core.retrieveByPath(context, request.getMendixObject(), 
-				genaicommons.proxies.Request.MemberNames.Request_Message.toString()).stream()
-				.map(msg -> genaicommons.proxies.Message.initialize(context, msg))
+		return getCurrentLoopMessages(request, context).stream()
 				.filter(msg -> msg.getToolCallId() != null && !msg.getToolCallId().isEmpty())
 				.collect(Collectors.toList());
+	}
+
+	// Get messages of a specific role belonging to the current agent loop only
+	public static List<Message> getCurrentLoopMessagesByRole(Request request, genaicommons.proxies.ENUM_MessageRole role, IContext context) {
+		return getCurrentLoopMessages(request, context).stream()
+				.filter(msg -> msg.getRole() == role)
+				.collect(Collectors.toList());
+	}
+
+	// Returns all messages since the last user message (the current agent loop)
+	private static List<Message> getCurrentLoopMessages(Request request, IContext context) {
+		List<Message> allMessages = Core.retrieveByPath(context, request.getMendixObject(),
+				genaicommons.proxies.Request.MemberNames.Request_Message.toString()).stream()
+				.map(msg -> genaicommons.proxies.Message.initialize(context, msg))
+				.collect(Collectors.toList());
+
+		int lastUserMessageIndex = -1;
+		for (int i = allMessages.size() - 1; i >= 0; i--) {
+			if (allMessages.get(i).getRole() == genaicommons.proxies.ENUM_MessageRole.user) {
+				lastUserMessageIndex = i;
+				break;
+			}
+		}
+
+		return allMessages.subList(lastUserMessageIndex + 1, allMessages.size());
 	}
 }

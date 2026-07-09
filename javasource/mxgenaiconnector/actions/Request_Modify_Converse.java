@@ -26,7 +26,6 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import genaicommons.impl.FunctionImpl;
 import genaicommons.impl.FunctionMappingImpl;
-import genaicommons.impl.MessageImpl;
 import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.Message;
 import genaicommons.proxies.Tool;
@@ -264,10 +263,9 @@ public class Request_Modify_Converse extends UserAction<java.lang.String>
 				return false;
 			}
 
-			// Get all messages with role assistant
-			// Assistant messages optionally have an array of tool_calls that contain an id and the functionName
-			List<Message> messageListAssistant = MessageImpl
-					.retrieveMessageListByRole(Request, ENUM_MessageRole.assistant, getContext());
+			// Get assistant messages from the current agent loop only
+			List<Message> messageListAssistant = FunctionMappingImpl
+					.getCurrentLoopMessagesByRole(Request, ENUM_MessageRole.assistant, getContext());
 
 			// HashMap with ToolCall._id and ToolCallFunction.Name created from the messageListAssistant
 			// The map contains only those tool calls, where functionName equals the toolChoiceFunctionName
