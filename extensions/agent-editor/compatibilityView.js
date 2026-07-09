@@ -2,7 +2,7 @@ import { j as e, d as x } from "./jsx-runtime-CWOFuNcx.js";
 import { S as s, r as d, a7 as C, ad as h, a9 as g, a6 as f, a8 as j, a4 as b } from "./PageContainers-B4e_cfEm.js";
 import { T as y, D as E } from "./Table-BYgJsym3.js";
 import { M } from "./compatibility-B4OgVO3B.js";
-import { u as V, g as S, S as R, a as H } from "./StatusBadge-BCToqO-0.js";
+import { u as V, g as S, S as R, a as H } from "./StatusBadge-DjqJi2z2.js";
 import { E as T } from "./Banner-CeIULR6d.js";
 import { c as k } from "./genericUtils-GaF65l2f.js";
 import { C as P } from "./CenteredLoadingSpinner-BqLuFhP3.js";
