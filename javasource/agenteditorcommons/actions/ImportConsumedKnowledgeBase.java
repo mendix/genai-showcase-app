@@ -22,25 +22,21 @@ public class ImportConsumedKnowledgeBase extends UserAction<java.util.List<IMend
 	private final java.lang.String DocumentContent;
 	private final java.lang.String QualifiedName;
 	private final java.lang.String DocumentID;
-	/** @deprecated use ConsumedKnowledgeBaseFromModel.getMendixObject() instead. */
-	@java.lang.Deprecated(forRemoval = true)
-	private final IMendixObject __ConsumedKnowledgeBaseFromModel;
-	private final agenteditorcommons.proxies.ConsumedKnowledgeBaseFromModel ConsumedKnowledgeBaseFromModel;
+	private final java.lang.String Provider;
 
 	public ImportConsumedKnowledgeBase(
 		IContext context,
 		java.lang.String _documentContent,
 		java.lang.String _qualifiedName,
 		java.lang.String _documentID,
-		IMendixObject _consumedKnowledgeBaseFromModel
+		java.lang.String _provider
 	)
 	{
 		super(context);
 		this.DocumentContent = _documentContent;
 		this.QualifiedName = _qualifiedName;
 		this.DocumentID = _documentID;
-		this.__ConsumedKnowledgeBaseFromModel = _consumedKnowledgeBaseFromModel;
-		this.ConsumedKnowledgeBaseFromModel = _consumedKnowledgeBaseFromModel == null ? null : agenteditorcommons.proxies.ConsumedKnowledgeBaseFromModel.initialize(getContext(), _consumedKnowledgeBaseFromModel);
+		this.Provider = _provider;
 	}
 
 	@java.lang.Override
@@ -48,10 +44,10 @@ public class ImportConsumedKnowledgeBase extends UserAction<java.util.List<IMend
 	{
 		// BEGIN USER CODE
 		try {
-			requireNonNull(ConsumedKnowledgeBaseFromModel.getProvider(getContext()),
+			requireNonNull(Provider,
 					"No Provider was specified for Model document " + QualifiedName
 							+ ". The document could not be imported.");
-			String importMicroflow = getImportMicroflow(ConsumedKnowledgeBaseFromModel.getProvider(getContext()));
+			String importMicroflow = getImportMicroflow(Provider);
 			requireNonNull(importMicroflow, "Model provider is not one of the allowed types for Model document " + QualifiedName 
 							+ "The document could not be imported.");
 			Map<String, Object> parametersAndValues = new java.util.HashMap<>();

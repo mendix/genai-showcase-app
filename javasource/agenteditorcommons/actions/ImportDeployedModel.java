@@ -23,20 +23,21 @@ public class ImportDeployedModel extends UserAction<java.util.List<IMendixObject
 	private final java.lang.String DocumentContent;
 	private final java.lang.String QualifiedName;
 	private final java.lang.String DocumentID;
-	/** @deprecated use DeployedModelFromModel.getMendixObject() instead. */
-	@java.lang.Deprecated(forRemoval = true)
-	private final IMendixObject __DeployedModelFromModel;
-	private final agenteditorcommons.proxies.DeployedModelFromModel DeployedModelFromModel;
+	private final java.lang.String Provider;
 
-	public ImportDeployedModel(IContext context, java.lang.String _documentContent, java.lang.String _qualifiedName,
-			java.lang.String _documentID, IMendixObject _deployedModelFromModel) {
+	public ImportDeployedModel(
+		IContext context,
+		java.lang.String _documentContent,
+		java.lang.String _qualifiedName,
+		java.lang.String _documentID,
+		java.lang.String _provider
+	)
+	{
 		super(context);
 		this.DocumentContent = _documentContent;
 		this.QualifiedName = _qualifiedName;
 		this.DocumentID = _documentID;
-		this.__DeployedModelFromModel = _deployedModelFromModel;
-		this.DeployedModelFromModel = _deployedModelFromModel == null ? null
-				: agenteditorcommons.proxies.DeployedModelFromModel.initialize(getContext(), _deployedModelFromModel);
+		this.Provider = _provider;
 	}
 
 	@java.lang.Override
@@ -44,10 +45,10 @@ public class ImportDeployedModel extends UserAction<java.util.List<IMendixObject
 	{
 		// BEGIN USER CODE
 		try {
-			requireNonNull(DeployedModelFromModel.getProvider(getContext()),
+			requireNonNull(Provider,
 					"No Provider was specified for Model document " + QualifiedName
 							+ ". The document could not be imported.");
-			String importMicroflow = getImportMicroflow(DeployedModelFromModel.getProvider(getContext()));
+			String importMicroflow = getImportMicroflow(Provider);
 			requireNonNull(importMicroflow, "Model provider is not one of the allowed types for Model document " + QualifiedName 
 							+ "The document could not be imported. Make sure your app contains the right compatible versions.");
 			
@@ -68,11 +69,11 @@ public class ImportDeployedModel extends UserAction<java.util.List<IMendixObject
 
 	/**
 	 * Returns a string representation of this action
-	 * 
 	 * @return a string representation of this action
 	 */
 	@java.lang.Override
-	public java.lang.String toString() {
+	public java.lang.String toString()
+	{
 		return "ImportDeployedModel";
 	}
 
