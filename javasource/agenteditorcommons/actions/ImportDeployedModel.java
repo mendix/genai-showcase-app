@@ -12,10 +12,11 @@ package agenteditorcommons.actions;
 import static java.util.Objects.requireNonNull;
 import java.util.Map;
 import com.mendix.core.Core;
+import com.mendix.core.actionmanagement.MicroflowCallBuilder;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
-import agentcommons.impl.MxLogger;
+import agenteditorcommons.impl.MxLogger;
 
 public class ImportDeployedModel extends UserAction<java.util.List<IMendixObject>>
 {
@@ -27,20 +28,15 @@ public class ImportDeployedModel extends UserAction<java.util.List<IMendixObject
 	private final IMendixObject __DeployedModelFromModel;
 	private final agenteditorcommons.proxies.DeployedModelFromModel DeployedModelFromModel;
 
-	public ImportDeployedModel(
-		IContext context,
-		java.lang.String _documentContent,
-		java.lang.String _qualifiedName,
-		java.lang.String _documentID,
-		IMendixObject _deployedModelFromModel
-	)
-	{
+	public ImportDeployedModel(IContext context, java.lang.String _documentContent, java.lang.String _qualifiedName,
+			java.lang.String _documentID, IMendixObject _deployedModelFromModel) {
 		super(context);
 		this.DocumentContent = _documentContent;
 		this.QualifiedName = _qualifiedName;
 		this.DocumentID = _documentID;
 		this.__DeployedModelFromModel = _deployedModelFromModel;
-		this.DeployedModelFromModel = _deployedModelFromModel == null ? null : agenteditorcommons.proxies.DeployedModelFromModel.initialize(getContext(), _deployedModelFromModel);
+		this.DeployedModelFromModel = _deployedModelFromModel == null ? null
+				: agenteditorcommons.proxies.DeployedModelFromModel.initialize(getContext(), _deployedModelFromModel);
 	}
 
 	@java.lang.Override
@@ -53,7 +49,8 @@ public class ImportDeployedModel extends UserAction<java.util.List<IMendixObject
 							+ ". The document could not be imported.");
 			String importMicroflow = getImportMicroflow(DeployedModelFromModel.getProvider(getContext()));
 			requireNonNull(importMicroflow, "Model provider is not one of the allowed types for Model document " + QualifiedName 
-							+ "The document could not be imported.");
+							+ "The document could not be imported. Make sure your app contains the right compatible versions.");
+			
 			Map<String, Object> parametersAndValues = new java.util.HashMap<>();
 			parametersAndValues.put("QualifiedName", QualifiedName);
 			parametersAndValues.put("DocumentID", DocumentID);
@@ -71,17 +68,17 @@ public class ImportDeployedModel extends UserAction<java.util.List<IMendixObject
 
 	/**
 	 * Returns a string representation of this action
+	 * 
 	 * @return a string representation of this action
 	 */
 	@java.lang.Override
-	public java.lang.String toString()
-	{
+	public java.lang.String toString() {
 		return "ImportDeployedModel";
 	}
 
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new MxLogger(ImportDeployedModel.class);
-	
+
 	private String getImportMicroflow(String provider) {
 		switch (provider) {
 		case "MxCloudGenAI":
