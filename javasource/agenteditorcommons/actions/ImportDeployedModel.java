@@ -85,7 +85,7 @@ public class ImportDeployedModel extends UserAction<java.util.List<IMendixObject
 		case "MxCloudGenAI":
 			return "MxGenAIConnector.MxCloudDeployedModel_CreateUpdateFromModel";
 		case "Azure":
-			return "OpenAIConnector.AzureDeployedModel_CreateUpdateFromModel";
+			return "OpenAIConnector.OpenAIDeployedModel_CreateUpdateFromModel_Azure";
 		default:
 			return null;
 		}
