@@ -1,4 +1,4 @@
-﻿@use '../../../theme/web/custom-variables' as *;
+@use '../../../theme/web/custom-variables' as *;
 
 // Import existing SASS variables
 @import 'chat-variables';
@@ -20,6 +20,7 @@
   --chat-bubble-margin: #{$chat-bubble-margin};
   --chat-border-color: #{$chat-border-color};
   --chat-bg-light: #{$chat-bg-light};
+  
 
   // Traceability variables
   --size-24: #{$size-24};
