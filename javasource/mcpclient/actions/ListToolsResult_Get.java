@@ -18,7 +18,6 @@ import com.mendix.systemwideinterfaces.core.UserAction;
 import io.modelcontextprotocol.client.McpSyncClient;
 import io.modelcontextprotocol.json.McpJsonDefaults;
 import io.modelcontextprotocol.spec.McpSchema;
-import io.modelcontextprotocol.spec.McpSchema.JsonSchema;
 import mcpclient.impl.McpClientRegistry;
 import mcpclient.impl.MxLogger;
 import mcpclient.proxies.EnumValue;
@@ -122,9 +121,11 @@ public class ListToolsResult_Get extends UserAction<IMendixObject>
 		
 		toolMendix.setTool_ListToolsResult(listToolResultMendix);
 		
-		JsonSchema inputSchema = toolMcp.inputSchema();
-		Map<String, Object> argumentsMcp = inputSchema.properties();
-		List<String> requiredList = inputSchema.required();
+		Map<String, Object> inputSchema = toolMcp.inputSchema();
+		@SuppressWarnings("unchecked")
+		Map<String, Object> argumentsMcp = inputSchema != null ? (Map<String, Object>) inputSchema.get("properties") : null;
+		@SuppressWarnings("unchecked")
+		List<String> requiredList = inputSchema != null ? (List<String>) inputSchema.get("required") : null;
 		
 		if(argumentsMcp == null || argumentsMcp.isEmpty()) {
 			return;

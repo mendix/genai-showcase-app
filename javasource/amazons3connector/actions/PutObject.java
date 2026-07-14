@@ -10,20 +10,28 @@
 package amazons3connector.actions;
 
 import static java.util.Objects.requireNonNull;
-import com.mendix.core.CoreException;
-import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.systemwideinterfaces.core.IMendixObject;
-import amazons3connector.impl.AmazonS3Client;
-import amazons3connector.impl.MxLogger;
-import amazons3connector.proxies.S3RequestMetaData;
-import software.amazon.awssdk.services.s3.S3Client;
+import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import com.mendix.core.Core;
-import software.amazon.awssdk.core.sync.RequestBody;
+import com.mendix.core.CoreException;
+import com.mendix.systemwideinterfaces.core.IContext;
+import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
+import amazons3connector.impl.AmazonS3Client;
+import amazons3connector.impl.MxLogger;
+import amazons3connector.proxies.ENUM_AWS_CommitmentPolicy;
+import amazons3connector.proxies.S3RequestMetaData;
+import software.amazon.awssdk.core.async.AsyncRequestBody;
+import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.services.s3.S3AsyncClient;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.encryption.s3.S3AsyncEncryptionClient;
 
 public class PutObject extends UserAction<java.lang.Boolean>
 {
@@ -40,13 +48,18 @@ public class PutObject extends UserAction<java.lang.Boolean>
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __FileDocument;
 	private final system.proxies.FileDocument FileDocument;
+	/** @deprecated use ClientsideEncryptionConfig.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __ClientsideEncryptionConfig;
+	private final amazons3connector.proxies.ClientsideEncryptionConfig ClientsideEncryptionConfig;
 
 	public PutObject(
 		IContext context,
 		IMendixObject _putObjectRequest,
 		IMendixObject _credentials,
 		java.lang.String _region,
-		IMendixObject _fileDocument
+		IMendixObject _fileDocument,
+		IMendixObject _clientsideEncryptionConfig
 	)
 	{
 		super(context);
@@ -57,6 +70,8 @@ public class PutObject extends UserAction<java.lang.Boolean>
 		this.Region = _region == null ? null : awsauthentication.proxies.ENUM_Region.valueOf(_region);
 		this.__FileDocument = _fileDocument;
 		this.FileDocument = _fileDocument == null ? null : system.proxies.FileDocument.initialize(getContext(), _fileDocument);
+		this.__ClientsideEncryptionConfig = _clientsideEncryptionConfig;
+		this.ClientsideEncryptionConfig = _clientsideEncryptionConfig == null ? null : amazons3connector.proxies.ClientsideEncryptionConfig.initialize(getContext(), _clientsideEncryptionConfig);
 	}
 
 	@java.lang.Override
@@ -79,26 +94,60 @@ public class PutObject extends UserAction<java.lang.Boolean>
 
 			// Logging of the awsRequest
 			LOGGER.debug("AWS request:", awsRequest);
+			// Check if ClientsideEncryptionConfig exists or not
+			if (ClientsideEncryptionConfig == null) {
+				// Client creation
+				S3Client client = AmazonS3Client.getS3Client(Credentials, Region, PutObjectRequest);
 
-			// Client creation
-			S3Client client = AmazonS3Client.getS3Client(Credentials, Region, PutObjectRequest);
+				try(InputStream is = Core.getFileDocumentContent(getContext(), FileDocument.getMendixObject());
+					BufferedInputStream bis = new BufferedInputStream(is)){
+						RequestBody body = RequestBody.fromInputStream(bis, FileDocument.getSize());
+						
+						// Invoke action on AWS client
+						awsResponse = client.putObject(awsRequest, body);
+				}
+				return awsResponse.sdkHttpResponse().isSuccessful();
+			} else {
+				// ---- Read Mendix parameters ----
+				String kmsKeyId = ClientsideEncryptionConfig.getKmsKey();
+				awsauthentication.proxies.ENUM_Region kmsRegion = ClientsideEncryptionConfig.getKmsRegion();
+				awsauthentication.proxies.Credentials kmsCredentials = ClientsideEncryptionConfig.getClientsideEncryptionConfig_Credentials();
+				ENUM_AWS_CommitmentPolicy mxPolicy = ClientsideEncryptionConfig.getCommitmentPolicy();
 
-			// Create request
-			InputStream is = Core.getFileDocumentContent(getContext(), FileDocument.getMendixObject());
-			RequestBody body = RequestBody.fromInputStream(is, FileDocument.getSize());
+				// ---- Validation ----
+				requireNonNull(kmsKeyId, "KMS keyId is required");
+				requireNonNull(kmsCredentials, "KMS credentials are required");
+				requireNonNull(kmsRegion, "KMS region is required");
+				requireNonNull(mxPolicy, "Commitment policy is required");
 
-			// Invoke action on AWS client
-			awsResponse = client.putObject(awsRequest, body);
-			is.close();
+				// Client creation	
+				S3AsyncClient client = AmazonS3Client.getS3AsyncClient(Credentials, Region, PutObjectRequest);
 
-			// Log the response
-			LOGGER.debug("AWS response:", awsResponse);
+				ExecutorService executor = Executors.newFixedThreadPool(2);
+
+				S3AsyncEncryptionClient encryptedClient = AmazonS3Client.createEncryptedClient(kmsCredentials, kmsRegion, kmsKeyId, client, mxPolicy, PutObjectRequest);
+	
+				try (InputStream is = Core.getFileDocumentContent(getContext(), FileDocument.getMendixObject())){
+					AsyncRequestBody body =
+						AsyncRequestBody.fromInputStream(
+							is,
+							FileDocument.getSize(),
+							executor
+						);
+
+					CompletableFuture<software.amazon.awssdk.services.s3.model.PutObjectResponse> future =
+						encryptedClient.putObject(awsRequest, body);
+
+					software.amazon.awssdk.services.s3.model.PutObjectResponse response =
+						future.join();
+
+					return response.sdkHttpResponse().isSuccessful();
+				}
+			}
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 			throw e;
 		}
-		// Determine return value
-		return awsResponse.sdkHttpResponse().isSuccessful();
 		// END USER CODE
 	}
 
@@ -150,6 +199,7 @@ public class PutObject extends UserAction<java.lang.Boolean>
 		}
 		return map;
 	}
+
 
 	private software.amazon.awssdk.services.s3.model.PutObjectRequest createAWSRequest() {
 		software.amazon.awssdk.services.s3.model.PutObjectRequest awsRequest = software.amazon.awssdk.services.s3.model.PutObjectRequest

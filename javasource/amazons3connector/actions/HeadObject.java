@@ -9,17 +9,17 @@
 
 package amazons3connector.actions;
 
+import static java.util.Objects.requireNonNull;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import static java.util.Objects.requireNonNull;
+import com.mendix.systemwideinterfaces.core.UserAction;
 import amazons3connector.impl.AmazonS3Client;
 import amazons3connector.impl.MxLogger;
 import amazons3connector.proxies.HeadObjectMetaData;
 import amazons3connector.proxies.HeadObjectResponse;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.NoSuchBucketException;
-import com.mendix.systemwideinterfaces.core.UserAction;
 
 /**
  * You can use the HeadBucket operation to retrieve the AWS Region the bucket is located and determine if a bucket exists and if you have permission to access it. Additionally, it will indicate whether the bucket name used in the request is an access point alias.

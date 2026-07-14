@@ -1,16 +1,20 @@
-import { r as c, R as a, ap as A, af as O, ag as q, a1 as C, ao as F, ah as G } from "./formelements-DgWWXRMR.js";
-import { c as H } from "./index-CE9RqUwp.js";
-import { createStudioProLogger as W } from "./logger-Bof2Evv1.js";
-import { g as _, h as $, a as Q } from "./customBlobDocumentUtils-Dwvjb_jQ.js";
-import { _ as z, I as J } from "./ComboBox-tmgYuUfm.js";
-import { u as U, D as X } from "./DialogFooter-CX5uFK7U.js";
-import { T as Y, a as Z } from "./toolHandlers-VhPap08R.js";
-import { T as I } from "./TextInputLabeled-DcUYd1Xh.js";
-import { T as P } from "./TextInputWithButton-H-kPhdc5.js";
-import { O as V, k as ee, Q as te } from "./index-ClN9e0Gp.js";
-import { g as ie } from "./mxCloudGenAIUtils-BRWNqsBE.js";
-import { h } from "./knowledgebaseToolHandlers-CvlCV-OF.js";
-const ae = {
+import { j as a, d as L } from "./jsx-runtime-CWOFuNcx.js";
+import { r as c, ae as K, a7 as A, a8 as q, ad as F, a9 as G } from "./PageContainers-BvK5usmz.js";
+import { createStudioProLogger as O } from "./logger-gMbuSAUF.js";
+import { g as H, h as W, a as $ } from "./customBlobDocumentUtils-DRHCWWx0.js";
+import { _ as U, I as _ } from "./ComboBox-DPKa68oX.js";
+import { u as z, D as J } from "./DialogFooter-CmNUeYU0.js";
+import { G as C } from "./GroupBox-Bv1UqUKB.js";
+import { T as Q, a as X } from "./toolHandlers-B8Y1dAHV.js";
+import { T as I } from "./TextInputLabeled-C0PQPpUV.js";
+import { T as Y } from "./TextInputWithButton-CkuCCNYk.js";
+import { o as Z } from "./genericUtils-GaF65l2f.js";
+import { k as P } from "./knowledgebaseIcons-B7aB_ZnQ.js";
+import { k as ee } from "./documentInitUtils-Bwe4f_Cu.js";
+import { g as te } from "./mxCloudGenAIUtils-U7THU9De.js";
+import { b as V } from "./toolUtils-3GFu_U6Y.js";
+import { h as p } from "./knowledgebaseToolHandlers-o9yeUkRo.js";
+const ie = {
   isValidName: !0,
   isValidDescription: !0,
   isValidDocument: !0,
@@ -18,48 +22,47 @@ const ae = {
   isValidCollectionIdentifier: !0,
   isValidMaxResults: !0,
   isValidMinSimilarity: !0
-}, ne = {
+}, ae = {
   name: "isValidName",
   description: "isValidDescription",
   document: "isValidDocument",
   collectionIdentifier: "isValidCollectionIdentifier",
   maxResults: "isValidMaxResults",
   minSimilarity: "isValidMinSimilarity"
-}, oe = ({
-  initialTool: s,
+}, ne = ({
+  initialTool: o,
   studioPro: i,
   agent: n,
-  onClose: p
+  onClose: h
 }) => {
-  var M, E;
-  const [t, g] = c.useState(s || V()), [r, f] = c.useState(ae), [v, d] = c.useState([]), [S, R] = c.useState(
-    ((M = (s || V()).maxResults) == null ? void 0 : M.toString()) ?? ""
-  ), [k, j] = c.useState(
-    ((E = (s || V()).minSimilarity) == null ? void 0 : E.toString()) ?? ""
-  ), y = c.useCallback(
+  const [t, f] = c.useState(o || V()), [r, g] = c.useState(ie), [v, d] = c.useState([]), [w, j] = c.useState(
+    (o || V()).maxResults?.toString() ?? ""
+  ), [k, D] = c.useState(
+    (o || V()).minSimilarity?.toString() ?? ""
+  ), S = c.useCallback(
     async (e) => ({
-      isValidName: await h("name", e, n, i),
-      isValidDescription: await h(
+      isValidName: await p("name", e, n, i),
+      isValidDescription: await p(
         "description",
         e,
         n,
         i
       ),
-      isValidDocument: await h("document", e, n, i),
+      isValidDocument: await p("document", e, n, i),
       isValidType: !0,
-      isValidCollectionIdentifier: await h(
+      isValidCollectionIdentifier: await p(
         "collectionIdentifier",
         e,
         n,
         i
       ),
-      isValidMaxResults: await h(
+      isValidMaxResults: await p(
         "maxResults",
         e,
         n,
         i
       ),
-      isValidMinSimilarity: await h(
+      isValidMinSimilarity: await p(
         "minSimilarity",
         e,
         n,
@@ -69,100 +72,98 @@ const ae = {
     [i, n]
   );
   c.useEffect(() => {
-    t.document ? _(i, t.document).then((e) => {
+    t.document ? H(i, t.document).then((e) => {
       if (!e || e.excluded) {
         d([]);
         return;
       }
-      const o = e.contents;
-      return ie(i, o)();
+      const s = e.contents;
+      return te(i, s)();
     }).then((e) => {
       d(!e || typeof e == "string" ? [] : e);
     }).catch(() => d([])) : d([]);
   }, [t.document, i]), c.useEffect(() => {
-    s && (R(s.maxResults !== void 0 ? s.maxResults.toString() : ""), j(s.minSimilarity !== void 0 ? s.minSimilarity.toString() : ""), y(s).then((e) => {
-      f(e);
+    o && (j(o.maxResults !== void 0 ? o.maxResults.toString() : ""), D(o.minSimilarity !== void 0 ? o.minSimilarity.toString() : ""), S(o).then((e) => {
+      g(e);
     }));
-  }, [s, y]);
-  const w = c.useCallback(
-    async (e, o) => {
-      const m = ne[e];
+  }, [o, S]);
+  const y = c.useCallback(
+    async (e, s) => {
+      const m = ae[e];
       if (m && r[m] !== !0) {
-        const l = await h(e, o, n, i);
-        f((u) => ({ ...u, [m]: l }));
+        const l = await p(e, s, n, i);
+        g((u) => ({ ...u, [m]: l }));
       }
     },
     [r, n, i]
-  ), T = (e, o) => {
-    o && x(e, (o == null ? void 0 : o.toString()) ?? "");
-  }, x = (e, o) => {
+  ), E = (e, s) => {
+    s && x(e, s?.toString() ?? "");
+  }, x = (e, s) => {
     if (e === "maxResults") {
-      const l = String(o);
+      const l = String(s);
       if (!/^\d*$/.test(l))
         return;
-      R(l);
+      j(l);
       const u = l === "" ? void 0 : Number.parseInt(l, 10), b = {
         ...t,
         maxResults: Number.isNaN(u) ? void 0 : u
       };
-      g(b), w(e, b);
+      f(b), y(e, b);
       return;
     }
     if (e === "minSimilarity") {
-      const l = String(o);
+      const l = String(s);
       if (!/^\d*\.?\d*$/.test(l))
         return;
-      j(l);
+      D(l);
       const u = l === "" || l === "." ? void 0 : Number.parseFloat(l), b = {
         ...t,
         minSimilarity: Number.isNaN(u) ? void 0 : u
       };
-      g(b), w(e, b);
+      f(b), y(e, b);
       return;
     }
-    const m = { ...t, [e]: o };
-    g(m), w(e, m);
-  }, B = async () => {
-    const e = await Z(i, t.document.documentId, te);
+    const m = { ...t, [e]: s };
+    f(m), y(e, m);
+  }, M = async () => {
+    const e = await X(i, t.document.documentId, ee);
     if (e) {
-      const o = { ...t, document: e };
-      g(o), w("document", o);
+      const s = { ...t, document: e };
+      f(s), y("document", s);
     }
-  }, L = () => {
-    $(i, t.document);
-  }, D = async () => {
-    const e = await y(t);
-    f(e), Object.values(e).some((m) => m !== !0) || p(t);
-  }, N = () => {
-    p(null);
+  }, T = () => {
+    W(i, t.document);
+  }, N = async () => {
+    const e = await S(t);
+    g(e), Object.values(e).some((m) => m !== !0) || h(t);
+  }, R = () => {
+    h(null);
   };
-  U(N, D);
-  const K = () => {
-    window.open(
-      "https://docs.mendix.com/appstore/modules/genai/mx-cloud-genai/MxGenAI-connector/#about-knowledge-bases",
-      "_blank",
-      "noopener,noreferrer"
+  z(R, N);
+  const B = () => {
+    Z(
+      "https://docs.mendix.com/appstore/modules/genai/mx-cloud-genai/MxGenAI-connector/#about-knowledge-bases"
     );
   };
-  return /* @__PURE__ */ a.jsxs(A, { children: [
-    /* @__PURE__ */ a.jsx(O, { children: /* @__PURE__ */ a.jsxs(q, { children: [
+  return /* @__PURE__ */ a.jsxs(K, { children: [
+    /* @__PURE__ */ a.jsx(A, { children: /* @__PURE__ */ a.jsxs(q, { children: [
       /* @__PURE__ */ a.jsxs(C, { label: "General", children: [
         /* @__PURE__ */ a.jsx(
-          P,
+          Y,
           {
             ariaLabel: "Knowledge base",
             label: "Knowledge base",
             value: t.document.qualifiedName,
-            icon: t.document.qualifiedName ? ee : void 0,
+            icon: t.document.qualifiedName ? P : void 0,
             buttonCaption: "Select...",
-            onClick: B,
+            onClick: M,
             validate: () => r.isValidDocument,
             buttonCaptionSecondary: t.document.qualifiedName ? "Show" : void 0,
-            onClickSecondary: t.document.qualifiedName ? L : void 0
+            onClickSecondary: t.document.qualifiedName ? T : void 0
           }
         ),
         /* @__PURE__ */ a.jsx(
-          z,
+          U,
           {
             "aria-label": "Collection identifier",
             label: "Collection",
@@ -174,9 +175,9 @@ const ae = {
             onInputChange: (e) => x("collectionIdentifier", e),
             allowsEmptyCollection: !0,
             onChange: (e) => {
-              T("collectionIdentifier", e);
+              E("collectionIdentifier", e);
             },
-            children: v.map((e) => /* @__PURE__ */ a.jsx(J, { id: e.name, children: e.name }, e.name))
+            children: v.map((e) => /* @__PURE__ */ a.jsx(_, { id: e.name, children: e.name }, e.name))
           }
         )
       ] }),
@@ -192,7 +193,7 @@ const ae = {
           }
         ),
         /* @__PURE__ */ a.jsx(
-          Y,
+          Q,
           {
             label: "Description",
             ariaLabel: "Description",
@@ -208,7 +209,7 @@ const ae = {
           {
             label: "Max results",
             ariaLabel: "Max number of results",
-            value: S,
+            value: w,
             onChange: (e) => x("maxResults", e),
             validate: () => r.isValidMaxResults,
             description: "This is the highest number of data chunks that can be returned in a single retrieve. If left empty, many records could be retrieved, so it's recommended to set this number (to e.g. 5), or set the minimum similarity in the next field, or to set both."
@@ -227,29 +228,29 @@ const ae = {
         )
       ] })
     ] }) }),
-    /* @__PURE__ */ a.jsx(X, { onOk: D, onCancel: N, onHelp: K })
+    /* @__PURE__ */ a.jsx(J, { onOk: N, onCancel: R, onHelp: B })
   ] });
-}, se = ({ studioPro: s, initialTool: i, agent: n, onClose: p }) => /* @__PURE__ */ a.jsx(G, { studioPro: s, children: /* @__PURE__ */ a.jsx(oe, { initialTool: i, studioPro: s, agent: n, onClose: p }) }), we = {
-  async loaded(s, i) {
-    const n = H(s), p = W(n);
+}, oe = ({ studioPro: o, initialTool: i, agent: n, onClose: h }) => /* @__PURE__ */ a.jsx(G, { studioPro: o, children: /* @__PURE__ */ a.jsx(ne, { initialTool: i, studioPro: o, agent: n, onClose: h }) }), Se = {
+  async loaded(o, i) {
+    const n = L(o), h = O(n);
     try {
       const t = document.getElementById("root");
       if (!t)
         throw new Error("Failed to find the root element");
-      const g = F.createRoot(t), r = await Q(n, i.agentDocumentId);
-      let f;
-      i.toolId && (f = (r.knowledgebaseTools || []).find((S) => S.id === i.toolId));
+      const f = F.createRoot(t), r = await $(n, i.agentDocumentId);
+      let g;
+      i.toolId && (g = (r.knowledgebaseTools || []).find((w) => w.id === i.toolId));
       const v = (d) => {
         n.ui.dialogs.closeWithResult(i.dialogId, d);
       };
-      g.render(
-        /* @__PURE__ */ a.jsx(c.StrictMode, { children: /* @__PURE__ */ a.jsx(se, { studioPro: n, initialTool: f, agent: r, onClose: v }) })
+      f.render(
+        /* @__PURE__ */ a.jsx(c.StrictMode, { children: /* @__PURE__ */ a.jsx(oe, { studioPro: n, initialTool: g, agent: r, onClose: v }) })
       );
     } catch (t) {
-      throw p.error("Error editing agent knowledge base tool:", t), new Error("Error editing agent knowledge base tool:", t);
+      throw h.error("Error editing agent knowledge base tool:", t), new Error("Error editing agent knowledge base tool:", t);
     }
   }
 };
 export {
-  we as component
+  Se as component
 };

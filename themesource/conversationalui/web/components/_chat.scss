@@ -30,7 +30,7 @@
 
 .chat-page--fullheight {
     height: 100%;
-    width: 100%;
+    max-width: var(--chat-width);
     display: flex;
     flex: 1 1 0;
     flex-wrap: wrap;
@@ -40,7 +40,6 @@
 
 .chat-page--fullheight-centered {
     @extend .chat-page--fullheight;
-    max-width: 153.5rem;
     justify-content: center;
     margin: auto;
 }
@@ -188,16 +187,16 @@
 }
 
 .message--user {
-    color: #0A1325;
+    color: var(--font-color-default);;
     font-weight: 400;
 
     h1,h2,h3,h4,h5,h6 {
-        color: #0A1325;
+        color: var(--font-color-default);
         font-weight: 600;
 
     }
     strong {
-        color: #0A1324D9;
+        color: var(--font-color-default);
         font-weight: 400;
 
     }
@@ -252,15 +251,14 @@
     overflow: hidden;
     padding: 12px var(--spacing-medium);
     background-color: var(--chat-bg-light);
-    color: var(--font-color-header);
+    color: var(--font-color-default);
     font-weight: var(--font-weight-normal);
     margin-bottom: var(--spacing-small);
     .tool-title {
         font-weight: var(--font-weight-semibold);
-        color: #0A1324B2;
+        color: var(--font-color-default);
         padding: 0;
         display: block;
-        color: #0A1324B2;
         font-weight: 600 ;
         .mx-image-viewer {
             width: auto;

@@ -24,7 +24,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import genaicommons.impl.MessageImpl;
 import genaicommons.impl.FunctionImpl;
 import genaicommons.impl.FunctionMappingImpl;
 import genaicommons.proxies.Message;
@@ -316,19 +315,18 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 	}
 
 	private boolean isToolRecall(Tool toolChoiceTool) throws CoreException {
-		// Get all messages with role 'tool'
-		List<Message> messageListTool = MessageImpl
-				.retrieveMessageListByRole(getRequest(RequestMapping), ENUM_MessageRole.tool, getContext());
+		// Get tool messages from the current agent loop only
+		List<Message> messageListTool = FunctionMappingImpl
+				.getCurrentLoopMessagesByRole(getRequest(RequestMapping), ENUM_MessageRole.tool, getContext());
 
 		// No tool calls yet; thus no tool recall
 		if (messageListTool.size() == 0) {
 			return false;
 		}
 
-		// Get all messages with role assistant
-		// Assistant messages optionally have an array of tool_calls that contain an id and the functionName
-		List<Message> messageListAssistant = MessageImpl
-				.retrieveMessageListByRole(getRequest(RequestMapping), ENUM_MessageRole.assistant, getContext());
+		// Get assistant messages from the current agent loop only
+		List<Message> messageListAssistant = FunctionMappingImpl
+				.getCurrentLoopMessagesByRole(getRequest(RequestMapping), ENUM_MessageRole.assistant, getContext());
 
 		// HashMap with ToolCall._id and ToolCallFunction.Name created from the messageListAssistant
 		// The map contains only those tool calls, where functionName equals the toolChoiceFunctionName

@@ -13,6 +13,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.Duration;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 import amazons3connector.impl.MxLogger;
 import amazons3connector.proxies.AbstractPresignConfig;
 import amazons3connector.proxies.DeleteObjectRequest;
@@ -24,7 +25,6 @@ import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 import software.amazon.awssdk.services.s3.presigner.model.PresignedDeleteObjectRequest;
 import software.amazon.awssdk.services.s3.presigner.model.PresignedGetObjectRequest;
 import software.amazon.awssdk.services.s3.presigner.model.PresignedPutObjectRequest;
-import com.mendix.systemwideinterfaces.core.UserAction;
 
 public class GeneratePresignedURL extends UserAction<java.lang.String>
 {

@@ -10,7 +10,9 @@
                 "knowledgebaseEdit": "knowledgebaseEdit.js",
                 "modelSettingsEdit": "modelSettingsEdit.js",
                 "mcpAuthenticationHeadersEdit": "mcpAuthenticationHeadersEdit.js",
-                "knowledgebaseToolEdit": "knowledgebaseToolEdit.js"
+                "knowledgebaseToolEdit": "knowledgebaseToolEdit.js",
+                "onboardingView": "onboardingView.js",
+                "compatibilityView": "compatibilityView.js"
             }
         },
         "permissions": {

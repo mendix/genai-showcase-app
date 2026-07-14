@@ -225,11 +225,14 @@
 }
 
 .img--22-22 {
+  img { 
     width: 22px;
     height: 22px;
     max-width: 22px;
     max-height: 22px;
     flex-shrink: 0;
+
+  }
 }
 
 .img--20-20 {
@@ -329,7 +332,7 @@
 }
 
 .input-label-width {
-  min-width: 11vw;
+  min-width: clamp(150px, 5vw, 7vw);
 }
 
 .input-label-grid {

@@ -13,13 +13,12 @@ import static java.util.Objects.requireNonNull;
 import java.util.Date;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 import amazons3connector.impl.AmazonS3Client;
 import amazons3connector.impl.MxLogger;
 import amazons3connector.proxies.Bucket;
 import amazons3connector.proxies.ListBucketsResponse;
-import awsauthentication.proxies.AbstractRequest;
 import software.amazon.awssdk.services.s3.S3Client;
-import com.mendix.systemwideinterfaces.core.UserAction;
 
 public class ListBuckets extends UserAction<IMendixObject>
 {

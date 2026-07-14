@@ -14,6 +14,7 @@ import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.MendixRuntimeException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
+import com.mendix.systemwideinterfaces.core.UserAction;
 import amazons3connector.impl.AmazonS3Client;
 import amazons3connector.impl.MxLogger;
 import amazons3connector.proxies.CreateBucketResponse;
@@ -21,7 +22,6 @@ import awsauthentication.proxies.ENUM_Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.BucketLocationConstraint;
 import software.amazon.awssdk.services.s3.model.CreateBucketRequest.Builder;
-import com.mendix.systemwideinterfaces.core.UserAction;
 
 public class CreateBucket extends UserAction<IMendixObject>
 {

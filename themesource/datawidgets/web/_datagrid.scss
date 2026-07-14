@@ -44,7 +44,7 @@ $root: ".widget-datagrid";
             top: 0;
             height: 100%;
             width: var(--spacing-smaller, $spacing-smaller);
-            background-color: $dragging-color-effect;
+            background-color: var(--dragging-color-effect, $dragging-color-effect);
 
             z-index: 1;
         }
@@ -129,6 +129,7 @@ $root: ".widget-datagrid";
                 color: var(--gray-dark, $gray-dark);
                 height: var(--btn-font-size, $btn-font-size);
                 align-self: center;
+                z-index: 1;
             }
 
             &:focus:not(:focus-visible) {
@@ -266,6 +267,7 @@ $root: ".widget-datagrid";
 
         > .td-custom-content {
             flex-grow: 1;
+            min-width: 0;
         }
 
         > .empty-placeholder {
@@ -306,52 +308,6 @@ $root: ".widget-datagrid";
     width: 100%;
 }
 
-.pagination-bar {
-    display: flex;
-    justify-content: flex-end;
-    white-space: nowrap;
-    align-items: baseline;
-    margin: 16px;
-    color: $pagination-caption-color;
-
-    .paging-status {
-        padding: 0 8px 0;
-    }
-
-    .pagination-button {
-        padding: 6px;
-        color: var(--gray-darker, $gray-darker);
-        border-color: transparent;
-        background-color: transparent;
-
-        &:hover {
-            color: var(--brand-primary, $brand-primary);
-            border-color: transparent;
-            background-color: transparent;
-        }
-
-        &:disabled {
-            border-color: transparent;
-            background-color: transparent;
-        }
-
-        &:focus:not(:focus-visible) {
-            outline: none;
-        }
-
-        &:focus-visible {
-            outline: 1px solid var(--brand-primary, $brand-primary);
-        }
-    }
-    .pagination-icon {
-        position: relative;
-        top: 4px;
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-    }
-}
-
 /* Column selector for hidable columns outside DG context */
 /* List of columns to select */
 .column-selectors {
@@ -390,10 +346,20 @@ $root: ".widget-datagrid";
     position: relative;
 
     &-grid {
+        &-head,
+        &-body {
+            display: contents;
+        }
         &.table {
             display: grid !important;
+            grid-template-columns: var(--widgets-grid-template-columns);
             min-width: fit-content;
             margin-bottom: 0;
+            &.infinite-loading {
+                // in order to restrict the scroll to row area
+                // we need to prevent table itself to expanding beyond available position
+                min-width: 0;
+            }
         }
     }
 
@@ -405,21 +371,13 @@ $root: ".widget-datagrid";
         overflow-x: auto;
     }
 
-    &-grid-head {
-        display: contents;
-    }
-
-    &-grid-body {
-        display: contents;
-    }
-
     &-footer {
         container: widget-datagrid-footer / inline-size;
     }
 
     &.widget-datagrid-selection-method-click {
         .tr.tr-selected .td {
-            background-color: $grid-selected-row-background;
+            background-color: var(--grid-selected-row-background, $grid-selected-row-background);
         }
     }
 
@@ -448,7 +406,7 @@ $root: ".widget-datagrid";
 
     &-loader-container {
         align-items: center;
-        background-color: rgba(255, 255, 255, 1);
+        background-color: var(--bg-color-secondary, $bg-color-secondary);
         display: flex;
         height: 400px;
         justify-content: center;
@@ -529,27 +487,55 @@ $root: ".widget-datagrid";
     margin: var(--spacing-small, 8px) 0;
 }
 
-.infinite-loading.widget-datagrid-grid-body {
-    // when virtual scroll is enabled we make area that holds rows scrollable
-    // (while the area that holds column headers still stays in place)
-    overflow-y: auto;
+.infinite-loading {
+    // infinite loading grid limits height to initiate scrolling
+    max-height: var(--widgets-grid-table-height);
+    overflow: auto;
+
+    .widget-datagrid-grid-head {
+        .th {
+            // make header sticky when grid is scrolled.
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            &:has([data-overlay-content]) {
+                // when there is popup open inside of the header cell, it should
+                // overlay other header elements, including ones from other grids.
+                z-index: 20;
+            }
+        }
+    }
+
+    &[data-scrolled-y] .widget-datagrid-grid-head .th:after {
+        // add shadow under the header
+        // implying that grid is scrolled vertically (there are rows hidden under header)
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), transparent);
+    }
 }
 
-.widget-datagrid-grid-head,
-.widget-datagrid-grid-body {
-    // this element has to position their children (columns or headers)
-    // as grid and have those aligned with the parent grid
-    display: grid;
-    // this property makes sure we align our own grid columns
-    // to the columns defined in the global grid
-    grid-template-columns: subgrid;
-
-    // ensure that we cover all columns of original top level grid
-    // so our own columns get aligned with the parent
-    grid-column: 1 / -1;
+// add shadows at the left to imply that grid is scrolled horizontally
+.widget-datagrid-content:has(.widget-datagrid-grid[data-scrolled-x]) {
+    position: relative; // needed to keep :after element positioned inside
+    &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        z-index: 10;
+        bottom: 0;
+        top: 0;
+        width: 5px;
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.1), transparent);
+        pointer-events: none;
+    }
 }
 
-:where(#{$root}-paging-bottom, #{$root}-padding-top) {
+:where(#{$root}-paging-bottom, #{$root}-paging-top) {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -588,7 +574,7 @@ $root: ".widget-datagrid";
 
     &:hover,
     &:focus-visible {
-        background-color: var(--brand-primary-50, #e6e7f2);
+        background-color: var(--brand-primary-50, $color-default-lighter);
     }
 }
 
@@ -601,7 +587,7 @@ $root: ".widget-datagrid";
 
 :where(#{$root}-select-all-bar) {
     grid-column: 1 / -1;
-    background-color: #f0f1f2;
+    background-color: var(--bg-color, $bg-color);
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -642,4 +628,8 @@ $root: ".widget-datagrid";
             justify-content: center;
         }
     }
+}
+
+#{$root} [data-overlay-content] {
+    z-index: 15;
 }

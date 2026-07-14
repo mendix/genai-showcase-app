@@ -1,5 +1,9 @@
 @import "date-picker";
 
+$filter-box-shadow:
+    0 2px 20px 1px rgba(5, 15, 129, 0.05),
+    0 2px 16px 0 rgba(33, 43, 54, 0.08) !default;
+
 @font-face {
     font-family: "datagrid-filters";
     src: url("./fonts/datagrid-filters.eot");
@@ -19,13 +23,15 @@
     flex-grow: 1;
     position: relative;
 
+    overflow: hidden;
+
     .filter-input {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
+        border-start-start-radius: 0;
+        border-end-start-radius: 0;
     }
 
     .btn-calendar {
-        margin-left: 5px; //Review in atlas, the current date picker is also 5px
+        margin-inline-start: 5px; //Review in atlas, the current date picker is also 5px
         .button-icon {
             width: 18px;
             height: 18px;
@@ -43,16 +49,16 @@
 
         .filter-selector-button {
             padding: 8px;
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-            border-right: none;
+            border-start-end-radius: 0;
+            border-end-end-radius: 0;
+            border-inline-end: none;
             height: 100%;
 
             &:before {
                 justify-content: center;
                 width: 20px;
                 height: 20px;
-                padding-left: 4px; /* The font has spaces in the right side, so to align in the middle we need this */
+                padding-inline-start: 4px; /* The font has spaces in the right side, so to align in the middle we need this */
             }
         }
     }
@@ -68,9 +74,7 @@
     z-index: 51;
     border-radius: 8px;
     list-style-type: none;
-    box-shadow:
-        0 2px 20px 1px rgba(5, 15, 129, 0.05),
-        0 2px 16px 0 rgba(33, 43, 54, 0.08);
+    box-shadow: var(--wdf-filter-box-shadow, $filter-box-shadow);
     overflow: hidden;
 
     .filter-listitem,
@@ -140,9 +144,7 @@
 :not(.dropdown-content) > .dropdown-list {
     background: var(--bg-color-secondary, $bg-color-secondary);
     border-radius: 8px;
-    box-shadow:
-        0 2px 20px 1px rgba(5, 15, 129, 0.05),
-        0 2px 16px 0 rgba(33, 43, 54, 0.08);
+    box-shadow: var(--wdf-filter-box-shadow, $filter-box-shadow);
     max-height: 40vh;
     z-index: 102;
 }
@@ -150,9 +152,7 @@
 .dropdown-content {
     background: var(--bg-color-secondary, $bg-color-secondary);
     border-radius: 8px;
-    box-shadow:
-        0 2px 20px 1px rgba(5, 15, 129, 0.05),
-        0 2px 16px 0 rgba(33, 43, 54, 0.08);
+    box-shadow: var(--wdf-filter-box-shadow, $filter-box-shadow);
     max-height: 40vh;
     z-index: 140;
 }
@@ -203,9 +203,7 @@
         z-index: 102;
         border-radius: 8px;
         list-style-type: none;
-        box-shadow:
-            0 2px 20px 1px rgba(5, 15, 129, 0.05),
-            0 2px 16px 0 rgba(33, 43, 54, 0.08);
+        box-shadow: var(--wdf-filter-box-shadow, $filter-box-shadow);
         overflow-x: hidden;
         max-height: 40vh;
 

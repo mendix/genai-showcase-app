@@ -102,6 +102,11 @@
             text-overflow: ellipsis;
             min-width: 0;      
         }
+        .item-title {
+            text-wrap: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
     }
 
     .widget-combobox {

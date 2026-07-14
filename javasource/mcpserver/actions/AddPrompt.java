@@ -101,10 +101,10 @@ public class AddPrompt extends UserAction<IMendixObject>
 
 		// Create the prompt spec and add to server
 		List<McpSchema.PromptArgument> mcpPromptArguments = Parameters.stream().map(e ->
-				new McpSchema.PromptArgument(e.getName(), e.getDescription(), e.getRequired())).collect(java.util.stream.Collectors.toList());
+				McpSchema.PromptArgument.builder(e.getName()).description(e.getDescription()).required(e.getRequired()).build()).collect(java.util.stream.Collectors.toList());
 
 		McpServerFeatures.SyncPromptSpecification syncPromptSpecification = new McpServerFeatures.SyncPromptSpecification(
-				new McpSchema.Prompt(Name, Description, mcpPromptArguments),
+				McpSchema.Prompt.builder(Name).description(Description).arguments(mcpPromptArguments).build(),
 				(exchange, request) -> {
 					// some request logging
 					String threadName = Thread.currentThread().getName();
@@ -123,16 +123,14 @@ public class AddPrompt extends UserAction<IMendixObject>
 						IMendixObject mxExecResult = Core.microflowCall(Microflow).withParams(args).execute(contextUser);
 						mcpserver.proxies.PromptMessage mxPromptMessage = mcpserver.proxies.PromptMessage.initialize(getContext(), mxExecResult);
 
-						McpSchema.PromptMessage mcpPromptMessage = new McpSchema.PromptMessage(
-								McpSchema.Role.valueOf(
-										mxPromptMessage.getRole()),
-								new McpSchema.TextContent(mxPromptMessage.getContent())
-						);
-						return new McpSchema.GetPromptResult(Name, List.of(mcpPromptMessage));
+						McpSchema.TextContent mcpTextContent = McpSchema.TextContent.builder(mxPromptMessage.getContent()).build();
+						McpSchema.PromptMessage mcpPromptMessage = McpSchema.PromptMessage.builder(
+								McpSchema.Role.valueOf(mxPromptMessage.getRole()), mcpTextContent).build();
+						return McpSchema.GetPromptResult.builder(List.of(mcpPromptMessage)).description(Name).build();
 					}
 					catch(Exception e) {
 						LOGGER.error(e, threadName + ": Error occurred during get prompt call.");
-						return new McpSchema.GetPromptResult(Name, null);
+						return McpSchema.GetPromptResult.builder(null).description(Name).build();
 					}	
 					finally {
 						LOGGER.trace(threadName + ": End processing getPrompt '" + Name + ". Duration: " + (System.currentTimeMillis() - start) + "ms.");
