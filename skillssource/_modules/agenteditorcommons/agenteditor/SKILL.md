@@ -23,7 +23,7 @@ Agent Editor provides four document types (add via Add other menu at module leve
 ### 1. Define Model (Required)
 
 - Create Model document
-- Set constant with GenAI resource key
+- Set necessary constants: provider Mendix Cloud GenAI needs a resource key; provider Azure (AI Foundry) needs a Project endpoint and an API key.
 - Click "List Models" to validate
 
 ### 2. Define Agent (Required)
@@ -173,7 +173,7 @@ This separation ensures:
 
 ## Limitations
 
-- Only Mendix Cloud GenAI supported (more providers planned)
+- Only providers Mendix Cloud GenAI and Azure (AI Foundry) are currently supported (more providers planned)
 - Mac support limited
 - MCP whole-server only (no individual tool selection yet)
 - Tool Choice "Tool" only for microflows currently
