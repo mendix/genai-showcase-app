@@ -30,7 +30,7 @@
 
 .chat-page--fullheight {
     height: 100%;
-    width: 100%;
+    max-width: var(--chat-width);
     display: flex;
     flex: 1 1 0;
     flex-wrap: wrap;
@@ -40,7 +40,6 @@
 
 .chat-page--fullheight-centered {
     @extend .chat-page--fullheight;
-    max-width: 153.5rem;
     justify-content: center;
     margin: auto;
 }
