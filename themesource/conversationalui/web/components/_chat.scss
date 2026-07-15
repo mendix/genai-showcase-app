@@ -43,6 +43,12 @@
     max-width: 153.5rem;
     justify-content: center;
     margin: auto;
+
+    .chat-container > .messages-container {
+        .scroll-btn-wrapper {
+            bottom: calc(170px + 16px);
+        }
+    }
 }
 
 .chat-container {
@@ -173,6 +179,9 @@
         width: 100%;
         > div {
             width: inherit;
+        }
+        .form-group {
+            margin-bottom: 0;
         }
     }
 

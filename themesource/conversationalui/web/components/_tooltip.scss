@@ -11,6 +11,7 @@
         }
     }
     .widget-tooltip-content {
+        position: relative;
         z-index: 1000;
         background-color: white;
         color: var(--gray-darker);
@@ -35,6 +36,7 @@
 
     .mx-link {
         font-weight: normal;
+        line-height: $line-height-base * 1.25;
     }
 }
 
@@ -150,6 +152,7 @@
     img {
         height: 16px;
         width: 16px;
+        margin: 0;
     }
 }
 

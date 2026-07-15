@@ -2952,81 +2952,6 @@
   content: "\ea6d";
 }
 
-.popupmenu--display-flex.popupmenu {
-  display: flex;
-}
-
-.popupmenu-custom-item-container {
-  padding: 8px;
-}
-.popupmenu-custom-item-container .mx-link {
-  display: block;
-  padding-left: 8px;
-  padding-right: 8px;
-}
-
-.popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item {
-  background-color: #fff;
-}
-.popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:hover, .popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:focus, .popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:active {
-  cursor: pointer;
-  border-color: #f8f8f8;
-  background-color: #f8f8f8;
-}
-
-.btn-without-border.mx-link {
-  text-decoration: none;
-  border: 1px solid transparent;
-  color: #0a1324;
-}
-.btn-without-border.mx-link.disabled {
-  background-color: transparent !important;
-  cursor: default;
-}
-.btn-without-border.mx-link:hover {
-  background-color: #e7e7e9;
-}
-
-.btn-no-hover.mx-link:hover {
-  background-color: transparent !important;
-}
-
-.listview-horizontal.mx-listview > ul {
-  display: inline-block;
-  margin-bottom: 0;
-}
-.listview-horizontal.mx-listview > ul > li {
-  display: inline-block;
-}
-
-.listview-hide-on-empty.mx-listview > ul > li.mx-listview-empty {
-  display: none;
-}
-
-.listview-empty-deployed-models.mx-listview > ul > li.mx-listview-empty > label {
-  display: none;
-}
-.listview-empty-deployed-models.mx-listview > ul > li.mx-listview-empty::before {
-  content: "Please add deployed models on the Edit page to be able to use this configuration.";
-  color: #e33f4e;
-}
-
-.label-with-text > label {
-  overflow: hidden;
-  margin-bottom: 4px;
-  text-align: left;
-  text-overflow: ellipsis;
-  color: #0a1324;
-  font-size: 14px;
-  font-weight: 600;
-  display: block;
-}
-
-.datagrid--no-scroll .widget-datagrid-content {
-  overflow-y: visible;
-  overflow-x: visible;
-}
-
 /* ==========================================================================
   Take picture styles
 ========================================================================== */
@@ -28935,6 +28860,51 @@ input[type=checkbox].three-state-checkbox + .control-label {
   cursor: default;
 }
 
+.scroll-btn-wrapper {
+  padding: 8px;
+  background-color: #fff;
+  border: 1px solid #0a1325;
+  position: fixed;
+  bottom: 196px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 8px;
+  opacity: 0;
+}
+.scroll-btn-wrapper:hover {
+  background-color: #f8f8f8;
+}
+.scroll-btn-wrapper:active {
+  background-color: #a9acb3;
+}
+.scroll-btn-wrapper .spinner {
+  width: 18px;
+  height: 18px;
+  margin-left: 8px;
+}
+.scroll-btn-wrapper .scroll-to-bottom-btn {
+  background: transparent;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 100;
+  padding: 0;
+  border: 0;
+  font-size: 20px;
+  color: #0a1324;
+  display: flex;
+  align-items: center;
+}
+.scroll-btn-wrapper .scroll-to-bottom-btn .icon-lined {
+  background-color: #264ae5;
+}
+
+.messages-container.not-at-bottom .scroll-btn-wrapper {
+  opacity: 1;
+}
+.messages-container.not-at-bottom .scroll-btn-wrapper .scroll-to-bottom-btn {
+  pointer-events: auto;
+}
+
 .btn.mx-button.btn-test-single img, .btn.mx-button.btn-test-all img, .btn.mx-button.btn-test img {
   height: 20px;
   width: 20px;
@@ -29130,6 +29100,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
   justify-content: center;
   margin: auto;
 }
+.chat-page--fullheight-centered .chat-container > .messages-container .scroll-btn-wrapper {
+  bottom: 186px;
+}
 
 .chat-container {
   display: flex;
@@ -29245,6 +29218,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .chat-bubble-wrapper--assistant > div {
   width: inherit;
+}
+.chat-bubble-wrapper--assistant .form-group {
+  margin-bottom: 0;
 }
 .chat-bubble-wrapper--user {
   align-items: flex-end;
@@ -29988,6 +29964,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .convui-pagecontainer {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   min-height: 100%;
   height: -webkit-fill-available;
   width: 95vw;
@@ -30255,10 +30232,12 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: 100%;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   margin: auto;
   gap: var(--spacing-large);
   padding: var(--spacing-medium) var(--spacing-large) r var(--spacing-medium) var(--spacing-large) r;
+  overflow: hidden;
   box-sizing: border-box;
   /* Test Agent */
 }
@@ -30542,6 +30521,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .layout-chat-popup.mx-window .modal-body .mx-placeholder {
   height: 100%;
 }
+.layout-chat-popup.mx-window .modal-body .chat-container > .messages-container .scroll-btn-wrapper {
+  bottom: calc(150px + 5vh);
+}
 
 .popupmenu--display-flex.popupmenu {
   display: flex;
@@ -30651,6 +30633,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .layout-chat-sidebar .mx-window-content .mx-window-body .mx-placeholder {
   height: 100%;
+}
+.layout-chat-sidebar .mx-window-content .mx-window-body .chat-container > .messages-container .scroll-btn-wrapper {
+  bottom: 150px;
 }
 
 /* ==========================================================================
@@ -30959,6 +30944,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   margin: 0;
 }
 .agent-tooltip .widget-tooltip-content {
+  position: relative;
   z-index: 1000;
   background-color: white;
   color: var(--gray-darker);
@@ -30980,6 +30966,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .agent-tooltip .mx-link {
   font-weight: normal;
+  line-height: 1.7857142863;
 }
 
 .agent-tooltip-w330 .widget-tooltip-content {
@@ -31084,6 +31071,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .tooltip-info-icon img {
   height: 16px;
   width: 16px;
+  margin: 0;
 }
 
 .output-tooltip .widget-tooltip-content {
@@ -31594,6 +31582,81 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .mxgenai-listview-horizontal.mx-listview > ul > li:hover {
   background-color: transparent;
+}
+
+.popupmenu--display-flex.popupmenu {
+  display: flex;
+}
+
+.popupmenu-custom-item-container {
+  padding: 8px;
+}
+.popupmenu-custom-item-container .mx-link {
+  display: block;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item {
+  background-color: #fff;
+}
+.popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:hover, .popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:focus, .popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:active {
+  cursor: pointer;
+  border-color: #f8f8f8;
+  background-color: #f8f8f8;
+}
+
+.btn-without-border.mx-link {
+  text-decoration: none;
+  border: 1px solid transparent;
+  color: #0a1324;
+}
+.btn-without-border.mx-link.disabled {
+  background-color: transparent !important;
+  cursor: default;
+}
+.btn-without-border.mx-link:hover {
+  background-color: #e7e7e9;
+}
+
+.btn-no-hover.mx-link:hover {
+  background-color: transparent !important;
+}
+
+.listview-horizontal.mx-listview > ul {
+  display: inline-block;
+  margin-bottom: 0;
+}
+.listview-horizontal.mx-listview > ul > li {
+  display: inline-block;
+}
+
+.listview-hide-on-empty.mx-listview > ul > li.mx-listview-empty {
+  display: none;
+}
+
+.listview-empty-deployed-models.mx-listview > ul > li.mx-listview-empty > label {
+  display: none;
+}
+.listview-empty-deployed-models.mx-listview > ul > li.mx-listview-empty::before {
+  content: "Please add deployed models on the Edit page to be able to use this configuration.";
+  color: #e33f4e;
+}
+
+.label-with-text > label {
+  overflow: hidden;
+  margin-bottom: 4px;
+  text-align: left;
+  text-overflow: ellipsis;
+  color: #0a1324;
+  font-size: 14px;
+  font-weight: 600;
+  display: block;
+}
+
+.datagrid--no-scroll .widget-datagrid-content {
+  overflow-y: visible;
+  overflow-x: visible;
 }
 
 .listview-horizontal.mx-listview > ul {
