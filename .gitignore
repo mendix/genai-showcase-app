@@ -23,3 +23,4 @@ theme-cache/web/theme.compiled.css.map
 modules/javasource/*/proxies/*
 modules/javasource/system/*
 /agenteditor/
+/.claude/

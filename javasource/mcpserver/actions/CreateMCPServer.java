@@ -72,7 +72,7 @@ public class CreateMCPServer extends UserAction<IMendixObject>
         mcpServer.setVersion(Version);
         mcpServer.setProtocolVersion(ProtocolVersion);
         mcpServer.setAuthenticationMicroflow(AuthenticationMicroflow);
-        mcpServer.setEndpoint(getContext().getRuntimeRequest().get().getRootUrl() + Path + "/mcp");
+        mcpServer.setEndpoint(Core.getConfiguration().getApplicationRootUrl() + Path + "/mcp");
         // Create request handler with Streamable HTTP transport
         // Uses /mcp endpoint for all MCP operations
         McpServerRequestHandler mcpRequestHandler = new McpServerRequestHandler(mcpServer, Path);

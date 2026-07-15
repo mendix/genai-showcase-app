@@ -86,7 +86,7 @@ public class ToolResult_Get extends UserAction<IMendixObject>
 			}
 			
 			
-			McpSchema.CallToolRequest callToolRequest = new McpSchema.CallToolRequest(ToolName, arguments);
+			McpSchema.CallToolRequest callToolRequest = McpSchema.CallToolRequest.builder(ToolName).arguments(arguments).build();
 
 			CallToolResult callToolResultMcp =  client.callTool(callToolRequest);
 			ToolResult toolResultMendix = createToolResult(callToolResultMcp);
