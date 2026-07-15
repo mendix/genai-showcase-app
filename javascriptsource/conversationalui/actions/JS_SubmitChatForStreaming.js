@@ -33,7 +33,7 @@ export async function JS_SubmitChatForStreaming(streamMessage, chatContextGUID) 
 
 	// Check if the response status is 404
 	if (response.status == 404) {
-		console.error(`The URL '${endpoint}' could not be found (HTTP 404). This might indicate that the microflow 'ConversationalUI.ASU_Streaming' was not added to the after startup microflow. Please ensure that the 'ConversationalUI.ASU_Streaming' microflow is executed before any streaming related action.`);
+		console.debug(`The URL '${endpoint}' could not be found (HTTP 404). This might indicate that the request handler was not registered correctly.`);
 		return "NotFound";
 	}
 
