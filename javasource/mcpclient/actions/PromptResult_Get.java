@@ -72,7 +72,7 @@ public class PromptResult_Get extends UserAction<IMendixObject>
 
 			Map<String, Object> arguments = getArguments();
 			
-			McpSchema.GetPromptRequest request = new McpSchema.GetPromptRequest(PromptName, arguments);
+			McpSchema.GetPromptRequest request = McpSchema.GetPromptRequest.builder(PromptName).arguments(arguments).build();
 
 			McpSchema.GetPromptResult resultMcp =  client.getPrompt(request);
 			PromptResult getPromptResultMendix = createPromptResult(resultMcp);

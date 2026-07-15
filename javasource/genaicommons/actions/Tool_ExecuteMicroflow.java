@@ -117,19 +117,21 @@ public class Tool_ExecuteMicroflow extends UserAction<java.lang.String>
 		for(Map.Entry<String, IDataType> entry : parametersAndTypes.entrySet()) {
 			IDataType value = entry.getValue();
 			String key = entry.getKey();
-			//find value in input map
-			String argumentValue = inputMap.get(key);
-			
-			//If there is no argumentValue, it is either a Mendix Object or nothing was passed
-			if (argumentValue == null && isMetaObjectSubClass(value,genaicommons.proxies.Tool.getType())){
-				parametersAndValues.put(key,  Tool.getMendixObject());
+
+			// Object-type parameters are always resolved from context, regardless of LLM-provided JSON.
+			// This prevents collision when MCP tool parameters are named "Tool" or "Request".
+			if (isMetaObjectSubClass(value, genaicommons.proxies.Tool.getType())) {
+				parametersAndValues.put(key, Tool.getMendixObject());
 				continue;
-				
-			} else if (argumentValue == null && isMetaObjectSubClass(value, genaicommons.proxies.Request.getType())){
+
+			} else if (isMetaObjectSubClass(value, genaicommons.proxies.Request.getType())) {
 				parametersAndValues.put(key, Request.getMendixObject());
 				continue;
-				
-			} else if (argumentValue == null) {
+			}
+
+			String argumentValue = inputMap.get(key);
+
+			if (argumentValue == null) {
 				parametersAndValues.put(key, null);
 				continue;
 			}

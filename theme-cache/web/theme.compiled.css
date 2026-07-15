@@ -29087,7 +29087,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 
 .chat-page--fullheight, .chat-page--fullheight-centered {
   height: 100%;
-  width: 100%;
+  max-width: var(--chat-width);
   display: flex;
   flex: 1 1 0;
   flex-wrap: wrap;
@@ -29096,7 +29096,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 .chat-page--fullheight-centered {
-  max-width: 153.5rem;
   justify-content: center;
   margin: auto;
 }

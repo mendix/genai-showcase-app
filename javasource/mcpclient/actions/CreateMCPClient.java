@@ -69,7 +69,7 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 			McpClientTransport transport = createTransport();
 			
 			McpSchema.ClientCapabilities capabilities = McpSchema.ClientCapabilities.builder().build();
-			McpSchema.Implementation clientInfo = new McpSchema.Implementation(ClientConfig.getName(), ClientConfig.getVersion());
+			McpSchema.Implementation clientInfo = McpSchema.Implementation.builder(ClientConfig.getName(), ClientConfig.getVersion()).build();
 
 			McpSyncClient client = McpClient.sync(transport)
 					.requestTimeout(Duration.ofSeconds(getConnectionTimeout()))
@@ -116,6 +116,7 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 	 * @return Transport instance (either HttpClientSseClientTransport or HttpClientStreamableHttpTransport)
 	 * @throws CoreException if there's an error creating the request builder
 	 */
+	
 	private McpClientTransport createTransport() throws CoreException {
 		HttpRequest.Builder customRequestBuilder = getCustomRequestBuilder();
 		String protocolVersion = ClientConfig.getProtocolVersion().toString();

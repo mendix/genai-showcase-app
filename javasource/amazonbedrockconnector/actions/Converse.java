@@ -1028,22 +1028,18 @@ public class Converse extends UserAction<IMendixObject>
 	
 	// Check if a tool has already been called to decide whether Tool Choice should be set or not
 	private boolean isToolRecall(Tool toolChoiceTool, Request commonRequest) throws CoreException {
-		// Get all messages where ToolCallId is set. These messages indicate that a tool has been called
-		List<genaicommons.proxies.Message> messageListTool = Core.retrieveByPath(getContext(), commonRequest.getMendixObject(), 
-				Request.MemberNames.Request_Message.toString()).stream()
-				.map(msg -> genaicommons.proxies.Message.initialize(getContext(), msg))
-				.filter(msg -> msg.getToolCallId() != null && !msg.getToolCallId().isEmpty())
-				.collect(Collectors.toList());
+		// Get tool messages from the current agent loop only
+		List<genaicommons.proxies.Message> messageListTool = genaicommons.impl.FunctionMappingImpl
+				.getToolCallMessages(commonRequest, getContext());
 
 		// No tool calls yet; thus no tool recall
 		if (messageListTool.size() == 0) {
 			return false;
 		}
-		
-		// Get all messages with role assistant
-		// Assistant messages optionally have an array of tool_calls that contain an id and the functionName
-		List<genaicommons.proxies.Message> messageListAssistant = genaicommons.impl.MessageImpl
-				.retrieveMessageListByRole(commonRequest, ENUM_MessageRole.assistant, getContext());
+
+		// Get assistant messages from the current agent loop only
+		List<genaicommons.proxies.Message> messageListAssistant = genaicommons.impl.FunctionMappingImpl
+				.getCurrentLoopMessagesByRole(commonRequest, ENUM_MessageRole.assistant, getContext());
 
 		// HashMap with ToolCall._id and ToolCallFunction.Name created from the messageListAssistant
 		// The map contains only those tool calls, where functionName equals the toolChoiceFunctionName
