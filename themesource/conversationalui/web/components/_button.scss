@@ -137,7 +137,7 @@
         background-color: $bg-color-secondary;
         border: 1px solid $gray-darker;
         position: fixed;
-        bottom: calc(180px + $spacing-medium);
+        bottom: calc(var(--chat-input-height, 180px) + $spacing-medium);
         display: inline-flex;
         align-items: center;
         border-radius: $spacing-small;

@@ -42,12 +42,6 @@
     @extend .chat-page--fullheight;
     justify-content: center;
     margin: auto;
-
-    .chat-container > .messages-container {
-        .scroll-btn-wrapper {
-            bottom: calc(170px + 16px);
-        }
-    }
 }
 
 .chat-container {

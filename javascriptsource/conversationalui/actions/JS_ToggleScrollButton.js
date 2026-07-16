@@ -48,5 +48,23 @@ export async function JS_ToggleScrollButton() {
     // Store reference globally
     window.chatScrollSetup = { container };
   });
+
+  waitForElement('.chat-input-wrapper', (inputWrapper) => {
+    const chatContainer = inputWrapper.closest('.chat-container');
+    if (!chatContainer) {
+      return;
+    }
+
+    // Distance from the input's top edge to the bottom of the viewport,
+    // so the fixed button clears the input plus whatever spacing sits below it.
+    const updateInputOffset = () => {
+      const distanceFromViewportBottom = window.innerHeight - inputWrapper.getBoundingClientRect().top;
+      chatContainer.style.setProperty('--chat-input-height', `${distanceFromViewportBottom}px`);
+    };
+
+    updateInputOffset();
+    new ResizeObserver(updateInputOffset).observe(inputWrapper);
+    window.addEventListener('resize', updateInputOffset);
+  });
 	// END USER CODE
 }
