@@ -1,11 +1,11 @@
 import { j as n } from "./jsx-runtime-CWOFuNcx.js";
 import { r as f, a9 as M, a6 as W, a7 as q, aa as P } from "./PageContainers-B4e_cfEm.js";
-import { u as U, B as _, C as $, c as z } from "./TextWithIcon-Cp5cdcPY.js";
+import { u as U, B as _, C as $, c as z } from "./TextWithIcon-C8FfnZsQ.js";
 import { createStudioProLogger as A } from "./logger-gMbuSAUF.js";
 import { f as B, g as G } from "./documentInitUtils-CvQbsMH5.js";
-import { c as H, a as J } from "./modelIcons-Dn45IrnE.js";
+import { c as H, a as J } from "./modelIcons-CLqRGrLL.js";
 import { C as Q } from "./CenteredLoadingSpinner-BqLuFhP3.js";
-import { C as y, i as X, B as Y, v as Z, a as ee } from "./validationUtils-F9qtbBA1.js";
+import { C as y, i as X, B as Y, v as Z, a as ee } from "./validationUtils-LU2oMxj3.js";
 import { G as b } from "./GroupBox-DjvYs9o_.js";
 import { y as F } from "./Link-Baa_rm91.js";
 import { g as te, h as ne } from "./constantUtils-D0RXxXWn.js";
@@ -371,5 +371,6 @@ const w = () => {
   ] }) });
 }, Ve = z(ve);
 export {
+  ve as App,
   Ve as component
 };
