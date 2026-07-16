@@ -20,7 +20,9 @@ import okhttp3.sse.*;
 import static java.util.Objects.requireNonNull;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
 public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
@@ -54,139 +56,26 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		requireNonNull(this.MxCloudDeployedModel, "A DeployedModel object is required");
 		try {
 			LOGGER.debug("Starting Request_ChatCompletions_Stream.");
-			
-			genaicommons.impl.StreamingImpl.createResponseMessage(getContext(),mxResponse);
-			
+
+			genaicommons.impl.StreamingImpl.createResponseMessage(getContext(), mxResponse);
+
 			CountDownLatch latch = new CountDownLatch(1);
-			
-			OkHttpClient client = new OkHttpClient.Builder()
-		            .readTimeout(0, java.util.concurrent.TimeUnit.MILLISECONDS)
-		            .build();
-	        
-	        MediaType JSON = MediaType.get("application/json; charset=utf-8");
-	        RequestBody requestBody = RequestBody.create(this.RequestBodyJSON, JSON);
-	        String accessKey = encryption.proxies.microflows.Microflows.decrypt(getContext(),this.MxCloudDeployedModel.getMxCloudDeployedModel_Configuration().getAccessToken());
-	        
-	        Request mxCloudrequest = new Request.Builder()
-	            .url(this.MxCloudDeployedModel.getMxCloudDeployedModel_Configuration().getResourceBaseUrl() + "/converse-stream")
-	            .header("Accept", "text/event-stream")
-	            .header("Content-Type", "application/json")
-	            .header("x-api-key", accessKey)
-	            .post(requestBody)
-	            .build();
-	        
-	        EventSourceListener listener = new EventSourceListener() {
-	            @Override
-	            public void onOpen(EventSource eventSource, Response response) {
-	            	
-	            	LOGGER.debug("SSE Connection opened. HTTP " + response.code());
-	       
-	            }
-	            
-	            @Override
-	            public void onEvent(EventSource eventSource, String id, String type, String data) {
-	            	try {
-		            	JsonNode rootNode = mapper.readTree(data);
-		            	switch (type) {
-		                case "MESSAGE_START":
-		                    break;
-		                    
-		                case "CONTENT_BLOCK_START":
-		                	createToolCall(rootNode);
-		                    break;
+			OkHttpClient client = buildHttpClient();
+			Request mxCloudRequest = buildMxCloudRequest();
+			EventSourceListener listener = createEventSourceListener(latch);
+			EventSource eventSource = EventSources.createFactory(client).newEventSource(mxCloudRequest, listener);
 
-		                case "CONTENT_BLOCK_DELTA":
-		                	if (rootNode.path("contentBlockIndex").asInt() == toolContentBlockIndex) {
-		                		updateToolCall(rootNode);
-		                	} else {
-			                    String chunkText = rootNode.path("delta").path("text").asText();
-			                    genaicommons.impl.StreamingImpl.updateResponseText(mxResponse, chunkText);
-			                    if (StreamingResponseWriterId != null) {
-			                    	genaicommons.impl.StreamingImpl.pushChunkToUI(getContext(), StreamingResponseWriterId, chunkText);
-			                    }
-		                	}
-		                    break;
-		                case "CONTENT_BLOCK_STOP":
-		                	if (rootNode.path("contentBlockIndex").asInt() == toolContentBlockIndex) {
-		                		finishToolCall(rootNode);
-		                	}
-		                    break;
+			awaitStreamCompletion(latch, eventSource);
 
-		                case "MESSAGE_STOP":
-		                	String stopReason = rootNode.path("stopReason").asText();
-		                	LOGGER.debug("Stop reason: " + stopReason);
-		                    mxResponse.setStopReason(stopReason);
-		                    break;
+			if (failureException != null) {
+				throw failureException;
+			}
 
-		                case "METADATA":
-		                    setResponseMetadata(rootNode);
-		                    break;
+			mxResponse.getResponse_Message().setContent(mxResponse.getResponseText());
+			mxResponse.getResponse_Message().setMessage_ToolCall(mxToolCallList);
 
-		                default:
-		                    break;
-		            }
-	            	} catch (Exception e) {
-        	            LOGGER.error("Error parsing JSON: " + e.getMessage());
-        	        }
-	                
-	            }
-	            
-	            @Override
-	            public void onClosed(EventSource eventSource) {
-	            	LOGGER.debug("SSE Connection closed");
-	            	latch.countDown(); // Signal completion
-	            }
-	            
-	            @Override
-	            public void onFailure(EventSource eventSource, Throwable t, Response response) {
-            	    try {
-		            	if (t != null) {
-		            		if (t instanceof Exception) {
-		            	        failureException = (Exception) t;
-		            	    } else {
-		            	        failureException = new Exception("Streaming failure", t);
-		            	    }
-		            	} else if (response != null) {
-		            		String responseBody = null;
-		                    if (response.body() != null) {
-		                        responseBody = response.body().string();
-		                    }
-		            		//LOGGER.error("SSE HTTP failure: " + response.code() + " - " + response.message() + " - " + responseBody);
-		            	    failureException = new IOException("HTTP " + response.code() + ": " + response.message() + " - " + responseBody);
-		            	} else {
-		            		//LOGGER.error("Unknown SSE failure");
-		            	    failureException = new RuntimeException("Unknown SSE failure");
-		            	}
-            	    } catch (Exception e) {
-            	        failureException = e;
-            	    } finally {
-            	        latch.countDown();
-            	    }
-	            }
-	        };
-	        
-	        EventSource eventSource = EventSources.createFactory(client)
-	            .newEventSource(mxCloudrequest, listener);
-	        
-	        try {
-	        	latch.await(); // Wait indefinitely until stream completes
-	        } catch (InterruptedException e) {
-	            Thread.currentThread().interrupt();
-	            eventSource.cancel();
-	            throw e;
-	        }
-	        
-	        eventSource.cancel();
-	        
-	        if (failureException !=  null) {
-	        	throw failureException;
-	        }
-	        
-	        mxResponse.getResponse_Message().setContent(mxResponse.getResponseText());
-	        mxResponse.getResponse_Message().setMessage_ToolCall(mxToolCallList);
-	        
-	        return mxResponse.getMendixObject();
-		        
+			return mxResponse.getMendixObject();
+
 		} catch (Exception e) {
 			LOGGER.error("Something went wrong for model: " + this.MxCloudDeployedModel.getDisplayName() + "\n" + e);
 			throw e;
@@ -213,44 +102,185 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	
 	genaicommons.proxies.Response mxResponse =  new genaicommons.proxies.Response(getContext());
 	List<genaicommons.proxies.ToolCall> mxToolCallList = new ArrayList<genaicommons.proxies.ToolCall>();
-	
-	Integer toolContentBlockIndex = 10000;
-	
-	private void createToolCall(JsonNode rootNode) {
-		
-		genaicommons.proxies.ToolCall mxToolCall = new genaicommons.proxies.ToolCall(getContext());
-		mxToolCall.setName(rootNode.path("start").path("toolUse").path("name").asText());
-		mxToolCall.setToolCallId(rootNode.path("start").path("toolUse").path("toolUseId").asText());
-		mxToolCallList.add(mxToolCall);
-		
-		toolContentBlockIndex = rootNode.path("contentBlockIndex").asInt();
+
+	Map<Integer, Block> blocks = new HashMap<Integer, Block>();
+
+	private OkHttpClient buildHttpClient() {
+		return new OkHttpClient.Builder()
+			.readTimeout(0, java.util.concurrent.TimeUnit.MILLISECONDS)
+			.build();
 	}
-	
-	private void updateToolCall(JsonNode rootNode) {
-		
-		genaicommons.proxies.ToolCall mxToolCall = mxToolCallList.get(mxToolCallList.size()-1);
-		
-		String currentText = mxToolCall.getInput();
-		String chunkText = rootNode.path("delta").path("toolUse").path("input").asText();
-		if (currentText == null) {
-			mxToolCall.setInput(chunkText);
-		}
-		else {
-			mxToolCall.setInput(currentText + chunkText);
-		}
-		
+
+	private Request buildMxCloudRequest() throws Exception {
+		MediaType JSON = MediaType.get("application/json; charset=utf-8");
+		RequestBody requestBody = RequestBody.create(this.RequestBodyJSON, JSON);
+		String accessKey = encryption.proxies.microflows.Microflows.decrypt(getContext(), this.MxCloudDeployedModel.getMxCloudDeployedModel_Configuration().getAccessToken());
+
+		return new Request.Builder()
+			.url(this.MxCloudDeployedModel.getMxCloudDeployedModel_Configuration().getResourceBaseUrl() + "/converse-stream")
+			.header("Accept", "text/event-stream")
+			.header("Content-Type", "application/json")
+			.header("x-api-key", accessKey)
+			.post(requestBody)
+			.build();
 	}
-	
-	private void finishToolCall(JsonNode rootNode) {
-		
-		genaicommons.proxies.ToolCall mxToolCall = mxToolCallList.get(mxToolCallList.size()-1);
-	
-		if (mxToolCall.getInput() == null || mxToolCall.getInput().isBlank()) {
-			mxToolCall.setInput("{}");
+
+	private void handleStreamEvent(String type, JsonNode rootNode) throws IOException {
+		int blockIndex = rootNode.path("contentBlockIndex").asInt();
+		switch (type) {
+		case "MESSAGE_START":
+			break;
+
+		case "CONTENT_BLOCK_START":
+			Block startedBlock = rootNode.path("start").has("toolUse")
+				? new ToolBlock()
+				: new TextBlock();
+			startedBlock.start(rootNode);
+			blocks.put(blockIndex, startedBlock);
+			break;
+
+		case "CONTENT_BLOCK_DELTA":
+			// Bedrock only emits CONTENT_BLOCK_START for tool-use blocks; text blocks
+			// stream straight to DELTA, so lazily create a TextBlock when none exists yet.
+			Block deltaBlock = blocks.computeIfAbsent(blockIndex, i -> new TextBlock());
+			deltaBlock.append(rootNode);
+			break;
+
+		case "CONTENT_BLOCK_STOP":
+			Block stoppedBlock = blocks.get(blockIndex);
+			if (stoppedBlock != null) {
+				stoppedBlock.complete();
+			}
+			break;
+
+		case "MESSAGE_STOP":
+			String stopReason = rootNode.path("stopReason").asText();
+			LOGGER.debug("Stop reason: " + stopReason);
+			mxResponse.setStopReason(stopReason);
+			break;
+
+		case "METADATA":
+			setResponseMetadata(rootNode);
+			break;
+
+		default:
+			break;
 		}
-		LOGGER.debug("Toolcall added to response.");
-		
 	}
+
+	private void handleStreamFailure(Throwable t, Response response) {
+		try {
+			if (t != null) {
+				failureException = (t instanceof Exception) ? (Exception) t : new Exception("Streaming failure", t);
+			} else if (response != null) {
+				String responseBody = response.body() != null ? response.body().string() : null;
+				failureException = new IOException("HTTP " + response.code() + ": " + response.message() + " - " + responseBody);
+			} else {
+				failureException = new RuntimeException("Unknown SSE failure");
+			}
+		} catch (Exception e) {
+			failureException = e;
+		}
+	}
+
+	private EventSourceListener createEventSourceListener(CountDownLatch latch) {
+		return new EventSourceListener() {
+			@Override
+			public void onOpen(EventSource eventSource, Response response) {
+				LOGGER.debug("SSE Connection opened. HTTP " + response.code());
+			}
+
+			@Override
+			public void onEvent(EventSource eventSource, String id, String type, String data) {
+				try {
+					JsonNode rootNode = mapper.readTree(data);
+					handleStreamEvent(type, rootNode);
+				} catch (Exception e) {
+					LOGGER.error("Error parsing JSON: " + e.getMessage());
+				}
+			}
+
+			@Override
+			public void onClosed(EventSource eventSource) {
+				LOGGER.debug("SSE Connection closed");
+				latch.countDown(); // Signal completion
+			}
+
+			@Override
+			public void onFailure(EventSource eventSource, Throwable t, Response response) {
+				handleStreamFailure(t, response);
+				latch.countDown();
+			}
+		};
+	}
+
+	private void awaitStreamCompletion(CountDownLatch latch, EventSource eventSource) throws InterruptedException {
+		try {
+			latch.await(); // Wait indefinitely until stream completes
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+			eventSource.cancel();
+			throw e;
+		}
+		eventSource.cancel();
+	}
+
+	private interface Block {
+		void start(JsonNode rootNode);
+		void append(JsonNode rootNode) throws IOException;
+		void complete();
+	}
+
+	private class TextBlock implements Block {
+
+		@Override
+		public void start(JsonNode rootNode) {
+			// no state to initialize for a text block
+		}
+
+		@Override
+		public void append(JsonNode rootNode) throws IOException {
+			String chunkText = rootNode.path("delta").path("text").asText();
+			genaicommons.impl.StreamingImpl.updateResponseText(mxResponse, chunkText);
+			if (StreamingResponseWriterId != null) {
+				genaicommons.impl.StreamingImpl.pushChunkToUI(getContext(), StreamingResponseWriterId, chunkText);
+			}
+		}
+
+		@Override
+		public void complete() {
+			// text is already accumulated on mxResponse as it streams in
+		}
+	}
+
+	private class ToolBlock implements Block {
+
+		private genaicommons.proxies.ToolCall mxToolCall;
+
+		@Override
+		public void start(JsonNode rootNode) {
+			mxToolCall = new genaicommons.proxies.ToolCall(getContext());
+			mxToolCall.setName(rootNode.path("start").path("toolUse").path("name").asText());
+			mxToolCall.setToolCallId(rootNode.path("start").path("toolUse").path("toolUseId").asText());
+			mxToolCallList.add(mxToolCall);
+		}
+
+		@Override
+		public void append(JsonNode rootNode) throws IOException {
+			String currentText = mxToolCall.getInput();
+			String chunkText = rootNode.path("delta").path("toolUse").path("input").asText();
+			mxToolCall.setInput(currentText == null ? chunkText : currentText + chunkText);
+		}
+
+		@Override
+		public void complete() {
+			if (mxToolCall.getInput() == null || mxToolCall.getInput().isBlank()) {
+				mxToolCall.setInput("{}");
+			}
+			LOGGER.debug("Toolcall added to response.");
+		}
+	}
+
 	private void setResponseMetadata(JsonNode rootNode) {
 		
 		mxResponse.setRequestTokens(rootNode.path("usage").path("inputTokens").asInt());

@@ -9,6 +9,61 @@ import "mx-global";
 import { Big } from "big.js";
 
 // BEGIN EXTRA CODE
+
+/**
+ * Parses a single SSE message block into its fields.
+ * @param {string} message
+ * @returns {{ data: string, deleteContent: boolean, throwError: boolean }}
+ */
+function parseSseMessage(message) {
+	const lines = message.replace(/\r\n/g, "\n").split("\n").filter(line => line.trim() !== "");
+	let data = "";
+	let deleteContent = false;
+	let throwError = false;
+
+	for (const line of lines) {
+		if (line.startsWith("data:")) {
+			// data lines can be multi-line; accumulate them
+			data += line.substring(5).trim();
+		} else if (line.startsWith("deleteContent:")) {
+			deleteContent = line.substring(14).trim() === "true";
+		} else if (line.startsWith("throwError:")) {
+			throwError = line.substring(11).trim() === "true";
+		}
+	}
+
+	return { data, deleteContent, throwError };
+}
+
+/**
+ * Decodes a base64-encoded, UTF-8 SSE data payload into text.
+ * @param {string} data
+ * @returns {string}
+ */
+function decodeBase64ToText(data) {
+	const binary = atob(data);
+	const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
+	return new TextDecoder("utf-8").decode(bytes);
+}
+
+/**
+ * Scrolls the messages container to the bottom, unless the user has scrolled up.
+ * Batched with requestAnimationFrame to avoid layout thrash during streaming.
+ */
+function scrollMessagesToBottom() {
+	if (window.scrollPending) {
+		return;
+	}
+	window.scrollPending = true;
+	requestAnimationFrame(() => {
+		const container = document.querySelector(".messages-container");
+		if (container && !container.classList.contains("not-at-bottom")) {
+			container.scrollTop = container.scrollHeight; // instant, no 'smooth'
+		}
+		window.scrollPending = false;
+	});
+}
+
 // END EXTRA CODE
 
 /**
@@ -38,77 +93,24 @@ export async function JS_SubmitChatForStreaming(streamMessage, chatContextGUID) 
 	}
 
 	const reader = response.body.getReader();
-	const decoder = new TextDecoder('utf-8');
-	let buffer = ''; // Buffer to accumulate incomplete SSE messages
+	const decoder = new TextDecoder("utf-8");
+	let buffer = ""; // accumulates incomplete SSE messages across chunks
 
-	// Function to process a complete SSE message
+	// Applies one complete SSE message to the stream message object.
 	const processSseMessage = (message) => {
-		// SSE messages typically look like:
-		// id: 1
-		// event: update
-		// data: {"status": "online", "value": 123}
-		//
-		// data: {"status": "offline"}
-		//
-		// (empty line indicates end of message)
-
-		const lines = message.replace(/\r\n/g, "\n").split("\n").filter(line => line.trim() !== "");
-		let id = null;
-		let event = 'message'; // Default event type
-		let data = '';
-		let deleteContent = false;
-		let throwError = false;
-
-		for (const line of lines) {
-			if (line.startsWith('id:')) {
-				id = line.substring(3).trim();
-			} else if (line.startsWith('event:')) {
-				event = line.substring(6).trim();
-			} else if (line.startsWith('data:')) {
-				// Accumulate data lines, they can be multi-line
-				data += line.substring(5).trim();
-			} else if (line.startsWith('deleteContent:')) {
-				const value = line.substring(14).trim();
-				deleteContent = value === 'true';
-			} else if (line.startsWith('throwError:')) {
-				const value = line.substring(11).trim();
-				throwError = value === 'true';
-			}
-			// You might also handle 'retry:' fields if your server sends them
-		}
+		const { data, deleteContent, throwError } = parseSseMessage(message);
 
 		if (throwError) {
-				throw new Error();
+			throw new Error("Server signalled a streaming error");
 		}
 		if (deleteContent) {
-				streamMessage.set("Content", "");
+			streamMessage.set("Content", "");
 		}
 		if (data) {
-			try {
-				const binary = atob(data);
-				const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
-				const decodedData = new TextDecoder("utf-8").decode(bytes);
-				// Here you would update your UI or application state
-				const currentText = streamMessage.get("Content")
-				streamMessage.set("Content", currentText + decodedData)
-				
-  				// Auto-scroll if at bottom (batched with requestAnimationFrame for smoothness)
-  				if (!window.scrollPending) {
-      				window.scrollPending = true;
-      				requestAnimationFrame(() => {
-          				const container = document.querySelector('.messages-container');
-          					if (container && !container.classList.contains('not-at-bottom')) {
-              						container.scrollTop = container.scrollHeight; // Instant, no 'smooth'
-          						}
-		          			window.scrollPending = false;
-      					});
-  				}  
-				
-			} catch (e) {
-				console.warn('Could not parse SSE data as JSON:', data, e);
-				// Handle non-JSON data if expected
-				updateUIWithStreamData(data, event);
-			}
+			const decodedData = decodeBase64ToText(data);
+			const currentText = streamMessage.get("Content");
+			streamMessage.set("Content", currentText + decodedData);
+			scrollMessagesToBottom();
 		}
 	};
 
@@ -117,7 +119,7 @@ export async function JS_SubmitChatForStreaming(streamMessage, chatContextGUID) 
 			const { done, value } = await reader.read();
 
 			if (done) {
-				console.log('Stream finished.');
+				console.log("Stream finished.");
 				break;
 			}
 
@@ -125,13 +127,12 @@ export async function JS_SubmitChatForStreaming(streamMessage, chatContextGUID) 
 			buffer += decoder.decode(value, { stream: true });
 			buffer = buffer.replace(/\r\n/g, "\n");
 
-			// Process complete SSE messages from the buffer
 			// SSE messages are terminated by two newline characters (\n\n)
 			let messageEndIndex;
-			while ((messageEndIndex = buffer.indexOf('\n\n')) !== -1) {
+			while ((messageEndIndex = buffer.indexOf("\n\n")) !== -1) {
 				const message = buffer.substring(0, messageEndIndex);
 				processSseMessage(message);
-				buffer = buffer.substring(messageEndIndex + 2); 
+				buffer = buffer.substring(messageEndIndex + 2);
 			}
 		}
 		return "Success";
