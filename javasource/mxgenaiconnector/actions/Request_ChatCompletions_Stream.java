@@ -143,7 +143,12 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 			// Bedrock only emits CONTENT_BLOCK_START for tool-use blocks; text blocks
 			// stream straight to DELTA, so lazily create a TextBlock when none exists yet.
 			Block deltaBlock = blocks.computeIfAbsent(blockIndex, i -> new TextBlock());
-			deltaBlock.append(rootNode);
+			try {
+				deltaBlock.append(rootNode);
+			} catch (Exception e) {
+				LOGGER.error("Failed to append delta to block at index " + blockIndex + " with StreamingResponseWriterId " + StreamingResponseWriterId + ": " + e.getMessage(), e);
+				throw e;
+			}
 			break;
 
 		case "CONTENT_BLOCK_STOP":

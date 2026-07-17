@@ -31,9 +31,15 @@ public class StreamingImpl {
 	}
 	
 	public static void pushChunkToUI(IContext ctx, String streamingResponseWriterId, String chunkText) throws IOException {
-		
+
 		if (streamingResponseWriterId != null) {
-			genaicommons.impl.ResponseConnectionController.getInstance().getStreamingResponseWriter(streamingResponseWriterId).write(chunkText.getBytes());
+			genaicommons.impl.ResponseConnectionController.StreamingResponseWriter writer =
+				genaicommons.impl.ResponseConnectionController.getInstance().getStreamingResponseWriter(streamingResponseWriterId);
+			if (writer == null) {
+				throw new IOException("No StreamingResponseWriter found for id: " + streamingResponseWriterId +
+					". This typically means the writer was not registered or has already been removed.");
+			}
+			writer.write(chunkText.getBytes());
 		}
 	}
 	
