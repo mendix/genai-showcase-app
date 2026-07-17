@@ -31243,6 +31243,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border-radius: var(--spacing-small);
 }
 
+.health-alert-icon > img {
+  min-height: 16px !important;
+  min-width: 16px !important;
+}
+
 .combobox-filter-height .widget-combobox-input-container {
   align-items: center;
   justify-content: center;
