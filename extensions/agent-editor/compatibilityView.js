@@ -1,11 +1,11 @@
 import { j as e, d as x } from "./jsx-runtime-CWOFuNcx.js";
-import { S as s, r as d, a7 as C, ad as h, a9 as g, a6 as f, a8 as j, a4 as b } from "./PageContainers-B4e_cfEm.js";
-import { T as y, D as E } from "./Table-BYgJsym3.js";
-import { M } from "./compatibility-B4OgVO3B.js";
-import { u as V, g as S, S as R, a as H } from "./StatusBadge-DjqJi2z2.js";
-import { E as T } from "./Banner-CeIULR6d.js";
+import { ak as h, S as s, r as d, a7 as g, ad as C, a9 as f, a6 as j, a8 as b, a4 as S } from "./PageContainers-BqHFWUr4.js";
+import { T as y, D as E } from "./Table-DNrOUaYU.js";
+import { g as M, M as V } from "./compatibilityUtils-R3Pg1ddN.js";
+import { u as P, S as R, a as H } from "./StatusBadge-w2RvyUis.js";
+import { E as T } from "./Banner-Bk-4OzcL.js";
 import { c as k } from "./genericUtils-GaF65l2f.js";
-import { C as P } from "./CenteredLoadingSpinner-BqLuFhP3.js";
+import { C as B } from "./CenteredLoadingSpinner-NelG--07.js";
 const v = ({
   width: t = "1em",
   height: o = "1em",
@@ -41,23 +41,26 @@ const v = ({
       )
     ]
   }
-), B = s(f)`
+), w = s(j)`
     && {
-        padding: 40px 80px;
+        padding: 40px 80px 0;
     }
-`, w = s.h1`
+    ${h} {
+        height: 40px;
+    }
+`, I = s.h1`
     font-weight: 600;
     margin: 0;
-`, I = s(j)`
+`, L = s(b)`
     gap: 24px;
     max-width: 1200px;
-`, L = s.h2`
+`, D = s.h2`
     font-weight: 600;
     margin: 0;
     font-size: 20px;
-`, D = s(E)`
+`, W = s(E)`
     color: ${(t) => t.theme.colorsTextLink};
-`, W = s(b)`
+`, A = s(S)`
     align-self: flex-start;
 `, c = [
   { id: "module", caption: "Module", isRowHeader: !0, maxWidth: 150 },
@@ -66,24 +69,24 @@ const v = ({
   { id: "status", caption: "Status", maxWidth: 100 },
   { id: "note", caption: "Note" },
   { id: "actions", caption: "", maxWidth: 140 }
-], A = ({ studioPro: t }) => {
-  const { data: o, agentEditorVersion: n, isPending: i, isError: r, refresh: l } = V(t), m = S(r, o);
+], q = ({ studioPro: t }) => {
+  const { data: o, agentEditorVersion: n, isPending: i, isError: r, refresh: l } = P(t), p = M(r, o);
   d.useEffect(() => {
     t.ui.panes.open({ id: "Marketplace" });
   }, [t]);
-  const p = c.slice(0, m === M.Compatible ? 5 : c.length), u = o.map((a) => [
+  const m = c.slice(0, p === V.Compatible ? 5 : c.length), u = o.map((a) => [
     { cellContent: a.module },
     { cellContent: a.installedVersion },
     { cellContent: a.requiredRange },
     { cellContent: /* @__PURE__ */ e.jsx(R, { status: a.status }) },
     { cellContent: a.note },
     {
-      cellContent: a.marketplaceComponentId ? /* @__PURE__ */ e.jsx(
-        D,
+      cellContent: a.appStorePackageIdString ? /* @__PURE__ */ e.jsx(
+        W,
         {
           icon: /* @__PURE__ */ e.jsx(v, {}),
           label: "Copy marketplace ID",
-          onPress: () => k(a.marketplaceComponentId)
+          onPress: () => k(a.appStorePackageIdString)
         }
       ) : null
     }
@@ -92,31 +95,31 @@ const v = ({
     d.useCallback(() => {
       l();
     }, [l])
-  ), o.length === 0 && i ? /* @__PURE__ */ e.jsx(P, {}) : /* @__PURE__ */ e.jsx(B, { children: /* @__PURE__ */ e.jsx(C, { children: /* @__PURE__ */ e.jsxs(I, { children: [
-    /* @__PURE__ */ e.jsx(w, { children: `Agent Editor V ${n}` }),
-    /* @__PURE__ */ e.jsx(L, { children: "Make sure you're ready to build" }),
-    /* @__PURE__ */ e.jsx(W, { variant: "primary", onPress: l, isDisabled: i, children: "Refresh" }),
+  ), o.length === 0 && i ? /* @__PURE__ */ e.jsx(B, {}) : /* @__PURE__ */ e.jsx(w, { children: /* @__PURE__ */ e.jsx(g, { children: /* @__PURE__ */ e.jsxs(L, { children: [
+    /* @__PURE__ */ e.jsx(I, { children: `Agent Editor V ${n}` }),
+    /* @__PURE__ */ e.jsx(D, { children: "Make sure you're ready to build" }),
+    /* @__PURE__ */ e.jsx(A, { variant: "primary", onPress: l, isDisabled: i, children: "Refresh" }),
     r && /* @__PURE__ */ e.jsx(T, { children: "Failed to load module information. Please try again." }),
     /* @__PURE__ */ e.jsx(
       y,
       {
         ariaLabel: "Module Compatibility Check",
-        columns: p,
+        columns: m,
         data: u,
         selectionMode: "none"
       }
     )
   ] }) }) });
-}, z = {
+}, G = {
   async loaded(t) {
     const o = x(t), n = document.getElementById("root");
     if (!n) throw new Error("Failed to find the root element");
-    h.createRoot(n).render(
-      /* @__PURE__ */ e.jsx(d.StrictMode, { children: /* @__PURE__ */ e.jsx(g, { studioPro: o, children: /* @__PURE__ */ e.jsx(A, { studioPro: o }) }) })
+    C.createRoot(n).render(
+      /* @__PURE__ */ e.jsx(d.StrictMode, { children: /* @__PURE__ */ e.jsx(f, { studioPro: o, children: /* @__PURE__ */ e.jsx(q, { studioPro: o }) }) })
     );
   }
 };
 export {
-  A as Compatibility,
-  z as component
+  q as Compatibility,
+  G as component
 };
