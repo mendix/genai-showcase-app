@@ -15,7 +15,7 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import agentcommons.actions.Agent_Call_WithHistory;
-import agentcommons.impl.MxLogger;
+import agenteditorcommons.impl.MxLogger;
 import agenteditorcommons.impl.AgentDocumentUtils;
 
 /**

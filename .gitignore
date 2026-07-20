@@ -24,3 +24,4 @@ modules/javasource/*/proxies/*
 modules/javasource/system/*
 /agenteditor/
 /.claude/
+/bin/

@@ -15,7 +15,7 @@ import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
-import agentcommons.impl.MxLogger;
+import agenteditorcommons.impl.MxLogger;
 
 public class ImportConsumedKnowledgeBase extends UserAction<java.util.List<IMendixObject>>
 {
@@ -45,10 +45,10 @@ public class ImportConsumedKnowledgeBase extends UserAction<java.util.List<IMend
 		// BEGIN USER CODE
 		try {
 			requireNonNull(Provider,
-					"No Provider was specified for Model document " + QualifiedName
+					"No provider was specified for knowledge base document " + QualifiedName
 							+ ". The document could not be imported.");
 			String importMicroflow = getImportMicroflow(Provider);
-			requireNonNull(importMicroflow, "Model provider is not one of the allowed types for Model document " + QualifiedName 
+			requireNonNull(importMicroflow, "Knowledge base provider is not one of the allowed types for knowledge base document " + QualifiedName 
 							+ "The document could not be imported.");
 			Map<String, Object> parametersAndValues = new java.util.HashMap<>();
 			parametersAndValues.put("QualifiedName", QualifiedName);

@@ -12,7 +12,6 @@ package agenteditorcommons.actions;
 import static java.util.Objects.requireNonNull;
 import java.util.Map;
 import com.mendix.core.Core;
-import com.mendix.core.actionmanagement.MicroflowCallBuilder;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
@@ -46,7 +45,7 @@ public class ImportDeployedModel extends UserAction<java.util.List<IMendixObject
 		// BEGIN USER CODE
 		try {
 			requireNonNull(Provider,
-					"No Provider was specified for Model document " + QualifiedName
+					"No provider was specified for Model document " + QualifiedName
 							+ ". The document could not be imported.");
 			String importMicroflow = getImportMicroflow(Provider);
 			requireNonNull(importMicroflow, "Model provider is not one of the allowed types for Model document " + QualifiedName 
