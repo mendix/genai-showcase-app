@@ -1,9 +1,8 @@
 import { j as e, d as w } from "./jsx-runtime-CWOFuNcx.js";
 import { R as m, T as l, S as s, a4 as C, aj as f, r as x, a7 as j, ad as b, a9 as y, a1 as k, a6 as A } from "./PageContainers-BvK5usmz.js";
 import { d as M, y as P } from "./Link-Bxad9cv4.js";
-import { O as i } from "./modelIcons-YezrRLMt.js";
-import { u as I, g as V, a as $, S as H } from "./StatusBadge-BVsNIRxt.js";
-import { b as B, o as E } from "./index-CanM1QxZ.js";
+import { b as I, o as V, O as r } from "./index-DclzxLgl.js";
+import { u as $, g as H, a as B, S as E } from "./StatusBadge-LHInYput.js";
 import { o as n } from "./genericUtils-GaF65l2f.js";
 import { C as F } from "./CenteredLoadingSpinner-DRQ0Sbi_.js";
 import { D as v } from "./formelements-Daexkze0.js";
@@ -11,7 +10,7 @@ const L = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200
 var S = Object.defineProperty, O = (t, o) => S(t, "name", { value: o, configurable: !0 });
 const R = O((t) => e.jsx(m, { light: G, dark: L, ...t }), "FeedbackIcon");
 var D = Object.defineProperty, T = (t, o) => D(t, "name", { value: o, configurable: !0 });
-const Z = T(({ title: t, type: o, icon: r, buttons: c, children: h }) => e.jsxs(N, { $type: o, children: [r && e.jsx("div", { children: r }), e.jsxs(z, { children: [e.jsx(W, { children: t }), e.jsx(K, { children: h }), c && e.jsx(U, { children: c.map((a, p) => e.jsxs(Y, { onPress: a.onPress, isDisabled: a.isDisabled, children: [a.caption, a.isExternal && e.jsx(M, {})] }, p)) })] })] }), "Card"), N = s.div`
+const Z = T(({ title: t, type: o, icon: i, buttons: c, children: h }) => e.jsxs(N, { $type: o, children: [i && e.jsx("div", { children: i }), e.jsxs(z, { children: [e.jsx(W, { children: t }), e.jsx(K, { children: h }), c && e.jsx(U, { children: c.map((a, p) => e.jsxs(Y, { onPress: a.onPress, isDisabled: a.isDisabled, children: [a.caption, a.isExternal && e.jsx(M, {})] }, p)) })] })] }), "Card"), N = s.div`
     display: flex;
     padding: ${l.spacing16};
     border: ${l.borderWidthMd} solid ${({ theme: t }) => t.colorsBorderSecondary};
@@ -40,11 +39,11 @@ const Z = T(({ title: t, type: o, icon: r, buttons: c, children: h }) => e.jsxs(
 `, d = (t) => /* @__PURE__ */ e.jsx(q, { children: /* @__PURE__ */ e.jsx(Z, { ...t }) }), _ = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M14%203.5H2C1.72386%203.5%201.5%203.72386%201.5%204V12C1.5%2012.2761%201.72386%2012.5%202%2012.5H14C14.2761%2012.5%2014.5%2012.2761%2014.5%2012V4C14.5%203.72386%2014.2761%203.5%2014%203.5Z'%20stroke='%23579BF9'%20stroke-miterlimit='10'/%3e%3cpath%20d='M14.5%204L8%208.5L1.5%204'%20stroke='%23579BF9'%20stroke-miterlimit='10'/%3e%3c/svg%3e", J = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M14%203.5H2C1.72386%203.5%201.5%203.72386%201.5%204V12C1.5%2012.2761%201.72386%2012.5%202%2012.5H14C14.2761%2012.5%2014.5%2012.2761%2014.5%2012V4C14.5%203.72386%2014.2761%203.5%2014%203.5Z'%20stroke='%23146FF4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M14.5%204L8%208.5L1.5%204'%20stroke='%23146FF4'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
 var Q = Object.defineProperty, X = (t, o) => Q(t, "name", { value: o, configurable: !0 });
 const ee = X((t) => e.jsx(m, { light: J, dark: _, ...t }), "MessageDefinitionIcon"), te = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M3.5%207.5V12C3.5%2012.275%203.725%2012.5%204%2012.5H12C12.275%2012.5%2012.5%2012.275%2012.5%2012V7.5'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M14.5%206.5L8%209.5L1.5%206.5L8%203.5L14.5%206.5ZM14.5%206.5V10.5'%20stroke='%23A4A4A4'%20stroke-linejoin='round'/%3e%3c/svg%3e", oe = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M3.5%207.5V12C3.5%2012.275%203.725%2012.5%204%2012.5H12C12.275%2012.5%2012.5%2012.275%2012.5%2012V7.5'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M14.5%206.5L8%209.5L1.5%206.5L8%203.5L14.5%206.5ZM14.5%206.5V10.5'%20stroke='%23535965'%20stroke-linejoin='round'/%3e%3c/svg%3e";
-var se = Object.defineProperty, re = (t, o) => se(t, "name", { value: o, configurable: !0 });
-const ie = re((t) => e.jsx(m, { light: oe, dark: te, ...t }), "MxAcademyIcon"), ne = ({
+var se = Object.defineProperty, ie = (t, o) => se(t, "name", { value: o, configurable: !0 });
+const re = ie((t) => e.jsx(m, { light: oe, dark: te, ...t }), "MxAcademyIcon"), ne = ({
   width: t = "1em",
   height: o = "1em",
-  stroke: r = "currentColor",
+  stroke: i = "currentColor",
   className: c,
   style: h
 }) => /* @__PURE__ */ e.jsxs(
@@ -62,7 +61,7 @@ const ie = re((t) => e.jsx(m, { light: oe, dark: te, ...t }), "MxAcademyIcon"), 
         "path",
         {
           d: "M9.80769 18.5H6.15385C4.13588 18.5 2.5 16.8641 2.5 14.8462V13.4872C2.5 11.4692 4.13588 9.83333 6.15385 9.83333H6.88462V9.11111C6.88462 7.11778 8.52154 5.5 10.5385 5.5H13.4615C15.4785 5.5 17.1154 7.11778 17.1154 9.11111V10.5556H17.8462C19.8641 10.5556 21.5 12.1914 21.5 14.2094V14.8889C21.5 16.8833 19.8833 18.5 17.8889 18.5H14.1923",
-          stroke: r,
+          stroke: i,
           strokeMiterlimit: "10"
         }
       ),
@@ -82,7 +81,7 @@ const ie = re((t) => e.jsx(m, { light: oe, dark: te, ...t }), "MxAcademyIcon"), 
     ${g}
 `, de = s(R)`
     ${g}
-`, le = s(ie)`
+`, le = s(re)`
     ${g}
 `, ce = s(ee)`
     ${g}
@@ -119,17 +118,17 @@ const ie = re((t) => e.jsx(m, { light: oe, dark: te, ...t }), "MxAcademyIcon"), 
         flex-wrap: wrap;
     }
 `, ue = s.div``, xe = ({ studioPro: t }) => {
-  const { data: o, agentEditorVersion: r, isPending: c, isError: h, refresh: a } = I(t), p = V(h, o);
-  return $(
+  const { data: o, agentEditorVersion: i, isPending: c, isError: h, refresh: a } = $(t), p = H(h, o);
+  return B(
     x.useCallback(() => {
       a();
     }, [a])
   ), o.length === 0 && c ? /* @__PURE__ */ e.jsx(F, {}) : /* @__PURE__ */ e.jsx(ge, { children: /* @__PURE__ */ e.jsxs(j, { children: [
     /* @__PURE__ */ e.jsxs(pe, { alignItems: "center", children: [
-      /* @__PURE__ */ e.jsx(ae, { src: B, alt: "Agent Editor" }),
+      /* @__PURE__ */ e.jsx(ae, { src: I, alt: "Agent Editor" }),
       /* @__PURE__ */ e.jsxs(he, { children: [
         "Agent Editor V ",
-        r
+        i
       ] })
     ] }),
     /* @__PURE__ */ e.jsxs(me, { children: [
@@ -139,17 +138,17 @@ const ie = re((t) => e.jsx(m, { light: oe, dark: te, ...t }), "MxAcademyIcon"), 
         {
           title: /* @__PURE__ */ e.jsxs(v, { alignItems: "center", children: [
             /* @__PURE__ */ e.jsx("div", { children: "1. Make sure you're ready to build" }),
-            /* @__PURE__ */ e.jsx(H, { status: p })
+            /* @__PURE__ */ e.jsx(E, { status: p })
           ] }),
           buttons: [
             {
               caption: "Open Compatibility Overview",
-              onPress: () => E(t)
+              onPress: () => V(t)
             }
           ],
           children: /* @__PURE__ */ e.jsxs("div", { children: [
             "Welcome to Agent Editor Version ",
-            r,
+            i,
             "! First, ensure that you have the correct module versions installed. You can check this by navigating to the Module Compatibility Overview, which is also accessible under Extensions in the top menu."
           ] })
         }
@@ -162,13 +161,13 @@ const ie = re((t) => e.jsx(m, { light: oe, dark: te, ...t }), "MxAcademyIcon"), 
             {
               caption: "How to create your first agent",
               isExternal: !0,
-              onPress: () => n(i.CreateFirstAgent)
+              onPress: () => n(r.CreateFirstAgent)
             }
           ],
           children: [
             "This Mendix Docs guides you through leveraging Agent Editor in Studio Pro to build and manage agents within your app model. You'll learn how to define agents as documents, integrating them with models, knowledge bases, and MCP services. Not sure where to start? Check out the",
             " ",
-            /* @__PURE__ */ e.jsx(P, { onPress: () => n(i.GenAIConcepts), children: "GenAI Concepts" }),
+            /* @__PURE__ */ e.jsx(P, { onPress: () => n(r.GenAIConcepts), children: "GenAI Concepts" }),
             " to enhance your understanding."
           ]
         }
@@ -181,7 +180,7 @@ const ie = re((t) => e.jsx(m, { light: oe, dark: te, ...t }), "MxAcademyIcon"), 
             {
               caption: "Calling the agent",
               isExternal: !0,
-              onPress: () => n(i.CallingTheAgent)
+              onPress: () => n(r.CallingTheAgent)
             }
           ],
           children: "Integrate your agent into the app by adding a microflow call that invokes the agent editor agent."
@@ -198,12 +197,12 @@ const ie = re((t) => e.jsx(m, { light: oe, dark: te, ...t }), "MxAcademyIcon"), 
             {
               caption: "Mendix Cloud GenAI portal",
               isExternal: !0,
-              onPress: () => n(i.MxCloudGenAIPortal)
+              onPress: () => n(r.MxCloudGenAIPortal)
             },
             {
               caption: "Mendix Cloud GenAI Resource Packs",
               isExternal: !0,
-              onPress: () => n(i.MxCloudGenAIResourcePacks)
+              onPress: () => n(r.MxCloudGenAIResourcePacks)
             }
           ],
           icon: /* @__PURE__ */ e.jsx(ne, { width: "32", height: "32" }),
@@ -219,7 +218,7 @@ const ie = re((t) => e.jsx(m, { light: oe, dark: te, ...t }), "MxAcademyIcon"), 
             {
               caption: "Learn more",
               isExternal: !0,
-              onPress: () => n(i.MxAcademy)
+              onPress: () => n(r.MxAcademy)
             }
           ],
           icon: /* @__PURE__ */ e.jsx(le, {}),
@@ -236,7 +235,7 @@ const ie = re((t) => e.jsx(m, { light: oe, dark: te, ...t }), "MxAcademyIcon"), 
             {
               caption: "Give feedback",
               isExternal: !0,
-              onPress: () => n(i.Feedback)
+              onPress: () => n(r.Feedback)
             }
           ],
           children: "We would love to hear your thoughts on this module! Please share any feedback you have."
@@ -252,7 +251,7 @@ const ie = re((t) => e.jsx(m, { light: oe, dark: te, ...t }), "MxAcademyIcon"), 
             {
               caption: "Sign up",
               isExternal: !0,
-              onPress: () => n(i.Newsletter)
+              onPress: () => n(r.Newsletter)
             }
           ],
           children: "Sign up to receive the monthly Mendix GenAI Updates."
@@ -260,16 +259,16 @@ const ie = re((t) => e.jsx(m, { light: oe, dark: te, ...t }), "MxAcademyIcon"), 
       )
     ] })
   ] }) });
-}, Me = {
+}, Ae = {
   async loaded(t) {
-    const o = w(t), r = document.getElementById("root");
-    if (!r) throw new Error("Failed to find the root element");
-    b.createRoot(r).render(
+    const o = w(t), i = document.getElementById("root");
+    if (!i) throw new Error("Failed to find the root element");
+    b.createRoot(i).render(
       /* @__PURE__ */ e.jsx(x.StrictMode, { children: /* @__PURE__ */ e.jsx(y, { studioPro: o, children: /* @__PURE__ */ e.jsx(xe, { studioPro: o }) }) })
     );
   }
 };
 export {
   xe as Onboarding,
-  Me as component
+  Ae as component
 };

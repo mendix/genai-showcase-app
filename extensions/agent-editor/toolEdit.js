@@ -3,9 +3,9 @@ import { r as y, ae as I, a7 as k, a8 as q, ad as B, a9 as L } from "./PageConta
 import { createStudioProLogger as P } from "./logger-gMbuSAUF.js";
 import { h as O, a as R } from "./customBlobDocumentUtils-DRHCWWx0.js";
 import { u as A, D as F } from "./DialogFooter-CmNUeYU0.js";
-import { T as K, h, a as G } from "./toolHandlers-CGsyMgzK.js";
+import { T as K, h, a as G } from "./toolHandlers-B8Y1dAHV.js";
 import { o as x } from "./genericUtils-GaF65l2f.js";
-import { a as d, c as H, h as W } from "./toolUtils-MLHoVQt4.js";
+import { a as d, c as H, h as W } from "./toolUtils-3GFu_U6Y.js";
 import { g as U } from "./documentInitUtils-Bwe4f_Cu.js";
 import { G as C } from "./GroupBox-Bv1UqUKB.js";
 import { T as D } from "./TextInputWithButton-CkuCCNYk.js";

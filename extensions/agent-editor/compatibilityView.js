@@ -1,17 +1,17 @@
 import { j as e, d as x } from "./jsx-runtime-CWOFuNcx.js";
-import { S as s, r as d, a7 as C, ad as h, a9 as g, a6 as f, a8 as j, a4 as b } from "./PageContainers-BvK5usmz.js";
-import { T as y, D as E } from "./Table-bHKZTZKr.js";
-import { M } from "./compatibility-B4OgVO3B.js";
-import { u as V, g as S, S as R, a as H } from "./StatusBadge-BVsNIRxt.js";
+import { S as i, r as l, a7 as C, ad as h, a9 as g, a6 as j, a8 as f } from "./PageContainers-BvK5usmz.js";
+import { T as b, D as y } from "./Table-bHKZTZKr.js";
+import { M as E } from "./compatibility-B4OgVO3B.js";
+import { u as M, g as V, S, a as H } from "./StatusBadge-LHInYput.js";
 import { E as T } from "./Banner-DAKvWnIG.js";
-import { c as k } from "./genericUtils-GaF65l2f.js";
-import { C as P } from "./CenteredLoadingSpinner-DRQ0Sbi_.js";
+import { c as R } from "./genericUtils-GaF65l2f.js";
+import { C as k } from "./CenteredLoadingSpinner-DRQ0Sbi_.js";
 const v = ({
   width: t = "1em",
   height: o = "1em",
   fill: n = "currentColor",
-  className: i,
-  style: r
+  className: r,
+  style: s
 }) => /* @__PURE__ */ e.jsxs(
   "svg",
   {
@@ -20,8 +20,8 @@ const v = ({
     viewBox: "160.5 16.5 15 15",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
-    className: i,
-    style: r,
+    className: r,
+    style: s,
     children: [
       /* @__PURE__ */ e.jsx(
         "path",
@@ -41,24 +41,22 @@ const v = ({
       )
     ]
   }
-), B = s(f)`
+), w = i(j)`
     && {
         padding: 40px 80px;
     }
-`, w = s.h1`
+`, B = i.h1`
     font-weight: 600;
     margin: 0;
-`, I = s(j)`
+`, I = i(f)`
     gap: 24px;
     max-width: 1200px;
-`, L = s.h2`
+`, L = i.h2`
     font-weight: 600;
     margin: 0;
     font-size: 20px;
-`, D = s(E)`
+`, P = i(y)`
     color: ${(t) => t.theme.colorsTextLink};
-`, W = s(b)`
-    align-self: flex-start;
 `, c = [
   { id: "module", caption: "Module", isRowHeader: !0, maxWidth: 150 },
   { id: "installedVersion", caption: "Installed Version", maxWidth: 120 },
@@ -66,39 +64,38 @@ const v = ({
   { id: "status", caption: "Status", maxWidth: 100 },
   { id: "note", caption: "Note" },
   { id: "actions", caption: "", maxWidth: 140 }
-], A = ({ studioPro: t }) => {
-  const { data: o, agentEditorVersion: n, isPending: i, isError: r, refresh: l } = V(t), m = S(r, o);
-  d.useEffect(() => {
+], W = ({ studioPro: t }) => {
+  const { data: o, agentEditorVersion: n, isPending: r, isError: s, refresh: d } = M(t), m = V(s, o);
+  l.useEffect(() => {
     t.ui.panes.open({ id: "Marketplace" });
   }, [t]);
-  const p = c.slice(0, m === M.Compatible ? 5 : c.length), u = o.map((a) => [
+  const p = c.slice(0, m === E.Compatible ? 5 : c.length), u = o.map((a) => [
     { cellContent: a.module },
     { cellContent: a.installedVersion },
     { cellContent: a.requiredRange },
-    { cellContent: /* @__PURE__ */ e.jsx(R, { status: a.status }) },
+    { cellContent: /* @__PURE__ */ e.jsx(S, { status: a.status }) },
     { cellContent: a.note },
     {
       cellContent: a.marketplaceComponentId ? /* @__PURE__ */ e.jsx(
-        D,
+        P,
         {
           icon: /* @__PURE__ */ e.jsx(v, {}),
           label: "Copy marketplace ID",
-          onPress: () => k(a.marketplaceComponentId)
+          onPress: () => R(a.marketplaceComponentId)
         }
       ) : null
     }
   ]);
   return H(
-    d.useCallback(() => {
-      l();
-    }, [l])
-  ), o.length === 0 && i ? /* @__PURE__ */ e.jsx(P, {}) : /* @__PURE__ */ e.jsx(B, { children: /* @__PURE__ */ e.jsx(C, { children: /* @__PURE__ */ e.jsxs(I, { children: [
-    /* @__PURE__ */ e.jsx(w, { children: `Agent Editor V ${n}` }),
+    l.useCallback(() => {
+      d();
+    }, [d])
+  ), o.length === 0 && r ? /* @__PURE__ */ e.jsx(k, {}) : /* @__PURE__ */ e.jsx(w, { children: /* @__PURE__ */ e.jsx(C, { children: /* @__PURE__ */ e.jsxs(I, { children: [
+    /* @__PURE__ */ e.jsx(B, { children: `Agent Editor V ${n}` }),
     /* @__PURE__ */ e.jsx(L, { children: "Make sure you're ready to build" }),
-    /* @__PURE__ */ e.jsx(W, { variant: "primary", onPress: l, isDisabled: i, children: "Refresh" }),
-    r && /* @__PURE__ */ e.jsx(T, { children: "Failed to load module information. Please try again." }),
+    s && /* @__PURE__ */ e.jsx(T, { children: "Failed to load module information. Please try again." }),
     /* @__PURE__ */ e.jsx(
-      y,
+      b,
       {
         ariaLabel: "Module Compatibility Check",
         columns: p,
@@ -107,16 +104,16 @@ const v = ({
       }
     )
   ] }) }) });
-}, z = {
+}, _ = {
   async loaded(t) {
     const o = x(t), n = document.getElementById("root");
     if (!n) throw new Error("Failed to find the root element");
     h.createRoot(n).render(
-      /* @__PURE__ */ e.jsx(d.StrictMode, { children: /* @__PURE__ */ e.jsx(g, { studioPro: o, children: /* @__PURE__ */ e.jsx(A, { studioPro: o }) }) })
+      /* @__PURE__ */ e.jsx(l.StrictMode, { children: /* @__PURE__ */ e.jsx(g, { studioPro: o, children: /* @__PURE__ */ e.jsx(W, { studioPro: o }) }) })
     );
   }
 };
 export {
-  A as Compatibility,
-  z as component
+  W as Compatibility,
+  _ as component
 };
