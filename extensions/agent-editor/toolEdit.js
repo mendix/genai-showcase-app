@@ -1,18 +1,18 @@
 import { j as a, d as E } from "./jsx-runtime-CWOFuNcx.js";
-import { r as y, ae as I, a7 as k, a8 as q, ad as B, a9 as L } from "./PageContainers-BvK5usmz.js";
+import { r as y, ae as k, a7 as I, a8 as q, ad as B, a9 as L } from "./PageContainers-BqHFWUr4.js";
 import { createStudioProLogger as P } from "./logger-gMbuSAUF.js";
 import { h as O, a as R } from "./customBlobDocumentUtils-DRHCWWx0.js";
-import { u as A, D as F } from "./DialogFooter-CmNUeYU0.js";
-import { T as K, h, a as G } from "./toolHandlers-B8Y1dAHV.js";
+import { u as A, D as F } from "./DialogFooter-6k2RbD2B.js";
+import { T as K, h, a as G } from "./toolHandlers-DR5-tmnR.js";
 import { o as x } from "./genericUtils-GaF65l2f.js";
-import { a as d, c as H, h as W } from "./toolUtils-3GFu_U6Y.js";
-import { g as U } from "./documentInitUtils-Bwe4f_Cu.js";
-import { G as C } from "./GroupBox-Bv1UqUKB.js";
-import { T as D } from "./TextInputWithButton-CkuCCNYk.js";
-import { _, I as $ } from "./ComboBox-DPKa68oX.js";
+import { a as d, c as H, h as W } from "./toolUtils-MLHoVQt4.js";
+import { k as U } from "./documentInitUtils-DoIciLyT.js";
+import { G as C } from "./GroupBox-Czphilzs.js";
+import { T as D } from "./TextInputWithButton-BkoxR7Pz.js";
+import { _, I as $ } from "./ComboBox-BD_2njDk.js";
 import { m as z } from "./toolIcons-B55yYne7.js";
-import { n as J } from "./MicroflowIcon-DiztpTHi.js";
-import { T as Q } from "./TextInputLabeled-C0PQPpUV.js";
+import { n as J } from "./MicroflowIcon-CXcQxAQ6.js";
+import { T as Q } from "./TextInputLabeled-D9mRNz7v.js";
 const X = [
   { key: d.Microflow, caption: "Microflow tool" },
   { key: d.MCP, caption: "MCP tool" }
@@ -182,8 +182,8 @@ const X = [
     };
     m(c), T("toolType", c);
   };
-  return /* @__PURE__ */ a.jsxs(I, { children: [
-    /* @__PURE__ */ a.jsx(k, { children: /* @__PURE__ */ a.jsx(q, { children: e.toolType === d.Microflow ? /* @__PURE__ */ a.jsx(
+  return /* @__PURE__ */ a.jsxs(k, { children: [
+    /* @__PURE__ */ a.jsx(I, { children: /* @__PURE__ */ a.jsx(q, { children: e.toolType === d.Microflow ? /* @__PURE__ */ a.jsx(
       Z,
       {
         tool: e,

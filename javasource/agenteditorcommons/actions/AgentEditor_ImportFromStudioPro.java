@@ -33,13 +33,13 @@ public class AgentEditor_ImportFromStudioPro extends UserAction<java.lang.Boolea
 	{
 		// BEGIN USER CODE
 		try {
-			LOGGER.info("Starting AgentEditor_ASU.");
+			LOGGER.info("Starting ASU_AgentEditor.");
 			
 			AgentDocumentUtils.importAllModelDocuments(getContext());
 			
 			registerServlet();
 
-			LOGGER.info("Finished AgentEditor_ASU.");
+			LOGGER.info("Finished ASU_AgentEditor.");
 			return true;
 		} catch (Exception e) {
 			LOGGER.error(e);
