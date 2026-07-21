@@ -2952,6 +2952,81 @@
   content: "\ea6d";
 }
 
+.popupmenu--display-flex.popupmenu {
+  display: flex;
+}
+
+.popupmenu-custom-item-container {
+  padding: 8px;
+}
+.popupmenu-custom-item-container .mx-link {
+  display: block;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item {
+  background-color: #fff;
+}
+.popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:hover, .popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:focus, .popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:active {
+  cursor: pointer;
+  border-color: #f8f8f8;
+  background-color: #f8f8f8;
+}
+
+.btn-without-border.mx-link {
+  text-decoration: none;
+  border: 1px solid transparent;
+  color: #0a1324;
+}
+.btn-without-border.mx-link.disabled {
+  background-color: transparent !important;
+  cursor: default;
+}
+.btn-without-border.mx-link:hover {
+  background-color: #e7e7e9;
+}
+
+.btn-no-hover.mx-link:hover {
+  background-color: transparent !important;
+}
+
+.listview-horizontal.mx-listview > ul {
+  display: inline-block;
+  margin-bottom: 0;
+}
+.listview-horizontal.mx-listview > ul > li {
+  display: inline-block;
+}
+
+.listview-hide-on-empty.mx-listview > ul > li.mx-listview-empty {
+  display: none;
+}
+
+.listview-empty-deployed-models.mx-listview > ul > li.mx-listview-empty > label {
+  display: none;
+}
+.listview-empty-deployed-models.mx-listview > ul > li.mx-listview-empty::before {
+  content: "Please add deployed models on the Edit page to be able to use this configuration.";
+  color: #e33f4e;
+}
+
+.label-with-text > label {
+  overflow: hidden;
+  margin-bottom: 4px;
+  text-align: left;
+  text-overflow: ellipsis;
+  color: #0a1324;
+  font-size: 14px;
+  font-weight: 600;
+  display: block;
+}
+
+.datagrid--no-scroll .widget-datagrid-content {
+  overflow-y: visible;
+  overflow-x: visible;
+}
+
 /* ==========================================================================
   Take picture styles
 ========================================================================== */
@@ -31168,6 +31243,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border-radius: var(--spacing-small);
 }
 
+.health-alert-icon > img {
+  min-height: 16px !important;
+  min-width: 16px !important;
+}
+
 .combobox-filter-height .widget-combobox-input-container {
   align-items: center;
   justify-content: center;
@@ -31235,6 +31315,16 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .model-selection .mx-image-viewer img {
   min-width: 24px;
   min-height: 24px;
+}
+
+.item-selection--image-16 .mx-image-viewer img {
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  min-height: 16px;
+  max-width: 16px;
+  max-height: 16px;
+  object-fit: contain;
 }
 
 .item-selection-content {
@@ -31518,81 +31608,6 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .mxgenai-listview-horizontal.mx-listview > ul > li:hover {
   background-color: transparent;
-}
-
-.popupmenu--display-flex.popupmenu {
-  display: flex;
-}
-
-.popupmenu-custom-item-container {
-  padding: 8px;
-}
-.popupmenu-custom-item-container .mx-link {
-  display: block;
-  padding-left: 8px;
-  padding-right: 8px;
-}
-
-.popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item {
-  background-color: #fff;
-}
-.popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:hover, .popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:focus, .popupmenu-custom-item-hover .widget-popupmenu-root .popupmenu-menu .popupmenu-custom-item:active {
-  cursor: pointer;
-  border-color: #f8f8f8;
-  background-color: #f8f8f8;
-}
-
-.btn-without-border.mx-link {
-  text-decoration: none;
-  border: 1px solid transparent;
-  color: #0a1324;
-}
-.btn-without-border.mx-link.disabled {
-  background-color: transparent !important;
-  cursor: default;
-}
-.btn-without-border.mx-link:hover {
-  background-color: #e7e7e9;
-}
-
-.btn-no-hover.mx-link:hover {
-  background-color: transparent !important;
-}
-
-.listview-horizontal.mx-listview > ul {
-  display: inline-block;
-  margin-bottom: 0;
-}
-.listview-horizontal.mx-listview > ul > li {
-  display: inline-block;
-}
-
-.listview-hide-on-empty.mx-listview > ul > li.mx-listview-empty {
-  display: none;
-}
-
-.listview-empty-deployed-models.mx-listview > ul > li.mx-listview-empty > label {
-  display: none;
-}
-.listview-empty-deployed-models.mx-listview > ul > li.mx-listview-empty::before {
-  content: "Please add deployed models on the Edit page to be able to use this configuration.";
-  color: #e33f4e;
-}
-
-.label-with-text > label {
-  overflow: hidden;
-  margin-bottom: 4px;
-  text-align: left;
-  text-overflow: ellipsis;
-  color: #0a1324;
-  font-size: 14px;
-  font-weight: 600;
-  display: block;
-}
-
-.datagrid--no-scroll .widget-datagrid-content {
-  overflow-y: visible;
-  overflow-x: visible;
 }
 
 .listview-horizontal.mx-listview > ul {
