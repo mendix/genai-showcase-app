@@ -13,26 +13,23 @@ import { Big } from "big.js";
 /**
  * Parses a single SSE message block into its fields.
  * @param {string} message
- * @returns {{ data: string, deleteContent: boolean, throwError: boolean }}
+ * @returns {{ data: string, throwError: boolean }}
  */
 function parseSseMessage(message) {
 	const lines = message.replace(/\r\n/g, "\n").split("\n").filter(line => line.trim() !== "");
 	let data = "";
-	let deleteContent = false;
 	let throwError = false;
 
 	for (const line of lines) {
 		if (line.startsWith("data:")) {
 			// data lines can be multi-line; accumulate them
 			data += line.substring(5).trim();
-		} else if (line.startsWith("deleteContent:")) {
-			deleteContent = line.substring(14).trim() === "true";
 		} else if (line.startsWith("throwError:")) {
 			throwError = line.substring(11).trim() === "true";
 		}
 	}
 
-	return { data, deleteContent, throwError };
+	return { data, throwError };
 }
 
 /**
@@ -98,13 +95,10 @@ export async function JS_SubmitChatForStreaming(streamMessage, chatContextGUID) 
 
 	// Applies one complete SSE message to the stream message object.
 	const processSseMessage = (message) => {
-		const { data, deleteContent, throwError } = parseSseMessage(message);
+		const { data, throwError } = parseSseMessage(message);
 
 		if (throwError) {
-			throw new Error("Server signalled a streaming error");
-		}
-		if (deleteContent) {
-			streamMessage.set("Content", "");
+			throw new Error();
 		}
 		if (data) {
 			const decodedData = decodeBase64ToText(data);
