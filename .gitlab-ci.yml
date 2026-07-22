@@ -1,0 +1,31 @@
+include:
+  - project: innovation-incubation/genai-components/genai-pipeline-templates
+    ref: $REF_BRANCH
+    file: scan.yml
+    rules:
+      - if: $CI_PIPELINE_SOURCE == "trigger"
+        when: never
+      - if: '$CI_PIPELINE_SOURCE == "web" && $TYPE != "" && $FIX_VERSION != ""'
+        when: never
+      - if: $CI_COMMIT_BRANCH
+        when: always
+
+  - project: innovation-incubation/genai-components/genai-pipeline-templates
+    ref: $REF_BRANCH
+    file: release.yml
+    rules:
+      - if: '$CI_PIPELINE_SOURCE == "trigger" && $TYPE != "" && $FIX_VERSION != ""'
+        when: always
+      - if: '$CI_PIPELINE_SOURCE == "web" && $TYPE != "" && $FIX_VERSION != ""'
+        when: always
+      - when: never
+  
+workflow:  
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+      when: always
+    - if: '$CI_PIPELINE_SOURCE == "trigger"'
+      when: always
+    - if: '$CI_COMMIT_BRANCH'
+      when: always
+    - when: never
