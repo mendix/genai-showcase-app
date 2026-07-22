@@ -36,6 +36,7 @@ public class DeployedModel_Create extends UserAction<IMendixObject>
 	private final genaicommons.proxies.ENUM_ModelSupport SupportsSystemPrompt;
 	private final genaicommons.proxies.ENUM_ModelSupport SupportsFunctionCalling;
 	private final genaicommons.proxies.ENUM_ModelSupport SupportsConversationsWithHistory;
+	private final genaicommons.proxies.ENUM_ModelSupport SupportsStreaming;
 
 	public DeployedModel_Create(
 		IContext context,
@@ -48,7 +49,8 @@ public class DeployedModel_Create extends UserAction<IMendixObject>
 		java.util.List<IMendixObject> _inputModalityList,
 		java.lang.String _supportsSystemPrompt,
 		java.lang.String _supportsFunctionCalling,
-		java.lang.String _supportsConversationsWithHistory
+		java.lang.String _supportsConversationsWithHistory,
+		java.lang.String _supportsStreaming
 	)
 	{
 		super(context);
@@ -67,6 +69,7 @@ public class DeployedModel_Create extends UserAction<IMendixObject>
 		this.SupportsSystemPrompt = _supportsSystemPrompt == null ? null : genaicommons.proxies.ENUM_ModelSupport.valueOf(_supportsSystemPrompt);
 		this.SupportsFunctionCalling = _supportsFunctionCalling == null ? null : genaicommons.proxies.ENUM_ModelSupport.valueOf(_supportsFunctionCalling);
 		this.SupportsConversationsWithHistory = _supportsConversationsWithHistory == null ? null : genaicommons.proxies.ENUM_ModelSupport.valueOf(_supportsConversationsWithHistory);
+		this.SupportsStreaming = _supportsStreaming == null ? null : genaicommons.proxies.ENUM_ModelSupport.valueOf(_supportsStreaming);
 	}
 
 	@java.lang.Override
@@ -116,6 +119,7 @@ public class DeployedModel_Create extends UserAction<IMendixObject>
 			deployedModel.setSupportsConversationsWithHistory(SupportsConversationsWithHistory);
 			deployedModel.setSupportsFunctionCalling(SupportsFunctionCalling);
 			deployedModel.setSupportsSystemPrompt(SupportsSystemPrompt);
+			deployedModel.setSupportsStreaming(SupportsStreaming);
 		}
 		return deployedModel;
 	}
