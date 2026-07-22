@@ -16,7 +16,8 @@ The interactive testing mode of an Agent document where you can test the agent's
 
 ### Model Document
 
-A Studio Pro document that configures the text generation model (LLM) that agents will use. Links to a Mendix Cloud GenAI Text Generation resource via a constant containing the resource key. Currently only Mendix Cloud GenAI is supported as model provider. More providers will be added in future releases.
+
+A Studio Pro document that configures the text generation model (LLM) that agents will use. Links to a Text Generation resource via a constant containing the resource key (Mendix Cloud GenAI) or project endpoint and api key (Azure AI Foundry).  Currently Mendix Cloud GenAI and Azure are supported as model provider. More providers will be added in future releases.
 
 ### Knowledge Base Document
 
@@ -167,7 +168,7 @@ The Studio Pro extension package that provides:
 
 When installing the Agent Editor from Marketplace, Agent Editor Commons is automatically installed with it.
 
-**Module Dependencies:** Agent Editor requires multiple Mendix modules (Administration, Agent Commons, Atlas Core, Community Commons, ConversationalUI, Data Widgets, Encryption, GenAI Commons, MCP Client, Mendix Cloud GenAI Connector, Nanoflow Commons, Web Actions, Events Widget, Markdown Viewer Widget). To view compatible versions, go to **Extensions menu > Agent Editor > Compatibility** in Studio Pro, which opens a module dependency overview showing required modules and their compatible version ranges.
+**Module Dependencies:** Agent Editor requires multiple Mendix modules (Administration, Agent Commons, Atlas Core, Community Commons, ConversationalUI, Data Widgets, Encryption, GenAI Commons, MCP Client, Nanoflow Commons, Web Actions, Events Widget, Markdown Viewer Widget). Additionally, based on the provider used for Model documents (Text Generation) and Knowledge base documents (Retrieval), Mendix Cloud GenAI Connector and OpenAI Connector are also needed. To view compatible versions, go to **Extensions menu > Agent Editor > Compatibility** in Studio Pro, which opens a module dependency overview showing required modules and their compatible version ranges.
 
 ### Agent Editor Commons
 
@@ -218,3 +219,9 @@ Module for connecting to Mendix Cloud GenAI:
 
 - Text generation API calls
 - Knowledge base retrieval
+
+### OpenAI Connector
+
+Module for connecting to Azure and OpenAI-like GenAI providers:
+
+- Text generation API calls

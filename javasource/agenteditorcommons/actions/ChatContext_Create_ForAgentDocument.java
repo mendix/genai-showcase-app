@@ -12,7 +12,7 @@ package agenteditorcommons.actions;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import agentcommons.actions.ChatContext_Create_ForAgent;
-import agentcommons.impl.MxLogger;
+import agenteditorcommons.impl.MxLogger;
 import agenteditorcommons.impl.AgentDocumentUtils;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;

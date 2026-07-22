@@ -1,6 +1,6 @@
 ---
 name: agenteditor
-description: Guide for all tasks related to GenAI agents in Studio Pro, including creating, configuring, deploying, troubleshooting, and integrating agents. Use whenever a request mentions agents, AI agents, assistants, models, knowledge bases, MCP services, agent workflows, or agent integration.
+description: Guide for all tasks related to GenAI agents in Studio Pro, including creating, configuring, deploying, troubleshooting, and integrating agents. Use whenever a request mentions agents, AI agents, assistants, models, knowledge bases, MCP services, agent workflows, or agent integration. This document describes current features and limitations what users and development agents can do with the functionalities.
 ---
 
 # Agent Editor Workflow Guide
@@ -23,7 +23,7 @@ Agent Editor provides four document types (add via Add other menu at module leve
 ### 1. Define Model (Required)
 
 - Create Model document
-- Set constant with GenAI resource key
+- Set necessary constants: provider Mendix Cloud GenAI needs a resource key; provider Azure (AI Foundry) needs a Project endpoint and an API key.
 - Click "List Models" to validate
 
 ### 2. Define Agent (Required)
@@ -135,8 +135,7 @@ After installing Agent Editor from Marketplace:
 4. Install all required dependencies
    - View compatible versions: Extensions menu > Agent Editor > Compatibility
    - Opens module dependency overview showing required modules and compatible versions
-5. Obtain GenAI resource keys from [Mendix Cloud GenAI Portal](https://genai.home.mendix.com/)
-6. Create constants for keys
+6. Create constants for keys or endpoints required fo
 
 ## Module Usage Rules
 
@@ -147,13 +146,14 @@ After installing Agent Editor from Marketplace:
 - **Reuse logic from the USE_ME folder**: Copy patterns, reference examples, and use template agents from the USE_ME folder
 - **Call the documented toolbox actions**: Use "Call Agent without History" and "Call Agent with History" actions in your microflows
 - **Use the documented domain model entities**: Work with `Response`, `Request`, and other GenAI Commons entities
-- **Create Agent documents**: Define your own agents using the Agent Editor extension
+
 
 ### What You CANNOT Do
 
 - **Modify Agent Editor Commons logic**: Do NOT change any microflows, pages, or logic within the Agent Editor Commons module
 - **Use private folder logic**: Do NOT call or reference any microflows, entities, or logic from private folders
 - **Extend the module directly**: Do NOT add custom logic to the Agent Editor Commons module
+- **Create Agent documents**: In the current version you cannot create your own agents using the Agent Editor extension
 
 ### Extension Pattern
 
@@ -173,7 +173,7 @@ This separation ensures:
 
 ## Limitations
 
-- Only Mendix Cloud GenAI supported (more providers planned)
+- Only providers Mendix Cloud GenAI and Azure (AI Foundry) are currently supported (more providers planned)
 - Mac support limited
 - MCP whole-server only (no individual tool selection yet)
 - Tool Choice "Tool" only for microflows currently

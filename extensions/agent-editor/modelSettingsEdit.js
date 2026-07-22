@@ -1,12 +1,12 @@
 import { j as t, d as y } from "./jsx-runtime-CWOFuNcx.js";
-import { r as o, ae as D, a7 as M, a8 as L, ad as q, a9 as R } from "./PageContainers-BvK5usmz.js";
+import { r as o, ae as D, a7 as M, a8 as L, ad as q, a9 as R } from "./PageContainers-BqHFWUr4.js";
 import { createStudioProLogger as B } from "./logger-gMbuSAUF.js";
 import { a as A } from "./customBlobDocumentUtils-DRHCWWx0.js";
-import { u as F, D as H } from "./DialogFooter-CmNUeYU0.js";
+import { u as F, D as H } from "./DialogFooter-6k2RbD2B.js";
 import { o as N } from "./genericUtils-GaF65l2f.js";
-import { I as G } from "./Banner-DAKvWnIG.js";
-import { G as j } from "./GroupBox-Bv1UqUKB.js";
-import { T as f } from "./TextInputLabeled-C0PQPpUV.js";
+import { I as G } from "./Banner-Bk-4OzcL.js";
+import { G as j } from "./GroupBox-Czphilzs.js";
+import { T as f } from "./TextInputLabeled-D9mRNz7v.js";
 const O = ({ initialAgent: a, onClose: r }) => {
   const [e, u] = o.useState(a), [n, d] = o.useState(a.maxTokens?.toString() ?? ""), [l, m] = o.useState(a.temperature?.toString() ?? ""), [i, C] = o.useState(a.topP?.toString() ?? ""), p = o.useCallback(() => n !== "" && e.maxTokens === void 0 ? "Please enter a valid number." : e.maxTokens !== void 0 && e.maxTokens < 1 ? "Max tokens must be greater than 0 (or empty)." : !0, [e.maxTokens, n]), c = o.useCallback(() => l !== "" && e.temperature === void 0 ? "Please enter a valid number." : e.temperature !== void 0 && e.temperature < 0 ? "Temperature must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.temperature, l]), h = o.useCallback(() => i !== "" && e.topP === void 0 ? "Please enter a valid number." : e.topP !== void 0 && e.topP < 0 ? "TopP must be greater or equal to 0. You can also leave it empty to use the model's default settings." : !0, [e.topP, i]), g = o.useCallback(
     (k, E, x) => (s) => {

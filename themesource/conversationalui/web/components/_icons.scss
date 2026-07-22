@@ -25,3 +25,8 @@
     padding: var(--spacing-small);
     border-radius: var(--spacing-small);
 }
+
+.health-alert-icon > img {
+    min-height: 16px !important;
+    min-width: 16px !important;
+}

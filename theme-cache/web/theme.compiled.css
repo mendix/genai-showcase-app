@@ -31222,6 +31222,11 @@ input[type=checkbox].three-state-checkbox + .control-label {
   border-radius: var(--spacing-small);
 }
 
+.health-alert-icon > img {
+  min-height: 16px !important;
+  min-width: 16px !important;
+}
+
 .combobox-filter-height .widget-combobox-input-container {
   align-items: center;
   justify-content: center;
@@ -31289,6 +31294,16 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .model-selection .mx-image-viewer img {
   min-width: 24px;
   min-height: 24px;
+}
+
+.item-selection--image-16 .mx-image-viewer img {
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  min-height: 16px;
+  max-width: 16px;
+  max-height: 16px;
+  object-fit: contain;
 }
 
 .item-selection-content {
