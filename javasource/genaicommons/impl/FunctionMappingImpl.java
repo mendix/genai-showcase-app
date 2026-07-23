@@ -1,15 +1,20 @@
 package genaicommons.impl;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.mendix.core.Core;
+import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IDataType;
+import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.Request;
 import genaicommons.proxies.Message;
+import genaicommons.proxies.ToolCall;
 
 public class FunctionMappingImpl {
 
@@ -43,6 +48,37 @@ public class FunctionMappingImpl {
 		return getCurrentLoopMessages(request, context).stream()
 				.filter(msg -> msg.getRole() == role)
 				.collect(Collectors.toList());
+	}
+
+	// Returns true if a tool with the given name has already been called (and answered) in the current agent loop.
+	// Used to decide whether a forced ToolChoice should be dropped to avoid an infinite tool-call loop.
+	public static boolean isToolRecall(Request request, String toolName, IContext context) throws CoreException {
+		List<Message> toolMessages = getToolCallMessages(request, context);
+		if (toolMessages.isEmpty()) {
+			return false;
+		}
+
+		List<Message> assistantMessages = getCurrentLoopMessagesByRole(request, ENUM_MessageRole.assistant, context);
+
+		Set<String> calledToolCallIds = new HashSet<>();
+		for (Message assistantMessage : assistantMessages) {
+			List<ToolCall> toolCalls = assistantMessage.getMessage_ToolCall();
+			if (toolCalls == null) {
+				continue;
+			}
+			for (ToolCall toolCall : toolCalls) {
+				if (toolName.equals(toolCall.getName())) {
+					calledToolCallIds.add(toolCall.getToolCallId());
+				}
+			}
+		}
+
+		for (Message toolMessage : toolMessages) {
+			if (calledToolCallIds.contains(toolMessage.getToolCallId())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	// Returns all messages since the last user message (the current agent loop)
