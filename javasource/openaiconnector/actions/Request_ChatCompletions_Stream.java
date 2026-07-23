@@ -515,7 +515,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	
 	private void accumulateToolCallFragments(ChatCompletionChunk.Choice.Delta delta) {
 	    delta.toolCalls().get().forEach(toolCallChunk -> {
-	        int index = (int) toolCallChunk.index();
+	        int index = getToolCallIndex(toolCallChunk);
 
 	        ToolCallFragments entry = toolCallAccumulator.computeIfAbsent(index, i -> new ToolCallFragments());
 
@@ -537,7 +537,20 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 
 	    LOGGER.debug("Accumulating tool call fragments, current state: {}", toolCallAccumulator);
 	}
-	
+
+	/**
+	 * Some OpenAI-compatible endpoints (e.g. Gemini, Mistral, via the OpenAIConnector's
+	 * configurable endpoint) omit the `index` field on tool call deltas, in particular
+	 * when only a single tool call is in flight. The SDK's index() getter treats it as
+	 * required and throws OpenAIInvalidDataException in that case, so fall back to 0
+	 * (the only in-flight tool call) rather than failing the whole chunk.
+	 */
+	private int getToolCallIndex(ChatCompletionChunk.Choice.Delta.ToolCall toolCallChunk) {
+	    return toolCallChunk._index().isMissing() || toolCallChunk._index().isNull()
+	        ? 0
+	        : (int) toolCallChunk.index();
+	}
+
 	// Tools
 	// Build Tool part for request
 	
