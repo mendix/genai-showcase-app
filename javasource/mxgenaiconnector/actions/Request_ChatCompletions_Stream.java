@@ -56,6 +56,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		requireNonNull(this.MxCloudDeployedModel, "A DeployedModel object is required");
 		try {
 			LOGGER.debug("Starting Request_ChatCompletions_Stream.");
+			LOGGER.trace("Request: " + this.RequestBodyJSON);
 
 			genaicommons.impl.StreamingImpl.createResponseMessage(getContext(), mxResponse);
 
