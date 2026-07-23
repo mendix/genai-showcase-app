@@ -12,11 +12,9 @@ package openaiconnector.actions;
 import static java.util.Objects.requireNonNull;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -57,10 +55,8 @@ import genaicommons.impl.MxLogger;
 import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.ENUM_ToolChoice;
 import genaicommons.proxies.Request;
-import genaicommons.proxies.Message;
 import genaicommons.proxies.Tool;
 import genaicommons.proxies.ToolCollection;
-import openaiconnector.proxies.OpenAIDeployedModel;
 import openaiconnector.proxies.Configuration;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
@@ -127,24 +123,31 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 
 	// BEGIN EXTRA CODE
 	private static final MxLogger LOGGER = new MxLogger(Request_ChatCompletions_Stream.class);
-	
+	private static final ObjectMapper MAPPER = new ObjectMapper();
+
 	/**
 	 * Creates a new Response object and initializes it
 	 */
 	
 	genaicommons.proxies.Response mxResponse =  new genaicommons.proxies.Response(getContext());
-	private final Map<Integer, Map<String, StringBuilder>> toolCallAccumulator = new LinkedHashMap<>();
+	private final Map<Integer, ToolCallFragments> toolCallAccumulator = new LinkedHashMap<>();
 	List<genaicommons.proxies.ToolCall> mxToolCallList = new ArrayList<genaicommons.proxies.ToolCall>();
+
+	/**
+	 * Accumulates the id/name/arguments fragments of a single streamed tool call across chunks
+	 */
+	private static class ToolCallFragments {
+		final StringBuilder id = new StringBuilder();
+		final StringBuilder name = new StringBuilder();
+		final StringBuilder arguments = new StringBuilder();
+	}
 	
 	/**
 	 * Creates an OpenAI client using the API key from the deployed model's configuration
 	 */
 	private OpenAIClient createOpenAIClient() throws Exception {
-		// Initialize the DeployedModel proxy
-		OpenAIDeployedModel deployedModel = OpenAIDeployedModel.initialize(getContext(), this.DeployedModel.getMendixObject());
-		
 		// Get the Configuration object via the many-to-one relationship
-		Configuration configuration = deployedModel.getOpenAIDeployedModel_Configuration();
+		Configuration configuration = this.DeployedModel.getOpenAIDeployedModel_Configuration();
 		requireNonNull(configuration, "Configuration is required to retrieve API Key");
 		
 		// Get the encrypted API key from Configuration
@@ -178,9 +181,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	 * Converts Mendix request object to OpenAI SDK format
 	 */
 	private ChatCompletionCreateParams buildChatCompletionRequest() throws Exception {
-		// Initialize the DeployedModel proxy to get the model name
-		OpenAIDeployedModel deployedModel = OpenAIDeployedModel.initialize(getContext(), this.DeployedModel.getMendixObject());
-		String model = deployedModel.getModel();
+		String model = this.DeployedModel.getModel();
 		requireNonNull(model, "Model name is required in DeployedModel");
 		
 		// Use the request provided to this action
@@ -380,7 +381,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 						LOGGER.warn("buildMessagesList: Skipping " + role + " message with empty content");
 						continue;
 					}
-					messages.add(convertRoleToMessageParam(role != null ? role.toString().toLowerCase() : "user", content));
+					messages.add(convertRoleToMessageParam(role, content));
 				}
 			}
 		}
@@ -391,29 +392,32 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	}
 	
 	/**
-	 * Converts Mendix Message.Role to OpenAI SDK ChatCompletionMessageParam
+	 * Converts a Mendix Message role (user/system; assistant/tool are handled separately
+	 * in buildMessagesList) to an OpenAI SDK ChatCompletionMessageParam
 	 */
-	private ChatCompletionMessageParam convertRoleToMessageParam(String role, String content) {
-		String normalizedRole = normalizeRole(role);
-		
-		return switch (normalizedRole) {
-			case "system" -> ChatCompletionMessageParam.ofSystem(
+	private ChatCompletionMessageParam convertRoleToMessageParam(ENUM_MessageRole role, String content) {
+		if (role == null) {
+			LOGGER.debug("Role is null, defaulting to USER");
+			return ChatCompletionMessageParam.ofUser(
+				ChatCompletionUserMessageParam.builder()
+					.content(content)
+					.build()
+			);
+		}
+
+		return switch (role) {
+			case system -> ChatCompletionMessageParam.ofSystem(
 				ChatCompletionSystemMessageParam.builder()
 					.content(content)
 					.build()
 			);
-			case "assistant" -> ChatCompletionMessageParam.ofAssistant(
-				ChatCompletionAssistantMessageParam.builder()
-					.content(content)
-					.build()
-			);
-			case "user" -> ChatCompletionMessageParam.ofUser(
+			case user -> ChatCompletionMessageParam.ofUser(
 				ChatCompletionUserMessageParam.builder()
 					.content(content)
 					.build()
 			);
 			default -> {
-				LOGGER.warn("Unknown role: " + normalizedRole + ", defaulting to USER");
+				LOGGER.warn("Unexpected role: " + role + ", defaulting to USER");
 				yield ChatCompletionMessageParam.ofUser(
 					ChatCompletionUserMessageParam.builder()
 						.content(content)
@@ -423,15 +427,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		};
 	}
 
-	private String normalizeRole(String role) {
-		if (role == null || role.trim().isEmpty()) {
-			LOGGER.debug("Role is null or empty, defaulting to USER");
-			return "user";
-		}
-		return role.trim().toLowerCase();
-	}
-	
-		
+
 	/**
 	 * Executes the streaming request using OpenAI Java SDK (https://github.com/openai/openai-java/)
 	 * Processes each chunk as it arrives from the API
@@ -487,7 +483,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 			                    	genaicommons.impl.StreamingImpl.pushChunkToUI(getContext(), request.getStreamingResponseWriterId(), content);
 			                    }
 
-							updateResponseText(content);
+							genaicommons.impl.StreamingImpl.updateResponseText(mxResponse, content);
 
 							LOGGER.debug("Received chunk content: " + content);
 						}
@@ -517,48 +513,24 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		}
 	}
 	
-	/**
-	 * Updates the ResponseText attribute by appending the new content
-	 */
-	//@Lina replace from GenAICommons once it is there
-	private void updateResponseText(String chunkText) {
-		
-		String currentText = mxResponse.getResponseText();
-		if (currentText == null) {
-			mxResponse.setResponseText(chunkText);
-		}
-		else {
-			mxResponse.setResponseText(currentText + chunkText);
-		}
-	}
-	
-	
 	private void accumulateToolCallFragments(ChatCompletionChunk.Choice.Delta delta) {
 	    delta.toolCalls().get().forEach(toolCallChunk -> {
 	        int index = (int) toolCallChunk.index();
 
-	        toolCallAccumulator.computeIfAbsent(index, i -> {
-	            Map<String, StringBuilder> entry = new HashMap<>();
-	            entry.put("id",        new StringBuilder());
-	            entry.put("name",      new StringBuilder());
-	            entry.put("arguments", new StringBuilder());
-	            return entry;
-	        });
-
-	        Map<String, StringBuilder> entry = toolCallAccumulator.get(index);
+	        ToolCallFragments entry = toolCallAccumulator.computeIfAbsent(index, i -> new ToolCallFragments());
 
 	        if (toolCallChunk.id() != null && toolCallChunk.id().isPresent()) {
-	            entry.get("id").append(toolCallChunk.id().get());
+	            entry.id.append(toolCallChunk.id().get());
 	        }
 
 	        if (toolCallChunk.function() != null && toolCallChunk.function().isPresent()) {
 	            var function = toolCallChunk.function().get();
 
 	            if (function.name() != null && function.name().isPresent()) {
-	                entry.get("name").append(function.name().get());
+	                entry.name.append(function.name().get());
 	            }
 	            if (function.arguments() != null && function.arguments().isPresent()) {
-	                entry.get("arguments").append(function.arguments().get());
+	                entry.arguments.append(function.arguments().get());
 	            }
 	        }
 	    });
@@ -576,7 +548,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	    if (schema != null && !schema.trim().isEmpty()) {
 	        if (schema.startsWith("{") || schema.startsWith("[")) {
 	            try {
-	                JsonNode schemaNode = new ObjectMapper().readTree(schema);
+	                JsonNode schemaNode = MAPPER.readTree(schema);
 	                if (schemaNode.isObject()) {
 	                    return JsonValue.fromJsonNode(schemaNode);
 	                } else {
@@ -593,29 +565,14 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	    // Fall back to auto-generation from microflow parameters
 	    Map<String, IDataType> parameterList = FunctionMappingImpl.getInputParametersForModel(tool.getMicroflow());
 
-	    ObjectNode schemaNode = new ObjectMapper().createObjectNode();
+	    ObjectNode schemaNode = MAPPER.createObjectNode();
 	    schemaNode.put("type", "object");
 	    ObjectNode propertiesNode = schemaNode.putObject("properties");
 	    ArrayNode requiredNode = schemaNode.putArray("required");
 
 	    if (parameterList != null && !parameterList.isEmpty()) {
 	        for (Map.Entry<String, IDataType> param : parameterList.entrySet()) {
-	            String paramName = param.getKey();
-	            String type = FunctionImpl.parameterGetType(param);
-
-	            ObjectNode paramNode = propertiesNode.putObject(paramName);
-
-	            if ("enum".equals(type)) {
-	                Set<String> enumKeys = param.getValue().getEnumeration().getEnumValues().keySet();
-	                ArrayNode enumArray = paramNode.putArray("enum");
-	                for (String enumKey : enumKeys) {
-	                    enumArray.add(enumKey);
-	                }
-	            } else {
-	                paramNode.put("type", type);
-	            }
-
-	            requiredNode.add(paramName);
+	            FunctionImpl.addProperty(propertiesNode, requiredNode, param);
 	        }
 	    }
 
@@ -690,7 +647,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 
 		            // Stop forcing the tool once it has already been called in this agent loop,
 		            // otherwise the model would be forced to call it again indefinitely
-		            if (isToolRecall(request, forcedTool)) {
+		            if (FunctionMappingImpl.isToolRecall(request, forcedTool.getName(), getContext())) {
 		                LOGGER.debug("ToolChoice " + forcedTool.getName() + " has already been called. Removing forced ToolChoice from request.");
 		                return null;
 		            }
@@ -716,36 +673,6 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		    }
 		}
 
-	// Returns true if forcedTool has already been called by a tool message in the current agent loop
-	private boolean isToolRecall(Request request, Tool forcedTool) throws Exception {
-		List<Message> toolMessages = FunctionMappingImpl.getCurrentLoopMessagesByRole(request, ENUM_MessageRole.tool, getContext());
-		if (toolMessages.isEmpty()) {
-			return false;
-		}
-
-		List<Message> assistantMessages = FunctionMappingImpl.getCurrentLoopMessagesByRole(request, ENUM_MessageRole.assistant, getContext());
-
-		Set<String> calledToolCallIds = new java.util.HashSet<>();
-		for (Message assistantMessage : assistantMessages) {
-			List<genaicommons.proxies.ToolCall> toolCalls = assistantMessage.getMessage_ToolCall();
-			if (toolCalls == null) {
-				continue;
-			}
-			for (genaicommons.proxies.ToolCall toolCall : toolCalls) {
-				if (forcedTool.getName().equals(toolCall.getName())) {
-					calledToolCallIds.add(toolCall.getToolCallId());
-				}
-			}
-		}
-
-		for (Message toolMessage : toolMessages) {
-			if (calledToolCallIds.contains(toolMessage.getToolCallId())) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	private void createToolCall(String toolCallId, String functionName, String arguments) {
 	    genaicommons.proxies.ToolCall mxToolCall = new genaicommons.proxies.ToolCall(getContext());
 
@@ -763,11 +690,11 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	        return;
 	    }
 
-	    for (Map.Entry<Integer, Map<String, StringBuilder>> accumEntry : toolCallAccumulator.entrySet()) {
-	        Map<String, StringBuilder> entry = accumEntry.getValue();
-	        String toolCallId   = entry.get("id").toString();
-	        String functionName = entry.get("name").toString();
-	        String arguments    = entry.get("arguments").toString();
+	    for (Map.Entry<Integer, ToolCallFragments> accumEntry : toolCallAccumulator.entrySet()) {
+	        ToolCallFragments entry = accumEntry.getValue();
+	        String toolCallId   = entry.id.toString();
+	        String functionName = entry.name.toString();
+	        String arguments    = entry.arguments.toString();
 
 	        LOGGER.debug("Finalizing tool call [{}] — Function: {}", accumEntry.getKey(), functionName);
 	        createToolCall(toolCallId, functionName, arguments);
