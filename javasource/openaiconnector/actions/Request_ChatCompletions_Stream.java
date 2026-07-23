@@ -58,6 +58,8 @@ import genaicommons.proxies.Request;
 import genaicommons.proxies.Tool;
 import genaicommons.proxies.ToolCollection;
 import openaiconnector.proxies.Configuration;
+import openaiconnector.proxies.ENUM_ApiType;
+import openaiconnector.proxies.ENUM_KeyType;
 import com.mendix.systemwideinterfaces.core.UserAction;
 
 public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
@@ -143,37 +145,113 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	}
 	
 	/**
-	 * Creates an OpenAI client using the API key from the deployed model's configuration
+	 * Creates an OpenAI client using the API key from the deployed model's configuration.
+	 * Branches between standard OpenAI (and OpenAI-compatible endpoints) and Azure OpenAI.
 	 */
 	private OpenAIClient createOpenAIClient() throws Exception {
 		// Get the Configuration object via the many-to-one relationship
 		Configuration configuration = this.DeployedModel.getOpenAIDeployedModel_Configuration();
 		requireNonNull(configuration, "Configuration is required to retrieve API Key");
-		
+
 		// Get the encrypted API key from Configuration
 		String encryptedApiKey = configuration.getApiKey();
 		requireNonNull(encryptedApiKey, "API Key is required in Configuration");
-		
+
 		// Decrypt the API key using Encryption module microflow
+		// For Azure with KeyType Bearer_Token this holds the Microsoft Entra token instead of an API key
 		String apiKey = encryption.proxies.microflows.Microflows.decrypt(getContext(), encryptedApiKey);
 		requireNonNull(apiKey, "Failed to decrypt API Key");
-		
-		// Get the endpoint from Configuration (optional - for Mistral AI or other OpenAI-compatible APIs)
+
 		String endpoint = configuration.getEndpoint();
-		
-		// Build the client with optional endpoint
-		OpenAIOkHttpClient.Builder clientBuilder = OpenAIOkHttpClient.builder()
-			.apiKey(apiKey);
-		
-		// Add base URL if endpoint is configured (e.g., for Mistral AI)
-		if (endpoint != null && !endpoint.trim().isEmpty()) {
-			clientBuilder.baseUrl(endpoint);
-			LOGGER.debug("Using custom endpoint: " + endpoint);
+
+		OpenAIOkHttpClient.Builder clientBuilder = OpenAIOkHttpClient.builder();
+
+		ENUM_ApiType apiType = configuration.getApiType();
+		if (apiType == ENUM_ApiType.AzureOpenAI) {
+			configureAzureClient(clientBuilder, configuration, apiKey, endpoint);
+		} else {
+			// OpenAI and null/legacy configurations: keep existing behaviour exactly
+			// (apiKey + optional baseUrl for OpenAI-compatible APIs like Mistral/Gemini).
+			clientBuilder.apiKey(apiKey);
+			if (endpoint != null && !endpoint.trim().isEmpty()) {
+				clientBuilder.baseUrl(endpoint);
+				LOGGER.debug("Using custom endpoint: " + endpoint);
+			}
 		}
 
 		LOGGER.debug("OpenAI client created successfully");
-		
+
 		return clientBuilder.build();
+	}
+
+	/**
+	 * Configures the client builder for an Azure OpenAI deployment: trims the stored
+	 * endpoint to its resource root, selects a credential based on the key type, sets the
+	 * service version, and pins the legacy (deployment-style) URL path mode.
+	 */
+	private void configureAzureClient(
+			OpenAIOkHttpClient.Builder clientBuilder,
+			Configuration configuration,
+			String apiKey,
+			String endpoint) {
+
+		requireNonNull(endpoint, "Endpoint is required for an Azure OpenAI configuration");
+		String resourceRoot = trimToAzureResourceRoot(endpoint);
+		requireNonNull(resourceRoot,
+			"Could not derive the Azure resource root from endpoint: " + endpoint);
+
+		clientBuilder
+			.baseUrl(resourceRoot)
+			.azureUrlPathMode(com.openai.azure.AzureUrlPathMode.LEGACY)
+			.azureServiceVersion(resolveAzureServiceVersion());
+
+		ENUM_KeyType keyType = configuration.getKeyType();
+		com.openai.credential.Credential credential =
+			(keyType == ENUM_KeyType.Bearer_Token)
+				? com.openai.credential.BearerTokenCredential.create(apiKey)
+				: com.openai.azure.credential.AzureApiKeyCredential.create(apiKey);
+		clientBuilder.credential(credential);
+
+		LOGGER.debug("Configured Azure OpenAI client: baseUrl=" + resourceRoot
+			+ ", keyType=" + (keyType != null ? keyType : "API_key (default)"));
+	}
+
+	/**
+	 * Reduces a stored Azure endpoint (e.g. "https://xxx.openai.azure.com/openai/deployments/")
+	 * to its scheme+authority resource root ("https://xxx.openai.azure.com"), which the SDK
+	 * re-expands with "openai/deployments/{model}" and the api-version in LEGACY mode.
+	 */
+	private String trimToAzureResourceRoot(String endpoint) {
+		String trimmed = endpoint.trim();
+		try {
+			java.net.URI uri = new java.net.URI(trimmed);
+			if (uri.getScheme() != null && uri.getAuthority() != null) {
+				return uri.getScheme() + "://" + uri.getAuthority();
+			}
+		} catch (java.net.URISyntaxException e) {
+			LOGGER.warn("Endpoint '" + endpoint
+				+ "' is not a valid URI; falling back to string-based trimming. " + e.getMessage());
+		}
+		// Fallback: strip everything from the first "/openai" path segment onwards.
+		int idx = trimmed.toLowerCase().indexOf("/openai");
+		if (idx > 0) {
+			return trimmed.substring(0, idx);
+		}
+		return trimmed.endsWith("/") ? trimmed.substring(0, trimmed.length() - 1) : trimmed;
+	}
+
+	/**
+	 * Resolves the Azure service version from the DeployedModel, falling back to the SDK's
+	 * latest stable version when none is configured.
+	 */
+	private com.openai.azure.AzureOpenAIServiceVersion resolveAzureServiceVersion() {
+		String apiVersion = this.DeployedModel.getAzureApiVersion();
+		if (apiVersion == null || apiVersion.trim().isEmpty()) {
+			LOGGER.warn("No AzureApiVersion configured on the DeployedModel; "
+				+ "falling back to the SDK's latest stable Azure service version.");
+			return com.openai.azure.AzureOpenAIServiceVersion.latestStableVersion();
+		}
+		return com.openai.azure.AzureOpenAIServiceVersion.fromString(apiVersion.trim());
 	}
 	
 	/**
