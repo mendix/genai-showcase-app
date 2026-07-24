@@ -28514,6 +28514,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .accordion-tool-calls .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button .tool-title {
   font-weight: var(--font-weight-normal);
   color: var(--font-color-header);
+  word-break: break-word;
 }
 .accordion-tool-calls .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button .mx-image-viewer {
   width: auto;
