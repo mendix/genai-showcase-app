@@ -30879,8 +30879,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 /* tooltip basic styling */
+.agent-tooltip .widget-tooltip-trigger .info-icon {
+  margin: 0 0 0 var(--spacing-smaller, 4px);
+  padding: 0;
+}
 .agent-tooltip .widget-tooltip-trigger .info-icon img {
-  margin: 0;
+  height: 16px;
+  width: 16px;
 }
 .agent-tooltip .widget-tooltip-content {
   z-index: 1000;

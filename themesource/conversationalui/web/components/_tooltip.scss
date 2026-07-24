@@ -5,8 +5,11 @@
 .agent-tooltip {
     .widget-tooltip-trigger {
         .info-icon {
+            margin: 0 0 0 var(--spacing-smaller, $spacing-smaller);
+            padding: 0;
             img {
-                margin: 0;
+                height: 16px;
+                width: 16px;
             }
         }
     }
