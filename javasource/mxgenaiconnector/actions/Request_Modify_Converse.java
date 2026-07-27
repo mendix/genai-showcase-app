@@ -96,19 +96,32 @@ public class Request_Modify_Converse extends UserAction<java.lang.String>
 	
 	private void updateMessages(ObjectNode rootNode)throws Exception {
 		ArrayNode messagesNode = (ArrayNode) rootNode.path("messages");
-		
+
 		for (int i = 0; i < messagesNode.size(); i++) {
 			//Map "tool" messages to Converse ToolResult
 			ConverseFunctionCalling.mapToolResult(messagesNode, i, getContext(), Request);
-			
+
             //If a fileCollection has been added, add a new Converse ContentBlock
             ConverseVisionDocument.mapFileCollection(messagesNode, i);
+
+			//Remove toolCalls/toolCallId, regardless of message role, as they are not part of the Converse message format
+			removeToolCallsNode(messagesNode.get(i));
         }
 		//Update messages of rootNode
 		rootNode.set("messages", messagesNode);
 	}
-	
-	
+
+	/**
+	 * Removes toolCalls/toolCallId that come from the export mapping; these are not valid Converse message fields
+	 */
+	private void removeToolCallsNode(JsonNode messageNode) {
+		if (messageNode == null || !messageNode.isObject()) {
+			return;
+		}
+		ObjectNode messageObject = (ObjectNode) messageNode;
+		messageObject.remove("toolCalls");
+		messageObject.remove("toolCallId");
+	}
 
 	//Removes system prompt node if empty (system prompt is not required, but can't be null)
 	private void removeSystemPromptIfEmpty(ObjectNode rootNode) {
