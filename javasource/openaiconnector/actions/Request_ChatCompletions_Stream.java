@@ -51,7 +51,7 @@ import genaicommons.proxies.FileCollection;
 import genaicommons.proxies.FileContent;
 import genaicommons.impl.FunctionImpl;
 import genaicommons.impl.FunctionMappingImpl;
-import genaicommons.impl.MxLogger;
+import openaiconnector.impl.MxLogger;
 import genaicommons.proxies.ENUM_MessageRole;
 import genaicommons.proxies.ENUM_ToolChoice;
 import genaicommons.proxies.Request;
@@ -178,8 +178,6 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 				LOGGER.debug("Using custom endpoint: " + endpoint);
 			}
 		}
-
-		LOGGER.debug("OpenAI client created successfully");
 
 		return clientBuilder.build();
 	}
@@ -321,29 +319,23 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		applyOpenAIRequestExtension(request, builder);
 
 		// Add tools if a ToolCollection is associated with the request
-				ToolCollection toolCollection = request.getRequest_ToolCollection();
-				if (toolCollection != null) {
-				    List<Tool> tools = toolCollection.getToolCollection_Tool();
+		ToolCollection toolCollection = request.getRequest_ToolCollection();
+		if (toolCollection != null) {
+		    List<Tool> tools = toolCollection.getToolCollection_Tool();
 
-				    if (tools != null && !tools.isEmpty()) {
-				        List<ChatCompletionTool> toolParams = buildTools(tools);
-				        builder.tools(toolParams);
-				        LOGGER.debug("Added ",toolParams.size()," tool(s) to the request.");
+		    if (tools != null && !tools.isEmpty()) {
+		        List<ChatCompletionTool> toolParams = buildTools(tools);
+		        builder.tools(toolParams);
 
-				        // Apply tool_choice if set on the request
-				        ChatCompletionToolChoiceOption toolChoiceParam =
-				            buildToolChoice(request, toolCollection);
+		        // Apply tool_choice if set on the request
+		        ChatCompletionToolChoiceOption toolChoiceParam =
+		            buildToolChoice(request, toolCollection);
 
-				        if (toolChoiceParam != null) {
-				            builder.toolChoice(toolChoiceParam);
-				            LOGGER.debug("Tool choice set to: {}", request.getToolChoice());
-				        }
-				    } else {
-				        LOGGER.debug("ToolCollection is present but contains no tools.");
-				    }
-				} else {
-				    LOGGER.debug("No ToolCollection associated with this request.");
-				}	
+		        if (toolChoiceParam != null) {
+		            builder.toolChoice(toolChoiceParam);
+		        }
+		    }
+		}
 		
 		LOGGER.debug("Chat completion request built successfully with model: " + model);
 
@@ -415,7 +407,6 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 						.content(content != null ? content : "")
 						.build()
 				));
-				LOGGER.debug("Added tool result message for tool_call_id: " + toolCallId);
 
 			} else if (role == ENUM_MessageRole.assistant) {
 				// Assistant message — may have text content, tool calls, or both
@@ -452,7 +443,6 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 			} else {
 				// user, system
 				if (role == ENUM_MessageRole.user && hasFiles(msg)) {
-					LOGGER.debug("Message with Files found");
 					messages.add(buildUserMessageWithFiles(msg, content));
 				} else {
 					if (content == null || content.trim().isEmpty()) {
@@ -463,8 +453,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 				}
 			}
 		}
-
-		LOGGER.debug("buildMessagesList: final message count sent to API = " + messages.size());
+		LOGGER.trace("buildMessagesList: final message count sent to API = " + messages.size());
 
 		return messages;
 	}
@@ -511,7 +500,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	 * Processes each chunk as it arrives from the API
 	 */
 	private void executeStreamingRequest(OpenAIClient client, ChatCompletionCreateParams requestParams) throws Exception {
-		LOGGER.debug("Initiating OpenAI streaming request");
+		LOGGER.debug("Initiating streaming request");
 
 		genaicommons.impl.StreamingImpl.createResponseMessage(getContext(), mxResponse);
 
@@ -552,6 +541,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		
 		if (chunk.choices() != null && !chunk.choices().isEmpty()) {
 			chunk.choices().stream()
+				// we only have one choice so this part is executed only once
 				.forEach(choice -> {
 					try {
 						// Update ResponseText with content delta
@@ -562,14 +552,11 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 			                    }
 
 							genaicommons.impl.StreamingImpl.updateResponseText(mxResponse, content);
-
-							LOGGER.debug("Received chunk content: " + content);
 						}
 
 						// Collect information for ToolCall
 						if (choice.delta() != null && choice.delta().toolCalls().isPresent()) {
 	                        accumulateToolCallFragments(choice.delta());
-	                        LOGGER.debug("Accumulating tool call fragments.");
 	                    }
 
 						// Extract and update stop reason if available
@@ -579,7 +566,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 							LOGGER.debug("Received chunk finish reason: " + finishReason);
 						}
 					} catch (Exception e) {
-						LOGGER.error("Error processing choice in chunk: " + e.getMessage(), e);
+						LOGGER.error("Error processing chunk: " + e.getMessage(), e);
 					}
 				});
 		}
@@ -612,8 +599,6 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	            }
 	        }
 	    });
-
-	    LOGGER.debug("Accumulating tool call fragments, current state: {}", toolCallAccumulator);
 	}
 
 	/**
@@ -694,7 +679,6 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	        ChatCompletionTool toolParam = ChatCompletionTool.ofFunction(functionTool);
 
 	        toolParams.add(toolParam);
-	        LOGGER.debug("Registered tool: {}", name);
 	    }
 
 	    return toolParams;
@@ -771,9 +755,6 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	    mxToolCall.setName(functionName);
 	    mxToolCall.setInput(arguments);
 	    mxToolCallList.add(mxToolCall);
-
-	    LOGGER.debug("Created ToolCall — ID: {}, Function: {}, Args: {}",
-	        toolCallId, functionName, arguments);
 	}
 
 	private void finalizeToolCalls() throws Exception {
@@ -787,7 +768,6 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	        String functionName = entry.name.toString();
 	        String arguments    = entry.arguments.toString();
 
-	        LOGGER.debug("Finalizing tool call [{}] — Function: {}", accumEntry.getKey(), functionName);
 	        createToolCall(toolCallId, functionName, arguments);
 	    }
 
