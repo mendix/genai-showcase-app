@@ -93,7 +93,8 @@ public class FunctionImpl {
 		if (type == "enum") {
 			Set<String> enumKeySet = inputParameter.getValue().getEnumeration().getEnumValues().keySet();
 			ArrayNode enumKeyArrayNode = MAPPER.valueToTree(enumKeySet);
-            propertyNode.set(type, enumKeyArrayNode);	
+            propertyNode.put("type", "string");
+            propertyNode.set(type, enumKeyArrayNode);
 		} else {
 			propertyNode.put("type", type);
 		}
