@@ -1,18 +1,20 @@
 import { j as e } from "./jsx-runtime-CWOFuNcx.js";
 import { r as x, a9 as s1, a6 as o1, a7 as n1, aa as r1 } from "./PageContainers-BqHFWUr4.js";
-import { u as K, B as E, C as G, c as i1 } from "./TextWithIcon-ByltjOqd.js";
+import { u as K, c as i1 } from "./useDependentDocumentChanges-DFCdDrGg.js";
 import { b as l1, d as a1, e as d1 } from "./documentInitUtils-DoIciLyT.js";
 import { g as W, c as z, u as S } from "./modelUtils-DYVbIsIX.js";
 import { C as c1 } from "./CenteredLoadingSpinner-NelG--07.js";
-import { i as A, C as p, B as $, v as U, a as p1 } from "./validationUtils-D9d068zK.js";
+import { C as p1 } from "./ComboBoxWithIcon-B8EWofqP.js";
 import { G as C1 } from "./GroupBox-Czphilzs.js";
 import { M as g, a as k } from "./model-BfOPpq4a.js";
-import { y as T } from "./Link-llJmH--q.js";
+import { y as E } from "./Link-llJmH--q.js";
+import { i as G, C as p, B as $, v as A } from "./validationUtils-DNmAMRcR.js";
 import { u as Y } from "./useExtensionPermissionsChanged-CbqUQaxU.js";
-import { W as O } from "./Banner-Bk-4OzcL.js";
+import { W as U } from "./Banner-Bk-4OzcL.js";
 import { T as X } from "./Table-DNrOUaYU.js";
-import { T as N } from "./TextInputWithButton-BkoxR7Pz.js";
-import { D as w, a as H, d as R } from "./formelements-DRgD5gZX.js";
+import { a as T } from "./TextWithIcon-DNOEi02G.js";
+import { D as w, a as H, d as O } from "./formelements-DRgD5gZX.js";
+import { B as N, C as R } from "./text-ByGAuYRB.js";
 import { h as P, g as f1 } from "./constantUtils-D0RXxXWn.js";
 import { createStudioProLogger as u1 } from "./logger-gMbuSAUF.js";
 import { d as x1 } from "./mxCloudGenAIUtils-U7THU9De.js";
@@ -881,9 +883,9 @@ const F1 = ({
   }, M = async () => {
     i.endpoint && P(t, i.endpoint);
   }, m = async (l) => {
-    const q = l.providerFields, e1 = await U(t, q.key);
+    const q = l.providerFields, e1 = await A(t, q.key);
     h(e1);
-    const t1 = await U(t, q.endpoint);
+    const t1 = await A(t, q.endpoint);
     C(t1), F(null), V(null);
   }, B = async () => {
     const l = await g1(t, s);
@@ -914,12 +916,12 @@ const F1 = ({
   const _ = (l) => l === p.Required ? "This field is required" : l === p.NotFound ? "Selected constant not found. It might have been deleted or renamed. Please update the constant selection." : l === p.InvalidType ? "Selected constant must be of type string." : l === p.Excluded ? "Selected constant is excluded from the project and cannot be used." : !0, L = c === p.EmptyValue || c === p.InvalidContent || c === p.PrivateValue, Q = u === p.EmptyValue || u === p.InvalidContent || u === p.PrivateValue;
   return /* @__PURE__ */ e.jsxs(e.Fragment, { children: [
     /* @__PURE__ */ e.jsx(
-      N,
+      T,
       {
         label: "Project endpoint",
         ariaLabel: "Project endpoint",
         value: i.endpoint?.qualifiedName ?? "",
-        icon: i.endpoint ? /* @__PURE__ */ e.jsx(A, {}) : void 0,
+        icon: i.endpoint ? /* @__PURE__ */ e.jsx(G, {}) : void 0,
         buttonCaption: "Select...",
         onClick: B,
         onClickSecondary: i.endpoint ? M : void 0,
@@ -927,17 +929,17 @@ const F1 = ({
         buttonCaptionSecondary: i.endpoint ? "Show" : void 0
       }
     ),
-    Q && /* @__PURE__ */ e.jsxs(O, { children: [
-      /* @__PURE__ */ e.jsx(E, { children: u === p.PrivateValue ? "Missing permissions" : "Invalid constant value" }),
+    Q && /* @__PURE__ */ e.jsxs(U, { children: [
+      /* @__PURE__ */ e.jsx(N, { children: u === p.PrivateValue ? "Missing permissions" : "Invalid constant value" }),
       /* @__PURE__ */ e.jsx("div", { children: u === p.PrivateValue ? "Private constants require additional permissions for local use. Grant access via View > Extensions and reopen the current tab." : "In order to test your Model locally, please set a valid value for the endpoint constant. E.g. https://resource-name.services.ai.azure.com/api/projects/project-name" })
     ] }),
     /* @__PURE__ */ e.jsx(
-      N,
+      T,
       {
         label: "API key",
         ariaLabel: "API key",
         value: i.key?.qualifiedName ?? "",
-        icon: i.key ? /* @__PURE__ */ e.jsx(A, {}) : void 0,
+        icon: i.key ? /* @__PURE__ */ e.jsx(G, {}) : void 0,
         buttonCaption: "Select...",
         onClick: Z,
         onClickSecondary: i.key ? v : void 0,
@@ -945,14 +947,14 @@ const F1 = ({
         buttonCaptionSecondary: i.key ? "Show" : void 0
       }
     ),
-    L && /* @__PURE__ */ e.jsxs(O, { children: [
-      /* @__PURE__ */ e.jsx(E, { children: c === p.PrivateValue ? "Missing permissions" : "Invalid constant value" }),
+    L && /* @__PURE__ */ e.jsxs(U, { children: [
+      /* @__PURE__ */ e.jsx(N, { children: c === p.PrivateValue ? "Missing permissions" : "Invalid constant value" }),
       /* @__PURE__ */ e.jsx("div", { children: c === p.PrivateValue ? "Private constants require additional permissions for local use. Grant access via View > Extensions and reopen the current tab." : "In order to test your Model locally, please set a valid value for the key constant." })
     ] }),
     (!i.endpoint || !i.key) && /* @__PURE__ */ e.jsxs(w, { children: [
-      /* @__PURE__ */ e.jsx(H, { children: /* @__PURE__ */ e.jsx(R, {}) }),
+      /* @__PURE__ */ e.jsx(H, { children: /* @__PURE__ */ e.jsx(O, {}) }),
       /* @__PURE__ */ e.jsx(H, { fullWidth: !0, children: /* @__PURE__ */ e.jsx(
-        T,
+        E,
         {
           href: "https://docs.mendix.com/agents/reference-guide/external-connectors/openai/#azure-resource-name",
           target: "_blank",
@@ -963,7 +965,7 @@ const F1 = ({
     ] }),
     i.endpoint && i.key && /* @__PURE__ */ e.jsxs(e.Fragment, { children: [
       /* @__PURE__ */ e.jsx($, { label: "Deployments", buttonCaption: "List deployments", onPress: a }),
-      f && /* @__PURE__ */ e.jsxs(G, { children: [
+      f && /* @__PURE__ */ e.jsxs(R, { children: [
         "Last updated: ",
         f.toLocaleString()
       ] }),
@@ -1009,7 +1011,7 @@ const F1 = ({
             ])
           }
         ),
-        /* @__PURE__ */ e.jsx(G, { children: "This list may contain deployments that are not text-to-text supported." })
+        /* @__PURE__ */ e.jsx(R, { children: "This list may contain deployments that are not text-to-text supported." })
       ] })
     ] })
   ] });
@@ -1100,7 +1102,7 @@ const D = () => {
   const [c, h] = x.useState(), [u, C] = x.useState(null), [j, F] = x.useState(null), f = s.providerFields, V = async () => {
     f.key && P(t, f.key);
   }, i = async (a) => {
-    const I = a.providerFields, _ = await U(t, I.key);
+    const I = a.providerFields, _ = await A(t, I.key);
     if (h(_), C(null), F(null), !_)
       I1(t, a, h, o, d);
     else {
@@ -1131,12 +1133,12 @@ const D = () => {
   const B = (a) => a === p.Required ? "Model key is required" : a === p.NotFound ? "Selected constant not found. It might have been deleted or renamed. Please update the constant selection." : a === p.InvalidType ? "Selected constant must be of type string." : a === p.Excluded ? "Selected constant is excluded from the project and cannot be used." : !0, Z = c === p.EmptyValue || c === p.InvalidContent || c === p.PrivateValue;
   return /* @__PURE__ */ e.jsxs(e.Fragment, { children: [
     /* @__PURE__ */ e.jsx(
-      N,
+      T,
       {
         label: "Model key",
         ariaLabel: "Model key",
         value: f.key?.qualifiedName ?? "",
-        icon: f.key ? /* @__PURE__ */ e.jsx(A, {}) : void 0,
+        icon: f.key ? /* @__PURE__ */ e.jsx(G, {}) : void 0,
         buttonCaption: "Select...",
         onClick: v,
         onClickSecondary: f.key ? V : void 0,
@@ -1145,9 +1147,9 @@ const D = () => {
       }
     ),
     !f.key && /* @__PURE__ */ e.jsxs(w, { children: [
-      /* @__PURE__ */ e.jsx(H, { children: /* @__PURE__ */ e.jsx(R, {}) }),
+      /* @__PURE__ */ e.jsx(H, { children: /* @__PURE__ */ e.jsx(O, {}) }),
       /* @__PURE__ */ e.jsx(H, { fullWidth: !0, children: /* @__PURE__ */ e.jsx(
-        T,
+        E,
         {
           href: "https://genai.home.mendix.com/p/resources",
           target: "_blank",
@@ -1156,8 +1158,8 @@ const D = () => {
         }
       ) })
     ] }),
-    Z && /* @__PURE__ */ e.jsxs(O, { children: [
-      /* @__PURE__ */ e.jsx(E, { children: c === p.PrivateValue ? "Missing permissions" : "Invalid constant value" }),
+    Z && /* @__PURE__ */ e.jsxs(U, { children: [
+      /* @__PURE__ */ e.jsx(N, { children: c === p.PrivateValue ? "Missing permissions" : "Invalid constant value" }),
       /* @__PURE__ */ e.jsx("div", { children: c === p.PrivateValue ? "Private constants require additional permissions for local use. Grant access via View > Extensions and reopen the current tab." : "In order to test your Model locally, please set a valid value for the key constant." })
     ] }),
     f.keyId && /* @__PURE__ */ e.jsxs(e.Fragment, { children: [
@@ -1192,11 +1194,11 @@ const D = () => {
         }
       ),
       /* @__PURE__ */ e.jsxs(w, { children: [
-        /* @__PURE__ */ e.jsx(H, { children: /* @__PURE__ */ e.jsx(R, {}) }),
-        /* @__PURE__ */ e.jsx(H, { fullWidth: !0, children: /* @__PURE__ */ e.jsx(T, { href: f.deepLinkURL, target: "_blank", rel: "noreferrer,noopener", children: "View resource in the portal" }) })
+        /* @__PURE__ */ e.jsx(H, { children: /* @__PURE__ */ e.jsx(O, {}) }),
+        /* @__PURE__ */ e.jsx(H, { fullWidth: !0, children: /* @__PURE__ */ e.jsx(E, { href: f.deepLinkURL, target: "_blank", rel: "noreferrer,noopener", children: "View resource in the portal" }) })
       ] }),
       /* @__PURE__ */ e.jsx($, { label: "Model versions", buttonCaption: "List models", onPress: M }),
-      j && /* @__PURE__ */ e.jsxs(G, { children: [
+      j && /* @__PURE__ */ e.jsxs(R, { children: [
         "Last updated: ",
         j.toLocaleString()
       ] }),
@@ -1308,8 +1310,8 @@ const D = () => {
       )
     ] }) }) })
   ] }) });
-}, o2 = i1(G1);
+}, r2 = i1(G1);
 export {
   G1 as App,
-  o2 as component
+  r2 as component
 };
