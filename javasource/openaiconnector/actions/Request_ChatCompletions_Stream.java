@@ -106,7 +106,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 			return mxResponse.getMendixObject();
 			
 		} catch (Exception e) {
-			LOGGER.error("An error occurred when calling the streaming API: " + e.getMessage(), e);
+			LOGGER.error("An error occurred when calling the streaming API: " + e);
 			throw e;
 		}
 		
@@ -723,7 +723,6 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		            // Stop forcing the tool once it has already been called in this agent loop,
 		            // otherwise the model would be forced to call it again indefinitely
 		            if (FunctionMappingImpl.isToolRecall(request, forcedTool.getName(), getContext())) {
-		                LOGGER.debug("ToolChoice " + forcedTool.getName() + " has already been called. Removing forced ToolChoice from request.");
 		                return null;
 		            }
 
