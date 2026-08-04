@@ -1,46 +1,46 @@
 import { j as e, d as w } from "./jsx-runtime-CWOFuNcx.js";
-import { R as m, T as l, S as s, a4 as C, aj as f, ak as j, r as x, a7 as b, ad as y, a9 as k, a1 as A, a6 as M } from "./PageContainers-BqHFWUr4.js";
-import { d as P, y as $ } from "./Link-llJmH--q.js";
+import { H as m, J as l, I as s, T as C, aj as f, ak as j, r as x, W as b, a1 as y, Y as k, Q as A, V as M } from "./PageContainers-1sk3OYaf.js";
+import { d as P, y as I } from "./Link-DIvQSyO2.js";
 import { O as i } from "./settings-Bgs47ll9.js";
-import { u as I, a as V, S as H } from "./StatusBadge-DlOSILAB.js";
-import { b as B, o as E } from "./index-BN9kIrPu.js";
-import { g as F } from "./compatibilityUtils-R3Pg1ddN.js";
+import { u as V, a as $, S as H } from "./StatusBadge-egeZJM1d.js";
+import { b as B, o as E } from "./index-Dvu7BhUM.js";
+import { g as F } from "./compatibilityUtils-Chr7KNop.js";
 import { o as n } from "./genericUtils-GaF65l2f.js";
-import { C as L } from "./CenteredLoadingSpinner-NelG--07.js";
-import { D as v } from "./formelements-DRgD5gZX.js";
-const S = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M10.5%205V2C10.5%201.725%2010.275%201.5%2010%201.5H2C1.725%201.5%201.5%201.725%201.5%202V8C1.5%208.275%201.725%208.5%202%208.5H3.5V11L6%209.57'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M8%206.5H14C14.275%206.5%2014.5%206.725%2014.5%207V12C14.5%2012.275%2014.275%2012.5%2014%2012.5H12.5V14.5L9.5%2012.5H8C7.725%2012.5%207.5%2012.275%207.5%2012V7C7.5%206.725%207.725%206.5%208%206.5Z'%20stroke='%23579BF9'%20stroke-miterlimit='10'/%3e%3c/svg%3e", G = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M10.5%205V2C10.5%201.725%2010.275%201.5%2010%201.5H2C1.725%201.5%201.5%201.725%201.5%202V8C1.5%208.275%201.725%208.5%202%208.5H3.5V11L6%209.57'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M8%206.5H14C14.275%206.5%2014.5%206.725%2014.5%207V12C14.5%2012.275%2014.275%2012.5%2014%2012.5H12.5V14.5L9.5%2012.5H8C7.725%2012.5%207.5%2012.275%207.5%2012V7C7.5%206.725%207.725%206.5%208%206.5Z'%20stroke='%23146FF4'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
+import { C as L } from "./CenteredLoadingSpinner-BZzc9Oqr.js";
+import { D as v } from "./formelements-CKhf3RUn.js";
+const G = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M10.5%205V2C10.5%201.725%2010.275%201.5%2010%201.5H2C1.725%201.5%201.5%201.725%201.5%202V8C1.5%208.275%201.725%208.5%202%208.5H3.5V11L6%209.57'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M8%206.5H14C14.275%206.5%2014.5%206.725%2014.5%207V12C14.5%2012.275%2014.275%2012.5%2014%2012.5H12.5V14.5L9.5%2012.5H8C7.725%2012.5%207.5%2012.275%207.5%2012V7C7.5%206.725%207.725%206.5%208%206.5Z'%20stroke='%23579BF9'%20stroke-miterlimit='10'/%3e%3c/svg%3e", S = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M10.5%205V2C10.5%201.725%2010.275%201.5%2010%201.5H2C1.725%201.5%201.5%201.725%201.5%202V8C1.5%208.275%201.725%208.5%202%208.5H3.5V11L6%209.57'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M8%206.5H14C14.275%206.5%2014.5%206.725%2014.5%207V12C14.5%2012.275%2014.275%2012.5%2014%2012.5H12.5V14.5L9.5%2012.5H8C7.725%2012.5%207.5%2012.275%207.5%2012V7C7.5%206.725%207.725%206.5%208%206.5Z'%20stroke='%23146FF4'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
 var O = Object.defineProperty, R = (t, o) => O(t, "name", { value: o, configurable: !0 });
-const D = R((t) => e.jsx(m, { light: G, dark: S, ...t }), "FeedbackIcon");
+const D = R((t) => e.jsx(m, { light: S, dark: G, ...t }), "FeedbackIcon");
 var T = Object.defineProperty, Z = (t, o) => T(t, "name", { value: o, configurable: !0 });
-const N = Z(({ title: t, type: o, icon: r, buttons: c, children: h }) => e.jsxs(z, { $type: o, children: [r && e.jsx("div", { children: r }), e.jsxs(W, { children: [e.jsx(K, { children: t }), e.jsx(U, { children: h }), c && e.jsx(Y, { children: c.map((a, p) => e.jsxs(q, { onPress: a.onPress, isDisabled: a.isDisabled, children: [a.caption, a.isExternal && e.jsx(P, {})] }, p)) })] })] }), "Card"), z = s.div`
+const N = Z(({ title: t, type: o, icon: r, buttons: c, children: h }) => e.jsxs(W, { $type: o, children: [r && e.jsx("div", { children: r }), e.jsxs(z, { children: [e.jsx(Y, { children: t }), e.jsx(K, { children: h }), c && e.jsx(U, { children: c.map((a, p) => e.jsxs(q, { onPress: a.onPress, isDisabled: a.isDisabled, children: [a.caption, a.isExternal && e.jsx(P, {})] }, p)) })] })] }), "Card"), W = s.div`
     display: flex;
     padding: ${l.spacing16};
     border: ${l.borderWidthMd} solid ${({ theme: t }) => t.colorsBorderSecondary};
     border-radius: ${l.borderRadiusSm};
     gap: ${l.spacing16};
     background-color: ${({ theme: t, $type: o }) => o === "emphasised" ? t.colorsBackgroundCanvasBase : t.colorsBackgroundDefault};
-`, W = s.div`
+`, z = s.div`
     display: flex;
     flex-direction: column;
     gap: ${l.spacing8};
-`, K = s.span`
+`, Y = s.span`
     font-weight: 600;
     font-size: 16px;
-`, U = s.div`
+`, K = s.div`
     color: ${({ theme: t }) => t.colorsTextPrimaryDefault};
-`, Y = s.div`
+`, U = s.div`
     padding-top: ${l.spacing4};
     display: flex;
     gap: 10px;
 `, q = s(C)`
     gap: ${l.spacing4};
-`, _ = s.div`
+`, J = s.div`
     && > div {
         border-color: ${({ theme: t }) => t.colorsBorderPrimary};
     }
-`, d = (t) => /* @__PURE__ */ e.jsx(_, { children: /* @__PURE__ */ e.jsx(N, { ...t }) }), J = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M14%203.5H2C1.72386%203.5%201.5%203.72386%201.5%204V12C1.5%2012.2761%201.72386%2012.5%202%2012.5H14C14.2761%2012.5%2014.5%2012.2761%2014.5%2012V4C14.5%203.72386%2014.2761%203.5%2014%203.5Z'%20stroke='%23579BF9'%20stroke-miterlimit='10'/%3e%3cpath%20d='M14.5%204L8%208.5L1.5%204'%20stroke='%23579BF9'%20stroke-miterlimit='10'/%3e%3c/svg%3e", Q = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M14%203.5H2C1.72386%203.5%201.5%203.72386%201.5%204V12C1.5%2012.2761%201.72386%2012.5%202%2012.5H14C14.2761%2012.5%2014.5%2012.2761%2014.5%2012V4C14.5%203.72386%2014.2761%203.5%2014%203.5Z'%20stroke='%23146FF4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M14.5%204L8%208.5L1.5%204'%20stroke='%23146FF4'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
+`, d = (t) => /* @__PURE__ */ e.jsx(J, { children: /* @__PURE__ */ e.jsx(N, { ...t }) }), Q = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M14%203.5H2C1.72386%203.5%201.5%203.72386%201.5%204V12C1.5%2012.2761%201.72386%2012.5%202%2012.5H14C14.2761%2012.5%2014.5%2012.2761%2014.5%2012V4C14.5%203.72386%2014.2761%203.5%2014%203.5Z'%20stroke='%23579BF9'%20stroke-miterlimit='10'/%3e%3cpath%20d='M14.5%204L8%208.5L1.5%204'%20stroke='%23579BF9'%20stroke-miterlimit='10'/%3e%3c/svg%3e", _ = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M14%203.5H2C1.72386%203.5%201.5%203.72386%201.5%204V12C1.5%2012.2761%201.72386%2012.5%202%2012.5H14C14.2761%2012.5%2014.5%2012.2761%2014.5%2012V4C14.5%203.72386%2014.2761%203.5%2014%203.5Z'%20stroke='%23146FF4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M14.5%204L8%208.5L1.5%204'%20stroke='%23146FF4'%20stroke-miterlimit='10'/%3e%3c/svg%3e";
 var X = Object.defineProperty, ee = (t, o) => X(t, "name", { value: o, configurable: !0 });
-const te = ee((t) => e.jsx(m, { light: Q, dark: J, ...t }), "MessageDefinitionIcon"), oe = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M3.5%207.5V12C3.5%2012.275%203.725%2012.5%204%2012.5H12C12.275%2012.5%2012.5%2012.275%2012.5%2012V7.5'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M14.5%206.5L8%209.5L1.5%206.5L8%203.5L14.5%206.5ZM14.5%206.5V10.5'%20stroke='%23A4A4A4'%20stroke-linejoin='round'/%3e%3c/svg%3e", se = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M3.5%207.5V12C3.5%2012.275%203.725%2012.5%204%2012.5H12C12.275%2012.5%2012.5%2012.275%2012.5%2012V7.5'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M14.5%206.5L8%209.5L1.5%206.5L8%203.5L14.5%206.5ZM14.5%206.5V10.5'%20stroke='%23535965'%20stroke-linejoin='round'/%3e%3c/svg%3e";
+const te = ee((t) => e.jsx(m, { light: _, dark: Q, ...t }), "MessageDefinitionIcon"), oe = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M3.5%207.5V12C3.5%2012.275%203.725%2012.5%204%2012.5H12C12.275%2012.5%2012.5%2012.275%2012.5%2012V7.5'%20stroke='%23A4A4A4'%20stroke-miterlimit='10'/%3e%3cpath%20d='M14.5%206.5L8%209.5L1.5%206.5L8%203.5L14.5%206.5ZM14.5%206.5V10.5'%20stroke='%23A4A4A4'%20stroke-linejoin='round'/%3e%3c/svg%3e", se = "data:image/svg+xml,%3csvg%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M3.5%207.5V12C3.5%2012.275%203.725%2012.5%204%2012.5H12C12.275%2012.5%2012.5%2012.275%2012.5%2012V7.5'%20stroke='%23535965'%20stroke-miterlimit='10'/%3e%3cpath%20d='M14.5%206.5L8%209.5L1.5%206.5L8%203.5L14.5%206.5ZM14.5%206.5V10.5'%20stroke='%23535965'%20stroke-linejoin='round'/%3e%3c/svg%3e";
 var re = Object.defineProperty, ie = (t, o) => re(t, "name", { value: o, configurable: !0 });
 const ne = ie((t) => e.jsx(m, { light: se, dark: oe, ...t }), "MxAcademyIcon"), ae = ({
   width: t = "1em",
@@ -123,8 +123,8 @@ const ne = ie((t) => e.jsx(m, { light: se, dark: oe, ...t }), "MxAcademyIcon"), 
         flex-wrap: wrap;
     }
 `, xe = s.div``, ve = ({ studioPro: t }) => {
-  const { data: o, agentEditorVersion: r, isPending: c, isError: h, refresh: a } = I(t), p = F(h, o);
-  return V(
+  const { data: o, agentEditorVersion: r, isPending: c, isError: h, refresh: a } = V(t), p = F(h, o);
+  return $(
     x.useCallback(() => {
       a();
     }, [a])
@@ -172,7 +172,7 @@ const ne = ie((t) => e.jsx(m, { light: se, dark: oe, ...t }), "MxAcademyIcon"), 
           children: [
             "This Mendix Docs guides you through leveraging Agent Editor in Studio Pro to build and manage agents within your app model. You'll learn how to define agents as documents, integrating them with models, knowledge bases, and MCP services. Not sure where to start? Check out the",
             " ",
-            /* @__PURE__ */ e.jsx($, { onPress: () => n(i.GenAIConcepts), children: "GenAI Concepts" }),
+            /* @__PURE__ */ e.jsx(I, { onPress: () => n(i.GenAIConcepts), children: "GenAI Concepts" }),
             " to enhance your understanding."
           ]
         }
@@ -264,7 +264,7 @@ const ne = ie((t) => e.jsx(m, { light: se, dark: oe, ...t }), "MxAcademyIcon"), 
       )
     ] })
   ] }) });
-}, $e = {
+}, Ie = {
   async loaded(t) {
     const o = w(t), r = document.getElementById("root");
     if (!r) throw new Error("Failed to find the root element");
@@ -275,5 +275,5 @@ const ne = ie((t) => e.jsx(m, { light: se, dark: oe, ...t }), "MxAcademyIcon"), 
 };
 export {
   ve as Onboarding,
-  $e as component
+  Ie as component
 };
