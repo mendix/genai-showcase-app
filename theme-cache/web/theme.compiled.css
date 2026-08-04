@@ -28514,6 +28514,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .accordion-tool-calls .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button .tool-title {
   font-weight: var(--font-weight-normal);
   color: var(--font-color-header);
+  word-break: break-word;
 }
 .accordion-tool-calls .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button .mx-image-viewer {
   width: auto;
@@ -30930,8 +30931,13 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 
 /* tooltip basic styling */
+.agent-tooltip .widget-tooltip-trigger .info-icon {
+  margin: 0 0 0 var(--spacing-smaller, 4px);
+  padding: 0;
+}
 .agent-tooltip .widget-tooltip-trigger .info-icon img {
-  margin: 0;
+  height: 16px;
+  width: 16px;
 }
 .agent-tooltip .widget-tooltip-content {
   position: relative;
