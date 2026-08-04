@@ -1,20 +1,22 @@
 import { j as n } from "./jsx-runtime-CWOFuNcx.js";
 import { r as f, a9 as W, a6 as q, a7 as U, aa as _ } from "./PageContainers-BqHFWUr4.js";
-import { u as $, B as z, C as H, c as J } from "./TextWithIcon-ByltjOqd.js";
+import { u as $, c as z } from "./useDependentDocumentChanges-DFCdDrGg.js";
 import { createStudioProLogger as A } from "./logger-gMbuSAUF.js";
-import { g as N, h as R, K as b, i as Q, j as S } from "./documentInitUtils-DoIciLyT.js";
-import { C as X } from "./CenteredLoadingSpinner-NelG--07.js";
-import { C as y, i as Y, B as Z, v as ee, a as te } from "./validationUtils-D9d068zK.js";
+import { g as N, h as R, K as b, i as H, j as S } from "./documentInitUtils-DoIciLyT.js";
+import { C as J } from "./CenteredLoadingSpinner-NelG--07.js";
+import { C as Q } from "./ComboBoxWithIcon-B8EWofqP.js";
 import { G as k } from "./GroupBox-Czphilzs.js";
 import { y as L } from "./Link-llJmH--q.js";
-import { g as ne, h as oe } from "./constantUtils-D0RXxXWn.js";
-import { d as se, a as re, u as ae, g as ie } from "./mxCloudGenAIUtils-U7THU9De.js";
-import { u as le } from "./useExtensionPermissionsChanged-CbqUQaxU.js";
-import { W as de } from "./Banner-Bk-4OzcL.js";
+import { g as X, h as Y } from "./constantUtils-D0RXxXWn.js";
+import { d as Z, a as ee, u as te, g as ne } from "./mxCloudGenAIUtils-U7THU9De.js";
+import { C as y, i as oe, B as se, v as re } from "./validationUtils-DNmAMRcR.js";
+import { u as ae } from "./useExtensionPermissionsChanged-CbqUQaxU.js";
+import { W as ie } from "./Banner-Bk-4OzcL.js";
 import { D, a as I, d as B } from "./formelements-DRgD5gZX.js";
+import { B as le, C as de } from "./text-ByGAuYRB.js";
 import { T as ce } from "./Table-DNrOUaYU.js";
 import { T as w } from "./TextInputLabeled-D9mRNz7v.js";
-import { T as ue } from "./TextInputWithButton-BkoxR7Pz.js";
+import { a as ue } from "./TextWithIcon-DNOEi02G.js";
 const G = (e, t) => async (r) => {
   const o = A(e);
   try {
@@ -48,12 +50,12 @@ const G = (e, t) => async (r) => {
   const r = e, o = t, a = Object.keys(r), d = Object.keys(o);
   return a.length !== d.length ? !1 : a.every((s) => K(r[s], o[s]));
 }, pe = async (e, t) => {
-  const r = A(e), o = await re(e, t);
+  const r = A(e), o = await ee(e, t);
   if (typeof o == "string") {
     r.warn("MxCloudGenAI resource API unavailable. Could not update model details.");
     return;
   }
-  return ae(
+  return te(
     t,
     o
   );
@@ -61,10 +63,10 @@ const G = (e, t) => async (r) => {
   const d = A(e);
   let s, h = !1, p = !1;
   try {
-    const m = t.providerFields, g = await ne(e, m.key);
+    const m = t.providerFields, g = await X(e, m.key);
     if (!g)
       throw new Error("No key value found. Please make sure the key constant is correctly configured.");
-    const u = se(e, g);
+    const u = Z(e, g);
     if (u.type !== "KNOWLEDGE_BASE")
       throw new Error(`Unsupported key type: ${u.type}. Only Knowledge Base keys are currently supported.`);
     const l = {
@@ -125,7 +127,7 @@ async function he(e, t) {
       title: "Getting collections",
       description: "Getting collections",
       action: async () => {
-        const d = await ie(e, t)();
+        const d = await ne(e, t)();
         return typeof d == "string" ? d : (r = d, !0);
       }
     }
@@ -158,9 +160,9 @@ const j = () => {
     }
     m(i), h(!0), u(/* @__PURE__ */ new Date());
   }, C = async () => {
-    l.key && oe(e, l.key);
+    l.key && Y(e, l.key);
   }, v = async (i) => {
-    const P = i.providerFields, E = await ee(e, P.key);
+    const P = i.providerFields, E = await re(e, P.key);
     if (d(E), !E)
       ye(
         e,
@@ -184,7 +186,7 @@ const j = () => {
     dependentIds: [l.key?.documentId].filter((i) => !!i),
     watchProjectSettings: !0,
     onDependentDocumentsChanged: M
-  }), le({
+  }), ae({
     studioPro: e,
     onPermissionsChanged: () => v(t)
   }), f.useEffect(() => {
@@ -199,7 +201,7 @@ const j = () => {
           label: "Knowledge base key",
           ariaLabel: "Knowledge base key",
           value: l.key?.qualifiedName ?? "",
-          icon: l.key ? /* @__PURE__ */ n.jsx(Y, {}) : void 0,
+          icon: l.key ? /* @__PURE__ */ n.jsx(oe, {}) : void 0,
           buttonCaption: "Select...",
           onClick: x,
           onClickSecondary: l.key ? C : void 0,
@@ -207,8 +209,8 @@ const j = () => {
           buttonCaptionSecondary: l.key ? "Show" : void 0
         }
       ),
-      T && /* @__PURE__ */ n.jsxs(de, { children: [
-        /* @__PURE__ */ n.jsx(z, { children: a === y.PrivateValue ? "Missing permissions" : "Invalid constant value" }),
+      T && /* @__PURE__ */ n.jsxs(ie, { children: [
+        /* @__PURE__ */ n.jsx(le, { children: a === y.PrivateValue ? "Missing permissions" : "Invalid constant value" }),
         /* @__PURE__ */ n.jsx("div", { children: a === y.PrivateValue ? "Private constants require additional permissions for local use. Grant access via View > Extensions and reopen the current tab." : "In order to use your Knowledge base locally, please set a valid value for the key constant." })
       ] }),
       !l.key && /* @__PURE__ */ n.jsxs(D, { children: [
@@ -240,7 +242,7 @@ const j = () => {
             label: "Embeddings model",
             ariaLabel: "Embeddings model name",
             value: l.modelDisplayName,
-            icon: l.modelDisplayName && l.modelDisplayName.toLocaleLowerCase().includes("cohere") ? Q : void 0,
+            icon: l.modelDisplayName && l.modelDisplayName.toLocaleLowerCase().includes("cohere") ? H : void 0,
             onChange: j,
             readOnly: !0
           }
@@ -282,9 +284,9 @@ const j = () => {
       ] })
     ] }),
     l.keyId && /* @__PURE__ */ n.jsxs(k, { label: "Configured Collections", children: [
-      /* @__PURE__ */ n.jsx(Z, { label: "Collections", buttonCaption: "List collections", onPress: c }),
+      /* @__PURE__ */ n.jsx(se, { label: "Collections", buttonCaption: "List collections", onPress: c }),
       s && /* @__PURE__ */ n.jsxs(n.Fragment, { children: [
-        g && /* @__PURE__ */ n.jsxs(H, { children: [
+        g && /* @__PURE__ */ n.jsxs(de, { children: [
           "Last updated: ",
           g.toLocaleString()
         ] }),
@@ -347,10 +349,10 @@ const j = () => {
     )();
   }, l = () => p.provider ? !0 : "Knowledge base provider is required.";
   return /* @__PURE__ */ n.jsx(W, { studioPro: e, children: /* @__PURE__ */ n.jsxs(q, { children: [
-    !s && /* @__PURE__ */ n.jsx(X, {}),
+    !s && /* @__PURE__ */ n.jsx(J, {}),
     s && /* @__PURE__ */ n.jsx(U, { children: /* @__PURE__ */ n.jsxs(_, { children: [
       /* @__PURE__ */ n.jsx(k, { label: "Common", children: /* @__PURE__ */ n.jsx(
-        te,
+        Q,
         {
           ariaLabel: "Provider",
           isDisabled: !0,
@@ -372,8 +374,8 @@ const j = () => {
       )
     ] }) })
   ] }) });
-}, Ve = J(Ce);
+}, Oe = z(Ce);
 export {
   Ce as App,
-  Ve as component
+  Oe as component
 };

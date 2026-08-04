@@ -243,6 +243,7 @@ public class AgentEditorTestServlet extends HttpServlet {
     
     private static Request createRequest(IContext context, JsonNode requestJson) throws IOException {
         Request request = new Request(context);
+        request.set_IsStudioProPlaygroundCall(true);
         JsonNode messagesNode = requestJson.get("messages");
         
         if (messagesNode != null && !messagesNode.isNull()) {

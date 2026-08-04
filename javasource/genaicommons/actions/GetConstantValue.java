@@ -12,7 +12,7 @@ package genaicommons.actions;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.UserAction;
-import agenteditorcommons.impl.MxLogger;
+import genaicommons.impl.MxLogger;
 
 public class GetConstantValue extends UserAction<java.lang.String>
 {

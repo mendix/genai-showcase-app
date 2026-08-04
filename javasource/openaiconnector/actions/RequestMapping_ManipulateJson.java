@@ -376,6 +376,20 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 		// Loop through all tools, find FunctionRequest object by functionName that contains the FunctionMicroflow,
 		// get InputParameterName of the FunctionMicroflow, create parametersNode and add to toolNode
 		JsonNode toolsNode = rootNode.path("tools");
+		
+		// Remove tools when not usable
+		if (toolsNode == null || toolsNode.isNull()
+				|| (toolsNode.isArray() && toolsNode.size() == 0)) {
+			((ObjectNode) rootNode).remove("tools");
+			return;
+		}
+
+		// Defensive: if tools is not an array, drop it
+		if (!toolsNode.isArray()) {
+			((ObjectNode) rootNode).remove("tools");
+			return;
+		}
+		
 		for (JsonNode toolNode : toolsNode) {
 			String toolName = toolNode.path("function").path("name").asText();
 			Tool functionMatch = FunctionImpl.getToolByName(getRequest(RequestMapping), toolName ,getContext());
