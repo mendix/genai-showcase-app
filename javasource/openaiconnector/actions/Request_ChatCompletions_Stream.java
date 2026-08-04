@@ -42,6 +42,7 @@ import com.openai.models.chat.completions.ChatCompletionFunctionTool;
 import com.openai.models.chat.completions.ChatCompletionChunk;
 import com.openai.models.chat.completions.ChatCompletionTool;
 import com.openai.models.chat.completions.ChatCompletionToolChoiceOption;
+import com.openai.models.ReasoningEffort;
 import com.openai.models.chat.completions.ChatCompletionContentPart;
 import com.openai.models.chat.completions.ChatCompletionContentPartImage;
 import com.openai.models.chat.completions.ChatCompletionContentPartText;
@@ -72,11 +73,16 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	@java.lang.Deprecated(forRemoval = true)
 	private final IMendixObject __DeployedModel;
 	private final openaiconnector.proxies.OpenAIDeployedModel DeployedModel;
+	/** @deprecated use RequestMapping.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __RequestMapping;
+	private final openaiconnector.proxies.RequestMapping RequestMapping;
 
 	public Request_ChatCompletions_Stream(
 		IContext context,
 		IMendixObject _request,
-		IMendixObject _deployedModel
+		IMendixObject _deployedModel,
+		IMendixObject _requestMapping
 	)
 	{
 		super(context);
@@ -84,6 +90,8 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		this.Request = _request == null ? null : genaicommons.proxies.Request.initialize(getContext(), _request);
 		this.__DeployedModel = _deployedModel;
 		this.DeployedModel = _deployedModel == null ? null : openaiconnector.proxies.OpenAIDeployedModel.initialize(getContext(), _deployedModel);
+		this.__RequestMapping = _requestMapping;
+		this.RequestMapping = _requestMapping == null ? null : openaiconnector.proxies.RequestMapping.initialize(getContext(), _requestMapping);
 	}
 
 	@java.lang.Override
@@ -292,20 +300,25 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
         		.build());
 		
 		// Add optional parameters if they exist
-		BigDecimal temperature = request.getTemperature();
+		BigDecimal temperature = this.RequestMapping.getTemperature();
 		if (temperature != null) {
-			// Convert BigDecimal to double
 			builder.temperature(temperature.doubleValue());
 		}
 		
-		Integer maxTokens = request.getMaxTokens();
+		Integer maxTokens = this.RequestMapping.getMaxTokens();
 		if (maxTokens != null && maxTokens > 0) {
 			builder.maxCompletionTokens(maxTokens.longValue());
 		}
 		
-		BigDecimal topP = request.getTopP();
+		BigDecimal topP = this.RequestMapping.getTopP();
 		if (topP != null && topP.signum() > 0) {
 			builder.topP(topP.doubleValue());
+		}
+
+		// "none" is a fallback value used to explicitly disable reasoning on supported models
+		String reasoningEffort = this.RequestMapping.getReasoningEffort();
+		if ("none".equalsIgnoreCase(reasoningEffort)) {
+			builder.reasoningEffort(ReasoningEffort.NONE);
 		}
 
 		List<genaicommons.proxies.StopSequence> stopSequences = request.getRequest_StopSequence();
@@ -316,7 +329,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 			builder.stop(ChatCompletionCreateParams.Stop.ofStrings(stopStrings));
 		}
 
-		applyOpenAIRequestExtension(request, builder);
+		applyOpenAIRequestExtension(builder);
 
 		// Add tools if a ToolCollection is associated with the request
 		ToolCollection toolCollection = request.getRequest_ToolCollection();
@@ -342,19 +355,8 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 		return builder.build();
 	}
 
-	/**
-	 * Applies OpenAI-specific optional parameters (ResponseFormat, FrequencyPenalty) from the
-	 * OpenAIRequest_Extension associated to the Request, if present.
-	 */
-	private void applyOpenAIRequestExtension(Request request, ChatCompletionCreateParams.Builder builder) throws CoreException {
-		openaiconnector.proxies.OpenAIRequest_Extension extension =
-			openaiconnector.proxies.microflows.Microflows.openAIRequest_Extension_GetOrCreate(getContext(), request);
-
-		if (extension == null) {
-			return;
-		}
-
-		openaiconnector.proxies.ENUM_ResponseFormat_Chat responseFormat = extension.getResponseFormat();
+	private void applyOpenAIRequestExtension(ChatCompletionCreateParams.Builder builder) {
+		openaiconnector.proxies.ENUM_ResponseFormat_Chat responseFormat = this.RequestMapping.getResponseFormat();
 		if (responseFormat != null) {
 			switch (responseFormat) {
 				case json_object:
@@ -364,12 +366,12 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 					builder.responseFormat(com.openai.models.ResponseFormatText.builder().build());
 					break;
 				default:
-					LOGGER.warn("Unknown ResponseFormat on OpenAIRequest_Extension: " + responseFormat);
+					LOGGER.warn("Unknown ResponseFormat on RequestMapping: " + responseFormat);
 					break;
 			}
 		}
 
-		BigDecimal frequencyPenalty = extension.getFrequencyPenalty();
+		BigDecimal frequencyPenalty = this.RequestMapping.getFrequencyPenalty();
 		if (frequencyPenalty != null) {
 			builder.frequencyPenalty(frequencyPenalty.doubleValue());
 		}
@@ -689,7 +691,7 @@ public class Request_ChatCompletions_Stream extends UserAction<IMendixObject>
 	        Request request,
 	        ToolCollection toolCollection) throws Exception {
 
-		    ENUM_ToolChoice toolChoice = request.getToolChoice(); 
+		    ENUM_ToolChoice toolChoice = this.RequestMapping.getToolChoice(); 
 	
 		    if (toolChoice == null) {
 		        return null;
