@@ -69,7 +69,11 @@ public class CreateMCPClient extends UserAction<IMendixObject>
 			McpClientTransport transport = createTransport();
 			
 			McpSchema.ClientCapabilities capabilities = McpSchema.ClientCapabilities.builder().build();
-			McpSchema.Implementation clientInfo = McpSchema.Implementation.builder(ClientConfig.getName(), ClientConfig.getVersion()).build();
+			String version = ClientConfig.getVersion();
+			if (version == null || version.isBlank()) {
+				version = "1.0.0";
+			}
+			McpSchema.Implementation clientInfo = McpSchema.Implementation.builder(ClientConfig.getName(), version).build();
 
 			McpSyncClient client = McpClient.sync(transport)
 					.requestTimeout(Duration.ofSeconds(getConnectionTimeout()))
