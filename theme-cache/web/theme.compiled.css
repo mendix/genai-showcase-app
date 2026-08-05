@@ -28095,7 +28095,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 :root {
   --chat-width: 900px;
   --send-btn-size: 28px;
-  --chat-input-max-height: 400px;
+  --chat-input-max-height: clamp(100px, 25vh, 400px);
   --chat-header-color: #264ae5;
   --pop-up-chat-bottom-position: 5vh;
   --pop-up-chat-right-position: 3vw;
@@ -28514,6 +28514,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .accordion-tool-calls .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button .tool-title {
   font-weight: var(--font-weight-normal);
   color: var(--font-color-header);
+  word-break: break-word;
 }
 .accordion-tool-calls .widget-accordion-group .widget-accordion-group-header .widget-accordion-group-header-button .mx-image-viewer {
   width: auto;
@@ -28860,6 +28861,51 @@ input[type=checkbox].three-state-checkbox + .control-label {
   cursor: default;
 }
 
+.scroll-btn-wrapper {
+  padding: 8px;
+  background-color: #fff;
+  border: 1px solid #0a1325;
+  position: fixed;
+  bottom: calc(var(--chat-input-height, 180px) + 16px);
+  display: inline-flex;
+  align-items: center;
+  border-radius: 8px;
+  opacity: 0;
+}
+.scroll-btn-wrapper:hover {
+  background-color: #f8f8f8;
+}
+.scroll-btn-wrapper:active {
+  background-color: #a9acb3;
+}
+.scroll-btn-wrapper .spinner {
+  width: 18px;
+  height: 18px;
+  margin-left: 8px;
+}
+.scroll-btn-wrapper .scroll-to-bottom-btn {
+  background: transparent;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 100;
+  padding: 0;
+  border: 0;
+  font-size: 20px;
+  color: #0a1324;
+  display: flex;
+  align-items: center;
+}
+.scroll-btn-wrapper .scroll-to-bottom-btn .icon-lined {
+  background-color: #264ae5;
+}
+
+.messages-container.not-at-bottom .scroll-btn-wrapper {
+  opacity: 1;
+}
+.messages-container.not-at-bottom .scroll-btn-wrapper .scroll-to-bottom-btn {
+  pointer-events: auto;
+}
+
 .btn.mx-button.btn-test-single img, .btn.mx-button.btn-test-all img, .btn.mx-button.btn-test img {
   height: 20px;
   width: 20px;
@@ -29169,6 +29215,9 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .chat-bubble-wrapper--assistant > div {
   width: inherit;
+}
+.chat-bubble-wrapper--assistant .form-group {
+  margin-bottom: 0;
 }
 .chat-bubble-wrapper--user {
   align-items: flex-end;
@@ -29912,6 +29961,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .convui-pagecontainer {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   min-height: 100%;
   height: -webkit-fill-available;
   width: 95vw;
@@ -30179,10 +30229,12 @@ input[type=checkbox].three-state-checkbox + .control-label {
   height: 100%;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   margin: auto;
   gap: var(--spacing-large);
   padding: var(--spacing-medium) var(--spacing-large) r var(--spacing-medium) var(--spacing-large) r;
+  overflow: hidden;
   box-sizing: border-box;
   /* Test Agent */
 }
@@ -30888,6 +30940,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
   width: 16px;
 }
 .agent-tooltip .widget-tooltip-content {
+  position: relative;
   z-index: 1000;
   background-color: white;
   color: var(--gray-darker);
@@ -30909,6 +30962,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 }
 .agent-tooltip .mx-link {
   font-weight: normal;
+  line-height: 1.7857142863;
 }
 
 .agent-tooltip-w330 .widget-tooltip-content {
@@ -31013,6 +31067,7 @@ input[type=checkbox].three-state-checkbox + .control-label {
 .tooltip-info-icon img {
   height: 16px;
   width: 16px;
+  margin: 0;
 }
 
 .output-tooltip .widget-tooltip-content {

@@ -4,6 +4,7 @@
 .convui-pagecontainer {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   min-height: 100%;
   height: -webkit-fill-available;
   width: 95vw;
@@ -297,10 +298,12 @@
     height: 100%;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     margin: auto;
     gap: var(--spacing-large);
     padding: var(--spacing-medium) var(--spacing-large)r var(--spacing-medium) var(--spacing-large)r;
+    overflow: hidden;
     box-sizing: border-box;
 
      @media (max-width: 800px) {

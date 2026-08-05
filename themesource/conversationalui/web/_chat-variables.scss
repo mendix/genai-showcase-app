@@ -2,7 +2,7 @@
 
 $chat-width: 900px !default;
 $send-btn-size: calc($form-input-font-size * 2) !default;
-$chat-input-max-height: 400px !default;
+$chat-input-max-height: clamp(100px, 25vh, 400px) !default;
 
 //pop-up & sidebar chat
 $chat-header-color: $brand-primary !default;

@@ -1,11 +1,11 @@
 import { j as e, d as x } from "./jsx-runtime-CWOFuNcx.js";
-import { ak as h, S as s, r as d, a7 as g, ad as C, a9 as f, a6 as j, a8 as b, a4 as S } from "./PageContainers-BqHFWUr4.js";
-import { T as y, D as E } from "./Table-DNrOUaYU.js";
-import { g as M, M as V } from "./compatibilityUtils-R3Pg1ddN.js";
-import { u as P, S as R, a as H } from "./StatusBadge-DlOSILAB.js";
-import { E as T } from "./Banner-Bk-4OzcL.js";
+import { ak as h, I as s, r as d, W as g, a1 as C, Y as f, V as j, X as b, T as S } from "./PageContainers-1sk3OYaf.js";
+import { T as y, D as E } from "./Table-CLlb8DoS.js";
+import { g as M, M as V } from "./compatibilityUtils-Chr7KNop.js";
+import { u as P, S as R, a as T } from "./StatusBadge-egeZJM1d.js";
+import { E as H } from "./Banner-BjuZQV3q.js";
 import { c as k } from "./genericUtils-GaF65l2f.js";
-import { C as B } from "./CenteredLoadingSpinner-NelG--07.js";
+import { C as B } from "./CenteredLoadingSpinner-BZzc9Oqr.js";
 const v = ({
   width: t = "1em",
   height: o = "1em",
@@ -41,24 +41,24 @@ const v = ({
       )
     ]
   }
-), w = s(j)`
+), I = s(j)`
     && {
         padding: 40px 80px 0;
     }
     ${h} {
         height: 40px;
     }
-`, I = s.h1`
+`, w = s.h1`
     font-weight: 600;
     margin: 0;
 `, L = s(b)`
     gap: 24px;
     max-width: 1200px;
-`, D = s.h2`
+`, W = s.h2`
     font-weight: 600;
     margin: 0;
     font-size: 20px;
-`, W = s(E)`
+`, D = s(E)`
     color: ${(t) => t.theme.colorsTextLink};
 `, A = s(S)`
     align-self: flex-start;
@@ -82,7 +82,7 @@ const v = ({
     { cellContent: a.note },
     {
       cellContent: a.appStorePackageIdString ? /* @__PURE__ */ e.jsx(
-        W,
+        D,
         {
           icon: /* @__PURE__ */ e.jsx(v, {}),
           label: "Copy marketplace ID",
@@ -91,15 +91,15 @@ const v = ({
       ) : null
     }
   ]);
-  return H(
+  return T(
     d.useCallback(() => {
       l();
     }, [l])
-  ), o.length === 0 && i ? /* @__PURE__ */ e.jsx(B, {}) : /* @__PURE__ */ e.jsx(w, { children: /* @__PURE__ */ e.jsx(g, { children: /* @__PURE__ */ e.jsxs(L, { children: [
-    /* @__PURE__ */ e.jsx(I, { children: `Agent Editor V ${n}` }),
-    /* @__PURE__ */ e.jsx(D, { children: "Make sure you're ready to build" }),
+  ), o.length === 0 && i ? /* @__PURE__ */ e.jsx(B, {}) : /* @__PURE__ */ e.jsx(I, { children: /* @__PURE__ */ e.jsx(g, { children: /* @__PURE__ */ e.jsxs(L, { children: [
+    /* @__PURE__ */ e.jsx(w, { children: `Agent Editor V ${n}` }),
+    /* @__PURE__ */ e.jsx(W, { children: "Make sure you're ready to build" }),
     /* @__PURE__ */ e.jsx(A, { variant: "primary", onPress: l, isDisabled: i, children: "Refresh" }),
-    r && /* @__PURE__ */ e.jsx(T, { children: "Failed to load module information. Please try again." }),
+    r && /* @__PURE__ */ e.jsx(H, { children: "Failed to load module information. Please try again." }),
     /* @__PURE__ */ e.jsx(
       y,
       {
@@ -110,7 +110,7 @@ const v = ({
       }
     )
   ] }) }) });
-}, G = {
+}, X = {
   async loaded(t) {
     const o = x(t), n = document.getElementById("root");
     if (!n) throw new Error("Failed to find the root element");
@@ -121,5 +121,5 @@ const v = ({
 };
 export {
   q as Compatibility,
-  G as component
+  X as component
 };

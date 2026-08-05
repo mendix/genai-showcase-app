@@ -49,6 +49,7 @@
                 .tool-title {
                     font-weight: var(--font-weight-normal);
                     color: var(--font-color-header);
+                    word-break: break-word;
                 }
                 .mx-image-viewer {
                     width: auto;

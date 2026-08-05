@@ -10,15 +10,11 @@
 package mxgenaiconnector.actions;
 
 import static java.util.Objects.requireNonNull;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IDataType;
@@ -26,10 +22,7 @@ import com.mendix.systemwideinterfaces.core.IMendixObject;
 import com.mendix.systemwideinterfaces.core.UserAction;
 import genaicommons.impl.FunctionImpl;
 import genaicommons.impl.FunctionMappingImpl;
-import genaicommons.proxies.ENUM_MessageRole;
-import genaicommons.proxies.Message;
 import genaicommons.proxies.Tool;
-import genaicommons.proxies.ToolCall;
 import mxgenaiconnector.impl.ConverseVisionDocument;
 import mxgenaiconnector.impl.ConverseFunctionCalling;
 import mxgenaiconnector.impl.MxLogger;
@@ -219,7 +212,7 @@ public class Request_Modify_Converse extends UserAction<java.lang.String>
         toolNode.set("inputSchema",jsonNode);
 	}
 		
-		private void setToolChoice(ObjectNode rootNode) {
+		private void setToolChoice(ObjectNode rootNode) throws CoreException {
 			JsonNode toolConfig = rootNode.path("toolConfig");
 			if(toolConfig.isEmpty()) {
 				return;
@@ -236,7 +229,7 @@ public class Request_Modify_Converse extends UserAction<java.lang.String>
             	//"tool" choice can only be used once for the same function to prevent infinity loops
                 case "tool":
                 	JsonNode toolNode = toolChoiceNode.get("tool");
-                	if(!toolNode.isEmpty() && isToolRecall(toolNode.path("name").asText())) {
+                	if(!toolNode.isEmpty() && FunctionMappingImpl.isToolRecall(Request, toolNode.path("name").asText(), getContext())) {
                 		((ObjectNode) toolConfig).remove("toolChoice");
                 	}
                     break;
@@ -268,60 +261,5 @@ public class Request_Modify_Converse extends UserAction<java.lang.String>
 			
 		}
 		
-		private boolean isToolRecall(String toolChoiceFunctionName) {
-			List<genaicommons.proxies.Message> messageListTool = FunctionMappingImpl.getToolCallMessages(Request,getContext());
-
-			// No tool calls yet; thus no tool recall
-			if (messageListTool.size() == 0) {
-				return false;
-			}
-
-			// Get assistant messages from the current agent loop only
-			List<Message> messageListAssistant = FunctionMappingImpl
-					.getCurrentLoopMessagesByRole(Request, ENUM_MessageRole.assistant, getContext());
-
-			// HashMap with ToolCall._id and ToolCallFunction.Name created from the messageListAssistant
-			// The map contains only those tool calls, where functionName equals the toolChoiceFunctionName
-			Map<String, String> toolChoiceToolCallMap = new HashMap<>();
-
-			for (Message message : messageListAssistant) {
-
-				// Get ToolCall list for each assistant message where the function name equals
-				// the function name from the tool choice (toolChoiceFunctionName)
-				List<ToolCall> toolCallList = Core.retrieveByPath(getContext(), message.getMendixObject(),
-								Message.MemberNames.Message_ToolCall.toString())
-						.stream()
-						.filter(mxObject -> {
-							return filterToolCallByFunctionName(toolChoiceFunctionName, mxObject);
-						})
-						.map(mxObject -> ToolCall.initialize(getContext(), mxObject))
-						.collect(Collectors.toList());
-
-				// Loop over toolCallList and add _id and functionName to a HashMap
-				for (ToolCall toolCall : toolCallList) {
-					String toolCallId = toolCall.getToolCallId();
-					String toolName = toolCall.getName();
-					toolChoiceToolCallMap.put(toolCallId, toolName);
-				}
-			}
-
-			// Loop over Tool messages and compare ToolCallId with Ids from Assistant
-			// messages in HashMap to see whether the function from the Tool Choice has
-			// already been called
-			for (Message messageTool : messageListTool) {
-				String toolId = messageTool.getToolCallId();
-				if (toolChoiceToolCallMap.containsKey(toolId)) {
-					return true;
-				}
-			}
-			return false;
-		}
-		
-		private boolean filterToolCallByFunctionName(String toolChoiceFunctionName, IMendixObject mxObject) {
-			String functionName = "";
-			functionName = ToolCall.initialize(getContext(), mxObject).getName();
-			// Return true if the functionName equals toolChoiceFunctionName
-			return functionName.equals(toolChoiceFunctionName);
-		}
 	// END EXTRA CODE
 }

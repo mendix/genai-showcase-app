@@ -33,7 +33,7 @@ function clickButton(buttonName) {
  * @param {boolean} submitOnShiftEnter - Button will be clicked when the users enters the enter and shift key on their keyboard.
  * @returns {Promise.<void>}
  */
-export async function Textarea_ExecuteButtonAction(textAreaName, buttonName, submitOnEnter, submitOnShiftEnter) {
+export async function JS_Textarea_ExecuteButtonAction(textAreaName, buttonName, submitOnEnter, submitOnShiftEnter) {
 	// BEGIN USER CODE
 	try {
 		//Validations

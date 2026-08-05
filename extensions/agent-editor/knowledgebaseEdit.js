@@ -1,22 +1,22 @@
 import { j as n } from "./jsx-runtime-CWOFuNcx.js";
-import { r as f, a9 as W, a6 as q, a7 as U, aa as _ } from "./PageContainers-BqHFWUr4.js";
-import { u as $, c as z } from "./useDependentDocumentChanges-DFCdDrGg.js";
+import { r as f, Y as W, V as q, W as U, Z as _ } from "./PageContainers-1sk3OYaf.js";
+import { u as $, c as z } from "./useDependentDocumentChanges-Dso85RXC.js";
 import { createStudioProLogger as A } from "./logger-gMbuSAUF.js";
-import { g as N, h as R, K as b, i as H, j as S } from "./documentInitUtils-DoIciLyT.js";
-import { C as J } from "./CenteredLoadingSpinner-NelG--07.js";
-import { C as Q } from "./ComboBoxWithIcon-B8EWofqP.js";
-import { G as k } from "./GroupBox-Czphilzs.js";
-import { y as L } from "./Link-llJmH--q.js";
-import { g as X, h as Y } from "./constantUtils-D0RXxXWn.js";
-import { d as Z, a as ee, u as te, g as ne } from "./mxCloudGenAIUtils-U7THU9De.js";
-import { C as y, i as oe, B as se, v as re } from "./validationUtils-DNmAMRcR.js";
-import { u as ae } from "./useExtensionPermissionsChanged-CbqUQaxU.js";
-import { W as ie } from "./Banner-Bk-4OzcL.js";
-import { D, a as I, d as B } from "./formelements-DRgD5gZX.js";
-import { B as le, C as de } from "./text-ByGAuYRB.js";
-import { T as ce } from "./Table-DNrOUaYU.js";
-import { T as w } from "./TextInputLabeled-D9mRNz7v.js";
-import { a as ue } from "./TextWithIcon-DNOEi02G.js";
+import { g as N, h as R, K as b, i as H, j as S } from "./documentInitUtils-COeMuvhV.js";
+import { C as Y } from "./CenteredLoadingSpinner-BZzc9Oqr.js";
+import { C as Z } from "./ComboBoxWithIcon-eOJ6Ms0Q.js";
+import { G as k } from "./GroupBox-BxPlcX3c.js";
+import { y as L } from "./Link-DIvQSyO2.js";
+import { g as J, h as Q } from "./constantUtils-D0RXxXWn.js";
+import { d as X, a as ee, u as te, g as ne } from "./mxCloudGenAIUtils-U7THU9De.js";
+import { C as y, i as oe, B as se, v as re } from "./validationUtils-BWaKRNki.js";
+import { u as ae } from "./useExtensionPermissionsChanged-CmzSIPTq.js";
+import { W as ie } from "./Banner-BjuZQV3q.js";
+import { D, a as I, d as B } from "./formelements-CKhf3RUn.js";
+import { B as le, C as de } from "./text-Kj7UY3CS.js";
+import { T as ce } from "./Table-CLlb8DoS.js";
+import { T as w } from "./TextInputLabeled-CTvLZgVy.js";
+import { a as ue } from "./TextWithIcon-Cn_oiqNe.js";
 const G = (e, t) => async (r) => {
   const o = A(e);
   try {
@@ -63,10 +63,10 @@ const G = (e, t) => async (r) => {
   const d = A(e);
   let s, h = !1, p = !1;
   try {
-    const m = t.providerFields, g = await X(e, m.key);
+    const m = t.providerFields, g = await J(e, m.key);
     if (!g)
       throw new Error("No key value found. Please make sure the key constant is correctly configured.");
-    const u = Z(e, g);
+    const u = X(e, g);
     if (u.type !== "KNOWLEDGE_BASE")
       throw new Error(`Unsupported key type: ${u.type}. Only Knowledge Base keys are currently supported.`);
     const l = {
@@ -160,7 +160,7 @@ const j = () => {
     }
     m(i), h(!0), u(/* @__PURE__ */ new Date());
   }, C = async () => {
-    l.key && Y(e, l.key);
+    l.key && Q(e, l.key);
   }, v = async (i) => {
     const P = i.providerFields, E = await re(e, P.key);
     if (d(E), !E)
@@ -349,10 +349,10 @@ const j = () => {
     )();
   }, l = () => p.provider ? !0 : "Knowledge base provider is required.";
   return /* @__PURE__ */ n.jsx(W, { studioPro: e, children: /* @__PURE__ */ n.jsxs(q, { children: [
-    !s && /* @__PURE__ */ n.jsx(J, {}),
+    !s && /* @__PURE__ */ n.jsx(Y, {}),
     s && /* @__PURE__ */ n.jsx(U, { children: /* @__PURE__ */ n.jsxs(_, { children: [
       /* @__PURE__ */ n.jsx(k, { label: "Common", children: /* @__PURE__ */ n.jsx(
-        Q,
+        Z,
         {
           ariaLabel: "Provider",
           isDisabled: !0,
