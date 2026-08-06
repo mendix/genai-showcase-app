@@ -10,11 +10,7 @@
 package openaiconnector.actions;
 
 import static java.util.Objects.requireNonNull;
-import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
-import java.util.stream.Collectors;
-import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IDataType;
@@ -26,12 +22,9 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import genaicommons.impl.FunctionImpl;
 import genaicommons.impl.FunctionMappingImpl;
-import genaicommons.proxies.Message;
 import genaicommons.proxies.Request;
 import genaicommons.proxies.Tool;
-import genaicommons.proxies.ToolCall;
 import genaicommons.proxies.ToolCollection;
-import genaicommons.proxies.ENUM_MessageRole;
 import openaiconnector.impl.MxLogger;
 import openaiconnector.proxies.OpenAIRequest_Extension;
 import openaiconnector.proxies.RequestMapping;
@@ -269,7 +262,7 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
 			
 			// Remove tool choice function, because it has already been called
 			// This prevents and infinite loop
-			if (toolChoiceTool == null || isToolRecall(toolChoiceTool)) {
+			if (toolChoiceTool == null || FunctionMappingImpl.isToolRecall(getRequest(RequestMapping), toolChoiceTool.getName(), getContext())) {
 				LOGGER.debug("ToolChoice " + toolChoiceTool.getName() + " has already been called. Removing ToolChoice from Request.");
 				((ObjectNode)rootNode).remove("tool_choice");
 			
@@ -314,64 +307,6 @@ public class RequestMapping_ManipulateJson extends UserAction<java.lang.String>
         return toolChoiceNode;
 	}
 
-	private boolean isToolRecall(Tool toolChoiceTool) throws CoreException {
-		// Get tool messages from the current agent loop only
-		List<Message> messageListTool = FunctionMappingImpl
-				.getCurrentLoopMessagesByRole(getRequest(RequestMapping), ENUM_MessageRole.tool, getContext());
-
-		// No tool calls yet; thus no tool recall
-		if (messageListTool.size() == 0) {
-			return false;
-		}
-
-		// Get assistant messages from the current agent loop only
-		List<Message> messageListAssistant = FunctionMappingImpl
-				.getCurrentLoopMessagesByRole(getRequest(RequestMapping), ENUM_MessageRole.assistant, getContext());
-
-		// HashMap with ToolCall._id and ToolCallFunction.Name created from the messageListAssistant
-		// The map contains only those tool calls, where functionName equals the toolChoiceFunctionName
-		Map<String, String> toolChoiceToolCallMap = new HashMap<>();
-
-		for (Message message : messageListAssistant) {
-
-			// Get ToolCall list for each assistant message where the function name equals
-			// the function name from the tool choice (toolChoiceFunctionName)
-			List<ToolCall> toolCallList = Core.retrieveByPath(getContext(), message.getMendixObject(),
-							Message.MemberNames.Message_ToolCall.toString())
-					.stream()
-					.filter(mxObject -> {
-						return filterToolCallByFunctionName(toolChoiceTool.getName(), mxObject);
-					})
-					.map(mxObject -> ToolCall.initialize(getContext(), mxObject))
-					.collect(Collectors.toList());
-
-			// Loop over toolCallList and add _id and functionName to a HashMap
-			for (ToolCall toolCall : toolCallList) {
-				String toolCallId = toolCall.getToolCallId();
-				String toolName = toolCall.getName();
-				toolChoiceToolCallMap.put(toolCallId, toolName);
-			}
-		}
-
-		// Loop over Tool messages and compare ToolCallId with Ids from Assistant
-		// messages in HashMap to see whether the function from the Tool Choice has
-		// already been called
-		for (Message messageTool : messageListTool) {
-			String toolId = messageTool.getToolCallId();
-			if (toolChoiceToolCallMap.containsKey(toolId)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private boolean filterToolCallByFunctionName(String toolChoiceFunctionName, IMendixObject mxObject) {
-		String functionName = "";
-		functionName = ToolCall.initialize(getContext(), mxObject).getName();
-		// Return true if the functionName equals toolChoiceFunctionName
-		return functionName.equals(toolChoiceFunctionName);
-	}
-	
 	private void mapFunctionParameters() throws CoreException {		
 		// Loop through all tools, find FunctionRequest object by functionName that contains the FunctionMicroflow,
 		// get InputParameterName of the FunctionMicroflow, create parametersNode and add to toolNode
